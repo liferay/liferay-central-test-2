@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="JournalArticleJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.journal.service.http.JournalArticleServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.journal.service.http.JournalArticleServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "id", model.getId());
 		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
@@ -88,6 +90,7 @@ public class JournalArticleJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			JournalArticle model = (JournalArticle)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

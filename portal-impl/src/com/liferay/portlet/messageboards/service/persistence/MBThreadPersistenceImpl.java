@@ -62,6 +62,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	implements MBThreadPersistence {
 	public MBThread create(long threadId) {
 		MBThread mbThread = new MBThreadImpl();
+
 		mbThread.setNew(true);
 		mbThread.setPrimaryKey(threadId);
 
@@ -122,7 +123,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(mbThread);
+
 			session.flush();
 
 			return mbThread;
@@ -132,20 +135,19 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBThread.class.getName());
 		}
 	}
 
-	public MBThread update(
-		com.liferay.portlet.messageboards.model.MBThread mbThread)
-		throws SystemException {
+	public MBThread update(MBThread mbThread) throws SystemException {
 		return update(mbThread, false);
 	}
 
-	public MBThread update(
-		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+	public MBThread update(MBThread mbThread, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = mbThread.isNew();
 
 		if (listener != null) {
@@ -189,6 +191,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			mbThread.setNew(false);
 
 			return mbThread;
@@ -198,6 +201,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBThread.class.getName());
 		}
 	}
@@ -240,6 +244,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -250,19 +255,27 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("priority DESC").append(", ");
+
+				query.append("priority DESC, ");
 				query.append("lastPostDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -290,13 +303,17 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		String finderClassName = MBThread.class.getName();
 		String finderMethodName = "findByCategoryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(categoryId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(categoryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -307,26 +324,34 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority DESC").append(", ");
+
+					query.append("priority DESC, ");
 					query.append("lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -350,11 +375,13 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBThread exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
@@ -365,15 +392,18 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	public MBThread findByCategoryId_Last(long categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		int count = countByCategoryId(categoryId);
+
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBThread exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
@@ -385,34 +415,45 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		long categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
+
 		int count = countByCategoryId(categoryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
 			query.append("categoryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("priority DESC").append(", ");
+
+				query.append("priority DESC, ");
 				query.append("lastPostDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+
 			MBThread[] array = new MBThreadImpl[3];
+
 			array[0] = (MBThread)objArray[0];
 			array[1] = (MBThread)objArray[1];
 			array[2] = (MBThread)objArray[2];
@@ -454,6 +495,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -485,6 +527,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -495,6 +538,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBThread ");
 
@@ -502,13 +546,16 @@ public class MBThreadPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority DESC").append(", ");
+
+					query.append("priority DESC, ");
 					query.append("lastPostDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -537,6 +584,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBThread mbThread = (MBThread)itr.next();
+
 			remove(mbThread);
 		}
 	}
@@ -554,6 +602,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -564,17 +613,23 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -607,6 +662,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -616,13 +672,11 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBThread");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBThread");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

@@ -31,31 +31,34 @@ import org.json.JSONObject;
  * <a href="UserServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portal.service.UserServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portal.service.UserServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portal.model.User</code>, that is translated
- * to a <code>org.json.JSONObject</code>. Methods that JSON cannot safely use are
- * skipped. The logic for the translation is encapsulated in <code>com.liferay.portal.service.http.UserJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portal.model.User</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portal.service.http.UserJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -70,27 +73,27 @@ import org.json.JSONObject;
  */
 public class UserServiceJSON {
 	public static void addGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.addRoleUsers(roleId, userIds);
 	}
 
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
@@ -103,8 +106,8 @@ public class UserServiceJSON {
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long organizationId, long locationId,
 		boolean sendEmail)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 				autoPassword, password1, password2, autoScreenName, screenName,
 				emailAddress, new java.util.Locale(locale), firstName,
@@ -123,8 +126,8 @@ public class UserServiceJSON {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] organizationIds, boolean sendEmail)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 				autoPassword, password1, password2, autoScreenName, screenName,
 				emailAddress, new java.util.Locale(locale), firstName,
@@ -135,36 +138,36 @@ public class UserServiceJSON {
 	}
 
 	public static void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.deleteRoleUser(roleId, userId);
 	}
 
 	public static void deleteUser(long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.deleteUser(userId);
 	}
 
 	public static long getDefaultUserId(long companyId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		long returnValue = UserServiceUtil.getDefaultUserId(companyId);
 
 		return returnValue;
 	}
 
 	public static JSONArray getGroupUsers(long groupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.util.List returnValue = UserServiceUtil.getGroupUsers(groupId);
 
 		return UserJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getRoleUsers(long roleId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
 
 		return UserJSONSerializer.toJSONArray(returnValue);
@@ -172,8 +175,8 @@ public class UserServiceJSON {
 
 	public static JSONObject getUserByEmailAddress(long companyId,
 		java.lang.String emailAddress)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByEmailAddress(companyId,
 				emailAddress);
 
@@ -181,8 +184,8 @@ public class UserServiceJSON {
 	}
 
 	public static JSONObject getUserById(long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserById(userId);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
@@ -190,8 +193,8 @@ public class UserServiceJSON {
 
 	public static JSONObject getUserByScreenName(long companyId,
 		java.lang.String screenName)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByScreenName(companyId,
 				screenName);
 
@@ -200,8 +203,8 @@ public class UserServiceJSON {
 
 	public static long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		long returnValue = UserServiceUtil.getUserIdByEmailAddress(companyId,
 				emailAddress);
 
@@ -210,8 +213,8 @@ public class UserServiceJSON {
 
 	public static long getUserIdByScreenName(long companyId,
 		java.lang.String screenName)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		long returnValue = UserServiceUtil.getUserIdByScreenName(companyId,
 				screenName);
 
@@ -219,67 +222,67 @@ public class UserServiceJSON {
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		boolean returnValue = UserServiceUtil.hasGroupUser(groupId, userId);
 
 		return returnValue;
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
 
 		return returnValue;
 	}
 
 	public static void setGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.setRoleUsers(roleId, userIds);
 	}
 
 	public static void setUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.setUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.unsetGroupUsers(groupId, userIds);
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void unsetRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static JSONObject updateActive(long userId, boolean active)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateActive(userId,
 				active);
 
@@ -288,8 +291,8 @@ public class UserServiceJSON {
 
 	public static JSONObject updateAgreedToTermsOfUse(long userId,
 		boolean agreedToTermsOfUse)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateAgreedToTermsOfUse(userId,
 				agreedToTermsOfUse);
 
@@ -297,8 +300,8 @@ public class UserServiceJSON {
 	}
 
 	public static JSONObject updateLockout(long userId, boolean lockout)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateLockout(userId,
 				lockout);
 
@@ -307,22 +310,22 @@ public class UserServiceJSON {
 
 	public static void updateOrganizations(long userId, long organizationId,
 		long locationId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.updateOrganizations(userId, organizationId, locationId);
 	}
 
 	public static void updateOrganizations(long userId, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.updateOrganizations(userId, organizationIds);
 	}
 
 	public static JSONObject updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updatePassword(userId,
 				password1, password2, passwordReset);
 
@@ -330,8 +333,8 @@ public class UserServiceJSON {
 	}
 
 	public static void updatePortrait(long userId, byte[] bytes)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		UserServiceUtil.updatePortrait(userId, bytes);
 	}
 
@@ -346,8 +349,8 @@ public class UserServiceJSON {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long organizationId, long locationId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 				password, screenName, emailAddress, languageId, timeZoneId,
 				greeting, comments, firstName, middleName, lastName, prefixId,
@@ -369,8 +372,8 @@ public class UserServiceJSON {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 				password, screenName, emailAddress, languageId, timeZoneId,
 				greeting, comments, firstName, middleName, lastName, prefixId,

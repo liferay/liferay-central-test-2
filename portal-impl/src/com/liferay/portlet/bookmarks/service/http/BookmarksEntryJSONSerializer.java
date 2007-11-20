@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="BookmarksEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
@@ -73,6 +75,7 @@ public class BookmarksEntryJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			BookmarksEntry model = (BookmarksEntry)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

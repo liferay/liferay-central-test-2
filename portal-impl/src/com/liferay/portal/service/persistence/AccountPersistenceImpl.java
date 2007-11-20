@@ -60,6 +60,7 @@ public class AccountPersistenceImpl extends BasePersistence
 	implements AccountPersistence {
 	public Account create(long accountId) {
 		Account account = new AccountImpl();
+
 		account.setNew(true);
 		account.setPrimaryKey(accountId);
 
@@ -120,7 +121,9 @@ public class AccountPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(account);
+
 			session.flush();
 
 			return account;
@@ -130,18 +133,19 @@ public class AccountPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Account.class.getName());
 		}
 	}
 
-	public Account update(com.liferay.portal.model.Account account)
-		throws SystemException {
+	public Account update(Account account) throws SystemException {
 		return update(account, false);
 	}
 
-	public Account update(com.liferay.portal.model.Account account,
-		boolean merge) throws SystemException {
+	public Account update(Account account, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = account.isNew();
 
 		if (listener != null) {
@@ -184,6 +188,7 @@ public class AccountPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			account.setNew(false);
 
 			return account;
@@ -193,6 +198,7 @@ public class AccountPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Account.class.getName());
 		}
 	}
@@ -257,6 +263,7 @@ public class AccountPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -288,6 +295,7 @@ public class AccountPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -298,6 +306,7 @@ public class AccountPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Account ");
 
 				if (obc != null) {
@@ -306,6 +315,7 @@ public class AccountPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -342,6 +352,7 @@ public class AccountPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -351,12 +362,11 @@ public class AccountPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Account");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Account");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

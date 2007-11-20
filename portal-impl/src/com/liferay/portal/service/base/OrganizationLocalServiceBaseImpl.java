@@ -268,7 +268,9 @@ public abstract class OrganizationLocalServiceBaseImpl
 	public Organization addOrganization(Organization model)
 		throws SystemException {
 		Organization organization = new OrganizationImpl();
+
 		organization.setNew(true);
+
 		organization.setOrganizationId(model.getOrganizationId());
 		organization.setCompanyId(model.getCompanyId());
 		organization.setParentOrganizationId(model.getParentOrganizationId());
@@ -297,7 +299,9 @@ public abstract class OrganizationLocalServiceBaseImpl
 	public Organization updateOrganization(Organization model)
 		throws SystemException {
 		Organization organization = new OrganizationImpl();
+
 		organization.setNew(false);
+
 		organization.setOrganizationId(model.getOrganizationId());
 		organization.setCompanyId(model.getCompanyId());
 		organization.setParentOrganizationId(model.getParentOrganizationId());

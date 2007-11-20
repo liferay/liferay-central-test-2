@@ -61,6 +61,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	implements PortletPreferencesPersistence {
 	public PortletPreferences create(long portletPreferencesId) {
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
+
 		portletPreferences.setNew(true);
 		portletPreferences.setPrimaryKey(portletPreferencesId);
 
@@ -125,7 +126,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(portletPreferences);
+
 			session.flush();
 
 			return portletPreferences;
@@ -135,20 +138,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PortletPreferences.class.getName());
 		}
 	}
 
-	public PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences)
+	public PortletPreferences update(PortletPreferences portletPreferences)
 		throws SystemException {
 		return update(portletPreferences, false);
 	}
 
-	public PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences,
+	public PortletPreferences update(PortletPreferences portletPreferences,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = portletPreferences.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			portletPreferences.setNew(false);
 
 			return portletPreferences;
@@ -201,6 +205,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PortletPreferences.class.getName());
 		}
 	}
@@ -246,6 +251,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByPlid";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(plid) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -256,16 +262,22 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, plid);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -293,13 +305,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByPlid";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(plid), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(plid),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -310,9 +326,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -321,10 +340,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, plid);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -348,11 +370,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("plid=");
-			msg.append(plid);
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("plid=" + plid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
@@ -363,15 +387,18 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	public PortletPreferences findByPlid_Last(long plid, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByPlid(plid);
+
 		List list = findByPlid(plid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("plid=");
-			msg.append(plid);
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("plid=" + plid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
@@ -383,16 +410,21 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		long portletPreferencesId, long plid, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+
 		int count = countByPlid(plid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 			query.append("plid = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -401,12 +433,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, plid);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
+
 			PortletPreferences[] array = new PortletPreferencesImpl[3];
+
 			array[0] = (PortletPreferences)objArray[0];
 			array[1] = (PortletPreferences)objArray[1];
 			array[2] = (PortletPreferences)objArray[2];
@@ -432,6 +468,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -442,22 +479,34 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("ownerId = ?");
+
 				query.append(" AND ");
+
 				query.append("ownerType = ?");
+
 				query.append(" AND ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, ownerId);
+
 				q.setInteger(queryPos++, ownerType);
+
 				q.setLong(queryPos++, plid);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -486,13 +535,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByO_O_P";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Integer.class.getName(),
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -503,13 +556,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("ownerId = ?");
+
 				query.append(" AND ");
+
 				query.append("ownerType = ?");
+
 				query.append(" AND ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -518,12 +578,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, ownerId);
+
 				q.setInteger(queryPos++, ownerType);
+
 				q.setLong(queryPos++, plid);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -548,17 +613,19 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("ownerId=" + ownerId);
+
 			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
+			msg.append("ownerType=" + ownerType);
+
 			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
+			msg.append("plid=" + plid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
@@ -570,21 +637,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		long plid, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByO_O_P(ownerId, ownerType, plid);
+
 		List list = findByO_O_P(ownerId, ownerType, plid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("ownerId=" + ownerId);
+
 			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
+			msg.append("ownerType=" + ownerType);
+
 			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
+			msg.append("plid=" + plid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
@@ -597,20 +667,29 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+
 		int count = countByO_O_P(ownerId, ownerType, plid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 			query.append("ownerId = ?");
+
 			query.append(" AND ");
+
 			query.append("ownerType = ?");
+
 			query.append(" AND ");
+
 			query.append("plid = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -619,14 +698,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, ownerId);
+
 			q.setInteger(queryPos++, ownerType);
+
 			q.setLong(queryPos++, plid);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
+
 			PortletPreferences[] array = new PortletPreferencesImpl[3];
+
 			array[0] = (PortletPreferences)objArray[0];
 			array[1] = (PortletPreferences)objArray[1];
 			array[2] = (PortletPreferences)objArray[2];
@@ -649,19 +734,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		if (portletPreferences == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("ownerId=" + ownerId);
+
 			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
+			msg.append("ownerType=" + ownerType);
+
 			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
+			msg.append("plid=" + plid);
+
 			msg.append(", ");
-			msg.append("portletId=");
-			msg.append(portletId);
+			msg.append("portletId=" + portletId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -684,8 +770,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
+				
 				portletId
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -696,13 +784,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("ownerId = ?");
+
 				query.append(" AND ");
+
 				query.append("ownerType = ?");
+
 				query.append(" AND ");
+
 				query.append("plid = ?");
+
 				query.append(" AND ");
 
 				if (portletId == null) {
@@ -715,9 +810,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, ownerId);
+
 				q.setInteger(queryPos++, ownerType);
+
 				q.setLong(queryPos++, plid);
 
 				if (portletId != null) {
@@ -725,6 +824,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -781,6 +881,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -812,6 +913,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -822,6 +924,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences ");
 
@@ -831,6 +934,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -859,6 +963,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+
 			remove(portletPreferences);
 		}
 	}
@@ -869,6 +974,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+
 			remove(portletPreferences);
 		}
 	}
@@ -878,6 +984,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByO_O_P_P(ownerId,
 				ownerType, plid, portletId);
+
 		remove(portletPreferences);
 	}
 
@@ -894,6 +1001,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByPlid";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(plid) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -904,17 +1012,23 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, plid);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -953,6 +1067,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -963,23 +1078,35 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("ownerId = ?");
+
 				query.append(" AND ");
+
 				query.append("ownerType = ?");
+
 				query.append(" AND ");
+
 				query.append("plid = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, ownerId);
+
 				q.setInteger(queryPos++, ownerType);
+
 				q.setLong(queryPos++, plid);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1017,8 +1144,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
+				
 				portletId
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1029,14 +1158,21 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
 				query.append("ownerId = ?");
+
 				query.append(" AND ");
+
 				query.append("ownerType = ?");
+
 				query.append(" AND ");
+
 				query.append("plid = ?");
+
 				query.append(" AND ");
 
 				if (portletId == null) {
@@ -1049,9 +1185,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, ownerId);
+
 				q.setInteger(queryPos++, ownerType);
+
 				q.setLong(queryPos++, plid);
 
 				if (portletId != null) {
@@ -1059,6 +1199,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1091,6 +1232,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1100,12 +1242,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.PortletPreferences");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.PortletPreferences");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

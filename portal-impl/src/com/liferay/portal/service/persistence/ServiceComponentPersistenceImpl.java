@@ -61,6 +61,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	implements ServiceComponentPersistence {
 	public ServiceComponent create(long serviceComponentId) {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
+
 		serviceComponent.setNew(true);
 		serviceComponent.setPrimaryKey(serviceComponentId);
 
@@ -125,7 +126,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(serviceComponent);
+
 			session.flush();
 
 			return serviceComponent;
@@ -135,20 +138,20 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ServiceComponent.class.getName());
 		}
 	}
 
-	public ServiceComponent update(
-		com.liferay.portal.model.ServiceComponent serviceComponent)
+	public ServiceComponent update(ServiceComponent serviceComponent)
 		throws SystemException {
 		return update(serviceComponent, false);
 	}
 
-	public ServiceComponent update(
-		com.liferay.portal.model.ServiceComponent serviceComponent,
+	public ServiceComponent update(ServiceComponent serviceComponent,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = serviceComponent.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			serviceComponent.setNew(false);
 
 			return serviceComponent;
@@ -201,6 +205,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ServiceComponent.class.getName());
 		}
 	}
@@ -247,6 +252,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByBuildNamespace";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -257,6 +263,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
 
@@ -268,11 +275,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("buildNamespace DESC").append(", ");
+
+				query.append("buildNamespace DESC, ");
 				query.append("buildNumber DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (buildNamespace != null) {
@@ -280,6 +290,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -307,13 +318,17 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findByBuildNamespace";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				buildNamespace, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				buildNamespace,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -324,6 +339,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
 
@@ -340,13 +356,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("buildNamespace DESC").append(", ");
+
+					query.append("buildNamespace DESC, ");
 					query.append("buildNumber DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (buildNamespace != null) {
@@ -354,6 +373,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -378,11 +398,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ServiceComponent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("buildNamespace=");
-			msg.append(buildNamespace);
+
+			msg.append("No ServiceComponent exists with the key {");
+
+			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
@@ -394,15 +416,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchServiceComponentException, SystemException {
 		int count = countByBuildNamespace(buildNamespace);
+
 		List list = findByBuildNamespace(buildNamespace, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ServiceComponent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("buildNamespace=");
-			msg.append(buildNamespace);
+
+			msg.append("No ServiceComponent exists with the key {");
+
+			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
@@ -414,13 +439,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		long serviceComponentId, String buildNamespace, OrderByComparator obc)
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = findByPrimaryKey(serviceComponentId);
+
 		int count = countByBuildNamespace(buildNamespace);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.ServiceComponent WHERE ");
 
@@ -437,13 +465,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("buildNamespace DESC").append(", ");
+
+				query.append("buildNamespace DESC, ");
 				query.append("buildNumber DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (buildNamespace != null) {
@@ -452,7 +483,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					serviceComponent);
+
 			ServiceComponent[] array = new ServiceComponentImpl[3];
+
 			array[0] = (ServiceComponent)objArray[0];
 			array[1] = (ServiceComponent)objArray[1];
 			array[2] = (ServiceComponent)objArray[2];
@@ -475,13 +508,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 		if (serviceComponent == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ServiceComponent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("buildNamespace=");
-			msg.append(buildNamespace);
+
+			msg.append("No ServiceComponent exists with the key {");
+
+			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(", ");
-			msg.append("buildNumber=");
-			msg.append(buildNumber);
+			msg.append("buildNumber=" + buildNumber);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -502,6 +536,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -512,6 +547,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
 
@@ -523,13 +559,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("buildNumber = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("buildNamespace DESC").append(", ");
+
+				query.append("buildNamespace DESC, ");
 				query.append("buildNumber DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (buildNamespace != null) {
@@ -539,6 +580,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, buildNumber);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -595,6 +637,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -626,6 +669,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -636,19 +680,23 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ServiceComponent ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("buildNamespace DESC").append(", ");
+
+					query.append("buildNamespace DESC, ");
 					query.append("buildNumber DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -678,6 +726,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ServiceComponent serviceComponent = (ServiceComponent)itr.next();
+
 			remove(serviceComponent);
 		}
 	}
@@ -686,6 +735,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = findByBNS_BNU(buildNamespace,
 				buildNumber);
+
 		remove(serviceComponent);
 	}
 
@@ -703,6 +753,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByBuildNamespace";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -713,6 +764,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
@@ -727,6 +779,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (buildNamespace != null) {
@@ -734,6 +787,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -769,6 +823,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -779,6 +834,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.ServiceComponent WHERE ");
@@ -791,10 +847,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("buildNumber = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (buildNamespace != null) {
@@ -804,6 +863,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, buildNumber);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -836,6 +896,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -845,12 +906,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ServiceComponent");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.ServiceComponent");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

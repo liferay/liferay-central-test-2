@@ -271,7 +271,9 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	public MembershipRequest addMembershipRequest(MembershipRequest model)
 		throws SystemException {
 		MembershipRequest membershipRequest = new MembershipRequestImpl();
+
 		membershipRequest.setNew(true);
+
 		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
 		membershipRequest.setCompanyId(model.getCompanyId());
 		membershipRequest.setUserId(model.getUserId());
@@ -300,7 +302,9 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	public MembershipRequest updateMembershipRequest(MembershipRequest model)
 		throws SystemException {
 		MembershipRequest membershipRequest = new MembershipRequestImpl();
+
 		membershipRequest.setNew(false);
+
 		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
 		membershipRequest.setCompanyId(model.getCompanyId());
 		membershipRequest.setUserId(model.getUserId());

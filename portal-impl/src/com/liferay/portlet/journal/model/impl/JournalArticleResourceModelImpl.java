@@ -41,13 +41,13 @@ import java.sql.Types;
  * <a href="JournalArticleResourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>JournalArticleResource</code>
- * table in the database.
+ * This class is a model that represents the <code>JournalArticleResource</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,7 +61,11 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticleResource";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
@@ -119,6 +123,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 
 	public JournalArticleResource toEscapedModel() {
 		JournalArticleResource model = new JournalArticleResourceImpl();
+
 		model.setResourcePrimKey(getResourcePrimKey());
 		model.setGroupId(getGroupId());
 		model.setArticleId(Html.escape(getArticleId()));
@@ -134,6 +139,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalArticleResourceImpl clone = new JournalArticleResourceImpl();
+
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
@@ -147,6 +153,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 		}
 
 		JournalArticleResourceImpl journalArticleResource = (JournalArticleResourceImpl)obj;
+
 		long pk = journalArticleResource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

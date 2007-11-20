@@ -61,6 +61,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	implements PluginSettingPersistence {
 	public PluginSetting create(long pluginSettingId) {
 		PluginSetting pluginSetting = new PluginSettingImpl();
+
 		pluginSetting.setNew(true);
 		pluginSetting.setPrimaryKey(pluginSettingId);
 
@@ -124,7 +125,9 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(pluginSetting);
+
 			session.flush();
 
 			return pluginSetting;
@@ -134,20 +137,20 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PluginSetting.class.getName());
 		}
 	}
 
-	public PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting)
+	public PluginSetting update(PluginSetting pluginSetting)
 		throws SystemException {
 		return update(pluginSetting, false);
 	}
 
-	public PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+	public PluginSetting update(PluginSetting pluginSetting, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = pluginSetting.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			pluginSetting.setNew(false);
 
 			return pluginSetting;
@@ -200,6 +204,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PluginSetting.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,16 +261,22 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,13 +304,17 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		String finderClassName = PluginSetting.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -309,9 +325,12 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -320,10 +339,13 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -348,11 +370,13 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No PluginSetting exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
@@ -364,15 +388,18 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No PluginSetting exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
@@ -384,15 +411,20 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = findByPrimaryKey(pluginSettingId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -401,12 +433,16 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pluginSetting);
+
 			PluginSetting[] array = new PluginSettingImpl[3];
+
 			array[0] = (PluginSetting)objArray[0];
 			array[1] = (PluginSetting)objArray[1];
 			array[2] = (PluginSetting)objArray[2];
@@ -428,16 +464,17 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		if (pluginSetting == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No PluginSetting exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("pluginId=");
-			msg.append(pluginId);
+			msg.append("pluginId=" + pluginId);
+
 			msg.append(", ");
-			msg.append("pluginType=");
-			msg.append(pluginType);
+			msg.append("pluginType=" + pluginType);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -459,8 +496,13 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), pluginId, pluginType
+				new Long(companyId),
+				
+				pluginId,
+				
+				pluginType
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -471,9 +513,12 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (pluginId == null) {
@@ -495,7 +540,9 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (pluginId != null) {
@@ -507,6 +554,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -563,6 +611,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -594,6 +643,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -604,6 +654,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.PluginSetting ");
 
 				if (obc != null) {
@@ -612,6 +663,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -640,6 +692,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PluginSetting pluginSetting = (PluginSetting)itr.next();
+
 			remove(pluginSetting);
 		}
 	}
@@ -648,6 +701,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = findByC_I_T(companyId, pluginId,
 				pluginType);
+
 		remove(pluginSetting);
 	}
 
@@ -664,6 +718,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -674,17 +729,23 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -721,8 +782,13 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), pluginId, pluginType
+				new Long(companyId),
+				
+				pluginId,
+				
+				pluginType
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -733,10 +799,13 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (pluginId == null) {
@@ -758,7 +827,9 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (pluginId != null) {
@@ -770,6 +841,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -802,6 +874,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -811,12 +884,11 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.PluginSetting");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.PluginSetting");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

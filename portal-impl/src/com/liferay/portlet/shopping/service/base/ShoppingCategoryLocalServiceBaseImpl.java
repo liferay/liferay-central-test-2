@@ -107,7 +107,9 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	public ShoppingCategory addShoppingCategory(ShoppingCategory model)
 		throws SystemException {
 		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
+
 		shoppingCategory.setNew(true);
+
 		shoppingCategory.setCategoryId(model.getCategoryId());
 		shoppingCategory.setGroupId(model.getGroupId());
 		shoppingCategory.setCompanyId(model.getCompanyId());
@@ -136,7 +138,9 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	public ShoppingCategory updateShoppingCategory(ShoppingCategory model)
 		throws SystemException {
 		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
+
 		shoppingCategory.setNew(false);
+
 		shoppingCategory.setCategoryId(model.getCategoryId());
 		shoppingCategory.setGroupId(model.getGroupId());
 		shoppingCategory.setCompanyId(model.getCompanyId());

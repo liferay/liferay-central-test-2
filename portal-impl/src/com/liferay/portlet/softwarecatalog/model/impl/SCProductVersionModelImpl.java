@@ -44,8 +44,8 @@ import java.util.Date;
  * <a href="SCProductVersionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -64,16 +64,38 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "SCProductVersion";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "productVersionId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "productEntryId", new Integer(Types.BIGINT) },
+			
+
 			{ "version", new Integer(Types.VARCHAR) },
+			
+
 			{ "changeLog", new Integer(Types.VARCHAR) },
+			
+
 			{ "downloadPageURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "directDownloadURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "repoStoreArtifact", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
@@ -243,6 +265,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 
 	public SCProductVersion toEscapedModel() {
 		SCProductVersion model = new SCProductVersionImpl();
+
 		model.setProductVersionId(getProductVersionId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -267,6 +290,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SCProductVersionImpl clone = new SCProductVersionImpl();
+
 		clone.setProductVersionId(getProductVersionId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -289,9 +313,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 		}
 
 		SCProductVersionImpl scProductVersion = (SCProductVersionImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(),
 				scProductVersion.getCreateDate());
+
 		value = value * -1;
 
 		if (value != 0) {

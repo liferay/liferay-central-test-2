@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="WikiPageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>WikiPage</code> table in the
- * database.
+ * This class is a model that represents the <code>WikiPage</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,16 +63,38 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiPage";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "pageId", new Integer(Types.BIGINT) },
+			
+
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "nodeId", new Integer(Types.BIGINT) },
+			
+
 			{ "title", new Integer(Types.VARCHAR) },
+			
+
 			{ "version", new Integer(Types.DOUBLE) },
+			
+
 			{ "content", new Integer(Types.CLOB) },
+			
+
 			{ "format", new Integer(Types.VARCHAR) },
+			
+
 			{ "head", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table WikiPage (pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
@@ -235,6 +257,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 	public WikiPage toEscapedModel() {
 		WikiPage model = new WikiPageImpl();
+
 		model.setPageId(getPageId());
 		model.setResourcePrimKey(getResourcePrimKey());
 		model.setCompanyId(getCompanyId());
@@ -259,6 +282,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		WikiPageImpl clone = new WikiPageImpl();
+
 		clone.setPageId(getPageId());
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setCompanyId(getCompanyId());
@@ -281,6 +305,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 
 		WikiPageImpl wikiPage = (WikiPageImpl)obj;
+
 		int value = 0;
 
 		if (getNodeId() < wikiPage.getNodeId()) {

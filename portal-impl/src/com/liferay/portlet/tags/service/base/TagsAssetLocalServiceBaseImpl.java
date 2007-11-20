@@ -140,7 +140,9 @@ public abstract class TagsAssetLocalServiceBaseImpl
 	implements TagsAssetLocalService, InitializingBean {
 	public TagsAsset addTagsAsset(TagsAsset model) throws SystemException {
 		TagsAsset tagsAsset = new TagsAssetImpl();
+
 		tagsAsset.setNew(true);
+
 		tagsAsset.setAssetId(model.getAssetId());
 		tagsAsset.setGroupId(model.getGroupId());
 		tagsAsset.setCompanyId(model.getCompanyId());
@@ -180,7 +182,9 @@ public abstract class TagsAssetLocalServiceBaseImpl
 
 	public TagsAsset updateTagsAsset(TagsAsset model) throws SystemException {
 		TagsAsset tagsAsset = new TagsAssetImpl();
+
 		tagsAsset.setNew(false);
+
 		tagsAsset.setAssetId(model.getAssetId());
 		tagsAsset.setGroupId(model.getGroupId());
 		tagsAsset.setCompanyId(model.getCompanyId());

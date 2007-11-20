@@ -41,8 +41,8 @@ import java.sql.Types;
  * <a href="JournalArticleImageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -61,12 +61,26 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticleImage";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "articleImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "articleId", new Integer(Types.VARCHAR) },
+			
+
 			{ "version", new Integer(Types.DOUBLE) },
+			
+
 			{ "elName", new Integer(Types.VARCHAR) },
+			
+
 			{ "languageId", new Integer(Types.VARCHAR) },
+			
+
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (uuid_ VARCHAR(75) null,articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
@@ -184,6 +198,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 	public JournalArticleImage toEscapedModel() {
 		JournalArticleImage model = new JournalArticleImageImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setArticleImageId(getArticleImageId());
 		model.setGroupId(getGroupId());
@@ -204,6 +219,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalArticleImageImpl clone = new JournalArticleImageImpl();
+
 		clone.setUuid(getUuid());
 		clone.setArticleImageId(getArticleImageId());
 		clone.setGroupId(getGroupId());
@@ -222,6 +238,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		}
 
 		JournalArticleImageImpl journalArticleImage = (JournalArticleImageImpl)obj;
+
 		long pk = journalArticleImage.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

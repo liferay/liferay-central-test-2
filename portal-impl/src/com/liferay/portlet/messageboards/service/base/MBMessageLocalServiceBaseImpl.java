@@ -150,7 +150,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	implements MBMessageLocalService, InitializingBean {
 	public MBMessage addMBMessage(MBMessage model) throws SystemException {
 		MBMessage mbMessage = new MBMessageImpl();
+
 		mbMessage.setNew(true);
+
 		mbMessage.setUuid(model.getUuid());
 		mbMessage.setMessageId(model.getMessageId());
 		mbMessage.setCompanyId(model.getCompanyId());
@@ -182,7 +184,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 
 	public MBMessage updateMBMessage(MBMessage model) throws SystemException {
 		MBMessage mbMessage = new MBMessageImpl();
+
 		mbMessage.setNew(false);
+
 		mbMessage.setUuid(model.getUuid());
 		mbMessage.setMessageId(model.getMessageId());
 		mbMessage.setCompanyId(model.getCompanyId());

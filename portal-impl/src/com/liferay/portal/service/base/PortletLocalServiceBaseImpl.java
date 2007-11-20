@@ -267,7 +267,9 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 	InitializingBean {
 	public Portlet addPortlet(Portlet model) throws SystemException {
 		Portlet portlet = new PortletImpl();
+
 		portlet.setNew(true);
+
 		portlet.setId(model.getId());
 		portlet.setCompanyId(model.getCompanyId());
 		portlet.setPortletId(model.getPortletId());
@@ -290,7 +292,9 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 
 	public Portlet updatePortlet(Portlet model) throws SystemException {
 		Portlet portlet = new PortletImpl();
+
 		portlet.setNew(false);
+
 		portlet.setId(model.getId());
 		portlet.setCompanyId(model.getCompanyId());
 		portlet.setPortletId(model.getPortletId());

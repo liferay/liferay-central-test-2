@@ -42,8 +42,8 @@ import java.util.Date;
  * <a href="UserTrackerPathModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -62,8 +62,14 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserTrackerPath";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userTrackerPathId", new Integer(Types.BIGINT) },
+			
+
 			{ "userTrackerId", new Integer(Types.BIGINT) },
+			
+
 			{ "path_", new Integer(Types.VARCHAR) },
+			
+
 			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
@@ -133,6 +139,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 
 	public UserTrackerPath toEscapedModel() {
 		UserTrackerPath model = new UserTrackerPathImpl();
+
 		model.setUserTrackerPathId(getUserTrackerPathId());
 		model.setUserTrackerId(getUserTrackerId());
 		model.setPath(Html.escape(getPath()));
@@ -149,6 +156,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserTrackerPathImpl clone = new UserTrackerPathImpl();
+
 		clone.setUserTrackerPathId(getUserTrackerPathId());
 		clone.setUserTrackerId(getUserTrackerId());
 		clone.setPath(getPath());
@@ -163,6 +171,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		}
 
 		UserTrackerPathImpl userTrackerPath = (UserTrackerPathImpl)obj;
+
 		long pk = userTrackerPath.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

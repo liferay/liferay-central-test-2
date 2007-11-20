@@ -62,6 +62,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 	implements RatingsStatsPersistence {
 	public RatingsStats create(long statsId) {
 		RatingsStats ratingsStats = new RatingsStatsImpl();
+
 		ratingsStats.setNew(true);
 		ratingsStats.setPrimaryKey(statsId);
 
@@ -124,7 +125,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(ratingsStats);
+
 			session.flush();
 
 			return ratingsStats;
@@ -134,20 +137,20 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(RatingsStats.class.getName());
 		}
 	}
 
-	public RatingsStats update(
-		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
+	public RatingsStats update(RatingsStats ratingsStats)
 		throws SystemException {
 		return update(ratingsStats, false);
 	}
 
-	public RatingsStats update(
-		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean merge) throws SystemException {
+	public RatingsStats update(RatingsStats ratingsStats, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = ratingsStats.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			ratingsStats.setNew(false);
 
 			return ratingsStats;
@@ -200,6 +204,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(RatingsStats.class.getName());
 		}
 	}
@@ -245,13 +250,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 		if (ratingsStats == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No RatingsStats exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("classNameId=");
-			msg.append(classNameId);
+
+			msg.append("No RatingsStats exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -274,6 +280,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -284,19 +291,28 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -353,6 +369,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -384,6 +401,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -394,6 +412,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.ratings.model.RatingsStats ");
 
@@ -403,6 +422,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -429,6 +449,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = findByC_C(classNameId, classPK);
+
 		remove(ratingsStats);
 	}
 
@@ -450,6 +471,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -460,20 +482,29 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -506,6 +537,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -515,13 +547,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.ratings.model.RatingsStats");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.ratings.model.RatingsStats");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

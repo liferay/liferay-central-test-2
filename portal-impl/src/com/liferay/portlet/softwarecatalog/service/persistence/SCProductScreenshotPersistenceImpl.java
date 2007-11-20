@@ -62,6 +62,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 	implements SCProductScreenshotPersistence {
 	public SCProductScreenshot create(long productScreenshotId) {
 		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
+
 		scProductScreenshot.setNew(true);
 		scProductScreenshot.setPrimaryKey(productScreenshotId);
 
@@ -126,7 +127,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(scProductScreenshot);
+
 			session.flush();
 
 			return scProductScreenshot;
@@ -136,20 +139,20 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductScreenshot.class.getName());
 		}
 	}
 
-	public SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
+	public SCProductScreenshot update(SCProductScreenshot scProductScreenshot)
 		throws SystemException {
 		return update(scProductScreenshot, false);
 	}
 
-	public SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
+	public SCProductScreenshot update(SCProductScreenshot scProductScreenshot,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = scProductScreenshot.isNew();
 
 		if (listener != null) {
@@ -193,6 +196,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			scProductScreenshot.setNew(false);
 
 			return scProductScreenshot;
@@ -202,6 +206,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductScreenshot.class.getName());
 		}
 	}
@@ -248,6 +253,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByProductEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -258,19 +264,27 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("productEntryId ASC").append(", ");
+
+				query.append("productEntryId ASC, ");
 				query.append("priority ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -298,13 +312,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		String finderClassName = SCProductScreenshot.class.getName();
 		String finderMethodName = "findByProductEntryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(productEntryId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(productEntryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -315,26 +333,34 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("productEntryId ASC").append(", ");
+
+					query.append("productEntryId ASC, ");
 					query.append("priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -359,11 +385,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductScreenshot exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("productEntryId=");
-			msg.append(productEntryId);
+
+			msg.append("No SCProductScreenshot exists with the key {");
+
+			msg.append("productEntryId=" + productEntryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
@@ -375,15 +403,18 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchProductScreenshotException, SystemException {
 		int count = countByProductEntryId(productEntryId);
+
 		List list = findByProductEntryId(productEntryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductScreenshot exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("productEntryId=");
-			msg.append(productEntryId);
+
+			msg.append("No SCProductScreenshot exists with the key {");
+
+			msg.append("productEntryId=" + productEntryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
@@ -395,35 +426,46 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		long productScreenshotId, long productEntryId, OrderByComparator obc)
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = findByPrimaryKey(productScreenshotId);
+
 		int count = countByProductEntryId(productEntryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 			query.append("productEntryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("productEntryId ASC").append(", ");
+
+				query.append("productEntryId ASC, ");
 				query.append("priority ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, productEntryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductScreenshot);
+
 			SCProductScreenshot[] array = new SCProductScreenshotImpl[3];
+
 			array[0] = (SCProductScreenshot)objArray[0];
 			array[1] = (SCProductScreenshot)objArray[1];
 			array[2] = (SCProductScreenshot)objArray[2];
@@ -445,13 +487,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 		if (scProductScreenshot == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductScreenshot exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("productEntryId=");
-			msg.append(productEntryId);
+
+			msg.append("No SCProductScreenshot exists with the key {");
+
+			msg.append("productEntryId=" + productEntryId);
+
 			msg.append(", ");
-			msg.append("priority=");
-			msg.append(priority);
+			msg.append("priority=" + priority);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -474,6 +517,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId), new Integer(priority)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -484,22 +528,33 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" AND ");
+
 				query.append("priority = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("productEntryId ASC").append(", ");
+
+				query.append("productEntryId ASC, ");
 				query.append("priority ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
+
 				q.setInteger(queryPos++, priority);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -556,6 +611,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -587,6 +643,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -597,6 +654,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot ");
 
@@ -604,13 +662,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("productEntryId ASC").append(", ");
+
+					query.append("productEntryId ASC, ");
 					query.append("priority ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -640,6 +701,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCProductScreenshot scProductScreenshot = (SCProductScreenshot)itr.next();
+
 			remove(scProductScreenshot);
 		}
 	}
@@ -648,6 +710,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = findByP_P(productEntryId,
 				priority);
+
 		remove(scProductScreenshot);
 	}
 
@@ -665,6 +728,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByProductEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -675,17 +739,23 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -723,6 +793,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId), new Integer(priority)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -733,20 +804,29 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" AND ");
+
 				query.append("priority = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
+
 				q.setInteger(queryPos++, priority);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -779,6 +859,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -788,13 +869,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

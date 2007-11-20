@@ -61,6 +61,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	implements ClassNamePersistence {
 	public ClassName create(long classNameId) {
 		ClassName className = new ClassNameImpl();
+
 		className.setNew(true);
 		className.setPrimaryKey(classNameId);
 
@@ -122,7 +123,9 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(className);
+
 			session.flush();
 
 			return className;
@@ -132,18 +135,19 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ClassName.class.getName());
 		}
 	}
 
-	public ClassName update(com.liferay.portal.model.ClassName className)
-		throws SystemException {
+	public ClassName update(ClassName className) throws SystemException {
 		return update(className, false);
 	}
 
-	public ClassName update(com.liferay.portal.model.ClassName className,
-		boolean merge) throws SystemException {
+	public ClassName update(ClassName className, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = className.isNew();
 
 		if (listener != null) {
@@ -186,6 +190,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			className.setNew(false);
 
 			return className;
@@ -195,6 +200,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ClassName.class.getName());
 		}
 	}
@@ -240,10 +246,11 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 		if (className == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ClassName exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("value=");
-			msg.append(value);
+
+			msg.append("No ClassName exists with the key {");
+
+			msg.append("value=" + value);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -261,6 +268,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		String finderMethodName = "fetchByValue";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { value };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -271,6 +279,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ClassName WHERE ");
 
 				if (value == null) {
@@ -283,6 +292,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (value != null) {
@@ -290,6 +300,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -346,6 +357,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -377,6 +389,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -387,6 +400,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ClassName ");
 
 				if (obc != null) {
@@ -395,6 +409,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -421,6 +436,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	public void removeByValue(String value)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = findByValue(value);
+
 		remove(className);
 	}
 
@@ -437,6 +453,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByValue";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { value };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -447,6 +464,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.ClassName WHERE ");
 
@@ -460,6 +478,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (value != null) {
@@ -467,6 +486,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -499,6 +519,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -508,12 +529,11 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ClassName");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.ClassName");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

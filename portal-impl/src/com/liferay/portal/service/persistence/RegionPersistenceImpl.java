@@ -61,6 +61,7 @@ public class RegionPersistenceImpl extends BasePersistence
 	implements RegionPersistence {
 	public Region create(long regionId) {
 		Region region = new RegionImpl();
+
 		region.setNew(true);
 		region.setPrimaryKey(regionId);
 
@@ -121,7 +122,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(region);
+
 			session.flush();
 
 			return region;
@@ -131,18 +134,19 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Region.class.getName());
 		}
 	}
 
-	public Region update(com.liferay.portal.model.Region region)
-		throws SystemException {
+	public Region update(Region region) throws SystemException {
 		return update(region, false);
 	}
 
-	public Region update(com.liferay.portal.model.Region region, boolean merge)
+	public Region update(Region region, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = region.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			region.setNew(false);
 
 			return region;
@@ -194,6 +199,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Region.class.getName());
 		}
 	}
@@ -235,6 +241,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCountryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(countryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -245,17 +252,25 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -283,13 +298,17 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderClassName = Region.class.getName();
 		String finderMethodName = "findByCountryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(countryId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(countryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -300,24 +319,32 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -341,11 +368,13 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("countryId=");
-			msg.append(countryId);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("countryId=" + countryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -356,15 +385,18 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region findByCountryId_Last(long countryId, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
 		int count = countByCountryId(countryId);
+
 		List list = findByCountryId(countryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("countryId=");
-			msg.append(countryId);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("countryId=" + countryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -375,32 +407,43 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region[] findByCountryId_PrevAndNext(long regionId, long countryId,
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
+
 		int count = countByCountryId(countryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 			query.append("countryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, countryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+
 			Region[] array = new RegionImpl[3];
+
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];
@@ -420,6 +463,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -430,17 +474,25 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -468,14 +520,17 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderClassName = Region.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] {
-				Boolean.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				Boolean.valueOf(active),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -486,24 +541,32 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -527,11 +590,13 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -542,15 +607,18 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region findByActive_Last(boolean active, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
 		int count = countByActive(active);
+
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -561,32 +629,43 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region[] findByActive_PrevAndNext(long regionId, boolean active,
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
+
 		int count = countByActive(active);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 			query.append("active_ = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+
 			Region[] array = new RegionImpl[3];
+
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];
@@ -611,6 +690,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -621,20 +701,31 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
+
 				q.setBoolean(queryPos++, active);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -663,13 +754,16 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByC_A";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Boolean.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -680,27 +774,38 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
+
 				q.setBoolean(queryPos++, active);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -724,14 +829,16 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("countryId=");
-			msg.append(countryId);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("countryId=" + countryId);
+
 			msg.append(", ");
-			msg.append("active=");
-			msg.append(active);
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -742,18 +849,21 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region findByC_A_Last(long countryId, boolean active,
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		int count = countByC_A(countryId, active);
+
 		List list = findByC_A(countryId, active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Region exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("countryId=");
-			msg.append(countryId);
+
+			msg.append("No Region exists with the key {");
+
+			msg.append("countryId=" + countryId);
+
 			msg.append(", ");
-			msg.append("active=");
-			msg.append(active);
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
@@ -765,35 +875,49 @@ public class RegionPersistenceImpl extends BasePersistence
 		boolean active, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
+
 		int count = countByC_A(countryId, active);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 			query.append("countryId = ?");
+
 			query.append(" AND ");
+
 			query.append("active_ = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, countryId);
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+
 			Region[] array = new RegionImpl[3];
+
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];
@@ -835,6 +959,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -866,6 +991,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -876,18 +1002,22 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Region ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -916,6 +1046,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Region region = (Region)itr.next();
+
 			remove(region);
 		}
 	}
@@ -925,6 +1056,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Region region = (Region)itr.next();
+
 			remove(region);
 		}
 	}
@@ -935,6 +1067,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Region region = (Region)itr.next();
+
 			remove(region);
 		}
 	}
@@ -952,6 +1085,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCountryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(countryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -962,16 +1096,22 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1004,6 +1144,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1014,16 +1155,22 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1061,6 +1208,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1071,19 +1219,28 @@ public class RegionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Region WHERE ");
+
 				query.append("countryId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, countryId);
+
 				q.setBoolean(queryPos++, active);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1116,6 +1273,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1125,12 +1283,11 @@ public class RegionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Region");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Region");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

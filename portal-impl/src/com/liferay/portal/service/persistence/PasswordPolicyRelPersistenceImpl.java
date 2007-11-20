@@ -61,6 +61,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	implements PasswordPolicyRelPersistence {
 	public PasswordPolicyRel create(long passwordPolicyRelId) {
 		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
+
 		passwordPolicyRel.setNew(true);
 		passwordPolicyRel.setPrimaryKey(passwordPolicyRelId);
 
@@ -125,7 +126,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(passwordPolicyRel);
+
 			session.flush();
 
 			return passwordPolicyRel;
@@ -135,20 +138,20 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PasswordPolicyRel.class.getName());
 		}
 	}
 
-	public PasswordPolicyRel update(
-		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
+	public PasswordPolicyRel update(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		return update(passwordPolicyRel, false);
 	}
 
-	public PasswordPolicyRel update(
-		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
+	public PasswordPolicyRel update(PasswordPolicyRel passwordPolicyRel,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = passwordPolicyRel.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			passwordPolicyRel.setNew(false);
 
 			return passwordPolicyRel;
@@ -201,6 +205,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PasswordPolicyRel.class.getName());
 		}
 	}
@@ -247,13 +252,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		if (passwordPolicyRel == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PasswordPolicyRel exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("classNameId=");
-			msg.append(classNameId);
+
+			msg.append("No PasswordPolicyRel exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -276,6 +282,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -286,19 +293,28 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -336,16 +352,17 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		if (passwordPolicyRel == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PasswordPolicyRel exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("passwordPolicyId=");
-			msg.append(passwordPolicyId);
+
+			msg.append("No PasswordPolicyRel exists with the key {");
+
+			msg.append("passwordPolicyId=" + passwordPolicyId);
+
 			msg.append(", ");
-			msg.append("classNameId=");
-			msg.append(classNameId);
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -369,6 +386,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				new Long(passwordPolicyId), new Long(classNameId),
 				new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -379,22 +397,34 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+
 				query.append("passwordPolicyId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, passwordPolicyId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -451,6 +481,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -482,6 +513,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -492,6 +524,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.PasswordPolicyRel ");
 
 				if (obc != null) {
@@ -500,6 +533,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -526,6 +560,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByC_C(classNameId, classPK);
+
 		remove(passwordPolicyRel);
 	}
 
@@ -533,6 +568,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		long classPK) throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByP_C_C(passwordPolicyId,
 				classNameId, classPK);
+
 		remove(passwordPolicyRel);
 	}
 
@@ -554,6 +590,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -564,20 +601,29 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -616,6 +662,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				new Long(passwordPolicyId), new Long(classNameId),
 				new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -626,23 +673,35 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+
 				query.append("passwordPolicyId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, passwordPolicyId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -675,6 +734,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -684,12 +744,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.PasswordPolicyRel");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.PasswordPolicyRel");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

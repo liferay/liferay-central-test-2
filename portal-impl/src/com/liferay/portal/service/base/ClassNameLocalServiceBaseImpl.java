@@ -267,7 +267,9 @@ public abstract class ClassNameLocalServiceBaseImpl
 	implements ClassNameLocalService, InitializingBean {
 	public ClassName addClassName(ClassName model) throws SystemException {
 		ClassName className = new ClassNameImpl();
+
 		className.setNew(true);
+
 		className.setClassNameId(model.getClassNameId());
 		className.setValue(model.getValue());
 
@@ -287,7 +289,9 @@ public abstract class ClassNameLocalServiceBaseImpl
 
 	public ClassName updateClassName(ClassName model) throws SystemException {
 		ClassName className = new ClassNameImpl();
+
 		className.setNew(false);
+
 		className.setClassNameId(model.getClassNameId());
 		className.setValue(model.getValue());
 

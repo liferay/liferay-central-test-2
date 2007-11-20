@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="ListTypeJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.ListTypeServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.ListTypeServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class ListTypeJSONSerializer {
 	public static JSONObject toJSONObject(ListType model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "listTypeId", model.getListTypeId());
 		JSONUtil.put(jsonObj, "name", model.getName());
 		JSONUtil.put(jsonObj, "type", model.getType());
@@ -64,6 +66,7 @@ public class ListTypeJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			ListType model = (ListType)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

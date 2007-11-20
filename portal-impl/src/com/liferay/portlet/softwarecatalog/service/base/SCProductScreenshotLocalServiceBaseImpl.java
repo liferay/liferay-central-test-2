@@ -70,7 +70,9 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	public SCProductScreenshot addSCProductScreenshot(SCProductScreenshot model)
 		throws SystemException {
 		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
+
 		scProductScreenshot.setNew(true);
+
 		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
 		scProductScreenshot.setCompanyId(model.getCompanyId());
 		scProductScreenshot.setGroupId(model.getGroupId());
@@ -96,7 +98,9 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	public SCProductScreenshot updateSCProductScreenshot(
 		SCProductScreenshot model) throws SystemException {
 		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
+
 		scProductScreenshot.setNew(false);
+
 		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
 		scProductScreenshot.setCompanyId(model.getCompanyId());
 		scProductScreenshot.setGroupId(model.getGroupId());

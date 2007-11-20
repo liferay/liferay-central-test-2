@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="ResourceCodeModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>ResourceCode</code> table in
- * the database.
+ * This class is a model that represents the <code>ResourceCode</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,8 +60,14 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ResourceCode";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "codeId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "scope", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
@@ -128,6 +134,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 
 	public ResourceCode toEscapedModel() {
 		ResourceCode model = new ResourceCodeImpl();
+
 		model.setCodeId(getCodeId());
 		model.setCompanyId(getCompanyId());
 		model.setName(Html.escape(getName()));
@@ -144,6 +151,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ResourceCodeImpl clone = new ResourceCodeImpl();
+
 		clone.setCodeId(getCodeId());
 		clone.setCompanyId(getCompanyId());
 		clone.setName(getName());
@@ -158,6 +166,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		}
 
 		ResourceCodeImpl resourceCode = (ResourceCodeImpl)obj;
+
 		long pk = resourceCode.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -39,8 +39,8 @@ import java.sql.Types;
  * <a href="ShoppingItemPriceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -59,14 +59,32 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItemPrice";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "itemPriceId", new Integer(Types.BIGINT) },
+			
+
 			{ "itemId", new Integer(Types.BIGINT) },
+			
+
 			{ "minQuantity", new Integer(Types.INTEGER) },
+			
+
 			{ "maxQuantity", new Integer(Types.INTEGER) },
+			
+
 			{ "price", new Integer(Types.DOUBLE) },
+			
+
 			{ "discount", new Integer(Types.DOUBLE) },
+			
+
 			{ "taxable", new Integer(Types.BOOLEAN) },
+			
+
 			{ "shipping", new Integer(Types.DOUBLE) },
+			
+
 			{ "useShippingFormula", new Integer(Types.BOOLEAN) },
+			
+
 			{ "status", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";
@@ -199,6 +217,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 
 	public ShoppingItemPrice toEscapedModel() {
 		ShoppingItemPrice model = new ShoppingItemPriceImpl();
+
 		model.setItemPriceId(getItemPriceId());
 		model.setItemId(getItemId());
 		model.setMinQuantity(getMinQuantity());
@@ -221,6 +240,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingItemPriceImpl clone = new ShoppingItemPriceImpl();
+
 		clone.setItemPriceId(getItemPriceId());
 		clone.setItemId(getItemId());
 		clone.setMinQuantity(getMinQuantity());
@@ -241,6 +261,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingItemPriceImpl shoppingItemPrice = (ShoppingItemPriceImpl)obj;
+
 		int value = 0;
 
 		if (getItemId() < shoppingItemPrice.getItemId()) {

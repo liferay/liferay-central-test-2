@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="LayoutJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.LayoutServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.LayoutServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "plid", model.getPlid());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
@@ -83,6 +85,7 @@ public class LayoutJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Layout model = (Layout)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

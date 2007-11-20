@@ -83,7 +83,9 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	public BookmarksFolder addBookmarksFolder(BookmarksFolder model)
 		throws SystemException {
 		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
+
 		bookmarksFolder.setNew(true);
+
 		bookmarksFolder.setUuid(model.getUuid());
 		bookmarksFolder.setFolderId(model.getFolderId());
 		bookmarksFolder.setGroupId(model.getGroupId());
@@ -112,7 +114,9 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	public BookmarksFolder updateBookmarksFolder(BookmarksFolder model)
 		throws SystemException {
 		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
+
 		bookmarksFolder.setNew(false);
+
 		bookmarksFolder.setUuid(model.getUuid());
 		bookmarksFolder.setFolderId(model.getFolderId());
 		bookmarksFolder.setGroupId(model.getGroupId());

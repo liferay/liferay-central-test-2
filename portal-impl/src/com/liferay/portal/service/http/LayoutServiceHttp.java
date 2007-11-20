@@ -37,26 +37,28 @@ import com.liferay.portal.service.http.TunnelUtil;
  * <a href="LayoutServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portal.service.LayoutServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portal.service.LayoutServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -80,8 +82,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(parentLayoutId);
+
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -107,6 +112,7 @@ public class LayoutServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(hidden);
+
 			Object paramObj8 = friendlyURL;
 
 			if (friendlyURL == null) {
@@ -119,6 +125,7 @@ public class LayoutServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -140,6 +147,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -153,8 +161,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(parentLayoutId);
+
 			Object paramObj3 = localeNamesMap;
 
 			if (localeNamesMap == null) {
@@ -180,6 +191,7 @@ public class LayoutServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(hidden);
+
 			Object paramObj8 = friendlyURL;
 
 			if (friendlyURL == null) {
@@ -192,6 +204,7 @@ public class LayoutServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -213,6 +226,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -222,6 +236,7 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"deleteLayout", new Object[] { paramObj0 });
 
@@ -242,6 +257,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -252,8 +268,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"deleteLayout",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
@@ -275,6 +294,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -286,8 +306,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = languageId;
 
 			if (languageId == null) {
@@ -297,6 +320,7 @@ public class LayoutServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"getLayoutName",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -318,6 +342,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -328,6 +353,7 @@ public class LayoutServiceHttp {
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = portletId;
 
 			if (portletId == null) {
@@ -349,6 +375,7 @@ public class LayoutServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"getLayoutReferences",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -366,6 +393,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -376,7 +404,9 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = parameterMap;
 
 			if (parameterMap == null) {
@@ -386,6 +416,7 @@ public class LayoutServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportLayouts",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
+
 			Object returnObj = null;
 
 			try {
@@ -407,6 +438,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -417,7 +449,9 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = parameterMap;
 
 			if (parameterMap == null) {
@@ -451,6 +485,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -461,8 +496,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(parentLayoutId);
+
 			Object paramObj3 = layoutIds;
 
 			if (layoutIds == null) {
@@ -490,6 +528,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -503,9 +542,13 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = new LongWrapper(parentLayoutId);
+
 			Object paramObj4 = localeNamesMap;
 
 			if (localeNamesMap == null) {
@@ -531,6 +574,7 @@ public class LayoutServiceHttp {
 			}
 
 			Object paramObj8 = new BooleanWrapper(hidden);
+
 			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
@@ -543,6 +587,7 @@ public class LayoutServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -564,6 +609,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -578,9 +624,13 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = new LongWrapper(parentLayoutId);
+
 			Object paramObj4 = localeNamesMap;
 
 			if (localeNamesMap == null) {
@@ -606,6 +656,7 @@ public class LayoutServiceHttp {
 			}
 
 			Object paramObj8 = new BooleanWrapper(hidden);
+
 			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
@@ -631,6 +682,7 @@ public class LayoutServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -652,6 +704,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -663,8 +716,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = typeSettings;
 
 			if (typeSettings == null) {
@@ -674,6 +730,7 @@ public class LayoutServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLayout",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -695,6 +752,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -707,8 +765,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = themeId;
 
 			if (themeId == null) {
@@ -728,12 +789,14 @@ public class LayoutServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(wapTheme);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLookAndFeel",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -755,6 +818,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -766,6 +830,7 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -781,6 +846,7 @@ public class LayoutServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateName",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
+
 			Object returnObj = null;
 
 			try {
@@ -802,6 +868,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -813,8 +880,11 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -832,6 +902,7 @@ public class LayoutServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -853,6 +924,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -863,10 +935,13 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(parentPlid);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateParentLayoutId",
 					new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -888,6 +963,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -899,12 +975,17 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = new LongWrapper(parentLayoutId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateParentLayoutId",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -926,6 +1007,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -936,9 +1018,12 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new IntegerWrapper(priority);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updatePriority", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -960,6 +1045,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -971,12 +1057,17 @@ public class LayoutServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new BooleanWrapper(privateLayout);
+
 			Object paramObj2 = new LongWrapper(layoutId);
+
 			Object paramObj3 = new IntegerWrapper(priority);
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updatePriority",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -998,6 +1089,7 @@ public class LayoutServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

@@ -62,7 +62,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	implements PollsVoteLocalService, InitializingBean {
 	public PollsVote addPollsVote(PollsVote model) throws SystemException {
 		PollsVote pollsVote = new PollsVoteImpl();
+
 		pollsVote.setNew(true);
+
 		pollsVote.setVoteId(model.getVoteId());
 		pollsVote.setUserId(model.getUserId());
 		pollsVote.setQuestionId(model.getQuestionId());
@@ -85,7 +87,9 @@ public abstract class PollsVoteLocalServiceBaseImpl
 
 	public PollsVote updatePollsVote(PollsVote model) throws SystemException {
 		PollsVote pollsVote = new PollsVoteImpl();
+
 		pollsVote.setNew(false);
+
 		pollsVote.setVoteId(model.getVoteId());
 		pollsVote.setUserId(model.getUserId());
 		pollsVote.setQuestionId(model.getQuestionId());

@@ -107,7 +107,9 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 	public ShoppingItem addShoppingItem(ShoppingItem model)
 		throws SystemException {
 		ShoppingItem shoppingItem = new ShoppingItemImpl();
+
 		shoppingItem.setNew(true);
+
 		shoppingItem.setItemId(model.getItemId());
 		shoppingItem.setCompanyId(model.getCompanyId());
 		shoppingItem.setUserId(model.getUserId());
@@ -159,7 +161,9 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 	public ShoppingItem updateShoppingItem(ShoppingItem model)
 		throws SystemException {
 		ShoppingItem shoppingItem = new ShoppingItemImpl();
+
 		shoppingItem.setNew(false);
+
 		shoppingItem.setItemId(model.getItemId());
 		shoppingItem.setCompanyId(model.getCompanyId());
 		shoppingItem.setUserId(model.getUserId());

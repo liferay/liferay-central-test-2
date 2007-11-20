@@ -264,7 +264,9 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	InitializingBean {
 	public Image addImage(Image model) throws SystemException {
 		Image image = new ImageImpl();
+
 		image.setNew(true);
+
 		image.setImageId(model.getImageId());
 		image.setModifiedDate(model.getModifiedDate());
 		image.setText(model.getText());
@@ -289,7 +291,9 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 
 	public Image updateImage(Image model) throws SystemException {
 		Image image = new ImageImpl();
+
 		image.setNew(false);
+
 		image.setImageId(model.getImageId());
 		image.setModifiedDate(model.getModifiedDate());
 		image.setText(model.getText());

@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="PollsVoteJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.polls.service.http.PollsVoteServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.polls.service.http.PollsVoteServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "voteId", model.getVoteId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
 		JSONUtil.put(jsonObj, "questionId", model.getQuestionId());
@@ -66,6 +68,7 @@ public class PollsVoteJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			PollsVote model = (PollsVote)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

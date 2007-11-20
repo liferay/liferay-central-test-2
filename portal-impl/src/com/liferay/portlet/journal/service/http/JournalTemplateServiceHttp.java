@@ -37,26 +37,28 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
  * <a href="JournalTemplateServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.journal.service.JournalTemplateServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.journal.service.JournalTemplateServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -89,7 +91,9 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
+
 			Object paramObj2 = new LongWrapper(plid);
+
 			Object paramObj3 = structureId;
 
 			if (structureId == null) {
@@ -115,6 +119,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(formatXsl);
+
 			Object paramObj8 = langType;
 
 			if (langType == null) {
@@ -122,6 +127,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj9 = new BooleanWrapper(smallImage);
+
 			Object paramObj10 = smallImageURL;
 
 			if (smallImageURL == null) {
@@ -135,7 +141,9 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj12 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj13 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
 					"addTemplate",
 					new Object[] {
@@ -143,6 +151,7 @@ public class JournalTemplateServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -164,6 +173,7 @@ public class JournalTemplateServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -186,7 +196,9 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
+
 			Object paramObj2 = new LongWrapper(plid);
+
 			Object paramObj3 = structureId;
 
 			if (structureId == null) {
@@ -212,6 +224,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(formatXsl);
+
 			Object paramObj8 = langType;
 
 			if (langType == null) {
@@ -219,6 +232,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj9 = new BooleanWrapper(smallImage);
+
 			Object paramObj10 = smallImageURL;
 
 			if (smallImageURL == null) {
@@ -250,6 +264,7 @@ public class JournalTemplateServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -271,6 +286,7 @@ public class JournalTemplateServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -281,6 +297,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = templateId;
 
 			if (templateId == null) {
@@ -307,6 +324,7 @@ public class JournalTemplateServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -317,6 +335,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = templateId;
 
 			if (templateId == null) {
@@ -325,6 +344,7 @@ public class JournalTemplateServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
 					"getTemplate", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -346,6 +366,7 @@ public class JournalTemplateServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -360,6 +381,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = templateId;
 
 			if (templateId == null) {
@@ -391,6 +413,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(formatXsl);
+
 			Object paramObj7 = langType;
 
 			if (langType == null) {
@@ -398,6 +421,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj8 = new BooleanWrapper(smallImage);
+
 			Object paramObj9 = smallImageURL;
 
 			if (smallImageURL == null) {
@@ -417,6 +441,7 @@ public class JournalTemplateServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -438,6 +463,7 @@ public class JournalTemplateServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="UserGroupJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.UserGroupServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.UserGroupServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "userGroupId", model.getUserGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "parentUserGroupId", model.getParentUserGroupId());
@@ -66,6 +68,7 @@ public class UserGroupJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			UserGroup model = (UserGroup)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

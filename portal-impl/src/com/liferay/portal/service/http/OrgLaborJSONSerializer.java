@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="OrgLaborJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.OrgLaborServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.OrgLaborServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "orgLaborId", model.getOrgLaborId());
 		JSONUtil.put(jsonObj, "organizationId", model.getOrganizationId());
 		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
@@ -78,6 +80,7 @@ public class OrgLaborJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			OrgLabor model = (OrgLabor)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

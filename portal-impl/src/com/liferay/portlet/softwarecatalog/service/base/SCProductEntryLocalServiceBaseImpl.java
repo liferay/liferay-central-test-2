@@ -101,7 +101,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	public SCProductEntry addSCProductEntry(SCProductEntry model)
 		throws SystemException {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
+
 		scProductEntry.setNew(true);
+
 		scProductEntry.setProductEntryId(model.getProductEntryId());
 		scProductEntry.setGroupId(model.getGroupId());
 		scProductEntry.setCompanyId(model.getCompanyId());
@@ -136,7 +138,9 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	public SCProductEntry updateSCProductEntry(SCProductEntry model)
 		throws SystemException {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
+
 		scProductEntry.setNew(false);
+
 		scProductEntry.setProductEntryId(model.getProductEntryId());
 		scProductEntry.setGroupId(model.getGroupId());
 		scProductEntry.setCompanyId(model.getCompanyId());

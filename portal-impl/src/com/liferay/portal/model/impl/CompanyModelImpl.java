@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="CompanyModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Company</code> table in the database.
+ * This class is a model that represents the <code>Company</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,11 +60,23 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Company";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "accountId", new Integer(Types.BIGINT) },
+			
+
 			{ "webId", new Integer(Types.VARCHAR) },
+			
+
 			{ "key_", new Integer(Types.CLOB) },
+			
+
 			{ "virtualHost", new Integer(Types.VARCHAR) },
+			
+
 			{ "mx", new Integer(Types.VARCHAR) },
+			
+
 			{ "logoId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
@@ -166,6 +179,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 
 	public Company toEscapedModel() {
 		Company model = new CompanyImpl();
+
 		model.setCompanyId(getCompanyId());
 		model.setAccountId(getAccountId());
 		model.setWebId(Html.escape(getWebId()));
@@ -185,6 +199,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		CompanyImpl clone = new CompanyImpl();
+
 		clone.setCompanyId(getCompanyId());
 		clone.setAccountId(getAccountId());
 		clone.setWebId(getWebId());
@@ -202,6 +217,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 
 		CompanyImpl company = (CompanyImpl)obj;
+
 		long pk = company.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

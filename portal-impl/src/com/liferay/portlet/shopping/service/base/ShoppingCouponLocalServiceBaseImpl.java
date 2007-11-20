@@ -99,7 +99,9 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	public ShoppingCoupon addShoppingCoupon(ShoppingCoupon model)
 		throws SystemException {
 		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
+
 		shoppingCoupon.setNew(true);
+
 		shoppingCoupon.setCouponId(model.getCouponId());
 		shoppingCoupon.setGroupId(model.getGroupId());
 		shoppingCoupon.setCompanyId(model.getCompanyId());
@@ -136,7 +138,9 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon model)
 		throws SystemException {
 		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
+
 		shoppingCoupon.setNew(false);
+
 		shoppingCoupon.setCouponId(model.getCouponId());
 		shoppingCoupon.setGroupId(model.getGroupId());
 		shoppingCoupon.setCompanyId(model.getCompanyId());

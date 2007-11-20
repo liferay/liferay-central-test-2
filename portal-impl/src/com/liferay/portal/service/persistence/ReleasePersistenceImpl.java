@@ -60,6 +60,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 	implements ReleasePersistence {
 	public Release create(long releaseId) {
 		Release release = new ReleaseImpl();
+
 		release.setNew(true);
 		release.setPrimaryKey(releaseId);
 
@@ -120,7 +121,9 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(release);
+
 			session.flush();
 
 			return release;
@@ -130,18 +133,19 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Release.class.getName());
 		}
 	}
 
-	public Release update(com.liferay.portal.model.Release release)
-		throws SystemException {
+	public Release update(Release release) throws SystemException {
 		return update(release, false);
 	}
 
-	public Release update(com.liferay.portal.model.Release release,
-		boolean merge) throws SystemException {
+	public Release update(Release release, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = release.isNew();
 
 		if (listener != null) {
@@ -184,6 +188,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			release.setNew(false);
 
 			return release;
@@ -193,6 +198,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Release.class.getName());
 		}
 	}
@@ -257,6 +263,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -288,6 +295,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -298,6 +306,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Release ");
 
 				if (obc != null) {
@@ -306,6 +315,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -342,6 +352,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -351,12 +362,11 @@ public class ReleasePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Release");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Release");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

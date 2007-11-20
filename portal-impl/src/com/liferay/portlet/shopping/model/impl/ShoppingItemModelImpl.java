@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="ShoppingItemModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>ShoppingItem</code> table in
- * the database.
+ * This class is a model that represents the <code>ShoppingItem</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,37 +63,101 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItem";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "itemId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "sku", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "properties", new Integer(Types.VARCHAR) },
+			
+
 			{ "fields_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "fieldsQuantities", new Integer(Types.VARCHAR) },
+			
+
 			{ "minQuantity", new Integer(Types.INTEGER) },
+			
+
 			{ "maxQuantity", new Integer(Types.INTEGER) },
+			
+
 			{ "price", new Integer(Types.DOUBLE) },
+			
+
 			{ "discount", new Integer(Types.DOUBLE) },
+			
+
 			{ "taxable", new Integer(Types.BOOLEAN) },
+			
+
 			{ "shipping", new Integer(Types.DOUBLE) },
+			
+
 			{ "useShippingFormula", new Integer(Types.BOOLEAN) },
+			
+
 			{ "requiresShipping", new Integer(Types.BOOLEAN) },
+			
+
 			{ "stockQuantity", new Integer(Types.INTEGER) },
+			
+
 			{ "featured_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "sale_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "smallImage", new Integer(Types.BOOLEAN) },
+			
+
 			{ "smallImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "smallImageURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "mediumImage", new Integer(Types.BOOLEAN) },
+			
+
 			{ "mediumImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "mediumImageURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "largeImage", new Integer(Types.BOOLEAN) },
+			
+
 			{ "largeImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "largeImageURL", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItem (itemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,fields_ BOOLEAN,fieldsQuantities STRING null,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,requiresShipping BOOLEAN,stockQuantity INTEGER,featured_ BOOLEAN,sale_ BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,mediumImage BOOLEAN,mediumImageId LONG,mediumImageURL VARCHAR(75) null,largeImage BOOLEAN,largeImageId LONG,largeImageURL VARCHAR(75) null)";
@@ -515,6 +579,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 
 	public ShoppingItem toEscapedModel() {
 		ShoppingItem model = new ShoppingItemImpl();
+
 		model.setItemId(getItemId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -560,6 +625,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingItemImpl clone = new ShoppingItemImpl();
+
 		clone.setItemId(getItemId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -603,6 +669,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingItemImpl shoppingItem = (ShoppingItemImpl)obj;
+
 		int value = 0;
 
 		if (getItemId() < shoppingItem.getItemId()) {

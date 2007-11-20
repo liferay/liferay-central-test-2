@@ -41,13 +41,13 @@ import java.util.Date;
  * <a href="MBStatsUserModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBStatsUser</code> table in the
- * database.
+ * This class is a model that represents the <code>MBStatsUser</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,9 +61,17 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBStatsUser";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "messageCount", new Integer(Types.INTEGER) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";
@@ -141,6 +149,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 
 	public MBStatsUser toEscapedModel() {
 		MBStatsUser model = new MBStatsUserImpl();
+
 		model.setStatsUserId(getStatsUserId());
 		model.setGroupId(getGroupId());
 		model.setUserId(getUserId());
@@ -158,6 +167,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBStatsUserImpl clone = new MBStatsUserImpl();
+
 		clone.setStatsUserId(getStatsUserId());
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
@@ -173,6 +183,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		}
 
 		MBStatsUserImpl mbStatsUser = (MBStatsUserImpl)obj;
+
 		int value = 0;
 
 		if (getMessageCount() < mbStatsUser.getMessageCount()) {

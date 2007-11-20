@@ -63,10 +63,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	implements JournalArticleImagePersistence {
 	public JournalArticleImage create(long articleImageId) {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
+
 		journalArticleImage.setNew(true);
 		journalArticleImage.setPrimaryKey(articleImageId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		journalArticleImage.setUuid(uuid);
 
 		return journalArticleImage;
@@ -130,7 +132,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(journalArticleImage);
+
 			session.flush();
 
 			return journalArticleImage;
@@ -140,20 +144,20 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalArticleImage.class.getName());
 		}
 	}
 
-	public JournalArticleImage update(
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
+	public JournalArticleImage update(JournalArticleImage journalArticleImage)
 		throws SystemException {
 		return update(journalArticleImage, false);
 	}
 
-	public JournalArticleImage update(
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
+	public JournalArticleImage update(JournalArticleImage journalArticleImage,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = journalArticleImage.isNew();
 
 		if (listener != null) {
@@ -184,6 +188,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(journalArticleImage.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			journalArticleImage.setUuid(uuid);
 		}
 
@@ -202,6 +207,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			journalArticleImage.setNew(false);
 
 			return journalArticleImage;
@@ -211,6 +217,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalArticleImage.class.getName());
 		}
 	}
@@ -256,6 +263,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -266,6 +274,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
 
@@ -279,6 +288,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -286,6 +296,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -313,13 +324,17 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -330,6 +345,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
 
@@ -348,6 +364,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -355,6 +372,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -379,11 +397,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -395,15 +415,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -415,13 +438,16 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String uuid, OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
 
@@ -440,6 +466,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -448,7 +475,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticleImage);
+
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
+
 			array[0] = (JournalArticleImage)objArray[0];
 			array[1] = (JournalArticleImage)objArray[1];
 			array[2] = (JournalArticleImage)objArray[2];
@@ -469,13 +498,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (journalArticleImage == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -496,6 +526,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -506,6 +537,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
 
@@ -517,10 +549,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -530,6 +565,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -564,6 +600,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -574,16 +611,22 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -611,13 +654,17 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -628,9 +675,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -639,10 +689,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -667,11 +720,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -683,15 +738,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -703,16 +761,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		long articleImageId, long groupId, OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -721,12 +784,16 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticleImage);
+
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
+
 			array[0] = (JournalArticleImage)objArray[0];
 			array[1] = (JournalArticleImage)objArray[1];
 			array[2] = (JournalArticleImage)objArray[2];
@@ -746,6 +813,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByTempImage";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -756,16 +824,22 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("tempImage = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, tempImage);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -793,14 +867,17 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByTempImage";
 		String[] finderParams = new String[] {
-				Boolean.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(tempImage), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				Boolean.valueOf(tempImage),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -811,9 +888,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("tempImage = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -822,10 +902,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, tempImage);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -850,11 +933,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("tempImage=");
-			msg.append(tempImage);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("tempImage=" + tempImage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -866,15 +951,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByTempImage(tempImage);
+
 		List list = findByTempImage(tempImage, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("tempImage=");
-			msg.append(tempImage);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("tempImage=" + tempImage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -886,16 +974,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		long articleImageId, boolean tempImage, OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
+
 		int count = countByTempImage(tempImage);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 			query.append("tempImage = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -904,12 +997,16 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setBoolean(queryPos++, tempImage);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticleImage);
+
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
+
 			array[0] = (JournalArticleImage)objArray[0];
 			array[1] = (JournalArticleImage)objArray[1];
 			array[2] = (JournalArticleImage)objArray[2];
@@ -933,8 +1030,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version)
+				new Long(groupId),
+				
+				articleId, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -945,9 +1045,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -958,11 +1061,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -972,6 +1079,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1000,13 +1108,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_A_V";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
-				Double.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Double.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version),
+				new Long(groupId),
+				
+				articleId, new Double(version),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1017,9 +1131,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1030,7 +1147,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -1039,7 +1158,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1049,6 +1170,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1073,17 +1195,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("version=");
-			msg.append(version);
+			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -1095,22 +1219,25 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		double version, OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByG_A_V(groupId, articleId, version);
+
 		List list = findByG_A_V(groupId, articleId, version, count - 1, count,
 				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("version=");
-			msg.append(version);
+			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -1122,16 +1249,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		long groupId, String articleId, double version, OrderByComparator obc)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
+
 		int count = countByG_A_V(groupId, articleId, version);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (articleId == null) {
@@ -1142,7 +1274,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			query.append(" AND ");
+
 			query.append("version = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -1151,7 +1285,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -1162,7 +1298,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticleImage);
+
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
+
 			array[0] = (JournalArticleImage)objArray[0];
 			array[1] = (JournalArticleImage)objArray[1];
 			array[2] = (JournalArticleImage)objArray[2];
@@ -1185,22 +1323,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		if (journalArticleImage == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticleImage exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("version=");
-			msg.append(version);
+			msg.append("version=" + version);
+
 			msg.append(", ");
-			msg.append("elName=");
-			msg.append(elName);
+			msg.append("elName=" + elName);
+
 			msg.append(", ");
-			msg.append("languageId=");
-			msg.append(languageId);
+			msg.append("languageId=" + languageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1224,9 +1363,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version), elName,
+				new Long(groupId),
+				
+				articleId, new Double(version),
+				
+				elName,
+				
 				languageId
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1237,9 +1382,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1250,7 +1398,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" AND ");
 
 				if (elName == null) {
@@ -1272,7 +1422,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1290,6 +1442,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1346,6 +1499,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1377,6 +1531,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1387,6 +1542,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage ");
 
@@ -1396,6 +1552,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1424,6 +1581,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticleImage journalArticleImage = (JournalArticleImage)itr.next();
+
 			remove(journalArticleImage);
 		}
 	}
@@ -1431,6 +1589,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByUUID_G(uuid, groupId);
+
 		remove(journalArticleImage);
 	}
 
@@ -1439,6 +1598,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticleImage journalArticleImage = (JournalArticleImage)itr.next();
+
 			remove(journalArticleImage);
 		}
 	}
@@ -1448,6 +1608,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticleImage journalArticleImage = (JournalArticleImage)itr.next();
+
 			remove(journalArticleImage);
 		}
 	}
@@ -1458,6 +1619,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticleImage journalArticleImage = (JournalArticleImage)itr.next();
+
 			remove(journalArticleImage);
 		}
 	}
@@ -1467,6 +1629,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByG_A_V_E_L(groupId,
 				articleId, version, elName, languageId);
+
 		remove(journalArticleImage);
 	}
 
@@ -1483,6 +1646,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1493,6 +1657,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -1507,6 +1672,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1514,6 +1680,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1549,6 +1716,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1559,6 +1727,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -1571,10 +1740,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1584,6 +1756,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1616,6 +1789,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1626,17 +1800,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1669,6 +1849,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByTempImage";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1679,17 +1860,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("tempImage = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, tempImage);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1726,8 +1913,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version)
+				new Long(groupId),
+				
+				articleId, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1738,10 +1928,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1752,11 +1945,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1766,6 +1963,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1803,9 +2001,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version), elName,
+				new Long(groupId),
+				
+				articleId, new Double(version),
+				
+				elName,
+				
 				languageId
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1816,10 +2020,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1830,7 +2037,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" AND ");
 
 				if (elName == null) {
@@ -1852,7 +2061,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1870,6 +2081,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1902,6 +2114,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1911,13 +2124,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticleImage");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalArticleImage");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

@@ -63,10 +63,12 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	implements BookmarksFolderPersistence {
 	public BookmarksFolder create(long folderId) {
 		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
+
 		bookmarksFolder.setNew(true);
 		bookmarksFolder.setPrimaryKey(folderId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		bookmarksFolder.setUuid(uuid);
 
 		return bookmarksFolder;
@@ -129,7 +131,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(bookmarksFolder);
+
 			session.flush();
 
 			return bookmarksFolder;
@@ -139,20 +143,20 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BookmarksFolder.class.getName());
 		}
 	}
 
-	public BookmarksFolder update(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
+	public BookmarksFolder update(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		return update(bookmarksFolder, false);
 	}
 
-	public BookmarksFolder update(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
-		boolean merge) throws SystemException {
+	public BookmarksFolder update(BookmarksFolder bookmarksFolder, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = bookmarksFolder.isNew();
 
 		if (listener != null) {
@@ -183,6 +187,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(bookmarksFolder.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			bookmarksFolder.setUuid(uuid);
 		}
 
@@ -201,6 +206,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			bookmarksFolder.setNew(false);
 
 			return bookmarksFolder;
@@ -210,6 +216,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BookmarksFolder.class.getName());
 		}
 	}
@@ -254,6 +261,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -264,6 +272,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 
@@ -275,11 +284,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -287,6 +299,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -314,13 +327,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderClassName = BookmarksFolder.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -331,6 +348,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 
@@ -347,13 +365,16 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentFolderId ASC").append(", ");
+
+					query.append("parentFolderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -361,6 +382,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -384,11 +406,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -399,15 +423,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -418,13 +445,16 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder[] findByUuid_PrevAndNext(long folderId, String uuid,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 
@@ -441,13 +471,16 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -456,7 +489,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
+
 			BookmarksFolder[] array = new BookmarksFolderImpl[3];
+
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];
@@ -477,13 +512,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		if (bookmarksFolder == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -504,6 +540,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -514,6 +551,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
 
@@ -525,13 +563,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -541,6 +584,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -575,6 +619,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -585,19 +630,27 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -625,13 +678,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderClassName = BookmarksFolder.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -642,26 +699,34 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentFolderId ASC").append(", ");
+
+					query.append("parentFolderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -685,11 +750,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -700,15 +767,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -720,35 +790,46 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
+
 			BookmarksFolder[] array = new BookmarksFolderImpl[3];
+
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];
@@ -768,6 +849,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -778,19 +860,27 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -818,13 +908,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderClassName = BookmarksFolder.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -835,26 +929,34 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentFolderId ASC").append(", ");
+
+					query.append("parentFolderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -878,11 +980,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -893,15 +997,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder findByCompanyId_Last(long companyId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -913,35 +1020,46 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
+
 			BookmarksFolder[] array = new BookmarksFolderImpl[3];
+
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];
@@ -966,6 +1084,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -976,22 +1095,33 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentFolderId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentFolderId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1019,14 +1149,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderClassName = BookmarksFolder.class.getName();
 		String finderMethodName = "findByG_P";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1037,29 +1170,40 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentFolderId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentFolderId ASC").append(", ");
+
+					query.append("parentFolderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentFolderId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1083,14 +1227,16 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("parentFolderId=");
-			msg.append(parentFolderId);
+			msg.append("parentFolderId=" + parentFolderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -1101,18 +1247,21 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder findByG_P_Last(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
+
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BookmarksFolder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("parentFolderId=");
-			msg.append(parentFolderId);
+			msg.append("parentFolderId=" + parentFolderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
@@ -1124,38 +1273,52 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		long parentFolderId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
+
 		int count = countByG_P(groupId, parentFolderId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("parentFolderId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
+
+				query.append("parentFolderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setLong(queryPos++, parentFolderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
+
 			BookmarksFolder[] array = new BookmarksFolderImpl[3];
+
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];
@@ -1197,6 +1360,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1228,6 +1392,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1238,6 +1403,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder ");
 
@@ -1245,13 +1411,16 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentFolderId ASC").append(", ");
+
+					query.append("parentFolderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1280,6 +1449,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+
 			remove(bookmarksFolder);
 		}
 	}
@@ -1287,6 +1457,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByUUID_G(uuid, groupId);
+
 		remove(bookmarksFolder);
 	}
 
@@ -1295,6 +1466,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+
 			remove(bookmarksFolder);
 		}
 	}
@@ -1304,6 +1476,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+
 			remove(bookmarksFolder);
 		}
 	}
@@ -1314,6 +1487,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+
 			remove(bookmarksFolder);
 		}
 	}
@@ -1331,6 +1505,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1341,6 +1516,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
@@ -1355,6 +1531,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1362,6 +1539,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1397,6 +1575,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1407,6 +1586,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
@@ -1419,10 +1599,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1432,6 +1615,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1464,6 +1648,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1474,17 +1659,23 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1517,6 +1708,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1527,17 +1719,23 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1575,6 +1773,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1585,20 +1784,29 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentFolderId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentFolderId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1631,6 +1839,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1640,13 +1849,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.bookmarks.model.BookmarksFolder");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

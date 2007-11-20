@@ -83,7 +83,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	public BookmarksEntry addBookmarksEntry(BookmarksEntry model)
 		throws SystemException {
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
+
 		bookmarksEntry.setNew(true);
+
 		bookmarksEntry.setUuid(model.getUuid());
 		bookmarksEntry.setEntryId(model.getEntryId());
 		bookmarksEntry.setCompanyId(model.getCompanyId());
@@ -114,7 +116,9 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	public BookmarksEntry updateBookmarksEntry(BookmarksEntry model)
 		throws SystemException {
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
+
 		bookmarksEntry.setNew(false);
+
 		bookmarksEntry.setUuid(model.getUuid());
 		bookmarksEntry.setEntryId(model.getEntryId());
 		bookmarksEntry.setCompanyId(model.getCompanyId());

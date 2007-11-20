@@ -267,7 +267,9 @@ public abstract class UserGroupLocalServiceBaseImpl
 	implements UserGroupLocalService, InitializingBean {
 	public UserGroup addUserGroup(UserGroup model) throws SystemException {
 		UserGroup userGroup = new UserGroupImpl();
+
 		userGroup.setNew(true);
+
 		userGroup.setUserGroupId(model.getUserGroupId());
 		userGroup.setCompanyId(model.getCompanyId());
 		userGroup.setParentUserGroupId(model.getParentUserGroupId());
@@ -290,7 +292,9 @@ public abstract class UserGroupLocalServiceBaseImpl
 
 	public UserGroup updateUserGroup(UserGroup model) throws SystemException {
 		UserGroup userGroup = new UserGroupImpl();
+
 		userGroup.setNew(false);
+
 		userGroup.setUserGroupId(model.getUserGroupId());
 		userGroup.setCompanyId(model.getCompanyId());
 		userGroup.setParentUserGroupId(model.getParentUserGroupId());

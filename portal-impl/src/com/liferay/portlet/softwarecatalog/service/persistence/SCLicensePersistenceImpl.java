@@ -62,6 +62,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	implements SCLicensePersistence {
 	public SCLicense create(long licenseId) {
 		SCLicense scLicense = new SCLicenseImpl();
+
 		scLicense.setNew(true);
 		scLicense.setPrimaryKey(licenseId);
 
@@ -123,7 +124,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(scLicense);
+
 			session.flush();
 
 			return scLicense;
@@ -133,20 +136,19 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCLicense.class.getName());
 		}
 	}
 
-	public SCLicense update(
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws SystemException {
+	public SCLicense update(SCLicense scLicense) throws SystemException {
 		return update(scLicense, false);
 	}
 
-	public SCLicense update(
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean merge) throws SystemException {
+	public SCLicense update(SCLicense scLicense, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = scLicense.isNew();
 
 		if (listener != null) {
@@ -190,6 +192,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			scLicense.setNew(false);
 
 			return scLicense;
@@ -199,6 +202,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCLicense.class.getName());
 		}
 	}
@@ -243,6 +247,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -253,18 +258,26 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,14 +305,17 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] {
-				Boolean.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				Boolean.valueOf(active),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -310,25 +326,33 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -352,11 +376,13 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No SCLicense exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -367,15 +393,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	public SCLicense findByActive_Last(boolean active, OrderByComparator obc)
 		throws NoSuchLicenseException, SystemException {
 		int count = countByActive(active);
+
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No SCLicense exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -386,34 +415,45 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	public SCLicense[] findByActive_PrevAndNext(long licenseId, boolean active,
 		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
+
 		int count = countByActive(active);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 			query.append("active_ = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scLicense);
+
 			SCLicense[] array = new SCLicenseImpl[3];
+
 			array[0] = (SCLicense)objArray[0];
 			array[1] = (SCLicense)objArray[1];
 			array[2] = (SCLicense)objArray[2];
@@ -438,6 +478,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -448,21 +489,32 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" AND ");
+
 				query.append("recommended = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
+
 				q.setBoolean(queryPos++, recommended);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -491,13 +543,16 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByA_R";
 		String[] finderParams = new String[] {
 				Boolean.class.getName(), Boolean.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -508,28 +563,39 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" AND ");
+
 				query.append("recommended = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
+
 				q.setBoolean(queryPos++, recommended);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -553,14 +619,16 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No SCLicense exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(", ");
-			msg.append("recommended=");
-			msg.append(recommended);
+			msg.append("recommended=" + recommended);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -571,18 +639,21 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	public SCLicense findByA_R_Last(boolean active, boolean recommended,
 		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
 		int count = countByA_R(active, recommended);
+
 		List list = findByA_R(active, recommended, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No SCLicense exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(", ");
-			msg.append("recommended=");
-			msg.append(recommended);
+			msg.append("recommended=" + recommended);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -594,37 +665,51 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		boolean recommended, OrderByComparator obc)
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
+
 		int count = countByA_R(active, recommended);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 			query.append("active_ = ?");
+
 			query.append(" AND ");
+
 			query.append("recommended = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setBoolean(queryPos++, active);
+
 			q.setBoolean(queryPos++, recommended);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scLicense);
+
 			SCLicense[] array = new SCLicenseImpl[3];
+
 			array[0] = (SCLicense)objArray[0];
 			array[1] = (SCLicense)objArray[1];
 			array[2] = (SCLicense)objArray[2];
@@ -666,6 +751,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -697,6 +783,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -707,6 +794,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense ");
 
@@ -714,12 +802,15 @@ public class SCLicensePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -748,6 +839,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCLicense scLicense = (SCLicense)itr.next();
+
 			remove(scLicense);
 		}
 	}
@@ -758,6 +850,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCLicense scLicense = (SCLicense)itr.next();
+
 			remove(scLicense);
 		}
 	}
@@ -775,6 +868,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -785,17 +879,23 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -833,6 +933,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -843,20 +944,29 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" AND ");
+
 				query.append("recommended = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
+
 				q.setBoolean(queryPos++, recommended);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -889,6 +999,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -898,13 +1009,11 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCLicense");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCLicense");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

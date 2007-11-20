@@ -37,26 +37,28 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  * <a href="IGImageServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.imagegallery.service.IGImageServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.imagegallery.service.IGImageServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -80,6 +82,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
+
 			Object paramObj1 = description;
 
 			if (description == null) {
@@ -105,13 +108,16 @@ public class IGImageServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -133,6 +139,7 @@ public class IGImageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -147,6 +154,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
+
 			Object paramObj1 = description;
 
 			if (description == null) {
@@ -189,6 +197,7 @@ public class IGImageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -210,6 +219,7 @@ public class IGImageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -219,6 +229,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"deleteImage", new Object[] { paramObj0 });
 
@@ -239,6 +250,7 @@ public class IGImageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -249,8 +261,10 @@ public class IGImageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"getImage", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -272,6 +286,7 @@ public class IGImageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -284,7 +299,9 @@ public class IGImageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
+
 			Object paramObj1 = new LongWrapper(folderId);
+
 			Object paramObj2 = description;
 
 			if (description == null) {
@@ -315,6 +332,7 @@ public class IGImageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -336,6 +354,7 @@ public class IGImageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

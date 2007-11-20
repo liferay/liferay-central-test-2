@@ -84,7 +84,9 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	implements TagsEntryLocalService, InitializingBean {
 	public TagsEntry addTagsEntry(TagsEntry model) throws SystemException {
 		TagsEntry tagsEntry = new TagsEntryImpl();
+
 		tagsEntry.setNew(true);
+
 		tagsEntry.setEntryId(model.getEntryId());
 		tagsEntry.setCompanyId(model.getCompanyId());
 		tagsEntry.setUserId(model.getUserId());
@@ -109,7 +111,9 @@ public abstract class TagsEntryLocalServiceBaseImpl
 
 	public TagsEntry updateTagsEntry(TagsEntry model) throws SystemException {
 		TagsEntry tagsEntry = new TagsEntryImpl();
+
 		tagsEntry.setNew(false);
+
 		tagsEntry.setEntryId(model.getEntryId());
 		tagsEntry.setCompanyId(model.getCompanyId());
 		tagsEntry.setUserId(model.getUserId());

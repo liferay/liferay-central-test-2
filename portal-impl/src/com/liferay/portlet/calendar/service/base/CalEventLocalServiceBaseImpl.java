@@ -83,7 +83,9 @@ public abstract class CalEventLocalServiceBaseImpl
 	implements CalEventLocalService, InitializingBean {
 	public CalEvent addCalEvent(CalEvent model) throws SystemException {
 		CalEvent calEvent = new CalEventImpl();
+
 		calEvent.setNew(true);
+
 		calEvent.setUuid(model.getUuid());
 		calEvent.setEventId(model.getEventId());
 		calEvent.setGroupId(model.getGroupId());
@@ -123,7 +125,9 @@ public abstract class CalEventLocalServiceBaseImpl
 
 	public CalEvent updateCalEvent(CalEvent model) throws SystemException {
 		CalEvent calEvent = new CalEventImpl();
+
 		calEvent.setNew(false);
+
 		calEvent.setUuid(model.getUuid());
 		calEvent.setEventId(model.getEventId());
 		calEvent.setGroupId(model.getGroupId());

@@ -71,7 +71,9 @@ public abstract class TagsSourceLocalServiceBaseImpl
 	implements TagsSourceLocalService, InitializingBean {
 	public TagsSource addTagsSource(TagsSource model) throws SystemException {
 		TagsSource tagsSource = new TagsSourceImpl();
+
 		tagsSource.setNew(true);
+
 		tagsSource.setSourceId(model.getSourceId());
 		tagsSource.setParentSourceId(model.getParentSourceId());
 		tagsSource.setName(model.getName());
@@ -94,7 +96,9 @@ public abstract class TagsSourceLocalServiceBaseImpl
 	public TagsSource updateTagsSource(TagsSource model)
 		throws SystemException {
 		TagsSource tagsSource = new TagsSourceImpl();
+
 		tagsSource.setNew(false);
+
 		tagsSource.setSourceId(model.getSourceId());
 		tagsSource.setParentSourceId(model.getParentSourceId());
 		tagsSource.setName(model.getName());

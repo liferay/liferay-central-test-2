@@ -74,6 +74,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	implements ShoppingItemPersistence {
 	public ShoppingItem create(long itemId) {
 		ShoppingItem shoppingItem = new ShoppingItemImpl();
+
 		shoppingItem.setNew(true);
 		shoppingItem.setPrimaryKey(itemId);
 
@@ -136,7 +137,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(shoppingItem);
+
 			session.flush();
 
 			return shoppingItem;
@@ -146,20 +149,20 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingItem.class.getName());
 		}
 	}
 
-	public ShoppingItem update(
-		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
+	public ShoppingItem update(ShoppingItem shoppingItem)
 		throws SystemException {
 		return update(shoppingItem, false);
 	}
 
-	public ShoppingItem update(
-		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
-		boolean merge) throws SystemException {
+	public ShoppingItem update(ShoppingItem shoppingItem, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = shoppingItem.isNew();
 
 		if (listener != null) {
@@ -203,6 +206,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			shoppingItem.setNew(false);
 
 			return shoppingItem;
@@ -212,6 +216,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingItem.class.getName());
 		}
 	}
@@ -256,6 +261,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -266,18 +272,26 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("itemId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -305,13 +319,17 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		String finderClassName = ShoppingItem.class.getName();
 		String finderMethodName = "findByCategoryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(categoryId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(categoryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -322,25 +340,33 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("itemId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -364,11 +390,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchItemException(msg.toString());
 		}
 		else {
@@ -379,15 +407,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	public ShoppingItem findByCategoryId_Last(long categoryId,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
 		int count = countByCategoryId(categoryId);
+
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchItemException(msg.toString());
 		}
 		else {
@@ -399,34 +430,45 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		long categoryId, OrderByComparator obc)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByPrimaryKey(itemId);
+
 		int count = countByCategoryId(categoryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 			query.append("categoryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("itemId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItem);
+
 			ShoppingItem[] array = new ShoppingItemImpl[3];
+
 			array[0] = (ShoppingItem)objArray[0];
 			array[1] = (ShoppingItem)objArray[1];
 			array[2] = (ShoppingItem)objArray[2];
@@ -447,13 +489,14 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 		if (shoppingItem == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("sku=");
-			msg.append(sku);
+			msg.append("sku=" + sku);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -474,6 +517,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), sku };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -484,9 +528,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (sku == null) {
@@ -497,11 +544,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("itemId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (sku != null) {
@@ -509,6 +560,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -565,6 +617,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -596,6 +649,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -606,6 +660,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem ");
 
@@ -613,12 +668,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("itemId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -647,6 +705,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ShoppingItem shoppingItem = (ShoppingItem)itr.next();
+
 			remove(shoppingItem);
 		}
 	}
@@ -654,6 +713,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	public void removeByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByC_S(companyId, sku);
+
 		remove(shoppingItem);
 	}
 
@@ -670,6 +730,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -680,17 +741,23 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 				query.append("categoryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, categoryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -725,6 +792,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), sku };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -735,10 +803,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (sku == null) {
@@ -751,7 +822,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (sku != null) {
@@ -759,6 +832,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -791,6 +865,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -800,13 +875,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingItem");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingItem");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -846,7 +919,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 	public List getShoppingItemPrices(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		String finderClassName = "null";
+		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
 		String finderMethodName = "getShoppingItemPrices";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -856,6 +929,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -866,28 +940,34 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETSHOPPINGITEMPRICES);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
-					sm.append("ShoppingItemPrice.itemId ASC");
-					sm.append(", ");
+
+					sm.append("ShoppingItemPrice.itemId ASC, ");
 					sm.append("ShoppingItemPrice.itemPriceId ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("ShoppingItemPrice",
 					com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -906,10 +986,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	}
 
 	public int getShoppingItemPricesSize(long pk) throws SystemException {
-		String finderClassName = "null";
+		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
 		String finderMethodName = "getShoppingItemPricesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -920,12 +1001,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -955,14 +1039,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
 		throws SystemException {
-		String finderClassName = "null";
+		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
 		String finderMethodName = "containsShoppingItemPrices";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), new Long(shoppingItemPricePK)
+				new Long(pk),
+				
+				new Long(shoppingItemPricePK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -970,6 +1059,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
 							pk, shoppingItemPricePK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1005,8 +1095,10 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			ShoppingItemPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				_SQL_CONTAINSSHOPPINGITEMPRICE);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

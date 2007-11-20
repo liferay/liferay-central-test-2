@@ -61,6 +61,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	implements UserIdMapperPersistence {
 	public UserIdMapper create(long userIdMapperId) {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
+
 		userIdMapper.setNew(true);
 		userIdMapper.setPrimaryKey(userIdMapperId);
 
@@ -124,7 +125,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(userIdMapper);
+
 			session.flush();
 
 			return userIdMapper;
@@ -134,20 +137,20 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserIdMapper.class.getName());
 		}
 	}
 
-	public UserIdMapper update(
-		com.liferay.portal.model.UserIdMapper userIdMapper)
+	public UserIdMapper update(UserIdMapper userIdMapper)
 		throws SystemException {
 		return update(userIdMapper, false);
 	}
 
-	public UserIdMapper update(
-		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
+	public UserIdMapper update(UserIdMapper userIdMapper, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = userIdMapper.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			userIdMapper.setNew(false);
 
 			return userIdMapper;
@@ -200,6 +204,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserIdMapper.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,16 +261,22 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,13 +304,17 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		String finderClassName = UserIdMapper.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -309,9 +325,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -320,10 +339,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -347,11 +369,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserIdMapper exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserIdMapper exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserIdMapperException(msg.toString());
 		}
 		else {
@@ -362,15 +386,18 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	public UserIdMapper findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchUserIdMapperException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserIdMapper exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserIdMapper exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserIdMapperException(msg.toString());
 		}
 		else {
@@ -382,15 +409,20 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByPrimaryKey(userIdMapperId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -399,12 +431,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userIdMapper);
+
 			UserIdMapper[] array = new UserIdMapperImpl[3];
+
 			array[0] = (UserIdMapper)objArray[0];
 			array[1] = (UserIdMapper)objArray[1];
 			array[2] = (UserIdMapper)objArray[2];
@@ -425,13 +461,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		if (userIdMapper == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserIdMapper exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserIdMapper exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("type=");
-			msg.append(type);
+			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -452,6 +489,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -462,9 +500,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
 
 				if (type == null) {
@@ -477,7 +518,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				if (type != null) {
@@ -485,6 +528,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -520,13 +564,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		if (userIdMapper == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserIdMapper exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("type=");
-			msg.append(type);
+
+			msg.append("No UserIdMapper exists with the key {");
+
+			msg.append("type=" + type);
+
 			msg.append(", ");
-			msg.append("externalUserId=");
-			msg.append(externalUserId);
+			msg.append("externalUserId=" + externalUserId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -547,6 +592,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				String.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { type, externalUserId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -557,6 +603,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
 
@@ -579,6 +626,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (type != null) {
@@ -590,6 +638,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -646,6 +695,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -677,6 +727,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -687,6 +738,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserIdMapper ");
 
 				if (obc != null) {
@@ -695,6 +747,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -723,6 +776,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserIdMapper userIdMapper = (UserIdMapper)itr.next();
+
 			remove(userIdMapper);
 		}
 	}
@@ -730,12 +784,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	public void removeByU_T(long userId, String type)
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByU_T(userId, type);
+
 		remove(userIdMapper);
 	}
 
 	public void removeByT_E(String type, String externalUserId)
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByT_E(type, externalUserId);
+
 		remove(userIdMapper);
 	}
 
@@ -752,6 +808,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -762,17 +819,23 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -807,6 +870,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -817,10 +881,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
 
 				if (type == null) {
@@ -833,7 +900,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				if (type != null) {
@@ -841,6 +910,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -876,6 +946,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				String.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { type, externalUserId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -886,6 +957,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
@@ -909,6 +981,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (type != null) {
@@ -920,6 +993,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -952,6 +1026,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -961,12 +1036,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserIdMapper");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.UserIdMapper");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

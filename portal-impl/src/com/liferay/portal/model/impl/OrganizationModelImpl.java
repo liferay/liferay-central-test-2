@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="OrganizationModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Organization_</code> table in
- * the database.
+ * This class is a model that represents the <code>Organization</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,14 +60,32 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Organization_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "parentOrganizationId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "location", new Integer(Types.BOOLEAN) },
+			
+
 			{ "recursable", new Integer(Types.BOOLEAN) },
+			
+
 			{ "regionId", new Integer(Types.BIGINT) },
+			
+
 			{ "countryId", new Integer(Types.BIGINT) },
+			
+
 			{ "statusId", new Integer(Types.INTEGER) },
+			
+
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
@@ -205,6 +223,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 
 	public Organization toEscapedModel() {
 		Organization model = new OrganizationImpl();
+
 		model.setOrganizationId(getOrganizationId());
 		model.setCompanyId(getCompanyId());
 		model.setParentOrganizationId(getParentOrganizationId());
@@ -227,6 +246,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		OrganizationImpl clone = new OrganizationImpl();
+
 		clone.setOrganizationId(getOrganizationId());
 		clone.setCompanyId(getCompanyId());
 		clone.setParentOrganizationId(getParentOrganizationId());
@@ -247,7 +267,9 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 
 		OrganizationImpl organization = (OrganizationImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(organization.getName());
 
 		if (value != 0) {

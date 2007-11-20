@@ -88,7 +88,9 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	public ShoppingItemPrice addShoppingItemPrice(ShoppingItemPrice model)
 		throws SystemException {
 		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
+
 		shoppingItemPrice.setNew(true);
+
 		shoppingItemPrice.setItemPriceId(model.getItemPriceId());
 		shoppingItemPrice.setItemId(model.getItemId());
 		shoppingItemPrice.setMinQuantity(model.getMinQuantity());
@@ -117,7 +119,9 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	public ShoppingItemPrice updateShoppingItemPrice(ShoppingItemPrice model)
 		throws SystemException {
 		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
+
 		shoppingItemPrice.setNew(false);
+
 		shoppingItemPrice.setItemPriceId(model.getItemPriceId());
 		shoppingItemPrice.setItemId(model.getItemId());
 		shoppingItemPrice.setMinQuantity(model.getMinQuantity());

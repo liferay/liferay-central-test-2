@@ -270,7 +270,9 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	public UserTracker addUserTracker(UserTracker model)
 		throws SystemException {
 		UserTracker userTracker = new UserTrackerImpl();
+
 		userTracker.setNew(true);
+
 		userTracker.setUserTrackerId(model.getUserTrackerId());
 		userTracker.setCompanyId(model.getCompanyId());
 		userTracker.setUserId(model.getUserId());
@@ -297,7 +299,9 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	public UserTracker updateUserTracker(UserTracker model)
 		throws SystemException {
 		UserTracker userTracker = new UserTrackerImpl();
+
 		userTracker.setNew(false);
+
 		userTracker.setUserTrackerId(model.getUserTrackerId());
 		userTracker.setCompanyId(model.getCompanyId());
 		userTracker.setUserId(model.getUserId());

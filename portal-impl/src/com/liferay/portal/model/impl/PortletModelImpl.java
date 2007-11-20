@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="PortletModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Portlet</code> table in the database.
+ * This class is a model that represents the <code>Portlet</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,9 +60,17 @@ public class PortletModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Portlet";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "id_", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "portletId", new Integer(Types.VARCHAR) },
+			
+
 			{ "roles", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";
@@ -145,6 +154,7 @@ public class PortletModelImpl extends BaseModelImpl {
 
 	public Portlet toEscapedModel() {
 		Portlet model = new PortletImpl();
+
 		model.setId(getId());
 		model.setCompanyId(getCompanyId());
 		model.setPortletId(Html.escape(getPortletId()));
@@ -162,6 +172,7 @@ public class PortletModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PortletImpl clone = new PortletImpl();
+
 		clone.setId(getId());
 		clone.setCompanyId(getCompanyId());
 		clone.setPortletId(getPortletId());
@@ -177,6 +188,7 @@ public class PortletModelImpl extends BaseModelImpl {
 		}
 
 		PortletImpl portlet = (PortletImpl)obj;
+
 		long pk = portlet.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

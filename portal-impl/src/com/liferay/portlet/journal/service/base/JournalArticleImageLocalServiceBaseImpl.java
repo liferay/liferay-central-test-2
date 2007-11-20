@@ -83,7 +83,9 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	public JournalArticleImage addJournalArticleImage(JournalArticleImage model)
 		throws SystemException {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
+
 		journalArticleImage.setNew(true);
+
 		journalArticleImage.setUuid(model.getUuid());
 		journalArticleImage.setArticleImageId(model.getArticleImageId());
 		journalArticleImage.setGroupId(model.getGroupId());
@@ -110,7 +112,9 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	public JournalArticleImage updateJournalArticleImage(
 		JournalArticleImage model) throws SystemException {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
+
 		journalArticleImage.setNew(false);
+
 		journalArticleImage.setUuid(model.getUuid());
 		journalArticleImage.setArticleImageId(model.getArticleImageId());
 		journalArticleImage.setGroupId(model.getGroupId());

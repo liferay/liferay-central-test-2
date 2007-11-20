@@ -270,7 +270,9 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	public UserIdMapper addUserIdMapper(UserIdMapper model)
 		throws SystemException {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
+
 		userIdMapper.setNew(true);
+
 		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
 		userIdMapper.setUserId(model.getUserId());
 		userIdMapper.setType(model.getType());
@@ -294,7 +296,9 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	public UserIdMapper updateUserIdMapper(UserIdMapper model)
 		throws SystemException {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
+
 		userIdMapper.setNew(false);
+
 		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
 		userIdMapper.setUserId(model.getUserId());
 		userIdMapper.setType(model.getType());

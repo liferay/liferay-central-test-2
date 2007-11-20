@@ -267,7 +267,9 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	implements OrgLaborLocalService, InitializingBean {
 	public OrgLabor addOrgLabor(OrgLabor model) throws SystemException {
 		OrgLabor orgLabor = new OrgLaborImpl();
+
 		orgLabor.setNew(true);
+
 		orgLabor.setOrgLaborId(model.getOrgLaborId());
 		orgLabor.setOrganizationId(model.getOrganizationId());
 		orgLabor.setTypeId(model.getTypeId());
@@ -302,7 +304,9 @@ public abstract class OrgLaborLocalServiceBaseImpl
 
 	public OrgLabor updateOrgLabor(OrgLabor model) throws SystemException {
 		OrgLabor orgLabor = new OrgLaborImpl();
+
 		orgLabor.setNew(false);
+
 		orgLabor.setOrgLaborId(model.getOrgLaborId());
 		orgLabor.setOrganizationId(model.getOrganizationId());
 		orgLabor.setTypeId(model.getTypeId());

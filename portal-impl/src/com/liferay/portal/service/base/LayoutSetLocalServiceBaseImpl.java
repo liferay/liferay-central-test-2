@@ -267,7 +267,9 @@ public abstract class LayoutSetLocalServiceBaseImpl
 	implements LayoutSetLocalService, InitializingBean {
 	public LayoutSet addLayoutSet(LayoutSet model) throws SystemException {
 		LayoutSet layoutSet = new LayoutSetImpl();
+
 		layoutSet.setNew(true);
+
 		layoutSet.setLayoutSetId(model.getLayoutSetId());
 		layoutSet.setGroupId(model.getGroupId());
 		layoutSet.setCompanyId(model.getCompanyId());
@@ -298,7 +300,9 @@ public abstract class LayoutSetLocalServiceBaseImpl
 
 	public LayoutSet updateLayoutSet(LayoutSet model) throws SystemException {
 		LayoutSet layoutSet = new LayoutSetImpl();
+
 		layoutSet.setNew(false);
+
 		layoutSet.setLayoutSetId(model.getLayoutSetId());
 		layoutSet.setGroupId(model.getGroupId());
 		layoutSet.setCompanyId(model.getCompanyId());

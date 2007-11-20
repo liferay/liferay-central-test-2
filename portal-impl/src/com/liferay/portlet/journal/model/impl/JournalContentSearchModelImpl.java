@@ -41,8 +41,8 @@ import java.sql.Types;
  * <a href="JournalContentSearchModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -61,11 +61,23 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalContentSearch";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
+			
+
 			{ "layoutId", new Integer(Types.BIGINT) },
+			
+
 			{ "portletId", new Integer(Types.VARCHAR) },
+			
+
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";
@@ -170,6 +182,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 
 	public JournalContentSearch toEscapedModel() {
 		JournalContentSearch model = new JournalContentSearchImpl();
+
 		model.setContentSearchId(getContentSearchId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -189,6 +202,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalContentSearchImpl clone = new JournalContentSearchImpl();
+
 		clone.setContentSearchId(getContentSearchId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -206,6 +220,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 
 		JournalContentSearchImpl journalContentSearch = (JournalContentSearchImpl)obj;
+
 		long pk = journalContentSearch.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

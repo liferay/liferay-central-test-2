@@ -75,6 +75,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	implements SCProductEntryPersistence {
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
+
 		scProductEntry.setNew(true);
 		scProductEntry.setPrimaryKey(productEntryId);
 
@@ -148,7 +149,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(scProductEntry);
+
 			session.flush();
 
 			return scProductEntry;
@@ -158,20 +161,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductEntry.class.getName());
 		}
 	}
 
-	public SCProductEntry update(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
+	public SCProductEntry update(SCProductEntry scProductEntry)
 		throws SystemException {
 		return update(scProductEntry, false);
 	}
 
-	public SCProductEntry update(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
-		boolean merge) throws SystemException {
+	public SCProductEntry update(SCProductEntry scProductEntry, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = scProductEntry.isNew();
 
 		if (listener != null) {
@@ -217,6 +220,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			scProductEntry.setNew(false);
 
 			return scProductEntry;
@@ -226,6 +230,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductEntry.class.getName());
 		}
 	}
@@ -271,6 +276,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -281,19 +287,27 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -321,13 +335,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -338,26 +356,34 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("modifiedDate DESC").append(", ");
+
+					query.append("modifiedDate DESC, ");
 					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -382,11 +408,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -397,15 +425,18 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	public SCProductEntry findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -417,35 +448,46 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByPrimaryKey(productEntryId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
+
 			SCProductEntry[] array = new SCProductEntryImpl[3];
+
 			array[0] = (SCProductEntry)objArray[0];
 			array[1] = (SCProductEntry)objArray[1];
 			array[2] = (SCProductEntry)objArray[2];
@@ -465,6 +507,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -475,19 +518,27 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -515,13 +566,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -532,26 +587,34 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("modifiedDate DESC").append(", ");
+
+					query.append("modifiedDate DESC, ");
 					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -576,11 +639,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -592,15 +657,18 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -612,35 +680,46 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByPrimaryKey(productEntryId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
+
 			SCProductEntry[] array = new SCProductEntryImpl[3];
+
 			array[0] = (SCProductEntry)objArray[0];
 			array[1] = (SCProductEntry)objArray[1];
 			array[2] = (SCProductEntry)objArray[2];
@@ -662,6 +741,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -672,22 +752,33 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -715,14 +806,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByG_U";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId), new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -733,29 +827,40 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("modifiedDate DESC").append(", ");
+
+					query.append("modifiedDate DESC, ");
 					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -780,14 +885,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -799,18 +906,21 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByG_U(groupId, userId);
+
 		List list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
@@ -822,38 +932,52 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		long groupId, long userId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByPrimaryKey(productEntryId);
+
 		int count = countByG_U(groupId, userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("modifiedDate DESC").append(", ");
+
+				query.append("modifiedDate DESC, ");
 				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
+
 			SCProductEntry[] array = new SCProductEntryImpl[3];
+
 			array[0] = (SCProductEntry)objArray[0];
 			array[1] = (SCProductEntry)objArray[1];
 			array[2] = (SCProductEntry)objArray[2];
@@ -895,6 +1019,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -926,6 +1051,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -936,6 +1062,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry ");
 
@@ -943,13 +1070,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("modifiedDate DESC").append(", ");
+
+					query.append("modifiedDate DESC, ");
 					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -978,6 +1108,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+
 			remove(scProductEntry);
 		}
 	}
@@ -987,6 +1118,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+
 			remove(scProductEntry);
 		}
 	}
@@ -997,6 +1129,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+
 			remove(scProductEntry);
 		}
 	}
@@ -1014,6 +1147,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1024,17 +1158,23 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1067,6 +1207,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1077,17 +1218,23 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1122,6 +1269,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1132,20 +1280,29 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1178,6 +1335,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1187,13 +1345,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1243,6 +1399,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1253,26 +1410,33 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETSCLICENSES);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
+
 					sm.append("SCLicense.name ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("SCLicense",
 					com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1295,6 +1459,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "getSCLicensesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1305,12 +1470,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSCLICENSESSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1343,9 +1511,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		String finderClassName = "SCLicenses_SCProductEntries";
 		String finderMethodName = "containsSCLicenses";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(scLicensePK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1353,6 +1524,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
 							scLicensePK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1431,6 +1603,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < scLicenses.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}
@@ -1510,6 +1683,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < scLicenses.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+
 				removeSCLicense.remove(pk, scLicense.getPrimaryKey());
 			}
 		}
@@ -1549,6 +1723,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < scLicenses.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}
@@ -1562,6 +1737,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	protected void initDao() {
 		containsSCLicense = new ContainsSCLicense(this);
+
 		addSCLicense = new AddSCLicense(this);
 		clearSCLicenses = new ClearSCLicenses(this);
 		removeSCLicense = new RemoveSCLicense(this);
@@ -1576,8 +1752,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		protected ContainsSCLicense(
 			SCProductEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSSCLICENSE);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1607,9 +1785,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		protected AddSCLicense(SCProductEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO SCLicenses_SCProductEntries (productEntryId, licenseId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1629,7 +1810,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		protected ClearSCLicenses(SCProductEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1642,8 +1825,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		protected RemoveSCLicense(SCProductEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

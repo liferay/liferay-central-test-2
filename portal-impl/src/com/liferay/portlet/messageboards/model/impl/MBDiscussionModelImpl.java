@@ -39,13 +39,13 @@ import java.sql.Types;
  * <a href="MBDiscussionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBDiscussion</code> table in
- * the database.
+ * This class is a model that represents the <code>MBDiscussion</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,8 +59,14 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBDiscussion";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "discussionId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "threadId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
@@ -125,6 +131,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 
 	public MBDiscussion toEscapedModel() {
 		MBDiscussion model = new MBDiscussionImpl();
+
 		model.setDiscussionId(getDiscussionId());
 		model.setClassNameId(getClassNameId());
 		model.setClassPK(getClassPK());
@@ -141,6 +148,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBDiscussionImpl clone = new MBDiscussionImpl();
+
 		clone.setDiscussionId(getDiscussionId());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
@@ -155,6 +163,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		}
 
 		MBDiscussionImpl mbDiscussion = (MBDiscussionImpl)obj;
+
 		long pk = mbDiscussion.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

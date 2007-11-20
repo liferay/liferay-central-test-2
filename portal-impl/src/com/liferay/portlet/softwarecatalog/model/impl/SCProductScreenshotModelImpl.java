@@ -39,8 +39,8 @@ import java.sql.Types;
  * <a href="SCProductScreenshotModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -59,11 +59,23 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "SCProductScreenshot";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "productScreenshotId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "productEntryId", new Integer(Types.BIGINT) },
+			
+
 			{ "thumbnailId", new Integer(Types.BIGINT) },
+			
+
 			{ "fullImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";
@@ -158,6 +170,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 
 	public SCProductScreenshot toEscapedModel() {
 		SCProductScreenshot model = new SCProductScreenshotImpl();
+
 		model.setProductScreenshotId(getProductScreenshotId());
 		model.setCompanyId(getCompanyId());
 		model.setGroupId(getGroupId());
@@ -177,6 +190,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SCProductScreenshotImpl clone = new SCProductScreenshotImpl();
+
 		clone.setProductScreenshotId(getProductScreenshotId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
@@ -194,6 +208,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		}
 
 		SCProductScreenshotImpl scProductScreenshot = (SCProductScreenshotImpl)obj;
+
 		int value = 0;
 
 		if (getProductEntryId() < scProductScreenshot.getProductEntryId()) {

@@ -42,12 +42,13 @@ import java.util.Date;
  * <a href="ImageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Image</code> table in the database.
+ * This class is a model that represents the <code>Image</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,11 +62,23 @@ public class ImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Image";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "imageId", new Integer(Types.BIGINT) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "text_", new Integer(Types.CLOB) },
+			
+
 			{ "type_", new Integer(Types.VARCHAR) },
+			
+
 			{ "height", new Integer(Types.INTEGER) },
+			
+
 			{ "width", new Integer(Types.INTEGER) },
+			
+
 			{ "size_", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
@@ -167,6 +180,7 @@ public class ImageModelImpl extends BaseModelImpl {
 
 	public Image toEscapedModel() {
 		Image model = new ImageImpl();
+
 		model.setImageId(getImageId());
 		model.setModifiedDate(getModifiedDate());
 		model.setText(Html.escape(getText()));
@@ -185,6 +199,7 @@ public class ImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ImageImpl clone = new ImageImpl();
+
 		clone.setImageId(getImageId());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setText(getText());
@@ -202,6 +217,7 @@ public class ImageModelImpl extends BaseModelImpl {
 		}
 
 		ImageImpl image = (ImageImpl)obj;
+
 		int value = 0;
 
 		if (getImageId() < image.getImageId()) {

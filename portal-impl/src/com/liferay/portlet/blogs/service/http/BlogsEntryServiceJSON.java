@@ -31,31 +31,34 @@ import org.json.JSONObject;
  * <a href="BlogsEntryServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portlet.blogs.service.BlogsEntryServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portlet.blogs.service.BlogsEntryServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portlet.blogs.model.BlogsEntry</code>, that
- * is translated to a <code>org.json.JSONObject</code>. Methods that JSON cannot
- * safely use are skipped. The logic for the translation is encapsulated in <code>com.liferay.portlet.blogs.service.http.BlogsEntryJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.blogs.model.BlogsEntry</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portlet.blogs.service.http.BlogsEntryJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -70,16 +73,16 @@ import org.json.JSONObject;
  */
 public class BlogsEntryServiceJSON {
 	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
 	public static java.lang.String getCategoryBlogsRSS(long categoryId,
 		int max, java.lang.String type, double version,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
 				max, type, version, feedURL, entryURL);
 
@@ -90,8 +93,8 @@ public class BlogsEntryServiceJSON {
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
 				max, type, version, displayStyle, feedURL, entryURL);
 
@@ -99,8 +102,8 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONArray getCompanyEntries(long companyId, int max)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.util.List returnValue = BlogsEntryServiceUtil.getCompanyEntries(companyId,
 				max);
 
@@ -110,8 +113,8 @@ public class BlogsEntryServiceJSON {
 	public static java.lang.String getCompanyEntriesRSS(long companyId,
 		int max, java.lang.String type, double version,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getCompanyEntriesRSS(companyId,
 				max, type, version, feedURL, entryURL);
 
@@ -122,8 +125,8 @@ public class BlogsEntryServiceJSON {
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getCompanyEntriesRSS(companyId,
 				max, type, version, displayStyle, feedURL, entryURL);
 
@@ -131,16 +134,16 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONObject getEntry(long entryId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject getEntry(long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(groupId,
 				urlTitle);
 
@@ -148,8 +151,8 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONArray getGroupEntries(long groupId, int max)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.util.List returnValue = BlogsEntryServiceUtil.getGroupEntries(groupId,
 				max);
 
@@ -159,8 +162,8 @@ public class BlogsEntryServiceJSON {
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
 				max, type, version, feedURL, entryURL);
 
@@ -170,8 +173,8 @@ public class BlogsEntryServiceJSON {
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
 				max, type, version, displayStyle, feedURL, entryURL);
 
@@ -179,8 +182,8 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONArray getOrganizationEntries(long organizationId, int max)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.util.List returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
 				max);
 
@@ -190,8 +193,8 @@ public class BlogsEntryServiceJSON {
 	public static java.lang.String getOrganizationEntriesRSS(
 		long organizationId, int max, java.lang.String type, double version,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getOrganizationEntriesRSS(organizationId,
 				max, type, version, feedURL, entryURL);
 
@@ -202,8 +205,8 @@ public class BlogsEntryServiceJSON {
 		long organizationId, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		java.lang.String returnValue = BlogsEntryServiceUtil.getOrganizationEntriesRSS(organizationId,
 				max, type, version, displayStyle, feedURL, entryURL);
 

@@ -39,13 +39,13 @@ import java.sql.Types;
  * <a href="MBMessageFlagModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBMessageFlag</code> table in
- * the database.
+ * This class is a model that represents the <code>MBMessageFlag</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,8 +59,14 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBMessageFlag";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "messageFlagId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "messageId", new Integer(Types.BIGINT) },
+			
+
 			{ "flag", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
@@ -125,6 +131,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 
 	public MBMessageFlag toEscapedModel() {
 		MBMessageFlag model = new MBMessageFlagImpl();
+
 		model.setMessageFlagId(getMessageFlagId());
 		model.setUserId(getUserId());
 		model.setMessageId(getMessageId());
@@ -141,6 +148,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBMessageFlagImpl clone = new MBMessageFlagImpl();
+
 		clone.setMessageFlagId(getMessageFlagId());
 		clone.setUserId(getUserId());
 		clone.setMessageId(getMessageId());
@@ -155,6 +163,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		}
 
 		MBMessageFlagImpl mbMessageFlag = (MBMessageFlagImpl)obj;
+
 		long pk = mbMessageFlag.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="TagsAssetJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.tags.service.http.TagsAssetServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.tags.service.http.TagsAssetServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class TagsAssetJSONSerializer {
 	public static JSONObject toJSONObject(TagsAsset model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "assetId", model.getAssetId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
@@ -83,6 +85,7 @@ public class TagsAssetJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			TagsAsset model = (TagsAsset)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

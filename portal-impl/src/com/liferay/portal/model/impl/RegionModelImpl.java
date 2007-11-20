@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="RegionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Region</code> table in the database.
+ * This class is a model that represents the <code>Region</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,9 +60,17 @@ public class RegionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Region";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "regionId", new Integer(Types.BIGINT) },
+			
+
 			{ "countryId", new Integer(Types.BIGINT) },
+			
+
 			{ "regionCode", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
@@ -145,6 +154,7 @@ public class RegionModelImpl extends BaseModelImpl {
 
 	public Region toEscapedModel() {
 		Region model = new RegionImpl();
+
 		model.setRegionId(getRegionId());
 		model.setCountryId(getCountryId());
 		model.setRegionCode(Html.escape(getRegionCode()));
@@ -161,6 +171,7 @@ public class RegionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		RegionImpl clone = new RegionImpl();
+
 		clone.setRegionId(getRegionId());
 		clone.setCountryId(getCountryId());
 		clone.setRegionCode(getRegionCode());
@@ -176,7 +187,9 @@ public class RegionModelImpl extends BaseModelImpl {
 		}
 
 		RegionImpl region = (RegionImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(region.getName());
 
 		if (value != 0) {

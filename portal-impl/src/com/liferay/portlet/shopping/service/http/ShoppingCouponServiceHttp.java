@@ -39,26 +39,28 @@ import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
  * <a href="ShoppingCouponServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -86,6 +88,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = code;
 
 			if (code == null) {
@@ -93,6 +96,7 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj2 = new BooleanWrapper(autoCode);
+
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -106,17 +110,29 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj5 = new IntegerWrapper(startDateMonth);
+
 			Object paramObj6 = new IntegerWrapper(startDateDay);
+
 			Object paramObj7 = new IntegerWrapper(startDateYear);
+
 			Object paramObj8 = new IntegerWrapper(startDateHour);
+
 			Object paramObj9 = new IntegerWrapper(startDateMinute);
+
 			Object paramObj10 = new IntegerWrapper(endDateMonth);
+
 			Object paramObj11 = new IntegerWrapper(endDateDay);
+
 			Object paramObj12 = new IntegerWrapper(endDateYear);
+
 			Object paramObj13 = new IntegerWrapper(endDateHour);
+
 			Object paramObj14 = new IntegerWrapper(endDateMinute);
+
 			Object paramObj15 = new BooleanWrapper(neverExpire);
+
 			Object paramObj16 = new BooleanWrapper(active);
+
 			Object paramObj17 = limitCategories;
 
 			if (limitCategories == null) {
@@ -130,7 +146,9 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj19 = new DoubleWrapper(minOrder);
+
 			Object paramObj20 = new DoubleWrapper(discount);
+
 			Object paramObj21 = discountType;
 
 			if (discountType == null) {
@@ -146,6 +164,7 @@ public class ShoppingCouponServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -167,6 +186,7 @@ public class ShoppingCouponServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -177,7 +197,9 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(couponId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
 					"deleteCoupon", new Object[] { paramObj0, paramObj1 });
 
@@ -198,6 +220,7 @@ public class ShoppingCouponServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -208,9 +231,12 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(couponId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
 					"getCoupon", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -232,6 +258,7 @@ public class ShoppingCouponServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -243,7 +270,9 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(companyId);
+
 			Object paramObj2 = code;
 
 			if (code == null) {
@@ -251,6 +280,7 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj3 = new BooleanWrapper(active);
+
 			Object paramObj4 = discountType;
 
 			if (discountType == null) {
@@ -258,14 +288,18 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(andOperator);
+
 			Object paramObj6 = new IntegerWrapper(begin);
+
 			Object paramObj7 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
 					"search",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -287,6 +321,7 @@ public class ShoppingCouponServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -304,7 +339,9 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(couponId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -318,17 +355,29 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(startDateMonth);
+
 			Object paramObj5 = new IntegerWrapper(startDateDay);
+
 			Object paramObj6 = new IntegerWrapper(startDateYear);
+
 			Object paramObj7 = new IntegerWrapper(startDateHour);
+
 			Object paramObj8 = new IntegerWrapper(startDateMinute);
+
 			Object paramObj9 = new IntegerWrapper(endDateMonth);
+
 			Object paramObj10 = new IntegerWrapper(endDateDay);
+
 			Object paramObj11 = new IntegerWrapper(endDateYear);
+
 			Object paramObj12 = new IntegerWrapper(endDateHour);
+
 			Object paramObj13 = new IntegerWrapper(endDateMinute);
+
 			Object paramObj14 = new BooleanWrapper(neverExpire);
+
 			Object paramObj15 = new BooleanWrapper(active);
+
 			Object paramObj16 = limitCategories;
 
 			if (limitCategories == null) {
@@ -342,7 +391,9 @@ public class ShoppingCouponServiceHttp {
 			}
 
 			Object paramObj18 = new DoubleWrapper(minOrder);
+
 			Object paramObj19 = new DoubleWrapper(discount);
+
 			Object paramObj20 = discountType;
 
 			if (discountType == null) {
@@ -358,6 +409,7 @@ public class ShoppingCouponServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -379,6 +431,7 @@ public class ShoppingCouponServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

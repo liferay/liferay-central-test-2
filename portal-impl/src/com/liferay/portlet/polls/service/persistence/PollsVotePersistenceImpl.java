@@ -62,6 +62,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	implements PollsVotePersistence {
 	public PollsVote create(long voteId) {
 		PollsVote pollsVote = new PollsVoteImpl();
+
 		pollsVote.setNew(true);
 		pollsVote.setPrimaryKey(voteId);
 
@@ -123,7 +124,9 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(pollsVote);
+
 			session.flush();
 
 			return pollsVote;
@@ -133,19 +136,19 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PollsVote.class.getName());
 		}
 	}
 
-	public PollsVote update(com.liferay.portlet.polls.model.PollsVote pollsVote)
-		throws SystemException {
+	public PollsVote update(PollsVote pollsVote) throws SystemException {
 		return update(pollsVote, false);
 	}
 
-	public PollsVote update(
-		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
+	public PollsVote update(PollsVote pollsVote, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = pollsVote.isNew();
 
 		if (listener != null) {
@@ -189,6 +192,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			pollsVote.setNew(false);
 
 			return pollsVote;
@@ -198,6 +202,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PollsVote.class.getName());
 		}
 	}
@@ -239,6 +244,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByQuestionId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(questionId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -249,16 +255,22 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("questionId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, questionId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -286,13 +298,17 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "findByQuestionId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(questionId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(questionId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -303,9 +319,12 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("questionId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -314,10 +333,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, questionId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -341,11 +363,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
+
+			msg.append("No PollsVote exists with the key {");
+
+			msg.append("questionId=" + questionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
@@ -356,15 +380,18 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	public PollsVote findByQuestionId_Last(long questionId,
 		OrderByComparator obc) throws NoSuchVoteException, SystemException {
 		int count = countByQuestionId(questionId);
+
 		List list = findByQuestionId(questionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
+
+			msg.append("No PollsVote exists with the key {");
+
+			msg.append("questionId=" + questionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
@@ -376,16 +403,21 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		long questionId, OrderByComparator obc)
 		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByPrimaryKey(voteId);
+
 		int count = countByQuestionId(questionId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 			query.append("questionId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -394,12 +426,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, questionId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsVote);
+
 			PollsVote[] array = new PollsVoteImpl[3];
+
 			array[0] = (PollsVote)objArray[0];
 			array[1] = (PollsVote)objArray[1];
 			array[2] = (PollsVote)objArray[2];
@@ -419,6 +455,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByChoiceId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(choiceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -429,16 +466,22 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("choiceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, choiceId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -466,13 +509,17 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "findByChoiceId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(choiceId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(choiceId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -483,9 +530,12 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("choiceId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -494,10 +544,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, choiceId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -521,11 +574,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("choiceId=");
-			msg.append(choiceId);
+
+			msg.append("No PollsVote exists with the key {");
+
+			msg.append("choiceId=" + choiceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
@@ -536,15 +591,18 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	public PollsVote findByChoiceId_Last(long choiceId, OrderByComparator obc)
 		throws NoSuchVoteException, SystemException {
 		int count = countByChoiceId(choiceId);
+
 		List list = findByChoiceId(choiceId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("choiceId=");
-			msg.append(choiceId);
+
+			msg.append("No PollsVote exists with the key {");
+
+			msg.append("choiceId=" + choiceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
@@ -555,16 +613,21 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	public PollsVote[] findByChoiceId_PrevAndNext(long voteId, long choiceId,
 		OrderByComparator obc) throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByPrimaryKey(voteId);
+
 		int count = countByChoiceId(choiceId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 			query.append("choiceId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -573,12 +636,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, choiceId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsVote);
+
 			PollsVote[] array = new PollsVoteImpl[3];
+
 			array[0] = (PollsVote)objArray[0];
 			array[1] = (PollsVote)objArray[1];
 			array[2] = (PollsVote)objArray[2];
@@ -599,13 +666,14 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		if (pollsVote == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
+
+			msg.append("No PollsVote exists with the key {");
+
+			msg.append("questionId=" + questionId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -628,6 +696,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(questionId), new Long(userId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -638,19 +707,28 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("questionId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, questionId);
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -707,6 +785,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -738,6 +817,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -748,6 +828,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portlet.polls.model.PollsVote ");
 
 				if (obc != null) {
@@ -756,6 +837,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -784,6 +866,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PollsVote pollsVote = (PollsVote)itr.next();
+
 			remove(pollsVote);
 		}
 	}
@@ -793,6 +876,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PollsVote pollsVote = (PollsVote)itr.next();
+
 			remove(pollsVote);
 		}
 	}
@@ -800,6 +884,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	public void removeByQ_U(long questionId, long userId)
 		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByQ_U(questionId, userId);
+
 		remove(pollsVote);
 	}
 
@@ -816,6 +901,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByQuestionId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(questionId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -826,17 +912,23 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("questionId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, questionId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -869,6 +961,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByChoiceId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(choiceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -879,17 +972,23 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("choiceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, choiceId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -927,6 +1026,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(questionId), new Long(userId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -937,20 +1037,29 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+
 				query.append("questionId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, questionId);
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -983,6 +1092,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -992,12 +1102,11 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portlet.polls.model.PollsVote");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.polls.model.PollsVote");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

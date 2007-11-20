@@ -61,6 +61,7 @@ public class PortletPersistenceImpl extends BasePersistence
 	implements PortletPersistence {
 	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
+
 		portlet.setNew(true);
 		portlet.setPrimaryKey(id);
 
@@ -120,7 +121,9 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(portlet);
+
 			session.flush();
 
 			return portlet;
@@ -130,18 +133,19 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Portlet.class.getName());
 		}
 	}
 
-	public Portlet update(com.liferay.portal.model.Portlet portlet)
-		throws SystemException {
+	public Portlet update(Portlet portlet) throws SystemException {
 		return update(portlet, false);
 	}
 
-	public Portlet update(com.liferay.portal.model.Portlet portlet,
-		boolean merge) throws SystemException {
+	public Portlet update(Portlet portlet, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = portlet.isNew();
 
 		if (listener != null) {
@@ -184,6 +188,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			portlet.setNew(false);
 
 			return portlet;
@@ -193,6 +198,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Portlet.class.getName());
 		}
 	}
@@ -234,6 +240,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -244,15 +251,21 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -280,13 +293,17 @@ public class PortletPersistenceImpl extends BasePersistence
 		String finderClassName = Portlet.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -297,8 +314,11 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -307,10 +327,13 @@ public class PortletPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -334,11 +357,13 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Portlet exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Portlet exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
@@ -349,15 +374,18 @@ public class PortletPersistenceImpl extends BasePersistence
 	public Portlet findByCompanyId_Last(long companyId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Portlet exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Portlet exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
@@ -368,15 +396,20 @@ public class PortletPersistenceImpl extends BasePersistence
 	public Portlet[] findByCompanyId_PrevAndNext(long id, long companyId,
 		OrderByComparator obc) throws NoSuchPortletException, SystemException {
 		Portlet portlet = findByPrimaryKey(id);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -385,11 +418,15 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, portlet);
+
 			Portlet[] array = new PortletImpl[3];
+
 			array[0] = (Portlet)objArray[0];
 			array[1] = (Portlet)objArray[1];
 			array[2] = (Portlet)objArray[2];
@@ -410,13 +447,14 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		if (portlet == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Portlet exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Portlet exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("portletId=");
-			msg.append(portletId);
+			msg.append("portletId=" + portletId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -437,6 +475,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -447,8 +486,11 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (portletId == null) {
@@ -461,7 +503,9 @@ public class PortletPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (portletId != null) {
@@ -469,6 +513,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -525,6 +570,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -556,6 +602,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -566,6 +613,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Portlet ");
 
 				if (obc != null) {
@@ -574,6 +622,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -602,6 +651,7 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Portlet portlet = (Portlet)itr.next();
+
 			remove(portlet);
 		}
 	}
@@ -609,6 +659,7 @@ public class PortletPersistenceImpl extends BasePersistence
 	public void removeByC_P(long companyId, String portletId)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = findByC_P(companyId, portletId);
+
 		remove(portlet);
 	}
 
@@ -625,6 +676,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -635,16 +687,22 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -680,6 +738,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -690,9 +749,12 @@ public class PortletPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (portletId == null) {
@@ -705,7 +767,9 @@ public class PortletPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (portletId != null) {
@@ -713,6 +777,7 @@ public class PortletPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -745,6 +810,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -754,12 +820,11 @@ public class PortletPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Portlet");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Portlet");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

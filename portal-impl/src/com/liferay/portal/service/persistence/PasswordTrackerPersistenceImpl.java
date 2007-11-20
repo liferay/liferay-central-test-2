@@ -61,6 +61,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 	implements PasswordTrackerPersistence {
 	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
+
 		passwordTracker.setNew(true);
 		passwordTracker.setPrimaryKey(passwordTrackerId);
 
@@ -124,7 +125,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(passwordTracker);
+
 			session.flush();
 
 			return passwordTracker;
@@ -134,20 +137,20 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PasswordTracker.class.getName());
 		}
 	}
 
-	public PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker)
+	public PasswordTracker update(PasswordTracker passwordTracker)
 		throws SystemException {
 		return update(passwordTracker, false);
 	}
 
-	public PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+	public PasswordTracker update(PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = passwordTracker.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			passwordTracker.setNew(false);
 
 			return passwordTracker;
@@ -200,6 +204,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PasswordTracker.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,19 +261,27 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("userId DESC").append(", ");
+
+				query.append("userId DESC, ");
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -295,13 +309,17 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		String finderClassName = PasswordTracker.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -312,26 +330,34 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("userId DESC").append(", ");
+
+					query.append("userId DESC, ");
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -355,11 +381,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PasswordTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No PasswordTracker exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
@@ -370,15 +398,18 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 	public PasswordTracker findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PasswordTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No PasswordTracker exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
@@ -390,34 +421,45 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
 		PasswordTracker passwordTracker = findByPrimaryKey(passwordTrackerId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("userId DESC").append(", ");
+
+				query.append("userId DESC, ");
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					passwordTracker);
+
 			PasswordTracker[] array = new PasswordTrackerImpl[3];
+
 			array[0] = (PasswordTracker)objArray[0];
 			array[1] = (PasswordTracker)objArray[1];
 			array[2] = (PasswordTracker)objArray[2];
@@ -459,6 +501,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -490,6 +533,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -500,19 +544,23 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.PasswordTracker ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("userId DESC").append(", ");
+
+					query.append("userId DESC, ");
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -541,6 +589,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
+
 			remove(passwordTracker);
 		}
 	}
@@ -558,6 +607,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -568,17 +618,23 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.PasswordTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -611,6 +667,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -620,12 +677,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.PasswordTracker");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.PasswordTracker");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

@@ -37,26 +37,28 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
  * <a href="BookmarksFolderServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -79,7 +81,9 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(parentFolderId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -93,13 +97,16 @@ public class BookmarksFolderServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj5 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"addFolder",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -121,6 +128,7 @@ public class BookmarksFolderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -134,7 +142,9 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(parentFolderId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -165,6 +175,7 @@ public class BookmarksFolderServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -186,6 +197,7 @@ public class BookmarksFolderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -195,6 +207,7 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"deleteFolder", new Object[] { paramObj0 });
 
@@ -215,6 +228,7 @@ public class BookmarksFolderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -225,8 +239,10 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"getFolder", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -248,6 +264,7 @@ public class BookmarksFolderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -260,7 +277,9 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
+
 			Object paramObj1 = new LongWrapper(parentFolderId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -274,11 +293,13 @@ public class BookmarksFolderServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(mergeWithParentFolder);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"updateFolder",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -300,6 +321,7 @@ public class BookmarksFolderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

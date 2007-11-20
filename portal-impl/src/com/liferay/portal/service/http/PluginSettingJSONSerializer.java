@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="PluginSettingJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.PluginSettingServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.PluginSettingServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class PluginSettingJSONSerializer {
 	public static JSONObject toJSONObject(PluginSetting model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "pluginSettingId", model.getPluginSettingId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "pluginId", model.getPluginId());
@@ -67,6 +69,7 @@ public class PluginSettingJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			PluginSetting model = (PluginSetting)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

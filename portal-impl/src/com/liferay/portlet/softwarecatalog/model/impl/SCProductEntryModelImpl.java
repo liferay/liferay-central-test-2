@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="SCProductEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>SCProductEntry</code> table in
- * the database.
+ * This class is a model that represents the <code>SCProductEntry</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,20 +64,50 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "SCProductEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "productEntryId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "type_", new Integer(Types.VARCHAR) },
+			
+
 			{ "tags", new Integer(Types.VARCHAR) },
+			
+
 			{ "shortDescription", new Integer(Types.VARCHAR) },
+			
+
 			{ "longDescription", new Integer(Types.VARCHAR) },
+			
+
 			{ "pageURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "author", new Integer(Types.VARCHAR) },
+			
+
 			{ "repoGroupId", new Integer(Types.VARCHAR) },
+			
+
 			{ "repoArtifactId", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(300) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
@@ -295,6 +325,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 
 	public SCProductEntry toEscapedModel() {
 		SCProductEntry model = new SCProductEntryImpl();
+
 		model.setProductEntryId(getProductEntryId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -323,6 +354,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SCProductEntryImpl clone = new SCProductEntryImpl();
+
 		clone.setProductEntryId(getProductEntryId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -349,9 +381,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		}
 
 		SCProductEntryImpl scProductEntry = (SCProductEntryImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getModifiedDate(),
 				scProductEntry.getModifiedDate());
+
 		value = value * -1;
 
 		if (value != 0) {
@@ -359,6 +394,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		}
 
 		value = getName().compareTo(scProductEntry.getName());
+
 		value = value * -1;
 
 		if (value != 0) {

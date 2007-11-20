@@ -89,7 +89,9 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	public SCFrameworkVersion addSCFrameworkVersion(SCFrameworkVersion model)
 		throws SystemException {
 		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
+
 		scFrameworkVersion.setNew(true);
+
 		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
 		scFrameworkVersion.setGroupId(model.getGroupId());
 		scFrameworkVersion.setCompanyId(model.getCompanyId());
@@ -119,7 +121,9 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	public SCFrameworkVersion updateSCFrameworkVersion(SCFrameworkVersion model)
 		throws SystemException {
 		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
+
 		scFrameworkVersion.setNew(false);
+
 		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
 		scFrameworkVersion.setGroupId(model.getGroupId());
 		scFrameworkVersion.setCompanyId(model.getCompanyId());

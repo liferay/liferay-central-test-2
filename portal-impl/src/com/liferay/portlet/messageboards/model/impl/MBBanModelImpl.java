@@ -43,12 +43,13 @@ import java.util.Date;
  * <a href="MBBanModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBBan</code> table in the database.
+ * This class is a model that represents the <code>MBBan</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,12 +63,26 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBBan";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "banId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "banUserId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBBan (banId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,banUserId LONG)";
@@ -181,6 +196,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 
 	public MBBan toEscapedModel() {
 		MBBan model = new MBBanImpl();
+
 		model.setBanId(getBanId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -200,6 +216,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBBanImpl clone = new MBBanImpl();
+
 		clone.setBanId(getBanId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -218,6 +235,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 		}
 
 		MBBanImpl mbBan = (MBBanImpl)obj;
+
 		long pk = mbBan.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

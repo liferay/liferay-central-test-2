@@ -72,7 +72,9 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	implements SCLicenseLocalService, InitializingBean {
 	public SCLicense addSCLicense(SCLicense model) throws SystemException {
 		SCLicense scLicense = new SCLicenseImpl();
+
 		scLicense.setNew(true);
+
 		scLicense.setLicenseId(model.getLicenseId());
 		scLicense.setName(model.getName());
 		scLicense.setUrl(model.getUrl());
@@ -96,7 +98,9 @@ public abstract class SCLicenseLocalServiceBaseImpl
 
 	public SCLicense updateSCLicense(SCLicense model) throws SystemException {
 		SCLicense scLicense = new SCLicenseImpl();
+
 		scLicense.setNew(false);
+
 		scLicense.setLicenseId(model.getLicenseId());
 		scLicense.setName(model.getName());
 		scLicense.setUrl(model.getUrl());

@@ -63,10 +63,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 	implements CalEventPersistence {
 	public CalEvent create(long eventId) {
 		CalEvent calEvent = new CalEventImpl();
+
 		calEvent.setNew(true);
 		calEvent.setPrimaryKey(eventId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		calEvent.setUuid(uuid);
 
 		return calEvent;
@@ -126,7 +128,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(calEvent);
+
 			session.flush();
 
 			return calEvent;
@@ -136,19 +140,19 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(CalEvent.class.getName());
 		}
 	}
 
-	public CalEvent update(com.liferay.portlet.calendar.model.CalEvent calEvent)
-		throws SystemException {
+	public CalEvent update(CalEvent calEvent) throws SystemException {
 		return update(calEvent, false);
 	}
 
-	public CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+	public CalEvent update(CalEvent calEvent, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = calEvent.isNew();
 
 		if (listener != null) {
@@ -179,6 +183,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (Validator.isNull(calEvent.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			calEvent.setUuid(uuid);
 		}
 
@@ -197,6 +202,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			calEvent.setNew(false);
 
 			return calEvent;
@@ -206,6 +212,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(CalEvent.class.getName());
 		}
 	}
@@ -247,6 +254,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -257,6 +265,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
@@ -268,11 +277,14 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -280,6 +292,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -307,13 +320,17 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -324,6 +341,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
@@ -340,13 +358,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("startDate ASC").append(", ");
+
+					query.append("startDate ASC, ");
 					query.append("title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -354,6 +375,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -377,11 +399,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -392,15 +416,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -411,13 +438,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent[] findByUuid_PrevAndNext(long eventId, String uuid,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
@@ -434,13 +464,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -448,7 +481,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
 			CalEvent[] array = new CalEventImpl[3];
+
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -469,13 +504,14 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		if (calEvent == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -496,6 +532,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -506,6 +543,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
@@ -517,13 +555,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -533,6 +576,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -567,6 +611,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -577,19 +622,27 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -617,13 +670,17 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -634,26 +691,34 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("startDate ASC").append(", ");
+
+					query.append("startDate ASC, ");
 					query.append("title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -677,11 +742,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -692,15 +759,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -711,34 +781,45 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent[] findByGroupId_PrevAndNext(long eventId, long groupId,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
 			CalEvent[] array = new CalEventImpl[3];
+
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -760,6 +841,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -770,9 +852,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (type == null) {
@@ -783,12 +868,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (type != null) {
@@ -796,6 +885,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -824,13 +914,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_T";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), type, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId),
+				
+				type,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -841,9 +936,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (type == null) {
@@ -859,14 +957,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("startDate ASC").append(", ");
+
+					query.append("startDate ASC, ");
 					query.append("title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (type != null) {
@@ -874,6 +976,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -897,14 +1000,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("type=");
-			msg.append(type);
+			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -915,18 +1020,21 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent findByG_T_Last(long groupId, String type,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_T(groupId, type);
+
 		List list = findByG_T(groupId, type, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("type=");
-			msg.append(type);
+			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -938,16 +1046,21 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String type, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
+
 		int count = countByG_T(groupId, type);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (type == null) {
@@ -963,14 +1076,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (type != null) {
@@ -978,7 +1095,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
 			CalEvent[] array = new CalEventImpl[3];
+
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -1003,6 +1122,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(repeating)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1013,22 +1133,33 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("repeating = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, repeating);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1057,13 +1188,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_R";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Boolean.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(repeating),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1074,29 +1208,40 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("repeating = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("startDate ASC").append(", ");
+
+					query.append("startDate ASC, ");
 					query.append("title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, repeating);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1120,14 +1265,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("repeating=");
-			msg.append(repeating);
+			msg.append("repeating=" + repeating);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -1138,18 +1285,21 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent findByG_R_Last(long groupId, boolean repeating,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_R(groupId, repeating);
+
 		List list = findByG_R(groupId, repeating, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No CalEvent exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("repeating=");
-			msg.append(repeating);
+			msg.append("repeating=" + repeating);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
@@ -1161,37 +1311,51 @@ public class CalEventPersistenceImpl extends BasePersistence
 		boolean repeating, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
+
 		int count = countByG_R(groupId, repeating);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("repeating = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("startDate ASC").append(", ");
+
+				query.append("startDate ASC, ");
 				query.append("title ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setBoolean(queryPos++, repeating);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
 			CalEvent[] array = new CalEventImpl[3];
+
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -1233,6 +1397,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1264,6 +1429,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1274,6 +1440,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent ");
 
@@ -1281,13 +1448,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("startDate ASC").append(", ");
+
+					query.append("startDate ASC, ");
 					query.append("title ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1316,6 +1486,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			CalEvent calEvent = (CalEvent)itr.next();
+
 			remove(calEvent);
 		}
 	}
@@ -1323,6 +1494,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByUUID_G(uuid, groupId);
+
 		remove(calEvent);
 	}
 
@@ -1331,6 +1503,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			CalEvent calEvent = (CalEvent)itr.next();
+
 			remove(calEvent);
 		}
 	}
@@ -1341,6 +1514,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			CalEvent calEvent = (CalEvent)itr.next();
+
 			remove(calEvent);
 		}
 	}
@@ -1351,6 +1525,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			CalEvent calEvent = (CalEvent)itr.next();
+
 			remove(calEvent);
 		}
 	}
@@ -1368,6 +1543,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1378,6 +1554,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1392,6 +1569,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1399,6 +1577,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1434,6 +1613,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1444,6 +1624,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1456,10 +1637,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1469,6 +1653,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1501,6 +1686,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1511,17 +1697,23 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1556,6 +1748,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1566,10 +1759,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (type == null) {
@@ -1582,7 +1778,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (type != null) {
@@ -1590,6 +1788,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1627,6 +1826,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(repeating)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1637,20 +1837,29 @@ public class CalEventPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("repeating = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, repeating);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1683,6 +1892,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1692,12 +1902,11 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portlet.calendar.model.CalEvent");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.calendar.model.CalEvent");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

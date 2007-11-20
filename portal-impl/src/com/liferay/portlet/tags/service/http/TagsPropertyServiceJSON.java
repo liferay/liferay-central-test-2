@@ -31,31 +31,34 @@ import org.json.JSONObject;
  * <a href="TagsPropertyServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portlet.tags.service.TagsPropertyServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portlet.tags.service.TagsPropertyServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portlet.tags.model.TagsProperty</code>, that
- * is translated to a <code>org.json.JSONObject</code>. Methods that JSON cannot
- * safely use are skipped. The logic for the translation is encapsulated in <code>com.liferay.portlet.tags.service.http.TagsPropertyJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.tags.model.TagsProperty</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portlet.tags.service.http.TagsPropertyJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -71,8 +74,8 @@ import org.json.JSONObject;
 public class TagsPropertyServiceJSON {
 	public static JSONObject addProperty(long entryId, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryId,
 				key, value);
 
@@ -81,8 +84,8 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONObject addProperty(java.lang.String entryName,
 		java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryName,
 				key, value);
 
@@ -90,13 +93,13 @@ public class TagsPropertyServiceJSON {
 	}
 
 	public static void deleteProperty(long propertyId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsPropertyServiceUtil.deleteProperty(propertyId);
 	}
 
 	public static JSONArray getProperties(long entryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List returnValue = TagsPropertyServiceUtil.getProperties(entryId);
 
 		return TagsPropertyJSONSerializer.toJSONArray(returnValue);
@@ -104,7 +107,7 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONArray getPropertyValues(long companyId,
 		java.lang.String key)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
 				key);
 
@@ -113,8 +116,8 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONObject updateProperty(long propertyId,
 		java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.updateProperty(propertyId,
 				key, value);
 

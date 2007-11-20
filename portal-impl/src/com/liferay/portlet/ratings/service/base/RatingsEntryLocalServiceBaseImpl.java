@@ -77,7 +77,9 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public RatingsEntry addRatingsEntry(RatingsEntry model)
 		throws SystemException {
 		RatingsEntry ratingsEntry = new RatingsEntryImpl();
+
 		ratingsEntry.setNew(true);
+
 		ratingsEntry.setEntryId(model.getEntryId());
 		ratingsEntry.setCompanyId(model.getCompanyId());
 		ratingsEntry.setUserId(model.getUserId());
@@ -105,7 +107,9 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public RatingsEntry updateRatingsEntry(RatingsEntry model)
 		throws SystemException {
 		RatingsEntry ratingsEntry = new RatingsEntryImpl();
+
 		ratingsEntry.setNew(false);
+
 		ratingsEntry.setEntryId(model.getEntryId());
 		ratingsEntry.setCompanyId(model.getCompanyId());
 		ratingsEntry.setUserId(model.getUserId());

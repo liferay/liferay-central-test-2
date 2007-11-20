@@ -63,10 +63,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	implements DLFileEntryPersistence {
 	public DLFileEntry create(long fileEntryId) {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
+
 		dlFileEntry.setNew(true);
 		dlFileEntry.setPrimaryKey(fileEntryId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		dlFileEntry.setUuid(uuid);
 
 		return dlFileEntry;
@@ -129,7 +131,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(dlFileEntry);
+
 			session.flush();
 
 			return dlFileEntry;
@@ -139,20 +143,20 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileEntry.class.getName());
 		}
 	}
 
-	public DLFileEntry update(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
+	public DLFileEntry update(DLFileEntry dlFileEntry)
 		throws SystemException {
 		return update(dlFileEntry, false);
 	}
 
-	public DLFileEntry update(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		boolean merge) throws SystemException {
+	public DLFileEntry update(DLFileEntry dlFileEntry, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = dlFileEntry.isNew();
 
 		if (listener != null) {
@@ -183,6 +187,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(dlFileEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			dlFileEntry.setUuid(uuid);
 		}
 
@@ -201,6 +206,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			dlFileEntry.setNew(false);
 
 			return dlFileEntry;
@@ -210,6 +216,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileEntry.class.getName());
 		}
 	}
@@ -254,6 +261,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -264,6 +272,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
@@ -275,11 +284,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("folderId ASC").append(", ");
+
+				query.append("folderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -287,6 +299,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -314,13 +327,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderClassName = DLFileEntry.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -331,6 +348,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
@@ -347,13 +365,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("folderId ASC").append(", ");
+
+					query.append("folderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -361,6 +382,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -384,11 +406,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
@@ -399,15 +423,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	public DLFileEntry findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchFileEntryException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
@@ -418,13 +445,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	public DLFileEntry[] findByUuid_PrevAndNext(long fileEntryId, String uuid,
 		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
@@ -441,13 +471,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId ASC").append(", ");
+
+				query.append("folderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -456,7 +489,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
+
 			DLFileEntry[] array = new DLFileEntryImpl[3];
+
 			array[0] = (DLFileEntry)objArray[0];
 			array[1] = (DLFileEntry)objArray[1];
 			array[2] = (DLFileEntry)objArray[2];
@@ -476,6 +511,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -486,19 +522,27 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("folderId ASC").append(", ");
+
+				query.append("folderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -526,13 +570,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderClassName = DLFileEntry.class.getName();
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(folderId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -543,26 +591,34 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("folderId ASC").append(", ");
+
+					query.append("folderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -586,11 +642,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
@@ -601,15 +659,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	public DLFileEntry findByFolderId_Last(long folderId, OrderByComparator obc)
 		throws NoSuchFileEntryException, SystemException {
 		int count = countByFolderId(folderId);
+
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
@@ -621,35 +682,46 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		long folderId, OrderByComparator obc)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
 		int count = countByFolderId(folderId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 			query.append("folderId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId ASC").append(", ");
+
+				query.append("folderId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
+
 			DLFileEntry[] array = new DLFileEntryImpl[3];
+
 			array[0] = (DLFileEntry)objArray[0];
 			array[1] = (DLFileEntry)objArray[1];
 			array[2] = (DLFileEntry)objArray[2];
@@ -670,13 +742,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		if (dlFileEntry == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -697,6 +770,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -707,9 +781,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -720,12 +797,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("folderId ASC").append(", ");
+
+				query.append("folderId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -733,6 +814,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -789,6 +871,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -820,6 +903,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -830,6 +914,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
 
@@ -837,13 +922,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("folderId ASC").append(", ");
+
+					query.append("folderId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -872,6 +960,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+
 			remove(dlFileEntry);
 		}
 	}
@@ -881,6 +970,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+
 			remove(dlFileEntry);
 		}
 	}
@@ -888,6 +978,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	public void removeByF_N(long folderId, String name)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByF_N(folderId, name);
+
 		remove(dlFileEntry);
 	}
 
@@ -904,6 +995,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -914,6 +1006,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
@@ -928,6 +1021,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -935,6 +1029,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -967,6 +1062,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -977,17 +1073,23 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1022,6 +1124,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1032,10 +1135,13 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -1048,7 +1154,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -1056,6 +1164,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1088,6 +1197,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1097,13 +1207,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileEntry");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

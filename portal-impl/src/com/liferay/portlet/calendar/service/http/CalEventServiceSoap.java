@@ -33,37 +33,40 @@ import java.rmi.RemoteException;
  * <a href="CalEventServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the <code>com.liferay.portlet.calendar.service.CalEventServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for SOAP to support certain types.
+ * This class provides a SOAP utility for the
+ * <code>com.liferay.portlet.calendar.service.CalEventServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to an array of <code>com.liferay.portlet.calendar.model.CalEventSoap</code>.
- * If the method in the service utility returns a <code>com.liferay.portlet.calendar.model.CalEvent</code>,
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.portlet.calendar.model.CalEventSoap</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.calendar.model.CalEvent</code>,
  * that is translated to a <code>com.liferay.portlet.calendar.model.CalEventSoap</code>.
  * Methods that SOAP cannot safely wire are skipped.
  * </p>
  *
  * <p>
- * The benefits of using the SOAP utility is that it is cross platform compatible.
- * SOAP allows different languages like Java, .NET, C++, PHP, and even Perl, to
- * call the generated services. One drawback of SOAP is that it is slow because
- * it needs to serialize all calls into a text format (XML).
+ * The benefits of using the SOAP utility is that it is cross platform
+ * compatible. SOAP allows different languages like Java, .NET, C++, PHP, and
+ * even Perl, to call the generated services. One drawback of SOAP is that it is
+ * slow because it needs to serialize all calls into a text format (XML).
  * </p>
  *
  * <p>
- * You can see a list of services at http://localhost:8080/tunnel-web/secure/axis.
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * You can see a list of services at
+ * http://localhost:8080/tunnel-web/secure/axis. Set the property
+ * <code>tunnel.servlet.hosts.allowed</code> in portal.properties to configure
+ * security.
  * </p>
  *
  * <p>
@@ -101,6 +104,7 @@ public class CalEventServiceSoap {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
 			throw new RemoteException(e.getMessage());
 		}
 	}
@@ -128,6 +132,7 @@ public class CalEventServiceSoap {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
 			throw new RemoteException(e.getMessage());
 		}
 	}
@@ -138,6 +143,7 @@ public class CalEventServiceSoap {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
 			throw new RemoteException(e.getMessage());
 		}
 	}
@@ -151,6 +157,7 @@ public class CalEventServiceSoap {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
 			throw new RemoteException(e.getMessage());
 		}
 	}
@@ -176,6 +183,7 @@ public class CalEventServiceSoap {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
 			throw new RemoteException(e.getMessage());
 		}
 	}

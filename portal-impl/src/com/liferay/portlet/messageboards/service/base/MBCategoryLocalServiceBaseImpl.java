@@ -112,7 +112,9 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	implements MBCategoryLocalService, InitializingBean {
 	public MBCategory addMBCategory(MBCategory model) throws SystemException {
 		MBCategory mbCategory = new MBCategoryImpl();
+
 		mbCategory.setNew(true);
+
 		mbCategory.setUuid(model.getUuid());
 		mbCategory.setCategoryId(model.getCategoryId());
 		mbCategory.setGroupId(model.getGroupId());
@@ -143,7 +145,9 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	public MBCategory updateMBCategory(MBCategory model)
 		throws SystemException {
 		MBCategory mbCategory = new MBCategoryImpl();
+
 		mbCategory.setNew(false);
+
 		mbCategory.setUuid(model.getUuid());
 		mbCategory.setCategoryId(model.getCategoryId());
 		mbCategory.setGroupId(model.getGroupId());

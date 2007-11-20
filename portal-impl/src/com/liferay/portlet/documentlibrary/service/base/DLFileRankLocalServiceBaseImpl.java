@@ -80,7 +80,9 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	implements DLFileRankLocalService, InitializingBean {
 	public DLFileRank addDLFileRank(DLFileRank model) throws SystemException {
 		DLFileRank dlFileRank = new DLFileRankImpl();
+
 		dlFileRank.setNew(true);
+
 		dlFileRank.setFileRankId(model.getFileRankId());
 		dlFileRank.setCompanyId(model.getCompanyId());
 		dlFileRank.setUserId(model.getUserId());
@@ -105,7 +107,9 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	public DLFileRank updateDLFileRank(DLFileRank model)
 		throws SystemException {
 		DLFileRank dlFileRank = new DLFileRankImpl();
+
 		dlFileRank.setNew(false);
+
 		dlFileRank.setFileRankId(model.getFileRankId());
 		dlFileRank.setCompanyId(model.getCompanyId());
 		dlFileRank.setUserId(model.getUserId());

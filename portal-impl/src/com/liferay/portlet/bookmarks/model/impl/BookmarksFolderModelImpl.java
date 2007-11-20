@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="BookmarksFolderModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,14 +63,32 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksFolder";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "parentFolderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
@@ -206,6 +224,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 
 	public BookmarksFolder toEscapedModel() {
 		BookmarksFolder model = new BookmarksFolderImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setFolderId(getFolderId());
 		model.setGroupId(getGroupId());
@@ -228,6 +247,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BookmarksFolderImpl clone = new BookmarksFolderImpl();
+
 		clone.setUuid(getUuid());
 		clone.setFolderId(getFolderId());
 		clone.setGroupId(getGroupId());
@@ -248,6 +268,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 		}
 
 		BookmarksFolderImpl bookmarksFolder = (BookmarksFolderImpl)obj;
+
 		int value = 0;
 
 		if (getParentFolderId() < bookmarksFolder.getParentFolderId()) {

@@ -37,26 +37,28 @@ import com.liferay.portlet.tags.service.TagsAssetServiceUtil;
  * <a href="TagsAssetServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.tags.service.TagsAssetServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.tags.service.TagsAssetServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -76,6 +78,7 @@ public class TagsAssetServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(assetId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"deleteAsset", new Object[] { paramObj0 });
 
@@ -96,6 +99,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -106,8 +110,10 @@ public class TagsAssetServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(assetId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getAsset", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -129,6 +135,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -145,16 +152,13 @@ public class TagsAssetServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getAssetTypes", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -162,6 +166,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -173,8 +178,11 @@ public class TagsAssetServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(begin);
+
 			Object paramObj2 = new IntegerWrapper(end);
+
 			Object paramObj3 = languageId;
 
 			if (languageId == null) {
@@ -184,6 +192,7 @@ public class TagsAssetServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getCompanyAssetDisplays",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -205,6 +214,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -214,11 +224,15 @@ public class TagsAssetServiceHttp {
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(begin);
+
 			Object paramObj2 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getCompanyAssets",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
+
 			Object returnObj = null;
 
 			try {
@@ -236,6 +250,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -244,8 +259,10 @@ public class TagsAssetServiceHttp {
 		long companyId) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getCompanyAssetsCount", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -263,6 +280,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -279,9 +297,11 @@ public class TagsAssetServiceHttp {
 			}
 
 			Object paramObj1 = new LongWrapper(classPK);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"incrementViewCounter",
 					new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -303,6 +323,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -315,6 +336,7 @@ public class TagsAssetServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = portletId;
 
 			if (portletId == null) {
@@ -334,13 +356,16 @@ public class TagsAssetServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(begin);
+
 			Object paramObj5 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"searchAssetDisplays",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -362,6 +387,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -371,6 +397,7 @@ public class TagsAssetServiceHttp {
 		java.lang.String languageId) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = portletId;
 
 			if (portletId == null) {
@@ -392,6 +419,7 @@ public class TagsAssetServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"searchAssetDisplaysCount",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -409,6 +437,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -425,6 +454,7 @@ public class TagsAssetServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -432,6 +462,7 @@ public class TagsAssetServiceHttp {
 			}
 
 			Object paramObj2 = new LongWrapper(classPK);
+
 			Object paramObj3 = entryNames;
 
 			if (entryNames == null) {
@@ -493,7 +524,9 @@ public class TagsAssetServiceHttp {
 			}
 
 			Object paramObj13 = new IntegerWrapper(height);
+
 			Object paramObj14 = new IntegerWrapper(width);
+
 			Object paramObj15 = priority;
 
 			if (priority == null) {
@@ -508,6 +541,7 @@ public class TagsAssetServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -529,6 +563,7 @@ public class TagsAssetServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

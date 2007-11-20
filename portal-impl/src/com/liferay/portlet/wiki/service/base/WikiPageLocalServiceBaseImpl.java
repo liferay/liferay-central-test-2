@@ -94,7 +94,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 	implements WikiPageLocalService, InitializingBean {
 	public WikiPage addWikiPage(WikiPage model) throws SystemException {
 		WikiPage wikiPage = new WikiPageImpl();
+
 		wikiPage.setNew(true);
+
 		wikiPage.setPageId(model.getPageId());
 		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
 		wikiPage.setCompanyId(model.getCompanyId());
@@ -124,7 +126,9 @@ public abstract class WikiPageLocalServiceBaseImpl
 
 	public WikiPage updateWikiPage(WikiPage model) throws SystemException {
 		WikiPage wikiPage = new WikiPageImpl();
+
 		wikiPage.setNew(false);
+
 		wikiPage.setPageId(model.getPageId());
 		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
 		wikiPage.setCompanyId(model.getCompanyId());

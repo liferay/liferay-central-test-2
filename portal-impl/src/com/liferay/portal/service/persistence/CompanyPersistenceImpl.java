@@ -61,6 +61,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 	implements CompanyPersistence {
 	public Company create(long companyId) {
 		Company company = new CompanyImpl();
+
 		company.setNew(true);
 		company.setPrimaryKey(companyId);
 
@@ -121,7 +122,9 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(company);
+
 			session.flush();
 
 			return company;
@@ -131,18 +134,19 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Company.class.getName());
 		}
 	}
 
-	public Company update(com.liferay.portal.model.Company company)
-		throws SystemException {
+	public Company update(Company company) throws SystemException {
 		return update(company, false);
 	}
 
-	public Company update(com.liferay.portal.model.Company company,
-		boolean merge) throws SystemException {
+	public Company update(Company company, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = company.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			company.setNew(false);
 
 			return company;
@@ -194,6 +199,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Company.class.getName());
 		}
 	}
@@ -237,10 +243,11 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		if (company == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Company exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("webId=");
-			msg.append(webId);
+
+			msg.append("No Company exists with the key {");
+
+			msg.append("webId=" + webId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -258,6 +265,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "fetchByWebId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { webId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -268,6 +276,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
 				if (webId == null) {
@@ -280,6 +289,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (webId != null) {
@@ -287,6 +297,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -322,10 +333,11 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		if (company == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Company exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("virtualHost=");
-			msg.append(virtualHost);
+
+			msg.append("No Company exists with the key {");
+
+			msg.append("virtualHost=" + virtualHost);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -344,6 +356,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "fetchByVirtualHost";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -354,6 +367,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
 				if (virtualHost == null) {
@@ -366,6 +380,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (virtualHost != null) {
@@ -373,6 +388,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -408,10 +424,11 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		if (company == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Company exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("mx=");
-			msg.append(mx);
+
+			msg.append("No Company exists with the key {");
+
+			msg.append("mx=" + mx);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -429,6 +446,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "fetchByMx";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { mx };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -439,6 +457,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
 				if (mx == null) {
@@ -451,6 +470,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (mx != null) {
@@ -458,6 +478,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -514,6 +535,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -545,6 +567,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -555,6 +578,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Company ");
 
 				if (obc != null) {
@@ -563,6 +587,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -589,18 +614,21 @@ public class CompanyPersistenceImpl extends BasePersistence
 	public void removeByWebId(String webId)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByWebId(webId);
+
 		remove(company);
 	}
 
 	public void removeByVirtualHost(String virtualHost)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByVirtualHost(virtualHost);
+
 		remove(company);
 	}
 
 	public void removeByMx(String mx)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByMx(mx);
+
 		remove(company);
 	}
 
@@ -617,6 +645,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByWebId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { webId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -627,6 +656,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -640,6 +670,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (webId != null) {
@@ -647,6 +678,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -679,6 +711,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByVirtualHost";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -689,6 +722,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -702,6 +736,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (virtualHost != null) {
@@ -709,6 +744,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -741,6 +777,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByMx";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { mx };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -751,6 +788,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -764,6 +802,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (mx != null) {
@@ -771,6 +810,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -803,6 +843,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -812,12 +853,11 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Company");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Company");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

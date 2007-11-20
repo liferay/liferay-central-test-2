@@ -267,7 +267,9 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	InitializingBean {
 	public Company addCompany(Company model) throws SystemException {
 		Company company = new CompanyImpl();
+
 		company.setNew(true);
+
 		company.setCompanyId(model.getCompanyId());
 		company.setAccountId(model.getAccountId());
 		company.setWebId(model.getWebId());
@@ -292,7 +294,9 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 
 	public Company updateCompany(Company model) throws SystemException {
 		Company company = new CompanyImpl();
+
 		company.setNew(false);
+
 		company.setCompanyId(model.getCompanyId());
 		company.setAccountId(model.getAccountId());
 		company.setWebId(model.getWebId());

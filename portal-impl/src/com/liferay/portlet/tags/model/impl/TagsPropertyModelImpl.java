@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="TagsPropertyModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>TagsProperty</code> table in
- * the database.
+ * This class is a model that represents the <code>TagsProperty</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,13 +63,29 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "TagsProperty";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "propertyId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "entryId", new Integer(Types.BIGINT) },
+			
+
 			{ "key_", new Integer(Types.VARCHAR) },
+			
+
 			{ "value", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(300) null)";
@@ -197,6 +213,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 
 	public TagsProperty toEscapedModel() {
 		TagsProperty model = new TagsPropertyImpl();
+
 		model.setPropertyId(getPropertyId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -218,6 +235,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		TagsPropertyImpl clone = new TagsPropertyImpl();
+
 		clone.setPropertyId(getPropertyId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -237,7 +255,9 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		}
 
 		TagsPropertyImpl tagsProperty = (TagsPropertyImpl)obj;
+
 		int value = 0;
+
 		value = getKey().compareTo(tagsProperty.getKey());
 
 		if (value != 0) {

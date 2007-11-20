@@ -40,8 +40,8 @@ import java.sql.Types;
  * <a href="PortletPreferencesModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -60,10 +60,20 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PortletPreferences";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },
+			
+
 			{ "ownerId", new Integer(Types.BIGINT) },
+			
+
 			{ "ownerType", new Integer(Types.INTEGER) },
+			
+
 			{ "plid", new Integer(Types.BIGINT) },
+			
+
 			{ "portletId", new Integer(Types.VARCHAR) },
+			
+
 			{ "preferences", new Integer(Types.CLOB) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
@@ -154,6 +164,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 
 	public PortletPreferences toEscapedModel() {
 		PortletPreferences model = new PortletPreferencesImpl();
+
 		model.setPortletPreferencesId(getPortletPreferencesId());
 		model.setOwnerId(getOwnerId());
 		model.setOwnerType(getOwnerType());
@@ -172,6 +183,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PortletPreferencesImpl clone = new PortletPreferencesImpl();
+
 		clone.setPortletPreferencesId(getPortletPreferencesId());
 		clone.setOwnerId(getOwnerId());
 		clone.setOwnerType(getOwnerType());
@@ -188,6 +200,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		}
 
 		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
+
 		long pk = portletPreferences.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

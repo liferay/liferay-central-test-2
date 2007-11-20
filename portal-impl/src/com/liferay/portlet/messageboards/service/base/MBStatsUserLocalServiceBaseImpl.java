@@ -87,7 +87,9 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	public MBStatsUser addMBStatsUser(MBStatsUser model)
 		throws SystemException {
 		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+
 		mbStatsUser.setNew(true);
+
 		mbStatsUser.setStatsUserId(model.getStatsUserId());
 		mbStatsUser.setGroupId(model.getGroupId());
 		mbStatsUser.setUserId(model.getUserId());
@@ -111,7 +113,9 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	public MBStatsUser updateMBStatsUser(MBStatsUser model)
 		throws SystemException {
 		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+
 		mbStatsUser.setNew(false);
+
 		mbStatsUser.setStatsUserId(model.getStatsUserId());
 		mbStatsUser.setGroupId(model.getGroupId());
 		mbStatsUser.setUserId(model.getUserId());

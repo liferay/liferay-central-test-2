@@ -42,13 +42,13 @@ import java.util.Date;
  * <a href="UserTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>UserTracker</code> table in the
- * database.
+ * This class is a model that represents the <code>UserTracker</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,12 +62,26 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserTracker";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userTrackerId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "sessionId", new Integer(Types.VARCHAR) },
+			
+
 			{ "remoteAddr", new Integer(Types.VARCHAR) },
+			
+
 			{ "remoteHost", new Integer(Types.VARCHAR) },
+			
+
 			{ "userAgent", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
@@ -187,6 +201,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 
 	public UserTracker toEscapedModel() {
 		UserTracker model = new UserTrackerImpl();
+
 		model.setUserTrackerId(getUserTrackerId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -207,6 +222,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserTrackerImpl clone = new UserTrackerImpl();
+
 		clone.setUserTrackerId(getUserTrackerId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -225,6 +241,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		}
 
 		UserTrackerImpl userTracker = (UserTrackerImpl)obj;
+
 		long pk = userTracker.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

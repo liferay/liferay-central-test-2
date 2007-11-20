@@ -130,7 +130,9 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	implements BlogsEntryLocalService, InitializingBean {
 	public BlogsEntry addBlogsEntry(BlogsEntry model) throws SystemException {
 		BlogsEntry blogsEntry = new BlogsEntryImpl();
+
 		blogsEntry.setNew(true);
+
 		blogsEntry.setUuid(model.getUuid());
 		blogsEntry.setEntryId(model.getEntryId());
 		blogsEntry.setGroupId(model.getGroupId());
@@ -162,7 +164,9 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	public BlogsEntry updateBlogsEntry(BlogsEntry model)
 		throws SystemException {
 		BlogsEntry blogsEntry = new BlogsEntryImpl();
+
 		blogsEntry.setNew(false);
+
 		blogsEntry.setUuid(model.getUuid());
 		blogsEntry.setEntryId(model.getEntryId());
 		blogsEntry.setGroupId(model.getGroupId());

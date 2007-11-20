@@ -63,10 +63,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 	implements IGImagePersistence {
 	public IGImage create(long imageId) {
 		IGImage igImage = new IGImageImpl();
+
 		igImage.setNew(true);
 		igImage.setPrimaryKey(imageId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		igImage.setUuid(uuid);
 
 		return igImage;
@@ -126,7 +128,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(igImage);
+
 			session.flush();
 
 			return igImage;
@@ -136,20 +140,19 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(IGImage.class.getName());
 		}
 	}
 
-	public IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage)
-		throws SystemException {
+	public IGImage update(IGImage igImage) throws SystemException {
 		return update(igImage, false);
 	}
 
-	public IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+	public IGImage update(IGImage igImage, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = igImage.isNew();
 
 		if (listener != null) {
@@ -180,6 +183,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (Validator.isNull(igImage.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			igImage.setUuid(uuid);
 		}
 
@@ -198,6 +202,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			igImage.setNew(false);
 
 			return igImage;
@@ -207,6 +212,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(IGImage.class.getName());
 		}
 	}
@@ -248,6 +254,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -258,6 +265,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
@@ -269,10 +277,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -280,6 +291,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -307,13 +319,17 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderClassName = IGImage.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -324,6 +340,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
@@ -340,12 +357,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -353,6 +373,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -376,11 +397,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No IGImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -391,15 +414,18 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No IGImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -410,13 +436,16 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage[] findByUuid_PrevAndNext(long imageId, String uuid,
 		OrderByComparator obc) throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
@@ -433,12 +462,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -446,7 +478,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+
 			IGImage[] array = new IGImageImpl[3];
+
 			array[0] = (IGImage)objArray[0];
 			array[1] = (IGImage)objArray[1];
 			array[2] = (IGImage)objArray[2];
@@ -466,6 +500,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -476,18 +511,26 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -515,13 +558,17 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderClassName = IGImage.class.getName();
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(folderId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -532,25 +579,33 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -574,11 +629,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No IGImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -589,15 +646,18 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage findByFolderId_Last(long folderId, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
 		int count = countByFolderId(folderId);
+
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No IGImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -608,33 +668,44 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage[] findByFolderId_PrevAndNext(long imageId, long folderId,
 		OrderByComparator obc) throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
+
 		int count = countByFolderId(folderId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
 			query.append("folderId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+
 			IGImage[] array = new IGImageImpl[3];
+
 			array[0] = (IGImage)objArray[0];
 			array[1] = (IGImage)objArray[1];
 			array[2] = (IGImage)objArray[2];
@@ -676,6 +747,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -707,6 +779,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -717,6 +790,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage ");
 
@@ -724,12 +798,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -758,6 +835,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			IGImage igImage = (IGImage)itr.next();
+
 			remove(igImage);
 		}
 	}
@@ -767,6 +845,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			IGImage igImage = (IGImage)itr.next();
+
 			remove(igImage);
 		}
 	}
@@ -784,6 +863,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -794,6 +874,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -808,6 +889,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -815,6 +897,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -847,6 +930,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -857,17 +941,23 @@ public class IGImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -900,6 +990,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -909,13 +1000,11 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.imagegallery.model.IGImage");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.imagegallery.model.IGImage");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

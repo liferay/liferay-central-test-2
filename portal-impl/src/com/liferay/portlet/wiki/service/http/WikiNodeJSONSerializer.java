@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="WikiNodeJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.wiki.service.http.WikiNodeServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.wiki.service.http.WikiNodeServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "nodeId", model.getNodeId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
@@ -71,6 +73,7 @@ public class WikiNodeJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			WikiNode model = (WikiNode)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

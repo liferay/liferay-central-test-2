@@ -110,7 +110,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	implements MBThreadLocalService, InitializingBean {
 	public MBThread addMBThread(MBThread model) throws SystemException {
 		MBThread mbThread = new MBThreadImpl();
+
 		mbThread.setNew(true);
+
 		mbThread.setThreadId(model.getThreadId());
 		mbThread.setCategoryId(model.getCategoryId());
 		mbThread.setRootMessageId(model.getRootMessageId());
@@ -136,7 +138,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 
 	public MBThread updateMBThread(MBThread model) throws SystemException {
 		MBThread mbThread = new MBThreadImpl();
+
 		mbThread.setNew(false);
+
 		mbThread.setThreadId(model.getThreadId());
 		mbThread.setCategoryId(model.getCategoryId());
 		mbThread.setRootMessageId(model.getRootMessageId());

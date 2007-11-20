@@ -63,10 +63,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	implements PollsQuestionPersistence {
 	public PollsQuestion create(long questionId) {
 		PollsQuestion pollsQuestion = new PollsQuestionImpl();
+
 		pollsQuestion.setNew(true);
 		pollsQuestion.setPrimaryKey(questionId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		pollsQuestion.setUuid(uuid);
 
 		return pollsQuestion;
@@ -129,7 +131,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(pollsQuestion);
+
 			session.flush();
 
 			return pollsQuestion;
@@ -139,20 +143,20 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PollsQuestion.class.getName());
 		}
 	}
 
-	public PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
+	public PollsQuestion update(PollsQuestion pollsQuestion)
 		throws SystemException {
 		return update(pollsQuestion, false);
 	}
 
-	public PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
-		boolean merge) throws SystemException {
+	public PollsQuestion update(PollsQuestion pollsQuestion, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = pollsQuestion.isNew();
 
 		if (listener != null) {
@@ -183,6 +187,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(pollsQuestion.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			pollsQuestion.setUuid(uuid);
 		}
 
@@ -201,6 +206,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			pollsQuestion.setNew(false);
 
 			return pollsQuestion;
@@ -210,6 +216,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(PollsQuestion.class.getName());
 		}
 	}
@@ -254,6 +261,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -264,6 +272,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
@@ -275,10 +284,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -286,6 +298,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -313,13 +326,17 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderClassName = PollsQuestion.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -330,6 +347,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
@@ -346,12 +364,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -359,6 +380,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -382,11 +404,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsQuestion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No PollsQuestion exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -397,15 +421,18 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	public PollsQuestion findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchQuestionException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsQuestion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No PollsQuestion exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -416,13 +443,16 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	public PollsQuestion[] findByUuid_PrevAndNext(long questionId, String uuid,
 		OrderByComparator obc) throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
@@ -439,12 +469,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -453,7 +486,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsQuestion);
+
 			PollsQuestion[] array = new PollsQuestionImpl[3];
+
 			array[0] = (PollsQuestion)objArray[0];
 			array[1] = (PollsQuestion)objArray[1];
 			array[2] = (PollsQuestion)objArray[2];
@@ -474,13 +509,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		if (pollsQuestion == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsQuestion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No PollsQuestion exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -501,6 +537,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -511,6 +548,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
@@ -522,12 +560,17 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -537,6 +580,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -571,6 +615,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -581,18 +626,26 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -620,13 +673,17 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderClassName = PollsQuestion.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -637,25 +694,33 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -679,11 +744,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsQuestion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No PollsQuestion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -694,15 +761,18 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	public PollsQuestion findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchQuestionException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No PollsQuestion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No PollsQuestion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -714,34 +784,45 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsQuestion);
+
 			PollsQuestion[] array = new PollsQuestionImpl[3];
+
 			array[0] = (PollsQuestion)objArray[0];
 			array[1] = (PollsQuestion)objArray[1];
 			array[2] = (PollsQuestion)objArray[2];
@@ -783,6 +864,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -814,6 +896,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -824,6 +907,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion ");
 
@@ -831,12 +915,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -865,6 +952,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PollsQuestion pollsQuestion = (PollsQuestion)itr.next();
+
 			remove(pollsQuestion);
 		}
 	}
@@ -872,6 +960,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByUUID_G(uuid, groupId);
+
 		remove(pollsQuestion);
 	}
 
@@ -880,6 +969,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			PollsQuestion pollsQuestion = (PollsQuestion)itr.next();
+
 			remove(pollsQuestion);
 		}
 	}
@@ -897,6 +987,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -907,6 +998,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -921,6 +1013,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -928,6 +1021,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -963,6 +1057,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -973,6 +1068,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -985,10 +1081,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -998,6 +1097,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1030,6 +1130,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1040,17 +1141,23 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1083,6 +1190,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1092,13 +1200,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.polls.model.PollsQuestion");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.polls.model.PollsQuestion");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

@@ -267,7 +267,9 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	InitializingBean {
 	public Role addRole(Role model) throws SystemException {
 		Role role = new RoleImpl();
+
 		role.setNew(true);
+
 		role.setRoleId(model.getRoleId());
 		role.setCompanyId(model.getCompanyId());
 		role.setClassNameId(model.getClassNameId());
@@ -291,7 +293,9 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 
 	public Role updateRole(Role model) throws SystemException {
 		Role role = new RoleImpl();
+
 		role.setNew(false);
+
 		role.setRoleId(model.getRoleId());
 		role.setCompanyId(model.getCompanyId());
 		role.setClassNameId(model.getClassNameId());

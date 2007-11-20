@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="PermissionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Permission_</code> table in the
- * database.
+ * This class is a model that represents the <code>Permission</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,8 +60,14 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Permission_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "permissionId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "actionId", new Integer(Types.VARCHAR) },
+			
+
 			{ "resourceId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
@@ -129,6 +135,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 
 	public Permission toEscapedModel() {
 		Permission model = new PermissionImpl();
+
 		model.setPermissionId(getPermissionId());
 		model.setCompanyId(getCompanyId());
 		model.setActionId(Html.escape(getActionId()));
@@ -145,6 +152,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PermissionImpl clone = new PermissionImpl();
+
 		clone.setPermissionId(getPermissionId());
 		clone.setCompanyId(getCompanyId());
 		clone.setActionId(getActionId());
@@ -159,6 +167,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 		}
 
 		PermissionImpl permission = (PermissionImpl)obj;
+
 		long pk = permission.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

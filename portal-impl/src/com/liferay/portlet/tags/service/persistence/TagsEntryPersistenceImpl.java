@@ -75,6 +75,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	implements TagsEntryPersistence {
 	public TagsEntry create(long entryId) {
 		TagsEntry tagsEntry = new TagsEntryImpl();
+
 		tagsEntry.setNew(true);
 		tagsEntry.setPrimaryKey(entryId);
 
@@ -146,7 +147,9 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(tagsEntry);
+
 			session.flush();
 
 			return tagsEntry;
@@ -156,19 +159,19 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(TagsEntry.class.getName());
 		}
 	}
 
-	public TagsEntry update(com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws SystemException {
+	public TagsEntry update(TagsEntry tagsEntry) throws SystemException {
 		return update(tagsEntry, false);
 	}
 
-	public TagsEntry update(
-		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
+	public TagsEntry update(TagsEntry tagsEntry, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = tagsEntry.isNew();
 
 		if (listener != null) {
@@ -214,6 +217,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			tagsEntry.setNew(false);
 
 			return tagsEntry;
@@ -223,6 +227,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(TagsEntry.class.getName());
 		}
 	}
@@ -266,13 +271,14 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 		if (tagsEntry == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No TagsEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No TagsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -293,6 +299,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -303,9 +310,12 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -316,11 +326,15 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -328,6 +342,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -384,6 +399,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -415,6 +431,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -425,18 +442,22 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portlet.tags.model.TagsEntry ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -463,6 +484,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchEntryException, SystemException {
 		TagsEntry tagsEntry = findByC_N(companyId, name);
+
 		remove(tagsEntry);
 	}
 
@@ -482,6 +504,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -492,10 +515,13 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -508,7 +534,9 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -516,6 +544,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -548,6 +577,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -557,12 +587,11 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portlet.tags.model.TagsEntry");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsEntry");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -612,6 +641,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -622,6 +652,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETTAGSASSETS);
 
 				if (obc != null) {
@@ -630,14 +661,18 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("TagsAsset",
 					com.liferay.portlet.tags.model.impl.TagsAssetImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -660,6 +695,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		String finderMethodName = "getTagsAssetsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -670,12 +706,15 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETTAGSASSETSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -708,9 +747,12 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		String finderClassName = "TagsAssets_TagsEntries";
 		String finderMethodName = "containsTagsAssets";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(tagsAssetPK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -718,6 +760,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsTagsAsset.contains(pk,
 							tagsAssetPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -792,6 +835,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < tagsAssets.size(); i++) {
 				com.liferay.portlet.tags.model.TagsAsset tagsAsset = (com.liferay.portlet.tags.model.TagsAsset)tagsAssets.get(i);
+
 				addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
 			}
 		}
@@ -867,6 +911,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < tagsAssets.size(); i++) {
 				com.liferay.portlet.tags.model.TagsAsset tagsAsset = (com.liferay.portlet.tags.model.TagsAsset)tagsAssets.get(i);
+
 				removeTagsAsset.remove(pk, tagsAsset.getPrimaryKey());
 			}
 		}
@@ -904,6 +949,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < tagsAssets.size(); i++) {
 				com.liferay.portlet.tags.model.TagsAsset tagsAsset = (com.liferay.portlet.tags.model.TagsAsset)tagsAssets.get(i);
+
 				addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
 			}
 		}
@@ -917,6 +963,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	protected void initDao() {
 		containsTagsAsset = new ContainsTagsAsset(this);
+
 		addTagsAsset = new AddTagsAsset(this);
 		clearTagsAssets = new ClearTagsAssets(this);
 		removeTagsAsset = new RemoveTagsAsset(this);
@@ -930,8 +977,10 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	protected class ContainsTagsAsset extends MappingSqlQuery {
 		protected ContainsTagsAsset(TagsEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSTAGSASSET);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -961,9 +1010,12 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		protected AddTagsAsset(TagsEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO TagsAssets_TagsEntries (entryId, assetId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -980,7 +1032,9 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		protected ClearTagsAssets(TagsEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM TagsAssets_TagsEntries WHERE entryId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -993,8 +1047,10 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		protected RemoveTagsAsset(TagsEntryPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM TagsAssets_TagsEntries WHERE entryId = ? AND assetId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

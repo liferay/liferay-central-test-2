@@ -62,6 +62,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	implements WikiNodePersistence {
 	public WikiNode create(long nodeId) {
 		WikiNode wikiNode = new WikiNodeImpl();
+
 		wikiNode.setNew(true);
 		wikiNode.setPrimaryKey(nodeId);
 
@@ -122,7 +123,9 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(wikiNode);
+
 			session.flush();
 
 			return wikiNode;
@@ -132,18 +135,19 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(WikiNode.class.getName());
 		}
 	}
 
-	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode)
-		throws SystemException {
+	public WikiNode update(WikiNode wikiNode) throws SystemException {
 		return update(wikiNode, false);
 	}
 
-	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode,
-		boolean merge) throws SystemException {
+	public WikiNode update(WikiNode wikiNode, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = wikiNode.isNew();
 
 		if (listener != null) {
@@ -187,6 +191,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			wikiNode.setNew(false);
 
 			return wikiNode;
@@ -196,6 +201,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(WikiNode.class.getName());
 		}
 	}
@@ -237,6 +243,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -247,18 +254,26 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -286,13 +301,17 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderClassName = WikiNode.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -303,25 +322,33 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -345,11 +372,13 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No WikiNode exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchNodeException(msg.toString());
 		}
 		else {
@@ -360,15 +389,18 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	public WikiNode findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No WikiNode exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchNodeException(msg.toString());
 		}
 		else {
@@ -379,32 +411,43 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	public WikiNode[] findByGroupId_PrevAndNext(long nodeId, long groupId,
 		OrderByComparator obc) throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+
 			WikiNode[] array = new WikiNodeImpl[3];
+
 			array[0] = (WikiNode)objArray[0];
 			array[1] = (WikiNode)objArray[1];
 			array[2] = (WikiNode)objArray[2];
@@ -424,6 +467,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -434,18 +478,26 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -473,13 +525,17 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderClassName = WikiNode.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -490,25 +546,33 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -532,11 +596,13 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No WikiNode exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchNodeException(msg.toString());
 		}
 		else {
@@ -547,15 +613,18 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	public WikiNode findByCompanyId_Last(long companyId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No WikiNode exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchNodeException(msg.toString());
 		}
 		else {
@@ -566,32 +635,43 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	public WikiNode[] findByCompanyId_PrevAndNext(long nodeId, long companyId,
 		OrderByComparator obc) throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+
 			WikiNode[] array = new WikiNodeImpl[3];
+
 			array[0] = (WikiNode)objArray[0];
 			array[1] = (WikiNode)objArray[1];
 			array[2] = (WikiNode)objArray[2];
@@ -633,6 +713,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -664,6 +745,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -674,18 +756,22 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portlet.wiki.model.WikiNode ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -714,6 +800,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			WikiNode wikiNode = (WikiNode)itr.next();
+
 			remove(wikiNode);
 		}
 	}
@@ -723,6 +810,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			WikiNode wikiNode = (WikiNode)itr.next();
+
 			remove(wikiNode);
 		}
 	}
@@ -740,6 +828,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -750,17 +839,23 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -793,6 +888,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -803,17 +899,23 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -846,6 +948,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -855,12 +958,11 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portlet.wiki.model.WikiNode");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.wiki.model.WikiNode");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

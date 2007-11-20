@@ -140,7 +140,9 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	public JournalArticle addJournalArticle(JournalArticle model)
 		throws SystemException {
 		JournalArticle journalArticle = new JournalArticleImpl();
+
 		journalArticle.setNew(true);
+
 		journalArticle.setUuid(model.getUuid());
 		journalArticle.setId(model.getId());
 		journalArticle.setResourcePrimKey(model.getResourcePrimKey());
@@ -185,7 +187,9 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	public JournalArticle updateJournalArticle(JournalArticle model)
 		throws SystemException {
 		JournalArticle journalArticle = new JournalArticleImpl();
+
 		journalArticle.setNew(false);
+
 		journalArticle.setUuid(model.getUuid());
 		journalArticle.setId(model.getId());
 		journalArticle.setResourcePrimKey(model.getResourcePrimKey());

@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="ListTypeModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>ListType</code> table in the
- * database.
+ * This class is a model that represents the <code>ListType</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,7 +60,11 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ListType";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "listTypeId", new Integer(Types.INTEGER) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "type_", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ListType (listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null)";
@@ -119,6 +123,7 @@ public class ListTypeModelImpl extends BaseModelImpl {
 
 	public ListType toEscapedModel() {
 		ListType model = new ListTypeImpl();
+
 		model.setListTypeId(getListTypeId());
 		model.setName(Html.escape(getName()));
 		model.setType(Html.escape(getType()));
@@ -134,6 +139,7 @@ public class ListTypeModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ListTypeImpl clone = new ListTypeImpl();
+
 		clone.setListTypeId(getListTypeId());
 		clone.setName(getName());
 		clone.setType(getType());
@@ -147,7 +153,9 @@ public class ListTypeModelImpl extends BaseModelImpl {
 		}
 
 		ListTypeImpl listType = (ListTypeImpl)obj;
+
 		int value = 0;
+
 		value = getName().toLowerCase().compareTo(listType.getName()
 														  .toLowerCase());
 

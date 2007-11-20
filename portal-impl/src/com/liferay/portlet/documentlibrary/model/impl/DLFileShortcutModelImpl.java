@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="DLFileShortcutModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>DLFileShortcut</code> table in
- * the database.
+ * This class is a model that represents the <code>DLFileShortcut</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,14 +63,32 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileShortcut";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "fileShortcutId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "toFolderId", new Integer(Types.BIGINT) },
+			
+
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(300) null)";
@@ -207,6 +225,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 
 	public DLFileShortcut toEscapedModel() {
 		DLFileShortcut model = new DLFileShortcutImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setFileShortcutId(getFileShortcutId());
 		model.setCompanyId(getCompanyId());
@@ -229,6 +248,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileShortcutImpl clone = new DLFileShortcutImpl();
+
 		clone.setUuid(getUuid());
 		clone.setFileShortcutId(getFileShortcutId());
 		clone.setCompanyId(getCompanyId());
@@ -249,6 +269,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		}
 
 		DLFileShortcutImpl dlFileShortcut = (DLFileShortcutImpl)obj;
+
 		long pk = dlFileShortcut.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

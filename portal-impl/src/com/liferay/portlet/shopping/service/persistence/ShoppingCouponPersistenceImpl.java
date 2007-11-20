@@ -62,6 +62,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	implements ShoppingCouponPersistence {
 	public ShoppingCoupon create(long couponId) {
 		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
+
 		shoppingCoupon.setNew(true);
 		shoppingCoupon.setPrimaryKey(couponId);
 
@@ -125,7 +126,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(shoppingCoupon);
+
 			session.flush();
 
 			return shoppingCoupon;
@@ -135,20 +138,20 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingCoupon.class.getName());
 		}
 	}
 
-	public ShoppingCoupon update(
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
+	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		return update(shoppingCoupon, false);
 	}
 
-	public ShoppingCoupon update(
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
-		boolean merge) throws SystemException {
+	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = shoppingCoupon.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			shoppingCoupon.setNew(false);
 
 			return shoppingCoupon;
@@ -201,6 +205,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingCoupon.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,18 +261,26 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -294,13 +308,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderClassName = ShoppingCoupon.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -311,25 +329,33 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -353,11 +379,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCoupon exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCoupon exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
@@ -368,15 +396,18 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	public ShoppingCoupon findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchCouponException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCoupon exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCoupon exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
@@ -388,34 +419,45 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = findByPrimaryKey(couponId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCoupon);
+
 			ShoppingCoupon[] array = new ShoppingCouponImpl[3];
+
 			array[0] = (ShoppingCoupon)objArray[0];
 			array[1] = (ShoppingCoupon)objArray[1];
 			array[2] = (ShoppingCoupon)objArray[2];
@@ -436,10 +478,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 		if (shoppingCoupon == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCoupon exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("code=");
-			msg.append(code);
+
+			msg.append("No ShoppingCoupon exists with the key {");
+
+			msg.append("code=" + code);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -457,6 +500,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderMethodName = "fetchByCode";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { code };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -467,6 +511,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
@@ -478,10 +523,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (code != null) {
@@ -489,6 +537,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -545,6 +594,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -576,6 +626,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -586,6 +637,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon ");
 
@@ -593,12 +645,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -627,6 +682,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)itr.next();
+
 			remove(shoppingCoupon);
 		}
 	}
@@ -634,6 +690,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	public void removeByCode(String code)
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = findByCode(code);
+
 		remove(shoppingCoupon);
 	}
 
@@ -650,6 +707,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -660,17 +718,23 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -703,6 +767,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCode";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { code };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -713,6 +778,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
@@ -727,6 +793,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (code != null) {
@@ -734,6 +801,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -766,6 +834,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -775,13 +844,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCoupon");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

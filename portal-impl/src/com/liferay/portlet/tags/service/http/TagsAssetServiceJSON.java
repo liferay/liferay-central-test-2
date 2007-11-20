@@ -31,31 +31,34 @@ import org.json.JSONObject;
  * <a href="TagsAssetServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portlet.tags.service.TagsAssetServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portlet.tags.service.TagsAssetServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portlet.tags.model.TagsAsset</code>, that
- * is translated to a <code>org.json.JSONObject</code>. Methods that JSON cannot
- * safely use are skipped. The logic for the translation is encapsulated in <code>com.liferay.portlet.tags.service.http.TagsAssetJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.tags.model.TagsAsset</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portlet.tags.service.http.TagsAssetJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -70,14 +73,14 @@ import org.json.JSONObject;
  */
 public class TagsAssetServiceJSON {
 	public static void deleteAsset(long assetId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetServiceUtil.deleteAsset(assetId);
 	}
 
 	public static JSONObject getAsset(long assetId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.getAsset(assetId);
 
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
@@ -92,8 +95,8 @@ public class TagsAssetServiceJSON {
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int begin, int end, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
 				begin, end, languageId);
 
@@ -101,7 +104,7 @@ public class TagsAssetServiceJSON {
 	}
 
 	public static JSONArray getCompanyAssets(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
 				begin, end);
 
@@ -109,7 +112,7 @@ public class TagsAssetServiceJSON {
 	}
 
 	public static int getCompanyAssetsCount(long companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
 
 		return returnValue;
@@ -117,8 +120,8 @@ public class TagsAssetServiceJSON {
 
 	public static JSONObject incrementViewCounter(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.incrementViewCounter(className,
 				classPK);
 
@@ -128,8 +131,8 @@ public class TagsAssetServiceJSON {
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.searchAssetDisplays(companyId,
 				portletId, keywords, languageId, begin, end);
 
@@ -139,7 +142,7 @@ public class TagsAssetServiceJSON {
 	public static int searchAssetDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = TagsAssetServiceUtil.searchAssetDisplaysCount(companyId,
 				portletId, keywords, languageId);
 
@@ -154,8 +157,8 @@ public class TagsAssetServiceJSON {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(groupId,
 				className, classPK, entryNames, startDate, endDate,
 				publishDate, expirationDate, mimeType, title, description,

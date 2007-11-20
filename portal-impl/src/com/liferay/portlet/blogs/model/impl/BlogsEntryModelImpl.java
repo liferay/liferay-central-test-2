@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="BlogsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>BlogsEntry</code> table in the
- * database.
+ * This class is a model that represents the <code>BlogsEntry</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,17 +64,41 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BlogsEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "entryId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "title", new Integer(Types.VARCHAR) },
+			
+
 			{ "urlTitle", new Integer(Types.VARCHAR) },
+			
+
 			{ "content", new Integer(Types.CLOB) },
+			
+
 			{ "displayDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null)";
@@ -249,6 +273,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 
 	public BlogsEntry toEscapedModel() {
 		BlogsEntry model = new BlogsEntryImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setEntryId(getEntryId());
 		model.setGroupId(getGroupId());
@@ -274,6 +299,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BlogsEntryImpl clone = new BlogsEntryImpl();
+
 		clone.setUuid(getUuid());
 		clone.setEntryId(getEntryId());
 		clone.setGroupId(getGroupId());
@@ -297,8 +323,11 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		}
 
 		BlogsEntryImpl blogsEntry = (BlogsEntryImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getDisplayDate(), blogsEntry.getDisplayDate());
+
 		value = value * -1;
 
 		if (value != 0) {

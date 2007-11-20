@@ -62,6 +62,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	implements MBMessageFlagPersistence {
 	public MBMessageFlag create(long messageFlagId) {
 		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
+
 		mbMessageFlag.setNew(true);
 		mbMessageFlag.setPrimaryKey(messageFlagId);
 
@@ -125,7 +126,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(mbMessageFlag);
+
 			session.flush();
 
 			return mbMessageFlag;
@@ -135,20 +138,20 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBMessageFlag.class.getName());
 		}
 	}
 
-	public MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
+	public MBMessageFlag update(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		return update(mbMessageFlag, false);
 	}
 
-	public MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean merge) throws SystemException {
+	public MBMessageFlag update(MBMessageFlag mbMessageFlag, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = mbMessageFlag.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			mbMessageFlag.setNew(false);
 
 			return mbMessageFlag;
@@ -201,6 +205,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBMessageFlag.class.getName());
 		}
 	}
@@ -246,6 +251,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -256,16 +262,22 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -293,13 +305,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderClassName = MBMessageFlag.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -310,9 +326,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -321,10 +340,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -348,11 +370,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -363,15 +387,18 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	public MBMessageFlag findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -383,16 +410,21 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -401,12 +433,16 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
+
 			MBMessageFlag[] array = new MBMessageFlagImpl[3];
+
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];
@@ -426,6 +462,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByMessageId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(messageId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -436,16 +473,22 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("messageId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, messageId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -473,13 +516,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderClassName = MBMessageFlag.class.getName();
 		String finderMethodName = "findByMessageId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(messageId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(messageId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -490,9 +537,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("messageId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -501,10 +551,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, messageId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -529,11 +582,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("messageId=");
-			msg.append(messageId);
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("messageId=" + messageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -545,15 +600,18 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByMessageId(messageId);
+
 		List list = findByMessageId(messageId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("messageId=");
-			msg.append(messageId);
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("messageId=" + messageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -565,16 +623,21 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		long messageId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+
 		int count = countByMessageId(messageId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 			query.append("messageId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -583,12 +646,16 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, messageId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
+
 			MBMessageFlag[] array = new MBMessageFlagImpl[3];
+
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];
@@ -609,13 +676,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		if (mbMessageFlag == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBMessageFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("messageId=");
-			msg.append(messageId);
+			msg.append("messageId=" + messageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -636,6 +704,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(messageId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -646,19 +715,28 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("messageId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, messageId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -715,6 +793,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -746,6 +825,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -756,6 +836,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag ");
 
@@ -765,6 +846,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -793,6 +875,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+
 			remove(mbMessageFlag);
 		}
 	}
@@ -802,6 +885,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+
 			remove(mbMessageFlag);
 		}
 	}
@@ -809,6 +893,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	public void removeByU_M(long userId, long messageId)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByU_M(userId, messageId);
+
 		remove(mbMessageFlag);
 	}
 
@@ -825,6 +910,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -835,17 +921,23 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -878,6 +970,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByMessageId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(messageId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -888,17 +981,23 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("messageId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, messageId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -934,6 +1033,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(messageId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -944,20 +1044,29 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("messageId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, messageId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -990,6 +1099,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -999,13 +1109,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBMessageFlag");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

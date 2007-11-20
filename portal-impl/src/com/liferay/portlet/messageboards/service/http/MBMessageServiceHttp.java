@@ -39,26 +39,28 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
  * <a href="MBMessageServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.messageboards.service.MBMessageServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.messageboards.service.MBMessageServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -82,6 +84,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -89,8 +92,11 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj2 = new LongWrapper(classPK);
+
 			Object paramObj3 = new LongWrapper(threadId);
+
 			Object paramObj4 = new LongWrapper(parentMessageId);
+
 			Object paramObj5 = subject;
 
 			if (subject == null) {
@@ -116,6 +122,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -137,6 +144,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -150,6 +158,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = subject;
 
 			if (subject == null) {
@@ -169,7 +178,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(anonymous);
+
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -177,13 +188,16 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -205,6 +219,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -219,6 +234,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = subject;
 
 			if (subject == null) {
@@ -238,7 +254,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(anonymous);
+
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -252,13 +270,16 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj8 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj9 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -280,6 +301,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -294,8 +316,11 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new LongWrapper(threadId);
+
 			Object paramObj2 = new LongWrapper(parentMessageId);
+
 			Object paramObj3 = subject;
 
 			if (subject == null) {
@@ -315,7 +340,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(anonymous);
+
 			Object paramObj7 = new DoubleWrapper(priority);
+
 			Object paramObj8 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -323,7 +350,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addMessage",
 					new Object[] {
@@ -331,6 +360,7 @@ public class MBMessageServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -352,6 +382,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -366,8 +397,11 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new LongWrapper(threadId);
+
 			Object paramObj2 = new LongWrapper(parentMessageId);
+
 			Object paramObj3 = subject;
 
 			if (subject == null) {
@@ -387,7 +421,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(anonymous);
+
 			Object paramObj7 = new DoubleWrapper(priority);
+
 			Object paramObj8 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -401,7 +437,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj10 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj11 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addMessage",
 					new Object[] {
@@ -409,6 +447,7 @@ public class MBMessageServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -430,6 +469,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -444,6 +484,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = subject;
 
 			if (subject == null) {
@@ -463,7 +504,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(anonymous);
+
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -488,6 +531,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -509,6 +553,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -524,6 +569,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = subject;
 
 			if (subject == null) {
@@ -543,7 +589,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(anonymous);
+
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -574,6 +622,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -595,6 +644,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -610,8 +660,11 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new LongWrapper(threadId);
+
 			Object paramObj2 = new LongWrapper(parentMessageId);
+
 			Object paramObj3 = subject;
 
 			if (subject == null) {
@@ -631,7 +684,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(anonymous);
+
 			Object paramObj7 = new DoubleWrapper(priority);
+
 			Object paramObj8 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -657,6 +712,7 @@ public class MBMessageServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -678,6 +734,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -693,8 +750,11 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new LongWrapper(threadId);
+
 			Object paramObj2 = new LongWrapper(parentMessageId);
+
 			Object paramObj3 = subject;
 
 			if (subject == null) {
@@ -714,7 +774,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(anonymous);
+
 			Object paramObj7 = new DoubleWrapper(priority);
+
 			Object paramObj8 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -746,6 +808,7 @@ public class MBMessageServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -767,6 +830,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -777,6 +841,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -784,7 +849,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj2 = new LongWrapper(classPK);
+
 			Object paramObj3 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"deleteDiscussionMessage",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
@@ -806,6 +873,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -815,6 +883,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"deleteMessage", new Object[] { paramObj0 });
 
@@ -835,6 +904,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -845,11 +915,15 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new IntegerWrapper(begin);
+
 			Object paramObj2 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessages",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
+
 			Object returnObj = null;
 
 			try {
@@ -871,6 +945,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -881,8 +956,10 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessagesCount", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -904,6 +981,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -916,7 +994,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -924,6 +1004,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -948,6 +1029,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -969,6 +1051,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -981,7 +1064,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -989,6 +1074,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -1013,6 +1099,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1034,6 +1121,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1046,7 +1134,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -1054,6 +1144,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -1078,6 +1169,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1099,6 +1191,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1109,8 +1202,10 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getMessage", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -1132,6 +1227,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1142,8 +1238,10 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getMessageDisplay", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -1165,6 +1263,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1177,7 +1276,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(threadId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -1185,6 +1286,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -1209,6 +1311,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1230,6 +1333,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1240,6 +1344,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"subscribeMessage", new Object[] { paramObj0 });
 
@@ -1260,6 +1365,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1270,6 +1376,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"unsubscribeMessage", new Object[] { paramObj0 });
 
@@ -1290,6 +1397,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1302,6 +1410,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -1309,7 +1418,9 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj2 = new LongWrapper(classPK);
+
 			Object paramObj3 = new LongWrapper(messageId);
+
 			Object paramObj4 = subject;
 
 			if (subject == null) {
@@ -1328,6 +1439,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1349,6 +1461,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1361,7 +1474,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			Object paramObj1 = new LongWrapper(categoryId);
+
 			Object paramObj2 = subject;
 
 			if (subject == null) {
@@ -1381,6 +1496,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -1393,6 +1509,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1414,6 +1531,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -1427,7 +1545,9 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
+
 			Object paramObj1 = new LongWrapper(categoryId);
+
 			Object paramObj2 = subject;
 
 			if (subject == null) {
@@ -1447,6 +1567,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj5 = new DoubleWrapper(priority);
+
 			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
@@ -1465,6 +1586,7 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1486,6 +1608,7 @@ public class MBMessageServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

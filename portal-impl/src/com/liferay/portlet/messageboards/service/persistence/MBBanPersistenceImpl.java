@@ -62,6 +62,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	implements MBBanPersistence {
 	public MBBan create(long banId) {
 		MBBan mbBan = new MBBanImpl();
+
 		mbBan.setNew(true);
 		mbBan.setPrimaryKey(banId);
 
@@ -119,7 +120,9 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(mbBan);
+
 			session.flush();
 
 			return mbBan;
@@ -129,18 +132,18 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBBan.class.getName());
 		}
 	}
 
-	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan)
-		throws SystemException {
+	public MBBan update(MBBan mbBan) throws SystemException {
 		return update(mbBan, false);
 	}
 
-	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan,
-		boolean merge) throws SystemException {
+	public MBBan update(MBBan mbBan, boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = mbBan.isNew();
 
 		if (listener != null) {
@@ -184,6 +187,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			mbBan.setNew(false);
 
 			return mbBan;
@@ -193,6 +197,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBBan.class.getName());
 		}
 	}
@@ -234,6 +239,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -244,16 +250,22 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -281,13 +293,17 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -298,9 +314,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -309,10 +328,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -336,11 +358,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -351,15 +375,18 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -370,16 +397,21 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan[] findByGroupId_PrevAndNext(long banId, long groupId,
 		OrderByComparator obc) throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByPrimaryKey(banId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -388,11 +420,15 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
+
 			MBBan[] array = new MBBanImpl[3];
+
 			array[0] = (MBBan)objArray[0];
 			array[1] = (MBBan)objArray[1];
 			array[2] = (MBBan)objArray[2];
@@ -412,6 +448,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -422,16 +459,22 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -459,13 +502,17 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -476,9 +523,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -487,10 +537,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -514,11 +567,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -529,15 +584,18 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -548,16 +606,21 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan[] findByUserId_PrevAndNext(long banId, long userId,
 		OrderByComparator obc) throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByPrimaryKey(banId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -566,11 +629,15 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
+
 			MBBan[] array = new MBBanImpl[3];
+
 			array[0] = (MBBan)objArray[0];
 			array[1] = (MBBan)objArray[1];
 			array[2] = (MBBan)objArray[2];
@@ -590,6 +657,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByBanUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(banUserId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -600,16 +668,22 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("banUserId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, banUserId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -637,13 +711,17 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByBanUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(banUserId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(banUserId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -654,9 +732,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("banUserId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -665,10 +746,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, banUserId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -692,11 +776,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("banUserId=");
-			msg.append(banUserId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("banUserId=" + banUserId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -707,15 +793,18 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan findByBanUserId_Last(long banUserId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
 		int count = countByBanUserId(banUserId);
+
 		List list = findByBanUserId(banUserId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("banUserId=");
-			msg.append(banUserId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("banUserId=" + banUserId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
@@ -726,16 +815,21 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan[] findByBanUserId_PrevAndNext(long banId, long banUserId,
 		OrderByComparator obc) throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByPrimaryKey(banId);
+
 		int count = countByBanUserId(banUserId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 			query.append("banUserId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -744,11 +838,15 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, banUserId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
+
 			MBBan[] array = new MBBanImpl[3];
+
 			array[0] = (MBBan)objArray[0];
 			array[1] = (MBBan)objArray[1];
 			array[2] = (MBBan)objArray[2];
@@ -769,13 +867,14 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		if (mbBan == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBBan exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("banUserId=");
-			msg.append(banUserId);
+			msg.append("banUserId=" + banUserId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -798,6 +897,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -808,19 +908,28 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("banUserId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, banUserId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -877,6 +986,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -908,6 +1018,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -918,6 +1029,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan ");
 
@@ -927,6 +1039,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -955,6 +1068,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBBan mbBan = (MBBan)itr.next();
+
 			remove(mbBan);
 		}
 	}
@@ -964,6 +1078,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBBan mbBan = (MBBan)itr.next();
+
 			remove(mbBan);
 		}
 	}
@@ -973,6 +1088,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBBan mbBan = (MBBan)itr.next();
+
 			remove(mbBan);
 		}
 	}
@@ -980,6 +1096,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public void removeByG_B(long groupId, long banUserId)
 		throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByG_B(groupId, banUserId);
+
 		remove(mbBan);
 	}
 
@@ -996,6 +1113,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1006,17 +1124,23 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1049,6 +1173,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1059,17 +1184,23 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1102,6 +1233,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByBanUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(banUserId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1112,17 +1244,23 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("banUserId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, banUserId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1160,6 +1298,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1170,20 +1309,29 @@ public class MBBanPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("banUserId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, banUserId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1216,6 +1364,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1225,13 +1374,11 @@ public class MBBanPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBBan");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBBan");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

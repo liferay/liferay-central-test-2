@@ -62,6 +62,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	implements BlogsStatsUserPersistence {
 	public BlogsStatsUser create(long statsUserId) {
 		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
+
 		blogsStatsUser.setNew(true);
 		blogsStatsUser.setPrimaryKey(statsUserId);
 
@@ -125,7 +126,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(blogsStatsUser);
+
 			session.flush();
 
 			return blogsStatsUser;
@@ -135,20 +138,20 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BlogsStatsUser.class.getName());
 		}
 	}
 
-	public BlogsStatsUser update(
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
+	public BlogsStatsUser update(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		return update(blogsStatsUser, false);
 	}
 
-	public BlogsStatsUser update(
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
-		boolean merge) throws SystemException {
+	public BlogsStatsUser update(BlogsStatsUser blogsStatsUser, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = blogsStatsUser.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			blogsStatsUser.setNew(false);
 
 			return blogsStatsUser;
@@ -201,6 +205,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BlogsStatsUser.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,18 +261,26 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -294,13 +308,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -311,25 +329,33 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -353,11 +379,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -368,15 +396,18 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	public BlogsStatsUser findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -388,34 +419,45 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
+
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
+
 			array[0] = (BlogsStatsUser)objArray[0];
 			array[1] = (BlogsStatsUser)objArray[1];
 			array[2] = (BlogsStatsUser)objArray[2];
@@ -435,6 +477,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -445,18 +488,26 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -484,13 +535,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -501,25 +556,33 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -543,11 +606,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -558,15 +623,18 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	public BlogsStatsUser findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -578,34 +646,45 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
+
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
+
 			array[0] = (BlogsStatsUser)objArray[0];
 			array[1] = (BlogsStatsUser)objArray[1];
 			array[2] = (BlogsStatsUser)objArray[2];
@@ -626,13 +705,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		if (blogsStatsUser == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -653,6 +733,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -663,21 +744,32 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -717,6 +809,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -727,21 +820,32 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -770,13 +874,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_E";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Integer.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -787,28 +894,39 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -832,14 +950,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("entryCount=");
-			msg.append(entryCount);
+			msg.append("entryCount=" + entryCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -850,18 +970,21 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	public BlogsStatsUser findByG_E_Last(long groupId, int entryCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByG_E(groupId, entryCount);
+
 		List list = findByG_E(groupId, entryCount, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("entryCount=");
-			msg.append(entryCount);
+			msg.append("entryCount=" + entryCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -873,37 +996,51 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		long groupId, int entryCount, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByG_E(groupId, entryCount);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("entryCount != ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setInteger(queryPos++, entryCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
+
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
+
 			array[0] = (BlogsStatsUser)objArray[0];
 			array[1] = (BlogsStatsUser)objArray[1];
 			array[2] = (BlogsStatsUser)objArray[2];
@@ -928,6 +1065,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -938,21 +1076,32 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -981,13 +1130,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByC_E";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Integer.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -998,28 +1150,39 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1043,14 +1206,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("entryCount=");
-			msg.append(entryCount);
+			msg.append("entryCount=" + entryCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1061,18 +1226,21 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	public BlogsStatsUser findByC_E_Last(long companyId, int entryCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByC_E(companyId, entryCount);
+
 		List list = findByC_E(companyId, entryCount, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No BlogsStatsUser exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("entryCount=");
-			msg.append(entryCount);
+			msg.append("entryCount=" + entryCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1084,37 +1252,51 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		long companyId, int entryCount, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByC_E(companyId, entryCount);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" AND ");
+
 			query.append("entryCount != ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("entryCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
+
 			q.setInteger(queryPos++, entryCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
+
 			BlogsStatsUser[] array = new BlogsStatsUserImpl[3];
+
 			array[0] = (BlogsStatsUser)objArray[0];
 			array[1] = (BlogsStatsUser)objArray[1];
 			array[2] = (BlogsStatsUser)objArray[2];
@@ -1156,6 +1338,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1187,6 +1370,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1197,6 +1381,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser ");
 
@@ -1204,12 +1389,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("entryCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1238,6 +1426,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+
 			remove(blogsStatsUser);
 		}
 	}
@@ -1247,6 +1436,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+
 			remove(blogsStatsUser);
 		}
 	}
@@ -1254,6 +1444,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	public void removeByG_U(long groupId, long userId)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByG_U(groupId, userId);
+
 		remove(blogsStatsUser);
 	}
 
@@ -1263,6 +1454,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+
 			remove(blogsStatsUser);
 		}
 	}
@@ -1273,6 +1465,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+
 			remove(blogsStatsUser);
 		}
 	}
@@ -1290,6 +1483,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1300,17 +1494,23 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1343,6 +1543,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1353,17 +1554,23 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1398,6 +1605,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1408,20 +1616,29 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1459,6 +1676,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1469,20 +1687,29 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1520,6 +1747,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1530,20 +1758,29 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("entryCount != ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setInteger(queryPos++, entryCount);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1576,6 +1813,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1585,13 +1823,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.blogs.model.BlogsStatsUser");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

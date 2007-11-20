@@ -267,7 +267,9 @@ public abstract class PermissionLocalServiceBaseImpl
 	implements PermissionLocalService, InitializingBean {
 	public Permission addPermission(Permission model) throws SystemException {
 		Permission permission = new PermissionImpl();
+
 		permission.setNew(true);
+
 		permission.setPermissionId(model.getPermissionId());
 		permission.setCompanyId(model.getCompanyId());
 		permission.setActionId(model.getActionId());
@@ -290,7 +292,9 @@ public abstract class PermissionLocalServiceBaseImpl
 	public Permission updatePermission(Permission model)
 		throws SystemException {
 		Permission permission = new PermissionImpl();
+
 		permission.setNew(false);
+
 		permission.setPermissionId(model.getPermissionId());
 		permission.setCompanyId(model.getCompanyId());
 		permission.setActionId(model.getActionId());

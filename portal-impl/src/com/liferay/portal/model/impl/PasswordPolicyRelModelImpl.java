@@ -38,8 +38,8 @@ import java.sql.Types;
  * <a href="PasswordPolicyRelModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -58,8 +58,14 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PasswordPolicyRel";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyRelId", new Integer(Types.BIGINT) },
+			
+
 			{ "passwordPolicyId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
@@ -124,6 +130,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 
 	public PasswordPolicyRel toEscapedModel() {
 		PasswordPolicyRel model = new PasswordPolicyRelImpl();
+
 		model.setPasswordPolicyRelId(getPasswordPolicyRelId());
 		model.setPasswordPolicyId(getPasswordPolicyId());
 		model.setClassNameId(getClassNameId());
@@ -140,6 +147,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PasswordPolicyRelImpl clone = new PasswordPolicyRelImpl();
+
 		clone.setPasswordPolicyRelId(getPasswordPolicyRelId());
 		clone.setPasswordPolicyId(getPasswordPolicyId());
 		clone.setClassNameId(getClassNameId());
@@ -154,6 +162,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		}
 
 		PasswordPolicyRelImpl passwordPolicyRel = (PasswordPolicyRelImpl)obj;
+
 		long pk = passwordPolicyRel.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

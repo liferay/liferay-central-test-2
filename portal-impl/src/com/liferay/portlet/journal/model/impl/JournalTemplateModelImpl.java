@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="JournalTemplateModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,21 +63,53 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalTemplate";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "id_", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "templateId", new Integer(Types.VARCHAR) },
+			
+
 			{ "structureId", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "xsl", new Integer(Types.CLOB) },
+			
+
 			{ "langType", new Integer(Types.VARCHAR) },
+			
+
 			{ "smallImage", new Integer(Types.BOOLEAN) },
+			
+
 			{ "smallImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalTemplate (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,templateId VARCHAR(75) null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsl TEXT null,langType VARCHAR(75) null,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
@@ -304,6 +336,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 
 	public JournalTemplate toEscapedModel() {
 		JournalTemplate model = new JournalTemplateImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setId(getId());
 		model.setGroupId(getGroupId());
@@ -333,6 +366,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalTemplateImpl clone = new JournalTemplateImpl();
+
 		clone.setUuid(getUuid());
 		clone.setId(getId());
 		clone.setGroupId(getGroupId());
@@ -360,7 +394,9 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		}
 
 		JournalTemplateImpl journalTemplate = (JournalTemplateImpl)obj;
+
 		int value = 0;
+
 		value = getTemplateId().compareTo(journalTemplate.getTemplateId());
 
 		if (value != 0) {

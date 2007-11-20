@@ -39,26 +39,28 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  * <a href="BlogsEntryServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.blogs.service.BlogsEntryServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.blogs.service.BlogsEntryServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -85,7 +87,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(categoryId);
+
 			Object paramObj2 = title;
 
 			if (title == null) {
@@ -99,10 +103,15 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(displayDateMonth);
+
 			Object paramObj5 = new IntegerWrapper(displayDateDay);
+
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
+
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
+
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
+
 			Object paramObj9 = themeDisplay;
 
 			if (themeDisplay == null) {
@@ -117,7 +126,9 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj11 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj12 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {
@@ -125,6 +136,7 @@ public class BlogsEntryServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -146,6 +158,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -163,7 +176,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(categoryId);
+
 			Object paramObj2 = title;
 
 			if (title == null) {
@@ -177,10 +192,15 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(displayDateMonth);
+
 			Object paramObj5 = new IntegerWrapper(displayDateDay);
+
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
+
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
+
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
+
 			Object paramObj9 = themeDisplay;
 
 			if (themeDisplay == null) {
@@ -213,6 +233,7 @@ public class BlogsEntryServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -234,6 +255,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -243,6 +265,7 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"deleteEntry", new Object[] { paramObj0 });
 
@@ -263,6 +286,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -275,7 +299,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -283,6 +309,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -301,6 +328,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -322,6 +350,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -334,7 +363,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -342,6 +373,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
@@ -366,6 +398,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -387,6 +420,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -397,9 +431,12 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getCompanyEntries", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -421,6 +458,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -433,7 +471,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -441,6 +481,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -459,6 +500,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -480,6 +522,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -492,7 +535,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -500,6 +545,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
@@ -524,6 +570,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -545,6 +592,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -555,8 +603,10 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getEntry", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -578,6 +628,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -588,6 +639,7 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = urlTitle;
 
 			if (urlTitle == null) {
@@ -596,6 +648,7 @@ public class BlogsEntryServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getEntry", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -617,6 +670,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -627,9 +681,12 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntries", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -651,6 +708,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -663,7 +721,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -671,6 +731,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -689,6 +750,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -710,6 +772,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -722,7 +785,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -730,6 +795,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
@@ -754,6 +820,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -775,6 +842,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -785,10 +853,13 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getOrganizationEntries",
 					new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -810,6 +881,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -822,7 +894,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -830,6 +904,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = feedURL;
 
 			if (feedURL == null) {
@@ -848,6 +923,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -869,6 +945,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -881,7 +958,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = new IntegerWrapper(max);
+
 			Object paramObj2 = type;
 
 			if (type == null) {
@@ -889,6 +968,7 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj3 = new DoubleWrapper(version);
+
 			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
@@ -913,6 +993,7 @@ public class BlogsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -934,6 +1015,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -949,7 +1031,9 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
+
 			Object paramObj1 = new LongWrapper(categoryId);
+
 			Object paramObj2 = title;
 
 			if (title == null) {
@@ -963,10 +1047,15 @@ public class BlogsEntryServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(displayDateMonth);
+
 			Object paramObj5 = new IntegerWrapper(displayDateDay);
+
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
+
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
+
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
+
 			Object paramObj9 = themeDisplay;
 
 			if (themeDisplay == null) {
@@ -987,6 +1076,7 @@ public class BlogsEntryServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -1008,6 +1098,7 @@ public class BlogsEntryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

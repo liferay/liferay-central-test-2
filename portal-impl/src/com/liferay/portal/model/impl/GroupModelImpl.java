@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="GroupModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Group_</code> table in the database.
+ * This class is a model that represents the <code>Group</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,17 +60,41 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Group_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "creatorUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "parentGroupId", new Integer(Types.BIGINT) },
+			
+
 			{ "liveGroupId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "type_", new Integer(Types.VARCHAR) },
+			
+
 			{ "typeSettings", new Integer(Types.VARCHAR) },
+			
+
 			{ "friendlyURL", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
@@ -241,6 +266,7 @@ public class GroupModelImpl extends BaseModelImpl {
 
 	public Group toEscapedModel() {
 		Group model = new GroupImpl();
+
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
 		model.setCreatorUserId(getCreatorUserId());
@@ -265,6 +291,7 @@ public class GroupModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		GroupImpl clone = new GroupImpl();
+
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setCreatorUserId(getCreatorUserId());
@@ -288,7 +315,9 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 
 		GroupImpl group = (GroupImpl)obj;
+
 		int value = 0;
+
 		value = getName().toLowerCase().compareTo(group.getName().toLowerCase());
 
 		if (value != 0) {

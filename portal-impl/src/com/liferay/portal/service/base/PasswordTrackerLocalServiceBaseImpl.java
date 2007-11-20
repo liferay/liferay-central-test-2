@@ -270,7 +270,9 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	public PasswordTracker addPasswordTracker(PasswordTracker model)
 		throws SystemException {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
+
 		passwordTracker.setNew(true);
+
 		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
 		passwordTracker.setUserId(model.getUserId());
 		passwordTracker.setCreateDate(model.getCreateDate());
@@ -293,7 +295,9 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	public PasswordTracker updatePasswordTracker(PasswordTracker model)
 		throws SystemException {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
+
 		passwordTracker.setNew(false);
+
 		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
 		passwordTracker.setUserId(model.getUserId());
 		passwordTracker.setCreateDate(model.getCreateDate());

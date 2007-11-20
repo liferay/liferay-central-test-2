@@ -41,13 +41,13 @@ import java.util.Date;
  * <a href="BlogsStatsUserModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>BlogsStatsUser</code> table in
- * the database.
+ * This class is a model that represents the <code>BlogsStatsUser</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,13 +61,29 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BlogsStatsUser";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "entryCount", new Integer(Types.INTEGER) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "ratingsTotalEntries", new Integer(Types.INTEGER) },
+			
+
 			{ "ratingsTotalScore", new Integer(Types.DOUBLE) },
+			
+
 			{ "ratingsAverageScore", new Integer(Types.DOUBLE) }
 		};
 	public static String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null,ratingsTotalEntries INTEGER,ratingsTotalScore DOUBLE,ratingsAverageScore DOUBLE)";
@@ -185,6 +201,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 
 	public BlogsStatsUser toEscapedModel() {
 		BlogsStatsUser model = new BlogsStatsUserImpl();
+
 		model.setStatsUserId(getStatsUserId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -206,6 +223,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
+
 		clone.setStatsUserId(getStatsUserId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -225,6 +243,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		}
 
 		BlogsStatsUserImpl blogsStatsUser = (BlogsStatsUserImpl)obj;
+
 		int value = 0;
 
 		if (getEntryCount() < blogsStatsUser.getEntryCount()) {

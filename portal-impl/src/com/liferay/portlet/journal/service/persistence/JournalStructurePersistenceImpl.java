@@ -63,10 +63,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	implements JournalStructurePersistence {
 	public JournalStructure create(long id) {
 		JournalStructure journalStructure = new JournalStructureImpl();
+
 		journalStructure.setNew(true);
 		journalStructure.setPrimaryKey(id);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		journalStructure.setUuid(uuid);
 
 		return journalStructure;
@@ -129,7 +131,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(journalStructure);
+
 			session.flush();
 
 			return journalStructure;
@@ -139,20 +143,20 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalStructure.class.getName());
 		}
 	}
 
-	public JournalStructure update(
-		com.liferay.portlet.journal.model.JournalStructure journalStructure)
+	public JournalStructure update(JournalStructure journalStructure)
 		throws SystemException {
 		return update(journalStructure, false);
 	}
 
-	public JournalStructure update(
-		com.liferay.portlet.journal.model.JournalStructure journalStructure,
+	public JournalStructure update(JournalStructure journalStructure,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = journalStructure.isNew();
 
 		if (listener != null) {
@@ -183,6 +187,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(journalStructure.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			journalStructure.setUuid(uuid);
 		}
 
@@ -201,6 +206,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			journalStructure.setNew(false);
 
 			return journalStructure;
@@ -210,6 +216,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalStructure.class.getName());
 		}
 	}
@@ -254,6 +261,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -264,6 +272,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -275,10 +284,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -286,6 +298,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -313,13 +326,17 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderClassName = JournalStructure.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -330,6 +347,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -346,12 +364,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("structureId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -359,6 +380,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -382,11 +404,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -397,15 +421,18 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchStructureException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -416,13 +443,16 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure[] findByUuid_PrevAndNext(long id, String uuid,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -439,12 +469,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -453,7 +486,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalStructure);
+
 			JournalStructure[] array = new JournalStructureImpl[3];
+
 			array[0] = (JournalStructure)objArray[0];
 			array[1] = (JournalStructure)objArray[1];
 			array[2] = (JournalStructure)objArray[2];
@@ -474,13 +509,14 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		if (journalStructure == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -501,6 +537,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -511,6 +548,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -522,12 +560,17 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -537,6 +580,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -571,6 +615,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -581,18 +626,26 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -620,13 +673,17 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderClassName = JournalStructure.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -637,25 +694,33 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("structureId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -679,11 +744,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -694,15 +761,18 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -713,34 +783,45 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure[] findByGroupId_PrevAndNext(long id, long groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalStructure);
+
 			JournalStructure[] array = new JournalStructureImpl[3];
+
 			array[0] = (JournalStructure)objArray[0];
 			array[1] = (JournalStructure)objArray[1];
 			array[2] = (JournalStructure)objArray[2];
@@ -760,6 +841,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByStructureId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -770,6 +852,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -781,10 +864,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (structureId != null) {
@@ -792,6 +878,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -819,13 +906,17 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderClassName = JournalStructure.class.getName();
 		String finderMethodName = "findByStructureId";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				structureId, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				structureId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -836,6 +927,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -852,12 +944,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("structureId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (structureId != null) {
@@ -865,6 +960,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -888,11 +984,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("structureId=");
-			msg.append(structureId);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("structureId=" + structureId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -903,15 +1001,18 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure findByStructureId_Last(String structureId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		int count = countByStructureId(structureId);
+
 		List list = findByStructureId(structureId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("structureId=");
-			msg.append(structureId);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("structureId=" + structureId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -923,13 +1024,16 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String structureId, OrderByComparator obc)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
+
 		int count = countByStructureId(structureId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
@@ -946,12 +1050,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (structureId != null) {
@@ -960,7 +1067,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalStructure);
+
 			JournalStructure[] array = new JournalStructureImpl[3];
+
 			array[0] = (JournalStructure)objArray[0];
 			array[1] = (JournalStructure)objArray[1];
 			array[2] = (JournalStructure)objArray[2];
@@ -981,13 +1090,14 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		if (journalStructure == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalStructure exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureId=" + structureId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1008,6 +1118,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1018,9 +1129,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (structureId == null) {
@@ -1031,11 +1145,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("structureId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (structureId != null) {
@@ -1043,6 +1161,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1099,6 +1218,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1130,6 +1250,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1140,6 +1261,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure ");
 
@@ -1147,12 +1269,15 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("structureId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1181,6 +1306,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalStructure journalStructure = (JournalStructure)itr.next();
+
 			remove(journalStructure);
 		}
 	}
@@ -1188,6 +1314,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByUUID_G(uuid, groupId);
+
 		remove(journalStructure);
 	}
 
@@ -1196,6 +1323,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalStructure journalStructure = (JournalStructure)itr.next();
+
 			remove(journalStructure);
 		}
 	}
@@ -1206,6 +1334,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalStructure journalStructure = (JournalStructure)itr.next();
+
 			remove(journalStructure);
 		}
 	}
@@ -1213,6 +1342,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public void removeByG_S(long groupId, String structureId)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByG_S(groupId, structureId);
+
 		remove(journalStructure);
 	}
 
@@ -1229,6 +1359,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1239,6 +1370,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
@@ -1253,6 +1385,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1260,6 +1393,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1295,6 +1429,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1305,6 +1440,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
@@ -1317,10 +1453,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1330,6 +1469,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1362,6 +1502,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1372,17 +1513,23 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1415,6 +1562,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByStructureId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1425,6 +1573,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
@@ -1439,6 +1588,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (structureId != null) {
@@ -1446,6 +1596,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1481,6 +1632,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1491,10 +1643,13 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (structureId == null) {
@@ -1507,7 +1662,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (structureId != null) {
@@ -1515,6 +1672,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1547,6 +1705,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1556,13 +1715,11 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalStructure");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalStructure");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

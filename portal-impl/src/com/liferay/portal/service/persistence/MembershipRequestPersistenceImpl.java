@@ -61,6 +61,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	implements MembershipRequestPersistence {
 	public MembershipRequest create(long membershipRequestId) {
 		MembershipRequest membershipRequest = new MembershipRequestImpl();
+
 		membershipRequest.setNew(true);
 		membershipRequest.setPrimaryKey(membershipRequestId);
 
@@ -125,7 +126,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(membershipRequest);
+
 			session.flush();
 
 			return membershipRequest;
@@ -135,20 +138,20 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MembershipRequest.class.getName());
 		}
 	}
 
-	public MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest)
+	public MembershipRequest update(MembershipRequest membershipRequest)
 		throws SystemException {
 		return update(membershipRequest, false);
 	}
 
-	public MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest,
+	public MembershipRequest update(MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = membershipRequest.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			membershipRequest.setNew(false);
 
 			return membershipRequest;
@@ -201,6 +205,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MembershipRequest.class.getName());
 		}
 	}
@@ -246,6 +251,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -256,18 +262,26 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -295,13 +309,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -312,25 +330,33 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -355,11 +381,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -371,15 +399,18 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -391,34 +422,45 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		long membershipRequestId, long groupId, OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					membershipRequest);
+
 			MembershipRequest[] array = new MembershipRequestImpl[3];
+
 			array[0] = (MembershipRequest)objArray[0];
 			array[1] = (MembershipRequest)objArray[1];
 			array[2] = (MembershipRequest)objArray[2];
@@ -438,6 +480,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -448,18 +491,26 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -487,13 +538,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -504,25 +559,33 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -547,11 +610,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -563,15 +628,18 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -583,34 +651,45 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		long membershipRequestId, long userId, OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					membershipRequest);
+
 			MembershipRequest[] array = new MembershipRequestImpl[3];
+
 			array[0] = (MembershipRequest)objArray[0];
 			array[1] = (MembershipRequest)objArray[1];
 			array[2] = (MembershipRequest)objArray[2];
@@ -634,6 +713,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -644,21 +724,32 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("statusId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, statusId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -687,13 +778,16 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_S";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Integer.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(statusId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId), new Integer(statusId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -704,28 +798,39 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("statusId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, statusId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -750,14 +855,16 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("statusId=");
-			msg.append(statusId);
+			msg.append("statusId=" + statusId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -769,18 +876,21 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByG_S(groupId, statusId);
+
 		List list = findByG_S(groupId, statusId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MembershipRequest exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("statusId=");
-			msg.append(statusId);
+			msg.append("statusId=" + statusId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -792,37 +902,51 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		long groupId, int statusId, OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
+
 		int count = countByG_S(groupId, statusId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("statusId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setInteger(queryPos++, statusId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					membershipRequest);
+
 			MembershipRequest[] array = new MembershipRequestImpl[3];
+
 			array[0] = (MembershipRequest)objArray[0];
 			array[1] = (MembershipRequest)objArray[1];
 			array[2] = (MembershipRequest)objArray[2];
@@ -864,6 +988,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -895,6 +1020,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -905,18 +1031,22 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.MembershipRequest ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -945,6 +1075,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+
 			remove(membershipRequest);
 		}
 	}
@@ -954,6 +1085,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+
 			remove(membershipRequest);
 		}
 	}
@@ -964,6 +1096,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+
 			remove(membershipRequest);
 		}
 	}
@@ -981,6 +1114,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -991,17 +1125,23 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1034,6 +1174,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1044,17 +1185,23 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1091,6 +1238,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1101,20 +1249,29 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("statusId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, statusId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1147,6 +1304,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1156,12 +1314,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.MembershipRequest");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.MembershipRequest");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

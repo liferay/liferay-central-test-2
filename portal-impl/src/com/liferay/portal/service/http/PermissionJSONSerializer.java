@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="PermissionJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.PermissionServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.PermissionServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "permissionId", model.getPermissionId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "actionId", model.getActionId());
@@ -65,6 +67,7 @@ public class PermissionJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Permission model = (Permission)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

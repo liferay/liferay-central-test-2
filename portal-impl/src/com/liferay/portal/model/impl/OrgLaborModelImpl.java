@@ -38,13 +38,13 @@ import java.sql.Types;
  * <a href="OrgLaborModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>OrgLabor</code> table in the
- * database.
+ * This class is a model that represents the <code>OrgLabor</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -58,21 +58,53 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "OrgLabor";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "orgLaborId", new Integer(Types.BIGINT) },
+			
+
 			{ "organizationId", new Integer(Types.BIGINT) },
+			
+
 			{ "typeId", new Integer(Types.INTEGER) },
+			
+
 			{ "sunOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "sunClose", new Integer(Types.INTEGER) },
+			
+
 			{ "monOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "monClose", new Integer(Types.INTEGER) },
+			
+
 			{ "tueOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "tueClose", new Integer(Types.INTEGER) },
+			
+
 			{ "wedOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "wedClose", new Integer(Types.INTEGER) },
+			
+
 			{ "thuOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "thuClose", new Integer(Types.INTEGER) },
+			
+
 			{ "friOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "friClose", new Integer(Types.INTEGER) },
+			
+
 			{ "satOpen", new Integer(Types.INTEGER) },
+			
+
 			{ "satClose", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";
@@ -267,6 +299,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 	public OrgLabor toEscapedModel() {
 		OrgLabor model = new OrgLaborImpl();
+
 		model.setOrgLaborId(getOrgLaborId());
 		model.setOrganizationId(getOrganizationId());
 		model.setTypeId(getTypeId());
@@ -296,6 +329,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		OrgLaborImpl clone = new OrgLaborImpl();
+
 		clone.setOrgLaborId(getOrgLaborId());
 		clone.setOrganizationId(getOrganizationId());
 		clone.setTypeId(getTypeId());
@@ -323,6 +357,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		}
 
 		OrgLaborImpl orgLabor = (OrgLaborImpl)obj;
+
 		int value = 0;
 
 		if (getOrganizationId() < orgLabor.getOrganizationId()) {

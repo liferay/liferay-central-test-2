@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="PollsQuestionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>PollsQuestion</code> table in
- * the database.
+ * This class is a model that represents the <code>PollsQuestion</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,16 +64,38 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsQuestion";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "questionId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "title", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "lastVoteDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PollsQuestion (uuid_ VARCHAR(75) null,questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(500) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
@@ -238,6 +260,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 	public PollsQuestion toEscapedModel() {
 		PollsQuestion model = new PollsQuestionImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setQuestionId(getQuestionId());
 		model.setGroupId(getGroupId());
@@ -262,6 +285,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsQuestionImpl clone = new PollsQuestionImpl();
+
 		clone.setUuid(getUuid());
 		clone.setQuestionId(getQuestionId());
 		clone.setGroupId(getGroupId());
@@ -284,9 +308,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		}
 
 		PollsQuestionImpl pollsQuestion = (PollsQuestionImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(),
 				pollsQuestion.getCreateDate());
+
 		value = value * -1;
 
 		if (value != 0) {

@@ -268,7 +268,9 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	public PluginSetting addPluginSetting(PluginSetting model)
 		throws SystemException {
 		PluginSetting pluginSetting = new PluginSettingImpl();
+
 		pluginSetting.setNew(true);
+
 		pluginSetting.setPluginSettingId(model.getPluginSettingId());
 		pluginSetting.setCompanyId(model.getCompanyId());
 		pluginSetting.setPluginId(model.getPluginId());
@@ -293,7 +295,9 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	public PluginSetting updatePluginSetting(PluginSetting model)
 		throws SystemException {
 		PluginSetting pluginSetting = new PluginSettingImpl();
+
 		pluginSetting.setNew(false);
+
 		pluginSetting.setPluginSettingId(model.getPluginSettingId());
 		pluginSetting.setCompanyId(model.getCompanyId());
 		pluginSetting.setPluginId(model.getPluginId());

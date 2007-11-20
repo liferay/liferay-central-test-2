@@ -39,13 +39,13 @@ import java.sql.Types;
  * <a href="RatingsStatsModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>RatingsStats</code> table in
- * the database.
+ * This class is a model that represents the <code>RatingsStats</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,10 +59,20 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "RatingsStats";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "statsId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "totalEntries", new Integer(Types.INTEGER) },
+			
+
 			{ "totalScore", new Integer(Types.DOUBLE) },
+			
+
 			{ "averageScore", new Integer(Types.DOUBLE) }
 		};
 	public static String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
@@ -147,6 +157,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 
 	public RatingsStats toEscapedModel() {
 		RatingsStats model = new RatingsStatsImpl();
+
 		model.setStatsId(getStatsId());
 		model.setClassNameId(getClassNameId());
 		model.setClassPK(getClassPK());
@@ -165,6 +176,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		RatingsStatsImpl clone = new RatingsStatsImpl();
+
 		clone.setStatsId(getStatsId());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
@@ -181,6 +193,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		}
 
 		RatingsStatsImpl ratingsStats = (RatingsStatsImpl)obj;
+
 		long pk = ratingsStats.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

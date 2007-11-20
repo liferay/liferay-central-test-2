@@ -95,7 +95,9 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	public DLFileShortcut addDLFileShortcut(DLFileShortcut model)
 		throws SystemException {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
+
 		dlFileShortcut.setNew(true);
+
 		dlFileShortcut.setUuid(model.getUuid());
 		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
 		dlFileShortcut.setCompanyId(model.getCompanyId());
@@ -124,7 +126,9 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut model)
 		throws SystemException {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
+
 		dlFileShortcut.setNew(false);
+
 		dlFileShortcut.setUuid(model.getUuid());
 		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
 		dlFileShortcut.setCompanyId(model.getCompanyId());

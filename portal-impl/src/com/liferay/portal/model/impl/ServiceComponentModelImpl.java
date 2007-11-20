@@ -40,8 +40,8 @@ import java.sql.Types;
  * <a href="ServiceComponentModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -60,9 +60,17 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ServiceComponent";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "serviceComponentId", new Integer(Types.BIGINT) },
+			
+
 			{ "buildNamespace", new Integer(Types.VARCHAR) },
+			
+
 			{ "buildNumber", new Integer(Types.BIGINT) },
+			
+
 			{ "buildDate", new Integer(Types.BIGINT) },
+			
+
 			{ "data_", new Integer(Types.CLOB) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
@@ -142,6 +150,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 
 	public ServiceComponent toEscapedModel() {
 		ServiceComponent model = new ServiceComponentImpl();
+
 		model.setServiceComponentId(getServiceComponentId());
 		model.setBuildNamespace(Html.escape(getBuildNamespace()));
 		model.setBuildNumber(getBuildNumber());
@@ -159,6 +168,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ServiceComponentImpl clone = new ServiceComponentImpl();
+
 		clone.setServiceComponentId(getServiceComponentId());
 		clone.setBuildNamespace(getBuildNamespace());
 		clone.setBuildNumber(getBuildNumber());
@@ -174,8 +184,11 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		}
 
 		ServiceComponentImpl serviceComponent = (ServiceComponentImpl)obj;
+
 		int value = 0;
+
 		value = getBuildNamespace().compareTo(serviceComponent.getBuildNamespace());
+
 		value = value * -1;
 
 		if (value != 0) {

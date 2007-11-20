@@ -290,7 +290,9 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	InitializingBean {
 	public Layout addLayout(Layout model) throws SystemException {
 		Layout layout = new LayoutImpl();
+
 		layout.setNew(true);
+
 		layout.setPlid(model.getPlid());
 		layout.setGroupId(model.getGroupId());
 		layout.setCompanyId(model.getCompanyId());
@@ -330,7 +332,9 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 
 	public Layout updateLayout(Layout model) throws SystemException {
 		Layout layout = new LayoutImpl();
+
 		layout.setNew(false);
+
 		layout.setPlid(model.getPlid());
 		layout.setGroupId(model.getGroupId());
 		layout.setCompanyId(model.getCompanyId());

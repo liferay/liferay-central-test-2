@@ -85,7 +85,9 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 	public TagsProperty addTagsProperty(TagsProperty model)
 		throws SystemException {
 		TagsProperty tagsProperty = new TagsPropertyImpl();
+
 		tagsProperty.setNew(true);
+
 		tagsProperty.setPropertyId(model.getPropertyId());
 		tagsProperty.setCompanyId(model.getCompanyId());
 		tagsProperty.setUserId(model.getUserId());
@@ -113,7 +115,9 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 	public TagsProperty updateTagsProperty(TagsProperty model)
 		throws SystemException {
 		TagsProperty tagsProperty = new TagsPropertyImpl();
+
 		tagsProperty.setNew(false);
+
 		tagsProperty.setPropertyId(model.getPropertyId());
 		tagsProperty.setCompanyId(model.getCompanyId());
 		tagsProperty.setUserId(model.getUserId());

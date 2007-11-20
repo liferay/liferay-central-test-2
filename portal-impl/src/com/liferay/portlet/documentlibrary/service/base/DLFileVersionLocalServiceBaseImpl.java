@@ -76,7 +76,9 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	public DLFileVersion addDLFileVersion(DLFileVersion model)
 		throws SystemException {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
+
 		dlFileVersion.setNew(true);
+
 		dlFileVersion.setFileVersionId(model.getFileVersionId());
 		dlFileVersion.setCompanyId(model.getCompanyId());
 		dlFileVersion.setUserId(model.getUserId());
@@ -104,7 +106,9 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	public DLFileVersion updateDLFileVersion(DLFileVersion model)
 		throws SystemException {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
+
 		dlFileVersion.setNew(false);
+
 		dlFileVersion.setFileVersionId(model.getFileVersionId());
 		dlFileVersion.setCompanyId(model.getCompanyId());
 		dlFileVersion.setUserId(model.getUserId());

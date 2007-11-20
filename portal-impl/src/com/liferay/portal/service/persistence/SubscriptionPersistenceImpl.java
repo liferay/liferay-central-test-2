@@ -61,6 +61,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	implements SubscriptionPersistence {
 	public Subscription create(long subscriptionId) {
 		Subscription subscription = new SubscriptionImpl();
+
 		subscription.setNew(true);
 		subscription.setPrimaryKey(subscriptionId);
 
@@ -124,7 +125,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(subscription);
+
 			session.flush();
 
 			return subscription;
@@ -134,20 +137,20 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Subscription.class.getName());
 		}
 	}
 
-	public Subscription update(
-		com.liferay.portal.model.Subscription subscription)
+	public Subscription update(Subscription subscription)
 		throws SystemException {
 		return update(subscription, false);
 	}
 
-	public Subscription update(
-		com.liferay.portal.model.Subscription subscription, boolean merge)
+	public Subscription update(Subscription subscription, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = subscription.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			subscription.setNew(false);
 
 			return subscription;
@@ -200,6 +204,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Subscription.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,16 +261,22 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,13 +304,17 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		String finderClassName = Subscription.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -309,9 +325,12 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -320,10 +339,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -347,11 +369,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Subscription exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -362,15 +386,18 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	public Subscription findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Subscription exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -382,15 +409,20 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -399,12 +431,16 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
+
 			Subscription[] array = new SubscriptionImpl[3];
+
 			array[0] = (Subscription)objArray[0];
 			array[1] = (Subscription)objArray[1];
 			array[2] = (Subscription)objArray[2];
@@ -429,6 +465,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -439,22 +476,34 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -483,13 +532,16 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByC_C_C";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -500,13 +552,20 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -515,12 +574,17 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -545,17 +609,19 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Subscription exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("classNameId=");
-			msg.append(classNameId);
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -567,22 +633,25 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		long classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
+
 		List list = findByC_C_C(companyId, classNameId, classPK, count - 1,
 				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Subscription exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("classNameId=");
-			msg.append(classNameId);
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -594,19 +663,28 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		long companyId, long classNameId, long classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
+
 		int count = countByC_C_C(companyId, classNameId, classPK);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" AND ");
+
 			query.append("classNameId = ?");
+
 			query.append(" AND ");
+
 			query.append("classPK = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -615,14 +693,20 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
+
 			q.setLong(queryPos++, classNameId);
+
 			q.setLong(queryPos++, classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
+
 			Subscription[] array = new SubscriptionImpl[3];
+
 			array[0] = (Subscription)objArray[0];
 			array[1] = (Subscription)objArray[1];
 			array[2] = (Subscription)objArray[2];
@@ -645,19 +729,20 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		if (subscription == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Subscription exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("classNameId=");
-			msg.append(classNameId);
+			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
+			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -682,6 +767,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(userId), new Long(classNameId),
 				new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -692,25 +778,40 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -767,6 +868,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -798,6 +900,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -808,6 +911,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Subscription ");
 
 				if (obc != null) {
@@ -816,6 +920,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -844,6 +949,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Subscription subscription = (Subscription)itr.next();
+
 			remove(subscription);
 		}
 	}
@@ -854,6 +960,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Subscription subscription = (Subscription)itr.next();
+
 			remove(subscription);
 		}
 	}
@@ -862,6 +969,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		long classPK) throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByC_U_C_C(companyId, userId,
 				classNameId, classPK);
+
 		remove(subscription);
 	}
 
@@ -878,6 +986,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -888,17 +997,23 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -936,6 +1051,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -946,23 +1062,35 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1002,6 +1130,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(userId), new Long(classNameId),
 				new Long(classPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1012,26 +1141,41 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Subscription WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("classNameId = ?");
+
 				query.append(" AND ");
+
 				query.append("classPK = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, classNameId);
+
 				q.setLong(queryPos++, classPK);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1064,6 +1208,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1073,12 +1218,11 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Subscription");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Subscription");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

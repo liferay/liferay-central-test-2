@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
 
 <beans>
 	<bean id="com.liferay.portal.service.AccountLocalService.impl" class="com.liferay.portal.service.impl.AccountLocalServiceImpl" lazy-init="true" />

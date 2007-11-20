@@ -43,12 +43,13 @@ import java.util.Date;
  * <a href="AddressModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Address</code> table in the database.
+ * This class is a model that represents the <code>Address</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,22 +63,56 @@ public class AddressModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Address";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "addressId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "street1", new Integer(Types.VARCHAR) },
+			
+
 			{ "street2", new Integer(Types.VARCHAR) },
+			
+
 			{ "street3", new Integer(Types.VARCHAR) },
+			
+
 			{ "city", new Integer(Types.VARCHAR) },
+			
+
 			{ "zip", new Integer(Types.VARCHAR) },
+			
+
 			{ "regionId", new Integer(Types.BIGINT) },
+			
+
 			{ "countryId", new Integer(Types.BIGINT) },
+			
+
 			{ "typeId", new Integer(Types.INTEGER) },
+			
+
 			{ "mailing", new Integer(Types.BOOLEAN) },
+			
+
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Address (addressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,regionId LONG,countryId LONG,typeId INTEGER,mailing BOOLEAN,primary_ BOOLEAN)";
@@ -312,6 +347,7 @@ public class AddressModelImpl extends BaseModelImpl {
 
 	public Address toEscapedModel() {
 		Address model = new AddressImpl();
+
 		model.setAddressId(getAddressId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -342,6 +378,7 @@ public class AddressModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		AddressImpl clone = new AddressImpl();
+
 		clone.setAddressId(getAddressId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -370,7 +407,9 @@ public class AddressModelImpl extends BaseModelImpl {
 		}
 
 		AddressImpl address = (AddressImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(), address.getCreateDate());
 
 		if (value != 0) {

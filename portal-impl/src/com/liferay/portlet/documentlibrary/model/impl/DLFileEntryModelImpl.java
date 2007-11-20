@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="DLFileEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>DLFileEntry</code> table in the
- * database.
+ * This class is a model that represents the <code>DLFileEntry</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,21 +63,53 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "fileEntryId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "versionUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "versionUserName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "title", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "version", new Integer(Types.DOUBLE) },
+			
+
 			{ "size_", new Integer(Types.INTEGER) },
+			
+
 			{ "readCount", new Integer(Types.INTEGER) },
+			
+
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,title VARCHAR(300) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
@@ -294,6 +326,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 	public DLFileEntry toEscapedModel() {
 		DLFileEntry model = new DLFileEntryImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setFileEntryId(getFileEntryId());
 		model.setCompanyId(getCompanyId());
@@ -323,6 +356,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileEntryImpl clone = new DLFileEntryImpl();
+
 		clone.setUuid(getUuid());
 		clone.setFileEntryId(getFileEntryId());
 		clone.setCompanyId(getCompanyId());
@@ -350,6 +384,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		}
 
 		DLFileEntryImpl dlFileEntry = (DLFileEntryImpl)obj;
+
 		int value = 0;
 
 		if (getFolderId() < dlFileEntry.getFolderId()) {

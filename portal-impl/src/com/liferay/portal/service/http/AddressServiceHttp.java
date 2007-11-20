@@ -37,26 +37,28 @@ import com.liferay.portal.service.http.TunnelUtil;
  * <a href="AddressServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portal.service.AddressServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portal.service.AddressServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -87,6 +89,7 @@ public class AddressServiceHttp {
 			}
 
 			Object paramObj1 = new LongWrapper(classPK);
+
 			Object paramObj2 = street1;
 
 			if (street1 == null) {
@@ -118,10 +121,15 @@ public class AddressServiceHttp {
 			}
 
 			Object paramObj7 = new LongWrapper(regionId);
+
 			Object paramObj8 = new LongWrapper(countryId);
+
 			Object paramObj9 = new IntegerWrapper(typeId);
+
 			Object paramObj10 = new BooleanWrapper(mailing);
+
 			Object paramObj11 = new BooleanWrapper(primary);
+
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"addAddress",
 					new Object[] {
@@ -129,6 +137,7 @@ public class AddressServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -150,6 +159,7 @@ public class AddressServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -159,6 +169,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"deleteAddress", new Object[] { paramObj0 });
 
@@ -179,6 +190,7 @@ public class AddressServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -189,8 +201,10 @@ public class AddressServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"getAddress", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -212,6 +226,7 @@ public class AddressServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -228,8 +243,10 @@ public class AddressServiceHttp {
 			}
 
 			Object paramObj1 = new LongWrapper(classPK);
+
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"getAddresses", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -251,6 +268,7 @@ public class AddressServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -264,6 +282,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);
+
 			Object paramObj1 = street1;
 
 			if (street1 == null) {
@@ -295,10 +314,15 @@ public class AddressServiceHttp {
 			}
 
 			Object paramObj6 = new LongWrapper(regionId);
+
 			Object paramObj7 = new LongWrapper(countryId);
+
 			Object paramObj8 = new IntegerWrapper(typeId);
+
 			Object paramObj9 = new BooleanWrapper(mailing);
+
 			Object paramObj10 = new BooleanWrapper(primary);
+
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"updateAddress",
 					new Object[] {
@@ -306,6 +330,7 @@ public class AddressServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -327,6 +352,7 @@ public class AddressServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

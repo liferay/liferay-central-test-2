@@ -61,6 +61,7 @@ public class ImagePersistenceImpl extends BasePersistence
 	implements ImagePersistence {
 	public Image create(long imageId) {
 		Image image = new ImageImpl();
+
 		image.setNew(true);
 		image.setPrimaryKey(imageId);
 
@@ -120,7 +121,9 @@ public class ImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(image);
+
 			session.flush();
 
 			return image;
@@ -130,18 +133,18 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Image.class.getName());
 		}
 	}
 
-	public Image update(com.liferay.portal.model.Image image)
-		throws SystemException {
+	public Image update(Image image) throws SystemException {
 		return update(image, false);
 	}
 
-	public Image update(com.liferay.portal.model.Image image, boolean merge)
-		throws SystemException {
+	public Image update(Image image, boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = image.isNew();
 
 		if (listener != null) {
@@ -184,6 +187,7 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			image.setNew(false);
 
 			return image;
@@ -193,6 +197,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Image.class.getName());
 		}
 	}
@@ -234,6 +239,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "findBySize";
 		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(size) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -244,17 +250,25 @@ public class ImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Image WHERE ");
+
 				query.append("size_ < ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setInteger(queryPos++, size);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -282,14 +296,17 @@ public class ImagePersistenceImpl extends BasePersistence
 		String finderClassName = Image.class.getName();
 		String finderMethodName = "findBySize";
 		String[] finderParams = new String[] {
-				Integer.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Integer.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Integer(size), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Integer(size),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -300,24 +317,32 @@ public class ImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Image WHERE ");
+
 				query.append("size_ < ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setInteger(queryPos++, size);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -341,11 +366,13 @@ public class ImagePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Image exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("size=");
-			msg.append(size);
+
+			msg.append("No Image exists with the key {");
+
+			msg.append("size=" + size);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -356,15 +383,18 @@ public class ImagePersistenceImpl extends BasePersistence
 	public Image findBySize_Last(int size, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
 		int count = countBySize(size);
+
 		List list = findBySize(size, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Image exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("size=");
-			msg.append(size);
+
+			msg.append("No Image exists with the key {");
+
+			msg.append("size=" + size);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
@@ -375,32 +405,43 @@ public class ImagePersistenceImpl extends BasePersistence
 	public Image[] findBySize_PrevAndNext(long imageId, int size,
 		OrderByComparator obc) throws NoSuchImageException, SystemException {
 		Image image = findByPrimaryKey(imageId);
+
 		int count = countBySize(size);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Image WHERE ");
+
 			query.append("size_ < ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("imageId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setInteger(queryPos++, size);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, image);
+
 			Image[] array = new ImageImpl[3];
+
 			array[0] = (Image)objArray[0];
 			array[1] = (Image)objArray[1];
 			array[2] = (Image)objArray[2];
@@ -442,6 +483,7 @@ public class ImagePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -473,6 +515,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -483,18 +526,22 @@ public class ImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Image ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("imageId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -523,6 +570,7 @@ public class ImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
+
 			remove(image);
 		}
 	}
@@ -540,6 +588,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countBySize";
 		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(size) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -550,16 +599,22 @@ public class ImagePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Image WHERE ");
+
 				query.append("size_ < ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setInteger(queryPos++, size);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -592,6 +647,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -601,12 +657,11 @@ public class ImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Image");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Image");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

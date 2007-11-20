@@ -57,7 +57,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	public RatingsStats addRatingsStats(RatingsStats model)
 		throws SystemException {
 		RatingsStats ratingsStats = new RatingsStatsImpl();
+
 		ratingsStats.setNew(true);
+
 		ratingsStats.setStatsId(model.getStatsId());
 		ratingsStats.setClassNameId(model.getClassNameId());
 		ratingsStats.setClassPK(model.getClassPK());
@@ -82,7 +84,9 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	public RatingsStats updateRatingsStats(RatingsStats model)
 		throws SystemException {
 		RatingsStats ratingsStats = new RatingsStatsImpl();
+
 		ratingsStats.setNew(false);
+
 		ratingsStats.setStatsId(model.getStatsId());
 		ratingsStats.setClassNameId(model.getClassNameId());
 		ratingsStats.setClassPK(model.getClassPK());

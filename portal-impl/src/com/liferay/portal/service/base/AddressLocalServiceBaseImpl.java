@@ -267,7 +267,9 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	InitializingBean {
 	public Address addAddress(Address model) throws SystemException {
 		Address address = new AddressImpl();
+
 		address.setNew(true);
+
 		address.setAddressId(model.getAddressId());
 		address.setCompanyId(model.getCompanyId());
 		address.setUserId(model.getUserId());
@@ -303,7 +305,9 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 
 	public Address updateAddress(Address model) throws SystemException {
 		Address address = new AddressImpl();
+
 		address.setNew(false);
+
 		address.setAddressId(model.getAddressId());
 		address.setCompanyId(model.getCompanyId());
 		address.setUserId(model.getUserId());

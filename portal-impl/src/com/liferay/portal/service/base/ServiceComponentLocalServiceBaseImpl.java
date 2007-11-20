@@ -270,7 +270,9 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	public ServiceComponent addServiceComponent(ServiceComponent model)
 		throws SystemException {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
+
 		serviceComponent.setNew(true);
+
 		serviceComponent.setServiceComponentId(model.getServiceComponentId());
 		serviceComponent.setBuildNamespace(model.getBuildNamespace());
 		serviceComponent.setBuildNumber(model.getBuildNumber());
@@ -294,7 +296,9 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	public ServiceComponent updateServiceComponent(ServiceComponent model)
 		throws SystemException {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
+
 		serviceComponent.setNew(false);
+
 		serviceComponent.setServiceComponentId(model.getServiceComponentId());
 		serviceComponent.setBuildNamespace(model.getBuildNamespace());
 		serviceComponent.setBuildNumber(model.getBuildNumber());

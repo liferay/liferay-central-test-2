@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="DLFileVersionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>DLFileVersion</code> table in
- * the database.
+ * This class is a model that represents the <code>DLFileVersion</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,13 +63,29 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileVersion";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "fileVersionId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "version", new Integer(Types.DOUBLE) },
+			
+
 			{ "size_", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";
@@ -192,6 +208,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 	public DLFileVersion toEscapedModel() {
 		DLFileVersion model = new DLFileVersionImpl();
+
 		model.setFileVersionId(getFileVersionId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -213,6 +230,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileVersionImpl clone = new DLFileVersionImpl();
+
 		clone.setFileVersionId(getFileVersionId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -232,6 +250,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		}
 
 		DLFileVersionImpl dlFileVersion = (DLFileVersionImpl)obj;
+
 		int value = 0;
 
 		if (getFolderId() < dlFileVersion.getFolderId()) {
@@ -251,6 +270,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		}
 
 		value = getName().compareTo(dlFileVersion.getName());
+
 		value = value * -1;
 
 		if (value != 0) {

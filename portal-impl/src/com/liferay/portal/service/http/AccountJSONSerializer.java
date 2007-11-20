@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="AccountJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.AccountServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.AccountServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
@@ -77,6 +79,7 @@ public class AccountJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Account model = (Account)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

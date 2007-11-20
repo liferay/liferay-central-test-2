@@ -61,6 +61,7 @@ public class CountryPersistenceImpl extends BasePersistence
 	implements CountryPersistence {
 	public Country create(long countryId) {
 		Country country = new CountryImpl();
+
 		country.setNew(true);
 		country.setPrimaryKey(countryId);
 
@@ -121,7 +122,9 @@ public class CountryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(country);
+
 			session.flush();
 
 			return country;
@@ -131,18 +134,19 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Country.class.getName());
 		}
 	}
 
-	public Country update(com.liferay.portal.model.Country country)
-		throws SystemException {
+	public Country update(Country country) throws SystemException {
 		return update(country, false);
 	}
 
-	public Country update(com.liferay.portal.model.Country country,
-		boolean merge) throws SystemException {
+	public Country update(Country country, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = country.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			country.setNew(false);
 
 			return country;
@@ -194,6 +199,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Country.class.getName());
 		}
 	}
@@ -236,6 +242,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -246,17 +253,25 @@ public class CountryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -284,14 +299,17 @@ public class CountryPersistenceImpl extends BasePersistence
 		String finderClassName = Country.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] {
-				Boolean.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				Boolean.valueOf(active),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -302,24 +320,32 @@ public class CountryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -343,11 +369,13 @@ public class CountryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Country exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No Country exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
@@ -358,15 +386,18 @@ public class CountryPersistenceImpl extends BasePersistence
 	public Country findByActive_Last(boolean active, OrderByComparator obc)
 		throws NoSuchCountryException, SystemException {
 		int count = countByActive(active);
+
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Country exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
+
+			msg.append("No Country exists with the key {");
+
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
@@ -377,32 +408,43 @@ public class CountryPersistenceImpl extends BasePersistence
 	public Country[] findByActive_PrevAndNext(long countryId, boolean active,
 		OrderByComparator obc) throws NoSuchCountryException, SystemException {
 		Country country = findByPrimaryKey(countryId);
+
 		int count = countByActive(active);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Country WHERE ");
+
 			query.append("active_ = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, country);
+
 			Country[] array = new CountryImpl[3];
+
 			array[0] = (Country)objArray[0];
 			array[1] = (Country)objArray[1];
 			array[2] = (Country)objArray[2];
@@ -444,6 +486,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -475,6 +518,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -485,18 +529,22 @@ public class CountryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Country ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -525,6 +573,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Country country = (Country)itr.next();
+
 			remove(country);
 		}
 	}
@@ -542,6 +591,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -552,16 +602,22 @@ public class CountryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setBoolean(queryPos++, active);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -594,6 +650,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -603,12 +660,11 @@ public class CountryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Country");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Country");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

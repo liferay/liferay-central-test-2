@@ -262,7 +262,9 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	InitializingBean {
 	public Account addAccount(Account model) throws SystemException {
 		Account account = new AccountImpl();
+
 		account.setNew(true);
+
 		account.setAccountId(model.getAccountId());
 		account.setCompanyId(model.getCompanyId());
 		account.setUserId(model.getUserId());
@@ -296,7 +298,9 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 
 	public Account updateAccount(Account model) throws SystemException {
 		Account account = new AccountImpl();
+
 		account.setNew(false);
+
 		account.setAccountId(model.getAccountId());
 		account.setCompanyId(model.getCompanyId());
 		account.setUserId(model.getUserId());

@@ -62,6 +62,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	implements MBStatsUserPersistence {
 	public MBStatsUser create(long statsUserId) {
 		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+
 		mbStatsUser.setNew(true);
 		mbStatsUser.setPrimaryKey(statsUserId);
 
@@ -125,7 +126,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(mbStatsUser);
+
 			session.flush();
 
 			return mbStatsUser;
@@ -135,20 +138,20 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBStatsUser.class.getName());
 		}
 	}
 
-	public MBStatsUser update(
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
+	public MBStatsUser update(MBStatsUser mbStatsUser)
 		throws SystemException {
 		return update(mbStatsUser, false);
 	}
 
-	public MBStatsUser update(
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
-		boolean merge) throws SystemException {
+	public MBStatsUser update(MBStatsUser mbStatsUser, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = mbStatsUser.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			mbStatsUser.setNew(false);
 
 			return mbStatsUser;
@@ -201,6 +205,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(MBStatsUser.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,18 +261,26 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -294,13 +308,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderClassName = MBStatsUser.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -311,25 +329,33 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("messageCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -353,11 +379,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -368,15 +396,18 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	public MBStatsUser findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -388,34 +419,45 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
+
 			MBStatsUser[] array = new MBStatsUserImpl[3];
+
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];
@@ -435,6 +477,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -445,18 +488,26 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -484,13 +535,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderClassName = MBStatsUser.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -501,25 +556,33 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("messageCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -543,11 +606,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -558,15 +623,18 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	public MBStatsUser findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -578,34 +646,45 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
+
 			MBStatsUser[] array = new MBStatsUserImpl[3];
+
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];
@@ -626,13 +705,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		if (mbStatsUser == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -653,6 +733,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -663,21 +744,32 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -717,6 +809,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(messageCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -727,21 +820,32 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("messageCount != ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, messageCount);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -770,13 +874,16 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_M";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Integer.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(messageCount),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -787,28 +894,39 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("messageCount != ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("messageCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, messageCount);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -832,14 +950,16 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("messageCount=");
-			msg.append(messageCount);
+			msg.append("messageCount=" + messageCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -850,18 +970,21 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	public MBStatsUser findByG_M_Last(long groupId, int messageCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByG_M(groupId, messageCount);
+
 		List list = findByG_M(groupId, messageCount, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No MBStatsUser exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No MBStatsUser exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("messageCount=");
-			msg.append(messageCount);
+			msg.append("messageCount=" + messageCount);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -873,37 +996,51 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		int messageCount, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
+
 		int count = countByG_M(groupId, messageCount);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("messageCount != ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("messageCount DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setInteger(queryPos++, messageCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
+
 			MBStatsUser[] array = new MBStatsUserImpl[3];
+
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];
@@ -945,6 +1082,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -976,6 +1114,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -986,6 +1125,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser ");
 
@@ -993,12 +1133,15 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("messageCount DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1027,6 +1170,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+
 			remove(mbStatsUser);
 		}
 	}
@@ -1036,6 +1180,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+
 			remove(mbStatsUser);
 		}
 	}
@@ -1043,6 +1188,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	public void removeByG_U(long groupId, long userId)
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = findByG_U(groupId, userId);
+
 		remove(mbStatsUser);
 	}
 
@@ -1052,6 +1198,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+
 			remove(mbStatsUser);
 		}
 	}
@@ -1069,6 +1216,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1079,17 +1227,23 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1122,6 +1276,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1132,17 +1287,23 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1177,6 +1338,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1187,20 +1349,29 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1238,6 +1409,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(messageCount)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1248,20 +1420,29 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("messageCount != ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setInteger(queryPos++, messageCount);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1294,6 +1475,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1303,13 +1485,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBStatsUser");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBStatsUser");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

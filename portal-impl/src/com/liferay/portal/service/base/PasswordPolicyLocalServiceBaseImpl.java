@@ -268,7 +268,9 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	public PasswordPolicy addPasswordPolicy(PasswordPolicy model)
 		throws SystemException {
 		PasswordPolicy passwordPolicy = new PasswordPolicyImpl();
+
 		passwordPolicy.setNew(true);
+
 		passwordPolicy.setPasswordPolicyId(model.getPasswordPolicyId());
 		passwordPolicy.setCompanyId(model.getCompanyId());
 		passwordPolicy.setUserId(model.getUserId());
@@ -313,7 +315,9 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	public PasswordPolicy updatePasswordPolicy(PasswordPolicy model)
 		throws SystemException {
 		PasswordPolicy passwordPolicy = new PasswordPolicyImpl();
+
 		passwordPolicy.setNew(false);
+
 		passwordPolicy.setPasswordPolicyId(model.getPasswordPolicyId());
 		passwordPolicy.setCompanyId(model.getCompanyId());
 		passwordPolicy.setUserId(model.getUserId());

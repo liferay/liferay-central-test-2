@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="ResourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Resource_</code> table in the
- * database.
+ * This class is a model that represents the <code>Resource</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,7 +60,11 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Resource_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "resourceId", new Integer(Types.BIGINT) },
+			
+
 			{ "codeId", new Integer(Types.BIGINT) },
+			
+
 			{ "primKey", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Resource_ (resourceId LONG not null primary key,codeId LONG,primKey VARCHAR(300) null)";
@@ -118,6 +122,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 
 	public Resource toEscapedModel() {
 		Resource model = new ResourceImpl();
+
 		model.setResourceId(getResourceId());
 		model.setCodeId(getCodeId());
 		model.setPrimKey(Html.escape(getPrimKey()));
@@ -133,6 +138,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ResourceImpl clone = new ResourceImpl();
+
 		clone.setResourceId(getResourceId());
 		clone.setCodeId(getCodeId());
 		clone.setPrimKey(getPrimKey());
@@ -146,6 +152,7 @@ public class ResourceModelImpl extends BaseModelImpl {
 		}
 
 		ResourceImpl resource = (ResourceImpl)obj;
+
 		long pk = resource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -38,26 +38,28 @@ import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
  * <a href="SCProductVersionServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -82,6 +84,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
+
 			Object paramObj1 = version;
 
 			if (version == null) {
@@ -107,6 +110,7 @@ public class SCProductVersionServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+
 			Object paramObj6 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
@@ -114,13 +118,16 @@ public class SCProductVersionServiceHttp {
 			}
 
 			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"addProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -142,6 +149,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -157,6 +165,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
+
 			Object paramObj1 = version;
 
 			if (version == null) {
@@ -182,6 +191,7 @@ public class SCProductVersionServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+
 			Object paramObj6 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
@@ -206,6 +216,7 @@ public class SCProductVersionServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -227,6 +238,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -237,6 +249,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productVersionId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"deleteProductVersion", new Object[] { paramObj0 });
 
@@ -257,6 +270,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -267,8 +281,10 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productVersionId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersion", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -290,6 +306,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -300,11 +317,15 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
+
 			Object paramObj1 = new IntegerWrapper(begin);
+
 			Object paramObj2 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersions",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
+
 			Object returnObj = null;
 
 			try {
@@ -326,6 +347,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -336,8 +358,10 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersionsCount", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -359,6 +383,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -372,6 +397,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productVersionId);
+
 			Object paramObj1 = version;
 
 			if (version == null) {
@@ -397,6 +423,7 @@ public class SCProductVersionServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+
 			Object paramObj6 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
@@ -409,6 +436,7 @@ public class SCProductVersionServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -430,6 +458,7 @@ public class SCProductVersionServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

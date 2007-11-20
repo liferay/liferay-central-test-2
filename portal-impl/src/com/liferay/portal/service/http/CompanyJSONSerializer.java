@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="CompanyJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.CompanyServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.CompanyServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
 		JSONUtil.put(jsonObj, "webId", model.getWebId());
@@ -68,6 +70,7 @@ public class CompanyJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Company model = (Company)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

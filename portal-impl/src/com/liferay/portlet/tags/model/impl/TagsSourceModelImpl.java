@@ -41,13 +41,13 @@ import java.sql.Types;
  * <a href="TagsSourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>TagsSource</code> table in the
- * database.
+ * This class is a model that represents the <code>TagsSource</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,8 +61,14 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "TagsSource";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "sourceId", new Integer(Types.BIGINT) },
+			
+
 			{ "parentSourceId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "acronym", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
@@ -132,6 +138,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 
 	public TagsSource toEscapedModel() {
 		TagsSource model = new TagsSourceImpl();
+
 		model.setSourceId(getSourceId());
 		model.setParentSourceId(getParentSourceId());
 		model.setName(Html.escape(getName()));
@@ -148,6 +155,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		TagsSourceImpl clone = new TagsSourceImpl();
+
 		clone.setSourceId(getSourceId());
 		clone.setParentSourceId(getParentSourceId());
 		clone.setName(getName());
@@ -162,6 +170,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 		}
 
 		TagsSourceImpl tagsSource = (TagsSourceImpl)obj;
+
 		long pk = tagsSource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

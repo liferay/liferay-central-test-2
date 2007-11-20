@@ -95,7 +95,9 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	public MBMessageFlag addMBMessageFlag(MBMessageFlag model)
 		throws SystemException {
 		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
+
 		mbMessageFlag.setNew(true);
+
 		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
 		mbMessageFlag.setUserId(model.getUserId());
 		mbMessageFlag.setMessageId(model.getMessageId());
@@ -118,7 +120,9 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag model)
 		throws SystemException {
 		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
+
 		mbMessageFlag.setNew(false);
+
 		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
 		mbMessageFlag.setUserId(model.getUserId());
 		mbMessageFlag.setMessageId(model.getMessageId());

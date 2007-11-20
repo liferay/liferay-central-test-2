@@ -268,7 +268,9 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	public EmailAddress addEmailAddress(EmailAddress model)
 		throws SystemException {
 		EmailAddress emailAddress = new EmailAddressImpl();
+
 		emailAddress.setNew(true);
+
 		emailAddress.setEmailAddressId(model.getEmailAddressId());
 		emailAddress.setCompanyId(model.getCompanyId());
 		emailAddress.setUserId(model.getUserId());
@@ -298,7 +300,9 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	public EmailAddress updateEmailAddress(EmailAddress model)
 		throws SystemException {
 		EmailAddress emailAddress = new EmailAddressImpl();
+
 		emailAddress.setNew(false);
+
 		emailAddress.setEmailAddressId(model.getEmailAddressId());
 		emailAddress.setCompanyId(model.getCompanyId());
 		emailAddress.setUserId(model.getUserId());

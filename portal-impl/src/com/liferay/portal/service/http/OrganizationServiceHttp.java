@@ -37,26 +37,28 @@ import com.liferay.portal.service.http.TunnelUtil;
  * <a href="OrganizationServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portal.service.OrganizationServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portal.service.OrganizationServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -77,6 +79,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
@@ -104,6 +107,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -115,6 +119,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
+
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
@@ -142,6 +147,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -154,6 +160,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(parentOrganizationId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -161,16 +168,22 @@ public class OrganizationServiceHttp {
 			}
 
 			Object paramObj2 = new BooleanWrapper(location);
+
 			Object paramObj3 = new BooleanWrapper(recursable);
+
 			Object paramObj4 = new LongWrapper(regionId);
+
 			Object paramObj5 = new LongWrapper(countryId);
+
 			Object paramObj6 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -192,6 +205,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -204,6 +218,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(parentOrganizationId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -211,16 +226,22 @@ public class OrganizationServiceHttp {
 			}
 
 			Object paramObj2 = new IntegerWrapper(type);
+
 			Object paramObj3 = new BooleanWrapper(recursable);
+
 			Object paramObj4 = new LongWrapper(regionId);
+
 			Object paramObj5 = new LongWrapper(countryId);
+
 			Object paramObj6 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -242,6 +263,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -252,6 +274,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"deleteOrganization", new Object[] { paramObj0 });
 
@@ -272,6 +295,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -282,8 +306,10 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"getOrganization", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -305,6 +331,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -315,6 +342,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -323,6 +351,7 @@ public class OrganizationServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"getOrganizationId", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -344,6 +373,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -354,8 +384,10 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"getUserOrganizations", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -377,6 +409,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -387,6 +420,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
@@ -414,6 +448,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -424,6 +459,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
@@ -451,6 +487,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -462,6 +499,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
+
 			Object paramObj1 = organizationIds;
 
 			if (organizationIds == null) {
@@ -489,6 +527,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -501,7 +540,9 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = new LongWrapper(parentOrganizationId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -509,16 +550,22 @@ public class OrganizationServiceHttp {
 			}
 
 			Object paramObj3 = new BooleanWrapper(location);
+
 			Object paramObj4 = new BooleanWrapper(recursable);
+
 			Object paramObj5 = new LongWrapper(regionId);
+
 			Object paramObj6 = new LongWrapper(countryId);
+
 			Object paramObj7 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -540,6 +587,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -552,7 +600,9 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = new LongWrapper(parentOrganizationId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -560,16 +610,22 @@ public class OrganizationServiceHttp {
 			}
 
 			Object paramObj3 = new IntegerWrapper(type);
+
 			Object paramObj4 = new BooleanWrapper(recursable);
+
 			Object paramObj5 = new LongWrapper(regionId);
+
 			Object paramObj6 = new LongWrapper(countryId);
+
 			Object paramObj7 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -591,6 +647,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -602,6 +659,7 @@ public class OrganizationServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
+
 			Object paramObj1 = comments;
 
 			if (comments == null) {
@@ -610,6 +668,7 @@ public class OrganizationServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -631,6 +690,7 @@ public class OrganizationServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

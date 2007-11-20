@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="JournalStructureModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,16 +63,38 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalStructure";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "id_", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "structureId", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "xsd", new Integer(Types.CLOB) }
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
@@ -236,6 +258,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 
 	public JournalStructure toEscapedModel() {
 		JournalStructure model = new JournalStructureImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setId(getId());
 		model.setGroupId(getGroupId());
@@ -260,6 +283,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalStructureImpl clone = new JournalStructureImpl();
+
 		clone.setUuid(getUuid());
 		clone.setId(getId());
 		clone.setGroupId(getGroupId());
@@ -282,7 +306,9 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		}
 
 		JournalStructureImpl journalStructure = (JournalStructureImpl)obj;
+
 		int value = 0;
+
 		value = getStructureId().compareTo(journalStructure.getStructureId());
 
 		if (value != 0) {

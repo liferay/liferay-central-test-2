@@ -74,6 +74,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	implements PermissionPersistence {
 	public Permission create(long permissionId) {
 		Permission permission = new PermissionImpl();
+
 		permission.setNew(true);
 		permission.setPrimaryKey(permissionId);
 
@@ -166,7 +167,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(permission);
+
 			session.flush();
 
 			return permission;
@@ -176,18 +179,19 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Permission.class.getName());
 		}
 	}
 
-	public Permission update(com.liferay.portal.model.Permission permission)
-		throws SystemException {
+	public Permission update(Permission permission) throws SystemException {
 		return update(permission, false);
 	}
 
-	public Permission update(com.liferay.portal.model.Permission permission,
-		boolean merge) throws SystemException {
+	public Permission update(Permission permission, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = permission.isNew();
 
 		if (listener != null) {
@@ -235,6 +239,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			permission.setNew(false);
 
 			return permission;
@@ -244,6 +249,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Permission.class.getName());
 		}
 	}
@@ -288,6 +294,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByResourceId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -298,15 +305,21 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
 				query.append("resourceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, resourceId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -334,13 +347,17 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderClassName = Permission.class.getName();
 		String finderMethodName = "findByResourceId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(resourceId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(resourceId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -351,8 +368,11 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
 				query.append("resourceId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -361,10 +381,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, resourceId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -389,11 +412,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Permission exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("resourceId=");
-			msg.append(resourceId);
+
+			msg.append("No Permission exists with the key {");
+
+			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
@@ -405,15 +430,18 @@ public class PermissionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		int count = countByResourceId(resourceId);
+
 		List list = findByResourceId(resourceId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Permission exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("resourceId=");
-			msg.append(resourceId);
+
+			msg.append("No Permission exists with the key {");
+
+			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
@@ -425,15 +453,20 @@ public class PermissionPersistenceImpl extends BasePersistence
 		long resourceId, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		Permission permission = findByPrimaryKey(permissionId);
+
 		int count = countByResourceId(resourceId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
 			query.append("resourceId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -442,12 +475,16 @@ public class PermissionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, resourceId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					permission);
+
 			Permission[] array = new PermissionImpl[3];
+
 			array[0] = (Permission)objArray[0];
 			array[1] = (Permission)objArray[1];
 			array[2] = (Permission)objArray[2];
@@ -468,13 +505,14 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		if (permission == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Permission exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("actionId=");
-			msg.append(actionId);
+
+			msg.append("No Permission exists with the key {");
+
+			msg.append("actionId=" + actionId);
+
 			msg.append(", ");
-			msg.append("resourceId=");
-			msg.append(resourceId);
+			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -495,6 +533,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -505,6 +544,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Permission WHERE ");
 
 				if (actionId == null) {
@@ -515,10 +555,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("resourceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (actionId != null) {
@@ -528,6 +571,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, resourceId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -584,6 +628,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -615,6 +660,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -625,6 +671,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Permission ");
 
 				if (obc != null) {
@@ -633,6 +680,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -661,6 +709,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Permission permission = (Permission)itr.next();
+
 			remove(permission);
 		}
 	}
@@ -668,6 +717,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public void removeByA_R(String actionId, long resourceId)
 		throws NoSuchPermissionException, SystemException {
 		Permission permission = findByA_R(actionId, resourceId);
+
 		remove(permission);
 	}
 
@@ -684,6 +734,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByResourceId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -694,16 +745,22 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
 				query.append("resourceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, resourceId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -739,6 +796,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -749,6 +807,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Permission WHERE ");
 
@@ -760,10 +819,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("resourceId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (actionId != null) {
@@ -773,6 +835,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, resourceId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -805,6 +868,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -814,12 +878,11 @@ public class PermissionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Permission");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Permission");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -869,6 +932,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -879,26 +943,33 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
+
 					sm.append("Group_.name ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("Group_",
 					com.liferay.portal.model.impl.GroupImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -921,6 +992,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "getGroupsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -931,12 +1003,15 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -969,9 +1044,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderClassName = "Groups_Permissions";
 		String finderMethodName = "containsGroups";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -979,6 +1057,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
 							groupPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1052,6 +1131,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1126,6 +1206,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				removeGroup.remove(pk, group.getPrimaryKey());
 			}
 		}
@@ -1163,6 +1244,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1196,6 +1278,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1206,26 +1289,33 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETROLES);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
+
 					sm.append("Role_.name ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("Role_",
 					com.liferay.portal.model.impl.RoleImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1248,6 +1338,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "getRolesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1258,12 +1349,15 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1295,15 +1389,19 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderClassName = "Roles_Permissions";
 		String finderMethodName = "containsRoles";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(rolePK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1377,6 +1475,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < roles.size(); i++) {
 				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+
 				addRole.add(pk, role.getPrimaryKey());
 			}
 		}
@@ -1451,6 +1550,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < roles.size(); i++) {
 				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+
 				removeRole.remove(pk, role.getPrimaryKey());
 			}
 		}
@@ -1488,6 +1588,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < roles.size(); i++) {
 				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+
 				addRole.add(pk, role.getPrimaryKey());
 			}
 		}
@@ -1521,6 +1622,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1531,6 +1633,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETUSERS);
 
 				if (obc != null) {
@@ -1539,14 +1642,18 @@ public class PermissionPersistenceImpl extends BasePersistence
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("User_",
 					com.liferay.portal.model.impl.UserImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1569,6 +1676,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderMethodName = "getUsersSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1579,12 +1687,15 @@ public class PermissionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1616,15 +1727,19 @@ public class PermissionPersistenceImpl extends BasePersistence
 		String finderClassName = "Users_Permissions";
 		String finderMethodName = "containsUsers";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1698,6 +1813,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -1772,6 +1888,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
 		}
@@ -1809,6 +1926,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -1822,14 +1940,19 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	protected void initDao() {
 		containsGroup = new ContainsGroup(this);
+
 		addGroup = new AddGroup(this);
 		clearGroups = new ClearGroups(this);
 		removeGroup = new RemoveGroup(this);
+
 		containsRole = new ContainsRole(this);
+
 		addRole = new AddRole(this);
 		clearRoles = new ClearRoles(this);
 		removeRole = new RemoveRole(this);
+
 		containsUser = new ContainsUser(this);
+
 		addUser = new AddUser(this);
 		clearUsers = new ClearUsers(this);
 		removeUser = new RemoveUser(this);
@@ -1851,8 +1974,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSGROUP);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1882,9 +2007,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected AddGroup(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO Groups_Permissions (permissionId, groupId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1901,7 +2029,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected ClearGroups(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1914,8 +2044,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected RemoveGroup(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1927,8 +2059,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSROLE);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1958,9 +2092,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected AddRole(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO Roles_Permissions (permissionId, roleId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1977,7 +2114,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected ClearRoles(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1990,8 +2129,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected RemoveRole(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2003,8 +2144,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSUSER);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2034,9 +2177,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected AddUser(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO Users_Permissions (permissionId, userId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2053,7 +2199,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected ClearUsers(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2066,8 +2214,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 		protected RemoveUser(PermissionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

@@ -37,26 +37,28 @@ import com.liferay.portal.service.http.TunnelUtil;
  * <a href="GroupServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portal.service.GroupServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portal.service.GroupServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -103,11 +105,13 @@ public class GroupServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(active);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"addGroup",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -129,6 +133,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -141,6 +146,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(liveGroupId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -166,12 +172,14 @@ public class GroupServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(active);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"addGroup",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -193,6 +201,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -203,6 +212,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
+
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
@@ -229,6 +239,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -238,6 +249,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"deleteGroup", new Object[] { paramObj0 });
 
@@ -258,6 +270,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -268,8 +281,10 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getGroup", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -291,6 +306,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -301,6 +317,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -309,6 +326,7 @@ public class GroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getGroup", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -330,6 +348,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -347,6 +366,7 @@ public class GroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getOrganizationsGroups", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -368,6 +388,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -385,6 +406,7 @@ public class GroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getUserGroupsGroups", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -406,6 +428,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -414,9 +437,12 @@ public class GroupServiceHttp {
 		long userId, long groupId) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
+
 			Object paramObj1 = new LongWrapper(groupId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"hasUserGroup", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -434,6 +460,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -444,6 +471,7 @@ public class GroupServiceHttp {
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -463,13 +491,16 @@ public class GroupServiceHttp {
 			}
 
 			Object paramObj4 = new IntegerWrapper(begin);
+
 			Object paramObj5 = new IntegerWrapper(end);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"search",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -487,6 +518,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -496,6 +528,7 @@ public class GroupServiceHttp {
 		java.lang.String[] params) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -517,6 +550,7 @@ public class GroupServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"searchCount",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
 			Object returnObj = null;
 
 			try {
@@ -534,6 +568,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -544,6 +579,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
+
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
@@ -570,6 +606,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -580,6 +617,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
+
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
@@ -606,6 +644,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -618,6 +657,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -643,12 +683,14 @@ public class GroupServiceHttp {
 			}
 
 			Object paramObj5 = new BooleanWrapper(active);
+
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"updateGroup",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -670,6 +712,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -680,6 +723,7 @@ public class GroupServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = typeSettings;
 
 			if (typeSettings == null) {
@@ -688,6 +732,7 @@ public class GroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"updateGroup", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -709,6 +754,7 @@ public class GroupServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

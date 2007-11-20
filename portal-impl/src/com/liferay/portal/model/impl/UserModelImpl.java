@@ -42,12 +42,13 @@ import java.util.Date;
  * <a href="UserModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>User_</code> table in the database.
+ * This class is a model that represents the <code>User</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,33 +62,89 @@ public class UserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "User_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "defaultUser", new Integer(Types.BOOLEAN) },
+			
+
 			{ "contactId", new Integer(Types.BIGINT) },
+			
+
 			{ "password_", new Integer(Types.VARCHAR) },
+			
+
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
+			
+
 			{ "passwordReset", new Integer(Types.BOOLEAN) },
+			
+
 			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
+			
+
 			{ "screenName", new Integer(Types.VARCHAR) },
+			
+
 			{ "emailAddress", new Integer(Types.VARCHAR) },
+			
+
 			{ "portraitId", new Integer(Types.BIGINT) },
+			
+
 			{ "languageId", new Integer(Types.VARCHAR) },
+			
+
 			{ "timeZoneId", new Integer(Types.VARCHAR) },
+			
+
 			{ "greeting", new Integer(Types.VARCHAR) },
+			
+
 			{ "comments", new Integer(Types.VARCHAR) },
+			
+
 			{ "loginDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "loginIP", new Integer(Types.VARCHAR) },
+			
+
 			{ "lastLoginDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "lastLoginIP", new Integer(Types.VARCHAR) },
+			
+
 			{ "lastFailedLoginDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "failedLoginAttempts", new Integer(Types.INTEGER) },
+			
+
 			{ "lockout", new Integer(Types.BOOLEAN) },
+			
+
 			{ "lockoutDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
@@ -478,6 +535,7 @@ public class UserModelImpl extends BaseModelImpl {
 
 	public User toEscapedModel() {
 		User model = new UserImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setUserId(getUserId());
 		model.setCompanyId(getCompanyId());
@@ -518,6 +576,7 @@ public class UserModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserImpl clone = new UserImpl();
+
 		clone.setUuid(getUuid());
 		clone.setUserId(getUserId());
 		clone.setCompanyId(getCompanyId());
@@ -557,6 +616,7 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 
 		UserImpl user = (UserImpl)obj;
+
 		long pk = user.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -107,7 +107,9 @@ public abstract class DLFolderLocalServiceBaseImpl
 	implements DLFolderLocalService, InitializingBean {
 	public DLFolder addDLFolder(DLFolder model) throws SystemException {
 		DLFolder dlFolder = new DLFolderImpl();
+
 		dlFolder.setNew(true);
+
 		dlFolder.setUuid(model.getUuid());
 		dlFolder.setFolderId(model.getFolderId());
 		dlFolder.setGroupId(model.getGroupId());
@@ -137,7 +139,9 @@ public abstract class DLFolderLocalServiceBaseImpl
 
 	public DLFolder updateDLFolder(DLFolder model) throws SystemException {
 		DLFolder dlFolder = new DLFolderImpl();
+
 		dlFolder.setNew(false);
+
 		dlFolder.setUuid(model.getUuid());
 		dlFolder.setFolderId(model.getFolderId());
 		dlFolder.setGroupId(model.getGroupId());

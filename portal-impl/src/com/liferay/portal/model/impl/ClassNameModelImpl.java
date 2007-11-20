@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="ClassNameModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>ClassName_</code> table in the
- * database.
+ * This class is a model that represents the <code>ClassName</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,6 +60,8 @@ public class ClassNameModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ClassName_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "value", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
@@ -106,6 +108,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 
 	public ClassName toEscapedModel() {
 		ClassName model = new ClassNameImpl();
+
 		model.setClassNameId(getClassNameId());
 		model.setValue(Html.escape(getValue()));
 
@@ -120,6 +123,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ClassNameImpl clone = new ClassNameImpl();
+
 		clone.setClassNameId(getClassNameId());
 		clone.setValue(getValue());
 
@@ -132,6 +136,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		}
 
 		ClassNameImpl className = (ClassNameImpl)obj;
+
 		long pk = className.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -43,12 +43,13 @@ import java.util.Date;
  * <a href="IGImageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>IGImage</code> table in the database.
+ * This class is a model that represents the <code>IGImage</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,14 +63,32 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "IGImage";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "imageId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "smallImageId", new Integer(Types.BIGINT) },
+			
+
 			{ "largeImageId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
@@ -203,6 +222,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 	public IGImage toEscapedModel() {
 		IGImage model = new IGImageImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setImageId(getImageId());
 		model.setCompanyId(getCompanyId());
@@ -225,6 +245,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		IGImageImpl clone = new IGImageImpl();
+
 		clone.setUuid(getUuid());
 		clone.setImageId(getImageId());
 		clone.setCompanyId(getCompanyId());
@@ -245,6 +266,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		}
 
 		IGImageImpl igImage = (IGImageImpl)obj;
+
 		int value = 0;
 
 		if (getImageId() < igImage.getImageId()) {

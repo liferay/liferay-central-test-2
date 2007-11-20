@@ -30,31 +30,34 @@ import org.json.JSONObject;
  * <a href="CompanyServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portal.service.CompanyServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portal.service.CompanyServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portal.model.Company</code>, that is translated
- * to a <code>org.json.JSONObject</code>. Methods that JSON cannot safely use are
- * skipped. The logic for the translation is encapsulated in <code>com.liferay.portal.service.http.CompanyJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portal.model.Company</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portal.service.http.CompanyJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -70,8 +73,8 @@ import org.json.JSONObject;
 public class CompanyServiceJSON {
 	public static JSONObject addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
 				virtualHost, mx);
 
@@ -80,8 +83,8 @@ public class CompanyServiceJSON {
 
 	public static JSONObject updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 				virtualHost, mx);
 
@@ -94,8 +97,8 @@ public class CompanyServiceJSON {
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 				virtualHost, mx, name, legalName, legalId, legalType, sicCode,
 				tickerSymbol, industry, type, size);
@@ -105,8 +108,8 @@ public class CompanyServiceJSON {
 
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
@@ -114,8 +117,8 @@ public class CompanyServiceJSON {
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean strangersWithMx, boolean strangersVerify,
 		boolean communityLogo)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		CompanyServiceUtil.updateSecurity(companyId, authType, autoLogin,
 			sendPassword, strangers, strangersWithMx, strangersVerify,
 			communityLogo);

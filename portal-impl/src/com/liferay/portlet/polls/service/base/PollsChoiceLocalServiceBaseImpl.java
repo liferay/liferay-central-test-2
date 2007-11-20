@@ -65,7 +65,9 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 	public PollsChoice addPollsChoice(PollsChoice model)
 		throws SystemException {
 		PollsChoice pollsChoice = new PollsChoiceImpl();
+
 		pollsChoice.setNew(true);
+
 		pollsChoice.setUuid(model.getUuid());
 		pollsChoice.setChoiceId(model.getChoiceId());
 		pollsChoice.setQuestionId(model.getQuestionId());
@@ -89,7 +91,9 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 	public PollsChoice updatePollsChoice(PollsChoice model)
 		throws SystemException {
 		PollsChoice pollsChoice = new PollsChoiceImpl();
+
 		pollsChoice.setNew(false);
+
 		pollsChoice.setUuid(model.getUuid());
 		pollsChoice.setChoiceId(model.getChoiceId());
 		pollsChoice.setQuestionId(model.getQuestionId());

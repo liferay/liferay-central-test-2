@@ -92,7 +92,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	InitializingBean {
 	public MBBan addMBBan(MBBan model) throws SystemException {
 		MBBan mbBan = new MBBanImpl();
+
 		mbBan.setNew(true);
+
 		mbBan.setBanId(model.getBanId());
 		mbBan.setGroupId(model.getGroupId());
 		mbBan.setCompanyId(model.getCompanyId());
@@ -118,7 +120,9 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 
 	public MBBan updateMBBan(MBBan model) throws SystemException {
 		MBBan mbBan = new MBBanImpl();
+
 		mbBan.setNew(false);
+
 		mbBan.setBanId(model.getBanId());
 		mbBan.setGroupId(model.getGroupId());
 		mbBan.setCompanyId(model.getCompanyId());

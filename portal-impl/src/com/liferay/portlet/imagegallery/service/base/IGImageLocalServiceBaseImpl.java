@@ -82,7 +82,9 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	InitializingBean {
 	public IGImage addIGImage(IGImage model) throws SystemException {
 		IGImage igImage = new IGImageImpl();
+
 		igImage.setNew(true);
+
 		igImage.setUuid(model.getUuid());
 		igImage.setImageId(model.getImageId());
 		igImage.setCompanyId(model.getCompanyId());
@@ -110,7 +112,9 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 
 	public IGImage updateIGImage(IGImage model) throws SystemException {
 		IGImage igImage = new IGImageImpl();
+
 		igImage.setNew(false);
+
 		igImage.setUuid(model.getUuid());
 		igImage.setImageId(model.getImageId());
 		igImage.setCompanyId(model.getCompanyId());

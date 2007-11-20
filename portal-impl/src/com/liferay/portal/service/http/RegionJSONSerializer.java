@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="RegionJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.RegionServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.RegionServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
 		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
 		JSONUtil.put(jsonObj, "regionCode", model.getRegionCode());
@@ -66,6 +68,7 @@ public class RegionJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Region model = (Region)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

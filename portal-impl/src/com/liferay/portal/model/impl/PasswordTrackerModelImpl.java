@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="PasswordTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,8 +63,14 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PasswordTracker";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
@@ -135,6 +141,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 
 	public PasswordTracker toEscapedModel() {
 		PasswordTracker model = new PasswordTrackerImpl();
+
 		model.setPasswordTrackerId(getPasswordTrackerId());
 		model.setUserId(getUserId());
 		model.setCreateDate(getCreateDate());
@@ -151,6 +158,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PasswordTrackerImpl clone = new PasswordTrackerImpl();
+
 		clone.setPasswordTrackerId(getPasswordTrackerId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
@@ -165,6 +173,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		}
 
 		PasswordTrackerImpl passwordTracker = (PasswordTrackerImpl)obj;
+
 		int value = 0;
 
 		if (getUserId() < passwordTracker.getUserId()) {
@@ -185,6 +194,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 
 		value = DateUtil.compareTo(getCreateDate(),
 				passwordTracker.getCreateDate());
+
 		value = value * -1;
 
 		if (value != 0) {

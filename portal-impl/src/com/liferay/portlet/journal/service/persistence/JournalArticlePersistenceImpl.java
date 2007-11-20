@@ -63,10 +63,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	implements JournalArticlePersistence {
 	public JournalArticle create(long id) {
 		JournalArticle journalArticle = new JournalArticleImpl();
+
 		journalArticle.setNew(true);
 		journalArticle.setPrimaryKey(id);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		journalArticle.setUuid(uuid);
 
 		return journalArticle;
@@ -128,7 +130,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(journalArticle);
+
 			session.flush();
 
 			return journalArticle;
@@ -138,20 +142,20 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalArticle.class.getName());
 		}
 	}
 
-	public JournalArticle update(
-		com.liferay.portlet.journal.model.JournalArticle journalArticle)
+	public JournalArticle update(JournalArticle journalArticle)
 		throws SystemException {
 		return update(journalArticle, false);
 	}
 
-	public JournalArticle update(
-		com.liferay.portlet.journal.model.JournalArticle journalArticle,
-		boolean merge) throws SystemException {
+	public JournalArticle update(JournalArticle journalArticle, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = journalArticle.isNew();
 
 		if (listener != null) {
@@ -182,6 +186,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(journalArticle.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			journalArticle.setUuid(uuid);
 		}
 
@@ -200,6 +205,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			journalArticle.setNew(false);
 
 			return journalArticle;
@@ -209,6 +215,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(JournalArticle.class.getName());
 		}
 	}
@@ -252,6 +259,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -262,6 +270,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -273,11 +282,14 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -285,6 +297,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -312,13 +325,17 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticle.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -329,6 +346,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -345,13 +363,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -359,6 +380,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -382,11 +404,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -397,15 +421,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -416,13 +443,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle[] findByUuid_PrevAndNext(long id, String uuid,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -439,13 +469,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -454,7 +487,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -475,13 +510,14 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (journalArticle == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -502,6 +538,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -512,6 +549,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
 
@@ -523,13 +561,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -539,6 +582,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -573,6 +617,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -583,19 +628,27 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -623,13 +676,17 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticle.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -640,26 +697,34 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -683,11 +748,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -698,15 +765,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -717,35 +787,46 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle[] findByGroupId_PrevAndNext(long id, long groupId,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -765,6 +846,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -775,19 +857,27 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -815,13 +905,17 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticle.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -832,26 +926,34 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -875,11 +977,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -890,15 +994,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByCompanyId_Last(long companyId,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -910,35 +1017,46 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -961,6 +1079,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -971,9 +1090,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -984,12 +1106,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -997,6 +1123,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1025,13 +1152,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_A";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId),
+				
+				articleId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1042,9 +1174,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1060,14 +1195,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1075,6 +1214,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1098,14 +1238,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1116,18 +1258,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByG_A_Last(long groupId, String articleId,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		int count = countByG_A(groupId, articleId);
+
 		List list = findByG_A(groupId, articleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1139,16 +1284,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String articleId, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByG_A(groupId, articleId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (articleId == null) {
@@ -1164,14 +1314,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -1180,7 +1334,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1203,6 +1359,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1213,9 +1370,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (structureId == null) {
@@ -1226,12 +1386,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (structureId != null) {
@@ -1239,6 +1403,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1267,13 +1432,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_S";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), structureId, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId),
+				
+				structureId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1284,9 +1454,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (structureId == null) {
@@ -1302,14 +1475,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (structureId != null) {
@@ -1317,6 +1494,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1340,14 +1518,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureId=" + structureId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1358,18 +1538,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByG_S_Last(long groupId, String structureId,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		int count = countByG_S(groupId, structureId);
+
 		List list = findByG_S(groupId, structureId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureId=" + structureId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1381,16 +1564,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String structureId, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByG_S(groupId, structureId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (structureId == null) {
@@ -1406,14 +1594,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (structureId != null) {
@@ -1422,7 +1614,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1445,6 +1639,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), templateId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1455,9 +1650,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (templateId == null) {
@@ -1468,12 +1666,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (templateId != null) {
@@ -1481,6 +1683,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1509,13 +1712,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_T";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), templateId, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId),
+				
+				templateId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1526,9 +1734,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (templateId == null) {
@@ -1544,14 +1755,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (templateId != null) {
@@ -1559,6 +1774,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1582,14 +1798,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("templateId=");
-			msg.append(templateId);
+			msg.append("templateId=" + templateId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1600,18 +1818,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle findByG_T_Last(long groupId, String templateId,
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		int count = countByG_T(groupId, templateId);
+
 		List list = findByG_T(groupId, templateId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("templateId=");
-			msg.append(templateId);
+			msg.append("templateId=" + templateId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1623,16 +1844,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String templateId, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByG_T(groupId, templateId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (templateId == null) {
@@ -1648,14 +1874,18 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (templateId != null) {
@@ -1664,7 +1894,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1685,16 +1917,17 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (journalArticle == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("version=");
-			msg.append(version);
+			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1716,8 +1949,11 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version)
+				new Long(groupId),
+				
+				articleId, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1728,9 +1964,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1741,14 +1980,20 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1758,6 +2003,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1796,8 +2042,11 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, Boolean.valueOf(approved)
+				new Long(groupId),
+				
+				articleId, Boolean.valueOf(approved)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1808,9 +2057,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1821,14 +2073,20 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("approved = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1838,6 +2096,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setBoolean(queryPos++, approved);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1866,14 +2125,19 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_A_A";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, Boolean.valueOf(approved),
+				new Long(groupId),
+				
+				articleId, Boolean.valueOf(approved),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1884,9 +2148,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -1897,21 +2164,27 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("approved = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -1921,6 +2194,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setBoolean(queryPos++, approved);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1945,17 +2219,19 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("approved=");
-			msg.append(approved);
+			msg.append("approved=" + approved);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1967,22 +2243,25 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		boolean approved, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		int count = countByG_A_A(groupId, articleId, approved);
+
 		List list = findByG_A_A(groupId, articleId, approved, count - 1, count,
 				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticle exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
+			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
-			msg.append("approved=");
-			msg.append(approved);
+			msg.append("approved=" + approved);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleException(msg.toString());
 		}
 		else {
@@ -1994,16 +2273,21 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String articleId, boolean approved, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
+
 		int count = countByG_A_A(groupId, articleId, approved);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
 
 			if (articleId == null) {
@@ -2014,21 +2298,27 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 
 			query.append(" AND ");
+
 			query.append("approved = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("articleId ASC").append(", ");
+
+				query.append("articleId ASC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			if (articleId != null) {
@@ -2039,7 +2329,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
+
 			JournalArticle[] array = new JournalArticleImpl[3];
+
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -2081,6 +2373,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -2112,6 +2405,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2122,6 +2416,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle ");
 
@@ -2129,13 +2424,16 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("articleId ASC").append(", ");
+
+					query.append("articleId ASC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -2164,6 +2462,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2171,6 +2470,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByUUID_G(uuid, groupId);
+
 		remove(journalArticle);
 	}
 
@@ -2179,6 +2479,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2188,6 +2489,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2198,6 +2500,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2208,6 +2511,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2218,6 +2522,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2225,6 +2530,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByG_A_V(groupId, articleId, version);
+
 		remove(journalArticle);
 	}
 
@@ -2234,6 +2540,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = (JournalArticle)itr.next();
+
 			remove(journalArticle);
 		}
 	}
@@ -2251,6 +2558,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2261,6 +2569,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -2275,6 +2584,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -2282,6 +2592,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2317,6 +2628,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2327,6 +2639,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
@@ -2339,10 +2652,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -2352,6 +2668,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2384,6 +2701,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2394,17 +2712,23 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2437,6 +2761,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2447,17 +2772,23 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2493,6 +2824,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2503,10 +2835,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -2519,7 +2854,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -2527,6 +2864,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2562,6 +2900,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2572,10 +2911,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (structureId == null) {
@@ -2588,7 +2930,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (structureId != null) {
@@ -2596,6 +2940,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2631,6 +2976,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), templateId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2641,10 +2987,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (templateId == null) {
@@ -2657,7 +3006,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (templateId != null) {
@@ -2665,6 +3016,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2701,8 +3053,11 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Double(version)
+				new Long(groupId),
+				
+				articleId, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2713,10 +3068,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -2727,11 +3085,15 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -2741,6 +3103,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2777,8 +3140,11 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, Boolean.valueOf(approved)
+				new Long(groupId),
+				
+				articleId, Boolean.valueOf(approved)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2789,10 +3155,13 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
 
 				if (articleId == null) {
@@ -2803,11 +3172,15 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("approved = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				if (articleId != null) {
@@ -2817,6 +3190,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				q.setBoolean(queryPos++, approved);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -2849,6 +3223,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -2858,13 +3233,11 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.journal.model.JournalArticle");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalArticle");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

@@ -81,7 +81,9 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	public SCProductVersion addSCProductVersion(SCProductVersion model)
 		throws SystemException {
 		SCProductVersion scProductVersion = new SCProductVersionImpl();
+
 		scProductVersion.setNew(true);
+
 		scProductVersion.setProductVersionId(model.getProductVersionId());
 		scProductVersion.setCompanyId(model.getCompanyId());
 		scProductVersion.setUserId(model.getUserId());
@@ -112,7 +114,9 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	public SCProductVersion updateSCProductVersion(SCProductVersion model)
 		throws SystemException {
 		SCProductVersion scProductVersion = new SCProductVersionImpl();
+
 		scProductVersion.setNew(false);
+
 		scProductVersion.setProductVersionId(model.getProductVersionId());
 		scProductVersion.setCompanyId(model.getCompanyId());
 		scProductVersion.setUserId(model.getUserId());

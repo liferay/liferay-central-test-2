@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="SCFrameworkVersionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,15 +63,35 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "SCFrameworkVersion";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "frameworkVersionId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "url", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url STRING null,active_ BOOLEAN,priority INTEGER)";
@@ -223,6 +243,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 
 	public SCFrameworkVersion toEscapedModel() {
 		SCFrameworkVersion model = new SCFrameworkVersionImpl();
+
 		model.setFrameworkVersionId(getFrameworkVersionId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -246,6 +267,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SCFrameworkVersionImpl clone = new SCFrameworkVersionImpl();
+
 		clone.setFrameworkVersionId(getFrameworkVersionId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -267,6 +289,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		}
 
 		SCFrameworkVersionImpl scFrameworkVersion = (SCFrameworkVersionImpl)obj;
+
 		int value = 0;
 
 		if (getPriority() < scFrameworkVersion.getPriority()) {

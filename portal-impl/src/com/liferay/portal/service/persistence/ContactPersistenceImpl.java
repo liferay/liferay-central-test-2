@@ -61,6 +61,7 @@ public class ContactPersistenceImpl extends BasePersistence
 	implements ContactPersistence {
 	public Contact create(long contactId) {
 		Contact contact = new ContactImpl();
+
 		contact.setNew(true);
 		contact.setPrimaryKey(contactId);
 
@@ -121,7 +122,9 @@ public class ContactPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(contact);
+
 			session.flush();
 
 			return contact;
@@ -131,18 +134,19 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Contact.class.getName());
 		}
 	}
 
-	public Contact update(com.liferay.portal.model.Contact contact)
-		throws SystemException {
+	public Contact update(Contact contact) throws SystemException {
 		return update(contact, false);
 	}
 
-	public Contact update(com.liferay.portal.model.Contact contact,
-		boolean merge) throws SystemException {
+	public Contact update(Contact contact, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = contact.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			contact.setNew(false);
 
 			return contact;
@@ -194,6 +199,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Contact.class.getName());
 		}
 	}
@@ -236,6 +242,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -246,15 +253,21 @@ public class ContactPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Contact WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -282,13 +295,17 @@ public class ContactPersistenceImpl extends BasePersistence
 		String finderClassName = Contact.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -299,8 +316,11 @@ public class ContactPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Contact WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -309,10 +329,13 @@ public class ContactPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -336,11 +359,13 @@ public class ContactPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Contact exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Contact exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchContactException(msg.toString());
 		}
 		else {
@@ -351,15 +376,18 @@ public class ContactPersistenceImpl extends BasePersistence
 	public Contact findByCompanyId_Last(long companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Contact exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Contact exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchContactException(msg.toString());
 		}
 		else {
@@ -371,15 +399,20 @@ public class ContactPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
 		Contact contact = findByPrimaryKey(contactId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Contact WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -388,11 +421,15 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, contact);
+
 			Contact[] array = new ContactImpl[3];
+
 			array[0] = (Contact)objArray[0];
 			array[1] = (Contact)objArray[1];
 			array[2] = (Contact)objArray[2];
@@ -434,6 +471,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -465,6 +503,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -475,6 +514,7 @@ public class ContactPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Contact ");
 
 				if (obc != null) {
@@ -483,6 +523,7 @@ public class ContactPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -511,6 +552,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Contact contact = (Contact)itr.next();
+
 			remove(contact);
 		}
 	}
@@ -528,6 +570,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -538,16 +581,22 @@ public class ContactPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Contact WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -580,6 +629,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -589,12 +639,11 @@ public class ContactPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Contact");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Contact");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

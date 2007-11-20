@@ -28,31 +28,34 @@ import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
  * <a href="WorkflowComponentServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a JSON utility for the <code>com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is difficult
- * for JSON to support certain types.
+ * This class provides a JSON utility for the
+ * <code>com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil</code>
+ * service utility. The static methods of this class calls the same methods of
+ * the service utility. However, the signatures are different because it is
+ * difficult for JSON to support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a <code>java.util.List</code>, that
- * is translated to a <code>org.json.JSONArray</code>. If the method in the service
- * utility returns a <code>com.liferay.portlet.workflow.model.WorkflowComponent</code>,
- * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON cannot
- * safely use are skipped. The logic for the translation is encapsulated in <code>com.liferay.portlet.workflow.service.http.WorkflowComponentJSONSerializer</code>.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * service utility returns a <code>com.liferay.portlet.workflow.model.WorkflowComponent</code>,
+ * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * cannot safely use are skipped. The logic for the translation is encapsulated
+ * in <code>com.liferay.portlet.workflow.service.http.WorkflowComponentJSONSerializer</code>.
  * </p>
  *
  * <p>
- * This allows you to call the the backend services directly from JavaScript. See
- * <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a reference
- * of how that portlet uses the generated JavaScript in <code>portal-web/docroot/html/js/service.js</code>
- * to call the backend services directly from JavaScript.
+ * This allows you to call the the backend services directly from JavaScript.
+ * See <code>portal-web/docroot/html/portlet/tags_admin/unpacked.js</code> for a
+ * reference of how that portlet uses the generated JavaScript in
+ * <code>portal-web/docroot/html/js/service.js</code> to call the backend
+ * services directly from JavaScript.
  * </p>
  *
  * <p>
@@ -67,8 +70,8 @@ import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
  */
 public class WorkflowComponentServiceJSON {
 	public static java.util.List getCurrentTasks(long instanceId, long tokenId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getCurrentTasks(instanceId,
 				tokenId);
 
@@ -77,8 +80,8 @@ public class WorkflowComponentServiceJSON {
 
 	public static java.lang.String getCurrentTasksXml(long instanceId,
 		long tokenId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getCurrentTasksXml(instanceId,
 				tokenId);
 
@@ -86,16 +89,16 @@ public class WorkflowComponentServiceJSON {
 	}
 
 	public static java.lang.String deploy(java.lang.String xml)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.deploy(xml);
 
 		return returnValue;
 	}
 
 	public static java.lang.Object getDefinition(long definitionId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.Object returnValue = WorkflowComponentServiceUtil.getDefinition(definitionId);
 
 		return returnValue;
@@ -103,8 +106,8 @@ public class WorkflowComponentServiceJSON {
 
 	public static java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getDefinitions(definitionId,
 				name, begin, end);
 
@@ -113,8 +116,8 @@ public class WorkflowComponentServiceJSON {
 
 	public static java.lang.String getDefinitionsXml(long definitionId,
 		java.lang.String name, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsXml(definitionId,
 				name, begin, end);
 
@@ -123,8 +126,8 @@ public class WorkflowComponentServiceJSON {
 
 	public static int getDefinitionsCount(long definitionId,
 		java.lang.String name)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		int returnValue = WorkflowComponentServiceUtil.getDefinitionsCount(definitionId,
 				name);
 
@@ -133,8 +136,8 @@ public class WorkflowComponentServiceJSON {
 
 	public static java.lang.String getDefinitionsCountXml(long definitionId,
 		java.lang.String name)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsCountXml(definitionId,
 				name);
 
@@ -142,8 +145,8 @@ public class WorkflowComponentServiceJSON {
 	}
 
 	public static java.lang.String getDefinitionXml(long definitionId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionXml(definitionId);
 
 		return returnValue;
@@ -155,8 +158,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getInstances(definitionId,
 				instanceId, definitionName, definitionVersion, startDateGT,
 				startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator,
@@ -170,8 +173,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		int returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
 				instanceId, definitionName, definitionVersion, startDateGT,
 				startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator);
@@ -184,8 +187,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesCountXml(definitionId,
 				instanceId, definitionName, definitionVersion, startDateGT,
 				startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator);
@@ -199,8 +202,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesXml(definitionId,
 				instanceId, definitionName, definitionVersion, startDateGT,
 				startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator,
@@ -210,32 +213,32 @@ public class WorkflowComponentServiceJSON {
 	}
 
 	public static java.util.List getTaskFormElements(long taskId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getTaskFormElements(taskId);
 
 		return returnValue;
 	}
 
 	public static java.lang.String getTaskFormElementsXml(long taskId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getTaskFormElementsXml(taskId);
 
 		return returnValue;
 	}
 
 	public static java.util.List getTaskTransitions(long taskId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getTaskTransitions(taskId);
 
 		return returnValue;
 	}
 
 	public static java.lang.String getTaskTransitionsXml(long taskId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getTaskTransitionsXml(taskId);
 
 		return returnValue;
@@ -248,8 +251,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.util.List returnValue = WorkflowComponentServiceUtil.getUserTasks(instanceId,
 				taskName, definitionName, assignedTo, createDateGT,
 				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
@@ -264,8 +267,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		int returnValue = WorkflowComponentServiceUtil.getUserTasksCount(instanceId,
 				taskName, definitionName, assignedTo, createDateGT,
 				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
@@ -280,8 +283,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksCountXml(instanceId,
 				taskName, definitionName, assignedTo, createDateGT,
 				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
@@ -297,8 +300,8 @@ public class WorkflowComponentServiceJSON {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksXml(instanceId,
 				taskName, definitionName, assignedTo, createDateGT,
 				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
@@ -308,20 +311,20 @@ public class WorkflowComponentServiceJSON {
 	}
 
 	public static void signalInstance(long instanceId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		WorkflowComponentServiceUtil.signalInstance(instanceId);
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		WorkflowComponentServiceUtil.signalToken(instanceId, tokenId);
 	}
 
 	public static java.lang.String startWorkflow(long definitionId)
-		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
-			java.rmi.RemoteException {
+		throws java.rmi.RemoteException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		java.lang.String returnValue = WorkflowComponentServiceUtil.startWorkflow(definitionId);
 
 		return returnValue;

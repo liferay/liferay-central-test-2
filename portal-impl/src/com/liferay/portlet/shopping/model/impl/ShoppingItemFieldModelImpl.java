@@ -41,8 +41,8 @@ import java.sql.Types;
  * <a href="ShoppingItemFieldModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -61,9 +61,17 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItemField";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "itemFieldId", new Integer(Types.BIGINT) },
+			
+
 			{ "itemId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "values_", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
@@ -146,6 +154,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 
 	public ShoppingItemField toEscapedModel() {
 		ShoppingItemField model = new ShoppingItemFieldImpl();
+
 		model.setItemFieldId(getItemFieldId());
 		model.setItemId(getItemId());
 		model.setName(Html.escape(getName()));
@@ -163,6 +172,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingItemFieldImpl clone = new ShoppingItemFieldImpl();
+
 		clone.setItemFieldId(getItemFieldId());
 		clone.setItemId(getItemId());
 		clone.setName(getName());
@@ -178,6 +188,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingItemFieldImpl shoppingItemField = (ShoppingItemFieldImpl)obj;
+
 		int value = 0;
 
 		if (getItemId() < shoppingItemField.getItemId()) {

@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="UserIdMapperModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>UserIdMapper</code> table in
- * the database.
+ * This class is a model that represents the <code>UserIdMapper</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,9 +60,17 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserIdMapper";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userIdMapperId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "type_", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "externalUserId", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
@@ -145,6 +153,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 
 	public UserIdMapper toEscapedModel() {
 		UserIdMapper model = new UserIdMapperImpl();
+
 		model.setUserIdMapperId(getUserIdMapperId());
 		model.setUserId(getUserId());
 		model.setType(Html.escape(getType()));
@@ -162,6 +171,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserIdMapperImpl clone = new UserIdMapperImpl();
+
 		clone.setUserIdMapperId(getUserIdMapperId());
 		clone.setUserId(getUserId());
 		clone.setType(getType());
@@ -177,6 +187,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		}
 
 		UserIdMapperImpl userIdMapper = (UserIdMapperImpl)obj;
+
 		long pk = userIdMapper.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

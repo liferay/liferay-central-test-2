@@ -86,7 +86,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	implements WikiNodeLocalService, InitializingBean {
 	public WikiNode addWikiNode(WikiNode model) throws SystemException {
 		WikiNode wikiNode = new WikiNodeImpl();
+
 		wikiNode.setNew(true);
+
 		wikiNode.setNodeId(model.getNodeId());
 		wikiNode.setGroupId(model.getGroupId());
 		wikiNode.setCompanyId(model.getCompanyId());
@@ -114,7 +116,9 @@ public abstract class WikiNodeLocalServiceBaseImpl
 
 	public WikiNode updateWikiNode(WikiNode model) throws SystemException {
 		WikiNode wikiNode = new WikiNodeImpl();
+
 		wikiNode.setNew(false);
+
 		wikiNode.setNodeId(model.getNodeId());
 		wikiNode.setGroupId(model.getGroupId());
 		wikiNode.setCompanyId(model.getCompanyId());

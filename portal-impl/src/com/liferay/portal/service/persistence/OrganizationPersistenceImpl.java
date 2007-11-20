@@ -74,6 +74,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	implements OrganizationPersistence {
 	public Organization create(long organizationId) {
 		Organization organization = new OrganizationImpl();
+
 		organization.setNew(true);
 		organization.setPrimaryKey(organizationId);
 
@@ -157,7 +158,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(organization);
+
 			session.flush();
 
 			return organization;
@@ -167,20 +170,20 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Organization.class.getName());
 		}
 	}
 
-	public Organization update(
-		com.liferay.portal.model.Organization organization)
+	public Organization update(Organization organization)
 		throws SystemException {
 		return update(organization, false);
 	}
 
-	public Organization update(
-		com.liferay.portal.model.Organization organization, boolean merge)
+	public Organization update(Organization organization, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = organization.isNew();
 
 		if (listener != null) {
@@ -227,6 +230,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			organization.setNew(false);
 
 			return organization;
@@ -236,6 +240,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Organization.class.getName());
 		}
 	}
@@ -281,6 +286,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -291,18 +297,26 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -330,13 +344,17 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderClassName = Organization.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -347,25 +365,33 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -390,11 +416,13 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -406,15 +434,18 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -426,33 +457,44 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
+
 			Organization[] array = new OrganizationImpl[3];
+
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -472,6 +514,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByLocations";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -482,18 +525,26 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND parentOrganizationId != 0 ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -521,13 +572,17 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderClassName = Organization.class.getName();
 		String finderMethodName = "findByLocations";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -538,25 +593,33 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND parentOrganizationId != 0 ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -581,11 +644,13 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -597,15 +662,18 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByLocations(companyId);
+
 		List list = findByLocations(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -617,33 +685,44 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
+
 		int count = countByLocations(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" AND parentOrganizationId != 0 ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
+
 			Organization[] array = new OrganizationImpl[3];
+
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -668,6 +747,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -678,21 +758,32 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentOrganizationId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, parentOrganizationId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -720,14 +811,17 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderClassName = Organization.class.getName();
 		String finderMethodName = "findByC_P";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -738,28 +832,39 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentOrganizationId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, parentOrganizationId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -784,14 +889,16 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("parentOrganizationId=");
-			msg.append(parentOrganizationId);
+			msg.append("parentOrganizationId=" + parentOrganizationId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -803,19 +910,22 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		long parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByC_P(companyId, parentOrganizationId);
+
 		List list = findByC_P(companyId, parentOrganizationId, count - 1,
 				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("parentOrganizationId=");
-			msg.append(parentOrganizationId);
+			msg.append("parentOrganizationId=" + parentOrganizationId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrganizationException(msg.toString());
 		}
 		else {
@@ -827,36 +937,50 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		long companyId, long parentOrganizationId, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
+
 		int count = countByC_P(companyId, parentOrganizationId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" AND ");
+
 			query.append("parentOrganizationId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
+
 			q.setLong(queryPos++, parentOrganizationId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
+
 			Organization[] array = new OrganizationImpl[3];
+
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -877,13 +1001,14 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		if (organization == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Organization exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No Organization exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -904,6 +1029,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -914,9 +1040,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -927,11 +1056,15 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -939,6 +1072,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -995,6 +1129,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1026,6 +1161,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1036,18 +1172,22 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Organization ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1076,6 +1216,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Organization organization = (Organization)itr.next();
+
 			remove(organization);
 		}
 	}
@@ -1085,6 +1226,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Organization organization = (Organization)itr.next();
+
 			remove(organization);
 		}
 	}
@@ -1095,6 +1237,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Organization organization = (Organization)itr.next();
+
 			remove(organization);
 		}
 	}
@@ -1102,6 +1245,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByC_N(companyId, name);
+
 		remove(organization);
 	}
 
@@ -1118,6 +1262,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1128,17 +1273,23 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1171,6 +1322,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByLocations";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1181,17 +1333,23 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND parentOrganizationId != 0 ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1229,6 +1387,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1239,20 +1398,29 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentOrganizationId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, parentOrganizationId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1288,6 +1456,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1298,10 +1467,13 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -1314,7 +1486,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -1322,6 +1496,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1354,6 +1529,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1363,12 +1539,11 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Organization");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Organization");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1418,6 +1593,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1428,26 +1604,33 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
+
 					sm.append("Group_.name ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("Group_",
 					com.liferay.portal.model.impl.GroupImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1470,6 +1653,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "getGroupsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1480,12 +1664,15 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1518,9 +1705,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderClassName = "Groups_Orgs";
 		String finderMethodName = "containsGroups";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1528,6 +1718,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
 							groupPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1601,6 +1792,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1675,6 +1867,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				removeGroup.remove(pk, group.getPrimaryKey());
 			}
 		}
@@ -1712,6 +1905,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < groups.size(); i++) {
 				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1745,6 +1939,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1755,6 +1950,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETUSERS);
 
 				if (obc != null) {
@@ -1763,14 +1959,18 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("User_",
 					com.liferay.portal.model.impl.UserImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1793,6 +1993,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderMethodName = "getUsersSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1803,12 +2004,15 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1840,15 +2044,19 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String finderClassName = "Users_Orgs";
 		String finderMethodName = "containsUsers";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -1922,6 +2130,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -1996,6 +2205,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
 		}
@@ -2033,6 +2243,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -2046,10 +2257,13 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 	protected void initDao() {
 		containsGroup = new ContainsGroup(this);
+
 		addGroup = new AddGroup(this);
 		clearGroups = new ClearGroups(this);
 		removeGroup = new RemoveGroup(this);
+
 		containsUser = new ContainsUser(this);
+
 		addUser = new AddUser(this);
 		clearUsers = new ClearUsers(this);
 		removeUser = new RemoveUser(this);
@@ -2067,8 +2281,10 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSGROUP);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2098,9 +2314,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected AddGroup(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO Groups_Orgs (organizationId, groupId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2118,7 +2337,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected ClearGroups(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2131,8 +2352,10 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected RemoveGroup(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2144,8 +2367,10 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(), _SQL_CONTAINSUSER);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2175,9 +2400,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected AddUser(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO Users_Orgs (organizationId, userId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2194,7 +2422,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected ClearUsers(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -2207,8 +2437,10 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		protected RemoveUser(OrganizationPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

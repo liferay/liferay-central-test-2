@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="ResourceJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.ResourceServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.ResourceServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "resourceId", model.getResourceId());
 		JSONUtil.put(jsonObj, "codeId", model.getCodeId());
 		JSONUtil.put(jsonObj, "primKey", model.getPrimKey());
@@ -64,6 +66,7 @@ public class ResourceJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Resource model = (Resource)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -350,7 +350,9 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	InitializingBean {
 	public Group addGroup(Group model) throws SystemException {
 		Group group = new GroupImpl();
+
 		group.setNew(true);
+
 		group.setGroupId(model.getGroupId());
 		group.setCompanyId(model.getCompanyId());
 		group.setCreatorUserId(model.getCreatorUserId());
@@ -381,7 +383,9 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 
 	public Group updateGroup(Group model) throws SystemException {
 		Group group = new GroupImpl();
+
 		group.setNew(false);
+
 		group.setGroupId(model.getGroupId());
 		group.setCompanyId(model.getCompanyId());
 		group.setCreatorUserId(model.getCreatorUserId());

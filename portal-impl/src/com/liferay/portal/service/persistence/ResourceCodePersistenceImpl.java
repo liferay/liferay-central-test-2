@@ -61,6 +61,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	implements ResourceCodePersistence {
 	public ResourceCode create(long codeId) {
 		ResourceCode resourceCode = new ResourceCodeImpl();
+
 		resourceCode.setNew(true);
 		resourceCode.setPrimaryKey(codeId);
 
@@ -123,7 +124,9 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(resourceCode);
+
 			session.flush();
 
 			return resourceCode;
@@ -133,20 +136,20 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ResourceCode.class.getName());
 		}
 	}
 
-	public ResourceCode update(
-		com.liferay.portal.model.ResourceCode resourceCode)
+	public ResourceCode update(ResourceCode resourceCode)
 		throws SystemException {
 		return update(resourceCode, false);
 	}
 
-	public ResourceCode update(
-		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
+	public ResourceCode update(ResourceCode resourceCode, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = resourceCode.isNew();
 
 		if (listener != null) {
@@ -190,6 +193,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			resourceCode.setNew(false);
 
 			return resourceCode;
@@ -199,6 +203,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ResourceCode.class.getName());
 		}
 	}
@@ -243,6 +248,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -253,16 +259,22 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -290,13 +302,17 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderClassName = ResourceCode.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -307,9 +323,12 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -318,10 +337,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -346,11 +368,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No ResourceCode exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
@@ -362,15 +386,18 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No ResourceCode exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
@@ -382,15 +409,20 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByPrimaryKey(codeId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -399,12 +431,16 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					resourceCode);
+
 			ResourceCode[] array = new ResourceCodeImpl[3];
+
 			array[0] = (ResourceCode)objArray[0];
 			array[1] = (ResourceCode)objArray[1];
 			array[2] = (ResourceCode)objArray[2];
@@ -424,6 +460,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByName";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -434,6 +471,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
 
@@ -447,6 +485,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (name != null) {
@@ -454,6 +493,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -481,13 +521,17 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderClassName = ResourceCode.class.getName();
 		String finderMethodName = "findByName";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				name, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				name,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -498,6 +542,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
 
@@ -516,6 +561,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (name != null) {
@@ -523,6 +569,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -546,11 +593,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
+
+			msg.append("No ResourceCode exists with the key {");
+
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
@@ -561,15 +610,18 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	public ResourceCode findByName_Last(String name, OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByName(name);
+
 		List list = findByName(name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
+
+			msg.append("No ResourceCode exists with the key {");
+
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
@@ -581,13 +633,16 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByPrimaryKey(codeId);
+
 		int count = countByName(name);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
 
 			if (name == null) {
@@ -605,6 +660,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (name != null) {
@@ -613,7 +669,9 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					resourceCode);
+
 			ResourceCode[] array = new ResourceCodeImpl[3];
+
 			array[0] = (ResourceCode)objArray[0];
 			array[1] = (ResourceCode)objArray[1];
 			array[2] = (ResourceCode)objArray[2];
@@ -634,16 +692,17 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		if (resourceCode == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No ResourceCode exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
+			msg.append("scope=" + scope);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -665,8 +724,11 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				Integer.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), name, new Integer(scope)
+				new Long(companyId),
+				
+				name, new Integer(scope)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -677,9 +739,12 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -690,11 +755,15 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("scope = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -704,6 +773,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				q.setInteger(queryPos++, scope);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -760,6 +830,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -791,6 +862,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -801,6 +873,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ResourceCode ");
 
 				if (obc != null) {
@@ -809,6 +882,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -837,6 +911,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ResourceCode resourceCode = (ResourceCode)itr.next();
+
 			remove(resourceCode);
 		}
 	}
@@ -846,6 +921,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ResourceCode resourceCode = (ResourceCode)itr.next();
+
 			remove(resourceCode);
 		}
 	}
@@ -853,6 +929,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	public void removeByC_N_S(long companyId, String name, int scope)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
+
 		remove(resourceCode);
 	}
 
@@ -869,6 +946,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -879,17 +957,23 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -922,6 +1006,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByName";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -932,6 +1017,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
@@ -946,6 +1032,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (name != null) {
@@ -953,6 +1040,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -989,8 +1077,11 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				Integer.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), name, new Integer(scope)
+				new Long(companyId),
+				
+				name, new Integer(scope)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1001,10 +1092,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -1015,11 +1109,15 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("scope = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				if (name != null) {
@@ -1029,6 +1127,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				q.setInteger(queryPos++, scope);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1061,6 +1160,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1070,12 +1170,11 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ResourceCode");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.ResourceCode");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

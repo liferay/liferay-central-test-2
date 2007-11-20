@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="RatingsEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.ratings.service.http.RatingsEntryServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.ratings.service.http.RatingsEntryServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class RatingsEntryJSONSerializer {
 	public static JSONObject toJSONObject(RatingsEntry model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
@@ -70,6 +72,7 @@ public class RatingsEntryJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			RatingsEntry model = (RatingsEntry)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

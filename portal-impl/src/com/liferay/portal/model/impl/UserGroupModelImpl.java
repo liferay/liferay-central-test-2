@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="UserGroupModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>UserGroup</code> table in the
- * database.
+ * This class is a model that represents the <code>UserGroup</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,9 +60,17 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserGroup";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "parentUserGroupId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null)";
@@ -142,6 +150,7 @@ public class UserGroupModelImpl extends BaseModelImpl {
 
 	public UserGroup toEscapedModel() {
 		UserGroup model = new UserGroupImpl();
+
 		model.setUserGroupId(getUserGroupId());
 		model.setCompanyId(getCompanyId());
 		model.setParentUserGroupId(getParentUserGroupId());
@@ -159,6 +168,7 @@ public class UserGroupModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserGroupImpl clone = new UserGroupImpl();
+
 		clone.setUserGroupId(getUserGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setParentUserGroupId(getParentUserGroupId());
@@ -174,7 +184,9 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		}
 
 		UserGroupImpl userGroup = (UserGroupImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(userGroup.getName());
 
 		if (value != 0) {

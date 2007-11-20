@@ -75,6 +75,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	implements SCProductVersionPersistence {
 	public SCProductVersion create(long productVersionId) {
 		SCProductVersion scProductVersion = new SCProductVersionImpl();
+
 		scProductVersion.setNew(true);
 		scProductVersion.setPrimaryKey(productVersionId);
 
@@ -149,7 +150,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(scProductVersion);
+
 			session.flush();
 
 			return scProductVersion;
@@ -159,20 +162,20 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductVersion.class.getName());
 		}
 	}
 
-	public SCProductVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
+	public SCProductVersion update(SCProductVersion scProductVersion)
 		throws SystemException {
 		return update(scProductVersion, false);
 	}
 
-	public SCProductVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
+	public SCProductVersion update(SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = scProductVersion.isNew();
 
 		if (listener != null) {
@@ -218,6 +221,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			scProductVersion.setNew(false);
 
 			return scProductVersion;
@@ -227,6 +231,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCProductVersion.class.getName());
 		}
 	}
@@ -273,6 +278,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByProductEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -283,18 +289,26 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -322,13 +336,17 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderClassName = SCProductVersion.class.getName();
 		String finderMethodName = "findByProductEntryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(productEntryId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(productEntryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -339,25 +357,33 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -382,11 +408,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("productEntryId=");
-			msg.append(productEntryId);
+
+			msg.append("No SCProductVersion exists with the key {");
+
+			msg.append("productEntryId=" + productEntryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductVersionException(msg.toString());
 		}
 		else {
@@ -398,15 +426,18 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchProductVersionException, SystemException {
 		int count = countByProductEntryId(productEntryId);
+
 		List list = findByProductEntryId(productEntryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCProductVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("productEntryId=");
-			msg.append(productEntryId);
+
+			msg.append("No SCProductVersion exists with the key {");
+
+			msg.append("productEntryId=" + productEntryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchProductVersionException(msg.toString());
 		}
 		else {
@@ -418,34 +449,45 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		long productVersionId, long productEntryId, OrderByComparator obc)
 		throws NoSuchProductVersionException, SystemException {
 		SCProductVersion scProductVersion = findByPrimaryKey(productVersionId);
+
 		int count = countByProductEntryId(productEntryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
 			query.append("productEntryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, productEntryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductVersion);
+
 			SCProductVersion[] array = new SCProductVersionImpl[3];
+
 			array[0] = (SCProductVersion)objArray[0];
 			array[1] = (SCProductVersion)objArray[1];
 			array[2] = (SCProductVersion)objArray[2];
@@ -487,6 +529,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -518,6 +561,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -528,6 +572,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion ");
 
@@ -535,12 +580,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -570,6 +618,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCProductVersion scProductVersion = (SCProductVersion)itr.next();
+
 			remove(scProductVersion);
 		}
 	}
@@ -588,6 +637,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByProductEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -598,17 +648,23 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
 				query.append("productEntryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, productEntryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -641,6 +697,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -650,13 +707,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -707,6 +762,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				new Long(pk), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -717,28 +773,34 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = HibernateUtil.openSession();
 
 				StringMaker sm = new StringMaker();
+
 				sm.append(_SQL_GETSCFRAMEWORKVERSIONS);
 
 				if (obc != null) {
 					sm.append("ORDER BY ");
 					sm.append(obc.getOrderBy());
 				}
+
 				else {
 					sm.append("ORDER BY ");
-					sm.append("SCFrameworkVersion.priority ASC");
-					sm.append(", ");
+
+					sm.append("SCFrameworkVersion.priority ASC, ");
 					sm.append("SCFrameworkVersion.name ASC");
 				}
 
 				String sql = sm.toString();
+
 				SQLQuery q = session.createSQLQuery(sql);
+
 				q.addEntity("SCFrameworkVersion",
 					com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl.class);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -761,6 +823,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "getSCFrameworkVersionsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -771,12 +834,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSCFRAMEWORKVERSIONSSIZE);
+
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
 				qPos.add(pk);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -809,11 +875,16 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		String finderClassName = "SCFrameworkVersi_SCProductVers";
 		String finderMethodName = "containsSCFrameworkVersions";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(),
+				
+				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), new Long(scFrameworkVersionPK)
+				new Long(pk),
+				
+				new Long(scFrameworkVersionPK)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -821,6 +892,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			try {
 				Boolean value = Boolean.valueOf(containsSCFrameworkVersion.contains(
 							pk, scFrameworkVersionPK));
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -901,6 +973,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			for (int i = 0; i < scFrameworkVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion =
 					(com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)scFrameworkVersions.get(i);
+
 				addSCFrameworkVersion.add(pk, scFrameworkVersion.getPrimaryKey());
 			}
 		}
@@ -982,6 +1055,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			for (int i = 0; i < scFrameworkVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion =
 					(com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)scFrameworkVersions.get(i);
+
 				removeSCFrameworkVersion.remove(pk,
 					scFrameworkVersion.getPrimaryKey());
 			}
@@ -1023,6 +1097,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			for (int i = 0; i < scFrameworkVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion =
 					(com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)scFrameworkVersions.get(i);
+
 				addSCFrameworkVersion.add(pk, scFrameworkVersion.getPrimaryKey());
 			}
 		}
@@ -1036,6 +1111,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	protected void initDao() {
 		containsSCFrameworkVersion = new ContainsSCFrameworkVersion(this);
+
 		addSCFrameworkVersion = new AddSCFrameworkVersion(this);
 		clearSCFrameworkVersions = new ClearSCFrameworkVersions(this);
 		removeSCFrameworkVersion = new RemoveSCFrameworkVersion(this);
@@ -1051,8 +1127,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				_SQL_CONTAINSSCFRAMEWORKVERSION);
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1084,9 +1162,12 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"INSERT INTO SCFrameworkVersi_SCProductVers (productVersionId, frameworkVersionId) VALUES (?, ?)");
+
 			_persistenceImpl = persistenceImpl;
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1107,7 +1188,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 
@@ -1121,8 +1204,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			SCProductVersionPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?");
+
 			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.BIGINT));
+
 			compile();
 		}
 

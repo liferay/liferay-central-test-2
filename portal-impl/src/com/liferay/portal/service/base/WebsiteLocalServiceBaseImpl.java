@@ -267,7 +267,9 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	InitializingBean {
 	public Website addWebsite(Website model) throws SystemException {
 		Website website = new WebsiteImpl();
+
 		website.setNew(true);
+
 		website.setWebsiteId(model.getWebsiteId());
 		website.setCompanyId(model.getCompanyId());
 		website.setUserId(model.getUserId());
@@ -296,7 +298,9 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 
 	public Website updateWebsite(Website model) throws SystemException {
 		Website website = new WebsiteImpl();
+
 		website.setNew(false);
+
 		website.setWebsiteId(model.getWebsiteId());
 		website.setCompanyId(model.getCompanyId());
 		website.setUserId(model.getUserId());

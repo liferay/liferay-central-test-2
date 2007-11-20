@@ -63,10 +63,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	implements DLFileShortcutPersistence {
 	public DLFileShortcut create(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
+
 		dlFileShortcut.setNew(true);
 		dlFileShortcut.setPrimaryKey(fileShortcutId);
 
 		String uuid = PortalUUIDUtil.generate();
+
 		dlFileShortcut.setUuid(uuid);
 
 		return dlFileShortcut;
@@ -129,7 +131,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(dlFileShortcut);
+
 			session.flush();
 
 			return dlFileShortcut;
@@ -139,20 +143,20 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileShortcut.class.getName());
 		}
 	}
 
-	public DLFileShortcut update(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
+	public DLFileShortcut update(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		return update(dlFileShortcut, false);
 	}
 
-	public DLFileShortcut update(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean merge) throws SystemException {
+	public DLFileShortcut update(DLFileShortcut dlFileShortcut, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = dlFileShortcut.isNew();
 
 		if (listener != null) {
@@ -183,6 +187,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		if (Validator.isNull(dlFileShortcut.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
+
 			dlFileShortcut.setUuid(uuid);
 		}
 
@@ -201,6 +206,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			dlFileShortcut.setNew(false);
 
 			return dlFileShortcut;
@@ -210,6 +216,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileShortcut.class.getName());
 		}
 	}
@@ -255,6 +262,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -265,6 +273,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
 
@@ -278,6 +287,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -285,6 +295,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -312,13 +323,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				uuid, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				uuid,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -329,6 +344,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
 
@@ -347,6 +363,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -354,6 +371,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -377,11 +395,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -392,15 +412,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	public DLFileShortcut findByUuid_Last(String uuid, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByUuid(uuid);
+
 		List list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -412,13 +435,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String uuid, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
+
 		int count = countByUuid(uuid);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
 
@@ -437,6 +463,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (uuid != null) {
@@ -445,7 +472,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
+
 			DLFileShortcut[] array = new DLFileShortcutImpl[3];
+
 			array[0] = (DLFileShortcut)objArray[0];
 			array[1] = (DLFileShortcut)objArray[1];
 			array[2] = (DLFileShortcut)objArray[2];
@@ -465,6 +494,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -475,16 +505,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -512,13 +548,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByFolderId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(folderId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -529,9 +569,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -540,10 +583,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -568,11 +614,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -584,15 +632,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByFolderId(folderId);
+
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -604,16 +655,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		long folderId, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
+
 		int count = countByFolderId(folderId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 			query.append("folderId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -622,12 +678,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
+
 			DLFileShortcut[] array = new DLFileShortcutImpl[3];
+
 			array[0] = (DLFileShortcut)objArray[0];
 			array[1] = (DLFileShortcut)objArray[1];
 			array[2] = (DLFileShortcut)objArray[2];
@@ -650,6 +710,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -660,9 +721,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("toFolderId = ?");
+
 				query.append(" AND ");
 
 				if (toName == null) {
@@ -675,7 +739,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, toFolderId);
 
 				if (toName != null) {
@@ -683,6 +749,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -711,13 +778,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByTF_TN";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(toFolderId), toName, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(toFolderId),
+				
+				toName,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -728,9 +800,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("toFolderId = ?");
+
 				query.append(" AND ");
 
 				if (toName == null) {
@@ -748,7 +823,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, toFolderId);
 
 				if (toName != null) {
@@ -756,6 +833,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -780,14 +858,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("toFolderId=");
-			msg.append(toFolderId);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("toFolderId=" + toFolderId);
+
 			msg.append(", ");
-			msg.append("toName=");
-			msg.append(toName);
+			msg.append("toName=" + toName);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -799,18 +879,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByTF_TN(toFolderId, toName);
+
 		List list = findByTF_TN(toFolderId, toName, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileShortcut exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("toFolderId=");
-			msg.append(toFolderId);
+
+			msg.append("No DLFileShortcut exists with the key {");
+
+			msg.append("toFolderId=" + toFolderId);
+
 			msg.append(", ");
-			msg.append("toName=");
-			msg.append(toName);
+			msg.append("toName=" + toName);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
@@ -822,16 +905,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		long toFolderId, String toName, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
+
 		int count = countByTF_TN(toFolderId, toName);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 			query.append("toFolderId = ?");
+
 			query.append(" AND ");
 
 			if (toName == null) {
@@ -849,7 +937,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, toFolderId);
 
 			if (toName != null) {
@@ -858,7 +948,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
+
 			DLFileShortcut[] array = new DLFileShortcutImpl[3];
+
 			array[0] = (DLFileShortcut)objArray[0];
 			array[1] = (DLFileShortcut)objArray[1];
 			array[2] = (DLFileShortcut)objArray[2];
@@ -900,6 +992,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -931,6 +1024,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -941,6 +1035,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut ");
 
@@ -950,6 +1045,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -978,6 +1074,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+
 			remove(dlFileShortcut);
 		}
 	}
@@ -987,6 +1084,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+
 			remove(dlFileShortcut);
 		}
 	}
@@ -997,6 +1095,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+
 			remove(dlFileShortcut);
 		}
 	}
@@ -1014,6 +1113,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1024,6 +1124,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
@@ -1038,6 +1139,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (uuid != null) {
@@ -1045,6 +1147,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1077,6 +1180,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByFolderId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1087,17 +1191,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1133,6 +1243,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1143,10 +1254,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
 				query.append("toFolderId = ?");
+
 				query.append(" AND ");
 
 				if (toName == null) {
@@ -1159,7 +1273,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, toFolderId);
 
 				if (toName != null) {
@@ -1167,6 +1283,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1199,6 +1316,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1208,13 +1326,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

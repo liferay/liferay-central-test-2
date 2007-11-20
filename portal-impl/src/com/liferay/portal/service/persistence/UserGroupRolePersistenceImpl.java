@@ -61,6 +61,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	implements UserGroupRolePersistence {
 	public UserGroupRole create(UserGroupRolePK userGroupRolePK) {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
+
 		userGroupRole.setNew(true);
 		userGroupRole.setPrimaryKey(userGroupRolePK);
 
@@ -124,7 +125,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(userGroupRole);
+
 			session.flush();
 
 			return userGroupRole;
@@ -134,20 +137,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserGroupRole.class.getName());
 		}
 	}
 
-	public UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole)
+	public UserGroupRole update(UserGroupRole userGroupRole)
 		throws SystemException {
 		return update(userGroupRole, false);
 	}
 
-	public UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+	public UserGroupRole update(UserGroupRole userGroupRole, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = userGroupRole.isNew();
 
 		if (listener != null) {
@@ -191,6 +194,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			userGroupRole.setNew(false);
 
 			return userGroupRole;
@@ -200,6 +204,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserGroupRole.class.getName());
 		}
 	}
@@ -245,6 +250,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -255,16 +261,22 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,13 +304,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -309,9 +325,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -320,10 +339,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -347,11 +369,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -362,15 +386,18 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	public UserGroupRole findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -382,15 +409,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		UserGroupRolePK userGroupRolePK, long userId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -399,12 +431,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
+
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
+
 			array[0] = (UserGroupRole)objArray[0];
 			array[1] = (UserGroupRole)objArray[1];
 			array[2] = (UserGroupRole)objArray[2];
@@ -424,6 +460,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -434,16 +471,22 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -471,13 +514,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -488,9 +535,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -499,10 +549,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -526,11 +579,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -541,15 +596,18 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	public UserGroupRole findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -561,15 +619,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		UserGroupRolePK userGroupRolePK, long groupId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -578,12 +641,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
+
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
+
 			array[0] = (UserGroupRole)objArray[0];
 			array[1] = (UserGroupRole)objArray[1];
 			array[2] = (UserGroupRole)objArray[2];
@@ -603,6 +670,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByRoleId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(roleId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -613,16 +681,22 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, roleId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -650,13 +724,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByRoleId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(roleId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(roleId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -667,9 +745,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -678,10 +759,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, roleId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -705,11 +789,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("roleId=");
-			msg.append(roleId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -720,15 +806,18 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	public UserGroupRole findByRoleId_Last(long roleId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByRoleId(roleId);
+
 		List list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("roleId=");
-			msg.append(roleId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -740,15 +829,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		UserGroupRolePK userGroupRolePK, long roleId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+
 		int count = countByRoleId(roleId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 			query.append("roleId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -757,12 +851,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, roleId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
+
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
+
 			array[0] = (UserGroupRole)objArray[0];
 			array[1] = (UserGroupRole)objArray[1];
 			array[2] = (UserGroupRole)objArray[2];
@@ -784,6 +882,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -794,19 +893,28 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -834,14 +942,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByU_G";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(groupId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(userId), new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -852,11 +963,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -865,11 +981,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -894,14 +1014,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -913,18 +1035,21 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByU_G(userId, groupId);
+
 		List list = findByU_G(userId, groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -937,17 +1062,24 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+
 		int count = countByU_G(userId, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" AND ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -956,13 +1088,18 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
+
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
+
 			array[0] = (UserGroupRole)objArray[0];
 			array[1] = (UserGroupRole)objArray[1];
 			array[2] = (UserGroupRole)objArray[2];
@@ -984,6 +1121,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -994,19 +1132,28 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, roleId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1034,14 +1181,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByG_R";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(roleId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId), new Long(roleId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1052,11 +1202,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -1065,11 +1220,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, roleId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -1094,14 +1253,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("roleId=");
-			msg.append(roleId);
+			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1113,18 +1274,21 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByG_R(groupId, roleId);
+
 		List list = findByG_R(groupId, roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No UserGroupRole exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("roleId=");
-			msg.append(roleId);
+			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1137,17 +1301,24 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+
 		int count = countByG_R(groupId, roleId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("roleId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -1156,13 +1327,18 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setLong(queryPos++, roleId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
+
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
+
 			array[0] = (UserGroupRole)objArray[0];
 			array[1] = (UserGroupRole)objArray[1];
 			array[2] = (UserGroupRole)objArray[2];
@@ -1204,6 +1380,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -1235,6 +1412,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1245,6 +1423,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserGroupRole ");
 
 				if (obc != null) {
@@ -1253,6 +1432,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -1281,6 +1461,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 			remove(userGroupRole);
 		}
 	}
@@ -1290,6 +1471,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 			remove(userGroupRole);
 		}
 	}
@@ -1299,6 +1481,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 			remove(userGroupRole);
 		}
 	}
@@ -1309,6 +1492,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 			remove(userGroupRole);
 		}
 	}
@@ -1319,6 +1503,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 			remove(userGroupRole);
 		}
 	}
@@ -1336,6 +1521,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1346,17 +1532,23 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1389,6 +1581,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1399,17 +1592,23 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1442,6 +1641,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByRoleId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(roleId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1452,17 +1652,23 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, roleId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1497,6 +1703,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1507,20 +1714,29 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1555,6 +1771,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1565,20 +1782,29 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("roleId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, roleId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1611,6 +1837,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1620,12 +1847,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserGroupRole");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.UserGroupRole");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

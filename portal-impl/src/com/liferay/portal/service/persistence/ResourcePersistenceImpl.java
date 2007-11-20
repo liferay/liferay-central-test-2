@@ -61,6 +61,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 	implements ResourcePersistence {
 	public Resource create(long resourceId) {
 		Resource resource = new ResourceImpl();
+
 		resource.setNew(true);
 		resource.setPrimaryKey(resourceId);
 
@@ -121,7 +122,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(resource);
+
 			session.flush();
 
 			return resource;
@@ -131,18 +134,19 @@ public class ResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Resource.class.getName());
 		}
 	}
 
-	public Resource update(com.liferay.portal.model.Resource resource)
-		throws SystemException {
+	public Resource update(Resource resource) throws SystemException {
 		return update(resource, false);
 	}
 
-	public Resource update(com.liferay.portal.model.Resource resource,
-		boolean merge) throws SystemException {
+	public Resource update(Resource resource, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = resource.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			resource.setNew(false);
 
 			return resource;
@@ -194,6 +199,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(Resource.class.getName());
 		}
 	}
@@ -238,6 +244,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCodeId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(codeId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -248,15 +255,21 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 				query.append("codeId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, codeId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -284,13 +297,17 @@ public class ResourcePersistenceImpl extends BasePersistence
 		String finderClassName = Resource.class.getName();
 		String finderMethodName = "findByCodeId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(codeId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(codeId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -301,8 +318,11 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 				query.append("codeId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -311,10 +331,13 @@ public class ResourcePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, codeId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -338,11 +361,13 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("codeId=");
-			msg.append(codeId);
+
+			msg.append("No Resource exists with the key {");
+
+			msg.append("codeId=" + codeId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
@@ -353,15 +378,18 @@ public class ResourcePersistenceImpl extends BasePersistence
 	public Resource findByCodeId_Last(long codeId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
 		int count = countByCodeId(codeId);
+
 		List list = findByCodeId(codeId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("codeId=");
-			msg.append(codeId);
+
+			msg.append("No Resource exists with the key {");
+
+			msg.append("codeId=" + codeId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
@@ -372,15 +400,20 @@ public class ResourcePersistenceImpl extends BasePersistence
 	public Resource[] findByCodeId_PrevAndNext(long resourceId, long codeId,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
+
 		int count = countByCodeId(codeId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 			query.append("codeId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -389,11 +422,15 @@ public class ResourcePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, codeId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
+
 			Resource[] array = new ResourceImpl[3];
+
 			array[0] = (Resource)objArray[0];
 			array[1] = (Resource)objArray[1];
 			array[2] = (Resource)objArray[2];
@@ -414,13 +451,14 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		if (resource == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No Resource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("codeId=");
-			msg.append(codeId);
+
+			msg.append("No Resource exists with the key {");
+
+			msg.append("codeId=" + codeId);
+
 			msg.append(", ");
-			msg.append("primKey=");
-			msg.append(primKey);
+			msg.append("primKey=" + primKey);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -441,6 +479,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -451,8 +490,11 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 				query.append("codeId = ?");
+
 				query.append(" AND ");
 
 				if (primKey == null) {
@@ -465,7 +507,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, codeId);
 
 				if (primKey != null) {
@@ -473,6 +517,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -529,6 +574,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -560,6 +606,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -570,6 +617,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.Resource ");
 
 				if (obc != null) {
@@ -578,6 +626,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -606,6 +655,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
+
 			remove(resource);
 		}
 	}
@@ -613,6 +663,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 	public void removeByC_P(long codeId, String primKey)
 		throws NoSuchResourceException, SystemException {
 		Resource resource = findByC_P(codeId, primKey);
+
 		remove(resource);
 	}
 
@@ -629,6 +680,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCodeId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(codeId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -639,16 +691,22 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 				query.append("codeId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, codeId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -684,6 +742,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -694,9 +753,12 @@ public class ResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
 				query.append("codeId = ?");
+
 				query.append(" AND ");
 
 				if (primKey == null) {
@@ -709,7 +771,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, codeId);
 
 				if (primKey != null) {
@@ -717,6 +781,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -749,6 +814,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -758,12 +824,11 @@ public class ResourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.Resource");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.Resource");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

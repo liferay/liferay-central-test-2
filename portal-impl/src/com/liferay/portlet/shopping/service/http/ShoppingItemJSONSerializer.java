@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="ShoppingItemJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.shopping.service.http.ShoppingItemServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.shopping.service.http.ShoppingItemServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "itemId", model.getItemId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
@@ -95,6 +97,7 @@ public class ShoppingItemJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			ShoppingItem model = (ShoppingItem)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

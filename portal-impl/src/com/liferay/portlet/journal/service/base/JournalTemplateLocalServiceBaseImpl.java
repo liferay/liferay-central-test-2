@@ -97,7 +97,9 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	public JournalTemplate addJournalTemplate(JournalTemplate model)
 		throws SystemException {
 		JournalTemplate journalTemplate = new JournalTemplateImpl();
+
 		journalTemplate.setNew(true);
+
 		journalTemplate.setUuid(model.getUuid());
 		journalTemplate.setId(model.getId());
 		journalTemplate.setGroupId(model.getGroupId());
@@ -133,7 +135,9 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	public JournalTemplate updateJournalTemplate(JournalTemplate model)
 		throws SystemException {
 		JournalTemplate journalTemplate = new JournalTemplateImpl();
+
 		journalTemplate.setNew(false);
+
 		journalTemplate.setUuid(model.getUuid());
 		journalTemplate.setId(model.getId());
 		journalTemplate.setGroupId(model.getGroupId());

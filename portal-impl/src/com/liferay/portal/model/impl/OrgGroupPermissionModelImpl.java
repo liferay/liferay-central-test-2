@@ -39,8 +39,8 @@ import java.sql.Types;
  * <a href="OrgGroupPermissionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -59,7 +59,11 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "OrgGroupPermission";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "permissionId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
@@ -116,6 +120,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 
 	public OrgGroupPermission toEscapedModel() {
 		OrgGroupPermission model = new OrgGroupPermissionImpl();
+
 		model.setOrganizationId(getOrganizationId());
 		model.setGroupId(getGroupId());
 		model.setPermissionId(getPermissionId());
@@ -131,6 +136,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		OrgGroupPermissionImpl clone = new OrgGroupPermissionImpl();
+
 		clone.setOrganizationId(getOrganizationId());
 		clone.setGroupId(getGroupId());
 		clone.setPermissionId(getPermissionId());
@@ -144,6 +150,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		}
 
 		OrgGroupPermissionImpl orgGroupPermission = (OrgGroupPermissionImpl)obj;
+
 		OrgGroupPermissionPK pk = orgGroupPermission.getPrimaryKey();
 
 		return getPrimaryKey().compareTo(pk);

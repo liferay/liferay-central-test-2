@@ -267,7 +267,9 @@ public abstract class ResourceLocalServiceBaseImpl
 	implements ResourceLocalService, InitializingBean {
 	public Resource addResource(Resource model) throws SystemException {
 		Resource resource = new ResourceImpl();
+
 		resource.setNew(true);
+
 		resource.setResourceId(model.getResourceId());
 		resource.setCodeId(model.getCodeId());
 		resource.setPrimKey(model.getPrimKey());
@@ -288,7 +290,9 @@ public abstract class ResourceLocalServiceBaseImpl
 
 	public Resource updateResource(Resource model) throws SystemException {
 		Resource resource = new ResourceImpl();
+
 		resource.setNew(false);
+
 		resource.setResourceId(model.getResourceId());
 		resource.setCodeId(model.getCodeId());
 		resource.setPrimKey(model.getPrimKey());

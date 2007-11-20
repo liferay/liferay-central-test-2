@@ -270,7 +270,9 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public ResourceCode addResourceCode(ResourceCode model)
 		throws SystemException {
 		ResourceCode resourceCode = new ResourceCodeImpl();
+
 		resourceCode.setNew(true);
+
 		resourceCode.setCodeId(model.getCodeId());
 		resourceCode.setCompanyId(model.getCompanyId());
 		resourceCode.setName(model.getName());
@@ -293,7 +295,9 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public ResourceCode updateResourceCode(ResourceCode model)
 		throws SystemException {
 		ResourceCode resourceCode = new ResourceCodeImpl();
+
 		resourceCode.setNew(false);
+
 		resourceCode.setCodeId(model.getCodeId());
 		resourceCode.setCompanyId(model.getCompanyId());
 		resourceCode.setName(model.getName());

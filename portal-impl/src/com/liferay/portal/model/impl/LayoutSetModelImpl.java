@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="LayoutSetModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>LayoutSet</code> table in the
- * database.
+ * This class is a model that represents the <code>LayoutSet</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,17 +60,41 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "LayoutSet";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "layoutSetId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
+			
+
 			{ "logo", new Integer(Types.BOOLEAN) },
+			
+
 			{ "logoId", new Integer(Types.BIGINT) },
+			
+
 			{ "themeId", new Integer(Types.VARCHAR) },
+			
+
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			
+
 			{ "wapThemeId", new Integer(Types.VARCHAR) },
+			
+
 			{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
+			
+
 			{ "css", new Integer(Types.VARCHAR) },
+			
+
 			{ "pageCount", new Integer(Types.INTEGER) },
+			
+
 			{ "virtualHost", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css VARCHAR(75) null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
@@ -250,6 +274,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 
 	public LayoutSet toEscapedModel() {
 		LayoutSet model = new LayoutSetImpl();
+
 		model.setLayoutSetId(getLayoutSetId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -275,6 +300,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		LayoutSetImpl clone = new LayoutSetImpl();
+
 		clone.setLayoutSetId(getLayoutSetId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -298,6 +324,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 
 		LayoutSetImpl layoutSet = (LayoutSetImpl)obj;
+
 		long pk = layoutSet.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

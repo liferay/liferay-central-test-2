@@ -123,7 +123,9 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	public DLFileEntry addDLFileEntry(DLFileEntry model)
 		throws SystemException {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
+
 		dlFileEntry.setNew(true);
+
 		dlFileEntry.setUuid(model.getUuid());
 		dlFileEntry.setFileEntryId(model.getFileEntryId());
 		dlFileEntry.setCompanyId(model.getCompanyId());
@@ -159,7 +161,9 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	public DLFileEntry updateDLFileEntry(DLFileEntry model)
 		throws SystemException {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
+
 		dlFileEntry.setNew(false);
+
 		dlFileEntry.setUuid(model.getUuid());
 		dlFileEntry.setFileEntryId(model.getFileEntryId());
 		dlFileEntry.setCompanyId(model.getCompanyId());

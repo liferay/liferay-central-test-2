@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="TagsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>TagsEntry</code> table in the
- * database.
+ * This class is a model that represents the <code>TagsEntry</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,11 +63,23 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "TagsEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
@@ -173,6 +185,7 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 
 	public TagsEntry toEscapedModel() {
 		TagsEntry model = new TagsEntryImpl();
+
 		model.setEntryId(getEntryId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -192,6 +205,7 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		TagsEntryImpl clone = new TagsEntryImpl();
+
 		clone.setEntryId(getEntryId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -209,7 +223,9 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		}
 
 		TagsEntryImpl tagsEntry = (TagsEntryImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(tagsEntry.getName());
 
 		if (value != 0) {

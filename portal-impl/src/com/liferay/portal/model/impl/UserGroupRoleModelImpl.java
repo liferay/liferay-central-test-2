@@ -39,13 +39,13 @@ import java.sql.Types;
  * <a href="UserGroupRoleModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>UserGroupRole</code> table in
- * the database.
+ * This class is a model that represents the <code>UserGroupRole</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,7 +59,11 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserGroupRole";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "roleId", new Integer(Types.BIGINT) }
 		};
 	public static String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
@@ -116,6 +120,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 
 	public UserGroupRole toEscapedModel() {
 		UserGroupRole model = new UserGroupRoleImpl();
+
 		model.setUserId(getUserId());
 		model.setGroupId(getGroupId());
 		model.setRoleId(getRoleId());
@@ -131,6 +136,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserGroupRoleImpl clone = new UserGroupRoleImpl();
+
 		clone.setUserId(getUserId());
 		clone.setGroupId(getGroupId());
 		clone.setRoleId(getRoleId());
@@ -144,6 +150,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		}
 
 		UserGroupRoleImpl userGroupRole = (UserGroupRoleImpl)obj;
+
 		UserGroupRolePK pk = userGroupRole.getPrimaryKey();
 
 		return getPrimaryKey().compareTo(pk);

@@ -101,7 +101,9 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	public ShoppingCart addShoppingCart(ShoppingCart model)
 		throws SystemException {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
+
 		shoppingCart.setNew(true);
+
 		shoppingCart.setCartId(model.getCartId());
 		shoppingCart.setGroupId(model.getGroupId());
 		shoppingCart.setCompanyId(model.getCompanyId());
@@ -131,7 +133,9 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 	public ShoppingCart updateShoppingCart(ShoppingCart model)
 		throws SystemException {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
+
 		shoppingCart.setNew(false);
+
 		shoppingCart.setCartId(model.getCartId());
 		shoppingCart.setGroupId(model.getGroupId());
 		shoppingCart.setCompanyId(model.getCompanyId());

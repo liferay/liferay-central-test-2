@@ -61,6 +61,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 	implements ListTypePersistence {
 	public ListType create(int listTypeId) {
 		ListType listType = new ListTypeImpl();
+
 		listType.setNew(true);
 		listType.setPrimaryKey(listTypeId);
 
@@ -121,7 +122,9 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(listType);
+
 			session.flush();
 
 			return listType;
@@ -131,18 +134,19 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ListType.class.getName());
 		}
 	}
 
-	public ListType update(com.liferay.portal.model.ListType listType)
-		throws SystemException {
+	public ListType update(ListType listType) throws SystemException {
 		return update(listType, false);
 	}
 
-	public ListType update(com.liferay.portal.model.ListType listType,
-		boolean merge) throws SystemException {
+	public ListType update(ListType listType, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = listType.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			listType.setNew(false);
 
 			return listType;
@@ -194,6 +199,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ListType.class.getName());
 		}
 	}
@@ -237,6 +243,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByType";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -247,6 +254,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 				if (type == null) {
@@ -257,10 +265,13 @@ public class ListTypePersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (type != null) {
@@ -268,6 +279,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -295,13 +307,17 @@ public class ListTypePersistenceImpl extends BasePersistence
 		String finderClassName = ListType.class.getName();
 		String finderMethodName = "findByType";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				type, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				type,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -312,6 +328,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 				if (type == null) {
@@ -327,12 +344,15 @@ public class ListTypePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (type != null) {
@@ -340,6 +360,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -363,11 +384,13 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ListType exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("type=");
-			msg.append(type);
+
+			msg.append("No ListType exists with the key {");
+
+			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
@@ -378,15 +401,18 @@ public class ListTypePersistenceImpl extends BasePersistence
 	public ListType findByType_Last(String type, OrderByComparator obc)
 		throws NoSuchListTypeException, SystemException {
 		int count = countByType(type);
+
 		List list = findByType(type, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ListType exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("type=");
-			msg.append(type);
+
+			msg.append("No ListType exists with the key {");
+
+			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
@@ -397,13 +423,16 @@ public class ListTypePersistenceImpl extends BasePersistence
 	public ListType[] findByType_PrevAndNext(int listTypeId, String type,
 		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
 		ListType listType = findByPrimaryKey(listTypeId);
+
 		int count = countByType(type);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
@@ -419,12 +448,15 @@ public class ListTypePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (type != null) {
@@ -432,7 +464,9 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, listType);
+
 			ListType[] array = new ListTypeImpl[3];
+
 			array[0] = (ListType)objArray[0];
 			array[1] = (ListType)objArray[1];
 			array[2] = (ListType)objArray[2];
@@ -474,6 +508,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -505,6 +540,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -515,18 +551,22 @@ public class ListTypePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.ListType ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -555,6 +595,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ListType listType = (ListType)itr.next();
+
 			remove(listType);
 		}
 	}
@@ -572,6 +613,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		String finderMethodName = "countByType";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { type };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -582,6 +624,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
@@ -595,6 +638,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (type != null) {
@@ -602,6 +646,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -634,6 +679,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -643,12 +689,11 @@ public class ListTypePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.ListType");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.ListType");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

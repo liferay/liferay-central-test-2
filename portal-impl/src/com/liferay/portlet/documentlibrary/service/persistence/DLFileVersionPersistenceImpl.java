@@ -62,6 +62,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	implements DLFileVersionPersistence {
 	public DLFileVersion create(long fileVersionId) {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
+
 		dlFileVersion.setNew(true);
 		dlFileVersion.setPrimaryKey(fileVersionId);
 
@@ -125,7 +126,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(dlFileVersion);
+
 			session.flush();
 
 			return dlFileVersion;
@@ -135,20 +138,20 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileVersion.class.getName());
 		}
 	}
 
-	public DLFileVersion update(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
+	public DLFileVersion update(DLFileVersion dlFileVersion)
 		throws SystemException {
 		return update(dlFileVersion, false);
 	}
 
-	public DLFileVersion update(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
-		boolean merge) throws SystemException {
+	public DLFileVersion update(DLFileVersion dlFileVersion, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = dlFileVersion.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			dlFileVersion.setNew(false);
 
 			return dlFileVersion;
@@ -201,6 +205,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileVersion.class.getName());
 		}
 	}
@@ -248,6 +253,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -258,9 +264,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -271,13 +280,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC").append(", ");
+
+				query.append("folderId DESC, ");
+				query.append("name DESC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -285,6 +298,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -313,13 +327,18 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByF_N";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), name, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(folderId),
+				
+				name,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -330,9 +349,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -348,15 +370,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("folderId DESC").append(", ");
-					query.append("name DESC").append(", ");
+
+					query.append("folderId DESC, ");
+					query.append("name DESC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -364,6 +390,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -388,14 +415,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -407,18 +436,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		int count = countByF_N(folderId, name);
+
 		List list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -430,16 +462,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		long folderId, String name, OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
+
 		int count = countByF_N(folderId, name);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 			query.append("folderId = ?");
+
 			query.append(" AND ");
 
 			if (name == null) {
@@ -455,15 +492,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC").append(", ");
+
+				query.append("folderId DESC, ");
+				query.append("name DESC, ");
 				query.append("version DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
@@ -472,7 +513,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileVersion);
+
 			DLFileVersion[] array = new DLFileVersionImpl[3];
+
 			array[0] = (DLFileVersion)objArray[0];
 			array[1] = (DLFileVersion)objArray[1];
 			array[2] = (DLFileVersion)objArray[2];
@@ -493,16 +536,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		if (dlFileVersion == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(", ");
-			msg.append("version=");
-			msg.append(version);
+			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -524,8 +568,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), name, new Double(version)
+				new Long(folderId),
+				
+				name, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -536,9 +583,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -549,15 +599,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC").append(", ");
+
+				query.append("folderId DESC, ");
+				query.append("name DESC, ");
 				query.append("version DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -567,6 +623,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -623,6 +680,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -654,6 +712,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -664,6 +723,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion ");
 
@@ -671,14 +731,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("folderId DESC").append(", ");
-					query.append("name DESC").append(", ");
+
+					query.append("folderId DESC, ");
+					query.append("name DESC, ");
 					query.append("version DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -708,6 +771,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileVersion dlFileVersion = (DLFileVersion)itr.next();
+
 			remove(dlFileVersion);
 		}
 	}
@@ -715,6 +779,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	public void removeByF_N_V(long folderId, String name, double version)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByF_N_V(folderId, name, version);
+
 		remove(dlFileVersion);
 	}
 
@@ -733,6 +798,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -743,10 +809,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -759,7 +828,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -767,6 +838,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -803,8 +875,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				Double.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), name, new Double(version)
+				new Long(folderId),
+				
+				name, new Double(version)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -815,10 +890,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -829,11 +907,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" AND ");
+
 				query.append("version = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -843,6 +925,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				q.setDouble(queryPos++, version);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -875,6 +958,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -884,13 +968,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

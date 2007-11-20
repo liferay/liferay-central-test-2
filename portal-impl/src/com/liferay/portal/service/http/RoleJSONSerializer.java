@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="RoleJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.RoleServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portal.service.http.RoleServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "roleId", model.getRoleId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
@@ -68,6 +70,7 @@ public class RoleJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			Role model = (Role)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

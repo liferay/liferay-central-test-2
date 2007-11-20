@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="DLFolderModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>DLFolder</code> table in the
- * database.
+ * This class is a model that represents the <code>DLFolder</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,16 +63,38 @@ public class DLFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFolder";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "parentFolderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
@@ -234,6 +256,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 
 	public DLFolder toEscapedModel() {
 		DLFolder model = new DLFolderImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setFolderId(getFolderId());
 		model.setGroupId(getGroupId());
@@ -258,6 +281,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFolderImpl clone = new DLFolderImpl();
+
 		clone.setUuid(getUuid());
 		clone.setFolderId(getFolderId());
 		clone.setGroupId(getGroupId());
@@ -280,6 +304,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 		}
 
 		DLFolderImpl dlFolder = (DLFolderImpl)obj;
+
 		int value = 0;
 
 		if (getParentFolderId() < dlFolder.getParentFolderId()) {

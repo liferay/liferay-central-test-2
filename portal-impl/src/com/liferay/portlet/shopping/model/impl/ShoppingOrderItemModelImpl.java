@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="ShoppingOrderItemModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,14 +63,32 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingOrderItem";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "orderItemId", new Integer(Types.BIGINT) },
+			
+
 			{ "orderId", new Integer(Types.BIGINT) },
+			
+
 			{ "itemId", new Integer(Types.VARCHAR) },
+			
+
 			{ "sku", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "properties", new Integer(Types.VARCHAR) },
+			
+
 			{ "price", new Integer(Types.DOUBLE) },
+			
+
 			{ "quantity", new Integer(Types.INTEGER) },
+			
+
 			{ "shippedDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingOrderItem (orderItemId LONG not null primary key,orderId LONG,itemId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
@@ -211,6 +229,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 
 	public ShoppingOrderItem toEscapedModel() {
 		ShoppingOrderItem model = new ShoppingOrderItemImpl();
+
 		model.setOrderItemId(getOrderItemId());
 		model.setOrderId(getOrderId());
 		model.setItemId(Html.escape(getItemId()));
@@ -233,6 +252,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingOrderItemImpl clone = new ShoppingOrderItemImpl();
+
 		clone.setOrderItemId(getOrderItemId());
 		clone.setOrderId(getOrderId());
 		clone.setItemId(getItemId());
@@ -253,7 +273,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingOrderItemImpl shoppingOrderItem = (ShoppingOrderItemImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(shoppingOrderItem.getName());
 
 		if (value != 0) {

@@ -97,7 +97,9 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	public JournalStructure addJournalStructure(JournalStructure model)
 		throws SystemException {
 		JournalStructure journalStructure = new JournalStructureImpl();
+
 		journalStructure.setNew(true);
+
 		journalStructure.setUuid(model.getUuid());
 		journalStructure.setId(model.getId());
 		journalStructure.setGroupId(model.getGroupId());
@@ -128,7 +130,9 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	public JournalStructure updateJournalStructure(JournalStructure model)
 		throws SystemException {
 		JournalStructure journalStructure = new JournalStructureImpl();
+
 		journalStructure.setNew(false);
+
 		journalStructure.setUuid(model.getUuid());
 		journalStructure.setId(model.getId());
 		journalStructure.setGroupId(model.getGroupId());

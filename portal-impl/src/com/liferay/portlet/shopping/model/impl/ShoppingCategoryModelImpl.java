@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="ShoppingCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,14 +63,32 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingCategory";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "categoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "parentCategoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingCategory (categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null)";
@@ -209,6 +227,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 
 	public ShoppingCategory toEscapedModel() {
 		ShoppingCategory model = new ShoppingCategoryImpl();
+
 		model.setCategoryId(getCategoryId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -231,6 +250,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingCategoryImpl clone = new ShoppingCategoryImpl();
+
 		clone.setCategoryId(getCategoryId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -251,6 +271,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingCategoryImpl shoppingCategory = (ShoppingCategoryImpl)obj;
+
 		int value = 0;
 
 		if (getParentCategoryId() < shoppingCategory.getParentCategoryId()) {

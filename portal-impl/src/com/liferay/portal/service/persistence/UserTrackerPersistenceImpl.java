@@ -61,6 +61,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	implements UserTrackerPersistence {
 	public UserTracker create(long userTrackerId) {
 		UserTracker userTracker = new UserTrackerImpl();
+
 		userTracker.setNew(true);
 		userTracker.setPrimaryKey(userTrackerId);
 
@@ -124,7 +125,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(userTracker);
+
 			session.flush();
 
 			return userTracker;
@@ -134,19 +137,20 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserTracker.class.getName());
 		}
 	}
 
-	public UserTracker update(com.liferay.portal.model.UserTracker userTracker)
+	public UserTracker update(UserTracker userTracker)
 		throws SystemException {
 		return update(userTracker, false);
 	}
 
-	public UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker, boolean merge)
+	public UserTracker update(UserTracker userTracker, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = userTracker.isNew();
 
 		if (listener != null) {
@@ -190,6 +194,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			userTracker.setNew(false);
 
 			return userTracker;
@@ -199,6 +204,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(UserTracker.class.getName());
 		}
 	}
@@ -243,6 +249,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -253,15 +260,21 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -289,13 +302,17 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -306,8 +323,11 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -316,10 +336,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -344,11 +367,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -360,15 +385,18 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -380,15 +408,20 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		long companyId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -397,12 +430,16 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
+
 			UserTracker[] array = new UserTrackerImpl[3];
+
 			array[0] = (UserTracker)objArray[0];
 			array[1] = (UserTracker)objArray[1];
 			array[2] = (UserTracker)objArray[2];
@@ -422,6 +459,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -432,15 +470,21 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -468,13 +512,17 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -485,8 +533,11 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
@@ -495,10 +546,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -522,11 +576,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -537,15 +593,18 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	public UserTracker findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -557,15 +616,20 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		long userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -574,12 +638,16 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
+
 			UserTracker[] array = new UserTrackerImpl[3];
+
 			array[0] = (UserTracker)objArray[0];
 			array[1] = (UserTracker)objArray[1];
 			array[2] = (UserTracker)objArray[2];
@@ -599,6 +667,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "findBySessionId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { sessionId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -609,6 +678,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 				if (sessionId == null) {
@@ -621,6 +691,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (sessionId != null) {
@@ -628,6 +699,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -655,13 +727,17 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findBySessionId";
 		String[] finderParams = new String[] {
-				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				sessionId, String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				sessionId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -672,6 +748,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 				if (sessionId == null) {
@@ -689,6 +766,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (sessionId != null) {
@@ -696,6 +774,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -720,11 +799,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("sessionId=");
-			msg.append(sessionId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("sessionId=" + sessionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -736,15 +817,18 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countBySessionId(sessionId);
+
 		List list = findBySessionId(sessionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No UserTracker exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("sessionId=");
-			msg.append(sessionId);
+
+			msg.append("No UserTracker exists with the key {");
+
+			msg.append("sessionId=" + sessionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -756,13 +840,16 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String sessionId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
+
 		int count = countBySessionId(sessionId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (sessionId == null) {
@@ -780,6 +867,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
 
 			if (sessionId != null) {
@@ -788,7 +876,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
+
 			UserTracker[] array = new UserTrackerImpl[3];
+
 			array[0] = (UserTracker)objArray[0];
 			array[1] = (UserTracker)objArray[1];
 			array[2] = (UserTracker)objArray[2];
@@ -830,6 +920,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -861,6 +952,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -871,6 +963,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.UserTracker ");
 
 				if (obc != null) {
@@ -879,6 +972,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -907,6 +1001,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserTracker userTracker = (UserTracker)itr.next();
+
 			remove(userTracker);
 		}
 	}
@@ -916,6 +1011,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserTracker userTracker = (UserTracker)itr.next();
+
 			remove(userTracker);
 		}
 	}
@@ -925,6 +1021,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			UserTracker userTracker = (UserTracker)itr.next();
+
 			remove(userTracker);
 		}
 	}
@@ -942,6 +1039,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -952,16 +1050,22 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -994,6 +1098,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1004,16 +1109,22 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1046,6 +1157,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countBySessionId";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { sessionId };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1056,6 +1168,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
@@ -1069,6 +1182,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
 
 				if (sessionId != null) {
@@ -1076,6 +1190,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1108,6 +1223,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1117,12 +1233,11 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.UserTracker");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.UserTracker");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

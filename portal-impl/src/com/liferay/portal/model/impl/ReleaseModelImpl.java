@@ -40,13 +40,13 @@ import java.util.Date;
  * <a href="ReleaseModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Release_</code> table in the
- * database.
+ * This class is a model that represents the <code>Release</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,10 +60,20 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Release_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "releaseId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "buildNumber", new Integer(Types.INTEGER) },
+			
+
 			{ "buildDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "verified", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
@@ -161,6 +171,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 
 	public Release toEscapedModel() {
 		Release model = new ReleaseImpl();
+
 		model.setReleaseId(getReleaseId());
 		model.setCreateDate(getCreateDate());
 		model.setModifiedDate(getModifiedDate());
@@ -179,6 +190,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ReleaseImpl clone = new ReleaseImpl();
+
 		clone.setReleaseId(getReleaseId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
@@ -195,6 +207,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		}
 
 		ReleaseImpl release = (ReleaseImpl)obj;
+
 		long pk = release.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

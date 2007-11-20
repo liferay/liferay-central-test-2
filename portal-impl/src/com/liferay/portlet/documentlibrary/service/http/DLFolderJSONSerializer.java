@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="DLFolderJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class DLFolderJSONSerializer {
 	public static JSONObject toJSONObject(DLFolder model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
@@ -73,6 +75,7 @@ public class DLFolderJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			DLFolder model = (DLFolder)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -88,7 +88,9 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	public ShoppingItemField addShoppingItemField(ShoppingItemField model)
 		throws SystemException {
 		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
+
 		shoppingItemField.setNew(true);
+
 		shoppingItemField.setItemFieldId(model.getItemFieldId());
 		shoppingItemField.setItemId(model.getItemId());
 		shoppingItemField.setName(model.getName());
@@ -112,7 +114,9 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	public ShoppingItemField updateShoppingItemField(ShoppingItemField model)
 		throws SystemException {
 		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
+
 		shoppingItemField.setNew(false);
+
 		shoppingItemField.setItemFieldId(model.getItemFieldId());
 		shoppingItemField.setItemId(model.getItemId());
 		shoppingItemField.setName(model.getName());

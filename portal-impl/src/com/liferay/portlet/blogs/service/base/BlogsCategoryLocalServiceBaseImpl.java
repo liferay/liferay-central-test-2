@@ -89,7 +89,9 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 	public BlogsCategory addBlogsCategory(BlogsCategory model)
 		throws SystemException {
 		BlogsCategory blogsCategory = new BlogsCategoryImpl();
+
 		blogsCategory.setNew(true);
+
 		blogsCategory.setCategoryId(model.getCategoryId());
 		blogsCategory.setCompanyId(model.getCompanyId());
 		blogsCategory.setUserId(model.getUserId());
@@ -117,7 +119,9 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 	public BlogsCategory updateBlogsCategory(BlogsCategory model)
 		throws SystemException {
 		BlogsCategory blogsCategory = new BlogsCategoryImpl();
+
 		blogsCategory.setNew(false);
+
 		blogsCategory.setCategoryId(model.getCategoryId());
 		blogsCategory.setCompanyId(model.getCompanyId());
 		blogsCategory.setUserId(model.getUserId());

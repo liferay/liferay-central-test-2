@@ -43,12 +43,13 @@ import java.util.Date;
  * <a href="WebsiteModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Website</code> table in the database.
+ * This class is a model that represents the <code>Website</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,15 +63,35 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Website";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "websiteId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "url", new Integer(Types.VARCHAR) },
+			
+
 			{ "typeId", new Integer(Types.INTEGER) },
+			
+
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
@@ -220,6 +241,7 @@ public class WebsiteModelImpl extends BaseModelImpl {
 
 	public Website toEscapedModel() {
 		Website model = new WebsiteImpl();
+
 		model.setWebsiteId(getWebsiteId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -243,6 +265,7 @@ public class WebsiteModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		WebsiteImpl clone = new WebsiteImpl();
+
 		clone.setWebsiteId(getWebsiteId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -264,7 +287,9 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		}
 
 		WebsiteImpl website = (WebsiteImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(), website.getCreateDate());
 
 		if (value != 0) {

@@ -62,6 +62,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 	implements BlogsCategoryPersistence {
 	public BlogsCategory create(long categoryId) {
 		BlogsCategory blogsCategory = new BlogsCategoryImpl();
+
 		blogsCategory.setNew(true);
 		blogsCategory.setPrimaryKey(categoryId);
 
@@ -125,7 +126,9 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(blogsCategory);
+
 			session.flush();
 
 			return blogsCategory;
@@ -135,20 +138,20 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BlogsCategory.class.getName());
 		}
 	}
 
-	public BlogsCategory update(
-		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
+	public BlogsCategory update(BlogsCategory blogsCategory)
 		throws SystemException {
 		return update(blogsCategory, false);
 	}
 
-	public BlogsCategory update(
-		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
-		boolean merge) throws SystemException {
+	public BlogsCategory update(BlogsCategory blogsCategory, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = blogsCategory.isNew();
 
 		if (listener != null) {
@@ -192,6 +195,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			blogsCategory.setNew(false);
 
 			return blogsCategory;
@@ -201,6 +205,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(BlogsCategory.class.getName());
 		}
 	}
@@ -246,6 +251,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByParentCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(parentCategoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -256,18 +262,26 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -295,13 +309,17 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		String finderClassName = BlogsCategory.class.getName();
 		String finderMethodName = "findByParentCategoryId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(parentCategoryId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(parentCategoryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -312,25 +330,33 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -354,11 +380,13 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("parentCategoryId=");
-			msg.append(parentCategoryId);
+
+			msg.append("No BlogsCategory exists with the key {");
+
+			msg.append("parentCategoryId=" + parentCategoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -369,16 +397,19 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 	public BlogsCategory findByParentCategoryId_Last(long parentCategoryId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByParentCategoryId(parentCategoryId);
+
 		List list = findByParentCategoryId(parentCategoryId, count - 1, count,
 				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No BlogsCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("parentCategoryId=");
-			msg.append(parentCategoryId);
+
+			msg.append("No BlogsCategory exists with the key {");
+
+			msg.append("parentCategoryId=" + parentCategoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -390,34 +421,45 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		long parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		BlogsCategory blogsCategory = findByPrimaryKey(categoryId);
+
 		int count = countByParentCategoryId(parentCategoryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
+
 			query.append("parentCategoryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, parentCategoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsCategory);
+
 			BlogsCategory[] array = new BlogsCategoryImpl[3];
+
 			array[0] = (BlogsCategory)objArray[0];
 			array[1] = (BlogsCategory)objArray[1];
 			array[2] = (BlogsCategory)objArray[2];
@@ -459,6 +501,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -490,6 +533,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -500,6 +544,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsCategory ");
 
@@ -507,12 +552,15 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -542,6 +590,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			BlogsCategory blogsCategory = (BlogsCategory)itr.next();
+
 			remove(blogsCategory);
 		}
 	}
@@ -560,6 +609,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByParentCategoryId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(parentCategoryId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -570,17 +620,23 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -613,6 +669,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -622,13 +679,11 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.blogs.model.BlogsCategory");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.blogs.model.BlogsCategory");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

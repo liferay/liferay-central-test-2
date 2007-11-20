@@ -41,13 +41,13 @@ import java.sql.Types;
  * <a href="SCLicenseModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>SCLicense</code> table in the
- * database.
+ * This class is a model that represents the <code>SCLicense</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,10 +61,20 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "SCLicense";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "licenseId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "url", new Integer(Types.VARCHAR) },
+			
+
 			{ "openSource", new Integer(Types.BOOLEAN) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "recommended", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
@@ -165,6 +175,7 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 
 	public SCLicense toEscapedModel() {
 		SCLicense model = new SCLicenseImpl();
+
 		model.setLicenseId(getLicenseId());
 		model.setName(Html.escape(getName()));
 		model.setUrl(Html.escape(getUrl()));
@@ -183,6 +194,7 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SCLicenseImpl clone = new SCLicenseImpl();
+
 		clone.setLicenseId(getLicenseId());
 		clone.setName(getName());
 		clone.setUrl(getUrl());
@@ -199,7 +211,9 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		}
 
 		SCLicenseImpl scLicense = (SCLicenseImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(scLicense.getName());
 
 		if (value != 0) {

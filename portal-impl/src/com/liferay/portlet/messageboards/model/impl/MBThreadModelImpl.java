@@ -42,13 +42,13 @@ import java.util.Date;
  * <a href="MBThreadModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBThread</code> table in the
- * database.
+ * This class is a model that represents the <code>MBThread</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,12 +62,26 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBThread";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "rootMessageId", new Integer(Types.BIGINT) },
+			
+
 			{ "messageCount", new Integer(Types.INTEGER) },
+			
+
 			{ "viewCount", new Integer(Types.INTEGER) },
+			
+
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
@@ -175,6 +189,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 
 	public MBThread toEscapedModel() {
 		MBThread model = new MBThreadImpl();
+
 		model.setThreadId(getThreadId());
 		model.setCategoryId(getCategoryId());
 		model.setRootMessageId(getRootMessageId());
@@ -195,6 +210,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBThreadImpl clone = new MBThreadImpl();
+
 		clone.setThreadId(getThreadId());
 		clone.setCategoryId(getCategoryId());
 		clone.setRootMessageId(getRootMessageId());
@@ -213,6 +229,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		}
 
 		MBThreadImpl mbThread = (MBThreadImpl)obj;
+
 		int value = 0;
 
 		if (getPriority() < mbThread.getPriority()) {
@@ -232,6 +249,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		}
 
 		value = DateUtil.compareTo(getLastPostDate(), mbThread.getLastPostDate());
+
 		value = value * -1;
 
 		if (value != 0) {

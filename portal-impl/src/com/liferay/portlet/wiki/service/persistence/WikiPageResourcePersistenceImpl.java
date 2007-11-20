@@ -62,6 +62,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	implements WikiPageResourcePersistence {
 	public WikiPageResource create(long resourcePrimKey) {
 		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
+
 		wikiPageResource.setNew(true);
 		wikiPageResource.setPrimaryKey(resourcePrimKey);
 
@@ -126,7 +127,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(wikiPageResource);
+
 			session.flush();
 
 			return wikiPageResource;
@@ -136,20 +139,20 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(WikiPageResource.class.getName());
 		}
 	}
 
-	public WikiPageResource update(
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
+	public WikiPageResource update(WikiPageResource wikiPageResource)
 		throws SystemException {
 		return update(wikiPageResource, false);
 	}
 
-	public WikiPageResource update(
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
+	public WikiPageResource update(WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = wikiPageResource.isNew();
 
 		if (listener != null) {
@@ -193,6 +196,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			wikiPageResource.setNew(false);
 
 			return wikiPageResource;
@@ -202,6 +206,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(WikiPageResource.class.getName());
 		}
 	}
@@ -248,13 +253,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 		if (wikiPageResource == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No WikiPageResource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("nodeId=");
-			msg.append(nodeId);
+
+			msg.append("No WikiPageResource exists with the key {");
+
+			msg.append("nodeId=" + nodeId);
+
 			msg.append(", ");
-			msg.append("title=");
-			msg.append(title);
+			msg.append("title=" + title);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -275,6 +281,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -285,9 +292,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
+
 				query.append("nodeId = ?");
+
 				query.append(" AND ");
 
 				if (title == null) {
@@ -300,7 +310,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, nodeId);
 
 				if (title != null) {
@@ -308,6 +320,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -364,6 +377,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -395,6 +409,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -405,6 +420,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiPageResource ");
 
@@ -414,6 +430,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -440,6 +457,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	public void removeByN_T(long nodeId, String title)
 		throws NoSuchPageResourceException, SystemException {
 		WikiPageResource wikiPageResource = findByN_T(nodeId, title);
+
 		remove(wikiPageResource);
 	}
 
@@ -458,6 +476,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -468,10 +487,13 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
+
 				query.append("nodeId = ?");
+
 				query.append(" AND ");
 
 				if (title == null) {
@@ -484,7 +506,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, nodeId);
 
 				if (title != null) {
@@ -492,6 +516,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -524,6 +549,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -533,13 +559,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPageResource");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.wiki.model.WikiPageResource");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

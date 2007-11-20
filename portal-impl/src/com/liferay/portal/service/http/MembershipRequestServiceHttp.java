@@ -36,26 +36,28 @@ import com.liferay.portal.service.http.TunnelUtil;
  * <a href="MembershipRequestServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portal.service.MembershipRequestServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portal.service.MembershipRequestServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -76,6 +78,7 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = comments;
 
 			if (comments == null) {
@@ -85,6 +88,7 @@ public class MembershipRequestServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
 					"addMembershipRequest",
 					new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -106,6 +110,7 @@ public class MembershipRequestServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -116,7 +121,9 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
+
 			Object paramObj1 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
 					"deleteMembershipRequests",
 					new Object[] { paramObj0, paramObj1 });
@@ -138,6 +145,7 @@ public class MembershipRequestServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -148,8 +156,10 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(membershipRequestId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
 					"getMembershipRequest", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -171,6 +181,7 @@ public class MembershipRequestServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -181,6 +192,7 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(membershipRequestId);
+
 			Object paramObj1 = reviewComments;
 
 			if (reviewComments == null) {
@@ -188,6 +200,7 @@ public class MembershipRequestServiceHttp {
 			}
 
 			Object paramObj2 = new IntegerWrapper(statusId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
 					"updateStatus",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
@@ -209,6 +222,7 @@ public class MembershipRequestServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

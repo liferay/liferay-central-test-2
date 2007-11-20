@@ -83,7 +83,9 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	public JournalArticleResource addJournalArticleResource(
 		JournalArticleResource model) throws SystemException {
 		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
+
 		journalArticleResource.setNew(true);
+
 		journalArticleResource.setResourcePrimKey(model.getResourcePrimKey());
 		journalArticleResource.setGroupId(model.getGroupId());
 		journalArticleResource.setArticleId(model.getArticleId());
@@ -105,7 +107,9 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	public JournalArticleResource updateJournalArticleResource(
 		JournalArticleResource model) throws SystemException {
 		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
+
 		journalArticleResource.setNew(false);
+
 		journalArticleResource.setResourcePrimKey(model.getResourcePrimKey());
 		journalArticleResource.setGroupId(model.getGroupId());
 		journalArticleResource.setArticleId(model.getArticleId());

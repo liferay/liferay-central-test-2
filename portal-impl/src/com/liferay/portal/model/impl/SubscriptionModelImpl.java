@@ -42,13 +42,13 @@ import java.util.Date;
  * <a href="SubscriptionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Subscription</code> table in
- * the database.
+ * This class is a model that represents the <code>Subscription</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -62,13 +62,29 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Subscription";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "subscriptionId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "frequency", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Subscription (subscriptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,frequency VARCHAR(75) null)";
@@ -195,6 +211,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 
 	public Subscription toEscapedModel() {
 		Subscription model = new SubscriptionImpl();
+
 		model.setSubscriptionId(getSubscriptionId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -216,6 +233,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		SubscriptionImpl clone = new SubscriptionImpl();
+
 		clone.setSubscriptionId(getSubscriptionId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -235,6 +253,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		}
 
 		SubscriptionImpl subscription = (SubscriptionImpl)obj;
+
 		long pk = subscription.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

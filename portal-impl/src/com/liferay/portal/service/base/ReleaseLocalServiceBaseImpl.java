@@ -264,7 +264,9 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	InitializingBean {
 	public Release addRelease(Release model) throws SystemException {
 		Release release = new ReleaseImpl();
+
 		release.setNew(true);
+
 		release.setReleaseId(model.getReleaseId());
 		release.setCreateDate(model.getCreateDate());
 		release.setModifiedDate(model.getModifiedDate());
@@ -288,7 +290,9 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 
 	public Release updateRelease(Release model) throws SystemException {
 		Release release = new ReleaseImpl();
+
 		release.setNew(false);
+
 		release.setReleaseId(model.getReleaseId());
 		release.setCreateDate(model.getCreateDate());
 		release.setModifiedDate(model.getModifiedDate());

@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="CountryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Country</code> table in the database.
+ * This class is a model that represents the <code>Country</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,11 +60,23 @@ public class CountryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Country";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "countryId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "a2", new Integer(Types.VARCHAR) },
+			
+
 			{ "a3", new Integer(Types.VARCHAR) },
+			
+
 			{ "number_", new Integer(Types.VARCHAR) },
+			
+
 			{ "idd_", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
@@ -171,6 +184,7 @@ public class CountryModelImpl extends BaseModelImpl {
 
 	public Country toEscapedModel() {
 		Country model = new CountryImpl();
+
 		model.setCountryId(getCountryId());
 		model.setName(Html.escape(getName()));
 		model.setA2(Html.escape(getA2()));
@@ -190,6 +204,7 @@ public class CountryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		CountryImpl clone = new CountryImpl();
+
 		clone.setCountryId(getCountryId());
 		clone.setName(getName());
 		clone.setA2(getA2());
@@ -207,7 +222,9 @@ public class CountryModelImpl extends BaseModelImpl {
 		}
 
 		CountryImpl country = (CountryImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(country.getName());
 
 		if (value != 0) {

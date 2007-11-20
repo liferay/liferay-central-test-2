@@ -62,6 +62,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	implements SCFrameworkVersionPersistence {
 	public SCFrameworkVersion create(long frameworkVersionId) {
 		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
+
 		scFrameworkVersion.setNew(true);
 		scFrameworkVersion.setPrimaryKey(frameworkVersionId);
 
@@ -126,7 +127,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(scFrameworkVersion);
+
 			session.flush();
 
 			return scFrameworkVersion;
@@ -136,20 +139,20 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCFrameworkVersion.class.getName());
 		}
 	}
 
-	public SCFrameworkVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
+	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
 		return update(scFrameworkVersion, false);
 	}
 
-	public SCFrameworkVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
+	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = scFrameworkVersion.isNew();
 
 		if (listener != null) {
@@ -193,6 +196,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			scFrameworkVersion.setNew(false);
 
 			return scFrameworkVersion;
@@ -202,6 +206,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(SCFrameworkVersion.class.getName());
 		}
 	}
@@ -247,6 +252,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -257,19 +263,27 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -297,13 +311,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -314,26 +332,34 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority ASC").append(", ");
+
+					query.append("priority ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -358,11 +384,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -374,15 +402,18 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -394,35 +425,46 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		long frameworkVersionId, long groupId, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SCFrameworkVersion scFrameworkVersion = findByPrimaryKey(frameworkVersionId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
+
 			SCFrameworkVersion[] array = new SCFrameworkVersionImpl[3];
+
 			array[0] = (SCFrameworkVersion)objArray[0];
 			array[1] = (SCFrameworkVersion)objArray[1];
 			array[2] = (SCFrameworkVersion)objArray[2];
@@ -442,6 +484,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -452,19 +495,27 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -492,13 +543,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByCompanyId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -509,26 +564,34 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority ASC").append(", ");
+
+					query.append("priority ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -553,11 +616,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -569,15 +634,18 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByCompanyId(companyId);
+
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -589,35 +657,46 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		long frameworkVersionId, long companyId, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SCFrameworkVersion scFrameworkVersion = findByPrimaryKey(frameworkVersionId);
+
 		int count = countByCompanyId(companyId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 			query.append("companyId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
+
 			SCFrameworkVersion[] array = new SCFrameworkVersionImpl[3];
+
 			array[0] = (SCFrameworkVersion)objArray[0];
 			array[1] = (SCFrameworkVersion)objArray[1];
 			array[2] = (SCFrameworkVersion)objArray[2];
@@ -642,6 +721,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -652,22 +732,33 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, active);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -696,13 +787,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByG_A";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Boolean.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -713,29 +807,40 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority ASC").append(", ");
+
+					query.append("priority ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, active);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -760,14 +865,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("active=");
-			msg.append(active);
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -779,18 +886,21 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByG_A(groupId, active);
+
 		List list = findByG_A(groupId, active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No SCFrameworkVersion exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No SCFrameworkVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("active=");
-			msg.append(active);
+			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
@@ -802,38 +912,52 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		long groupId, boolean active, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SCFrameworkVersion scFrameworkVersion = findByPrimaryKey(frameworkVersionId);
+
 		int count = countByG_A(groupId, active);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("active_ = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("priority ASC").append(", ");
+
+				query.append("priority ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
+
 			SCFrameworkVersion[] array = new SCFrameworkVersionImpl[3];
+
 			array[0] = (SCFrameworkVersion)objArray[0];
 			array[1] = (SCFrameworkVersion)objArray[1];
 			array[2] = (SCFrameworkVersion)objArray[2];
@@ -875,6 +999,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -906,6 +1031,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -916,6 +1042,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion ");
 
@@ -923,13 +1050,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("priority ASC").append(", ");
+
+					query.append("priority ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -958,6 +1088,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+
 			remove(scFrameworkVersion);
 		}
 	}
@@ -967,6 +1098,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+
 			remove(scFrameworkVersion);
 		}
 	}
@@ -977,6 +1109,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+
 			remove(scFrameworkVersion);
 		}
 	}
@@ -994,6 +1127,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1004,17 +1138,23 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1047,6 +1187,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByCompanyId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1057,17 +1198,23 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1105,6 +1252,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1115,20 +1263,29 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("active_ = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setBoolean(queryPos++, active);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1161,6 +1318,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1170,13 +1328,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

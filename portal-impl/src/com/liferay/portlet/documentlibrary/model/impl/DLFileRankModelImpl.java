@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="DLFileRankModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>DLFileRank</code> table in the
- * database.
+ * This class is a model that represents the <code>DLFileRank</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,10 +64,20 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileRank";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "fileRankId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";
@@ -157,6 +167,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 
 	public DLFileRank toEscapedModel() {
 		DLFileRank model = new DLFileRankImpl();
+
 		model.setFileRankId(getFileRankId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -175,6 +186,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileRankImpl clone = new DLFileRankImpl();
+
 		clone.setFileRankId(getFileRankId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -191,8 +203,11 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		}
 
 		DLFileRankImpl dlFileRank = (DLFileRankImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(), dlFileRank.getCreateDate());
+
 		value = value * -1;
 
 		if (value != 0) {

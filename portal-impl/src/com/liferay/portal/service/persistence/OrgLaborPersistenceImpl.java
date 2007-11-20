@@ -61,6 +61,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	implements OrgLaborPersistence {
 	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
+
 		orgLabor.setNew(true);
 		orgLabor.setPrimaryKey(orgLaborId);
 
@@ -121,7 +122,9 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(orgLabor);
+
 			session.flush();
 
 			return orgLabor;
@@ -131,18 +134,19 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(OrgLabor.class.getName());
 		}
 	}
 
-	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor)
-		throws SystemException {
+	public OrgLabor update(OrgLabor orgLabor) throws SystemException {
 		return update(orgLabor, false);
 	}
 
-	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor,
-		boolean merge) throws SystemException {
+	public OrgLabor update(OrgLabor orgLabor, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = orgLabor.isNew();
 
 		if (listener != null) {
@@ -185,6 +189,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			orgLabor.setNew(false);
 
 			return orgLabor;
@@ -194,6 +199,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(OrgLabor.class.getName());
 		}
 	}
@@ -239,6 +245,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByOrganizationId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -249,18 +256,26 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+
 				query.append("organizationId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("organizationId ASC").append(", ");
+
+				query.append("organizationId ASC, ");
 				query.append("typeId ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, organizationId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -288,13 +303,17 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String finderClassName = OrgLabor.class.getName();
 		String finderMethodName = "findByOrganizationId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(organizationId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(organizationId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -305,25 +324,33 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+
 				query.append("organizationId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("organizationId ASC").append(", ");
+
+					query.append("organizationId ASC, ");
 					query.append("typeId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, organizationId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -347,11 +374,13 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No OrgLabor exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("organizationId=");
-			msg.append(organizationId);
+
+			msg.append("No OrgLabor exists with the key {");
+
+			msg.append("organizationId=" + organizationId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrgLaborException(msg.toString());
 		}
 		else {
@@ -362,15 +391,18 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	public OrgLabor findByOrganizationId_Last(long organizationId,
 		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		int count = countByOrganizationId(organizationId);
+
 		List list = findByOrganizationId(organizationId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No OrgLabor exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("organizationId=");
-			msg.append(organizationId);
+
+			msg.append("No OrgLabor exists with the key {");
+
+			msg.append("organizationId=" + organizationId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchOrgLaborException(msg.toString());
 		}
 		else {
@@ -382,33 +414,44 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		long organizationId, OrderByComparator obc)
 		throws NoSuchOrgLaborException, SystemException {
 		OrgLabor orgLabor = findByPrimaryKey(orgLaborId);
+
 		int count = countByOrganizationId(organizationId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+
 			query.append("organizationId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("organizationId ASC").append(", ");
+
+				query.append("organizationId ASC, ");
 				query.append("typeId ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, organizationId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, orgLabor);
+
 			OrgLabor[] array = new OrgLaborImpl[3];
+
 			array[0] = (OrgLabor)objArray[0];
 			array[1] = (OrgLabor)objArray[1];
 			array[2] = (OrgLabor)objArray[2];
@@ -450,6 +493,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -481,6 +525,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -491,19 +536,23 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portal.model.OrgLabor ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("organizationId ASC").append(", ");
+
+					query.append("organizationId ASC, ");
 					query.append("typeId ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -533,6 +582,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			OrgLabor orgLabor = (OrgLabor)itr.next();
+
 			remove(orgLabor);
 		}
 	}
@@ -551,6 +601,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByOrganizationId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -561,16 +612,22 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
+
 				query.append("organizationId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, organizationId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -603,6 +660,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -612,12 +670,11 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portal.model.OrgLabor");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portal.model.OrgLabor");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

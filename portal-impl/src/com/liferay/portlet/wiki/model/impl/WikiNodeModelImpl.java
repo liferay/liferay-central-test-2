@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="WikiNodeModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>WikiNode</code> table in the
- * database.
+ * This class is a model that represents the <code>WikiNode</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,14 +63,32 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiNode";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "nodeId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static String TABLE_SQL_CREATE = "create table WikiNode (nodeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
@@ -212,6 +230,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 	public WikiNode toEscapedModel() {
 		WikiNode model = new WikiNodeImpl();
+
 		model.setNodeId(getNodeId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -234,6 +253,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		WikiNodeImpl clone = new WikiNodeImpl();
+
 		clone.setNodeId(getNodeId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -254,7 +274,9 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		}
 
 		WikiNodeImpl wikiNode = (WikiNodeImpl)obj;
+
 		int value = 0;
+
 		value = getName().toLowerCase().compareTo(wikiNode.getName()
 														  .toLowerCase());
 

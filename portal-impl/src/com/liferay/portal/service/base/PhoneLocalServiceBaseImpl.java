@@ -267,7 +267,9 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	InitializingBean {
 	public Phone addPhone(Phone model) throws SystemException {
 		Phone phone = new PhoneImpl();
+
 		phone.setNew(true);
+
 		phone.setPhoneId(model.getPhoneId());
 		phone.setCompanyId(model.getCompanyId());
 		phone.setUserId(model.getUserId());
@@ -297,7 +299,9 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 
 	public Phone updatePhone(Phone model) throws SystemException {
 		Phone phone = new PhoneImpl();
+
 		phone.setNew(false);
+
 		phone.setPhoneId(model.getPhoneId());
 		phone.setCompanyId(model.getCompanyId());
 		phone.setUserId(model.getUserId());

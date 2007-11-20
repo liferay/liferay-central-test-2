@@ -62,6 +62,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	implements DLFileRankPersistence {
 	public DLFileRank create(long fileRankId) {
 		DLFileRank dlFileRank = new DLFileRankImpl();
+
 		dlFileRank.setNew(true);
 		dlFileRank.setPrimaryKey(fileRankId);
 
@@ -123,7 +124,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(dlFileRank);
+
 			session.flush();
 
 			return dlFileRank;
@@ -133,20 +136,19 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileRank.class.getName());
 		}
 	}
 
-	public DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws SystemException {
+	public DLFileRank update(DLFileRank dlFileRank) throws SystemException {
 		return update(dlFileRank, false);
 	}
 
-	public DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean merge) throws SystemException {
+	public DLFileRank update(DLFileRank dlFileRank, boolean merge)
+		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = dlFileRank.isNew();
 
 		if (listener != null) {
@@ -190,6 +192,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			dlFileRank.setNew(false);
 
 			return dlFileRank;
@@ -199,6 +202,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(DLFileRank.class.getName());
 		}
 	}
@@ -243,6 +247,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -253,18 +258,26 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -292,13 +305,17 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -309,25 +326,33 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -351,11 +376,13 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No DLFileRank exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
@@ -366,15 +393,18 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public DLFileRank findByUserId_Last(long userId, OrderByComparator obc)
 		throws NoSuchFileRankException, SystemException {
 		int count = countByUserId(userId);
+
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
+
+			msg.append("No DLFileRank exists with the key {");
+
+			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
@@ -385,34 +415,45 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public DLFileRank[] findByUserId_PrevAndNext(long fileRankId, long userId,
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
+
 		int count = countByUserId(userId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 			query.append("userId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank);
+
 			DLFileRank[] array = new DLFileRankImpl[3];
+
 			array[0] = (DLFileRank)objArray[0];
 			array[1] = (DLFileRank)objArray[1];
 			array[2] = (DLFileRank)objArray[2];
@@ -434,6 +475,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -444,9 +486,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -457,11 +502,15 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -469,6 +518,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -497,13 +547,18 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByF_N";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
+				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(folderId), name, String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(folderId),
+				
+				name,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -514,9 +569,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -532,13 +590,17 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -546,6 +608,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -569,14 +632,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileRank exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
@@ -587,18 +652,21 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public DLFileRank findByF_N_Last(long folderId, String name,
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		int count = countByF_N(folderId, name);
+
 		List list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
+
+			msg.append("No DLFileRank exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
@@ -610,16 +678,21 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String name, OrderByComparator obc)
 		throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
+
 		int count = countByF_N(folderId, name);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 			query.append("folderId = ?");
+
 			query.append(" AND ");
 
 			if (name == null) {
@@ -635,13 +708,17 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
@@ -650,7 +727,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank);
+
 			DLFileRank[] array = new DLFileRankImpl[3];
+
 			array[0] = (DLFileRank)objArray[0];
 			array[1] = (DLFileRank)objArray[1];
 			array[2] = (DLFileRank)objArray[2];
@@ -671,19 +750,20 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		if (dlFileRank == null) {
 			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
+
+			msg.append("No DLFileRank exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
+			msg.append("userId=" + userId);
+
 			msg.append(", ");
-			msg.append("folderId=");
-			msg.append(folderId);
+			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
+			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -705,8 +785,11 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(folderId), name
+				new Long(companyId), new Long(userId), new Long(folderId),
+				
+				name
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -717,13 +800,20 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -734,13 +824,19 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				query.append(" ");
+
 				query.append("ORDER BY ");
+
 				query.append("createDate DESC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -748,6 +844,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -804,6 +901,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -835,6 +933,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -845,6 +944,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank ");
 
@@ -852,12 +952,15 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
+
 					query.append("createDate DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -886,6 +989,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileRank dlFileRank = (DLFileRank)itr.next();
+
 			remove(dlFileRank);
 		}
 	}
@@ -896,6 +1000,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			DLFileRank dlFileRank = (DLFileRank)itr.next();
+
 			remove(dlFileRank);
 		}
 	}
@@ -903,6 +1008,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public void removeByC_U_F_N(long companyId, long userId, long folderId,
 		String name) throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = findByC_U_F_N(companyId, userId, folderId, name);
+
 		remove(dlFileRank);
 	}
 
@@ -919,6 +1025,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -929,17 +1036,23 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("userId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, userId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -974,6 +1087,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -984,10 +1098,13 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -1000,7 +1117,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -1008,6 +1127,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1044,8 +1164,11 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId), new Long(folderId), name
+				new Long(companyId), new Long(userId), new Long(folderId),
+				
+				name
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1056,14 +1179,21 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+
 				query.append("companyId = ?");
+
 				query.append(" AND ");
+
 				query.append("userId = ?");
+
 				query.append(" AND ");
+
 				query.append("folderId = ?");
+
 				query.append(" AND ");
 
 				if (name == null) {
@@ -1076,9 +1206,13 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, companyId);
+
 				q.setLong(queryPos++, userId);
+
 				q.setLong(queryPos++, folderId);
 
 				if (name != null) {
@@ -1086,6 +1220,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -1118,6 +1253,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1127,13 +1263,11 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileRank");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

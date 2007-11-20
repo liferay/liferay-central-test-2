@@ -37,26 +37,28 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
  * <a href="ShoppingCategoryServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -79,7 +81,9 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(parentCategoryId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -93,13 +97,16 @@ public class ShoppingCategoryServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(addCommunityPermissions);
+
 			Object paramObj5 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"addCategory",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -121,6 +128,7 @@ public class ShoppingCategoryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -134,7 +142,9 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(parentCategoryId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -165,6 +175,7 @@ public class ShoppingCategoryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -186,6 +197,7 @@ public class ShoppingCategoryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -196,6 +208,7 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"deleteCategory", new Object[] { paramObj0 });
 
@@ -216,6 +229,7 @@ public class ShoppingCategoryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -226,8 +240,10 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"getCategory", new Object[] { paramObj0 });
+
 			Object returnObj = null;
 
 			try {
@@ -249,6 +265,7 @@ public class ShoppingCategoryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -261,7 +278,9 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
+
 			Object paramObj1 = new LongWrapper(parentCategoryId);
+
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -275,11 +294,13 @@ public class ShoppingCategoryServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(mergeWithParentCategory);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"updateCategory",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -301,6 +322,7 @@ public class ShoppingCategoryServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

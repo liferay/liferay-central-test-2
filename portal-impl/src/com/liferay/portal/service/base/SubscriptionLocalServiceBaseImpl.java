@@ -270,7 +270,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	public Subscription addSubscription(Subscription model)
 		throws SystemException {
 		Subscription subscription = new SubscriptionImpl();
+
 		subscription.setNew(true);
+
 		subscription.setSubscriptionId(model.getSubscriptionId());
 		subscription.setCompanyId(model.getCompanyId());
 		subscription.setUserId(model.getUserId());
@@ -298,7 +300,9 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	public Subscription updateSubscription(Subscription model)
 		throws SystemException {
 		Subscription subscription = new SubscriptionImpl();
+
 		subscription.setNew(false);
+
 		subscription.setSubscriptionId(model.getSubscriptionId());
 		subscription.setCompanyId(model.getCompanyId());
 		subscription.setUserId(model.getUserId());

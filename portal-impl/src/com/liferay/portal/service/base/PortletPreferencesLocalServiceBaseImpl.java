@@ -270,7 +270,9 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	public PortletPreferences addPortletPreferences(PortletPreferences model)
 		throws SystemException {
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
+
 		portletPreferences.setNew(true);
+
 		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
 		portletPreferences.setOwnerId(model.getOwnerId());
 		portletPreferences.setOwnerType(model.getOwnerType());
@@ -295,7 +297,9 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	public PortletPreferences updatePortletPreferences(PortletPreferences model)
 		throws SystemException {
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
+
 		portletPreferences.setNew(false);
+
 		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
 		portletPreferences.setOwnerId(model.getOwnerId());
 		portletPreferences.setOwnerType(model.getOwnerType());

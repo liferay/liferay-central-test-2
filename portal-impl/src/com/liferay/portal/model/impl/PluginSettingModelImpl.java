@@ -40,13 +40,13 @@ import java.sql.Types;
  * <a href="PluginSettingModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>PluginSetting</code> table in
- * the database.
+ * This class is a model that represents the <code>PluginSetting</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -60,10 +60,20 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PluginSetting";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "pluginSettingId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "pluginId", new Integer(Types.VARCHAR) },
+			
+
 			{ "pluginType", new Integer(Types.VARCHAR) },
+			
+
 			{ "roles", new Integer(Types.VARCHAR) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PluginSetting (pluginSettingId LONG not null primary key,companyId LONG,pluginId VARCHAR(75) null,pluginType VARCHAR(75) null,roles STRING null,active_ BOOLEAN)";
@@ -160,6 +170,7 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 
 	public PluginSetting toEscapedModel() {
 		PluginSetting model = new PluginSettingImpl();
+
 		model.setPluginSettingId(getPluginSettingId());
 		model.setCompanyId(getCompanyId());
 		model.setPluginId(Html.escape(getPluginId()));
@@ -178,6 +189,7 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PluginSettingImpl clone = new PluginSettingImpl();
+
 		clone.setPluginSettingId(getPluginSettingId());
 		clone.setCompanyId(getCompanyId());
 		clone.setPluginId(getPluginId());
@@ -194,6 +206,7 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		}
 
 		PluginSettingImpl pluginSetting = (PluginSettingImpl)obj;
+
 		long pk = pluginSetting.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

@@ -43,13 +43,13 @@ import java.util.Date;
  * <a href="BookmarksEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>BookmarksEntry</code> table in
- * the database.
+ * This class is a model that represents the <code>BookmarksEntry</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -63,16 +63,38 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksEntry";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "entryId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "folderId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "url", new Integer(Types.VARCHAR) },
+			
+
 			{ "comments", new Integer(Types.VARCHAR) },
+			
+
 			{ "visits", new Integer(Types.INTEGER) },
+			
+
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
@@ -230,6 +252,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 	public BookmarksEntry toEscapedModel() {
 		BookmarksEntry model = new BookmarksEntryImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setEntryId(getEntryId());
 		model.setCompanyId(getCompanyId());
@@ -254,6 +277,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BookmarksEntryImpl clone = new BookmarksEntryImpl();
+
 		clone.setUuid(getUuid());
 		clone.setEntryId(getEntryId());
 		clone.setCompanyId(getCompanyId());
@@ -276,6 +300,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		}
 
 		BookmarksEntryImpl bookmarksEntry = (BookmarksEntryImpl)obj;
+
 		int value = 0;
 
 		if (getFolderId() < bookmarksEntry.getFolderId()) {

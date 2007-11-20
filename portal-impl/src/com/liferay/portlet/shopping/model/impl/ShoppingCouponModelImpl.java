@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="ShoppingCouponModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>ShoppingCoupon</code> table in
- * the database.
+ * This class is a model that represents the <code>ShoppingCoupon</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,22 +64,56 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingCoupon";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "couponId", new Integer(Types.BIGINT) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "code_", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "startDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "endDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "active_", new Integer(Types.BOOLEAN) },
+			
+
 			{ "limitCategories", new Integer(Types.VARCHAR) },
+			
+
 			{ "limitSkus", new Integer(Types.VARCHAR) },
+			
+
 			{ "minOrder", new Integer(Types.DOUBLE) },
+			
+
 			{ "discount", new Integer(Types.DOUBLE) },
+			
+
 			{ "discountType", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories STRING null,limitSkus STRING null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";
@@ -319,6 +353,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 
 	public ShoppingCoupon toEscapedModel() {
 		ShoppingCoupon model = new ShoppingCouponImpl();
+
 		model.setCouponId(getCouponId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -349,6 +384,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingCouponImpl clone = new ShoppingCouponImpl();
+
 		clone.setCouponId(getCouponId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -377,7 +413,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingCouponImpl shoppingCoupon = (ShoppingCouponImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(),
 				shoppingCoupon.getCreateDate());
 

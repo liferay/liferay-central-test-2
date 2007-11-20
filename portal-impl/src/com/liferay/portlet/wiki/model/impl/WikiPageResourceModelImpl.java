@@ -41,8 +41,8 @@ import java.sql.Types;
  * <a href="WikiPageResourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -61,7 +61,11 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiPageResource";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
+			
+
 			{ "nodeId", new Integer(Types.BIGINT) },
+			
+
 			{ "title", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
@@ -118,6 +122,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 
 	public WikiPageResource toEscapedModel() {
 		WikiPageResource model = new WikiPageResourceImpl();
+
 		model.setResourcePrimKey(getResourcePrimKey());
 		model.setNodeId(getNodeId());
 		model.setTitle(Html.escape(getTitle()));
@@ -133,6 +138,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		WikiPageResourceImpl clone = new WikiPageResourceImpl();
+
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setNodeId(getNodeId());
 		clone.setTitle(getTitle());
@@ -146,6 +152,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 		}
 
 		WikiPageResourceImpl wikiPageResource = (WikiPageResourceImpl)obj;
+
 		long pk = wikiPageResource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {

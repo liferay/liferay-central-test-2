@@ -263,7 +263,9 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	public UserGroupRole addUserGroupRole(UserGroupRole model)
 		throws SystemException {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
+
 		userGroupRole.setNew(true);
+
 		userGroupRole.setUserId(model.getUserId());
 		userGroupRole.setGroupId(model.getGroupId());
 		userGroupRole.setRoleId(model.getRoleId());
@@ -285,7 +287,9 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	public UserGroupRole updateUserGroupRole(UserGroupRole model)
 		throws SystemException {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
+
 		userGroupRole.setNew(false);
+
 		userGroupRole.setUserId(model.getUserId());
 		userGroupRole.setGroupId(model.getGroupId());
 		userGroupRole.setRoleId(model.getRoleId());

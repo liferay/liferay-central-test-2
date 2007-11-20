@@ -62,6 +62,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	implements ShoppingCategoryPersistence {
 	public ShoppingCategory create(long categoryId) {
 		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
+
 		shoppingCategory.setNew(true);
 		shoppingCategory.setPrimaryKey(categoryId);
 
@@ -126,7 +127,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(shoppingCategory);
+
 			session.flush();
 
 			return shoppingCategory;
@@ -136,20 +139,20 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingCategory.class.getName());
 		}
 	}
 
-	public ShoppingCategory update(
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
+	public ShoppingCategory update(ShoppingCategory shoppingCategory)
 		throws SystemException {
 		return update(shoppingCategory, false);
 	}
 
-	public ShoppingCategory update(
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
+	public ShoppingCategory update(ShoppingCategory shoppingCategory,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = shoppingCategory.isNew();
 
 		if (listener != null) {
@@ -193,6 +196,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			shoppingCategory.setNew(false);
 
 			return shoppingCategory;
@@ -202,6 +206,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(ShoppingCategory.class.getName());
 		}
 	}
@@ -247,6 +252,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -257,19 +263,27 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentCategoryId ASC").append(", ");
+
+				query.append("parentCategoryId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -297,13 +311,17 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		String finderClassName = ShoppingCategory.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -314,26 +332,34 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentCategoryId ASC").append(", ");
+
+					query.append("parentCategoryId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -357,11 +383,13 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCategory exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -372,15 +400,18 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	public ShoppingCategory findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByGroupId(groupId);
+
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCategory exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -392,35 +423,46 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		long groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
+
 		int count = countByGroupId(groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentCategoryId ASC").append(", ");
+
+				query.append("parentCategoryId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
+
 			ShoppingCategory[] array = new ShoppingCategoryImpl[3];
+
 			array[0] = (ShoppingCategory)objArray[0];
 			array[1] = (ShoppingCategory)objArray[1];
 			array[2] = (ShoppingCategory)objArray[2];
@@ -445,6 +487,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -455,22 +498,33 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
+
 				query.append("ORDER BY ");
-				query.append("parentCategoryId ASC").append(", ");
+
+				query.append("parentCategoryId ASC, ");
 				query.append("name ASC");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				List list = q.list();
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -498,14 +552,17 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		String finderClassName = ShoppingCategory.class.getName();
 		String finderMethodName = "findByG_P";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId),
+				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -516,29 +573,40 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentCategoryId ASC").append(", ");
+
+					query.append("parentCategoryId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
+
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
@@ -563,14 +631,16 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCategory exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("parentCategoryId=");
-			msg.append(parentCategoryId);
+			msg.append("parentCategoryId=" + parentCategoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -581,18 +651,21 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	public ShoppingCategory findByG_P_Last(long groupId, long parentCategoryId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
+
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingCategory exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
+
+			msg.append("No ShoppingCategory exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
-			msg.append("parentCategoryId=");
-			msg.append(parentCategoryId);
+			msg.append("parentCategoryId=" + parentCategoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
@@ -604,38 +677,52 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		long groupId, long parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
+
 		int count = countByG_P(groupId, parentCategoryId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringMaker query = new StringMaker();
+
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 			query.append("groupId = ?");
+
 			query.append(" AND ");
+
 			query.append("parentCategoryId = ?");
+
 			query.append(" ");
 
 			if (obc != null) {
 				query.append("ORDER BY ");
 				query.append(obc.getOrderBy());
 			}
+
 			else {
 				query.append("ORDER BY ");
-				query.append("parentCategoryId ASC").append(", ");
+
+				query.append("parentCategoryId ASC, ");
 				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
+
 			int queryPos = 0;
+
 			q.setLong(queryPos++, groupId);
+
 			q.setLong(queryPos++, parentCategoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
+
 			ShoppingCategory[] array = new ShoppingCategoryImpl[3];
+
 			array[0] = (ShoppingCategory)objArray[0];
 			array[1] = (ShoppingCategory)objArray[1];
 			array[2] = (ShoppingCategory)objArray[2];
@@ -677,6 +764,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -708,6 +796,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -718,6 +807,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory ");
 
@@ -725,13 +815,16 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 					query.append(obc.getOrderBy());
 				}
+
 				else {
 					query.append("ORDER BY ");
-					query.append("parentCategoryId ASC").append(", ");
+
+					query.append("parentCategoryId ASC, ");
 					query.append("name ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -760,6 +853,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
+
 			remove(shoppingCategory);
 		}
 	}
@@ -770,6 +864,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
+
 			remove(shoppingCategory);
 		}
 	}
@@ -787,6 +882,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -797,17 +893,23 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -845,6 +947,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -855,20 +958,29 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("SELECT COUNT(*) ");
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
+
 				query.append("groupId = ?");
+
 				query.append(" AND ");
+
 				query.append("parentCategoryId = ?");
+
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
+
 				int queryPos = 0;
+
 				q.setLong(queryPos++, groupId);
+
 				q.setLong(queryPos++, parentCategoryId);
 
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
@@ -901,6 +1013,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -910,13 +1023,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.shopping.model.ShoppingCategory");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCategory");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

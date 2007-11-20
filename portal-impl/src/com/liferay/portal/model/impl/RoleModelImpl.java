@@ -40,12 +40,13 @@ import java.sql.Types;
  * <a href="RoleModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>Role_</code> table in the database.
+ * This class is a model that represents the <code>Role</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -59,11 +60,23 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Role_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
+			
+
 			{ "classPK", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
+			
+
 			{ "type_", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
@@ -163,6 +176,7 @@ public class RoleModelImpl extends BaseModelImpl {
 
 	public Role toEscapedModel() {
 		Role model = new RoleImpl();
+
 		model.setRoleId(getRoleId());
 		model.setCompanyId(getCompanyId());
 		model.setClassNameId(getClassNameId());
@@ -181,6 +195,7 @@ public class RoleModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		RoleImpl clone = new RoleImpl();
+
 		clone.setRoleId(getRoleId());
 		clone.setCompanyId(getCompanyId());
 		clone.setClassNameId(getClassNameId());
@@ -198,7 +213,9 @@ public class RoleModelImpl extends BaseModelImpl {
 		}
 
 		RoleImpl role = (RoleImpl)obj;
+
 		int value = 0;
+
 		value = getName().compareTo(role.getName());
 
 		if (value != 0) {

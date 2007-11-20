@@ -35,12 +35,13 @@ import java.util.List;
  * <a href="MBMessageJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.messageboards.service.http.MBMessageServiceJSON</code>
+ * This class is used by
+ * <code>com.liferay.portlet.messageboards.service.http.MBMessageServiceJSON</code>
  * to translate objects.
  * </p>
  *
@@ -52,6 +53,7 @@ import java.util.List;
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
 		JSONObject jsonObj = new JSONObject();
+
 		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "messageId", model.getMessageId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
@@ -75,6 +77,7 @@ public class MBMessageJSONSerializer {
 
 		for (int i = 0; i < models.size(); i++) {
 			MBMessage model = (MBMessage)models.get(i);
+
 			jsonArray.put(toJSONObject(model));
 		}
 

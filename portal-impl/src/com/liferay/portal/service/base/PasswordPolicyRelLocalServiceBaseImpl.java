@@ -270,7 +270,9 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	public PasswordPolicyRel addPasswordPolicyRel(PasswordPolicyRel model)
 		throws SystemException {
 		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
+
 		passwordPolicyRel.setNew(true);
+
 		passwordPolicyRel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
 		passwordPolicyRel.setPasswordPolicyId(model.getPasswordPolicyId());
 		passwordPolicyRel.setClassNameId(model.getClassNameId());
@@ -293,7 +295,9 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	public PasswordPolicyRel updatePasswordPolicyRel(PasswordPolicyRel model)
 		throws SystemException {
 		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
+
 		passwordPolicyRel.setNew(false);
+
 		passwordPolicyRel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
 		passwordPolicyRel.setPasswordPolicyId(model.getPasswordPolicyId());
 		passwordPolicyRel.setClassNameId(model.getClassNameId());

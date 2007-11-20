@@ -270,7 +270,9 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	public UserTrackerPath addUserTrackerPath(UserTrackerPath model)
 		throws SystemException {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
+
 		userTrackerPath.setNew(true);
+
 		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
 		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
 		userTrackerPath.setPath(model.getPath());
@@ -293,7 +295,9 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	public UserTrackerPath updateUserTrackerPath(UserTrackerPath model)
 		throws SystemException {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
+
 		userTrackerPath.setNew(false);
+
 		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
 		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
 		userTrackerPath.setPath(model.getPath());

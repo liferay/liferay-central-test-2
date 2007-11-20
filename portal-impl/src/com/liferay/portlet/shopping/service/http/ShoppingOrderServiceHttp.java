@@ -39,26 +39,28 @@ import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
  * <a href="ShoppingOrderServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the <code>com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil</code>
- * service utility. The static methods of this class calls the same methods of the
+ * This class provides a HTTP utility for the
+ * <code>com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil</code> service
+ * utility. The static methods of this class calls the same methods of the
  * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code> parameter.
+ * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
+ * parameter.
  * </p>
  *
  * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for tunneling
- * without the cost of serializing to text. The drawback is that it only works with
- * Java.
+ * The benefits of using the HTTP utility is that it is fast and allows for
+ * tunneling without the cost of serializing to text. The drawback is that it
+ * only works with Java.
  * </p>
  *
  * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in portal.properties
- * to configure security.
+ * Set the property <code>tunnel.servlet.hosts.allowed</code> in
+ * portal.properties to configure security.
  * </p>
  *
  * <p>
@@ -81,6 +83,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = number;
 
 			if (number == null) {
@@ -100,6 +103,7 @@ public class ShoppingOrderServiceHttp {
 			}
 
 			Object paramObj4 = new DoubleWrapper(ppPaymentGross);
+
 			Object paramObj5 = ppReceiverEmail;
 
 			if (ppReceiverEmail == null) {
@@ -136,6 +140,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -146,7 +151,9 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(orderId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
 					"deleteOrder", new Object[] { paramObj0, paramObj1 });
 
@@ -167,6 +174,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -177,9 +185,12 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(orderId);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
 					"getOrder", new Object[] { paramObj0, paramObj1 });
+
 			Object returnObj = null;
 
 			try {
@@ -201,6 +212,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -211,7 +223,9 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(orderId);
+
 			Object paramObj2 = emailType;
 
 			if (emailType == null) {
@@ -239,6 +253,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -263,7 +278,9 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(orderId);
+
 			Object paramObj2 = billingFirstName;
 
 			if (billingFirstName == null) {
@@ -325,6 +342,7 @@ public class ShoppingOrderServiceHttp {
 			}
 
 			Object paramObj12 = new BooleanWrapper(shipToBilling);
+
 			Object paramObj13 = shippingFirstName;
 
 			if (shippingFirstName == null) {
@@ -404,7 +422,9 @@ public class ShoppingOrderServiceHttp {
 			}
 
 			Object paramObj26 = new IntegerWrapper(ccExpMonth);
+
 			Object paramObj27 = new IntegerWrapper(ccExpYear);
+
 			Object paramObj28 = ccVerNumber;
 
 			if (ccVerNumber == null) {
@@ -428,6 +448,7 @@ public class ShoppingOrderServiceHttp {
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -449,6 +470,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}
@@ -462,7 +484,9 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
+
 			Object paramObj1 = new LongWrapper(orderId);
+
 			Object paramObj2 = ppTxnId;
 
 			if (ppTxnId == null) {
@@ -476,6 +500,7 @@ public class ShoppingOrderServiceHttp {
 			}
 
 			Object paramObj4 = new DoubleWrapper(ppPaymentGross);
+
 			Object paramObj5 = ppReceiverEmail;
 
 			if (ppReceiverEmail == null) {
@@ -494,6 +519,7 @@ public class ShoppingOrderServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6
 					});
+
 			Object returnObj = null;
 
 			try {
@@ -515,6 +541,7 @@ public class ShoppingOrderServiceHttp {
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
+
 			throw se;
 		}
 	}

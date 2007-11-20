@@ -61,6 +61,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	implements TagsSourcePersistence {
 	public TagsSource create(long sourceId) {
 		TagsSource tagsSource = new TagsSourceImpl();
+
 		tagsSource.setNew(true);
 		tagsSource.setPrimaryKey(sourceId);
 
@@ -122,7 +123,9 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+
 			session.delete(tagsSource);
+
 			session.flush();
 
 			return tagsSource;
@@ -132,20 +135,19 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(TagsSource.class.getName());
 		}
 	}
 
-	public TagsSource update(
-		com.liferay.portlet.tags.model.TagsSource tagsSource)
-		throws SystemException {
+	public TagsSource update(TagsSource tagsSource) throws SystemException {
 		return update(tagsSource, false);
 	}
 
-	public TagsSource update(
-		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
+	public TagsSource update(TagsSource tagsSource, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
+
 		boolean isNew = tagsSource.isNew();
 
 		if (listener != null) {
@@ -189,6 +191,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 			}
 
 			session.flush();
+
 			tagsSource.setNew(false);
 
 			return tagsSource;
@@ -198,6 +201,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+
 			FinderCache.clearCache(TagsSource.class.getName());
 		}
 	}
@@ -264,6 +268,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DynamicQuery query = queryInitializer.initialize(session);
+
 			query.setLimit(begin, end);
 
 			return query.list();
@@ -295,6 +300,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -305,6 +311,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 				session = openSession();
 
 				StringMaker query = new StringMaker();
+
 				query.append("FROM com.liferay.portlet.tags.model.TagsSource ");
 
 				if (obc != null) {
@@ -313,6 +320,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 				}
 
 				Query q = session.createQuery(query.toString());
+
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
@@ -349,6 +357,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
+
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -358,12 +367,11 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append("FROM com.liferay.portlet.tags.model.TagsSource");
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsSource");
 
-				Query q = session.createQuery(query.toString());
 				Long count = null;
+
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {

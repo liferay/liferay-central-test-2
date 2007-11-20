@@ -75,7 +75,9 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser model)
 		throws SystemException {
 		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
+
 		blogsStatsUser.setNew(true);
+
 		blogsStatsUser.setStatsUserId(model.getStatsUserId());
 		blogsStatsUser.setGroupId(model.getGroupId());
 		blogsStatsUser.setCompanyId(model.getCompanyId());
@@ -103,7 +105,9 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser model)
 		throws SystemException {
 		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
+
 		blogsStatsUser.setNew(false);
+
 		blogsStatsUser.setStatsUserId(model.getStatsUserId());
 		blogsStatsUser.setGroupId(model.getGroupId());
 		blogsStatsUser.setCompanyId(model.getCompanyId());

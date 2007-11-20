@@ -41,13 +41,13 @@ import java.sql.Types;
  * <a href="PollsChoiceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>PollsChoice</code> table in the
- * database.
+ * This class is a model that represents the <code>PollsChoice</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -61,9 +61,17 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsChoice";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "choiceId", new Integer(Types.BIGINT) },
+			
+
 			{ "questionId", new Integer(Types.BIGINT) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
@@ -143,6 +151,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 	public PollsChoice toEscapedModel() {
 		PollsChoice model = new PollsChoiceImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setChoiceId(getChoiceId());
 		model.setQuestionId(getQuestionId());
@@ -160,6 +169,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsChoiceImpl clone = new PollsChoiceImpl();
+
 		clone.setUuid(getUuid());
 		clone.setChoiceId(getChoiceId());
 		clone.setQuestionId(getQuestionId());
@@ -175,6 +185,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		}
 
 		PollsChoiceImpl pollsChoice = (PollsChoiceImpl)obj;
+
 		int value = 0;
 
 		if (getQuestionId() < pollsChoice.getQuestionId()) {

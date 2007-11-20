@@ -105,7 +105,9 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	public JournalContentSearch addJournalContentSearch(
 		JournalContentSearch model) throws SystemException {
 		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
+
 		journalContentSearch.setNew(true);
+
 		journalContentSearch.setContentSearchId(model.getContentSearchId());
 		journalContentSearch.setGroupId(model.getGroupId());
 		journalContentSearch.setCompanyId(model.getCompanyId());
@@ -131,7 +133,9 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	public JournalContentSearch updateJournalContentSearch(
 		JournalContentSearch model) throws SystemException {
 		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
+
 		journalContentSearch.setNew(false);
+
 		journalContentSearch.setContentSearchId(model.getContentSearchId());
 		journalContentSearch.setGroupId(model.getGroupId());
 		journalContentSearch.setCompanyId(model.getCompanyId());

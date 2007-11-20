@@ -262,7 +262,9 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	InitializingBean {
 	public Contact addContact(Contact model) throws SystemException {
 		Contact contact = new ContactImpl();
+
 		contact.setNew(true);
+
 		contact.setContactId(model.getContactId());
 		contact.setCompanyId(model.getCompanyId());
 		contact.setUserId(model.getUserId());
@@ -307,7 +309,9 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 
 	public Contact updateContact(Contact model) throws SystemException {
 		Contact contact = new ContactImpl();
+
 		contact.setNew(false);
+
 		contact.setContactId(model.getContactId());
 		contact.setCompanyId(model.getCompanyId());
 		contact.setUserId(model.getUserId());

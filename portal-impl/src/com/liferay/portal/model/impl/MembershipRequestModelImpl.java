@@ -43,8 +43,8 @@ import java.util.Date;
  * <a href="MembershipRequestModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
@@ -63,14 +63,32 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MembershipRequest";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "membershipRequestId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "comments", new Integer(Types.VARCHAR) },
+			
+
 			{ "replyComments", new Integer(Types.VARCHAR) },
+			
+
 			{ "replyDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "replierUserId", new Integer(Types.BIGINT) },
+			
+
 			{ "statusId", new Integer(Types.INTEGER) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
@@ -207,6 +225,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 
 	public MembershipRequest toEscapedModel() {
 		MembershipRequest model = new MembershipRequestImpl();
+
 		model.setMembershipRequestId(getMembershipRequestId());
 		model.setCompanyId(getCompanyId());
 		model.setUserId(getUserId());
@@ -229,6 +248,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MembershipRequestImpl clone = new MembershipRequestImpl();
+
 		clone.setMembershipRequestId(getMembershipRequestId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -249,9 +269,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		}
 
 		MembershipRequestImpl membershipRequest = (MembershipRequestImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(),
 				membershipRequest.getCreateDate());
+
 		value = value * -1;
 
 		if (value != 0) {

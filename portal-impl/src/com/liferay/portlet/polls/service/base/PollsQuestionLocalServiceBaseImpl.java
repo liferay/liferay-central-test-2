@@ -79,7 +79,9 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	public PollsQuestion addPollsQuestion(PollsQuestion model)
 		throws SystemException {
 		PollsQuestion pollsQuestion = new PollsQuestionImpl();
+
 		pollsQuestion.setNew(true);
+
 		pollsQuestion.setUuid(model.getUuid());
 		pollsQuestion.setQuestionId(model.getQuestionId());
 		pollsQuestion.setGroupId(model.getGroupId());
@@ -110,7 +112,9 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	public PollsQuestion updatePollsQuestion(PollsQuestion model)
 		throws SystemException {
 		PollsQuestion pollsQuestion = new PollsQuestionImpl();
+
 		pollsQuestion.setNew(false);
+
 		pollsQuestion.setUuid(model.getUuid());
 		pollsQuestion.setQuestionId(model.getQuestionId());
 		pollsQuestion.setGroupId(model.getGroupId());

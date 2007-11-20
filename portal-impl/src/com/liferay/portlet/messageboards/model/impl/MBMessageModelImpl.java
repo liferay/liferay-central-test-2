@@ -44,13 +44,13 @@ import java.util.Date;
  * <a href="MBMessageModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is a model that represents the <code>MBMessage</code> table in the
- * database.
+ * This class is a model that represents the <code>MBMessage</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -64,18 +64,44 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBMessage";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "messageId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "userId", new Integer(Types.BIGINT) },
+			
+
 			{ "userName", new Integer(Types.VARCHAR) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
+			
+
 			{ "threadId", new Integer(Types.BIGINT) },
+			
+
 			{ "parentMessageId", new Integer(Types.BIGINT) },
+			
+
 			{ "subject", new Integer(Types.VARCHAR) },
+			
+
 			{ "body", new Integer(Types.CLOB) },
+			
+
 			{ "attachments", new Integer(Types.BOOLEAN) },
+			
+
 			{ "anonymous", new Integer(Types.BOOLEAN) }
 		};
 	public static String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
@@ -262,6 +288,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public MBMessage toEscapedModel() {
 		MBMessage model = new MBMessageImpl();
+
 		model.setUuid(Html.escape(getUuid()));
 		model.setMessageId(getMessageId());
 		model.setCompanyId(getCompanyId());
@@ -288,6 +315,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBMessageImpl clone = new MBMessageImpl();
+
 		clone.setUuid(getUuid());
 		clone.setMessageId(getMessageId());
 		clone.setCompanyId(getCompanyId());
@@ -312,7 +340,9 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		}
 
 		MBMessageImpl mbMessage = (MBMessageImpl)obj;
+
 		int value = 0;
+
 		value = DateUtil.compareTo(getCreateDate(), mbMessage.getCreateDate());
 
 		if (value != 0) {
