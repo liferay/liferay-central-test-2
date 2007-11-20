@@ -162,7 +162,8 @@ public class ServiceBuilder {
 
 		if (serviceBuilder == null) {
 			System.out.println(
-				"Please set the system properties. Sample properties are:\n" +
+				"Please set these required system properties. Sample values are:\n" +
+				"\n" +
 				"\t-Dservice.input.file=${service.file}\n" +
 				"\t-Dservice.hbm.file=classes/META-INF/portal-hbm.xml\n" +
 				"\t-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml\n" +
@@ -179,7 +180,51 @@ public class ServiceBuilder {
 				"\t-Dservice.principal.bean.package=com.liferay.portal.service.impl\n" +
 				"\t-Dservice.props.util.package=com.liferay.portal.util\n" +
 				"\t-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate\n" +
-				"\t-Dservice.spring.util.package=com.liferay.portal.spring.util");
+				"\t-Dservice.spring.util.package=com.liferay.portal.spring.util\n" +
+				"\n" +
+				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
+				"\n" +
+				"\t-Dservice.tpl.base_mode_impl.ftl=" + _TPL_ROOT + "base_mode_impl.ftl\n"+
+				"\t-Dservice.tpl.base_persistence.ftl=" + _TPL_ROOT + "base_persistence.ftl\n"+
+				"\t-Dservice.tpl.bean_locator_util.ftl=" + _TPL_ROOT + "bean_locator_util.ftl\n"+
+				"\t-Dservice.tpl.copyright.txt=copyright.txt\n"+
+				"\t-Dservice.tpl.dynamic_dialect.ftl=" + _TPL_ROOT + "dynamic_dialect.ftl\n"+
+				"\t-Dservice.tpl.ejb_pk.ftl=" + _TPL_ROOT + "ejb_pk.ftl\n"+
+				"\t-Dservice.tpl.exception.ftl=" + _TPL_ROOT + "exception.ftl\n"+
+				"\t-Dservice.tpl.extended_model.ftl=" + _TPL_ROOT + "extended_model.ftl\n"+
+				"\t-Dservice.tpl.extended_model_impl.ftl=" + _TPL_ROOT + "extended_model_impl.ftl\n"+
+				"\t-Dservice.tpl.finder.ftl=" + _TPL_ROOT + "finder.ftl\n"+
+				"\t-Dservice.tpl.finder_cache.ftl=" + _TPL_ROOT + "finder_cache.ftl\n"+
+				"\t-Dservice.tpl.finder_util.ftl=" + _TPL_ROOT + "finder_util.ftl\n"+
+				"\t-Dservice.tpl.hbm_xml.ftl=" + _TPL_ROOT + "hbm_xml.ftl\n"+
+				"\t-Dservice.tpl.hibernate_configuration.ftl=" + _TPL_ROOT + "hibernate_configuration.ftl\n"+
+				"\t-Dservice.tpl.hibernate_util.ftl=" + _TPL_ROOT + "hibernate_util.ftl\n"+
+				"\t-Dservice.tpl.json_js.ftl=" + _TPL_ROOT + "json_js.ftl\n"+
+				"\t-Dservice.tpl.json_js_method.ftl=" + _TPL_ROOT + "json_js_method.ftl\n"+
+				"\t-Dservice.tpl.model.ftl=" + _TPL_ROOT + "model.ftl\n"+
+				"\t-Dservice.tpl.model_hints_xml.ftl=" + _TPL_ROOT + "model_hints_xml.ftl\n"+
+				"\t-Dservice.tpl.model_impl.ftl=" + _TPL_ROOT + "model_impl.ftl\n"+
+				"\t-Dservice.tpl.model_soap.ftl=" + _TPL_ROOT + "model_soap.ftl\n"+
+				"\t-Dservice.tpl.persistence.ftl=" + _TPL_ROOT + "persistence.ftl\n"+
+				"\t-Dservice.tpl.persistence_impl.ftl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
+				"\t-Dservice.tpl.persistence_util.ftl=" + _TPL_ROOT + "persistence_util.ftl\n"+
+				"\t-Dservice.tpl.principal_bean.ftl=" + _TPL_ROOT + "principal_bean.ftl\n"+
+				"\t-Dservice.tpl.props.ftl=" + _TPL_ROOT + "props.ftl\n"+
+				"\t-Dservice.tpl.props_util.ftl=" + _TPL_ROOT + "props_util.ftl\n"+
+				"\t-Dservice.tpl.remoting_xml.ftl=" + _TPL_ROOT + "remoting_xml.ftl\n"+
+				"\t-Dservice.tpl.service.ftl=" + _TPL_ROOT + "service.ftl\n"+
+				"\t-Dservice.tpl.service_base_impl.ftl=" + _TPL_ROOT + "service_base_impl.ftl\n"+
+				"\t-Dservice.tpl.service_factory.ftl=" + _TPL_ROOT + "service_factory.ftl\n"+
+				"\t-Dservice.tpl.service_http.ftl=" + _TPL_ROOT + "service_http.ftl\n"+
+				"\t-Dservice.tpl.service_impl.ftl=" + _TPL_ROOT + "service_impl.ftl\n"+
+				"\t-Dservice.tpl.service_json.ftl=" + _TPL_ROOT + "service_json.ftl\n"+
+				"\t-Dservice.tpl.service_json_serializer.ftl=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
+				"\t-Dservice.tpl.service_soap.ftl=" + _TPL_ROOT + "service_soap.ftl\n"+
+				"\t-Dservice.tpl.service_util.ftl=" + _TPL_ROOT + "service_util.ftl\n"+
+				"\t-Dservice.tpl.spring_data_source_xml.ftl=" + _TPL_ROOT + "spring_data_source_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_util.ftl=" + _TPL_ROOT + "spring_util.ftl\n"+
+				"\t-Dservice.tpl.spring_xml.ftl=" + _TPL_ROOT + "spring_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_xml_session.ftl=" + _TPL_ROOT + "spring_xml_session.ftl");
 		}
 	}
 
@@ -524,6 +569,61 @@ public class ServiceBuilder {
 		String beanLocatorUtilPackage, String principalBeanPackage,
 		String propsUtilPackage, String springHibernatePackage,
 		String springUtilPackage, boolean build) {
+
+		_tplBaseModeImpl = _getTplProperty("base_mode_impl", _tplBaseModeImpl);
+		_tplBasePersistence = _getTplProperty(
+			"base_persistence", _tplBasePersistence);
+		_tplBeanLocatorUtil = _getTplProperty(
+			"bean_locator_util", _tplBeanLocatorUtil);
+		_tplDynamicDialect = _getTplProperty(
+			"dynamic_dialect", _tplDynamicDialect);
+		_tplEjbPk = _getTplProperty("ejb_pk", _tplEjbPk);
+		_tplException = _getTplProperty("exception", _tplException);
+		_tplExtendedModel = _getTplProperty(
+			"extended_model", _tplExtendedModel);
+		_tplExtendedModelImpl = _getTplProperty(
+			"extended_model_impl", _tplExtendedModelImpl);
+		_tplFinder = _getTplProperty("finder", _tplFinder);
+		_tplFinderCache = _getTplProperty("finder_cache", _tplFinderCache);
+		_tplFinderUtil = _getTplProperty("finder_util", _tplFinderUtil);
+		_tplHbmXml = _getTplProperty("hbm_xml", _tplHbmXml);
+		_tplHibernateConfiguration = _getTplProperty(
+			"hibernate_configuration", _tplHibernateConfiguration);
+		_tplHibernateUtil = _getTplProperty(
+			"hibernate_util", _tplHibernateUtil);
+		_tplJsonJs = _getTplProperty("json_js", _tplJsonJs);
+		_tplJsonJsMethod = _getTplProperty("json_js_method", _tplJsonJsMethod);
+		_tplModel = _getTplProperty("model", _tplModel);
+		_tplModelHintsXml = _getTplProperty(
+			"model_hints_xml", _tplModelHintsXml);
+		_tplModelImpl = _getTplProperty("model_impl", _tplModelImpl);
+		_tplModelSoap = _getTplProperty("model_soap", _tplModelSoap);
+		_tplPersistence = _getTplProperty("persistence", _tplPersistence);
+		_tplPersistenceImpl = _getTplProperty(
+			"persistence_impl", _tplPersistenceImpl);
+		_tplPersistenceUtil = _getTplProperty(
+			"persistence_util", _tplPersistenceUtil);
+		_tplPrincipalBean = _getTplProperty(
+			"principal_bean", _tplPrincipalBean);
+		_tplProps = _getTplProperty("props", _tplProps);
+		_tplPropsUtil = _getTplProperty("props_util", _tplPropsUtil);
+		_tplRemotingXml = _getTplProperty("remoting_xml", _tplRemotingXml);
+		_tplService = _getTplProperty("service", _tplService);
+		_tplServiceBaseImpl = _getTplProperty(
+			"service_base_impl", _tplServiceBaseImpl);
+		_tplServiceFactory = _getTplProperty(
+			"service_factory", _tplServiceFactory);
+		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
+		_tplServiceImpl = _getTplProperty("service_impl", _tplServiceImpl);
+		_tplServiceJson = _getTplProperty("service_json", _tplServiceJson);
+		_tplServiceJsonSerializer = _getTplProperty(
+			"service_json_serializer", _tplServiceJsonSerializer);
+		_tplServiceSoap = _getTplProperty("service_soap", _tplServiceSoap);
+		_tplServiceUtil = _getTplProperty("service_util", _tplServiceUtil);
+		_tplSpringDataSourceXml = _getTplProperty(
+			"spring_data_source_xml", _tplSpringDataSourceXml);
+		_tplSpringUtil = _getTplProperty("spring_util", _tplSpringUtil);
+		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -1351,7 +1451,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("base_model_impl.ftl");
+		String content = _processTemplate(_tplBaseModeImpl);
 
 		// Write file
 
@@ -1372,7 +1472,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("base_persistence.ftl");
+		String content = _processTemplate(_tplBasePersistence);
 
 		// Write file
 
@@ -1391,7 +1491,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("bean_locator_util.ftl");
+		String content = _processTemplate(_tplBeanLocatorUtil);
 
 		// Write file
 
@@ -1412,7 +1512,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("dynamic_dialect.ftl");
+		String content = _processTemplate(_tplDynamicDialect);
 
 		// Write file
 
@@ -1431,7 +1531,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("ejb_pk.ftl", context);
+		String content = _processTemplate(_tplEjbPk, context);
 
 		// Write file
 
@@ -1462,7 +1562,7 @@ public class ServiceBuilder {
 
 				context.put("exception", exception);
 
-				String content = _processTemplate("exception.ftl", context);
+				String content = _processTemplate(_tplException, context);
 
 				FileUtil.write(exceptionFile, content);
 			}
@@ -1480,7 +1580,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("extended_model.ftl", context);
+		String content = _processTemplate(_tplExtendedModel, context);
 
 		// Write file
 
@@ -1501,7 +1601,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("extended_model_impl.ftl", context);
+		String content = _processTemplate(_tplExtendedModelImpl, context);
 
 		// Write file
 
@@ -1529,7 +1629,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("finder.ftl", context);
+		String content = _processTemplate(_tplFinder, context);
 
 		// Write file
 
@@ -1547,7 +1647,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("finder_cache.ftl");
+		String content = _processTemplate(_tplFinderCache);
 
 		// Write file
 
@@ -1575,7 +1675,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("finder_util.ftl", context);
+		String content = _processTemplate(_tplFinderUtil, context);
 
 		// Write file
 
@@ -1617,7 +1717,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("hbm_xml.ftl", context);
+		String content = _processTemplate(_tplHbmXml, context);
 
 		File xmlFile = new File(_hbmFileName);
 
@@ -1672,7 +1772,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("hibernate_configuration.ftl");
+		String content = _processTemplate(_tplHibernateConfiguration);
 
 		// Write file
 
@@ -1693,7 +1793,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("hibernate_util.ftl");
+		String content = _processTemplate(_tplHibernateUtil);
 
 		// Write file
 
@@ -1709,7 +1809,7 @@ public class ServiceBuilder {
 		StringMaker content = new StringMaker();
 
 		if (_ejbList.size() > 0) {
-			content.append(_processTemplate("json_js.ftl"));
+			content.append(_processTemplate(_tplJsonJs));
 		}
 
 		for (int i = 0; i < _ejbList.size(); i++) {
@@ -1741,8 +1841,7 @@ public class ServiceBuilder {
 					context.put("methods", jsonMethods);
 
 					content.append("\n\n");
-					content.append(
-						_processTemplate("json_js_method.ftl", context));
+					content.append(_processTemplate(_tplJsonJsMethod, context));
 				}
 			}
 		}
@@ -1793,7 +1892,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("model.ftl", context);
+		String content = _processTemplate(_tplModel, context);
 
 		// Write file
 
@@ -1814,7 +1913,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("model_hints_xml.ftl", context);
+		String content = _processTemplate(_tplModelHintsXml, context);
 
 		File xmlFile = new File(_modelHintsFileName);
 
@@ -1866,7 +1965,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("model_impl.ftl", context);
+		String content = _processTemplate(_tplModelImpl, context);
 
 		// Write file
 
@@ -1887,7 +1986,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("model_soap.ftl", context);
+		String content = _processTemplate(_tplModelSoap, context);
 
 		// Write file
 
@@ -1913,7 +2012,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("persistence.ftl", context);
+		String content = _processTemplate(_tplPersistence, context);
 
 		// Write file
 
@@ -1941,7 +2040,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("persistence_impl.ftl", context);
+		String content = _processTemplate(_tplPersistenceImpl, context);
 
 		// Write file
 
@@ -1964,7 +2063,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("persistence_util.ftl", context);
+		String content = _processTemplate(_tplPersistenceUtil, context);
 
 		// Write file
 
@@ -2004,7 +2103,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("principal_bean.ftl");
+		String content = _processTemplate(_tplPrincipalBean);
 
 		// Write file
 
@@ -2039,7 +2138,7 @@ public class ServiceBuilder {
 		context.put("buildNumber", new Long(buildNumber));
 		context.put("currentTimeMillis", new Long(System.currentTimeMillis()));
 
-		String content = _processTemplate("props.ftl", context);
+		String content = _processTemplate(_tplProps, context);
 
 		// Write file
 
@@ -2053,7 +2152,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("props_util.ftl");
+		String content = _processTemplate(_tplPropsUtil);
 
 		// Write file
 
@@ -2093,7 +2192,7 @@ public class ServiceBuilder {
 				context.put("serviceName", serviceName);
 				context.put("serviceMapping", serviceMapping);
 
-				sm.append(_processTemplate("remoting_xml.ftl", context));
+				sm.append(_processTemplate(_tplRemotingXml, context));
 			}
 		}
 
@@ -2169,7 +2268,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service.ftl", context);
+		String content = _processTemplate(_tplService, context);
 
 		// Write file
 
@@ -2196,7 +2295,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_base_impl.ftl", context);
+		String content = _processTemplate(_tplServiceBaseImpl, context);
 
 		// Write file
 
@@ -2217,7 +2316,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_factory.ftl", context);
+		String content = _processTemplate(_tplServiceFactory, context);
 
 		// Write file
 
@@ -2245,7 +2344,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_http.ftl", context);
+		String content = _processTemplate(_tplServiceHttp, context);
 
 		// Write file
 
@@ -2270,7 +2369,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_impl.ftl", context);
+		String content = _processTemplate(_tplServiceImpl, context);
 
 		// Write file
 
@@ -2295,7 +2394,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_json.ftl", context);
+		String content = _processTemplate(_tplServiceJson, context);
 
 		// Write file
 
@@ -2317,8 +2416,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate(
-			"service_json_serializer.ftl", context);
+		String content = _processTemplate(_tplServiceJsonSerializer, context);
 
 		// Write file
 
@@ -2345,7 +2443,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_soap.ftl", context);
+		String content = _processTemplate(_tplServiceSoap, context);
 
 		// Write file
 
@@ -2375,7 +2473,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("service_util.ftl", context);
+		String content = _processTemplate(_tplServiceUtil, context);
 
 		// Write file
 
@@ -2397,7 +2495,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("spring_data_source_xml.ftl");
+		String content = _processTemplate(_tplSpringDataSourceXml);
 
 		// Write file
 
@@ -2413,7 +2511,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("spring_util.ftl");
+		String content = _processTemplate(_tplSpringUtil);
 
 		// Write file
 
@@ -2431,7 +2529,7 @@ public class ServiceBuilder {
 
 		// Content
 
-		String content = _processTemplate("spring_xml.ftl", context);
+		String content = _processTemplate(_tplSpringXml, context);
 
 		File xmlFile = new File(_springFileName);
 
@@ -3088,6 +3186,10 @@ public class ServiceBuilder {
 		}
 	}
 
+	private String _getTplProperty(String key, String defaultValue) {
+		return System.getProperty("service.tpl." + key, defaultValue);
+	}
+
 	private boolean _hasHttpMethods(JavaClass javaClass) {
 		JavaMethod[] methods = javaClass.getMethods();
 
@@ -3134,7 +3236,7 @@ public class ServiceBuilder {
 	}
 
 	private String _processTemplate(String name, Map context) throws Exception {
-		return FreeMarkerUtil.process(_FTL_ROOT + name, context);
+		return FreeMarkerUtil.process(name, context);
 	}
 
 	private boolean _requiresNullCheck(EntityColumn col) {
@@ -3149,8 +3251,51 @@ public class ServiceBuilder {
 
 	private static final String _DEFAULT_CLASS_COMMENTS = "ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.";
 
-	private static final String _FTL_ROOT = "com/liferay/portal/tools/servicebuilder/dependencies/";
+	private static final String _TPL_ROOT = "com/liferay/portal/tools/servicebuilder/dependencies/";
 
+	private String _tplBaseModeImpl = _TPL_ROOT + "base_mode_impl.ftl";
+	private String _tplBasePersistence = _TPL_ROOT + "base_persistence.ftl";
+	private String _tplBeanLocatorUtil = _TPL_ROOT + "bean_locator_util.ftl";
+	private String _tplDynamicDialect = _TPL_ROOT + "dynamic_dialect.ftl";
+	private String _tplEjbPk = _TPL_ROOT + "ejb_pk.ftl";
+	private String _tplException = _TPL_ROOT + "exception.ftl";
+	private String _tplExtendedModel = _TPL_ROOT + "extended_model.ftl";
+	private String _tplExtendedModelImpl =
+		_TPL_ROOT + "extended_model_impl.ftl";
+	private String _tplFinder = _TPL_ROOT + "finder.ftl";
+	private String _tplFinderCache = _TPL_ROOT + "finder_cache.ftl";
+	private String _tplFinderUtil = _TPL_ROOT + "finder_util.ftl";
+	private String _tplHbmXml = _TPL_ROOT + "hbm_xml.ftl";
+	private String _tplHibernateConfiguration =
+		_TPL_ROOT + "hibernate_configuration.ftl";
+	private String _tplHibernateUtil = _TPL_ROOT + "hibernate_util.ftl";
+	private String _tplJsonJs = _TPL_ROOT + "json_js.ftl";
+	private String _tplJsonJsMethod = _TPL_ROOT + "json_js_method.ftl";
+	private String _tplModel = _TPL_ROOT + "model.ftl";
+	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
+	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
+	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
+	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
+	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
+	private String _tplPersistenceUtil = _TPL_ROOT + "persistence_util.ftl";
+	private String _tplPrincipalBean = _TPL_ROOT + "principal_bean.ftl";
+	private String _tplProps = _TPL_ROOT + "props.ftl";
+	private String _tplPropsUtil = _TPL_ROOT + "props_util.ftl";
+	private String _tplRemotingXml = _TPL_ROOT + "remoting_xml.ftl";
+	private String _tplService = _TPL_ROOT + "service.ftl";
+	private String _tplServiceBaseImpl = _TPL_ROOT + "service_base_impl.ftl";
+	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
+	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
+	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";
+	private String _tplServiceJson = _TPL_ROOT + "service_json.ftl";
+	private String _tplServiceJsonSerializer =
+		_TPL_ROOT + "service_json_serializer.ftl";
+	private String _tplServiceSoap = _TPL_ROOT + "service_soap.ftl";
+	private String _tplServiceUtil = _TPL_ROOT + "service_util.ftl";
+	private String _tplSpringDataSourceXml =
+		_TPL_ROOT + "spring_data_source_xml.ftl";
+	private String _tplSpringUtil = _TPL_ROOT + "spring_util.ftl";
+	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set _badTableNames;
 	private Set _badCmpFields;
 	private String _hbmFileName;
