@@ -49,11 +49,6 @@ package com.liferay.portal.model;
  *
  */
 public interface Layout extends LayoutModel {
-	public int validateFriendlyURL(java.lang.String friendlyURL);
-
-	public void validateFriendlyURLKeyword(java.lang.String friendlyURL)
-		throws com.liferay.portal.LayoutFriendlyURLException;
-
 	public com.liferay.portal.model.Group getGroup();
 
 	public boolean isShared();

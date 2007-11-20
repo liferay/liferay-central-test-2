@@ -49,8 +49,5 @@ package com.liferay.portal.model;
  *
  */
 public interface Contact extends ContactModel {
-	public java.lang.String getFullName(java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName);
-
 	public java.lang.String getFullName();
 }

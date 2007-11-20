@@ -49,10 +49,6 @@ package com.liferay.portal.model;
  *
  */
 public interface Portlet extends PortletModel {
-	public java.lang.String getRootPortletId(java.lang.String portletId);
-
-	public java.lang.String getInstanceId(java.lang.String portletId);
-
 	public java.lang.String getRootPortletId();
 
 	public java.lang.String getInstanceId();
