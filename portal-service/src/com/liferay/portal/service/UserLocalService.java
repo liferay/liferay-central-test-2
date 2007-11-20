@@ -673,6 +673,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.User updateModifiedDate(long userId,
+		java.util.Date modifiedDate)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void updateOrganizations(long userId, long organizationId,
 		long locationId)
 		throws com.liferay.portal.SystemException, 

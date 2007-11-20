@@ -573,7 +573,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkLoginFailureById(long userId)
 		throws PortalException, SystemException {
 
-		User user = getUserById(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		checkLoginFailure(user);
 	}
@@ -1345,7 +1345,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateLockoutById(long userId, boolean lockout)
 		throws PortalException, SystemException {
 
-		User user = getUserById(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		return updateLockout(user, lockout);
 	}
@@ -1357,6 +1357,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = getUserByScreenName(companyId, screenName);
 
 		return updateLockout(user, lockout);
+	}
+
+	public User updateModifiedDate(long userId, Date modifiedDate)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setModifiedDate(modifiedDate);
+
+		userPersistence.update(user);
+
+		return user;
 	}
 
 	/**
@@ -1484,7 +1496,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updatePasswordReset(long userId, boolean passwordReset)
 		throws PortalException, SystemException {
 
-		User user = getUserById(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setPasswordReset(passwordReset);
 

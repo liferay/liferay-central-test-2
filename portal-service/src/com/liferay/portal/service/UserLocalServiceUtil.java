@@ -1460,6 +1460,15 @@ public class UserLocalServiceUtil {
 			screenName, lockout);
 	}
 
+	public static com.liferay.portal.model.User updateModifiedDate(
+		long userId, java.util.Date modifiedDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.updateModifiedDate(userId, modifiedDate);
+	}
+
 	public static void updateOrganizations(long userId, long organizationId,
 		long locationId)
 		throws com.liferay.portal.PortalException, 
