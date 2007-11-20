@@ -48,6 +48,9 @@ if (editable) {
 searchContainer.setHeaderNames(headerNames);
 
 List results = WebsiteServiceUtil.getWebsites(className, classPK);
+
+searchContainer.setTotal(results.size());
+
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {

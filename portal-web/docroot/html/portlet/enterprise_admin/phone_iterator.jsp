@@ -60,6 +60,8 @@ if (!className.equals(Organization.class.getName()) && (organizationIdsArray.len
 
 results.addAll(PhoneServiceUtil.getPhones(className, classPK));
 
+searchContainer.setTotal(results.size());
+
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {

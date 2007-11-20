@@ -54,6 +54,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
+
+searchContainer.setTotal(results.size());
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />

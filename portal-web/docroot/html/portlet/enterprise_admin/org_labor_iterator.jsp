@@ -44,6 +44,9 @@ if (editable) {
 searchContainer.setHeaderNames(headerNames);
 
 List results = OrgLaborServiceUtil.getOrgLabors(organization.getOrganizationId());
+
+searchContainer.setTotal(results.size());
+
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
