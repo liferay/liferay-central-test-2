@@ -543,7 +543,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<td>
 			<input class="liferay-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
 		</td>
-</tr>
+	</tr>
 </tbody>
 </table>
 
