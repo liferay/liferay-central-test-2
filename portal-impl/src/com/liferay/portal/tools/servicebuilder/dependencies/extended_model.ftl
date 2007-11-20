@@ -28,7 +28,7 @@ package ${packagePath}.model;
  public interface ${entity.name} extends ${entity.name}Model {
 
 	<#list methods as method>
-		<#if !method.isConstructor() && method.isPublic()>
+		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
 			public ${method.returns.value}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#assign parameters = method.parameters>
