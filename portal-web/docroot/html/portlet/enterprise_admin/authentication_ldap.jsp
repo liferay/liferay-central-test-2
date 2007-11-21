@@ -406,14 +406,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	</td>
 </tr>
 <tr>
-	<td>
-		<liferay-ui:message key="user-default-object-classes" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
-	</td>
-</tr>
-<tr>
 	<td colspan="2">
 		<br />
 
@@ -599,6 +591,14 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		</td>
 		<td>
 			<input class="liferay-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="user-default-object-classes" />
+		</td>
+		<td>
+			<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
 		</td>
 	</tr>
 	<tr>
