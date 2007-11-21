@@ -187,7 +187,7 @@
 
 		<java
 			classname="com.liferay.util.resin.BatchJspCompiler"
-			classpath="${jspc.classpath};${project.dir}/lib/concurrent.jar;${project.dir}/lib/trove.jar"
+			classpath="${jspc.classpath};${project.dir}/lib/backport-concurrent.jar;${project.dir}/lib/trove.jar"
 			fork="true"
 			maxmemory="512m"
 			newenvironment="true"
