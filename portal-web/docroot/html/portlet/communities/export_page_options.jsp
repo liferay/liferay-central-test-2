@@ -38,11 +38,11 @@ Layout layout2 = (Layout)row.getObject();
 	<a href="javascript: Liferay.ExportLayouts.details({toggle: '#_detail_<%= layout2.getPlid() %>_toggle', detail: '#_detail_<%= layout2.getPlid() %>'});" target="_self" style="text-decoration: none;">
 		<img
 			id="_detail_<%= layout2.getPlid() %>_toggle"
-			src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" 
-			onmousemove="ToolTip.show(event, this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" 
-			align="absmiddle" 
+			src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png"
+			onmousemove="ToolTip.show(event, this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')"
+			align="absmiddle"
 			border="0" />
-		
+
 		<%= layout2.getName(locale) %>
 	</a>
 </div>

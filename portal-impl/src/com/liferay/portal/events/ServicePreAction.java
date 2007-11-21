@@ -1204,7 +1204,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
 				// Publish To Live
-				
+
 				PortletURL publishToLiveURL = new PortletURLImpl(
 					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
 
@@ -1225,9 +1225,9 @@ public class ServicePreAction extends Action {
 				publishToLiveURL.setParameter(
 					"groupId", String.valueOf(portletGroupId));
 				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
-				
+
 				publishToLiveURL.setParameter("popupId", "publish-to-live");
-				
+
 				themeDisplay.setURLPublishToLive(publishToLiveURL);
 			}
 

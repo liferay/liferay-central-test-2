@@ -87,9 +87,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Map.Entry;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -520,7 +520,7 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void publishLayouts(
-			long creatorUserId, Map layoutIdMap, long originGroupId, 
+			long creatorUserId, Map layoutIdMap, long originGroupId,
 			long targetGroupId, boolean privateLayout)
 		throws Exception{
 
@@ -529,29 +529,29 @@ public class EditPagesAction extends PortletAction {
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
 			Boolean.FALSE.toString());
-		
+
 		List layouts = new ArrayList();
 
 		Iterator itr = layoutIdMap.entrySet().iterator();
-		
+
 		while (itr.hasNext()) {
 			Entry entry = (Entry)itr.next();
 			long plid = ((Long)entry.getKey()).longValue();
-			boolean includeChildren = 
+			boolean includeChildren =
 				((Boolean)entry.getValue()).booleanValue();
-			
+
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-			
+
 			if (!layouts.contains(layout)) {
 				layouts.add(layout);
 			}
 
-			Iterator parentsItr = 
+			Iterator parentsItr =
 				getMissingParents(layout, targetGroupId).iterator();
-			
+
 			while (parentsItr.hasNext()) {
 				Layout parent = (Layout)parentsItr.next();
-				
+
 				if (!layouts.contains(parent)) {
 					layouts.add(parent);
 				}
@@ -559,10 +559,10 @@ public class EditPagesAction extends PortletAction {
 
 			if (includeChildren) {
 				Iterator childrenItr = layout.getAllChildren().iterator();
-				
+
 				while (childrenItr.hasNext()) {
 					Layout child = (Layout)childrenItr.next();
-					
+
 					if (!layouts.contains(child)) {
 						layouts.add(child);
 					}
@@ -622,23 +622,23 @@ public class EditPagesAction extends PortletAction {
 		}
 		else if (scope.equals("selected-pages")) {
 			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-			
+
 			long selPlid = 0;
 			boolean includeChildren = false;
-			
+
 			Map layoutIdMap = new LinkedHashMap();
-			
+
 			for (int i = 0; i < rowIds.length; i++) {
 				selPlid = rowIds[i];
 				includeChildren = ParamUtil.getBoolean(
 					req, "includeChildren_" + selPlid);
-				
+
 				layoutIdMap.put(
 					new Long(selPlid), new Boolean(includeChildren));
 			}
 
 			publishLayouts(
-				user.getUserId(), layoutIdMap, stagingGroupId, 
+				user.getUserId(), layoutIdMap, stagingGroupId,
 				stagingGroup.getLiveGroupId(), privateLayout);
 		}
 	}

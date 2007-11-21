@@ -74,7 +74,7 @@ if (selPlid > 0) {
 	publish = true;
 }
 else {
-	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected"), ","));	
+	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected"), ","));
 }
 
 List results = new ArrayList();
@@ -213,9 +213,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<c:choose>
 						<c:when test="<%= !publish %>">
 							<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
-			
+
 							<%@ include file="/html/portlet/communities/tree_js.jspf" %>
-			
+
 							<script type="text/javascript">
 								jQuery(
 									function() {
@@ -238,32 +238,32 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						<c:otherwise>
 							<%
 							List headerNames = new ArrayList();
-							
+
 							headerNames.add("pages");
 							headerNames.add("type");
-							
+
 							int total = results.size();
-		
+
 							SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
-		
+
 							searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "fm3", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
-		
+
 							searchContainer.setTotal(total);
-							
+
 							searchContainer.setResults(results);
-		
+
 							List resultRows = searchContainer.getResultRows();
-		
+
 							for (int i = 0; i < results.size(); i++) {
 								Layout layout2 = (Layout)results.get(i);
-								
+
 								ResultRow row = new ResultRow(layout2, layout2.getPrimaryKey(), i);
-		
+
 								row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
-								
+
 								resultRows.add(row);
 							}
-							
+
 							%>
 							<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 						</c:otherwise>
@@ -284,11 +284,11 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<portlet:param name="struts_action" value="/communities/export_pages" />
 					<portlet:param name="tabs2" value="<%= tabs2 %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-					<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" /> 
+					<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
 					<portlet:param name="stagingGroupId" value="<%= String.valueOf(stagingGroupId) %>" />
 					<portlet:param name="popupId" value="<%= popupId %>" />
 				</portlet:renderURL>
-				
+
 				<c:choose>
 					<c:when test="<%= !publish %>">
 						<input class="button" id="select_btn" <%= (results.size() == 0)?"style=\"display: none;\"":"" %> type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
@@ -299,7 +299,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
 							<input class="button" id="change_btn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 						</c:if>
-						
+
 						<input class="button" id="publish_btn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm3);" />
 					</c:otherwise>
 				</c:choose>

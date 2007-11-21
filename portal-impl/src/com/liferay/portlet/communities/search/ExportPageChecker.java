@@ -39,14 +39,14 @@ public class ExportPageChecker extends RowChecker {
 	}
 
 	public ExportPageChecker(
-		RenderResponse res, String align, String valign, String formName, 
+		RenderResponse res, String align, String valign, String formName,
 		String allRowsId, String rowId) {
 
 		super(res, align, valign, COLSPAN, formName, allRowsId, rowId);
 	}
 
 	public ExportPageChecker(
-		RenderResponse res, String align, String valign, int colspan, 
+		RenderResponse res, String align, String valign, int colspan,
 		String formName, String allRowsId, String rowId) {
 
 		super(res, align, valign, colspan, formName, allRowsId, rowId);

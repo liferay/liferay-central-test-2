@@ -25,13 +25,13 @@
 <script type="text/javascript">
 	jQuery(function(){
 		jQuery("#<portlet:namespace />exportTree li > span.export-tree-item > img.select-state").bind("click", <portlet:namespace />handleNodeClick);
-	
+
 		jQuery("#<portlet:namespace />exportTree li > img.expand-image").bind("click", <portlet:namespace />handleExpandClick);
-	
+
 		jQuery("#<portlet:namespace />exportTree li > img.expand-image").bind("click", <portlet:namespace />handleExpandClick);
-	
+
 		jQuery("#lfr-expand").click(<portlet:namespace />handleExpandAllClick);
-	
+
 		jQuery("#lfr-collapse").click(<portlet:namespace />handleCollapsAllClick);
 	});
 </script>
@@ -57,13 +57,13 @@
 private StringMaker _renderLayouts(String nameSpace, long stagingGroupId, long liveGroupId, boolean privateLayout, long parentLayoutId, long selPlid, PortletURL portletURL, ThemeDisplay themeDisplay, Locale locale) {
 
 	StringMaker sm = new StringMaker();
-	
+
 	try {
 		List stagingLayouts = LayoutLocalServiceUtil.getLayouts(stagingGroupId, privateLayout, parentLayoutId);
 		List liveLayouts = LayoutLocalServiceUtil.getLayouts(liveGroupId, privateLayout, parentLayoutId);
 
 		int maxLayouts = Math.max(stagingLayouts.size(), liveLayouts.size());
-		
+
 		if (stagingLayouts.size() > 0) {
 			sm.append("<ul");
 
@@ -75,8 +75,8 @@ private StringMaker _renderLayouts(String nameSpace, long stagingGroupId, long l
 
 			for (int i = 0; i < stagingLayouts.size(); i++) {
 				Layout layout = (Layout)stagingLayouts.get(i);
-				
-				boolean current = (selPlid == layout.getPlid()); 
+
+				boolean current = (selPlid == layout.getPlid());
 
 				StringMaker node = new StringMaker();
 
@@ -86,26 +86,26 @@ private StringMaker _renderLayouts(String nameSpace, long stagingGroupId, long l
 				node.append(" parentLayoutId=\"");
 				node.append(layout.getParentLayoutId());
 				node.append("\"");
-				
+
 				if (current) {
 					node.append(" class=\"tree-item current\"");
 				}
 				else {
 					node.append("  class=\"tree-item\"");
 				}
-				
+
 				node.append(">");
-				
+
 				node.append("<img class=\"expand-image\" src=\"");
 				node.append(themeDisplay.getPathThemeImages());
-				
+
 				if (layout.getChildren().size() > 0) {
 					node.append("/trees/plus.png\"/>");
 				}
 				else {
 					node.append("/trees/spacer.png\"/>");
 				}
-				
+
 				node.append("<span class=\"export-tree-item\">");
 				node.append("<img class=\"select-state\" src=\"");
 				node.append(themeDisplay.getPathThemeImages());
@@ -142,7 +142,7 @@ private StringMaker _renderLayouts(String nameSpace, long stagingGroupId, long l
 			}
 			sm.append("</ul>");
 		}
-		
+
 		return sm;
 	}
 	catch (Exception e) {
