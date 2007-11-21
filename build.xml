@@ -692,29 +692,6 @@
 		</copy>
 	</target>
 
-	<target name="build-eclipse">
-		<copy todir="${lp.eclipse.dir}" overwrite="yes">
-			<fileset dir="tools/eclipse_workspace_tmpl" />
-			<filterset>
-				<filter token="JAVA_HOME" value="${env.JAVA_HOME}" />
-			</filterset>
-		</copy>
-
-		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-jetty.launch">
-			<replacefilter
-				token="@JBOSS_HOME@"
-				value="${app.server.jboss-jetty.dir}"
-			/>
-		</replace>
-
-		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-tomcat.launch">
-			<replacefilter
-				token="@JBOSS_HOME@"
-				value="${app.server.jboss-tomcat.dir}"
-			/>
-		</replace>
-	</target>
-
 	<target name="build-ext">
 		<available file="${lp.ext.dir}/modules" type="dir" property="lp.ext.dir.available" />
 
