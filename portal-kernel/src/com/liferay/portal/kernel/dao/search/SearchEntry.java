@@ -36,13 +36,16 @@ public abstract class SearchEntry implements Cloneable {
 
 	public static final String DEFAULT_VALIGN = "middle";
 
+	public static final int DEFAULT_COLSPAN = 1;
+
 	public SearchEntry() {
-		this(DEFAULT_ALIGN, DEFAULT_VALIGN);
+		this(DEFAULT_ALIGN, DEFAULT_VALIGN, DEFAULT_COLSPAN);
 	}
 
-	public SearchEntry(String align, String valign) {
+	public SearchEntry(String align, String valign, int colspan) {
 		_align = align;
 		_valign = valign;
+		_colspan = colspan;
 	}
 
 	public String getAlign() {
@@ -61,9 +64,18 @@ public abstract class SearchEntry implements Cloneable {
 		_valign = valign;
 	}
 
+	public int getColspan() {
+		return _colspan;
+	}
+
+	public void setColspan(int colspan) {
+		_colspan = colspan;
+	}
+
 	public abstract void print(PageContext pageContext) throws Exception;
 
 	private String _align;
 	private String _valign;
+	private int _colspan;
 
 }

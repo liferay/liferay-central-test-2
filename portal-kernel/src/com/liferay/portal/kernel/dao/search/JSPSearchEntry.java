@@ -39,14 +39,20 @@ import javax.servlet.jsp.PageContext;
 public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(String align, String valign, String path) {
-		this(align, valign, path, null, null, null);
+		this(align, valign, DEFAULT_COLSPAN, path, null, null, null);
 	}
 
 	public JSPSearchEntry(
-		String align, String valign, String path, ServletContext ctx,
-		HttpServletRequest req, HttpServletResponse res) {
+		String align, String valign, int colspan, String path) {
+		
+		this(align, valign, colspan, path, null, null, null);
+	}
 
-		super(align, valign);
+	public JSPSearchEntry(
+		String align, String valign, int colspan, String path,
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+
+		super(align, valign, colspan);
 
 		_path = path;
 		_ctx = ctx;
@@ -79,7 +85,8 @@ public class JSPSearchEntry extends SearchEntry {
 	}
 
 	public Object clone() {
-		return new JSPSearchEntry(getAlign(), getValign(), getPath());
+		return new JSPSearchEntry(
+			getAlign(), getValign(), getColspan(), getPath());
 	}
 
 	private String _path;

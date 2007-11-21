@@ -101,6 +101,8 @@ if (rowChecker != null) {
 			<c:if test="<%= (rowChecker != null) && (headerNames.size() == 2) && (i == 1) %>">
 				width="95%"
 			</c:if>
+			
+			class="col-<%= i + 1 %>"
 		>
 			<c:if test="<%= orderKey != null %>">
 				<a href="<%= searchContainer.getIteratorURL().toString() %>&<%= namespace %>orderByCol=<%= orderKey %>&<%= namespace %>orderByType=<%= orderByType %>">
@@ -187,7 +189,7 @@ if (rowChecker != null) {
 				allRowsIsChecked = false;
 			}
 
-			row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+			row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
 		}
 	%>
 
@@ -204,7 +206,7 @@ if (rowChecker != null) {
 			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
 		%>
 
-			<td class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
+			<td class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>">
 
 				<%
 				entry.print(pageContext);
