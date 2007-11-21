@@ -22,9 +22,6 @@
 
 package com.liferay.portal.lucene;
 
-import EDU.oswego.cs.dl.util.concurrent.FIFOSemaphore;
-import EDU.oswego.cs.dl.util.concurrent.Semaphore;
-
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
@@ -32,6 +29,8 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
+
+import edu.emory.mathcs.backport.java.util.concurrent.Semaphore;
 
 import java.io.IOException;
 
@@ -78,10 +77,10 @@ public class IndexWriterFactory {
 				Company company = (Company)companies.get(i);
 
 				_lockLookup.put(
-					new Long(company.getCompanyId()), new FIFOSemaphore(1));
+					new Long(company.getCompanyId()), new Semaphore(1));
 			}
 
-			_lockLookup.put(new Long(CompanyImpl.SYSTEM), new FIFOSemaphore(1));
+			_lockLookup.put(new Long(CompanyImpl.SYSTEM), new Semaphore(1));
 		}
 		catch (SystemException se) {
 			_log.error(se);

@@ -27,8 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
-
-import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
+import com.liferay.util.CollectionFactory;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -58,7 +57,7 @@ public class PortletInstanceFactory {
 	}
 
 	private PortletInstanceFactory() {
-		_pool = new ConcurrentHashMap();
+		_pool = CollectionFactory.getSyncHashMap();
 	}
 
 	private CachePortlet _create(Portlet portlet, ServletContext ctx)
@@ -79,7 +78,7 @@ public class PortletInstanceFactory {
 		Map map = (Map)_pool.get(poolId);
 
 		if (map == null) {
-			map = new ConcurrentHashMap();
+			map = CollectionFactory.getSyncHashMap();
 
 			_pool.put(poolId, map);
 		}
@@ -87,7 +86,7 @@ public class PortletInstanceFactory {
 		Map portletInstances = (Map)map.get(portlet.getRootPortletId());
 
 		if (portletInstances == null) {
-			portletInstances = new ConcurrentHashMap();
+			portletInstances = CollectionFactory.getSyncHashMap();
 
 			map.put(portlet.getRootPortletId(), portletInstances);
 		}

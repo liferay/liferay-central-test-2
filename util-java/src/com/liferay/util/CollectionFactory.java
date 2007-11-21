@@ -22,11 +22,9 @@
 
 package com.liferay.util;
 
-import EDU.oswego.cs.dl.util.concurrent.SyncMap;
-import EDU.oswego.cs.dl.util.concurrent.SyncSet;
-import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
-
 import com.liferay.portal.kernel.util.GetterUtil;
+
+import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -107,29 +105,27 @@ public class CollectionFactory {
 	}
 
 	public static Map getSyncHashMap() {
-		return new SyncMap(getHashMap(), new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashMap();
 	}
 
 	public static Map getSyncHashMap(int capacity) {
-		return new SyncMap(
-			getHashMap(capacity), new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashMap(capacity);
 	}
 
 	public static Map getSyncHashMap(Map map) {
-		return new SyncMap(map, new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashMap(map);
 	}
 
 	public static Set getSyncHashSet() {
-		return new SyncSet(getHashSet(), new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashSet();
 	}
 
 	public static Set getSyncHashSet(int capacity) {
-		return new SyncSet(
-			getHashSet(capacity), new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashSet(capacity);
 	}
 
 	public static Set getSyncHashSet(Set set) {
-		return new SyncSet(set, new WriterPreferenceReadWriteLock());
+		return new ConcurrentHashSet(set);
 	}
 
 }
