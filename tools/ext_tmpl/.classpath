@@ -75,6 +75,7 @@
 	<classpathentry kind="lib" path="lib/portal/doubleclick-filter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/easyconf.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache.jar"/>
+	<classpathentry kind="lib" path="lib/portal/freemarker.jar"/>
 	<classpathentry kind="lib" path="lib/portal/friki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/gif89.jar"/>
 	<classpathentry kind="lib" path="lib/portal/google.jar"/>
