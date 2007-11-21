@@ -197,7 +197,11 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 //portletURL.setParameter("tabs4", tabs4);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("backURL", backURL);
+
+if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+	portletURL.setParameter("backURL", backURL);
+}
+
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
 PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
@@ -370,7 +374,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 		<%
 		String tabs1Names = "staging";
-		
+
 		if (stagingGroup == null) {
 			tabs1Names = "live," + tabs1Names;
 		}
@@ -407,23 +411,35 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 </c:if>
 
 <c:if test="<%= (group != null) %>">
-	<liferay-ui:tabs
-		names="public,private"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
+	<c:choose>
+		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+			<liferay-ui:tabs
+				names="public,private"
+				param="tabs2"
+				url="<%= portletURL.toString() %>"
+				backURL="<%= redirect %>"
+			/>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:tabs
+				names="public,private"
+				param="tabs2"
+				url="<%= portletURL.toString() %>"
+			/>
+		</c:otherwise>
+	</c:choose>
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 			</c:if>
-			
+
 			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsPopupURL">
 				<portlet:param name="struts_action" value="/communities/export_pages" />
 				<portlet:param name="tabs2" value="<%= tabs2 %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-				<portlet:param name="pagesRedirect" value="<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>" />
+				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 				<portlet:param name="popupId" value="publish-to-live" />
 			</portlet:renderURL>
 

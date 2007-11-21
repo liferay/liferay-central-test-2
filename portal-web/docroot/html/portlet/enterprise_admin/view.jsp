@@ -107,7 +107,7 @@ String portletURLString = portletURL.toString();
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
 
