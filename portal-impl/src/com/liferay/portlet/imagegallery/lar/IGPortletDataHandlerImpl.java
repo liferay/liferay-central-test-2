@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.imagegallery.lar;
 
+import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -152,8 +155,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			// IGImages
 
-			List images = new ArrayList();
-
 			itr = igImages.iterator();
 
 			while (itr.hasNext()) {
@@ -167,41 +168,26 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					igImage.setUserUuid(igImage.getUserUuid());
 
-					Image largeImage = ImageUtil.fetchByPrimaryKey(
-						igImage.getLargeImageId());
-
-					images.add(largeImage);
-
 					context.addTagsEntries(
 						IGImage.class, igImage.getPrimaryKeyObj());
+
+					try {
+						Image largeImage = ImageUtil.findByPrimaryKey(
+							igImage.getLargeImageId());
+
+						igImage.setImageType(largeImage.getType());
+
+						context.getZipWriter().addEntry(
+							getIGImageDir(igImage), largeImage.getTextObj());
+					}
+					catch (NoSuchImageException nsie) {
+					}
 				}
 			}
 
 			xml = xStream.toXML(igImages);
 
 			el = root.addElement("ig-images");
-
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Images
-
-			itr = images.iterator();
-
-			while (itr.hasNext()) {
-				Image image = (Image)itr.next();
-
-				if (context.addPrimaryKey(
-						Image.class, image.getPrimaryKeyObj())) {
-
-					itr.remove();
-				}
-			}
-
-			xml = xStream.toXML(images);
-
-			el = root.addElement("images");
 
 			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
@@ -268,26 +254,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				importFolder(context, mergeData, folderPKs, folder);
 			}
 
-			// Images
-
-			el = root.element("images").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
-
-			Map imagesPKs = CollectionFactory.getHashMap();
-
-			List images = (List)xStream.fromXML(tempDoc.asXML());
-
-			itr = images.iterator();
-
-			while (itr.hasNext()) {
-				Image image = (Image)itr.next();
-
-				imagesPKs.put(image.getPrimaryKeyObj(), image);
-			}
-
 			// IGImages
 
 			el = root.element("ig-images").element("list");
@@ -304,7 +270,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGImage igImage = (IGImage)itr.next();
 
 				importIGImage(
-					context, mergeData, folderPKs, imagesPKs, igImage);
+					context, mergeData, folderPKs, igImage);
 			}
 
 			return null;
@@ -312,6 +278,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	protected String getIGImageDir(IGImage igImage)
+		throws PortalException, SystemException {
+
+		return _IMAGE_GALLERY_FOLDER + igImage.getPrimaryKey() + "." +
+			igImage.getImageType();
 	}
 
 	protected void importFolder(
@@ -369,28 +342,28 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void importIGImage(
 			PortletDataContext context, boolean mergeData, Map folderPKs,
-			Map imagesPKs, IGImage igImage)
+			IGImage igImage)
 		throws Exception {
 
 		long userId = context.getUserId(igImage.getUserUuid());
 		long folderId = MapUtil.getLong(
 			folderPKs, igImage.getFolderId(), igImage.getFolderId());
 
-		Image image = (Image)imagesPKs.get(new Long(igImage.getLargeImageId()));
-
 		File imageFile = null;
 
-		if (image == null) {
+		byte[] byteArray = context.getZipReader().getEntryAsByteArray(
+			getIGImageDir(igImage));
+
+		if (byteArray == null) {
 			_log.error(
 				"Could not find image for IG image " + igImage.getImageId());
 
 			return;
 		}
 		else {
-			imageFile = new File(
-				igImage.getDescription() + "." + image.getType());
+			imageFile = new File(getIGImageDir(igImage));
 
-			FileUtil.write(imageFile, image.getTextObj());
+			FileUtil.write(imageFile, byteArray);
 		}
 
 		String[] tagsEntries = context.getTagsEntries(
@@ -411,22 +384,22 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				if (existingImage == null) {
 					IGImageLocalServiceUtil.addImage(
 						igImage.getUuid(), userId, folderId,
-						igImage.getDescription(), imageFile, image.getType(),
-						tagsEntries, addCommunityPermissions,
-						addGuestPermissions);
+						igImage.getDescription(), imageFile,
+						igImage.getImageType(), tagsEntries,
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					IGImageLocalServiceUtil.updateImage(
 						userId, existingImage.getImageId(), folderId,
 						igImage.getDescription(), imageFile,
-						image.getType(), tagsEntries);
+						igImage.getImageType(), tagsEntries);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
 					userId, folderId, igImage.getDescription(), imageFile,
-					image.getType(), tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
+					igImage.getImageType(), tagsEntries,
+					addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -441,6 +414,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final String _IMPORT_IG_DATA =
 		"import-" + PortletKeys.IMAGE_GALLERY + "-data";
+
+	private static final String _IMAGE_GALLERY_FOLDER = "image-gallery/";
 
 	private static final PortletDataHandlerBoolean _enableExport =
 		new PortletDataHandlerBoolean(_EXPORT_IG_DATA, true, null);

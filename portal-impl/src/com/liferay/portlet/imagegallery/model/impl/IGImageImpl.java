@@ -22,7 +22,10 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -65,8 +68,22 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
+	public String getImageType() throws PortalException, SystemException {
+		if (_imageType == null) {
+			Image largeImage = ImageUtil.findByPrimaryKey(getLargeImageId());
+
+			_imageType = largeImage.getType();
+		}
+		return _imageType;
+	}
+
+	public void setImageType(String imageType) {
+		_imageType = imageType;
+	}
+
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);
 
 	private String _userUuid;
+	private String _imageType;
 
 }
