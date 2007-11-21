@@ -74,6 +74,7 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
 			_imageType = largeImage.getType();
 		}
+
 		return _imageType;
 	}
 

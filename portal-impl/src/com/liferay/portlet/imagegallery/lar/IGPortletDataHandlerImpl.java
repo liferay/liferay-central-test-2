@@ -269,8 +269,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				importIGImage(
-					context, mergeData, folderPKs, igImage);
+				importIGImage(context, mergeData, folderPKs, igImage);
 			}
 
 			return null;
