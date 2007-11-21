@@ -54,11 +54,6 @@ public interface JournalArticle extends JournalArticleModel {
 
 	public void setUserUuid(java.lang.String userUuid);
 
-	public java.lang.String getApprovedByUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
-
 	public java.lang.String[] getAvailableLocales();
 
 	public java.lang.String getContentByLocale(java.lang.String languageId);
@@ -66,4 +61,9 @@ public interface JournalArticle extends JournalArticleModel {
 	public java.lang.String getDefaultLocale();
 
 	public boolean isTemplateDriven();
+
+	public java.lang.String getApprovedByUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
 }

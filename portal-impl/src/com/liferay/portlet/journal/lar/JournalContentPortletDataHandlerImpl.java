@@ -147,11 +147,7 @@ public class JournalContentPortletDataHandlerImpl
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No article found with company id " +
-							context.getCompanyId() + ", group id " +
-								articleGroupId + " and article id " +
-									articleId);
+					_log.warn(nsae);
 				}
 			}
 
@@ -257,8 +253,8 @@ public class JournalContentPortletDataHandlerImpl
 		if (!mergeData){
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Merge data option wasn't selected, this can cause " +
-						"duplication of entities because there's no way to " +
+					"Merge data option was not selected. This can cause " +
+						"duplication of entities because there is no way to " +
 							"check if they already exist.");
 			}
 		}

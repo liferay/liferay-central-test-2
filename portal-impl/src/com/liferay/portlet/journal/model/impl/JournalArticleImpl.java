@@ -61,15 +61,6 @@ public class JournalArticleImpl
 		_userUuid = userUuid;
 	}
 
-	public String getApprovedByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(
-			getApprovedByUserId(), "uuid", _approvedByUserUuid);
-	}
-
-	public void setApprovedByUserUuid(String approvedByUserUuid) {
-		_approvedByUserUuid = approvedByUserUuid;
-	}
-
 	public String[] getAvailableLocales() {
 		return LocalizationUtil.getAvailableLocales(getContent());
 	}
@@ -110,7 +101,16 @@ public class JournalArticleImpl
 		}
 	}
 
-	private String _approvedByUserUuid;
+	public String getApprovedByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(
+			getApprovedByUserId(), "uuid", _approvedByUserUuid);
+	}
+
+	public void setApprovedByUserUuid(String approvedByUserUuid) {
+		_approvedByUserUuid = approvedByUserUuid;
+	}
+
 	private String _userUuid;
+	private String _approvedByUserUuid;
 
 }

@@ -220,78 +220,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected static void exportArticle(
-			PortletDataContext context, JournalArticle article)
-		throws SystemException, PortalException, IOException {
-
-		article.setUserUuid(article.getUserUuid());
-		article.setApprovedByUserUuid(
-			article.getApprovedByUserUuid());
-
-		context.addComments(
-			JournalArticle.class,
-			new Long(article.getResourcePrimKey()));
-
-		context.addRatingsEntries(
-			JournalArticle.class,
-			new Long(article.getResourcePrimKey()));
-
-		context.addTagsEntries(
-			JournalArticle.class,
-			new Long(article.getResourcePrimKey()));
-
-		// Journal Article Images
-
-		List articleImages = JournalArticleImageUtil.findByG_A_V(
-			context.getGroupId(), article.getArticleId(),
-			article.getVersion());
-
-		Iterator itr2 = articleImages.iterator();
-
-		while (itr2.hasNext()) {
-			JournalArticleImage articleImage = (JournalArticleImage)itr2.next();
-
-			try {
-				Image image = ImageUtil.findByPrimaryKey(
-					articleImage.getArticleImageId());
-
-				String fileName = articleImage.getElName() +
-					articleImage.getLanguageId() + "." +
-							image.getType();
-
-				context.getZipWriter().addEntry(
-					getArticleImageDir(article) +  fileName,
-					image.getTextObj());
-			}
-			catch (NoSuchImageException nsie) {
-			}
-		}
-	}
-
-	protected static void exportStructure(JournalStructure structure)
-		throws SystemException {
-
-		structure.setUserUuid(structure.getUserUuid());
-	}
-
-	protected static void exportTemplate(
-			PortletDataContext context, JournalTemplate template)
-		throws SystemException, IOException {
-
-		template.setUserUuid(template.getUserUuid());
-
-		if (template.isSmallImage()) {
-			Image smallImage = ImageUtil.fetchByPrimaryKey(
-				template.getSmallImageId());
-
-			template.setSmallImageType(smallImage.getType());
-
-			context.getZipWriter().addEntry(
-				getSmallImageDir(template),
-				smallImage.getTextObj());
-		}
-	}
-
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
@@ -394,14 +322,89 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	protected static void exportArticle(
+			PortletDataContext context, JournalArticle article)
+		throws SystemException, PortalException, IOException {
+
+		article.setUserUuid(article.getUserUuid());
+		article.setApprovedByUserUuid(article.getApprovedByUserUuid());
+
+		context.addComments(
+			JournalArticle.class, new Long(article.getResourcePrimKey()));
+
+		context.addRatingsEntries(
+			JournalArticle.class, new Long(article.getResourcePrimKey()));
+
+		context.addTagsEntries(
+			JournalArticle.class, new Long(article.getResourcePrimKey()));
+
+		// Journal Article Images
+
+		List articleImages = JournalArticleImageUtil.findByG_A_V(
+			context.getGroupId(), article.getArticleId(), article.getVersion());
+
+		Iterator itr2 = articleImages.iterator();
+
+		while (itr2.hasNext()) {
+			JournalArticleImage articleImage = (JournalArticleImage)itr2.next();
+
+			try {
+				Image image = ImageUtil.findByPrimaryKey(
+					articleImage.getArticleImageId());
+
+				String fileName = articleImage.getElName() +
+					articleImage.getLanguageId() + "." + image.getType();
+
+				context.getZipWriter().addEntry(
+					getArticleImageDir(article) +  fileName,
+					image.getTextObj());
+			}
+			catch (NoSuchImageException nsie) {
+			}
+		}
+	}
+
+	protected static void exportStructure(JournalStructure structure)
+		throws SystemException {
+
+		structure.setUserUuid(structure.getUserUuid());
+	}
+
+	protected static void exportTemplate(
+			PortletDataContext context, JournalTemplate template)
+		throws SystemException, IOException {
+
+		template.setUserUuid(template.getUserUuid());
+
+		if (template.isSmallImage()) {
+			Image smallImage = ImageUtil.fetchByPrimaryKey(
+				template.getSmallImageId());
+
+			template.setSmallImageType(smallImage.getType());
+
+			context.getZipWriter().addEntry(
+				getSmallImageDir(template), smallImage.getTextObj());
+		}
+	}
+
+	protected static String getArticleImageDir(JournalArticle article) {
+		return _JOURNAL_ARTICLE_IMAGES_FOLDER + article.getArticleId() +
+			"/" + article.getVersion() + "/";
+	}
+
+	protected static String getSmallImageDir(JournalTemplate template)
+		throws SystemException {
+
+		return _TEMPLATE_IMAGES_FOLDER + template.getSmallImageId() + "." +
+			template.getSmallImageType();
+	}
+
 	protected static JournalArticle importArticle(
 			PortletDataContext context, boolean mergeData, Map structurePKs,
 			Map templatePKs, JournalArticle article)
 		throws Exception {
 
 		long userId = context.getUserId(article.getUserUuid());
-		long approvedByUserId = context.getUserId(
-			article.getApprovedByUserUuid());
 		long plid = context.getPlid();
 
 		String articleId = article.getArticleId();
@@ -410,7 +413,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		if ((Validator.isNumber(articleId)) ||
 			(JournalArticleUtil.fetchByG_A_V(
 				context.getGroupId(), articleId,
-				JournalArticleImpl.DEFAULT_VERSION) != null)) {
+					JournalArticleImpl.DEFAULT_VERSION) != null)) {
 
 			autoArticleId = true;
 		}
@@ -570,6 +573,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		if (article.isApproved() && !existingArticle.isApproved()) {
+			long approvedByUserId = context.getUserId(
+				article.getApprovedByUserUuid());
+
 			JournalArticleLocalServiceUtil.approveArticle(
 				approvedByUserId, context.getGroupId(),
 				existingArticle.getArticleId(), existingArticle.getVersion(),
@@ -588,8 +594,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		if (!articleId.equals(existingArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"An article with the same ID ("+articleId+") was " +
-						"found. A new ID was generated: " +
+					"An article with the ID " + articleId + " already " +
+						"exists. The new generated ID is " +
 							existingArticle.getArticleId());
 			}
 		}
@@ -655,8 +661,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		if (!structureId.equals(existingStructure.getStructureId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"A structure with the same ID ("+structureId+") was " +
-						"found. A new ID was generated: " +
+					"A structure with the ID " + structureId + " already " +
+						"exists. The new generated ID is " +
 							existingStructure.getStructureId());
 			}
 		}
@@ -742,23 +748,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		if (!templateId.equals(existingTemplate.getTemplateId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"A template with the same ID ("+templateId+") was " +
-						"found. A new ID was generated: " +
+					"A template with the ID " + templateId + " already " +
+						"exists. The new generated ID is " +
 							existingTemplate.getTemplateId());
 			}
 		}
-	}
-
-	protected static String getArticleImageDir(JournalArticle article) {
-		return _JOURNAL_ARTICLE_IMAGES_FOLDER + article.getArticleId() +
-			"/" + article.getVersion() + "/";
-	}
-
-	protected static String getSmallImageDir(JournalTemplate template)
-		throws SystemException {
-
-		return _TEMPLATE_IMAGES_FOLDER + template.getSmallImageId() + "." +
-			template.getSmallImageType();
 	}
 
 	private static final String _EXPORT_JOURNAL_DATA =
