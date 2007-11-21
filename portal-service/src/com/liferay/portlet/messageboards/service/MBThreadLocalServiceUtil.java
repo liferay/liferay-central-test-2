@@ -226,6 +226,32 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 

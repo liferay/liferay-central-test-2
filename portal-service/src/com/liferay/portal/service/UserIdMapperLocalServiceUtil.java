@@ -97,6 +97,32 @@ public class UserIdMapperLocalServiceUtil {
 		userIdMapperLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		userIdMapperLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		userIdMapperLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 

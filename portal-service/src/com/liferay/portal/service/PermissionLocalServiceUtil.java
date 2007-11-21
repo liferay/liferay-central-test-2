@@ -96,6 +96,32 @@ public class PermissionLocalServiceUtil {
 		permissionLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 

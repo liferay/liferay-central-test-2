@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
@@ -175,7 +176,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String indexerClass, String openSearchClass, String schedulerClass,
 		String portletURLClass, String friendlyURLMapperClass,
 		String urlEncoderClass, String portletDataHandlerClass,
-		String portletLayoutListenerClass, String smtpMessageListenerClass,
+		String portletLayoutListenerClass,
+		String activityTrackerInterpreterClass, String smtpMessageListenerClass,
 		String defaultPreferences, String prefsValidator,
 		boolean prefsCompanyWide, boolean prefsUniquePerLayout,
 		boolean prefsOwnedByGroup, boolean useDefaultTemplate,
@@ -213,6 +215,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_portletLayoutListenerClass = portletLayoutListenerClass;
+		_activityTrackerInterpreterClass = activityTrackerInterpreterClass;
 		_smtpMessageListenerClass = smtpMessageListenerClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
@@ -693,6 +696,52 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String portletLayoutListenerClass) {
 
 		_portletLayoutListenerClass = portletLayoutListenerClass;
+	}
+
+	/**
+	 * Gets the name of the activity tracker interpreter class of the portlet.
+	 *
+	 * @return		the name of the activity tracker interpreter class of the
+	 *				portlet
+	 */
+	public String getActivityTrackerInterpreterClass() {
+		return _activityTrackerInterpreterClass;
+	}
+
+	/**
+	 * Sets the name of the activity tracker interpreter class of the portlet.
+	 *
+	 * @param		activityTrackerInterpreterClass the name of the activity
+	 *				tracker interpreter class of the portlet
+	 */
+	public void setActivityTrackerInterpreterClass(
+		String activityTrackerInterpreterClass) {
+
+		_activityTrackerInterpreterClass = activityTrackerInterpreterClass;
+	}
+
+	/**
+	 * Gets the name of the activity tracker interpreter instance of the
+	 * portlet.
+	 *
+	 * @return		the name of the activity tracker interpreter instance of the
+	 *				portlet
+	 */
+	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
+		if (Validator.isNotNull(getActivityTrackerInterpreterClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getActivityTrackerInterpreterInstance();
+			}
+			else {
+				return (ActivityTrackerInterpreter)InstancePool.get(
+					getActivityTrackerInterpreterClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -2180,7 +2229,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(), getSmtpMessageListenerClass(),
+			getPortletLayoutListenerClass(),
+			getActivityTrackerInterpreterClass(), getSmtpMessageListenerClass(),
 			getDefaultPreferences(), getPreferencesValidator(),
 			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
 			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
@@ -2312,6 +2362,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the portlet data layout listener class of the portlet.
 	 */
 	private String _portletLayoutListenerClass;
+
+ 	/**
+	 * The name of the activity tracker interpreter class of the portlet.
+	 */
+	private String _activityTrackerInterpreterClass;
 
  	/**
 	 * The name of the SMTP message listener class of the portlet.

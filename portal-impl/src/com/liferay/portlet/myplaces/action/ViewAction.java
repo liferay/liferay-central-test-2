@@ -41,6 +41,9 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -52,6 +55,44 @@ import org.apache.struts.action.ActionMapping;
  *
  */
 public class ViewAction extends PortletAction {
+
+	public ActionForward strutsExecute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+
+		List layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+
+		String redirect = themeDisplay.getPathMain();
+
+		if (layouts.size() > 0) {
+			Layout layout = (Layout)layouts.get(0);
+
+			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		}
+		else {
+			redirect = ParamUtil.getString(req, "redirect");
+
+			SessionErrors.add(
+				req, NoSuchLayoutSetException.class.getName(),
+				new NoSuchLayoutSetException(
+					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
+						"}"));
+		}
+
+		// Send redirect
+
+		res.sendRedirect(redirect);
+
+		return null;
+	}
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,

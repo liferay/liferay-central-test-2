@@ -104,6 +104,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			MBMessage message = (MBMessage)itr.next();
 
+			// Activity trackers
+
+			activityTrackerLocalService.deleteActivityTrackers(
+				MBMessage.class.getName(), message.getMessageId());
+
 			// Tags
 
 			tagsAssetLocalService.deleteAsset(

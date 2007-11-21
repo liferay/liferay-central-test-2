@@ -47,6 +47,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.messageboards.MBActivityKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -461,6 +462,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 9);
 
+		// Activity trackers
+
+		if (!message.isDiscussion() && !user.isDefaultUser()) {
+			long receiverUserId = 0;
+
+			if (parentMessage != null) {
+				receiverUserId = parentMessage.getUserId();
+			}
+
+			activityTrackerLocalService.addActivityTracker(
+				userId, category.getGroupId(), MBMessage.class.getName(),
+				messageId, MBActivityKeys.ADD, StringPool.BLANK,
+				receiverUserId);
+		}
+
+		logAddMessage(messageId, stopWatch, 10);
+
 		// Testing roll back
 
 		/*if (true) {
@@ -481,7 +499,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			_log.error("Indexing " + messageId, ioe);
 		}
 
-		logAddMessage(messageId, stopWatch, 9);
+		logAddMessage(messageId, stopWatch, 11);
 
 		return message;
 	}
@@ -714,6 +732,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			mbThreadPersistence.update(thread);
 		}
+
+		// Activity trackers
+
+		activityTrackerLocalService.deleteActivityTrackers(
+			MBMessage.class.getName(), message.getMessageId());
 
 		// Tags
 

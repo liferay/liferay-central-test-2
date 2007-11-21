@@ -96,6 +96,32 @@ public class PortletLocalServiceUtil {
 		portletLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		portletLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		portletLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 

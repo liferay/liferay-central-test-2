@@ -1,3 +1,18 @@
+create table ActivityTracker (
+	activityTrackerId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	activity VARCHAR(75) null,
+	extraData TEXT null,
+	receiverUserId LONG,
+	receiverUserName VARCHAR(75) null
+);
+
 alter table BlogsEntry add uuid_ VARCHAR(75) null;
 
 alter table BookmarksEntry add uuid_ VARCHAR(75) null;

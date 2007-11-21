@@ -96,6 +96,32 @@ public class ContactLocalServiceUtil {
 		contactLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 

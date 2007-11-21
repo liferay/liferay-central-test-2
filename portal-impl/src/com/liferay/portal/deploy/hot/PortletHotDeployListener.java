@@ -43,14 +43,17 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.smtp.SMTPServerUtil;
+import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -212,6 +215,27 @@ public class PortletHotDeployListener implements HotDeployListener {
 								newInstance();
 				}
 
+				ActivityTrackerInterpreter activityTrackerInterpreterInstance =
+					null;
+
+				if (Validator.isNotNull(
+						portlet.getActivityTrackerInterpreterClass())) {
+
+					activityTrackerInterpreterInstance =
+						(ActivityTrackerInterpreter)
+							portletClassLoader.loadClass(
+								portlet.getActivityTrackerInterpreterClass()).
+									newInstance();
+
+					activityTrackerInterpreterInstance =
+						new ActivityTrackerInterpreterImpl(
+							activityTrackerInterpreterInstance);
+
+					ActivityTrackerInterpreterUtil.
+						addActivityTrackerInterpreter(
+							activityTrackerInterpreterInstance);
+				}
+
 				MessageListener smtpMessageListenerInstance = null;
 
 				if (Validator.isNotNull(
@@ -298,6 +322,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 					configurationActionInstance, indexerInstance,
 					schedulerInstance, urlEncoderInstance,
 					portletDataHandlerInstance, portletLayoutListenerInstance,
+					activityTrackerInterpreterInstance,
 					smtpMessageListenerInstance, prefsValidatorInstance,
 					resourceBundles, customUserAttributes);
 
@@ -425,6 +450,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				while (itr.hasNext()) {
 					Portlet portlet = (Portlet)itr.next();
+
+					ActivityTrackerInterpreterUtil.
+						deleteActivityTrackerInterpreter(
+							portlet.getActivityTrackerInterpreterInstance());
 
 					SMTPServerUtil.deleteListener(
 						portlet.getSmtpMessageListenerInstance());

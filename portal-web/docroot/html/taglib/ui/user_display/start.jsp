@@ -34,23 +34,7 @@ if (userDisplay != null) {
 }
 
 if (Validator.isNull(url) && (userDisplay != null)) {
-	Group userGroup = userDisplay.getGroup();
-
-	int publicLayoutsPageCount = userGroup.getPublicLayoutsPageCount();
-
-	if (publicLayoutsPageCount > 0) {
-		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
-
-		portletURL.setWindowState(WindowState.NORMAL);
-		portletURL.setPortletMode(PortletMode.VIEW);
-
-		portletURL.setParameter("struts_action", "/my_places/view");
-
-		portletURL.setParameter("groupId", String.valueOf(userGroup.getGroupId()));
-		portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
-
-		url = portletURL.toString();
-	}
+	url = userDisplay.getDisplayURL(themeDisplay.getURLPortal());
 }
 %>
 

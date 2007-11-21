@@ -882,6 +882,10 @@
 			<forward name="portlet.my_account.view" path="portlet.my_account.view" />
 		</action>
 
+		<!-- My Activities -->
+
+		<action path="/my_activities/view" forward="portlet.my_activities.view" />
+
 		<!-- My Community Tags -->
 
 		<action path="/my_community_tags/edit" type="com.liferay.portlet.mycommunitytags.action.EditPreferencesAction">
@@ -998,6 +1002,10 @@
 		<action path="/organization_admin/select_location" forward="portlet.enterprise_admin.select_location" />
 
 		<action path="/organization_admin/view" forward="portlet.enterprise_admin.view" />
+
+		<!-- Our Activities -->
+
+		<action path="/our_activities/view" forward="portlet.our_activities.view" />
 
 		<!-- Page Comments -->
 

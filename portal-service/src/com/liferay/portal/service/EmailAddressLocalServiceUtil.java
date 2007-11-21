@@ -97,6 +97,32 @@ public class EmailAddressLocalServiceUtil {
 		emailAddressLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 

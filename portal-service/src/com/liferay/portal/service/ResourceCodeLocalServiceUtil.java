@@ -97,6 +97,32 @@ public class ResourceCodeLocalServiceUtil {
 		resourceCodeLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 

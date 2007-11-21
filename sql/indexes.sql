@@ -1,3 +1,9 @@
+create index IX_125EE7A4 on ActivityTracker (classNameId, classPK);
+create index IX_57B7CA39 on ActivityTracker (companyId);
+create index IX_8EEF8AFB on ActivityTracker (groupId);
+create index IX_A9E541D8 on ActivityTracker (receiverUserId);
+create index IX_B57EB3C9 on ActivityTracker (userId);
+
 create index IX_93D5AD4E on Address (companyId);
 create index IX_ABD7DAC0 on Address (companyId, classNameId);
 create index IX_71CB1123 on Address (companyId, classNameId, classPK);

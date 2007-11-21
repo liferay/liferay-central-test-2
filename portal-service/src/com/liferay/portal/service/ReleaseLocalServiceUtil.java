@@ -96,6 +96,32 @@ public class ReleaseLocalServiceUtil {
 		releaseLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 

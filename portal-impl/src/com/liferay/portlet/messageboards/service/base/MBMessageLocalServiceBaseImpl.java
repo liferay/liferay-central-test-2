@@ -37,6 +37,8 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ActivityTrackerLocalService;
+import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -55,6 +57,10 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.ActivityTrackerFinder;
+import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
+import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
+import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -398,6 +404,33 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.mailService = mailService;
 	}
 
+	public ActivityTrackerLocalService getActivityTrackerLocalService() {
+		return activityTrackerLocalService;
+	}
+
+	public void setActivityTrackerLocalService(
+		ActivityTrackerLocalService activityTrackerLocalService) {
+		this.activityTrackerLocalService = activityTrackerLocalService;
+	}
+
+	public ActivityTrackerPersistence getActivityTrackerPersistence() {
+		return activityTrackerPersistence;
+	}
+
+	public void setActivityTrackerPersistence(
+		ActivityTrackerPersistence activityTrackerPersistence) {
+		this.activityTrackerPersistence = activityTrackerPersistence;
+	}
+
+	public ActivityTrackerFinder getActivityTrackerFinder() {
+		return activityTrackerFinder;
+	}
+
+	public void setActivityTrackerFinder(
+		ActivityTrackerFinder activityTrackerFinder) {
+		this.activityTrackerFinder = activityTrackerFinder;
+	}
+
 	public CompanyLocalService getCompanyLocalService() {
 		return companyLocalService;
 	}
@@ -732,6 +765,18 @@ public abstract class MBMessageLocalServiceBaseImpl
 			mailService = MailServiceFactory.getImpl();
 		}
 
+		if (activityTrackerLocalService == null) {
+			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (activityTrackerPersistence == null) {
+			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
+		}
+
+		if (activityTrackerFinder == null) {
+			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
+		}
+
 		if (companyLocalService == null) {
 			companyLocalService = CompanyLocalServiceFactory.getImpl();
 		}
@@ -872,6 +917,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;
 	protected MailService mailService;
+	protected ActivityTrackerLocalService activityTrackerLocalService;
+	protected ActivityTrackerPersistence activityTrackerPersistence;
+	protected ActivityTrackerFinder activityTrackerFinder;
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;

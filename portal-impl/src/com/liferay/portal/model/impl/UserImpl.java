@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -41,6 +42,7 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 
 import java.util.ArrayList;
@@ -427,6 +429,25 @@ public class UserImpl extends UserModelImpl implements User {
 		catch (Exception e) {
 			return false;
 		}
+	}
+
+	public String getDisplayURL(String portalURL) {
+		try {
+			Group group = getGroup();
+
+			int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+
+			if (publicLayoutsPageCount > 0) {
+				return portalURL + PortalUtil.getPathMain() +
+					"/my_places/view?groupId=" + group.getGroupId() +
+						"&privateLayout=0";
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return StringPool.BLANK;
 	}
 
 	private static Log _log = LogFactory.getLog(UserImpl.class);

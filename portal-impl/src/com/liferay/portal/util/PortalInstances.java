@@ -28,10 +28,12 @@ import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -373,6 +375,39 @@ public class PortalInstances {
 			_log.error(e, e);
 		}
 
+		// Activity tracker interpreter
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Activity tracker interpreter");
+		}
+
+		try {
+			Iterator itr = PortletLocalServiceUtil.getPortlets(
+				companyId).iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				ActivityTrackerInterpreter activityTrackerInterpreter =
+					portlet.getActivityTrackerInterpreterInstance();
+
+				if (portlet.isActive() &&
+					(activityTrackerInterpreter != null)) {
+
+					activityTrackerInterpreter =
+						new ActivityTrackerInterpreterImpl(
+							activityTrackerInterpreter);
+
+					ActivityTrackerInterpreterUtil.
+						addActivityTrackerInterpreter(
+							activityTrackerInterpreter);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		// SMTP message listener
 
 		if (_log.isDebugEnabled()) {
@@ -393,8 +428,6 @@ public class PortalInstances {
 					SMTPServerUtil.addListener(smtpMessageListener);
 				}
 			}
-		}
-		catch (ObjectAlreadyExistsException oaee) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);

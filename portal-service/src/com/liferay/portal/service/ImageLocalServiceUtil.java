@@ -96,6 +96,32 @@ public class ImageLocalServiceUtil {
 		imageLocalService.setAccountPersistence(accountPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getActivityTrackerPersistence();
+	}
+
+	public static void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		imageLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getActivityTrackerFinder();
+	}
+
+	public static void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		imageLocalService.setActivityTrackerFinder(activityTrackerFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 

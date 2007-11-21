@@ -748,6 +748,14 @@
 		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
 	</definition>
 
+	<!-- My Activities -->
+
+	<definition name="portlet.my_activities" extends="portlet" />
+
+	<definition name="portlet.my_activities.view" extends="portlet.my_activities">
+		<put name="portlet_content" value="/portlet/my_activities/view.jsp" />
+	</definition>
+
 	<!-- My Community Tags -->
 
 	<definition name="portlet.my_community_tags" extends="portlet" />
@@ -810,6 +818,14 @@
 
 	<definition name="portlet.open_id.view" extends="portlet.open_id">
 		<put name="portlet_content" value="/portlet/open_id/view.jsp" />
+	</definition>
+
+	<!-- Our Activities -->
+
+	<definition name="portlet.our_activities" extends="portlet" />
+
+	<definition name="portlet.our_activities.view" extends="portlet.our_activities">
+		<put name="portlet_content" value="/portlet/our_activities/view.jsp" />
 	</definition>
 
 	<!-- Page Comments -->

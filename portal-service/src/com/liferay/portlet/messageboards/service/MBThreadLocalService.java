@@ -120,6 +120,16 @@ public interface MBThreadLocalService {
 	public void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder);
 
+	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
+
+	public void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence);
+
+	public com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder();
+
+	public void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
+
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(

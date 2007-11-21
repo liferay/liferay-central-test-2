@@ -1,6 +1,30 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portal.service.persistence.ActivityTrackerFinder.countByU_R">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ActivityTracker
+			WHERE
+				(ActivityTracker.userId = ?) OR
+				(ActivityTracker.receiverUserId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ActivityTrackerFinder.findByU_R">
+		<![CDATA[
+			SELECT
+				{ActivityTracker.*}
+			FROM
+				ActivityTracker
+			WHERE
+				(ActivityTracker.userId = ?) OR
+				(ActivityTracker.receiverUserId = ?)
+			ORDER BY
+				ActivityTracker.createDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByGroupId">
 		<![CDATA[
 			SELECT

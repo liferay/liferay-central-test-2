@@ -35,6 +35,8 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AccountServiceFactory;
+import com.liferay.portal.service.ActivityTrackerLocalService;
+import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressLocalServiceFactory;
 import com.liferay.portal.service.AddressService;
@@ -154,6 +156,10 @@ import com.liferay.portal.service.WebsiteService;
 import com.liferay.portal.service.WebsiteServiceFactory;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AccountUtil;
+import com.liferay.portal.service.persistence.ActivityTrackerFinder;
+import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
+import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
+import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
@@ -330,6 +336,33 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 
 	public void setAccountPersistence(AccountPersistence accountPersistence) {
 		this.accountPersistence = accountPersistence;
+	}
+
+	public ActivityTrackerLocalService getActivityTrackerLocalService() {
+		return activityTrackerLocalService;
+	}
+
+	public void setActivityTrackerLocalService(
+		ActivityTrackerLocalService activityTrackerLocalService) {
+		this.activityTrackerLocalService = activityTrackerLocalService;
+	}
+
+	public ActivityTrackerPersistence getActivityTrackerPersistence() {
+		return activityTrackerPersistence;
+	}
+
+	public void setActivityTrackerPersistence(
+		ActivityTrackerPersistence activityTrackerPersistence) {
+		this.activityTrackerPersistence = activityTrackerPersistence;
+	}
+
+	public ActivityTrackerFinder getActivityTrackerFinder() {
+		return activityTrackerFinder;
+	}
+
+	public void setActivityTrackerFinder(
+		ActivityTrackerFinder activityTrackerFinder) {
+		this.activityTrackerFinder = activityTrackerFinder;
 	}
 
 	public AddressLocalService getAddressLocalService() {
@@ -1274,6 +1307,18 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 			accountPersistence = AccountUtil.getPersistence();
 		}
 
+		if (activityTrackerLocalService == null) {
+			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (activityTrackerPersistence == null) {
+			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
+		}
+
+		if (activityTrackerFinder == null) {
+			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
+		}
+
 		if (addressLocalService == null) {
 			addressLocalService = AddressLocalServiceFactory.getImpl();
 		}
@@ -1718,6 +1763,9 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	protected AccountLocalService accountLocalService;
 	protected AccountService accountService;
 	protected AccountPersistence accountPersistence;
+	protected ActivityTrackerLocalService activityTrackerLocalService;
+	protected ActivityTrackerPersistence activityTrackerPersistence;
+	protected ActivityTrackerFinder activityTrackerFinder;
 	protected AddressLocalService addressLocalService;
 	protected AddressService addressService;
 	protected AddressPersistence addressPersistence;

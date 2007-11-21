@@ -70,6 +70,16 @@ public interface ResourceCodeLocalService {
 	public void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence);
 
+	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
+
+	public void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence);
+
+	public com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder();
+
+	public void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
+
 	public com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence();
 
 	public void setAddressPersistence(

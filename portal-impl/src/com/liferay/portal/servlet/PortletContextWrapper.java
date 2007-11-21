@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.model.ActivityTrackerInterpreter;
 
 import java.util.Locale;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class PortletContextWrapper {
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
+		ActivityTrackerInterpreter activityTrackerInterpreterInstance,
 		MessageListener smtpMessageListenerInstance,
 		PreferencesValidator prefsValidatorInstance, Map resourceBundles,
 		Map customUserAttributes) {
@@ -69,6 +71,8 @@ public class PortletContextWrapper {
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
+		_activityTrackerInterpreterInstance =
+			activityTrackerInterpreterInstance;
 		_smtpMessageListenerInstance = smtpMessageListenerInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
@@ -115,6 +119,10 @@ public class PortletContextWrapper {
 		return _portletLayoutListenerInstance;
 	}
 
+	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
+		return _activityTrackerInterpreterInstance;
+	}
+
 	public MessageListener getSmtpMessageListenerInstance() {
 		return _smtpMessageListenerInstance;
 	}
@@ -153,6 +161,7 @@ public class PortletContextWrapper {
 	private URLEncoder _urlEncoderInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
+	private ActivityTrackerInterpreter _activityTrackerInterpreterInstance;
 	private MessageListener _smtpMessageListenerInstance;
 	private PreferencesValidator _prefsValidatorInstance;
 	private Map _resourceBundles;

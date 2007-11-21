@@ -137,6 +137,13 @@ public interface Portlet extends PortletModel {
 	public void setPortletLayoutListenerClass(
 		java.lang.String portletLayoutListenerClass);
 
+	public java.lang.String getActivityTrackerInterpreterClass();
+
+	public void setActivityTrackerInterpreterClass(
+		java.lang.String activityTrackerInterpreterClass);
+
+	public com.liferay.portal.model.ActivityTrackerInterpreter getActivityTrackerInterpreterInstance();
+
 	public java.lang.String getSmtpMessageListenerClass();
 
 	public void setSmtpMessageListenerClass(

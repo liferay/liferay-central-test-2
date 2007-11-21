@@ -29,6 +29,8 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ActivityTrackerLocalService;
+import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -37,6 +39,10 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.ActivityTrackerFinder;
+import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
+import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
+import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -330,6 +336,33 @@ public abstract class MBThreadLocalServiceBaseImpl
 		this.dlService = dlService;
 	}
 
+	public ActivityTrackerLocalService getActivityTrackerLocalService() {
+		return activityTrackerLocalService;
+	}
+
+	public void setActivityTrackerLocalService(
+		ActivityTrackerLocalService activityTrackerLocalService) {
+		this.activityTrackerLocalService = activityTrackerLocalService;
+	}
+
+	public ActivityTrackerPersistence getActivityTrackerPersistence() {
+		return activityTrackerPersistence;
+	}
+
+	public void setActivityTrackerPersistence(
+		ActivityTrackerPersistence activityTrackerPersistence) {
+		this.activityTrackerPersistence = activityTrackerPersistence;
+	}
+
+	public ActivityTrackerFinder getActivityTrackerFinder() {
+		return activityTrackerFinder;
+	}
+
+	public void setActivityTrackerFinder(
+		ActivityTrackerFinder activityTrackerFinder) {
+		this.activityTrackerFinder = activityTrackerFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -514,6 +547,18 @@ public abstract class MBThreadLocalServiceBaseImpl
 			dlService = DLServiceFactory.getImpl();
 		}
 
+		if (activityTrackerLocalService == null) {
+			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (activityTrackerPersistence == null) {
+			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
+		}
+
+		if (activityTrackerFinder == null) {
+			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -584,6 +629,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected MBThreadFinder mbThreadFinder;
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;
+	protected ActivityTrackerLocalService activityTrackerLocalService;
+	protected ActivityTrackerPersistence activityTrackerPersistence;
+	protected ActivityTrackerFinder activityTrackerFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

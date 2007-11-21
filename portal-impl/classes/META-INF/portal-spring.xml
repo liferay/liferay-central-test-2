@@ -65,6 +65,50 @@
 			<ref bean="com.liferay.portal.service.persistence.AccountPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ActivityTrackerLocalService.impl" class="com.liferay.portal.service.impl.ActivityTrackerLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ActivityTrackerLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ActivityTrackerLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="set*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ActivityTrackerLocalServiceFactory" class="com.liferay.portal.service.ActivityTrackerLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ActivityTrackerLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ActivityTrackerPersistenceImpl" class="com.liferay.portal.service.persistence.ActivityTrackerPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ActivityTrackerUtil" class="com.liferay.portal.service.persistence.ActivityTrackerUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ActivityTrackerPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ActivityTrackerFinderImpl" class="com.liferay.portal.service.persistence.ActivityTrackerFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.ActivityTrackerFinderUtil" class="com.liferay.portal.service.persistence.ActivityTrackerFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.ActivityTrackerFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.AddressLocalService.impl" class="com.liferay.portal.service.impl.AddressLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.AddressLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

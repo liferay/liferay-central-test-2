@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.3//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_3.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.4.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_4_0.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -225,6 +225,7 @@
 		<scheduler-class>com.liferay.portlet.messageboards.job.Scheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
+		<activity-tracker-interpreter-class>com.liferay.portlet.messageboards.MBActivityTrackerInterpreter</activity-tracker-interpreter-class>
 		<smtp-message-listener-class>com.liferay.portlet.messageboards.smtp.MessageListenerImpl</smtp-message-listener-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
@@ -1093,6 +1094,26 @@
 		<icon>/html/portlet/blogs_aggregator/icon.png</icon>
 		<struts-path>blogs_aggregator</struts-path>
 		<configuration-action-class>com.liferay.portlet.blogsaggregator.action.ConfigurationActionImpl</configuration-action-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
+	<portlet>
+		<portlet-name>116</portlet-name>
+		<icon>/html/portlet/my_activities/icon.png</icon>
+		<struts-path>my_activities</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
+	<portlet>
+		<portlet-name>117</portlet-name>
+		<icon>/html/portlet/our_activities/icon.png</icon>
+		<struts-path>our_activities</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

@@ -174,6 +174,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
+		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
@@ -294,6 +295,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
+		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
