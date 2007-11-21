@@ -68,7 +68,6 @@ import org.dom4j.Element;
  * @author Raymond Augé
  * @author Bruno Farache
  *
- * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
  *
