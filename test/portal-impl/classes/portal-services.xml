@@ -3,12 +3,8 @@
 
 <beans>
 	<bean id="userServiceHttpSecureProxyExecutor" class="com.liferay.portal.spring.remoting.AuthenticatingHttpInvokerRequestExecutor">
-		<property name="userId">
-			<value>2</value>
-		</property>
-		<property name="password">
-			<value>test</value>
-		</property>
+		<property name="userId" value="2" />
+		<property name="password" value="test" />
 	</bean>
 	<bean id="userServiceHessianSecureProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="http://localhost:8080/tunnel-web/secure/spring/com_liferay_portal_service_spring_UserService-hessian" />
