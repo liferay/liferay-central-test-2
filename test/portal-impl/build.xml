@@ -67,7 +67,8 @@
 		<pathelement path="${project.dir}/lib/portal/velocity.jar" />
 		<pathelement path="${project.dir}/lib/portal/xstream.jar" />
 		<pathelement path="${project.dir}/util-java/util-java.jar" />
-		<pathelement path="${project.dir}/portal-impl/portal-impl.jar" />
+		<pathelement path="${project.dir}/portal-impl/classes" />
+		<pathelement path="${project.dir}/portal-web/docroot/WEB-INF/classes" />
 	</path>
 
 	<target name="compile">
@@ -149,8 +150,9 @@
 			classpathref="test-spring-remoting.classpath"
 			fork="true"
 			newenvironment="true"
-			args="hessian"
-		/>
+		>
+			<arg value="hessian" />
+		</java>
 	</target>
 
 	<target name="test-spring-remoting-http" depends="compile">
@@ -159,7 +161,8 @@
 			classpathref="test-spring-remoting.classpath"
 			fork="true"
 			newenvironment="true"
-			args="http"
-		/>
+		>
+			<arg value="http" />
+		</java>
 	</target>
 </project>
