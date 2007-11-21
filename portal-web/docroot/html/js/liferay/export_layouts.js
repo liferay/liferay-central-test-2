@@ -6,17 +6,18 @@ Liferay.ExportLayouts = {
 
 	publishToLive: function(options) {
 		options = options || {};
-		
+
 		var messageId = options.messageId;
 		var url = options.url;
-		
-		if (!messageId) {
-			messageId = Liferay.Language.get(messageId);
+		var title = options.title;
+
+		if (!title) {
+			title = Liferay.Language.get(messageId);
 		}
-		
+
 		var exportLayoutsPopup = Liferay.Popup(
 			{
-				'title': messageId,
+				'title': title,
 				modal: true,
 				width: 600,
 				height: 550,
@@ -30,11 +31,11 @@ Liferay.ExportLayouts = {
 
 	all: function(options) {
 		options = options || {};
-		
+
 		var pane = options.pane;
 		var obj = options.obj;
 		var publish = options.publish;
-		
+
 		if (obj.checked) {
 			jQuery(pane).hide();
 			if (!publish) {
@@ -50,11 +51,11 @@ Liferay.ExportLayouts = {
 	selected: function(options) {
 		window.status = "LOG: selected(" + options.toString() + ")";
 		options = options || {};
-		
+
 		var pane = options.pane;
 		var obj = options.obj;
 		var publish = options.publish;
-		
+
 		if (obj.checked) {
 			jQuery(pane).show();
 			if (!publish) {
@@ -69,10 +70,10 @@ Liferay.ExportLayouts = {
 
 	details: function(options) {
 		options = options || {};
-		
+
 		var toggle = options.toggle;
 		var detail = options.detail;
-		
+
 		var img = jQuery(toggle)[0];
 		if (jQuery(detail).css('display') == 'none') {
 			jQuery(detail).slideDown('normal');
