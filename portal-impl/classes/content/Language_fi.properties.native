@@ -714,6 +714,7 @@ color-text=Tekstin väri
 color-url=URL:n väri
 color=Väri
 colors=Värit
+column-n-portlets=Column {0} Portlets
 column_1=Sarake 1
 column_2=Sarake 2
 column_3=Sarake 3

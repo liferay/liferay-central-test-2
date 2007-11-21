@@ -84,10 +84,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Map.Entry;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -517,6 +519,79 @@ public class EditPagesAction extends PortletAction {
 			parameterMap, bais);
 	}
 
+	protected void publishLayouts(
+			long creatorUserId, Map layoutIdMap, long originGroupId, 
+			long targetGroupId, boolean privateLayout)
+		throws Exception{
+
+		Map parameterMap = getPublishParameters();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			Boolean.FALSE.toString());
+		
+		List layouts = new ArrayList();
+
+		Iterator itr = layoutIdMap.entrySet().iterator();
+		
+		while (itr.hasNext()) {
+			Entry entry = (Entry)itr.next();
+			long plid = ((Long)entry.getKey()).longValue();
+			boolean includeChildren = 
+				((Boolean)entry.getValue()).booleanValue();
+			
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+			
+			if (!layouts.contains(layout)) {
+				layouts.add(layout);
+			}
+
+			Iterator parentsItr = 
+				getMissingParents(layout, targetGroupId).iterator();
+			
+			while (parentsItr.hasNext()) {
+				Layout parent = (Layout)parentsItr.next();
+				
+				if (!layouts.contains(parent)) {
+					layouts.add(parent);
+				}
+			}
+
+			if (includeChildren) {
+				Iterator childrenItr = layout.getAllChildren().iterator();
+				
+				while (childrenItr.hasNext()) {
+					Layout child = (Layout)childrenItr.next();
+					
+					if (!layouts.contains(child)) {
+						layouts.add(child);
+					}
+				}
+			}
+
+		}
+
+		itr = layouts.iterator();
+
+		long[] layoutIds = new long[layouts.size()];
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Layout curLayout = (Layout)itr.next();
+
+			layoutIds[i] = curLayout.getLayoutId();
+		}
+
+		byte[] data = LayoutLocalServiceUtil.exportLayouts(
+			originGroupId, privateLayout, layoutIds,
+			parameterMap);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		LayoutLocalServiceUtil.importLayouts(
+			creatorUserId, targetGroupId, privateLayout,
+			parameterMap, bais);
+	}
+
 	protected void publishToLive(ActionRequest req) throws Exception{
 		User user = PortalUtil.getUser(req);
 
@@ -540,20 +615,31 @@ public class EditPagesAction extends PortletAction {
 
 		String scope = ParamUtil.getString(req, "scope");
 
-		if (scope.equals("allPages")) {
+		if (scope.equals("all-pages")) {
 			copyLayouts(
 				user.getUserId(), stagingGroup.getGroupId(), privateLayout,
 				stagingGroup.getLiveGroupId(), privateLayout);
 		}
-		else if (scope.equals("currentPage")) {
-			long selPlid = ParamUtil.getLong(
-				req, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
-			boolean includeChildren = ParamUtil.getBoolean(
-				req, "includeChildren");
+		else if (scope.equals("selected-pages")) {
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+			
+			long selPlid = 0;
+			boolean includeChildren = false;
+			
+			Map layoutIdMap = new LinkedHashMap();
+			
+			for (int i = 0; i < rowIds.length; i++) {
+				selPlid = rowIds[i];
+				includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+				
+				layoutIdMap.put(
+					new Long(selPlid), new Boolean(includeChildren));
+			}
 
-			publishLayout(
-				user.getUserId(), selPlid, stagingGroup.getLiveGroupId(),
-				includeChildren);
+			publishLayouts(
+				user.getUserId(), layoutIdMap, stagingGroupId, 
+				stagingGroup.getLiveGroupId(), privateLayout);
 		}
 	}
 

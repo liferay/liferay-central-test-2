@@ -37,6 +37,7 @@
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
+<%@ page import="com.liferay.portal.NoSuchPortletException"%>
 <%@ page import="com.liferay.portal.NoSuchRoleException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
@@ -60,6 +61,7 @@
 <%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
 <%@ page import="com.liferay.portal.util.comparator.OrganizationNameComparator" %>
 <%@ page import="com.liferay.portlet.communities.action.ActionUtil" %>
+<%@ page import="com.liferay.portlet.communities.search.ExportPageChecker"%>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleUserChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>

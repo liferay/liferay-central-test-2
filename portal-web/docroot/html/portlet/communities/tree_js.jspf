@@ -26,6 +26,9 @@
 
 <script type="text/javascript">
 	var <portlet:namespace />layoutIcons = {
+		checkbox: '<%= themeDisplay.getPathThemeImages() %>/trees/checkbox.png',
+		checked: '<%= themeDisplay.getPathThemeImages() %>/trees/checked.png',
+		childChecked: '<%= themeDisplay.getPathThemeImages() %>/trees/child_checked.png',
 		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
 		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
 		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',

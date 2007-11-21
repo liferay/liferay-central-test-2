@@ -1203,14 +1203,16 @@ public class ServicePreAction extends Action {
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
+				// Publish To Live
+				
 				PortletURL publishToLiveURL = new PortletURLImpl(
 					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
 
-				publishToLiveURL.setWindowState(WindowState.MAXIMIZED);
+				publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 				publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 				publishToLiveURL.setParameter(
-					"struts_action", "/layout_management/edit_pages");
+					"struts_action", "/layout_management/export_pages");
 
 				if (layout.isPrivateLayout()) {
 					publishToLiveURL.setParameter("tabs2", "private");
@@ -1219,12 +1221,13 @@ public class ServicePreAction extends Action {
 					publishToLiveURL.setParameter("tabs2", "public");
 				}
 
-				publishToLiveURL.setParameter("redirect", currentURL);
+				publishToLiveURL.setParameter("pagesRedirect", currentURL);
 				publishToLiveURL.setParameter(
 					"groupId", String.valueOf(portletGroupId));
 				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
-				publishToLiveURL.setParameter("cmd", "publish_to_live");
-
+				
+				publishToLiveURL.setParameter("popupId", "publish-to-live");
+				
 				themeDisplay.setURLPublishToLive(publishToLiveURL);
 			}
 

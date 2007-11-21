@@ -1,0 +1,152 @@
+<%
+/**
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery("#<portlet:namespace />exportTree li > span.export-tree-item > img.select-state").bind("click", <portlet:namespace />handleNodeClick);
+	
+		jQuery("#<portlet:namespace />exportTree li > img.expand-image").bind("click", <portlet:namespace />handleExpandClick);
+	
+		jQuery("#<portlet:namespace />exportTree li > img.expand-image").bind("click", <portlet:namespace />handleExpandClick);
+	
+		jQuery("#lfr-expand").click(<portlet:namespace />handleExpandAllClick);
+	
+		jQuery("#lfr-collapse").click(<portlet:namespace />handleCollapsAllClick);
+	});
+</script>
+
+<ul class="gamma">
+	<li class="toggle-expand">
+		<a href="javascript: ;" id="lfr-expand"><liferay-ui:message key="expand-all"/></a> | <a href="javascript: ;" id="lfr-collapse"><liferay-ui:message key="collapse-all"/></a>
+	</li>
+	<li class="root-container">
+		<a href="javascript: self.location = '<%= portletURL.toString() %>';">
+			<img class="" id="" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" border="0" height="20" hspace="0" vspace="0" width="19" />
+			<span><strong><%= liveGroup.getName() %></strong></span>
+		</a>
+		<div id="<portlet:namespace />exportTree">
+			<ul>
+				<%= _renderLayouts(renderResponse.getNamespace(), stagingGroupId, liveGroupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, selPlid, portletURL, themeDisplay, locale).toString() %>
+			</ul>
+		</div>
+	</li>
+</ul>
+
+<%!
+private StringMaker _renderLayouts(String nameSpace, long stagingGroupId, long liveGroupId, boolean privateLayout, long parentLayoutId, long selPlid, PortletURL portletURL, ThemeDisplay themeDisplay, Locale locale) {
+
+	StringMaker sm = new StringMaker();
+	
+	try {
+		List stagingLayouts = LayoutLocalServiceUtil.getLayouts(stagingGroupId, privateLayout, parentLayoutId);
+		List liveLayouts = LayoutLocalServiceUtil.getLayouts(liveGroupId, privateLayout, parentLayoutId);
+
+		int maxLayouts = Math.max(stagingLayouts.size(), liveLayouts.size());
+		
+		if (stagingLayouts.size() > 0) {
+			sm.append("<ul");
+
+			if (parentLayoutId != 0) {
+				sm.append(" style=\"display: none;\"");
+			}
+
+			sm.append(">");
+
+			for (int i = 0; i < stagingLayouts.size(); i++) {
+				Layout layout = (Layout)stagingLayouts.get(i);
+				
+				boolean current = (selPlid == layout.getPlid()); 
+
+				StringMaker node = new StringMaker();
+
+				node.append("<li layoutId=\"");
+				node.append(layout.getLayoutId());
+				node.append("\"");
+				node.append(" parentLayoutId=\"");
+				node.append(layout.getParentLayoutId());
+				node.append("\"");
+				
+				if (current) {
+					node.append(" class=\"tree-item current\"");
+				}
+				else {
+					node.append("  class=\"tree-item\"");
+				}
+				
+				node.append(">");
+				
+				node.append("<img class=\"expand-image\" src=\"");
+				node.append(themeDisplay.getPathThemeImages());
+				
+				if (layout.getChildren().size() > 0) {
+					node.append("/trees/plus.png\"/>");
+				}
+				else {
+					node.append("/trees/spacer.png\"/>");
+				}
+				
+				node.append("<span class=\"export-tree-item\">");
+				node.append("<img class=\"select-state\" src=\"");
+				node.append(themeDisplay.getPathThemeImages());
+				node.append("/trees/checkbox.png\"/>");
+				node.append("<img class=\"icon\" src=\"");
+				node.append(themeDisplay.getPathThemeImages());
+				node.append("/trees/page.png\"/>");
+				node.append("<span class=\"layout-name\">");
+
+				node.append("<a href=\"javascript: self.location = '");
+				node.append(HttpUtil.encodeURL(portletURL.toString()));
+				node.append("&");
+				node.append(nameSpace);
+				node.append("selPlid=");
+				node.append(layout.getPlid());
+				node.append("';\">");
+
+				if (current) {
+					node.append("<strong>");
+					node.append(layout.getName(locale));
+					node.append("</strong>");
+				}
+				else {
+					node.append(layout.getName(locale));
+				}
+				node.append("</a>");
+
+				node.append("</span>");
+				node.append("</span>");
+				node.append(_renderLayouts(nameSpace, stagingGroupId, liveGroupId, privateLayout, layout.getLayoutId(), selPlid, portletURL, themeDisplay, locale));
+				node.append("</li>");
+
+				sm.append(node.toString());
+			}
+			sm.append("</ul>");
+		}
+		
+		return sm;
+	}
+	catch (Exception e) {
+		return sm;
+	}
+}
+%>

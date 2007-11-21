@@ -22,29 +22,35 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="ExportPagesAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class ExportPagesAction extends PortletAction {
@@ -72,6 +78,31 @@ public class ExportPagesAction extends PortletAction {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		try {
+			ActionUtil.getGroup(req);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchGroupException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				return mapping.findForward("portlet.communities.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(req, "portlet.communities.export_pages"));
 	}
 
 	private static Log _log = LogFactory.getLog(ExportPagesAction.class);

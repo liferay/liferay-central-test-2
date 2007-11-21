@@ -729,6 +729,7 @@ color-text=Färgtext
 color-url=Färg URL
 color=Färg
 colors=Färger
+column-n-portlets=Column {0} Portlets
 column_1=Kolumn 1
 column_2=Kolumn 2
 column_3=Kolumn 3
