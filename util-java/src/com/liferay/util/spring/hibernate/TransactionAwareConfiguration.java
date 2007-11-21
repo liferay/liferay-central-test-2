@@ -37,7 +37,7 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  */
 public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
 
-	protected SessionFactory getTransactionAwareSessionFactoryProxy(
+	protected SessionFactory wrapSessionFactoryIfNecessary(
 		SessionFactory target) {
 
 		// LEP-2996

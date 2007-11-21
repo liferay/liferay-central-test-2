@@ -51,13 +51,6 @@ package com.liferay.portlet.messageboards.service;
 public interface MBCategoryService {
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 

@@ -83,24 +83,6 @@ import java.rmi.RemoteException;
 public class MBCategoryServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
 		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
-					parentCategoryId, name, description,
-					addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {

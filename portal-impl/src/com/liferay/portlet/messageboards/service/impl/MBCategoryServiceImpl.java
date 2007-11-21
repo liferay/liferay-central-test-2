@@ -43,20 +43,6 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory addCategory(
 			long plid, long parentCategoryId, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), plid, parentCategoryId,
-			ActionKeys.ADD_CATEGORY);
-
-		return mbCategoryLocalService.addCategory(
-			getUserId(), plid, parentCategoryId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public MBCategory addCategory(
-			long plid, long parentCategoryId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
