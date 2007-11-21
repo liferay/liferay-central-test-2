@@ -390,7 +390,6 @@ create table JournalArticle (
 );
 
 create table JournalArticleImage (
-	uuid_ VARCHAR(75) null,
 	articleImageId LONG not null primary key,
 	groupId LONG,
 	articleId VARCHAR(75) null,

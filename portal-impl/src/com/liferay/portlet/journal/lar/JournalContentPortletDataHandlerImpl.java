@@ -22,14 +22,13 @@
 
 package com.liferay.portlet.journal.lar;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -42,11 +41,9 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
@@ -67,26 +64,9 @@ import org.dom4j.Element;
  * <a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
  * </i></b></a>
  *
- * <p>
- * Provides the Journal Content portlet export and import functionality, which
- * is to clone the article, structure, and template referenced in the
- * Journal Content portlet if the article is associated with the layout's group.
- * Upon import, new instances of the corresponding articles, structures, and
- * templates are created or updated. The author of the newly created
- * objects are determined by the JournalCreationStrategy class defined in
- * <i>portal.properties</i>.
- * </p>
- *
- * <p>
- * This <code>PortletDataHandler</code> differs from from
- * <code>JournalPortletDataHandlerImpl</code> in that it only exports articles
- * referenced in Journal Content portlets. Articles not displayed in Journal
- * Content portlets will not be exported unless
- * <code>JournalPortletDataHandlerImpl</code> is activated.
- * </p>
- *
  * @author Joel Kozikowski
- * @author Raymond AugÃ©
+ * @author Raymond Augé
+ * @author Bruno Farache
  *
  * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
@@ -116,8 +96,9 @@ public class JournalContentPortletDataHandlerImpl
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_JOURNAL_CONTENT_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_JOURNAL_CONTENT_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -128,7 +109,7 @@ public class JournalContentPortletDataHandlerImpl
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -178,74 +159,67 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
-			String articlePrimaryKey = getPrimaryKey(
-				article.getGroupId(), article.getArticleId());
+			XStream xStream = new XStream();
 
-			if ((article.getGroupId() == context.getGroupId()) &&
-				!context.addPrimaryKey(
-					JournalArticle.class, articlePrimaryKey)) {
+			Document doc = DocumentHelper.createDocument();
 
-				XStream xStream = new XStream();
+			Element root = doc.addElement("journal-content");
 
-				Document doc = DocumentHelper.createDocument();
+			List content = root.content();
 
-				Element root = doc.addElement("journal-content");
+			if (!context.addPrimaryKey(
+					JournalArticle.class, article.getPrimaryKeyObj())) {
+
+				JournalPortletDataHandlerImpl.exportArticle(context, article);
 
 				String xml = xStream.toXML(article);
 
 				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
-				List content = root.content();
-
 				content.add(tempDoc.getRootElement().createCopy());
-
-				String structureId = article.getStructureId();
-
-				if (Validator.isNotNull(structureId)) {
-					String structurePrimaryKey = getPrimaryKey(
-						article.getGroupId(), structureId);
-
-					if (!context.addPrimaryKey(
-							JournalStructure.class, structurePrimaryKey)) {
-
-						JournalStructure structure =
-							JournalStructureUtil.findByG_S(
-								article.getGroupId(), structureId);
-
-						xml = xStream.toXML(structure);
-
-						tempDoc = PortalUtil.readDocumentFromXML(xml);
-
-						content.add(tempDoc.getRootElement().createCopy());
-					}
-				}
-
-				String templateId = article.getTemplateId();
-
-				if (Validator.isNotNull(templateId)) {
-					String templatePrimaryKey = getPrimaryKey(
-						article.getGroupId(), templateId);
-
-					if (!context.addPrimaryKey(
-							JournalTemplate.class, templatePrimaryKey)) {
-
-						JournalTemplate template =
-							JournalTemplateUtil.findByG_T(
-								article.getGroupId(), templateId);
-
-						xml = xStream.toXML(template);
-
-						tempDoc = PortalUtil.readDocumentFromXML(xml);
-
-						content.add(tempDoc.getRootElement().createCopy());
-					}
-				}
-
-				return doc.asXML();
 			}
-			else {
-				return StringPool.BLANK;
+
+			String structureId = article.getStructureId();
+
+			if (Validator.isNotNull(structureId)) {
+				JournalStructure structure = JournalStructureUtil.findByG_S(
+					article.getGroupId(), structureId);
+
+				if (!context.addPrimaryKey(
+						JournalStructure.class, article.getPrimaryKeyObj())) {
+
+					JournalPortletDataHandlerImpl.exportStructure(structure);
+
+					String xml = xStream.toXML(structure);
+
+					Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+
+					content.add(tempDoc.getRootElement().createCopy());
+				}
 			}
+
+			String templateId = article.getTemplateId();
+
+			if (Validator.isNotNull(templateId)) {
+				JournalTemplate template = JournalTemplateUtil.findByG_T(
+					article.getGroupId(), templateId);
+
+				if (!context.addPrimaryKey(
+						JournalTemplate.class, template.getPrimaryKeyObj())) {
+
+					JournalPortletDataHandlerImpl.exportTemplate(
+						context, template);
+
+					String xml = xStream.toXML(template);
+
+					Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+
+					content.add(tempDoc.getRootElement().createCopy());
+				}
+			}
+
+			return doc.asXML();
+
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -260,8 +234,9 @@ public class JournalContentPortletDataHandlerImpl
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_JOURNAL_CONTENT_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_JOURNAL_CONTENT_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -272,233 +247,87 @@ public class JournalContentPortletDataHandlerImpl
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+
+		if (!mergeData){
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Merge data option wasn't selected, this can cause " +
+						"duplication of entities because there's no way to " +
+							"check if they already exist.");
+			}
+		}
+
 		try {
-			importJournalData(context, portletId, data);
+			if (Validator.isNull(data)) {
+				return null;
+			}
 
-			// Update the group-id in the display content to reference this
-			// group, since the article is now in this group.
+			XStream xStream = new XStream();
 
-			prefs.setValue("group-id", String.valueOf(context.getGroupId()));
+			Document doc = PortalUtil.readDocumentFromXML(data);
+
+			Element root = doc.getRootElement();
+
+			Element el = root.element(JournalStructureImpl.class.getName());
+
+			Document tempDoc = DocumentHelper.createDocument();
+
+			Map structurePKs = CollectionFactory.getHashMap();
+
+			if (el != null) {
+				tempDoc.content().add(el.createCopy());
+
+				JournalStructure structure = (JournalStructure)xStream.fromXML(
+					tempDoc.asXML());
+
+				JournalPortletDataHandlerImpl.importStructure(
+					context, mergeData, structurePKs, structure);
+			}
+
+			el = root.element(JournalTemplateImpl.class.getName());
+
+			Map templatePKs = CollectionFactory.getHashMap();
+
+			if (el != null) {
+				tempDoc = DocumentHelper.createDocument();
+
+				tempDoc.content().add(el.createCopy());
+
+				JournalTemplate template = (JournalTemplate)xStream.fromXML(
+					tempDoc.asXML());
+
+				JournalPortletDataHandlerImpl.importTemplate(
+					context, mergeData, structurePKs, templatePKs, template);
+			}
+
+			el = root.element(JournalArticleImpl.class.getName());
+
+			if (el != null) {
+				tempDoc = DocumentHelper.createDocument();
+
+				tempDoc.content().add(el.createCopy());
+
+				JournalArticle article = (JournalArticle)xStream.fromXML(
+					tempDoc.asXML());
+
+				article = JournalPortletDataHandlerImpl.importArticle(
+					context, mergeData, structurePKs, templatePKs, article);
+
+				prefs.setValue(
+					"group-id", String.valueOf(context.getGroupId()));
+				prefs.setValue("article-id", article.getArticleId());
+			}
 
 			return prefs;
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
-		}
-	}
-
-	protected String getPrimaryKey(long groupId, String key) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(key);
-
-		return sm.toString();
-	}
-
-	protected void importJournalData(
-			PortletDataContext context, String portletId, String data)
-		throws Exception {
-
-		if (Validator.isNull(data)) {
-			return;
-		}
-
-		JournalCreationStrategy creationStrategy =
-			JournalCreationStrategyFactory.getInstance();
-
-		XStream xStream = new XStream();
-
-		Document doc = PortalUtil.readDocumentFromXML(data);
-
-		Element root = doc.getRootElement();
-
-		Element el = root.element(JournalArticleImpl.class.getName());
-
-		Document tempDoc = DocumentHelper.createDocument();
-
-		tempDoc.content().add(el.createCopy());
-
-		JournalArticle article = (JournalArticle)xStream.fromXML(
-			tempDoc.asXML());
-
-		article.setGroupId(context.getGroupId());
-
-        JournalArticle oldArticle = null;
-
-        try {
-            oldArticle =
-				JournalArticleLocalServiceUtil.getLatestArticle(
-					context.getGroupId(), article.getArticleId());
-        }
-        catch (NoSuchArticleException nsae) {
-        }
-
-        if (oldArticle == null) {
-			article.setNew(true);
-            article.setId(CounterLocalServiceUtil.increment());
-
-			long authorId = creationStrategy.getAuthorUserId(
-				context.getCompanyId(), context.getGroupId(), article);
-
-			if (authorId > 0) {
-				article.setUserId(authorId);
-				article.setUserName(
-					creationStrategy.getAuthorUserName(
-						context.getCompanyId(), context.getGroupId(), article));
-			}
-
-			long approvedById = creationStrategy.getApprovalUserId(
-				context.getCompanyId(), context.getGroupId(), article);
-
-			if (approvedById > 0) {
-				article.setApprovedByUserId(approvedById);
-				article.setApprovedByUserName(
-					creationStrategy.getApprovalUserName(
-						context.getCompanyId(), context.getGroupId(), article));
-				article.setApproved(true);
-			}
-			else {
-				article.setApprovedByUserId(0);
-				article.setApprovedByUserName(null);
-				article.setApproved(false);
-			}
-
-            String newContent = creationStrategy.getTransformedContent(
-				context.getCompanyId(), context.getGroupId(), article);
-
-			if (newContent != null) {
-                article.setContent(newContent);
-            }
-
-			article = JournalArticleUtil.update(article);
-
-			boolean addCommunityPermissions =
-				creationStrategy.addCommunityPermissions(
-					context.getCompanyId(), context.getGroupId(), article);
-			boolean addGuestPermissions =
-				creationStrategy.addGuestPermissions(
-					context.getCompanyId(), context.getGroupId(), article);
-
-			JournalArticleLocalServiceUtil.addArticleResources(
-				article, addCommunityPermissions, addGuestPermissions);
-		}
-		else {
-
-			// TODO If the article already exists, it must either be merged with
-			// the object in the Hibernate session retrieved by fetch above, or
-			// not updated at all.
-
-			//JournalArticleUtil.update(article, true);
-		}
-
-		el = root.element(JournalStructureImpl.class.getName());
-
-		if (el != null) {
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
-
-			JournalStructure structure = (JournalStructure)xStream.fromXML(
-				tempDoc.asXML());
-
-			structure.setGroupId(context.getGroupId());
-
-            if (JournalStructureUtil.fetchByG_S(
-					context.getGroupId(), structure.getStructureId()) == null) {
-
-				structure.setNew(true);
-                structure.setId(CounterLocalServiceUtil.increment());
-
-				long authorId = creationStrategy.getAuthorUserId(
-					context.getCompanyId(), context.getGroupId(), structure);
-
-				if (authorId > 0) {
-					structure.setUserId(authorId);
-					structure.setUserName(
-						creationStrategy.getAuthorUserName(
-							context.getCompanyId(), context.getGroupId(),
-							structure));
-				}
-
-				structure = JournalStructureUtil.update(structure);
-
-				boolean addCommunityPermissions =
-					creationStrategy.addCommunityPermissions(
-						context.getCompanyId(), context.getGroupId(),
-						structure);
-				boolean addGuestPermissions =
-					creationStrategy.addGuestPermissions(
-						context.getCompanyId(), context.getGroupId(),
-						structure);
-
-				JournalStructureLocalServiceUtil.addStructureResources(
-					structure, addCommunityPermissions, addGuestPermissions);
-			}
-			else {
-
-				// TODO If the structure already exists, it must either be
-				// merged with the object in the Hibernate session retrieved by
-				// fetch above, or not updated at all.
-
-				//JournalStructureUtil.update(structure, true);
-			}
-		}
-
-		el = root.element(JournalTemplateImpl.class.getName());
-
-		if (el != null) {
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
-
-			JournalTemplate template = (JournalTemplate)xStream.fromXML(
-				tempDoc.asXML());
-
-			template.setGroupId(context.getGroupId());
-
-            if (JournalTemplateUtil.fetchByG_T(
-					context.getGroupId(), template.getTemplateId()) == null) {
-
-				template.setNew(true);
-                template.setId(CounterLocalServiceUtil.increment());
-
-				long authorId = creationStrategy.getAuthorUserId(
-					context.getCompanyId(), context.getGroupId(), template);
-
-				if (authorId > 0) {
-					template.setUserId(authorId);
-					template.setUserName(
-						creationStrategy.getAuthorUserName(
-							context.getCompanyId(), context.getGroupId(),
-							template));
-				}
-
-				template = JournalTemplateUtil.update(template);
-
-				boolean addCommunityPermissions =
-					creationStrategy.addCommunityPermissions(
-						context.getCompanyId(), context.getGroupId(), template);
-				boolean addGuestPermissions =
-					creationStrategy.addGuestPermissions(
-						context.getCompanyId(), context.getGroupId(), template);
-
-				JournalTemplateLocalServiceUtil.addTemplateResources(
-					template, addCommunityPermissions, addGuestPermissions);
-			}
-			else {
-
-				// TODO If the template already exists, it must either be merged
-				// with the object in the Hibernate session retrieved by fetch
-				// above, or not updated at all.
-
-				//JournalTemplateUtil.update(template, true);
-			}
 		}
 	}
 

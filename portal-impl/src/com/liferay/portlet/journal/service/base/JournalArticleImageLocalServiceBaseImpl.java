@@ -86,7 +86,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 
 		journalArticleImage.setNew(true);
 
-		journalArticleImage.setUuid(model.getUuid());
 		journalArticleImage.setArticleImageId(model.getArticleImageId());
 		journalArticleImage.setGroupId(model.getGroupId());
 		journalArticleImage.setArticleId(model.getArticleId());
@@ -115,7 +114,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 
 		journalArticleImage.setNew(false);
 
-		journalArticleImage.setUuid(model.getUuid());
 		journalArticleImage.setArticleImageId(model.getArticleImageId());
 		journalArticleImage.setGroupId(model.getGroupId());
 		journalArticleImage.setArticleId(model.getArticleId());

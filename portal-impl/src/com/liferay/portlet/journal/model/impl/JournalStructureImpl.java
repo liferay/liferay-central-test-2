@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 
 /**
@@ -81,5 +83,15 @@ public class JournalStructureImpl
 
 	public JournalStructureImpl() {
 	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	private String _userUuid;
 
 }

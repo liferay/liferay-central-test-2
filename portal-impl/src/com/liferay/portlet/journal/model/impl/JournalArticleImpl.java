@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
@@ -49,6 +51,23 @@ public class JournalArticleImpl
 	public static final String STAND_ALONE = "stand-alone";
 
 	public JournalArticleImpl() {
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	public String getApprovedByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(
+			getApprovedByUserId(), "uuid", _approvedByUserUuid);
+	}
+
+	public void setApprovedByUserUuid(String approvedByUserUuid) {
+		_approvedByUserUuid = approvedByUserUuid;
 	}
 
 	public String[] getAvailableLocales() {
@@ -90,5 +109,8 @@ public class JournalArticleImpl
 			return true;
 		}
 	}
+
+	private String _approvedByUserUuid;
+	private String _userUuid;
 
 }

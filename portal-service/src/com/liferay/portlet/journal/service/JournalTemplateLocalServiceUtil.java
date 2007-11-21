@@ -277,6 +277,24 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.addTemplate(uuid, userId,
+			templateId, autoTemplateId, plid, structureId, name, description,
+			xsl, formatXsl, langType, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
 		long plid, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
@@ -295,12 +313,12 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -308,20 +326,20 @@ public class JournalTemplateLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.addTemplate(userId, templateId,
-			autoTemplateId, plid, structureId, name, description, xsl,
-			formatXsl, langType, smallImage, smallImageURL, smallFile,
+		return journalTemplateLocalService.addTemplate(uuid, userId,
+			templateId, autoTemplateId, plid, structureId, name, description,
+			xsl, formatXsl, langType, smallImage, smallImageURL, smallFile,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplateToGroup(
-		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long groupId, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -329,7 +347,7 @@ public class JournalTemplateLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.addTemplateToGroup(userId,
+		return journalTemplateLocalService.addTemplateToGroup(uuid, userId,
 			templateId, autoTemplateId, groupId, structureId, name,
 			description, xsl, formatXsl, langType, smallImage, smallImageURL,
 			smallFile, addCommunityPermissions, addGuestPermissions,

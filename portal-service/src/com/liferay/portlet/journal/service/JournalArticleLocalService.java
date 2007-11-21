@@ -200,6 +200,23 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
+		java.lang.String uuid, long userId, java.lang.String articleId,
+		boolean autoArticleId, long plid, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
 		long plid, java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
@@ -218,17 +235,17 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long userId, java.lang.String articleId, boolean autoArticleId,
-		long plid, java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.util.Map images, java.lang.String articleURL,
+		java.lang.String uuid, long userId, java.lang.String articleId,
+		boolean autoArticleId, long plid, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -238,17 +255,17 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticleToGroup(
-		long userId, java.lang.String articleId, boolean autoArticleId,
-		long groupId, java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.util.Map images, java.lang.String articleURL,
+		java.lang.String uuid, long userId, java.lang.String articleId,
+		boolean autoArticleId, long groupId, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

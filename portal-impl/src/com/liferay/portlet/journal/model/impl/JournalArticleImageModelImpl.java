@@ -60,9 +60,6 @@ import java.sql.Types;
 public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticleImage";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "articleImageId", new Integer(Types.BIGINT) },
 			
 
@@ -83,7 +80,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (uuid_ VARCHAR(75) null,articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImageModel"));
@@ -101,16 +98,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_articleImageId);
-	}
-
-	public String getUuid() {
-		return GetterUtil.getString(_uuid);
-	}
-
-	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
-			_uuid = uuid;
-		}
 	}
 
 	public long getArticleImageId() {
@@ -199,7 +186,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public JournalArticleImage toEscapedModel() {
 		JournalArticleImage model = new JournalArticleImageImpl();
 
-		model.setUuid(Html.escape(getUuid()));
 		model.setArticleImageId(getArticleImageId());
 		model.setGroupId(getGroupId());
 		model.setArticleId(Html.escape(getArticleId()));
@@ -220,7 +206,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public Object clone() {
 		JournalArticleImageImpl clone = new JournalArticleImageImpl();
 
-		clone.setUuid(getUuid());
 		clone.setArticleImageId(getArticleImageId());
 		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
@@ -280,7 +265,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
-	private String _uuid;
 	private long _articleImageId;
 	private long _groupId;
 	private String _articleId;

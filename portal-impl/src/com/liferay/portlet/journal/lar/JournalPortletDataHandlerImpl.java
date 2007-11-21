@@ -22,28 +22,45 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.util.CollectionFactory;
+import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
+import java.io.File;
+import java.io.IOException;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,28 +78,10 @@ import org.dom4j.Element;
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * <p>
- * Provides the Journal portlet export and import functionality, which is to
- * clone all articles, structures, and templates associated with the layout's
- * group. Upon import, new instances of the corresponding articles, structures,
- * and templates are created or updated. The author of the newly created
- * objects are determined by the JournalCreationStrategy class defined in
- * <i>portal.properties</i>.
- * </p>
- *
- * <p>
- * This <code>PortletDataHandler</code> differs from
- * <code>JournalContentPortletDataHandlerImpl</code> in that it exports all
- * articles owned by the group whether or not they are actually displayed in a
- * portlet in the layout set.
- * </p>
- *
  * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
- * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
+ * @author Bruno Farache
  *
  */
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
@@ -107,8 +106,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_JOURNAL_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_JOURNAL_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -119,7 +119,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -132,57 +132,30 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
-			// Articles
+			// Structures
 
-			List obj = JournalArticleUtil.findByGroupId(context.getGroupId());
+			List obj = JournalStructureUtil.findByGroupId(context.getGroupId());
 
 			Iterator itr = obj.iterator();
 
 			while (itr.hasNext()) {
-				JournalArticle article = (JournalArticle)itr.next();
-
-				String articlePrimaryKey = getPrimaryKey(
-					article.getGroupId(), article.getArticleId());
+				JournalStructure structure = (JournalStructure)itr.next();
 
 				if (context.addPrimaryKey(
-						JournalArticle.class, articlePrimaryKey)) {
+						JournalStructure.class, structure.getPrimaryKeyObj())) {
 
 					itr.remove();
+				}
+				else {
+					exportStructure(structure);
 				}
 			}
 
 			String xml = xStream.toXML(obj);
 
-			Element el = root.addElement("articles");
-
 			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Structures
-
-			obj = JournalStructureUtil.findByGroupId(context.getGroupId());
-
-			itr = obj.iterator();
-
-			while (itr.hasNext()) {
-				JournalStructure structure = (JournalStructure)itr.next();
-
-				String structurePrimaryKey = getPrimaryKey(
-					structure.getGroupId(), structure.getStructureId());
-
-				if (context.addPrimaryKey(
-						JournalStructure.class, structurePrimaryKey)) {
-
-					itr.remove();
-				}
-			}
-
-			xml = xStream.toXML(obj);
-
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
-
-			el = root.addElement("structures");
+			Element el = root.addElement("journal-structures");
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -195,19 +168,46 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
-				String templatePrimaryKey = getPrimaryKey(
-					template.getGroupId(), template.getTemplateId());
-
 				if (context.addPrimaryKey(
-						JournalTemplate.class, templatePrimaryKey)) {
+						JournalTemplate.class, template.getPrimaryKeyObj())) {
 
 					itr.remove();
+				}
+				else {
+					exportTemplate(context, template);
 				}
 			}
 
 			xml = xStream.toXML(obj);
 
-			el = root.addElement("templates");
+			el = root.addElement("journal-templates");
+
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
+
+			el.content().add(tempDoc.getRootElement().createCopy());
+
+			// Articles
+
+			obj = JournalArticleUtil.findByGroupId(context.getGroupId());
+
+			itr = obj.iterator();
+
+			while (itr.hasNext()) {
+				JournalArticle article = (JournalArticle)itr.next();
+
+				if (context.addPrimaryKey(
+						JournalArticle.class, article.getPrimaryKeyObj())) {
+
+					itr.remove();
+				}
+				else {
+					exportArticle(context, article);
+				}
+			}
+
+			xml = xStream.toXML(obj);
+
+			el = root.addElement("journal-articles");
 
 			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
@@ -220,6 +220,78 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	protected static void exportArticle(
+			PortletDataContext context, JournalArticle article)
+		throws SystemException, PortalException, IOException {
+
+		article.setUserUuid(article.getUserUuid());
+		article.setApprovedByUserUuid(
+			article.getApprovedByUserUuid());
+
+		context.addComments(
+			JournalArticle.class,
+			new Long(article.getResourcePrimKey()));
+
+		context.addRatingsEntries(
+			JournalArticle.class,
+			new Long(article.getResourcePrimKey()));
+
+		context.addTagsEntries(
+			JournalArticle.class,
+			new Long(article.getResourcePrimKey()));
+
+		// Journal Article Images
+
+		List articleImages = JournalArticleImageUtil.findByG_A_V(
+			context.getGroupId(), article.getArticleId(),
+			article.getVersion());
+
+		Iterator itr2 = articleImages.iterator();
+
+		while (itr2.hasNext()) {
+			JournalArticleImage articleImage = (JournalArticleImage)itr2.next();
+
+			try {
+				Image image = ImageUtil.findByPrimaryKey(
+					articleImage.getArticleImageId());
+
+				String fileName = articleImage.getElName() +
+					articleImage.getLanguageId() + "." +
+							image.getType();
+
+				context.getZipWriter().addEntry(
+					getArticleImageDir(article) +  fileName,
+					image.getTextObj());
+			}
+			catch (NoSuchImageException nsie) {
+			}
+		}
+	}
+
+	protected static void exportStructure(JournalStructure structure)
+		throws SystemException {
+
+		structure.setUserUuid(structure.getUserUuid());
+	}
+
+	protected static void exportTemplate(
+			PortletDataContext context, JournalTemplate template)
+		throws SystemException, IOException {
+
+		template.setUserUuid(template.getUserUuid());
+
+		if (template.isSmallImage()) {
+			Image smallImage = ImageUtil.fetchByPrimaryKey(
+				template.getSmallImageId());
+
+			template.setSmallImageType(smallImage.getType());
+
+			context.getZipWriter().addEntry(
+				getSmallImageDir(template),
+				smallImage.getTextObj());
+		}
+	}
+
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
@@ -228,8 +300,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_JOURNAL_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_JOURNAL_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -240,157 +313,49 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 
-		try {
-			JournalCreationStrategy creationStrategy =
-				JournalCreationStrategyFactory.getInstance();
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
+		try {
 			XStream xStream = new XStream();
 
 			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
-			// Articles
+			// Structures
 
-			Element el = root.element("articles").element("list");
+			Element el = root.element("journal-structures").element("list");
 
 			Document tempDoc = DocumentHelper.createDocument();
 
 			tempDoc.content().add(el.createCopy());
 
-			List articles = (List)xStream.fromXML(tempDoc.asXML());
-
-			Iterator itr = articles.iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle article = (JournalArticle)itr.next();
-
-				article.setGroupId(context.getGroupId());
-
-				if (JournalArticleUtil.fetchByPrimaryKey(
-						article.getPrimaryKey()) == null) {
-
-					article.setNew(true);
-
-					long authorId = creationStrategy.getAuthorUserId(
-						context.getCompanyId(), context.getGroupId(), article);
-
-					if (authorId > 0) {
-						article.setUserId(authorId);
-						article.setUserName(
-							creationStrategy.getAuthorUserName(
-								context.getCompanyId(), context.getGroupId(),
-								article));
-					}
-
-					long approvedById = creationStrategy.getApprovalUserId(
-						context.getCompanyId(), context.getGroupId(), article);
-
-					if (approvedById > 0) {
-						article.setApprovedByUserId(approvedById);
-						article.setApprovedByUserName(
-							creationStrategy.getApprovalUserName(
-								context.getCompanyId(), context.getGroupId(),
-								article));
-						article.setApproved(true);
-					}
-					else {
-						article.setApprovedByUserId(0);
-						article.setApprovedByUserName(null);
-						article.setApproved(false);
-					}
-
-					String newContent = creationStrategy.getTransformedContent(
-						context.getCompanyId(), context.getGroupId(), article);
-
-					if (newContent != null) {
-                        article.setContent(newContent);
-                    }
-
-					article = JournalArticleUtil.update(article);
-
-					boolean addCommunityPermissions =
-						creationStrategy.addCommunityPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							article);
-					boolean addGuestPermissions =
-						creationStrategy.addGuestPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							article);
-
-					JournalArticleLocalServiceUtil.addArticleResources(
-						article, addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					JournalArticleUtil.update(article, true);
-				}
-			}
-
-			// Structures
-
-			el = root.element("structures").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			Map structurePKs = CollectionFactory.getHashMap();
 
 			List structures = (List)xStream.fromXML(tempDoc.asXML());
 
-			itr = structures.iterator();
+			Iterator itr = structures.iterator();
 
 			while (itr.hasNext()) {
 				JournalStructure structure = (JournalStructure)itr.next();
 
-				structure.setGroupId(context.getGroupId());
-
-				if (JournalStructureUtil.fetchByPrimaryKey(
-						structure.getPrimaryKey()) == null) {
-
-					structure.setNew(true);
-
-					long authorId = creationStrategy.getAuthorUserId(
-						context.getCompanyId(), context.getGroupId(),
-						structure);
-
-					if (authorId > 0) {
-						structure.setUserId(authorId);
-						structure.setUserName(
-							creationStrategy.getAuthorUserName(
-								context.getCompanyId(), context.getGroupId(),
-								structure));
-					}
-
-					structure = JournalStructureUtil.update(structure);
-
-					boolean addCommunityPermissions =
-						creationStrategy.addCommunityPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							structure);
-					boolean addGuestPermissions =
-						creationStrategy.addGuestPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							structure);
-
-					JournalStructureLocalServiceUtil.addStructureResources(
-						structure, addCommunityPermissions,
-						addGuestPermissions);
-				}
-				else {
-					JournalStructureUtil.update(structure, true);
-				}
+				importStructure(context, mergeData, structurePKs,  structure);
 			}
 
 			// Templates
 
-			el = root.element("templates").element("list");
+			el = root.element("journal-templates").element("list");
 
 			tempDoc = DocumentHelper.createDocument();
 
 			tempDoc.content().add(el.createCopy());
+
+			Map templatePKs = CollectionFactory.getHashMap();
 
 			List templates = (List)xStream.fromXML(tempDoc.asXML());
 
@@ -399,41 +364,27 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
-				template.setGroupId(context.getGroupId());
+				importTemplate(
+					context, mergeData, structurePKs, templatePKs, template);
+			}
 
-				if (JournalTemplateUtil.fetchByPrimaryKey(
-						template.getPrimaryKey()) == null) {
+			// Articles
 
-					template.setNew(true);
+			el = root.element("journal-articles").element("list");
 
-					long authorId = creationStrategy.getAuthorUserId(
-						context.getCompanyId(), context.getGroupId(), template);
+			tempDoc = DocumentHelper.createDocument();
 
-					if (authorId > 0) {
-						template.setUserId(authorId);
-						template.setUserName(
-							creationStrategy.getAuthorUserName(
-								context.getCompanyId(), context.getGroupId(),
-								template));
-					}
+			tempDoc.content().add(el.createCopy());
 
-					template = JournalTemplateUtil.update(template);
+			List articles = (List)xStream.fromXML(tempDoc.asXML());
 
-					boolean addCommunityPermissions =
-						creationStrategy.addCommunityPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							template);
-					boolean addGuestPermissions =
-						creationStrategy.addGuestPermissions(
-							context.getCompanyId(), context.getGroupId(),
-							template);
+			itr = articles.iterator();
 
-					JournalTemplateLocalServiceUtil.addTemplateResources(
-						template, addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					JournalTemplateUtil.update(template, true);
-				}
+			while (itr.hasNext()) {
+				JournalArticle article = (JournalArticle)itr.next();
+
+				importArticle(
+					context, mergeData, structurePKs, templatePKs, article);
 			}
 
 			return null;
@@ -443,14 +394,371 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected String getPrimaryKey(long groupId, String key) {
-		StringMaker sm = new StringMaker();
+	protected static JournalArticle importArticle(
+			PortletDataContext context, boolean mergeData, Map structurePKs,
+			Map templatePKs, JournalArticle article)
+		throws Exception {
 
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(key);
+		long userId = context.getUserId(article.getUserUuid());
+		long approvedByUserId = context.getUserId(
+			article.getApprovedByUserUuid());
+		long plid = context.getPlid();
 
-		return sm.toString();
+		String articleId = article.getArticleId();
+		boolean autoArticleId = false;
+
+		if ((Validator.isNumber(articleId)) ||
+			(JournalArticleUtil.fetchByG_A_V(
+				context.getGroupId(), articleId,
+				JournalArticleImpl.DEFAULT_VERSION) != null)) {
+
+			autoArticleId = true;
+		}
+
+		String parentStructureId = MapUtil.getString(
+			structurePKs, article.getStructureId(), article.getStructureId());
+		String parentTemplateId = MapUtil.getString(
+			templatePKs, article.getTemplateId(), article.getTemplateId());
+
+		Date displayDate = article.getDisplayDate();
+
+		int displayDateMonth = 0;
+		int displayDateDay = 0;
+		int displayDateYear = 0;
+		int displayDateHour = 0;
+		int displayDateMinute = 0;
+
+		if (displayDate != null) {
+			Calendar displayCal = CalendarFactoryUtil.getCalendar();
+
+			displayCal.setTime(displayDate);
+
+			displayDateMonth = displayCal.get(Calendar.MONTH);
+			displayDateDay = displayCal.get(Calendar.DATE);
+			displayDateYear = displayCal.get(Calendar.YEAR);
+			displayDateHour = displayCal.get(Calendar.HOUR);
+			displayDateMinute = displayCal.get(Calendar.MINUTE);
+		}
+
+		Date expirationDate = article.getExpirationDate();
+
+		int expirationDateMonth = 0;
+		int expirationDateDay = 0;
+		int expirationDateYear = 0;
+		int expirationDateHour = 0;
+		int expirationDateMinute = 0;
+		boolean neverExpire = true;
+
+		if (expirationDate != null) {
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar();
+
+			expirationCal.setTime(expirationDate);
+
+			expirationDateMonth = expirationCal.get(Calendar.MONTH);
+			expirationDateDay = expirationCal.get(Calendar.DATE);
+			expirationDateYear = expirationCal.get(Calendar.YEAR);
+			expirationDateHour = expirationCal.get(Calendar.HOUR);
+			expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+			neverExpire = false;
+		}
+
+		Date reviewDate = article.getReviewDate();
+
+		int reviewDateMonth = 0;
+		int reviewDateDay = 0;
+		int reviewDateYear = 0;
+		int reviewDateHour = 0;
+		int reviewDateMinute = 0;
+		boolean neverReview = true;
+
+		if (reviewDate != null) {
+			Calendar reviewCal = CalendarFactoryUtil.getCalendar();
+
+			reviewCal.setTime(reviewDate);
+
+			reviewDateMonth = reviewCal.get(Calendar.MONTH);
+			reviewDateDay = reviewCal.get(Calendar.DATE);
+			reviewDateYear = reviewCal.get(Calendar.YEAR);
+			reviewDateHour = reviewCal.get(Calendar.HOUR);
+			reviewDateMinute = reviewCal.get(Calendar.MINUTE);
+			neverReview = false;
+		}
+
+		Map images = CollectionFactory.getHashMap();
+
+		List imageFiles = (List)context.getZipReader().getFolderEntries().get(
+			getArticleImageDir(article));
+
+		if (imageFiles != null && imageFiles.size() > 0) {
+			Iterator itr = imageFiles.iterator();
+
+			while (itr.hasNext()) {
+				ObjectValuePair imageFile = (ObjectValuePair)itr.next();
+
+				String fileName = (String)imageFile.getKey();
+
+				int pos = fileName.lastIndexOf(".");
+
+				if (pos != -1) {
+					fileName = fileName.substring(0, pos);
+				}
+				images.put(fileName, imageFile.getValue());
+			}
+		}
+
+		String articleURL = null;
+
+		PortletPreferences prefs = null;
+
+		String[] tagsEntries = context.getTagsEntries(
+			JournalArticle.class, new Long(article.getResourcePrimKey()));
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+		boolean incrementVersion = false;
+
+		JournalArticle existingArticle = null;
+
+		if (mergeData) {
+			existingArticle = JournalArticleUtil.fetchByUUID_G(
+				article.getUuid(), context.getGroupId());
+
+			if (existingArticle == null) {
+				existingArticle =  JournalArticleLocalServiceUtil.addArticle(
+					article.getUuid(), userId, articleId, autoArticleId, plid,
+					article.getTitle(), article.getDescription(),
+					article.getContent(), article.getType(), parentStructureId,
+					parentTemplateId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					reviewDateMonth, reviewDateDay, reviewDateYear,
+					reviewDateHour, reviewDateMinute, neverReview,
+					article.getIndexable(), images, articleURL, prefs,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				existingArticle =  JournalArticleLocalServiceUtil.updateArticle(
+					userId, existingArticle.getGroupId(),
+					existingArticle.getArticleId(),
+					existingArticle.getVersion(), incrementVersion,
+					article.getTitle(), article.getDescription(),
+					article.getContent(), article.getType(),
+					existingArticle.getStructureId(),
+					existingArticle.getTemplateId(), displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, article.getIndexable(),
+					images, articleURL, prefs, tagsEntries);
+			}
+		}
+		else {
+			existingArticle = JournalArticleLocalServiceUtil.addArticle(
+				userId, articleId, autoArticleId, plid, article.getTitle(),
+				article.getDescription(), article.getContent(),
+				article.getType(), parentStructureId, parentTemplateId,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, reviewDateMonth,
+				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
+				neverReview, article.getIndexable(), images, articleURL, prefs,
+				tagsEntries, addCommunityPermissions, addGuestPermissions);
+		}
+
+		if (article.isApproved() && !existingArticle.isApproved()) {
+			JournalArticleLocalServiceUtil.approveArticle(
+				approvedByUserId, context.getGroupId(),
+				existingArticle.getArticleId(), existingArticle.getVersion(),
+				articleURL, prefs);
+		}
+
+		context.importComments(
+			JournalArticle.class, new Long(article.getResourcePrimKey()),
+			new Long(existingArticle.getResourcePrimKey()),
+			context.getGroupId());
+
+		context.importRatingsEntries(
+			JournalArticle.class, new Long(article.getResourcePrimKey()),
+			new Long(existingArticle.getResourcePrimKey()));
+
+		if (!articleId.equals(existingArticle.getArticleId())) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"An article with the same ID ("+articleId+") was " +
+						"found. A new ID was generated: " +
+							existingArticle.getArticleId());
+			}
+		}
+
+		return existingArticle;
+	}
+
+	protected static void importStructure(
+			PortletDataContext context, boolean mergeData, Map structurePKs,
+			JournalStructure structure)
+		throws Exception {
+
+		long userId = context.getUserId(structure.getUserUuid());
+		long plid = context.getPlid();
+
+		String structureId = structure.getStructureId();
+		boolean autoStructureId = false;
+
+		if ((Validator.isNumber(structureId)) ||
+			(JournalStructureUtil.fetchByG_S(
+				context.getGroupId(), structureId) != null)) {
+
+			autoStructureId = true;
+		}
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		JournalStructure existingStructure = null;
+
+		if (mergeData) {
+			existingStructure = JournalStructureUtil.fetchByUUID_G(
+				structure.getUuid(), context.getGroupId());
+
+			if (existingStructure == null) {
+				existingStructure =
+					JournalStructureLocalServiceUtil.addStructure(
+						structure.getUuid(), userId, structureId,
+						autoStructureId, plid, structure.getName(),
+						structure.getDescription(), structure.getXsd(),
+						addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				existingStructure =
+					JournalStructureLocalServiceUtil.updateStructure(
+						existingStructure.getGroupId(),
+						existingStructure.getStructureId(), structure.getName(),
+						structure.getDescription(), structure.getXsd());
+			}
+		}
+		else {
+			existingStructure =
+				JournalStructureLocalServiceUtil.addStructure(
+					userId, structureId, autoStructureId, plid,
+					structure.getName(), structure.getDescription(),
+					structure.getXsd(), addCommunityPermissions,
+					addGuestPermissions);
+		}
+
+		structurePKs.put(
+			structure.getStructureId(), existingStructure.getStructureId());
+
+		if (!structureId.equals(existingStructure.getStructureId())) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"A structure with the same ID ("+structureId+") was " +
+						"found. A new ID was generated: " +
+							existingStructure.getStructureId());
+			}
+		}
+	}
+
+	protected static void importTemplate(
+			PortletDataContext context, boolean mergeData, Map structurePKs,
+			Map templatePKs, JournalTemplate template)
+		throws Exception {
+
+		long userId = context.getUserId(template.getUserUuid());
+		long plid = context.getPlid();
+
+		String templateId = template.getTemplateId();
+		boolean autoTemplateId = false;
+
+		if ((Validator.isNumber(templateId)) ||
+			(JournalTemplateUtil.fetchByG_T(
+				context.getGroupId(), templateId) != null)) {
+
+			autoTemplateId = true;
+		}
+
+		String parentStructureId = MapUtil.getString(
+			structurePKs, template.getStructureId(), template.getStructureId());
+
+		boolean formatXsl = false;
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		File smallFile = null;
+
+		if (template.isSmallImage()) {
+			byte[] byteArray = context.getZipReader().getEntryAsByteArray(
+				getSmallImageDir(template));
+
+			smallFile = new File(getSmallImageDir(template));
+
+			FileUtil.write(smallFile, byteArray);
+		}
+
+		JournalTemplate existingTemplate = null;
+
+		if (mergeData) {
+			existingTemplate = JournalTemplateUtil.fetchByUUID_G(
+				template.getUuid(), context.getGroupId());
+
+			if (existingTemplate == null) {
+				existingTemplate =
+					JournalTemplateLocalServiceUtil.addTemplate(
+						template.getUuid(), userId, templateId, autoTemplateId,
+						plid, parentStructureId, template.getName(),
+						template.getDescription(), template.getXsl(), formatXsl,
+						template.getLangType(), template.isSmallImage(),
+						template.getSmallImageURL(), smallFile,
+						addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				existingTemplate =
+					JournalTemplateLocalServiceUtil.updateTemplate(
+						existingTemplate.getGroupId(),
+						existingTemplate.getTemplateId(),
+						existingTemplate.getStructureId(), template.getName(),
+						template.getDescription(), template.getXsl(), formatXsl,
+						template.getLangType(), template.isSmallImage(),
+						template.getSmallImageURL(), smallFile);
+			}
+		}
+		else {
+			existingTemplate =
+				JournalTemplateLocalServiceUtil.addTemplate(
+					userId, templateId, autoTemplateId, plid, parentStructureId,
+					template.getName(), template.getDescription(),
+					template.getXsl(), formatXsl, template.getLangType(),
+					template.isSmallImage(), template.getSmallImageURL(),
+					smallFile, addCommunityPermissions, addGuestPermissions);
+		}
+
+		templatePKs.put(
+			template.getTemplateId(), existingTemplate.getTemplateId());
+
+		if (!templateId.equals(existingTemplate.getTemplateId())) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"A template with the same ID ("+templateId+") was " +
+						"found. A new ID was generated: " +
+							existingTemplate.getTemplateId());
+			}
+		}
+	}
+
+	protected static String getArticleImageDir(JournalArticle article) {
+		return _JOURNAL_ARTICLE_IMAGES_FOLDER + article.getArticleId() +
+			"/" + article.getVersion() + "/";
+	}
+
+	protected static String getSmallImageDir(JournalTemplate template)
+		throws SystemException {
+
+		return _TEMPLATE_IMAGES_FOLDER + template.getSmallImageId() + "." +
+			template.getSmallImageType();
 	}
 
 	private static final String _EXPORT_JOURNAL_DATA =
@@ -458,6 +766,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final String _IMPORT_JOURNAL_DATA =
 		"import-" + PortletKeys.JOURNAL + "-data";
+
+	private static final String _JOURNAL_ARTICLE_IMAGES_FOLDER =
+		"journal-article-images/";
+
+	private static final String _TEMPLATE_IMAGES_FOLDER = "template-images/";
 
 	private static final PortletDataHandlerBoolean _enableExport =
 		new PortletDataHandlerBoolean(_EXPORT_JOURNAL_DATA, true, null);

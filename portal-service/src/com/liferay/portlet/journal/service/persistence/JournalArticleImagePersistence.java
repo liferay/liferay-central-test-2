@@ -61,43 +61,6 @@ public interface JournalArticleImagePersistence {
 	public com.liferay.portlet.journal.model.JournalArticleImage fetchByPrimaryKey(
 		long articleImageId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage findByUuid_First(
-		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleImageException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage findByUuid_Last(
-		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleImageException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage[] findByUuid_PrevAndNext(
-		long articleImageId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleImageException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage findByUUID_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleImageException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage fetchByUUID_G(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -208,13 +171,6 @@ public interface JournalArticleImagePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException;
-
-	public void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleImageException;
-
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -230,12 +186,6 @@ public interface JournalArticleImagePersistence {
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
-
-	public int countByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException;
-
-	public int countByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

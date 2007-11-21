@@ -108,8 +108,6 @@ create index IX_3B51BB68 on JournalArticleImage (groupId);
 create index IX_158B526F on JournalArticleImage (groupId, articleId, version);
 create index IX_D67292FC on JournalArticleImage (groupId, articleId, version, elName, languageId);
 create index IX_D4121315 on JournalArticleImage (tempImage);
-create index IX_32EF07F2 on JournalArticleImage (uuid_);
-create index IX_3BFB3CF8 on JournalArticleImage (uuid_, groupId);
 
 create index IX_F8433677 on JournalArticleResource (groupId);
 create index IX_88DF994A on JournalArticleResource (groupId, articleId);

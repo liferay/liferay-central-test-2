@@ -96,7 +96,7 @@
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
-	<entity name="JournalArticleImage" uuid="true" local-service="true" remote-service="false">
+	<entity name="JournalArticleImage" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 

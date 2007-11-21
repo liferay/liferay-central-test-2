@@ -143,6 +143,17 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
 		long plid, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
@@ -154,12 +165,12 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -167,12 +178,12 @@ public interface JournalTemplateLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplateToGroup(
-		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long groupId, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String templateId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

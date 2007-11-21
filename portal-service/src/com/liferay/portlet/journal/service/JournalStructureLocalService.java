@@ -141,6 +141,14 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
+		java.lang.String uuid, long userId, java.lang.String structureId,
+		boolean autoStructureId, long plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,
 		java.lang.String xsd, java.lang.String[] communityPermissions,
@@ -149,9 +157,10 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		long userId, java.lang.String structureId, boolean autoStructureId,
-		long plid, java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String structureId,
+		boolean autoStructureId, long plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -159,9 +168,10 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructureToGroup(
-		long userId, java.lang.String structureId, boolean autoStructureId,
-		long groupId, java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, java.lang.String structureId,
+		boolean autoStructureId, long groupId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

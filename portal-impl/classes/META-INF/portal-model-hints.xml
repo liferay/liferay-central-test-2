@@ -818,7 +818,6 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticleImage">
-		<field name="uuid" type="String" />
 		<field name="articleImageId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="articleId" type="String" />

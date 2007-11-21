@@ -807,7 +807,6 @@
 		<id name="articleImageId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />

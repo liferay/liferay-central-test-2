@@ -79,7 +79,22 @@ public class JournalTemplateLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addTemplate(
-			userId, templateId, autoTemplateId, plid, structureId, name,
+			null, userId, templateId, autoTemplateId, plid, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalTemplate addTemplate(
+			String uuid, long userId, String templateId, boolean autoTemplateId,
+			long plid, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			String smallImageURL, File smallFile,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addTemplate(
+			uuid, userId, templateId, autoTemplateId, plid, structureId, name,
 			description, xsl, formatXsl, langType, smallImage, smallImageURL,
 			smallFile, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
@@ -94,15 +109,15 @@ public class JournalTemplateLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addTemplate(
-			userId, templateId, autoTemplateId, plid, structureId, name,
+			null, userId, templateId, autoTemplateId, plid, structureId, name,
 			description, xsl, formatXsl, langType, smallImage, smallImageURL,
 			smallFile, null, null, communityPermissions, guestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, long plid,
-			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean smallImage,
+			String uuid, long userId, String templateId, boolean autoTemplateId,
+			long plid, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -111,14 +126,14 @@ public class JournalTemplateLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return addTemplateToGroup(
-			userId, templateId, autoTemplateId, groupId, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			uuid, userId, templateId, autoTemplateId, groupId, structureId,
+			name, description, xsl, formatXsl, langType, smallImage,
+			smallImageURL, smallFile, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public JournalTemplate addTemplateToGroup(
-			long userId, String templateId, boolean autoTemplateId,
+			String uuid, long userId, String templateId, boolean autoTemplateId,
 			long groupId, String structureId, String name, String description,
 			String xsl, boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
@@ -169,6 +184,7 @@ public class JournalTemplateLocalServiceImpl
 
 		JournalTemplate template = journalTemplatePersistence.create(id);
 
+		template.setUuid(uuid);
 		template.setGroupId(groupId);
 		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());

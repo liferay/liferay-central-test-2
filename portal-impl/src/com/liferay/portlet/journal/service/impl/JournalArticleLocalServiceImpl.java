@@ -134,9 +134,36 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addArticle(
-			userId, articleId, autoArticleId, plid, title, description, content,
-			type, structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			null, userId, articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalArticle addArticle(
+			String uuid, long userId, String articleId, boolean autoArticleId,
+			long plid, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addArticle(
+			uuid, userId, articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
@@ -161,9 +188,9 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addArticle(
-			userId, articleId, autoArticleId, plid, title, description, content,
-			type, structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			null, userId, articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
@@ -172,11 +199,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			long userId, String articleId, boolean autoArticleId, long plid,
-			String title, String description, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			String uuid, long userId, String articleId, boolean autoArticleId,
+			long plid, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -190,7 +217,7 @@ public class JournalArticleLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return addArticleToGroup(
-			userId, articleId, autoArticleId, groupId, title, description,
+			uuid, userId, articleId, autoArticleId, groupId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -202,11 +229,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticleToGroup(
-			long userId, String articleId, boolean autoArticleId, long groupId,
-			String title, String description, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			String uuid, long userId, String articleId, boolean autoArticleId,
+			long groupId, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -266,6 +293,7 @@ public class JournalArticleLocalServiceImpl
 			groupId, articleId, article.getVersion(), false, content,
 			structureId, images);
 
+		article.setUuid(uuid);
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
@@ -1805,7 +1833,10 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			if (emailType.equals("denied") &&
+			if (prefs == null) {
+				return;
+			}
+			else if (emailType.equals("denied") &&
 				JournalUtil.getEmailArticleApprovalDeniedEnabled(prefs)) {
 			}
 			else if (emailType.equals("granted") &&

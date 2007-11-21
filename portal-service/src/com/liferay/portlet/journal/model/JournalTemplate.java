@@ -49,4 +49,13 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalTemplate extends JournalTemplateModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
+
+	public java.lang.String getSmallImageType()
+		throws com.liferay.portal.SystemException;
+
+	public void setSmallImageType(java.lang.String smallImageType);
 }
