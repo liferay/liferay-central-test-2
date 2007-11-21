@@ -46,7 +46,7 @@
 		<!--
 		<axis-wsdl2java
 			output="src"
-			url="${axis.url}/Portal_LayoutService?wsdl"
+			url="${client.url}/Portal_LayoutService?wsdl"
 		/>
 		-->
 
