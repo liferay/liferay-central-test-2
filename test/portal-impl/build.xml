@@ -43,46 +43,14 @@
 	</path>
 
 	<path id="test-spring-remoting.classpath">
-		<path refid="web.classpath" />
-		<path refid="test-junit.classpath" />
-		<pathelement path="${classpath}" />
-		<pathelement path="${project.dir}/test/classes" />
-		<pathelement path="${project.dir}/lib/portal/commons-beanutils.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-configuration.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-collections.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-digester.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-discovery.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-lang.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-logging.jar" />
-		<pathelement path="${project.dir}/lib/portal/commons-codec.jar" />
-		<pathelement path="${project.dir}/lib/portal/concurrent.jar" />
-		<pathelement path="${project.dir}/lib/portal/dom4j.jar" />
-		<pathelement path="${project.dir}/lib/portal/easyconf.jar" />
-		<pathelement path="${project.dir}/lib/portal/hessian.jar" />
-		<pathelement path="${project.dir}/lib/portal/hibernate3.jar" />
-		<pathelement path="${project.dir}/lib/portal/jcr.jar" />
-		<pathelement path="${project.dir}/lib/portal/log4j.jar" />
-		<pathelement path="${project.dir}/lib/portal/oscache.jar" />
-		<pathelement path="${project.dir}/lib/portal/spring.jar" />
-		<pathelement path="${project.dir}/lib/portal/velocity.jar" />
-		<pathelement path="${project.dir}/lib/portal/xstream.jar" />
-		<pathelement path="${project.dir}/util-java/util-java.jar" />
-		<pathelement path="${project.dir}/portal-impl/classes" />
-		<pathelement path="${project.dir}/portal-web/docroot/WEB-INF/classes" />
+		<path refid="test-service.classpath" />
 	</path>
 
 	<target name="compile">
 		<mkdir dir="classes" />
 
-		<path id="test-compile.classpath">
-			<path refid="test-soap.classpath" />
-			<path refid="test-spring-remoting.classpath" />
-			<pathelement path="${project.dir}/portal-impl/classes" />
-			<pathelement path="${project.dir}/portal-web/docroot/WEB-INF/classes" />
-		</path>
-
 		<javac
-			classpathref="test-compile.classpath"
+			classpathref="test-service.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
