@@ -219,9 +219,9 @@ var Tree = new Class({
 			// Enable selectable
 
 			if (instance.selectable) {
-				jQuery('li.tree-item', treeEl).each(
+				jQuery('img.select-state[@src*=checked]', treeEl).each(
 					function() {
-						instance._fixParentsOfSelected(this);
+						instance._fixParentsOfSelected(this.parentNode);
 					}
 				);
 
