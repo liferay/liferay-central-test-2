@@ -727,18 +727,16 @@
 		<project-name>Burlap</project-name>
 		<project-url>http://www.caucho.com/resin-3.0/protocols/burlap.xtp</project-url>
 		<licenses>
-
-			<!--
-			The project website implies that burlap.jar is part of the Resin
-			project which is GPL, but a physical review of the source code
-			reveals the Apache License 1.1 in the Burlap source code files.
-			-->
-
 			<license>
 				<license-name>Apache License 1.1</license-name>
 				<copyright-notice>Copyright (c) 2001-2002 Caucho Technology, Inc. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			The project website implies that burlap.jar is part of the Resin
+			project which is GPL, but a physical review of the source code
+			reveals the Apache License 1.1 in the Burlap source code files.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/casclient.jar</file-name>
@@ -1112,6 +1110,10 @@
 				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This includes a public patch from HHH-2470 to fix a bad memory leak
+			in Hibernate 3.2.5.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/htmlparser.jar</file-name>

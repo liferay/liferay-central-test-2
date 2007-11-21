@@ -21,7 +21,7 @@
 				License
 			</th>
 			<th>
-				Copyright
+				Comments
 			</th>
 		</tr>
 
@@ -52,6 +52,9 @@
 			</td>
 			<td nowrap="nowrap">
 				<xsl:apply-templates select="licenses/license" />
+			</td>
+			<td>
+				<xsl:value-of select="comments" />
 			</td>
 		</tr>
 	</xsl:template>
