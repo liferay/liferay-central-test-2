@@ -173,7 +173,7 @@ public class ResultRow {
 
 	public void addText(String align, String valign, String name, String href) {
 		addText(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name, 
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
 			href);
 	}
 
@@ -230,8 +230,7 @@ public class ResultRow {
 			addText(align, valign, colspan, name);
 		}
 		else {
-			addText(align, valign, colspan, name,
-				portletURL.toString());
+			addText(align, valign, colspan, name, portletURL.toString());
 		}
 	}
 
@@ -281,7 +280,7 @@ public class ResultRow {
 		String align, String valign, String name, String href) {
 
 		addButton(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name, 
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
 			href);
 	}
 
@@ -340,7 +339,7 @@ public class ResultRow {
 	}
 
 	public void addJSP(
-		String align, String valign, String path, ServletContext ctx, 
+		String align, String valign, String path, ServletContext ctx,
 		HttpServletRequest req, HttpServletResponse res) {
 
 		addJSP(
@@ -369,8 +368,8 @@ public class ResultRow {
 		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
 
 		_entries.add(
-			index, new JSPSearchEntry(
-				align, valign, colspan, path, ctx, req, res));
+			index,
+			new JSPSearchEntry(align, valign, colspan, path, ctx, req, res));
 	}
 
 	// Score

@@ -49,20 +49,19 @@ public class RowChecker {
 	public static final String ROW_IDS = "rowIds";
 
 	public RowChecker(RenderResponse res) {
-		this(res, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS,
-			ROW_IDS);
+		this(res, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS, ROW_IDS);
 	}
 
 	public RowChecker(
 		RenderResponse res, String align, String valign, String formName,
 		String allRowsId, String rowId) {
 
-		this(res, align, valign, COLSPAN, formName, allRowsId,
-			rowId);
+		this(res, align, valign, COLSPAN, formName, allRowsId, rowId);
 	}
 
-	public RowChecker(RenderResponse res, String align, String valign,
-			int colspan, String formName, String allRowsId, String rowId) {
+	public RowChecker(
+		RenderResponse res, String align, String valign, int colspan,
+		String formName, String allRowsId, String rowId) {
 
 		_align = align;
 		_valign = valign;

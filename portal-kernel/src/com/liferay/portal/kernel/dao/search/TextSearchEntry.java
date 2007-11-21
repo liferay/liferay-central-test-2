@@ -36,7 +36,6 @@ import javax.servlet.jsp.PageContext;
 public class TextSearchEntry extends SearchEntry {
 
 	public TextSearchEntry(String align, String valign, String name) {
-
 		this(align, valign, DEFAULT_COLSPAN, name, null);
 	}
 
@@ -59,15 +58,15 @@ public class TextSearchEntry extends SearchEntry {
 	}
 
 	public TextSearchEntry(
-		String align, String valign, String name, String href, String target, 
+		String align, String valign, String name, String href, String target,
 		String title) {
 
-		this(align, valign, DEFAULT_COLSPAN, name, href, null, 
-			null);
+		this(align, valign, DEFAULT_COLSPAN, name, href, null, null);
 	}
 
-	public TextSearchEntry(String align, String valign, int colspan,
-			String name, String href, String target, String title) {
+	public TextSearchEntry(
+		String align, String valign, int colspan, String name, String href,
+		String target, String title) {
 
 		super(align, valign, colspan);
 

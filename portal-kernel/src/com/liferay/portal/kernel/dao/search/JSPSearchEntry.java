@@ -44,7 +44,7 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(
 		String align, String valign, int colspan, String path) {
-		
+
 		this(align, valign, colspan, path, null, null, null);
 	}
 
