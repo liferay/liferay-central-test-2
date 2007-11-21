@@ -696,9 +696,9 @@
 	</library>
 	<library>
 		<file-name>portal/backport-concurrent.jar</file-name>
-		<version>2.1</version>
+		<version>3.1</version>
 		<project-name>Concurrent (Backport)</project-name>
-		<project-url>http://dcl.mathcs.emory.edu/util/backport-util-concurrent</project-url>
+		<project-url>http://backport-jsr166.sourceforge.net</project-url>
 		<project-description>Backport of JSR 166 concurrent API to Java 1.4</project-description>
 		<licenses>
 			<license>
