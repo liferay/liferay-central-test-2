@@ -32,7 +32,9 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -170,6 +172,9 @@ public class EditMessageAction extends PortletAction {
 	protected void updateMessage(ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		PortletPreferences prefs = req.getPreferences();
 
 		long messageId = ParamUtil.getLong(req, "messageId");
@@ -222,7 +227,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					tagsEntries, prefs, communityPermissions, guestPermissions);
+					tagsEntries, prefs, communityPermissions, guestPermissions,
+				    themeDisplay);
 			}
 			else {
 
@@ -231,7 +237,7 @@ public class EditMessageAction extends PortletAction {
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
 					anonymous, priority, tagsEntries, prefs,
-					communityPermissions, guestPermissions);
+					communityPermissions, guestPermissions, themeDisplay);
 			}
 		}
 		else {
@@ -240,7 +246,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, categoryId, subject, body, files, priority,
-				tagsEntries, prefs);
+				tagsEntries, prefs, themeDisplay);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();

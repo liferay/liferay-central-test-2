@@ -246,10 +246,34 @@ public interface MBMessageLocalService {
 		java.lang.String body, java.util.List files, boolean anonymous,
 		double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long userId, long categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long userId, long categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -282,6 +306,17 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long userId, long categoryId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String uuid, long userId, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List files, boolean anonymous, double priority,
@@ -290,6 +325,19 @@ public interface MBMessageLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String uuid, long userId, long categoryId, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.util.List files, boolean anonymous, double priority,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -440,6 +488,14 @@ public interface MBMessageLocalService {
 		long userId, long messageId, long categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		long userId, long messageId, long categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, double priority,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

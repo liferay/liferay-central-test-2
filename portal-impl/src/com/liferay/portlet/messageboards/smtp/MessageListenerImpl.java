@@ -160,7 +160,7 @@ public class MessageListenerImpl implements MessageListener {
 
 				if (parentMessageId == -1) {
 					parentMessageId = MBUtil.getMessageId(parentHeader);
-				}			
+				}
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Previous message id " + parentMessageId);
@@ -233,7 +233,7 @@ public class MessageListenerImpl implements MessageListener {
 			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
 
 		String[] parts = StringUtil.split(target, ".");
-		
+
 		long categoryId = GetterUtil.getLong(parts[0]);
 
 		return categoryId;

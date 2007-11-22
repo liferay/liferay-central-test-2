@@ -81,7 +81,7 @@
 		<input checked disabled="disabled" type="checkbox" />
 
 		<label><liferay-ui:message key="portlets"/></label>
-	
+
 		<ul>
 
 			<li class="tree-item">

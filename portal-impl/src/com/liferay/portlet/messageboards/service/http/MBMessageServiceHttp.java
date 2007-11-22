@@ -650,6 +650,106 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		HttpPrincipal httpPrincipal, long categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			Object paramObj1 = subject;
+
+			if (subject == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = body;
+
+			if (body == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = files;
+
+			if (files == null) {
+				paramObj3 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj4 = new BooleanWrapper(anonymous);
+
+			Object paramObj5 = new DoubleWrapper(priority);
+
+			Object paramObj6 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj7 = prefs;
+
+			if (prefs == null) {
+				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj8 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj9 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj10 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj10 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"addMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List files, boolean anonymous, double priority,
@@ -807,6 +907,110 @@ public class MBMessageServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		HttpPrincipal httpPrincipal, long categoryId, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.util.List files, boolean anonymous, double priority,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			Object paramObj1 = new LongWrapper(threadId);
+
+			Object paramObj2 = new LongWrapper(parentMessageId);
+
+			Object paramObj3 = subject;
+
+			if (subject == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = body;
+
+			if (body == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = files;
+
+			if (files == null) {
+				paramObj5 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj6 = new BooleanWrapper(anonymous);
+
+			Object paramObj7 = new DoubleWrapper(priority);
+
+			Object paramObj8 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj9 = prefs;
+
+			if (prefs == null) {
+				paramObj9 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj10 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj11 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj11 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj12 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj12 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"addMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;
@@ -1585,6 +1789,91 @@ public class MBMessageServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		HttpPrincipal httpPrincipal, long messageId, long categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(messageId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
+
+			Object paramObj2 = subject;
+
+			if (subject == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = body;
+
+			if (body == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = files;
+
+			if (files == null) {
+				paramObj4 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj5 = new DoubleWrapper(priority);
+
+			Object paramObj6 = tagsEntries;
+
+			if (tagsEntries == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj7 = prefs;
+
+			if (prefs == null) {
+				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj8 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"updateMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

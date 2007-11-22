@@ -254,6 +254,35 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
+			long categoryId, String subject, String body, List files,
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
+			priority, tagsEntries, prefs, communityPermissions,
+			guestPermissions, themeDisplay);
+	}
+
+	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			double priority, String[] tagsEntries,
@@ -309,6 +338,36 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions);
+	}
+
+	public MBMessage addMessage(
+			long categoryId, long threadId, long parentMessageId,
+			String subject, String body, List files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
+			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public void deleteDiscussionMessage(
@@ -611,6 +670,38 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, categoryId, subject, body, files, priority,
 			tagsEntries, prefs);
+	}
+
+	public MBMessage updateMessage(
+			long messageId, long categoryId, String subject, String body,
+			List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		MBMessagePermission.check(
+			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			MBMessage message = mbMessageLocalService.getMessage(messageId);
+
+			MBThread thread = mbThreadLocalService.getThread(
+				message.getThreadId());
+
+			priority = thread.getPriority();
+		}
+
+		return mbMessageLocalService.updateMessage(
+			getUserId(), messageId, categoryId, subject, body, files, priority,
+			tagsEntries, prefs, themeDisplay);
 	}
 
 	protected String exportToRSS(
