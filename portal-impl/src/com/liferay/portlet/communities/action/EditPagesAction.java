@@ -311,7 +311,7 @@ public class EditPagesAction extends PortletAction {
 			long targetGroupId, boolean targetPrivateLayout)
 		throws Exception{
 
-		Map parameterMap = getPublishParameters();
+		Map parameterMap = geStagingParameters();
 
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
 			sourceGroupId, sourcePrivateLayout, parameterMap);
@@ -420,54 +420,34 @@ public class EditPagesAction extends PortletAction {
 		return missingParents;
 	}
 
-	protected Map getPublishParameters() {
+	protected Map geStagingParameters() {
 		Map parameterMap = new HashMap();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS,
+			PortletDataHandlerKeys.USER_PERMISSIONS,
 			Boolean.FALSE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
+			PortletDataHandlerKeys.PORTLET_DATA,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_COMMENTS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_RATINGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_TAGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			PortletDataHandlerKeys.PORTLET_SETUP,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS,
-			Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
+			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_COMMENTS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_RATINGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.MERGE_DATA, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.STAGING, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			UserIdStrategy.CURRENT_USER_ID);
@@ -480,10 +460,10 @@ public class EditPagesAction extends PortletAction {
 			boolean includeChildren)
 		throws Exception{
 
-		Map parameterMap = getPublishParameters();
+		Map parameterMap = geStagingParameters();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.FALSE.toString());
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -524,10 +504,10 @@ public class EditPagesAction extends PortletAction {
 			long targetGroupId, boolean privateLayout)
 		throws Exception{
 
-		Map parameterMap = getPublishParameters();
+		Map parameterMap = geStagingParameters();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.FALSE.toString());
 
 		List layouts = new ArrayList();

@@ -25,13 +25,13 @@ package com.liferay.portal.lar;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
-import com.liferay.portal.model.Layout;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -57,7 +57,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class PortletDataContextImpl implements PortletDataContext {
@@ -70,6 +70,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_groupId = groupId;
 		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
+		_dataStrategy =  MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
+			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 		_userIdStrategy = userIdStrategy;
 		_zipReader = zipReader;
 		_zipWriter = null;
@@ -83,6 +86,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_groupId = groupId;
 		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
+		_dataStrategy =  null;
 		_userIdStrategy = null;
 		_zipReader = null;
 		_zipWriter = zipWriter;
@@ -106,6 +110,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Map getParameterMap() {
 		return _parameterMap;
+	}
+
+	public boolean getBooleanParameter(String namespace, String name) {
+		boolean defaultValue = MapUtil.getBoolean(
+			getParameterMap(),
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
+			true);
+
+		return MapUtil.getBoolean(
+			getParameterMap(),
+			PortletDataHandlerControl.getNamespacedControlName(namespace, name),
+			defaultValue);
 	}
 
 	public Set getPrimaryKeys() {
@@ -132,13 +148,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public void addComments(Class classObj, Object primaryKey)
 		throws PortalException, SystemException {
-
-		boolean exportComments = MapUtil.getBoolean(
-			_parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
-
-		if (!exportComments && (classObj != Layout.class)) {
-			return;
-		}
 
 		List messages = MBMessageLocalServiceUtil.getMessages(
 			classObj.getName(), ((Long)primaryKey).longValue());
@@ -169,13 +178,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class classObj, Object primaryKey, Object newPrimaryKey,
 			long groupId)
 		throws PortalException, SystemException {
-
-		boolean importComments = MapUtil.getBoolean(
-			_parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
-
-		if (!importComments && (classObj != Layout.class)) {
-			return;
-		}
 
 		Map messagePKs = CollectionFactory.getHashMap();
 		Map threadPKs = CollectionFactory.getHashMap();
@@ -220,13 +222,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addRatingsEntries(Class classObj, Object primaryKey)
 		throws PortalException, SystemException {
 
-		boolean exportRatings = MapUtil.getBoolean(
-			_parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
-
-		if (!exportRatings && (classObj != Layout.class)) {
-			return;
-		}
-
 		List entries = RatingsEntryLocalServiceUtil.getEntries(
 			classObj.getName(), ((Long)primaryKey).longValue());
 
@@ -257,13 +252,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void importRatingsEntries(
 			Class classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException {
-
-		boolean importRatings = MapUtil.getBoolean(
-			_parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
-
-		if (!importRatings && (classObj != Layout.class)) {
-			return;
-		}
 
 		List entries = (List)_ratingsEntriesMap.get(
 			getPrimaryKeyString(classObj, primaryKey));
@@ -332,6 +320,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
+	public String getDataStrategy() {
+		 return _dataStrategy;
+	}
+
 	public UserIdStrategy getUserIdStrategy() {
 		return _userIdStrategy;
 	}
@@ -370,6 +362,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
+	private String _dataStrategy;
 	private UserIdStrategy _userIdStrategy;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;

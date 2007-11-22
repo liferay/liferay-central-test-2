@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -79,13 +78,13 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {_bookmarksAndFolders, _tags};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {_bookmarksAndFolders, _tags};
 	}
 
 	public String exportData(
@@ -93,25 +92,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BOOKMARKS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -172,8 +153,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
-					context.addTagsEntries(
-						BookmarksEntry.class, entry.getPrimaryKeyObj());
+					if (exportTags) {
+						context.addTagsEntries(
+							BookmarksEntry.class, entry.getPrimaryKeyObj());
+					}
 				}
 			}
 
@@ -197,28 +180,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BOOKMARKS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -244,7 +206,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
 
-				importFolder(context, mergeData, folderPKs, folder);
+				importFolder(context, folderPKs, folder);
 			}
 
 			// Entries
@@ -262,7 +224,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				importEntry(context, mergeData, folderPKs, entry);
+				importEntry(context, importTags, folderPKs, entry);
 			}
 
 			return null;
@@ -273,7 +235,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
+			PortletDataContext context, boolean importTags, Map folderPKs,
 			BookmarksEntry entry)
 		throws Exception {
 
@@ -281,8 +243,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
-		String[] tagsEntries = context.getTagsEntries(
-			BookmarksEntry.class, entry.getPrimaryKeyObj());
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				BookmarksEntry.class, entry.getPrimaryKeyObj());
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -292,7 +258,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			BookmarksFolderUtil.findByPrimaryKey(folderId);
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 				existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
 					entry.getUuid(), context.getGroupId());
 
@@ -324,8 +291,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
-			BookmarksFolder folder)
+			PortletDataContext context, Map folderPKs, BookmarksFolder folder)
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
@@ -345,7 +311,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 				existingFolder = BookmarksFolderUtil.fetchByUUID_G(
 					folder.getUuid(), context.getGroupId());
 
@@ -379,17 +346,19 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_BOOKMARKS_DATA =
-		"export-" + PortletKeys.BOOKMARKS + "-data";
+	private static final String _BOOKMARKS_AND_FOLDERS =
+		"folders-and-bookmarks";
 
-	private static final String _IMPORT_BOOKMARKS_DATA =
-		"import-" + PortletKeys.BOOKMARKS + "-data";
+	private static final String _TAGS = "tags";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_BOOKMARKS_DATA, true, null);
+	private static final String _NAMESPACE = "bookmarks";
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_BOOKMARKS_DATA, true, null);
+	private static final PortletDataHandlerBoolean _bookmarksAndFolders =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, _BOOKMARKS_AND_FOLDERS, true, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(BookmarksPortletDataHandlerImpl.class);

@@ -30,18 +30,20 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerChoice extends PortletDataHandlerControl {
 
-	public PortletDataHandlerChoice(String controlName) {
-		this(controlName, 0, _DEFAULT_CHOICES);
+	public PortletDataHandlerChoice(String namespace, String controlName) {
+		this(namespace, controlName, 0, _DEFAULT_CHOICES);
 	}
 
-	public PortletDataHandlerChoice(String controlName, int defaultChoice) {
-		this(controlName, defaultChoice, _DEFAULT_CHOICES);
+	public PortletDataHandlerChoice(
+		String namespace, String controlName, int defaultChoice) {
+		this(namespace, controlName, defaultChoice, _DEFAULT_CHOICES);
 	}
 
-	public PortletDataHandlerChoice(String controlName, int defaultChoice,
-									String[] choices) {
+	public PortletDataHandlerChoice(
+		String namespace, String controlName, int defaultChoice,
+		String[] choices) {
 
-		super(controlName);
+		super(namespace, controlName);
 
 		_choices = choices;
 		_defaultChoice = defaultChoice;

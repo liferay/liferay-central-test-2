@@ -30,51 +30,35 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerKeys {
 
-	public static final String EXPORT_PERMISSIONS = "EXPORT_PERMISSIONS";
+	public static final String PERMISSIONS = "PERMISSIONS";
 
-	public static final String EXPORT_USER_PERMISSIONS =
-		"EXPORT_USER_PERMISSIONS";
+	public static final String USER_PERMISSIONS = "USER_PERMISSIONS";
 
-	public static final String EXPORT_PORTLET_DATA = "EXPORT_PORTLET_DATA";
+	public static final String PORTLET_DATA = "PORTLET_DATA";
 
-	public static final String EXPORT_PORTLET_PREFERENCES =
-		"EXPORT_PORTLET_PREFERENCES";
+	public static final String PORTLET_DATA_ALL = "PORTLET_DATA_ALL";
 
-	public static final String EXPORT_COMMENTS = "EXPORT_COMMENTS";
+	public static final String PORTLET_DATA_CONTROL_DEFAULT =
+		"PORTLET_DATA_CONTROL_DEFAULT";
 
-	public static final String EXPORT_RATINGS = "EXPORT_RATINGS";
+	public static final String PORTLET_SETUP = "PORTLET_SETUP";
 
-	public static final String EXPORT_TAGS = "EXPORT_TAGS";
+	public static final String PORTLET_USER_PREFERENCES =
+		"PORTLET_USER_PREFERENCES";
 
-	public static final String EXPORT_SELECTED_LAYOUTS =
-		"EXPORT_SELECTED_LAYOUTS";
+	public static final String SELECTED_LAYOUTS = "SELECTED_LAYOUTS";
 
-	public static final String EXPORT_THEME = "EXPORT_THEME";
+	public static final String THEME = "THEME";
 
-	public static final String IMPORT_DELETE_MISSING_LAYOUTS =
-		"IMPORT_DELETE_MISSING_LAYOUTS";
+	public static final String DELETE_MISSING_LAYOUTS =
+		"DELETE_MISSING_LAYOUTS";
 
-	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
+	public static final String DATA_STRATEGY = "DATA_STRATEGY";
 
-	public static final String IMPORT_USER_PERMISSIONS =
-		"IMPORT_USER_PERMISSIONS";
+	public static final String DATA_STRATEGY_MIRROR = "DATA_STRATEGY_MIRROR";
 
-	public static final String IMPORT_PORTLET_DATA = "IMPORT_PORTLET_DATA";
-
-	public static final String IMPORT_PORTLET_PREFERENCES =
-		"IMPORT_PORTLET_PREFERENCES";
-
-	public static final String IMPORT_COMMENTS = "IMPORT_COMMENTS";
-
-	public static final String IMPORT_RATINGS = "IMPORT_RATINGS";
-
-	public static final String IMPORT_TAGS = "IMPORT_TAGS";
-
-	public static final String IMPORT_THEME = "IMPORT_THEME";
-
-	public static final String MERGE_DATA = "MERGE_DATA";
-
-	public static final String STAGING = "STAGING";
+	public static final String DATA_STRATEGY_COPY_AS_NEW =
+		"DATA_STRATEGY_COPY_AS_NEW";
 
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
 

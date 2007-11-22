@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -80,7 +79,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableExport, _enableShortcutsExport, _enableRanksExport
+			_documentsAndFolders, _shortcuts, _ranks, _comments, _ratings, _tags
 		};
 	}
 
@@ -88,7 +87,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableImport, _enableShortcutsImport, _enableRanksImport
+			_documentsAndFolders, _shortcuts, _ranks, _comments, _ratings, _tags
 		};
 	}
 
@@ -97,29 +96,14 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(parameterMap, _EXPORT_DL_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
-
-		boolean exportShortcuts = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_SHORTCUTS);
-		boolean exportRanks = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_RANKS);
+		boolean exportShortcuts = context.getBooleanParameter(
+			_NAMESPACE, _SHORTCUTS);
+		boolean exportRanks = context.getBooleanParameter(_NAMESPACE, _RANKS);
+		boolean exportComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean exportRatings = context.getBooleanParameter
+			(_NAMESPACE, _RATINGS);
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -192,14 +176,20 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
-					context.addComments(
-						DLFileEntry.class, entry.getPrimaryKeyObj());
+					if (exportComments) {
+						context.addComments(
+							DLFileEntry.class, entry.getPrimaryKeyObj());
+					}
 
-					context.addRatingsEntries(
-						DLFileEntry.class, entry.getPrimaryKeyObj());
+					if (exportRatings) {
+						context.addRatingsEntries(
+							DLFileEntry.class, entry.getPrimaryKeyObj());
+					}
 
-					context.addTagsEntries(
-						DLFileEntry.class, entry.getPrimaryKeyObj());
+					if (exportTags) {
+						context.addTagsEntries(
+							DLFileEntry.class, entry.getPrimaryKeyObj());
+					}
 
 					InputStream in =
 						DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -288,31 +278,14 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(parameterMap, _IMPORT_DL_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-		boolean importShortcuts = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_SHORTCUTS);
-		boolean importRanks = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_RANKS);
+		boolean importShortcuts = context.getBooleanParameter(
+			_NAMESPACE, _SHORTCUTS);
+		boolean importRanks = context.getBooleanParameter(_NAMESPACE, _RANKS);
+		boolean importComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean importRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -339,7 +312,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				DLFolder folder = (DLFolder)itr.next();
 
-				importFolder(context, mergeData, folderPKs, folder);
+				importFolder(context, folderPKs, folder);
 			}
 
 			// Entries
@@ -359,7 +332,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				DLFileEntry entry = (DLFileEntry)itr.next();
 
-				importEntry(context, mergeData, folderPKs, entryNames, entry);
+				importEntry(context, importComments, importRatings, importTags,
+				            folderPKs, entryNames, entry);
 			}
 
 			// Shortcuts
@@ -379,7 +353,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					DLFileShortcut shortcut = (DLFileShortcut)itr.next();
 
 					importShortcut(
-						context, mergeData, folderPKs, entryNames, shortcut);
+						context, folderPKs, entryNames, shortcut);
 				}
 			}
 
@@ -411,7 +385,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
+			PortletDataContext context, boolean importComments,
+			boolean importRatings, boolean importTags, Map folderPKs,
 			Map entryNames, DLFileEntry entry)
 		throws Exception {
 
@@ -419,8 +394,12 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
-		String[] tagsEntries = context.getTagsEntries(
-			DLFileEntry.class, entry.getPrimaryKeyObj());
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				DLFileEntry.class, entry.getPrimaryKeyObj());
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -433,7 +412,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			DLFolderUtil.findByPrimaryKey(folderId);
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingEntry = DLFileEntryFinderUtil.findByUuid_G(
 					entry.getUuid(), context.getGroupId());
 
@@ -462,13 +443,17 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			entryNames.put(entry.getName(), existingEntry.getName());
 
-			context.importComments(
-				DLFileEntry.class, entry.getPrimaryKeyObj(),
-				existingEntry.getPrimaryKeyObj(), context.getGroupId());
+			if (importComments) {
+				context.importComments(
+					DLFileEntry.class, entry.getPrimaryKeyObj(),
+					existingEntry.getPrimaryKeyObj(), context.getGroupId());
+			}
 
-			context.importRatingsEntries(
-				DLFileEntry.class, entry.getPrimaryKeyObj(),
-				existingEntry.getPrimaryKeyObj());
+			if (importRatings) {
+				context.importRatingsEntries(
+					DLFileEntry.class, entry.getPrimaryKeyObj(),
+					existingEntry.getPrimaryKeyObj());
+			}
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -478,7 +463,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
+			PortletDataContext context, Map folderPKs,
 			DLFolder folder)
 		throws Exception {
 
@@ -497,7 +482,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				DLFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingFolder = DLFolderUtil.fetchByUUID_G(
 					folder.getUuid(), context.getGroupId());
 
@@ -559,8 +546,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importShortcut(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
-			Map entryNames, DLFileShortcut shortcut)
+			PortletDataContext context, Map folderPKs, Map entryNames,
+			DLFileShortcut shortcut)
 		throws Exception {
 
 		long userId = context.getUserId(shortcut.getUserUuid());
@@ -578,7 +565,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFolderUtil.findByPrimaryKey(folderId);
 			DLFolderUtil.findByPrimaryKey(toFolderId);
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				DLFileShortcut existingShortcut =
 					DLFileShortcutFinderUtil.findByUuid_G(
 						shortcut.getUuid(), context.getGroupId());
@@ -607,43 +596,41 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_DL_DATA =
-		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-data";
+	private static final String _DOCUMENTS_AND_FOLDERS =
+		"folders-and-documents";
 
-	private static final String _IMPORT_DL_DATA =
-		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-data";
+	private static final String _RANKS = "ranks";
 
-	private static final String _EXPORT_DL_SHORTCUTS =
-		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-shortcuts";
+	private static final String _SHORTCUTS ="shortcuts";
 
-	private static final String _IMPORT_DL_SHORTCUTS =
-		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-shortcuts";
+	private static final String _COMMENTS = "comments";
 
-	private static final String _EXPORT_DL_RANKS =
-		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
+	private static final String _RATINGS = "ratings";
 
-	private static final String _IMPORT_DL_RANKS =
-		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
+	private static final String _TAGS = "tags";
 
 	private static final String _ZIP_FOLDER = "document-library/";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_DL_DATA, true, null);
+	private static final String _NAMESPACE = "document_library";
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_DL_DATA, true, null);
+	private static final PortletDataHandlerBoolean _documentsAndFolders =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, _DOCUMENTS_AND_FOLDERS, true, true, null);
 
-	private static final PortletDataHandlerBoolean _enableShortcutsExport =
-		new PortletDataHandlerBoolean(_EXPORT_DL_SHORTCUTS, true, null);
+	private static final PortletDataHandlerBoolean _ranks =
+		new PortletDataHandlerBoolean(_NAMESPACE, _RANKS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableShortcutsImport =
-		new PortletDataHandlerBoolean(_IMPORT_DL_SHORTCUTS, true, null);
+	private static final PortletDataHandlerBoolean _shortcuts=
+		new PortletDataHandlerBoolean(_NAMESPACE, _SHORTCUTS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableRanksExport =
-		new PortletDataHandlerBoolean(_EXPORT_DL_RANKS, true, null);
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableRanksImport =
-		new PortletDataHandlerBoolean(_IMPORT_DL_RANKS, true, null);
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(DLPortletDataHandlerImpl.class);

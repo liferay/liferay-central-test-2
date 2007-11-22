@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * <a href="PortletDataHandlerControl.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,14 +32,41 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerControl {
 
-	public PortletDataHandlerControl(String controlName) {
+	public static String getNamespacedControlName(
+		String namespace, String controlName) {
+		return StringPool.UNDERLINE + namespace + StringPool.UNDERLINE +
+			controlName;
+	}
+
+	public PortletDataHandlerControl(String namespace, String controlName) {
+		this(namespace, controlName, false);
+	}
+
+	public PortletDataHandlerControl(
+		String namespace, String controlName, boolean disabled) {
 		_controlName = controlName;
+		_disabled = disabled;
+		_namespace = namespace;
 	}
 
 	public String getControlName() {
 		return _controlName;
 	}
 
+	public boolean isDisabled() {
+		return _disabled;
+	}
+
+	public String getNamespace() {
+		return _namespace;
+	}
+
+	public String getNamespacedControlName() {
+		return getNamespacedControlName(_namespace, getControlName());
+	}
+
 	private String _controlName;
+	private boolean _disabled;
+	private String _namespace;
 
 }

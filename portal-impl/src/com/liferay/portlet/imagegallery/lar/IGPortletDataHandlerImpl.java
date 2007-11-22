@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -77,13 +76,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {_imagesAndFolders, _tags};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {_imagesAndFolders, _tags};
 	}
 
 	public String exportData(
@@ -91,24 +90,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(parameterMap, _EXPORT_IG_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -168,8 +150,10 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					igImage.setUserUuid(igImage.getUserUuid());
 
-					context.addTagsEntries(
-						IGImage.class, igImage.getPrimaryKeyObj());
+					if (exportTags) {
+						context.addTagsEntries(
+							IGImage.class, igImage.getPrimaryKeyObj());
+					}
 
 					try {
 						Image largeImage = ImageUtil.findByPrimaryKey(
@@ -205,27 +189,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(parameterMap, _IMPORT_IG_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -251,7 +215,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGFolder folder = (IGFolder)itr.next();
 
-				importFolder(context, mergeData, folderPKs, folder);
+				importFolder(context, folderPKs, folder);
 			}
 
 			// IGImages
@@ -269,7 +233,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				importIGImage(context, mergeData, folderPKs, igImage);
+				importIGImage(context, importTags, folderPKs, igImage);
 			}
 
 			return null;
@@ -287,7 +251,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
+			PortletDataContext context, Map folderPKs,
 			IGFolder folder)
 		throws Exception {
 
@@ -306,7 +270,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingFolder = IGFolderUtil.fetchByUUID_G(
 					folder.getUuid(), context.getGroupId());
 
@@ -340,7 +306,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importIGImage(
-			PortletDataContext context, boolean mergeData, Map folderPKs,
+			PortletDataContext context, boolean importTags, Map folderPKs,
 			IGImage igImage)
 		throws Exception {
 
@@ -365,8 +331,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			FileUtil.write(imageFile, byteArray);
 		}
 
-		String[] tagsEntries = context.getTagsEntries(
-			IGImage.class, igImage.getPrimaryKeyObj());
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				IGImage.class, igImage.getPrimaryKeyObj());
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -376,7 +346,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			IGFolderUtil.findByPrimaryKey(folderId);
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingImage = IGImageFinderUtil.findByUuid_G(
 					igImage.getUuid(), context.getGroupId());
 
@@ -408,19 +380,20 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_IG_DATA =
-		"export-" + PortletKeys.IMAGE_GALLERY + "-data";
+	private static final String _IMAGES_AND_FOLDERS = "images-and-folders";
 
-	private static final String _IMPORT_IG_DATA =
-		"import-" + PortletKeys.IMAGE_GALLERY + "-data";
+	private static final String _TAGS ="tags";
 
 	private static final String _IMAGE_GALLERY_FOLDER = "image-gallery/";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_IG_DATA, true, null);
+	private static final String _NAMESPACE = "image_gallery";
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_IG_DATA, true, null);
+	private static final PortletDataHandlerBoolean _imagesAndFolders =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, _IMAGES_AND_FOLDERS, true, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log = LogFactory.getLog(IGPortletDataHandlerImpl.class);
 

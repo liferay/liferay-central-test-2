@@ -373,22 +373,19 @@ public class ServicePreAction extends Action {
 		Map parameterMap = new HashMap();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS,
+			PortletDataHandlerKeys.USER_PERMISSIONS,
 			Boolean.FALSE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
+			PortletDataHandlerKeys.PORTLET_DATA,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.MERGE_DATA, Boolean.FALSE.toString());
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			Boolean.TRUE.toString());
 
 		LayoutLocalServiceUtil.importLayouts(
 			userId, groupId, privateLayout, parameterMap, larFile);

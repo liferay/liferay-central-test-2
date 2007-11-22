@@ -87,7 +87,17 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void importLayouts(long groupId, boolean privateLayout,
+		java.util.Map parameterMap, java.io.File file)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void importPortletInfo(long plid, java.lang.String portletId,
 		java.util.Map parameterMap, java.io.File file)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

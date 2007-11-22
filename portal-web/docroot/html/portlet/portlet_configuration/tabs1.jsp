@@ -69,6 +69,17 @@ permissionsURL.setParameter("backURL", backURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 permissionsURL.setParameter("previewWidth", previewWidth);
+
+// Data
+
+PortletURL dataURL = renderResponse.createRenderURL();
+
+dataURL.setWindowState(WindowState.MAXIMIZED);
+
+dataURL.setParameter("struts_action", "/portlet_configuration/export_import");
+dataURL.setParameter("redirect", redirect);
+dataURL.setParameter("backURL", backURL);
+dataURL.setParameter("portletResource", portletResource);
 %>
 
 <c:choose>
@@ -76,17 +87,19 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
 				<liferay-ui:tabs
-					names="setup,supported-clients,permissions"
+					names="setup,supported-clients,permissions,export-import"
 					url0="<%= configurationURL.toString() %>"
 					url1="<%= supportedClientsURL.toString() %>"
 					url2="<%= permissionsURL.toString() %>"
+					url3="<%= dataURL.toString() %>"
 				/>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="supported-clients,permissions"
+					names="supported-clients,permissions,export-import"
 					url0="<%= supportedClientsURL.toString() %>"
 					url1="<%= permissionsURL.toString() %>"
+					url2="<%= dataURL.toString() %>"
 				/>
 			</c:otherwise>
 		</c:choose>
@@ -95,15 +108,17 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
 				<liferay-ui:tabs
-					names="setup,permissions"
+					names="setup,permissions,export-import"
 					url0="<%= configurationURL.toString() %>"
 					url1="<%= permissionsURL.toString() %>"
+					url2="<%= dataURL.toString() %>"
 				/>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="permissions"
+					names="permissions,export-import"
 					url0="<%= permissionsURL.toString() %>"
+					url1="<%= dataURL.toString() %>"
 				/>
 			</c:otherwise>
 		</c:choose>

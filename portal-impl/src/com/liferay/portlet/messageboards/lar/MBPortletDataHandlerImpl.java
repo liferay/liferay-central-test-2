@@ -34,7 +34,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -86,8 +85,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableExport, _enableAttachmentsExport, _enableBansExport,
-			_enableFlagsExport
+			_messagesAndCategories, _attachments, _userBans, _flags
 		};
 	}
 
@@ -95,8 +93,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException{
 
 		return new PortletDataHandlerControl[] {
-			_enableImport, _enableAttachmentsImport, _enableBansImport,
-			_enableFlagsImport
+			_messagesAndCategories, _attachments, _userBans, _flags
 		};
 	}
 
@@ -105,32 +102,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_MESSAGE_BOARDS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
-
-		boolean exportAttachments = MapUtil.getBoolean(
-			parameterMap, _EXPORT_MESSAGE_BOARDS_ATTACHMENTS);
-		boolean exportBans = MapUtil.getBoolean(
-			parameterMap, _EXPORT_MESSAGE_BOARDS_BANS);
-		boolean exportFlags = MapUtil.getBoolean(
-			parameterMap, _EXPORT_MESSAGE_BOARDS_FLAGS);
+		boolean exportAttachments = context.getBooleanParameter(_NAMESPACE, _ATTACHEMENTS);
+		boolean exportBans = context.getBooleanParameter(_NAMESPACE, _USER_BANS);
+		boolean exportFlags = context.getBooleanParameter(_NAMESPACE, _FLAGS);
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -194,9 +169,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					message.setUserUuid(message.getUserUuid());
 					message.setPriority(message.getPriority());
 
-					context.addTagsEntries(
-						MBMessage.class, message.getPrimaryKeyObj());
-
+					if (exportTags) {
+						context.addTagsEntries(
+							MBMessage.class, message.getPrimaryKeyObj());
+					}
 					// Attachments
 
 					if (message.isAttachments() && exportAttachments) {
@@ -310,34 +286,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_MESSAGE_BOARDS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-		boolean importAttachments = MapUtil.getBoolean(
-			parameterMap, _IMPORT_MESSAGE_BOARDS_ATTACHMENTS);
-		boolean importBans = MapUtil.getBoolean(
-			parameterMap, _IMPORT_MESSAGE_BOARDS_BANS);
-		boolean importFlags = MapUtil.getBoolean(
-			parameterMap, _IMPORT_MESSAGE_BOARDS_FLAGS);
+		boolean importAttachments = context.getBooleanParameter(_NAMESPACE, _ATTACHEMENTS);
+		boolean importBans = context.getBooleanParameter(_NAMESPACE, _USER_BANS);
+		boolean importFlags = context.getBooleanParameter(_NAMESPACE, _FLAGS);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -364,7 +316,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				MBCategory category = (MBCategory)itr.next();
 
-				importCategory(context, mergeData, categoryPKs, category);
+				importCategory(context, categoryPKs, category);
 			}
 
 			// Messages
@@ -386,7 +338,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBMessage message = (MBMessage)itr.next();
 
 				importMessage(
-					context, mergeData, importAttachments, categoryPKs,
+					context, importAttachments, importTags, categoryPKs,
 					messagePKs, threadPKs, message);
 			}
 
@@ -459,8 +411,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importCategory(
-			PortletDataContext context, boolean mergeData, Map categoryPKs,
-			MBCategory category)
+			PortletDataContext context, Map categoryPKs, MBCategory category)
 		throws Exception {
 
 		long userId = context.getUserId(category.getUserUuid());
@@ -479,7 +430,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBCategoryUtil.findByPrimaryKey(parentCategoryId);
 			}
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingCategory = MBCategoryUtil.fetchByUUID_G(
 					category.getUuid(), context.getGroupId());
 
@@ -538,8 +491,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importMessage(
-			PortletDataContext context, boolean mergeData,
-			boolean importAttachments, Map categoryPKs, Map messagePKs,
+			PortletDataContext context, boolean importAttachments,
+			boolean importTags, Map categoryPKs, Map messagePKs,
 			Map threadPKs, MBMessage message)
 		throws Exception {
 
@@ -567,8 +520,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		String[] tagsEntries = context.getTagsEntries(
-			MBMessage.class, message.getPrimaryKeyObj());
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				MBMessage.class, message.getPrimaryKeyObj());
+		}
 
 		PortletPreferences prefs = null;
 
@@ -585,7 +542,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBThreadUtil.findByPrimaryKey(threadId);
 			}
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingMessage = MBMessageFinderUtil.findByUuid_G(
 					message.getUuid(), context.getGroupId());
 
@@ -636,55 +595,38 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_MESSAGE_BOARDS_DATA =
-		"export-" + PortletKeys.MESSAGE_BOARDS + "-data";
+	private static final String _MESSAGES_AND_CATEGORIES =
+		"messages-and-categories";
 
-	private static final String _IMPORT_MESSAGE_BOARDS_DATA =
-		"import-" + PortletKeys.MESSAGE_BOARDS + "-data";
+	private static final String _ATTACHEMENTS =
+		"attachments";
 
-	private static final String _EXPORT_MESSAGE_BOARDS_ATTACHMENTS =
-		"export-" + PortletKeys.MESSAGE_BOARDS + "-attachments";
+	private static final String _USER_BANS =
+		"user-bans";
 
-	private static final String _IMPORT_MESSAGE_BOARDS_ATTACHMENTS =
-		"import-" + PortletKeys.MESSAGE_BOARDS + "-attachments";
+	private static final String _FLAGS =
+		"flags";
 
-	private static final String _EXPORT_MESSAGE_BOARDS_BANS =
-		"export-" + PortletKeys.MESSAGE_BOARDS + "-bans";
+	private static final String _TAGS =
+		"tags";
 
-	private static final String _IMPORT_MESSAGE_BOARDS_BANS =
-		"import-" + PortletKeys.MESSAGE_BOARDS + "-bans";
+	private static final String _NAMESPACE = "message_board";
 
-	private static final String _EXPORT_MESSAGE_BOARDS_FLAGS =
-		"export-" + PortletKeys.MESSAGE_BOARDS + "-flags";
-
-	private static final String _IMPORT_MESSAGE_BOARDS_FLAGS =
-		"import-" + PortletKeys.MESSAGE_BOARDS + "-flags";
-
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_MESSAGE_BOARDS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_MESSAGE_BOARDS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableAttachmentsExport =
+	private static final PortletDataHandlerBoolean _messagesAndCategories =
 		new PortletDataHandlerBoolean(
-			_EXPORT_MESSAGE_BOARDS_ATTACHMENTS, true, null);
+			_NAMESPACE, _MESSAGES_AND_CATEGORIES, true, true, null);
 
-	private static final PortletDataHandlerBoolean _enableAttachmentsImport =
-		new PortletDataHandlerBoolean(
-			_IMPORT_MESSAGE_BOARDS_ATTACHMENTS, true, null);
+	private static final PortletDataHandlerBoolean _attachments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _ATTACHEMENTS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableBansExport =
-		new PortletDataHandlerBoolean(_EXPORT_MESSAGE_BOARDS_BANS, true, null);
+	private static final PortletDataHandlerBoolean _userBans =
+		new PortletDataHandlerBoolean(_NAMESPACE, _USER_BANS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableBansImport =
-		new PortletDataHandlerBoolean(_IMPORT_MESSAGE_BOARDS_BANS, true, null);
+	private static final PortletDataHandlerBoolean _flags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _FLAGS, true, null);
 
-	private static final PortletDataHandlerBoolean _enableFlagsExport =
-		new PortletDataHandlerBoolean(_EXPORT_MESSAGE_BOARDS_FLAGS, true, null);
-
-	private static final PortletDataHandlerBoolean _enableFlagsImport =
-		new PortletDataHandlerBoolean(_IMPORT_MESSAGE_BOARDS_FLAGS, true, null);
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(MBPortletDataHandlerImpl.class);

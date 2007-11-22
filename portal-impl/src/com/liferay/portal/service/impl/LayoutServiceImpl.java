@@ -128,6 +128,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			groupId, privateLayout, parameterMap);
 	}
 
+	public byte[] exportPortletInfo(
+			long plid, String portletId, Map parameterMap)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayout(plid);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), layout.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
+
+		return layoutLocalService.exportPortletInfo(
+			plid, portletId, parameterMap);
+	}
+
 	public void importLayouts(
 			long groupId, boolean privateLayout, Map parameterMap, File file)
 		throws PortalException, SystemException {
@@ -137,6 +151,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		layoutLocalService.importLayouts(
 			getUserId(), groupId, privateLayout, parameterMap, file);
+	}
+
+	public void importPortletInfo(
+			long plid, String portletId, Map parameterMap, File file)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayout(plid);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), layout.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.importPortletInfo(
+			getUserId(), plid, portletId, parameterMap, file);
 	}
 
 	public void setLayouts(

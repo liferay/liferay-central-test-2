@@ -1196,4 +1196,36 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.updatePriority(layout, priority);
 	}
+
+	public static byte[] exportPortletInfo(long plid,
+		java.lang.String portletId, java.util.Map parameterMap)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.exportPortletInfo(plid, portletId,
+			parameterMap);
+	}
+
+	public static void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.importPortletInfo(userId, plid, portletId,
+			parameterMap, file);
+	}
+
+	public static void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.importPortletInfo(userId, plid, portletId,
+			parameterMap, is);
+	}
 }

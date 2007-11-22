@@ -30,11 +30,9 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
-import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -42,7 +40,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -64,39 +61,19 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {_calendarEvents};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {_calendarEvents};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_CALENDAR_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
 
 		try {
 			XStream xStream = new XStream();
@@ -146,29 +123,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_CALENDAR_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-
 		try {
 			XStream xStream = new XStream();
 
@@ -191,7 +145,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				CalEvent event = (CalEvent) itr.next();
 
-				importEvent(context, mergeData, event);
+				importEvent(context, event);
 			}
 
 			return null;
@@ -202,7 +156,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEvent(
-			PortletDataContext context, boolean mergeData, CalEvent event)
+			PortletDataContext context, CalEvent event)
 		throws Exception {
 
 		long userId = context.getUserId(event.getUserUuid());
@@ -249,7 +203,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 		CalEvent existingEvent = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingEvent = CalEventUtil.fetchByUUID_G(
 				event.getUuid(), context.getGroupId());
 
@@ -293,17 +249,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_CALENDAR_DATA =
-		"export-" + PortletKeys.CALENDAR + "-data";
+	private static final String _CALENDAR_EVENTS = "events";
 
-	private static final String _IMPORT_CALENDAR_DATA =
-		"import-" + PortletKeys.CALENDAR + "-data";
+	private static final String _NAMESPACE = "calendar";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_CALENDAR_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_CALENDAR_DATA, true, null);
+	private static final PortletDataHandlerBoolean _calendarEvents =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, _CALENDAR_EVENTS, true, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(CalendarPortletDataHandlerImpl.class);

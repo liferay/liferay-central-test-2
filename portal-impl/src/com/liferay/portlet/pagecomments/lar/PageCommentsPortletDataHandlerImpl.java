@@ -27,12 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.MapUtil;
-
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -51,39 +46,19 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {_comments};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {_comments};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_PAGE_COMMENTS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
 
 		try {
 			context.addComments(Layout.class, new Long(context.getPlid()));
@@ -100,26 +75,6 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_PAGE_COMMENTS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
 		try {
 			context.importComments(
 				Layout.class, data, new Long(context.getPlid()),
@@ -132,17 +87,13 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_PAGE_COMMENTS_DATA =
-		"export-" + PortletKeys.PAGE_COMMENTS + "-data";
+	private static final String _COMMENTS =
+		"page-comments";
 
-	private static final String _IMPORT_PAGE_COMMENTS_DATA =
-		"import-" + PortletKeys.PAGE_COMMENTS + "-data";
+	private static final String _NAMESPACE = "page_comments";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_PAGE_COMMENTS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_PAGE_COMMENTS_DATA, true, null);
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(PageCommentsPortletDataHandlerImpl.class);

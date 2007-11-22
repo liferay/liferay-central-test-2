@@ -68,6 +68,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeLoader;
@@ -130,7 +131,8 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug�
+ * @author Raymond Augé
+ * @author Jorge Ferrer
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
@@ -359,24 +361,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		boolean exportPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS);
+			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 		boolean exportPortletData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
-		boolean exportPortletPreferences = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
-		boolean exportTags = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_TAGS);
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean exportPortletSetup = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean exportPortletUserPreferences = MapUtil.getBoolean(
+			parameterMap,
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean exportTheme = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_THEME);
+			parameterMap, PortletDataHandlerKeys.THEME);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export permissions " + exportPermissions);
 			_log.debug("Export user permissions " + exportUserPermissions);
 			_log.debug("Export portlet data " + exportPortletData);
 			_log.debug(
-				"Export portlet preferences " + exportPortletPreferences);
+				"Export portlet setup " + exportPortletSetup);
+			_log.debug(
+				"Export portlet user preferences " +
+					exportPortletUserPreferences);
 			_log.debug("Export theme " + exportTheme);
 		}
 
@@ -420,6 +426,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute("export-date", Time.getRFC822());
 		header.addAttribute("theme-id", layoutSet.getThemeId());
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
+		header.addAttribute("type", "layouts");
 
 		// Layouts
 
@@ -491,18 +498,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				// Portlet preferences
 
-				if (exportPortletPreferences) {
+				if (exportPortletSetup) {
 					exportPortletPreferences(
 						PortletKeys.PREFS_OWNER_ID_DEFAULT,
 						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, false,
 						layout.getPlid(), layoutTypePortlet, layoutEl);
+					exportPortletPreferences(
+						layout.getGroupId(),
+						PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
+						layout.getPlid(), layoutTypePortlet, layoutEl);
+					exportPortletPreferences(
+						layout.getCompanyId(),
+						PortletKeys.PREFS_OWNER_TYPE_COMPANY, false,
+						layout.getPlid(), layoutTypePortlet, layoutEl);
+				}
 
-					if (!layoutSet.isPrivateLayout()) {
-						exportPortletPreferences(
-							defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
-							true, layout.getPlid(), layoutTypePortlet,
-							layoutEl);
-					}
+				if (exportPortletUserPreferences) {
+					exportPortletPreferences(
+						defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
+						true, layout.getPlid(), layoutTypePortlet,
+						layoutEl);
 				}
 
 				// Portlet permissions
@@ -518,7 +533,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Portlet preferences
 
-		if (exportPortletPreferences) {
+		if (exportPortletUserPreferences) {
 			exportPortletPreferences(
 				groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
 				PortletKeys.PREFS_PLID_SHARED, false, root);
@@ -550,9 +565,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Tags
 
-		if (exportTags) {
-			exportTags(context, root);
-		}
+		exportTags(context, root);
 
 		// Look and feel
 
@@ -570,7 +583,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// XML
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
+			_log.info("Exporting layouts took " + stopWatch.getTime() + " ms");
 		}
 
 		// Zip
@@ -708,20 +721,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
 		boolean importPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS);
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
-		boolean importPortletPreferences = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
-		boolean importTags = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean importPortletSetup = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean importPortletUserPreferences = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
+			parameterMap, PortletDataHandlerKeys.THEME);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
@@ -730,7 +743,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			_log.debug("Import user permissions " + importUserPermissions);
 			_log.debug("Import portlet data " + importPortletData);
 			_log.debug(
-				"Import portlet preferences " + importPortletPreferences);
+				"Import portlet setup " + importPortletSetup);
+			_log.debug(
+				"Import portlet user preferences " +
+					importPortletUserPreferences);
 			_log.debug("Import theme " + importTheme);
 		}
 
@@ -848,19 +864,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
 
-		// Comments
+		// Read comments, ratings and tags to make them available to the
+		// data handlers through the context
 
-		importComments(context, root);
-
-		// Ratings
-
-		importRatings(context, root);
-
-		// Tags
-
-		if (importTags) {
-			importTags(context, root);
-		}
+		readComments(context, root);
+		readRatings(context, root);
+		readTags(context, root);
 
 		// Layouts
 
@@ -973,9 +982,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Portlet preferences
 
-			if (importPortletPreferences) {
-				importPortletPreferences(layoutSet, layout.getPlid(), layoutEl);
-			}
+			importPortletPreferences(
+				layoutSet.getCompanyId(), layout.getPlid(),
+				importPortletSetup, importPortletUserPreferences, layoutEl);
 
 			// Portlet data
 
@@ -991,12 +1000,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					permissionsEl, importUserPermissions);
 			}
 		}
-
-		// Portlet preferences
-
-		/*if (importPortletPreferences) {
-			importPortletPreferences(layoutSet, root);
-		}*/
 
 		Element rolesEl = (Element)root.element("roles");
 
@@ -1640,6 +1643,131 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			rolesEl);
 	}
 
+	public byte[] exportPortletInfo(
+			long plid, String portletId, Map parameterMap)
+		throws PortalException, SystemException {
+
+		boolean exportPortletUserPreferences = MapUtil.getBoolean(
+			parameterMap,
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
+		boolean exportPortletSetup = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+
+		StopWatch stopWatch = null;
+
+		if (_log.isInfoEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+			throw new LayoutImportException(
+				"Invalid type of layout (" + layout.getType() + ")");
+		}
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		if (!layoutTypePortlet.hasPortletId(portletId)) {
+			throw new LayoutImportException(
+				"The specified layout doesn't have that portlet (" + portletId
+					+ ")");
+		}
+
+		long companyId = layout.getCompanyId();
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+		ZipWriter zipWriter = new ZipWriter();
+
+		PortletDataContext context = new PortletDataContextImpl(
+			companyId, layout.getGroupId(), parameterMap,
+			CollectionFactory.getHashSet(), zipWriter);
+
+		context.setPlid(plid);
+
+		// Build compatibility
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("root");
+
+		Element header = root.addElement("header");
+
+		header.addAttribute(
+			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
+		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
+		header.addAttribute("export-date", Time.getRFC822());
+		header.addAttribute("type", "portlet");
+
+		// Data
+
+		PortletPreferences portletPreferences = (PortletPreferences)
+			portletPreferencesLocalService.getPortletPreferences(plid).get(0);
+
+		javax.portlet.PortletPreferences jxPrefs =
+			portletPreferencesLocalService.getPreferences(
+				layout.getCompanyId(), portletPreferences.getOwnerId(),
+				portletPreferences.getOwnerType(), plid, portletId);
+
+		exportPortletData(context, portletId, jxPrefs, root);
+
+		// Comments
+
+		exportComments(context, root);
+
+		// Ratings
+
+		exportRatings(context, root);
+
+		// Tags
+
+		exportTags(context, root);
+
+		// Portlet preferences
+
+		if (exportPortletSetup) {
+			exportPortletPreferences(
+				PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, false, layout, portletId,
+				root);
+			exportPortletPreferences(
+				layout.getGroupId(),
+				PortletKeys.PREFS_OWNER_TYPE_GROUP, false, layout, portletId,
+				root);
+			exportPortletPreferences(
+				layout.getCompanyId(),
+				PortletKeys.PREFS_OWNER_TYPE_COMPANY, false, layout, portletId,
+				root);
+		}
+
+		if (exportPortletUserPreferences) {
+			exportPortletPreferences(
+				defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
+				true, layout, portletId, root);
+		}
+
+		// XML
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Exporting portlet info took " + stopWatch.getTime() + " ms");
+		}
+
+		// Zip
+
+		try {
+			zipWriter.addEntry("portlet.xml", XMLFormatter.toString(doc));
+
+			return zipWriter.finish();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
 	protected void exportPortletData(
 			PortletDataContext context, Layout layout,
 			LayoutTypePortlet layoutTypePortlet, Element parentEl)
@@ -1695,6 +1823,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Exporting data for " + portletId);
+		}
+
+		Map parameterMap = context.getParameterMap();
+
+		boolean exportData =
+			MapUtil.getBoolean(
+				parameterMap,
+				PortletDataHandlerKeys.PORTLET_DATA + "." + portletId) ||
+			MapUtil.getBoolean(
+				parameterMap,
+				PortletDataHandlerKeys.PORTLET_DATA_ALL);
+
+		if (!exportData) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Not exporting data for " + portletId +
+						" because it wasn't selected by the user");
+			}
+
+			return;
 		}
 
 		String data = portletDataHandler.exportData(
@@ -1808,6 +1956,51 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addElement("preferences").addCDATA(
 					portletPreferences.getPreferences());
 			}
+		}
+	}
+
+	protected void exportPortletPreferences(
+			long ownerId, int ownerType, boolean defaultUser, Layout layout,
+	        String portletId, Element parentEl)
+		throws PortalException, SystemException {
+
+		PortletPreferences portletPreferences = null;
+
+		long plid = layout.getPlid();
+
+		if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
+			(ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY)) {
+			plid = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+		}
+
+		try {
+			portletPreferences =
+				portletPreferencesLocalService.getPortletPreferences(
+					ownerId, ownerType, plid, portletId);
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if ((layoutTypePortlet == null) ||
+				(layoutTypePortlet.hasPortletId(portletId))) {
+
+				Element el = parentEl.addElement("portlet-preferences");
+
+				el.addAttribute("owner-id", String.valueOf(ownerId));
+				el.addAttribute("owner-type", String.valueOf(ownerType));
+				el.addAttribute("default-user", String.valueOf(defaultUser));
+
+				el.addAttribute("plid", String.valueOf(plid));
+
+				el.addAttribute("portlet-id", portletId);
+				el.addElement("preferences").addCDATA(
+					portletPreferences.getPreferences());
+			}
+		}
+		catch (NoSuchPortletPreferencesException E) {
+
+			// Ignore inexistent preferences
+
 		}
 	}
 
@@ -2257,7 +2450,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return false;
 	}
 
-	protected void importComments(PortletDataContext context, Element root)
+	protected void readComments(PortletDataContext context, Element root)
 		throws PortalException, SystemException {
 
 		try {
@@ -2470,6 +2663,140 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			rolesEl);
 	}
 
+	public void importPortletInfo(
+			long userId, long plid, String portletId, Map parameterMap,
+			File file)
+		throws PortalException, SystemException {
+
+		try {
+			importPortletInfo(
+				userId, plid, portletId, parameterMap,
+				new FileInputStream(file));
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new SystemException(fnfe);
+		}
+	}
+
+	public void importPortletInfo(
+			long userId, long plid, String portletId, Map parameterMap,
+			InputStream is)
+		throws PortalException, SystemException {
+
+		boolean importPortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean importPortletSetup = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean importUserPreferences = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
+		String userIdStrategy = MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
+
+		StopWatch stopWatch = null;
+
+		if (_log.isInfoEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		long companyId = layout.getCompanyId();
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		// UserId strategy
+
+		UserIdStrategy strategy = null;
+
+		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
+			strategy = new AlwaysCurrentUserIdStrategy(user);
+		}
+		else if (UserIdStrategy.CURRENT_USER_ID.equals(userIdStrategy)) {
+			strategy = new CurrentUserIdStrategy(user);
+		}
+
+		ZipReader zipReader = new ZipReader(is);
+
+		PortletDataContext context = new PortletDataContextImpl(
+			companyId, layout.getGroupId(), parameterMap,
+			CollectionFactory.getHashSet(), strategy, zipReader);
+
+		context.setPlid(plid);
+
+		// Zip
+
+		Element root = null;
+
+		try {
+
+			// XML
+
+			String xml = zipReader.getEntryAsString("portlet.xml");
+
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(xml));
+
+			root = doc.getRootElement();
+
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+
+		// Build compatibility
+
+		Element header = (Element)root.element("header");
+
+		int buildNumber = ReleaseInfo.getBuildNumber();
+
+		int importBuildNumber = GetterUtil.getInteger(
+			header.attributeValue("build-number"));
+
+		if (buildNumber != importBuildNumber) {
+			throw new LayoutImportException(
+				"LAR build number " + importBuildNumber + " does not match " +
+					"portal build number " + buildNumber);
+		}
+
+		String type = header.attributeValue("type");
+
+		if (!type.equals("portlet")) {
+			throw new LayoutImportException(
+				"Invalid type of LAR file (" + type + ")");
+		}
+
+		// Read comments, ratings and tags to make them available to the
+		// data handlers through the context
+
+		readComments(context, root);
+		readRatings(context, root);
+		readTags(context, root);
+
+		// Portlet preferences
+
+		importPortletPreferences(
+			layout.getCompanyId(), plid, importPortletSetup,
+			importUserPreferences, root);
+
+		// Portlet Data
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Importing portlet data");
+		}
+
+		if (importPortletData) {
+			importPortletData(context, layout, root);
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Importing portlet data takes " + stopWatch.getTime() + " ms");
+		}
+	}
+
 	protected void importPortletData(
 			PortletDataContext context, Layout layout, Element parentEl)
 		throws PortalException, SystemException {
@@ -2613,11 +2940,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importPortletPreferences(
-			LayoutSet layoutSet, long plid, Element parentEl)
+			long companyId, long plid, boolean importPortletSetup,
+			boolean importUserPreferences, Element parentEl)
 		throws PortalException, SystemException {
 
-		long defaultUserId = userLocalService.getDefaultUserId(
-			layoutSet.getCompanyId());
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 		Iterator itr = parentEl.elements("portlet-preferences").iterator();
 
@@ -2627,6 +2954,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long ownerId = GetterUtil.getLong(el.attributeValue("owner-id"));
 			int ownerType = GetterUtil.getInteger(
 				el.attributeValue("owner-type"));
+
+			if ((ownerId == PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
+				(ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) &&
+				!importPortletSetup) {
+				continue;
+			}
+
+			if ((ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
+				(ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
+				!importUserPreferences) {
+				continue;
+			}
+
 			boolean defaultUser = GetterUtil.getBoolean(
 				el.attributeValue("default-user"));
 			//long plid = GetterUtil.getLong(el.attributeValue("plid"));
@@ -2742,7 +3082,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void importRatings(PortletDataContext context, Element root)
+	protected void readRatings(PortletDataContext context, Element root)
 		throws PortalException, SystemException {
 
 		try {
@@ -2776,7 +3116,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void importTags(PortletDataContext context, Element root)
+	protected void readTags(PortletDataContext context, Element root)
 		throws PortalException, SystemException {
 
 		Iterator itr = root.elements("tags").iterator();

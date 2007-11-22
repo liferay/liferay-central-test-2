@@ -24,8 +24,17 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.LayoutImportException" %>
 <%@ page import="com.liferay.portal.NoSuchResourceException" %>
+<%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataException" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandler" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerBoolean" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerChoice" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerControl" %>
+<%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %>
+<%@ page import="com.liferay.portal.kernel.lar.UserIdStrategy" %>
 <%@ page import="com.liferay.portal.kernel.servlet.PortletServlet" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>

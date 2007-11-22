@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -78,7 +77,7 @@ import org.dom4j.Element;
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -89,13 +88,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {
+			_articleStructuresAndTemplates, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {
+			_articleStructuresAndTemplates, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public String exportData(
@@ -103,25 +106,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_JOURNAL_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
+		boolean exportImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
+		boolean exportComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean exportRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -201,7 +191,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
-					exportArticle(context, article);
+					exportArticle(
+						context, exportImages, exportComments, exportRatings,
+						exportTags, article);
 				}
 			}
 
@@ -225,28 +217,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_JOURNAL_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+		boolean importImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
+		boolean importComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean importRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -272,7 +248,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalStructure structure = (JournalStructure)itr.next();
 
-				importStructure(context, mergeData, structurePKs,  structure);
+				importStructure(context, structurePKs,  structure);
 			}
 
 			// Templates
@@ -293,7 +269,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
 				importTemplate(
-					context, mergeData, structurePKs, templatePKs, template);
+					context, structurePKs, templatePKs, template);
 			}
 
 			// Articles
@@ -312,7 +288,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				JournalArticle article = (JournalArticle)itr.next();
 
 				importArticle(
-					context, mergeData, structurePKs, templatePKs, article);
+					context, importImages, importComments, importRatings,
+					importTags, structurePKs, templatePKs, article);
 			}
 
 			return null;
@@ -323,43 +300,55 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void exportArticle(
-			PortletDataContext context, JournalArticle article)
+			PortletDataContext context, boolean exportImages,
+			boolean exportComments, boolean exportRatings, boolean exportTags,
+			JournalArticle article)
 		throws SystemException, PortalException, IOException {
 
 		article.setUserUuid(article.getUserUuid());
 		article.setApprovedByUserUuid(article.getApprovedByUserUuid());
 
-		context.addComments(
-			JournalArticle.class, new Long(article.getResourcePrimKey()));
+		if (exportComments) {
+			context.addComments(
+				JournalArticle.class, new Long(article.getResourcePrimKey()));
+		}
 
-		context.addRatingsEntries(
-			JournalArticle.class, new Long(article.getResourcePrimKey()));
+		if (exportRatings) {
+			context.addRatingsEntries(
+				JournalArticle.class, new Long(article.getResourcePrimKey()));
+		}
 
-		context.addTagsEntries(
-			JournalArticle.class, new Long(article.getResourcePrimKey()));
+		if (exportTags) {
+			context.addTagsEntries(
+				JournalArticle.class, new Long(article.getResourcePrimKey()));
+		}
 
 		// Journal Article Images
 
-		List articleImages = JournalArticleImageUtil.findByG_A_V(
-			context.getGroupId(), article.getArticleId(), article.getVersion());
+		if (exportImages) {
+			List articleImages = JournalArticleImageUtil.findByG_A_V(
+				context.getGroupId(), article.getArticleId(),
+				article.getVersion());
 
-		Iterator itr2 = articleImages.iterator();
+			Iterator itr2 = articleImages.iterator();
 
-		while (itr2.hasNext()) {
-			JournalArticleImage articleImage = (JournalArticleImage)itr2.next();
+			while (itr2.hasNext()) {
+				JournalArticleImage articleImage =
+					(JournalArticleImage)itr2.next();
 
-			try {
-				Image image = ImageUtil.findByPrimaryKey(
-					articleImage.getArticleImageId());
+				try {
+					Image image = ImageUtil.findByPrimaryKey(
+						articleImage.getArticleImageId());
 
-				String fileName = articleImage.getElName() +
-					articleImage.getLanguageId() + "." + image.getType();
+					String fileName = articleImage.getElName() +
+						articleImage.getLanguageId() + "." + image.getType();
 
-				context.getZipWriter().addEntry(
-					getArticleImageDir(article) +  fileName,
-					image.getTextObj());
-			}
-			catch (NoSuchImageException nsie) {
+					context.getZipWriter().addEntry(
+						getArticleImageDir(article) +  fileName,
+						image.getTextObj());
+				}
+				catch (NoSuchImageException nsie) {
+				}
 			}
 		}
 	}
@@ -400,8 +389,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static JournalArticle importArticle(
-			PortletDataContext context, boolean mergeData, Map structurePKs,
-			Map templatePKs, JournalArticle article)
+			PortletDataContext context, boolean importImages,
+			boolean importComments, boolean importRatings, boolean importTags,
+			Map structurePKs, Map templatePKs, JournalArticle article)
 		throws Exception {
 
 		long userId = context.getUserId(article.getUserUuid());
@@ -489,23 +479,26 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map images = CollectionFactory.getHashMap();
 
-		List imageFiles = (List)context.getZipReader().getFolderEntries().get(
-			getArticleImageDir(article));
+		if (importImages) {
+			List imageFiles =
+				(List)context.getZipReader().getFolderEntries().get(
+					getArticleImageDir(article));
 
-		if (imageFiles != null && imageFiles.size() > 0) {
-			Iterator itr = imageFiles.iterator();
+			if (imageFiles != null && imageFiles.size() > 0) {
+				Iterator itr = imageFiles.iterator();
 
-			while (itr.hasNext()) {
-				ObjectValuePair imageFile = (ObjectValuePair)itr.next();
+				while (itr.hasNext()) {
+					ObjectValuePair imageFile = (ObjectValuePair)itr.next();
 
-				String fileName = (String)imageFile.getKey();
+					String fileName = (String)imageFile.getKey();
 
-				int pos = fileName.lastIndexOf(".");
+					int pos = fileName.lastIndexOf(".");
 
-				if (pos != -1) {
-					fileName = fileName.substring(0, pos);
+					if (pos != -1) {
+						fileName = fileName.substring(0, pos);
+					}
+					images.put(fileName, imageFile.getValue());
 				}
-				images.put(fileName, imageFile.getValue());
 			}
 		}
 
@@ -513,8 +506,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		PortletPreferences prefs = null;
 
-		String[] tagsEntries = context.getTagsEntries(
-			JournalArticle.class, new Long(article.getResourcePrimKey()));
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				JournalArticle.class, new Long(article.getResourcePrimKey()));
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -522,7 +519,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		JournalArticle existingArticle = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingArticle = JournalArticleUtil.fetchByUUID_G(
 				article.getUuid(), context.getGroupId());
 
@@ -582,14 +581,18 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				articleURL, prefs);
 		}
 
-		context.importComments(
-			JournalArticle.class, new Long(article.getResourcePrimKey()),
-			new Long(existingArticle.getResourcePrimKey()),
-			context.getGroupId());
+		if (importComments) {
+			context.importComments(
+				JournalArticle.class, new Long(article.getResourcePrimKey()),
+				new Long(existingArticle.getResourcePrimKey()),
+				context.getGroupId());
+		}
 
-		context.importRatingsEntries(
-			JournalArticle.class, new Long(article.getResourcePrimKey()),
-			new Long(existingArticle.getResourcePrimKey()));
+		if (importRatings) {
+			context.importRatingsEntries(
+				JournalArticle.class, new Long(article.getResourcePrimKey()),
+				new Long(existingArticle.getResourcePrimKey()));
+		}
 
 		if (!articleId.equals(existingArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
@@ -604,7 +607,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importStructure(
-			PortletDataContext context, boolean mergeData, Map structurePKs,
+			PortletDataContext context, Map structurePKs,
 			JournalStructure structure)
 		throws Exception {
 
@@ -626,7 +629,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		JournalStructure existingStructure = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingStructure = JournalStructureUtil.fetchByUUID_G(
 				structure.getUuid(), context.getGroupId());
 
@@ -669,8 +674,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importTemplate(
-			PortletDataContext context, boolean mergeData, Map structurePKs,
-			Map templatePKs, JournalTemplate template)
+			PortletDataContext context, Map structurePKs, Map templatePKs,
+			JournalTemplate template)
 		throws Exception {
 
 		long userId = context.getUserId(template.getUserUuid());
@@ -707,7 +712,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		JournalTemplate existingTemplate = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingTemplate = JournalTemplateUtil.fetchByUUID_G(
 				template.getUuid(), context.getGroupId());
 
@@ -755,22 +762,41 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_JOURNAL_DATA =
-		"export-" + PortletKeys.JOURNAL + "-data";
+	private static final String _ARTICLES_STRUCTURES_AND_TEMPLATES =
+		"articles-structures-and-templates";
 
-	private static final String _IMPORT_JOURNAL_DATA =
-		"import-" + PortletKeys.JOURNAL + "-data";
+	private static final String _IMAGES = "images";
+
+	private static final String _COMMENTS = "comments";
+
+	private static final String _RATINGS = "ratings";
+
+	private static final String _TAGS = "tags";
+
+	private static final String _TEMPLATE_IMAGES_FOLDER = "template-images/";
 
 	private static final String _JOURNAL_ARTICLE_IMAGES_FOLDER =
 		"journal-article-images/";
 
-	private static final String _TEMPLATE_IMAGES_FOLDER = "template-images/";
+	private static final String _NAMESPACE = "journal";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_JOURNAL_DATA, true, null);
+	private static final PortletDataHandlerBoolean
+		_articleStructuresAndTemplates =
+			new PortletDataHandlerBoolean(
+				_NAMESPACE, _ARTICLES_STRUCTURES_AND_TEMPLATES, true, true,
+				null);
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_JOURNAL_DATA, true, null);
+	private static final PortletDataHandlerBoolean _images =
+		new PortletDataHandlerBoolean(_NAMESPACE, _IMAGES, true, null);
+
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(JournalPortletDataHandlerImpl.class);

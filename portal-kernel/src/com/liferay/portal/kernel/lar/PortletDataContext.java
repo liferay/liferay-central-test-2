@@ -57,6 +57,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map getParameterMap();
 
+	public boolean getBooleanParameter(String namespace, String name);
+
 	public Set getPrimaryKeys();
 
 	public boolean addPrimaryKey(Class classObj, Object primaryKey);
@@ -101,6 +103,8 @@ public interface PortletDataContext extends Serializable {
 	public void addTagsEntries(
 			String className, Object classPK, String[] values)
 		throws PortalException, SystemException;
+
+	public String getDataStrategy();
 
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 

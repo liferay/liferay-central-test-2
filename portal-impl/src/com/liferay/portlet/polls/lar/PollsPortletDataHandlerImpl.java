@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsChoice;
@@ -78,7 +77,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableExport, _enableVotesExport
+			_polls, _votes
 		};
 	}
 
@@ -86,7 +85,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException{
 
 		return new PortletDataHandlerControl[] {
-			_enableImport, _enableVotesImport
+			_polls, _votes
 		};
 	}
 
@@ -95,28 +94,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_POLLS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
-
-		boolean exportVotes = MapUtil.getBoolean(
-			parameterMap, _EXPORT_POLLS_VOTES);
+		boolean exportVotes = context.getBooleanParameter(_NAMESPACE, _VOTES);
 
 		try {
 			XStream xStream = new XStream();
@@ -232,28 +210,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_POLLS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-		boolean importVotes = MapUtil.getBoolean(
-			parameterMap, _IMPORT_POLLS_VOTES);
+		boolean importVotes = MapUtil.getBoolean(parameterMap, _VOTES);
 
 		try {
 			XStream xStream = new XStream();
@@ -279,7 +236,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				PollsQuestion question = (PollsQuestion)itr.next();
 
-				importQuestion(context, mergeData, questionPKs, question);
+				importQuestion(context, questionPKs, question);
 			}
 
 			// Choices
@@ -299,8 +256,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				PollsChoice choice = (PollsChoice)itr.next();
 
-				importChoice(
-					context, mergeData, questionPKs, choicePKs, choice);
+				importChoice(context, questionPKs, choicePKs, choice);
 			}
 
 			// Votes
@@ -331,8 +287,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importChoice(
-			PortletDataContext context, boolean mergeData, Map questionPKs,
-			Map choicePKs, PollsChoice choice)
+			PortletDataContext context, Map questionPKs, Map choicePKs,
+			PollsChoice choice)
 		throws Exception {
 
 		long questionId = MapUtil.getLong(
@@ -343,7 +299,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			PollsQuestionUtil.findByPrimaryKey(questionId);
 
-			if (mergeData) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 				existingChoice = PollsChoiceFinderUtil.findByUuid_G(
 					choice.getUuid(), context.getGroupId());
 
@@ -374,7 +331,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importQuestion(
-			PortletDataContext context, boolean mergeData, Map questionPKs,
+			PortletDataContext context, Map questionPKs,
 			PollsQuestion question)
 		throws SystemException, PortalException {
 
@@ -408,7 +365,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		PollsQuestion existingQuestion = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
 				question.getUuid(), context.getGroupId());
 
@@ -467,29 +425,17 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _EXPORT_POLLS_DATA =
-		"export-" + PortletKeys.POLLS + "-data";
+	private static final String _POLLS = "polls";
 
-	private static final String _IMPORT_POLLS_DATA =
-		"import-" + PortletKeys.POLLS + "-data";
+	private static final String _VOTES = "votes";
 
-	private static final String _EXPORT_POLLS_VOTES =
-		"export-" + PortletKeys.POLLS + "-votes";
+	private static final String _NAMESPACE = "polls";
 
-	private static final String _IMPORT_POLLS_VOTES =
-		"import-" + PortletKeys.POLLS + "-votes";
+	private static final PortletDataHandlerBoolean _polls =
+		new PortletDataHandlerBoolean(_NAMESPACE, _POLLS, true, true, null);
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_POLLS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_POLLS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableVotesExport =
-		new PortletDataHandlerBoolean(_EXPORT_POLLS_VOTES, true, null);
-
-	private static final PortletDataHandlerBoolean _enableVotesImport =
-		new PortletDataHandlerBoolean(_IMPORT_POLLS_VOTES, true, null);
+	private static final PortletDataHandlerBoolean _votes =
+		new PortletDataHandlerBoolean(_NAMESPACE, _VOTES, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(PollsPortletDataHandlerImpl.class);

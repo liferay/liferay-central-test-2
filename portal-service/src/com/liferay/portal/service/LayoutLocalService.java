@@ -539,4 +539,21 @@ public interface LayoutLocalService {
 		com.liferay.portal.model.Layout layout, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.InputStream is)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

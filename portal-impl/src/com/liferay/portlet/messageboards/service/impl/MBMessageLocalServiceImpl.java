@@ -1240,7 +1240,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, MBMessage message, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		if ((tagsEntries == null) || message.isDiscussion()) {
+		if (message.isDiscussion()) {
 			return;
 		}
 

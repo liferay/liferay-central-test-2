@@ -123,6 +123,15 @@ public class LayoutServiceUtil {
 		return layoutService.exportLayouts(groupId, privateLayout, parameterMap);
 	}
 
+	public static byte[] exportPortletInfo(long plid,
+		java.lang.String portletId, java.util.Map parameterMap)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.exportPortletInfo(plid, portletId, parameterMap);
+	}
+
 	public static void importLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
@@ -130,6 +139,15 @@ public class LayoutServiceUtil {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.importLayouts(groupId, privateLayout, parameterMap, file);
+	}
+
+	public static void importPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.importPortletInfo(plid, portletId, parameterMap, file);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,

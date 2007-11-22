@@ -31,18 +31,15 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -64,13 +61,15 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {
+			_entries, _comments, _ratings, _tags};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {
+			_entries, _comments, _ratings, _tags};
 	}
 
 	public String exportData(
@@ -78,25 +77,11 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BLOGS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
+		boolean exportComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean exportRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -124,14 +109,20 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
-					context.addComments(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
+					if (exportComments) {
+						context.addComments(
+							BlogsEntry.class, entry.getPrimaryKeyObj());
+					}
 
-					context.addRatingsEntries(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
+					if (exportRatings) {
+						context.addRatingsEntries(
+							BlogsEntry.class, entry.getPrimaryKeyObj());
+					}
 
-					context.addTagsEntries(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
+					if (exportTags) {
+						context.addTagsEntries(
+							BlogsEntry.class, entry.getPrimaryKeyObj());
+					}
 				}
 			}
 
@@ -155,28 +146,11 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BLOGS_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+		boolean importComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean importRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -200,7 +174,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				importEntry(context, mergeData, entry);
+				importEntry(
+					context, importComments, importRatings,
+					importTags, entry);
 			}
 
 			return null;
@@ -211,7 +187,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, boolean mergeData, BlogsEntry entry)
+			PortletDataContext context, boolean importComments,
+			boolean importRatings, boolean importTags, BlogsEntry entry)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
@@ -228,15 +205,22 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
 
 		ThemeDisplay themeDisplay = null;
-		String[] tagsEntries = context.getTagsEntries(
-			BlogsEntry.class, entry.getPrimaryKeyObj());
+
+		String[] tagsEntries = null;
+
+		if (importTags) {
+			tagsEntries = context.getTagsEntries(
+				BlogsEntry.class, entry.getPrimaryKeyObj());
+		}
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
 		BlogsEntry existingEntry = null;
 
-		if (mergeData) {
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingEntry = BlogsEntryUtil.fetchByUUID_G(
 				entry.getUuid(), context.getGroupId());
 
@@ -265,26 +249,40 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				addGuestPermissions);
 		}
 
-		context.importComments(
-			BlogsEntry.class, entry.getPrimaryKeyObj(),
-			existingEntry.getPrimaryKeyObj(), context.getGroupId());
+		if (importComments) {
+			context.importComments(
+				BlogsEntry.class, entry.getPrimaryKeyObj(),
+				existingEntry.getPrimaryKeyObj(), context.getGroupId());
+		}
 
-		context.importRatingsEntries(
-			BlogsEntry.class, entry.getPrimaryKeyObj(),
-			existingEntry.getPrimaryKeyObj());
+		if (importRatings) {
+			context.importRatingsEntries(
+				BlogsEntry.class, entry.getPrimaryKeyObj(),
+				existingEntry.getPrimaryKeyObj());
+		}
 	}
 
-	private static final String _EXPORT_BLOGS_DATA =
-		"export-" + PortletKeys.BLOGS + "-data";
+	private static final String _ENTRIES = "entries";
 
-	private static final String _IMPORT_BLOGS_DATA =
-		"import-" + PortletKeys.BLOGS + "-data";
+	private static final String _COMMENTS = "comments";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_BLOGS_DATA, true, null);
+	private static final String _RATINGS = "ratings";
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_BLOGS_DATA, true, null);
+	private static final String _TAGS = "tags";
+
+	private static final String _NAMESPACE = "blogs";
+
+	private static final PortletDataHandlerBoolean _entries =
+		new PortletDataHandlerBoolean(_NAMESPACE, _ENTRIES, true, true, null);
+
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(BlogsPortletDataHandlerImpl.class);

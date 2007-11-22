@@ -27,12 +27,10 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -44,7 +42,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -65,7 +62,7 @@ import org.dom4j.Element;
  * </i></b></a>
  *
  * @author Joel Kozikowski
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Bruno Farache
  *
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
@@ -78,13 +75,17 @@ public class JournalContentPortletDataHandlerImpl
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {
+			_articlesSelected, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {
+			_articlesSelected, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public String exportData(
@@ -92,25 +93,10 @@ public class JournalContentPortletDataHandlerImpl
 			PortletPreferences prefs)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_JOURNAL_CONTENT_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (exportData) {
-				_log.debug("Exporting data is enabled");
-			}
-			else {
-				_log.debug("Exporting data is disabled");
-			}
-		}
-
-		if (!exportData && !staging) {
-			return null;
-		}
+		boolean exportImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
+		boolean exportComments = context.getBooleanParameter(_NAMESPACE, _COMMENTS);
+		boolean exportRatings = context.getBooleanParameter(_NAMESPACE, _RATINGS);
+		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			String articleId = prefs.getValue("article-id", null);
@@ -165,7 +151,9 @@ public class JournalContentPortletDataHandlerImpl
 			if (!context.addPrimaryKey(
 					JournalArticle.class, article.getPrimaryKeyObj())) {
 
-				JournalPortletDataHandlerImpl.exportArticle(context, article);
+				JournalPortletDataHandlerImpl.exportArticle(
+					context, exportImages, exportComments, exportRatings,
+					exportTags, article);
 
 				String xml = xStream.toXML(article);
 
@@ -226,37 +214,12 @@ public class JournalContentPortletDataHandlerImpl
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_JOURNAL_CONTENT_DATA);
-		boolean staging = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.STAGING);
-
-		if (_log.isDebugEnabled()) {
-			if (importData) {
-				_log.debug("Importing data is enabled");
-			}
-			else {
-				_log.debug("Importing data is disabled");
-			}
-		}
-
-		if (!importData && !staging) {
-			return null;
-		}
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-
-		if (!mergeData){
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Merge data option was not selected. This can cause " +
-						"duplication of entities because there is no way to " +
-							"check if they already exist.");
-			}
-		}
+		boolean importImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
+		boolean importComments = context.getBooleanParameter(
+			_NAMESPACE, _COMMENTS);
+		boolean importRatings = context.getBooleanParameter(
+			_NAMESPACE, _RATINGS);
+		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			if (Validator.isNull(data)) {
@@ -282,7 +245,7 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				JournalPortletDataHandlerImpl.importStructure(
-					context, mergeData, structurePKs, structure);
+					context, structurePKs, structure);
 			}
 
 			el = root.element(JournalTemplateImpl.class.getName());
@@ -298,7 +261,7 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				JournalPortletDataHandlerImpl.importTemplate(
-					context, mergeData, structurePKs, templatePKs, template);
+					context, structurePKs, templatePKs, template);
 			}
 
 			el = root.element(JournalArticleImpl.class.getName());
@@ -312,7 +275,8 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				article = JournalPortletDataHandlerImpl.importArticle(
-					context, mergeData, structurePKs, templatePKs, article);
+					context, importImages, importComments, importRatings,
+					importTags, structurePKs, templatePKs, article);
 
 				prefs.setValue(
 					"group-id", String.valueOf(context.getGroupId()));
@@ -326,17 +290,34 @@ public class JournalContentPortletDataHandlerImpl
 		}
 	}
 
-	private static final String _EXPORT_JOURNAL_CONTENT_DATA =
-		"export-" + PortletKeys.JOURNAL_CONTENT + "-data";
+	private static final String _ARTICLES_SELECTED =
+		"articles-selected";
 
-	private static final String _IMPORT_JOURNAL_CONTENT_DATA =
-		"import-" + PortletKeys.JOURNAL_CONTENT + "-data";
+	private static final String _IMAGES = "images";
 
-	private static final PortletDataHandlerBoolean _enableExport =
-		new PortletDataHandlerBoolean(_EXPORT_JOURNAL_CONTENT_DATA, true, null);
+	private static final String _COMMENTS = "comments";
 
-	private static final PortletDataHandlerBoolean _enableImport =
-		new PortletDataHandlerBoolean(_IMPORT_JOURNAL_CONTENT_DATA, true, null);
+	private static final String _RATINGS = "ratings";
+
+	private static final String _TAGS = "tags";
+
+	private static final String _NAMESPACE = "journal_content";
+
+	private static final PortletDataHandlerBoolean _articlesSelected =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, _ARTICLES_SELECTED, true, true, null);
+
+	private static final PortletDataHandlerBoolean _images =
+		new PortletDataHandlerBoolean(_NAMESPACE, _IMAGES, true, null);
+
+	private static final PortletDataHandlerBoolean _comments =
+		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+
+	private static final PortletDataHandlerBoolean _tags =
+		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(JournalContentPortletDataHandlerImpl.class);
