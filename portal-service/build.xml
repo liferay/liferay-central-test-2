@@ -19,8 +19,6 @@
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="classes"
-			fork="${javac.fork}"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="on"
 			srcdir="src"
 		/>

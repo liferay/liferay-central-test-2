@@ -19,9 +19,7 @@
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			fork="${javac.fork}"
 			includes="*.java"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
 			srcdir="."
 		/>

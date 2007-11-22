@@ -69,8 +69,6 @@
 			deprecation="${javac.deprecation}"
 			destdir="${classes.dir}"
 			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java"
-			fork="${javac.fork}"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
@@ -82,7 +80,6 @@
 			deprecation="${javac.deprecation}"
 			destdir="${classes.dir}"
 			includes="**/portal/smtp/SMTPServerUtil.java"
-			fork="${javac.fork}"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
@@ -148,8 +145,6 @@
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
 					destdir="${app.server.classes.portal.dir}"
-					fork="${javac.fork}"
-					memoryMaximumSize="${javac.memoryMaximumSize}"
 					nowarn="${javac.nowarn}"
 					srcdir="src"
 				/>
@@ -165,8 +160,6 @@
 			deprecation="${javac.deprecation}"
 			destdir="classes"
 			includes="**/portal/tools/*.java"
-			fork="${javac.fork}"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>

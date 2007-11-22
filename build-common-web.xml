@@ -33,8 +33,6 @@
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
 					destdir="${compile.file.dest}"
-					fork="${javac.fork}"
-					memoryMaximumSize="${javac.memoryMaximumSize}"
 					nowarn="on"
 					srcdir="docroot/WEB-INF/src"
 				/>
