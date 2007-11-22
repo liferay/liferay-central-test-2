@@ -350,11 +350,14 @@ public class MBUtil {
 		return sm.toString();
 	}
 
-	public static String getMailingListAddress(long categoryId, String mx) {
+	public static String getMailingListAddress(
+		long messageId, long categoryId, String mx) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(SMTP_PORTLET_PREFIX);
 		sm.append(categoryId);
+		sm.append(StringPool.PERIOD);
+		sm.append(messageId);
 		sm.append(StringPool.AT);
 		sm.append(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN));
 		sm.append(StringPool.PERIOD);
