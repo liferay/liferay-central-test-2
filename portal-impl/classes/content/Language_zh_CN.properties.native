@@ -240,6 +240,7 @@ action.PERMISSIONS=允许
 action.PERMISSIONS_USER=允许用户
 action.PREFERENCES=特选
 action.PRINT=印刷品
+action.REPLY_TO_MESSAGE=给消息的回复
 action.SIGNAL=信号
 action.SUBSCRIBE=订阅
 action.UPDATE=更新

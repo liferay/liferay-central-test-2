@@ -240,6 +240,7 @@ action.PERMISSIONS=Permissions
 action.PERMISSIONS_USER=Permissions de l'utilisateur
 action.PREFERENCES=Préférences
 action.PRINT=Imprimer
+action.REPLY_TO_MESSAGE=Réponse au message
 action.SIGNAL=Signaler
 action.SUBSCRIBE=Souscrire
 action.UPDATE=Mittre à jour

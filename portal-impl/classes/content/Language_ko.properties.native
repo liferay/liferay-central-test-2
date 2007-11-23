@@ -240,6 +240,7 @@ action.PERMISSIONS=허가
 action.PERMISSIONS_USER=허가 사용자
 action.PREFERENCES=특혜
 action.PRINT=인쇄
+action.REPLY_TO_MESSAGE=메시지에 대답
 action.SIGNAL=신호
 action.SUBSCRIBE=구독하십시요
 action.UPDATE=갱신

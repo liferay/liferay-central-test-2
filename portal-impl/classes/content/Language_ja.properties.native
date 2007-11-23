@@ -240,6 +240,7 @@ action.PERMISSIONS=許可
 action.PERMISSIONS_USER=許可のユーザー
 action.PREFERENCES=好み
 action.PRINT=印刷物
+action.REPLY_TO_MESSAGE=メッセージへの応答
 action.SIGNAL=信号
 action.SUBSCRIBE=予約購読しなさい
 action.UPDATE=更新

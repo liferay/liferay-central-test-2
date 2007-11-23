@@ -24,11 +24,11 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -702,19 +702,23 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)
 		throws PortalException, SystemException {
+
 		if (parentMessageId > 0) {
 			if (MBCategoryPermission.contains(
 					getPermissionChecker(), categoryId,
 					ActionKeys.ADD_MESSAGE)) {
+
 				return;
 			}
 
 			MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
 				parentMessageId);
 
-			if ((parentMessage == null) || !MBCategoryPermission.contains(
+			if ((parentMessage == null) ||
+				!MBCategoryPermission.contains(
 					getPermissionChecker(), categoryId,
 					ActionKeys.REPLY_TO_MESSAGE)) {
+
 				throw new PrincipalException();
 			}
 		}

@@ -240,6 +240,7 @@ action.PERMISSIONS=Αδειες
 action.PERMISSIONS_USER=Χρήστης αδειών
 action.PREFERENCES=Προτιμήσεις
 action.PRINT=Τυπωμένη ύλη
+action.REPLY_TO_MESSAGE=Απάντηση στο μήνυμα
 action.SIGNAL=Σήμα
 action.SUBSCRIBE=Προσυπογράψτε
 action.UPDATE=Αναπροσαρμογή
