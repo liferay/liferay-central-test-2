@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
@@ -145,8 +146,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		checkReplyToPermission(categoryId, parentMessageId);
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
@@ -174,8 +174,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		checkReplyToPermission(categoryId, parentMessageId);
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
@@ -289,8 +288,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		checkReplyToPermission(categoryId, parentMessageId);
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
@@ -318,8 +316,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		checkReplyToPermission(categoryId, parentMessageId);
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
@@ -348,8 +345,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		checkReplyToPermission(categoryId, parentMessageId);
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
@@ -702,6 +698,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, categoryId, subject, body, files, priority,
 			tagsEntries, prefs, themeDisplay);
+	}
+
+	protected void checkReplyToPermission(long categoryId, long parentMessageId)
+		throws PortalException, SystemException {
+		if (parentMessageId > 0) {
+			if (MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId,
+					ActionKeys.ADD_MESSAGE)) {
+				return;
+			}
+
+			MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
+				parentMessageId);
+
+			if ((parentMessage == null) || !MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId,
+					ActionKeys.REPLY_TO_MESSAGE)) {
+				throw new PrincipalException();
+			}
+		}
+		else {
+			MBCategoryPermission.check(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+		}
 	}
 
 	protected String exportToRSS(

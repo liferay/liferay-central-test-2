@@ -145,6 +145,8 @@ public class ActionKeys {
 
 	public static final String PRINT = "PRINT";
 
+	public static final String REPLY_TO_MESSAGE = "REPLY_TO_MESSAGE";
+
 	public static final String SIGNAL = "SIGNAL";
 
 	public static final String SUBSCRIBE = "SUBSCRIBE";

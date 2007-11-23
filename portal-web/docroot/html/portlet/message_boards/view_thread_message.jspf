@@ -112,7 +112,7 @@
 
 				<c:if test="<%= editable %>">
 					<ul class="message-board-edit-controls">
-						<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
+						<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE) %>">
 							<li>
 								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
 									<portlet:param name="struts_action" value="/message_boards/edit_message" />
