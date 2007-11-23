@@ -351,7 +351,8 @@ public class MBUtil {
 	}
 
 	public static String getMailingListAddress(
-		long messageId, long categoryId, String mx) {
+		long categoryId, long messageId, String mx) {
+
 		StringMaker sm = new StringMaker();
 
 		sm.append(SMTP_PORTLET_PREFIX);

@@ -74,8 +74,8 @@ public class MessageListenerImpl implements MessageListener {
 				return false;
 			}
 
-			Company company = _getCompany(recipient);
-			long categoryId = _getCategoryId(recipient);
+			Company company = getCompany(recipient);
+			long categoryId = getCategoryId(recipient);
 
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
@@ -117,9 +117,9 @@ public class MessageListenerImpl implements MessageListener {
 					"Deliver message from " + from + " to " + recipient);
 			}
 
-			Company company = _getCompany(recipient);
-			long categoryId = _getCategoryId(recipient);
-			long parentMessageId = _getParentMessageId(recipient);
+			Company company = getCompany(recipient);
+			long categoryId = getCategoryId(recipient);
+			long parentMessageId = getParentMessageId(recipient);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Category id " + categoryId);
@@ -186,7 +186,7 @@ public class MessageListenerImpl implements MessageListener {
 
 			MBMailMessage collector = new MBMailMessage();
 
-			_collectPartContent(message, collector);
+			collectPartContent(message, collector);
 
 			PermissionCheckerUtil.setThreadValues(user);
 
@@ -226,62 +226,18 @@ public class MessageListenerImpl implements MessageListener {
 		return MessageListenerImpl.class.getName();
 	}
 
-	private long _getCategoryId(String recipient) {
-		int pos = recipient.indexOf(StringPool.AT);
-
-		String target = recipient.substring(
-			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
-
-		String[] parts = StringUtil.split(target, ".");
-
-		long categoryId = GetterUtil.getLong(parts[0]);
-
-		return categoryId;
-	}
-
-	private Company _getCompany(String recipient)
-		throws PortalException, SystemException {
-
-		int pos = recipient.indexOf(StringPool.AT);
-
-		String smtpServerSubdomain = PropsUtil.get(
-			PropsUtil.SMTP_SERVER_SUBDOMAIN);
-
-		String mx = recipient.substring(
-			pos + smtpServerSubdomain.length() + 2);
-
-		return CompanyLocalServiceUtil.getCompanyByMx(mx);
-	}
-
-	private long _getParentMessageId(String recipient) {
-		int pos = recipient.indexOf(StringPool.AT);
-
-		String target = recipient.substring(
-			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
-
-		String[] parts = StringUtil.split(target, ".");
-
-		long messageId = -1;
-
-		if (parts.length == 2) {
-		    messageId = GetterUtil.getLong(parts[1]);
-		}
-
-		return messageId;
-	}
-
-	private void _collectMultipartContent(
+	protected void collectMultipartContent(
 			MimeMultipart multipart, MBMailMessage collector)
 		throws IOException, MessagingException {
 
 		for (int i = 0; i < multipart.getCount(); i++) {
 			BodyPart part = multipart.getBodyPart(i);
 
-			_collectPartContent(part, collector);
+			collectPartContent(part, collector);
 		}
 	}
 
-	private void _collectPartContent(Part part, MBMailMessage collector)
+	protected void collectPartContent(Part part, MBMailMessage collector)
 		throws IOException, MessagingException {
 
 		Object partContent = part.getContent();
@@ -308,8 +264,7 @@ public class MessageListenerImpl implements MessageListener {
 		}
 		else {
 			if (partContent instanceof MimeMultipart) {
-				_collectMultipartContent(
-					(MimeMultipart)partContent, collector);
+				collectMultipartContent((MimeMultipart)partContent, collector);
 			}
 			else if (partContent instanceof String) {
 				if (contentType.startsWith("text/html")) {
@@ -320,6 +275,50 @@ public class MessageListenerImpl implements MessageListener {
 				}
 			}
 		}
+	}
+
+	protected long getCategoryId(String recipient) {
+		int pos = recipient.indexOf(StringPool.AT);
+
+		String target = recipient.substring(
+			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
+
+		String[] parts = StringUtil.split(target, ".");
+
+		long categoryId = GetterUtil.getLong(parts[0]);
+
+		return categoryId;
+	}
+
+	protected Company getCompany(String recipient)
+		throws PortalException, SystemException {
+
+		int pos = recipient.indexOf(StringPool.AT);
+
+		String smtpServerSubdomain = PropsUtil.get(
+			PropsUtil.SMTP_SERVER_SUBDOMAIN);
+
+		String mx = recipient.substring(
+			pos + smtpServerSubdomain.length() + 2);
+
+		return CompanyLocalServiceUtil.getCompanyByMx(mx);
+	}
+
+	protected long getParentMessageId(String recipient) {
+		int pos = recipient.indexOf(StringPool.AT);
+
+		String target = recipient.substring(
+			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
+
+		String[] parts = StringUtil.split(target, ".");
+
+		long messageId = -1;
+
+		if (parts.length == 2) {
+		    messageId = GetterUtil.getLong(parts[1]);
+		}
+
+		return messageId;
 	}
 
 	private static Log _log = LogFactory.getLog(MessageListenerImpl.class);

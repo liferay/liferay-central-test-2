@@ -1412,7 +1412,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					PropsUtil.SMTP_SERVER_ENABLED))) {
 
 				mailingListAddress = MBUtil.getMailingListAddress(
-					message.getMessageId(), message.getCategoryId(),
+					message.getCategoryId(), message.getMessageId(),
 					company.getMx());
 			}
 
