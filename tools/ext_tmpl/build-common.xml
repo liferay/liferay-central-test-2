@@ -100,7 +100,7 @@ Please use Ant 1.7.0 or above.
 			<fail>
 .
 
-Taks cannot continue because ECJ is not installed.
+Task cannot continue because ECJ is not installed.
 
 ECJ was automatically installed. Please rerun your task.
 			</fail>
