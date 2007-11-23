@@ -1211,6 +1211,8 @@ public class ServicePreAction extends Action {
 				publishToLiveURL.setParameter(
 					"struts_action", "/layout_management/export_pages");
 
+				publishToLiveURL.setParameter("popupId", "publish-to-live");
+
 				if (layout.isPrivateLayout()) {
 					publishToLiveURL.setParameter("tabs2", "private");
 				}
@@ -1222,8 +1224,6 @@ public class ServicePreAction extends Action {
 				publishToLiveURL.setParameter(
 					"groupId", String.valueOf(portletGroupId));
 				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
-
-				publishToLiveURL.setParameter("popupId", "publish-to-live");
 
 				themeDisplay.setURLPublishToLive(publishToLiveURL);
 			}

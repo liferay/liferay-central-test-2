@@ -27,34 +27,27 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Layout layout2 = (Layout)row.getObject();
+Layout curLayout = (Layout)row.getObject();
 %>
 
-<div class="type" style="float: right;padding-right: 32px;text-align: center;width: 100px;">
-	<%= LanguageUtil.get(pageContext, StringUtil.replace(layout2.getType(), "_", "-")) %>
+<div class="type" style="float: right; padding-right: 32px; text-align: center; width: 100px;">
+	<%= LanguageUtil.get(pageContext, StringUtil.replace(curLayout.getType(), "_", "-")) %>
 </div>
 
 <div class="layout">
-	<a href="javascript: Liferay.ExportLayouts.details({toggle: '#_detail_<%= layout2.getPlid() %>_toggle', detail: '#_detail_<%= layout2.getPlid() %>'});" target="_self" style="text-decoration: none;">
-		<img
-			id="_detail_<%= layout2.getPlid() %>_toggle"
-			src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png"
-			onmousemove="ToolTip.show(event, this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')"
-			align="absmiddle"
-			border="0" />
-
-		<%= layout2.getName(locale) %>
-	</a>
+	<a href="javascript: Liferay.LayoutExporter.details({toggle: '#_detail_<%= curLayout.getPlid() %>_toggle', detail: '#_detail_<%= curLayout.getPlid() %>'});" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onMouseMove="ToolTip.show(event, this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></a>
 </div>
 
-<div class="export-layout-detail" id="_detail_<%= layout2.getPlid() %>" style="border-top: 1px solid #CCC;margin-top: 4px;padding-top: 4px;width: 95%;display: none;">
-	<input name="<portlet:namespace />includeAncestors_<%= layout2.getPlid() %>" type="checkbox" value="1" disabled checked>
-	<label for="<portlet:namespace />includeAncestors_<%= layout2.getPlid() %>"><liferay-ui:message key="include-ancestor-pages-if-necessary"/></label>
+<div class="export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; display: none; margin-top: 4px; padding-top: 4px; width: 95%;">
+	<input checked disabled name="<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>" type="checkbox" value="1" />
 
-	<c:if test="<%= layout2.getChildren().size() > 0 %>">
-		<br/>
+	<label for="<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>"><liferay-ui:message key="include-ancestor-pages-if-necessary" /></label>
 
-		<input name="<portlet:namespace />includeChildren_<%= layout2.getPlid() %>" type="checkbox" value="1">
-		<label for="<portlet:namespace />includeChildren_<%= layout2.getPlid() %>"><liferay-ui:message key="include-all-descendent-pages"/></label>
+	<c:if test="<%= curLayout.getChildren().size() > 0 %>">
+		<br />
+
+		<input name="<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>" type="checkbox" value="1" />
+
+		<label for="<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>"><liferay-ui:message key="include-all-descendent-pages" /></label>
 	</c:if>
 </div>

@@ -34,6 +34,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 
 import java.io.File;
+import java.io.InputStream;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -128,6 +129,18 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			groupId, privateLayout, parameterMap);
 	}
 
+	public byte[] exportLayouts(
+			long groupId, boolean privateLayout, long[] layoutIds,
+			Map parameterMap)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return layoutLocalService.exportLayouts(
+			groupId, privateLayout, layoutIds, parameterMap);
+	}
+
 	public byte[] exportPortletInfo(
 			long plid, String portletId, Map parameterMap)
 		throws PortalException, SystemException {
@@ -151,6 +164,18 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		layoutLocalService.importLayouts(
 			getUserId(), groupId, privateLayout, parameterMap, file);
+	}
+
+	public void importLayouts(
+			long groupId, boolean privateLayout, Map parameterMap,
+			InputStream is)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.importLayouts(
+			getUserId(), groupId, privateLayout, parameterMap, is);
 	}
 
 	public void importPortletInfo(

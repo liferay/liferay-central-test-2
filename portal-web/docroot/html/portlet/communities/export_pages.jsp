@@ -25,10 +25,13 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
-String tabs2 = ParamUtil.getString(request, "tabs2", "public");
-boolean publish = ParamUtil.getBoolean(request, "publish", false);
 String popupId = ParamUtil.getString(request, "popupId");
+
+String tabs2 = ParamUtil.getString(request, "tabs2", "public");
+
+String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
+
+boolean publish = ParamUtil.getBoolean(request, "publish");
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -44,7 +47,6 @@ if (selGroup.isStagingGroup()) {
 }
 else {
 	liveGroup = selGroup;
-	group = selGroup;
 
 	if (selGroup.hasStagingGroup()) {
 		stagingGroup = selGroup.getStagingGroup();
@@ -70,7 +72,7 @@ long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_L
 long[] selectedPlids = new long[0];
 
 if (selPlid > 0) {
-	selectedPlids = new long[]{selPlid};
+	selectedPlids = new long[] {selPlid};
 	publish = true;
 }
 else {
@@ -144,172 +146,154 @@ else {
 }
 
 portletURL.setParameter("struts_action", "/communities/edit_pages");
-portletURL.setParameter("private", String.valueOf(privateLayout));
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
+portletURL.setParameter("private", String.valueOf(privateLayout));
 
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
 <style type="text/css">
-#<portlet:namespace />pane th.col-1 {
-	width: 3%;
-}
-#<portlet:namespace />pane th.col-2 {
-	width: 74%;
-	text-align: left;
-}
-#<portlet:namespace />pane th.col-3 {
-	width: 23%;
-	text-align: center;
-	padding-right: 40px;
-}
-#<portlet:namespace />pane td.col-1 {
-	padding-top: 5px;
-}
+	#<portlet:namespace />pane th.col-1 {
+		width: 3%;
+	}
+
+	#<portlet:namespace />pane th.col-2 {
+		text-align: left;
+		width: 74%;
+	}
+
+	#<portlet:namespace />pane th.col-3 {
+		padding-right: 40px;
+		text-align: center;
+		width: 23%;
+	}
+
+	#<portlet:namespace />pane td.col-1 {
+		padding-top: 5px;
+	}
 </style>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm3">
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="publish_to_live">
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
+<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
-<table border="0" cellpadding="4" cellspacing="0" height="100%" width="100%">
-<tr>
-	<td align="left" valign="top">
-		<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
-		<tr>
-			<td style="padding-bottom: 6px;">
-				<fieldset>
-					<legend><liferay-ui:message key="scope"/></legend>
-					<c:choose>
-						<c:when test="<%= !publish %>">
-							<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_all_pages" type="radio" value="all-pages" <%= (results.size() == 0) ? "checked":"" %> onclick="Liferay.ExportLayouts.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish?"true":"false" %>});">
-							<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages"/></label>
+<fieldset>
+	<legend><liferay-ui:message key="scope" /></legend>
 
-							<br/>
+	<c:choose>
+		<c:when test="<%= !publish %>">
+			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-							<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_selected_pages" type="radio" value="selected-pages" <%= (results.size() > 0) ? "checked":"" %> onclick="Liferay.ExportLayouts.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish?"true":"false" %>});">
-							<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages"/></label>
-						</c:when>
-						<c:otherwise>
-							<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_all_pages" type="radio" value="all-pages" <%= (results.size() == 0) ? "checked":"" %> onclick="Liferay.ExportLayouts.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish?"true":"false" %>});">
-							<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages"/></label>
+			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label><br />
 
-							<c:if test="<%= results.size() > 0 %>">
-								<br/>
+			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-								<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_selected_pages" type="radio" value="selected-pages" <%= (results.size() > 0) ? "checked":"" %> onclick="Liferay.ExportLayouts.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish?"true":"false" %>});">
-								<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages"/></label>
-							</c:if>
-						</c:otherwise>
-					</c:choose>
-				</fieldset>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top">
-				<div id="<portlet:namespace />pane" style='height: 380px;overflow: auto;border: 1px solid #CCC;<%= (results.size() == 0)?"display: none;":"" %>'>
-					<c:choose>
-						<c:when test="<%= !publish %>">
-							<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
+			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+		</c:when>
+		<c:otherwise>
+			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-							<%@ include file="/html/portlet/communities/tree_js.jspf" %>
+			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label>
 
-							<script type="text/javascript">
-								jQuery(
-									function() {
-										new Tree(
-											{
-												className: "gamma",
-												icons: <portlet:namespace />layoutIcons,
-												nodes: <portlet:namespace />layoutArray,
-												openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTree") %>',
-												outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
-												treeId: "exportLayoutsTree",
-												selectable: true,
-												selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected") %>'
-											}
-										);
-									}
-								);
-							</script>
-						</c:when>
-						<c:otherwise>
-							<%
-							List headerNames = new ArrayList();
-
-							headerNames.add("pages");
-							headerNames.add("type");
-
-							int total = results.size();
-
-							SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
-
-							searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "fm3", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
-
-							searchContainer.setTotal(total);
-
-							searchContainer.setResults(results);
-
-							List resultRows = searchContainer.getResultRows();
-
-							for (int i = 0; i < results.size(); i++) {
-								Layout layout2 = (Layout)results.get(i);
-
-								ResultRow row = new ResultRow(layout2, layout2.getPrimaryKey(), i);
-
-								row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
-
-								resultRows.add(row);
-							}
-
-							%>
-							<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</td>
-		</tr>
-
-		<tr>
-			<td>
+			<c:if test="<%= results.size() > 0 %>">
 				<br />
-			</td>
-		</tr>
 
-		<tr>
-			<td align="center" id="session_btns">
-				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
-					<portlet:param name="struts_action" value="/communities/export_pages" />
-					<portlet:param name="tabs2" value="<%= tabs2 %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-					<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
-					<portlet:param name="stagingGroupId" value="<%= String.valueOf(stagingGroupId) %>" />
-					<portlet:param name="popupId" value="<%= popupId %>" />
-				</portlet:renderURL>
+				<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-				<c:choose>
-					<c:when test="<%= !publish %>">
-						<input class="button" id="select_btn" <%= (results.size() == 0)?"style=\"display: none;\"":"" %> type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+				<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+			</c:if>
+		</c:otherwise>
+	</c:choose>
+</fieldset>
 
-						<input class="button" id="publish_btn" <%= (results.size() > 0)?"style=\"display: none;\"":"" %> type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm3);" />
-					</c:when>
-					<c:otherwise>
-						<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
-							<input class="button" id="change_btn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
-						</c:if>
+<div id="<portlet:namespace />pane" style="border: 1px solid #CCC; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
+	<c:choose>
+		<c:when test="<%= !publish %>">
+			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
 
-						<input class="button" id="publish_btn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm3);" />
-					</c:otherwise>
-				</c:choose>
+			<%@ include file="/html/portlet/communities/tree_js.jspf" %>
 
-				<input class="button" id="cancel_btn" type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+			<script type="text/javascript">
+				jQuery(
+					function() {
+						new Tree(
+							{
+								className: "gamma",
+								icons: <portlet:namespace />layoutIcons,
+								nodes: <portlet:namespace />layoutArray,
+								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTree") %>',
+								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
+								selectable: true,
+								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected") %>',
+								treeId: "exportLayoutsTree"
+							}
+						);
+					}
+				);
+			</script>
+		</c:when>
+		<c:otherwise>
+
+			<%
+			int total = results.size();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("pages");
+			headerNames.add("type");
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
+
+			searchContainer.setTotal(total);
+			searchContainer.setResults(results);
+			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, RowChecker.FORM_NAME, RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				Layout curLayout = (Layout)results.get(i);
+
+				ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
+
+				row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+		</c:otherwise>
+	</c:choose>
+</div>
+
+<br />
+
+<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
+	<portlet:param name="struts_action" value="/communities/export_pages" />
+	<portlet:param name="tabs2" value="<%= tabs2 %>" />
+	<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
+	<portlet:param name="popupId" value="<%= popupId %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:param name="stagingGroupId" value="<%= String.valueOf(stagingGroupId) %>" />
+</portlet:renderURL>
+
+<c:choose>
+	<c:when test="<%= !publish %>">
+		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+	</c:when>
+	<c:otherwise>
+		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
+			<input type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
+		</c:if>
+
+		<input type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+	</c:otherwise>
+</c:choose>
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 
 </form>

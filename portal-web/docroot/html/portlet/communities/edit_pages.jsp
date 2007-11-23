@@ -153,7 +153,7 @@ if (Validator.isNull(tabs4)) {
 	}
 }
 
-long parentLayoutId = BeanParamUtil.getLong(selLayout, request,  "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 Organization organization = null;
 User user2 = null;
@@ -372,13 +372,15 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 	</c:if>
 
 	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
+
 		<%
 		String tabs1Names = "staging";
 
 		if (stagingGroup == null) {
-			tabs1Names = "live," + tabs1Names;
+			tabs1Names = "live,staging";
 		}
 		%>
+
 		<liferay-ui:tabs
 			names="<%= tabs1Names %>"
 			param="tabs1"
@@ -431,27 +433,27 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
-				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
+			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0) %>">
+				<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 			</c:if>
 
-			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsPopupURL">
+			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
 				<portlet:param name="struts_action" value="/communities/export_pages" />
-				<portlet:param name="tabs2" value="<%= tabs2 %>" />
-				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 				<portlet:param name="popupId" value="publish-to-live" />
+				<portlet:param name="tabs2" value="<%= tabs2 %>" />
+				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			</portlet:renderURL>
 
-			<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="Liferay.ExportLayouts.publishToLive({url:'<%= exportLayoutsPopupURL %>', messageId:'publish-to-live'});" />
+			<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
 
-			<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
+			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
 
 			<br /><br />
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
-				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
+				<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 				<br /><br />
 			</c:if>
@@ -1462,7 +1464,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<br />
 
-							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
+							<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportPages();" />
 						</c:when>
 						<c:when test='<%= tabs4.equals("import") %>'>
 							<c:if test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">

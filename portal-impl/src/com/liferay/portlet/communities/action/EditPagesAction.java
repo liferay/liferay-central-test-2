@@ -280,9 +280,7 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected void copyFromLive(ActionRequest req) throws Exception{
-		User user = PortalUtil.getUser(req);
-
+	protected void copyFromLive(ActionRequest req) throws Exception {
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
@@ -302,25 +300,23 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		copyLayouts(
-			user.getUserId(), stagingGroup.getLiveGroupId(), privateLayout,
-			stagingGroup.getGroupId(), privateLayout);
+			stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
+			privateLayout);
 	}
 
 	protected void copyLayouts(
-			long creatorUserId, long sourceGroupId, boolean sourcePrivateLayout,
-			long targetGroupId, boolean targetPrivateLayout)
-		throws Exception{
+			long stagingGroupId, long liveGroupId, boolean privateLayout)
+		throws Exception {
 
 		Map parameterMap = geStagingParameters();
 
-		byte[] data = LayoutLocalServiceUtil.exportLayouts(
-			sourceGroupId, sourcePrivateLayout, parameterMap);
+		byte[] data = LayoutServiceUtil.exportLayouts(
+			stagingGroupId, privateLayout, parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetGroupId, targetPrivateLayout, parameterMap,
-			bais);
+		LayoutServiceUtil.importLayouts(
+			liveGroupId, privateLayout, parameterMap, bais);
 	}
 
 	protected void copyPreferences(
@@ -390,7 +386,7 @@ public class EditPagesAction extends PortletAction {
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
-	protected List getMissingParents(Layout layout, long targetGroupId)
+	protected List getMissingParents(Layout layout, long liveGroupId)
 		throws PortalException, SystemException {
 
 		List missingParents = new ArrayList();
@@ -400,7 +396,7 @@ public class EditPagesAction extends PortletAction {
 		while (parentLayoutId > 0) {
 			try {
 				LayoutLocalServiceUtil.getLayout(
-					targetGroupId, layout.isPrivateLayout(), parentLayoutId);
+					liveGroupId, layout.isPrivateLayout(), parentLayoutId);
 
 				// If one parent is found all others are assumed to exist
 
@@ -456,9 +452,8 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void publishLayout(
-			long creatorUserId, long plid, long targetGroupId,
-			boolean includeChildren)
-		throws Exception{
+			long plid, long liveGroupId, boolean includeChildren)
+		throws Exception {
 
 		Map parameterMap = geStagingParameters();
 
@@ -472,7 +467,7 @@ public class EditPagesAction extends PortletAction {
 
 		layouts.add(layout);
 
-		layouts.addAll(getMissingParents(layout, targetGroupId));
+		layouts.addAll(getMissingParents(layout, liveGroupId));
 
 		if (includeChildren) {
 			layouts.addAll(layout.getAllChildren());
@@ -488,21 +483,20 @@ public class EditPagesAction extends PortletAction {
 			layoutIds[i] = curLayout.getLayoutId();
 		}
 
-		byte[] data = LayoutLocalServiceUtil.exportLayouts(
+		byte[] data = LayoutServiceUtil.exportLayouts(
 			layout.getGroupId(), layout.isPrivateLayout(), layoutIds,
 			parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetGroupId, layout.isPrivateLayout(),
-			parameterMap, bais);
+		LayoutServiceUtil.importLayouts(
+			liveGroupId, layout.isPrivateLayout(), parameterMap, bais);
 	}
 
 	protected void publishLayouts(
-			long creatorUserId, Map layoutIdMap, long originGroupId,
-			long targetGroupId, boolean privateLayout)
-		throws Exception{
+			Map layoutIdMap, long stagingGroupId, long liveGroupId,
+			boolean privateLayout)
+		throws Exception {
 
 		Map parameterMap = geStagingParameters();
 
@@ -512,10 +506,11 @@ public class EditPagesAction extends PortletAction {
 
 		List layouts = new ArrayList();
 
-		Iterator itr = layoutIdMap.entrySet().iterator();
+		Iterator itr1 = layoutIdMap.entrySet().iterator();
 
-		while (itr.hasNext()) {
-			Entry entry = (Entry)itr.next();
+		while (itr1.hasNext()) {
+			Entry entry = (Entry)itr1.next();
+
 			long plid = ((Long)entry.getKey()).longValue();
 			boolean includeChildren =
 				((Boolean)entry.getValue()).booleanValue();
@@ -526,55 +521,49 @@ public class EditPagesAction extends PortletAction {
 				layouts.add(layout);
 			}
 
-			Iterator parentsItr =
-				getMissingParents(layout, targetGroupId).iterator();
+			Iterator itr2 = getMissingParents(layout, liveGroupId).iterator();
 
-			while (parentsItr.hasNext()) {
-				Layout parent = (Layout)parentsItr.next();
+			while (itr2.hasNext()) {
+				Layout parentLayout = (Layout)itr2.next();
 
-				if (!layouts.contains(parent)) {
-					layouts.add(parent);
+				if (!layouts.contains(parentLayout)) {
+					layouts.add(parentLayout);
 				}
 			}
 
 			if (includeChildren) {
-				Iterator childrenItr = layout.getAllChildren().iterator();
+				itr2 = layout.getAllChildren().iterator();
 
-				while (childrenItr.hasNext()) {
-					Layout child = (Layout)childrenItr.next();
+				while (itr2.hasNext()) {
+					Layout childLayout = (Layout)itr2.next();
 
-					if (!layouts.contains(child)) {
-						layouts.add(child);
+					if (!layouts.contains(childLayout)) {
+						layouts.add(childLayout);
 					}
 				}
 			}
-
 		}
 
-		itr = layouts.iterator();
+		itr1 = layouts.iterator();
 
 		long[] layoutIds = new long[layouts.size()];
 
-		for (int i = 0; itr.hasNext(); i++) {
-			Layout curLayout = (Layout)itr.next();
+		for (int i = 0; itr1.hasNext(); i++) {
+			Layout curLayout = (Layout)itr1.next();
 
 			layoutIds[i] = curLayout.getLayoutId();
 		}
 
-		byte[] data = LayoutLocalServiceUtil.exportLayouts(
-			originGroupId, privateLayout, layoutIds,
-			parameterMap);
+		byte[] data = LayoutServiceUtil.exportLayouts(
+			stagingGroupId, privateLayout, layoutIds, parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetGroupId, privateLayout,
-			parameterMap, bais);
+		LayoutServiceUtil.importLayouts(
+			liveGroupId, privateLayout, parameterMap, bais);
 	}
 
-	protected void publishToLive(ActionRequest req) throws Exception{
-		User user = PortalUtil.getUser(req);
-
+	protected void publishToLive(ActionRequest req) throws Exception {
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
@@ -597,20 +586,17 @@ public class EditPagesAction extends PortletAction {
 
 		if (scope.equals("all-pages")) {
 			copyLayouts(
-				user.getUserId(), stagingGroup.getGroupId(), privateLayout,
-				stagingGroup.getLiveGroupId(), privateLayout);
+				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
+				privateLayout);
 		}
 		else if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			long selPlid = 0;
-			boolean includeChildren = false;
-
 			Map layoutIdMap = new LinkedHashMap();
 
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
 			for (int i = 0; i < rowIds.length; i++) {
-				selPlid = rowIds[i];
-				includeChildren = ParamUtil.getBoolean(
+				long selPlid = rowIds[i];
+				boolean includeChildren = ParamUtil.getBoolean(
 					req, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(
@@ -618,8 +604,8 @@ public class EditPagesAction extends PortletAction {
 			}
 
 			publishLayouts(
-				user.getUserId(), layoutIdMap, stagingGroupId,
-				stagingGroup.getLiveGroupId(), privateLayout);
+				layoutIdMap, stagingGroupId, stagingGroup.getLiveGroupId(),
+				privateLayout);
 		}
 	}
 
@@ -880,8 +866,6 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateStagingState(ActionRequest req) throws Exception {
-		User user = PortalUtil.getUser(req);
-
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 		boolean activateStaging = ParamUtil.getBoolean(req, "activateStaging");
@@ -899,14 +883,12 @@ public class EditPagesAction extends PortletAction {
 
 			if (group.hasPrivateLayouts()) {
 				copyLayouts(
-					user.getUserId(), group.getGroupId(), true,
-					stagingGroup.getGroupId(), true);
+					group.getGroupId(), stagingGroup.getGroupId(), true);
 			}
 
 			if (group.hasPublicLayouts()) {
 				copyLayouts(
-					user.getUserId(), group.getGroupId(), false,
-					stagingGroup.getGroupId(), false);
+					group.getGroupId(), stagingGroup.getGroupId(), false);
 			}
 		}
 	}

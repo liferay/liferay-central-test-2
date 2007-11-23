@@ -1,4 +1,42 @@
-Liferay.ExportLayouts = {
+Liferay.LayoutExporter = {
+	all: function(options) {
+		options = options || {};
+
+		var pane = options.pane;
+		var obj = options.obj;
+		var publish = options.publish;
+
+		if (obj.checked) {
+			jQuery(pane).hide();
+
+			if (!publish) {
+				jQuery('#publish_btn').show();
+				jQuery('#select_btn').hide();
+			}
+			else {
+				jQuery('#change_btn').hide();
+			}
+		}
+	},
+
+	details: function(options) {
+		options = options || {};
+
+		var toggle = options.toggle;
+		var detail = options.detail;
+
+		var img = jQuery(toggle)[0];
+
+		if (jQuery(detail).css('display') == 'none') {
+			jQuery(detail).slideDown('normal');
+			img.src = Liferay.LayoutExporter.icons.minus;
+		}
+		else {
+			jQuery(detail).slideUp('normal');
+			img.src = Liferay.LayoutExporter.icons.plus;
+		}
+	},
+
 	icons: {
 		minus: themeDisplay.getPathThemeImages() + '/arrows/01_minus.png',
 		plus: themeDisplay.getPathThemeImages() + '/arrows/01_plus.png'
@@ -29,27 +67,7 @@ Liferay.ExportLayouts = {
 		AjaxUtil.update(url, exportLayoutsPopup);
 	},
 
-	all: function(options) {
-		options = options || {};
-
-		var pane = options.pane;
-		var obj = options.obj;
-		var publish = options.publish;
-
-		if (obj.checked) {
-			jQuery(pane).hide();
-			if (!publish) {
-				jQuery('#publish_btn').show();
-				jQuery('#select_btn').hide();
-			}
-			else {
-				jQuery('#change_btn').hide();
-			}
-		}
-	},
-
 	selected: function(options) {
-		window.status = "LOG: selected(" + options.toString() + ")";
 		options = options || {};
 
 		var pane = options.pane;
@@ -58,6 +76,7 @@ Liferay.ExportLayouts = {
 
 		if (obj.checked) {
 			jQuery(pane).show();
+
 			if (!publish) {
 				jQuery('#publish_btn').hide();
 				jQuery('#select_btn').show();
@@ -65,23 +84,6 @@ Liferay.ExportLayouts = {
 			else {
 				jQuery('#change_btn').show();
 			}
-		}
-	},
-
-	details: function(options) {
-		options = options || {};
-
-		var toggle = options.toggle;
-		var detail = options.detail;
-
-		var img = jQuery(toggle)[0];
-		if (jQuery(detail).css('display') == 'none') {
-			jQuery(detail).slideDown('normal');
-			img.src = Liferay.ExportLayouts.icons.minus;
-		}
-		else {
-			jQuery(detail).slideUp('normal');
-			img.src = Liferay.ExportLayouts.icons.plus;
 		}
 	}
 };

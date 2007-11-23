@@ -443,6 +443,58 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
+		long groupId, boolean privateLayout, long[] layoutIds,
+		java.util.Map parameterMap)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+
+			Object paramObj2 = layoutIds;
+
+			if (layoutIds == null) {
+				paramObj2 = new NullWrapper("[J");
+			}
+
+			Object paramObj3 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj3 = new NullWrapper("java.util.Map");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"exportLayouts",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (byte[])returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId, java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
@@ -511,6 +563,54 @@ public class LayoutServiceHttp {
 
 			if (file == null) {
 				paramObj3 = new NullWrapper("java.io.File");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"importLayouts",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
+		boolean privateLayout, java.util.Map parameterMap,
+		java.io.InputStream is)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+
+			Object paramObj2 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj3 = is;
+
+			if (is == null) {
+				paramObj3 = new NullWrapper("java.io.InputStream");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
