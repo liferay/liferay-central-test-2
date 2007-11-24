@@ -245,8 +245,8 @@ public class EditMessageAction extends PortletAction {
 			// Update message
 
 			message = MBMessageServiceUtil.updateMessage(
-				messageId, categoryId, subject, body, files, priority,
-				tagsEntries, prefs, themeDisplay);
+				messageId, subject, body, files, priority, tagsEntries, prefs,
+				themeDisplay);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();

@@ -186,31 +186,6 @@ if (message != null) {
 
 <table class="liferay-table">
 
-<c:if test="<%= message != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="category" />
-		</td>
-		<td>
-
-			<%
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-			%>
-
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-			<%= category.getName() %>
-			</a>
-
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
-
 <tr>
 	<td>
 		<liferay-ui:message key="subject" />

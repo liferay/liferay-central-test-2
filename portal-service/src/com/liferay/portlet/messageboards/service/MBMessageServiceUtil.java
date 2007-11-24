@@ -121,6 +121,23 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long categoryId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.addMessage(categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, addCommunityPermissions, addGuestPermissions,
+			themeDisplay);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
 		java.util.List files, boolean anonymous, double priority,
 		java.lang.String[] tagsEntries,
@@ -354,6 +371,17 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		long messageId, java.lang.String subject, java.lang.String body,
+		java.util.List files, double priority, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.updateMessage(messageId, subject, body, files,
+			priority, tagsEntries);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, long categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs)
@@ -363,6 +391,18 @@ public class MBMessageServiceUtil {
 
 		return mbMessageService.updateMessage(messageId, categoryId, subject,
 			body, files, priority, tagsEntries, prefs);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		long messageId, java.lang.String subject, java.lang.String body,
+		java.util.List files, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.updateMessage(messageId, subject, body, files,
+			priority, tagsEntries, prefs);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -376,5 +416,18 @@ public class MBMessageServiceUtil {
 
 		return mbMessageService.updateMessage(messageId, categoryId, subject,
 			body, files, priority, tagsEntries, prefs, themeDisplay);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		long messageId, java.lang.String subject, java.lang.String body,
+		java.util.List files, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.updateMessage(messageId, subject, body, files,
+			priority, tagsEntries, prefs, themeDisplay);
 	}
 }

@@ -28,6 +28,7 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 MBMessage message = (MBMessage)row.getObject();
+MBCategory category = MBCategoryLocalServiceUtil.getCategory(message.getCategoryId());
 %>
 
 <liferay-ui:icon-menu>
@@ -39,6 +40,16 @@ MBMessage message = (MBMessage)row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
+
+	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="moveThreadURL">
+			<portlet:param name="struts_action" value="/message_boards/edit_thread" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="forward" message="move-thread" url="<%= moveThreadURL %>" />
 	</c:if>
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">

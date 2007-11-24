@@ -107,10 +107,26 @@ public class MBCategoryPermission {
 			return false;
 		}
 		else {
-			return permissionChecker.hasPermission(
-				category.getGroupId(), MBCategory.class.getName(),
-				category.getCategoryId(), actionId);
+			long categoryId = category.getCategoryId();
+
+			while (categoryId !=
+						MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+
+				category =
+					MBCategoryLocalServiceUtil.getCategory(categoryId);
+
+				categoryId = category.getParentCategoryId();
+
+				if (permissionChecker.hasPermission(
+					category.getGroupId(), MBCategory.class.getName(),
+					category.getCategoryId(), actionId)) {
+
+					return true;
+				}
+			}
 		}
+
+		return false;
 	}
 
 }

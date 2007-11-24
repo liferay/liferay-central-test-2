@@ -196,6 +196,35 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
+			long categoryId, long threadId, long parentMessageId,
+			String subject, String body, List files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		checkReplyToPermission(categoryId, parentMessageId);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
+	}
+
+	public MBMessage addMessage(
 			long categoryId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
@@ -605,25 +634,38 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getUserId(), messageId, subject, body);
 	}
 
+	/**
+	 * @deprecated Use MBCategoryService.moveThread instead
+	 */
 	public MBMessage updateMessage(
 			long messageId, long categoryId, String subject, String body,
 			List files, double priority, String[] tagsEntries)
 		throws PortalException, SystemException {
 
+		return updateMessage(
+			messageId, subject, body, files, priority, tagsEntries);
+	}
+
+	public MBMessage updateMessage(
+			long messageId, String subject, String body,
+			List files, double priority, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessageLocalService.getMessage(messageId);
+
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+				getPermissionChecker(), message.getCategoryId(),
+				ActionKeys.ADD_FILE)) {
 
 			files.clear();
 		}
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
+				getPermissionChecker(), message.getCategoryId(),
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			MBMessage message = mbMessageLocalService.getMessage(messageId);
 
 			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
@@ -632,30 +674,44 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, categoryId, subject, body, files, priority,
-			tagsEntries, null);
+			getUserId(), messageId, subject, body, files, priority, tagsEntries,
+			null);
 	}
 
+	/**
+	 * @deprecated Use MBCategoryService.moveThread instead
+	 */
 	public MBMessage updateMessage(
 			long messageId, long categoryId, String subject, String body,
 			List files, double priority, String[] tagsEntries,
 			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
+		return updateMessage(
+			messageId, subject, body, files, priority, tagsEntries, prefs);
+	}
+
+	public MBMessage updateMessage(
+			long messageId, String subject, String body,
+			List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessageLocalService.getMessage(messageId);
+
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+				getPermissionChecker(), message.getCategoryId(),
+				ActionKeys.ADD_FILE)) {
 
 			files.clear();
 		}
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
+				getPermissionChecker(), message.getCategoryId(),
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			MBMessage message = mbMessageLocalService.getMessage(messageId);
 
 			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
@@ -664,30 +720,44 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, categoryId, subject, body, files, priority,
-			tagsEntries, prefs);
+			getUserId(), messageId, message.getCategoryId(), subject, body,
+			files, priority, tagsEntries, prefs);
 	}
 
+	/**
+	 * @deprecated Use MBCategoryService.moveThread instead
+	 */
 	public MBMessage updateMessage(
 			long messageId, long categoryId, String subject, String body,
 			List files, double priority, String[] tagsEntries,
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		return updateMessage(
+			messageId, subject, body, files, priority, tagsEntries, prefs,
+			themeDisplay);
+	}
+
+	public MBMessage updateMessage(
+			long messageId, String subject, String body,
+			List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessageLocalService.getMessage(messageId);
+
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+				getPermissionChecker(), message.getCategoryId(), ActionKeys.ADD_FILE)) {
 
 			files.clear();
 		}
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), categoryId,
+				getPermissionChecker(), message.getCategoryId(),
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			MBMessage message = mbMessageLocalService.getMessage(messageId);
 
 			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
@@ -696,8 +766,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, categoryId, subject, body, files, priority,
-			tagsEntries, prefs, themeDisplay);
+			getUserId(), messageId, subject, body, files, priority, tagsEntries,
+			prefs, themeDisplay);
 	}
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)

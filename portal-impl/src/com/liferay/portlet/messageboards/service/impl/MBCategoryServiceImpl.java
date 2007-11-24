@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
@@ -100,6 +101,21 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 		return mbCategoryLocalService.getCategoriesCount(
 			groupId, parentCategoryId);
+	}
+
+	public void moveThread(long categoryId, long threadId)
+		throws PortalException, SystemException {
+
+		MBThread thread = mbThreadLocalService.getThread(threadId);
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), thread.getCategoryId(),
+			ActionKeys.MOVE_THREAD);
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.MOVE_THREAD);
+
+		mbCategoryLocalService.moveThread(categoryId, threadId);
 	}
 
 	public void subscribeCategory(long categoryId)

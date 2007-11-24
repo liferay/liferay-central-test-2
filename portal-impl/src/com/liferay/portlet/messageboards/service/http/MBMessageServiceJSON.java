@@ -211,4 +211,15 @@ public class MBMessageServiceJSON {
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject updateMessage(long messageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		double priority, java.lang.String[] tagsEntries)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
+				subject, body, files, priority, tagsEntries);
+
+		return MBMessageJSONSerializer.toJSONObject(returnValue);
+	}
 }

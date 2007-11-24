@@ -54,6 +54,8 @@ public interface Constants {
 
 	public static final String MANAGE = "manage";
 
+	public static final String MOVE = "move";
+
 	public static final String PREVIEW = "preview";
 
 	public static final String PROGRESS_ID = "progressId";

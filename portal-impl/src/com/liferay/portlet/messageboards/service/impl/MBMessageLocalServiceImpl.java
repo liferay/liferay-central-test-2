@@ -274,6 +274,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
+			long userId, long categoryId, long threadId,
+			long parentMessageId, String subject, String body, List files,
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			null, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
+	}
+
+	public MBMessage addMessage(
 			String uuid, long userId, long categoryId, long threadId,
 			long parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
@@ -1080,6 +1095,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			tagsEntries, prefs);
 	}
 
+	/**
+	 * @deprecated Use MBCategoryService.moveThread instead
+	 */
 	public MBMessage updateMessage(
 			long userId, long messageId, long categoryId, String subject,
 			String body, List files, double priority, String[] tagsEntries,
@@ -1087,13 +1105,37 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return updateMessage(
-			userId, messageId, categoryId, subject, body, files, priority,
+			userId, messageId, subject, body, files, priority,
 			tagsEntries, prefs, null);
 	}
 
 	public MBMessage updateMessage(
+			long userId, long messageId, String subject, String body,
+			List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs)
+		throws PortalException, SystemException {
+
+		return updateMessage(
+			userId, messageId, subject, body, files, priority, tagsEntries,
+			prefs, null);
+	}
+
+	/**
+	 * @deprecated Use MBCategoryService.moveThread instead
+	 */
+	public MBMessage updateMessage(
 			long userId, long messageId, long categoryId, String subject,
 			String body, List files, double priority, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+		return updateMessage(
+			userId, messageId, subject, body, files, priority,
+			tagsEntries, prefs, null);
+	}
+
+	public MBMessage updateMessage(
+			long userId, long messageId, String subject, String body,
+			List files, double priority, String[] tagsEntries,
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -1101,8 +1143,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		MBCategory category = getCategory(message, categoryId);
-		long oldCategoryId = message.getCategoryId();
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				message.getCategoryId());
+
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 		Date now = new Date();
@@ -1178,49 +1221,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		category.setLastPostDate(now);
 
 		mbCategoryPersistence.update(category);
-
-		if (oldCategoryId != category.getCategoryId()) {
-
-			// Messages
-
-			Iterator itr = mbMessagePersistence.findByC_T(
-				oldCategoryId, thread.getThreadId()).iterator();
-
-			while (itr.hasNext()) {
-				MBMessage curMessage = (MBMessage)itr.next();
-
-				curMessage.setCategoryId(category.getCategoryId());
-
-				mbMessagePersistence.update(curMessage);
-
-				// Lucene
-
-				try {
-					if (!category.isDiscussion()) {
-						String[] curTagsEntries =
-							tagsEntryLocalService.getEntryNames(
-								MBMessage.class.getName(),
-								curMessage.getMessageId());
-
-						Indexer.updateMessage(
-							curMessage.getCompanyId(), category.getGroupId(),
-							curMessage.getUserName(), category.getCategoryId(),
-							curMessage.getThreadId(), curMessage.getMessageId(),
-							curMessage.getSubject(), curMessage.getBody(),
-							curTagsEntries);
-					}
-				}
-				catch (IOException ioe) {
-					_log.error("Indexing " + messageId, ioe);
-				}
-			}
-
-			// Thread
-
-			thread.setCategoryId(category.getCategoryId());
-
-			mbThreadPersistence.update(thread);
-		}
 
 		// Tags
 
@@ -1321,26 +1321,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
 			null, null, null, null, ContentTypes.TEXT_HTML,
 			message.getSubject(), null, null, null, 0, 0, null, false);
-	}
-
-	protected MBCategory getCategory(MBMessage message, long categoryId)
-		throws PortalException, SystemException {
-
-		if (message.getCategoryId() != categoryId) {
-			MBCategory oldCategory = mbCategoryPersistence.findByPrimaryKey(
-				message.getCategoryId());
-
-			MBCategory newCategory = mbCategoryPersistence.fetchByPrimaryKey(
-				categoryId);
-
-			if ((newCategory == null) ||
-				(oldCategory.getGroupId() != newCategory.getGroupId())) {
-
-				categoryId = message.getCategoryId();
-			}
-		}
-
-		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	protected void logAddMessage(

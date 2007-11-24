@@ -28,10 +28,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -105,5 +107,34 @@ public class ActionUtil {
 
 		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
 	}
+
+	public static void getThreadMessage(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getThreadMessage(httpReq);
+	}
+
+	public static void getThreadMessage(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getThreadMessage(httpReq);
+	}
+
+	public static void getThreadMessage(HttpServletRequest req)
+		throws Exception {
+		long threadId = ParamUtil.getLong(req, "threadId");
+
+		MBMessage message = null;
+
+		if (threadId > 0) {
+			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
+
+			message = MBMessageServiceUtil.getMessage(
+				thread.getRootMessageId());
+		}
+
+		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
+	}
+
 
 }

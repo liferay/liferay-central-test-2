@@ -1659,6 +1659,13 @@ Liferay.Service.MB.MBCategory = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	moveThread: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "moveThread";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	subscribeCategory: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "subscribeCategory";

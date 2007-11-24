@@ -31,6 +31,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -73,6 +74,11 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 
 		return category;
+	}
+
+	public String[] getTagsEntries() throws SystemException, PortalException {
+		return TagsEntryLocalServiceUtil.getEntryNames(
+			MBMessage.class.getName(), getMessageId());
 	}
 
 	public boolean isRoot() {

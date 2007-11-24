@@ -337,6 +337,15 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return category;
 	}
 
+	public void moveThread(long categoryId, long threadId)
+		throws PortalException, SystemException {
+
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			threadId);
+
+		moveThread(categoryId, thread);
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -615,6 +624,50 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 
 		mbCategoryPersistence.remove(fromCategory.getCategoryId());
+	}
+
+	protected void moveThread(long categoryId, MBThread thread)
+		throws PortalException, SystemException {
+
+		long oldCategoryId = thread.getCategoryId();
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		// Messages
+
+		Iterator itr = mbMessagePersistence.findByC_T(
+			oldCategoryId, thread.getThreadId()).iterator();
+
+		while (itr.hasNext()) {
+			MBMessage curMessage = (MBMessage)itr.next();
+
+			curMessage.setCategoryId(category.getCategoryId());
+
+			mbMessagePersistence.update(curMessage);
+
+			// Lucene
+
+			try {
+				if (!category.isDiscussion()) {
+					Indexer.updateMessage(
+						curMessage.getCompanyId(), category.getGroupId(),
+						curMessage.getUserName(), category.getCategoryId(),
+						curMessage.getThreadId(), curMessage.getMessageId(),
+						curMessage.getSubject(), curMessage.getBody(),
+						curMessage.getTagsEntries());
+				}
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + curMessage.getMessageId(), ioe);
+			}
+		}
+
+		// Thread
+
+		thread.setCategoryId(category.getCategoryId());
+
+		mbThreadPersistence.update(thread);
 	}
 
 	public void subscribeCategory(long userId, long categoryId)

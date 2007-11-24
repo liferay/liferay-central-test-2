@@ -156,6 +156,18 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
+	public static void moveThread(long categoryId, long threadId)
+		throws RemoteException {
+		try {
+			MBCategoryServiceUtil.moveThread(categoryId, threadId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void subscribeCategory(long categoryId)
 		throws RemoteException {
 		try {

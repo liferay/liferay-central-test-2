@@ -204,6 +204,18 @@ else {
 					</c:choose>
 				</td>
 			</c:if>
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
+				<td>
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editThreadURL">
+						<portlet:param name="struts_action" value="/message_boards/edit_thread" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+					</portlet:renderURL>
+
+					<liferay-ui:icon image="forward" message="move-thread" url="<%= editThreadURL %>" label="<%= true %>" />
+				</td>
+			</c:if>
+
 		</tr>
 		</table>
 	</div>
