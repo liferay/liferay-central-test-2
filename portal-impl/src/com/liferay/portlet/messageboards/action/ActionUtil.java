@@ -136,5 +136,4 @@ public class ActionUtil {
 		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
 	}
 
-
 }

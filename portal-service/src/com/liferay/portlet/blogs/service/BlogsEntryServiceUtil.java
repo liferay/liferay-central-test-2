@@ -55,35 +55,35 @@ public class BlogsEntryServiceUtil {
 		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addGuestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.addEntry(plid, categoryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, themeDisplay, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			displayDateMinute, tagsEntries, addCommunityPermissions,
+			addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.addEntry(plid, categoryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, themeDisplay, tagsEntries, communityPermissions,
-			guestPermissions);
+			displayDateMinute, tagsEntries, communityPermissions,
+			guestPermissions, themeDisplay);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -232,14 +232,14 @@ public class BlogsEntryServiceUtil {
 		long entryId, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.updateEntry(entryId, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries);
+			displayDateHour, displayDateMinute, tagsEntries, themeDisplay);
 	}
 }

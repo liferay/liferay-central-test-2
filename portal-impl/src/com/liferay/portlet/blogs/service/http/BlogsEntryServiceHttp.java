@@ -79,10 +79,9 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -112,22 +111,22 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj9 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			Object paramObj10 = tagsEntries;
+			Object paramObj9 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj10 = new BooleanWrapper(addCommunityPermissions);
 
-			Object paramObj12 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj11 = new BooleanWrapper(addGuestPermissions);
+
+			Object paramObj12 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj12 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"addEntry",
@@ -167,11 +166,10 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries,
+		int displayDateMinute, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -201,29 +199,29 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj9 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			Object paramObj10 = tagsEntries;
+			Object paramObj9 = tagsEntries;
 
 			if (tagsEntries == null) {
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj10 = communityPermissions;
+
+			if (communityPermissions == null) {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = communityPermissions;
+			Object paramObj11 = guestPermissions;
 
-			if (communityPermissions == null) {
+			if (guestPermissions == null) {
 				paramObj11 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj12 = guestPermissions;
+			Object paramObj12 = themeDisplay;
 
-			if (guestPermissions == null) {
-				paramObj12 = new NullWrapper("[Ljava.lang.String;");
+			if (themeDisplay == null) {
+				paramObj12 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
@@ -1024,9 +1022,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries)
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -1056,17 +1053,17 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj9 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			Object paramObj10 = tagsEntries;
+			Object paramObj9 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj10 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj10 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),

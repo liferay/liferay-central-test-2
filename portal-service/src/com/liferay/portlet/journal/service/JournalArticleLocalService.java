@@ -395,8 +395,8 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String languageId,
-		int page, com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String xmlRequest)
+		int page, java.lang.String xmlRequest,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -409,9 +409,8 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
-		java.lang.String languageId, int page,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String xmlRequest)
+		java.lang.String languageId, int page, java.lang.String xmlRequest,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -425,8 +424,8 @@ public interface JournalArticleLocalService {
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String templateId, java.lang.String languageId, int page,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String xmlRequest)
+		java.lang.String xmlRequest,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

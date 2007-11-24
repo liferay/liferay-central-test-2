@@ -220,8 +220,8 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, themeDisplay, tagsEntries,
-				communityPermissions, guestPermissions);
+				displayDateMinute, tagsEntries, communityPermissions,
+				guestPermissions, themeDisplay);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
@@ -237,7 +237,7 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, themeDisplay, tagsEntries);
+				displayDateMinute, tagsEntries, themeDisplay);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

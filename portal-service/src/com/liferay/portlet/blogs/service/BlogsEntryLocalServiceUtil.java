@@ -366,75 +366,73 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addGuestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			displayDateHour, displayDateMinute, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String uuid, long userId, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.addEntry(uuid, userId, plid, categoryId,
 			title, content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			displayDateHour, displayDateMinute, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
-			communityPermissions, guestPermissions);
+			displayDateHour, displayDateMinute, tagsEntries,
+			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String uuid, long userId, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries,
+		int displayDateMinute, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.addEntry(uuid, userId, plid, categoryId,
 			title, content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
+			displayDateHour, displayDateMinute, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			guestPermissions, themeDisplay);
 	}
 
 	public static void addEntryResources(long entryId,
@@ -646,15 +644,15 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long entryId, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.updateEntry(userId, entryId, categoryId,
 			title, content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, themeDisplay, tagsEntries);
+			displayDateHour, displayDateMinute, tagsEntries, themeDisplay);
 	}
 
 	public static void updateTagsAsset(long userId,

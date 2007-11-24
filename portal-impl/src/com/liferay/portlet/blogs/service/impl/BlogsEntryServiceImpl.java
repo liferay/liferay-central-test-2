@@ -68,9 +68,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry addEntry(
 			long plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -80,16 +80,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			tagsEntries, addCommunityPermissions, addGuestPermissions,
+			themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			long plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -99,7 +99,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, communityPermissions, guestPermissions);
+			tagsEntries, communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public void deleteEntry(long entryId)
@@ -326,8 +326,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			long entryId, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries)
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -335,8 +335,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, categoryId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, themeDisplay, tagsEntries);
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			tagsEntries, themeDisplay);
 	}
 
 	protected String exportToRSS(

@@ -204,8 +204,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateHour = displayDateCal.get(Calendar.HOUR);
 		int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
 
-		ThemeDisplay themeDisplay = null;
-
 		String[] tagsEntries = null;
 
 		if (importTags) {
@@ -215,6 +213,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
+
+		ThemeDisplay themeDisplay = null;
 
 		BlogsEntry existingEntry = null;
 
@@ -229,15 +229,15 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					entry.getUuid(), userId, plid, entry.getCategoryId(),
 					entry.getTitle(), entry.getContent(), displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, themeDisplay, tagsEntries,
-					addCommunityPermissions, addGuestPermissions);
+					displayDateMinute, tagsEntries, addCommunityPermissions,
+					addGuestPermissions, themeDisplay);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getCategoryId(),
 					entry.getTitle(), entry.getContent(), displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, themeDisplay, tagsEntries);
+					displayDateMinute, tagsEntries, themeDisplay);
 			}
 		}
 		else {
@@ -245,8 +245,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				userId, plid, entry.getCategoryId(), entry.getTitle(),
 				entry.getContent(), displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				themeDisplay, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
+				tagsEntries, addCommunityPermissions, addGuestPermissions,
+				themeDisplay);
 		}
 
 		if (importComments) {

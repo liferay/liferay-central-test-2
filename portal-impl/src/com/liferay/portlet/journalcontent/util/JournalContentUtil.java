@@ -132,8 +132,8 @@ public class JournalContentUtil {
 
 		if (disableCaching) {
 			return _getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay,
-				page, xmlRequest);
+				groupId, articleId, templateId, languageId, page, xmlRequest,
+				themeDisplay);
 		}
 
 		String key =
@@ -144,14 +144,15 @@ public class JournalContentUtil {
 
 		if (articleDisplay == null) {
 			articleDisplay = _getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay,
-				page, xmlRequest);
+				groupId, articleId, templateId, languageId, page, xmlRequest,
+				themeDisplay);
 
 			if (articleDisplay != null) {
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 
-				MultiVMPoolUtil.put(_cache, key, _groups, groupKey, articleDisplay);
+				MultiVMPoolUtil.put(
+					_cache, key, _groups, groupKey, articleDisplay);
 			}
 		}
 
@@ -200,12 +201,12 @@ public class JournalContentUtil {
 
 	private static JournalArticleDisplay _getArticleDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, int page, String xmlRequest) {
+		int page, String xmlRequest, ThemeDisplay themeDisplay) {
 
 		try {
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
-				groupId, articleId, templateId, languageId, page, themeDisplay,
-				xmlRequest);
+				groupId, articleId, templateId, languageId, page, xmlRequest,
+				themeDisplay);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

@@ -82,54 +82,54 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			uuid, userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, null, null, communityPermissions,
-			guestPermissions);
+			tagsEntries, null, null, communityPermissions, guestPermissions,
+			themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] tagsEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -556,7 +556,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long entryId, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			ThemeDisplay themeDisplay, String[] tagsEntries)
+			String[] tagsEntries, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry

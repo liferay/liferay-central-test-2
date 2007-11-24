@@ -800,12 +800,12 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String languageId,
-			int page, ThemeDisplay themeDisplay, String xmlRequest)
+			int page, String xmlRequest, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, null, languageId, page, themeDisplay,
-			xmlRequest);
+			groupId, articleId, null, languageId, page, xmlRequest,
+			themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -822,15 +822,15 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String templateId,
-			String languageId, int page, ThemeDisplay themeDisplay,
-			String xmlRequest)
+			String languageId, int page, String xmlRequest,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
 			groupId, articleId, article.getVersion(), templateId, languageId,
-			page, themeDisplay, xmlRequest);
+			page, xmlRequest, themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -839,14 +839,14 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, 1,
-			themeDisplay, null);
+			groupId, articleId, version, templateId, languageId, 1, null,
+			themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
-			String languageId, int page, ThemeDisplay themeDisplay,
-			String xmlRequest)
+			String languageId, int page, String xmlRequest,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		String content = null;
