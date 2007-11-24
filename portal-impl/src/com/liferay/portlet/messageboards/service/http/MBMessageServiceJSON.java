@@ -85,6 +85,20 @@ public class MBMessageServiceJSON {
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject addMessage(long categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
+				subject, body, files, anonymous, priority, tagsEntries,
+				communityPermissions, guestPermissions);
+
+		return MBMessageJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject addMessage(long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
 		java.util.List files, boolean anonymous, double priority,
@@ -96,20 +110,6 @@ public class MBMessageServiceJSON {
 				threadId, parentMessageId, subject, body, files, anonymous,
 				priority, tagsEntries, addCommunityPermissions,
 				addGuestPermissions);
-
-		return MBMessageJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addMessage(long categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-				subject, body, files, anonymous, priority, tagsEntries,
-				communityPermissions, guestPermissions);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}
@@ -197,17 +197,6 @@ public class MBMessageServiceJSON {
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 				className, classPK, messageId, subject, body);
-
-		return MBMessageJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject updateMessage(long messageId, long categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		double priority, java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-				categoryId, subject, body, files, priority, tagsEntries);
 
 		return MBMessageJSONSerializer.toJSONObject(returnValue);
 	}

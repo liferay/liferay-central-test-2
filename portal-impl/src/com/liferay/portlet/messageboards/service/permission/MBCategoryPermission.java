@@ -112,14 +112,13 @@ public class MBCategoryPermission {
 			while (categoryId !=
 						MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 
-				category =
-					MBCategoryLocalServiceUtil.getCategory(categoryId);
+				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
 				categoryId = category.getParentCategoryId();
 
 				if (permissionChecker.hasPermission(
-					category.getGroupId(), MBCategory.class.getName(),
-					category.getCategoryId(), actionId)) {
+						category.getGroupId(), MBCategory.class.getName(),
+						category.getCategoryId(), actionId)) {
 
 					return true;
 				}

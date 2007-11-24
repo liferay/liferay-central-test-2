@@ -704,16 +704,16 @@
 		<put name="portlet_content" value="/portlet/message_boards/edit_message.jsp" />
 	</definition>
 
+	<definition name="portlet.message_boards.edit_thread" extends="portlet.message_boards">
+		<put name="portlet_content" value="/portlet/message_boards/edit_thread.jsp" />
+	</definition>
+
 	<definition name="portlet.message_boards.edit_topic" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/edit_topic.jsp" />
 	</definition>
 
 	<definition name="portlet.message_boards.error" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/error.jsp" />
-	</definition>
-
-	<definition name="portlet.message_boards.edit_thread" extends="portlet.message_boards">
-		<put name="portlet_content" value="/portlet/message_boards/edit_thread.jsp" />
 	</definition>
 
 	<definition name="portlet.message_boards.search" extends="portlet.message_boards">

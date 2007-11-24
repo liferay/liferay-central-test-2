@@ -185,7 +185,6 @@ if (message != null) {
 </div>
 
 <table class="liferay-table">
-
 <tr>
 	<td>
 		<liferay-ui:message key="subject" />

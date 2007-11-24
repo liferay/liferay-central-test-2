@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -532,6 +533,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
+		ThemeDisplay themeDisplay = null;
+
 		MBMessage existingMessage = null;
 
 		try {
@@ -554,13 +557,15 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), tagsEntries, prefs,
-						addCommunityPermissions, addGuestPermissions);
+						addCommunityPermissions, addGuestPermissions,
+						themeDisplay);
 				}
 				else {
 					MBMessageLocalServiceUtil.updateMessage(
-						userId, existingMessage.getMessageId(), categoryId,
+						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
-						message.getPriority(), tagsEntries, prefs);
+						message.getPriority(), tagsEntries, prefs,
+						themeDisplay);
 				}
 			}
 			else {
@@ -568,7 +573,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					userId, categoryId, threadId, parentMessageId,
 					message.getSubject(), message.getBody(), files,
 					message.getAnonymous(), message.getPriority(), tagsEntries,
-					prefs, addCommunityPermissions, addGuestPermissions);
+					prefs, addCommunityPermissions, addGuestPermissions,
+					themeDisplay);
 			}
 
 			messagePKs.put(

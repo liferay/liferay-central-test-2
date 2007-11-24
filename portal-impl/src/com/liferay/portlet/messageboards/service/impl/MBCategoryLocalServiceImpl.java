@@ -626,6 +626,20 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		mbCategoryPersistence.remove(fromCategory.getCategoryId());
 	}
 
+	public void subscribeCategory(long userId, long categoryId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.addSubscription(
+			userId, MBCategory.class.getName(), categoryId);
+	}
+
+	public void unsubscribeCategory(long userId, long categoryId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.deleteSubscription(
+			userId, MBCategory.class.getName(), categoryId);
+	}
+
 	protected void moveThread(long categoryId, MBThread thread)
 		throws PortalException, SystemException {
 
@@ -640,26 +654,26 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			oldCategoryId, thread.getThreadId()).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage curMessage = (MBMessage)itr.next();
+			MBMessage message = (MBMessage)itr.next();
 
-			curMessage.setCategoryId(category.getCategoryId());
+			message.setCategoryId(category.getCategoryId());
 
-			mbMessagePersistence.update(curMessage);
+			mbMessagePersistence.update(message);
 
 			// Lucene
 
 			try {
 				if (!category.isDiscussion()) {
 					Indexer.updateMessage(
-						curMessage.getCompanyId(), category.getGroupId(),
-						curMessage.getUserName(), category.getCategoryId(),
-						curMessage.getThreadId(), curMessage.getMessageId(),
-						curMessage.getSubject(), curMessage.getBody(),
-						curMessage.getTagsEntries());
+						message.getCompanyId(), category.getGroupId(),
+						message.getUserName(), category.getCategoryId(),
+						message.getThreadId(), message.getMessageId(),
+						message.getSubject(), message.getBody(),
+						message.getTagsEntries());
 				}
 			}
 			catch (IOException ioe) {
-				_log.error("Indexing " + curMessage.getMessageId(), ioe);
+				_log.error("Indexing " + message.getMessageId(), ioe);
 			}
 		}
 
@@ -668,20 +682,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		thread.setCategoryId(category.getCategoryId());
 
 		mbThreadPersistence.update(thread);
-	}
-
-	public void subscribeCategory(long userId, long categoryId)
-		throws PortalException, SystemException {
-
-		subscriptionLocalService.addSubscription(
-			userId, MBCategory.class.getName(), categoryId);
-	}
-
-	public void unsubscribeCategory(long userId, long categoryId)
-		throws PortalException, SystemException {
-
-		subscriptionLocalService.deleteSubscription(
-			userId, MBCategory.class.getName(), categoryId);
 	}
 
 	protected void validate(String name) throws PortalException {

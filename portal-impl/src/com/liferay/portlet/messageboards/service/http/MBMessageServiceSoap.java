@@ -101,16 +101,15 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
-		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		long categoryId, java.lang.String subject, java.lang.String body,
+		java.util.List files, boolean anonymous, double priority,
+		java.lang.String[] tagsEntries,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-					threadId, parentMessageId, subject, body, files, anonymous,
-					priority, tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
+					subject, body, files, anonymous, priority, tagsEntries,
+					communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -122,15 +121,16 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
-		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
+		long categoryId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-					subject, body, files, anonymous, priority, tagsEntries,
-					communityPermissions, guestPermissions);
+					threadId, parentMessageId, subject, body, files, anonymous,
+					priority, tagsEntries, addCommunityPermissions,
+					addGuestPermissions);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -276,23 +276,6 @@ public class MBMessageServiceSoap {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 					className, classPK, messageId, subject, body);
-
-			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
-		long messageId, long categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, double priority,
-		java.lang.String[] tagsEntries) throws RemoteException {
-		try {
-			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-					categoryId, subject, body, files, priority, tagsEntries);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}

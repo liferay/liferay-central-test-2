@@ -32,15 +32,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
 long messageId = message.getMessageId();
-long threadId = message.getThreadId();
 
 long categoryId = BeanParamUtil.getLong(message, request, "categoryId");
-long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+long threadId = message.getThreadId();
 
 MBMessage curParentMessage = null;
 String parentAuthor = null;
 
-String body = "";
+String body = StringPool.BLANK;
 boolean quote = false;
 %>
 
@@ -83,15 +82,7 @@ boolean quote = false;
 <liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
 
 <%
-long breadcrumbsMessageId = parentMessageId;
-
-if (threadId <= 0) {
-	breadcrumbsMessageId = messageId;
-}
-
-if (message != null) {
-	breadcrumbsMessageId = message.getMessageId();
-}
+long breadcrumbsMessageId = message.getMessageId();
 %>
 
 <div class="breadcrumbs">
@@ -99,7 +90,6 @@ if (message != null) {
 </div>
 
 <table class="liferay-table">
-
 <tr>
 	<td>
 		<liferay-ui:message key="category" />
@@ -111,34 +101,29 @@ if (message != null) {
 		%>
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-		<%= category.getName() %>
-		</a>
+		<%= category.getName() %></a>
 
 		<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
+</table>
+
+<br />
+
+<table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="add-explanation-post"/>
+		<liferay-ui:message key="add-explanation-post" />
 	</td>
 	<td>
-		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" onchange="<portlet:namespace/>toggleExplanationPost()" type="checkbox" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
+		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" type="checkbox" onClick="<portlet:namespace/>toggleExplanationPost();" />
 	</td>
 </tr>
 </table>
 
-<table class="liferay-table" id="<portlet:namespace/>explanationPost" style="display: none">
+<br />
 
+<table class="liferay-table" id="<portlet:namespace/>explanationPost" style="display: none;">
 <tr>
 	<td>
 		<liferay-ui:message key="subject" />
@@ -174,7 +159,3 @@ if (message != null) {
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_thread.jsp");
-%>

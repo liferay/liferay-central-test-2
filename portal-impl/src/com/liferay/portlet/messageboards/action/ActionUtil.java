@@ -122,6 +122,7 @@ public class ActionUtil {
 
 	public static void getThreadMessage(HttpServletRequest req)
 		throws Exception {
+
 		long threadId = ParamUtil.getLong(req, "threadId");
 
 		MBMessage message = null;

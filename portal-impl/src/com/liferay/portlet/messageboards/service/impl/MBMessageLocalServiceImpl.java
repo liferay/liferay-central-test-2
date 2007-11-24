@@ -166,7 +166,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
 			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
-			addGuestPermissions);
+			addGuestPermissions, themeDisplay);
 
 		if ((className.equals(BlogsEntry.class.getName())) &&
 			(themeDisplay != null)) {
@@ -186,26 +186,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, long categoryId, String subject, String body,
 			List files, boolean anonymous, double priority,
 			String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			userId, categoryId, subject, body, files, anonymous, priority,
 			tagsEntries, prefs, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public MBMessage addMessage(
-			long userId, long categoryId, String subject, String body,
-			List files, boolean anonymous, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			userId, categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, prefs, null, null, communityPermissions,
-			guestPermissions);
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public MBMessage addMessage(
@@ -227,24 +215,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			List files, boolean anonymous, double priority,
 			String[] tagsEntries, PortletPreferences prefs,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		long threadId = 0;
-		long parentMessageId = 0;
-
-		return addMessage(
-			null, userId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public MBMessage addMessage(
-			long userId, long categoryId, String subject, String body,
-			List files, boolean anonymous, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -257,20 +227,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions, themeDisplay);
-	}
-
-	public MBMessage addMessage(
-			long userId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			null, userId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public MBMessage addMessage(
@@ -286,34 +242,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			files, anonymous, priority, tagsEntries, prefs,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
-	}
-
-	public MBMessage addMessage(
-			String uuid, long userId, long categoryId, long threadId,
-			long parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			uuid, userId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public MBMessage addMessage(
-			long userId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			null, userId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs, null, null,
-			communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -334,14 +262,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String uuid, long userId, long categoryId, long threadId,
 			long parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			PortletPreferences prefs, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
+
 		return addMessage(
-			null, userId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs, null, null,
-			communityPermissions, guestPermissions, null);
+			uuid, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public MBMessage addMessage(
@@ -520,7 +449,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, false, themeDisplay);
+		notifySubscribers(category, message, prefs, themeDisplay, false);
 
 		logAddMessage(messageId, stopWatch, 7);
 
@@ -1079,8 +1008,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, long messageId, String subject, String body)
 		throws PortalException, SystemException {
 
-		long categoryId = CompanyImpl.SYSTEM;
-
 		if (Validator.isNull(subject)) {
 			subject = "N/A";
 		}
@@ -1089,48 +1016,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		double priority = 0.0;
 		String[] tagsEntries = null;
 		PortletPreferences prefs = null;
-
-		return updateMessage(
-			userId, messageId, categoryId, subject, body, files, priority,
-			tagsEntries, prefs);
-	}
-
-	/**
-	 * @deprecated Use MBCategoryService.moveThread instead
-	 */
-	public MBMessage updateMessage(
-			long userId, long messageId, long categoryId, String subject,
-			String body, List files, double priority, String[] tagsEntries,
-			PortletPreferences prefs)
-		throws PortalException, SystemException {
-
-		return updateMessage(
-			userId, messageId, subject, body, files, priority,
-			tagsEntries, prefs, null);
-	}
-
-	public MBMessage updateMessage(
-			long userId, long messageId, String subject, String body,
-			List files, double priority, String[] tagsEntries,
-			PortletPreferences prefs)
-		throws PortalException, SystemException {
+		ThemeDisplay themeDisplay = null;
 
 		return updateMessage(
 			userId, messageId, subject, body, files, priority, tagsEntries,
-			prefs, null);
-	}
-
-	/**
-	 * @deprecated Use MBCategoryService.moveThread instead
-	 */
-	public MBMessage updateMessage(
-			long userId, long messageId, long categoryId, String subject,
-			String body, List files, double priority, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-		return updateMessage(
-			userId, messageId, subject, body, files, priority,
-			tagsEntries, prefs, null);
+			prefs, themeDisplay);
 	}
 
 	public MBMessage updateMessage(
@@ -1143,9 +1033,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-				message.getCategoryId());
-
+		MBCategory category = message.getCategory();
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 		Date now = new Date();
@@ -1203,7 +1091,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, true, themeDisplay);
+		notifySubscribers(category, message, prefs, themeDisplay, true);
 
 		// Thread
 
@@ -1339,7 +1227,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	protected void notifySubscribers(
 			MBCategory category, MBMessage message, PortletPreferences prefs,
-			boolean update, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, boolean update)
 		throws PortalException, SystemException {
 
 		try {
@@ -1352,17 +1240,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 			else {
 				return;
-			}
-
-			String messageURL = StringPool.BLANK;
-
-			if (themeDisplay != null) {
-				String portalURL = PortalUtil.getPortalURL(themeDisplay);
-				String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
-
-				messageURL =
-					portalURL + layoutURL + "/message_boards/message/" +
-						message.getMessageId();
 			}
 
 			Company company = companyPersistence.findByPrimaryKey(
@@ -1379,6 +1256,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				categoryIds, category.getGroupId(), category.getCategoryId());
 
 			categoryIds.add(new Long(category.getCategoryId()));
+
+			String messageURL = StringPool.BLANK;
+
+			if (themeDisplay != null) {
+				String portalURL = PortalUtil.getPortalURL(themeDisplay);
+				String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+
+				messageURL =
+					portalURL + layoutURL + "/message_boards/message/" +
+						message.getMessageId();
+			}
 
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.MESSAGE_BOARDS, user);

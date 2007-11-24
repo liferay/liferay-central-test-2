@@ -56,10 +56,6 @@ public interface MBMessage extends MBMessageModel {
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 
-	public java.lang.String[] getTagsEntries()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public boolean isRoot();
 
 	public boolean isReply();
@@ -79,4 +75,8 @@ public interface MBMessage extends MBMessageModel {
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 
 	public java.lang.String getBody(boolean translated);
+
+	public java.lang.String[] getTagsEntries()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

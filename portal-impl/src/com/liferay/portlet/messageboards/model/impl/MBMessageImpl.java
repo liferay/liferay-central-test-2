@@ -76,11 +76,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		return category;
 	}
 
-	public String[] getTagsEntries() throws SystemException, PortalException {
-		return TagsEntryLocalServiceUtil.getEntryNames(
-			MBMessage.class.getName(), getMessageId());
-	}
-
 	public boolean isRoot() {
 		if (getParentMessageId() == DEFAULT_PARENT_MESSAGE_ID) {
 			return true;
@@ -137,6 +132,11 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		else {
 			return getBody();
 		}
+	}
+
+	public String[] getTagsEntries() throws PortalException, SystemException {
+		return TagsEntryLocalServiceUtil.getEntryNames(
+			MBMessage.class.getName(), getMessageId());
 	}
 
 	private static Log _log = LogFactory.getLog(MBMessageImpl.class);

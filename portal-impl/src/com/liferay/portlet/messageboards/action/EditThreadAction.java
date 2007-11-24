@@ -79,8 +79,8 @@ public class EditThreadAction extends PortletAction {
 				setForward(req, "portlet.message_boards.error");
 			}
 			else if (e instanceof MessageBodyException ||
-				e instanceof MessageSubjectException ||
-				e instanceof NoSuchThreadException) {
+					 e instanceof MessageSubjectException ||
+					 e instanceof NoSuchThreadException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 			}
@@ -128,7 +128,7 @@ public class EditThreadAction extends PortletAction {
 
 		MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
-		MBCategoryServiceUtil.moveThread(categoryId,threadId);
+		MBCategoryServiceUtil.moveThread(categoryId, threadId);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
 			req, "addExplanationPost");
