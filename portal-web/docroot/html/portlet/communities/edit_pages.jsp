@@ -435,17 +435,17 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		<c:when test='<%= tabs1.equals("staging") %>'>
 			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
+
+				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
+					<portlet:param name="struts_action" value="/communities/export_pages" />
+					<portlet:param name="popupId" value="publish-to-live" />
+					<portlet:param name="tabs2" value="<%= tabs2 %>" />
+					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+				</portlet:renderURL>
+
+				<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
 			</c:if>
-
-			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
-				<portlet:param name="struts_action" value="/communities/export_pages" />
-				<portlet:param name="popupId" value="publish-to-live" />
-				<portlet:param name="tabs2" value="<%= tabs2 %>" />
-				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-			</portlet:renderURL>
-
-			<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
 
 			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
 
