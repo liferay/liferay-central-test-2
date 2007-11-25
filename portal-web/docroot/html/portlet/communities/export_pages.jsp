@@ -89,7 +89,7 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	}
 }
 
-boolean privateLayout = ParamUtil.getBoolean(request, "private");
+boolean privateLayout = tabs2.equals("private");
 
 if (privateLayout) {
 	if (group != null) {
