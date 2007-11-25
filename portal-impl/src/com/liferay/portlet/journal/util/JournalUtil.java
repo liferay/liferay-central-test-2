@@ -89,7 +89,7 @@ import org.dom4j.io.SAXReader;
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class JournalUtil {

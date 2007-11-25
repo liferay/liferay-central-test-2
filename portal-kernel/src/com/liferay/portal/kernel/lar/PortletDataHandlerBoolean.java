@@ -31,29 +31,32 @@ package com.liferay.portal.kernel.lar;
 public class PortletDataHandlerBoolean extends PortletDataHandlerControl {
 
 	public PortletDataHandlerBoolean(String namespace, String controlName) {
-		this(namespace, controlName, false, null);
+		this(namespace, controlName, true);
 	}
 
 	public PortletDataHandlerBoolean(
 		String namespace, String controlName, boolean defaultState) {
-		this(namespace, controlName, defaultState, null);
+
+		this(namespace, controlName, defaultState, false);
 	}
 
 	public PortletDataHandlerBoolean(
 		String namespace, String controlName, boolean defaultState,
 		boolean disabled) {
+
 		this(namespace, controlName, defaultState, disabled, null);
 	}
 
 	public PortletDataHandlerBoolean(
 		String namespace, String controlName, boolean defaultState,
 		PortletDataHandlerControl[] children) {
+
 		this(namespace, controlName, defaultState, false, children);
 	}
 
 	public PortletDataHandlerBoolean(
-		String namespace, String controlName, boolean defaultState, boolean disabled,
-		PortletDataHandlerControl[] children) {
+		String namespace, String controlName, boolean defaultState,
+		boolean disabled, PortletDataHandlerControl[] children) {
 
 		super(namespace, controlName, disabled);
 

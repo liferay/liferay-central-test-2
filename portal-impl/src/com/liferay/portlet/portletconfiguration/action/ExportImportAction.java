@@ -22,35 +22,20 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.AddressCityException;
-import com.liferay.portal.AddressStreetException;
-import com.liferay.portal.AddressZipException;
 import com.liferay.portal.LayoutImportException;
-import com.liferay.portal.NoSuchAddressException;
-import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.NoSuchListTypeException;
-import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.ActionConstants;
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -66,7 +51,6 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -84,7 +68,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Jorge Ferrer
  *
  */
-public class ExportImportAction extends PortletAction {
+public class ExportImportAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -105,40 +89,32 @@ public class ExportImportAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("import")) {
-				importData(req, portlet);
+			if (cmd.equals("copy_from_live")) {
+				copyFromLive(req, portlet);
+
 				sendRedirect(req, res);
 			}
 			else if (cmd.equals("export")) {
 				exportData(req, res, portlet);
 			}
+			else if (cmd.equals("import")) {
+				importData(req, portlet);
+
+				sendRedirect(req, res);
+			}
 			else if (cmd.equals("publish_to_live")) {
 				publishToLive(req, portlet);
-				sendRedirect(req, res);
-			}
-			else if (cmd.equals("copy_from_live")) {
-				copyFromLive(req, portlet);
-				sendRedirect(req, res);
-			}
 
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchAddressException ||
+			if (e instanceof NoSuchLayoutException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
-			}
-			else if (e instanceof AddressCityException ||
-					 e instanceof AddressStreetException ||
-					 e instanceof AddressZipException ||
-					 e instanceof NoSuchCountryException ||
-					 e instanceof NoSuchLayoutException ||
-					 e instanceof NoSuchListTypeException ||
-					 e instanceof NoSuchRegionException) {
-
-				SessionErrors.add(req, e.getClass().getName());
+				setForward(req, "portlet.portlet_configuration.error");
 			}
 			else {
 				throw e;
@@ -166,26 +142,8 @@ public class ExportImportAction extends PortletAction {
 			req, "portlet.portlet_configuration.export_import"));
 	}
 
-	protected void copyPortletInfo(
-			long creatorUserId, long sourcePlid, long targetPlid,
-			String portletId, Map parameters)
-		throws Exception{
-
-		Map parameterMap = getStagingParameters(parameters);
-
-		byte[] data = LayoutLocalServiceUtil.exportPortletInfo(
-			sourcePlid, portletId, parameterMap);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(data);
-
-		LayoutLocalServiceUtil.importPortletInfo(
-			creatorUserId, targetPlid, portletId, parameterMap,
-			bais);
-	}
-
 	protected void copyFromLive(ActionRequest req, Portlet portlet)
-		throws Exception{
-		User user = PortalUtil.getUser(req);
+		throws Exception {
 
 		long plid = ParamUtil.getLong(req, "plid");
 
@@ -199,13 +157,29 @@ public class ExportImportAction extends PortletAction {
 			targetLayout.getLayoutId());
 
 		copyPortletInfo(
-			user.getUserId(), sourceLayout.getPlid(), targetLayout.getPlid(),
+			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId(), req.getParameterMap());
 	}
 
+	protected void copyPortletInfo(
+			long sourcePlid, long targetPlid, String portletId, Map parameters)
+		throws Exception {
+
+		Map parameterMap = getStagingParameters(parameters);
+
+		byte[] data = LayoutLocalServiceUtil.exportPortletInfo(
+			sourcePlid, portletId, parameterMap);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		LayoutServiceUtil.importPortletInfo(
+			targetPlid, portletId, parameterMap, bais);
+	}
+
 	private void exportData(
-		ActionRequest req, ActionResponse res, Portlet portlet)
-		throws Exception{
+			ActionRequest req, ActionResponse res, Portlet portlet)
+		throws Exception {
+
 		try {
 			long plid = ParamUtil.getLong(req, "plid");
 			String fileName = ParamUtil.getString(req, "exportFileName");
@@ -225,35 +199,13 @@ public class ExportImportAction extends PortletAction {
 		}
 	}
 
-	protected Portlet getPortlet(PortletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		String portletId = ParamUtil.getString(req, "portletResource");
-
-		if (!PortletPermissionUtil.contains(
-				permissionChecker, themeDisplay.getPlid(), portletId,
-				ActionKeys.CONFIGURATION)) {
-
-			throw new PrincipalException();
-		}
-
-		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
-	}
-
 	protected static Map getStagingParameters(Map parameters) {
 		Map parameterMap = new HashMap();
 
 		parameterMap.putAll(parameters);
 
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
 		parameterMap.put(
@@ -270,7 +222,8 @@ public class ExportImportAction extends PortletAction {
 	}
 
 	private void importData(ActionRequest req, Portlet portlet)
-		throws Exception{
+		throws Exception {
+
 		try {
 			UploadPortletRequest uploadReq =
 				PortalUtil.getUploadPortletRequest(req);
@@ -288,12 +241,10 @@ public class ExportImportAction extends PortletAction {
 
 			SessionErrors.add(req, LayoutImportException.class.getName());
 		}
-
 	}
 
 	protected void publishToLive(ActionRequest req, Portlet portlet)
-		throws Exception{
-		User user = PortalUtil.getUser(req);
+		throws Exception {
 
 		long plid = ParamUtil.getLong(req, "plid");
 
@@ -307,7 +258,7 @@ public class ExportImportAction extends PortletAction {
 			sourceLayout.getLayoutId());
 
 		copyPortletInfo(
-			user.getUserId(), sourceLayout.getPlid(), targetLayout.getPlid(),
+			sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId(), req.getParameterMap());
 	}
 

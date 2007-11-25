@@ -46,13 +46,13 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_comments};
+		return new PortletDataHandlerControl[] {_pageComments};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_comments};
+		return new PortletDataHandlerControl[] {_pageComments};
 	}
 
 	public String exportData(
@@ -87,13 +87,10 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _COMMENTS =
-		"page-comments";
-
 	private static final String _NAMESPACE = "page_comments";
 
-	private static final PortletDataHandlerBoolean _comments =
-		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, true, null);
+	private static final PortletDataHandlerBoolean _pageComments =
+		new PortletDataHandlerBoolean(_NAMESPACE, "page-comments", true, true);
 
 	private static Log _log =
 		LogFactory.getLog(PageCommentsPortletDataHandlerImpl.class);

@@ -248,7 +248,7 @@ public class RenderResponseImpl implements RenderResponse {
 		return _req.getLocale();
 	}
 
-	public OutputStream getPortletOutputStream() throws IOException{
+	public OutputStream getPortletOutputStream() throws IOException {
 		if (_calledGetWriter) {
 			throw new IllegalStateException();
 		}

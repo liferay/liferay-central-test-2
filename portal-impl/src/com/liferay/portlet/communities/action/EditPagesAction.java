@@ -305,18 +305,18 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void copyLayouts(
-			long stagingGroupId, long liveGroupId, boolean privateLayout)
+			long sourceGroupId, long targetGroupId, boolean privateLayout)
 		throws Exception {
 
 		Map parameterMap = geStagingParameters();
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
-			stagingGroupId, privateLayout, parameterMap);
+			sourceGroupId, privateLayout, parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 		LayoutServiceUtil.importLayouts(
-			liveGroupId, privateLayout, parameterMap, bais);
+			targetGroupId, privateLayout, parameterMap, bais);
 	}
 
 	protected void copyPreferences(
@@ -422,17 +422,13 @@ public class EditPagesAction extends PortletAction {
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			Boolean.FALSE.toString());
+			PortletDataHandlerKeys.USER_PERMISSIONS, Boolean.FALSE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_SETUP, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
 			Boolean.TRUE.toString());

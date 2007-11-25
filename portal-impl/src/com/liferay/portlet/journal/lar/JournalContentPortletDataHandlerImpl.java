@@ -62,7 +62,7 @@ import org.dom4j.Element;
  * </i></b></a>
  *
  * @author Joel Kozikowski
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Bruno Farache
  *
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
@@ -73,18 +73,18 @@ public class JournalContentPortletDataHandlerImpl
 	implements PortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_articlesSelected, _images, _comments, _ratings, _tags
+			_selectedArticles, _images, _comments, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_articlesSelected, _images, _comments, _ratings, _tags
+			_selectedArticles, _images, _comments, _ratings, _tags
 		};
 	}
 
@@ -92,11 +92,6 @@ public class JournalContentPortletDataHandlerImpl
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
-		boolean exportComments = context.getBooleanParameter(_NAMESPACE, _COMMENTS);
-		boolean exportRatings = context.getBooleanParameter(_NAMESPACE, _RATINGS);
-		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			String articleId = prefs.getValue("article-id", null);
@@ -151,9 +146,7 @@ public class JournalContentPortletDataHandlerImpl
 			if (!context.addPrimaryKey(
 					JournalArticle.class, article.getPrimaryKeyObj())) {
 
-				JournalPortletDataHandlerImpl.exportArticle(
-					context, exportImages, exportComments, exportRatings,
-					exportTags, article);
+				JournalPortletDataHandlerImpl.exportArticle(context, article);
 
 				String xml = xStream.toXML(article);
 
@@ -214,13 +207,6 @@ public class JournalContentPortletDataHandlerImpl
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		boolean importImages = context.getBooleanParameter(_NAMESPACE, _IMAGES);
-		boolean importComments = context.getBooleanParameter(
-			_NAMESPACE, _COMMENTS);
-		boolean importRatings = context.getBooleanParameter(
-			_NAMESPACE, _RATINGS);
-		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
-
 		try {
 			if (Validator.isNull(data)) {
 				return null;
@@ -275,8 +261,7 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				article = JournalPortletDataHandlerImpl.importArticle(
-					context, importImages, importComments, importRatings,
-					importTags, structurePKs, templatePKs, article);
+					context, structurePKs, templatePKs, article);
 
 				prefs.setValue(
 					"group-id", String.valueOf(context.getGroupId()));
@@ -290,34 +275,23 @@ public class JournalContentPortletDataHandlerImpl
 		}
 	}
 
-	private static final String _ARTICLES_SELECTED =
-		"articles-selected";
-
-	private static final String _IMAGES = "images";
-
-	private static final String _COMMENTS = "comments";
-
-	private static final String _RATINGS = "ratings";
-
-	private static final String _TAGS = "tags";
-
 	private static final String _NAMESPACE = "journal_content";
 
-	private static final PortletDataHandlerBoolean _articlesSelected =
+	private static final PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, _ARTICLES_SELECTED, true, true, null);
+			_NAMESPACE, "selected-articles", true, true);
 
 	private static final PortletDataHandlerBoolean _images =
-		new PortletDataHandlerBoolean(_NAMESPACE, _IMAGES, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "images");
 
 	private static final PortletDataHandlerBoolean _comments =
-		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
 	private static final PortletDataHandlerBoolean _ratings =
-		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
 		LogFactory.getLog(JournalContentPortletDataHandlerImpl.class);

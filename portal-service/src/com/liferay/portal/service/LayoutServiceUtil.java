@@ -169,6 +169,15 @@ public class LayoutServiceUtil {
 		layoutService.importPortletInfo(plid, portletId, parameterMap, file);
 	}
 
+	public static void importPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap, java.io.InputStream is)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.importPortletInfo(plid, portletId, parameterMap, is);
+	}
+
 	public static void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.PortalException, 

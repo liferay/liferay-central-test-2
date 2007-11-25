@@ -76,25 +76,19 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {
-			_polls, _votes
-		};
+		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {
-			_polls, _votes
-		};
+		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportVotes = context.getBooleanParameter(_NAMESPACE, _VOTES);
 
 		try {
 			XStream xStream = new XStream();
@@ -130,7 +124,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 					choices.addAll(questionChoices);
 
-					if (exportVotes) {
+					if (context.getBooleanParameter(_NAMESPACE, "votes")) {
 						question.setUserUuid(question.getUserUuid());
 
 						List questionVotes = PollsVoteUtil.findByQuestionId(
@@ -208,10 +202,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		Map parameterMap = context.getParameterMap();
-
-		boolean importVotes = MapUtil.getBoolean(parameterMap, _VOTES);
-
 		try {
 			XStream xStream = new XStream();
 
@@ -261,7 +251,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Votes
 
-			if (importVotes) {
+			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
 				el = root.element("poll-votes").element("list");
 
 				tempDoc = DocumentHelper.createDocument();
@@ -301,6 +291,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingChoice = PollsChoiceFinderUtil.findByUuid_G(
 					choice.getUuid(), context.getGroupId());
 
@@ -331,8 +322,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importQuestion(
-			PortletDataContext context, Map questionPKs,
-			PollsQuestion question)
+			PortletDataContext context, Map questionPKs, PollsQuestion question)
 		throws SystemException, PortalException {
 
 		long userId = context.getUserId(question.getUserUuid());
@@ -425,17 +415,13 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _POLLS = "polls";
-
-	private static final String _VOTES = "votes";
-
 	private static final String _NAMESPACE = "polls";
 
-	private static final PortletDataHandlerBoolean _polls =
-		new PortletDataHandlerBoolean(_NAMESPACE, _POLLS, true, true, null);
+	private static final PortletDataHandlerBoolean _questions =
+		new PortletDataHandlerBoolean(_NAMESPACE, "questions", true, true);
 
 	private static final PortletDataHandlerBoolean _votes =
-		new PortletDataHandlerBoolean(_NAMESPACE, _VOTES, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 
 	private static Log _log =
 		LogFactory.getLog(PollsPortletDataHandlerImpl.class);

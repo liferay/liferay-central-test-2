@@ -76,21 +76,19 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_imagesAndFolders, _tags};
+		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_imagesAndFolders, _tags};
+		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -150,7 +148,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					igImage.setUserUuid(igImage.getUserUuid());
 
-					if (exportTags) {
+					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 						context.addTagsEntries(
 							IGImage.class, igImage.getPrimaryKeyObj());
 					}
@@ -188,8 +186,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
-
-		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -233,7 +229,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				importIGImage(context, importTags, folderPKs, igImage);
+				importIGImage(context, folderPKs, igImage);
 			}
 
 			return null;
@@ -251,8 +247,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map folderPKs,
-			IGFolder folder)
+			PortletDataContext context, Map folderPKs, IGFolder folder)
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
@@ -306,8 +301,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importIGImage(
-			PortletDataContext context, boolean importTags, Map folderPKs,
-			IGImage igImage)
+			PortletDataContext context, Map folderPKs, IGImage igImage)
 		throws Exception {
 
 		long userId = context.getUserId(igImage.getUserUuid());
@@ -333,7 +327,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		String[] tagsEntries = null;
 
-		if (importTags) {
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
 				IGImage.class, igImage.getPrimaryKeyObj());
 		}
@@ -380,20 +374,16 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _IMAGES_AND_FOLDERS = "images-and-folders";
-
-	private static final String _TAGS ="tags";
+	private static final String _NAMESPACE = "image_gallery";
 
 	private static final String _IMAGE_GALLERY_FOLDER = "image-gallery/";
 
-	private static final String _NAMESPACE = "image_gallery";
-
-	private static final PortletDataHandlerBoolean _imagesAndFolders =
+	private static final PortletDataHandlerBoolean _foldersAndImages =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, _IMAGES_AND_FOLDERS, true, true, null);
+			_NAMESPACE, "folders-and-images", true, true);
 
 	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log = LogFactory.getLog(IGPortletDataHandlerImpl.class);
 

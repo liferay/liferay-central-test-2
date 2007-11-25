@@ -351,7 +351,7 @@ public class SCProductEntryLocalServiceImpl
 	public String getRepositoryXML(
 			long groupId, String baseImageURL, Date oldestDate,
 			int maxNumOfVersions, Properties repoSettings)
-		throws PortalException, SystemException{
+		throws PortalException, SystemException {
 
 		Document doc = DocumentHelper.createDocument();
 

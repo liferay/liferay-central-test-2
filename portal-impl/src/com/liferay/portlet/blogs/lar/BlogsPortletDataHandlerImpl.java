@@ -62,26 +62,22 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags};
+			_entries, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags};
+			_entries, _comments, _ratings, _tags
+		};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportComments = context.getBooleanParameter(
-			_NAMESPACE, _COMMENTS);
-		boolean exportRatings = context.getBooleanParameter(
-			_NAMESPACE, _RATINGS);
-		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -109,17 +105,17 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
-					if (exportComments) {
+					if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 						context.addComments(
 							BlogsEntry.class, entry.getPrimaryKeyObj());
 					}
 
-					if (exportRatings) {
+					if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 						context.addRatingsEntries(
 							BlogsEntry.class, entry.getPrimaryKeyObj());
 					}
 
-					if (exportTags) {
+					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 						context.addTagsEntries(
 							BlogsEntry.class, entry.getPrimaryKeyObj());
 					}
@@ -146,12 +142,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		boolean importComments = context.getBooleanParameter(
-			_NAMESPACE, _COMMENTS);
-		boolean importRatings = context.getBooleanParameter(
-			_NAMESPACE, _RATINGS);
-		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
-
 		try {
 			XStream xStream = new XStream();
 
@@ -174,9 +164,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				importEntry(
-					context, importComments, importRatings,
-					importTags, entry);
+				importEntry(context, entry);
 			}
 
 			return null;
@@ -186,9 +174,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importEntry(
-			PortletDataContext context, boolean importComments,
-			boolean importRatings, boolean importTags, BlogsEntry entry)
+	protected void importEntry(PortletDataContext context, BlogsEntry entry)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
@@ -206,7 +192,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String[] tagsEntries = null;
 
-		if (importTags) {
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
 				BlogsEntry.class, entry.getPrimaryKeyObj());
 		}
@@ -249,40 +235,32 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				themeDisplay);
 		}
 
-		if (importComments) {
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				BlogsEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj(), context.getGroupId());
 		}
 
-		if (importRatings) {
+		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 			context.importRatingsEntries(
 				BlogsEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj());
 		}
 	}
 
-	private static final String _ENTRIES = "entries";
-
-	private static final String _COMMENTS = "comments";
-
-	private static final String _RATINGS = "ratings";
-
-	private static final String _TAGS = "tags";
-
 	private static final String _NAMESPACE = "blogs";
 
 	private static final PortletDataHandlerBoolean _entries =
-		new PortletDataHandlerBoolean(_NAMESPACE, _ENTRIES, true, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);
 
 	private static final PortletDataHandlerBoolean _comments =
-		new PortletDataHandlerBoolean(_NAMESPACE, _COMMENTS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
 	private static final PortletDataHandlerBoolean _ratings =
-		new PortletDataHandlerBoolean(_NAMESPACE, _RATINGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
 		LogFactory.getLog(BlogsPortletDataHandlerImpl.class);

@@ -64,7 +64,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public DLFileRank updateFileRank(
 			long groupId, long companyId, long userId, long folderId,
 			String name)
-		throws PortalException, SystemException{
+		throws PortalException, SystemException {
 
 		try {
 			dlFileRankPersistence.removeByC_U_F_N(

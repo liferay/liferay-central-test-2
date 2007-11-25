@@ -61,13 +61,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_calendarEvents};
+		return new PortletDataHandlerControl[] {_events};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_calendarEvents};
+		return new PortletDataHandlerControl[] {_events};
 	}
 
 	public String exportData(
@@ -155,8 +155,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importEvent(
-			PortletDataContext context, CalEvent event)
+	protected void importEvent(PortletDataContext context, CalEvent event)
 		throws Exception {
 
 		long userId = context.getUserId(event.getUserUuid());
@@ -249,13 +248,10 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _CALENDAR_EVENTS = "events";
-
 	private static final String _NAMESPACE = "calendar";
 
-	private static final PortletDataHandlerBoolean _calendarEvents =
-		new PortletDataHandlerBoolean(
-			_NAMESPACE, _CALENDAR_EVENTS, true, true, null);
+	private static final PortletDataHandlerBoolean _events =
+		new PortletDataHandlerBoolean(_NAMESPACE, "events", true, true);
 
 	private static Log _log =
 		LogFactory.getLog(CalendarPortletDataHandlerImpl.class);

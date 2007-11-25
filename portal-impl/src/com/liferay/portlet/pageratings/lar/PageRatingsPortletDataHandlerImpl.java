@@ -50,7 +50,7 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {_pageRatings};
 	}
@@ -87,13 +87,10 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _PAGE_RATINGS = "page-ratings";
-
-	private static final String _NAMESPACE = "page-ratings";
+	private static final String _NAMESPACE = "page_ratings";
 
 	private static final PortletDataHandlerBoolean _pageRatings =
-		new PortletDataHandlerBoolean(
-			_NAMESPACE, _PAGE_RATINGS, true, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "page-ratings", true, true);
 
 	private static Log _log =
 		LogFactory.getLog(PageRatingsPortletDataHandlerImpl.class);

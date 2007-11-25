@@ -277,7 +277,7 @@ public class EditArticleAction extends PortletAction {
 	protected String getSaveAndContinueRedirect(
 			PortletConfig config, ActionRequest req, JournalArticle article,
 			String redirect)
-		throws Exception{
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);

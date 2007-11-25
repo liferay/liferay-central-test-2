@@ -115,8 +115,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public boolean getBooleanParameter(String namespace, String name) {
 		boolean defaultValue = MapUtil.getBoolean(
 			getParameterMap(),
-			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
-			true);
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT, true);
 
 		return MapUtil.getBoolean(
 			getParameterMap(),

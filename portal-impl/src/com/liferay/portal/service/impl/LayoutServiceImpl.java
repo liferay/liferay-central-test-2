@@ -192,6 +192,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getUserId(), plid, portletId, parameterMap, file);
 	}
 
+	public void importPortletInfo(
+			long plid, String portletId, Map parameterMap, InputStream is)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayout(plid);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), layout.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.importPortletInfo(
+			getUserId(), plid, portletId, parameterMap, is);
+	}
+
 	public void setLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			long[] layoutIds)

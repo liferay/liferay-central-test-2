@@ -375,17 +375,14 @@ public class ServicePreAction extends Action {
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			Boolean.FALSE.toString());
+			PortletDataHandlerKeys.USER_PERMISSIONS, Boolean.FALSE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_SETUP, Boolean.TRUE.toString());
 
 		LayoutLocalServiceUtil.importLayouts(
 			userId, groupId, privateLayout, parameterMap, larFile);

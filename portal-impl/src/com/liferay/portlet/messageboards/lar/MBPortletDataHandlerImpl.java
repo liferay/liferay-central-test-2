@@ -74,8 +74,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 /**
- * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
@@ -86,15 +85,15 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_messagesAndCategories, _attachments, _userBans, _flags
+			_categoriesAndMessages, _attachments, _userBans, _flags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_messagesAndCategories, _attachments, _userBans, _flags
+			_categoriesAndMessages, _attachments, _userBans, _flags
 		};
 	}
 
@@ -102,11 +101,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportAttachments = context.getBooleanParameter(_NAMESPACE, _ATTACHEMENTS);
-		boolean exportBans = context.getBooleanParameter(_NAMESPACE, _USER_BANS);
-		boolean exportFlags = context.getBooleanParameter(_NAMESPACE, _FLAGS);
-		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -170,13 +164,17 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					message.setUserUuid(message.getUserUuid());
 					message.setPriority(message.getPriority());
 
-					if (exportTags) {
+					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 						context.addTagsEntries(
 							MBMessage.class, message.getPrimaryKeyObj());
 					}
+
 					// Attachments
 
-					if (message.isAttachments() && exportAttachments) {
+					if (context.getBooleanParameter(
+							_NAMESPACE, "attachments") &&
+						message.isAttachments()) {
+
 						String[] fileNames = null;
 
 						try {
@@ -200,7 +198,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 						}
 					}
 
-					if (exportFlags) {
+					if (context.getBooleanParameter(_NAMESPACE, "flags")) {
 						List messageFlags = MBMessageFlagUtil.findByMessageId(
 							message.getMessageId());
 
@@ -246,7 +244,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			List bans = new ArrayList();
 
-			if (exportBans) {
+			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
 				bans = MBBanUtil.findByGroupId(context.getGroupId());
 
 				itr = bans.iterator();
@@ -287,11 +285,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		boolean importAttachments = context.getBooleanParameter(_NAMESPACE, _ATTACHEMENTS);
-		boolean importBans = context.getBooleanParameter(_NAMESPACE, _USER_BANS);
-		boolean importFlags = context.getBooleanParameter(_NAMESPACE, _FLAGS);
-		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
-
 		try {
 			XStream xStream = new XStream();
 
@@ -328,8 +321,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map messagePKs = CollectionFactory.getHashMap();
 			Map threadPKs = CollectionFactory.getHashMap();
+			Map messagePKs = CollectionFactory.getHashMap();
 
 			List messages = (List)xStream.fromXML(tempDoc.asXML());
 
@@ -339,13 +332,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				MBMessage message = (MBMessage)itr.next();
 
 				importMessage(
-					context, importAttachments, importTags, categoryPKs,
-					messagePKs, threadPKs, message);
+					context, categoryPKs, threadPKs, messagePKs, message);
 			}
 
 			// Flags
 
-			if (importFlags) {
+			if (context.getBooleanParameter(_NAMESPACE, "flags")) {
 				el = root.element("message-board-flags").element("list");
 
 				tempDoc = DocumentHelper.createDocument();
@@ -365,7 +357,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Bans
 
-			if (importBans) {
+			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
 				el = root.element("message-board-bans").element("list");
 
 				tempDoc = DocumentHelper.createDocument();
@@ -492,23 +484,24 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importMessage(
-			PortletDataContext context, boolean importAttachments,
-			boolean importTags, Map categoryPKs, Map messagePKs,
-			Map threadPKs, MBMessage message)
+			PortletDataContext context, Map categoryPKs, Map threadPKs,
+			Map messagePKs, MBMessage message)
 		throws Exception {
 
 		long userId = context.getUserId(message.getUserUuid());
 		long categoryId = MapUtil.getLong(
 			categoryPKs, message.getCategoryId(), message.getCategoryId());
+		long threadId = MapUtil.getLong(
+			threadPKs, message.getThreadId(), message.getThreadId());
 		long parentMessageId = MapUtil.getLong(
 			messagePKs, message.getParentMessageId(),
 			message.getParentMessageId());
-		long threadId = MapUtil.getLong(
-			threadPKs, message.getThreadId(), message.getThreadId());
 
 		List files = new ArrayList();
 
-		if (message.isAttachments() && importAttachments) {
+		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
+			message.isAttachments()) {
+
 			files = (List)context.getZipReader().getFolderEntries().get(
 				message.getAttachmentsDir() + "/");
 
@@ -523,7 +516,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		String[] tagsEntries = null;
 
-		if (importTags) {
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
 				MBMessage.class, message.getPrimaryKeyObj());
 		}
@@ -577,12 +570,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					themeDisplay);
 			}
 
-			messagePKs.put(
-				message.getPrimaryKeyObj(),
-				existingMessage.getPrimaryKeyObj());
 			threadPKs.put(
 				new Long(message.getThreadId()),
 				new Long(existingMessage.getThreadId()));
+			messagePKs.put(
+				message.getPrimaryKeyObj(), existingMessage.getPrimaryKeyObj());
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(
@@ -601,38 +593,23 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _MESSAGES_AND_CATEGORIES =
-		"messages-and-categories";
-
-	private static final String _ATTACHEMENTS =
-		"attachments";
-
-	private static final String _USER_BANS =
-		"user-bans";
-
-	private static final String _FLAGS =
-		"flags";
-
-	private static final String _TAGS =
-		"tags";
-
 	private static final String _NAMESPACE = "message_board";
 
-	private static final PortletDataHandlerBoolean _messagesAndCategories =
+	private static final PortletDataHandlerBoolean _categoriesAndMessages =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, _MESSAGES_AND_CATEGORIES, true, true, null);
+			_NAMESPACE, "categories-and-messages", true, true);
 
 	private static final PortletDataHandlerBoolean _attachments =
-		new PortletDataHandlerBoolean(_NAMESPACE, _ATTACHEMENTS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "attachments");
 
 	private static final PortletDataHandlerBoolean _userBans =
-		new PortletDataHandlerBoolean(_NAMESPACE, _USER_BANS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "user-bans");
 
 	private static final PortletDataHandlerBoolean _flags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _FLAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "flags");
 
 	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
 		LogFactory.getLog(MBPortletDataHandlerImpl.class);

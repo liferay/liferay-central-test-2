@@ -112,6 +112,11 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void importPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap, java.io.InputStream is)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 

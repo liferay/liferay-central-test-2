@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.lar;
 /**
  * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class PortletDataHandlerKeys {

@@ -415,6 +415,11 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
+		java.util.Map parameterMap)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -462,6 +467,18 @@ public interface LayoutLocalService {
 
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.InputStream is)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void importPortletInfo(long userId, long plid,
+		java.lang.String portletId, java.util.Map parameterMap,
+		java.io.InputStream is)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -537,23 +554,6 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout updatePriority(
 		com.liferay.portal.model.Layout layout, int priority)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
-		java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void importPortletInfo(long userId, long plid,
-		java.lang.String portletId, java.util.Map parameterMap,
-		java.io.File file)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void importPortletInfo(long userId, long plid,
-		java.lang.String portletId, java.util.Map parameterMap,
-		java.io.InputStream is)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

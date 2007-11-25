@@ -61,14 +61,6 @@ import org.dom4j.Element;
  * <a href="BookmarksPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * <p>
- * Provides the Bookmarks portlet export and import functionality, which is to
- * clone all bookmark entries associated with the layout's group. Upon import,
- * new instances of the corresponding bookmark entries are created or updated.
- * The author of the newly created objects is assumed to be the same one as the
- * original author and that an account for it exists and has the same id.
- * </p>
- *
  * @author Jorge Ferrer
  * @author Bruno Farache
  *
@@ -78,21 +70,19 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_bookmarksAndFolders, _tags};
+		return new PortletDataHandlerControl[] {_foldersAndEntries, _tags};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException{
+		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_bookmarksAndFolders, _tags};
+		return new PortletDataHandlerControl[] {_foldersAndEntries, _tags};
 	}
 
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
-
-		boolean exportTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -153,7 +143,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
-					if (exportTags) {
+					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 						context.addTagsEntries(
 							BookmarksEntry.class, entry.getPrimaryKeyObj());
 					}
@@ -179,8 +169,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
-
-		boolean importTags = context.getBooleanParameter(_NAMESPACE, _TAGS);
 
 		try {
 			XStream xStream = new XStream();
@@ -224,7 +212,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				importEntry(context, importTags, folderPKs, entry);
+				importEntry(context, folderPKs, entry);
 			}
 
 			return null;
@@ -235,8 +223,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, boolean importTags, Map folderPKs,
-			BookmarksEntry entry)
+			PortletDataContext context, Map folderPKs, BookmarksEntry entry)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
@@ -245,7 +232,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		String[] tagsEntries = null;
 
-		if (importTags) {
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
 				BookmarksEntry.class, entry.getPrimaryKeyObj());
 		}
@@ -260,6 +247,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 				existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
 					entry.getUuid(), context.getGroupId());
 
@@ -346,19 +334,14 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	private static final String _BOOKMARKS_AND_FOLDERS =
-		"folders-and-bookmarks";
-
-	private static final String _TAGS = "tags";
-
 	private static final String _NAMESPACE = "bookmarks";
 
-	private static final PortletDataHandlerBoolean _bookmarksAndFolders =
+	private static final PortletDataHandlerBoolean _foldersAndEntries =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, _BOOKMARKS_AND_FOLDERS, true, true, null);
+			_NAMESPACE, "folders-and-entries", true, true);
 
 	private static final PortletDataHandlerBoolean _tags =
-		new PortletDataHandlerBoolean(_NAMESPACE, _TAGS, true, null);
+		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
 		LogFactory.getLog(BookmarksPortletDataHandlerImpl.class);

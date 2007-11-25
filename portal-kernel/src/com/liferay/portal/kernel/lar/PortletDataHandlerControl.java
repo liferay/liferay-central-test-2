@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -34,8 +35,15 @@ public class PortletDataHandlerControl {
 
 	public static String getNamespacedControlName(
 		String namespace, String controlName) {
-		return StringPool.UNDERLINE + namespace + StringPool.UNDERLINE +
-			controlName;
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(StringPool.UNDERLINE);
+		sm.append(namespace);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(controlName);
+
+		return sm.toString();
 	}
 
 	public PortletDataHandlerControl(String namespace, String controlName) {
@@ -44,29 +52,30 @@ public class PortletDataHandlerControl {
 
 	public PortletDataHandlerControl(
 		String namespace, String controlName, boolean disabled) {
+
+		_namespace = namespace;
 		_controlName = controlName;
 		_disabled = disabled;
-		_namespace = namespace;
-	}
-
-	public String getControlName() {
-		return _controlName;
-	}
-
-	public boolean isDisabled() {
-		return _disabled;
 	}
 
 	public String getNamespace() {
 		return _namespace;
 	}
 
+	public String getControlName() {
+		return _controlName;
+	}
+
 	public String getNamespacedControlName() {
 		return getNamespacedControlName(_namespace, getControlName());
 	}
 
+	public boolean isDisabled() {
+		return _disabled;
+	}
+
+	private String _namespace;
 	private String _controlName;
 	private boolean _disabled;
-	private String _namespace;
 
 }
