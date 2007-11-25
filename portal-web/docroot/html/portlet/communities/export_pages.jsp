@@ -173,7 +173,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm2">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="publish_to_live">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
@@ -281,16 +281,16 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <c:choose>
 	<c:when test="<%= !publish %>">
-		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="select_btn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publish_btn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
-			<input type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
+			<input type="button" id="change_btn" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 
-		<input type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<input type="button" id="publish_btn" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:otherwise>
 </c:choose>
 
