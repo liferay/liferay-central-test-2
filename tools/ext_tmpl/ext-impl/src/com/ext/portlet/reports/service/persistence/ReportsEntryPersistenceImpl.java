@@ -7,12 +7,16 @@ import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -29,10 +33,13 @@ import java.util.List;
 
 public class ReportsEntryPersistenceImpl extends BasePersistence
     implements ReportsEntryPersistence {
+    private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+                "value.object.listener.com.ext.portlet.reports.model.ReportsEntry"));
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
 
     public ReportsEntry create(String entryId) {
         ReportsEntry reportsEntry = new ReportsEntryImpl();
+
         reportsEntry.setNew(true);
         reportsEntry.setPrimaryKey(entryId);
 
@@ -71,11 +78,30 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public ReportsEntry remove(ReportsEntry reportsEntry)
         throws SystemException {
+        ModelListener listener = _getListener();
+
+        if (listener != null) {
+            listener.onBeforeRemove(reportsEntry);
+        }
+
+        reportsEntry = removeImpl(reportsEntry);
+
+        if (listener != null) {
+            listener.onAfterRemove(reportsEntry);
+        }
+
+        return reportsEntry;
+    }
+
+    protected ReportsEntry removeImpl(ReportsEntry reportsEntry)
+        throws SystemException {
         Session session = null;
 
         try {
             session = openSession();
+
             session.delete(reportsEntry);
+
             session.flush();
 
             return reportsEntry;
@@ -83,17 +109,44 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             throw HibernateUtil.processException(e);
         } finally {
             closeSession(session);
+
             FinderCache.clearCache(ReportsEntry.class.getName());
         }
     }
 
-    public ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry)
+    public ReportsEntry update(ReportsEntry reportsEntry)
         throws SystemException {
         return update(reportsEntry, false);
     }
 
-    public ReportsEntry update(
+    public ReportsEntry update(ReportsEntry reportsEntry, boolean merge)
+        throws SystemException {
+        ModelListener listener = _getListener();
+
+        boolean isNew = reportsEntry.isNew();
+
+        if (listener != null) {
+            if (isNew) {
+                listener.onBeforeCreate(reportsEntry);
+            } else {
+                listener.onBeforeUpdate(reportsEntry);
+            }
+        }
+
+        reportsEntry = updateImpl(reportsEntry, merge);
+
+        if (listener != null) {
+            if (isNew) {
+                listener.onAfterCreate(reportsEntry);
+            } else {
+                listener.onAfterUpdate(reportsEntry);
+            }
+        }
+
+        return reportsEntry;
+    }
+
+    public ReportsEntry updateImpl(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws SystemException {
         Session session = null;
@@ -110,6 +163,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             }
 
             session.flush();
+
             reportsEntry.setNew(false);
 
             return reportsEntry;
@@ -117,6 +171,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             throw HibernateUtil.processException(e);
         } finally {
             closeSession(session);
+
             FinderCache.clearCache(ReportsEntry.class.getName());
         }
     }
@@ -158,6 +213,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -168,6 +224,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -178,10 +235,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 query.append(" ");
+
                 query.append("ORDER BY ");
+
                 query.append("name ASC");
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (companyId != null) {
@@ -189,6 +249,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 List list = q.list();
+
                 FinderCache.putResult(finderClassName, finderMethodName,
                     finderParams, finderArgs, list);
 
@@ -213,13 +274,17 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] {
-                String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+                String.class.getName(),
+                
+                "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
-                companyId, String.valueOf(begin), String.valueOf(end),
-                String.valueOf(obc)
+                companyId,
+                
+                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -230,6 +295,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -244,12 +310,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 if (obc != null) {
                     query.append("ORDER BY ");
                     query.append(obc.getOrderBy());
-                } else {
+                }
+                else {
                     query.append("ORDER BY ");
+
                     query.append("name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (companyId != null) {
@@ -257,6 +326,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 List list = QueryUtil.list(q, getDialect(), begin, end);
+
                 FinderCache.putResult(finderClassName, finderMethodName,
                     finderParams, finderArgs, list);
 
@@ -277,11 +347,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         if (list.size() == 0) {
             StringMaker msg = new StringMaker();
-            msg.append("No ReportsEntry exists with the key ");
-            msg.append(StringPool.OPEN_CURLY_BRACE);
-            msg.append("companyId=");
-            msg.append(companyId);
+
+            msg.append("No ReportsEntry exists with the key {");
+
+            msg.append("companyId=" + companyId);
+
             msg.append(StringPool.CLOSE_CURLY_BRACE);
+
             throw new NoSuchEntryException(msg.toString());
         } else {
             return (ReportsEntry) list.get(0);
@@ -291,15 +363,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     public ReportsEntry findByCompanyId_Last(String companyId,
         OrderByComparator obc) throws NoSuchEntryException, SystemException {
         int count = countByCompanyId(companyId);
+
         List list = findByCompanyId(companyId, count - 1, count, obc);
 
         if (list.size() == 0) {
             StringMaker msg = new StringMaker();
-            msg.append("No ReportsEntry exists with the key ");
-            msg.append(StringPool.OPEN_CURLY_BRACE);
-            msg.append("companyId=");
-            msg.append(companyId);
+
+            msg.append("No ReportsEntry exists with the key {");
+
+            msg.append("companyId=" + companyId);
+
             msg.append(StringPool.CLOSE_CURLY_BRACE);
+
             throw new NoSuchEntryException(msg.toString());
         } else {
             return (ReportsEntry) list.get(0);
@@ -310,13 +385,16 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String companyId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         ReportsEntry reportsEntry = findByPrimaryKey(entryId);
+
         int count = countByCompanyId(companyId);
+
         Session session = null;
 
         try {
             session = openSession();
 
             StringMaker query = new StringMaker();
+
             query.append(
                 "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -331,12 +409,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             if (obc != null) {
                 query.append("ORDER BY ");
                 query.append(obc.getOrderBy());
-            } else {
+            }
+            else {
                 query.append("ORDER BY ");
+
                 query.append("name ASC");
             }
 
             Query q = session.createQuery(query.toString());
+
             int queryPos = 0;
 
             if (companyId != null) {
@@ -345,7 +426,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
                     reportsEntry);
+
             ReportsEntry[] array = new ReportsEntryImpl[3];
+
             array[0] = (ReportsEntry) objArray[0];
             array[1] = (ReportsEntry) objArray[1];
             array[2] = (ReportsEntry) objArray[2];
@@ -363,6 +446,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -373,6 +457,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -383,10 +468,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 query.append(" ");
+
                 query.append("ORDER BY ");
+
                 query.append("name ASC");
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (userId != null) {
@@ -394,6 +482,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 List list = q.list();
+
                 FinderCache.putResult(finderClassName, finderMethodName,
                     finderParams, finderArgs, list);
 
@@ -418,13 +507,17 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] {
-                String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+                String.class.getName(),
+                
+                "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
-                userId, String.valueOf(begin), String.valueOf(end),
-                String.valueOf(obc)
+                userId,
+                
+                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -435,6 +528,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -449,12 +543,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 if (obc != null) {
                     query.append("ORDER BY ");
                     query.append(obc.getOrderBy());
-                } else {
+                }
+                else {
                     query.append("ORDER BY ");
+
                     query.append("name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (userId != null) {
@@ -462,6 +559,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 List list = QueryUtil.list(q, getDialect(), begin, end);
+
                 FinderCache.putResult(finderClassName, finderMethodName,
                     finderParams, finderArgs, list);
 
@@ -482,11 +580,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         if (list.size() == 0) {
             StringMaker msg = new StringMaker();
-            msg.append("No ReportsEntry exists with the key ");
-            msg.append(StringPool.OPEN_CURLY_BRACE);
-            msg.append("userId=");
-            msg.append(userId);
+
+            msg.append("No ReportsEntry exists with the key {");
+
+            msg.append("userId=" + userId);
+
             msg.append(StringPool.CLOSE_CURLY_BRACE);
+
             throw new NoSuchEntryException(msg.toString());
         } else {
             return (ReportsEntry) list.get(0);
@@ -496,15 +596,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     public ReportsEntry findByUserId_Last(String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         int count = countByUserId(userId);
+
         List list = findByUserId(userId, count - 1, count, obc);
 
         if (list.size() == 0) {
             StringMaker msg = new StringMaker();
-            msg.append("No ReportsEntry exists with the key ");
-            msg.append(StringPool.OPEN_CURLY_BRACE);
-            msg.append("userId=");
-            msg.append(userId);
+
+            msg.append("No ReportsEntry exists with the key {");
+
+            msg.append("userId=" + userId);
+
             msg.append(StringPool.CLOSE_CURLY_BRACE);
+
             throw new NoSuchEntryException(msg.toString());
         } else {
             return (ReportsEntry) list.get(0);
@@ -515,13 +618,16 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         ReportsEntry reportsEntry = findByPrimaryKey(entryId);
+
         int count = countByUserId(userId);
+
         Session session = null;
 
         try {
             session = openSession();
 
             StringMaker query = new StringMaker();
+
             query.append(
                 "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
@@ -536,12 +642,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             if (obc != null) {
                 query.append("ORDER BY ");
                 query.append(obc.getOrderBy());
-            } else {
+            }
+            else {
                 query.append("ORDER BY ");
+
                 query.append("name ASC");
             }
 
             Query q = session.createQuery(query.toString());
+
             int queryPos = 0;
 
             if (userId != null) {
@@ -550,7 +659,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
                     reportsEntry);
+
             ReportsEntry[] array = new ReportsEntryImpl[3];
+
             array[0] = (ReportsEntry) objArray[0];
             array[1] = (ReportsEntry) objArray[1];
             array[2] = (ReportsEntry) objArray[2];
@@ -588,6 +699,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             session = openSession();
 
             DynamicQuery query = queryInitializer.initialize(session);
+
             query.setLimit(begin, end);
 
             return query.list();
@@ -617,6 +729,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         Object[] finderArgs = new Object[] {
                 String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -627,17 +740,21 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
 
                 if (obc != null) {
                     query.append("ORDER BY ");
                     query.append(obc.getOrderBy());
-                } else {
+                }
+                else {
                     query.append("ORDER BY ");
+
                     query.append("name ASC");
                 }
 
                 Query q = session.createQuery(query.toString());
+
                 List list = QueryUtil.list(q, getDialect(), begin, end);
 
                 if (obc == null) {
@@ -663,6 +780,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         while (itr.hasNext()) {
             ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+
             remove(reportsEntry);
         }
     }
@@ -672,6 +790,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         while (itr.hasNext()) {
             ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+
             remove(reportsEntry);
         }
     }
@@ -689,6 +808,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "countByCompanyId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -699,6 +819,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append("SELECT COUNT(*) ");
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
@@ -712,6 +833,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 query.append(" ");
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (companyId != null) {
@@ -719,6 +841,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 Long count = null;
+
                 Iterator itr = q.list().iterator();
 
                 if (itr.hasNext()) {
@@ -748,6 +871,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "countByUserId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -758,6 +882,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 session = openSession();
 
                 StringMaker query = new StringMaker();
+
                 query.append("SELECT COUNT(*) ");
                 query.append(
                     "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
@@ -771,6 +896,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 query.append(" ");
 
                 Query q = session.createQuery(query.toString());
+
                 int queryPos = 0;
 
                 if (userId != null) {
@@ -778,6 +904,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 }
 
                 Long count = null;
+
                 Iterator itr = q.list().iterator();
 
                 if (itr.hasNext()) {
@@ -807,6 +934,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "countAll";
         String[] finderParams = new String[] {  };
         Object[] finderArgs = new Object[] {  };
+
         Object result = FinderCache.getResult(finderClassName,
                 finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -816,12 +944,11 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             try {
                 session = openSession();
 
-                StringMaker query = new StringMaker();
-                query.append("SELECT COUNT(*) ");
-                query.append("FROM com.ext.portlet.reports.model.ReportsEntry");
+                Query q = session.createQuery(
+                        "SELECT COUNT(*) FROM com.ext.portlet.reports.model.ReportsEntry");
 
-                Query q = session.createQuery(query.toString());
                 Long count = null;
+
                 Iterator itr = q.list().iterator();
 
                 if (itr.hasNext()) {
@@ -847,5 +974,17 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     protected void initDao() {
+    }
+
+    private static ModelListener _getListener() {
+        if (Validator.isNotNull(_LISTENER)) {
+            try {
+                return (ModelListener) Class.forName(_LISTENER).newInstance();
+            } catch (Exception e) {
+                _log.error(e);
+            }
+        }
+
+        return null;
     }
 }

@@ -7,6 +7,24 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * <a href="ReportsEntrySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by
+ * <code>com.ext.portlet.reports.service.http.ReportsEntryServiceSoap</code>.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ * @see com.ext.portlet.reports.service.http.ReportsEntryServiceSoap
+ *
+ */
 public class ReportsEntrySoap implements Serializable {
     private String _entryId;
     private String _companyId;
@@ -21,6 +39,7 @@ public class ReportsEntrySoap implements Serializable {
 
     public static ReportsEntrySoap toSoapModel(ReportsEntry model) {
         ReportsEntrySoap soapModel = new ReportsEntrySoap();
+
         soapModel.setEntryId(model.getEntryId());
         soapModel.setCompanyId(model.getCompanyId());
         soapModel.setUserId(model.getUserId());
@@ -37,6 +56,7 @@ public class ReportsEntrySoap implements Serializable {
 
         for (int i = 0; i < models.size(); i++) {
             ReportsEntry model = (ReportsEntry) models.get(i);
+
             soapModels.add(toSoapModel(model));
         }
 

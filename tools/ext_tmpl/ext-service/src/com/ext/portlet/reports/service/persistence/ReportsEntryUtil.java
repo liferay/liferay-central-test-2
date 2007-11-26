@@ -1,19 +1,7 @@
 package com.ext.portlet.reports.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-
 public class ReportsEntryUtil {
     private static final String _UTIL = ReportsEntryUtil.class.getName();
-    private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-                "value.object.listener.com.ext.portlet.reports.model.ReportsEntry"));
-    private static Log _log = LogFactory.getLog(ReportsEntryUtil.class);
     private static ReportsEntryUtil _util;
     private ReportsEntryPersistence _persistence;
 
@@ -26,92 +14,31 @@ public class ReportsEntryUtil {
         java.lang.String entryId)
         throws com.liferay.portal.SystemException, 
             com.ext.portlet.reports.NoSuchEntryException {
-        ModelListener listener = _getListener();
-
-        if (listener != null) {
-            listener.onBeforeRemove(findByPrimaryKey(entryId));
-        }
-
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry = getPersistence()
-                                                                      .remove(entryId);
-
-        if (listener != null) {
-            listener.onAfterRemove(reportsEntry);
-        }
-
-        return reportsEntry;
+        return getPersistence().remove(entryId);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry remove(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws com.liferay.portal.SystemException {
-        ModelListener listener = _getListener();
-
-        if (listener != null) {
-            listener.onBeforeRemove(reportsEntry);
-        }
-
-        reportsEntry = getPersistence().remove(reportsEntry);
-
-        if (listener != null) {
-            listener.onAfterRemove(reportsEntry);
-        }
-
-        return reportsEntry;
+        return getPersistence().remove(reportsEntry);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws com.liferay.portal.SystemException {
-        ModelListener listener = _getListener();
-        boolean isNew = reportsEntry.isNew();
-
-        if (listener != null) {
-            if (isNew) {
-                listener.onBeforeCreate(reportsEntry);
-            } else {
-                listener.onBeforeUpdate(reportsEntry);
-            }
-        }
-
-        reportsEntry = getPersistence().update(reportsEntry);
-
-        if (listener != null) {
-            if (isNew) {
-                listener.onAfterCreate(reportsEntry);
-            } else {
-                listener.onAfterUpdate(reportsEntry);
-            }
-        }
-
-        return reportsEntry;
+        return getPersistence().update(reportsEntry);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws com.liferay.portal.SystemException {
-        ModelListener listener = _getListener();
-        boolean isNew = reportsEntry.isNew();
+        return getPersistence().update(reportsEntry, merge);
+    }
 
-        if (listener != null) {
-            if (isNew) {
-                listener.onBeforeCreate(reportsEntry);
-            } else {
-                listener.onBeforeUpdate(reportsEntry);
-            }
-        }
-
-        reportsEntry = getPersistence().update(reportsEntry, merge);
-
-        if (listener != null) {
-            if (isNew) {
-                listener.onAfterCreate(reportsEntry);
-            } else {
-                listener.onAfterUpdate(reportsEntry);
-            }
-        }
-
-        return reportsEntry;
+    public static com.ext.portlet.reports.model.ReportsEntry updateImpl(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
+        throws com.liferay.portal.SystemException {
+        return getPersistence().updateImpl(reportsEntry, merge);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
@@ -278,17 +205,5 @@ public class ReportsEntryUtil {
         }
 
         return _util;
-    }
-
-    private static ModelListener _getListener() {
-        if (Validator.isNotNull(_LISTENER)) {
-            try {
-                return (ModelListener) Class.forName(_LISTENER).newInstance();
-            } catch (Exception e) {
-                _log.error(e);
-            }
-        }
-
-        return null;
     }
 }

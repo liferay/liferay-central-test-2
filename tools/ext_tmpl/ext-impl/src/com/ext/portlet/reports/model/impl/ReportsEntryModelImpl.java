@@ -1,49 +1,68 @@
 package com.ext.portlet.reports.model.impl;
 
+import com.ext.portlet.reports.model.ReportsEntry;
+
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
 import java.util.Date;
 
 
+/**
+ * <a href="ReportsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>ReportsEntry</code> table
+ * in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ * @see com.ext.portlet.reports.service.model.ReportsEntry
+ * @see com.ext.portlet.reports.service.model.ReportsEntryModel
+ * @see com.ext.portlet.reports.service.model.impl.ReportsEntryImpl
+ *
+ */
 public class ReportsEntryModelImpl extends BaseModelImpl {
     public static String TABLE_NAME = "ReportsEntry";
     public static Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
+            
+
             { "companyId", new Integer(Types.VARCHAR) },
+            
+
             { "userId", new Integer(Types.VARCHAR) },
+            
+
             { "userName", new Integer(Types.VARCHAR) },
+            
+
             { "createDate", new Integer(Types.TIMESTAMP) },
+            
+
             { "modifiedDate", new Integer(Types.TIMESTAMP) },
+            
+
             { "name", new Integer(Types.VARCHAR) }
         };
     public static String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
     public static String TABLE_SQL_DROP = "drop table ReportsEntry";
-    public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry"),
-            XSS_ALLOW);
-    public static boolean XSS_ALLOW_ENTRYID = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry.entryId"),
-            XSS_ALLOW_BY_MODEL);
-    public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry.companyId"),
-            XSS_ALLOW_BY_MODEL);
-    public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry.userId"),
-            XSS_ALLOW_BY_MODEL);
-    public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry.userName"),
-            XSS_ALLOW_BY_MODEL);
-    public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-                "xss.allow.com.ext.portlet.reports.model.ReportsEntry.name"),
-            XSS_ALLOW_BY_MODEL);
     public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
                 "lock.expiration.time.com.ext.portlet.reports.model.ReportsEntryModel"));
     private String _entryId;
@@ -78,10 +97,6 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
                 ((entryId != null) && (_entryId == null)) ||
                 ((entryId != null) && (_entryId != null) &&
                 !entryId.equals(_entryId))) {
-            if (!XSS_ALLOW_ENTRYID) {
-                entryId = XSSUtil.strip(entryId);
-            }
-
             _entryId = entryId;
         }
     }
@@ -95,10 +110,6 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
                 ((companyId != null) && (_companyId == null)) ||
                 ((companyId != null) && (_companyId != null) &&
                 !companyId.equals(_companyId))) {
-            if (!XSS_ALLOW_COMPANYID) {
-                companyId = XSSUtil.strip(companyId);
-            }
-
             _companyId = companyId;
         }
     }
@@ -112,10 +123,6 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
                 ((userId != null) && (_userId == null)) ||
                 ((userId != null) && (_userId != null) &&
                 !userId.equals(_userId))) {
-            if (!XSS_ALLOW_USERID) {
-                userId = XSSUtil.strip(userId);
-            }
-
             _userId = userId;
         }
     }
@@ -129,10 +136,6 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
                 ((userName != null) && (_userName == null)) ||
                 ((userName != null) && (_userName != null) &&
                 !userName.equals(_userName))) {
-            if (!XSS_ALLOW_USERNAME) {
-                userName = XSSUtil.strip(userName);
-            }
-
             _userName = userName;
         }
     }
@@ -171,16 +174,33 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
         if (((name == null) && (_name != null)) ||
                 ((name != null) && (_name == null)) ||
                 ((name != null) && (_name != null) && !name.equals(_name))) {
-            if (!XSS_ALLOW_NAME) {
-                name = XSSUtil.strip(name);
-            }
-
             _name = name;
         }
     }
 
+    public ReportsEntry toEscapedModel() {
+        ReportsEntry model = new ReportsEntryImpl();
+
+        model.setEntryId(Html.escape(getEntryId()));
+        model.setCompanyId(Html.escape(getCompanyId()));
+        model.setUserId(Html.escape(getUserId()));
+        model.setUserName(Html.escape(getUserName()));
+        model.setCreateDate(getCreateDate());
+        model.setModifiedDate(getModifiedDate());
+        model.setName(Html.escape(getName()));
+
+        if (true) {
+            model = (ReportsEntry) Proxy.newProxyInstance(ReportsEntry.class.getClassLoader(),
+                    new Class[] { ReportsEntry.class },
+                    new ReadOnlyBeanHandler(model));
+        }
+
+        return model;
+    }
+
     public Object clone() {
         ReportsEntryImpl clone = new ReportsEntryImpl();
+
         clone.setEntryId(getEntryId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
@@ -198,7 +218,9 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
         }
 
         ReportsEntryImpl reportsEntry = (ReportsEntryImpl) obj;
+
         int value = 0;
+
         value = getName().toLowerCase().compareTo(reportsEntry.getName()
                                                               .toLowerCase());
 

@@ -21,6 +21,10 @@ public interface ReportsEntryPersistence {
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws com.liferay.portal.SystemException;
 
+    public com.ext.portlet.reports.model.ReportsEntry updateImpl(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
+        throws com.liferay.portal.SystemException;
+
     public com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
         java.lang.String entryId)
         throws com.liferay.portal.SystemException, 
