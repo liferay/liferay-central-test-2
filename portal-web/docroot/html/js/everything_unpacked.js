@@ -13994,7 +13994,7 @@ Liferay.Service = {
 Liferay.ServiceAuth = {
 	header: null,
 
-	doAs: function(userId, password) {
+	setHeader: function(userId, password) {
 		header = "Basic " + Base64.encode(userId + ':' + password);
 	}
 };
