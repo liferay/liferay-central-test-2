@@ -22,6 +22,7 @@
 
 package com.liferay.portal.freemarker;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -61,8 +62,8 @@ public class FreeMarkerUtil {
 			_configuration = new Configuration();
 
 			_configuration.setObjectWrapper(new DefaultObjectWrapper());
-			_configuration.setClassForTemplateLoading(
-				FreeMarkerUtil.class, "../../../../");
+			_configuration.setTemplateLoader(
+				new ClassTemplateLoader(FreeMarkerUtil.class, "/"));
 		}
 
 		return _configuration;
