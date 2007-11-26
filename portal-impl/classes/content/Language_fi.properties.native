@@ -1,6 +1,3 @@
-#!
-#! created/edited by Popeye version 0.54 (popeye.sourceforge.net)
-#! encoding:ISO-8859-1
 ##
 ## Language settings
 ##
@@ -773,7 +770,6 @@ color-text=Tekstin väri
 color-url=URL:n väri
 color=Väri
 colors=Värit
-column-n-portlets=Kolumnin {0} portletit
 column_1=Sarake 1
 column_2=Sarake 2
 column_3=Sarake 3
@@ -1292,7 +1288,7 @@ go-to-paypal-and-set-up-ipn-to-post-to-x=Mene PayPal:iin ja aseta IPN lähettä�
 go=Mene
 google-analytics-id=Google Analytics ID
 google-license=Google lisenssi
-googles-spelling-suggestion-for=Google&#39;n oikeinkirjoitus-ehdotus sanalle {0} on {1}.
+googles-spelling-suggestion-for=Google'n oikeinkirjoitus-ehdotus sanalle {0} on {1}.
 government=Hallitus
 grace-limit-help=Tämä kertoo kuinka monta kertaa käyttäjä voi kirjautua salasanan vanhenemisen jälkeen ennen kuin hänen täytyy vaihtaa uusi salasana.
 grace-limit=Rajoitus
@@ -1410,7 +1406,6 @@ inactive=Toimeton
 inch=Tuuma
 include-all-children-pages=Sisällytä kaikki alisivut
 include-all-descendent-pages=Sisällytä alisivut
-include-all-portlets=Sisällytä kaikki portletit
 include-ancestor-pages-if-necessary=Sisällytä esi-isäsivut tarvittaessa
 include-artifact-in-repository=Sisällytä artefakti varastoon
 include-original-text=Sisällytä alkuperäinen teksti
@@ -1494,11 +1489,6 @@ kilometer=Kilometri
 ko_en=Koreasta englanniksi
 korean=Korealainen
 language-type=Kielityyppi
-
-##
-## Language settings
-##
-
 language=Kieli
 large-image-url=Suuren kuvan URL
 large-image=Suuri kuva
@@ -1839,14 +1829,12 @@ number=Numero
 numbers=Numerot
 objects-to-export=Tuotavat objektit
 of-every=joka
-of=
 ok=OK
 old-group-name-is-a-required-system-group=Vanha ryhmänimi on välttämätön järjestelmäryhmä.
 old-name=Vanha nimi
 old-role-name-is-a-required-system-role=Vanha roolinimi on välttämätön järjestelmärooli.
 older-version-installed=Vanhentunut
 on-hold=Jonossa
-on=
 one-column=Yksi sarake
 one-of-your-fields-contain-invalid-characters=Yksi kentistä sisältää epäkelpoja merkkejä.
 online-now=Nyt kirjautuneena
@@ -2793,7 +2781,6 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=Käyttäjä, joka lisäsi viestin
 the-vacation-message-notifies-others-of-your-absence=Lomaviesti kertoo muille poissaolostasi.
 the-verse-could-not-be-found=Säettä ei löydy.
-the=
 theme-plugin=Teema plugin
 theme-plugins=Teema pluginit
 theme=Teema
@@ -3099,7 +3086,6 @@ wide-skyscraper=Leveä skyscraper
 wide=Leveä
 width=Leveys
 wikis=Wikit
-within=
 word-search=Sanahaku
 word-spacing=Sanaväli
 work-phone=Työpuhelinnumero

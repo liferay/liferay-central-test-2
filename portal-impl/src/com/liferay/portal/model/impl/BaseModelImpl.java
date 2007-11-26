@@ -23,8 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
  * <a href="BaseModelImpl.java.html"><b><i>View Source</i></b></a>
