@@ -1,7 +1,5 @@
 <#include "copyright.txt" parse="false">
 
-package ${beanLocatorUtilPackage};
-
 package ${springHibernatePackage};
 
 import com.liferay.util.dao.DataAccess;
