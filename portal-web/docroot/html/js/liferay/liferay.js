@@ -50,7 +50,20 @@ Liferay.Service = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 
 		if (callback) {
-			jQuery.getJSON(Liferay.Service.url, params, callback);
+			jQuery.ajax(
+				{
+					type: 'GET',
+					url: Liferay.Service.url,
+					data: params,
+					dataType: 'json',
+					beforeSend: function(xHR) {
+						if (Liferay.ServiceAuth.header) {
+							xHR.setRequestHeader('Authorization', Liferay.ServiceAuth.header);
+						}
+					},
+					success: callback
+				}
+			);
 		}
 		else {
 			var xHR = jQuery.ajax(
@@ -80,6 +93,14 @@ Liferay.Service = {
 		}
 
 		return serviceParameters;
+	}
+};
+
+Liferay.ServiceAuth = {
+	header: null,
+
+	doAs: function(userId, password) {
+		header = "Basic " + Base64.encode(userId + ':' + password);
 	}
 };
 
