@@ -98,7 +98,7 @@ Liferay.Session = {
 		var instance = this;
 
 		var banner = instance.banner;
-		var warningText = banner.find('#session_warning_text');
+		var warningText = banner.find('#sessionWarningText');
 
 		document.title = instance._originalTitle;
 
@@ -108,7 +108,8 @@ Liferay.Session = {
 
 			clearTimeout(instance._sessionExpired);
 
-			var okBtn = banner.find('#ok_btn');
+			var okBtn = banner.find('#okBtn');
+
 			okBtn.click(
 				function() {
 					instance.notice.close();
@@ -116,7 +117,8 @@ Liferay.Session = {
 				}
 			);
 
-			var cancelBtn = banner.find('#cancel_btn');
+			var cancelBtn = banner.find('#cancelBtn');
+
 			cancelBtn.hide();
 
 			jQuery.ajax(
@@ -148,7 +150,7 @@ Liferay.Session = {
 		instance._sessionWarning = setTimeout(
 			function() {
 				instance.warn();
-			}, 
+			},
 		instance.sessionTimeout);
 
 		instance.setCookie();
@@ -178,7 +180,7 @@ Liferay.Session = {
 		instance._sessionExpired = setTimeout(
 			function() {
 				instance.expire();
-			}, 
+			},
 		instance.sessionTimeoutWarning);
 	},
 
@@ -242,7 +244,7 @@ Liferay.Session = {
 			var days=0, hours=0, minutes=0, seconds=0, output='';
 
 			// Remove the milliseconds
-			amount = Math.floor(amount/1000); 
+			amount = Math.floor(amount/1000);
 
 			hours = Math.floor(amount/3600);
 			amount = amount%3600;

@@ -42,7 +42,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<font class="bg" size="2"><span class="bg-neg-alert" id="session_warning_text">
+				<font class="bg" size="2"><span class="bg-neg-alert" id="sessionWarningText">
 				<%= LanguageUtil.format(pageContext, "warning-due-to-inactivity-your-session-will-expire", new Object[] {new Integer(sessionTimeoutWarning), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale).format(Time.getDate(sessionTimeoutCal)), timeZone.getDisplayName(false, TimeZone.SHORT, locale), new Integer(sessionTimeout)}, false) %>
 				</span></font>
 			</td>
@@ -53,10 +53,10 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			</td>
 		</tr>
 		<tr>
-			<td align="center" id="session_btns">
-				<input class="button" id="ok_btn" type="button" value="<liferay-ui:message key="ok" />" onClick="extendSession(); Liferay.Popup.close(this);" />
+			<td align="center">
+				<input class="button" id="okBtn" type="button" value="<liferay-ui:message key="ok" />" onClick="extendSession(); Liferay.Popup.close(this);" />
 
-				<input class="button" id="cancel_btn" type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
+				<input class="button" id="cancelBtn" type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 			</td>
 		</tr>
 		</table>

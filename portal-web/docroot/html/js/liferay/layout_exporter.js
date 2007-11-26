@@ -10,11 +10,11 @@ Liferay.LayoutExporter = {
 			jQuery(pane).hide();
 
 			if (!publish) {
-				jQuery('#publish_btn').show();
-				jQuery('#select_btn').hide();
+				jQuery('#publishBtn').show();
+				jQuery('#selectBtn').hide();
 			}
 			else {
-				jQuery('#change_btn').hide();
+				jQuery('#changeBtn').hide();
 			}
 		}
 	},
@@ -78,11 +78,11 @@ Liferay.LayoutExporter = {
 			jQuery(pane).show();
 
 			if (!publish) {
-				jQuery('#publish_btn').hide();
-				jQuery('#select_btn').show();
+				jQuery('#publishBtn').hide();
+				jQuery('#selectBtn').show();
 			}
 			else {
-				jQuery('#change_btn').show();
+				jQuery('#changeBtn').show();
 			}
 		}
 	}

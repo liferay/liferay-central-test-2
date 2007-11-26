@@ -281,16 +281,16 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <c:choose>
 	<c:when test="<%= !publish %>">
-		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="select_btn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publish_btn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
-			<input type="button" id="change_btn" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
+			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 
-		<input type="button" id="publish_btn" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input id="publishBtn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:otherwise>
 </c:choose>
 
