@@ -1646,7 +1646,6 @@
 		<exception>RequiredPasswordPolicy</exception>
 		<exception>RequiredRole</exception>
 		<exception>RequiredUser</exception>
-		<exception>RequiredUser</exception>
 		<exception>RequiredUserGroup</exception>
 		<exception>ReservedUserEmailAddress</exception>
 		<exception>ReservedUserId</exception>
