@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -57,6 +58,9 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 
 	public static String FIND_BY_NO_ASSETS =
 		WikiPageFinder.class.getName() + ".findByNoAssets";
+
+	public static String FIND_BY_UUID_G =
+		WikiPageFinder.class.getName() + ".findByUuid_G";
 
 	public int countByCreateDate(long nodeId, Date createDate, boolean before)
 		throws SystemException {
@@ -177,6 +181,42 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			q.addEntity("WikiPage", WikiPageImpl.class);
 
 			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public WikiPage findByUuid_G(String uuid, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("WikiPage", WikiPageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(uuid);
+			qPos.add(groupId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (WikiPage)list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

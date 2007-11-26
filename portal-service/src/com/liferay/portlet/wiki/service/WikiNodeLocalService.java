@@ -123,6 +123,13 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.wiki.model.WikiNode addNode(
+		java.lang.String uuid, long userId, long plid, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -130,8 +137,9 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
-		long plid, java.lang.String name, java.lang.String description,
+	public com.liferay.portlet.wiki.model.WikiNode addNode(
+		java.lang.String uuid, long userId, long plid, java.lang.String name,
+		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

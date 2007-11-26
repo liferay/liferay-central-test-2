@@ -72,6 +72,8 @@ public class UpgradeUUID extends UpgradeProcess {
 		upgradeTable("PollsChoice", "choiceId");
 		upgradeTable("PollsQuestion", "questionId");
 		upgradeTable("User_", "userId");
+		upgradeTable("WikiNode", "nodeId");
+		upgradeTable("WikiPage", "pageId");
 	}
 
 	protected void upgradeTable(String tableName, String pkColName)

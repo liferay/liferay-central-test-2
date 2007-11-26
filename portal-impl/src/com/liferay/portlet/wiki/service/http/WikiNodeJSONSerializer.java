@@ -54,6 +54,7 @@ public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
 		JSONObject jsonObj = new JSONObject();
 
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "nodeId", model.getNodeId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());

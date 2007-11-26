@@ -49,5 +49,10 @@ package com.liferay.portlet.wiki.model;
  *
  */
 public interface WikiPage extends WikiPageModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
+
 	public com.liferay.portlet.wiki.model.WikiNode getNode();
 }

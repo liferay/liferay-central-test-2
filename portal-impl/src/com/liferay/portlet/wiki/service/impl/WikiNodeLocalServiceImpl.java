@@ -71,7 +71,19 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addNode(
-			userId, plid, name, description,
+			null, userId, plid, name, description,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public WikiNode addNode(
+			String uuid, long userId, long plid, String name,
+			String description, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addNode(
+			uuid, userId, plid, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -82,14 +94,15 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addNode(
-			userId, plid, name, description, null, null, communityPermissions,
-			guestPermissions);
+			null, userId, plid, name, description, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public WikiNode addNode(
-			long userId, long plid, String name, String description,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String uuid, long userId, long plid, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Node
@@ -104,6 +117,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		WikiNode node = wikiNodePersistence.create(nodeId);
 
+		node.setUuid(uuid);
 		node.setGroupId(groupId);
 		node.setCompanyId(user.getCompanyId());
 		node.setUserId(user.getUserId());

@@ -50,6 +50,7 @@ public class WikiNodeSoap implements Serializable {
 	public static WikiNodeSoap toSoapModel(WikiNode model) {
 		WikiNodeSoap soapModel = new WikiNodeSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setNodeId(model.getNodeId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -85,6 +86,14 @@ public class WikiNodeSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setNodeId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getNodeId() {
@@ -167,6 +176,7 @@ public class WikiNodeSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
+	private String _uuid;
 	private long _nodeId;
 	private long _groupId;
 	private long _companyId;

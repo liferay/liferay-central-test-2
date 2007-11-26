@@ -75,6 +75,46 @@ public class WikiPageUtil {
 		return getPersistence().fetchByPrimaryKey(pageId);
 	}
 
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage[] findByUuid_PrevAndNext(
+		long pageId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByUuid_PrevAndNext(pageId, uuid, obc);
+	}
+
 	public static java.util.List findByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByNodeId(nodeId);
@@ -279,6 +319,11 @@ public class WikiPageUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
 	public static void removeByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByNodeId(nodeId);
@@ -308,6 +353,11 @@ public class WikiPageUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByNodeId(long nodeId)

@@ -89,6 +89,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 
 		wikiNode.setNew(true);
 
+		wikiNode.setUuid(model.getUuid());
 		wikiNode.setNodeId(model.getNodeId());
 		wikiNode.setGroupId(model.getGroupId());
 		wikiNode.setCompanyId(model.getCompanyId());
@@ -119,6 +120,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 
 		wikiNode.setNew(false);
 
+		wikiNode.setUuid(model.getUuid());
 		wikiNode.setNodeId(model.getNodeId());
 		wikiNode.setGroupId(model.getGroupId());
 		wikiNode.setCompanyId(model.getCompanyId());

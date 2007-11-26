@@ -51,6 +51,10 @@ public interface WikiNodeModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getNodeId();
 
 	public void setNodeId(long nodeId);

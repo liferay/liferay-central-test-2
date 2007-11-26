@@ -62,6 +62,9 @@ import java.util.Date;
 public class WikiPageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiPage";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "pageId", new Integer(Types.BIGINT) },
 			
 
@@ -97,7 +100,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 			{ "head", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table WikiPage (pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table WikiPage";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageModel"));
@@ -115,6 +118,16 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_pageId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getPageId() {
@@ -258,6 +271,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public WikiPage toEscapedModel() {
 		WikiPage model = new WikiPageImpl();
 
+		model.setUuid(Html.escape(getUuid()));
 		model.setPageId(getPageId());
 		model.setResourcePrimKey(getResourcePrimKey());
 		model.setCompanyId(getCompanyId());
@@ -283,6 +297,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public Object clone() {
 		WikiPageImpl clone = new WikiPageImpl();
 
+		clone.setUuid(getUuid());
 		clone.setPageId(getPageId());
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setCompanyId(getCompanyId());
@@ -374,6 +389,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _pageId;
 	private long _resourcePrimKey;
 	private long _companyId;

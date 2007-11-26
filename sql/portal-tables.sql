@@ -1286,6 +1286,7 @@ create table Website (
 );
 
 create table WikiNode (
+	uuid_ VARCHAR(75) null,
 	nodeId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -1299,6 +1300,7 @@ create table WikiNode (
 );
 
 create table WikiPage (
+	uuid_ VARCHAR(75) null,
 	pageId LONG not null primary key,
 	resourcePrimKey LONG,
 	companyId LONG,

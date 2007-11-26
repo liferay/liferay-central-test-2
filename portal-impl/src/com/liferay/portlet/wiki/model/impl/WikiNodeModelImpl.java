@@ -62,6 +62,9 @@ import java.util.Date;
 public class WikiNodeModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiNode";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
+			
+
 			{ "nodeId", new Integer(Types.BIGINT) },
 			
 
@@ -91,7 +94,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table WikiNode (nodeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table WikiNode (uuid_ VARCHAR(75) null,nodeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table WikiNode";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiNodeModel"));
@@ -109,6 +112,16 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_nodeId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getNodeId() {
@@ -231,6 +244,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public WikiNode toEscapedModel() {
 		WikiNode model = new WikiNodeImpl();
 
+		model.setUuid(Html.escape(getUuid()));
 		model.setNodeId(getNodeId());
 		model.setGroupId(getGroupId());
 		model.setCompanyId(getCompanyId());
@@ -254,6 +268,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public Object clone() {
 		WikiNodeImpl clone = new WikiNodeImpl();
 
+		clone.setUuid(getUuid());
 		clone.setNodeId(getNodeId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -315,6 +330,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _nodeId;
 	private long _groupId;
 	private long _companyId;

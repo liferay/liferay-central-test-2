@@ -66,6 +66,10 @@ alter table TagsAsset add viewCount INTEGER;
 
 alter table User_ add uuid_ VARCHAR(75) null;
 
+alter table WikiNode add uuid_ VARCHAR(75) null;
+
+alter table WikiPage add uuid_ VARCHAR(75) null;
+
 COMMIT_TRANSACTION;
 
 update TagsAsset set priority = 0, viewCount = 0;

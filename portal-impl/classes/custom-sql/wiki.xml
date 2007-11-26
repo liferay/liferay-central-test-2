@@ -44,4 +44,18 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				{WikiPage.*}
+			FROM
+				WikiPage
+			INNER JOIN
+				WikiNode ON
+					(WikiNode.nodeId = WikiPage.nodeId)
+			WHERE
+				(WikiPage.uuid_ = ?) AND
+				(WikiNode.groupId = ?)
+		]]>
+	</sql>
 </custom-sql>

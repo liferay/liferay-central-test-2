@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -58,6 +60,14 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	public WikiPageImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public WikiNode getNode() {
 		WikiNode node = null;
 
@@ -75,4 +85,5 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
+	private String _userUuid;
 }

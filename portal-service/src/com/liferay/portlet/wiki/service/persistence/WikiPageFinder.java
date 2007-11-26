@@ -45,4 +45,8 @@ public interface WikiPageFinder {
 
 	public java.util.List findByNoAssets()
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
 }

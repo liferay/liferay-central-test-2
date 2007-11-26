@@ -51,6 +51,10 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getPageId();
 
 	public void setPageId(long pageId);

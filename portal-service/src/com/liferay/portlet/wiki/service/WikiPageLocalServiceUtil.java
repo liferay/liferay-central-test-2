@@ -254,6 +254,30 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.addPage(userId, nodeId, title);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
+		long nodeId, java.lang.String title, double version,
+		java.lang.String content, java.lang.String format, boolean head,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.addPage(userId, nodeId, title, version,
+			content, format, head, tagsEntries);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage addPage(
+		java.lang.String uuid, long userId, long nodeId,
+		java.lang.String title, double version, java.lang.String content,
+		java.lang.String format, boolean head, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.addPage(uuid, userId, nodeId, title,
+			version, content, format, head, tagsEntries);
+	}
+
 	public static void addPageResources(long nodeId, java.lang.String title,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 

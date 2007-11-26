@@ -58,6 +58,34 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage fetchByPrimaryKey(
 		long pageId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage[] findByUuid_PrevAndNext(
+		long pageId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException;
+
 	public java.util.List findByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException;
 
@@ -195,6 +223,9 @@ public interface WikiPagePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException;
 
@@ -213,6 +244,9 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException;

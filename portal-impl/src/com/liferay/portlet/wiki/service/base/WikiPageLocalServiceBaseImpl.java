@@ -97,6 +97,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 
 		wikiPage.setNew(true);
 
+		wikiPage.setUuid(model.getUuid());
 		wikiPage.setPageId(model.getPageId());
 		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
 		wikiPage.setCompanyId(model.getCompanyId());
@@ -129,6 +130,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 
 		wikiPage.setNew(false);
 
+		wikiPage.setUuid(model.getUuid());
 		wikiPage.setPageId(model.getPageId());
 		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
 		wikiPage.setCompanyId(model.getCompanyId());

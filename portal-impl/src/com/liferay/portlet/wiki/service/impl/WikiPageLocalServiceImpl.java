@@ -70,12 +70,40 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage addPage(long userId, long nodeId, String title)
 		throws PortalException, SystemException {
 
+		double version = WikiPageImpl.DEFAULT_VERSION;
+		String content = null;
+		String format = WikiPageImpl.DEFAULT_FORMAT;
+		boolean head = true;
+		String[] tagsEntries = null;
+
+		return addPage(
+			null, userId, nodeId, title, version, content, format, head,
+			tagsEntries);
+	}
+
+	public WikiPage addPage(
+			long userId, long nodeId, String title, double version,
+			String content, String format, boolean head, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		return addPage(
+			null, userId, nodeId, title, version, content, format, head,
+			tagsEntries);
+	}
+
+	public WikiPage addPage(
+			String uuid, long userId, long nodeId, String title, double version,
+			String content, String format, boolean head, String[] tagsEntries)
+		throws PortalException, SystemException {
+
 		// Page
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
+
 		Date now = new Date();
 
-		validate(title);
+		validate(title, nodeId, content, format);
 
 		long pageId = counterLocalService.increment();
 
@@ -84,6 +112,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = wikiPagePersistence.create(pageId);
 
+		page.setUuid(uuid);
 		page.setResourcePrimKey(resourcePrimKey);
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
@@ -91,15 +120,31 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setCreateDate(now);
 		page.setNodeId(nodeId);
 		page.setTitle(title);
-		page.setVersion(WikiPageImpl.DEFAULT_VERSION);
-		page.setFormat(WikiPageImpl.DEFAULT_FORMAT);
-		page.setHead(true);
+		page.setVersion(version);
+		page.setContent(content);
+		page.setFormat(format);
+		page.setHead(head);
 
 		wikiPagePersistence.update(page);
 
 		// Resources
 
 		addPageResources(page.getNode(), page, true, true);
+
+		// Tags
+
+		updateTagsAsset(userId, page, tagsEntries);
+
+		// Lucene
+
+		try {
+			Indexer.addPage(
+				page.getCompanyId(), node.getGroupId(), nodeId, title,
+				content, tagsEntries);
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + pageId, ioe);
+		}
 
 		return page;
 	}
@@ -486,7 +531,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			null, false);
 	}
 
-	protected void validate(String title) throws PortalException {
+	protected void validate(
+			String title, long nodeId, String content, String format)
+		throws PortalException {
+
 		if (Validator.isNull(title)) {
 			throw new PageTitleException();
 		}
@@ -497,6 +545,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (!matcher.matches()) {
 			throw new PageTitleException();
 		}
+
+		validate(nodeId, content, format);
 	}
 
 	protected void validate(long nodeId, String content, String format)

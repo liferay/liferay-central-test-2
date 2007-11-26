@@ -50,6 +50,7 @@ public class WikiPageSoap implements Serializable {
 	public static WikiPageSoap toSoapModel(WikiPage model) {
 		WikiPageSoap soapModel = new WikiPageSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setPageId(model.getPageId());
 		soapModel.setResourcePrimKey(model.getResourcePrimKey());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -87,6 +88,14 @@ public class WikiPageSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setPageId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getPageId() {
@@ -189,6 +198,7 @@ public class WikiPageSoap implements Serializable {
 		_head = head;
 	}
 
+	private String _uuid;
 	private long _pageId;
 	private long _resourcePrimKey;
 	private long _companyId;

@@ -54,6 +54,7 @@ public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
 		JSONObject jsonObj = new JSONObject();
 
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "pageId", model.getPageId());
 		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
