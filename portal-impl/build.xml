@@ -445,7 +445,7 @@
 
 	<target name="build-service">
 		<java
-			classname="com.liferay.portal.tools.ServiceBuilder"
+			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"
 			classpathref="project.classpath"
 			fork="true"
 			maxmemory="256m"

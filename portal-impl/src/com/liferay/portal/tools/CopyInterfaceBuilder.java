@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.comparator.JavaMethodComparator;
+import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.util.TextFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;

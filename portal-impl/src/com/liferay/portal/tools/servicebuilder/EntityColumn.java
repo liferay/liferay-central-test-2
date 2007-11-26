@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;

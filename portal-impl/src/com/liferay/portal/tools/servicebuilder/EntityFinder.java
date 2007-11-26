@@ -20,32 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.tools.servicebuilder;
 
 import java.util.List;
 
 /**
- * <a href="EntityOrder.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntityFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EntityOrder {
+public class EntityFinder {
 
-	public EntityOrder(boolean asc, List columns) {
-		_asc = asc;
+	public EntityFinder(String name, String returnType, List columns,
+						String where, boolean dbIndex) {
+
+		_name = name;
+		_returnType = returnType;
 		_columns = columns;
+		_where = where;
+		_dbIndex = dbIndex;
 	}
 
-	public boolean isAscending() {
-		return _asc;
+	public String getName() {
+		return _name;
+	}
+
+	public String getReturnType() {
+		return _returnType;
+	}
+
+	public boolean isCollection() {
+		if (_returnType != null && _returnType.equals("Collection")) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public List getColumns() {
 		return _columns;
 	}
 
-	private boolean _asc;
+	public String getWhere() {
+		return _where;
+	}
+
+	public boolean isDBIndex() {
+		return _dbIndex;
+	}
+
+	private String _name;
+	private String _returnType;
 	private List _columns;
+	private String _where;
+	private boolean _dbIndex;
 
 }

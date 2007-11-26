@@ -24,6 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;

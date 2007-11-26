@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
