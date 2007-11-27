@@ -1,5 +1,7 @@
 package ${packagePath}.service.persistence;
 
+import java.util.Date;
+
 public class ${entity.name}Util {
 
 	<#list methods as method>
