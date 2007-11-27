@@ -172,14 +172,8 @@ public class LDAPAuth implements Authenticator {
 
 				SearchResult result = (SearchResult)enu.next();
 
-				String fullUserDN = null;
-
-				if (Validator.isNull(baseDN)) {
-					fullUserDN = result.getName();
-				}
-				else {
-					fullUserDN = result.getName() + StringPool.COMMA + baseDN;
-				}
+				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
+					companyId, result);
 
 				Attributes attrs = PortalLDAPUtil.getAttributes(
 					ctx, fullUserDN);

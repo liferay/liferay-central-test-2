@@ -311,19 +311,24 @@ public class PortalLDAPUtil {
 		return ctx.search(baseDN, groupFilter, cons);
 	}
 
-	public static String getNameInNamespace(long companyId, String name)
+	public static String getNameInNamespace(long companyId, Binding binding)
 		throws Exception {
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_BASE_DN);
 
-		StringMaker sm = new StringMaker();
+		if (Validator.isNull(baseDN)) {
+			return binding.getName();
+		}
+		else {
+			StringMaker sm = new StringMaker();
 
-		sm.append(name);
-		sm.append(StringPool.COMMA);
-		sm.append(baseDN);
+			sm.append(binding.getName());
+			sm.append(StringPool.COMMA);
+			sm.append(baseDN);
 
-		return sm.toString();
+			return sm.toString();
+		}
 	}
 
 	public static Binding getUser(long companyId, String screenName)
@@ -436,7 +441,7 @@ public class PortalLDAPUtil {
 					SearchResult result = (SearchResult)enu.next();
 
 					Attributes attrs = getAttributes(
-						ctx, getNameInNamespace(companyId, result.getName()));
+						ctx, getNameInNamespace(companyId, result));
 
 					importLDAPUser(
 						companyId, ctx, attrs, StringPool.BLANK, true);
@@ -451,7 +456,7 @@ public class PortalLDAPUtil {
 					SearchResult result = (SearchResult)enu.next();
 
 					Attributes attrs = getAttributes(
-						ctx, getNameInNamespace(companyId, result.getName()));
+						ctx, getNameInNamespace(companyId, result));
 
 					importLDAPGroup(companyId, ctx, attrs, true);
 				}
