@@ -11,15 +11,6 @@
 		<antcall target="deploy" />
 	</target>
 
-	<target name="validate">
-		<xmlvalidate failonerror="no">
-			<fileset dir="${project.dir}"
-				includes="**/*.xml"
-				excludes="**/*build*.xml,**/custom-sql/*.xml,**/ehcache.xml,**/activemq.xml,bin/**/*.xml,**/definitions/**/*.xml,lib/versions.xml" />
-			<xmlcatalog refid="dtd.catalog"/>
-		</xmlvalidate>
-	</target>
-
 	<target name="start">
 		<antcall target="compile" />
 
@@ -1066,6 +1057,16 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				includes="*.xml,*.wsdd"
 			/>
 		</copy>
+	</target>
+
+	<target name="validate-xml">
+		<xmlvalidate failonerror="no">
+			<fileset dir="${project.dir}"
+				excludes="**/dependencies/**,**/ehcache/**"
+				includes="**/liferay-*.xml,**/web.xml"
+			/>
+			<xmlcatalog refid="dtd.catalog" />
+		</xmlvalidate>
 	</target>
 
 	<target name="zip-api">

@@ -95,6 +95,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN",
+			"facelet-taglib_1_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Display 2.0.0//EN",
 			"liferay-display_2_0_0.dtd"
 		),
@@ -232,6 +237,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Liferay//DTD Theme Loader 4.3.0//EN",
 			"liferay-theme-loader_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//MuleSource //DTD mule-configuration XML V1.0//EN",
+			"mule-configuration.dtd"
 		),
 
 		new KeyValuePair(
