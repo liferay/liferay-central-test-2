@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -79,9 +80,10 @@ public class SitemapServlet extends HttpServlet {
 				portalURL + mainPath);
 
 			if (!res.isCommitted()) {
-				res.setContentType("text/xml; charset=UTF-8");
+				res.setContentType(ContentTypes.TEXT_XML_UTF8);
 
 				out = new OutputStreamWriter(res.getOutputStream());
+
 				out.write(sitemap);
 			}
 		}

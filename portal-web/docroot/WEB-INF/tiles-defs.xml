@@ -28,11 +28,6 @@
 		<put name="content" value="/portal/error.jsp" />
 	</definition>
 
-	<definition name="portal.status" extends="portal">
-		<put name="title" value="status" />
-		<put name="content" value="/portal/status.jsp" />
-	</definition>
-
 	<definition name="portal.extend_session_confirm" path="/portal/extend_session_confirm.jsp" />
 
 	<definition name="portal.j_login_error" extends="portal">
@@ -60,6 +55,11 @@
 
 	<definition name="portal.portlet_not_setup" extends="portlet">
 		<put name="portlet_content" value="/portal/portlet_not_setup.jsp" />
+	</definition>
+
+	<definition name="portal.status" extends="portal">
+		<put name="title" value="status" />
+		<put name="content" value="/portal/status.jsp" />
 	</definition>
 
 	<definition name="portal.terms_of_use" extends="portal">

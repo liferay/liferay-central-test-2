@@ -24,17 +24,13 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
@@ -44,7 +40,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.InputStream;
 
@@ -52,8 +47,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
@@ -87,7 +80,8 @@ public class GetFileAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			getFile(folderId, name, version, fileShortcutId, themeDisplay, req,
+			getFile(
+				folderId, name, version, fileShortcutId, themeDisplay, req,
 				res);
 
 			return null;
@@ -115,11 +109,11 @@ public class GetFileAction extends PortletAction {
 
 		HttpServletRequest httpReq =
 			((ActionRequestImpl)req).getHttpServletRequest();
-
 		HttpServletResponse httpRes =
 			((ActionResponseImpl)res).getHttpServletResponse();
 
-		getFile(folderId, name, version, fileShortcutId, themeDisplay, httpReq,
+		getFile(
+			folderId, name, version, fileShortcutId, themeDisplay, httpReq,
 			httpRes);
 
 		setForward(req, ActionConstants.COMMON_NULL);

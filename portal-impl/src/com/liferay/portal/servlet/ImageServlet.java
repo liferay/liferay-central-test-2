@@ -24,6 +24,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
@@ -77,14 +78,16 @@ public class ImageServlet extends HttpServlet {
 		try {
 			writeImage(req, res);
 		}
-		catch (NullPointerException npe) {
-			PortalUtil.sendError(HttpServletResponse.SC_NOT_FOUND,
-				new NoSuchImageException(), req, res);
+		catch (NoSuchImageException nsie) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsie, req, res);
 		}
 	}
 
-	protected Image getDefaultImage(HttpServletRequest req, long imageId) {
-		String path = req.getPathInfo();
+	protected Image getDefaultImage(HttpServletRequest req, long imageId)
+		throws NoSuchImageException {
+
+		String path = GetterUtil.getString(req.getPathInfo());
 
 		if (path.startsWith("/company_logo")) {
 			return ImageLocalUtil.getDefaultCompanyLogo();
@@ -93,7 +96,8 @@ public class ImageServlet extends HttpServlet {
 			return ImageLocalUtil.getDefaultUserPortrait();
 		}
 		else {
-			return ImageLocalUtil.getDefaultSpacer();
+			//return ImageLocalUtil.getDefaultSpacer();
+			throw new NoSuchImageException();
 		}
 	}
 
@@ -142,7 +146,7 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+		throws IOException, NoSuchImageException, ServletException {
 
 		long imageId = getImageId(req);
 

@@ -32,13 +32,10 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 

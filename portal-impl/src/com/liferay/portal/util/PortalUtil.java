@@ -1705,13 +1705,14 @@ public class PortalUtil {
 		String redirect = mainPath + "/portal/status";
 
 		boolean showStatus = GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.LAYOUT_SHOW_HTTP_STATUS));
+			PropsUtil.LAYOUT_SHOW_HTTP_STATUS));
 
-		String resource = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
+		String resource = GetterUtil.getString(PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND));
 
 		if (e instanceof NoSuchLayoutException &&
-				Validator.isNotNull(resource)) {
+			Validator.isNotNull(resource)) {
+
 			res.setStatus(status);
 
 			redirect = resource;
@@ -1732,14 +1733,14 @@ public class PortalUtil {
 			if (rd != null) {
 				rd.forward(req, res);
 			}
-		}else {
+		}
+		else {
 			if (e != null) {
 				res.sendError(status, e.getMessage());
 			}
 			else {
 				res.sendError(status);
 			}
-
 		}
 	}
 

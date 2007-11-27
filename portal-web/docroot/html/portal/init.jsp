@@ -24,7 +24,7 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ page import="com.liferay.documentlibrary.NoSuchFileException"%>
+<%@ page import="com.liferay.documentlibrary.NoSuchFileException" %>
 <%@ page import="com.liferay.portal.CookieNotSupportedException" %>
 <%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>
 <%@ page import="com.liferay.portal.LayoutHiddenException" %>
@@ -32,19 +32,17 @@
 <%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %>
 <%@ page import="com.liferay.portal.LayoutPermissionException" %>
 <%@ page import="com.liferay.portal.LayoutTypeException" %>
-<%@ page import="com.liferay.portal.NoSuchGroupException"%>
-<%@ page import="com.liferay.portal.NoSuchImageException"%>
+<%@ page import="com.liferay.portal.NoSuchGroupException" %>
+<%@ page import="com.liferay.portal.NoSuchImageException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
-<%@ page import="com.liferay.portal.NoSuchLayoutSetException"%>
+<%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
 <%@ page import="com.liferay.portal.NoSuchResourceException" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
 <%@ page import="com.liferay.portal.PasswordExpiredException" %>
-<%@ page import="com.liferay.portal.PortalException"%>
 <%@ page import="com.liferay.portal.PortletActiveException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
 <%@ page import="com.liferay.portal.SendPasswordException" %>
-<%@ page import="com.liferay.portal.SystemException"%>
 <%@ page import="com.liferay.portal.UserActiveException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserLockoutException" %>
@@ -59,7 +57,7 @@
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException"%>
+<%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 <%@ page import="com.liferay.util.servlet.fileupload.LiferayFileUpload" %>
