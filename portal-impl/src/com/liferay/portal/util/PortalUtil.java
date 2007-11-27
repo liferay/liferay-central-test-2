@@ -1204,19 +1204,44 @@ public class PortalUtil {
 		String strutsAction = ParamUtil.getString(req, "struts_action");
 
 		if (Validator.isNotNull(strutsAction)) {
-			return strutsAction;
+
+			// This method should only return a Struts action if you're dealing
+			// with a regular HTTP servlet request, not a portlet HTTP servlet
+			// request.
+
+			return StringPool.BLANK;
 		}
+
+		int strutsActionCount = 0;
 
 		Enumeration enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			if (name.endsWith("_struts_action")) {
-				strutsAction = ParamUtil.getString(req, name);
+			int pos = name.indexOf("_struts_action");
 
-				if (Validator.isNotNull(strutsAction)) {
-					return strutsAction;
+			if (pos != -1) {
+				strutsActionCount++;
+
+				// There should never be more than one Struts action
+
+				if (strutsActionCount > 1) {
+					return StringPool.BLANK;
+				}
+
+				String curStrutsAction = ParamUtil.getString(req, name);
+
+				if (Validator.isNotNull(curStrutsAction)) {
+
+					// The Struts action must be for the correct portlet
+
+					String portletId1 = name.substring(1, pos);
+					String portletId2 = ParamUtil.getString(req, "p_p_id");
+
+					if (portletId1.equals(portletId2)) {
+						strutsAction = curStrutsAction;
+					}
 				}
 			}
 		}
