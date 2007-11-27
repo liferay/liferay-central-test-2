@@ -293,6 +293,10 @@ public interface Portlet extends PortletModel {
 	public void setFooterPortletJavaScript(
 		java.util.List footerPortletJavaScript);
 
+	public java.lang.String getCssClassWrapper();
+
+	public void setCssClassWrapper(java.lang.String cssClassWrapper);
+
 	public boolean getAddDefaultResource();
 
 	public boolean isAddDefaultResource();

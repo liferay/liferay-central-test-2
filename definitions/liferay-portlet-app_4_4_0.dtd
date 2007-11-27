@@ -29,7 +29,8 @@ pop-up-print?, layout-cacheable?, instanceable?, private-request-attributes?,
 private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
 footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
-footer-portlet-javascript*, add-default-resource?, system?, active?, include?)>
+footer-portlet-javascript*, css-class-wrapper?, add-default-resource?, system?,
+active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -428,6 +429,12 @@ Set the path of JavaScript that will be referenced in the page's footer relative
 to the portlet's context path.
 -->
 <!ELEMENT footer-portlet-javascript (#PCDATA)>
+
+<!--
+Set name of the CSS class that will be injected in the DIV that wraps this
+portlet.
+-->
+<!ELEMENT css-class-wrapper (#PCDATA)>
 
 <!--
 If the add-default-resource value is set to false, and the portlet does not

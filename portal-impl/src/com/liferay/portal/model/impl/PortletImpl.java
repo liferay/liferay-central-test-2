@@ -190,9 +190,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		List headerPortletCss, List headerPortalJavaScript,
 		List headerPortletJavaScript, List footerPortalCss,
 		List footerPortletCss, List footerPortalJavaScript,
-		List footerPortletJavaScript, boolean addDefaultResource, String roles,
-		Set unlinkedRoles, Map roleMappers, boolean system, boolean active,
-		boolean include, Map initParams, Integer expCache, Map portletModes,
+		List footerPortletJavaScript, String cssClassWrapper,
+		boolean addDefaultResource, String roles, Set unlinkedRoles,
+		Map roleMappers, boolean system, boolean active, boolean include,
+		Map initParams, Integer expCache, Map portletModes,
 		Set supportedLocales, String resourceBundle, PortletInfo portletInfo,
 		Set userAttributes, Map customUserAttributes, String servletContextName,
 		List servletURLPatterns) {
@@ -244,6 +245,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortletCss = footerPortletCss;
 		_footerPortalJavaScript = footerPortalJavaScript;
 		_footerPortletJavaScript = footerPortletJavaScript;
+		_cssClassWrapper = cssClassWrapper;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -1537,6 +1539,28 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the name of the CSS class that will be injected in the DIV that
+	 * wraps this portlet.
+	 *
+	 * @return		the name of the CSS class that will be injected in the DIV
+	 *				that wraps this portlet
+	 */
+	public String getCssClassWrapper() {
+		return _cssClassWrapper;
+	}
+
+	/**
+	 * Sets the name of the CSS class that will be injected in the DIV that
+	 * wraps this portlet.
+	 *
+	 * @param		cssClassWrapper the name of the CSS class that will be
+	 *				injected in the DIV that wraps this portlet
+	 */
+	public void setCssClassWrapper(String cssClassWrapper) {
+		_cssClassWrapper = cssClassWrapper;
+	}
+
+	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
 	 * @return		true if default resources for the portlet are added to a
@@ -2243,9 +2267,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
 			getFooterPortalCss(), getFooterPortletCss(),
 			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
-			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
-			getRoleMappers(), isSystem(), isActive(), isInclude(),
-			getInitParams(), getExpCache(), getPortletModes(),
+			getCssClassWrapper(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
@@ -2523,6 +2547,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * relative to the portlet's context path.
 	 */
 	private List _footerPortletJavaScript;
+
+	/**
+	 * The name of the CSS class that will be injected in the DIV that wraps
+	 * this portlet.
+	 */
+	private String _cssClassWrapper;
 
 	/**
 	 * True if default resources for the portlet are added to a page.

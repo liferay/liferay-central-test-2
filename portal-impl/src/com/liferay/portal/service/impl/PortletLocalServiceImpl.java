@@ -1101,6 +1101,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						footerPortletJavaScriptEl.getText());
 				}
 
+				portletModel.setCssClassWrapper(GetterUtil.getString(
+					portlet.elementText("css-class-wrapper"),
+					portletModel.getCssClassWrapper()));
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
 					portlet.elementText("add-default-resource"),
 					portletModel.isAddDefaultResource()));
