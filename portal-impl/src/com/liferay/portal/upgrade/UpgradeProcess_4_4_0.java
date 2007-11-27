@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_4_0.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v4_4_0.UpgradeLinkToLayoutPages;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeTags;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeUUID;
@@ -50,6 +51,7 @@ public class UpgradeProcess_4_4_0 extends UpgradeProcess {
 		upgrade(new UpgradeUUID());
 		upgrade(new UpgradeTags());
 		upgrade(new UpgradeDocumentLibrary());
+		upgrade(new UpgradeLinkToLayoutPages());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_4_0.class);

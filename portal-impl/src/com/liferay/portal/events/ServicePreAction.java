@@ -879,8 +879,21 @@ public class ServicePreAction extends Action {
 		long plid = ParamUtil.getLong(req, "p_l_id");
 
 		if (plid > 0) {
+			layout = LayoutLocalServiceUtil.getLayout(plid);
+		}
+		else {
+			long groupId = ParamUtil.getLong(req, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+			long layoutId = ParamUtil.getLong(req, "layoutId");
+
+			if ((groupId > 0) && layoutId > 0) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					groupId, privateLayout, layoutId);
+			}
+		}
+
+		if (layout != null) {
 			try {
-				layout = LayoutLocalServiceUtil.getLayout(plid);
 
 				if (!signedIn &&
 					GetterUtil.getBoolean(PropsUtil.get(

@@ -30,12 +30,14 @@
 		<liferay-ui:message key="link-to-layout" />
 	</td>
 	<td>
+		<input name="TypeSettingsProperties(groupId)" type="hidden" value="<%= layout.getGroupId() %>"></input>
+		<input name="TypeSettingsProperties(privateLayout)" type="hidden" value="<%= layout.isPrivateLayout() %>"></input>
 
 		<%
-		long linkToPlid = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToPlid", StringPool.BLANK));
+		long linkToLayoutId = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToLayoutId", StringPool.BLANK));
 		%>
 
-		<select name="TypeSettingsProperties(linkToPlid)">
+		<select name="TypeSettingsProperties(linkToLayoutId)">
 			<option value=""></option>
 
 			<%
@@ -62,18 +64,18 @@
 					name = "-&nbsp;" + name;
 				}
 
-				Layout copiableLayout = null;
+				Layout linkableLayout = null;
 
 				try {
-					copiableLayout = LayoutLocalServiceUtil.getLayout(objId);
+					linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
 				}
 				catch (Exception e) {
 				}
 
-				if (copiableLayout != null) {
+				if (linkableLayout != null) {
 			%>
 
-					<option <%= (linkToPlid == copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
+					<option <%= (linkToLayoutId == linkableLayout.getLayoutId()) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
 
 			<%
 				}
