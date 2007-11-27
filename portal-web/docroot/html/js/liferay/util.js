@@ -343,15 +343,16 @@ Liferay.Util = {
 	},
 
 	moveItem: function(fromBox, toBox, sort) {
-		if (fromBox.selectedIndex >= 0) {
-			var toSelect = jQuery(toBox);
-			var selectedOption = jQuery(fromBox).find('option:selected');
 
-			toSelect.append(selectedOption);
-		}
+		var selectedIndex = fromBox.selectedIndex;
+		if (selectedIndex >= 0) {
+			var selectedOption = fromBox.options[selectedIndex];
+			fromBox.options.remove(selectedIndex);
+			toBox.options.add(selectedOption);
 
-		if (selectedOption.text() != '' && sort == true) {
-			Liferay.Util.sortBox(toBox);
+			if (selectedOption.text != '' && sort == true) {
+				Liferay.Util.sortBox(toBox);
+			}
 		}
 	},
 
@@ -623,20 +624,22 @@ Liferay.Util = {
 	},
 
 	sortBox: function(box) {
-		var newBox = [];
+		var newBox = new Array();
 
-		for (var i = 0; i < box.length; i++) {
-			newBox[i] = [box[i].value, box[i].text];
+		for (var i = 0; i < box.options.length; i++) {
+			newBox[i] = new Array();
+			newBox[i][0] = box.options[i].value;
+			newBox[i][1] = box.options[i].text;
 		}
 
 		newBox.sort(Liferay.Util.sortByAscending);
 
-		for (var i = box.length - 1; i > -1; i--) {
-			box.options[i] = null;
+		for (var i = box.options.length - 1; i > -1; i--) {
+			box.options.remove(i);
 		}
 
 		for (var i = 0; i < newBox.length; i++) {
-			box.options[box.length] = new Option(newBox[i][1], newBox[i][0]);
+			box.options.add(new Option( newBox[i][1], newBox[i][0] ));
 		}
 	},
 
