@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/quick_note/init.jsp" %>
 
-<div class="portlet-quick-note" id="<portlet:namespace />pad" style="background: <%= color %>;">
+<div id="<portlet:namespace />pad" style="background: <%= color %>;">
 	<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 		<div class="portlet-title-default">
 			<table border="0" cellpadding="2" cellspacing="0" width="100%">
