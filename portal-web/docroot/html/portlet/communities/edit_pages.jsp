@@ -338,7 +338,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
 <input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>'>
-<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" type="hidden" value="<%= true %>">
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="">
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">

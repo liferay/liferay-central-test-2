@@ -81,6 +81,15 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 		submitForm(document.<portlet:namespace />fm);
 		}
 	}
+
+	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
+		if (checkbox.checked) {
+			jQuery('#' + parentDivId).find("input").not(".disabled").removeAttr('disabled');
+		}
+		else {
+			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
+		}
+	}
 </script>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">

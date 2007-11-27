@@ -35,20 +35,20 @@
 		<li class="tree-item">
 			<c:choose>
 				<c:when test='<%= tabs2.equals("import") || tabs2.equals("staging") %>'>
-					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_DATA %>" defaultValue="<%= true %>" />
+					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls')" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>"><liferay-ui:message key="data" /></label>
 
 					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:input-checkbox param='<%= PortletDataHandlerKeys.PORTLET_DATA + "." + selPortlet.getPortletId() %>' defaultValue="<%= true %>" />
+					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "." + selPortlet.getPortletId() %>" onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls')" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "." + selPortlet.getPortletId() %>Checkbox"><liferay-ui:message key="data" /></label>
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "." + selPortlet.getPortletId() %>"><liferay-ui:message key="data" /></label>
 				</c:otherwise>
 			</c:choose>
 
-			<ul>
+			<ul id="<portlet:namespace/>portletDataControls">
 
 				<%
 				PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();

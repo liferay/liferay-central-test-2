@@ -42,6 +42,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 
 			if (controls[i].isDisabled()) {
 				sm.append(" disabled ");
+				sm.append(" class=\"disabled\" ");
 			}
 
 			sm.append("name=\"");

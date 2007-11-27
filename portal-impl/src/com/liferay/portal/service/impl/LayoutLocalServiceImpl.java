@@ -1961,7 +1961,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (MapUtil.getBoolean(
 				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + "." + portletId) ||
+				PortletDataHandlerKeys.PORTLET_DATA + "_" + portletId) ||
 			MapUtil.getBoolean(
 				parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
 
