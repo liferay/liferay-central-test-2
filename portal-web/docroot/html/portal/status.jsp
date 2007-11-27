@@ -30,7 +30,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, NoSuchLayoutException.class.getName()) || SessionErrors.contains(request, NoSuchFileException.class.getName()) || SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) || SessionErrors.contains(request, NoSuchImageException.class.getName()) || SessionErrors.contains(request, NoSuchGroupException.class.getName()) %>">
-		<h1>404 - <liferay-ui:message key="not-found" /></h1>
+		<h3><liferay-ui:message key="not-found" /></h3>
 
 		<br />
 		<br />
@@ -42,7 +42,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
-		<h1>403 - <liferay-ui:message key="forbidden" /></h1>
+		<h3><liferay-ui:message key="forbidden" /></h3>
 
 		<br />
 		<br />
@@ -54,7 +54,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, SystemException.class.getName()) || SessionErrors.contains(request, PortalException.class.getName()) %>">
-		<h1>500 - <liferay-ui:message key="internal-server-error" /></h1>
+		<h3><liferay-ui:message key="internal-server-error" /></h3>
 
 		<br />
 		<br />
@@ -66,7 +66,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
 	</c:when>
 	<c:otherwise>
-		<h1>500 - <liferay-ui:message key="internal-server-error" /></h1>
+		<h3><liferay-ui:message key="internal-server-error" /></h3>
 
 		<br />
 		<br />
@@ -82,8 +82,6 @@ String currentURL = PortalUtil.getCurrentURL(request);
 <br />
 <br />
 
-<a href="javascript: history.go(-1);"><liferay-ui:message key="back" /></a>
-
 <div class="separator"><!----></div>
 
-<%= ReleaseInfo.getReleaseInfo() %>
+<a href="javascript: history.go(-1);"><liferay-ui:message key="back" /></a>
