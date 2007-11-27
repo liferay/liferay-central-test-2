@@ -231,7 +231,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 	}
 
 	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>", false);
 	}
 
 	function <portlet:namespace />importPages() {
@@ -1448,7 +1448,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<c:choose>
 						<c:when test='<%= tabs4.equals("export") %>'>
-							<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
+							<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
 
 							<br /><br />
 
@@ -1460,6 +1460,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<liferay-ui:message key="what-would-you-like-to-export" />
 
+							<br /><br />
+
 							<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
 
 							<br />
@@ -1468,7 +1470,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						</c:when>
 						<c:when test='<%= tabs4.equals("import") %>'>
 							<c:if test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
-								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
+								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
 
 								<br /><br />
 
@@ -1479,6 +1481,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								<br />
 
 								<liferay-ui:message key="what-would-you-like-to-import" />
+
+								<br /><br />
 
 								<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
 

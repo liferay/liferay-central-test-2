@@ -91,16 +91,47 @@ public class TabsTag extends ParamAncestorTagImpl {
 			req.setAttribute("liferay-ui:tabs:value", _value);
 			req.setAttribute("liferay-ui:tabs:portletURL", _portletURL);
 			req.setAttribute("liferay-ui:tabs:url", _url);
-			req.setAttribute("liferay-ui:tabs:url0", _url0);
-			req.setAttribute("liferay-ui:tabs:url1", _url1);
-			req.setAttribute("liferay-ui:tabs:url2", _url2);
-			req.setAttribute("liferay-ui:tabs:url3", _url3);
-			req.setAttribute("liferay-ui:tabs:url4", _url4);
-			req.setAttribute("liferay-ui:tabs:url5", _url5);
-			req.setAttribute("liferay-ui:tabs:url6", _url6);
-			req.setAttribute("liferay-ui:tabs:url7", _url7);
-			req.setAttribute("liferay-ui:tabs:url8", _url8);
-			req.setAttribute("liferay-ui:tabs:url9", _url9);
+
+			if (_url0 != null) {
+				req.setAttribute("liferay-ui:tabs:url0", _url0);
+			}
+
+			if (_url1 != null) {
+				req.setAttribute("liferay-ui:tabs:url1", _url1);
+			}
+
+			if (_url2 != null) {
+				req.setAttribute("liferay-ui:tabs:url2", _url2);
+			}
+
+			if (_url3 != null) {
+				req.setAttribute("liferay-ui:tabs:url3", _url3);
+			}
+
+			if (_url4 != null) {
+				req.setAttribute("liferay-ui:tabs:url4", _url4);
+			}
+
+			if (_url5 != null) {
+				req.setAttribute("liferay-ui:tabs:url5", _url5);
+			}
+
+			if (_url6 != null) {
+				req.setAttribute("liferay-ui:tabs:url6", _url6);
+			}
+
+			if (_url7 != null) {
+				req.setAttribute("liferay-ui:tabs:url7", _url7);
+			}
+
+			if (_url8 != null) {
+				req.setAttribute("liferay-ui:tabs:url8", _url8);
+			}
+
+			if (_url9 != null) {
+				req.setAttribute("liferay-ui:tabs:url9", _url9);
+			}
+
 			req.setAttribute("liferay-ui:tabs:backURL", _backURL);
 			req.setAttribute(
 				"liferay-ui:tabs:refresh", String.valueOf(_refresh));
@@ -118,6 +149,19 @@ public class TabsTag extends ParamAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		try {
+			ServletRequest req = pageContext.getRequest();
+
+			req.removeAttribute("liferay-ui:tabs:url0");
+			req.removeAttribute("liferay-ui:tabs:url1");
+			req.removeAttribute("liferay-ui:tabs:url2");
+			req.removeAttribute("liferay-ui:tabs:url3");
+			req.removeAttribute("liferay-ui:tabs:url4");
+			req.removeAttribute("liferay-ui:tabs:url5");
+			req.removeAttribute("liferay-ui:tabs:url6");
+			req.removeAttribute("liferay-ui:tabs:url7");
+			req.removeAttribute("liferay-ui:tabs:url8");
+			req.removeAttribute("liferay-ui:tabs:url9");
+
 			include(getEndPage());
 
 			return EVAL_PAGE;

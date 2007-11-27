@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.LayoutImportException" %>
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
+<%@ page import="com.liferay.portal.NoSuchResourceException" %>
 <%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataException" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandler" %>

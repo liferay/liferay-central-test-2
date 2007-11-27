@@ -70,57 +70,46 @@ permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 permissionsURL.setParameter("previewWidth", previewWidth);
 
-// Data
+// LAR
 
-PortletURL dataURL = renderResponse.createRenderURL();
+PortletURL larURL = renderResponse.createRenderURL();
 
-dataURL.setWindowState(WindowState.MAXIMIZED);
+larURL.setWindowState(WindowState.MAXIMIZED);
 
-dataURL.setParameter("struts_action", "/portlet_configuration/export_import");
-dataURL.setParameter("redirect", redirect);
-dataURL.setParameter("backURL", backURL);
-dataURL.setParameter("portletResource", portletResource);
+larURL.setParameter("struts_action", "/portlet_configuration/export_import");
+larURL.setParameter("redirect", redirect);
+larURL.setParameter("backURL", backURL);
+larURL.setParameter("portletResource", portletResource);
+
+int pos = 0;
+
+String tabsNames = StringPool.BLANK;
+
+if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
+	tabsNames += ",setup";
+
+	request.setAttribute("liferay-ui:tabs:url" + pos++, configurationURL.toString());
+}
+
+if (portlet.hasMultipleMimeTypes()) {
+	tabsNames += ",supported-clients";
+
+	request.setAttribute("liferay-ui:tabs:url" + pos++, supportedClientsURL.toString());
+}
+
+tabsNames += ",permissions";
+
+request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
+
+if (Validator.isNotNull(portlet.getConfigurationActionClass()) || Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
+	tabsNames += ",export-import";
+
+	request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
+}
+
+if (tabsNames.startsWith(",")) {
+	tabsNames = tabsNames.substring(1);
+}
 %>
 
-<c:choose>
-	<c:when test="<%= portlet.hasMultipleMimeTypes() %>">
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
-				<liferay-ui:tabs
-					names="setup,supported-clients,permissions,export-import"
-					url0="<%= configurationURL.toString() %>"
-					url1="<%= supportedClientsURL.toString() %>"
-					url2="<%= permissionsURL.toString() %>"
-					url3="<%= dataURL.toString() %>"
-				/>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:tabs
-					names="supported-clients,permissions,export-import"
-					url0="<%= supportedClientsURL.toString() %>"
-					url1="<%= permissionsURL.toString() %>"
-					url2="<%= dataURL.toString() %>"
-				/>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:otherwise>
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
-				<liferay-ui:tabs
-					names="setup,permissions,export-import"
-					url0="<%= configurationURL.toString() %>"
-					url1="<%= permissionsURL.toString() %>"
-					url2="<%= dataURL.toString() %>"
-				/>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:tabs
-					names="permissions,export-import"
-					url0="<%= permissionsURL.toString() %>"
-					url1="<%= dataURL.toString() %>"
-				/>
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>
+<liferay-ui:tabs names="<%= tabsNames %>" />

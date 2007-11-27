@@ -46,13 +46,13 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_pageRatings};
+		return new PortletDataHandlerControl[] {_ratings};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_pageRatings};
+		return new PortletDataHandlerControl[] {_ratings};
 	}
 
 	public String exportData(
@@ -89,8 +89,8 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final String _NAMESPACE = "page_ratings";
 
-	private static final PortletDataHandlerBoolean _pageRatings =
-		new PortletDataHandlerBoolean(_NAMESPACE, "page-ratings", true, true);
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings", true, true);
 
 	private static Log _log =
 		LogFactory.getLog(PageRatingsPortletDataHandlerImpl.class);

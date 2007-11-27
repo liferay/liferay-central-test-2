@@ -31,7 +31,7 @@
 		</li>
 	</c:if>
 
-	<c:if test="<%= supportsData %>">
+	<c:if test="<%= supportsLAR %>">
 		<li class="tree-item">
 			<c:choose>
 				<c:when test='<%= tabs2.equals("import") || tabs2.equals("staging") %>'>
@@ -49,20 +49,21 @@
 			</c:choose>
 
 			<ul>
+
 				<%
-					PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
+				PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
 
-					PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
+				PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
 
-					ResourceBundle resourceBundle = selPortletConfig.getResourceBundle(locale);
+				ResourceBundle resourceBundle = selPortletConfig.getResourceBundle(locale);
 
-					try {
-						PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
+				try {
+					PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
 
-						if (controls != null) {
+					if (controls != null) {
 				%>
 
-					<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+						<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 
 				<%
 					}
@@ -75,12 +76,13 @@
 					</li>
 
 				<%
-					}
+				}
 				%>
 
 				<c:if test='<%= tabs2.equals("import") %>'>
 					<li class="tree-item">
 						<liferay-ui:message key="data-strategy" />:
+
 						<ul>
 							<li>
 								<input checked id="<portlet:namespace />mirror" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY%>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR%>" />
@@ -92,35 +94,24 @@
 							</li>
 						</ul>
 					</li>
-
 					<li class="tree-item">
 						<liferay-ui:message key="user-id-strategy" />:
+
 						<ul>
 							<li>
 								<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+
 								<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
 							</li>
 							<li>
 								<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+
 								<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
 							</li>
 						</ul>
 					</li>
 				</c:if>
-
 			</ul>
 		</li>
 	</c:if>
-
-
-	<%--
-	<c:if test="<%= supportsUserPreferences %>">
-		<li class="tree-item">
-			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
-
-			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox"><liferay-ui:message key="user-preferences" /></label>
-		</li>
-	</c:if>
-	--%>
-
 </ul>

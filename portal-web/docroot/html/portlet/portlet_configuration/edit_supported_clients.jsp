@@ -58,10 +58,10 @@ supportedClientsRedirect.setParameter("portletResource", portletResource);
 Iterator itr = allPortletModes.iterator();
 
 while (itr.hasNext()) {
-	String portletMode = (String)itr.next();
+	String curPortletMode = (String)itr.next();
 
-	String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + portletMode;
-	boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, new PortletMode(portletMode));
+	String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + curPortletMode;
+	boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, new PortletMode(curPortletMode));
 
 	boolean mobileDevices = GetterUtil.getBoolean(portletSetup.getValue(mobileDevicesParam, String.valueOf(mobileDevicesDefault)));
 %>
@@ -72,7 +72,7 @@ while (itr.hasNext()) {
 			<liferay-ui:message key="portlet-mode" />
 		</td>
 		<td>
-			<b><liferay-ui:message key="<%= portletMode %>" /></b>
+			<b><liferay-ui:message key="<%= curPortletMode %>" /></b>
 		</td>
 	</tr>
 	<tr>
@@ -80,7 +80,7 @@ while (itr.hasNext()) {
 			<liferay-ui:message key="regular-browsers" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param='<%= "regularBrowsersEnabled" + portletMode %>' defaultValue="<%= true %>" disabled="<%= true %>" />
+			<liferay-ui:input-checkbox param='<%= "regularBrowsersEnabled" + curPortletMode %>' defaultValue="<%= true %>" disabled="<%= true %>" />
 		</td>
 	</tr>
 	<tr>
