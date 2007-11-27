@@ -78,7 +78,7 @@ portletURL.setParameter("name", name);
 		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
 	}
 </script>
-
+<div class="portlet-document-library">
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
 		<c:when test="<%= hasLock.booleanValue() %>">
@@ -223,12 +223,32 @@ portletURL.setParameter("name", name);
 			<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
 		</c:if>
 	</portlet:renderURL>
+	
+<script type="text/javascript">
+	jQuery(
+		function() {
+			new Liferay.Upload({
+				allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+				container: '#<portlet:namespace />fileUpload',
+				fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+				fallbackContainer: '#<portlet:namespace />fallback',
+				maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) %>,
+				namespace: '<portlet:namespace />',
+				uploadFile: '<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>'
+			});
+		}
+	);
+</script>
 
+<div class="liferay-upload-container" id="<portlet:namespace />fileUpload"></div>
+
+<div class="liferay-fallback" id="<portlet:namespace />fallback">
 	<liferay-ui:upload-progress
 		id="<%= uploadProgressId %>"
 		iframeSrc="<%= uploadProgressURL %>"
 		redirect="<%= redirect %>"
 	/>
+</div>
 
 	<c:if test="<%= fileEntry != null %>">
 		<br />
@@ -336,3 +356,4 @@ portletURL.setParameter("name", name);
 		</c:when>
 	</c:choose>
 </c:if>
+</div>

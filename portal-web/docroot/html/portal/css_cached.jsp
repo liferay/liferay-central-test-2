@@ -1023,6 +1023,12 @@ ul.gamma .tree-item-hover {
 
 /* ---------- Specific portlet styles ---------- */
 
+/* ---------- Document Library ---------- */
+
+.portlet-document-library .upload-file {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/document_library/page.png);
+}
+
 /* ---------- Quick note ---------- */
 
 .portlet-quick-note {
