@@ -164,6 +164,7 @@ ECJ was automatically installed. Please rerun your task.
         <dtd publicId="-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN" location="${definitions}/web-facesconfig_1_0.dtd"/>
 	    <dtd publicId="-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN" location="${definitions}/web-facesconfig_1_1.dtd"/>
 	    <dtd publicId="-//W3C//DTD XMLSCHEMA 200102//EN" location="${definitions}/XMLSchema.dtd"/>
+	    <dtd publicId="-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN" location="${definitions}/facelet-taglib_1_0.dtd"/>
 	</xmlcatalog>
 
 	<target name="print-current-time">
