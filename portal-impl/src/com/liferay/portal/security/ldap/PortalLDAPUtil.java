@@ -47,7 +47,11 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -173,6 +177,27 @@ public class PortalLDAPUtil {
 		}
 
 		ctx.close();
+	}
+
+	public static Attributes getAttributes(
+			LdapContext ctx, String fullDistinguishedName)
+		throws Exception {
+
+		String[] attrIds = {
+			"modifyTimestamp", "createTimestamp", "modifiersName",
+			"creatorsName"
+		};
+
+		Attributes attrs = ctx.getAttributes(fullDistinguishedName);
+
+		NamingEnumeration enu = ctx.getAttributes(
+			fullDistinguishedName, attrIds).getAll();
+
+		while (enu.hasMore()) {
+			attrs.put((Attribute)enu.next());
+		}
+
+		return attrs;
 	}
 
 	public static String getAuthSearchFilter(
@@ -393,9 +418,11 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
+					Attributes attrs =
+						getAttributes(ctx, result.getNameInNamespace());
+
 					importLDAPUser(
-						companyId, ctx, result.getAttributes(),
-						StringPool.BLANK, true);
+						companyId, ctx, attrs, StringPool.BLANK, true);
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
@@ -406,8 +433,10 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					importLDAPGroup(
-						companyId, ctx, result.getAttributes(), true);
+					Attributes attrs =
+						getAttributes(ctx, result.getNameInNamespace());
+
+					importLDAPGroup(companyId, ctx, attrs, true);
 				}
 			}
 		}
@@ -573,6 +602,43 @@ public class PortalLDAPUtil {
 					companyId, emailAddress);
 			}
 
+			// Skip if is default user
+
+			if (user.isDefaultUser()) {
+				return user;
+			}
+
+			// Skip import if user fields has been already synced and if
+			// import is part of a scheduled import
+
+			Date ldapUserModifiedDate = null;
+			String modifiedDate = LDAPUtil.getAttributeValue(
+				attrs, "modifyTimestamp");
+
+			try {
+				ldapUserModifiedDate = new SimpleDateFormat(
+					"yyyyMMddHHmmss").parse(modifiedDate);
+
+				if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
+					(autoPassword)) {
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("User already syncronized, skipping user " +
+							user.getEmailAddress());
+					}
+
+					return user;
+				}
+			}
+			catch(ParseException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Unable to parse LDAP modify timestamp " +
+						modifiedDate);
+				}
+
+				_log.debug(pe, pe);
+			}
+
 			Contact contact = user.getContact();
 
 			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
@@ -600,6 +666,11 @@ public class PortalLDAPUtil {
 				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
 				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
 				jobTitle, user.getOrganizationIds());
+
+			if (ldapUserModifiedDate != null) {
+				UserLocalServiceUtil.updateModifiedDate(
+					user.getUserId(), ldapUserModifiedDate);
+			}
 		}
 		catch (NoSuchUserException nsue) {
 
@@ -741,7 +812,7 @@ public class PortalLDAPUtil {
 			Attributes groupAttrs = null;
 
 			try {
-				groupAttrs = ctx.getAttributes(fullGroupDN);
+				groupAttrs = getAttributes(ctx, fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -787,7 +858,7 @@ public class PortalLDAPUtil {
 			Attributes userAttrs = null;
 
 			try {
-				userAttrs = ctx.getAttributes(fullUserDN);
+				userAttrs = getAttributes(ctx, fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
