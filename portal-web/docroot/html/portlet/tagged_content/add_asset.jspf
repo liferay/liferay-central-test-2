@@ -102,6 +102,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 
 			addURL.setParameter("struts_action", "/document_library/edit_file_entry");
 			addURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(req, DLFileEntry.class.getName())));
+			addURL.setParameter("uploader", "classic");
 		}
 	}
 	else if (assetType.equals(IGImage.class.getName())) {
@@ -110,6 +111,7 @@ public PortletURL getAddURL(RenderRequest req, String[] entries, String assetTyp
 
 			addURL.setParameter("struts_action", "/image_gallery/edit_image");
 			addURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(req, IGImage.class.getName())));
+			addURL.setParameter("uploader", "classic");
 		}
 	}
 	else if (assetType.equals(JournalArticle.class.getName())) {
