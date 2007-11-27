@@ -32,11 +32,13 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 
@@ -110,8 +112,10 @@ public class FriendlyURLServlet extends HttpServlet {
 		catch (NoSuchLayoutException nsle) {
 			_log.warn(nsle);
 
-			redirect = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsle, req, res);
+
+			return;
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

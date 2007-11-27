@@ -77,9 +77,8 @@ public class MessagingAction extends Action {
 				json = getJSON(mapping, form, req, res);
 			}
 			catch (Exception e) {
-				res.sendError(
-					HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-					e.getMessage());
+				PortalUtil.sendError(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 
 				return null;
 			}

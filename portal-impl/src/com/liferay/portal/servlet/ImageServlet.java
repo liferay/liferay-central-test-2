@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Image;
@@ -73,7 +74,13 @@ public class ImageServlet extends HttpServlet {
 			res.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 		}
 
-		writeImage(req, res);
+		try {
+			writeImage(req, res);
+		}
+		catch (NullPointerException npe) {
+			PortalUtil.sendError(HttpServletResponse.SC_NOT_FOUND,
+				new NoSuchImageException(), req, res);
+		}
 	}
 
 	protected Image getDefaultImage(HttpServletRequest req, long imageId) {

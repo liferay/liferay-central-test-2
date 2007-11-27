@@ -51,9 +51,7 @@ public class SitemapServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		res.setContentType("text/xml; charset=UTF-8");
-
-		OutputStreamWriter out = new OutputStreamWriter(res.getOutputStream());
+		OutputStreamWriter out = null;
 
 		try {
 			String host = PortalUtil.getHost(req);
@@ -81,23 +79,29 @@ public class SitemapServlet extends HttpServlet {
 				portalURL + mainPath);
 
 			if (!res.isCommitted()) {
+				res.setContentType("text/xml; charset=UTF-8");
+
+				out = new OutputStreamWriter(res.getOutputStream());
 				out.write(sitemap);
 			}
 		}
 		catch (NoSuchLayoutSetException e) {
-			res.sendError(HttpServletResponse.SC_NOT_FOUND);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, e, req, res);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
 
-			res.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			PortalUtil.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 		}
 		finally {
-			out.flush();
-			out.close();
+			if (out != null) {
+				out.flush();
+				out.close();
+			}
 		}
 	}
 

@@ -597,6 +597,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_SHOW_PORTLET_INACTIVE = "layout.show.portlet.inactive";
 
+	public static final String LAYOUT_SHOW_HTTP_STATUS = "layout.show.http.status";
+
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";
 
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";

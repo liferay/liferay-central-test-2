@@ -92,6 +92,7 @@ import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
+import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.xml.XMLSafeReader;
@@ -1664,6 +1665,56 @@ public class PortalUtil {
 			res.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 			rd.include(req, res);
+		}
+	}
+
+	public static void sendError(
+			int status, Exception e, HttpServletRequest req,
+			HttpServletResponse res)
+		throws IOException, ServletException {
+
+		ServletContext ctx = req.getSession().getServletContext();
+
+		String mainPath = PortalUtil.PATH_MAIN;
+
+		String redirect = mainPath + "/portal/status";
+
+		boolean showStatus = GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.LAYOUT_SHOW_HTTP_STATUS));
+
+		String resource = PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
+
+		if (e instanceof NoSuchLayoutException &&
+				Validator.isNotNull(resource)) {
+			res.setStatus(status);
+
+			redirect = resource;
+
+			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+
+			if (rd != null) {
+				rd.forward(req, res);
+			}
+		}
+		else if (showStatus) {
+			res.setStatus(status);
+
+			SessionErrors.add(req, e.getClass().getName(), e);
+
+			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+
+			if (rd != null) {
+				rd.forward(req, res);
+			}
+		}else {
+			if (e != null) {
+				res.sendError(status, e.getMessage());
+			}
+			else {
+				res.sendError(status);
+			}
+
 		}
 	}
 

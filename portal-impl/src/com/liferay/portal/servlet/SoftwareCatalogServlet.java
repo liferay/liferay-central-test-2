@@ -95,15 +95,16 @@ public class SoftwareCatalogServlet extends HttpServlet {
 				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchGroupException nsge) {
-			res.sendError(HttpServletResponse.SC_NOT_FOUND);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsge, req, res);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
 
-			res.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			PortalUtil.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 		}
 	}
 

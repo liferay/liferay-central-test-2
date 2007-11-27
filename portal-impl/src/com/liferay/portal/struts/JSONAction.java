@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.PrintWriter;
 
@@ -66,8 +67,8 @@ public abstract class JSONAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			res.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			PortalUtil.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 
 			return null;
 		}

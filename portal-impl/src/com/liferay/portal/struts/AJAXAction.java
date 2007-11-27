@@ -24,6 +24,7 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.PrintWriter;
 
@@ -54,8 +55,8 @@ public abstract class AJAXAction extends Action {
 			xml = getXML(mapping, form, req, res);
 		}
 		catch (Exception e) {
-			res.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			PortalUtil.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 
 			return null;
 		}
