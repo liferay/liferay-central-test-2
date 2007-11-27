@@ -31,7 +31,7 @@ content = ParamUtil.getString(request, "content", content);
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
-	<liferay-portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">

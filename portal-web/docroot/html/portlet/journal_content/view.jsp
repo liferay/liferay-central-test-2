@@ -135,11 +135,11 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 				<c:if test="<%= showEditArticleIcon %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
-						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-						<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-						<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-						<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+						<portlet:param name="struts_action" value="/journal/edit_article" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+						<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+						<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 					</liferay-portlet:renderURL>
 
 					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
@@ -151,9 +151,9 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 				<c:if test="<%= showAddArticleIcon %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
-						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-						<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
-						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="struts_action" value="/journal/edit_article" />
+						<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
 					</liferay-portlet:renderURL>
 
 					<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />

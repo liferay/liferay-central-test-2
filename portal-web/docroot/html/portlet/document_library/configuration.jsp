@@ -49,7 +49,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
 
-		nameEl.href = "<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
+		nameEl.href = "<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
 	}
 </script>
@@ -94,10 +94,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<liferay-ui:message key="root-folder" />
 	</td>
 	<td>
-		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /><liferay-portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
+		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /><portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
 		<%= rootFolderName %></a>
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=830'); void(''); folderWindow.focus();">
+		<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=830'); void(''); folderWindow.focus();">
 
 		<input type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 	</td>
