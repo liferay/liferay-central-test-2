@@ -27,9 +27,9 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-my-account</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
-		<css-class-wrapper>portlet-my-account</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>3</portlet-name>
@@ -41,8 +41,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-search</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>4</portlet-name>
@@ -128,8 +128,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<include>false</include>
 		<css-class-wrapper>portlet-address-book</css-class-wrapper>
+		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>11</portlet-name>
@@ -191,8 +191,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-journal</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>16</portlet-name>
@@ -261,7 +261,6 @@
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
-		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>21</portlet-name>
@@ -281,8 +280,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<include>false</include>
 		<css-class-wrapper>portlet-instant-messenger</css-class-wrapper>
+		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>23</portlet-name>
@@ -345,8 +344,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-bookmarks</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>29</portlet-name>
@@ -382,8 +381,8 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-image-gallery</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>32</portlet-name>
@@ -408,8 +407,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>34</portlet-name>
@@ -437,8 +436,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>37</portlet-name>
@@ -618,8 +617,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-login</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>59</portlet-name>
@@ -728,8 +727,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-navigation</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>73</portlet-name>
@@ -743,8 +742,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-breadcrumb</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>77</portlet-name>
@@ -804,8 +803,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<add-default-resource>true</add-default-resource>
 		<css-class-wrapper>portlet-language</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>83</portlet-name>
@@ -893,8 +892,8 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<system>true</system>
 		<css-class-wrapper>portlet-messaging</css-class-wrapper>
+		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>93</portlet-name>
