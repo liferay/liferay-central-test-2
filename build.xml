@@ -11,6 +11,15 @@
 		<antcall target="deploy" />
 	</target>
 
+	<target name="validate">
+		<xmlvalidate failonerror="no">
+			<fileset dir="${project.dir}"
+				includes="**/*.xml"
+				excludes="**/*build*.xml,**/custom-sql/*.xml,**/ehcache.xml,**/activemq.xml,bin/**/*.xml,**/definitions/**/*.xml,lib/versions.xml" />
+			<xmlcatalog refid="dtd.catalog"/>
+		</xmlvalidate>
+	</target>
+
 	<target name="start">
 		<antcall target="compile" />
 
