@@ -2239,6 +2239,11 @@
 			<name>view-action</name>
 			<value>/document_library_display/view</value>
 		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
 				<name>showBreadcrumbs</name>
@@ -2265,11 +2270,6 @@
 				<value>document,size</value>
 			</preference>
 		</portlet-preferences>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
