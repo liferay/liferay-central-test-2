@@ -41,8 +41,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 			sm.append(control.getDefaultState() ? "checked=\"checked\" " : "");
 
 			if (controls[i].isDisabled()) {
-				sm.append(" disabled ");
-				sm.append(" class=\"disabled\" ");
+				sm.append(" class=\"disabled\" disabled ");
 			}
 
 			sm.append("name=\"");

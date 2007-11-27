@@ -103,8 +103,9 @@
 			<li class="tree-item">
 				<c:choose>
 					<c:when test='<%= tabs4.equals("import") %>'>
-						<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>"/>
-						<input checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataStrategies')" type="checkbox" />
+						<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>" />
+
+						<input checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataStrategies');" type="checkbox" />
 
 						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>"><liferay-ui:message key="data" /></label>
 
@@ -149,12 +150,12 @@
 					<c:otherwise>
 						<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="true" />
 
-						<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataList')" type="checkbox" />
+						<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataList');" type="checkbox" />
 
 						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
 
 						<span id="<portlet:namespace />portletDataAll">
-							<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>"/>
+							<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>" />
 						</span>
 
 						<div id="<portlet:namespace />portletDataList" style="display: none;">
@@ -179,7 +180,7 @@
 								%>
 
 											<li class="tree-item">
-												<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>"  onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>')" type="checkbox" />
+												<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>');" type="checkbox" />
 
 												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "_" + curPortlet.getPortletId() %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
 
@@ -212,13 +213,13 @@
 	</li>
 
 	<li class="tree-item">
-		<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" onChange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />permissionsUl')" type="checkbox" />
+		<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />permissionsUl');" type="checkbox" />
 
-		<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label>  <liferay-ui:icon-help message="export-import-permissions-help" />
+		<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label> <liferay-ui:icon-help message="export-import-permissions-help" />
 
 		<ul id="<portlet:namespace />permissionsUl" style="display: none;">
 			<li class="tree-item">
-				<input checked class="disabled" disabled="disabled" type="checkbox"/>
+				<input checked class="disabled" disabled="disabled" type="checkbox" />
 
 				<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
 			</li>
