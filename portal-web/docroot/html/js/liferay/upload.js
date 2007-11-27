@@ -17,10 +17,23 @@ Liferay.Upload = new Class({
 
 		instance._container = jQuery(params.container);
 		instance._fallbackContainer = jQuery(params.fallbackContainer || []);
-		instance._namespaceId = params.namespace || '_liferay_pns_' + (new Date().getTime());
+		instance._namespaceId = params.namespace || '_liferay_pns_' + Math.ceil(Math.random() * (new Date).getTime()) + '_';
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
+		
+		//Check for an override via the query string
+		
+		var loc = location.href;
+		if (loc.indexOf('uploader=classic') > -1 && instance._fallbackContainer.length) {
+			instance._fallbackContainer.show();
+			if (!instance._fallbackIframe) {
+				instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
+
+				instance._fallbackIframe.height(300);
+			}
+			return;
+		}
 
 		// Language keys
 
@@ -377,7 +390,8 @@ Liferay.Upload = new Class({
 			upload_cancel_callback: instance._cancelUploads,
 			auto_upload : false,
 			upload_field_name: 'file',
-			create_ui: true
+			create_ui: true,
+			debug: false
 		});
 
 		window[instance._swfUpload] = instance._uploader;
