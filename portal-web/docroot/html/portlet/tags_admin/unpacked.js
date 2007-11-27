@@ -2,6 +2,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 	initialize: function(params) {
 		var instance = this;
 
+		//Liferay.ServiceAuth.setHeader("2", "test");
+
 		instance._categoriesCount = 0;
 		instance._entriesInCurCategoryCount = 0;
 		instance._searchFilters = {};

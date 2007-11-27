@@ -27,6 +27,18 @@
 		</init-param>
 	</filter>
 	<filter>
+		<filter-name>Secure JSONServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>json.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
 		<filter-name>Secure LiferayServlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
@@ -71,6 +83,14 @@
 		<url-pattern>/secure/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>Secure JSONServlet Filter</filter-name>
+		<url-pattern>/json/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Secure JSONServlet Filter</filter-name>
+		<url-pattern>/secure/json/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>Secure LiferayServlet Filter</filter-name>
 		<url-pattern>/liferay/*</url-pattern>
 	</filter-mapping>
@@ -110,13 +130,22 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>JSONServlet</servlet-name>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.servlet.JSONServlet</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>LiferayServlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
 			<param-value>com.liferay.portal.servlet.TunnelServlet</param-value>
 		</init-param>
-		<load-on-startup>2</load-on-startup>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>SpringServlet</servlet-name>
@@ -125,7 +154,7 @@
 			<param-name>servlet-class</param-name>
 			<param-value>com.liferay.portal.spring.servlet.RemotingServlet</param-value>
 		</init-param>
-		<load-on-startup>3</load-on-startup>
+		<load-on-startup>4</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>WebDAVServlet - Document Library</servlet-name>
@@ -138,7 +167,7 @@
 			<param-name>storage-class</param-name>
 			<param-value>com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl</param-value>
 		</init-param>
-		<load-on-startup>4</load-on-startup>
+		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>WebDAVServlet - Journal</servlet-name>
@@ -151,7 +180,7 @@
 			<param-name>storage-class</param-name>
 			<param-value>com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl</param-value>
 		</init-param>
-		<load-on-startup>5</load-on-startup>
+		<load-on-startup>6</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
@@ -160,6 +189,14 @@
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
 		<url-pattern>/secure/axis/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>JSONServlet</servlet-name>
+		<url-pattern>/json/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>JSONServlet</servlet-name>
+		<url-pattern>/secure/json/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LiferayServlet</servlet-name>
@@ -192,6 +229,10 @@
 		<web-resource-collection>
 			<web-resource-name>/secure/axis/*</web-resource-name>
 			<url-pattern>/secure/axis/*</url-pattern>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>/secure/json/*</web-resource-name>
+			<url-pattern>/secure/json/*</url-pattern>
 		</web-resource-collection>
 		<web-resource-collection>
 			<web-resource-name>/secure/liferay/*</web-resource-name>
