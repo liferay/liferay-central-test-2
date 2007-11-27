@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,6 +48,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -184,8 +186,8 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		String[] attrIds = {
-			"modifyTimestamp", "createTimestamp", "modifiersName",
-			"creatorsName"
+			"creatorsName", "createTimestamp", "modifiersName",
+			"modifyTimestamp"
 		};
 
 		Attributes attrs = ctx.getAttributes(fullDistinguishedName);
@@ -309,6 +311,21 @@ public class PortalLDAPUtil {
 		return ctx.search(baseDN, groupFilter, cons);
 	}
 
+	public static String getNameInNamespace(long companyId, String name)
+		throws Exception {
+
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_BASE_DN);
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(name);
+		sm.append(StringPool.COMMA);
+		sm.append(baseDN);
+
+		return sm.toString();
+	}
+
 	public static Binding getUser(long companyId, String screenName)
 		throws Exception {
 
@@ -418,8 +435,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					Attributes attrs =
-						getAttributes(ctx, result.getNameInNamespace());
+					Attributes attrs = getAttributes(
+						ctx, getNameInNamespace(companyId, result.getName()));
 
 					importLDAPUser(
 						companyId, ctx, attrs, StringPool.BLANK, true);
@@ -433,8 +450,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					Attributes attrs =
-						getAttributes(ctx, result.getNameInNamespace());
+					Attributes attrs = getAttributes(
+						ctx, getNameInNamespace(companyId, result.getName()));
 
 					importLDAPGroup(companyId, ctx, attrs, true);
 				}
@@ -612,28 +629,32 @@ public class PortalLDAPUtil {
 			// import is part of a scheduled import
 
 			Date ldapUserModifiedDate = null;
+
 			String modifiedDate = LDAPUtil.getAttributeValue(
 				attrs, "modifyTimestamp");
 
 			try {
-				ldapUserModifiedDate = new SimpleDateFormat(
-					"yyyyMMddHHmmss").parse(modifiedDate);
+				DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+				ldapUserModifiedDate = dateFormat.parse(modifiedDate);
 
 				if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
-					(autoPassword)) {
+					autoPassword) {
 
 					if (_log.isDebugEnabled()) {
-						_log.debug("User already syncronized, skipping user " +
-							user.getEmailAddress());
+						_log.debug(
+							"User is already syncronized, skipping user " +
+								user.getEmailAddress());
 					}
 
 					return user;
 				}
 			}
-			catch(ParseException pe) {
+			catch (ParseException pe) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Unable to parse LDAP modify timestamp " +
-						modifiedDate);
+					_log.debug(
+						"Unable to parse LDAP modify timestamp " +
+							modifiedDate);
 				}
 
 				_log.debug(pe, pe);
