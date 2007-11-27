@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_4_0;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -33,8 +31,6 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.util.dao.DataAccess;
-
-import java.io.IOException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,12 +42,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeLinkToLayoutPages.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class UpgradeLinkToLayoutPages extends UpgradeProcess {
+public class UpgradeLayout extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -65,7 +61,6 @@ public class UpgradeLinkToLayoutPages extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -74,8 +69,8 @@ public class UpgradeLinkToLayoutPages extends UpgradeProcess {
 			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(
-				"SELECT plid,typeSettings FROM Layout" +
-					" WHERE type_='link_to_layout'");
+				"select plid, typeSettings from Layout where type_ = " +
+					"'link_to_layout'");
 
 			rs = ps.executeQuery();
 
@@ -89,14 +84,13 @@ public class UpgradeLinkToLayoutPages extends UpgradeProcess {
 					newTypeSettings = upgradeTypeSettings(typeSettings);
 
 					ps = con.prepareStatement(
-						"UPDATE Layout SET typeSettings = '" + newTypeSettings +
-							"' WHERE plid=" + plid);
+						"update Layout set typeSettings = '" + newTypeSettings +
+							"' where plid = " + plid);
 
 					ps.executeUpdate();
-
 				}
 				catch (Exception e) {
-					_log.error("Error upgrading layout with plid=" + plid, e);
+					_log.error("Error upgrading layout with plid " + plid, e);
 				}
 
 				ps.close();
@@ -105,11 +99,9 @@ public class UpgradeLinkToLayoutPages extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
-	private String upgradeTypeSettings(String typeSettings)
-		throws IOException, PortalException, SystemException {
+	protected String upgradeTypeSettings(String typeSettings) throws Exception {
 		Properties props = new NullSafeProperties();
 
 		PropertiesUtil.load(props,typeSettings);
@@ -120,15 +112,15 @@ public class UpgradeLinkToLayoutPages extends UpgradeProcess {
 			Layout layout = LayoutLocalServiceUtil.getLayout(linkToPlid);
 
 			props.remove("linkToPlid");
-			props.put("groupId", Long.toString(layout.getGroupId()));
+			props.put("groupId", String.valueOf(layout.getGroupId()));
 			props.put(
-				"privateLayout", Boolean.toString(layout.isPrivateLayout()));
-			props.put("linkToLayoutId", Long.toString(layout.getLayoutId()));
+				"privateLayout", String.valueOf(layout.isPrivateLayout()));
+			props.put("linkToLayoutId", String.valueOf(layout.getLayoutId()));
 		}
 
 		return PropertiesUtil.toString(props);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeLinkToLayoutPages.class);
+	private static Log _log = LogFactory.getLog(UpgradeLayout.class);
 
 }
