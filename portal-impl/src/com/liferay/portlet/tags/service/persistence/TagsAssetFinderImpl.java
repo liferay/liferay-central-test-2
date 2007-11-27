@@ -154,7 +154,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
 			setDates(qPos, publishDate, expirationDate);
-			setGroupId(qPos, groupId);
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
 			setClassNamedIds(qPos, classNameIds);
 
 			Iterator itr = q.list().iterator();
@@ -243,7 +245,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
 			setDates(qPos, publishDate, expirationDate);
-			setGroupId(qPos, groupId);
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
 			setClassNamedIds(qPos, classNameIds);
 
 			Iterator itr = q.list().iterator();
@@ -364,7 +368,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
 			setDates(qPos, publishDate, expirationDate);
-			setGroupId(qPos, groupId);
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
 			setClassNamedIds(qPos, classNameIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
@@ -479,7 +485,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setEntryIds(qPos, entryIds);
 			setEntryIds(qPos, notEntryIds);
 			setDates(qPos, publishDate, expirationDate);
-			setGroupId(qPos, groupId);
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
 			setClassNamedIds(qPos, classNameIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
