@@ -21,17 +21,20 @@ Liferay.Upload = new Class({
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
-		
-		//Check for an override via the query string
-		
+
+		// Check for an override via the query string
+
 		var loc = location.href;
+
 		if (loc.indexOf('uploader=classic') > -1 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
+
 			if (!instance._fallbackIframe) {
 				instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
 
 				instance._fallbackIframe.height(300);
 			}
+
 			return;
 		}
 
