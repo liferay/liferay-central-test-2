@@ -646,7 +646,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
