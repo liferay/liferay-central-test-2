@@ -1434,7 +1434,8 @@ public class PortalUtil {
 				portletURL.setWindowState(WindowState.MAXIMIZED);
 				portletURL.setPortletMode(PortletMode.VIEW);
 
-				portletURL.setParameter("struts_action", "/directory/edit_user");
+				portletURL.setParameter(
+					"struts_action", "/directory/edit_user");
 				portletURL.setParameter(
 					"p_u_i_d", String.valueOf(user.getUserId()));
 
