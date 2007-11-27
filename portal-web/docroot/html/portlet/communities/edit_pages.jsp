@@ -1554,7 +1554,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 						<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />
 
-						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic(), PortalUtil.getPortalURL(request) + group.getPathFriendlyURL(false, themeDisplay)}) %>
+						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic(), PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPrivateGroup()}) %>
 
 						<br /><br />
 
