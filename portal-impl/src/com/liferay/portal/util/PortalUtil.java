@@ -1199,6 +1199,30 @@ public class PortalUtil {
 		return getSelectedUser(getHttpServletRequest(req), checkPermission);
 	}
 
+	public static String getStrutsAction(HttpServletRequest req) {
+		String strutsAction = ParamUtil.getString(req, "struts_action");
+
+		if (Validator.isNotNull(strutsAction)) {
+			return strutsAction;
+		}
+
+		Enumeration enu = req.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.endsWith("_struts_action")) {
+				strutsAction = ParamUtil.getString(req, name);
+
+				if (Validator.isNotNull(strutsAction)) {
+					return strutsAction;
+				}
+			}
+		}
+
+		return strutsAction;
+	}
+
 	public static String[] getSystemCommunityRoles() {
 		return _instance._getSystemCommunityRoles();
 	}
@@ -1942,10 +1966,34 @@ public class PortalUtil {
 
 		String path = GetterUtil.getString(req.getPathInfo());
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("doAsUserId path " + path);
+		}
+
+		String strutsAction = getStrutsAction(req);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Struts action " + strutsAction);
+		}
+
 		boolean alwaysAllowDoAsUser = false;
 
-		if (path.equals("/portal/fckeditor")) {
+		if (path.equals("/portal/fckeditor") ||
+			strutsAction.equals("/document_library/edit_file_entry") ||
+			strutsAction.equals("/image_gallery/edit_image")) {
+
 			alwaysAllowDoAsUser = true;
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (alwaysAllowDoAsUser) {
+				_log.debug(
+					"doAsUserId path or Struts action is always allowed");
+			}
+			else {
+				_log.debug(
+					"doAsUserId path is Struts action not always allowed");
+			}
 		}
 
 		if (alwaysAllowDoAsUser) {

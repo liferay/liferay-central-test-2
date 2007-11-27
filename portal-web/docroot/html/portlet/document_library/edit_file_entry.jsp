@@ -234,7 +234,7 @@ portletURL.setParameter("name", name);
 					fallbackContainer: '#<portlet:namespace />fallback',
 					maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) %>,
 					namespace: '<portlet:namespace />',
-					uploadFile: '<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>'
+					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></liferay-portlet:actionURL>'
 				});
 			}
 		);

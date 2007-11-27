@@ -145,7 +145,7 @@ String uploadProgressId = "igImageUploadProgress";
 				fallbackContainer: '#<portlet:namespace />fallback',
 				maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) %>,
 				namespace: '<portlet:namespace />',
-				uploadFile: '<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>'
+				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/image_gallery/edit_image" /></liferay-portlet:actionURL>'
 			});
 		}
 	);
