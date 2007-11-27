@@ -1069,6 +1069,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String remoteHost, String userAgent)
 		throws PortalException, SystemException {
 
+		sendPassword(
+			companyId, emailAddress, remoteAddr, remoteHost, userAgent, false);
+	}
+
+	public void sendPassword(
+			long companyId, String emailAddress, String remoteAddr,
+			String remoteHost, String userAgent, boolean encryptPassword)
+		throws PortalException, SystemException {
+
 		if (!PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
 			!PrefsPropsUtil.getBoolean(
@@ -1119,6 +1128,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
 
+			String password = user.getPassword();
+
+			if (encryptPassword) {
+				password = PwdEncryptor.encrypt(password);
+			}
+
 			subject = StringUtil.replace(
 				subject,
 				new String[] {
@@ -1143,7 +1158,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					userAgent,
 					String.valueOf(user.getUserId()),
-					user.getPassword()
+					password
 				});
 
 			body = StringUtil.replace(
@@ -1170,7 +1185,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					userAgent,
 					String.valueOf(user.getUserId()),
-					user.getPassword()
+					password
 				});
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
