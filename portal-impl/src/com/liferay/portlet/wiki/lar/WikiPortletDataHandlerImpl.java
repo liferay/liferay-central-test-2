@@ -68,7 +68,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_pagesAndNodes, _comments, _tags
+			_nodesAndPages, _comments, _tags
 		};
 	}
 
@@ -76,7 +76,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_pagesAndNodes, _comments, _tags
+			_nodesAndPages, _comments, _tags
 		};
 	}
 
@@ -335,9 +335,9 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final String _NAMESPACE = "wiki";
 
-	private static final PortletDataHandlerBoolean _pagesAndNodes =
+	private static final PortletDataHandlerBoolean _nodesAndPages =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, "pages-and-nodes", true, true);
+			_NAMESPACE, "nodes-and-pages", true, true);
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");

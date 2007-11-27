@@ -1773,6 +1773,7 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Aucun co
 no=Non
 node-id=Identification De Noeud
 node=Noeud
+nodes-and-pages=Noeuds et pages
 nodes-require-at-least-one-read-role=Les noeuds doivent être associés avec au moins un rôle autorisé à les lire.
 nodes-require-at-least-one-write-role=Les noeuds doivent être associés avec au moins un rôle autorisé en écriture.
 nodes=Noeuds

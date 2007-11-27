@@ -1773,6 +1773,7 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Nenhum c
 no=Não
 node-id=Nó Id
 node=Nó
+nodes-and-pages=Nós e páginas
 nodes-require-at-least-one-read-role=Os nós requerem ao menos um papel lido.
 nodes-require-at-least-one-write-role=Os nós requerem ao menos um escrevem o papel.
 nodes=Nós

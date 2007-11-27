@@ -531,6 +531,21 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			null, false);
 	}
 
+	protected void validate(long nodeId, String content, String format)
+		throws PortalException {
+
+		if (format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
+			try {
+				NodeFilter filter = WikiUtil.getFilter(nodeId);
+
+				WikiUtil.convert(filter, content);
+			}
+			catch (Exception e) {
+				throw new PageContentException();
+			}
+		}
+	}
+
 	protected void validate(
 			String title, long nodeId, String content, String format)
 		throws PortalException {
@@ -547,21 +562,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		validate(nodeId, content, format);
-	}
-
-	protected void validate(long nodeId, String content, String format)
-		throws PortalException {
-
-		if (format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
-			try {
-				NodeFilter filter = WikiUtil.getFilter(nodeId);
-
-				WikiUtil.convert(filter, content);
-			}
-			catch (Exception e) {
-				throw new PageContentException();
-			}
-		}
 	}
 
 	private static Log _log = LogFactory.getLog(WikiPageLocalServiceImpl.class);

@@ -1772,6 +1772,7 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Κανέ
 no=Όχι
 node-id=Ταυτότητα κόμβων
 node=Κόμβος
+nodes-and-pages=Κόμβοι και σελίδες
 nodes-require-at-least-one-read-role=Οι κόμβοι απαιτούν τουλάχιστον ένα ρόλο ανάγνωσης.
 nodes-require-at-least-one-write-role=Οι κόμβοι απαιτούν τουλάχιστον ένα ρόλο καταχώρησης.
 nodes=Κόμβοι

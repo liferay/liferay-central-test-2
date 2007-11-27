@@ -86,4 +86,5 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
 	private String _userUuid;
+
 }

@@ -1770,6 +1770,7 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=郵便�
 no=否
 node-id=ノードID
 node=ノード
+nodes-and-pages=ノード及びページ
 nodes-require-at-least-one-read-role=ノードは少なくとも1 つの読まれた役割を要求する。
 nodes-require-at-least-one-write-role=ノードは少なくとも1 つを書く役割を要求する。
 nodes=ノード

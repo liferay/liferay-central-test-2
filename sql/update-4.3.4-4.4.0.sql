@@ -64,12 +64,12 @@ alter table TagsAsset add groupId LONG;
 alter table TagsAsset add priority DOUBLE;
 alter table TagsAsset add viewCount INTEGER;
 
+COMMIT_TRANSACTION;
+
+update TagsAsset set priority = 0, viewCount = 0;
+
 alter table User_ add uuid_ VARCHAR(75) null;
 
 alter table WikiNode add uuid_ VARCHAR(75) null;
 
 alter table WikiPage add uuid_ VARCHAR(75) null;
-
-COMMIT_TRANSACTION;
-
-update TagsAsset set priority = 0, viewCount = 0;

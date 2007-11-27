@@ -1773,6 +1773,7 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Es wurde
 no=Nein
 node-id=Knoten-Id
 node=Knoten
+nodes-and-pages=Nullpunkte und Seiten
 nodes-require-at-least-one-read-role=Knoten benötigen mindestens eine Lese-Rolle.
 nodes-require-at-least-one-write-role=Knoten benötigen mindestens eine Schreib-Rolle.
 nodes=Knoten
