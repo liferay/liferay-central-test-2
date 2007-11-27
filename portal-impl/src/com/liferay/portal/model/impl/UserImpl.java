@@ -423,8 +423,8 @@ public class UserImpl extends UserModelImpl implements User {
 			Role role = RoleLocalServiceUtil.getRole(
 				getCompanyId(), RoleImpl.POWER_USER);
 
-			return UserLocalServiceUtil.hasRoleUser(
-				role.getRoleId(), getUserId());
+			return RoleLocalServiceUtil.hasUserRole(
+				getUserId(), getCompanyId(), RoleImpl.POWER_USER, true);
 		}
 		catch (Exception e) {
 			return false;
