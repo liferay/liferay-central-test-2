@@ -66,7 +66,11 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
 		Map filterMap = new HashMap();
 
-		String pluginName = pluginPackage.getName();
+		String pluginName = displayName;
+
+		if (pluginPackage != null) {
+			pluginName = pluginPackage.getName();
+		}
 
 		filterMap.put(
 			"portlet_class", "com.liferay.util.bridges.php.PHPPortlet");
