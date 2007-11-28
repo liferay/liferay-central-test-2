@@ -1380,6 +1380,7 @@ import-data-strategy-copy-as-new-help=Todos os dados e índice dentro do LAR imp
 import-data-strategy-mirror-help=Todos os dados e índice dentro do LAR importado serão criados como novos a primeira vez ao manter uma referência à fonte. As importações subseqüentes da mesma fonte atualizarão as entradas em vez de criar entradas novas.
 import-enabled=A Importação Permitiu
 import-export=Importação/Exportação
+import-from-within-the-target-community-can-cause-conflicts=A importação dentro da comunidade do alvo pode causar conflitos. Use por favor o portlet das comunidades de uma outra comunidade preferivelmente.
 import-interval=Intervalo Da Importação
 import-on-startup-enabled=A importação na partida permitiu
 import-search-filter=Filtro Da Busca Da Importação
@@ -2781,6 +2782,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=O usuário que adicionou a mensagem
 the-vacation-message-notifies-others-of-your-absence=A mensagem das férias notifica outra de sua ausência.
 the-verse-could-not-be-found=O verso não podia ser encontrado.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=_
 theme-plugin=Tema Plugin
 theme-plugins=Tema Plugins

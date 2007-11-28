@@ -1879,6 +1879,7 @@ the-user-could-not-be-found=L'usuari no existeix.
 the-user-id-you-requested-is-already-taken=El nom d'usuari solicitat ja está en uso.
 the-user-id-you-requested-is-reserved=El nom d'usuari solicitat está reservat.
 the-verse-could-not-be-found=No s'ha trobat el verso.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=El
 themes=temes
 there-are-currently-x-users-in-x-rooms=Actualment hay {0} usuaris en {1} sales.

@@ -1380,6 +1380,7 @@ import-data-strategy-copy-as-new-help=Alle Daten und Inhalt innerhalb des import
 import-data-strategy-mirror-help=Alle Daten und Inhalt innerhalb des importierten LAR werden verursacht, wie neu das erste mal beim Beibehalten eines Hinweises auf der Quelle. Folgende Importe aus der gleichen Quelle aktualisieren die Eintragungen, anstatt, neue Eintragungen zu verursachen.
 import-enabled=Import Ermöglicht
 import-export=Import / Export
+import-from-within-the-target-community-can-cause-conflicts=Import aus innerhalb der Zielgemeinschaft kann Konflikte verursachen. Verwenden Sie bitte das Gemeinschaftsportlet von einer anderen Gemeinschaft anstatt.
 import-interval=Import Intervall
 import-on-startup-enabled=Import beim Start aktiviert
 import-search-filter=Import-Suchfilter
@@ -2781,6 +2782,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=Der Benutzer, der die Nachricht hinzufügte
 the-vacation-message-notifies-others-of-your-absence=Die Abwesenheitsnachricht informiert andere über Ihre Abwesenheit
 the-verse-could-not-be-found=Der Vers konnte nicht gefunden werden.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=Der/Die/Das
 theme-plugin=Thema-Plugin
 theme-plugins=Thema-Plugins

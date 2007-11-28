@@ -1915,6 +1915,7 @@ the-user-could-not-be-found=کاربر يافت نشد
 the-user-id-you-requested-is-already-taken=شناسه کاربری مورد نظر شما قبلا ثبت شده است
 the-user-id-you-requested-is-reserved=شناسه کاربری مورد نظر شما رزرو شده است
 the-verse-could-not-be-found=آيه يافت نشد
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 themes=تم ها
 there-are-currently-x-users-in-x-rooms=در حال حاضر {0} کاربر در {1} اطاق قرار دارد.
 there-are-no-addresses=آدرسی وجود ندارد.

@@ -1433,7 +1433,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 					String tabs4Names = "export,import";
-
 					%>
 
 					<liferay-ui:tabs
@@ -1488,7 +1487,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
 								</c:when>
 								<c:otherwise>
-									<liferay-ui:message key="import-from-within-the-target-community-could-cause-conflicts-please-use-the-communities-portlet-from-another-community-instead"/>
+									<liferay-ui:message key="import-from-within-the-target-community-can-cause-conflicts" />
 								</c:otherwise>
 							</c:choose>
 						</c:when>

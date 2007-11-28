@@ -1372,6 +1372,7 @@ the-user-could-not-be-found=Uživatel nenalezen.
 the-user-id-you-requested-is-already-taken=User ID je již použit.
 the-user-id-you-requested-is-reserved=Tento User ID je rezervován.
 the-verse-could-not-be-found=Citát nenalezen.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=Tento
 there-are-currently-x-users-in-x-rooms=Nyní je {0} uživatelů v {1} místnostech.
 there-are-no-addresses=Žádné adresy.

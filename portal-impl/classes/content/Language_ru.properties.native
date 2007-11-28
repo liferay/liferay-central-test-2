@@ -1834,6 +1834,7 @@ the-user-could-not-be-found=Пользователь не найден.
 the-user-id-you-requested-is-already-taken=Указанный вами ID пользователя уже занят.
 the-user-id-you-requested-is-reserved=Указанный вами ID пользователя зарезервирован.
 the-verse-could-not-be-found=Строфа не найдена.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 themes=Темы
 there-are-currently-x-users-in-x-rooms=Сейчас в {1} комнатах находится {0} пользователей.
 there-are-no-addresses=Нет адресов.

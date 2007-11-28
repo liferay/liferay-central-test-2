@@ -2747,6 +2747,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=Käyttäjä, joka lisäsi viestin
 the-vacation-message-notifies-others-of-your-absence=Lomaviesti kertoo muille poissaolostasi.
 the-verse-could-not-be-found=Säettä ei löydy.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 theme-plugin=Teema plugin
 theme-plugins=Teema pluginit
 theme=Teema

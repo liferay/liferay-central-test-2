@@ -1380,6 +1380,7 @@ import-data-strategy-copy-as-new-help=Al gegevens en de inhoud binnen ingevoerde
 import-data-strategy-mirror-help=Al gegevens en de inhoud binnen ingevoerde LAR zullen als nieuw de eerste keer worden gecreeerd terwijl het handhaven van een verwijzing naar de bron. De verdere invoer uit de zelfde bron zal de ingangen in plaats van het creëren van nieuwe ingangen bijwerken.
 import-enabled=Toegelaten de invoer
 import-export=Importeren / Exporteren
+import-from-within-the-target-community-can-cause-conflicts=De invoer van binnen de doelgemeenschap kan conflicten veroorzaken. Gelieve te gebruiken portlet van Gemeenschappen in plaats daarvan van een andere gemeenschap.
 import-interval=Het Interval van de invoer
 import-on-startup-enabled=De invoer op Toegelaten Opstarten
 import-search-filter=De Filter van het Onderzoek van de invoer
@@ -2781,6 +2782,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=De gebruiker die het bericht toevoegde
 the-vacation-message-notifies-others-of-your-absence=Het vakantiebericht verteld anderen van uw afwezigheid.
 the-verse-could-not-be-found=Het vers kon niet worden gevonden.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=de
 theme-plugin=Thema Plugin
 theme-plugins=Thema Plugins

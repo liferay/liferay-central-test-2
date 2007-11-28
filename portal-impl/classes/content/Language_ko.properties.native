@@ -1379,6 +1379,7 @@ import-data-strategy-copy-as-new-help=LAR이 수입될 때마다 수입된LAR안
 import-data-strategy-mirror-help=근원에 참고를 유지하고 있는 동안 수입된LAR안쪽에 모든 자료 그리고 내용은 새로울 것이것과 같이 첫번째로 창조될 것이다. 동일할 근원에서 연속적인 수입품은 새로울 입장을 창조하기의 대신에 입장을 새롭게 할 것이다.
 import-enabled=수입품은 가능하게 했다
 import-export=수입품 / 수출
+import-from-within-the-target-community-can-cause-conflicts=표적 지역 사회안에에게서 수입품은 충돌을 일으키는 원인이 될 수 있는다. 다른 지역 사회에게서 지역 사회portlet을 대신 사용하십시요.
 import-interval=수입품 간격
 import-on-startup-enabled=가능하게 하는 개시에 수입품
 import-search-filter=수입품 수색 여과기
@@ -2780,6 +2781,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=메시지를 추가한 사용자
 the-vacation-message-notifies-others-of-your-absence=휴가 메시지는 너의 휴무의 다른 사람을 통지한다.
 the-verse-could-not-be-found=운문은 발견될 수 없었다.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 theme-plugin=플러그 접속식 주제
 theme-plugins=주제Plugins
 theme=주제

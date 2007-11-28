@@ -1377,6 +1377,7 @@ import-data-strategy-copy-as-new-help=LAR が輸入される度に輸入され�
 import-data-strategy-mirror-help=源への参照を維持している間輸入されたLAR の中のデータそして内容すべては新しいように最初に作成される。同じ源からのそれに続く輸入高は新しい記入項目を作成するかわりに記入項目を更新する。
 import-enabled=可能になる輸入
 import-export=輸入/ 輸出
+import-from-within-the-target-community-can-cause-conflicts=ターゲットコミュニティ内のからの輸入により対立を引き起こすことができる。もう一人のコミュニティからのコミュニティportlet を代りに使用しなさい。
 import-interval=輸入間隔
 import-on-startup-enabled=開始の輸入は可能になった
 import-search-filter=輸入の調査フィルター
@@ -2777,6 +2778,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=メッセージを加えたユーザー
 the-vacation-message-notifies-others-of-your-absence=休暇メッセージはあなたの不在の他を知らせる。
 the-verse-could-not-be-found=詩は見つけられる�theme=主題
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 theme-plugin=差込式主題
 theme-plugins=主題Plugins
 theme=主題

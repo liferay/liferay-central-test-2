@@ -98,6 +98,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 <c:choose>
 	<c:when test="<%= supportsLAR || supportsSetup %>">
+
 		<%
 		String tabs2Names = "export,import";
 
@@ -235,7 +236,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 	</c:when>
 	<c:otherwise>
-		<%= LanguageUtil.format(locale, "the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it", selPortlet.getDisplayName()) %>
+		<%= LanguageUtil.format(locale, "the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it", PortalUtil.getPortletTitle(selPortlet, application, locale)) %>
 	</c:otherwise>
 </c:choose>
 

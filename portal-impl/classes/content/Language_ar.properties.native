@@ -2283,6 +2283,7 @@ the-user-id-you-requested-is-reserved=الرمز التعريفي للمستخد
 the-user-who-added-the-message=المستخدم الذي أضاف الرسالة
 the-vacation-message-notifies-others-of-your-absence=رسالة الإجازة تعلم الآخرين بغيابك
 the-verse-could-not-be-found=لم يتم العثور على الترنيمة.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=الـ
 theme=ملمح
 themes=الملامح

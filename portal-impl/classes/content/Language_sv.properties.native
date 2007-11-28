@@ -2598,6 +2598,7 @@ the-user-id-you-requested-is-reserved=Det önskade användarID är reserverat.
 the-user-who-added-the-message=Användaren som lade till meddelandet
 the-vacation-message-notifies-others-of-your-absence=Meddelande som ska meddela de andra användarna din frånvaro.
 the-verse-could-not-be-found=Versen kunde inte hittas.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=den
 theme-plugin=Tillägg med grafiskt tema
 theme-plugins=Tillägg med grafiskt tema

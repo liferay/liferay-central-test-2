@@ -1378,6 +1378,7 @@ the-user-could-not-be-found=Không tìm thấy người dùng.
 the-user-id-you-requested-is-already-taken=Định danh yêu cầu đã được sử dụng.
 the-user-id-you-requested-is-reserved=Định danh đã được đặt chỗ.
 the-verse-could-not-be-found=Trích dẫn không tìm thấy.
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=The
 there-are-currently-x-users-in-x-rooms=There are currently {0} users in {1} rooms.
 there-are-no-addresses=Không có địa chỉ nào

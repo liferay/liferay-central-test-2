@@ -1380,6 +1380,7 @@ import-data-strategy-copy-as-new-help=所有数据和内容在进口的LAR 里�
 import-data-strategy-mirror-help=所有数据和内容在进口的LAR 里面第一次将被创造象新当维护在来源的参考。随后进口从同样来源将更新词条而不是创造新词条。
 import-enabled=进口使能
 import-export=输入/输出
+import-from-within-the-target-community-can-cause-conflicts=进口从目标社区内部可能导致冲突。改为请使用公共portlet 从其它社区。
 import-interval=进口间隔时间
 import-on-startup-enabled=进口在起动使能
 import-search-filter=进口查寻过滤器
@@ -2781,6 +2782,7 @@ the-user-must-have-at-least-one-regular-organization-to-be-able-to-select-an-ass
 the-user-who-added-the-message=增加消息的用户
 the-vacation-message-notifies-others-of-your-absence=假期消息通知其他人您的缺席。
 the-verse-could-not-be-found=找不到文章节录。
+the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 the=这
 theme-plugin=主题外挂程式
 theme-plugins=主题外挂程式
