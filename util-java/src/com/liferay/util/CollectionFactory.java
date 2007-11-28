@@ -25,6 +25,7 @@ package com.liferay.util;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
+import edu.emory.mathcs.backport.java.util.concurrent.CopyOnWriteArrayList;
 
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -102,6 +103,18 @@ public class CollectionFactory {
 		else {
 			return new LinkedList();
 		}
+	}
+
+	public static List getSyncArrayList() {
+		return new CopyOnWriteArrayList();
+	}
+
+	public static List getSyncArrayList(int capacity) {
+		return new CopyOnWriteArrayList();
+	}
+
+	public static List getSyncArrayList(List list) {
+		return new CopyOnWriteArrayList(list);
 	}
 
 	public static Map getSyncHashMap() {
