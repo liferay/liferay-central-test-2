@@ -122,10 +122,28 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		}
 		else if (type == "ldapGroups") {
   			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_ldap_groups" /></portlet:renderURL>";
+			url += "&<portlet:namespace />importGroupSearchFilter=" + document.<portlet:namespace />fm.<portlet:namespace />importGroupSearchFilter.value;
+			url += "&<portlet:namespace />groupMappingGroupName=" + document.<portlet:namespace />fm.<portlet:namespace />groupMappingGroupName.value;
+			url += "&<portlet:namespace />groupMappingDescription=" + document.<portlet:namespace />fm.<portlet:namespace />groupMappingDescription.value;
+			url += "&<portlet:namespace />groupMappingUser=" + document.<portlet:namespace />fm.<portlet:namespace />groupMappingUser.value;
 		}
 		else if (type == "ldapUsers") {
   			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_ldap_users" /></portlet:renderURL>";
+			url += "&<portlet:namespace />importUserSearchFilter=" + document.<portlet:namespace />fm.<portlet:namespace />importUserSearchFilter.value;
+			url += "&<portlet:namespace />userMappingScreenName=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingScreenName.value;
+			url += "&<portlet:namespace />userMappingPassword=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingPassword.value;
+			url += "&<portlet:namespace />userMappingEmailAddress=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingEmailAddress.value;
+			url += "&<portlet:namespace />userMappingFullName=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingFullName.value;
+			url += "&<portlet:namespace />userMappingFirstName=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingFirstName.value;
+			url += "&<portlet:namespace />userMappingLastName=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingLastName.value;
+			url += "&<portlet:namespace />userMappingJobTitle=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingJobTitle.value;
+			url += "&<portlet:namespace />userMappingGroup=" + document.<portlet:namespace />fm.<portlet:namespace />userMappingGroup.value;
 		}
+
+		url += "&<portlet:namespace />baseProviderURL=" + document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value;
+		url += "&<portlet:namespace />baseDN=" + document.<portlet:namespace />fm.<portlet:namespace />baseDN.value;
+		url += "&<portlet:namespace />principal=" + document.<portlet:namespace />fm.<portlet:namespace />principal.value;
+		url += "&<portlet:namespace />credentials=" + document.<portlet:namespace />fm.<portlet:namespace />credentials.value;
 
 		AjaxUtil.update(url, popup);
 	}

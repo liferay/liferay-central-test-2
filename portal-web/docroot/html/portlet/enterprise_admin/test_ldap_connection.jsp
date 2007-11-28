@@ -25,7 +25,11 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
+String principal = ParamUtil.getString(request, "principal");
+String credentials = ParamUtil.getString(request, "credentials");
+
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 %>
 
 <c:choose>

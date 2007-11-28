@@ -25,7 +25,12 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
+String baseDN = ParamUtil.getString(request, "baseDN");
+String principal = ParamUtil.getString(request, "principal");
+String credentials = ParamUtil.getString(request, "credentials");
+
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 
 if (ctx == null) {
 %>
@@ -36,9 +41,21 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, SearchContainer.DEFAULT_DELTA);
+String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
-Properties userMappings = PortalLDAPUtil.getUserMappings(themeDisplay.getCompanyId());
+NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, 20, baseDN, userFilter);
+
+String userMappingsParams =
+	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
+	"\npassword=" + ParamUtil.getString(request, "userMappingPassword") +
+	"\nemailAddress=" + ParamUtil.getString(request, "userMappingEmailAddress") +
+	"\nfullName=" + ParamUtil.getString(request, "userMappingFullName") +
+	"\nfirstName=" + ParamUtil.getString(request, "userMappingFirstName") +
+	"\nlastName=" + ParamUtil.getString(request, "userMappingLastName") +
+	"\njobTitle=" + ParamUtil.getString(request, "userMappingJobTitle") +
+	"\ngroup=" + ParamUtil.getString(request, "userMappingGroup");
+
+Properties userMappings = PropertiesUtil.load(userMappingsParams);
 %>
 
 <liferay-ui:message key="test-ldap-users" />

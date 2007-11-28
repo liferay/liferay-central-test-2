@@ -25,7 +25,12 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
+String baseDN = ParamUtil.getString(request, "baseDN");
+String principal = ParamUtil.getString(request, "principal");
+String credentials = ParamUtil.getString(request, "credentials");
+
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 
 if (ctx == null) {
 %>
@@ -36,9 +41,16 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, SearchContainer.DEFAULT_DELTA);
+String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
-Properties groupMappings = PortalLDAPUtil.getGroupMappings(themeDisplay.getCompanyId());
+NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, 20, baseDN, groupFilter);
+
+String groupMappingsParam =
+	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
+	"\ndescription=" + ParamUtil.getString(request, "groupMappingDescription") +
+	"\nuser=" + ParamUtil.getString(request, "groupMappingUser");
+
+Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 %>
 
 <liferay-ui:message key="test-ldap-groups" />
