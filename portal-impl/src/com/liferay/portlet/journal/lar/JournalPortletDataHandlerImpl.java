@@ -282,7 +282,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected static void exportArticle(
 			PortletDataContext context, JournalArticle article)
-		throws SystemException, PortalException, IOException {
+		throws IOException, PortalException, SystemException {
 
 		article.setUserUuid(article.getUserUuid());
 		article.setApprovedByUserUuid(article.getApprovedByUserUuid());
@@ -350,7 +350,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected static void exportTemplate(
 			PortletDataContext context, JournalTemplate template)
-		throws SystemException, IOException {
+		throws IOException, PortalException, SystemException {
 
 		template.setUserUuid(template.getUserUuid());
 
@@ -371,14 +371,14 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static String getSmallImageDir(JournalArticle article)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _ARTICLE_SMALL_IMAGES_FOLDER + article.getSmallImageId() + "." +
 			article.getSmallImageType();
 	}
 
 	protected static String getSmallImageDir(JournalTemplate template)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _TEMPLATE_SMALL_IMAGES_FOLDER + template.getSmallImageId() +
 			"." + template.getSmallImageType();
