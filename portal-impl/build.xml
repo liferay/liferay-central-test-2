@@ -159,7 +159,7 @@
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="classes"
-			includes="**/portal/tools/*.java"
+			includes="**/portal/tools/*.java,**/portal/tools/**/*.java"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
