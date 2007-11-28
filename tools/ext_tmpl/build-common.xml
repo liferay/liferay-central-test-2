@@ -96,8 +96,6 @@ Please use Ant 1.7.0 or above.
 			</not>
 		</and>
 		<then>
-			<copy file="${project.dir}/lib/development/ecj.jar" todir="${ant.home}/lib" />
-
 			<fail>
 .
 
