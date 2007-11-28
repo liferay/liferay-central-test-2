@@ -758,6 +758,13 @@ public class PortalUtil {
 		return target;
 	}
 
+	public static String getJsSafePortletId(String portletId) {
+		return JS.getSafeName(portletId);
+	}
+
+	/**
+	 * @deprecated Use <code>getJsSafePortletId</code>.
+	 */
 	public static String getJsSafePortletName(String portletName) {
 		return JS.getSafeName(portletName);
 	}
@@ -1045,11 +1052,11 @@ public class PortalUtil {
 		return getPortletGroupId(getHttpServletRequest(req));
 	}
 
-	public static String getPortletNamespace(String portletName) {
+	public static String getPortletNamespace(String portletId) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(StringPool.UNDERLINE);
-		sm.append(portletName);
+		sm.append(portletId);
 		sm.append(StringPool.UNDERLINE);
 
 		return sm.toString();

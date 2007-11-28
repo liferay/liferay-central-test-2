@@ -576,7 +576,7 @@ public class ResourceActionsUtil {
 				name = name + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
-			name = PortalUtil.getJsSafePortletName(name);
+			name = PortalUtil.getJsSafePortletId(name);
 
 			// Actions
 
@@ -683,7 +683,7 @@ public class ResourceActionsUtil {
 							servletContextName;
 				}
 
-				portletNameString = PortalUtil.getJsSafePortletName(
+				portletNameString = PortalUtil.getJsSafePortletId(
 					portletNameString);
 
 				// Reference for a portlet to child models

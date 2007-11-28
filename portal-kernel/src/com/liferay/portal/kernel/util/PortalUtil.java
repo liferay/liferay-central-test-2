@@ -80,11 +80,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPortletNamespace(String portletName)
+	public static String getPortletNamespace(String portletId)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletName, false);
+			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletId, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;

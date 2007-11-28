@@ -132,7 +132,7 @@ public class PluginSettingLocalServiceImpl
 			boolean active)
 		throws PortalException, SystemException {
 
-		pluginId = PortalUtil.getJsSafePortletName(pluginId);
+		pluginId = PortalUtil.getJsSafePortletId(pluginId);
 
 		PluginSetting pluginSetting = pluginSettingPersistence.fetchByC_I_T(
 			companyId, pluginId, pluginType);

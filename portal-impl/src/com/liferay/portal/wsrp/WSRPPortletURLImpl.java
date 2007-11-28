@@ -127,8 +127,8 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 		String[] plid = {String.valueOf(getPlid())};
 		params.put("p_l_id", plid);
 
-		String[] portletName = {getPortletName()};
-		params.put("p_p_id", portletName);
+		String[] portletId = {getPortletId()};
+		params.put("p_p_id", portletId);
 
 		String[] action = {isAction() ? "1" : "0"};
 		params.put("p_p_action", action);
@@ -151,7 +151,7 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String name =
-				PortalUtil.getPortletNamespace(portletName[0]) +
+				PortalUtil.getPortletNamespace(portletId[0]) +
 				(String)entry.getKey();
 			String[] values = (String[])entry.getValue();
 

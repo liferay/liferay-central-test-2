@@ -22,12 +22,12 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.HttpUtil;
 
 import java.util.HashMap;
@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
 public class StrutsURLEncoder implements URLEncoder {
 
 	public static void setParameters(
-		PortletURLImpl portletURL, String queryString) {
+		LiferayPortletURL portletURL, String queryString) {
 
 		String[] params = StringUtil.split(queryString, "&");
 
@@ -82,14 +82,16 @@ public class StrutsURLEncoder implements URLEncoder {
 					portletURL.setAction(GetterUtil.getBoolean(value));
 				}
 				else {
-					portletURL.setParameter(param, HttpUtil.decodeURL(value), true);
+					portletURL.setParameter(
+						param, HttpUtil.decodeURL(value), true);
 				}
 			}
 		}
 	}
 
-	public StrutsURLEncoder(String contextPath, String mainPath,
-							String servletMapping, PortletURLImpl portletURL) {
+	public StrutsURLEncoder(
+		String contextPath, String mainPath, String servletMapping,
+		LiferayPortletURL portletURL) {
 
 		_contextPath = contextPath;
 		_mainPath = mainPath;
@@ -214,7 +216,7 @@ public class StrutsURLEncoder implements URLEncoder {
 	private String _contextPath;
 	private String _mainPath;
 	private String _servletMapping = StringPool.BLANK;
-	private PortletURLImpl _portletURL;
+	private LiferayPortletURL _portletURL;
 	private WindowState _windowState;
 	private PortletMode _portletMode;
 

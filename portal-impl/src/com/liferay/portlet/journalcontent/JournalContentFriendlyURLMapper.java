@@ -23,16 +23,15 @@
 package com.liferay.portlet.journalcontent;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -48,23 +47,17 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		if (!(portletURL instanceof PortletURLImpl)) {
-			return null;
-		}
-
-		PortletURLImpl url = (PortletURLImpl)portletURL;
-
+	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
 		String strutsAction = GetterUtil.getString(
-			url.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/journal_content/view")) {
-			String portletId = url.getPortlet().getPortletId();
-			String groupId = url.getParameter("groupId");
-			String articleId = url.getParameter("articleId");
-			String templateId = url.getParameter("templateId");
+			String portletId = portletURL.getPortletId();
+			String groupId = portletURL.getParameter("groupId");
+			String articleId = portletURL.getParameter("articleId");
+			String templateId = portletURL.getParameter("templateId");
 
 			if (Validator.isNotNull(portletId) &&
 				Validator.isNotNull(groupId) &&
@@ -74,20 +67,20 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 					"/journal_content/" + portletId + "/" + groupId + "/" +
 						articleId;
 
-				url.addParameterIncludedInPath("groupId");
-				url.addParameterIncludedInPath("articleId");
+				portletURL.addParameterIncludedInPath("groupId");
+				portletURL.addParameterIncludedInPath("articleId");
 
 				if (Validator.isNotNull(templateId)) {
 					friendlyURLPath += "/" + templateId;
 
-					url.addParameterIncludedInPath("templateId");
+					portletURL.addParameterIncludedInPath("templateId");
 				}
 			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			url.addParameterIncludedInPath("p_p_id");
-			url.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
 		return friendlyURLPath;

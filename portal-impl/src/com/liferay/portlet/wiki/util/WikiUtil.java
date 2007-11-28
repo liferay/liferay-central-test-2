@@ -24,9 +24,9 @@ package com.liferay.portlet.wiki.util;
 
 import com.efsol.friki.PageRepository;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
 
 import java.io.IOException;
@@ -113,7 +113,8 @@ public class WikiUtil {
 
 		String portletURLToString = StringPool.BLANK;
 
-		PortletURLImpl portletURL = (PortletURLImpl)filter.getPortletURL();
+		LiferayPortletURL portletURL =
+			(LiferayPortletURL)filter.getPortletURL();
 
 		if (portletURL != null) {
 			portletURL.setParameter(

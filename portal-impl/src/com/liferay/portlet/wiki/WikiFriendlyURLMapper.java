@@ -23,18 +23,17 @@
 package com.liferay.portlet.wiki;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -53,21 +52,15 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		if (!(portletURL instanceof PortletURLImpl)) {
-			return null;
-		}
-
-		PortletURLImpl url = (PortletURLImpl)portletURL;
-
+	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
 		String strutsAction = GetterUtil.getString(
-			url.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/wiki/view")) {
-			String title = url.getParameter("title");
-			String nodeId = url.getParameter("nodeId");
+			String title = portletURL.getParameter("title");
+			String nodeId = portletURL.getParameter("nodeId");
 
 			if (Validator.isNotNull(nodeId)) {
 				StringMaker sm = new StringMaker();
@@ -77,13 +70,13 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				sm.append(StringPool.SLASH);
 				sm.append(nodeId);
 
-				url.addParameterIncludedInPath("nodeId");
+				portletURL.addParameterIncludedInPath("nodeId");
 
 				if (Validator.isNotNull(title)) {
 					sm.append(StringPool.SLASH);
 					sm.append(title);
 
-					url.addParameterIncludedInPath("title");
+					portletURL.addParameterIncludedInPath("title");
 				}
 
 				friendlyURLPath = sm.toString();
@@ -91,8 +84,8 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			url.addParameterIncludedInPath("p_p_id");
-			url.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
 		return friendlyURLPath;

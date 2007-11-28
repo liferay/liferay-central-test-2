@@ -67,12 +67,12 @@ public class TCKAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			String[] portletNames = req.getParameterValues("portletName");
+			String[] portletIds = req.getParameterValues("portletId");
 
-			for (int i = 0; i < portletNames.length; i++) {
-				String[] nameAndWar = StringUtil.split(portletNames[i], "/");
+			for (int i = 0; i < portletIds.length; i++) {
+				String[] nameAndWar = StringUtil.split(portletIds[i], "/");
 
-				portletNames[i] = PortalUtil.getJsSafePortletName(
+				portletIds[i] = PortalUtil.getJsSafePortletId(
 					nameAndWar[1] + PortletImpl.WAR_SEPARATOR + nameAndWar[0]);
 			}
 
@@ -92,8 +92,8 @@ public class TCKAction extends Action {
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			for (int i = 0; i < portletNames.length; i++) {
-				layoutType.addPortletId(userId, portletNames[i]);
+			for (int i = 0; i < portletIds.length; i++) {
+				layoutType.addPortletId(userId, portletIds[i]);
 			}
 
 			LayoutLocalServiceUtil.updateLayout(

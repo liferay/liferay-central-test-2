@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+
 import java.util.Enumeration;
 
 import javax.portlet.PortletException;
@@ -71,48 +73,49 @@ public class PortletURLUtil {
 	public static PortletURL clone(PortletURL portletURL, RenderResponse res)
 		throws PortletException {
 
-		PortletURLImpl portletURLImpl = (PortletURLImpl)portletURL;
+		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(portletURLImpl, portletURLImpl.isAction(), res);
+		return clone(liferayPortletURL, liferayPortletURL.isAction(), res);
 	}
 
 	public static PortletURL clone(
 			PortletURL portletURL, boolean action, RenderResponse res)
 		throws PortletException {
 
-		PortletURLImpl portletURLImpl = (PortletURLImpl)portletURL;
+		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(portletURLImpl, action, res);
+		return clone(liferayPortletURL, action, res);
 	}
 
 	public static PortletURL clone(
-			PortletURLImpl portletURLImpl, boolean action, RenderResponse res)
+			LiferayPortletURL liferayPortletURL, boolean action,
+			RenderResponse res)
 		throws PortletException {
 
-		PortletURLImpl newURLImpl = null;
+		LiferayPortletURL newURLImpl = null;
 
 		if (action) {
-			newURLImpl = (PortletURLImpl)res.createActionURL();
+			newURLImpl = (LiferayPortletURL)res.createActionURL();
 		}
 		else {
-			newURLImpl = (PortletURLImpl)res.createRenderURL();
+			newURLImpl = (LiferayPortletURL)res.createRenderURL();
 		}
 
-		newURLImpl.setPortletName(portletURLImpl.getPortletName());
+		newURLImpl.setPortletId(liferayPortletURL.getPortletId());
 
-		WindowState windowState = portletURLImpl.getWindowState();
+		WindowState windowState = liferayPortletURL.getWindowState();
 
 		if (windowState != null) {
 			newURLImpl.setWindowState(windowState);
 		}
 
-		PortletMode portletMode = portletURLImpl.getPortletMode();
+		PortletMode portletMode = liferayPortletURL.getPortletMode();
 
 		if (portletMode != null) {
 			newURLImpl.setPortletMode(portletMode);
 		}
 
-		newURLImpl.setParameters(portletURLImpl.getParameterMap());
+		newURLImpl.setParameters(liferayPortletURL.getParameterMap());
 
 		return newURLImpl;
 	}

@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -59,7 +60,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSecurityException;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
@@ -75,32 +75,32 @@ import org.apache.commons.logging.LogFactory;
  * @author Jorge Ferrer
  *
  */
-public class PortletURLImpl implements PortletURL, Serializable {
+public class PortletURLImpl implements LiferayPortletURL, Serializable {
 
 	public static final boolean APPEND_PARAMETERS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));
 
-	public PortletURLImpl(ActionRequestImpl req, String portletName, long plid,
-						  boolean action) {
+	public PortletURLImpl(
+		ActionRequestImpl req, String portletId, long plid, boolean action) {
 
-		this(req.getHttpServletRequest(), portletName, plid, action);
-
-		_portletReq = req;
-	}
-
-	public PortletURLImpl(RenderRequestImpl req, String portletName, long plid,
-						  boolean action) {
-
-		this(req.getHttpServletRequest(), portletName, plid, action);
+		this(req.getHttpServletRequest(), portletId, plid, action);
 
 		_portletReq = req;
 	}
 
-	public PortletURLImpl(HttpServletRequest req, String portletName, long plid,
-						  boolean action) {
+	public PortletURLImpl(
+		RenderRequestImpl req, String portletId, long plid, boolean action) {
+
+		this(req.getHttpServletRequest(), portletId, plid, action);
+
+		_portletReq = req;
+	}
+
+	public PortletURLImpl(
+		HttpServletRequest req, String portletId, long plid, boolean action) {
 
 		_req = req;
-		_portletName = portletName;
+		_portletId = portletId;
 		_plid = plid;
 		_secure = req.isSecure();
 		_action = action;
@@ -116,23 +116,37 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _portletReq;
 	}
 
-	public String getPortletName() {
-		return _portletName;
+	public String getPortletId() {
+		return _portletId;
 	}
 
-	public void setPortletName(String portletName) {
-		_portletName = portletName;
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
 
 		// Clear cache
 
 		_toString = null;
 	}
 
+	/**
+	 * @deprecated Use <code>getPortletId</code>.
+	 */
+	public String getPortletName() {
+		return getPortletId();
+	}
+
+	/**
+	 * @deprecated Use <code>setPortletId</code>.
+	 */
+	public void setPortletName(String portletName) {
+		setPortletId(portletName);
+	}
+
 	public Portlet getPortlet() {
 		if (_portlet == null) {
 			try {
 				_portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(_req), _portletName);
+					PortalUtil.getCompanyId(_req), _portletId);
 			}
 			catch (SystemException se) {
 				_log.error(se.getMessage());
@@ -165,7 +179,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 	public String getNamespace() {
 		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletName);
+			_namespace = PortalUtil.getPortletNamespace(_portletId);
 		}
 
 		return _namespace;
@@ -528,7 +542,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		if (!isParameterIncludedInPath("p_p_id")) {
 			sm.append("p_p_id");
 			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, _portletName));
+			sm.append(processValue(key, _portletId));
 			sm.append(StringPool.AMPERSAND);
 		}
 
@@ -658,7 +672,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 					sm.append(StringPool.AMPERSAND);
 				}
 
-				sm.append("#p_").append(_portletName);
+				sm.append("#p_").append(_portletId);
 			}
 		}
 
@@ -699,7 +713,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 	private HttpServletRequest _req;
 	private PortletRequest _portletReq;
-	private String _portletName;
+	private String _portletId;
 	private Portlet _portlet;
 	private String _namespace;
 	private long _plid;

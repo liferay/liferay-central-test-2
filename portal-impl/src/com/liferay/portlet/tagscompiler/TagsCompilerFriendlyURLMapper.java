@@ -23,6 +23,7 @@
 package com.liferay.portlet.tagscompiler;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -30,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -50,7 +50,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
-	public String buildPath(PortletURL portletURL) {
+	public String buildPath(LiferayPortletURL portletURL) {
 		return null;
 	}
 

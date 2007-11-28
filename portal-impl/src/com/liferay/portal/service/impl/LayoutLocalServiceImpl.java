@@ -3104,7 +3104,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		themeId +=
 			PortletImpl.WAR_SEPARATOR + themeLoader.getServletContextName();
 
-		return PortalUtil.getJsSafePortletName(themeId);
+		return PortalUtil.getJsSafePortletId(themeId);
 	}
 
 	protected void importUserPermissions(

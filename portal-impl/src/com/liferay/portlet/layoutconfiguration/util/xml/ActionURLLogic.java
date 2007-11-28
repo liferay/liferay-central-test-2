@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
 
 import java.io.StringReader;
@@ -68,15 +68,15 @@ public class ActionURLLogic extends RuntimeLogic {
 
 		Element root = doc.getRootElement();
 
-		PortletURLImpl portletURL =
-			(PortletURLImpl)_res.createPortletURL(isAction());
+		LiferayPortletURL portletURL =
+			(LiferayPortletURL)_res.createPortletURL(isAction());
 
-		String portletName = root.attributeValue("portlet-name");
+		String portletId = root.attributeValue("portlet-name");
 
-		if (portletName != null) {
-			portletName = PortalUtil.getJsSafePortletName(portletName);
+		if (portletId != null) {
+			portletId = PortalUtil.getJsSafePortletId(portletId);
 
-			portletURL.setPortletName(portletName);
+			portletURL.setPortletId(portletId);
 		}
 
 		for (int i = 1;; i++) {

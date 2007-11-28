@@ -23,16 +23,15 @@
 package com.liferay.portlet.blogs;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -51,41 +50,35 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		if (!(portletURL instanceof PortletURLImpl)) {
-			return null;
-		}
-
-		PortletURLImpl url = (PortletURLImpl)portletURL;
-
+	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
 		String strutsAction = GetterUtil.getString(
-			url.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/blogs/rss")) {
 			friendlyURLPath = "/blogs/rss";
 		}
 		else if (strutsAction.equals("/blogs/view_entry")) {
-			String entryId = url.getParameter("entryId");
+			String entryId = portletURL.getParameter("entryId");
 
-			String urlTitle = url.getParameter("urlTitle");
+			String urlTitle = portletURL.getParameter("urlTitle");
 
 			if (Validator.isNotNull(entryId)) {
 				friendlyURLPath = "/blogs/" + entryId;
 
-				url.addParameterIncludedInPath("entryId");
+				portletURL.addParameterIncludedInPath("entryId");
 			}
 			else if (Validator.isNotNull(urlTitle)) {
 				friendlyURLPath = "/blogs/" + urlTitle;
 
-				url.addParameterIncludedInPath("urlTitle");
+				portletURL.addParameterIncludedInPath("urlTitle");
 			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			url.addParameterIncludedInPath("p_p_id");
-			url.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
 		return friendlyURLPath;

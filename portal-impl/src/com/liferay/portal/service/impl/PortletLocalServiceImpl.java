@@ -108,7 +108,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public Portlet getPortletById(long companyId, String portletId)
 		throws SystemException {
 
-		portletId = PortalUtil.getJsSafePortletName(portletId);
+		portletId = PortalUtil.getJsSafePortletId(portletId);
 
 		Portlet portlet = null;
 
@@ -184,7 +184,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public boolean hasPortlet(long companyId, String portletId)
 		throws SystemException {
 
-		portletId = PortalUtil.getJsSafePortletName(portletId);
+		portletId = PortalUtil.getJsSafePortletId(portletId);
 
 		Portlet portlet = null;
 
@@ -364,7 +364,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			long companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
 
-		portletId = PortalUtil.getJsSafePortletName(portletId);
+		portletId = PortalUtil.getJsSafePortletId(portletId);
 
 		Portlet portlet = portletPersistence.fetchByC_P(companyId, portletId);
 
@@ -542,7 +542,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
-			portletId = PortalUtil.getJsSafePortletName(portletId);
+			portletId = PortalUtil.getJsSafePortletId(portletId);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Reading portlet " + portletId);
@@ -747,7 +747,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 							servletContextName;
 				}
 
-				portletId = PortalUtil.getJsSafePortletName(portletId);
+				portletId = PortalUtil.getJsSafePortletId(portletId);
 
 				portletIds.add(portletId);
 				curPortletIds.add(portletId);
@@ -799,7 +799,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			if ((servletContextName != null) && (portlet.isWARFile()) &&
 				(portletId.endsWith(
 					PortletImpl.WAR_SEPARATOR +
-						PortalUtil.getJsSafePortletName(servletContextName)) &&
+						PortalUtil.getJsSafePortletId(servletContextName)) &&
 				(!portletIds.contains(portletId)))) {
 
 				undefinedPortletIds.add(portletId);
@@ -890,7 +890,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
-			portletId = PortalUtil.getJsSafePortletName(portletId);
+			portletId = PortalUtil.getJsSafePortletId(portletId);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Reading portlet extension " + portletId);

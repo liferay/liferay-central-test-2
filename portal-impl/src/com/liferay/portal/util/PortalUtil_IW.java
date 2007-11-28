@@ -242,6 +242,10 @@ public class PortalUtil_IW {
 		return PortalUtil.getLayoutTarget(layout);
 	}
 
+	public java.lang.String getJsSafePortletId(java.lang.String portletId) {
+		return PortalUtil.getJsSafePortletId(portletId);
+	}
+
 	public java.lang.String getJsSafePortletName(java.lang.String portletName) {
 		return PortalUtil.getJsSafePortletName(portletName);
 	}
@@ -352,8 +356,8 @@ public class PortalUtil_IW {
 		return PortalUtil.getPortletGroupId(req);
 	}
 
-	public java.lang.String getPortletNamespace(java.lang.String portletName) {
-		return PortalUtil.getPortletNamespace(portletName);
+	public java.lang.String getPortletNamespace(java.lang.String portletId) {
+		return PortalUtil.getPortletNamespace(portletId);
 	}
 
 	public java.lang.String getPortletXmlFileName()
@@ -428,6 +432,11 @@ public class PortalUtil_IW {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req, checkPermission);
+	}
+
+	public java.lang.String getStrutsAction(
+		javax.servlet.http.HttpServletRequest req) {
+		return PortalUtil.getStrutsAction(req);
 	}
 
 	public java.lang.String[] getSystemCommunityRoles() {
@@ -653,6 +662,13 @@ public class PortalUtil_IW {
 		throws java.io.IOException, javax.servlet.ServletException {
 		PortalUtil.renderPortlet(sm, ctx, req, res, portlet, queryString,
 			columnId, columnPos, columnCount, path);
+	}
+
+	public void sendError(int status, java.lang.Exception e,
+		javax.servlet.http.HttpServletRequest req,
+		javax.servlet.http.HttpServletResponse res)
+		throws java.io.IOException, javax.servlet.ServletException {
+		PortalUtil.sendError(status, e, req, res);
 	}
 
 	public void setPageSubtitle(java.lang.String subtitle,

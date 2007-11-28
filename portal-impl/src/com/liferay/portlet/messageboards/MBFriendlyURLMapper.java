@@ -23,16 +23,15 @@
 package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -52,33 +51,27 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		if (!(portletURL instanceof PortletURLImpl)) {
-			return null;
-		}
-
-		PortletURLImpl url = (PortletURLImpl)portletURL;
-
+	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
-		String tabs1 = GetterUtil.getString(url.getParameter("tabs1"));
-		String tabs2 = GetterUtil.getString(url.getParameter("tabs2"));
+		String tabs1 = GetterUtil.getString(portletURL.getParameter("tabs1"));
+		String tabs2 = GetterUtil.getString(portletURL.getParameter("tabs2"));
 
 		if (Validator.isNotNull(tabs2)) {
 			return null;
 		}
 
 		String strutsAction = GetterUtil.getString(
-			url.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/message_boards/view")) {
 			String categoryId = GetterUtil.getString(
-				url.getParameter("categoryId"));
+				portletURL.getParameter("categoryId"));
 
 			if (Validator.isNotNull(categoryId) && !categoryId.equals("0")) {
 				friendlyURLPath = "/message_boards/category/" + categoryId;
 
-				url.addParameterIncludedInPath("categoryId");
+				portletURL.addParameterIncludedInPath("categoryId");
 			}
 			else {
 				friendlyURLPath = "/message_boards";
@@ -87,26 +80,26 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 					friendlyURLPath += "/" + tabs1;
 				}
 
-				url.addParameterIncludedInPath("tabs1");
+				portletURL.addParameterIncludedInPath("tabs1");
 
 				if (categoryId.equals("0")) {
-					url.addParameterIncludedInPath("categoryId");
+					portletURL.addParameterIncludedInPath("categoryId");
 				}
 			}
 		}
 		else if (strutsAction.equals("/message_boards/view_message")) {
-			String messageId = url.getParameter("messageId");
+			String messageId = portletURL.getParameter("messageId");
 
 			if (Validator.isNotNull(messageId)) {
 				friendlyURLPath = "/message_boards/message/" + messageId;
 
-				url.addParameterIncludedInPath("messageId");
+				portletURL.addParameterIncludedInPath("messageId");
 			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			url.addParameterIncludedInPath("p_p_id");
-			url.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
 		return friendlyURLPath;

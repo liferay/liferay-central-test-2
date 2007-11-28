@@ -54,12 +54,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	public static final String PLUGIN_TYPE = "theme";
 
 	public static String getDefaultRegularThemeId() {
-		return PortalUtil.getJsSafePortletName(
+		return PortalUtil.getJsSafePortletId(
 			PropsUtil.get(PropsUtil.DEFAULT_REGULAR_THEME_ID));
 	}
 
 	public static String getDefaultWapThemeId() {
-		return PortalUtil.getJsSafePortletName(
+		return PortalUtil.getJsSafePortletId(
 			PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID));
 	}
 

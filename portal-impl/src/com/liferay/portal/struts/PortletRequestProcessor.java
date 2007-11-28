@@ -22,6 +22,7 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -40,7 +41,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletRequestDispatcherImpl;
-import com.liferay.portlet.PortletURLImpl;
 
 import java.io.IOException;
 
@@ -190,8 +190,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				String forwardPath = actionForward.getPath();
 
 				if (forwardPath.startsWith("/")) {
-					PortletURLImpl forwardURL =
-						(PortletURLImpl)resImpl.createRenderURL();
+					LiferayPortletURL forwardURL =
+						(LiferayPortletURL)resImpl.createRenderURL();
 
 					forwardURL.setParameter("struts_action", forwardPath);
 

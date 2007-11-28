@@ -23,17 +23,16 @@
 package com.liferay.portlet.softwarecatalog;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -52,53 +51,48 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		if (!(portletURL instanceof PortletURLImpl)) {
-			return null;
-		}
-
-		PortletURLImpl url = (PortletURLImpl)portletURL;
-
+	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURL = null;
 
-		String tabs1 = url.getParameter("tabs1");
+		String tabs1 = portletURL.getParameter("tabs1");
 
 		String action = GetterUtil.getString(
-			url.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
 		if (action.equals("/software_catalog/view")) {
 			friendlyURL = "/software_catalog/" + tabs1;
 		}
 		else if (action.equals("/software_catalog/view_product_entry")) {
-			String productEntryId = url.getParameter("productEntryId");
+			String productEntryId = portletURL.getParameter("productEntryId");
 
 			friendlyURL = "/software_catalog/products/" + productEntryId;
 
-			url.addParameterIncludedInPath("productEntryId");
+			portletURL.addParameterIncludedInPath("productEntryId");
 		}
 		else if (action.equals("/software_catalog/edit_product_entry")) {
-			String productEntryId = url.getParameter("productEntryId");
+			String productEntryId = portletURL.getParameter("productEntryId");
 
 			if (Validator.isNotNull(productEntryId)) {
 				friendlyURL = "/software_catalog/products/" +
 					productEntryId + "/edit";
 
-				url.addParameterIncludedInPath("productEntryId");
+				portletURL.addParameterIncludedInPath("productEntryId");
 			}
 			else {
 				friendlyURL = "/software_catalog/products/new";
 			}
 		}
 		else if (action.equals("/software_catalog/edit_product_version")){
-			String productEntryId = url.getParameter("productEntryId");
-			String productVersionId = url.getParameter("productVersionId");
+			String productEntryId = portletURL.getParameter("productEntryId");
+			String productVersionId = portletURL.getParameter(
+				"productVersionId");
 
 			if (Validator.isNotNull(productVersionId)) {
 				friendlyURL = "/software_catalog/products/" +
 					productEntryId + "/versions/" + productVersionId + "/edit";
 
-				url.addParameterIncludedInPath("productEntryId");
-				url.addParameterIncludedInPath("productVersionId");
+				portletURL.addParameterIncludedInPath("productEntryId");
+				portletURL.addParameterIncludedInPath("productVersionId");
 			}
 			else {
 				friendlyURL = "/software_catalog/products/" +
@@ -108,14 +102,14 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		else if (action.equals(
 					"/software_catalog/edit_framework_version")) {
 
-			String frameworkVersionId = url.getParameter(
+			String frameworkVersionId = portletURL.getParameter(
 				"frameworkVersionId");
 
 			if (Validator.isNotNull(frameworkVersionId)) {
 				friendlyURL = "/software_catalog/framework_versions/" +
 					frameworkVersionId + "/edit";
 
-				url.addParameterIncludedInPath("frameworkVersionId");
+				portletURL.addParameterIncludedInPath("frameworkVersionId");
 			}
 			else {
 				friendlyURL = "/software_catalog/framework_versions/new";
@@ -124,13 +118,13 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		else if (action.equals(
 					"/software_catalog/edit_license")) {
 
-			String licenseId = url.getParameter("licenseId");
+			String licenseId = portletURL.getParameter("licenseId");
 
 			if (Validator.isNotNull(licenseId)) {
 				friendlyURL = "/software_catalog/licenses/" +
 					licenseId + "/edit";
 
-				url.addParameterIncludedInPath("licenseId");
+				portletURL.addParameterIncludedInPath("licenseId");
 			}
 			else {
 				friendlyURL = "/software_catalog/licenses/new";
@@ -143,9 +137,9 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURL)) {
-			url.addParameterIncludedInPath("p_p_id");
-			url.addParameterIncludedInPath("struts_action");
-			url.addParameterIncludedInPath("tabs1");
+			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("tabs1");
 		}
 
 		return friendlyURL;

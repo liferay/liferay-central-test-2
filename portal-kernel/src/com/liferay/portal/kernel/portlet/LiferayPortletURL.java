@@ -22,22 +22,59 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import java.io.Serializable;
+
 import java.util.Map;
+import java.util.Set;
+
+import javax.portlet.PortletMode;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
- * <a href="FriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayPortletURL.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Myunghun Kim
  * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
  *
  */
-public interface FriendlyURLMapper {
+public interface LiferayPortletURL extends PortletURL, Serializable {
 
-	public String getMapping();
+	public String getPortletId();
 
-	public String buildPath(LiferayPortletURL portletURL);
+	public void setPortletId(String portletId);
 
-	public void populateParams(String friendlyURLPath, Map params);
+	public boolean isAction();
+
+	public void setAction(boolean action);
+
+	public WindowState getWindowState();
+
+	public PortletMode getPortletMode();
+
+	public String getParameter(String name);
+
+	public void setParameter(String name, String value, boolean append);
+
+	public void setParameter(String name, String[] values, boolean append);
+
+	public Map getParameterMap();
+
+	public Set getParametersIncludedInPath();
+
+	public void addParameterIncludedInPath(String name);
+
+	public boolean isParameterIncludedInPath(String name);
+
+	public boolean isSecure();
+
+	public boolean isAnchor();
+
+	public void setAnchor(boolean anchor);
+
+	public boolean isEncrypt();
+
+	public void setEncrypt(boolean encrypt);
+
+	public void setDoAsUserId(long doAsUserId);
 
 }

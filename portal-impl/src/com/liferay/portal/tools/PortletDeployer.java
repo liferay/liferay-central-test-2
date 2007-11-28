@@ -151,7 +151,7 @@ public class PortletDeployer extends BaseDeployer {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletName = PortalUtil.getJsSafePortletName(
+			String portletName = PortalUtil.getJsSafePortletId(
 				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
 

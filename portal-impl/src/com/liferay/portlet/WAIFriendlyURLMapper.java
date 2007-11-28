@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,7 +33,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
@@ -47,10 +47,8 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
-	public String buildPath(PortletURL portletURL) {
-		PortletURLImpl portletURLImpl = (PortletURLImpl) portletURL;
-
-		String portletId = portletURLImpl.getPortlet().getPortletId();
+	public String buildPath(LiferayPortletURL portletURL) {
+		String portletId = portletURL.getPortletId();
 
 		String prefix = portletId;
 
@@ -60,10 +58,9 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 			prefix = portletId.substring(0, pos);
 		}
 
-		String appUrl = GetterUtil.getString(
-			portletURLImpl.getParameter("appURL"));
+		String appUrl = GetterUtil.getString(portletURL.getParameter("appURL"));
 
-		portletURLImpl.addParameterIncludedInPath("p_p_id");
+		portletURL.addParameterIncludedInPath("p_p_id");
 
 		return StringPool.SLASH + _MAPPING + StringPool.SLASH + prefix +
 			StringPool.SLASH + appUrl;

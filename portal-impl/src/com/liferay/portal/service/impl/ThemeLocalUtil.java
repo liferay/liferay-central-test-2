@@ -515,7 +515,7 @@ public class ThemeLocalUtil {
 					themeId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
-			themeId = PortalUtil.getJsSafePortletName(themeId);
+			themeId = PortalUtil.getJsSafePortletId(themeId);
 
 			themeContextReplace.addValue("theme-id", themeId);
 

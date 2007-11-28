@@ -22,12 +22,12 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.MapUtil;
 
@@ -82,15 +82,15 @@ public class ActionURLTagUtil {
 				return StringPool.BLANK;
 			}
 
-			PortletURLImpl portletURL = null;
+			LiferayPortletURL portletURL = null;
 
 			if (action) {
-				portletURL =
-					(PortletURLImpl)renderResponse.createActionURL(portletName);
+				portletURL = (LiferayPortletURL)renderResponse.createActionURL(
+					portletName);
 			}
 			else {
-				portletURL =
-					(PortletURLImpl)renderResponse.createRenderURL(portletName);
+				portletURL = (LiferayPortletURL)renderResponse.createRenderURL(
+					portletName);
 			}
 
 			if (Validator.isNotNull(windowState)) {

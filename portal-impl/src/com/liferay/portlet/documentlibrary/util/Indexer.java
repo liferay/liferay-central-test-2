@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import javax.portlet.PortletURL;
@@ -45,15 +45,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL) {
 
-		PortletURLImpl portletURLImpl = (PortletURLImpl)portletURL;
+		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
 		try {
-			portletURLImpl.setWindowState(LiferayWindowState.EXCLUSIVE);
+			liferayPortletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 		}
 		catch (WindowStateException wse) {
 		}
 
-		portletURLImpl.setAction(true);
+		liferayPortletURL.setAction(true);
 
 		// Title
 
