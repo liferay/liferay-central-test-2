@@ -126,8 +126,8 @@ else {
 String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
-boolean mergeUrlTags = GetterUtil.getBoolean(prefs.getValue("merge-url-tags", null), false);
-boolean mergeUserTags = GetterUtil.getBoolean(prefs.getValue("merge-user-tags", null), false);
+boolean mergeUrlTags = GetterUtil.getBoolean(prefs.getValue("merge-url-tags", null), true);
+boolean mergeUserTags = GetterUtil.getBoolean(prefs.getValue("merge-user-tags", null), true);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
 
 String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "abstracts"));
