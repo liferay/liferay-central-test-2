@@ -69,6 +69,10 @@ public class TCKAction extends Action {
 
 			String[] portletIds = req.getParameterValues("portletId");
 
+			if (portletIds == null) {
+				portletIds = req.getParameterValues("portletName");
+			}
+
 			for (int i = 0; i < portletIds.length; i++) {
 				String[] nameAndWar = StringUtil.split(portletIds[i], "/");
 
