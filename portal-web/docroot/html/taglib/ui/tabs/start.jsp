@@ -28,7 +28,7 @@
 
 // URL
 
-PortletURLImpl portletURL = (PortletURLImpl)request.getAttribute("liferay-ui:tabs:portletURL");
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tabs:portletURL");
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:url"));
 String anchor = StringPool.BLANK;
