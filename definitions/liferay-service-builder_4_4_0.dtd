@@ -348,10 +348,14 @@ example.
 
 The attribute comparator takes in the values =, !=, <, <=, >, >=, or LIKE and is
 used to compare this column.
+
+The attribute case-sensitive is a boolean value and is only used if the column
+is a String value.
 -->
 <!ATTLIST finder-column
 	name CDATA #REQUIRED
 	db-name CDATA #IMPLIED
+	case-sensitive CDATA #IMPLIED
 	comparator CDATA #IMPLIED
 >
 

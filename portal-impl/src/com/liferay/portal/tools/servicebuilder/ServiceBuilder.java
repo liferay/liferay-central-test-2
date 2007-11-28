@@ -841,8 +841,10 @@ public class ServiceBuilder {
 							true);
 
 						boolean orderColByAscending = asc;
+
 						String orderColBy = GetterUtil.getString(
 							orderColEl.attributeValue("order-by"));
+
 						if (orderColBy.equals("asc")) {
 							orderColByAscending = true;
 						}
@@ -932,6 +934,10 @@ public class ServiceBuilder {
 							}
 						}
 
+						boolean finderColCaseSensitive = GetterUtil.getBoolean(
+							finderColEl.attributeValue("case-sensitive"),
+							true);
+
 						String finderColComparator = GetterUtil.getString(
 							finderColEl.attributeValue("comparator"), "=");
 
@@ -941,14 +947,16 @@ public class ServiceBuilder {
 						col = (EntityColumn)col.clone();
 
 						col.setDBName(finderColDBName);
+						col.setCaseSensitive(finderColCaseSensitive);
 						col.setComparator(finderColComparator);
 
 						finderColsList.add(col);
 					}
 
-					finderList.add(new EntityFinder(
-						finderName, finderReturn, finderColsList, finderWhere,
-						finderDBIndex));
+					finderList.add(
+						new EntityFinder(
+							finderName, finderReturn, finderColsList,
+							finderWhere, finderDBIndex));
 				}
 
 				List referenceList = new ArrayList();

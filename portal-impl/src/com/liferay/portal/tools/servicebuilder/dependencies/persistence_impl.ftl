@@ -344,7 +344,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								else {
 							</#if>
 
-							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -483,7 +487,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								else {
 							</#if>
 
-							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -679,7 +687,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							else {
 						</#if>
 
-						query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+							query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+						<#else>
+							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
 							}
@@ -864,7 +876,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								else {
 							</#if>
 
-							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -1182,7 +1198,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							else {
 						</#if>
 
-						query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+							query.append("lower(${finderCol.DBName}) ${finderCol.comparator} ?");
+						<#else>
+							query.append("${finderCol.DBName} ${finderCol.comparator} ?");
+						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
 							}
