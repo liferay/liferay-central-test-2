@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.blogs;
 
+import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.BaseFriendlyURLMapper;
 import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;

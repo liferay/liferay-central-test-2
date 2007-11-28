@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.tagscompiler;
 
+import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.BaseFriendlyURLMapper;
 
 import java.util.Map;
 

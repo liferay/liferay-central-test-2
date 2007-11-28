@@ -20,7 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.kernel.portlet;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+
+import java.util.Map;
 
 /**
  * <a href="BaseFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -28,10 +34,31 @@ package com.liferay.portlet;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.portlet</code>.
- *
  */
-public abstract class BaseFriendlyURLMapper
-	extends com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper {
+public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
+
+	public abstract String getPortletId();
+
+	protected String getNamespace() {
+		try {
+			return PortalUtil.getPortletNamespace(getPortletId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return getPortletId();
+		}
+	}
+
+	protected void addParam(Map params, String name, long value) {
+		params.put(getNamespace() + name, String.valueOf(value));
+	}
+
+	protected void addParam(Map params, String name, String value) {
+		params.put(getNamespace() + name, value);
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(BaseFriendlyURLMapper.class);
+
 }
