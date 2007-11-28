@@ -14875,13 +14875,16 @@ Liferay.Util = {
 
 		newBox.sort(Liferay.Util.sortByAscending);
 
-		for (var i = box.length - 1; i > -1; i--) {
-			box.options[i] = null;
-		}
+		var boxObj = jQuery(box);
 
-		for (var i = 0; i < newBox.length; i++) {
-			box.options[box.length] = new Option(newBox[i][1], newBox[i][0]);
-		}
+		boxObj.find('option').remove();
+
+		jQuery.each(
+			newBox,
+			function(key, value) {
+				boxObj.append('<option value="' + value[0] + '">' + value[1] + '</option>');
+			}
+		);
 	},
 
 	sortByAscending: function(a, b) {
