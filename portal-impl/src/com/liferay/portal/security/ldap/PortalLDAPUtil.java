@@ -99,15 +99,22 @@ public class PortalLDAPUtil {
 			return;
 		}
 
+		User user = UserLocalServiceUtil.getUserById(
+			companyId, contact.getUserId());
+
 		Properties userMappings = getUserMappings(companyId);
+		Binding binding = getUser(contact.getCompanyId(), user.getScreenName());
+		String name = StringPool.BLANK;
 
-		User user = UserLocalServiceUtil.getUserById(contact.getUserId());
+		if (Validator.isNull(binding)) {
 
-		String name =
-			userMappings.getProperty("screenName") + StringPool.EQUAL +
+			// Generate FDN based on UsersDN
+
+			name = userMappings.getProperty("screenName") + StringPool.EQUAL +
 				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
-		if (!hasUser(companyId, user.getScreenName())) {
+			// Create new user in LDAP
+
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
 				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
 
@@ -116,6 +123,11 @@ public class PortalLDAPUtil {
 			ctx.bind(name, ldapUser);
 		}
 		else {
+
+			// Modify existing LDAP user record
+
+			name = getNameInNamespace(companyId, binding);
+
 			Modifications mods = Modifications.getInstance();
 
 			mods.addItem(
@@ -145,12 +157,18 @@ public class PortalLDAPUtil {
 		}
 
 		Properties userMappings = getUserMappings(companyId);
+		Binding binding = getUser(user.getCompanyId(), user.getScreenName());
+		String name = StringPool.BLANK;
 
-		String name =
-			userMappings.getProperty("screenName") + StringPool.EQUAL +
+		if (Validator.isNull(binding)) {
+
+			// Generate FDN based on UsersDN
+
+			name = userMappings.getProperty("screenName") + StringPool.EQUAL +
 				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
-		if (!hasUser(companyId, user.getScreenName())) {
+			// Create new user in LDAP
+
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
 				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
 
@@ -159,6 +177,11 @@ public class PortalLDAPUtil {
 			ctx.bind(name, ldapUser);
 		}
 		else {
+
+			// Modify existing LDAP user record
+
+			name = getNameInNamespace(companyId, binding);
+
 			Modifications mods = Modifications.getInstance();
 
 			if (user.isPasswordModified() &&
