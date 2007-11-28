@@ -117,7 +117,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		for (int i = 0; i < c.length; i++) {
 			if ((!Validator.isChar(c[i])) && (!Validator.isDigit(c[i])) &&
-				(c[i] != '/') && (c[i] != '-') && (c[i] != '_')) {
+				(c[i] != '/') && (c[i] != '-') && (c[i] != '_') &&
+				(c[i] != '.')) {
 
 				return LayoutFriendlyURLException.INVALID_CHARACTERS;
 			}
