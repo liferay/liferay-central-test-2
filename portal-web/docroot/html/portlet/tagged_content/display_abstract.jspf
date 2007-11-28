@@ -114,7 +114,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 		StringMaker sm = new StringMaker();
 
 		if (articleDisplay.isSmallImage()) {
-			sm.append("<br /><img src=\"");
+			sm.append("<div style=\"float: left; padding-right: 10px;\"><img src=\"");
 
 			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
 				sm.append(articleDisplay.getSmallImageURL());
@@ -127,7 +127,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 				sm.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
 			}
 
-			sm.append("\" /><br />");
+			sm.append("\" /></div>");
 		}
 
 		sm.append(articleDisplay.getDescription());
