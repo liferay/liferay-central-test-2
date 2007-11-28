@@ -501,7 +501,7 @@
 		<finder name="G_P_F" return-type="Layout">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
-			<finder-column name="friendlyURL" />
+			<finder-column name="friendlyURL" case-sensitive="false" />
 		</finder>
 
 		<!-- References -->
