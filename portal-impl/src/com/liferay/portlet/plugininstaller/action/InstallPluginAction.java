@@ -66,6 +66,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -78,6 +80,8 @@ import org.apache.struts.action.ActionMapping;
  * <a href="InstallPluginAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ * @author Minhchau Dang
  *
  */
 public class InstallPluginAction extends PortletAction {
@@ -208,6 +212,10 @@ public class InstallPluginAction extends PortletAction {
 		}
 	}
 
+	protected String[] getSourceForgeMirrors() {
+		return PropsUtil.getArray(PropsUtil.SOURCE_FORGE_MIRRORS);
+	}
+
 	protected void ignorePackages(ActionRequest req) throws Exception {
 		String pluginPackagesIgnored = ParamUtil.getString(
 			req, "pluginPackagesIgnored");
@@ -291,17 +299,38 @@ public class InstallPluginAction extends PortletAction {
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {
+		try {
+			String url = ParamUtil.getString(req, "url");
+
+			URL urlObj = new URL(url);
+
+			String host = urlObj.getHost();
+
+			if (host.endsWith(".sf.net") || host.endsWith(".sourceforge.net")) {
+				remoteDeploySourceForge(urlObj.getPath(), req);
+			}
+			else {
+				remoteDeploy(url, urlObj, req, true);
+			}
+		}
+		catch (MalformedURLException murle) {
+			SessionErrors.add(req, "invalidUrl", murle);
+		}
+	}
+
+	protected int remoteDeploy(
+			String url, URL urlObj, ActionRequest req, boolean failOnError)
+		throws Exception {
+
+		int responseCode = HttpServletResponse.SC_OK;
+
 		GetMethod getMethod = null;
 
 		String deploymentContext = ParamUtil.getString(
 			req, "deploymentContext");
 
 		try {
-			String url = ParamUtil.getString(req, "url");
-
-			URL urlObj = new URL(url);
-
-			HostConfiguration hostConfig = Http.getHostConfig(url.toString());
+			HostConfiguration hostConfig = Http.getHostConfig(url);
 
 			HttpClient client = Http.getClient(hostConfig);
 
@@ -326,14 +355,16 @@ public class InstallPluginAction extends PortletAction {
 			PluginPackageUtil.registerPluginPackageInstallation(
 				deploymentContext);
 
-			int responseCode = client.executeMethod(hostConfig, getMethod);
+			responseCode = client.executeMethod(hostConfig, getMethod);
 
-			if (responseCode != 200) {
-				SessionErrors.add(
-					req, "errorConnectingToUrl",
-					new Object[] {String.valueOf(responseCode)});
+			if (responseCode != HttpServletResponse.SC_OK) {
+				if (failOnError) {
+					SessionErrors.add(
+						req, "errorConnectingToUrl",
+						new Object[] {String.valueOf(responseCode)});
+				}
 
-				return;
+				return responseCode;
 			}
 
 			long contentLength = getMethod.getResponseContentLength();
@@ -389,7 +420,11 @@ public class InstallPluginAction extends PortletAction {
 				SessionMessages.add(req, "pluginDownloaded");
 			}
 			else {
-				SessionErrors.add(req, UploadException.class.getName());
+				if (failOnError) {
+					SessionErrors.add(req, UploadException.class.getName());
+				}
+
+				responseCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 			}
 		}
 		catch (MalformedURLException murle) {
@@ -404,6 +439,41 @@ public class InstallPluginAction extends PortletAction {
 			}
 
 			PluginPackageUtil.endPluginPackageInstallation(deploymentContext);
+		}
+
+		return responseCode;
+	}
+
+	protected void remoteDeploySourceForge(String path, ActionRequest req)
+		throws Exception {
+
+		String[] sourceForgeMirrors = getSourceForgeMirrors();
+
+		for (int i = 0; i < sourceForgeMirrors.length; i++) {
+			try {
+				String url = sourceForgeMirrors[i] + path;
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Downloading from SourceForge mirror " + url);
+				}
+
+				URL urlObj = new URL(url);
+
+				boolean failOnError = false;
+
+				if ((i + 1) == sourceForgeMirrors.length) {
+					failOnError = true;
+				}
+
+				int responseCode = remoteDeploy(url, urlObj, req, failOnError);
+
+				if (responseCode == HttpServletResponse.SC_OK) {
+					return;
+				}
+			}
+			catch (MalformedURLException murle) {
+				SessionErrors.add(req, "invalidUrl", murle);
+			}
 		}
 	}
 

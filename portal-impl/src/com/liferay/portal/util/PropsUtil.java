@@ -687,6 +687,10 @@ public class PropsUtil {
 
 	public static final String LUCENE_MERGE_FACTOR = "lucene.merge.factor";
 
+	// SourceForge
+
+	public static final String SOURCE_FORGE_MIRRORS = "source.forge.mirrors";
+
 	// Value Object
 
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
