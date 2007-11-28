@@ -65,6 +65,18 @@ public interface JournalArticleDisplay extends Serializable {
 
 	public void setTemplateId(String templateId);
 
+	public boolean isSmallImage();
+
+	public void setSmallImage(boolean smallImage);
+
+	public long getSmallImageId();
+
+	public void setSmallImageId(long smallImageId);
+
+	public String getSmallImageURL();
+
+	public void setSmallImageURL(String smallImageURL);
+
 	public int getNumberOfPages();
 
 	public void setNumberOfPages(int numberOfPages);

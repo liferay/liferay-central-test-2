@@ -169,6 +169,9 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		journalArticle.setExpirationDate(model.getExpirationDate());
 		journalArticle.setReviewDate(model.getReviewDate());
 		journalArticle.setIndexable(model.getIndexable());
+		journalArticle.setSmallImage(model.getSmallImage());
+		journalArticle.setSmallImageId(model.getSmallImageId());
+		journalArticle.setSmallImageURL(model.getSmallImageURL());
 
 		return journalArticlePersistence.update(journalArticle);
 	}
@@ -216,6 +219,9 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		journalArticle.setExpirationDate(model.getExpirationDate());
 		journalArticle.setReviewDate(model.getReviewDate());
 		journalArticle.setIndexable(model.getIndexable());
+		journalArticle.setSmallImage(model.getSmallImage());
+		journalArticle.setSmallImageId(model.getSmallImageId());
+		journalArticle.setSmallImageURL(model.getSmallImageURL());
 
 		return journalArticlePersistence.update(journalArticle);
 	}

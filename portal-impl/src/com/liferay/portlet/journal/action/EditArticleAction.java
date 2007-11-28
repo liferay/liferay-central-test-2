@@ -41,6 +41,8 @@ import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
+import com.liferay.portlet.journal.ArticleSmallImageNameException;
+import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.ArticleTypeException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
@@ -145,6 +147,8 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleDisplayDateException ||
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
+					 e instanceof ArticleSmallImageNameException ||
+					 e instanceof ArticleSmallImageSizeException ||
 					 e instanceof ArticleTitleException ||
 					 e instanceof ArticleTypeException ||
 					 e instanceof DuplicateArticleIdException) {
@@ -324,85 +328,102 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected JournalArticle updateArticle(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
 
-		String articleId = ParamUtil.getString(req, "articleId");
-		boolean autoArticleId = ParamUtil.getBoolean(req, "autoArticleId");
+		long groupId = ParamUtil.getLong(uploadReq, "groupId");
 
-		double version = ParamUtil.getDouble(req, "version");
+		String articleId = ParamUtil.getString(uploadReq, "articleId");
+		boolean autoArticleId = ParamUtil.getBoolean(
+			uploadReq, "autoArticleId");
+
+		double version = ParamUtil.getDouble(uploadReq, "version");
 		boolean incrementVersion = ParamUtil.getBoolean(
-			req, "incrementVersion");
+			uploadReq, "incrementVersion");
 
-		String title = ParamUtil.getString(req, "title");
-		String description = ParamUtil.getString(req, "description");
-		String content = ParamUtil.getString(req, "content");
-		String type = ParamUtil.getString(req, "type");
-		String structureId = ParamUtil.getString(req, "structureId");
-		String templateId = ParamUtil.getString(req, "templateId");
+		String title = ParamUtil.getString(uploadReq, "title");
+		String description = ParamUtil.getString(uploadReq, "description");
+		String content = ParamUtil.getString(uploadReq, "content");
+		String type = ParamUtil.getString(uploadReq, "type");
+		String structureId = ParamUtil.getString(uploadReq, "structureId");
+		String templateId = ParamUtil.getString(uploadReq, "templateId");
 
-		String lastLanguageId = ParamUtil.getString(req, "lastLanguageId");
+		String lastLanguageId = ParamUtil.getString(
+			uploadReq, "lastLanguageId");
 		String defaultLanguageId = ParamUtil.getString(
-			req, "defaultLanguageId");
+			uploadReq, "defaultLanguageId");
 
-		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
-		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
-		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
-		int displayDateHour = ParamUtil.getInteger(req, "displayDateHour");
-		int displayDateMinute = ParamUtil.getInteger(req, "displayDateMinute");
-		int displayDateAmPm = ParamUtil.getInteger(req, "displayDateAmPm");
+		int displayDateMonth = ParamUtil.getInteger(
+			uploadReq, "displayDateMonth");
+		int displayDateDay = ParamUtil.getInteger(uploadReq, "displayDateDay");
+		int displayDateYear = ParamUtil.getInteger(
+			uploadReq, "displayDateYear");
+		int displayDateHour = ParamUtil.getInteger(
+			uploadReq, "displayDateHour");
+		int displayDateMinute = ParamUtil.getInteger(
+			uploadReq, "displayDateMinute");
+		int displayDateAmPm = ParamUtil.getInteger(
+			uploadReq, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
 		int expirationDateMonth = ParamUtil.getInteger(
-			req, "expirationDateMonth");
-		int expirationDateDay = ParamUtil.getInteger(req, "expirationDateDay");
+			uploadReq, "expirationDateMonth");
+		int expirationDateDay = ParamUtil.getInteger(
+			uploadReq, "expirationDateDay");
 		int expirationDateYear = ParamUtil.getInteger(
-			req, "expirationDateYear");
+			uploadReq, "expirationDateYear");
 		int expirationDateHour = ParamUtil.getInteger(
-			req, "expirationDateHour");
+			uploadReq, "expirationDateHour");
 		int expirationDateMinute = ParamUtil.getInteger(
-			req, "expirationDateMinute");
+			uploadReq, "expirationDateMinute");
 		int expirationDateAmPm = ParamUtil.getInteger(
-			req, "expirationDateAmPm");
-		boolean neverExpire = ParamUtil.getBoolean(req, "neverExpire");
+			uploadReq, "expirationDateAmPm");
+		boolean neverExpire = ParamUtil.getBoolean(uploadReq, "neverExpire");
 
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;
 		}
 
-		int reviewDateMonth = ParamUtil.getInteger(req, "reviewDateMonth");
-		int reviewDateDay = ParamUtil.getInteger(req, "reviewDateDay");
-		int reviewDateYear = ParamUtil.getInteger(req, "reviewDateYear");
-		int reviewDateHour = ParamUtil.getInteger(req, "reviewDateHour");
-		int reviewDateMinute = ParamUtil.getInteger(req, "reviewDateMinute");
-		int reviewDateAmPm = ParamUtil.getInteger(req, "reviewDateAmPm");
-		boolean neverReview = ParamUtil.getBoolean(req, "neverReview");
+		int reviewDateMonth = ParamUtil.getInteger(
+			uploadReq, "reviewDateMonth");
+		int reviewDateDay = ParamUtil.getInteger(uploadReq, "reviewDateDay");
+		int reviewDateYear = ParamUtil.getInteger(uploadReq, "reviewDateYear");
+		int reviewDateHour = ParamUtil.getInteger(uploadReq, "reviewDateHour");
+		int reviewDateMinute = ParamUtil.getInteger(
+			uploadReq, "reviewDateMinute");
+		int reviewDateAmPm = ParamUtil.getInteger(uploadReq, "reviewDateAmPm");
+		boolean neverReview = ParamUtil.getBoolean(uploadReq, "neverReview");
 
 		if (reviewDateAmPm == Calendar.PM) {
 			reviewDateHour += 12;
 		}
 
-		boolean indexable = ParamUtil.getBoolean(req, "indexable");
+		boolean indexable = ParamUtil.getBoolean(uploadReq, "indexable");
 
-		Map images = getImages(PortalUtil.getUploadPortletRequest(req));
+		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
+		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
+		File smallFile = uploadReq.getFile("smallFile");
 
-		String articleURL = ParamUtil.getString(req, "articleURL");
+		Map images = getImages(uploadReq);
+
+		String articleURL = ParamUtil.getString(uploadReq, "articleURL");
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+			ParamUtil.getString(uploadReq, "tagsEntries"));
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = uploadReq.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = uploadReq.getParameterValues(
 			"guestPermissions");
 
-		boolean approve = ParamUtil.getBoolean(req, "approve");
+		boolean approve = ParamUtil.getBoolean(uploadReq, "approve");
 
 		JournalArticle article = null;
 
@@ -423,8 +444,9 @@ public class EditArticleAction extends PortletAction {
 				expirationDateYear, expirationDateHour, expirationDateMinute,
 				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 				reviewDateHour, reviewDateMinute, neverReview, indexable,
-				images, articleURL, req.getPreferences(), tagsEntries,
-				communityPermissions, guestPermissions);
+				smallImage, smallImageURL, smallFile, images, articleURL,
+				req.getPreferences(), tagsEntries, communityPermissions,
+				guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				req, JournalArticle.class.getName(), article.getPrimaryKey(),
@@ -467,8 +489,8 @@ public class EditArticleAction extends PortletAction {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, indexable, images, articleURL,
-				req.getPreferences(), tagsEntries);
+				neverReview, indexable, smallImage, smallImageURL, smallFile,
+				images, articleURL, req.getPreferences(), tagsEntries);
 		}
 
 		if (approve) {
@@ -484,12 +506,13 @@ public class EditArticleAction extends PortletAction {
 
 		// Journal content
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			uploadReq, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource, true, true);
+					uploadReq, portletResource, true, true);
 
 			prefs.setValue("group-id", String.valueOf(article.getGroupId()));
 			prefs.setValue("article-id", article.getArticleId());

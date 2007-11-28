@@ -81,6 +81,9 @@ public class JournalArticleJSONSerializer {
 		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
 		JSONUtil.put(jsonObj, "reviewDate", model.getReviewDate());
 		JSONUtil.put(jsonObj, "indexable", model.getIndexable());
+		JSONUtil.put(jsonObj, "smallImage", model.getSmallImage());
+		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
+		JSONUtil.put(jsonObj, "smallImageURL", model.getSmallImageURL());
 
 		return jsonObj;
 	}

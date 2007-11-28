@@ -76,6 +76,9 @@ public class JournalArticleSoap implements Serializable {
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setReviewDate(model.getReviewDate());
 		soapModel.setIndexable(model.getIndexable());
+		soapModel.setSmallImage(model.getSmallImage());
+		soapModel.setSmallImageId(model.getSmallImageId());
+		soapModel.setSmallImageURL(model.getSmallImageURL());
 
 		return soapModel;
 	}
@@ -323,6 +326,34 @@ public class JournalArticleSoap implements Serializable {
 		_indexable = indexable;
 	}
 
+	public boolean getSmallImage() {
+		return _smallImage;
+	}
+
+	public boolean isSmallImage() {
+		return _smallImage;
+	}
+
+	public void setSmallImage(boolean smallImage) {
+		_smallImage = smallImage;
+	}
+
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
+	public String getSmallImageURL() {
+		return _smallImageURL;
+	}
+
+	public void setSmallImageURL(String smallImageURL) {
+		_smallImageURL = smallImageURL;
+	}
+
 	private String _uuid;
 	private long _id;
 	private long _resourcePrimKey;
@@ -349,4 +380,7 @@ public class JournalArticleSoap implements Serializable {
 	private Date _expirationDate;
 	private Date _reviewDate;
 	private boolean _indexable;
+	private boolean _smallImage;
+	private long _smallImageId;
+	private String _smallImageURL;
 }

@@ -37,7 +37,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		long id, long resourcePrimKey, long groupId, long userId,
 		String articleId, double version, String title, String description,
 		String[] availableLocales, String content, String type,
-		String structureId, String templateId, int numberOfPages,
+		String structureId, String templateId, boolean smallImage,
+		long smallImageId, String smallImageURL, int numberOfPages,
 		int currentPage, boolean paginate) {
 
 		_id = id;
@@ -53,6 +54,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_type = type;
 		_structureId = structureId;
 		_templateId = templateId;
+		_smallImage = smallImage;
+		_smallImageId = smallImageId;
+		_smallImageURL = smallImageURL;
 		_numberOfPages = numberOfPages;
 		_currentPage = currentPage;
 		_paginate = paginate;
@@ -122,6 +126,30 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_templateId = templateId;
 	}
 
+	public boolean isSmallImage() {
+		return _smallImage;
+	}
+
+	public void setSmallImage(boolean smallImage) {
+		_smallImage = smallImage;
+	}
+
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
+	public String getSmallImageURL() {
+		return _smallImageURL;
+	}
+
+	public void setSmallImageURL(String smallImageURL) {
+		_smallImageURL = smallImageURL;
+	}
+
 	public int getNumberOfPages() {
 		return _numberOfPages;
 	}
@@ -159,6 +187,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private String _type;
 	private String _structureId;
 	private String _templateId;
+	private boolean _smallImage;
+	private long _smallImageId;
+	private String _smallImageURL;
 	private int _numberOfPages;
 	private int _currentPage;
 	private boolean _paginate;

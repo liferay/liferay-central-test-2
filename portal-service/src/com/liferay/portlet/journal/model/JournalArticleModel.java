@@ -161,5 +161,19 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setIndexable(boolean indexable);
 
+	public boolean getSmallImage();
+
+	public boolean isSmallImage();
+
+	public void setSmallImage(boolean smallImage);
+
+	public long getSmallImageId();
+
+	public void setSmallImageId(long smallImageId);
+
+	public String getSmallImageURL();
+
+	public void setSmallImageURL(String smallImageURL);
+
 	public JournalArticle toEscapedModel();
 }

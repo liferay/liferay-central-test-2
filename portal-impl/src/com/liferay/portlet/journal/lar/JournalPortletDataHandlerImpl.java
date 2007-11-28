@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
@@ -455,6 +456,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			neverReview = false;
 		}
 
+		boolean smallImage = false;
+		String smallImageURL = StringPool.BLANK;
+		File smallFile = null;
+
 		Map images = CollectionFactory.getHashMap();
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
@@ -515,8 +520,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					expirationDateHour, expirationDateMinute, neverExpire,
 					reviewDateMonth, reviewDateDay, reviewDateYear,
 					reviewDateHour, reviewDateMinute, neverReview,
-					article.getIndexable(), images, articleURL, prefs,
-					tagsEntries, addCommunityPermissions, addGuestPermissions);
+					article.getIndexable(), smallImage, smallImageURL,
+					smallFile, images, articleURL, prefs, tagsEntries,
+					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingArticle =  JournalArticleLocalServiceUtil.updateArticle(
@@ -533,7 +539,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
-					images, articleURL, prefs, tagsEntries);
+					smallImage, smallImageURL, smallFile, images, articleURL,
+					prefs, tagsEntries);
 			}
 		}
 		else {
@@ -546,8 +553,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, article.getIndexable(), images, articleURL, prefs,
-				tagsEntries, addCommunityPermissions, addGuestPermissions);
+				neverReview, article.getIndexable(), smallImage, smallImageURL,
+				smallFile, images, articleURL, prefs, tagsEntries,
+				addCommunityPermissions, addGuestPermissions);
 		}
 
 		if (article.isApproved() && !existingArticle.isApproved()) {

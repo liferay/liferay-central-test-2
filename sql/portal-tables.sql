@@ -401,7 +401,10 @@ create table JournalArticle (
 	expired BOOLEAN,
 	expirationDate DATE null,
 	reviewDate DATE null,
-	indexable BOOLEAN
+	indexable BOOLEAN,
+	smallImage BOOLEAN,
+	smallImageId LONG,
+	smallImageURL VARCHAR(75) null
 );
 
 create table JournalArticleImage (

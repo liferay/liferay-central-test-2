@@ -137,9 +137,18 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "reviewDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "indexable", new Integer(Types.BOOLEAN) }
+			{ "indexable", new Integer(Types.BOOLEAN) },
+			
+
+			{ "smallImage", new Integer(Types.BOOLEAN) },
+			
+
+			{ "smallImageId", new Integer(Types.BIGINT) },
+			
+
+			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleModel"));
@@ -474,6 +483,43 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getSmallImage() {
+		return _smallImage;
+	}
+
+	public boolean isSmallImage() {
+		return _smallImage;
+	}
+
+	public void setSmallImage(boolean smallImage) {
+		if (smallImage != _smallImage) {
+			_smallImage = smallImage;
+		}
+	}
+
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		if (smallImageId != _smallImageId) {
+			_smallImageId = smallImageId;
+		}
+	}
+
+	public String getSmallImageURL() {
+		return GetterUtil.getString(_smallImageURL);
+	}
+
+	public void setSmallImageURL(String smallImageURL) {
+		if (((smallImageURL == null) && (_smallImageURL != null)) ||
+				((smallImageURL != null) && (_smallImageURL == null)) ||
+				((smallImageURL != null) && (_smallImageURL != null) &&
+				!smallImageURL.equals(_smallImageURL))) {
+			_smallImageURL = smallImageURL;
+		}
+	}
+
 	public JournalArticle toEscapedModel() {
 		JournalArticle model = new JournalArticleImpl();
 
@@ -503,6 +549,9 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		model.setExpirationDate(getExpirationDate());
 		model.setReviewDate(getReviewDate());
 		model.setIndexable(getIndexable());
+		model.setSmallImage(getSmallImage());
+		model.setSmallImageId(getSmallImageId());
+		model.setSmallImageURL(Html.escape(getSmallImageURL()));
 
 		if (true) {
 			model = (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
@@ -542,6 +591,9 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		clone.setExpirationDate(getExpirationDate());
 		clone.setReviewDate(getReviewDate());
 		clone.setIndexable(getIndexable());
+		clone.setSmallImage(getSmallImage());
+		clone.setSmallImageId(getSmallImageId());
+		clone.setSmallImageURL(getSmallImageURL());
 
 		return clone;
 	}
@@ -634,4 +686,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private Date _expirationDate;
 	private Date _reviewDate;
 	private boolean _indexable;
+	private boolean _smallImage;
+	private long _smallImageId;
+	private String _smallImageURL;
 }

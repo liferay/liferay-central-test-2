@@ -186,6 +186,9 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		disableIncrementVersion = true;
 	}
 }
+
+boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
+String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
 <script type="text/javascript">
@@ -607,19 +610,6 @@ String[] availableLocales = null;
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="description" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<liferay-ui:message key="language" />
 			</td>
 			<td>
@@ -723,7 +713,9 @@ String[] availableLocales = null;
 
 		<c:choose>
 			<c:when test="<%= structure == null %>">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+				<div>
+					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+				</div>
 			</c:when>
 			<c:otherwise>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -819,6 +811,70 @@ String[] availableLocales = null;
 			</tr>
 			</table>
 		</c:if>
+
+		<br />
+
+		<table class="journal-edit-article-extra" width="100%">
+		<tr class="portlet-section-header">
+			<td>
+				<b><liferay-ui:message key="abstract" /></b>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
+
+					<%
+					String[] imageExtensions = PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+					%>
+
+					<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+				</liferay-ui:error>
+
+				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="description" />
+					</td>
+					<td>
+						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="small-image-url" />
+					</td>
+					<td>
+						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImageURL" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
+					</td>
+					<td>
+						<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="use-small-image" />
+					</td>
+					<td>
+						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
 
 		<div>
 			<br />

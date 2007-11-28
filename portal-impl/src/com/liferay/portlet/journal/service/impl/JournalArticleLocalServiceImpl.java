@@ -51,6 +51,8 @@ import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
 import com.liferay.portlet.journal.ArticleReviewDateException;
+import com.liferay.portlet.journal.ArticleSmallImageNameException;
+import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.ArticleTypeException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
@@ -68,10 +70,12 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
@@ -128,8 +132,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -140,8 +145,9 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
+			smallFile, images, articleURL, prefs, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -155,8 +161,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -167,8 +174,9 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
+			smallFile, images, articleURL, prefs, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -182,8 +190,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -194,8 +203,9 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
-			tagsEntries, null, null, communityPermissions, guestPermissions);
+			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
+			smallFile, images, articleURL, prefs, tagsEntries, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -208,8 +218,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -223,9 +234,10 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, images, articleURL,
-			prefs, tagsEntries, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
+			smallFile, images, articleURL, prefs, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalArticle addArticleToGroup(
@@ -238,8 +250,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -273,9 +286,18 @@ public class JournalArticleLocalServiceImpl
 				new ArticleReviewDateException());
 		}
 
+		byte[] smallBytes = null;
+
+		try {
+			smallBytes = FileUtil.getBytes(smallFile);
+		}
+		catch (IOException ioe) {
+		}
+
 		validate(
 			groupId, articleId, autoArticleId, title, content, type,
-			structureId, templateId);
+			structureId, templateId, smallImage, smallImageURL, smallFile,
+			smallBytes);
 
 		if (autoArticleId) {
 			articleId = String.valueOf(counterLocalService.increment());
@@ -322,8 +344,16 @@ public class JournalArticleLocalServiceImpl
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 		article.setIndexable(indexable);
+		article.setSmallImage(smallImage);
+		article.setSmallImageId(counterLocalService.increment());
+		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article);
+
+		// Small image
+
+		saveImages(
+			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
 		// Resources
 
@@ -627,6 +657,10 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticleImageLocalService.deleteImages(
 			article.getGroupId(), article.getArticleId(), article.getVersion());
+
+		// Small image
+
+		ImageLocalUtil.deleteImage(article.getSmallImageId());
 
 		// Resources
 
@@ -1026,8 +1060,9 @@ public class JournalArticleLocalServiceImpl
 			article.getUserId(), article.getArticleId(), article.getVersion(),
 			article.getTitle(), article.getDescription(),
 			article.getAvailableLocales(), content, article.getType(),
-			article.getStructureId(), templateId, numberOfPages, page,
-			paginate);
+			article.getStructureId(), templateId, article.isSmallImage(),
+			article.getSmallImageId(), article.getSmallImageURL(),
+			numberOfPages, page, paginate);
 	}
 
 	public List getArticles() throws SystemException {
@@ -1453,8 +1488,9 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries)
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1486,7 +1522,17 @@ public class JournalArticleLocalServiceImpl
 				new ArticleReviewDateException());
 		}
 
-		validate(groupId, title, content, type, structureId, templateId);
+		byte[] smallBytes = null;
+
+		try {
+			smallBytes = FileUtil.getBytes(smallFile);
+		}
+		catch (IOException ioe) {
+		}
+
+		validate(
+			groupId, title, content, type, structureId, templateId, smallImage,
+			smallImageURL, smallFile, smallBytes);
 
 		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
@@ -1543,8 +1589,15 @@ public class JournalArticleLocalServiceImpl
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 		article.setIndexable(indexable);
+		article.setSmallImage(smallImage);
+		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article);
+
+		// Small image
+
+		saveImages(
+			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
 		// Tags
 
@@ -1827,6 +1880,21 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	protected void saveImages(
+			boolean smallImage, long smallImageId, File smallFile,
+			byte[] smallBytes)
+		throws SystemException {
+
+		if (smallImage) {
+			if ((smallFile != null) && (smallBytes != null)) {
+				ImageLocalUtil.updateImage(smallImageId, smallBytes);
+			}
+		}
+		else {
+			ImageLocalUtil.deleteImage(smallImageId);
+		}
+	}
+
 	protected void sendEmail(
 			JournalArticle article, String articleURL, PortletPreferences prefs,
 			String emailType)
@@ -1980,7 +2048,9 @@ public class JournalArticleLocalServiceImpl
 
 	protected void validate(
 			long groupId, String articleId, boolean autoArticleId, String title,
-			String content, String type, String structureId, String templateId)
+			String content, String type, String structureId, String templateId,
+			boolean smallImage, String smallImageURL, File smallFile,
+			byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
@@ -2001,12 +2071,15 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		validate(groupId, title, content, type, structureId, templateId);
+		validate(
+			groupId, title, content, type, structureId, templateId,
+			smallImage, smallImageURL, smallFile, smallBytes);
 	}
 
 	protected void validate(
 			long groupId, String title, String content, String type,
-			String structureId, String templateId)
+			String structureId, String templateId, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
@@ -2027,6 +2100,44 @@ public class JournalArticleLocalServiceImpl
 
 			if (!template.getStructureId().equals(structureId)) {
 				throw new NoSuchTemplateException();
+			}
+		}
+
+		String[] imageExtensions =
+			PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+
+		if (smallImage && Validator.isNull(smallImageURL) &&
+			smallFile != null && smallBytes != null) {
+
+			String smallImageName = smallFile.getName();
+
+			if (smallImageName != null) {
+				boolean validSmallImageExtension = false;
+
+				for (int i = 0; i < imageExtensions.length; i++) {
+					if (StringPool.STAR.equals(imageExtensions[i]) ||
+						StringUtil.endsWith(
+							smallImageName, imageExtensions[i])) {
+
+						validSmallImageExtension = true;
+
+						break;
+					}
+				}
+
+				if (!validSmallImageExtension) {
+					throw new ArticleSmallImageNameException(smallImageName);
+				}
+			}
+
+			long smallImageMaxSize = GetterUtil.getLong(
+				PropsUtil.get(PropsUtil.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+
+			if ((smallImageMaxSize > 0) &&
+				((smallBytes == null) ||
+					(smallBytes.length > smallImageMaxSize))) {
+
+				throw new ArticleSmallImageSizeException();
 			}
 		}
 	}

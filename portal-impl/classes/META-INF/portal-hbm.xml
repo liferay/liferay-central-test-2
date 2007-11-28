@@ -818,6 +818,9 @@
 		<property name="expirationDate" />
 		<property name="reviewDate" />
 		<property name="indexable" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="smallImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" table="JournalArticleImage">
 		<cache usage="read-write" />

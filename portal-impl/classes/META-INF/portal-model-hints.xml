@@ -832,6 +832,9 @@
 		<field name="indexable" type="boolean">
 			<hint name="default-value">true</hint>
 		</field>
+		<field name="smallImage" type="boolean" />
+		<field name="smallImageId" type="long" />
+		<field name="smallImageURL" type="String" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticleImage">
 		<field name="articleImageId" type="long" />
@@ -1389,6 +1392,7 @@
 		<field name="acronym" type="String" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
+		<field name="uuid" type="String" />
 		<field name="nodeId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -1403,6 +1407,7 @@
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiPage">
+		<field name="uuid" type="String" />
 		<field name="pageId" type="long" />
 		<field name="resourcePrimKey" type="long" />
 		<field name="companyId" type="long" />

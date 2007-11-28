@@ -32,6 +32,9 @@ alter table IGFolder add uuid_ VARCHAR(75) null;
 alter table IGImage add uuid_ VARCHAR(75) null;
 
 alter table JournalArticle add uuid_ VARCHAR(75) null;
+alter table JournalArticle add smallImage BOOLEAN;
+alter table JournalArticle add smallImageId LONG;
+alter table JournalArticle add smallImageURL VARCHAR(75) null;
 
 alter table JournalArticleImage add uuid_ VARCHAR(75) null;
 

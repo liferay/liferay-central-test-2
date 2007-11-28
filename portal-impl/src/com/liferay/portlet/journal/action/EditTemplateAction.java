@@ -171,7 +171,7 @@ public class EditTemplateAction extends PortletAction {
 
 		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(uploadReq, "groupId");
 
 		String templateId = ParamUtil.getString(uploadReq, "templateId");
 		boolean autoTemplateId = ParamUtil.getBoolean(
@@ -197,9 +197,9 @@ public class EditTemplateAction extends PortletAction {
 		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
 		File smallFile = uploadReq.getFile("smallFile");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = uploadReq.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = uploadReq.getParameterValues(
 			"guestPermissions");
 
 		JournalTemplate template = null;

@@ -115,6 +115,18 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <liferay-ui:error exception="<%= TemplateDescriptionException.class %>" message="please-enter-a-valid-description" />
 <liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
 <liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
+
+<liferay-ui:error exception="<%= TemplateSmallImageNameException.class %>">
+
+	<%
+	String[] imageExtensions = PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+	%>
+
+	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+</liferay-ui:error>
+
+
+<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 <liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
 
 <table class="liferay-table">
