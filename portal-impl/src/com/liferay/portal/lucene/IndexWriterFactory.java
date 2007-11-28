@@ -24,23 +24,25 @@ package com.liferay.portal.lucene;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
+
 import edu.emory.mathcs.backport.java.util.concurrent.Semaphore;
+
+import java.io.IOException;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
@@ -165,9 +167,11 @@ public class IndexWriterFactory {
 			synchronized(this) {
 				IndexWriterData writerData =
 					(IndexWriterData)_writerLookup.get(companyIdObj);
-                if (writerData == null) {
+
+				if (writerData == null) {
                     newWriter = true;
-                    acquireLock(companyId, false);
+
+					acquireLock(companyId, false);
 
                     IndexWriter writer = new IndexWriter(
                         LuceneUtil.getLuceneDir(companyId),
@@ -180,7 +184,6 @@ public class IndexWriterFactory {
                     _writerLookup.put(companyIdObj, writerData);
                 }
 
-
 				writerData.setCount(writerData.getCount() + 1);
 
 				return writerData.getWriter();
@@ -189,10 +192,9 @@ public class IndexWriterFactory {
 		catch (Exception e) {
 			hasError = true;
 
-			_log.error("Unable to create new writer: ", e);
+			_log.error("Unable to create a new writer", e);
 
-			throw new IOException("Unable to create new writer: " +
-                StackTraceUtil.getStackTrace(e));
+			throw new IOException("Unable to create a new writer");
 		}
 		finally {
 			if (hasError && newWriter) {
