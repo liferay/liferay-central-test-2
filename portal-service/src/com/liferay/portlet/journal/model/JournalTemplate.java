@@ -55,7 +55,8 @@ public interface JournalTemplate extends JournalTemplateModel {
 	public void setUserUuid(java.lang.String userUuid);
 
 	public java.lang.String getSmallImageType()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public void setSmallImageType(java.lang.String smallImageType);
 }

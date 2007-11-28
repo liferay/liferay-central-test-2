@@ -23,8 +23,9 @@
 package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.persistence.ImageUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
@@ -58,9 +59,10 @@ public class JournalTemplateImpl
 		_userUuid = userUuid;
 	}
 
-	public String getSmallImageType() throws SystemException {
+	public String getSmallImageType() throws PortalException, SystemException {
 		if (_smallImageType == null && isSmallImage()) {
-			Image smallImage =  ImageUtil.fetchByPrimaryKey(getSmallImageId());
+			Image smallImage =  ImageLocalServiceUtil.getImage(
+				getSmallImageId());
 
 			_smallImageType = smallImage.getType();
 		}

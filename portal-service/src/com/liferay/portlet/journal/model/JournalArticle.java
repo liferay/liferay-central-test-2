@@ -68,7 +68,8 @@ public interface JournalArticle extends JournalArticleModel {
 	public void setApprovedByUserUuid(java.lang.String approvedByUserUuid);
 
 	public java.lang.String getSmallImageType()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public void setSmallImageType(java.lang.String smallImageType);
 }
