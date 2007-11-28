@@ -342,11 +342,21 @@ public class PortalLDAPUtil {
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_BASE_DN);
-		String filter = getAuthSearchFilter(companyId, "*", screenName, "*");
+
+		Properties userMappings = getUserMappings(companyId);
+
+		StringMaker filter = new StringMaker();
+
+		filter.append(StringPool.OPEN_PARENTHESIS);
+		filter.append(userMappings.getProperty("screenName"));
+		filter.append(StringPool.EQUAL);
+		filter.append(screenName);
+		filter.append(StringPool.CLOSE_PARENTHESIS);
+
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-		NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+		NamingEnumeration enu = ctx.search(baseDN, filter.toString(), cons);
 
 		ctx.close();
 
