@@ -96,8 +96,8 @@ public class ImageServlet extends HttpServlet {
 			return ImageLocalUtil.getDefaultUserPortrait();
 		}
 		else {
-			//return ImageLocalUtil.getDefaultSpacer();
-			throw new NoSuchImageException();
+			throw new NoSuchImageException(
+				"No default image exists for " + imageId);
 		}
 	}
 
@@ -161,9 +161,7 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		if (image == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No default image exists for " + imageId);
-			}
+			throw new NoSuchImageException("Image is null");
 		}
 		else {
 			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
