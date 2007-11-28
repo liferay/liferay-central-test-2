@@ -32,4 +32,4 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 DLFolder folder = (DLFolder)row.getObject();
 %>
 
-<%@ include file="/html/portlet/document_library/folder_action_common.jsp" %>
+<%@ include file="/html/portlet/document_library/folder_action_common.jspf" %>

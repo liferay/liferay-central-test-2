@@ -32,4 +32,4 @@ long folderId = ParamUtil.getLong(request, "folderId");
 DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 %>
 
-<%@ include file="/html/portlet/document_library/folder_action_common.jsp" %>
+<%@ include file="/html/portlet/document_library/folder_action_common.jspf" %>
