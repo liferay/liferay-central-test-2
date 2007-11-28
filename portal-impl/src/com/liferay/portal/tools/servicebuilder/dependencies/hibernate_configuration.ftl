@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${springHibernatePackage};
 
 import com.liferay.portal.kernel.util.Validator;

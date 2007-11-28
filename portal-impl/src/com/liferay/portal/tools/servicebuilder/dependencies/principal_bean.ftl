@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${principalBeanPackage};
 
 import com.liferay.portal.PortalException;

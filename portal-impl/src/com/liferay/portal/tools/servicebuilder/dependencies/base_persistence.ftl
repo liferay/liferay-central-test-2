@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${basePersistencePackage};
 
 import ${springHibernatePackage}.HibernateUtil;

@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${baseModelImplPackage};
 
 import com.liferay.portal.model.BaseModel;

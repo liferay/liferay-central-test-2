@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${springHibernatePackage};
 
 import com.liferay.util.dao.DataAccess;

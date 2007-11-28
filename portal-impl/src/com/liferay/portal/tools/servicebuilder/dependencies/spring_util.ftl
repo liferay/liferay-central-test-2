@@ -1,5 +1,6 @@
 <#include "copyright.txt" parse="false">
 
+
 package ${springUtilPackage};
 
 import ${propsUtilPackage}.PropsUtil;
