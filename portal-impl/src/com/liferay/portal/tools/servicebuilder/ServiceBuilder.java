@@ -2976,6 +2976,7 @@ public class ServiceBuilder {
 			xml = xml.substring(0, x) + "\n" + xml.substring(y);
 		}
 
+		xml = StringUtil.replace(xml, '\r', "");
 		xml = XMLFormatter.toString(xml);
 		xml = StringUtil.replace(xml, "\"/>", "\" />");
 

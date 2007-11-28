@@ -19,11 +19,11 @@
 
 			<#list columnList as column>
 				<#if !column.isCollection()>
+					<field name="${column.name}" type="${column.type}"
+
 					<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>
 						<#assign field = modelHintsUtil.getFieldsEl(modelName, column.name)>
 						<#assign hints = field.elements()>
-
-						<field name="${column.name}" type="${column.type}"
 
 						<#if hints?size gt 0>
 							>
@@ -40,6 +40,8 @@
 						<#else>
 							/>
 						</#if>
+					<#else>
+						/>
 					</#if>
 				</#if>
 			</#list>
