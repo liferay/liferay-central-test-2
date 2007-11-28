@@ -106,12 +106,19 @@ public class PortalLDAPUtil {
 		Binding binding = getUser(contact.getCompanyId(), user.getScreenName());
 		String name = StringPool.BLANK;
 
-		if (Validator.isNull(binding)) {
+		if (binding == null) {
 
-			// Generate FDN based on UsersDN
+			// Generate full DN based on user DN
 
-			name = userMappings.getProperty("screenName") + StringPool.EQUAL +
-				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
+			StringMaker sm = new StringMaker();
+
+			sm.append(userMappings.getProperty("screenName"));
+			sm.append(StringPool.EQUAL);
+			sm.append(user.getScreenName());
+			sm.append(StringPool.COMMA);
+			sm.append(getUsersDN(companyId));
+
+			name = sm.toString();
 
 			// Create new user in LDAP
 
@@ -160,12 +167,19 @@ public class PortalLDAPUtil {
 		Binding binding = getUser(user.getCompanyId(), user.getScreenName());
 		String name = StringPool.BLANK;
 
-		if (Validator.isNull(binding)) {
+		if (binding == null) {
 
-			// Generate FDN based on UsersDN
+			// Generate full DN based on user DN
 
-			name = userMappings.getProperty("screenName") + StringPool.EQUAL +
-				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
+			StringMaker sm = new StringMaker();
+
+			sm.append(userMappings.getProperty("screenName"));
+			sm.append(StringPool.EQUAL);
+			sm.append(user.getScreenName());
+			sm.append(StringPool.COMMA);
+			sm.append(getUsersDN(companyId));
+
+			name = sm.toString();
 
 			// Create new user in LDAP
 
