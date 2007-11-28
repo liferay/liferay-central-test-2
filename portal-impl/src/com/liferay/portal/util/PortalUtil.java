@@ -943,8 +943,19 @@ public class PortalUtil {
 
 			String className = (String)entry.getValue();
 
-			FriendlyURLMapper friendlyURLMapper =
-				(FriendlyURLMapper)InstancePool.get(className);
+			FriendlyURLMapper friendlyURLMapper = null;
+
+			try {
+				friendlyURLMapper =
+					(FriendlyURLMapper)InstancePool.get(className);
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+
+			if (friendlyURLMapper == null) {
+				continue;
+			}
 
 			if (url.endsWith(
 					StringPool.SLASH + friendlyURLMapper.getMapping())) {
