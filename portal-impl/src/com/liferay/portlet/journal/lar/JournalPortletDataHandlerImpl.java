@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
@@ -288,6 +287,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		article.setUserUuid(article.getUserUuid());
 		article.setApprovedByUserUuid(article.getApprovedByUserUuid());
 
+		if (article.isSmallImage()) {
+			Image smallImage = ImageUtil.fetchByPrimaryKey(
+				article.getSmallImageId());
+
+			article.setSmallImageType(smallImage.getType());
+
+			context.getZipWriter().addEntry(
+				getSmallImageDir(article), smallImage.getTextObj());
+		}
+
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
 			List articleImages = JournalArticleImageUtil.findByG_A_V(
 				context.getGroupId(), article.getArticleId(),
@@ -361,11 +370,18 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			article.getVersion() + "/";
 	}
 
+	protected static String getSmallImageDir(JournalArticle article)
+		throws SystemException {
+
+		return _ARTICLE_SMALL_IMAGES_FOLDER + article.getSmallImageId() + "." +
+			article.getSmallImageType();
+	}
+
 	protected static String getSmallImageDir(JournalTemplate template)
 		throws SystemException {
 
-		return _TEMPLATE_IMAGES_FOLDER + template.getSmallImageId() + "." +
-			template.getSmallImageType();
+		return _TEMPLATE_SMALL_IMAGES_FOLDER + template.getSmallImageId() +
+			"." + template.getSmallImageType();
 	}
 
 	protected static JournalArticle importArticle(
@@ -456,9 +472,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			neverReview = false;
 		}
 
-		boolean smallImage = false;
-		String smallImageURL = StringPool.BLANK;
 		File smallFile = null;
+
+		if (article.isSmallImage()) {
+			byte[] byteArray = context.getZipReader().getEntryAsByteArray(
+				getSmallImageDir(article));
+
+			smallFile = new File(getSmallImageDir(article));
+
+			FileUtil.write(smallFile, byteArray);
+		}
 
 		Map images = CollectionFactory.getHashMap();
 
@@ -520,9 +543,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					expirationDateHour, expirationDateMinute, neverExpire,
 					reviewDateMonth, reviewDateDay, reviewDateYear,
 					reviewDateHour, reviewDateMinute, neverReview,
-					article.getIndexable(), smallImage, smallImageURL,
-					smallFile, images, articleURL, prefs, tagsEntries,
-					addCommunityPermissions, addGuestPermissions);
+					article.getIndexable(), article.getSmallImage(),
+					article.getSmallImageURL(), smallFile, images, articleURL,
+					prefs, tagsEntries, addCommunityPermissions,
+					addGuestPermissions);
 			}
 			else {
 				existingArticle =  JournalArticleLocalServiceUtil.updateArticle(
@@ -539,8 +563,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
-					smallImage, smallImageURL, smallFile, images, articleURL,
-					prefs, tagsEntries);
+					article.getSmallImage(), article.getSmallImageURL(),
+					smallFile, images, articleURL, prefs, tagsEntries);
 			}
 		}
 		else {
@@ -553,9 +577,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, article.getIndexable(), smallImage, smallImageURL,
-				smallFile, images, articleURL, prefs, tagsEntries,
-				addCommunityPermissions, addGuestPermissions);
+				neverReview, article.getIndexable(), article.getSmallImage(),
+				article.getSmallImageURL(), smallFile, images, articleURL,
+				prefs, tagsEntries, addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		if (article.isApproved() && !existingArticle.isApproved()) {
@@ -754,7 +779,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	private static final String _ARTICLE_IMAGES_FOLDER =
 		"article-images/";
 
-	private static final String _TEMPLATE_IMAGES_FOLDER = "template-images/";
+	private static final String _ARTICLE_SMALL_IMAGES_FOLDER =
+		"article-thumbnails/";
+
+	private static final String _TEMPLATE_SMALL_IMAGES_FOLDER =
+		"template-thumbnails/";
 
 	private static final PortletDataHandlerBoolean
 		_articlesStructuresAndTemplates = new PortletDataHandlerBoolean(

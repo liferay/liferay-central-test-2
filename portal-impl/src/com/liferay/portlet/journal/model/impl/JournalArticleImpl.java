@@ -26,6 +26,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -110,7 +112,22 @@ public class JournalArticleImpl
 		_approvedByUserUuid = approvedByUserUuid;
 	}
 
+	public String getSmallImageType() throws SystemException {
+		if (_smallImageType == null && isSmallImage()) {
+			Image smallImage =  ImageUtil.fetchByPrimaryKey(getSmallImageId());
+
+			_smallImageType = smallImage.getType();
+		}
+
+		return _smallImageType;
+	}
+
+	public void setSmallImageType(String smallImageType) {
+		_smallImageType = smallImageType;
+	}
+
 	private String _userUuid;
 	private String _approvedByUserUuid;
+	private String _smallImageType;
 
 }
