@@ -93,6 +93,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/ecj.jar</file-name>
+		<version>3.3.1.1</version>
+		<project-name>Eclpse JDT Core Batch Compiler</project-name>
+		<project-url>http://www.eclipse.org/jdt/core/index.php</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License Version 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/firebird.jar</file-name>
 		<version></version>
 		<project-name>Firebird</project-name>
@@ -574,17 +585,6 @@
 		<licenses>
 			<license>
 				<license-name>Project website contains this: feel free to use it</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/compiler/ecj.jar</file-name>
-		<version>3.3.1.1</version>
-		<project-name>Eclpse JDT Core Batch Compiler</project-name>
-		<project-url>http://www.eclipse.org/jdt/core/index.php</project-url>
-		<licenses>
-			<license>
-				<license-name>Eclipse Public License Version 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
