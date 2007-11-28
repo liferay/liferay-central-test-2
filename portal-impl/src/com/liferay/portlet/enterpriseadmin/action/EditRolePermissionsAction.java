@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -77,9 +78,6 @@ public class EditRolePermissionsAction extends PortletAction {
 			}
 			else if (cmd.equals("delete_permission")) {
 				deletePermission(req, res);
-			}
-			else if (cmd.equals("group_permissions")) {
-				updateGroupPermissions(req, res);
 			}
 		}
 		catch (Exception e) {
@@ -159,8 +157,6 @@ public class EditRolePermissionsAction extends PortletAction {
 			selResource = portletResource;
 		}
 
-		List groupScopeActionIds = new ArrayList();
-
 		List actions = ResourceActionsUtil.getResourceActions(
 			themeDisplay.getCompanyId(), portletResource, modelResource);
 
@@ -176,7 +172,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			int scope = ParamUtil.getInteger(req, "scope" + actionId);
 
-			if (scope == ResourceImpl.SCOPE_COMPANY) {
+				if (scope == ResourceImpl.SCOPE_COMPANY) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
 					scope, String.valueOf(themeDisplay.getCompanyId()),
@@ -193,7 +189,27 @@ public class EditRolePermissionsAction extends PortletAction {
 						actionId);
 				}
 				else {
-					groupScopeActionIds.add(actionId);
+
+					String[] groupIds = StringUtil.split(
+						ParamUtil.getString(req, "groupIds" + actionId));
+
+					if (groupIds.length == 0) {
+						SessionErrors.add(req, "missingGroupIdsForAction");
+						return;
+					}
+
+					groupIds = ArrayUtil.distinct(groupIds);
+
+					PermissionServiceUtil.unsetRolePermissions(
+						roleId, themeDisplay.getPortletGroupId(), selResource,
+						ResourceImpl.SCOPE_GROUP, actionId);
+
+					for (int j = 0; j < groupIds.length; j++) {
+						PermissionServiceUtil.setRolePermission(
+							roleId, themeDisplay.getPortletGroupId(),
+							selResource, ResourceImpl.SCOPE_GROUP,
+							groupIds[j], actionId);
+					}
 				}
 			}
 			else {
@@ -218,70 +234,9 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		String redirect = ParamUtil.getString(req, "redirect");
 
-		if (groupScopeActionIds.size() == 0) {
-			SessionMessages.add(req, "permissionsUpdated");
+		SessionMessages.add(req, "permissionsUpdated");
 
-			redirect += "&" + Constants.CMD + "=" + Constants.VIEW;
-		}
-		else {
-			redirect +=
-				"&groupScopePos=0&groupScopeActionIds=" +
-					StringUtil.merge(groupScopeActionIds);
-		}
-
-		res.sendRedirect(redirect);
-	}
-
-	protected void updateGroupPermissions(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long roleId = ParamUtil.getLong(req, "roleId");
-
-		String portletResource = ParamUtil.getString(req, "portletResource");
-		String modelResource = ParamUtil.getString(req, "modelResource");
-
-		String selResource = modelResource;
-		if (Validator.isNull(modelResource)) {
-			selResource = portletResource;
-		}
-
-		int groupScopePos = ParamUtil.getInteger(req, "groupScopePos");
-		String[] groupScopeActionIds = StringUtil.split(
-			ParamUtil.getString(req, "groupScopeActionIds"));
-
-		String actionId = groupScopeActionIds[groupScopePos];
-
-		String[] addGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "addGroupIds"));
-		String[] removeGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "removeGroupIds"));
-
-		for (int i = 0; i < addGroupIds.length; i++) {
-			PermissionServiceUtil.setRolePermission(
-				roleId, themeDisplay.getPortletGroupId(), selResource,
-				ResourceImpl.SCOPE_GROUP, addGroupIds[i], actionId);
-		}
-
-		for (int i = 0; i < removeGroupIds.length; i++) {
-			PermissionServiceUtil.unsetRolePermission(
-				roleId, themeDisplay.getPortletGroupId(), selResource,
-				ResourceImpl.SCOPE_GROUP, removeGroupIds[i], actionId);
-		}
-
-		String redirect = ParamUtil.getString(req, "redirect");
-
-		if (redirect.indexOf("groupScopePos=" + groupScopePos + "&") != -1) {
-
-			// Show message only if the user stayed on the same page
-
-			SessionMessages.add(req, "request_processed");
-		}
-		else if ((groupScopePos + 1) == groupScopeActionIds.length) {
-			SessionMessages.add(req, "permissionsUpdated");
-		}
+		redirect += "&" + Constants.CMD + "=" + Constants.VIEW;
 
 		res.sendRedirect(redirect);
 	}

@@ -464,6 +464,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.select_community" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/select_community.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.test_ldap_connection" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/test_ldap_connection.jsp" />
 	</definition>

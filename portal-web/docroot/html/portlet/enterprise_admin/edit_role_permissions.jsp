@@ -61,10 +61,6 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = portletResourceName;
 }
 
-int groupScopePos = ParamUtil.getInteger(request, "groupScopePos");
-String groupScopeActionIds = ParamUtil.getString(request, "groupScopeActionIds");
-String[] groupScopeActionIdsArray = StringUtil.split(groupScopeActionIds);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -98,7 +94,7 @@ if (portletResource.equals(PortletKeys.PORTAL)) {
 	totalSteps = 1;
 }
 else if (role.getType() == RoleImpl.TYPE_REGULAR) {
-	totalSteps = 4;
+	totalSteps = 3;
 }
 else if ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 	totalSteps = 3;
@@ -153,31 +149,68 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateGroupPermissions(groupScopePos) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";
+	function <portlet:namespace />removeGroup(pos, target) {
+		var selectedGroupIds = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value.split(",");
+		var selectedGroupNames = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value.split("@@");
 
-		var redirect = "";
+		selectedGroupIds.splice(pos, 1);
+		selectedGroupNames.splice(pos, 1);
 
-		if (<%= cmd.equals(Constants.VIEW) %>) {
-			redirect = "<%= portletURL.toString() %>";
+		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
+	}
+
+	function <portlet:namespace />selectGroup(groupId, name, target) {
+		var selectedGroupIdsField = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value;
+		var selectedGroupIds = [];
+
+		if (selectedGroupIdsField != "") {
+			selectedGroupIds = selectedGroupIdsField.split(",");
 		}
-		else if (groupScopePos == <%= groupScopeActionIdsArray.length %>) {
-			//redirect = "<%= portletURL.toString() %>&<portlet:namespace />groupScopePos=-1";
-			redirect = "<%= portletURL.toString() %>&<portlet:namespace /><%= Constants.CMD %>=<%= Constants.VIEW %>";
+
+		var selectedGroupNamesField = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value;
+		var selectedGroupNames = [];
+
+		if (selectedGroupNamesField != "") {
+			selectedGroupNames = selectedGroupNamesField.split("@@");
+		}
+
+		selectedGroupIds.push(groupId);
+		selectedGroupNames.push(name);
+
+		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
+	}
+
+
+	function <portlet:namespace />toggleGroupDiv(target) {
+		var scope = document.<portlet:namespace />fm['<portlet:namespace />scope' + target].value;
+		if (scope == '<%= ResourceImpl.SCOPE_GROUP %>')            {
+			document.getElementById("<portlet:namespace />groupDiv" + target).style.display = "";
 		}
 		else {
-			redirect = "<%= portletURL.toString() %>&<portlet:namespace />groupScopePos=" +
-				groupScopePos + "&<portlet:namespace />groupScopeActionIds=<%= groupScopeActionIds %>";
+			document.getElementById("<portlet:namespace />groupDiv" + target).style.display = "none";
+		}
+	}
 
-			if (groupScopePos == <%= groupScopePos %>) {
-				redirect += "&<portlet:namespace />cur=<%= cur %>";
+	function <portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target) {
+		document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value = selectedGroupIds.join(',');
+		document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value = selectedGroupNames.join('@@');
+
+		var nameEl = document.getElementById("<portlet:namespace />groupHTML" + target);
+
+		var groupsHTML = '';
+
+		for (var i = 0; i < selectedGroupIds.length; i++) {
+			var id = selectedGroupIds[i];
+			var name = selectedGroupNames[i];
+
+			groupsHTML += '<span>' + name + '&nbsp;[<a href="javascript: <portlet:namespace />removeGroup(' + i + ', \''+ target + '\' );">x</a>]</span>';
+
+			if (i < selectedGroupIds.length) {
+				groupsHTML += ',&nbsp;'
 			}
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
+		nameEl.innerHTML = groupsHTML;
 	}
 </script>
 
@@ -188,8 +221,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 <input name="<portlet:namespace />modelResource" type="hidden" value="<%= modelResource %>" />
-<input name="<portlet:namespace />groupScopePos" type="hidden" value="<%= groupScopePos %>" />
-<input name="<portlet:namespace />groupScopeActionIds" type="hidden" value="<%= groupScopeActionIds %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
@@ -361,116 +392,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
-
-		<%
-		String actionId = groupScopeActionIdsArray[groupScopePos];
-
-		portletURL.setParameter("groupScopePos", String.valueOf(groupScopePos));
-		portletURL.setParameter("groupScopeActionIds", groupScopeActionIds);
-		%>
-
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"4", String.valueOf(totalSteps)}) %>
-
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(modelResource) %>">
-					<%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-resource", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), modelResourceName}) %>
-				</c:when>
-				<c:otherwise>
-					<%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), portletResourceName}) %>
-				</c:otherwise>
-			</c:choose>
-		</div>
-
-		<br />
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<%
-		GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
-
-		searchContainer.setRowChecker(new GroupPermissionChecker(renderResponse, role, selResource, actionId));
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/group_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<%
-		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap groupParams = new LinkedHashMap();
-
-		if (tabs2.equals("current")) {
-			List rolePermissions = new ArrayList();
-
-			rolePermissions.add(selResource);
-			rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
-			rolePermissions.add(actionId);
-			rolePermissions.add(new Long(role.getRoleId()));
-
-			groupParams.put("rolePermissions", rolePermissions);
-		}
-
-		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
-
-		searchContainer.setTotal(total);
-
-		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-		%>
-
-		<div class="separator"><!-- --></div>
-
-		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);" />
-
-		<br /><br />
-
-		<%
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			Group group = (Group)results.get(i);
-
-			ResultRow row = new ResultRow(group, group.getGroupId(), i);
-
-			// Name
-
-			row.addText(group.getName());
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-		%>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<br />
-
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<input type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);" />
-
-				<input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
 	<c:when test="<%= editPortletPermissions || Validator.isNotNull(modelResource) %>">
 
 		<%
@@ -531,6 +452,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= breadcrumbs %>
 		</div>
 
+		<liferay-ui:error key="missingGroupIdsForAction" message="select-at-least-one-community-for-each-action-with-scope-set-to-communities" />
+
 		<table class="liferay-table">
 		<tr>
 			<th>
@@ -546,15 +469,30 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					</c:when>
 				</c:choose>
 			</th>
+			<th>
+			</th>
 		</tr>
 
 		<%
 		for (int i = 0; i < actions.size(); i++) {
 			String actionId = (String)actions.get(i);
 
-			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY)  || (role.getType() == RoleImpl.TYPE_ORGANIZATION))  && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP, actionId);
+			int scopeParam = ParamUtil.getInteger(renderRequest, "scope" + actionId);
+
+			boolean hasCompanyScope = false;
+			boolean hasGroupTemplateScope = false;
+			boolean hasGroupScope = false;
+
+			if (scopeParam > 0) {
+				hasCompanyScope = (scopeParam == ResourceImpl.SCOPE_COMPANY);
+				hasGroupTemplateScope = (scopeParam == ResourceImpl.SCOPE_GROUP_TEMPLATE);
+				hasGroupScope = (scopeParam == ResourceImpl.SCOPE_GROUP);
+			}
+			else {
+				hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_COMPANY, actionId);
+				hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY)  || (role.getType() == RoleImpl.TYPE_ORGANIZATION))  && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+				hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP, actionId);
+			}
 		%>
 
 			<tr>
@@ -564,7 +502,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				<td>
 					<c:choose>
 						<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
-							<select name="<portlet:namespace />scope<%= actionId %>">
+							<select name="<portlet:namespace />scope<%= actionId %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= actionId %>')">
 								<option value=""></option>
 									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
@@ -598,6 +536,67 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 						</c:when>
 					</c:choose>
 				</td>
+				<td>
+					<%
+					StringMaker groupsHTML = new StringMaker();
+					String groupIds = ParamUtil.getString(request, "groupIds" + actionId, null);
+					long[] groupIdsArray = StringUtil.split(groupIds, 0L);
+					List groupNames = new ArrayList();
+					%>
+					<c:if test="<%= hasGroupScope %>">
+						<%
+
+						LinkedHashMap groupParams = new LinkedHashMap();
+
+						List rolePermissions = new ArrayList();
+
+						rolePermissions.add(selResource);
+						rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
+						rolePermissions.add(actionId);
+						rolePermissions.add(new Long(role.getRoleId()));
+
+						groupParams.put("rolePermissions", rolePermissions);
+
+						List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+						groupIdsArray = new long[groups.size()];
+
+						for (int j = 0; j < groups.size(); j++) {
+							Group group = (Group)groups.get(j);
+
+							groupIdsArray[j] = group.getGroupId();
+
+							groupNames.add(group.getName());
+
+							groupsHTML.append("<span>");
+							groupsHTML.append(group.getName());
+
+							groupsHTML.append("&nbsp;[<a href='javascript: ");
+							groupsHTML.append(renderResponse.getNamespace());
+							groupsHTML.append("removeGroup(");
+							groupsHTML.append(i);
+							groupsHTML.append(");'>x</a>]");
+
+							groupsHTML.append("</span>");
+
+							if ((j + 1) != groups.size()) {
+								groupsHTML.append(",&nbsp;");
+							}
+
+						}
+						%>
+					</c:if>
+						<input name="<portlet:namespace />groupIds<%= actionId %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
+						<input name="<portlet:namespace />groupNames<%= actionId %>" type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
+
+						<div id="<portlet:namespace />groupDiv<%= actionId %>" <%= hasGroupScope?"":"style=\"display: none\"" %>>
+							<span id="<portlet:namespace />groupHTML<%= actionId %>">
+								<%= groupsHTML.toString() %>
+							</span>
+
+							<input type="button" value="<liferay-ui:message key="select" />" onClick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= actionId %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
+						</div>
+				</td>
 			</tr>
 
 		<%
@@ -608,7 +607,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br />
 
-		<input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />updateActions();" />
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateActions();" />
 
 		<script type="text/javascript">
 			jQuery(
