@@ -1434,9 +1434,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					String tabs4Names = "export,import";
 
-					if ((layout.getGroupId() == groupId) && (layout.isPrivateLayout() == privateLayout)) {
-						tabs4Names = "export";
-					}
 					%>
 
 					<liferay-ui:tabs
@@ -1468,27 +1465,32 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportPages();" />
 						</c:when>
 						<c:when test='<%= tabs4.equals("import") %>'>
-							<c:if test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
-								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
+							<c:choose>
+								<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
+									<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
 
-								<br /><br />
+									<br /><br />
 
-								<div>
-									<input name="<portlet:namespace />importFileName" size="50" type="file" />
-								</div>
+									<div>
+										<input name="<portlet:namespace />importFileName" size="50" type="file" />
+									</div>
 
-								<br />
+									<br />
 
-								<liferay-ui:message key="what-would-you-like-to-import" />
+									<liferay-ui:message key="what-would-you-like-to-import" />
 
-								<br /><br />
+									<br /><br />
 
-								<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
+									<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
 
-								<br />
+									<br />
 
-								<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
-							</c:if>
+									<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
+								</c:when>
+								<c:otherwise>
+									<liferay-ui:message key="import-from-within-the-target-community-could-cause-conflicts-please-use-the-communities-portlet-from-another-community-instead"/>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 					</c:choose>
 

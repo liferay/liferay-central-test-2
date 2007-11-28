@@ -101,11 +101,9 @@ tabsNames += ",permissions";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
 
-if (Validator.isNotNull(portlet.getConfigurationActionClass()) || Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
-	tabsNames += ",export-import";
+tabsNames += ",export-import";
 
-	request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
-}
+request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
 
 if (tabsNames.startsWith(",")) {
 	tabsNames = tabsNames.substring(1);

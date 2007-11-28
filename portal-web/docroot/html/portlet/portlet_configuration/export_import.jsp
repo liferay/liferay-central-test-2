@@ -96,104 +96,47 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 	<liferay-util:param name="tabs1" value="export-import" />
 </liferay-util:include>
 
-<%
-String tabs2Names = "export,import";
-
-if (layout.getGroup().isStagingGroup()) {
-	tabs2Names += ",staging";
-}
-%>
-
-<liferay-ui:tabs
-	names="<%= tabs2Names %>"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
-<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
-<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
-
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveData(); return false;">
-<input name="<portlet:namespace />tabs1" type="hidden" value="export_import">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />plid" type="hidden" value="<%= layout.getPlid() %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= layout.getGroupId() %>">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
-
 <c:choose>
-	<c:when test='<%= tabs2.equals("export") %>'>
-		<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
-
-		<br /><br />
-
-		<div>
-			<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(selPortlet.getDisplayName(), " ", "_") %>-<%= Time.getShortTimestamp() %>.portlet.lar">
-		</div>
-
-		<br />
-
-		<liferay-ui:message key="what-would-you-like-to-export" />
-
-		<br /><br />
-
-		<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
-
-		<br />
-
-		<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportData();" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("import") %>'>
-		<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
-
-		<br /><br />
-
-		<div>
-			<input name="<portlet:namespace />importFileName" size="50" type="file" />
-		</div>
-
-		<br />
-
-		<liferay-ui:message key="what-would-you-like-to-import" />
-
-		<br /><br />
-
-		<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
-
-		<br />
-
-		<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importData();">
-	</c:when>
-	<c:when test='<%= tabs2.equals("staging") %>'>
-
+	<c:when test="<%= supportsLAR || supportsSetup %>">
 		<%
-		String errorMesageKey = StringPool.BLANK;
+		String tabs2Names = "export,import";
 
-		Group stagingGroup = layout.getGroup();
-		Group liveGroup = stagingGroup.getLiveGroup();
-
-		Layout targetLayout = null;
-
-		try {
-			targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
-		}
-		catch (NoSuchLayoutException nsle) {
-			errorMesageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
-		}
-
-		if (targetLayout != null) {
-			LayoutType layoutType = targetLayout.getLayoutType();
-
-			if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
-				errorMesageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
-			}
+		if (layout.getGroup().isStagingGroup()) {
+			tabs2Names += ",staging";
 		}
 		%>
 
+		<liferay-ui:tabs
+			names="<%= tabs2Names %>"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
+		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
+
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveData(); return false;">
+		<input name="<portlet:namespace />tabs1" type="hidden" value="export_import">
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+		<input name="<portlet:namespace />plid" type="hidden" value="<%= layout.getPlid() %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= layout.getGroupId() %>">
+		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
+
 		<c:choose>
-			<c:when test="<%= Validator.isNull(errorMesageKey) %>">
-				<liferay-ui:message key="what-would-you-like-to-copy-from-live-or-publish-to-live" />
+			<c:when test='<%= tabs2.equals("export") %>'>
+				<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
+
+				<br /><br />
+
+				<div>
+					<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(selPortlet.getDisplayName(), " ", "_") %>-<%= Time.getShortTimestamp() %>.portlet.lar">
+				</div>
+
+				<br />
+
+				<liferay-ui:message key="what-would-you-like-to-export" />
 
 				<br /><br />
 
@@ -201,34 +144,99 @@ if (layout.getGroup().isStagingGroup()) {
 
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
-
-				<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
+				<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportData();" />
 			</c:when>
-			<c:otherwise>
-				<liferay-ui:message key="<%= errorMesageKey %>" />
-			</c:otherwise>
+			<c:when test='<%= tabs2.equals("import") %>'>
+				<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
+
+				<br /><br />
+
+				<div>
+					<input name="<portlet:namespace />importFileName" size="50" type="file" />
+				</div>
+
+				<br />
+
+				<liferay-ui:message key="what-would-you-like-to-import" />
+
+				<br /><br />
+
+				<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importData();">
+			</c:when>
+			<c:when test='<%= tabs2.equals("staging") %>'>
+
+				<%
+				String errorMesageKey = StringPool.BLANK;
+
+				Group stagingGroup = layout.getGroup();
+				Group liveGroup = stagingGroup.getLiveGroup();
+
+				Layout targetLayout = null;
+
+				try {
+					targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+				}
+				catch (NoSuchLayoutException nsle) {
+					errorMesageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
+				}
+
+				if (targetLayout != null) {
+					LayoutType layoutType = targetLayout.getLayoutType();
+
+					if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
+						errorMesageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+					}
+				}
+				%>
+
+				<c:choose>
+					<c:when test="<%= Validator.isNull(errorMesageKey) %>">
+						<liferay-ui:message key="what-would-you-like-to-copy-from-live-or-publish-to-live" />
+
+						<br /><br />
+
+						<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
+
+						<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="<%= errorMesageKey %>" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
 		</c:choose>
+
+		</form>
+
+		<script type="text/javascript">
+			jQuery(function(){
+				jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
+
+				jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
+					var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
+
+					if (this.checked) {
+						input.children(".<portlet:namespace />handler-control").show();
+					}
+					else {
+						input.children(".<portlet:namespace />handler-control").hide();
+					}
+				});
+			});
+		</script>
+
 	</c:when>
+	<c:otherwise>
+		<%= LanguageUtil.format(locale, "the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it", selPortlet.getDisplayName()) %>
+	</c:otherwise>
 </c:choose>
-
-</form>
-
-<script type="text/javascript">
-	jQuery(function(){
-		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
-
-		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
-			var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
-
-			if (this.checked) {
-				input.children(".<portlet:namespace />handler-control").show();
-			}
-			else {
-				input.children(".<portlet:namespace />handler-control").hide();
-			}
-		});
-	});
-</script>
 
 <%@ include file="/html/portlet/communities/render_controls.jspf" %>
