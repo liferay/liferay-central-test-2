@@ -339,7 +339,7 @@ public interface PortletLocalService {
 		java.lang.String servletContextName, java.lang.String xml)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.Map getFriendlyURLMappers();
+	public java.util.List getFriendlyURLMappers();
 
 	public com.liferay.portal.model.Portlet getPortletById(long companyId,
 		java.lang.String portletId) throws com.liferay.portal.SystemException;

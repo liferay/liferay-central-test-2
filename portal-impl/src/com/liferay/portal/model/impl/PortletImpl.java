@@ -553,19 +553,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the friendly URL mapper of the portlet.
-	 *
-	 * @return		the name of the friendly URL mapper class of the portlet
-	 */
-	public FriendlyURLMapper getFriendlyURLMapper() {
-		if (Validator.isNull(getFriendlyURLMapperClass())) {
-			return null;
-		}
-
-		return (FriendlyURLMapper)InstancePool.get(getFriendlyURLMapperClass());
-	}
-
-	/**
 	 * Gets the name of the friendly URL mapper class of the portlet.
 	 *
 	 * @return		the name of the friendly URL mapper class of the portlet
@@ -582,6 +569,28 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setFriendlyURLMapperClass(String friendlyURLMapperClass) {
 		_friendlyURLMapperClass = friendlyURLMapperClass;
+	}
+
+	/**
+	 * Gets the friendly URL mapper instance of the portlet.
+	 *
+	 * @return		the friendly URL mapper instance of the portlet
+	 */
+	public FriendlyURLMapper getFriendlyURLMapperInstance() {
+		if (Validator.isNotNull(getFriendlyURLMapperClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getFriendlyURLMapperInstance();
+			}
+			else {
+				return (FriendlyURLMapper)InstancePool.get(
+					getFriendlyURLMapperClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**

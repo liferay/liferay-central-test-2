@@ -148,7 +148,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		Portlet portlet = getPortlet();
 
 		if (portlet != null) {
-			FriendlyURLMapper mapper = portlet.getFriendlyURLMapper();
+			FriendlyURLMapper mapper = portlet.getFriendlyURLMapperInstance();
 
 			if (mapper != null) {
 				portletFriendlyURLPath = mapper.buildPath(this);

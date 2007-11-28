@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -100,7 +101,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public Map getFriendlyURLMappers() {
+	public List getFriendlyURLMappers() {
 		return _getFriendlyURLMappers();
 	}
 
@@ -389,8 +390,26 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	private Map _getFriendlyURLMappers() {
-		return _friendlyURLMappers;
+	private List _getFriendlyURLMappers() {
+		List friendlyURLMappers = new ArrayList(
+			_friendlyURLMapperPortlets.size());
+
+		Iterator itr = _friendlyURLMapperPortlets.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			Portlet portlet = (Portlet)entry.getValue();
+
+			FriendlyURLMapper friendlyURLMapper =
+				portlet.getFriendlyURLMapperInstance();
+
+			if (friendlyURLMapper != null) {
+				friendlyURLMappers.add(friendlyURLMapper);
+			}
+		}
+
+		return friendlyURLMappers;
 	}
 
 	private String _getPortletId(String securityPath) throws SystemException {
@@ -859,8 +878,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		Map friendlyURLMappers = _getFriendlyURLMappers();
-
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
@@ -925,11 +942,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				if (Validator.isNull(
 						portletModel.getFriendlyURLMapperClass())) {
 
-					friendlyURLMappers.remove(portletId);
+					_friendlyURLMapperPortlets.remove(portletId);
 				}
 				else {
-					friendlyURLMappers.put(
-						portletId, portletModel.getFriendlyURLMapperClass());
+					_friendlyURLMapperPortlets.put(portletId, portletModel);
 				}
 
 				portletModel.setURLEncoderClass(GetterUtil.getString(
@@ -1166,6 +1182,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		CollectionFactory.getSyncHashMap();
 	private static Map _portletIdsByStrutsPath =
 		CollectionFactory.getSyncHashMap();
-	private static Map _friendlyURLMappers = CollectionFactory.getSyncHashMap();
+	private static Map _friendlyURLMapperPortlets =
+		CollectionFactory.getSyncHashMap();
 
 }

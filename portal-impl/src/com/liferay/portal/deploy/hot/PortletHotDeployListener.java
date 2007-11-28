@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
@@ -188,6 +189,14 @@ public class PortletHotDeployListener implements HotDeployListener {
 						portlet.getSchedulerClass()).newInstance();
 				}
 
+				FriendlyURLMapper friendlyURLMapperInstance = null;
+
+				if (Validator.isNotNull(portlet.getFriendlyURLMapperClass())) {
+					friendlyURLMapperInstance =
+						(FriendlyURLMapper)portletClassLoader.loadClass(
+							portlet.getFriendlyURLMapperClass()).newInstance();
+				}
+
 				URLEncoder urlEncoderInstance = null;
 
 				if (Validator.isNotNull(portlet.getURLEncoderClass())) {
@@ -320,8 +329,9 @@ public class PortletHotDeployListener implements HotDeployListener {
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
 					configurationActionInstance, indexerInstance,
-					schedulerInstance, urlEncoderInstance,
-					portletDataHandlerInstance, portletLayoutListenerInstance,
+					schedulerInstance, friendlyURLMapperInstance,
+					urlEncoderInstance, portletDataHandlerInstance,
+					portletLayoutListenerInstance,
 					activityTrackerInterpreterInstance,
 					smtpMessageListenerInstance, prefsValidatorInstance,
 					resourceBundles, customUserAttributes);

@@ -793,7 +793,7 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
-	public static java.util.Map getFriendlyURLMappers() {
+	public static java.util.List getFriendlyURLMappers() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getFriendlyURLMappers();

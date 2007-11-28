@@ -110,12 +110,12 @@ public interface Portlet extends PortletModel {
 
 	public void setPortletURLClass(java.lang.String portletURLClass);
 
-	public com.liferay.portal.kernel.portlet.FriendlyURLMapper getFriendlyURLMapper();
-
 	public java.lang.String getFriendlyURLMapperClass();
 
 	public void setFriendlyURLMapperClass(
 		java.lang.String friendlyURLMapperClass);
+
+	public com.liferay.portal.kernel.portlet.FriendlyURLMapper getFriendlyURLMapperInstance();
 
 	public java.lang.String getURLEncoderClass();
 

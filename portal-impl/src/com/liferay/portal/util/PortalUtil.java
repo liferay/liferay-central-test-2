@@ -933,29 +933,13 @@ public class PortalUtil {
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
-		Map friendlyURLMappers =
+		List friendlyURLMappers =
 			PortletLocalServiceUtil.getFriendlyURLMappers();
 
-		Iterator itr = friendlyURLMappers.entrySet().iterator();
+		Iterator itr = friendlyURLMappers.iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String className = (String)entry.getValue();
-
-			FriendlyURLMapper friendlyURLMapper = null;
-
-			try {
-				friendlyURLMapper =
-					(FriendlyURLMapper)InstancePool.get(className);
-			}
-			catch (Exception e) {
-				_log.error(e.getMessage());
-			}
-
-			if (friendlyURLMapper == null) {
-				continue;
-			}
+			FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)itr.next();
 
 			if (url.endsWith(
 					StringPool.SLASH + friendlyURLMapper.getMapping())) {

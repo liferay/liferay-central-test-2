@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringPool;
@@ -3371,18 +3370,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 
-			Map friendlyURLMappers =
+			List friendlyURLMappers =
 				portletLocalService.getFriendlyURLMappers();
 
-			Iterator itr = friendlyURLMappers.entrySet().iterator();
+			Iterator itr = friendlyURLMappers.iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				String className = (String)entry.getValue();
-
 				FriendlyURLMapper friendlyURLMapper =
-					(FriendlyURLMapper)InstancePool.get(className);
+					(FriendlyURLMapper)itr.next();
 
 				if (friendlyURL.indexOf(friendlyURLMapper.getMapping()) != -1) {
 					LayoutFriendlyURLException lfurle =

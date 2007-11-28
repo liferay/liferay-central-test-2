@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -54,6 +55,7 @@ public class PortletContextWrapper {
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
 		Indexer indexerInstance, Scheduler schedulerInstance,
+		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
@@ -68,6 +70,7 @@ public class PortletContextWrapper {
 		_configurationActionInstance = configurationActionInstance;
 		_indexerInstance = indexerInstance;
 		_schedulerInstance = schedulerInstance;
+		_friendlyURLMapperInstance = friendlyURLMapperInstance;
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
@@ -105,6 +108,10 @@ public class PortletContextWrapper {
 
 	public Scheduler getSchedulerInstance() {
 		return _schedulerInstance;
+	}
+
+	public FriendlyURLMapper getFriendlyURLMapperInstance() {
+		return _friendlyURLMapperInstance;
 	}
 
 	public URLEncoder getURLEncoderInstance() {
@@ -158,6 +165,7 @@ public class PortletContextWrapper {
 	private ConfigurationAction _configurationActionInstance;
 	private Indexer _indexerInstance;
 	private Scheduler _schedulerInstance;
+	private FriendlyURLMapper _friendlyURLMapperInstance;
 	private URLEncoder _urlEncoderInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
