@@ -1554,6 +1554,7 @@ public class JournalArticleLocalServiceImpl
 			article.setCreateDate(now);
 			article.setArticleId(articleId);
 			article.setVersion(MathUtil.format(latestVersion + 0.1, 1, 1));
+			article.setSmallImageId(oldArticle.getSmallImageId());
 		}
 		else {
 			article = oldArticle;
@@ -1590,6 +1591,11 @@ public class JournalArticleLocalServiceImpl
 		article.setReviewDate(reviewDate);
 		article.setIndexable(indexable);
 		article.setSmallImage(smallImage);
+
+		if (article.getSmallImageId() == 0) {
+			article.setSmallImageId(counterLocalService.increment());
+		}
+
 		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article);
