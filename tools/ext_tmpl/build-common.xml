@@ -89,9 +89,12 @@ Please use Ant 1.7.0 or above.
 	</if>
 
 	<if>
-		<not>
-			<isset property="env.ANT_OPTS" />
-		</not>
+		<and>
+			<equals arg1="${java.class.version}" arg2="49.0" />
+			<not>
+				<isset property="env.ANT_OPTS" />
+			</not>
+		</and>
 		<then>
 			<copy file="${project.dir}/lib/development/ecj.jar" todir="${ant.home}/lib" />
 
@@ -108,9 +111,12 @@ Please set it to the recommended value of "-Xms256M -Xmx512M".
 	<whichresource resource="/org/eclipse/jdt/core/JDTCompilerAdapter.class" property="ecj.compiler" />
 
 	<if>
-		<not>
-			<isset property="ecj.compiler" />
-		</not>
+		<and>
+			<equals arg1="${javac.compiler}" arg2="org.eclipse.jdt.core.JDTCompilerAdapter" />
+			<not>
+				<isset property="ecj.compiler" />
+			</not>
+		</and>
 		<then>
 			<copy file="${project.dir}/lib/development/ecj.jar" todir="${ant.home}/lib" />
 
