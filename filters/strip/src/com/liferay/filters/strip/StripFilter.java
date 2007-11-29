@@ -307,7 +307,7 @@ public class StripFilter implements Filter {
 	}
 
 	private static final String _ALREADY_FILTERED =
-		StripFilter.class + "_ALREADY_FILTERED";
+		StripFilter.class.getName() + "_ALREADY_FILTERED";
 
 	private static final String _STRIP = "strip";
 

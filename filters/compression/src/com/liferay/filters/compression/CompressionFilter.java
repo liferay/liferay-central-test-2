@@ -170,7 +170,7 @@ public class CompressionFilter implements Filter {
 	}
 
 	private static final String _ALREADY_FILTERED =
-		CompressionFilter.class + "_ALREADY_FILTERED";
+		CompressionFilter.class.getName() + "_ALREADY_FILTERED";
 
 	private static final String _COMPRESS = "compress";
 
