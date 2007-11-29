@@ -559,7 +559,7 @@ public class ServicePreAction extends Action {
 			groupId = group.getLiveGroupId();
 		}
 
-		// Community or organization layhous are only viewable by users who
+		// Community or organization layouts are only viewable by users who
 		// belong to the community or organization, or by users who can update
 		// the community or organization
 
@@ -902,9 +902,16 @@ public class ServicePreAction extends Action {
 					req.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
 
-				if (!isViewableCommunity(
-						user, layout.getGroupId(), layout.isPrivateLayout(),
-						permissionChecker)) {
+				boolean isViewableCommunity = isViewableCommunity(
+					user, layout.getGroupId(), layout.isPrivateLayout(),
+					permissionChecker);
+
+				if (!isViewableCommunity) {
+					layout = null;
+				}
+				else if (isViewableCommunity &&
+					!LayoutPermissionUtil.contains(
+						permissionChecker, layout, ActionKeys.VIEW)) {
 
 					layout = null;
 				}
