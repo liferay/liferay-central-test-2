@@ -238,9 +238,7 @@ public class JournalVmUtil {
 				name.equals("portlet-attributes") ||
 				name.equals("attribute")) {
 
-				map.put(
-					el.element("name").getText(),
-					el.element("value").getText());
+				map.put(el.elementText("name"), el.elementText("value"));
 			}
 			else if (name.equals("parameter")) {
 				name = el.element("name").getText();

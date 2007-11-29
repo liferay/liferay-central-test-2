@@ -23,6 +23,7 @@
 package com.liferay.util.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -116,7 +117,9 @@ public class PortletRequestUtil {
 
 			Object value = req.getAttribute(name);
 
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (Validator.isNotNull(value)) {
+				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			}
 		}
 
 		Element portletSessionEl = reqEl.addElement("portlet-session");
@@ -136,7 +139,9 @@ public class PortletRequestUtil {
 
 			Object value = ses.getAttribute(name, PortletSession.PORTLET_SCOPE);
 
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (Validator.isNotNull(value)) {
+				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			}
 		}
 
 		attributesEl = portletSessionEl.addElement("application-attributes");
@@ -153,7 +158,9 @@ public class PortletRequestUtil {
 			Object value = ses.getAttribute(
 				name, PortletSession.APPLICATION_SCOPE);
 
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (Validator.isNotNull(value)) {
+				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			}
 		}
 
 		try {
