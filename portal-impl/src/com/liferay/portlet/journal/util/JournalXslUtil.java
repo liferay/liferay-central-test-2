@@ -31,6 +31,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -50,6 +51,8 @@ public class JournalXslUtil {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
+		JournalXslErrorListener errorListener = new JournalXslErrorListener();
+
 		try {
 			StreamSource xmlSource = new StreamSource(new StringReader(xml));
 			StreamSource scriptSource = new StreamSource(
@@ -61,13 +64,18 @@ public class JournalXslUtil {
 			transformerFactory.setURIResolver(
 				new URIResolver(tokens, languageId));
 
+			transformerFactory.setErrorListener(errorListener);
+
 			Transformer transformer =
 				transformerFactory.newTransformer(scriptSource);
 
 			transformer.transform(xmlSource, new StreamResult(bam));
 		}
+		catch (TransformerConfigurationException tce) {
+			throw new TransformException(errorListener.getMessageAndLocation());
+		}
 		catch (TransformerException te) {
-			throw new TransformException(te.getMessage());
+			throw new TransformException(errorListener.getMessageAndLocation());
 		}
 
 		return bam.toString("UTF-8");

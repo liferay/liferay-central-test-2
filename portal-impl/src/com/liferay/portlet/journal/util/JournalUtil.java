@@ -862,6 +862,8 @@ public class JournalUtil {
 			String tokensString = PropertiesUtil.list(tokens);
 
 			_log.debug("Tokens\n" + tokensString);
+
+			_log.debug(xml);
 		}
 
 		List listenersList = new ArrayList();

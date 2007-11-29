@@ -56,6 +56,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -156,8 +158,17 @@ public class ViewArticleContentAction extends Action {
 				String langType = template.getLangType();
 				String script = template.getXsl();
 
-				output = JournalUtil.transform(
-					tokens, languageId, xml, script, langType);
+				try {
+					output = JournalUtil.transform(
+						tokens, languageId, xml, script, langType);
+				}
+				catch (Exception ee) {
+					_log.error(ee, ee);
+
+					PortalUtil.sendError(
+						HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ee, req,
+						res);
+				}
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(
@@ -247,5 +258,7 @@ public class ViewArticleContentAction extends Action {
 				groupId, articleId, version, previewArticleId, el, req);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(ViewArticleContentAction.class);
 
 }

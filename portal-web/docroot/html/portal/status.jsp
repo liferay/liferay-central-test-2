@@ -28,46 +28,72 @@
 String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
+<%@ page import="com.liferay.portlet.journal.TransformException"%>
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
-		<h3><liferay-ui:message key="forbidden" /></h3><br />
+		<h3 class="portlet-msg-error"><liferay-ui:message key="forbidden" /></h3><br />
 
 		<liferay-ui:message key="you-do-not-have-permission-to-access-the-requested-resource" />
 
 		<br /><br />
 
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+
+		<br /><br />
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, PortalException.class.getName()) || SessionErrors.contains(request, SystemException.class.getName()) %>">
-		<h3><liferay-ui:message key="internal-server-error" /></h3><br />
+		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
 
 		<liferay-ui:message key="an-error-occurred-while-attempting-to-access-the-requested-resource" />
 
 		<br /><br />
 
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+
+		<br /><br />
+	</c:when>
+	<c:when test="<%= SessionErrors.contains(request, TransformException.class.getName()) %>">
+		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
+
+		<liferay-ui:message key="an-error-occurred-while-attempting-to-process-the-requested-resource" />
+
+		<br /><br />
+
+		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+
+		<br /><br />
+
+		<%
+		TransformException te = (TransformException)SessionErrors.get(request, TransformException.class.getName());
+		%>
+
+		<div class="error-report">
+			<%= StringUtil.replace(te.getMessage(),new String[]{"<", "\n"},new String[]{"&lt;", "<br/>\n"}) %>
+		</div>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, NoSuchFileException.class.getName()) || SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) || SessionErrors.contains(request, NoSuchGroupException.class.getName()) || SessionErrors.contains(request, NoSuchImageException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) %>">
-		<h3><liferay-ui:message key="not-found" /></h3><br />
+		<h3 class="portlet-msg-error"><liferay-ui:message key="not-found" /></h3><br />
 
 		<liferay-ui:message key="the-requested-resource-was-not-found" />
 
 		<br /><br />
 
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+
+		<br /><br />
 	</c:when>
 	<c:otherwise>
-		<h3><liferay-ui:message key="internal-server-error" /></h3><br />
+		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
 
 		<liferay-ui:message key="an-error-occurred-while-attempting-to-access-the-requested-resource" />
 
 		<br /><br />
 
 		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+
+		<br /><br />
 	</c:otherwise>
 </c:choose>
-
-<br /><br />
 
 <div class="separator"><!-- --></div>
 
