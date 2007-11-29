@@ -60,9 +60,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
 		String rssFormat = ParamUtil.getString(req, "rssFormat");
 
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments", true);
-		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings", true);
-
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
@@ -75,9 +72,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("rss-delta", String.valueOf(rssDelta));
 		prefs.setValue("rss-display-style", rssDisplayStyle);
 		prefs.setValue("rss-format", rssFormat);
-
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 
 		prefs.store();
 

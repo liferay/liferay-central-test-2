@@ -34,28 +34,26 @@ portletURL.setParameter("struts_action", "/blogs/view");
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
 
-<div class="liferay-blog">
-	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-	<liferay-portlet:renderURLParams varImpl="searchURL" />
-	<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-	<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
 
-	<%
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
+<%
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
-	int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
 
-	searchContainer.setTotal(total);
+searchContainer.setTotal(total);
 
-	List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setResults(results);
-	%>
+searchContainer.setResults(results);
+%>
 
-	<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
+<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
 
-	</form>
-</div>
+</form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
