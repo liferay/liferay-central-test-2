@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.service.AccountServiceUtil;
 
 /**
  * <a href="AccountServiceJSON.java.html"><b><i>View Source</i></b></a>

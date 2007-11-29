@@ -271,7 +271,6 @@ public class ServiceBuilder {
 	public static Set getBadTableNames() {
 		Set badTableNames = new HashSet();
 
-		badTableNames = new HashSet();
 		badTableNames.add("Account");
 		badTableNames.add("Action");
 		badTableNames.add("Cache");

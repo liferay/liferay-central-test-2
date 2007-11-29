@@ -44,8 +44,6 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -419,7 +417,5 @@ public class EditSettingsAction extends PortletAction {
 			strangers, strangersWithMx, strangersVerify,
 			company.isCommunityLogo());
 	}
-
-	private static Log _log = LogFactory.getLog(EditSettingsAction.class);
 
 }

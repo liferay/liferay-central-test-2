@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.OrgLaborServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="OrgLaborServiceHttp.java.html"><b><i>View Source</i></b></a>

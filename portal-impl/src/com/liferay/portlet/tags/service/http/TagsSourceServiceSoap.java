@@ -25,8 +25,6 @@ package com.liferay.portlet.tags.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.liferay.portlet.tags.service.TagsSourceServiceUtil;
-
 /**
  * <a href="TagsSourceServiceSoap.java.html"><b><i>View Source</i></b></a>
  *

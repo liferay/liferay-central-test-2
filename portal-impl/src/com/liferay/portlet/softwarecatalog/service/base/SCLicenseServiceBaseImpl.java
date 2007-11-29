@@ -29,8 +29,6 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.service.impl.PrincipalBean;
 
-import com.liferay.portlet.softwarecatalog.model.SCLicense;
-import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;

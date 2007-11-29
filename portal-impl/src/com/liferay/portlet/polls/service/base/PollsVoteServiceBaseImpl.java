@@ -29,8 +29,6 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.service.impl.PrincipalBean;
 
-import com.liferay.portlet.polls.model.PollsVote;
-import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;

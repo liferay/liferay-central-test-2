@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortalServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="PortalServiceHttp.java.html"><b><i>View Source</i></b></a>

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portlet.tags.service.TagsSourceServiceUtil;
 
 /**
  * <a href="TagsSourceServiceJSON.java.html"><b><i>View Source</i></b></a>

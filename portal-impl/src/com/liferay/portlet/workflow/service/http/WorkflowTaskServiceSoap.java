@@ -25,8 +25,6 @@ package com.liferay.portlet.workflow.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil;
-
 /**
  * <a href="WorkflowTaskServiceSoap.java.html"><b><i>View Source</i></b></a>
  *

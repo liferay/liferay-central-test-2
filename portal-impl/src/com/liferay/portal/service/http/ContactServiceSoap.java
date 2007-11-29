@@ -24,7 +24,6 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.service.ContactServiceUtil;
 
 /**
  * <a href="ContactServiceSoap.java.html"><b><i>View Source</i></b></a>

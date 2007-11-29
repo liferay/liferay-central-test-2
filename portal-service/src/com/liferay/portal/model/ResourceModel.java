@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.model.BaseModel;
 
 /**
  * <a href="ResourceModel.java.html"><b><i>View Source</i></b></a>

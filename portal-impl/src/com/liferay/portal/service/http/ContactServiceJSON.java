@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.service.ContactServiceUtil;
 
 /**
  * <a href="ContactServiceJSON.java.html"><b><i>View Source</i></b></a>

@@ -43,9 +43,6 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -261,8 +258,5 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
-
-	private static Log _log =
-		LogFactory.getLog(BlogsPortletDataHandlerImpl.class);
 
 }

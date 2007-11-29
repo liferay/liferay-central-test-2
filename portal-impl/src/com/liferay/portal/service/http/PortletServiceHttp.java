@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortletServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="PortletServiceHttp.java.html"><b><i>View Source</i></b></a>

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service.base;
 
-import com.liferay.portal.model.Country;
-import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;

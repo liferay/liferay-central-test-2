@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.model.BaseModel;
-
 import java.util.Date;
 
 /**
