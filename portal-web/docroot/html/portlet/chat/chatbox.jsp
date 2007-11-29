@@ -49,7 +49,7 @@ int left = ParamUtil.getInteger(request, "left");
 			</table>
 		</div>
 
-		<input class="msg-to-input-id" type=hidden value="<%= toId %>" />
+		<input class="msg-to-input-id" type="hidden" value="<%= toId %>" />
 
 		<div class="msg-chat-area" style="border: #d0d0d0 1px solid; padding: 5px; overflow: auto; margin: 5px 0 5px 0; height: 100px">
 			<%= messages %>
