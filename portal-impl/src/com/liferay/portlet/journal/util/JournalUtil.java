@@ -863,7 +863,7 @@ public class JournalUtil {
 
 			_log.debug("Tokens\n" + tokensString);
 
-			_log.debug(xml);
+			_log.debug("XML before listeners\n" + xml);
 		}
 
 		List listenersList = new ArrayList();

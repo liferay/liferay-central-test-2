@@ -58,6 +58,7 @@
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>
+<%@ page import="com.liferay.portlet.journal.TransformException" %>
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 <%@ page import="com.liferay.util.servlet.fileupload.LiferayFileUpload" %>

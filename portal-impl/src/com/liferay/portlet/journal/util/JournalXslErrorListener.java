@@ -22,14 +22,16 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xml.res.XMLErrorResources;
 import org.apache.xml.res.XMLMessages;
 import org.apache.xml.utils.SAXSourceLocator;
 import org.apache.xml.utils.WrappedRuntimeException;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -42,7 +44,7 @@ import org.xml.sax.SAXParseException;
 public class JournalXslErrorListener implements ErrorListener {
 
 	public void error(TransformerException exception)
-			throws TransformerException {
+		throws TransformerException {
 
 		setLocation(exception);
 
@@ -50,7 +52,7 @@ public class JournalXslErrorListener implements ErrorListener {
 	}
 
 	public void fatalError(TransformerException exception)
-			throws TransformerException {
+		throws TransformerException {
 
 		setLocation(exception);
 
@@ -58,7 +60,7 @@ public class JournalXslErrorListener implements ErrorListener {
 	}
 
 	public void warning(TransformerException exception)
-			throws TransformerException {
+		throws TransformerException {
 
 		setLocation(exception);
 
@@ -68,44 +70,53 @@ public class JournalXslErrorListener implements ErrorListener {
 	public void setLocation(Throwable exception) {
 		SourceLocator locator = null;
 		Throwable cause = exception;
-		Throwable realCause = null;
+		Throwable rootCause = null;
 
-		do {
-			if(cause instanceof SAXParseException) {
+		while (cause != null) {
+			if (cause instanceof SAXParseException) {
 				locator = new SAXSourceLocator((SAXParseException)cause);
-				realCause = cause;
+				rootCause = cause;
 			}
 			else if (cause instanceof TransformerException) {
 				SourceLocator causeLocator =
 					((TransformerException)cause).getLocator();
 
-				if(causeLocator != null) {
+				if (causeLocator != null) {
 					locator = causeLocator;
-					realCause = cause;
+					rootCause = cause;
 				}
 			}
 
-			if(cause instanceof TransformerException)
+			if (cause instanceof TransformerException) {
 				cause = ((TransformerException)cause).getCause();
-			else if(cause instanceof WrappedRuntimeException)
+			}
+			else if (cause instanceof WrappedRuntimeException) {
 				cause = ((WrappedRuntimeException)cause).getException();
-			else if(cause instanceof SAXException)
+			}
+			else if (cause instanceof SAXException) {
 				cause = ((SAXException)cause).getException();
-			else
+			}
+			else {
 				cause = null;
+			}
 		}
-		while(cause != null);
 
-		_message = realCause.getMessage();
+		_message = rootCause.getMessage();
 
-		if(null != locator) {
-			_location = XMLMessages.createXMLMessage("line", null) +
-				locator.getLineNumber() + "; " +
-					XMLMessages.createXMLMessage("column", null) +
-						locator.getColumnNumber() + "; ";
+		if (locator != null) {
+			StringMaker sm = new StringMaker();
+
+			sm.append(XMLMessages.createXMLMessage("line", null));
+			sm.append(locator.getLineNumber());
+			sm.append("; ");
+			sm.append(XMLMessages.createXMLMessage("column", null));
+			sm.append(locator.getColumnNumber());
+			sm.append("; ");
+
+			_location = sm.toString();
 		}
 		else {
-			_location = "";
+			_location = StringPool.BLANK;
 		}
 	}
 

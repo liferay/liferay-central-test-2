@@ -25,10 +25,9 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String currentURL = PortalUtil.getCurrentURL(request);
+String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request);
 %>
 
-<%@ page import="com.liferay.portlet.journal.TransformException"%>
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="forbidden" /></h3><br />
@@ -37,9 +36,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<br /><br />
 
-		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
-
-		<br /><br />
+		<code><%= url %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, PortalException.class.getName()) || SessionErrors.contains(request, SystemException.class.getName()) %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
@@ -48,9 +45,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<br /><br />
 
-		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
-
-		<br /><br />
+		<code><%= url %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, TransformException.class.getName()) %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
@@ -59,7 +54,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<br /><br />
 
-		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
+		<code><%= url %></code>
 
 		<br /><br />
 
@@ -67,8 +62,8 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		TransformException te = (TransformException)SessionErrors.get(request, TransformException.class.getName());
 		%>
 
-		<div class="error-report">
-			<%= StringUtil.replace(te.getMessage(),new String[]{"<", "\n"},new String[]{"&lt;", "<br/>\n"}) %>
+		<div>
+			<%= StringUtil.replace(te.getMessage(), new String[] {"<", "\n"}, new String[] {"&lt;", "<br />\n"}) %>
 		</div>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, NoSuchFileException.class.getName()) || SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) || SessionErrors.contains(request, NoSuchGroupException.class.getName()) || SessionErrors.contains(request, NoSuchImageException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) %>">
@@ -78,9 +73,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<br /><br />
 
-		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
-
-		<br /><br />
+		<code><%= url %></code>
 	</c:when>
 	<c:otherwise>
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
@@ -89,9 +82,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<br /><br />
 
-		<code><%= PortalUtil.getPortalURL(request) + currentURL %></code>
-
-		<br /><br />
+		<code><%= url %></code>
 	</c:otherwise>
 </c:choose>
 

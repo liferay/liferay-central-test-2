@@ -162,11 +162,11 @@ public class ViewArticleContentAction extends Action {
 					output = JournalUtil.transform(
 						tokens, languageId, xml, script, langType);
 				}
-				catch (Exception ee) {
-					_log.error(ee, ee);
+				catch (Exception e1) {
+					_log.error(e1, e1);
 
 					PortalUtil.sendError(
-						HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ee, req,
+						HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1, req,
 						res);
 				}
 			}
@@ -186,8 +186,8 @@ public class ViewArticleContentAction extends Action {
 					"portlet.journal.view_article_content");
 			}
 		}
-		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+		catch (Exception e2) {
+			req.setAttribute(PageContext.EXCEPTION, e2);
 
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}

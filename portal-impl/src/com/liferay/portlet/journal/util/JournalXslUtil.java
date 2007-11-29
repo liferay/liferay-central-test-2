@@ -63,7 +63,6 @@ public class JournalXslUtil {
 
 			transformerFactory.setURIResolver(
 				new URIResolver(tokens, languageId));
-
 			transformerFactory.setErrorListener(errorListener);
 
 			Transformer transformer =
