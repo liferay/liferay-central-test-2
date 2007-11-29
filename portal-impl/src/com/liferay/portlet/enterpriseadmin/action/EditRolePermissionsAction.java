@@ -43,7 +43,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -172,7 +171,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			int scope = ParamUtil.getInteger(req, "scope" + actionId);
 
-				if (scope == ResourceImpl.SCOPE_COMPANY) {
+			if (scope == ResourceImpl.SCOPE_COMPANY) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
 					scope, String.valueOf(themeDisplay.getCompanyId()),
@@ -189,12 +188,12 @@ public class EditRolePermissionsAction extends PortletAction {
 						actionId);
 				}
 				else {
-
 					String[] groupIds = StringUtil.split(
 						ParamUtil.getString(req, "groupIds" + actionId));
 
 					if (groupIds.length == 0) {
 						SessionErrors.add(req, "missingGroupIdsForAction");
+
 						return;
 					}
 
@@ -232,11 +231,11 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		// Send redirect
 
-		String redirect = ParamUtil.getString(req, "redirect");
-
 		SessionMessages.add(req, "permissionsUpdated");
 
-		redirect += "&" + Constants.CMD + "=" + Constants.VIEW;
+		String redirect =
+			ParamUtil.getString(req, "redirect") + "&" + Constants.CMD + "=" +
+				Constants.VIEW;
 
 		res.sendRedirect(redirect);
 	}

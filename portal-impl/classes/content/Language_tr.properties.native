@@ -794,6 +794,7 @@ security=Güvenlik
 see-current-results=Sonuçları Görüntüle
 see-large-photo=Büyük Resmi Görüntüle 
 see-x-for-more-information=See {0} for more information.
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-folder=Klasör Seçiniz
 select-recipients=Alıcı Seçiniz
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.

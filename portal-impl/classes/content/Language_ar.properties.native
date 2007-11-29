@@ -1966,6 +1966,7 @@ see-x-for-more-information=للمزيد من المعلومات، راجع {0}.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=إختر مقالة موجودة أو أضف مقالة ليم عرضها في هذه البورتلت.
 select-and-copy=إختر و إنسخ
 select-article=إختر مقالة
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=صندوق الإختيارات
 select-content=إختر محتوى
 select-date=إختر التاريخ

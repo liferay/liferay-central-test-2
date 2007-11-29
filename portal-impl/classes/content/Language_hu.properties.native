@@ -113,6 +113,7 @@ results-of-about=Results {0} of about {1}.
 results-of=Results {0} of {1}.
 search-took-x-seconds=Search took {0} seconds.
 see-x-for-more-information=See {0} for more information.
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Select the action that this role can perform on the <i>{0}</i> resource.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Select the communities where this role can perform the <i>{0}</i> action on the {1} portlet.

@@ -126,15 +126,15 @@ if (organizations != null) {
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name) {
-		var selectedOrgsIdsField = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
 		var selectedOrgsIds = [];
+		var selectedOrgsIdsField = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
 
 		if (selectedOrgsIdsField != "") {
 			selectedOrgsIds = selectedOrgsIdsField.split(",");
 		}
 
-		var selectedOrgsNamesField = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value;
 		var selectedOrgsNames = [];
+		var selectedOrgsNamesField = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value;
 
 		if (selectedOrgsNamesField != "") {
 			selectedOrgsNames = selectedOrgsNamesField.split("@@");

@@ -2387,6 +2387,7 @@ select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Vä
 select-and-copy=Välj och kopiera
 select-article=Välj artikel
 select-asset=Välj innehåll
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=Välj ruta
 select-by-tags-category=Välj via taggkategori
 select-content=Välj innehåll

@@ -33,7 +33,7 @@
 <br /><br />
 
 <%
-String target = ParamUtil.getString(request, "target");	
+String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

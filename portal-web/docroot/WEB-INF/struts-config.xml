@@ -539,9 +539,9 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/select_organization" forward="portlet.enterprise_admin.select_organization" />
-
 		<action path="/enterprise_admin/select_community" forward="portlet.enterprise_admin.select_community" />
+
+		<action path="/enterprise_admin/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
 		<action path="/enterprise_admin/test_ldap_connection" forward="portlet.enterprise_admin.test_ldap_connection" />
 

@@ -2370,6 +2370,7 @@ select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Val
 select-and-copy=Valitse ja kopioi
 select-article=Valitse artikkeli
 select-asset=Valitse assetti
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=Valintalaatikko
 select-by-tags-category=Valitse tagi kategorian mukaan
 select-content=Valitse sisältö

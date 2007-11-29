@@ -1647,6 +1647,7 @@ see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=يک مقاله انتخاب کنيد و يا مقاله ای بسازيد تا در اين پرتلت نمايش داده شود.
 select-and-copy=انتخاب و کپی
 select-article=انتخاب مقاله
+select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-box=انتخاب جعبه
 select-content=انتخاب محتوا
 select-date=انتخاب تاريخ
