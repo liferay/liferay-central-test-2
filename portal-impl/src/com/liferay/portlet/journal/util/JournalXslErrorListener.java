@@ -49,8 +49,6 @@ public class JournalXslErrorListener implements ErrorListener {
 	public JournalXslErrorListener(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
-		_location = null;
-		_message = null;
 	}
 
 	public void error(TransformerException exception)
