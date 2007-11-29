@@ -89,7 +89,7 @@ long breadcrumbsMessageId = message.getMessageId();
 	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="category" />
@@ -110,7 +110,7 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="add-explanation-post" />
@@ -123,7 +123,7 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <br />
 
-<table class="liferay-table" id="<portlet:namespace/>explanationPost" style="display: none;">
+<table class="lfr-table" id="<portlet:namespace/>explanationPost" style="display: none;">
 <tr>
 	<td>
 		<liferay-ui:message key="subject" />

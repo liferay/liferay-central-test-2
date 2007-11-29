@@ -332,7 +332,7 @@
 						}
 						%>
 
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td valign="top">
 								<b><liferay-ui:message key="attachments" />:</b>

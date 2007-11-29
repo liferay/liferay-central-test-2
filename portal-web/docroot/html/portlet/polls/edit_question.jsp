@@ -99,7 +99,7 @@ if (choiceName > 0) {
 <liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 <liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="title" />
@@ -126,7 +126,7 @@ if (choiceName > 0) {
 		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
@@ -150,10 +150,10 @@ if (choiceName > 0) {
 		<liferay-ui:message key="choices" />
 	</td>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
-				<table class="liferay-table">
+				<table class="lfr-table">
 
 				<%
 				for (int i = 1; i <= choicesCount; i++) {

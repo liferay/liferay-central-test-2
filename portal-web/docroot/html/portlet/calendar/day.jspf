@@ -26,10 +26,10 @@
 Calendar cal = (Calendar)selCal.clone();
 %>
 
-<table class="liferay-table" width="100%">
+<table class="lfr-table" width="100%">
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 

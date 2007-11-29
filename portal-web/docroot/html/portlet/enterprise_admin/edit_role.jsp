@@ -60,7 +60,7 @@ int roleType = ParamUtil.getInteger(request, "roleType");
 		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
 		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<c:if test="<%= role != null %>">
 			<tr>

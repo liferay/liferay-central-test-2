@@ -62,11 +62,11 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br /><br />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />zips" wrap="soft"><%= zipsString %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />zips" wrap="soft"><%= zipsString %></textarea>
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="temperature-format" />

@@ -27,13 +27,13 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="url" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />initUrl" value="<%= initUrl %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />initUrl" value="<%= initUrl %>" />
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 		<liferay-ui:message key="scope" /> (<liferay-ui:message key="regex" />)
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />scope" value="<%= scope %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />scope" value="<%= scope %>" />
 	</td>
 </tr>
 <tr>
@@ -49,7 +49,7 @@
 		<liferay-ui:message key="proxy-host" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyHost" value="<%= proxyHost %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyHost" value="<%= proxyHost %>" />
 	</td>
 </tr>
 <tr>
@@ -57,7 +57,7 @@
 		<liferay-ui:message key="proxy-port" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyPort" value="<%= proxyPort %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyPort" value="<%= proxyPort %>" />
 	</td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@
 		<liferay-ui:message key="proxy-authentication-username" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
 	</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@
 		<liferay-ui:message key="proxy-authentication-password" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
 	</td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@
 		<liferay-ui:message key="proxy-authentication-host" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
 	</td>
 </tr>
 <tr>
@@ -101,7 +101,7 @@
 		<liferay-ui:message key="proxy-authentication-domain" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
 	</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@
 		<liferay-ui:message key="stylesheet" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />stylesheet" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />stylesheet" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
 	</td>
 </tr>
 </table>

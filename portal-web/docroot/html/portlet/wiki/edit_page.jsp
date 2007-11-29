@@ -75,7 +75,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<b><liferay-ui:message key="format" /></b>
@@ -110,7 +110,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="tags" />

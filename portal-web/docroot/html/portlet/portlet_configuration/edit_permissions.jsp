@@ -660,7 +660,7 @@ else {
 
 				<br />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
@@ -1103,7 +1103,7 @@ else {
 		String selectedActionId = ParamUtil.getString(request, "selectedActionId");
 		%>
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="list-users-with-the-permission-to-perform-the-action" />:

@@ -41,7 +41,7 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 try {
 %>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<label for="<portlet:namespace />keywords"><liferay-ui:message key="keywords" /></label>

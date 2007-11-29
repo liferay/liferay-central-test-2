@@ -87,7 +87,7 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 
 <liferay-ui:tabs names="task" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < taskFormElements.size(); i++) {
@@ -177,10 +177,10 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-							<input class="liferay-input-text" name="<portlet:namespace /><%= displayName %>" type="text" value="<%= value %>" />
+							<input class="lfr-input-text" name="<portlet:namespace /><%= displayName %>" type="text" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
-							<input class="liferay-input-text" name="<portlet:namespace /><%= displayName %>" type="password" value="<%= value %>" />
+							<input class="lfr-input-text" name="<portlet:namespace /><%= displayName %>" type="password" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -213,7 +213,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							</select>
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-							<textarea class="liferay-textarea" name="<portlet:namespace /><%= displayName %>" wrap="soft"><%= value %></textarea>
+							<textarea class="lfr-textarea" name="<portlet:namespace /><%= displayName %>" wrap="soft"><%= value %></textarea>
 						</c:when>
 					</c:choose>
 				</c:when>

@@ -115,13 +115,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -129,13 +129,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="address" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="enabled" />
@@ -169,16 +169,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-review-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -206,7 +206,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<b>[$ARTICLE_ID$]</b>

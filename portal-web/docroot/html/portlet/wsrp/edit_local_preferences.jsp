@@ -60,13 +60,13 @@ catch (Throwable t) {
 	</span>
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="wsrp-service-url" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />wsrp_service_url" type="text" value="<%= wsrpServiceUrl %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />wsrp_service_url" type="text" value="<%= wsrpServiceUrl %>" />
 	</td>
 </tr>
 <tr>
@@ -74,7 +74,7 @@ catch (Throwable t) {
 		<liferay-ui:message key="wsrp-markup-endpoint" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />markup_endpoint" type="text" value="<%= markupEndpoint %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />markup_endpoint" type="text" value="<%= markupEndpoint %>" />
 	</td>
 </tr>
 <tr>
@@ -82,7 +82,7 @@ catch (Throwable t) {
 		<liferay-ui:message key="wsrp-service-description-endpoint" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />service_description_endpoint" type="text" value="<%= serviceDescriptionEndpoint %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />service_description_endpoint" type="text" value="<%= serviceDescriptionEndpoint %>" />
 	</td>
 </tr>
 <tr>
@@ -90,7 +90,7 @@ catch (Throwable t) {
 		<liferay-ui:message key="wsrp-registration-endpoint" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />registration_endpoint" type="text" value="<%= registrationEndpoint %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />registration_endpoint" type="text" value="<%= registrationEndpoint %>" />
 	</td>
 </tr>
 <tr>
@@ -98,7 +98,7 @@ catch (Throwable t) {
 		<liferay-ui:message key="wsrp-portlet-management-endpoint" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />portlet_management_endpoint" type="text" value="<%= portletManagementEndpoint %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />portlet_management_endpoint" type="text" value="<%= portletManagementEndpoint %>" />
 	</td>
 </tr>
 <tr>

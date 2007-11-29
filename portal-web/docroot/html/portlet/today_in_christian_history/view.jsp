@@ -50,7 +50,7 @@ List events = TICHUtil.getEvents();
 				</a>
 			</c:when>
 			<c:otherwise>
-				<table class="liferay-table">
+				<table class="lfr-table">
 
 				<%
 				for (int i = 0; i < events.size(); i++) {

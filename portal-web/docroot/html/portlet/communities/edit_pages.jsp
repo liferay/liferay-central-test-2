@@ -395,7 +395,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		<c:when test="<%= layout.getGroup().isStagingGroup() && layout.getGroup().getLiveGroupId() == liveGroupId %>">
 		</c:when>
 		<c:otherwise>
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="activate-staging" />
@@ -459,7 +459,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		</c:otherwise>
 	</c:choose>
 
-	<table class="liferay-table" width="100%">
+	<table class="lfr-table" width="100%">
 	<tr>
 		<td valign="top">
 			<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
@@ -642,7 +642,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td>
-							<table class="liferay-table">
+							<table class="lfr-table">
 							<tr>
 								<td></td>
 								<td>
@@ -1023,7 +1023,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<br /><br />
 
-							<table class="liferay-table">
+							<table class="lfr-table">
 							<tr>
 								<td>
 									<liferay-ui:message key="name" />
@@ -1113,7 +1113,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<br /><br />
 
-							<table class="liferay-table">
+							<table class="lfr-table">
 							<tr>
 								<td>
 									<select name="<portlet:namespace />layoutIdsBox" size="7">
@@ -1153,7 +1153,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<br /><br />
 
-							<table class="liferay-table">
+							<table class="lfr-table">
 							<tr>
 								<td>
 									<liferay-ui:message key="merge-guest-public-pages" />
@@ -1197,7 +1197,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							%>
 
 							<c:if test="<%= selLayout != null %>">
-								<table class="liferay-table">
+								<table class="lfr-table">
 								<tr>
 									<td>
 										<%= LanguageUtil.get(pageContext, "inherit-look-and-feel-from-the-" + (privateLayout ? "public" : "private") + "-root-node") %>
@@ -1288,7 +1288,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 									<br /><br />
 
-									<textarea class="liferay-textarea" name="<portlet:namespace />css"><%= cssText %></textarea>
+									<textarea class="lfr-textarea" name="<portlet:namespace />css"><%= cssText %></textarea>
 
 									<br /><br />
 
@@ -1315,7 +1315,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							%>
 
 							<c:if test="<%= selLayout != null %>">
-								<table class="liferay-table">
+								<table class="lfr-table">
 								<tr>
 									<td>
 										<%= LanguageUtil.get(pageContext, "inherit-look-and-feel-from-the-" + (privateLayout ? "public" : "private") + "-root-node") %>
@@ -1374,7 +1374,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<br /><br />
 					</c:if>
 
-					<table class="liferay-table">
+					<table class="lfr-table">
 					<tr>
 						<td>
 							<liferay-ui:message key="logo" />
@@ -1517,7 +1517,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<br /><br />
 
-					<table class="liferay-table">
+					<table class="lfr-table">
 					<tr>
 						<td>
 							<liferay-ui:message key="public-virtual-host" />
@@ -1559,7 +1559,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 						<br /><br />
 
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="friendly-url" />
@@ -1612,7 +1612,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<br /><br />
 
-					<table class="liferay-table">
+					<table class="lfr-table">
 					<tr>
 						<td>
 							<liferay-ui:message key="google-analytics-id" />

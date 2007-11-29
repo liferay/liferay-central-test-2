@@ -30,7 +30,7 @@
 
 <br /><br />
 
-<input class="liferay-input-text" name="<portlet:namespace />file" type="file" />
+<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
 
 <br /><br />
 

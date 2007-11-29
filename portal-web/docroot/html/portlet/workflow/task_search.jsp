@@ -30,7 +30,7 @@ TaskSearch searchContainer = (TaskSearch)request.getAttribute("liferay-ui:search
 TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="task-name" />
@@ -59,7 +59,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 </table>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="create-date" /> (<liferay-ui:message key="range" />)
@@ -108,7 +108,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">

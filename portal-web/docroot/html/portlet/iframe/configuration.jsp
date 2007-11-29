@@ -44,13 +44,13 @@ String htmlAttributes =
 <liferay-ui:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
 </div>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="source-url" />
 	</td>
 	<td>
-		<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span> <input class="liferay-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
+		<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span> <input class="lfr-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
 	</td>
 </tr>
 <tr>
@@ -106,7 +106,7 @@ String htmlAttributes =
 		<liferay-ui:message key="user-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userName" type="text" value="<%= userName %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />userName" type="text" value="<%= userName %>" />
 	</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@ String htmlAttributes =
 		<liferay-ui:message key="password" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />password" type="text" value="<%= password %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />password" type="text" value="<%= password %>" />
 	</td>
 </tr>
 <tr>
@@ -122,7 +122,7 @@ String htmlAttributes =
 		<liferay-ui:message key="hidden-variables" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
 	</td>
 </tr>
 <tr>
@@ -135,7 +135,7 @@ String htmlAttributes =
 		<liferay-ui:message key="html-attributes" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
 	</td>
 </tr>
 </table>

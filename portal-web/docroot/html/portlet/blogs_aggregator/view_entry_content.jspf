@@ -23,7 +23,7 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 

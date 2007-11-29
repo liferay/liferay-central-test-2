@@ -28,7 +28,7 @@
 List activityTrackers = ActivityTrackerLocalServiceUtil.getCompanyActivityTrackers(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < activityTrackers.size(); i++) {

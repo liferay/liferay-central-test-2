@@ -32,7 +32,7 @@
 <fieldset>
 	<legend><liferay-ui:message key="page" /></legend>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="maximum-items-to-display" />
@@ -77,7 +77,7 @@
 <fieldset>
 	<legend><liferay-ui:message key="rss" /></legend>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="maximum-items-to-display" />

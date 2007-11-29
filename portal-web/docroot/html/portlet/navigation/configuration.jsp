@@ -38,7 +38,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="display-style" />
@@ -90,7 +90,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	<td>
 		<br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="header" />

@@ -60,13 +60,13 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="movie" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />movie" type="text" value="<%= movie %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />movie" type="text" value="<%= movie %>" />
 	</td>
 </tr>
 <tr>
@@ -74,7 +74,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 		<liferay-ui:message key="flash-attributes" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />flashAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />flashAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
 	</td>
 </tr>
 <tr>
@@ -82,7 +82,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 		<liferay-ui:message key="flash-variables" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />flashVariables" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= flashVariables %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />flashVariables" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= flashVariables %></textarea>
 	</td>
 </tr>
 </table>

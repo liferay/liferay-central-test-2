@@ -35,7 +35,7 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 
 <br /><br />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />hangmanWordList" wrap="soft"><%= hangmanWordList %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />hangmanWordList" wrap="soft"><%= hangmanWordList %></textarea>
 
 <br /><br />
 

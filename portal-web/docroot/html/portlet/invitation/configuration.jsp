@@ -56,13 +56,13 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 <liferay-ui:error key="emailMessageBody" message="please-enter-a-valid-body" />
 <liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="subject" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
 	</td>
 </tr>
 <tr>
@@ -88,7 +88,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<b>[$FROM_ADDRESS$]</b>

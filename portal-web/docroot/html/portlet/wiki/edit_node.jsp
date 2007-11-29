@@ -56,7 +56,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />

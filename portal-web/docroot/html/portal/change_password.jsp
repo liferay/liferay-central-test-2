@@ -81,7 +81,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	</span>
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="password" />

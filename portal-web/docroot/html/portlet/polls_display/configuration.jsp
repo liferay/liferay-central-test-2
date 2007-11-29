@@ -35,7 +35,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 
 <liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="question" />

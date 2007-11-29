@@ -127,13 +127,13 @@
 		<div class="ctrl-holder">
 			<label for="login"><liferay-ui:message key="login" /></label>
 
-			<input class="liferay-input-text" id="login" name="login" type="text" value="<%= login %>" />
+			<input class="lfr-input-text" id="login" name="login" type="text" value="<%= login %>" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for='<%= passwordParam %>'><liferay-ui:message key="password" /></label>
 
-			<input class="liferay-input-text" id="<%= passwordParam %>" name="<%= passwordParam %>" type="password" value="<%= password %>" />
+			<input class="lfr-input-text" id="<%= passwordParam %>" name="<%= passwordParam %>" type="password" value="<%= password %>" />
 
 			<span id="passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 		</div>

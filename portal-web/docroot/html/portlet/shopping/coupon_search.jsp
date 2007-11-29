@@ -30,7 +30,7 @@ CouponSearch searchContainer = (CouponSearch)request.getAttribute("liferay-ui:se
 CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="code" />

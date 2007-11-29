@@ -40,7 +40,7 @@ if (translation == null) {
 	<br /><br />
 </c:if>
 
-<textarea class="liferay-textarea" name="<portlet:namespace />text" wrap="soft"><%= translation.getFromText() %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />text" wrap="soft"><%= translation.getFromText() %></textarea>
 
 <br /><br />
 

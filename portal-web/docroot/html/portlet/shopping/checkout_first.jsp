@@ -145,10 +145,10 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 	<br /><br />
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="first-name" />
@@ -200,7 +200,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="state" />
@@ -273,7 +273,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 <liferay-ui:error exception="<%= ShippingStreetException.class %>" message="please-enter-a-valid-street" />
 <liferay-ui:error exception="<%= ShippingZipException.class %>" message="please-enter-a-valid-zip" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<c:if test="<%= addresses.size() > 0 %>">
 		<td>
@@ -306,10 +306,10 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="first-name" />
@@ -361,7 +361,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="state" />
@@ -446,7 +446,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 	<br /><br />
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="full-name" />
@@ -530,7 +530,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 	<br /><br />
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="verification-number" />

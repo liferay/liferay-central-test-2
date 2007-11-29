@@ -150,7 +150,7 @@
 		margin: 5px 0px 0px 0px;
 	}
 
-	.liferay-textarea.message-edit {
+	.lfr-textarea.message-edit {
 		font-family: monospace;
 		height: 378px;
 		min-height: 100%;

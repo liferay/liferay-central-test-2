@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 
 	<%

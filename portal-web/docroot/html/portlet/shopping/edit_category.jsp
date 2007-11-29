@@ -78,7 +78,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 	</div>
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= category != null %>">
 	<tr>
@@ -86,7 +86,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 			<liferay-ui:message key="parent-category" />
 		</td>
 		<td>
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 

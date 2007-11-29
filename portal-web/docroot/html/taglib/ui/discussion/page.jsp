@@ -203,7 +203,7 @@ List messages = treeWalker.getMessages();
 
 	<br />
 
-	<table class="liferay-table" width="100%">
+	<table class="lfr-table" width="100%">
 
 	<%
 	Collections.sort(messages, new MessageCreateDateComparator(true, false));
@@ -263,7 +263,7 @@ List messages = treeWalker.getMessages();
 
 				<br />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
 						<td>
@@ -311,7 +311,7 @@ List messages = treeWalker.getMessages();
 				</tr>
 				</table>
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
 					<td>
 						<br />

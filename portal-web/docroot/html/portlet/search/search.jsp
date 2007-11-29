@@ -90,7 +90,7 @@ if (Validator.isNotNull(primarySearch)) {
 
 <br /><br />
 
-<table class="liferay-table" width="100%">
+<table class="lfr-table" width="100%">
 
 <%
 for (int i = 0; i < portlets.size(); i++) {

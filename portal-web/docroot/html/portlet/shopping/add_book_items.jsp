@@ -46,7 +46,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryImpl.
 
 <br /><br />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />isbns" wrap="soft"></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />isbns" wrap="soft"></textarea>
 
 <br /><br />
 

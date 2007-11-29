@@ -100,7 +100,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<b><%= LanguageUtil.get(pageContext, recipientFinder.getName()) %></b>
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="enabled" />
@@ -163,7 +163,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="email-address" />
@@ -194,10 +194,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td>
-					<input class="liferay-input-text" name="<portlet:namespace />filterEmailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
+					<input class="lfr-input-text" name="<portlet:namespace />filterEmailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
 				</td>
 				<td>
-					<input class="liferay-input-text" name="<portlet:namespace />filterFolder<%= i %>" type="text" value="<%= folder %>" />
+					<input class="lfr-input-text" name="<portlet:namespace />filterFolder<%= i %>" type="text" value="<%= folder %>" />
 				</td>
 			</tr>
 
@@ -220,11 +220,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<textarea class="liferay-textarea" name="<portlet:namespace />forwardAddress" wrap="soft"><%= forwardAddress %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />forwardAddress" wrap="soft"><%= forwardAddress %></textarea>
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="leave-a-copy-of-the-forwarded-message" />

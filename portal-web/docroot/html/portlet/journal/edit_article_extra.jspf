@@ -23,12 +23,12 @@
 %>
 
 <style type="text/css">
-	.liferay-table .journal-edit-article-extra {
+	.lfr-table .journal-edit-article-extra {
 		border: 1px solid #CCC;
 		width: 100%;
 	}
 
-	.liferay-table .journal-edit-article-extra tr td {
+	.lfr-table .journal-edit-article-extra tr td {
 		padding: 5px;
 	}
 

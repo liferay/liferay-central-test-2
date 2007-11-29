@@ -100,7 +100,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="from" />

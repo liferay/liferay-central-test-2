@@ -205,7 +205,7 @@ int tabIndex = 1;
 <liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
 <liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="id" />

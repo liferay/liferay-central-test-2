@@ -34,7 +34,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	id="toggle_id_journal_article_search"
 	displayTerms="<%= displayTerms %>"
 >
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="id" />

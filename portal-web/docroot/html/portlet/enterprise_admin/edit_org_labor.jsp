@@ -71,7 +71,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="type" />
@@ -100,7 +100,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 String[] days = CalendarUtil.getDays(locale);

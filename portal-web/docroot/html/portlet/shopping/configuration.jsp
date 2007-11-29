@@ -101,13 +101,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="paypal-email-address" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
 			</td>
 		</tr>
 		<tr>
@@ -233,7 +233,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="formula" />
@@ -255,7 +255,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="values" />
 			</td>
 			<td>
-				<table class="liferay-table">
+				<table class="lfr-table">
 
 				<%
 				int shippingRange = 0;
@@ -296,7 +296,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="formula" />
@@ -318,7 +318,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="values" />
 			</td>
 			<td>
-				<table class="liferay-table">
+				<table class="lfr-table">
 
 				<%
 				int insuranceRange = 0;
@@ -370,7 +370,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<c:choose>
 			<c:when test='<%= tabs3.endsWith("-email") %>'>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="enabled" />
@@ -398,10 +398,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<input class="liferay-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= emailOrderConfirmationSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= emailOrderConfirmationSubject %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<input class="liferay-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= emailOrderShippingSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= emailOrderShippingSubject %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -429,7 +429,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<br /><br />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<b>[$FROM_ADDRESS$]</b>
@@ -521,13 +521,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</table>
 			</c:when>
 			<c:otherwise>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="name" />
 					</td>
 					<td>
-						<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 					</td>
 				</tr>
 				<tr>
@@ -535,7 +535,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<liferay-ui:message key="address" />
 					</td>
 					<td>
-						<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 					</td>
 				</tr>
 				</table>

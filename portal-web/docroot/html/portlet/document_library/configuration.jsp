@@ -65,7 +65,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:tabs names="display-style" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="classic" />
@@ -88,7 +88,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:tabs names="folders-listing" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="root-folder" />
@@ -200,7 +200,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <liferay-ui:tabs names="documents-listing" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="show-search" />

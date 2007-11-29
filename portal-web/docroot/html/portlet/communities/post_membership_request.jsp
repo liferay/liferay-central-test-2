@@ -48,7 +48,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 <liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="community" />

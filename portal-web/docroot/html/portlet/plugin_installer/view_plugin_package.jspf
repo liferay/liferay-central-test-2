@@ -40,7 +40,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 <liferay-ui:error key="invalidUrl" message="please-enter-a-valid-url" />
 <liferay-ui:error key="errorConnectingToUrl" message="an-unexpected-error-occurred-while-connecting-to-the-specified-url" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />:

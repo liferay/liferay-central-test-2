@@ -303,7 +303,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="enabled" />
@@ -326,7 +326,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="default-values" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<input name="<portlet:namespace />defaultLdap" type="radio" value="apache"> Apache Directory Server
@@ -357,13 +357,13 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="connection" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="base-provider-url" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
 
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
@@ -373,7 +373,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="base-dn" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
 
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
@@ -383,7 +383,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="principal" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />principal" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />principal" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
 	</td>
 </tr>
 <tr>
@@ -391,7 +391,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="credentials" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
 	</td>
 </tr>
 </table>
@@ -404,13 +404,13 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="users" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="authentication-search-filter" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />searchFilter" type="text" value='<%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />searchFilter" type="text" value='<%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %>' />
 
 		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
 	</td>
@@ -420,7 +420,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="import-search-filter" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
 	</td>
 </tr>
 <tr>
@@ -435,7 +435,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="screen-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value='<%= userMappingScreenName %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value='<%= userMappingScreenName %>' />
 	</td>
 </tr>
 <tr>
@@ -443,7 +443,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="password" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingPassword" type="text" value='<%= userMappingPassword %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingPassword" type="text" value='<%= userMappingPassword %>' />
 	</td>
 </tr>
 <tr>
@@ -451,7 +451,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="email-address" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value='<%= userMappingEmailAddress %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value='<%= userMappingEmailAddress %>' />
 	</td>
 </tr>
 <tr>
@@ -459,7 +459,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="full-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingFullName" type="text" value='<%= userMappingFullName %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingFullName" type="text" value='<%= userMappingFullName %>' />
 	</td>
 </tr>
 <tr>
@@ -467,7 +467,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="first-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value='<%= userMappingFirstName %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value='<%= userMappingFirstName %>' />
 	</td>
 </tr>
 <tr>
@@ -475,7 +475,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="last-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingLastName" type="text" value='<%= userMappingLastName %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingLastName" type="text" value='<%= userMappingLastName %>' />
 	</td>
 </tr>
 <tr>
@@ -483,7 +483,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="job-title" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value='<%= userMappingJobTitle %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value='<%= userMappingJobTitle %>' />
 	</td>
 </tr>
 <tr>
@@ -491,7 +491,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="group" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userMappingGroup" type="text" value='<%= userMappingGroup %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingGroup" type="text" value='<%= userMappingGroup %>' />
 	</td>
 </tr>
 </table>
@@ -504,13 +504,13 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="groups" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="import-search-filter" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
 	</td>
 </tr>
 <tr>
@@ -525,7 +525,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="group-name" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value='<%= groupMappingGroupName %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value='<%= groupMappingGroupName %>' />
 	</td>
 </tr>
 <tr>
@@ -533,7 +533,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value='<%= groupMappingDescription %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value='<%= groupMappingDescription %>' />
 	</td>
 </tr>
 <tr>
@@ -541,7 +541,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="user" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />groupMappingUser" type="text" value='<%= groupMappingUser %>' />
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingUser" type="text" value='<%= groupMappingUser %>' />
 	</td>
 </tr>
 </table>
@@ -554,7 +554,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="import-export" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="import-enabled" />
@@ -608,7 +608,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			<liferay-ui:message key="users-dn" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
+			<input class="lfr-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
 		</td>
 	</tr>
 	<tr>
@@ -616,7 +616,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			<liferay-ui:message key="user-default-object-classes" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
+			<input class="lfr-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
 		</td>
 	</tr>
 	<tr>
@@ -624,7 +624,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			<liferay-ui:message key="groups-dn" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
+			<input class="lfr-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
 		</td>
 	</tr>
 </tbody>
@@ -634,7 +634,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:tabs names="password-policy" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="use-ldap-password-policy" />

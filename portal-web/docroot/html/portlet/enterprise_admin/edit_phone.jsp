@@ -59,7 +59,7 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="number" />

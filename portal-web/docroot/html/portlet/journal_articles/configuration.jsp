@@ -35,7 +35,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="community" />

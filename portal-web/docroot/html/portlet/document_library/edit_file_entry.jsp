@@ -109,7 +109,7 @@ portletURL.setParameter("name", name);
 </div>
 
 <c:if test="<%= fileEntry != null %>">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="name" />
@@ -240,9 +240,9 @@ portletURL.setParameter("name", name);
 		);
 	</script>
 
-	<div class="liferay-upload-container" id="<portlet:namespace />fileUpload"></div>
+	<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 
-	<div class="liferay-fallback" id="<portlet:namespace />fallback">
+	<div class="lfr-fallback" id="<portlet:namespace />fallback">
 		<liferay-ui:upload-progress
 			id="<%= uploadProgressId %>"
 			iframeSrc="<%= uploadProgressURL %>"

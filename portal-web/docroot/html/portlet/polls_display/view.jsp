@@ -75,7 +75,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 <c:choose>
 	<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<%
 		Iterator itr = choices.iterator();

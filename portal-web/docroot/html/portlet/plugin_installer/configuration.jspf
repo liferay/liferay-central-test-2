@@ -22,7 +22,7 @@
  */
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="enabled" />
@@ -209,7 +209,7 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-url-per-line" />)</span>
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositoriesTrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_TRUSTED) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />pluginRepositoriesTrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_TRUSTED) %></textarea>
 	</td>
 </tr>
 <tr>
@@ -224,7 +224,7 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-url-per-line" />)</span>
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositoriesUntrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />pluginRepositoriesUntrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED) %></textarea>
 	</td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-plugin-package-id-per-line" />)</span>
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />pluginPackagesIgnored" wrap="soft"><%= GetterUtil.getString(PrefsPropsUtil.getString(PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED)) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />pluginPackagesIgnored" wrap="soft"><%= GetterUtil.getString(PrefsPropsUtil.getString(PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED)) %></textarea>
 	</td>
 </tr>
 <tr>

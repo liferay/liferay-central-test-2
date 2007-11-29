@@ -48,7 +48,7 @@
 				<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
 				<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="open-id" />

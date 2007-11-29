@@ -43,7 +43,7 @@ portletURL.setParameter("tabs1", tabs1);
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<c:choose>
 		<c:when test='<%= tabs1.equals("larger") %>'>
-			<table class="liferay-table">
+			<table class="lfr-table">
 
 			<%
 			List entries = WCUtil.getLarger();
@@ -159,7 +159,7 @@ portletURL.setParameter("tabs1", tabs1);
 			</table>
 		</c:when>
 		<c:when test='<%= tabs1.equals("shorter") %>'>
-			<table class="liferay-table">
+			<table class="lfr-table">
 
 			<%
 			List entries = WCUtil.getShorter();

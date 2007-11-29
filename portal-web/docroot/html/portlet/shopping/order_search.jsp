@@ -30,7 +30,7 @@ OrderSearch searchContainer = (OrderSearch)request.getAttribute("liferay-ui:sear
 OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="number" />

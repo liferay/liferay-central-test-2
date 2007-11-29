@@ -312,7 +312,7 @@
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" height="100%">
-				<textarea class="liferay-textarea message-edit" id="textArea" name="textArea"></textarea>
+				<textarea class="lfr-textarea message-edit" id="textArea" name="textArea"></textarea>
 			</td>
 		</tr>
 		</table>

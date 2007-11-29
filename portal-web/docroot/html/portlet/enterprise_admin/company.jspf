@@ -30,10 +30,10 @@ User user2 = company.getDefaultUser();
 <liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 <liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
@@ -69,7 +69,7 @@ User user2 = company.getDefaultUser();
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="sic-code" />
@@ -105,7 +105,7 @@ User user2 = company.getDefaultUser();
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="virtual-host" />
@@ -135,10 +135,10 @@ User user2 = company.getDefaultUser();
 
 <liferay-ui:tabs names="display" param="tabs2" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="language" />
@@ -183,7 +183,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" />

@@ -181,7 +181,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 />
 
 <div class="vevent">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="date-and-time" />:

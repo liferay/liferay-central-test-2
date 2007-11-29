@@ -62,7 +62,7 @@ if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
 	backURL="<%= redirect %>"
 />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="module-id" />
@@ -100,7 +100,7 @@ if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
 
 <br /><br />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />roles"><%= StringUtil.merge(rolesArray, "\n") %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />roles"><%= StringUtil.merge(rolesArray, "\n") %></textarea>
 
 <br /><br />
 

@@ -35,7 +35,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
 <liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="node" />

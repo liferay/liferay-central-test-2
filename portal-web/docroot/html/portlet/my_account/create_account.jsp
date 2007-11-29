@@ -53,10 +53,10 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="first-name" />

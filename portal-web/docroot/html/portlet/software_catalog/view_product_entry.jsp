@@ -73,7 +73,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="type" />:
@@ -157,7 +157,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <c:choose>
 	<c:when test="<%= latestProductVersion != null %>">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="modified-date" />:

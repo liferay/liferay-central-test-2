@@ -33,7 +33,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValu
 		<liferay-ui:message key="there-are-no-recent-documents" />
 	</c:when>
 	<c:otherwise>
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<%
 		for (int i = 0; i < fileRanks.size(); i++) {

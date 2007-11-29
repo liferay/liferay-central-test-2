@@ -53,7 +53,7 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 <liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 <liferay-ui:error exception="<%= CompanyWebIdException.class %>" message="please-enter-a-valid-web-id" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= company2 != null %>">
 	<tr>

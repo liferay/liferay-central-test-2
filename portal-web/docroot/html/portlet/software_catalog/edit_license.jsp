@@ -52,7 +52,7 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 
 <liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />

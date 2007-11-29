@@ -129,7 +129,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 <liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="id" />
@@ -150,7 +150,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<c:choose>
@@ -266,7 +266,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<liferay-ui:message key="script" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />xsl" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />xsl" type="file" />
 
 		<input type="button" value="<liferay-ui:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();" />
 
@@ -321,7 +321,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
 	</td>
 </tr>
 <tr>

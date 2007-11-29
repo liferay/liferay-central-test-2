@@ -59,7 +59,7 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="url" />

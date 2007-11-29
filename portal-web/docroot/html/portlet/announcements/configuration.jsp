@@ -45,7 +45,7 @@ content = ParamUtil.getString(request, "content", content);
 
 <liferay-ui:error exception="<%= AnnouncementsContentException.class %>" message="please-enter-valid-content" />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />content" wrap="soft"><%= content %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />content" wrap="soft"><%= content %></textarea>
 
 <br />
 

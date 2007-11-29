@@ -51,7 +51,7 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />

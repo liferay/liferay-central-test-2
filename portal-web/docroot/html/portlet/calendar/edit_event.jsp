@@ -326,7 +326,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="start-date" />
@@ -473,7 +473,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<input <%= (recurrenceType == Recurrence.NO_RECURRENCE) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<portlet:namespace />showTable('<portlet:namespace />neverTable');"> <liferay-ui:message key="never" /><br />
@@ -505,12 +505,12 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />weeklyTable" style="display: none;">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" /> <liferay-ui:message key="weeks-on" />
 
-					<table class="liferay-table">
+					<table class="lfr-table">
 					<tr>
 						<td nowrap>
 							<input <%= weeklyPosSu ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox"> <%= days[0] %>
@@ -543,7 +543,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />monthlyTable" style="display: none;">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td nowrap>
 					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <liferay-ui:message key="day" /> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" /> <liferay-ui:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" /> <liferay-ui:message key="month-s" /><br />
@@ -577,7 +577,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</div>
 
 		<div id="<portlet:namespace />yearlyTable" style="display: none;">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td nowrap>
 					<input <%= (yearlyType == 0) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="0"> <liferay-ui:message key="every" />
@@ -653,7 +653,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<liferay-ui:message key="end-date" />
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <liferay-ui:message key="no-end-date" /><br />

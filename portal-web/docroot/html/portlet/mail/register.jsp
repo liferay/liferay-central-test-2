@@ -46,7 +46,7 @@
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<input name="<portlet:namespace />userName" type="text" />

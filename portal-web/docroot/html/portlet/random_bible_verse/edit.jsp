@@ -31,7 +31,7 @@ Map bibles = RBVUtil.getBibles();
 <form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="language" />

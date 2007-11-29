@@ -57,7 +57,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />

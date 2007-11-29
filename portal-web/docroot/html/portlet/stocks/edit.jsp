@@ -62,7 +62,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 <br /><br />
 
-<textarea class="liferay-textarea" name="<portlet:namespace />symbols" wrap="soft"><%= symbolsString %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />symbols" wrap="soft"><%= symbolsString %></textarea>
 
 <br /><br />
 

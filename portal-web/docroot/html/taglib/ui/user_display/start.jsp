@@ -39,7 +39,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 %>
 
 <c:if test="<%= displayStyle == 1 %>">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td valign="top">
 </c:if>

@@ -83,13 +83,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -97,13 +97,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="address" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="enabled" />
@@ -122,7 +122,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="subject" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
 			</td>
 		</tr>
 		<tr>
@@ -148,7 +148,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<b>[$EVENT_START_DATE$]</b>

@@ -34,7 +34,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	id="toggle_id_journal_structure_search"
 	displayTerms="<%= displayTerms %>"
 >
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="id" />

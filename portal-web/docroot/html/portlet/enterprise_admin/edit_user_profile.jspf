@@ -183,10 +183,10 @@ if (organizations != null) {
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<c:if test="<%= user2 != null %>">
 			<tr>
@@ -295,7 +295,7 @@ if (organizations != null) {
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<%
 		boolean fieldEnableContactBirthday = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));

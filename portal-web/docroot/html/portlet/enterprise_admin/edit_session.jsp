@@ -64,7 +64,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 		}
 		%>
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="session-id" />:

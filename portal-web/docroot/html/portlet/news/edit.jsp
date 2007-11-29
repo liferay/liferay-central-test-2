@@ -58,7 +58,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:choose>
 			<c:when test="<%= Validator.isNull(categoryName) %>">
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td align="right">
 						<b><liferay-ui:message key="available-categories" /></b>
@@ -164,7 +164,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 
@@ -197,7 +197,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="num-of-articles-per-selection" />

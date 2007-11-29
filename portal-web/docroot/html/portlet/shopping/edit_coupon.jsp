@@ -96,13 +96,13 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= DuplicateCouponCodeException.class %>" message="please-enter-a-unique-code" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="code" />
 	</td>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<c:choose>
@@ -216,7 +216,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="minimum-order" />

@@ -30,7 +30,7 @@ InstanceSearch searchContainer = (InstanceSearch)request.getAttribute("liferay-u
 InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<%--<td>
 		<liferay-ui:message key="instance-id" />
@@ -61,7 +61,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 </table>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="start-date" /> (<liferay-ui:message key="range" />)
@@ -96,7 +96,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">

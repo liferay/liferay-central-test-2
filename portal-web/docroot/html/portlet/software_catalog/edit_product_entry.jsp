@@ -93,7 +93,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 <liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
 <liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="name" />
@@ -228,7 +228,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <liferay-ui:tabs names="plugin-repository" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="group-id" />
@@ -251,7 +251,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <liferay-ui:tabs names="screenshots" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < screenshotsCount; i++) {
@@ -267,12 +267,12 @@ for (int i = 0; i < screenshotsCount; i++) {
 			<liferay-ui:message key="thumbnail" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />thumbnail<%= i %>" type="file" />
+			<input class="lfr-input-text" name="<portlet:namespace />thumbnail<%= i %>" type="file" />
 		</td>
 
 		<c:if test="<%= productScreenshot != null %>">
 			<td rowspan="3" valign="top">
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getThumbnailId()) %>" target="_blank"><liferay-ui:message key="see-thumbnail" /></a>
@@ -295,7 +295,7 @@ for (int i = 0; i < screenshotsCount; i++) {
 			<liferay-ui:message key="full-image" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />fullImage<%= i %>" type="file" />
+			<input class="lfr-input-text" name="<portlet:namespace />fullImage<%= i %>" type="file" />
 		</td>
 	</tr>
 	<tr>

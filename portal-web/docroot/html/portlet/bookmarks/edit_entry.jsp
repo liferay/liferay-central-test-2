@@ -75,7 +75,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	</div>
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
 	<tr>

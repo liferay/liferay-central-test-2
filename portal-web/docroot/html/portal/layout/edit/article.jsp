@@ -24,13 +24,13 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="article-id" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="TypeSettingsProperties(article-id)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
+		<input class="lfr-input-text" name="TypeSettingsProperties(article-id)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
 	</td>
 </tr>
 </table>

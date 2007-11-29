@@ -62,7 +62,7 @@ if (organizationId > 0) {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="organization" />

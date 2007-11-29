@@ -61,7 +61,7 @@ Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 int counter = 0;

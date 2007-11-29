@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/amazon_rankings/init.jsp" %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 Set amazonRankingsSet = new TreeSet();

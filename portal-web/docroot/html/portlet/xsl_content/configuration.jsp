@@ -31,13 +31,13 @@
 <liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
 <liferay-ui:error key="transformation" message="an-error-occurred-while-processing-your-xml-and-xsl" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="xml-url" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />xmlURL" type="text" value="<%= xmlURL %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />xmlURL" type="text" value="<%= xmlURL %>" />
 	</td>
 </tr>
 <tr>
@@ -45,7 +45,7 @@
 		<liferay-ui:message key="xsl-url" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />xslURL" type="text" value="<%= xslURL %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />xslURL" type="text" value="<%= xslURL %>" />
 	</td>
 </tr>
 </table>

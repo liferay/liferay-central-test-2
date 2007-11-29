@@ -31,7 +31,7 @@
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="article-type" />
@@ -63,13 +63,13 @@
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="target-portlet-id" />
 	</td>
 	<td>
-		<input class="liferay-input-text" <%= showListed ? "disabled" : "" %> name="<portlet:namespace />targetPortletId" type="text" value="<%= targetPortletId %>" />
+		<input class="lfr-input-text" <%= showListed ? "disabled" : "" %> name="<portlet:namespace />targetPortletId" type="text" value="<%= targetPortletId %>" />
 	</td>
 </tr>
 </table>

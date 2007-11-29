@@ -79,7 +79,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 	</c:otherwise>
 </c:choose>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="order" /> #:
@@ -108,14 +108,14 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<b><liferay-ui:message key="billing-address" /></b>
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="first-name" />:
@@ -203,7 +203,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="first-name" />:
@@ -297,7 +297,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="status" />:
@@ -371,7 +371,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="full-name" />:
@@ -525,7 +525,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="subtotal" />:

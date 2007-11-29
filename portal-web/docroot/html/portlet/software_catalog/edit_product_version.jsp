@@ -90,7 +90,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <fieldset>
 	<legend><%=LanguageUtil.get(pageContext, "main-fields")%></legend>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="version-name" />
@@ -136,7 +136,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <fieldset class="repository-fields">
 	<legend><%=LanguageUtil.get(pageContext, "repository-fields")%></legend>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="download-page-url" />

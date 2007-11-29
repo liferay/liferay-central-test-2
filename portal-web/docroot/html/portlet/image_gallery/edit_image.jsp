@@ -54,7 +54,7 @@ if (image != null) {
 </div>
 
 <c:if test="<%= image != null %>">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="thumbnail" />
@@ -151,9 +151,9 @@ String uploadProgressId = "igImageUploadProgress";
 	);
 </script>
 
-<div class="liferay-upload-container" id="<portlet:namespace />fileUpload"></div>
+<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 
-<div class="liferay-fallback" id="<portlet:namespace />fallback">
+<div class="lfr-fallback" id="<portlet:namespace />fallback">
 	<liferay-ui:upload-progress
 		id="<%= uploadProgressId %>"
 		iframeSrc="<%= uploadProgressURL %>"

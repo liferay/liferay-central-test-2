@@ -27,7 +27,7 @@
 		names="export"
 	/>
 
-	<input class="liferay-input-text" name="exportFileName" type="text" value="liferay.ics">
+	<input class="lfr-input-text" name="exportFileName" type="text" value="liferay.ics">
 
 	<br /><br />
 
@@ -40,13 +40,13 @@
 	names="import"
 />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />importFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />importFile" type="file" />
 	</td>
 </tr>
 </table>

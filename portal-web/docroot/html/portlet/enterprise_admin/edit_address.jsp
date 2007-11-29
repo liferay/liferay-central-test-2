@@ -67,10 +67,10 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="street1" />
@@ -114,7 +114,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="country" />

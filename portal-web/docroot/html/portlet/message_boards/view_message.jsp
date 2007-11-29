@@ -164,7 +164,7 @@ else {
 	</div>
 
 	<div class="message-board-thread-actions">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 				<td>

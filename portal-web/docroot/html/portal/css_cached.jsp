@@ -497,39 +497,39 @@ ul.gamma .tree-item-hover {
 
 /* ---------- Uploader ---------- */
 
-.liferay-upload-container {
+.lfr-upload-container {
 	margin-bottom: 1em;
 	width: 450px;
 }
 
-.liferay-upload-container .upload-target a {
+.lfr-upload-container .upload-target a {
 	float: left;
 	margin-right: 15px;
 }
 
-.liferay-upload-container a.browse-button {
+.lfr-upload-container a.browse-button {
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/add_content.png);
 	background-repeat: no-repeat;
 }
 
-.liferay-upload-container a.upload-button {
+.lfr-upload-container a.upload-button {
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/top.png);
 	background-repeat: no-repeat;
 }
 
-.liferay-upload-container a.clear-uploads {
+.lfr-upload-container a.clear-uploads {
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/portlet/refresh.png);
 	background-repeat: no-repeat;
 }
 
-.liferay-upload-container a.cancel-uploads {
+.lfr-upload-container a.cancel-uploads {
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/close.png);
 	background-repeat: no-repeat;
 	float: right;
 	margin-right: 0;
 }
 
-.liferay-upload-container .upload-file {
+.lfr-upload-container .upload-file {
 	background: #f0faf0 url(<%=themeDisplay.getPathThemeImages()%>/document_library/jpg.png) no-repeat 5px 50%;
 	border-bottom: 1px solid #ccc;
 	display: block;
@@ -540,55 +540,55 @@ ul.gamma .tree-item-hover {
 	position: relative;
 }
 
-.liferay-upload-container .upload-list-info {
+.lfr-upload-container .upload-list-info {
 	margin: 5px 0;
 }
 
-.liferay-upload-container .upload-list-info h4 {
+.lfr-upload-container .upload-list-info h4 {
 	font-size: 1.3em;
 }
 
-.liferay-upload-container .cancel-button {
+.lfr-upload-container .cancel-button {
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/delete.png);
 	background-repeat: no-repeat;
 	position: absolute;
 	right: 5px;
 }
 
-.liferay-upload-container .upload-complete {
+.lfr-upload-container .upload-complete {
 	background-color: #E8EEF7;
 	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/my_place_current.png);
 	font-weight: normal;
 	opacity: 0.6;
 }
 
-.liferay-upload-container .upload-complete .cancel-button {
+.lfr-upload-container .upload-complete .cancel-button {
 	display: none;
 }
 
-.liferay-upload-container .file-uploading {
+.lfr-upload-container .file-uploading {
 	background-color: #ffc;
 }
 
-.liferay-upload-container .file-uploading .cancel-button {
+.lfr-upload-container .file-uploading .cancel-button {
 	top: 0;
 }
 
-.liferay-upload-container .progress-bar {
+.lfr-upload-container .progress-bar {
 	background: #fff;
 	border: 1px solid #83a8d9;
 	display: none;
 	height: 15px;
 }
 
-.liferay-upload-container .progress {
+.lfr-upload-container .progress {
 	background: #8db2e3 url(<%=themeDisplay.getPathThemeImages()%>/progress_bar/complete_gradient.png) repeat-y 100% 0;
 	display: block;
 	height: 15px;
 	width: 0;
 }
 
-.liferay-upload-container .file-uploading .progress-bar {
+.lfr-upload-container .file-uploading .progress-bar {
 	display: block;
 }
 
@@ -621,7 +621,7 @@ ul.gamma .tree-item-hover {
 	padding-top: 0;
 }
 
-.lfr-portal-login .liferay-input-text {
+.lfr-portal-login .lfr-input-text {
 	width: 150px;
 }
 
@@ -714,11 +714,11 @@ ul.gamma .tree-item-hover {
 	margin-left: 0px;
 }
 
-.js .liferay-fallback {
+.js .lfr-fallback {
 	display: none;
 }
 
-.liferay-button {
+.lfr-button {
 	background: url() no-repeat 0 50%;
 	padding: 2px 0 2px 20px;
 }
@@ -735,24 +735,24 @@ ul.gamma .tree-item-hover {
 	height: 1%;
 }
 
-.liferay-table {
+.lfr-table {
 	border-collapse: collapse;
 	clear: both;
 }
 
-.liferay-table tr td, .liferay-table tr th {
+.lfr-table tr td, .lfr-table tr th {
 	padding: 0 5px;
 }
 
-.liferay-table tr th {
+.lfr-table tr th {
 	font-weight: bold;
 }
 
-.liferay-table tr td:first-child, .liferay-table tr td.first-child, .liferay-table tr th:first-child, .liferay-table tr th.first-child {
+.lfr-table tr td:first-child, .lfr-table tr td.first-child, .lfr-table tr th:first-child, .lfr-table tr th.first-child {
 	padding-left: 0;
 }
 
-.liferay-table tr td:last-child, .liferay-table tr td.last-child, .liferay-table tr th:last-child, .liferay-table tr th.last-child {
+.lfr-table tr td:last-child, .lfr-table tr td.last-child, .lfr-table tr th:last-child, .lfr-table tr th.last-child {
 	padding-right: 0;
 }
 
@@ -762,11 +762,11 @@ ul.gamma .tree-item-hover {
 
 /* ---------- Liferay forms ---------- */
 
-.liferay-input-text {
+.lfr-input-text {
 	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
 }
 
-.liferay-textarea {
+.lfr-textarea {
 	height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;
 	width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;
 }

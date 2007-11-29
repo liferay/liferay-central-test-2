@@ -36,7 +36,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	id="toggle_id_enterprise_admin_organization_search"
 	displayTerms="<%= displayTerms %>"
 >
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="name" />

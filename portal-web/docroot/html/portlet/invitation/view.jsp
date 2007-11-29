@@ -55,7 +55,7 @@
 				</div>
 			</c:if>
 
-			<input class="liferay-input-text" name="<portlet:namespace />emailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
+			<input class="lfr-input-text" name="<portlet:namespace />emailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
 
 			<br />
 

@@ -82,7 +82,7 @@
 
 <form>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<input type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />showPrevious();" /> <input type="button" value="<liferay-ui:message key="play" />" onClick="<portlet:namespace />play();" /> <input type="button" value="<liferay-ui:message key="pause" />" onClick="<portlet:namespace />pause();" /> <input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />showNext();" />
@@ -116,7 +116,7 @@
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 

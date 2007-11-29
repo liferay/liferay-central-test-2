@@ -24,7 +24,7 @@
 
 <br />
 
-<table class="liferay-table" width="100%">
+<table class="lfr-table" width="100%">
 <tr class="portlet-section-header">
 	<td>
 		<b><liferay-ui:message key="meta-tags" />:</b>
@@ -42,19 +42,19 @@
 
 			<liferay-ui:message key="meta-robots" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-robots)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
 
 			<br /><br />
 
 			<liferay-ui:message key="meta-description" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-description)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
 
 			<br /><br />
 
 			<liferay-ui:message key="meta-keywords" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-keywords)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
 
 			<br /><br />
 		</div>
@@ -77,19 +77,19 @@
 
 			<liferay-ui:message key="javascript-1" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-1)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-1)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 
 			<br /><br />
 
 			<liferay-ui:message key="javascript-2" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-2)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-2)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 
 			<br /><br />
 
 			<liferay-ui:message key="javascript-3" /><br />
 
-			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-3)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
+			<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-3)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 		</div>
 	</td>
 </tr>
@@ -115,7 +115,7 @@
 				String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
 				%>
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="include" />

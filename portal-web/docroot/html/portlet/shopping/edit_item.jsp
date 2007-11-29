@@ -175,7 +175,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= item != null %>">
 	<tr>
@@ -242,7 +242,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<td colspan="2">
 		<br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="requires-shipping" />
@@ -306,7 +306,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < fieldsCount; i++) {
@@ -390,7 +390,7 @@ for (int i = 0; i < fieldsCount; i++) {
 
 <input name="<portlet:namespace />prices" type="hidden" value="" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < pricesCount; i++) {
@@ -497,7 +497,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 	<tr>
 		<td>
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="min-qty" />
@@ -532,7 +532,7 @@ for (int i = 0; i < pricesCount; i++) {
 			</tr>
 			</table>
 
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="shipping" />
@@ -620,7 +620,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 <liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="small-image-url" />
@@ -634,7 +634,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
 	</td>
 </tr>
 <tr>
@@ -663,7 +663,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="medium-image" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />mediumFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />mediumFile" type="file" />
 	</td>
 </tr>
 <tr>
@@ -692,7 +692,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="large-image" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />largeFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />largeFile" type="file" />
 	</td>
 </tr>
 <tr>

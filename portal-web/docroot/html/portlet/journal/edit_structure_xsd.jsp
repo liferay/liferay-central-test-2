@@ -75,7 +75,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<b><liferay-ui:message key="editor-type" /></b>
@@ -96,7 +96,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		<textarea class="codepress html" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off"></textarea>
 	</c:when>
 	<c:otherwise>
-		<textarea class="liferay-textarea" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+		<textarea class="lfr-textarea" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
 	</c:otherwise>
 </c:choose>
 

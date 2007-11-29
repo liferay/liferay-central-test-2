@@ -190,7 +190,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			String fieldDescription = itemField.getDescription();
 		%>
 
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<%= fieldName %>:

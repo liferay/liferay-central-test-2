@@ -145,7 +145,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 </div>
 
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="name" />
@@ -204,7 +204,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="community" />

@@ -29,10 +29,10 @@ DateFormat dateFormatDayOfWeek = new SimpleDateFormat("EEE", locale);
 DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 %>
 
-<table class="liferay-table" width="100%">
+<table class="lfr-table" width="100%">
 <tr>
 	<td>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 

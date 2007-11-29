@@ -91,7 +91,7 @@ else {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<b><liferay-ui:message key="editor-type" /></b>
@@ -112,7 +112,7 @@ else {
 		<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
 	</c:when>
 	<c:otherwise>
-		<textarea class="liferay-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+		<textarea class="lfr-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
 	</c:otherwise>
 </c:choose>
 

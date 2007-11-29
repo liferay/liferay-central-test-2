@@ -26,7 +26,7 @@
 String syntaxHelpURL = PropsUtil.get(PropsUtil.WIKI_CLASSIC_SYNTAX_HELP_URL);
 %>
 
-<table class="liferay-table" width="100%">
+<table class="lfr-table" width="100%">
 <tr>
 	<td width="70%" valign="top">
 		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />

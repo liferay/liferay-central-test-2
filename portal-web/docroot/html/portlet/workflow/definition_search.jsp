@@ -30,7 +30,7 @@ DefinitionSearch searchContainer = (DefinitionSearch)request.getAttribute("lifer
 DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<%--<td>
 		<liferay-ui:message key="definition-id" />

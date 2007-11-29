@@ -460,7 +460,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<form method="post" name="<portlet:namespace />search" onSubmit="this.action = themeDisplay.getPathMain() + '/mail/action?sortBy=' + Mail.sortBy.value + '&asc=' + Mail.sortBy.asc; AjaxUtil.submit(this,{onComplete: Mail.getSearchReturn}); return false;">
 				<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
-				<table class="liferay-table" id="portlet-mail-toolbar-search">
+				<table class="lfr-table" id="portlet-mail-toolbar-search">
 				<tr>
 					<td>
 						<input class="font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text" />
@@ -497,7 +497,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
 		<div id="portlet-mail-toolbar-advanced-search" style="display: none;" width="100%">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="from" />
@@ -530,7 +530,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 			<br />
 
-			<table class="liferay-table" id="portlet-mail-toolbar-advanced-search-dates">
+			<table class="lfr-table" id="portlet-mail-toolbar-advanced-search-dates">
 			<tr>
 				<td>
 					<liferay-ui:message key="within" />
@@ -579,7 +579,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 			<br />
 
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<select name="<%= MailDisplayTerms.AND_OPERATOR %>">

@@ -432,7 +432,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= breadcrumbs %>
 		</div>
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<th>
 				<liferay-ui:message key="action" />

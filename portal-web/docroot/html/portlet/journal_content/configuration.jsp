@@ -67,7 +67,7 @@ type = ParamUtil.getString(request, "type", type);
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
 <input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="portlet-id" />:
@@ -97,7 +97,7 @@ type = ParamUtil.getString(request, "type", type);
 			}
 	%>
 
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td>
 					<liferay-ui:message key="override-default-template" />
@@ -145,7 +145,7 @@ type = ParamUtil.getString(request, "type", type);
 	}
 	%>
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="disable-caching" />

@@ -36,7 +36,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	id="toggle_id_enterprise_admin_user_search"
 	displayTerms="<%= displayTerms %>"
 >
-	<table class="liferay-table">
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="first-name" />

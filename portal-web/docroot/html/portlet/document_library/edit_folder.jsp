@@ -79,7 +79,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	</div>
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= folder != null %>">
 	<tr>

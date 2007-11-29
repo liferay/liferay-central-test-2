@@ -37,13 +37,13 @@ String message = ParamUtil.getString(request, "message");
 
 <liferay-ui:error key="to" message="please-enter-a-valid-email-address" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="to" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" value="<%= to %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />to" type="text" value="<%= to %>" />
 	</td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@ String message = ParamUtil.getString(request, "message");
 		<liferay-ui:message key="subject" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
 	</td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@ String message = ParamUtil.getString(request, "message");
 		<liferay-ui:message key="message" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
+		<textarea class="lfr-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
 	</td>
 </tr>
 <tr>

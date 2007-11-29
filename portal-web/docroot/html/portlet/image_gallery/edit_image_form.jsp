@@ -94,7 +94,7 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 	<br /><br />
 </c:if>
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= ((image != null) || (folderId <= 0)) %>">
 	<tr>
@@ -132,7 +132,7 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />file" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 <tr>

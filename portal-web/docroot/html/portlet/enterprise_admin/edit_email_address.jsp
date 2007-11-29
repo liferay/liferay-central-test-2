@@ -59,7 +59,7 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="address" />

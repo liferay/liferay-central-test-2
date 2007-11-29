@@ -134,13 +134,13 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
 <liferay-ui:error exception="<%= RecipientException.class %>" message="please-enter-a-valid-email-address" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="to" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" id="<portlet:namespace />to" />
+		<input class="lfr-input-text" name="<portlet:namespace />to" type="text" id="<portlet:namespace />to" />
 	</td>
 </tr>
 <tr>
@@ -148,7 +148,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<liferay-ui:message key="cc" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />cc" type="text" id="<portlet:namespace />cc" value="<%= cc %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />cc" type="text" id="<portlet:namespace />cc" value="<%= cc %>" />
 	</td>
 </tr>
 <tr>
@@ -156,7 +156,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<liferay-ui:message key="bcc" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />bcc" type="text" id="<portlet:namespace />bcc" value="<%= bcc %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />bcc" type="text" id="<portlet:namespace />bcc" value="<%= bcc %>" />
 	</td>
 </tr>
 <tr>
@@ -164,14 +164,14 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<liferay-ui:message key="subject" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
 	</td>
 </tr>
 </table>
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
 		<liferay-ui:message key="attachments" />

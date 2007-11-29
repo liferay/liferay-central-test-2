@@ -68,7 +68,7 @@
 
 </liferay-ui:error>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="title" />
@@ -95,7 +95,7 @@ for (int i = 0; i < urls.length; i++) {
 			<input name="<portlet:namespace />title" value="<%= title %>" />
 		</td>
 		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />url" value="<%= urls[i] %>" />
+			<input class="lfr-input-text" name="<portlet:namespace />url" value="<%= urls[i] %>" />
 		</td>
 		<td>
 			<a href="javascript: ;" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
@@ -110,7 +110,7 @@ for (int i = 0; i < urls.length; i++) {
 
 <br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td>
 		<liferay-ui:message key="num-of-entries-per-feed" />

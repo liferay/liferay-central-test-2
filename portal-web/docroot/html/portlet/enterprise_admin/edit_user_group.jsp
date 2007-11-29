@@ -53,7 +53,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 <liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
 <liferay-ui:error exception="<%= UserGroupNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <c:if test="<%= userGroup != null %>">
 	<tr>

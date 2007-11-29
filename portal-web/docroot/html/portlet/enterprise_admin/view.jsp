@@ -776,7 +776,7 @@ String portletURLString = portletURL.toString();
 						<%@ include file="/html/portlet/enterprise_admin/authentication_ldap.jspf" %>
 					</c:when>
 					<c:when test='<%= tabs3.equals("cas") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="enabled" />
@@ -800,7 +800,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="login-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGIN_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGIN_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -808,7 +808,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="logout-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGOUT_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGOUT_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -816,7 +816,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="service-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVICE_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVICE_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -824,7 +824,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="validate-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_VALIDATE_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_VALIDATE_URL) %>" />
 							</td>
 						</tr>
 						</table>
@@ -834,7 +834,7 @@ String portletURLString = portletURL.toString();
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateCAS');" />
 					</c:when>
 					<c:when test='<%= tabs3.equals("ntlm") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="enabled" />
@@ -848,7 +848,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="domain-controller" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -856,7 +856,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="domain" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
 							</td>
 						</tr>
 						</table>
@@ -866,7 +866,7 @@ String portletURLString = portletURL.toString();
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateNtlm');" />
 					</c:when>
 					<c:when test='<%= tabs3.equals("open-id") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="enabled" />
@@ -882,7 +882,7 @@ String portletURLString = portletURL.toString();
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenId');" />
 					</c:when>
 					<c:when test='<%= tabs3.equals("open-sso") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="enabled" />
@@ -896,7 +896,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="login-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -904,7 +904,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="logout-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -912,7 +912,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="service-url" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL) %>" />
 							</td>
 						</tr>
 						<tr>
@@ -920,7 +920,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="cookie-name" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
 							</td>
 						</tr>
 						</table>
@@ -930,7 +930,7 @@ String portletURLString = portletURL.toString();
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenSSO');" />
 					</c:when>
 					<c:otherwise>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="how-do-users-authenticate" />
@@ -1006,7 +1006,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
 				<br /><br />
 
@@ -1014,7 +1014,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
 				<br /><br />
 
@@ -1022,7 +1022,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
 
 				<br /><br />
 
@@ -1033,7 +1033,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
 
 				<br /><br />
 
@@ -1041,7 +1041,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
 				<br /><br />
 
@@ -1052,7 +1052,7 @@ String portletURLString = portletURL.toString();
 
 				<br /><br />
 
-				<textarea class="liferay-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
+				<textarea class="lfr-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
 				<br /><br />
 
@@ -1114,7 +1114,7 @@ String portletURLString = portletURL.toString();
 
 				<c:choose>
 					<c:when test='<%= tabs3.endsWith("-notification") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="enabled" />
@@ -1142,10 +1142,10 @@ String portletURLString = portletURL.toString();
 							<td>
 								<c:choose>
 									<c:when test='<%= tabs3.equals("account-created-notification") %>'>
-										<input class="liferay-input-text" name="<portlet:namespace />emailUserAddedSubject" type="text" value="<%= emailUserAddedSubject %>" />
+										<input class="lfr-input-text" name="<portlet:namespace />emailUserAddedSubject" type="text" value="<%= emailUserAddedSubject %>" />
 									</c:when>
 									<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
-										<input class="liferay-input-text" name="<portlet:namespace />emailPasswordSentSubject" type="text" value="<%= emailPasswordSentSubject %>" />
+										<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject" type="text" value="<%= emailPasswordSentSubject %>" />
 									</c:when>
 								</c:choose>
 							</td>
@@ -1173,7 +1173,7 @@ String portletURLString = portletURL.toString();
 
 						<br /><br />
 
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<b>[$FROM_ADDRESS$]</b>
@@ -1265,13 +1265,13 @@ String portletURLString = portletURL.toString();
 						</table>
 					</c:when>
 					<c:otherwise>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<liferay-ui:message key="name" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 							</td>
 						</tr>
 						<tr>
@@ -1279,7 +1279,7 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:message key="address" />
 							</td>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 							</td>
 						</tr>
 						</table>

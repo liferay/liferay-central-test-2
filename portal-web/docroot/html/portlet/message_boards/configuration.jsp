@@ -106,13 +106,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -120,7 +120,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="address" />
 			</td>
 			<td>
-				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -131,7 +131,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<b>[$COMPANY_ID$]</b>
@@ -199,7 +199,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.startsWith("message-") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="enabled" />
@@ -227,10 +227,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" type="text" value="<%= emailMessageAddedSubjectPrefix %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" type="text" value="<%= emailMessageAddedSubjectPrefix %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input class="liferay-input-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -245,7 +245,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="body" />
 			</td>
 			<td>
-				<textarea class="liferay-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorContent %></textarea>
+				<textarea class="lfr-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorContent %></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -258,7 +258,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="signature" />
 			</td>
 			<td>
-				<textarea class="liferay-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorContent %></textarea>
+				<textarea class="lfr-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorContent %></textarea>
 			</td>
 		</tr>
 		</table>
@@ -269,7 +269,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<b>[$CATEGORY_NAME$]</b>
@@ -413,7 +413,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
@@ -442,7 +442,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="name" />
@@ -499,7 +499,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</table>
 			</td>
 			<td>
-				<table id="<portlet:namespace />localized-priorities-table" class="liferay-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
+				<table id="<portlet:namespace />localized-priorities-table" class="lfr-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
 				<tr>
 					<td>
 						<liferay-ui:message key="name" />
@@ -696,7 +696,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br /><br />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
@@ -725,7 +725,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<textarea class="liferay-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
+				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
 			</td>
 			<td>
 
@@ -742,7 +742,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				}
 				%>
 
-				<textarea class="liferay-textarea" id="<portlet:namespace />ranks_temp" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onRanksChanged();"></textarea>
+				<textarea class="lfr-textarea" id="<portlet:namespace />ranks_temp" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onRanksChanged();"></textarea>
 			</td>
 		</tr>
 		</table>
@@ -816,7 +816,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="show-user-name-as" />

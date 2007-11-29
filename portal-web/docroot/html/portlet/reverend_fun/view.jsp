@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 
@@ -59,7 +59,7 @@
 		String nextDate = ReverendFunUtil.getNextDate(date);
 		%>
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<b><%= DateFormat.getDateInstance(DateFormat.LONG, locale).format(dateFormat.parse(date)) %></b>

@@ -27,7 +27,7 @@
 <c:if test="<%= SessionMessages.contains(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT) %>">
 	<br />
 
-	<table class="liferay-table">
+	<table class="lfr-table">
 
 	<%
 	RepositoryReport repositoryReport = (RepositoryReport)SessionMessages.get(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT);

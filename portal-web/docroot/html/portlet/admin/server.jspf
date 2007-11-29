@@ -60,7 +60,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("indexes") %>'>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="reindex-all-search-indexes" />
@@ -80,10 +80,10 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<c:choose>
 					<c:when test='<%= tabs3.equals("add-category") %>'>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />loggerName" type="text" />
+								<input class="lfr-input-text" name="<portlet:namespace />loggerName" type="text" />
 
 								<select name="<portlet:namespace />priority">
 
@@ -302,7 +302,7 @@ numberFormat.setMinimumIntegerDigits(2);
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="number-of-minutes" />
@@ -316,7 +316,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="custom-message" />
 					</td>
 					<td>
-						<textarea class="liferay-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+						<textarea class="lfr-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 					</td>
 				</tr>
 				</table>
@@ -358,7 +358,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<br />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="free-memory" />:
@@ -389,7 +389,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<liferay-ui:tabs names="actions" />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />

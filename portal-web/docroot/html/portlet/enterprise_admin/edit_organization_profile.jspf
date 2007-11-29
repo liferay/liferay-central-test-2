@@ -81,10 +81,10 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization" />
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
@@ -145,7 +145,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		</table>
 	</td>
 	<td valign="top">
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="type" />

@@ -50,13 +50,13 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
 
-		<input class="liferay-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= Html.toInputSafe(title) %>" />
+		<input class="lfr-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= Html.toInputSafe(title) %>" />
 	</div>
 
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace/>description"><liferay-ui:message key="description" /></label>
 
-		<textarea class="liferay-textarea" id="<portlet:namespace/>description" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
+		<textarea class="lfr-textarea" id="<portlet:namespace/>description" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
 	</div>
 
 	<div class="ctrl-holder">
@@ -66,7 +66,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />successURL"><liferay-ui:message key="redirect-url-on-success" /></label>
 
-		<input class="liferay-input-text" id="<portlet:namespace />successURL" name="<portlet:namespace />successURL" type="text" value="<%= Html.toInputSafe(successURL) %>" />
+		<input class="lfr-input-text" id="<portlet:namespace />successURL" name="<portlet:namespace />successURL" type="text" value="<%= Html.toInputSafe(successURL) %>" />
 	</div>
 </fieldset>
 
@@ -89,13 +89,13 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />subject"><liferay-ui:message key="subject" /></label>
 
-			<input class="liferay-input-text" id="<portlet:namespace />subject" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
+			<input class="lfr-input-text" id="<portlet:namespace />subject" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
 
-			<input class="liferay-input-text" id="<portlet:namespace />emailAddress" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
+			<input class="lfr-input-text" id="<portlet:namespace />emailAddress" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
 		</div>
 	</fieldset>
 
@@ -109,7 +109,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />filename"><liferay-ui:message key="path-and-file-name" /></label>
 
-			<input class="liferay-input-text" id="<portlet:namespace />filename" name="<portlet:namespace />fileName" type="text" value="<%= fileName %>" />
+			<input class="lfr-input-text" id="<portlet:namespace />filename" name="<portlet:namespace />fileName" type="text" value="<%= fileName %>" />
 		</div>
 	</fieldset>
 

@@ -26,7 +26,7 @@
 
 <form name="<portlet:namespace />fm" target="_blank" onSubmit="submitForm(document.<portlet:namespace />fm, 'http://www.weather.com/search/search', false); return false;">
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 for (int i = 0; i < zips.length; i++) {

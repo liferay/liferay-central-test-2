@@ -28,7 +28,7 @@
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
-		<table class="liferay-table">
+		<table class="lfr-table">
 
 		<%
 		for (int i = 0; i < symbols.length; i++) {

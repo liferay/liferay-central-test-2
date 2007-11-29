@@ -545,7 +545,7 @@ Document contentDoc = null;
 String[] availableLocales = null;
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<td valign="top">
 		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
@@ -554,7 +554,7 @@ String[] availableLocales = null;
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 		<liferay-ui:tags-error />
 
-		<table class="liferay-table">
+		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="id" />
@@ -575,7 +575,7 @@ String[] availableLocales = null;
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<table class="liferay-table">
+						<table class="lfr-table">
 						<tr>
 							<td>
 								<c:choose>
@@ -615,7 +615,7 @@ String[] availableLocales = null;
 			<td>
 				<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<select <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
@@ -639,7 +639,7 @@ String[] availableLocales = null;
 						</c:if>
 					</td>
 					<td>
-						<table class="liferay-table">
+						<table class="lfr-table">
 
 						<%
 						contentDoc = null;
@@ -793,7 +793,7 @@ String[] availableLocales = null;
 		</c:choose>
 
 		<c:if test="<%= article == null %>">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
 				<td colspan="2">
 					<br />
@@ -833,7 +833,7 @@ String[] availableLocales = null;
 
 				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
 
-				<table class="liferay-table">
+				<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="description" />
@@ -860,7 +860,7 @@ String[] availableLocales = null;
 						<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
 					</td>
 					<td>
-						<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
+						<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
 					</td>
 				</tr>
 				<tr>

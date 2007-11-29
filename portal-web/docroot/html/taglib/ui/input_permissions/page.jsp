@@ -52,7 +52,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
 		%>
 
-		<table class="liferay-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<table class="lfr-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
 		<tr>
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />

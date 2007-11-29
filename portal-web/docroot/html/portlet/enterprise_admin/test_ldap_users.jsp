@@ -66,7 +66,7 @@ Properties userMappings = PropertiesUtil.load(userMappingsParams);
 
 <br /><br />
 
-<table class="liferay-table">
+<table class="lfr-table">
 
 <%
 int counter = 0;
