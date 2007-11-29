@@ -58,8 +58,12 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class ${entity.name}ServiceHttp {
 
+	<#assign hasMethods = false>
+
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			<#assign hasMethods = true>
+
 			<#assign returnTypeName = method.returns.value + serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign parameters = method.parameters>
 
@@ -182,6 +186,8 @@ public class ${entity.name}ServiceHttp {
 		</#if>
 	</#list>
 
-	private static Log _log = LogFactoryUtil.getLog(${entity.name}ServiceHttp.class);
+	<#if hasMethods>
+		private static Log _log = LogFactoryUtil.getLog(${entity.name}ServiceHttp.class);
+	</#if>
 
 }

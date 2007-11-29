@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="AccountServiceSoap.java.html"><b><i>View Source</i></b></a>
@@ -77,5 +75,4 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  *
  */
 public class AccountServiceSoap {
-	private static Log _log = LogFactoryUtil.getLog(AccountServiceSoap.class);
 }

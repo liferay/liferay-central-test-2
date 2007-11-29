@@ -58,8 +58,12 @@ import java.rmi.RemoteException;
  */
 public class ${entity.name}ServiceSoap {
 
+	<#assign hasMethods = false>
+
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && serviceBuilder.isSoapMethod(method)>
+			<#assign hasMethods = true>
+
 			<#assign returnValueName = method.returns.value>
 			<#assign returnValueDimension = serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign extendedModelName = packagePath + ".model." + entity.name>
@@ -142,6 +146,8 @@ public class ${entity.name}ServiceSoap {
 		</#if>
 	</#list>
 
-	private static Log _log = LogFactoryUtil.getLog(${entity.name}ServiceSoap.class);
+	<#if hasMethods>
+		private static Log _log = LogFactoryUtil.getLog(${entity.name}ServiceSoap.class);
+	</#if>
 
 }
