@@ -42,7 +42,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.util.MathUtil;
-
+import com.liferay.portal.kernel.util.OrderByComparator;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -489,6 +489,13 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByFolderId(folderId, begin, end);
 	}
 
+	public List getFileEntries(
+			long folderId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryPersistence.findByFolderId(folderId, begin, end, obc);
+	}
+
 	public List getFileEntriesAndShortcuts(long folderId, int begin, int end)
 		throws SystemException {
 
@@ -540,6 +547,13 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public List getGroupFileEntries(
+			long groupId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryFinder.findByGroupId(groupId, begin, end, obc);
+	}
+
+	public List getGroupFileEntries(
 			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
@@ -548,6 +562,20 @@ public class DLFileEntryLocalServiceImpl
 		}
 		else {
 			return dlFileEntryFinder.findByG_U(groupId, userId, begin, end);
+		}
+	}
+
+	public List getGroupFileEntries(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return dlFileEntryFinder.findByGroupId(groupId, begin, end, obc);
+		}
+		else {
+			return dlFileEntryFinder.findByG_U(
+				groupId, userId, begin, end, obc);
 		}
 	}
 

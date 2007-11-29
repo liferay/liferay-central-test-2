@@ -41,11 +41,19 @@ public interface DLFileEntryFinder {
 	public java.util.List findByGroupId(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List findByG_U(long groupId, long userId, int begin,
 		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_U(long groupId, long userId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
 		java.lang.String uuid, long groupId)

@@ -37,6 +37,7 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import org.hibernate.Session;
 
 /**
@@ -187,12 +188,21 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(
+			long groupId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -237,12 +247,22 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	public List findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
+		return findByG_U(groupId, userId, begin, end, null);
+	}
+
+	public List findByG_U(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

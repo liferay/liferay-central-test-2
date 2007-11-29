@@ -587,6 +587,14 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
 	}
 
+	public static java.util.List getFileEntries(long folderId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntries(folderId, begin, end, obc);
+	}
+
 	public static java.util.List getFileEntriesAndShortcuts(long folderId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -639,12 +647,30 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getGroupFileEntries(groupId, begin, end);
 	}
 
+	public static java.util.List getGroupFileEntries(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, begin, end,
+			obc);
+	}
+
 	public static java.util.List getGroupFileEntries(long groupId, long userId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getGroupFileEntries(groupId, userId,
 			begin, end);
+	}
+
+	public static java.util.List getGroupFileEntries(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, userId,
+			begin, end, obc);
 	}
 
 	public static int getGroupFileEntriesCount(long groupId)

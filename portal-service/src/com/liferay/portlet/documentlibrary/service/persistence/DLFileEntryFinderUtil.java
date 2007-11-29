@@ -49,6 +49,12 @@ public class DLFileEntryFinderUtil {
 		return getFinder().findByGroupId(groupId, begin, end);
 	}
 
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByGroupId(groupId, begin, end, obc);
+	}
+
 	public static java.util.List findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
@@ -57,6 +63,12 @@ public class DLFileEntryFinderUtil {
 	public static java.util.List findByG_U(long groupId, long userId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);
+	}
+
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByG_U(groupId, userId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(

@@ -307,6 +307,10 @@ public interface DLFileEntryLocalService {
 	public java.util.List getFileEntries(long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getFileEntries(long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getFileEntriesAndShortcuts(long folderId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -328,8 +332,16 @@ public interface DLFileEntryLocalService {
 	public java.util.List getGroupFileEntries(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupFileEntries(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getGroupFileEntries(long groupId, long userId,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List getGroupFileEntries(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
 	public int getGroupFileEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
