@@ -615,12 +615,6 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void sendPassword(long companyId, java.lang.String emailAddress,
-		java.lang.String remoteAddr, java.lang.String remoteHost,
-		java.lang.String userAgent, boolean encryptPassword)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void setGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

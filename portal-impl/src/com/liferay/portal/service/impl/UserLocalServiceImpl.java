@@ -1069,15 +1069,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String remoteHost, String userAgent)
 		throws PortalException, SystemException {
 
-		sendPassword(
-			companyId, emailAddress, remoteAddr, remoteHost, userAgent, false);
-	}
-
-	public void sendPassword(
-			long companyId, String emailAddress, String remoteAddr,
-			String remoteHost, String userAgent, boolean encryptPassword)
-		throws PortalException, SystemException {
-
 		if (!PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
 			!PrefsPropsUtil.getBoolean(
@@ -1102,11 +1093,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new SendPasswordException();
 		}*/
 
+		String newPassword = PwdToolkitUtil.generate();
+
 		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
 				PwdEncryptor.TYPE_NONE)) {
 
-			user.setPassword(PwdToolkitUtil.generate());
-			user.setPasswordEncrypted(false);
+			user.setPassword(PwdEncryptor.encrypt(newPassword));
+			user.setPasswordUnencrypted(newPassword);
+			user.setPasswordEncrypted(true);
 			user.setPasswordReset(
 				passwordPolicy.getChangeable() &&
 				passwordPolicy.getChangeRequired());
@@ -1127,12 +1121,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
 			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
-
-			String password = user.getPassword();
-
-			if (encryptPassword) {
-				password = PwdEncryptor.encrypt(password);
-			}
 
 			subject = StringUtil.replace(
 				subject,
@@ -1158,7 +1146,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					userAgent,
 					String.valueOf(user.getUserId()),
-					password
+					newPassword
 				});
 
 			body = StringUtil.replace(
@@ -1185,7 +1173,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					userAgent,
 					String.valueOf(user.getUserId()),
-					password
+					newPassword
 				});
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
