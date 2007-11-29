@@ -1098,12 +1098,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
 				PwdEncryptor.TYPE_NONE)) {
 
+			boolean passwordReset = false;
+
+			if (passwordPolicy.getChangeable() &&
+				passwordPolicy.getChangeRequired()) {
+
+				passwordReset = true;
+			}
+
 			user.setPassword(PwdEncryptor.encrypt(newPassword));
 			user.setPasswordUnencrypted(newPassword);
 			user.setPasswordEncrypted(true);
-			user.setPasswordReset(
-				passwordPolicy.getChangeable() &&
-				passwordPolicy.getChangeRequired());
+			user.setPasswordReset(passwordReset);
 
 			userPersistence.update(user);
 		}
