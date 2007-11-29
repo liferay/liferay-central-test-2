@@ -357,6 +357,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByGroupId(groupId, begin, end);
 	}
 
+	public List getGroupEntries(
+			long groupId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByGroupId(groupId, begin, end, obc);
+	}
+
 	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return blogsEntryPersistence.countByGroupId(groupId);
 	}

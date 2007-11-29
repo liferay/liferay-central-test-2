@@ -283,6 +283,10 @@ public interface BlogsEntryLocalService {
 	public java.util.List getGroupEntries(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupEntries(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 

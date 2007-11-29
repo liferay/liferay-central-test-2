@@ -573,6 +573,14 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getGroupEntries(groupId, begin, end);
 	}
 
+	public static java.util.List getGroupEntries(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getGroupEntries(groupId, begin, end, obc);
+	}
+
 	public static int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
