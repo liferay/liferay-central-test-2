@@ -23,11 +23,13 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portlet.journal.TransformException;
 
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.transform.Transformer;
@@ -51,7 +53,11 @@ public class JournalXslUtil {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
-		JournalXslErrorListener errorListener = new JournalXslErrorListener();
+		long companyId = Long.parseLong((String)tokens.get("company_id"));
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		JournalXslErrorListener errorListener =
+			new JournalXslErrorListener(companyId, locale);
 
 		try {
 			StreamSource xmlSource = new StreamSource(new StringReader(xml));
