@@ -127,10 +127,8 @@ public class ExportImportAction extends EditConfigurationAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		Portlet portlet = null;
-
 		try {
-			portlet = getPortlet(req);
+			getPortlet(req);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());

@@ -31,9 +31,6 @@ import com.liferay.portal.model.Layout;
 
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PageCommentsPortletDataHandlerImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -91,8 +88,5 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments", true, true);
-
-	private static Log _log =
-		LogFactory.getLog(PageCommentsPortletDataHandlerImpl.class);
 
 }

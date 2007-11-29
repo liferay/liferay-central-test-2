@@ -85,7 +85,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags
+			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
 		};
 	}
 
@@ -93,7 +93,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags
+			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
 		};
 	}
 

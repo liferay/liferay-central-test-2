@@ -43,9 +43,6 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -252,8 +249,5 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _events =
 		new PortletDataHandlerBoolean(_NAMESPACE, "events", true, true);
-
-	private static Log _log =
-		LogFactory.getLog(CalendarPortletDataHandlerImpl.class);
 
 }

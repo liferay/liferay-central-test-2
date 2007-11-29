@@ -31,9 +31,6 @@ import com.liferay.portal.model.Layout;
 
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PageRatingsPortletDataHandlerImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -91,8 +88,5 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings", true, true);
-
-	private static Log _log =
-		LogFactory.getLog(PageRatingsPortletDataHandlerImpl.class);
 
 }

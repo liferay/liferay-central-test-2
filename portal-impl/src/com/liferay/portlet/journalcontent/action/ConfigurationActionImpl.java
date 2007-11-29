@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journalcontent.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,7 +30,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -58,22 +56,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
 		String templateId = ParamUtil.getString(
 			req, "templateId").toUpperCase();
-
-		String languageId = LanguageUtil.getLanguageId(req);
-
 		boolean disableCaching = ParamUtil.getBoolean(req, "disableCaching");
-
-		String content = JournalContentUtil.getContent(
-			groupId, articleId, templateId, languageId, themeDisplay,
-			disableCaching);
-
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
