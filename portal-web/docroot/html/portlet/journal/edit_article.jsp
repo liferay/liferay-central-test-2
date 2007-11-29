@@ -174,7 +174,7 @@ else {
 boolean disableIncrementVersion = false;
 
 if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION))) {
-	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(themeDisplay.getPortletGroupId(), articleId, version));
+	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(article.getGroupId(), articleId, version));
 
 	if (!latestVersion) {
 		incrementVersion = true;
