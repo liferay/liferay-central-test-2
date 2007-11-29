@@ -49,345 +49,99 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SourceFormatter {
 
 	public static void main(String[] args) {
-		SourceFormatter sf = new SourceFormatter();
-
-		sf.formatJava();
-		sf.formatJSP();
+		try {
+			_formatJava();
+			_formatJSP();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void formatJava() {
-		try {
-			String basedir = "../";
+	public static String stripImports(
+			String content, String packageDir, String className)
+		throws IOException {
 
-			List list = new ArrayList();
+		int x = content.indexOf("import ");
 
-			DirectoryScanner ds = new DirectoryScanner();
-			ds.setIncludes(
-				new String[] {
-					"**\\*.java"
-				});
-			ds.setExcludes(
-				new String[] {
-					"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
-					"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
-					"**\\JSMin.java", "**\\PropsUtil.java",
-					"**\\InstanceWrapperBuilder.java",
-					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-					"**\\UserAttributes.java", "**\\WebKeys.java",
-					"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
-					"**\\portal-service\\**\\model\\*Model.java",
-					"**\\portal-service\\**\\model\\*Soap.java",
-					"**\\model\\impl\\*ModelImpl.java",
-					"**\\portal\\service\\**", "**\\portal-client\\**",
-					"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-					"**\\util-wsrp\\**"
-				});
-			ds.setBasedir(basedir);
-			ds.scan();
+		if (x == -1) {
+			return content;
+		}
 
-			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+		int y = content.indexOf("{", x);
 
-			ds = new DirectoryScanner();
-			ds.setIncludes(
-				new String[] {
-					"**\\service\\http\\*HttpTest.java",
-					"**\\service\\http\\*SoapTest.java",
-					"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
-					"**\\service\\permission\\*.java",
-					"**\\service\\persistence\\BasePersistence.java",
-					"**\\service\\persistence\\*FinderImpl.java",
-					"**\\portal-service\\**\\liferay\\counter\\**.java",
-					"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
-					"**\\portal-service\\**\\liferay\\lock\\**.java",
-					"**\\portal-service\\**\\liferay\\mail\\**.java",
-					"**\\util-bridges\\**\\*.java"
-				});
-			ds.setExcludes(
-				new String[] {
-					"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
-				});
-			ds.setBasedir(basedir);
-			ds.scan();
+		y = content.substring(0, y).lastIndexOf(";") + 1;
 
-			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+		String imports = _formatImports(content.substring(x, y));
 
-			ds = new DirectoryScanner();
-			ds.setIncludes(
-				new String[] {
-					"**\\test\\src\\**\\*.java",
-				});
-			ds.setBasedir(basedir);
-			ds.scan();
+		content =
+			content.substring(0, x) + imports +
+				content.substring(y + 1, content.length());
 
-			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+		Set classes = ClassUtil.getClasses(
+			new StringReader(content), className);
 
-			String copyright = FileUtil.read("../copyright.txt");
+		classes.add("_getMarkup");
+		classes.add("_performBlockingInteraction");
 
-			String[] files = (String[])list.toArray(new String[list.size()]);
+		x = content.indexOf("import ");
 
-			for (int i = 0; i < files.length; i++) {
-				File file = new File(basedir + files[i]);
+		y = content.indexOf("{", x);
 
-				String content = FileUtil.read(file);
+		y = content.substring(0, y).lastIndexOf(";") + 1;
 
-				String className = file.getName();
-				className = className.substring(0, className.length() - 5);
+		imports = content.substring(x, y);
 
-				String packageDir = files[i];
+		StringMaker sm = new StringMaker();
 
-				int packageDirX = packageDir.indexOf(
-					File.separator + "src" + File.separator);
-				int packageDirY = packageDir.lastIndexOf(File.separator);
+		BufferedReader br = new BufferedReader(new StringReader(imports));
 
-				packageDir = packageDir.substring(packageDirX + 5, packageDirY);
-				packageDir = StringUtil.replace(
-					packageDir, File.separator, StringPool.PERIOD);
+		String line = null;
 
-				if (packageDir.endsWith(".model")) {
-					if (content.indexOf(
-							"extends " + className + "Model {") != -1) {
+		while ((line = br.readLine()) != null) {
+			if (line.indexOf("import ") != -1) {
+				int importX = line.indexOf(" ");
+				int importY = line.lastIndexOf(".");
 
-						continue;
-					}
-				}
+				String importPackage = line.substring(importX + 1, importY);
+				String importClass = line.substring(
+					importY + 1, line.length() - 1);
 
-				String newContent = _formatJavaContent(files[i], content);
-
-				if (newContent.indexOf("$\n */") != -1) {
-					System.out.println("*: " + files[i]);
-
-					newContent = StringUtil.replace(
-						newContent, "$\n */", "$\n *\n */");
-				}
-
-				if (newContent.indexOf(copyright) == -1) {
-					System.out.println("(c): " + files[i]);
-				}
-
-				if (newContent.indexOf(className + ".java.html") == -1) {
-					System.out.println("Java2HTML: " + files[i]);
-				}
-
-				// Sort imports
-
-				if (newContent.indexOf("import ") != -1) {
-					int x = newContent.indexOf("import ");
-
-					int y = newContent.indexOf("{", x);
-					y = newContent.substring(0, y).lastIndexOf(";") + 1;
-
-					String imports =
-						_formatImports(newContent.substring(x, y));
-
-					newContent =
-						newContent.substring(0, x) +
-						imports +
-						newContent.substring(y + 1, newContent.length());
-				}
-
-				// Check for unused imports
-
-				if (newContent.indexOf("import ") != -1) {
-					Set classes = ClassUtil.getClasses(file);
-
-					// Some classes are not picked up properly
-
-					classes.add("_getMarkup");
-					classes.add("_performBlockingInteraction");
-
-					int x = newContent.indexOf("import ");
-
-					int y = newContent.indexOf("{", x);
-					y = newContent.substring(0, y).lastIndexOf(";") + 1;
-
-					String imports = newContent.substring(x, y);
-
-					StringMaker sm = new StringMaker();
-
-					BufferedReader br =
-						new BufferedReader(new StringReader(imports));
-
-					String line = null;
-
-					while ((line = br.readLine()) != null) {
-						if (line.indexOf("import ") != -1) {
-							int importX = line.indexOf(" ");
-							int importY = line.lastIndexOf(".");
-
-							String importPackage =
-								line.substring(importX + 1, importY);
-							String importClass =
-								line.substring(importY + 1, line.length() - 1);
-
-							if (!packageDir.equals(importPackage)) {
-								if (!importClass.equals("*")) {
-									if (!classes.contains(importClass)) {
-										System.out.println(
-											"Unused imports: " + importClass +
-											" " + files[i]);
-									}
-									else {
-										sm.append(line).append("\n");
-									}
-								}
-								else {
-									sm.append(line).append("\n");
-								}
-							}
+				if (!packageDir.equals(importPackage)) {
+					if (!importClass.equals("*")) {
+						if (classes.contains(importClass)) {
+							sm.append(line);
+							sm.append("\n");
 						}
 					}
-
-					imports = _formatImports(sm.toString());
-
-					newContent =
-						newContent.substring(0, x) +
-						imports +
-						newContent.substring(y + 1, newContent.length());
-				}
-
-				if (newContent.indexOf(";\n/**") != -1) {
-					newContent = StringUtil.replace(
-						newContent,
-						";\n/**",
-						";\n\n/**");
-				}
-
-				if (newContent.indexOf("\t/*\n\t *") != -1) {
-					newContent = StringUtil.replace(
-						newContent,
-						"\t/*\n\t *",
-						"\t/**\n\t *");
-				}
-
-				if (newContent.indexOf("if(") != -1) {
-					newContent = StringUtil.replace(
-						newContent,
-						"if(",
-						"if (");
-				}
-
-				if (newContent.indexOf("while(") != -1) {
-					newContent = StringUtil.replace(
-						newContent,
-						"while(",
-						"while (");
-				}
-
-				if (newContent.indexOf("\n\n\n") != -1) {
-					newContent = StringUtil.replace(
-						newContent,
-						"\n\n\n",
-						"\n\n");
-				}
-
-				if  (newContent.indexOf("*/\npackage ") != -1) {
-					System.out.println("package: " + files[i]);
-				}
-
-				if (!newContent.endsWith("\n\n}") &&
-					!newContent.endsWith("{\n}")) {
-
-					System.out.println("}: " + files[i]);
-				}
-
-				if ((newContent != null) && !content.equals(newContent)) {
-					FileUtil.write(file, newContent);
-
-					System.out.println(file.toString());
-				}
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void formatJSP() {
-		try {
-			String basedir = "../";
-
-			List list = new ArrayList();
-
-			DirectoryScanner ds = new DirectoryScanner();
-			ds.setIncludes(
-				new String[] {
-					"**\\*.jsp", "**\\*.jspf", "**\\*.vm"
-				});
-			ds.setExcludes(
-				new String[] {
-					"**\\null.jsp", "**\\tmp\\**"
-				});
-			ds.setBasedir(basedir);
-			ds.scan();
-
-			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
-
-			String copyright = FileUtil.read("../copyright.txt");
-
-			String[] files = (String[])list.toArray(new String[list.size()]);
-
-			for (int i = 0; i < files.length; i++) {
-				File file = new File(basedir + files[i]);
-
-				String content = FileUtil.read(file, true);
-				String newContent = _formatJSPContent(files[i], content);
-
-				if (files[i].endsWith(".jsp")) {
-					if (newContent.indexOf(copyright) == -1) {
-						System.out.println("(c): " + files[i]);
+					else {
+						sm.append(line);
+						sm.append("\n");
 					}
 				}
-
-				if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {
-					newContent = StringUtil.replace(newContent,
-						"alert('<%= LanguageUtil.",
-						"alert('<%= UnicodeLanguageUtil.");
-				}
-
-				if (newContent.indexOf("alert(\"<%= LanguageUtil.") != -1) {
-					newContent = StringUtil.replace(newContent,
-						"alert(\"<%= LanguageUtil.",
-						"alert(\"<%= UnicodeLanguageUtil.");
-				}
-
-				if (newContent.indexOf("confirm('<%= LanguageUtil.") != -1) {
-					newContent = StringUtil.replace(newContent,
-						"confirm('<%= LanguageUtil.",
-						"confirm('<%= UnicodeLanguageUtil.");
-				}
-
-				if (newContent.indexOf("confirm(\"<%= LanguageUtil.") != -1) {
-					newContent = StringUtil.replace(newContent,
-						"confirm(\"<%= LanguageUtil.",
-						"confirm(\"<%= UnicodeLanguageUtil.");
-				}
-
-				if ((newContent != null) && !content.equals(newContent)) {
-					FileUtil.write(file, newContent);
-
-					System.out.println(file.toString());
-				}
 			}
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		imports = _formatImports(sm.toString());
+
+		content =
+			content.substring(0, x) + imports +
+				content.substring(y + 1, content.length());
+
+		return content;
 	}
 
-	private String _formatImports(String imports) throws IOException {
-
-		// Ignore if there are comments
-
+	public static String _formatImports(String imports) throws IOException {
 		if ((imports.indexOf("/*") != -1) ||
 			(imports.indexOf("*/") != -1) ||
 			(imports.indexOf("//") != -1)) {
+
 			return imports + "\n";
 		}
 
 		List importsList = new ArrayList();
 
-		BufferedReader br =
-			new BufferedReader(new StringReader(imports));
+		BufferedReader br = new BufferedReader(new StringReader(imports));
 
 		String line = null;
 
@@ -409,7 +163,9 @@ public class SourceFormatter {
 			String s = (String)importsList.get(i);
 
 			int pos = s.indexOf(".");
+
 			pos = s.indexOf(".", pos + 1);
+
 			if (pos == -1) {
 				pos = s.indexOf(".");
 			}
@@ -422,19 +178,187 @@ public class SourceFormatter {
 
 			temp = packageLevel;
 
-			sm.append(s).append("\n");
+			sm.append(s);
+			sm.append("\n");
 		}
 
 		return sm.toString();
 	}
 
-	private String _formatJavaContent(String fileName, String content)
+	private static void _formatJava() throws IOException {
+		String basedir = "../";
+
+		List list = new ArrayList();
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
+				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
+				"**\\JSMin.java", "**\\PropsUtil.java",
+				"**\\InstanceWrapperBuilder.java",
+				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
+				"**\\UserAttributes.java", "**\\WebKeys.java",
+				"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
+				"**\\portal-service\\**\\model\\*Model.java",
+				"**\\portal-service\\**\\model\\*Soap.java",
+				"**\\model\\impl\\*ModelImpl.java",
+				"**\\portal\\service\\**", "**\\portal-client\\**",
+				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
+				"**\\util-wsrp\\**"
+			});
+		ds.setIncludes(new String[] {"**\\*.java"});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+			});
+		ds.setIncludes(
+			new String[] {
+				"**\\service\\http\\*HttpTest.java",
+				"**\\service\\http\\*SoapTest.java",
+				"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
+				"**\\service\\permission\\*.java",
+				"**\\service\\persistence\\BasePersistence.java",
+				"**\\service\\persistence\\*FinderImpl.java",
+				"**\\portal-service\\**\\liferay\\counter\\**.java",
+				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
+				"**\\portal-service\\**\\liferay\\lock\\**.java",
+				"**\\portal-service\\**\\liferay\\mail\\**.java",
+				"**\\util-bridges\\**\\*.java"
+			});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setIncludes(new String[] {"**\\test\\src\\**\\*.java",});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		String copyright = FileUtil.read("../copyright.txt");
+
+		String[] files = (String[])list.toArray(new String[list.size()]);
+
+		for (int i = 0; i < files.length; i++) {
+			File file = new File(basedir + files[i]);
+
+			String content = FileUtil.read(file);
+
+			String className = file.getName();
+
+			className = className.substring(0, className.length() - 5);
+
+			String packagePath = files[i];
+
+			int packagePathX = packagePath.indexOf(
+				File.separator + "src" + File.separator);
+			int packagePathY = packagePath.lastIndexOf(File.separator);
+
+			packagePath = packagePath.substring(packagePathX + 5, packagePathY);
+			packagePath = StringUtil.replace(
+				packagePath, File.separator, StringPool.PERIOD);
+
+			if (packagePath.endsWith(".model")) {
+				if (content.indexOf(
+						"extends " + className + "Model {") != -1) {
+
+					continue;
+				}
+			}
+
+			String newContent = _formatJavaContent(files[i], content);
+
+			if (newContent.indexOf("$\n */") != -1) {
+				System.out.println("*: " + files[i]);
+
+				newContent = StringUtil.replace(
+					newContent, "$\n */", "$\n *\n */");
+			}
+
+			if (newContent.indexOf(copyright) == -1) {
+				System.out.println("(c): " + files[i]);
+			}
+
+			if (newContent.indexOf(className + ".java.html") == -1) {
+				System.out.println("Java2HTML: " + files[i]);
+			}
+
+			newContent = stripImports(newContent, packagePath, className);
+
+			if (newContent.indexOf(";\n/**") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					";\n/**",
+					";\n\n/**");
+			}
+
+			if (newContent.indexOf("\t/*\n\t *") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"\t/*\n\t *",
+					"\t/**\n\t *");
+			}
+
+			if (newContent.indexOf("if(") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"if(",
+					"if (");
+			}
+
+			if (newContent.indexOf("while(") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"while(",
+					"while (");
+			}
+
+			if (newContent.indexOf("\n\n\n") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"\n\n\n",
+					"\n\n");
+			}
+
+			if  (newContent.indexOf("*/\npackage ") != -1) {
+				System.out.println("package: " + files[i]);
+			}
+
+			if (!newContent.endsWith("\n\n}") &&
+				!newContent.endsWith("{\n}")) {
+
+				System.out.println("}: " + files[i]);
+			}
+
+			if ((newContent != null) && !content.equals(newContent)) {
+				FileUtil.write(file, newContent);
+
+				System.out.println(file.toString());
+			}
+		}
+	}
+
+	private static String _formatJavaContent(String fileName, String content)
 		throws IOException {
 
 		StringMaker sm = new StringMaker();
 
-		BufferedReader br =
-			new BufferedReader(new StringReader(content));
+		BufferedReader br = new BufferedReader(new StringReader(content));
 
 		int lineCount = 0;
 
@@ -449,7 +373,8 @@ public class SourceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
-			sm.append(line).append("\n");
+			sm.append(line);
+			sm.append("\n");
 
 			line = StringUtil.replace(line, "\t", "    ");
 
@@ -469,7 +394,70 @@ public class SourceFormatter {
 		return newContent;
 	}
 
-	private String _formatJSPContent(String fileName, String content)
+	private static void _formatJSP() throws IOException {
+		String basedir = "../";
+
+		List list = new ArrayList();
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(new String[] {"**\\null.jsp", "**\\tmp\\**"});
+		ds.setIncludes(new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		String copyright = FileUtil.read("../copyright.txt");
+
+		String[] files = (String[])list.toArray(new String[list.size()]);
+
+		for (int i = 0; i < files.length; i++) {
+			File file = new File(basedir + files[i]);
+
+			String content = FileUtil.read(file, true);
+			String newContent = _formatJSPContent(files[i], content);
+
+			if (files[i].endsWith(".jsp")) {
+				if (newContent.indexOf(copyright) == -1) {
+					System.out.println("(c): " + files[i]);
+				}
+			}
+
+			if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {
+				newContent = StringUtil.replace(newContent,
+					"alert('<%= LanguageUtil.",
+					"alert('<%= UnicodeLanguageUtil.");
+			}
+
+			if (newContent.indexOf("alert(\"<%= LanguageUtil.") != -1) {
+				newContent = StringUtil.replace(newContent,
+					"alert(\"<%= LanguageUtil.",
+					"alert(\"<%= UnicodeLanguageUtil.");
+			}
+
+			if (newContent.indexOf("confirm('<%= LanguageUtil.") != -1) {
+				newContent = StringUtil.replace(newContent,
+					"confirm('<%= LanguageUtil.",
+					"confirm('<%= UnicodeLanguageUtil.");
+			}
+
+			if (newContent.indexOf("confirm(\"<%= LanguageUtil.") != -1) {
+				newContent = StringUtil.replace(newContent,
+					"confirm(\"<%= LanguageUtil.",
+					"confirm(\"<%= UnicodeLanguageUtil.");
+			}
+
+			if ((newContent != null) && !content.equals(newContent)) {
+				FileUtil.write(file, newContent);
+
+				System.out.println(file.toString());
+			}
+		}
+	}
+
+	private static String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
 		StringMaker sm = new StringMaker();
@@ -517,7 +505,8 @@ public class SourceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
-			sm.append(line).append("\n");
+			sm.append(line);
+			sm.append("\n");
 		}
 
 		br.close();

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
@@ -294,89 +295,15 @@ public class ServiceBuilder {
 	public static void writeFile(File file, String content, Map jalopySettings)
 		throws IOException {
 
+		String packagePath = _getPackagePath(file);
+
+		String className = file.getName();
+
+		className = className.substring(0, className.length() - 5);
+
+		content = SourceFormatter.stripImports(content, packagePath, className);
+
 		File tempFile = new File("ServiceBuilder.temp");
-
-		FileUtil.write(tempFile, content);
-
-		/*if (file.getName().equals("ShoppingItemPersistence.java")) {
-			FileUtil.write(file, content);
-
-			return;
-		}*/
-
-		// Strip unused imports
-
-		String[] checkImports = new String[] {
-			"com.liferay.portal.PortalException",
-			"com.liferay.portal.SystemException",
-			"com.liferay.portal.kernel.bean.ReadOnlyBeanHandler",
-			"com.liferay.portal.kernel.dao.DynamicQueryInitializer",
-			"com.liferay.portal.kernel.log.Log",
-			"com.liferay.portal.kernel.log.LogFactoryUtil",
-			"com.liferay.portal.kernel.util.BooleanWrapper",
-			"com.liferay.portal.kernel.util.DateUtil",
-			"com.liferay.portal.kernel.util.DoubleWrapper",
-			"com.liferay.portal.kernel.util.FloatWrapper",
-			"com.liferay.portal.kernel.util.GetterUtil",
-			"com.liferay.portal.kernel.util.IntegerWrapper",
-			"com.liferay.portal.kernel.util.LongWrapper",
-			"com.liferay.portal.kernel.util.MethodWrapper",
-			"com.liferay.portal.kernel.util.NullWrapper",
-			"com.liferay.portal.kernel.util.OrderByComparator",
-			"com.liferay.portal.kernel.util.ShortWrapper",
-			"com.liferay.portal.kernel.util.StringMaker",
-			"com.liferay.portal.kernel.util.StringPool",
-			"com.liferay.portal.kernel.util.Validator",
-			"com.liferay.portal.kernel.uuid.PortalUUIDUtil",
-			"com.liferay.portal.security.auth.HttpPrincipal",
-			"com.liferay.portal.service.http.TunnelUtil",
-			"com.liferay.portal.spring.hibernate.FinderCache",
-			"com.liferay.portal.spring.hibernate.HibernateUtil",
-			"com.liferay.portal.util.PropsUtil",
-			"com.liferay.util.Html",
-			"com.liferay.util.JSONUtil",
-			"com.liferay.util.dao.hibernate.QueryPos",
-			"com.liferay.util.dao.hibernate.QueryUtil",
-			"java.io.Serializable",
-			"java.lang.reflect.Proxy",
-			"java.rmi.RemoteException",
-			"java.sql.ResultSet",
-			"java.sql.SQLException",
-			"java.sql.Types",
-			"java.util.Collection",
-			"java.util.Collections",
-			"java.util.Date",
-			"java.util.HashSet",
-			"java.util.Iterator",
-			"java.util.List",
-			"java.util.Properties",
-			"java.util.Set",
-			"javax.sql.DataSource",
-			"org.apache.commons.logging.Log",
-			"org.apache.commons.logging.LogFactory",
-			"org.hibernate.Hibernate",
-			"org.hibernate.ObjectNotFoundException",
-			"org.hibernate.Query",
-			"org.hibernate.SQLQuery",
-			"org.json.JSONArray",
-			"org.json.JSONObject",
-			"org.springframework.dao.DataAccessException",
-			"org.springframework.jdbc.core.SqlParameter",
-			"org.springframework.jdbc.object.MappingSqlQuery",
-			"org.springframework.jdbc.object.SqlUpdate"
-		};
-
-		Set classes = ClassUtil.getClasses(tempFile);
-
-		for (int i = 0; i < checkImports.length; i++) {
-			String importClass = checkImports[i].substring(
-				checkImports[i].lastIndexOf(".") + 1, checkImports[i].length());
-
-			if (!classes.contains(importClass)) {
-				content = StringUtil.replace(
-					content, "import " + checkImports[i] + ";", "");
-			}
-		}
 
 		FileUtil.write(tempFile, content);
 
@@ -1432,24 +1359,15 @@ public class ServiceBuilder {
 		return true;
 	}
 
-	private void _appendNullLogic(EntityColumn col, StringMaker sm) {
-		sm.append("if (" + col.getName() + " == null) {");
+	private static String _getPackagePath(File file) throws IOException {
+		String fileName = StringUtil.replace(file.toString(), "\\", "/");
 
-		if (col.getComparator().equals("=")) {
-			sm.append("query.append(\"" + col.getDBName() + " IS NULL\");");
-		}
-		else if (col.getComparator().equals("<>") ||
-				 col.getComparator().equals("!=")) {
+		int x = fileName.indexOf("src/");
+		int y = fileName.lastIndexOf("/");
 
-			sm.append("query.append(\"" + col.getDBName() + " IS NOT NULL\");");
-		}
-		else {
-			sm.append(
-				"query.append(\"" + col.getDBName() + " " +
-					col.getComparator() + " null\");");
-		}
+		fileName = fileName.substring(x + 4, y);
 
-		sm.append("} else {");
+		return StringUtil.replace(fileName, "/", ".");
 	}
 
 	private void _createBaseModelImpl() throws Exception {
@@ -3215,22 +3133,6 @@ public class ServiceBuilder {
 		return false;
 	}
 
-	private boolean _hasSoapMethods(JavaClass javaClass) {
-		JavaMethod[] methods = javaClass.getMethods();
-
-		for (int i = 0; i < methods.length; i++) {
-			JavaMethod javaMethod = methods[i];
-
-			if (!javaMethod.isConstructor() && javaMethod.isPublic() &&
-				isCustomMethod(javaMethod) && isSoapMethod(javaMethod)) {
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	private List _mergeReferenceList(List referenceList) {
 		List list = new ArrayList(_ejbList.size() + referenceList.size());
 
@@ -3248,17 +3150,11 @@ public class ServiceBuilder {
 		return FreeMarkerUtil.process(name, context);
 	}
 
-	private boolean _requiresNullCheck(EntityColumn col) {
-		return !col.isPrimitiveType();
-	}
-
 	private static final int _REMOTE = 0;
 
 	private static final int _LOCAL = 1;
 
 	private static final String _CREATE_TABLE = "create table ";
-
-	private static final String _DEFAULT_CLASS_COMMENTS = "ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.";
 
 	private static final String _TPL_ROOT = "com/liferay/portal/tools/servicebuilder/dependencies/";
 

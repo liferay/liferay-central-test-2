@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.StreamTokenizer;
 
 import java.util.HashSet;
@@ -40,10 +41,21 @@ import java.util.Set;
 public class ClassUtil {
 
 	public static Set getClasses(File file) throws IOException {
+		String fileName = file.getName();
+
+		if (fileName.endsWith(".java")) {
+			fileName = fileName.substring(0, fileName.length() - 5);
+		}
+
+		return getClasses(new FileReader(file), fileName);
+	}
+
+	public static Set getClasses(Reader reader, String className)
+		throws IOException {
+
 		Set classes = new HashSet();
 
-		StreamTokenizer st = new StreamTokenizer(
-			new BufferedReader(new FileReader(file)));
+		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
 
 		st.resetSyntax();
 		st.slashSlashComments(true);
@@ -87,13 +99,7 @@ public class ClassUtil {
 			}
 		}
 
-		String fileName = file.getName();
-
-		if (fileName.endsWith(".java")) {
-			fileName = fileName.substring(0, fileName.length() - 5);
-		}
-
-		classes.remove(fileName);
+		classes.remove(className);
 
 		return classes;
 	}
