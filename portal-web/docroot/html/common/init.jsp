@@ -120,6 +120,7 @@
 <%@ page import="com.liferay.portal.security.auth.PrincipalException" %>
 <%@ page import="com.liferay.portal.service.*" %>
 <%@ page import="com.liferay.portal.service.impl.LayoutTemplateLocalUtil" %>
+<%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PortletPermissionUtil" %>
 <%@ page import="com.liferay.portal.struts.StrutsUtil" %>

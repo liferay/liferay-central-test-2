@@ -283,7 +283,8 @@
 					new Liferay.Navigation(
 						{
 							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
-							navBlock: '#navigation'
+							navBlock: '#navigation',
+							hasManageLayoutPermission: <%= GroupPermissionUtil.contains(themeDisplay.getPermissionChecker(), themeDisplay.getPortletGroupId(), ActionKeys.MANAGE_LAYOUTS) %>
 						}
 					);
 

@@ -11,8 +11,9 @@ Liferay.Navigation = new Class({
 
 		instance._navBlock = jQuery(instance.params.navBlock);
 
+		instance._hasManageLayoutPermission = instance.params.hasManageLayoutPermission;
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
-		instance._isSortable = instance._navBlock.is('.sort-pages');
+		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasManageLayoutPermission;
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
@@ -155,27 +156,29 @@ Liferay.Navigation = new Class({
 				'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
 				'</div>';
 
-			navList.after(
-				'<div id="add-page">' +
-				'<a href="javascript:;">' +
-				'<span>' + Liferay.Language.get('add-page') + '</span>' +
-				'</a>' +
-				'</div>');
+			if (instance._hasManageLayoutPermission) {
+				navList.after(
+					'<div id="add-page">' +
+					'<a href="javascript:;">' +
+					'<span>' + Liferay.Language.get('add-page') + '</span>' +
+					'</a>' +
+					'</div>');
 
-			var addPage = navList.parent().find('#add-page a');
+				var addPage = navList.parent().find('#add-page a');
 
-			addPage.click(
-				function(event){
-					instance._addPage(event, this);
-				}
-			);
+				addPage.click(
+					function(event){
+						instance._addPage(event, this);
+					}
+				);
+			}
 		}
 	},
 
 	_makeDeletable: function() {
 		var instance = this;
 
-		if (instance._isModifiable) {
+		if (instance._isModifiable && instance._hasManageLayoutPermission) {
 			var navItems = instance._navBlock.find('li').not('.selected');
 
 			instance._deleteButton(navItems);
@@ -555,6 +558,7 @@ Liferay.Navigation = new Class({
 		}
 	},
 
+	_hasManageLayoutPermission: false,
 	_isSortable: false,
 	_isModifiable: false,
 	_isUseHandle: false,
