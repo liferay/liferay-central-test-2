@@ -773,7 +773,7 @@ String portletURLString = portletURL.toString();
 
 				<c:choose>
 					<c:when test='<%= tabs3.equals("ldap") %>'>
-						<%@ include file="/html/portlet/enterprise_admin/authentication_ldap.jsp" %>
+						<%@ include file="/html/portlet/enterprise_admin/authentication_ldap.jspf" %>
 					</c:when>
 					<c:when test='<%= tabs3.equals("cas") %>'>
 						<table class="liferay-table">

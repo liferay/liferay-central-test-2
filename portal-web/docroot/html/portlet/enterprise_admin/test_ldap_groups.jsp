@@ -110,7 +110,7 @@ while (enu.hasMore()) {
 			<%= description %>
 		</td>
 		<td>
-			<%= (attribute == null) ? "0" : attribute.size() %>
+			<%= (attribute == null) ? "0" : String.valueOf(attribute.size()) %>
 		</td>
 	</tr>
 
