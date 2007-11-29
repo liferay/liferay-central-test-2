@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
+import com.liferay.portal.kernel.util.JavaConstants;
 
 import java.io.IOException;
 
@@ -51,13 +52,6 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletServlet extends HttpServlet {
 
-	public static final String JAVAX_PORTLET_PORTLET = "javax.portlet.portlet";
-
-	public static final String JAVAX_PORTLET_REQUEST = "javax.portlet.request";
-
-	public static final String JAVAX_PORTLET_RESPONSE =
-		"javax.portlet.response";
-
 	public static final String PORTLET_CLASS_LOADER = "PORTLET_CLASS_LOADER";
 
 	public static final String PORTLET_SERVLET_CONFIG =
@@ -72,13 +66,14 @@ public class PortletServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		PortletRequest portletReq =
-			(PortletRequest)req.getAttribute(JAVAX_PORTLET_REQUEST);
+		PortletRequest portletReq = (PortletRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponse portletRes =
-			(PortletResponse)req.getAttribute(JAVAX_PORTLET_RESPONSE);
+		PortletResponse portletRes = (PortletResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		Portlet portlet = (Portlet)req.getAttribute(JAVAX_PORTLET_PORTLET);
+		Portlet portlet = (Portlet)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_PORTLET);
 
 		LiferayPortletSession portletSes =
 			(LiferayPortletSession)portletReq.getPortletSession();
