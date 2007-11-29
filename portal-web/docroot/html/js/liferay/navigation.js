@@ -11,10 +11,11 @@ Liferay.Navigation = new Class({
 
 		instance._navBlock = jQuery(instance.params.navBlock);
 
-		instance._hasManageLayoutPermission = instance.params.hasManageLayoutPermission;
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
 		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasManageLayoutPermission;
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
+
+		instance._hasManageLayoutPermission = instance.params.hasManageLayoutPermission;
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
@@ -558,10 +559,10 @@ Liferay.Navigation = new Class({
 		}
 	},
 
-	_hasManageLayoutPermission: false,
 	_isSortable: false,
 	_isModifiable: false,
 	_isUseHandle: false,
+	_hasManageLayoutPermission: false,
 	_enterPage: '',
 	_updateURL: ''
 });
