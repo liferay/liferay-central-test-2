@@ -33,6 +33,7 @@ import java.util.Enumeration;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -56,50 +57,103 @@ public class PortletRequestUtil {
 
 		Document doc = DocumentHelper.createDocument();
 
-		Element request = doc.addElement("request");
+		Element reqEl = doc.addElement("request");
 
-		DocUtil.add(request, "container-type", "portlet");
-		DocUtil.add(request, "container-namespace", req.getContextPath());
-		DocUtil.add(request, "content-type", req.getResponseContentType());
-		DocUtil.add(request, "server-name", req.getServerName());
-		DocUtil.add(request, "server-port", req.getServerPort());
-		DocUtil.add(request, "secure", req.isSecure());
-		DocUtil.add(request, "auth-type", req.getAuthType());
-		DocUtil.add(request, "remote-user", req.getRemoteUser());
-		DocUtil.add(request, "context-path", req.getContextPath());
-		DocUtil.add(request, "locale", req.getLocale());
-		DocUtil.add(request, "portlet-mode", req.getPortletMode());
-		DocUtil.add(request, "portlet-session-id", req.getRequestedSessionId());
-		DocUtil.add(request, "scheme", req.getScheme());
-		DocUtil.add(request, "window-state", req.getWindowState());
+		DocUtil.add(reqEl, "container-type", "portlet");
+		DocUtil.add(reqEl, "container-namespace", req.getContextPath());
+		DocUtil.add(reqEl, "content-type", req.getResponseContentType());
+		DocUtil.add(reqEl, "server-name", req.getServerName());
+		DocUtil.add(reqEl, "server-port", req.getServerPort());
+		DocUtil.add(reqEl, "secure", req.isSecure());
+		DocUtil.add(reqEl, "auth-type", req.getAuthType());
+		DocUtil.add(reqEl, "remote-user", req.getRemoteUser());
+		DocUtil.add(reqEl, "context-path", req.getContextPath());
+		DocUtil.add(reqEl, "locale", req.getLocale());
+		DocUtil.add(reqEl, "portlet-mode", req.getPortletMode());
+		DocUtil.add(reqEl, "portlet-session-id", req.getRequestedSessionId());
+		DocUtil.add(reqEl, "scheme", req.getScheme());
+		DocUtil.add(reqEl, "window-state", req.getWindowState());
 
 		if (req instanceof RenderRequest) {
-			DocUtil.add(request, "action", Boolean.FALSE);
+			DocUtil.add(reqEl, "action", Boolean.FALSE);
 		}
 		else if (req instanceof ActionRequest) {
-			DocUtil.add(request, "action", Boolean.TRUE);
+			DocUtil.add(reqEl, "action", Boolean.TRUE);
 		}
 
 		if (res instanceof RenderResponse) {
-			_toXML((RenderResponse)res, request);
+			_renderResponseToXML((RenderResponse)res, reqEl);
 		}
 
-		Element parameters = request.addElement("parameters");
+		Element parametersEl = reqEl.addElement("parameters");
 
 		Enumeration enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			Element parameter = parameters.addElement("parameter");
+			Element parameterEl = parametersEl.addElement("parameter");
 
-			DocUtil.add(parameter, "name", name);
+			DocUtil.add(parameterEl, "name", name);
 
 			String[] values = req.getParameterValues(name);
 
 			for (int i = 0; i < values.length; i++) {
-				DocUtil.add(parameter, "value", values[i]);
+				DocUtil.add(parameterEl, "value", values[i]);
 			}
+		}
+
+		Element attributesEl = reqEl.addElement("attributes");
+
+		enu = req.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+
+			Object value = req.getAttribute(name);
+
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
+		}
+
+		Element portletSessionEl = reqEl.addElement("portlet-session");
+
+		attributesEl = portletSessionEl.addElement("portlet-attributes");
+
+		PortletSession ses = req.getPortletSession();
+
+		enu = ses.getAttributeNames(PortletSession.PORTLET_SCOPE);
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+
+			Object value = ses.getAttribute(name, PortletSession.PORTLET_SCOPE);
+
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
+		}
+
+		attributesEl = portletSessionEl.addElement("application-attributes");
+
+		enu = ses.getAttributeNames(PortletSession.APPLICATION_SCOPE);
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+
+			Object value = ses.getAttribute(
+				name, PortletSession.APPLICATION_SCOPE);
+
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
 		}
 
 		try {
@@ -111,17 +165,19 @@ public class PortletRequestUtil {
 		return xml;
 	}
 
-	private static void _toXML(RenderResponse res, Element request) {
-		DocUtil.add(request, "portlet-namespace", res.getNamespace());
+	private static void _renderResponseToXML(
+		RenderResponse res, Element reqEl) {
+
+		DocUtil.add(reqEl, "portlet-namespace", res.getNamespace());
 
 		PortletURL url = res.createRenderURL();
 
-		DocUtil.add(request, "render-url", url);
+		DocUtil.add(reqEl, "render-url", url);
 
 		try {
 			url.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-			DocUtil.add(request, "render-url-exclusive", url);
+			DocUtil.add(reqEl, "render-url-exclusive", url);
 		}
 		catch (WindowStateException wse) {
 		}
@@ -129,7 +185,7 @@ public class PortletRequestUtil {
 		try {
 			url.setWindowState(LiferayWindowState.MAXIMIZED);
 
-			DocUtil.add(request, "render-url-maximized", url);
+			DocUtil.add(reqEl, "render-url-maximized", url);
 		}
 		catch (WindowStateException wse) {
 		}
@@ -137,7 +193,7 @@ public class PortletRequestUtil {
 		try {
 			url.setWindowState(LiferayWindowState.MINIMIZED);
 
-			DocUtil.add(request, "render-url-minimized", url);
+			DocUtil.add(reqEl, "render-url-minimized", url);
 		}
 		catch (WindowStateException wse) {
 		}
@@ -145,7 +201,7 @@ public class PortletRequestUtil {
 		try {
 			url.setWindowState(LiferayWindowState.NORMAL);
 
-			DocUtil.add(request, "render-url-normal", url);
+			DocUtil.add(reqEl, "render-url-normal", url);
 		}
 		catch (WindowStateException wse) {
 		}
@@ -153,7 +209,7 @@ public class PortletRequestUtil {
 		try {
 			url.setWindowState(LiferayWindowState.POP_UP);
 
-			DocUtil.add(request, "render-url-pop-up", url);
+			DocUtil.add(reqEl, "render-url-pop-up", url);
 		}
 		catch (WindowStateException wse) {
 		}
