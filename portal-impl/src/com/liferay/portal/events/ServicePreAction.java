@@ -910,8 +910,8 @@ public class ServicePreAction extends Action {
 					layout = null;
 				}
 				else if (isViewableCommunity &&
-					!LayoutPermissionUtil.contains(
-						permissionChecker, layout, ActionKeys.VIEW)) {
+						!LayoutPermissionUtil.contains(
+							permissionChecker, layout, ActionKeys.VIEW)) {
 
 					layout = null;
 				}
