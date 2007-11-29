@@ -33,7 +33,6 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
@@ -419,9 +418,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public boolean isLayoutsRequired() {
 		try {
-			Role role = RoleLocalServiceUtil.getRole(
-				getCompanyId(), RoleImpl.POWER_USER);
-
 			return RoleLocalServiceUtil.hasUserRole(
 				getUserId(), getCompanyId(), RoleImpl.POWER_USER, true);
 		}
