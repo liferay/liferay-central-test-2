@@ -22,13 +22,16 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.util.Locale;
 
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xml.res.XMLMessages;
 import org.apache.xml.utils.SAXSourceLocator;
 import org.apache.xml.utils.WrappedRuntimeException;
 
@@ -42,6 +45,13 @@ import org.xml.sax.SAXParseException;
  *
  */
 public class JournalXslErrorListener implements ErrorListener {
+
+	public JournalXslErrorListener(long companyId, Locale locale) {
+		_companyId = companyId;
+		_locale = locale;
+		_location = null;
+		_message = null;
+	}
 
 	public void error(TransformerException exception)
 		throws TransformerException {
@@ -106,10 +116,12 @@ public class JournalXslErrorListener implements ErrorListener {
 		if (locator != null) {
 			StringMaker sm = new StringMaker();
 
-			sm.append(XMLMessages.createXMLMessage("line", null));
+			sm.append(LanguageUtil.get(_companyId, _locale, "line"));
+			sm.append(" #");
 			sm.append(locator.getLineNumber());
 			sm.append("; ");
-			sm.append(XMLMessages.createXMLMessage("column", null));
+			sm.append(LanguageUtil.get(_companyId, _locale, "column"));
+			sm.append(" #");
 			sm.append(locator.getColumnNumber());
 			sm.append("; ");
 
@@ -132,7 +144,9 @@ public class JournalXslErrorListener implements ErrorListener {
 		return _message + " " + _location;
 	}
 
-	private String _location = null;
-	private String _message = null;
+	private long _companyId;
+	private Locale _locale;
+	private String _location;
+	private String _message;
 
 }
