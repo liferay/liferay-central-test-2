@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
@@ -478,7 +479,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			byte[] byteArray = context.getZipReader().getEntryAsByteArray(
 				getSmallImageDir(article));
 
-			smallFile = new File(getSmallImageDir(article));
+			smallFile = File.createTempFile(
+				String.valueOf(article.getSmallImageId()),
+				StringPool.PERIOD + article.getSmallImageType());
 
 			FileUtil.write(smallFile, byteArray);
 		}
@@ -717,7 +720,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			byte[] byteArray = context.getZipReader().getEntryAsByteArray(
 				getSmallImageDir(template));
 
-			smallFile = new File(getSmallImageDir(template));
+			smallFile = File.createTempFile(
+				String.valueOf(template.getSmallImageId()),
+				StringPool.PERIOD + template.getSmallImageType());
 
 			FileUtil.write(smallFile, byteArray);
 		}

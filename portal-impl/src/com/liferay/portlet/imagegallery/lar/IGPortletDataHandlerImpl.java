@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -320,7 +321,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			return;
 		}
 		else {
-			imageFile = new File(getIGImageDir(igImage));
+			imageFile = File.createTempFile(
+				String.valueOf(igImage.getPrimaryKey()),
+				StringPool.PERIOD + igImage.getImageType());
 
 			FileUtil.write(imageFile, byteArray);
 		}
