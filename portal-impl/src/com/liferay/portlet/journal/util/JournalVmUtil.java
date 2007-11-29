@@ -56,6 +56,7 @@ import org.dom4j.io.SAXReader;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalVmUtil {
@@ -233,7 +234,34 @@ public class JournalVmUtil {
 
 			String name = el.getName();
 
-			if (el.elements().size() > 0) {
+			if (name.equals("application-attributes") ||
+					name.equals("portlet-attributes") ||
+					name.equals("attribute")) {
+
+				map.put(
+						el.element("name").getText(),
+						el.element("value").getText());
+			}
+			else if (name.equals("parameter")) {
+				name = el.element("name").getText();
+				List vList = el.elements("value");
+				List values = new ArrayList();
+
+				if (vList.size() == 1) {
+					map.put(name, vList.get(0));
+				}
+				else {
+					for (Iterator vItr = vList.iterator(); vItr.hasNext();) {
+						Element curEl = (Element)vItr.next();
+
+						values.add(curEl.getText());
+					}
+
+					map.put(name, values);
+				}
+
+			}
+			else if (el.elements().size() > 0) {
 				map.put(name, _insertRequestVariables(el));
 			}
 			else {
