@@ -18,12 +18,12 @@ var Messaging = {
 
 		if (!chatBox) {
 			var contents =
-				"<div class='msg-chat-box' id='msg-chat-box_" + toDivId + "'>" +
-					"<input class='msg-to-input-id' type=hidden value='" + msg.toId + "' />" +
-					"<div class='msg-chat-area textarea' style='overflow: auto; height: 100px'>" +
+				"<div class='chat-box' id='msg-chat-box_" + toDivId + "'>" +
+					"<input class='to-input-id' type=hidden value='" + msg.toId + "' />" +
+					"<div class='chat-area textarea' style='overflow: auto; height: 100px'>" +
 						(msg.messages || "") +
 					"</div>" +
-					"<input class='msg-type-area' style='width: 90%; margin-top: 5px' tabIndex=1 type='text' onKeyPress='Messaging.sendChat(this, event)' />" +
+					"<input class='type-area' style='width: 90%; margin-top: 5px' tabIndex=1 type='text' onKeyPress='Messaging.sendChat(this, event)' />" +
 				"</div>";
 
 			chatBox = Liferay.Popup({
@@ -66,8 +66,8 @@ var Messaging = {
 	},
 
 	populateChatBox : function(chatBox, msg) {
-		var typeArea = jQuery.getOne(".msg-type-area", chatBox);
-		var chatArea = jQuery.getOne(".msg-chat-area", chatBox);
+		var typeArea = jQuery.getOne(".type-area", chatBox);
+		var chatArea = jQuery.getOne(".chat-area", chatBox);
 
 		if (msg.body != null) {
 			var name = msg.toName.split(/[ ,.-]/);
@@ -148,8 +148,8 @@ var Messaging = {
 
 	maximizeChat : function(id) {
 		var chatBox = jQuery.getOne(id);
-		var widthDiv = jQuery.getOne(".msg-chat-box-width");
-		var chatArea = jQuery.getOne(".msg-chat-area");
+		var widthDiv = jQuery.getOne(".chat-box-width");
+		var chatArea = jQuery.getOne(".chat-area");
 
 		chatBox.style.left = Viewport.scroll().x + "px";
 		chatBox.style.top = Viewport.scroll().y + "px";
@@ -159,8 +159,8 @@ var Messaging = {
 
 	minimizeChat : function(id) {
 		var chatBox = jQuery.getOne(id);
-		var widthDiv = jQuery.getOne(".msg-chat-box-width");
-		var chatArea = jQuery.getOne(".msg-chat-area");
+		var widthDiv = jQuery.getOne(".chat-box-width");
+		var chatArea = jQuery.getOne(".chat-area");
 
 		widthDiv.style.width = 250 + "px";
 		chatArea.style.height = 100 + "px";
@@ -174,7 +174,7 @@ var Messaging = {
 	},
 
 	saveCookie : function() {
-		var chatList = jQuery(".msg-chat-box");
+		var chatList = jQuery(".chat-box");
 		var jsonString = "[";
 
 		chatList.each(function(i){
@@ -183,10 +183,10 @@ var Messaging = {
 
 			jsonString += "{"
 				+ "toName:\"" + popup.find(".popup-title")[0].innerHTML + "\","
-				+ "toId:\"" +jQuery(".msg-to-input-id", item)[0].value + "\","
+				+ "toId:\"" +jQuery(".to-input-id", item)[0].value + "\","
 				+ "top:" + parseInt(popup.css("top")) + ","
 				+ "left:" + parseInt(popup.css("left")) + ","
-				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".msg-chat-area", item)[0].innerHTML) + "\"}";
+				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".chat-area", item)[0].innerHTML) + "\"}";
 
 			if (i < chatList.length - 1) {
 				jsonString += ",";
