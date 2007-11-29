@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -37,7 +38,6 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import org.hibernate.Session;
 
 /**
