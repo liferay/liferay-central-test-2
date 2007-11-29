@@ -234,10 +234,7 @@ public class JournalVmUtil {
 
 			String name = el.getName();
 
-			if (name.equals("application-attributes") ||
-				name.equals("portlet-attributes") ||
-				name.equals("attribute")) {
-
+			if (name.equals("attribute")) {
 				map.put(el.elementText("name"), el.elementText("value"));
 			}
 			else if (name.equals("parameter")) {
@@ -246,7 +243,7 @@ public class JournalVmUtil {
 				List valueEls = el.elements("value");
 
 				if (valueEls.size() == 1) {
-					map.put(name, valueEls.get(0));
+					map.put(name, ((Element)valueEls.get(0)).getText());
 				}
 				else {
 					List values = new ArrayList();
