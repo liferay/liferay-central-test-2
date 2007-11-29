@@ -25,7 +25,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.OrgGroupRole;
-import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;
 import com.liferay.portal.util.PropsUtil;
 
