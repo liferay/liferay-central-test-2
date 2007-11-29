@@ -84,7 +84,7 @@ public class RandomLookAndFeelAction extends Action {
 
 			Layout layout = themeDisplay.getLayout();
 
-			if ((layout == null) || layout.isShared()) {
+			if (layout == null) {
 				return;
 			}
 

@@ -134,9 +134,7 @@ public class UpdateLayoutAction extends Action {
 			else {
 				layoutTypePortlet.addStateMinPortletId(portletId);
 
-				if (layout.isShared()) {
-					updateLayout = false;
-				}
+				updateLayout = false;
 			}
 		}
 		else if (cmd.equals("move")) {
@@ -154,12 +152,10 @@ public class UpdateLayoutAction extends Action {
 		}
 
 		if (updateLayout) {
-			if (layout.isShared()) {
 
-				// LEP-3648
+			// LEP-3648
 
-				layoutTypePortlet.resetStates();
-			}
+			layoutTypePortlet.resetStates();
 
 			LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),

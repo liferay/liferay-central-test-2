@@ -40,7 +40,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -169,23 +168,11 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
+	/**
+	 * @deprecated Will always return true.
+	 */
 	public boolean isShared() {
-		if (!isPrivateLayout()) {
-			return true;
-		}
-		else {
-			Group group = getGroup();
-
-			if (group.getClassNameId() > 0) {
-				long userClassNameId = PortalUtil.getClassNameId(User.class);
-
-				if (group.getClassNameId() == userClassNameId) {
-					return false;
-				}
-			}
-
-			return true;
-		}
+		return true;
 	}
 
 	public long getAncestorPlid() {
@@ -604,30 +591,27 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		LayoutTypePortlet layoutTypePortlet = null;
 
-		if (isShared()) {
-			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+		LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
-			if (layoutClone != null) {
-				String typeSettings = layoutClone.get(req, getPlid());
+		if (layoutClone != null) {
+			String typeSettings = layoutClone.get(req, getPlid());
 
-				if (typeSettings != null) {
-					Properties props = new NullSafeProperties();
+			if (typeSettings != null) {
+				Properties props = new NullSafeProperties();
 
-					PropertiesUtil.load(props, typeSettings);
+				PropertiesUtil.load(props, typeSettings);
 
-					String stateMax = props.getProperty(
-						LayoutTypePortletImpl.STATE_MAX);
-					String stateMin = props.getProperty(
-						LayoutTypePortletImpl.STATE_MIN);
+				String stateMax = props.getProperty(
+					LayoutTypePortletImpl.STATE_MAX);
+				String stateMin = props.getProperty(
+					LayoutTypePortletImpl.STATE_MIN);
 
-					Layout layout = (Layout)((LayoutImpl)this).clone();
+				Layout layout = (Layout)((LayoutImpl)this).clone();
 
-					layoutTypePortlet =
-						(LayoutTypePortlet)layout.getLayoutType();
+				layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
-					layoutTypePortlet.setStateMax(stateMax);
-					layoutTypePortlet.setStateMin(stateMin);
-				}
+				layoutTypePortlet.setStateMax(stateMax);
+				layoutTypePortlet.setStateMin(stateMin);
 			}
 		}
 

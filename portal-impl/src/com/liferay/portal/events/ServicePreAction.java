@@ -220,12 +220,6 @@ public class ServicePreAction extends Action {
 			else {
 				layoutTypePortlet.setStateMax(stateMaxPrevious);
 			}
-
-			if (!layout.isShared()) {
-				LayoutLocalServiceUtil.updateLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					layout.getLayoutId(), layout.getTypeSettings());
-			}
 		}
 
 		// Fix maximized state
@@ -260,12 +254,6 @@ public class ServicePreAction extends Action {
 					layoutTypePortlet.removeStateMaxPortletId(portletId);
 
 					String typeSettings = layout.getTypeSettings();
-
-					if (!layout.isShared()) {
-						LayoutLocalServiceUtil.updateLayout(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							layout.getLayoutId(), typeSettings);
-					}
 				}
 			}
 		}
@@ -971,7 +959,7 @@ public class ServicePreAction extends Action {
 			plid = layout.getPlid();
 		}
 
-		if ((layout != null) && layout.isShared()) {
+		if (layout != null) {
 
 			// Updates to shared layouts are not reflected until the next time
 			// the user logs in because group layouts are cached in the session

@@ -66,7 +66,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.ClassNameServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
@@ -1887,18 +1886,11 @@ public class PortalUtil {
 			}
 
 			if (updateLayout) {
-				if ((user != null) && !layout.isShared()) {
-					LayoutServiceUtil.updateLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(), layout.getTypeSettings());
-				}
-				else {
-					LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+				LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
-					if (layoutClone != null) {
-						layoutClone.update(
-							req, layout.getPlid(), layout.getTypeSettings());
-					}
+				if (layoutClone != null) {
+					layoutClone.update(
+						req, layout.getPlid(), layout.getTypeSettings());
 				}
 			}
 
@@ -1998,18 +1990,11 @@ public class PortalUtil {
 			}
 
 			if (updateLayout) {
-				if ((user != null) && !layout.isShared()) {
-					LayoutServiceUtil.updateLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(), layout.getTypeSettings());
-				}
-				else {
-					LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+				LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
-					if (layoutClone != null) {
-						layoutClone.update(
-							req, layout.getPlid(), layout.getTypeSettings());
-					}
+				if (layoutClone != null) {
+					layoutClone.update(
+						req, layout.getPlid(), layout.getTypeSettings());
 				}
 			}
 

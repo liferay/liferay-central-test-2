@@ -83,7 +83,7 @@ public class RandomLayoutAction extends Action {
 
 			Layout layout = themeDisplay.getLayout();
 
-			if ((layout == null) || layout.isShared()) {
+			if (layout == null) {
 				return;
 			}
 
