@@ -23,13 +23,16 @@
 package com.liferay.util.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
@@ -111,15 +114,20 @@ public class PortletRequestUtil {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			Element attributeEl = attributesEl.addElement("attribute");
-
-			DocUtil.add(attributeEl, "name", name);
+			if (!_isValidAttributeName(name)) {
+				continue;
+			}
 
 			Object value = req.getAttribute(name);
 
-			if (Validator.isNotNull(value)) {
-				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (!_isValidAttributeValue(value)) {
+				continue;
 			}
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
 		}
 
 		Element portletSessionEl = reqEl.addElement("portlet-session");
@@ -133,15 +141,20 @@ public class PortletRequestUtil {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			Element attributeEl = attributesEl.addElement("attribute");
-
-			DocUtil.add(attributeEl, "name", name);
+			if (!_isValidAttributeName(name)) {
+				continue;
+			}
 
 			Object value = ses.getAttribute(name, PortletSession.PORTLET_SCOPE);
 
-			if (Validator.isNotNull(value)) {
-				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (!_isValidAttributeValue(value)) {
+				continue;
 			}
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
 		}
 
 		attributesEl = portletSessionEl.addElement("application-attributes");
@@ -151,16 +164,21 @@ public class PortletRequestUtil {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			Element attributeEl = attributesEl.addElement("attribute");
-
-			DocUtil.add(attributeEl, "name", name);
+			if (!_isValidAttributeName(name)) {
+				continue;
+			}
 
 			Object value = ses.getAttribute(
 				name, PortletSession.APPLICATION_SCOPE);
 
-			if (Validator.isNotNull(value)) {
-				DocUtil.add(attributeEl, "value", String.valueOf(value));
+			if (!_isValidAttributeValue(value)) {
+				continue;
 			}
+
+			Element attributeEl = attributesEl.addElement("attribute");
+
+			DocUtil.add(attributeEl, "name", name);
+			DocUtil.add(attributeEl, "value", String.valueOf(value));
 		}
 
 		try {
@@ -219,6 +237,64 @@ public class PortletRequestUtil {
 			DocUtil.add(reqEl, "render-url-pop-up", url);
 		}
 		catch (WindowStateException wse) {
+		}
+	}
+
+	private static boolean _isValidAttributeName(String name) {
+		if (name.equalsIgnoreCase("j_password") ||
+			name.equalsIgnoreCase("LAYOUT_CONTENT") ||
+			name.equalsIgnoreCase("LAYOUTS") ||
+			name.equalsIgnoreCase("PORTLET_RENDER_PARAMETERS") ||
+			name.equalsIgnoreCase("USER_PASSWORD") ||
+			name.startsWith("javax.") ||
+			name.startsWith("liferay-ui:")) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	private static boolean _isValidAttributeValue(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		else if (obj instanceof Collection) {
+			Collection col = (Collection)obj;
+
+			if (col.size() == 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (obj instanceof Map) {
+			Map map = (Map)obj;
+
+			if (map.size() == 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			String objString = String.valueOf(obj);
+
+			if (Validator.isNull(objString)) {
+				return false;
+			}
+
+			String hashCode =
+				StringPool.AT + Integer.toHexString(obj.hashCode());
+
+			if (objString.endsWith(hashCode)) {
+				return false;
+			}
+
+			return true;
 		}
 	}
 
