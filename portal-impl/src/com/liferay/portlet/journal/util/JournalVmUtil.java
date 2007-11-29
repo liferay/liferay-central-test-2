@@ -227,39 +227,42 @@ public class JournalVmUtil {
 			return map;
 		}
 
-		Iterator itr = parent.elements().iterator();
+		Iterator itr1 = parent.elements().iterator();
 
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+		while (itr1.hasNext()) {
+			Element el = (Element)itr1.next();
 
 			String name = el.getName();
 
 			if (name.equals("application-attributes") ||
-					name.equals("portlet-attributes") ||
-					name.equals("attribute")) {
+				name.equals("portlet-attributes") ||
+				name.equals("attribute")) {
 
 				map.put(
-						el.element("name").getText(),
-						el.element("value").getText());
+					el.element("name").getText(),
+					el.element("value").getText());
 			}
 			else if (name.equals("parameter")) {
 				name = el.element("name").getText();
-				List vList = el.elements("value");
-				List values = new ArrayList();
 
-				if (vList.size() == 1) {
-					map.put(name, vList.get(0));
+				List valueEls = el.elements("value");
+
+				if (valueEls.size() == 1) {
+					map.put(name, valueEls.get(0));
 				}
 				else {
-					for (Iterator vItr = vList.iterator(); vItr.hasNext();) {
-						Element curEl = (Element)vItr.next();
+					List values = new ArrayList();
 
-						values.add(curEl.getText());
+					Iterator itr2 = valueEls.iterator();
+
+					while (itr2.hasNext()) {
+						Element valueEl = (Element)itr2.next();
+
+						values.add(valueEl.getText());
 					}
 
 					map.put(name, values);
 				}
-
 			}
 			else if (el.elements().size() > 0) {
 				map.put(name, _insertRequestVariables(el));
