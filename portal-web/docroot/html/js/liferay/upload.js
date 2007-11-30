@@ -21,12 +21,15 @@ Liferay.Upload = new Class({
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
-
+		
+		instance._classicUploaderParam = 'uploader=classic';
+		instance._newUploaderParam = 'uploader=new';
+		
 		// Check for an override via the query string
 
 		var loc = location.href;
 
-		if (loc.indexOf('uploader=classic') > -1 && instance._fallbackContainer.length) {
+		if (loc.indexOf(instance._classicUploaderParam) > -1 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
 
 			if (!instance._fallbackIframe) {
@@ -95,7 +98,7 @@ Liferay.Upload = new Class({
 				'<span class="progress-bar">' +
 					'<span class="progress" id="' + fileId + 'progress"></span>' +
 				'</span>' +
-				'<a class="liferay-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
+				'<a class="lfr-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
 			'</li>');
 
 		li.find('.cancel-button').click(
@@ -286,11 +289,11 @@ Liferay.Upload = new Class({
 		instance._uploadTarget = jQuery('<div id="' + instance._uploadTargetId + '" class="float-container upload-target"></div>');
 		instance._listInfo = jQuery('<div id="' + instance._listInfoId + '" class="upload-list-info"></div>');
 		instance._fileList = jQuery('<div id="' + instance._fileListId + '" class="upload-list"></div>');
-		instance._cancelButton = jQuery('<a class="liferay-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
-		instance._clearUploadsButton = jQuery('<a class="liferay-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
+		instance._cancelButton = jQuery('<a class="lfr-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
+		instance._clearUploadsButton = jQuery('<a class="lfr-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
 
-		instance._browseButton = jQuery('<a class="liferay-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
-		instance._uploadButton = jQuery('<a class="liferay-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
+		instance._browseButton = jQuery('<a class="lfr-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
+		instance._uploadButton = jQuery('<a class="lfr-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
 
 		instance._container.prepend([instance._uploadTarget[0], instance._listInfo[0], instance._fileList[0]]);
 		instance._uploadTarget.append([instance._browseButton[0], instance._uploadButton[0], instance._cancelButton[0]]);
@@ -338,12 +341,23 @@ Liferay.Upload = new Class({
 
 							instance._fallbackIframe.height(300);
 						}
+						
+						
+						var classicUploaderUrl = '';
+						
+						if (location.hash.length) {
+							classicUploaderUrl = '&';
+						}
+						
+						location.hash += classicUploaderUrl + instance._classicUploaderParam;
 					}
 					else {
 						instance._container.show();
 						instance._fallbackContainer.hide();
 						fallback.text(instance._useFallbackText);
 						fallback.removeClass(fallbackClass).addClass(newUploaderClass);
+						
+						location.hash = location.hash.replace(instance._classicUploaderParam, instance._newUploaderParam);
 					}
 				}
 			);
