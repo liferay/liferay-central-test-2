@@ -882,7 +882,6 @@ public class ServicePreAction extends Action {
 
 		if (layout != null) {
 			try {
-
 				if (!signedIn &&
 					GetterUtil.getBoolean(PropsUtil.get(
 						PropsUtil.AUTH_FORWARD_BY_REDIRECT))) {
