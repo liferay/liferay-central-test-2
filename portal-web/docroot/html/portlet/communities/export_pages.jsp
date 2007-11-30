@@ -33,7 +33,11 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
+String treeKey = ParamUtil.getString(request, "treeKey", "stageLayoutsTree");
+
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
+
+String action = treeKey.equals("stageLayoutsTree")?"publish":"copy";
 
 Group liveGroup = null;
 Group stagingGroup = null;
@@ -76,7 +80,7 @@ if (selPlid > 0) {
 	publish = true;
 }
 else {
-	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected"), ","));
+	selectedPlids = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected"), ","));
 }
 
 List results = new ArrayList();
@@ -175,7 +179,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm2">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="publish_to_live">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= group.isStagingGroup()?"publish_to_live":"copy_from_live" %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
@@ -223,11 +227,11 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 								className: "gamma",
 								icons: <portlet:namespace />layoutIcons,
 								nodes: <portlet:namespace />layoutArray,
-								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTree") %>',
+								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey) %>',
 								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
 								selectable: true,
-								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "exportLayoutsTreeSelected") %>',
-								treeId: "exportLayoutsTree"
+								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected") %>',
+								treeId: '<%= treeKey %>'
 							}
 						);
 					}
@@ -276,21 +280,21 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
 	<portlet:param name="popupId" value="<%= popupId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="stagingGroupId" value="<%= String.valueOf(stagingGroupId) %>" />
+	<portlet:param name="treeKey" value="<%= treeKey %>" />
 </portlet:renderURL>
 
 <c:choose>
 	<c:when test="<%= !publish %>">
 		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key="<%= action %>" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
 			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 
-		<input id="publishBtn" type="button" value="<liferay-ui:message key="publish" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input id="publishBtn" type="button" value="<liferay-ui:message key="<%= action %>" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:otherwise>
 </c:choose>
 

@@ -441,12 +441,22 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<portlet:param name="tabs2" value="<%= tabs2 %>" />
 					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+					<portlet:param name="treeKey" value="stageLayoutsTree" />
 				</portlet:renderURL>
 
 				<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
 			</c:if>
 
-			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
+			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
+				<portlet:param name="struts_action" value="/communities/export_pages" />
+				<portlet:param name="popupId" value="copy-from-live" />
+				<portlet:param name="tabs2" value="<%= tabs2 %>" />
+				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+				<portlet:param name="treeKey" value="liveLayoutsTree" />
+			</portlet:renderURL>
+
+			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= importLayoutsURL %>', messageId: 'copy-from-live'});" />
 
 			<br /><br />
 		</c:when>
