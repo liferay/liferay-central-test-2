@@ -21,10 +21,10 @@ Liferay.Upload = new Class({
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
-		
+
 		instance._classicUploaderParam = 'uploader=classic';
 		instance._newUploaderParam = 'uploader=new';
-		
+
 		// Check for an override via the query string
 
 		var loc = location.href;
@@ -341,14 +341,13 @@ Liferay.Upload = new Class({
 
 							instance._fallbackIframe.height(300);
 						}
-						
-						
+
 						var classicUploaderUrl = '';
-						
+
 						if (location.hash.length) {
 							classicUploaderUrl = '&';
 						}
-						
+
 						location.hash += classicUploaderUrl + instance._classicUploaderParam;
 					}
 					else {
@@ -356,7 +355,7 @@ Liferay.Upload = new Class({
 						instance._fallbackContainer.hide();
 						fallback.text(instance._useFallbackText);
 						fallback.removeClass(fallbackClass).addClass(newUploaderClass);
-						
+
 						location.hash = location.hash.replace(instance._classicUploaderParam, instance._newUploaderParam);
 					}
 				}

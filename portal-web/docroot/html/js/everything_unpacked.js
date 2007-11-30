@@ -18897,12 +18897,12 @@ var Messaging = {
 
 		if (!chatBox) {
 			var contents =
-				"<div class='msg-chat-box' id='msg-chat-box_" + toDivId + "'>" +
-					"<input class='msg-to-input-id' type=hidden value='" + msg.toId + "' />" +
-					"<div class='msg-chat-area textarea' style='overflow: auto; height: 100px'>" +
+				"<div class='chat-box' id='msg-chat-box_" + toDivId + "'>" +
+					"<input class='to-input-id' type=hidden value='" + msg.toId + "' />" +
+					"<div class='chat-area textarea' style='overflow: auto; height: 100px'>" +
 						(msg.messages || "") +
 					"</div>" +
-					"<input class='msg-type-area' style='width: 90%; margin-top: 5px' tabIndex=1 type='text' onKeyPress='Messaging.sendChat(this, event)' />" +
+					"<input class='type-area' style='width: 90%; margin-top: 5px' tabIndex=1 type='text' onKeyPress='Messaging.sendChat(this, event)' />" +
 				"</div>";
 
 			chatBox = Liferay.Popup({
@@ -18945,8 +18945,8 @@ var Messaging = {
 	},
 
 	populateChatBox : function(chatBox, msg) {
-		var typeArea = jQuery.getOne(".msg-type-area", chatBox);
-		var chatArea = jQuery.getOne(".msg-chat-area", chatBox);
+		var typeArea = jQuery.getOne(".type-area", chatBox);
+		var chatArea = jQuery.getOne(".chat-area", chatBox);
 
 		if (msg.body != null) {
 			var name = msg.toName.split(/[ ,.-]/);
@@ -19027,8 +19027,8 @@ var Messaging = {
 
 	maximizeChat : function(id) {
 		var chatBox = jQuery.getOne(id);
-		var widthDiv = jQuery.getOne(".msg-chat-box-width");
-		var chatArea = jQuery.getOne(".msg-chat-area");
+		var widthDiv = jQuery.getOne(".chat-box-width");
+		var chatArea = jQuery.getOne(".chat-area");
 
 		chatBox.style.left = Viewport.scroll().x + "px";
 		chatBox.style.top = Viewport.scroll().y + "px";
@@ -19038,8 +19038,8 @@ var Messaging = {
 
 	minimizeChat : function(id) {
 		var chatBox = jQuery.getOne(id);
-		var widthDiv = jQuery.getOne(".msg-chat-box-width");
-		var chatArea = jQuery.getOne(".msg-chat-area");
+		var widthDiv = jQuery.getOne(".chat-box-width");
+		var chatArea = jQuery.getOne(".chat-area");
 
 		widthDiv.style.width = 250 + "px";
 		chatArea.style.height = 100 + "px";
@@ -19053,7 +19053,7 @@ var Messaging = {
 	},
 
 	saveCookie : function() {
-		var chatList = jQuery(".msg-chat-box");
+		var chatList = jQuery(".chat-box");
 		var jsonString = "[";
 
 		chatList.each(function(i){
@@ -19062,10 +19062,10 @@ var Messaging = {
 
 			jsonString += "{"
 				+ "toName:\"" + popup.find(".popup-title")[0].innerHTML + "\","
-				+ "toId:\"" +jQuery(".msg-to-input-id", item)[0].value + "\","
+				+ "toId:\"" +jQuery(".to-input-id", item)[0].value + "\","
 				+ "top:" + parseInt(popup.css("top")) + ","
 				+ "left:" + parseInt(popup.css("left")) + ","
-				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".msg-chat-area", item)[0].innerHTML) + "\"}";
+				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".chat-area", item)[0].innerHTML) + "\"}";
 
 			if (i < chatList.length - 1) {
 				jsonString += ",";
@@ -20607,11 +20607,14 @@ Liferay.Upload = new Class({
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
 
+		instance._classicUploaderParam = 'uploader=classic';
+		instance._newUploaderParam = 'uploader=new';
+
 		// Check for an override via the query string
 
 		var loc = location.href;
 
-		if (loc.indexOf('uploader=classic') > -1 && instance._fallbackContainer.length) {
+		if (loc.indexOf(instance._classicUploaderParam) > -1 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
 
 			if (!instance._fallbackIframe) {
@@ -20680,7 +20683,7 @@ Liferay.Upload = new Class({
 				'<span class="progress-bar">' +
 					'<span class="progress" id="' + fileId + 'progress"></span>' +
 				'</span>' +
-				'<a class="liferay-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
+				'<a class="lfr-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
 			'</li>');
 
 		li.find('.cancel-button').click(
@@ -20871,11 +20874,11 @@ Liferay.Upload = new Class({
 		instance._uploadTarget = jQuery('<div id="' + instance._uploadTargetId + '" class="float-container upload-target"></div>');
 		instance._listInfo = jQuery('<div id="' + instance._listInfoId + '" class="upload-list-info"></div>');
 		instance._fileList = jQuery('<div id="' + instance._fileListId + '" class="upload-list"></div>');
-		instance._cancelButton = jQuery('<a class="liferay-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
-		instance._clearUploadsButton = jQuery('<a class="liferay-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
+		instance._cancelButton = jQuery('<a class="lfr-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
+		instance._clearUploadsButton = jQuery('<a class="lfr-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
 
-		instance._browseButton = jQuery('<a class="liferay-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
-		instance._uploadButton = jQuery('<a class="liferay-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
+		instance._browseButton = jQuery('<a class="lfr-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
+		instance._uploadButton = jQuery('<a class="lfr-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
 
 		instance._container.prepend([instance._uploadTarget[0], instance._listInfo[0], instance._fileList[0]]);
 		instance._uploadTarget.append([instance._browseButton[0], instance._uploadButton[0], instance._cancelButton[0]]);
@@ -20923,12 +20926,22 @@ Liferay.Upload = new Class({
 
 							instance._fallbackIframe.height(300);
 						}
+
+						var classicUploaderUrl = '';
+
+						if (location.hash.length) {
+							classicUploaderUrl = '&';
+						}
+
+						location.hash += classicUploaderUrl + instance._classicUploaderParam;
 					}
 					else {
 						instance._container.show();
 						instance._fallbackContainer.hide();
 						fallback.text(instance._useFallbackText);
 						fallback.removeClass(fallbackClass).addClass(newUploaderClass);
+
+						location.hash = location.hash.replace(instance._classicUploaderParam, instance._newUploaderParam);
 					}
 				}
 			);
