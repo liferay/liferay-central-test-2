@@ -16,54 +16,54 @@
 
 /* This CSS sets the default styles for the windows explorer display style. */
 
-.document-library-col-folders {
+.portlet-document-library .col-folders {
 	left: 45%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.document-library-col-documents {
+.portlet-document-library .col-documents {
 	left: 65%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.document-library-col-name {
+.portlet-document-library .col-name {
 	left: 12px;
 	line-height: 20px;
 	position: absolute;
 }
 
-.document-library-folder-image {
+.portlet-document-library .folder-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: bottom;
 }
 
-.document-library-expand-image {
+.portlet-document-library .expand-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: length;
 }
 
-.ie .document-library-folder-image,.ie .document-library-expand-image {
+.ie .portlet-document-library .folder-image,.ie .portlet-document-library .expand-image {
 	vertical-align: middle;
 }
 
-.document-library-header {
+.portlet-document-library .header {
 	background-color: #E6E6E6;
 	font-weight: bold;
 	line-height: 20px;
 	height: 20px;
 }
 
-.document-library-list-item {
+.portlet-document-library .list-item {
 	padding: 8px 0 0 20px;
 }
 
-.document-library-top-row {
+.portlet-document-library .top-row {
 	border-bottom: 1px solid #E6E6E6;
 	padding: 5px 0 8px 0;
 }

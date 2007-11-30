@@ -225,10 +225,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					<br />
 
 					<ul>
-						<li class="document-library-header">
-							<span class="document-library-col-name"><liferay-ui:message key="name" /></span>
-							<span class="document-library-col-folders"><liferay-ui:message key="num-of-folders" /></span>
-							<span class="document-library-col-documents"><liferay-ui:message key="num-of-documents" /></span>
+						<li class="header">
+							<span class="col-name"><liferay-ui:message key="name" /></span>
+							<span class="col-folders"><liferay-ui:message key="num-of-folders" /></span>
+							<span class="col-documents"><liferay-ui:message key="num-of-documents" /></span>
 						</li>
 
 						<%
@@ -255,16 +255,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							folderURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 						%>
 
-						<li class="document-library-top-row">
-							<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />
+						<li class="top-row">
+							<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />
 
-							<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />
+							<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />
 
 							<a href="<%= folderURL %>"><%= curFolder.getName() %></a>
 
-							<span class="document-library-col-folders"><%= foldersCount %></span>
+							<span class="col-folders"><%= foldersCount %></span>
 
-							<span class="document-library-col-documents"><%= fileEntriesCount %></span>
+							<span class="col-documents"><%= fileEntriesCount %></span>
 
 							<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 						</li>
@@ -308,12 +308,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 										for (var i = 0; i < json.length; i++) {
 											ul.append(
-												'<li class="document-library-list-item">' +
-													'<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
-													'<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
+												'<li class="list-item">' +
+													'<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
+													'<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
 													'<a href="' + folderURL + json[i].folderId + '">' + json[i].name + '</a>\n' +
-													'<span class="document-library-col-folders">' + json[i].subFoldersCount + '</span>\n' +
-													'<span class="document-library-col-documents">' + json[i].fileEntriesCount + '</span>\n' +
+													'<span class="col-folders">' + json[i].subFoldersCount + '</span>\n' +
+													'<span class="col-documents">' + json[i].fileEntriesCount + '</span>\n' +
 													'<span id="span-' + json[i].folderId + '"></span>' +
 												'</li>'
 											);
@@ -333,10 +333,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 										// Must create a new element to change the onclick attribute for IE
 
-										expandImage.after(document.createElement('<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
+										expandImage.after(document.createElement('<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
 										expandImage.remove();
 
-										folderImage.after(document.createElement('<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
+										folderImage.after(document.createElement('<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
 										folderImage.remove();
 									}
 									else {
