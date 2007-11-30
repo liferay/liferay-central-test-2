@@ -132,8 +132,8 @@ else {
 </tr>
 </table>
 
-<div class="message-board-thread-controls">
-	<div class="message-board-thread-navigation">
+<div class="thread-controls">
+	<div class="thread-navigation">
 		<liferay-ui:message key="threads" />
 
 		[
@@ -163,7 +163,7 @@ else {
 		]
 	</div>
 
-	<div class="message-board-thread-actions">
+	<div class="thread-actions">
 		<table class="lfr-table">
 		<tr>
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
@@ -220,10 +220,10 @@ else {
 		</table>
 	</div>
 
-	<div class="message-board-clear"></div>
+	<div class="clear"></div>
 </div>
 
-<div class="portlet-section-header message-board-title">
+<div class="portlet-section-header title">
 	<%= message.getSubject() %>
 </div>
 
@@ -239,7 +239,7 @@ else {
 	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 	%>
 
-	<div class="message-board-message-scroll" id="<portlet:namespace />messageScroll0"></div>
+	<div class="message-scroll" id="<portlet:namespace />messageScroll0"></div>
 
 	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
 		<liferay-ui:toggle

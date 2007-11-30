@@ -23,134 +23,134 @@
 %>
 
 <style type="text/css">
-	.message-board-code {
+	.portlet-message-boards .code {
 		background: #fff;
 		border: 1px solid #777;
 		font-family: monospace;
 		white-space: pre;
 	}
 
-	.message-board-code-lines {
+	.portlet-message-boards .code-lines {
 		border-right: 1px solid #ccc;
 		color: #000;
 		margin-right: 5px;
 		padding: 0px 5px 0px 5px;
 	}
 
-	.message-board-quote {
+	.portlet-message-boards .quote {
 		background: #fff url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteleft.png) left top no-repeat;
 		border: 1px solid #777;
 		padding: 5px 0px 0px 5px;
 	}
 
-	.message-board-quote-content {
+	.portlet-message-boards .quote-content {
 		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteright.png) right bottom no-repeat;
 		padding: 5px 30px 10px 30px;
 	}
 
-	.message-board-quote-title {
+	.portlet-message-boards .quote-title {
 		font-weight: bold;
 		padding: 5px 0px 5px 0px;
 	}
 
-	.message-board-title {
+	.portlet-message-boards .title {
 		border-bottom: 1px solid #ccc;
 		font-size: large;
 		font-weight: normal;
 		padding: 5px;
 	}
 
-	.message-board-message-container {
+	.portlet-message-boards .message-container {
 		border: 1px solid #ccc;
 		margin: 5px 0 0 0;
 	}
 
-	.ie .message-board-message-container {
+	.ie .portlet-message-boards .message-container {
 		width: 100%;
 	}
 
-	.message-board-message-container table {
+	.portlet-message-boards .message-container table {
 		border-collapse: collapse;
 		table-layout: fixed;
 	}
 
-	.message-board-message-container td {
+	.portlet-message-boards .message-container td {
 		border: none;
 	}
 
-	.message-board-thread-top {
+	.portlet-message-boards .thread-top {
 		border-bottom: 1px solid #ccc;
 		padding: 3px 5px;
 	}
 
-	.message-board-thread-bottom {
+	.portlet-message-boards .thread-bottom {
 		padding: 3px 5px;
 		text-align: right;
 	}
 
-	td.message-board-user-info {
+	td.user-info {
 		border-right: 1px solid #ccc;
 	}
 
-	.message-board-subject {
+	.portlet-message-boards .subject {
 		float: left;
 	}
 
-	.message-board-edit-controls {
+	.portlet-message-boards .edit-controls {
 		float: right;
 	}
 
-	.message-board-edit-controls li {
+	.portlet-message-boards .edit-controls li {
 		float: left;
 		margin-right: 10px;
 	}
 
-	.message-board-thread-body {
+	.portlet-message-boards .thread-body {
 		padding: 15px;
 	}
 
-	.message-board-user-info {
+	.portlet-message-boards .user-info {
 		border: 1px solid #f00;
 		padding: 5px;
 	}
 
-	.message-board-clear {
+	.portlet-message-boards .clear {
 		clear: both;
 	}
 
-	.toggle_id_message_boards_view_message_thread {
+	.portlet-message-boards .toggle_id_message_boards_view_message_thread {
 		border: 1px solid #ccc;
 		margin: 5px 0px 0px 0px;
 	}
 
-	.message-board-thread-controls {
+	.portlet-message-boards .thread-controls {
 		border: 1px solid #ccc;
 		margin-bottom: 5px;
 		padding: 3px 5px;
 	}
 
-	.message-board-thread-navigation {
+	.portlet-message-boards .thread-navigation {
 		float: left;
 	}
 
-	.message-board-thread-actions {
+	.portlet-message-boards .thread-actions {
 		float: right;
 	}
 
-	.message-board-emoticons {
+	.portlet-message-boards .emoticons {
 		border: 1px solid #ccc;
 		margin-left: 10px;
 	}
 
-	.message-board-tree {
+	.portlet-message-boards .tree {
 		vertical-align: middle;
 	}
 
-	.message-board-message-scroll {
+	.portlet-message-boards .message-scroll {
 		margin: 5px 0px 0px 0px;
 	}
 
-	.lfr-textarea.message-edit {
+	.portlet-message-boards .lfr-textarea.message-edit {
 		font-family: monospace;
 		height: 378px;
 		min-height: 100%;

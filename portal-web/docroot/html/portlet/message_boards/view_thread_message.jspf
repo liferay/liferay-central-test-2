@@ -22,10 +22,10 @@
  */
 %>
 
-<div class="message-board-message-container" style="margin-left: <%= depth * 10 %>px;">
+<div class="message-container" style="margin-left: <%= depth * 10 %>px;">
 	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />messageScroll<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="message-board-user-info" rowspan="2" valign="top" width="150">
+		<td class="user-info" rowspan="2" valign="top" width="150">
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
 					<liferay-ui:message key="anonymous" />
@@ -77,8 +77,8 @@
 			</c:choose>
 		</td>
 		<td valign="top">
-			<div class="message-board-thread-top">
-				<div class="message-board-subject">
+			<div class="thread-top float-container">
+				<div class="subject">
 					<b><%= StringUtil.shorten(message.getSubject(), 50) %></b>
 					|
 
@@ -111,7 +111,7 @@
 				</div>
 
 				<c:if test="<%= editable %>">
-					<ul class="message-board-edit-controls">
+					<ul class="edit-controls">
 						<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE) %>">
 							<li>
 								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
@@ -148,11 +148,9 @@
 						</li>
 					</ul>
 				</c:if>
-
-				<div class="message-board-clear"></div>
 			</div>
 
-			<div class="message-board-thread-body">
+			<div class="thread-body">
 
 				<%
 				String msgBody = message.getBody(false);
@@ -362,8 +360,8 @@
 
 	<c:if test="<%= editable %>">
 		<tr>
-			<td class="message-board-thread-bottom" valign="bottom">
-				<ul class="message-board-edit-controls">
+			<td class="thread-bottom" valign="bottom">
+				<ul class="edit-controls">
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 						<li>
 							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
