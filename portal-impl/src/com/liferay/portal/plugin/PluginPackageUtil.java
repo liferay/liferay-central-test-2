@@ -48,12 +48,9 @@ import com.liferay.util.Version;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
-
 import java.net.MalformedURLException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,7 +76,6 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
-
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -397,7 +393,8 @@ public class PluginPackageUtil {
 
 		String pluginName = GetterUtil.getString(props.getProperty("name"));
 
-		String deploymentContext = moduleArtifactId;
+		String deploymentContext = GetterUtil.getString(props.getProperty(
+				"recommended-deployment-context"), moduleArtifactId);
 
 		String author = GetterUtil.getString(props.getProperty("author"));
 
