@@ -1083,7 +1083,7 @@ ul.gamma .tree-item-hover {
 
 /* ---------- RSS ---------- */
 
-.portlet-rss-header {
+.portlet-rss .header {
 	cursor: default;
 	font-weight: bold;
 	margin-top: 2px;

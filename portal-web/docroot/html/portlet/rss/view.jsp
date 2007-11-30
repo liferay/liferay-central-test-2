@@ -73,9 +73,9 @@ boolean hide = false;
 					var currentPortlet = jQuery('#p_p_id<portlet:namespace />');
 
 					currentPortlet.Accordion({
-						headerSelector: '.portlet-rss-header',
-						panelSelector: '.portlet-rss-content',
-						panelHeight: jQuery("#p_p_id<portlet:namespace /> .portlet-rss-content:first").height(),
+						headerSelector: '.header',
+						panelSelector: '.feeds',
+						panelHeight: jQuery("#p_p_id<portlet:namespace /> .feeds:first").height(),
 						speed: 300
 					});
 

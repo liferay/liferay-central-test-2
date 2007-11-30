@@ -460,6 +460,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>42</portlet-name>

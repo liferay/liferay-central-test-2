@@ -40,7 +40,7 @@ catch (Exception e) {
 
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<div class="portlet-rss-header">
+		<div class="header">
 			<%= title %>&nbsp;&nbsp;
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal;">
@@ -48,7 +48,7 @@ catch (Exception e) {
 			</a>
 		</div>
 
-		<div class="portlet-rss-content" style="<%= hide ? "display: none" : "" %>">
+		<div class="feeds" style="<%= hide ? "display: none" : "" %>">
 			<div style="padding: 0 10px 0 10px;">
 				<div style="height: 10px; font-size: 0;"></div>
 
