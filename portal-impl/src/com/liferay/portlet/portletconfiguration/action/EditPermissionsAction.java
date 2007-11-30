@@ -74,6 +74,9 @@ public class EditPermissionsAction extends PortletAction {
 			if (cmd.equals("group_permissions")) {
 				updateGroupPermissions(req);
 			}
+			else if (cmd.equals("guest_permissions")) {
+				updateGuestPermissions(req);
+			}
 			else if (cmd.equals("organization_permissions")) {
 				updateOrganizationPermissions(req);
 			}
@@ -170,6 +173,19 @@ public class EditPermissionsAction extends PortletAction {
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
 			}
 		}
+	}
+
+	protected void updateGuestPermissions(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long resourceId = ParamUtil.getLong(req, "resourceId");
+		String[] actionIds = StringUtil.split(
+			ParamUtil.getString(req, "guestActionIds"));
+
+		PermissionServiceUtil.setUserPermissions(
+			themeDisplay.getDefaultUserId(), themeDisplay.getPortletGroupId(),
+			actionIds, resourceId);
 	}
 
 	protected void updateOrganizationPermissions(ActionRequest req)

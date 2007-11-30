@@ -507,35 +507,27 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		long companyId = user.getCompanyId();
 
-		Group guestGroup = GroupServiceUtil.getGroup(
-			companyId, GroupImpl.GUEST);
-
 		long[] resourceIds = getResourceIds(
-			companyId, guestGroup.getGroupId(), name, primKey, actionId);
+			companyId, 0, name, primKey, actionId);
 
 		PermissionCheckerBag bag = getBag(GUEST_GROUP_BAG_ID);
 
 		if (bag == null) {
-			List groups = new ArrayList();
+			Group guestGroup = GroupServiceUtil.getGroup(
+				companyId, GroupImpl.GUEST);
 
-			groups.add(guestGroup);
-
-			List roles = RoleServiceUtil.getUserRoles(user.getUserId());
-
-			roles.addAll(
-				RoleServiceUtil.getGroupRoles(guestGroup.getGroupId()));
+			List roles = RoleServiceUtil.getGroupRoles(guestGroup.getGroupId());
 
 			bag = new PermissionCheckerBagImpl(
 				defaultUserId, new ArrayList(), new ArrayList(),
-				new ArrayList(), new ArrayList(), groups, roles);
+				new ArrayList(), new ArrayList(), new ArrayList(), roles);
 
 			putBag(GUEST_GROUP_BAG_ID, bag);
 		}
 
 		try {
 			return PermissionServiceUtil.hasUserPermissions(
-				defaultUserId, guestGroup.getGroupId(), actionId, resourceIds,
-				bag);
+				defaultUserId, 0, actionId, resourceIds, bag);
 		}
 		catch (Exception e) {
 			return false;

@@ -127,6 +127,18 @@ public class ThemeDisplay implements Serializable {
 		_account = account;
 	}
 
+	public User getDefaultUser() {
+		if (_defaultUser == null) {
+			_defaultUser = _company.getDefaultUser();
+		}
+
+		return _defaultUser;
+	}
+
+	public long getDefaultUserId() {
+		return getDefaultUser().getUserId();
+	}
+
 	public User getUser() {
 		return _user;
 	}
@@ -772,6 +784,8 @@ public class ThemeDisplay implements Serializable {
 		_realCompanyLogo = StringPool.BLANK;
 		_realCompanyLogoHeight = 0;
 		_realCompanyLogoWidth = 0;
+		_account = null;
+		_defaultUser = null;
 		_user = null;
 		_realUser = null;
 		_doAsUserId = StringPool.BLANK;
@@ -851,6 +865,7 @@ public class ThemeDisplay implements Serializable {
 	private int _realCompanyLogoHeight;
 	private int _realCompanyLogoWidth;
 	private Account _account;
+	private User _defaultUser;
 	private User _user;
 	private User _realUser;
 	private String _doAsUserId = StringPool.BLANK;

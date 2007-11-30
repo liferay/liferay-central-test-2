@@ -108,6 +108,13 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />saveGuestPermissions() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "guest_permissions";
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= portletURL.toString() %>";
+		document.<portlet:namespace />fm.<portlet:namespace />guestActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+	}
+
 	function <portlet:namespace />saveOrganizationPermissions(organizationIdsPos, organizationIdsPosValue) {
 
 		<%
@@ -1022,17 +1029,10 @@ else {
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("community") || tabs2.equals("guest") %>'>
+	<c:when test='<%= tabs2.equals("community") %>'>
 
 		<%
-		Group group = null;
-
-		if (tabs2.equals("community")) {
-			group = GroupLocalServiceUtil.getGroup(groupId);
-		}
-		else {
-			group = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
-		}
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
 
 		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -1053,7 +1053,67 @@ else {
 		for (int i = 0; i < actions2.size(); i++) {
 			String actionId = (String)actions2.get(i);
 
-			if (!tabs2.equals("guest") || (tabs2.equals("guest") && !guestUnsupportedActions.contains(actionId))) {
+			leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+		}
+
+		Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+		// Right list
+
+		List rightList = new ArrayList();
+
+		for (int i = 0; i < actions1.size(); i++) {
+			String actionId = (String)actions1.get(i);
+
+			if (!actions2.contains(actionId)) {
+				rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+			}
+		}
+
+		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		%>
+
+		<liferay-ui:input-move-boxes
+			formName="fm"
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="current_actions"
+			rightBoxName="available_actions"
+			leftList="<%= leftList %>"
+			rightList="<%= rightList %>"
+		/>
+
+		<br />
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td align="right">
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("guest") %>'>
+		<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
+
+		<%
+		User guestUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
+
+		List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
+
+		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+		List actions2 = ResourceActionsUtil.getActions(permissions);
+
+		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+
+		// Left list
+
+		List leftList = new ArrayList();
+
+		for (int i = 0; i < actions2.size(); i++) {
+			String actionId = (String)actions2.get(i);
+
+			if (!guestUnsupportedActions.contains(actionId)) {
 				leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 			}
 		}
@@ -1067,7 +1127,7 @@ else {
 		for (int i = 0; i < actions1.size(); i++) {
 			String actionId = (String)actions1.get(i);
 
-			if (!tabs2.equals("guest") || (tabs2.equals("guest") && !guestUnsupportedActions.contains(actionId))) {
+			if (!guestUnsupportedActions.contains(actionId)) {
 				if (!actions2.contains(actionId)) {
 					rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 				}
@@ -1092,7 +1152,7 @@ else {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td align="right">
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
 			</td>
 		</tr>
 		</table>

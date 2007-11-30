@@ -122,16 +122,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Guest permissions
 
 			if (guestPermissions != null) {
+				long defaultUserId = userLocalService.getDefaultUserId(
+					companyId);
 
-				// Don't add guest permissions when you've already added
-				// community permissions and the given community is the guest
-				// community.
+				List guestPermissionsList =
+					permissionLocalService.getPermissions(
+						companyId, guestPermissions, resource.getResourceId());
 
-				if ((groupId <= 0) || (guestGroup.getGroupId() != groupId)) {
-					addModelPermissions(
-						guestGroup.getGroupId(), resource.getResourceId(),
-						guestPermissions);
-				}
+				userPersistence.addPermissions(
+					defaultUserId, guestPermissionsList);
 			}
 		}
 	}
@@ -206,26 +205,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		logAddResources(name, primKey, stopWatch, 2);
 
-		// Guest
-
-		Group guestGroup = groupLocalService.getGroup(
-			companyId, GroupImpl.GUEST);
-
-		addResource(
-			companyId, name, ResourceImpl.SCOPE_GROUP,
-			String.valueOf(guestGroup.getGroupId()));
-
-		logAddResources(name, primKey, stopWatch, 3);
-
-		// Group
-
-		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
+		if (groupId > 0) {
 			addResource(
 				companyId, name, ResourceImpl.SCOPE_GROUP,
 				String.valueOf(groupId));
 		}
 
-		logAddResources(name, primKey, stopWatch, 4);
+		logAddResources(name, primKey, stopWatch, 3);
 
 		if (primKey != null) {
 
@@ -234,14 +220,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			Resource resource = addResource(
 				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
-			logAddResources(name, primKey, stopWatch, 5);
+			logAddResources(name, primKey, stopWatch, 4);
 
 			// Permissions
 
 			List permissions = permissionLocalService.addPermissions(
 				companyId, name, resource.getResourceId(), portletActions);
 
-			logAddResources(name, primKey, stopWatch, 6);
+			logAddResources(name, primKey, stopWatch, 5);
 
 			// User permissions
 
@@ -249,7 +235,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				userPersistence.addPermissions(userId, permissions);
 			}
 
-			logAddResources(name, primKey, stopWatch, 7);
+			logAddResources(name, primKey, stopWatch, 6);
 
 			// Community permissions
 
@@ -258,7 +244,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					groupId, name, resource.getResourceId(), portletActions);
 			}
 
-			logAddResources(name, primKey, stopWatch, 8);
+			logAddResources(name, primKey, stopWatch, 7);
 
 			// Guest permissions
 
@@ -268,17 +254,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				// community permissions and the given community is the guest
 				// community.
 
-				if ((groupId > 0) && addCommunityPermissions) {
-					if (guestGroup.getGroupId() == groupId) {
-						addGuestPermissions = false;
-					}
-				}
-
-				if (addGuestPermissions) {
-					addGuestPermissions(
-						guestGroup.getGroupId(), name, resource.getResourceId(),
-						portletActions);
-				}
+				addGuestPermissions(
+					companyId, name, resource.getResourceId(), portletActions);
 			}
 
 			logAddResources(name, primKey, stopWatch, 9);
@@ -433,10 +410,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addGuestPermissions(
-			long groupId, String name, long resourceId, boolean portletActions)
+			long companyId, String name, long resourceId,
+			boolean portletActions)
 		throws PortalException, SystemException {
 
-		Group group = groupPersistence.findByPrimaryKey(groupId);
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 		List actions = null;
 
@@ -452,9 +430,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
 		List permissions = permissionLocalService.getPermissions(
-			group.getCompanyId(), actionIds, resourceId);
+			companyId, actionIds, resourceId);
 
-		groupPersistence.addPermissions(groupId, permissions);
+		userPersistence.addPermissions(defaultUserId, permissions);
 	}
 
 	protected void addModelPermissions(
