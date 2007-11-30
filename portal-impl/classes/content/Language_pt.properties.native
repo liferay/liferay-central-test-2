@@ -686,6 +686,7 @@ calculate=Calcule
 calendar-of-events=Calendário dos eventos
 call=Chamada
 cancel-all-uploads=Cancele Todos os Uploads
+cancel-shutdown=Cancele A Parada programada
 cancel-upload=Cancele O Upload
 cancel=Cancelamento
 cannot-be-found={0} cannot be found.

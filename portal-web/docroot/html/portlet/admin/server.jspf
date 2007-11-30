@@ -324,6 +324,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
+
+				<c:if test="<%= ShutdownUtil.isInProcess() %>">
+					<input type="button" value="<liferay-ui:message key="cancel-shutdown" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />minutes.value = 0; <portlet:namespace />saveServer('shutdown');" />
+				</c:if>
 			</c:when>
 			<c:otherwise>
 

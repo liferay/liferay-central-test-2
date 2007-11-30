@@ -686,6 +686,7 @@ calculate=計算
 calendar-of-events=事項日曆
 call=電話
 cancel-all-uploads=取消所有向上作用的負載
+cancel-shutdown=取消停工
 cancel-upload=取消向上作用的負載
 cancel=取消
 cannot-be-found={0} c找不到.
