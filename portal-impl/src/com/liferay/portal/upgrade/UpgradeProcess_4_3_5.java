@@ -20,45 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_4_0;
+package com.liferay.portal.upgrade;
 
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
+import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeProcess_4_3_5.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeSchema extends UpgradeProcess {
+public class UpgradeProcess_4_3_5 extends UpgradeProcess {
+
+	public int getThreshold() {
+		return ReleaseInfo.RELEASE_4_3_5_BUILD_NUMBER;
+	}
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
+		upgrade(new UpgradePermission());
 	}
 
-	protected void doUpgrade() throws Exception {
-		if (_alreadyUpgraded) {
-			return;
-		}
-
-		_alreadyUpgraded = true;
-
-		runSQLTemplate("update-4.3.5-4.4.0.sql", false);
-	}
-
-	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
-
-	private boolean _alreadyUpgraded;
+	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_5.class);
 
 }
