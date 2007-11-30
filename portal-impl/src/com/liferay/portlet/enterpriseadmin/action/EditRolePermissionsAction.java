@@ -44,7 +44,10 @@ import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -60,6 +63,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditRolePermissionsAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class EditRolePermissionsAction extends PortletAction {
@@ -148,84 +152,101 @@ public class EditRolePermissionsAction extends PortletAction {
 		long roleId = ParamUtil.getLong(req, "roleId");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
-		String modelResource = ParamUtil.getString(req, "modelResource");
+		String[] modelResources = StringUtil.split(
+			ParamUtil.getString(req, "modelResources"));
 
-		String selResource = modelResource;
+		Map resourceActionsMap = new HashMap();
 
-		if (Validator.isNull(modelResource)) {
-			selResource = portletResource;
+		if (Validator.isNotNull(portletResource)) {
+			resourceActionsMap.put(
+				portletResource,
+				ResourceActionsUtil.getResourceActions(
+					themeDisplay.getCompanyId(), portletResource, null));
 		}
 
-		List actions = ResourceActionsUtil.getResourceActions(
-			themeDisplay.getCompanyId(), portletResource, modelResource);
+		for (int i = 0; i < modelResources.length; i++) {
+			resourceActionsMap.put(
+				modelResources[i],
+				ResourceActionsUtil.getResourceActions(
+					themeDisplay.getCompanyId(), null, modelResources[i]));
+		}
 
-		Collections.sort(
-			actions,
-			new ActionComparator(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale()));
+		Iterator it = resourceActionsMap.keySet().iterator();
 
-		Role role = RoleServiceUtil.getRole(roleId);
+		while (it.hasNext()) {
+			String selResource = (String) it.next();
 
-		for (int i = 0; i < actions.size(); i++) {
-			String actionId = (String)actions.get(i);
+			List actions = (List) resourceActionsMap.get(selResource);
 
-			int scope = ParamUtil.getInteger(req, "scope" + actionId);
+			Collections.sort(
+				actions,
+				new ActionComparator(
+					themeDisplay.getCompanyId(), themeDisplay.getLocale()));
 
-			if (scope == ResourceImpl.SCOPE_COMPANY) {
-				PermissionServiceUtil.setRolePermission(
-					roleId, themeDisplay.getPortletGroupId(), selResource,
-					scope, String.valueOf(themeDisplay.getCompanyId()),
-					actionId);
-			}
-			else if (scope == ResourceImpl.SCOPE_GROUP) {
-				if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
-					(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
+			Role role = RoleServiceUtil.getRole(roleId);
 
+			for (int i = 0; i < actions.size(); i++) {
+				String actionId = (String)actions.get(i);
+
+				int scope = ParamUtil.getInteger(
+					req, "scope" + selResource + actionId);
+
+				if (scope == ResourceImpl.SCOPE_COMPANY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						scope, String.valueOf(themeDisplay.getCompanyId()),
 						actionId);
 				}
-				else {
-					String[] groupIds = StringUtil.split(
-						ParamUtil.getString(req, "groupIds" + actionId));
+				else if (scope == ResourceImpl.SCOPE_GROUP) {
+					if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
+						(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 
-					if (groupIds.length == 0) {
-						SessionErrors.add(req, "missingGroupIdsForAction");
-
-						return;
+						PermissionServiceUtil.setRolePermission(
+							roleId, themeDisplay.getPortletGroupId(),
+							selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE,
+							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+							actionId);
 					}
+					else {
+						String[] groupIds = StringUtil.split(
+							ParamUtil.getString(
+								req, "groupIds" + selResource + actionId));
 
-					groupIds = ArrayUtil.distinct(groupIds);
+						if (groupIds.length == 0) {
+							SessionErrors.add(req, "missingGroupIdsForAction");
+							return;
+						}
+
+						groupIds = ArrayUtil.distinct(groupIds);
+
+						PermissionServiceUtil.unsetRolePermissions(
+							roleId, themeDisplay.getPortletGroupId(),
+							selResource, ResourceImpl.SCOPE_GROUP, actionId);
+
+						for (int j = 0; j < groupIds.length; j++) {
+							PermissionServiceUtil.setRolePermission(
+								roleId, themeDisplay.getPortletGroupId(),
+								selResource, ResourceImpl.SCOPE_GROUP,
+								groupIds[j], actionId);
+						}
+					}
+				}
+				else {
+
+					// Remove company, group template, and group permissions
+
+					PermissionServiceUtil.unsetRolePermissions(
+						roleId, themeDisplay.getPortletGroupId(), selResource,
+						ResourceImpl.SCOPE_COMPANY, actionId);
+
+					PermissionServiceUtil.unsetRolePermissions(
+						roleId, themeDisplay.getPortletGroupId(), selResource,
+						ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 
 					PermissionServiceUtil.unsetRolePermissions(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
 						ResourceImpl.SCOPE_GROUP, actionId);
-
-					for (int j = 0; j < groupIds.length; j++) {
-						PermissionServiceUtil.setRolePermission(
-							roleId, themeDisplay.getPortletGroupId(),
-							selResource, ResourceImpl.SCOPE_GROUP,
-							groupIds[j], actionId);
-					}
 				}
-			}
-			else {
-
-				// Remove company, group template, and group permissions
-
-				PermissionServiceUtil.unsetRolePermissions(
-					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.SCOPE_COMPANY, actionId);
-
-				PermissionServiceUtil.unsetRolePermissions(
-					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-
-				PermissionServiceUtil.unsetRolePermissions(
-					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.SCOPE_GROUP, actionId);
 			}
 		}
 

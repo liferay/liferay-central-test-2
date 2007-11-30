@@ -28,20 +28,22 @@ import java.io.Serializable;
  * <a href="PermissionDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class PermissionDisplay implements Comparable, Serializable {
 
 	public PermissionDisplay(Permission permission, Resource resource,
-							 String resourceName, String resourceNameParam,
-							 String resourceLabel, String actionId,
-							 String actionLabel) {
+							 String portletName, String portletLabel,
+							 String modelName, String modelLabel,
+							 String actionId, String actionLabel) {
 
 		_permission = permission;
+		_portletName = portletName;
+		_portletLabel = portletLabel;
 		_resource = resource;
-		_resourceName = resourceName;
-		_resourceNameParam = resourceNameParam;
-		_resourceLabel = resourceLabel;
+		_modelName = modelName;
+		_modelLabel = modelLabel;
 		_actionId = actionId;
 		_actionLabel = actionLabel;
 	}
@@ -54,16 +56,20 @@ public class PermissionDisplay implements Comparable, Serializable {
 		return _resource;
 	}
 
-	public String getResourceName() {
-		return _resourceName;
+	public String getPortletName() {
+		return _portletName;
 	}
 
-	public String getResourceNameParam() {
-		return _resourceNameParam;
+	public String getPortletLabel() {
+		return _portletLabel;
 	}
 
-	public String getResourceLabel() {
-		return _resourceLabel;
+	public String getModelName() {
+		return _modelName;
+	}
+
+	public String getModelLabel() {
+		return _modelLabel;
 	}
 
 	public String getActionId() {
@@ -74,6 +80,26 @@ public class PermissionDisplay implements Comparable, Serializable {
 		return _actionLabel;
 	}
 
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (!(obj instanceof PermissionDisplay)) {
+			return false;
+		}
+
+		PermissionDisplay permissionDisplay = (PermissionDisplay) obj;
+
+		if (_portletName.equals(permissionDisplay.getPortletName()) &&
+			_modelName.equals(permissionDisplay.getModelName()) &&
+			_actionId.equals(permissionDisplay.getActionId())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	public int compareTo(Object obj) {
 		if (obj == null) {
 			return -1;
@@ -81,12 +107,17 @@ public class PermissionDisplay implements Comparable, Serializable {
 
 		PermissionDisplay permissionDisplay = (PermissionDisplay)obj;
 
-		int value = getResourceLabel().compareTo(
-			permissionDisplay.getResourceLabel());
+		int value = getPortletLabel().compareTo(
+			permissionDisplay.getPortletLabel());
 
 		if (value == 0) {
-			value = getActionLabel().compareTo(
-				permissionDisplay.getActionLabel());
+			value = getModelLabel().compareTo(
+				permissionDisplay.getModelLabel());
+
+			if (value == 0) {
+				value = getActionLabel().compareTo(
+					permissionDisplay.getActionLabel());
+			}
 		}
 
 		return value;
@@ -94,9 +125,10 @@ public class PermissionDisplay implements Comparable, Serializable {
 
 	private Permission _permission;
 	private Resource _resource;
-	private String _resourceName;
-	private String _resourceNameParam;
-	private String _resourceLabel;
+	private String _portletName;
+	private String _portletLabel;
+	private String _modelName;
+	private String _modelLabel;
 	private String _actionId;
 	private String _actionLabel;
 

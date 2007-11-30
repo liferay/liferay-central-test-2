@@ -24,6 +24,20 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<script type="text/javascript">
+	var <portlet:namespace />selectedCommunities = [];
+
+	function <portlet:namespace />selectGroup(groupId, name, target) {
+		opener.<portlet:namespace />selectGroup(groupId, name, target);
+
+		<portlet:namespace />selectedCommunities[<portlet:namespace />selectedCommunities.length] = name;
+
+		var selectedCommunities = document.getElementById('<portlet:namespace />selectedCommunitiesDiv')
+
+		selectedCommunities.innerHTML = '<bean:message key="selected"/>: <b>' + <portlet:namespace />selectedCommunities.join(', ') + '</b><br/><br/>';
+	}
+</script>
+
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="communities" />
@@ -73,6 +87,8 @@ searchContainer.setResults(results);
 
 <div class="separator"><!-- --></div>
 
+<div id="<portlet:namespace/>selectedCommunitiesDiv"></div>
+
 <%
 List resultRows = searchContainer.getResultRows();
 
@@ -83,7 +99,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringMaker sm = new StringMaker();
 
-	sm.append("javascript: opener.");
+	sm.append("javascript: ");
 	sm.append(renderResponse.getNamespace());
 	sm.append("selectGroup('");
 	sm.append(group.getGroupId());
@@ -92,7 +108,6 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("', '");
 	sm.append(target);
 	sm.append("');");
-	sm.append("window.close();");
 
 	String rowHREF = sm.toString();
 
@@ -131,6 +146,10 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<br/>
+
+<input onclick="window.close();" type="button" value="<liferay-ui:message key="close"/>" />
 
 </form>
 
