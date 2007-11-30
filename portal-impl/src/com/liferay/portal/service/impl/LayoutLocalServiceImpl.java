@@ -2913,7 +2913,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.attributeValue("owner-type"));
 
 			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
-
 				continue;
 			}
 
@@ -2930,6 +2929,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				continue;
 			}
 
+			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
+				plid = PortletKeys.PREFS_PLID_SHARED;
+			}
+
 			boolean defaultUser = GetterUtil.getBoolean(
 				el.attributeValue("default-user"));
 			String portletId = el.attributeValue("portlet-id");
@@ -2937,10 +2940,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			if (defaultUser) {
 				ownerId = defaultUserId;
-			}
-
-			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
-				plid = PortletKeys.PREFS_PLID_SHARED;
 			}
 
 			try {
