@@ -2912,15 +2912,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			int ownerType = GetterUtil.getInteger(
 				el.attributeValue("owner-type"));
 
-			if ((ownerId == PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
-				(ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) &&
+			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+
+				continue;
+			}
+
+			if ((ownerType != PortletKeys.PREFS_OWNER_TYPE_USER) &&
 				!importPortletSetup) {
 
 				continue;
 			}
 
-			if ((ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
-				(ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
+			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
+				(ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
 				!importUserPreferences) {
 
 				continue;
@@ -2928,12 +2932,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			boolean defaultUser = GetterUtil.getBoolean(
 				el.attributeValue("default-user"));
-			//long plid = GetterUtil.getLong(el.attributeValue("plid"));
 			String portletId = el.attributeValue("portlet-id");
 			String preferences = el.elementText("preferences");
 
 			if (defaultUser) {
 				ownerId = defaultUserId;
+			}
+
+			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
+				plid = PortletKeys.PREFS_PLID_SHARED;
 			}
 
 			try {
