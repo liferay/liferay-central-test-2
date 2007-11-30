@@ -34,7 +34,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 <h3><%= title %></h3>
 
-<p class="lfr-web-form-descr"><%= description %></p>
+<p class="description"><%= description %></p>
 
 <liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
 <liferay-ui:success key="saveToFileSuccees" message="the-file-was-saved-successfully" />
@@ -66,24 +66,24 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			<p class="lfr-webform"><%= fieldOptions %></p>
 		</c:when>
 		<c:when test='<%= fieldType.equals("text") %>'>
-			<label class="lfr-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<input class="lfr-input-text <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
 		</c:when>
 		<c:when test='<%= fieldType.equals("textarea") %>'>
-			<label class="lfr-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<textarea class="lfr-textarea <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
 		</c:when>
 		<c:when test='<%= fieldType.equals("checkbox") %>'>
-			<label class="lfr-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-checkbox <%= fieldOptional ? "optional" : "" %>">
 				<input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" />
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("radio") %>'>
-			<label class="lfr-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-radio <%= fieldOptional ? "optional" : "" %>">
 
@@ -104,7 +104,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("options") %>'>
-			<label class="lfr-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-radio <%= fieldOptional ? "optional" : "" %>">
 
@@ -149,7 +149,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<div class="lfr-web-form-submit">
+<div class="button-holder">
 	<input type="submit" value="<liferay-ui:message key="send" />" />
 </div>
 
