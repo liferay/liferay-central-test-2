@@ -25,23 +25,16 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String popupId = ParamUtil.getString(request, "popupId");
-
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
-String treeKey = ParamUtil.getString(request, "treeKey", "stageLayoutsTree");
-
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
-
-String action = treeKey.equals("stageLayoutsTree")?"publish":"copy";
 
 Group liveGroup = null;
 Group stagingGroup = null;
-Group group = selGroup;
 
 int pagesCount = 0;
 
@@ -57,11 +50,7 @@ else {
 	}
 }
 
-long groupId = liveGroup.getGroupId();
-
-if (group != null) {
-	groupId = group.getGroupId();
-}
+long selGroupId = selGroup.getGroupId();
 
 long liveGroupId = liveGroup.getGroupId();
 
@@ -69,6 +58,14 @@ long stagingGroupId = 0;
 
 if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
+}
+
+String popupId = "copy-from-live";
+String treeKey = "liveLayoutsTree";
+
+if (selGroup.isStagingGroup()) {
+	popupId = "publish-to-live";
+	treeKey = "stageLayoutsTree";
 }
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
@@ -96,24 +93,13 @@ for (int i = 0; i < selectedPlids.length; i++) {
 boolean privateLayout = tabs2.equals("private");
 
 if (privateLayout) {
-	if (group != null) {
-		pagesCount = group.getPrivateLayoutsPageCount();
-	}
+	pagesCount = selGroup.getPrivateLayoutsPageCount();
 }
 else {
-	if (group != null) {
-		pagesCount = group.getPublicLayoutsPageCount();
-	}
+	pagesCount = selGroup.getPublicLayoutsPageCount();
 }
 
-Properties groupTypeSettings = null;
-
-if (group != null) {
-	groupTypeSettings = group.getTypeSettingsProperties();
-}
-else {
-	groupTypeSettings = new Properties();
-}
+Properties groupTypeSettings = selGroup.getTypeSettingsProperties();
 
 Organization organization = null;
 User user2 = null;
@@ -136,7 +122,7 @@ else if (liveGroup.isUser()) {
 
 LayoutLister layoutLister = new LayoutLister();
 
-LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
+LayoutView layoutView = layoutLister.getLayoutView(selGroupId, privateLayout, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
 
@@ -179,7 +165,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm2">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= group.isStagingGroup()?"publish_to_live":"copy_from_live" %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value='<%= selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live" %>'>
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
@@ -278,23 +264,21 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<portlet:param name="struts_action" value="/communities/export_pages" />
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
-	<portlet:param name="popupId" value="<%= popupId %>" />
-	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="treeKey" value="<%= treeKey %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
 </portlet:renderURL>
 
 <c:choose>
 	<c:when test="<%= !publish %>">
 		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key="<%= action %>" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
 			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 
-		<input id="publishBtn" type="button" value="<liferay-ui:message key="<%= action %>" />" onClick="submitForm(document.<portlet:namespace />fm2);" />
+		<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick="submitForm(document.<portlet:namespace />fm2);" />
 	</c:otherwise>
 </c:choose>
 

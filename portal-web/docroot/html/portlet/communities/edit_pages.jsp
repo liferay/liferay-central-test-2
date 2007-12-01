@@ -212,6 +212,15 @@ viewPagesURL.setPortletMode(PortletMode.VIEW);
 viewPagesURL.setParameter("struts_action", "/my_places/view");
 viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
+
+request.setAttribute("edit_pages.jsp-tab4", tabs4);
+
+request.setAttribute("edit_pages.jsp-groupId", new Long(groupId));
+request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
+
+request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
+
+request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
 <script type="text/javascript">
@@ -406,7 +415,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			</tr>
 			</table>
 
-			<br />
+			<c:if test="<%= (stagingGroup != null) %>">
+				<br />
+			</c:if>
 		</c:otherwise>
 	</c:choose>
 </c:if>
@@ -437,11 +448,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
 					<portlet:param name="struts_action" value="/communities/export_pages" />
-					<portlet:param name="popupId" value="publish-to-live" />
 					<portlet:param name="tabs2" value="<%= tabs2 %>" />
 					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-					<portlet:param name="treeKey" value="stageLayoutsTree" />
 				</portlet:renderURL>
 
 				<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
@@ -449,11 +458,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
 				<portlet:param name="struts_action" value="/communities/export_pages" />
-				<portlet:param name="popupId" value="copy-from-live" />
 				<portlet:param name="tabs2" value="<%= tabs2 %>" />
 				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-				<portlet:param name="treeKey" value="liveLayoutsTree" />
 			</portlet:renderURL>
 
 			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= importLayoutsURL %>', messageId: 'copy-from-live'});" />
@@ -1408,117 +1415,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
 				</c:when>
 				<c:when test='<%= tabs3.equals("export-import") %>'>
-					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
-
-					<%
-					List portletsList = new ArrayList();
-					Set portletIdsSet = new HashSet();
-
-					Iterator itr1 = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout).iterator();
-
-					while (itr1.hasNext()) {
-						Layout curLayout = (Layout)itr1.next();
-
-						if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-							LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
-
-							Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();
-
-							while (itr2.hasNext()) {
-								Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
-
-								if (curPortlet != null) {
-									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
-
-									if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
-										portletIdsSet.add(curPortlet.getRootPortletId());
-
-										portletsList.add(curPortlet);
-									}
-								}
-							}
-						}
-					}
-
-					Collections.sort(portletsList, new PortletTitleComparator(application, locale));
-
-					String tabs4Names = "export,import";
-					%>
-
-					<liferay-ui:tabs
-						names="<%= tabs4Names %>"
-						param="tabs4"
-						url="<%= portletURL.toString() %>"
-					/>
-
-					<c:choose>
-						<c:when test='<%= tabs4.equals("export") %>'>
-							<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
-
-							<br /><br />
-
-							<div>
-								<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
-							</div>
-
-							<br />
-
-							<liferay-ui:message key="what-would-you-like-to-export" />
-
-							<br /><br />
-
-							<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
-
-							<br />
-
-							<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportPages();" />
-						</c:when>
-						<c:when test='<%= tabs4.equals("import") %>'>
-							<c:choose>
-								<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
-									<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
-
-									<br /><br />
-
-									<div>
-										<input name="<portlet:namespace />importFileName" size="50" type="file" />
-									</div>
-
-									<br />
-
-									<liferay-ui:message key="what-would-you-like-to-import" />
-
-									<br /><br />
-
-									<%@ include file="/html/portlet/communities/export_import_options.jspf" %>
-
-									<br />
-
-									<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
-								</c:when>
-								<c:otherwise>
-									<liferay-ui:message key="import-from-within-the-target-community-can-cause-conflicts" />
-								</c:otherwise>
-							</c:choose>
-						</c:when>
-					</c:choose>
-
-					<script type="text/javascript">
-						jQuery(function(){
-							jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
-
-							jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
-								var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
-
-								if (this.checked) {
-									input.children(".<portlet:namespace />handler-control").show();
-								}
-								else {
-									input.children(".<portlet:namespace />handler-control").hide();
-								}
-							});
-						});
-					</script>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
@@ -1649,5 +1546,3 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 </c:if>
 
 </form>
-
-<%@ include file="/html/portlet/communities/render_controls.jspf" %>
