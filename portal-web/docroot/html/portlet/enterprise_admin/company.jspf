@@ -129,7 +129,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany('<%= Constants.UPDATE %>');" />
+<input type="submit" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany();" />
 
 <br /><br />
 
@@ -195,10 +195,6 @@ User user2 = company.getDefaultUser();
 </table>
 
 <br />
-
-<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany('display');" />
-
-<br /><br />
 
 <liferay-ui:tabs
 	names="email-addresses,addresses,websites,phone-numbers"

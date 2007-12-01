@@ -60,8 +60,6 @@ public class EditCompanyAction extends PortletAction {
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateCompany(req);
-			}
-			else if (cmd.equals("display")) {
 				updateDisplay(req);
 			}
 
