@@ -78,14 +78,14 @@ public class UpgradeLayout extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				String newTypeSettings;
-
 				try {
-					newTypeSettings = upgradeTypeSettings(typeSettings);
+					String newTypeSettings = upgradeTypeSettings(typeSettings);
 
 					ps = con.prepareStatement(
-						"update Layout set typeSettings = '" + newTypeSettings +
-							"' where plid = " + plid);
+						"update Layout set typeSettings = ? where plid = " +
+							plid);
+
+					ps.setString(1, newTypeSettings);
 
 					ps.executeUpdate();
 				}

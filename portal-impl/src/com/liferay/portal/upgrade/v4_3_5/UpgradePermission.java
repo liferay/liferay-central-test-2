@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v4_3_5;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -239,7 +240,7 @@ public class UpgradePermission extends UpgradeProcess {
 				ps = con.prepareStatement(
 					"select primKey from Resource_ where primKey like ?");
 
-				ps.setString(1, plid + "_LAYOUT_%");
+				ps.setString(1, plid + PortletImpl.LAYOUT_SEPARATOR + "%");
 
 				rs = ps.executeQuery();
 
