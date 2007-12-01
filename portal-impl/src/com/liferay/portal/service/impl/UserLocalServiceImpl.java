@@ -164,38 +164,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public User addUser(
-			long creatorUserId, long companyId, boolean autoPassword,
-			String password1, String password2, boolean autoScreenName,
-			String screenName, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, long organizationId,
-			long locationId, boolean sendEmail)
-		throws PortalException, SystemException {
-
-		long[] organizationIds = new long[] {organizationId, locationId};
-
-		if ((organizationId <= 0) && (locationId <= 0)) {
-			organizationIds = new long[0];
-		}
-		else if (organizationId > 0) {
-			organizationIds = new long[] {organizationId};
-		}
-		else if (locationId > 0) {
-			organizationIds = new long[] {locationId};
-		}
-
-		return addUser(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, locale, firstName,
-			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
-	}
-
 	public User addUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean autoScreenName,
@@ -1380,16 +1348,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public void updateOrganizations(
-			long userId, long organizationId, long locationId)
-		throws PortalException, SystemException {
-
-		updateOrganizations(userId, new long[] {organizationId, locationId});
-	}
-
 	public void updateOrganizations(
 			long userId, long[] organizationIds)
 		throws PortalException, SystemException {
@@ -1537,30 +1495,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		ImageLocalUtil.updateImage(portraitId, bytes);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public User updateUser(
-			long userId, String password, String screenName,
-			String emailAddress, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String icqSn, String jabberSn,
-			String msnSn, String skypeSn, String ymSn, String jobTitle,
-			long organizationId, long locationId)
+			long userId, String oldPassword, boolean passwordReset,
+			String screenName, String emailAddress, String languageId,
+			String timeZoneId, String greeting, String comments,
+			String firstName, String middleName, String lastName, int prefixId,
+			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+			int birthdayYear, String smsSn, String aimSn, String icqSn,
+			String jabberSn, String msnSn, String skypeSn, String ymSn,
+			String jobTitle, long[] organizationIds)
 		throws PortalException, SystemException {
 
+		String newPassword1 = StringPool.BLANK;
+		String newPassword2 = StringPool.BLANK;
+
 		return updateUser(
-			userId, password, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth,birthdayDay, birthdayYear, smsSn,
-			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			new long[] {organizationId, locationId});
+			userId, oldPassword, newPassword1, newPassword2, passwordReset,
+			screenName, emailAddress, languageId, timeZoneId, greeting,
+			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
+			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
 	}
 
 	public User updateUser(
-			long userId, String password, String screenName,
+			long userId, String oldPassword, String newPassword1,
+			String newPassword2, boolean passwordReset, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,
@@ -1572,11 +1531,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
+		String password = oldPassword;
 		screenName = screenName.trim().toLowerCase();
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
+
+		if (Validator.isNotNull(newPassword1) ||
+			Validator.isNotNull(newPassword2)) {
+
+			updatePassword(userId, newPassword1, newPassword2, passwordReset);
+
+			password = newPassword1;
+		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Company company = companyPersistence.findByPrimaryKey(
@@ -1590,6 +1558,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setContactId(counterLocalService.increment());
 		}
 
+		user.setPasswordReset(passwordReset);
 		user.setScreenName(screenName);
 
 		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {

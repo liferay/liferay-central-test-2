@@ -105,9 +105,6 @@ public class EditUserAction extends PortletAction {
 			else if (cmd.equals("deleteRole")) {
 				deleteRole(req);
 			}
-			else if (cmd.equals("password")) {
-				user = updatePassword(req);
-			}
 			else if (cmd.equals("unlock")) {
 				user = updateLockout(req);
 			}
@@ -242,27 +239,6 @@ public class EditUserAction extends PortletAction {
 		return user;
 	}
 
-	protected User updatePassword(ActionRequest req) throws Exception {
-		PortletSession ses = req.getPortletSession();
-
-		String password1 = ParamUtil.getString(req, "password1");
-		String password2 = ParamUtil.getString(req, "password2");
-		boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
-
-		User user = PortalUtil.getSelectedUser(req);
-
-		UserServiceUtil.updatePassword(
-			user.getUserId(), password1, password2, passwordReset);
-
-		if (user.getUserId() == PortalUtil.getUserId(req)) {
-			ses.setAttribute(
-				WebKeys.USER_PASSWORD, password1,
-				PortletSession.APPLICATION_SCOPE);
-		}
-
-		return user;
-	}
-
 	protected Object[] updateUser(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -320,19 +296,23 @@ public class EditUserAction extends PortletAction {
 
 			user = PortalUtil.getSelectedUser(req);
 
-			String password = AdminUtil.getUpdateUserPassword(
+			String oldPassword = AdminUtil.getUpdateUserPassword(
 				req, user.getUserId());
+			String newPassword1 = ParamUtil.getString(req, "password1");
+			String newPassword2 = ParamUtil.getString(req, "password2");
+			boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
 
 			Contact contact = user.getContact();
 
 			String tempOldScreenName = user.getScreenName();
 
 			user = UserServiceUtil.updateUser(
-				user.getUserId(), password, screenName, emailAddress,
-				languageId, timeZoneId, greeting, comments, firstName,
-				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn,
-				skypeSn, ymSn, jobTitle, organizationIds);
+				user.getUserId(), oldPassword, newPassword1, newPassword2,
+				passwordReset, screenName, emailAddress, languageId, timeZoneId,
+				greeting, comments, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
+				aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+				organizationIds);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;
@@ -353,6 +333,14 @@ public class EditUserAction extends PortletAction {
 				PortletSession ses = req.getPortletSession();
 
 				CachePortlet.clearResponses(ses);
+
+				// Password
+
+				if (Validator.isNotNull(newPassword1)) {
+					ses.setAttribute(
+						WebKeys.USER_PASSWORD, newPassword1,
+						PortletSession.APPLICATION_SCOPE);
+				}
 			}
 
 		}

@@ -731,14 +731,14 @@ public class PortalLDAPUtil {
 			}
 
 			user = UserLocalServiceUtil.updateUser(
-				user.getUserId(), password, screenName, emailAddress,
-				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-				user.getComments(), firstName, middleName, lastName,
-				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
-				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
-				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
-				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
-				jobTitle, user.getOrganizationIds());
+				user.getUserId(), password, user.isPasswordReset(), screenName,
+				emailAddress, user.getLanguageId(), user.getTimeZoneId(),
+				user.getGreeting(), user.getComments(), firstName, middleName,
+				lastName, contact.getPrefixId(), contact.getSuffixId(),
+				contact.getMale(), birthdayMonth, birthdayDay, birthdayYear,
+				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
+				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+				contact.getYmSn(), jobTitle, user.getOrganizationIds());
 
 			if (ldapUserModifiedDate != null) {
 				UserLocalServiceUtil.updateModifiedDate(

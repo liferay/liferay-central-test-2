@@ -135,32 +135,6 @@ public class UserServiceSoap {
 		String locale, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long organizationId, long locationId,
-		boolean sendEmail) throws RemoteException {
-		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
-					autoPassword, password1, password2, autoScreenName,
-					screenName, emailAddress, new java.util.Locale(locale),
-					firstName, middleName, lastName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationId, locationId, sendEmail);
-
-			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.model.UserSoap addUser(long companyId,
-		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean autoScreenName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		String locale, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] organizationIds, boolean sendEmail)
 		throws RemoteException {
 		try {
@@ -477,19 +451,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateOrganizations(long userId, long organizationId,
-		long locationId) throws RemoteException {
-		try {
-			UserServiceUtil.updateOrganizations(userId, organizationId,
-				locationId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void updateOrganizations(long userId, long[] organizationIds)
 		throws RemoteException {
 		try {
@@ -531,24 +492,26 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
-		java.lang.String password, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String comments, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long organizationId,
-		long locationId) throws RemoteException {
+		java.lang.String oldPassword, boolean passwordReset,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
-					password, screenName, emailAddress, languageId, timeZoneId,
-					greeting, comments, firstName, middleName, lastName,
-					prefixId, suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn,
-					skypeSn, ymSn, jobTitle, organizationId, locationId);
+					oldPassword, passwordReset, screenName, emailAddress,
+					languageId, timeZoneId, greeting, comments, firstName,
+					middleName, lastName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
+					icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+					organizationIds);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -560,24 +523,27 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
-		java.lang.String password, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.String languageId,
-		java.lang.String timeZoneId, java.lang.String greeting,
-		java.lang.String comments, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String oldPassword, java.lang.String newPassword1,
+		java.lang.String newPassword2, boolean passwordReset,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
-					password, screenName, emailAddress, languageId, timeZoneId,
-					greeting, comments, firstName, middleName, lastName,
-					prefixId, suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn,
-					skypeSn, ymSn, jobTitle, organizationIds);
+					oldPassword, newPassword1, newPassword2, passwordReset,
+					screenName, emailAddress, languageId, timeZoneId, greeting,
+					comments, firstName, middleName, lastName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn,
+					jobTitle, organizationIds);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

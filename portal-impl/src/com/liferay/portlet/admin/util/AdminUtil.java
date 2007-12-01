@@ -89,11 +89,12 @@ public class AdminUtil {
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
 		return UserServiceUtil.updateUser(
-			userId, password, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, contact.getFirstName(), contact.getMiddleName(),
-			contact.getLastName(), contact.getPrefixId(), contact.getSuffixId(),
-			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
+			userId, password, user.isPasswordReset(), screenName, emailAddress,
+			languageId, timeZoneId, greeting, comments, contact.getFirstName(),
+			contact.getMiddleName(), contact.getLastName(),
+			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
+			jabberSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
 			user.getOrganizationIds());
 	}
 
