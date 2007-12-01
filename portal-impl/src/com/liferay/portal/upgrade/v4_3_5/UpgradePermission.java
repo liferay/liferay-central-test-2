@@ -451,6 +451,4 @@ public class UpgradePermission extends UpgradeProcess {
 
 	private static Log _log = LogFactory.getLog(UpgradePermission.class);
 
-	private boolean _alreadyUpgraded;
-
 }
