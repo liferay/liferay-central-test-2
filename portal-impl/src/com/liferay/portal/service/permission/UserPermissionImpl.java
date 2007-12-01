@@ -28,6 +28,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.UserLocalServiceUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +41,15 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
  *
  */
 public class UserPermissionImpl implements UserPermission {
+
+	public void check(
+			PermissionChecker permissionChecker, long userId, String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, userId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
 
 	/**
 	 * @deprecated
@@ -61,6 +74,12 @@ public class UserPermissionImpl implements UserPermission {
 
 			throw new PrincipalException();
 		}
+	}
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long userId, String actionId) {
+
+		return contains(permissionChecker, userId, null, actionId);
 	}
 
 	/**
@@ -96,12 +115,25 @@ public class UserPermissionImpl implements UserPermission {
 
 			return true;
 		}
-		else if ((organizationIds.length > 0) &&
-				 (hasOrganizationPermission(
-					 permissionChecker, organizationIds,
-					 organizationActionId))) {
+		else {
+			if (organizationIds == null) {
+				try  {
+					User user = UserLocalServiceUtil.getUserById(userId);
+
+					organizationIds = user.getOrganizationIds();
+				}
+				catch (Exception e) {
+					_log.warn(e);
+				}
+			}
+
+			if ((organizationIds != null) && (organizationIds.length > 0) &&
+				(hasOrganizationPermission(
+					permissionChecker, organizationIds,
+					organizationActionId))) {
 
 				return true;
+			}
 		}
 
 		return false;
@@ -122,5 +154,7 @@ public class UserPermissionImpl implements UserPermission {
 
 		return false;
 	}
+
+	private static Log _log = LogFactory.getLog(UserPermissionImpl.class);
 
 }

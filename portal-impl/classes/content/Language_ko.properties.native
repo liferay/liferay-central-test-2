@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=손님에 과태 허가를 할당하십시�
 assign-members=일원을 지정하십시요
 assign-organization-roles-to-users=사용자에 조직 역할을 할당하십시요.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=또한 현재 지역 사회의 일원 이는 사용자에 허가를 단 할당하십시요?
+assign-regular-roles=일정한 역할을 할당하십시요
 assign-to-communities=지역 사회에 할당하십시요
 assign-to-organizations=조직에 할당하십시요
 assign-to-users=사용자에 할당하십시요

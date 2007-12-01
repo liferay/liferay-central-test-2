@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=分配缺省允许到客人
 assign-members=分配成员
 assign-organization-roles-to-users=分配组织角色到用户。
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=分配允许只到并且是当前的社区的成员的用户?
+assign-regular-roles=分配规则角色
 assign-to-communities=分配到公共
 assign-to-organizations=分配到组织
 assign-to-users=分配到用户

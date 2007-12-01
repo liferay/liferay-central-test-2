@@ -60,6 +60,14 @@ public class RoleServiceUtil {
 		return roleService.addRole(name, type);
 	}
 
+	public static void addUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
+
+		roleService.addUserRoles(userId, roleIds);
+	}
+
 	public static void deleteRole(long roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -143,6 +151,14 @@ public class RoleServiceUtil {
 		RoleService roleService = RoleServiceFactory.getService();
 
 		return roleService.hasUserRoles(userId, companyId, names, inherited);
+	}
+
+	public static void unsetUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
+
+		roleService.unsetUserRoles(userId, roleIds);
 	}
 
 	public static com.liferay.portal.model.Role updateRole(long roleId,

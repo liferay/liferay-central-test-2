@@ -22,13 +22,22 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
 <%
+User user2 = (User)request.getAttribute("edit_user.jsp-user2");
+
+String sectionRedirectParams = (String)request.getAttribute("edit_user.jsp-sectionRedirectParams");
+
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
 
 headerNames.add("name");
-headerNames.add(StringPool.BLANK);
+
+if (user2.getUserId() != user.getUserId()) {
+	headerNames.add(StringPool.BLANK);
+}
 
 searchContainer.setHeaderNames(headerNames);
 
@@ -46,7 +55,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	if (editable) {
+	if (user2.getUserId() != user.getUserId()) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_role_action.jsp");
 	}
 
@@ -61,3 +70,9 @@ searchContainer.setTotal(results.size());
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 <br />
+
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<input onclick="javascript: self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_regular_role_assignments" /><portlet:param name="redirect" value='<%= currentURL + "&" + renderResponse.getNamespace() + "tabs2=regular-roles" %>' /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>';" type="button" value="<liferay-ui:message key="assign-regular-roles" />" />
+
+	<br /><br />
+</c:if>

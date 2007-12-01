@@ -52,6 +52,14 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 			user.getUserId(), user.getCompanyId(), name, type);
 	}
 
+	public void addUserRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		checkUserRolesPermission(userId, roleIds);
+
+		roleLocalService.addUserRoles(userId, roleIds);
+	}
+
 	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
@@ -118,6 +126,14 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 			userId, companyId, names, inherited);
 	}
 
+	public void unsetUserRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		checkUserRolesPermission(userId, roleIds);
+
+		roleLocalService.unsetUserRoles(userId, roleIds);
+	}
+
 	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 
@@ -125,6 +141,15 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return roleLocalService.updateRole(roleId, name);
+	}
+
+	protected void checkUserRolesPermission(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		for (int i = 0; i < roleIds.length; i++) {
+			RolePermissionUtil.check(
+				getPermissionChecker(), roleIds[i], ActionKeys.UPDATE);
+		}
 	}
 
 }

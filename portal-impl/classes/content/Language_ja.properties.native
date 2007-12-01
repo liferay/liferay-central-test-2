@@ -574,6 +574,7 @@ assign-default-permissions-to-guest=ゲストにデフォルトの許可を割�
 assign-members=メンバーを割り当てなさい
 assign-organization-roles-to-users=ユーザーに構成役割を割り当てなさい。
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=現在のコミュニティのメンバーまたであるユーザーに許可をしか割り当ててはいけないか。
+assign-regular-roles=規則的な役割を割り当てなさい
 assign-to-communities=コミュニティに割り当てなさい
 assign-to-organizations=組織に割り当てなさい
 assign-to-users=ユーザーに割り当てなさい

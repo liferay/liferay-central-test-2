@@ -95,6 +95,18 @@ public class RoleServiceSoap {
 		}
 	}
 
+	public static void addUserRoles(long userId, long[] roleIds)
+		throws RemoteException {
+		try {
+			RoleServiceUtil.addUserRoles(userId, roleIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteRole(long roleId) throws RemoteException {
 		try {
 			RoleServiceUtil.deleteRole(roleId);
@@ -230,6 +242,18 @@ public class RoleServiceSoap {
 					companyId, names, inherited);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsetUserRoles(long userId, long[] roleIds)
+		throws RemoteException {
+		try {
+			RoleServiceUtil.unsetUserRoles(userId, roleIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

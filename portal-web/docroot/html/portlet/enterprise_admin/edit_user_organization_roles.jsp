@@ -22,24 +22,35 @@
  */
 %>
 
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
 <%
-List groups = GroupLocalServiceUtil.getUserGroups(user2.getUserId());
+User user2 = (User)request.getAttribute("edit_user.jsp-user2");
+
+String sectionRedirectParams = (String)request.getAttribute("edit_user.jsp-sectionRedirectParams");
+
+List userOrganizations = user2.getOrganizations();
 
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
 
 headerNames.add("name");
-headerNames.add("community");
-headerNames.add(StringPool.BLANK);
+headerNames.add("organization");
+
+if (user2.getUserId() != user.getUserId()) {
+	headerNames.add(StringPool.BLANK);
+}
 
 searchContainer.setHeaderNames(headerNames);
 
 List results = new ArrayList();
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < groups.size(); i++) {
-	Group group = (Group)groups.get(i);
+for (int i = 0; i < userOrganizations.size(); i++) {
+	Organization organization = (Organization)userOrganizations.get(i);
+
+	Group group = organization.getGroup();
 
 	List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
@@ -54,13 +65,13 @@ for (int i = 0; i < groups.size(); i++) {
 
 		row.addText(role.getName());
 
-		// Community
+		// Organization
 
-		row.addText(group.getName());
+		row.addText(organization.getName());
 
 		// Action
 
-		if (editable) {
+		if (user2.getUserId() != user.getUserId()) {
 			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_group_role_action.jsp");
 		}
 

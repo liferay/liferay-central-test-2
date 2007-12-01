@@ -903,6 +903,15 @@
 				(Permission_.resourceId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.joinByUsersRoles">
+		<![CDATA[
+			INNER JOIN
+				Users_Roles ON
+					(Users_Roles.roleId = Role_.roleId)
+			WHERE
+				(Users_Roles.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT

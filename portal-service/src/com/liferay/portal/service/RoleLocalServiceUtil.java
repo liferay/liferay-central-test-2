@@ -798,6 +798,14 @@ public class RoleLocalServiceUtil {
 			className, classPK);
 	}
 
+	public static void addUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		roleLocalService.addUserRoles(userId, roleIds);
+	}
+
 	public static void checkSystemRoles(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -892,6 +900,14 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getUserRoles(userId);
 	}
 
+	public static boolean hasUserRole(long userId, long roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.hasUserRole(userId, roleId);
+	}
+
 	public static boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.PortalException, 
@@ -953,6 +969,14 @@ public class RoleLocalServiceUtil {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		roleLocalService.setUserRoles(userId, roleIds);
+	}
+
+	public static void unsetUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		roleLocalService.unsetUserRoles(userId, roleIds);
 	}
 
 	public static com.liferay.portal.model.Role updateRole(long roleId,

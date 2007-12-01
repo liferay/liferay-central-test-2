@@ -34,6 +34,13 @@ import com.liferay.portal.security.auth.PrincipalException;
  */
 public class UserPermissionUtil {
 
+	public static void check(
+			PermissionChecker permissionChecker, long userId, String actionId)
+		throws PrincipalException {
+
+		getUserPermission().check(permissionChecker, userId, actionId);
+	}
+
 	/**
 	 * @deprecated
 	 */
@@ -54,6 +61,13 @@ public class UserPermissionUtil {
 
 		getUserPermission().check(
 			permissionChecker, userId, organizationIds, actionId);
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long userId, String actionId) {
+
+		return getUserPermission().contains(
+			permissionChecker, userId, actionId);
 	}
 
 	/**

@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=Assignez les permissions de défaut à l'inv
 assign-members=Affectez Les Membres
 assign-organization-roles-to-users=Assignez les rôles d'organisation aux utilisateurs.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=Assignez les permissions seulement aux utilisateurs qui sont également des membres de la communauté courante ?
+assign-regular-roles=Assignez Les Rôles Réguliers
 assign-to-communities=Assignez aux Communautés
 assign-to-organizations=Assignez aux organismes
 assign-to-users=Assignez aux utilisateurs

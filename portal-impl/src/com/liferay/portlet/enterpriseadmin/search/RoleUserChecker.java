@@ -20,48 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.permission;
+package com.liferay.portlet.enterpriseadmin.search;
 
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.kernel.dao.search.RowChecker;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+
+import javax.portlet.RenderResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="RoleUserChecker.java.html"><b><i>View Source</i></b></a>
  *
- * @author Charles May
+ * @author Brian Wing Shun Chan
  *
  */
-public interface UserPermission {
+public class RoleUserChecker extends RowChecker {
 
-	public void check(
-			PermissionChecker permissionChecker, long userId, String actionId)
-		throws PrincipalException;
+	public RoleUserChecker(RenderResponse res, User user) {
+		super(res);
 
-	/**
-	 * @deprecated
-	 */
-	public void check(
-			PermissionChecker permissionChecker, long userId,
-			long organizationId, long locationId, String actionId)
-		throws PrincipalException;
+		_user = user;
+	}
 
-	public void check(
-			PermissionChecker permissionChecker, long userId,
-			long[] organizationIds, String actionId)
-		throws PrincipalException;
+	public boolean isChecked(Object obj) {
+		Role role = (Role)obj;
 
-	public boolean contains(
-		PermissionChecker permissionChecker, long userId, String actionId);
+		try {
+			return RoleLocalServiceUtil.hasUserRole(
+				_user.getUserId(), role.getRoleId());
+		}
+		catch (Exception e){
+			_log.error(e);
 
-	/**
-	 * @deprecated
-	 */
-	public boolean contains(
-		PermissionChecker permissionChecker, long userId, long organizationId,
-		long locationId, String actionId);
+			return false;
+		}
+	}
 
-	public boolean contains(
-		PermissionChecker permissionChecker, long userId,
-		long[] organizationIds, String actionId);
+	private static Log _log = LogFactory.getLog(RoleUserChecker.class);
+
+	private User _user;
 
 }

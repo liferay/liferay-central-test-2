@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=Asignar permisos por defecto al usuario anó
 assign-members=Asignar miembros
 assign-organization-roles-to-users=Asignar roles de organización a los usuarios.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=¿Asignar permisos solamente a los usuarios que son también miembros de esta comunidad?
+assign-regular-roles=Asigne Los Papeles Regulares
 assign-to-communities=Asignar a comunidades
 assign-to-organizations=Asignar a organizaciones
 assign-to-users=Asignar a usuarios

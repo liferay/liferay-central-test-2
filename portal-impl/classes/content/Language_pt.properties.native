@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=Atribua permissões do defeito ao convidado
 assign-members=Atribua Membros
 assign-organization-roles-to-users=Atribua papéis da organização aos usuários.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=Atribua permissões somente aos usuários que são também membros da comunidade atual?
+assign-regular-roles=Atribua Papéis Regulares
 assign-to-communities=Atribua às comunidades
 assign-to-organizations=Atribua às organizações
 assign-to-users=Atribua aos usuários

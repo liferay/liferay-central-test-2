@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=Den Gästen Standardrechte zuweisen
 assign-members=Mitglieder zuweisen
 assign-organization-roles-to-users=Weisen Sie Organisation Rollen Benutzern zu.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=Weisen Sie Erlaubnis nur Benutzern zu, die auch Mitglieder der gegenwärtigen Gemeinschaft sind?
+assign-regular-roles=Weisen Sie Regelmäßige Rollen Zu
 assign-to-communities=Den Geinschaften zuweisen
 assign-to-organizations=Den Organisationen zuweisen
 assign-to-users=Den Nutzern zuweisen

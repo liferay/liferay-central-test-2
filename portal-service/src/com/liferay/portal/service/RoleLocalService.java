@@ -343,6 +343,10 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void checkSystemRoles(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -389,6 +393,10 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasUserRole(long userId, long roleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.SystemException, 
@@ -418,6 +426,10 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(long userId, long[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetUserRoles(long userId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

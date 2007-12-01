@@ -44,7 +44,7 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(Portl
 	if ((user2 == null) || user2.isActive()) {
 		editable = true;
 
-		if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), user2.getOrganizationIds(), ActionKeys.UPDATE)) {
+		if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
 			editable = false;
 		}
 	}
@@ -66,6 +66,8 @@ else {
 }
 
 String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
+
+request.setAttribute("edit_user.jsp-user2", user2);
 %>
 
 <script type="text/javascript">
@@ -149,13 +151,28 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 			</c:if>
 
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/user_regular_role_iterator.jspf" %>
+
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
+
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_regular_roles.jsp" />
 			</liferay-ui:section>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/user_community_role_iterator.jspf" %>
+
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
+
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_community_roles.jsp" />
 			</liferay-ui:section>
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/user_organization_role_iterator.jspf" %>
+
+				<%
+				request.setAttribute("edit_user.jsp-sectionRedirectParams", sectionRedirectParams);
+				%>
+
+				<liferay-util:include page="/html/portlet/enterprise_admin/edit_user_organization_roles.jsp" />
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:if>

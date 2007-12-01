@@ -576,6 +576,7 @@ assign-default-permissions-to-guest=standaardtoestemmingen aan gast toewijzen
 assign-members=Wijs Leden toe
 assign-organization-roles-to-users=Wijs de rollen van de Organisatie aan gebruikers toe.
 assign-permissions-only-to-users-that-are-also-members-of-the-current-community=Toestemmingen slechts aan wijs toe gebruikers die ook lid van de huidige gemeenschap zijn?
+assign-regular-roles=Wijs Regelmatige Rollen toe
 assign-to-communities=Aan Communities toewijzen
 assign-to-organizations=Aan Organisaties toewijzen
 assign-to-users=Aan Gebruikers toewijzen

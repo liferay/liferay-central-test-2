@@ -89,6 +89,9 @@ public class RoleFinderImpl implements RoleFinder {
 	public static String JOIN_BY_ROLES_PERMISSIONS =
 		RoleFinder.class.getName() + ".joinByRolesPermissions";
 
+	public static String JOIN_BY_USERS_ROLES =
+		RoleFinder.class.getName() + ".joinByUsersRoles";
+
 	public int countByR_U(long roleId, long userId) throws SystemException {
 		String finderSQL = Role.class.getName();
 		String[] finderClassNames = new String[] {
@@ -511,6 +514,9 @@ public class RoleFinderImpl implements RoleFinder {
 		if (key.equals("permissionsResourceId")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLES_PERMISSIONS);
 		}
+		else if (key.equals("usersRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
+		}
 
 		if (Validator.isNotNull(join)) {
 			int pos = join.indexOf("WHERE");
@@ -551,6 +557,9 @@ public class RoleFinderImpl implements RoleFinder {
 
 		if (key.equals("permissionsResourceId")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLES_PERMISSIONS);
+		}
+		else if (key.equals("usersRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
 
 		if (Validator.isNotNull(join)) {

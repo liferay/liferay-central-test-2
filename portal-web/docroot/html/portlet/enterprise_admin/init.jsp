@@ -99,6 +99,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleUserChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupRoleChecker" %>

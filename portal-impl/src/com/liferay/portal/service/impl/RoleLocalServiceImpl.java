@@ -93,6 +93,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
+	public void addUserRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		userPersistence.addRoles(userId, roleIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void checkSystemRoles(long companyId)
 		throws PortalException, SystemException {
 
@@ -276,6 +284,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return userPersistence.getRoles(userId);
 	}
 
+	public boolean hasUserRole(long userId, long roleId)
+		throws PortalException, SystemException {
+
+		return userPersistence.containsRole(userId, roleId);
+	}
+
 	/**
 	 * Returns true if the user has the role.
 	 *
@@ -333,7 +347,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			int begin, int end)
 		throws SystemException {
 
-		return search (
+		return search(
 			companyId, name, description, type, new LinkedHashMap(), begin,
 			end);
 	}
@@ -368,6 +382,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		userPersistence.setRoles(userId, roleIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void unsetUserRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		userPersistence.removeRoles(userId, roleIds);
 
 		PermissionCacheUtil.clearCache();
 	}

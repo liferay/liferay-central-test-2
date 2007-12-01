@@ -81,6 +81,12 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void addUserRoles(long userId, long[] roleIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		RoleServiceUtil.addUserRoles(userId, roleIds);
+	}
+
 	public static void deleteRole(long roleId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -166,6 +172,12 @@ public class RoleServiceJSON {
 				names, inherited);
 
 		return returnValue;
+	}
+
+	public static void unsetUserRoles(long userId, long[] roleIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		RoleServiceUtil.unsetUserRoles(userId, roleIds);
 	}
 
 	public static JSONObject updateRole(long roleId, java.lang.String name)

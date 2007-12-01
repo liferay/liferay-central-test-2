@@ -114,6 +114,44 @@ public class RoleServiceHttp {
 		}
 	}
 
+	public static void addUserRoles(HttpPrincipal httpPrincipal, long userId,
+		long[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = roleIds;
+
+			if (roleIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
+					"addUserRoles", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteRole(HttpPrincipal httpPrincipal, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -499,6 +537,44 @@ public class RoleServiceHttp {
 			}
 
 			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unsetUserRoles(HttpPrincipal httpPrincipal, long userId,
+		long[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = roleIds;
+
+			if (roleIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
+					"unsetUserRoles", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

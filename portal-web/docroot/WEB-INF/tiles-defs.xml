@@ -452,6 +452,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_portrait.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_user_regular_role_assignments" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_regular_role_assignments.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_website" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_website.jsp" />
 	</definition>
