@@ -246,13 +246,8 @@ public class UpgradePermission extends UpgradeProcess {
 				while (rs.next()) {
 					String primKey = rs.getString("primKey");
 
-					String sql = getStalePermissionsSQL(
-						"19", "Layout", "plid", guestGroupId);
-
-					sql = StringUtil.replace(
-						sql,
-						"Layout.plid = Resource_.primKey ",
-						"Layout.plid = " + plid + " ");
+					String sql = getStalePortletPermissionsSQL(
+						primKey, guestGroupId);
 
 					deleteStalePermissions(sql, guestGroupId);
 				}
@@ -424,6 +419,23 @@ public class UpgradePermission extends UpgradeProcess {
 				tablePKCol2 + " = " + tableName1 + "." + tablePKCol2 + " " +
 			"where Groups_Permissions.groupId = " + guestGroupId + " and " +
 				tableName2 + ".groupId != " + guestGroupId + ";";
+
+		return sql;
+	}
+
+	protected String getStalePortletPermissionsSQL(
+			String primKey, long guestGroupId)
+		throws Exception {
+
+		String sql =
+			"select Groups_Permissions.permissionId from Groups_Permissions " +
+			"inner join Permission_ on Permission_.permissionId = " +
+				"Groups_Permissions.permissionId " +
+			"inner join Resource_ on Resource_.resourceId = " +
+				"Permission_.resourceId " +
+			"inner join ResourceCode on ResourceCode.codeId = " +
+				"Resource_.codeId and Resource_.primKey = '" + primKey + "' " +
+			"where Groups_Permissions.groupId = " + guestGroupId + ";";
 
 		return sql;
 	}
