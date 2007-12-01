@@ -66,24 +66,24 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			<p class="lfr-webform"><%= fieldOptions %></p>
 		</c:when>
 		<c:when test='<%= fieldType.equals("text") %>'>
-			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<input class="lfr-input-text <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
 		</c:when>
 		<c:when test='<%= fieldType.equals("textarea") %>'>
-			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<textarea class="lfr-textarea <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
 		</c:when>
 		<c:when test='<%= fieldType.equals("checkbox") %>'>
-			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-checkbox <%= fieldOptional ? "optional" : "" %>">
 				<input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" />
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("radio") %>'>
-			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-radio <%= fieldOptional ? "optional" : "" %>">
 
@@ -104,7 +104,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("options") %>'>
-			<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 			<div class="lfr-input-radio <%= fieldOptional ? "optional" : "" %>">
 
