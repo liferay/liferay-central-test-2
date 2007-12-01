@@ -210,6 +210,8 @@ request.setAttribute("edit_user.jsp-user2", user2);
 		</liferay-ui:section>
 	</liferay-ui:tabs>
 
+	<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
+
 	<liferay-ui:tabs
 		names="phone-numbers,sms-messenger-id,instant-messenger-ids"
 		formName="fm"

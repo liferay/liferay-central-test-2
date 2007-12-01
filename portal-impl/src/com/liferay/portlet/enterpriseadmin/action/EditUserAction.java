@@ -96,9 +96,6 @@ public class EditUserAction extends PortletAction {
 				user = (User)returnValue[0];
 				oldScreenName = ((String)returnValue[1]);
 			}
-			else if (cmd.equals("comments")) {
-				user = updateComments(req);
-			}
 			else if (cmd.equals(Constants.DEACTIVATE) ||
 					 cmd.equals(Constants.DELETE) ||
 					 cmd.equals(Constants.RESTORE)) {
@@ -108,17 +105,8 @@ public class EditUserAction extends PortletAction {
 			else if (cmd.equals("deleteRole")) {
 				deleteRole(req);
 			}
-			else if (cmd.equals("display")) {
-				user = updateDisplay(req);
-			}
-			else if (cmd.equals("im")) {
-				user = updateIm(req);
-			}
 			else if (cmd.equals("password")) {
 				user = updatePassword(req);
-			}
-			else if (cmd.equals("sms")) {
-				user = updateSms(req);
 			}
 			else if (cmd.equals("unlock")) {
 				user = updateLockout(req);
@@ -246,76 +234,6 @@ public class EditUserAction extends PortletAction {
 		}
 	}
 
-	protected User updateComments(ActionRequest req) throws Exception {
-		String comments = ParamUtil.getString(req, "comments");
-
-		User user = PortalUtil.getSelectedUser(req);
-
-		Contact contact = user.getContact();
-
-		AdminUtil.updateUser(
-			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
-			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			comments, contact.getSmsSn(), contact.getAimSn(),
-			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-			contact.getSkypeSn(), contact.getYmSn());
-
-		return user;
-	}
-
-	protected User updateDisplay(ActionRequest req) throws Exception {
-		PortletSession ses = req.getPortletSession();
-
-		String languageId = ParamUtil.getString(req, "languageId");
-		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
-		String greeting = ParamUtil.getString(req, "greeting");
-
-		User user = PortalUtil.getSelectedUser(req);
-
-		Contact contact = user.getContact();
-
-		AdminUtil.updateUser(
-			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
-			languageId, timeZoneId, greeting, user.getComments(),
-			contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-			contact.getYmSn());
-
-		// Reset the locale
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpSession httpSes = httpReq.getSession();
-
-		httpSes.removeAttribute(Globals.LOCALE_KEY);
-
-		// Clear cached portlet responses
-
-		CachePortlet.clearResponses(ses);
-
-		return user;
-	}
-
-	protected User updateIm(ActionRequest req) throws Exception {
-		String aimSn = ParamUtil.getString(req, "aimSn");
-		String icqSn = ParamUtil.getString(req, "icqSn");
-		String jabberSn = ParamUtil.getString(req, "jabberSn");
-		String msnSn = ParamUtil.getString(req, "msnSn");
-		String skypeSn = ParamUtil.getString(req, "skypeSn");
-		String ymSn = ParamUtil.getString(req, "ymSn");
-
-		User user = PortalUtil.getSelectedUser(req);
-
-		Contact contact = user.getContact();
-
-		AdminUtil.updateUser(
-			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
-			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			user.getComments(), contact.getSmsSn(), aimSn, icqSn, jabberSn,
-			msnSn, skypeSn, ymSn);
-
-		return user;
-	}
-
 	protected User updateLockout(ActionRequest req) throws Exception {
 		User user = PortalUtil.getSelectedUser(req);
 
@@ -345,23 +263,6 @@ public class EditUserAction extends PortletAction {
 		return user;
 	}
 
-	protected User updateSms(ActionRequest req) throws Exception {
-		String smsSn = ParamUtil.getString(req, "smsSn");
-
-		User user = PortalUtil.getSelectedUser(req);
-
-		Contact contact = user.getContact();
-
-		AdminUtil.updateUser(
-			req, user.getUserId(), user.getScreenName(), user.getEmailAddress(),
-			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-			user.getComments(), smsSn, contact.getAimSn(), contact.getIcqSn(),
-			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-			contact.getYmSn());
-
-		return user;
-	}
-
 	protected Object[] updateUser(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -374,6 +275,9 @@ public class EditUserAction extends PortletAction {
 		boolean autoScreenName = false;
 		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		String languageId = ParamUtil.getString(req, "languageId");
+		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
+		String greeting = ParamUtil.getString(req, "greeting");
 		String firstName = ParamUtil.getString(req, "firstName");
 		String middleName = ParamUtil.getString(req, "middleName");
 		String lastName = ParamUtil.getString(req, "lastName");
@@ -383,6 +287,14 @@ public class EditUserAction extends PortletAction {
 		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
+		String comments = ParamUtil.getString(req, "comments");
+		String smsSn = ParamUtil.getString(req, "smsSn");
+		String aimSn = ParamUtil.getString(req, "aimSn");
+		String icqSn = ParamUtil.getString(req, "icqSn");
+		String jabberSn = ParamUtil.getString(req, "jabberSn");
+		String msnSn = ParamUtil.getString(req, "msnSn");
+		String skypeSn = ParamUtil.getString(req, "skypeSn");
+		String ymSn = ParamUtil.getString(req, "ymSn");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(req, "organizationIds"),  0L);
@@ -417,16 +329,32 @@ public class EditUserAction extends PortletAction {
 
 			user = UserServiceUtil.updateUser(
 				user.getUserId(), password, screenName, emailAddress,
-				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-				user.getComments(), firstName, middleName, lastName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-				contact.getYmSn(), jobTitle, organizationIds);
+				languageId, timeZoneId, greeting, comments, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, smsSn, aimSn, icqSn, jabberSn, msnSn,
+				skypeSn, ymSn, jobTitle, organizationIds);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;
 			}
+
+			if (user.getUserId() == themeDisplay.getUserId()) {
+
+				// Reset the locale
+
+				HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(
+					req);
+				HttpSession httpSes = httpReq.getSession();
+
+				httpSes.removeAttribute(Globals.LOCALE_KEY);
+
+				// Clear cached portlet responses
+
+				PortletSession ses = req.getPortletSession();
+
+				CachePortlet.clearResponses(ses);
+			}
+
 		}
 
 		return new Object[] {user, oldScreenName};

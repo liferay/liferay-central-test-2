@@ -91,10 +91,4 @@
 </tr>
 </table>
 
-<c:if test="<%= editable %>">
-	<br />
-
-	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('im');" /><br />
-</c:if>
-
 <br />

@@ -22,8 +22,6 @@
  */
 %>
 
-<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
-
 <table class="lfr-table">
 <tr>
 	<td>
@@ -34,11 +32,5 @@
 	</td>
 </tr>
 </table>
-
-<c:if test="<%= editable %>">
-	<br />
-
-	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('sms');" /><br />
-</c:if>
 
 <br />

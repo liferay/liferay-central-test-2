@@ -22,6 +22,11 @@
  */
 %>
 
+<%
+String languageId = BeanParamUtil.getString(user2, request, "languageId");
+String timeZoneId = BeanParamUtil.getString(user2, request, "timeZoneId");
+%>
+
 <table class="lfr-table">
 <tr>
 	<td>
@@ -31,7 +36,7 @@
 		<select name="<portlet:namespace />languageId">
 
 			<%
-			Locale locale2 = user2.getLocale();
+			Locale locale2 = LocaleUtil.fromLanguageId(languageId);
 
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
@@ -52,7 +57,7 @@
 		<liferay-ui:message key="time-zone" />
 	</td>
 	<td>
-		<liferay-ui:input-time-zone name="timeZoneId" value="<%= user2.getTimeZone().getID() %>" />
+		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
 	</td>
 </tr>
 <tr>
@@ -65,12 +70,4 @@
 </tr>
 </table>
 
-<c:if test="<%= editable %>">
-	<br />
-
-	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('display');" />
-
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= backURL %>';" />
-</c:if>
-
-<br /><br />
+<br />
