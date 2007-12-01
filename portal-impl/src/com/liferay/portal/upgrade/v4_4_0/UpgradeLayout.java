@@ -78,20 +78,15 @@ public class UpgradeLayout extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				try {
-					String newTypeSettings = upgradeTypeSettings(typeSettings);
+				String newTypeSettings = upgradeTypeSettings(typeSettings);
 
-					ps = con.prepareStatement(
-						"update Layout set typeSettings = ? where plid = " +
-							plid);
+				ps = con.prepareStatement(
+					"update Layout set typeSettings = ? where plid = " +
+						plid);
 
-					ps.setString(1, newTypeSettings);
+				ps.setString(1, newTypeSettings);
 
-					ps.executeUpdate();
-				}
-				catch (Exception e) {
-					_log.error("Error upgrading layout with plid " + plid, e);
-				}
+				ps.executeUpdate();
 
 				ps.close();
 			}
@@ -104,7 +99,7 @@ public class UpgradeLayout extends UpgradeProcess {
 	protected String upgradeTypeSettings(String typeSettings) throws Exception {
 		Properties props = new NullSafeProperties();
 
-		PropertiesUtil.load(props,typeSettings);
+		PropertiesUtil.load(props, typeSettings);
 
 		long linkToPlid = GetterUtil.getLong(props.getProperty("linkToPlid"));
 

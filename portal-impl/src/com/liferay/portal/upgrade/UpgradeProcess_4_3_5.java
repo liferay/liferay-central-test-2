@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
+import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
 import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
@@ -44,6 +45,7 @@ public class UpgradeProcess_4_3_5 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(new UpgradePermission());
+		upgrade(new UpgradePortletId());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_5.class);
