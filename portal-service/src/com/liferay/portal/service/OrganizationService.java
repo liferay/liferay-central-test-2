@@ -59,14 +59,9 @@ public interface OrganizationService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Organization addOrganization(
-		long parentOrganizationId, java.lang.String name, boolean location,
-		boolean recursable, long regionId, long countryId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Organization addOrganization(
 		long parentOrganizationId, java.lang.String name, int type,
-		boolean recursable, long regionId, long countryId, int statusId)
+		boolean recursable, long regionId, long countryId, int statusId,
+		java.lang.String comments)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -102,20 +97,8 @@ public interface OrganizationService {
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		boolean location, boolean recursable, long regionId, long countryId,
-		int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, long parentOrganizationId, java.lang.String name,
 		int type, boolean recursable, long regionId, long countryId,
-		int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, java.lang.String comments)
+		int statusId, java.lang.String comments)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

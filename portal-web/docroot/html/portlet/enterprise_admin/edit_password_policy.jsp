@@ -71,6 +71,11 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
 		<liferay-ui:message key="changeable" />
 	</td>
@@ -118,6 +123,12 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 </table>
 
 <br />
+
+<input type="submit" value="<liferay-ui:message key="save" />" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+
+<br /><br />
 
 <liferay-ui:tabs names="password-syntax-checking" />
 
@@ -344,12 +355,6 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	</tr>
 </tbody>
 </table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

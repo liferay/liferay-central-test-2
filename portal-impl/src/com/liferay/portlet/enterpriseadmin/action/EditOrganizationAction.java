@@ -70,9 +70,6 @@ public class EditOrganizationAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				organization = updateOrganization(req);
 			}
-			else if (cmd.equals("comments")) {
-				organization = updateComments(req);
-			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteOrganizations(req);
 			}
@@ -147,15 +144,6 @@ public class EditOrganizationAction extends PortletAction {
 		}
 	}
 
-	protected Organization updateComments(ActionRequest req) throws Exception {
-		long organizationId = ParamUtil.getLong(req, "organizationId");
-
-		String comments = ParamUtil.getString(req, "comments");
-
-		return OrganizationServiceUtil.updateOrganization(
-			organizationId, comments);
-	}
-
 	protected Organization updateOrganization(ActionRequest req)
 		throws Exception {
 
@@ -170,6 +158,7 @@ public class EditOrganizationAction extends PortletAction {
 		int type = ParamUtil.getInteger(req, "type");
 		long regionId = ParamUtil.getLong(req, "regionId");
 		long countryId = ParamUtil.getLong(req, "countryId");
+		String comments = ParamUtil.getString(req, "comments");
 
 		Organization organization = null;
 
@@ -179,7 +168,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId);
+				countryId, statusId, comments);
 		}
 		else {
 
@@ -187,7 +176,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId);
+				recursable, regionId, countryId, statusId, comments);
 		}
 
 		return organization;

@@ -88,23 +88,12 @@ public class OrganizationServiceJSON {
 	}
 
 	public static JSONObject addOrganization(long parentOrganizationId,
-		java.lang.String name, boolean location, boolean recursable,
-		long regionId, long countryId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-				name, location, recursable, regionId, countryId, statusId);
-
-		return OrganizationJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, int type, boolean recursable, long regionId,
-		long countryId, int statusId)
+		long countryId, int statusId, java.lang.String comments)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-				name, type, recursable, regionId, countryId, statusId);
+				name, type, recursable, regionId, countryId, statusId, comments);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -163,35 +152,14 @@ public class OrganizationServiceJSON {
 	}
 
 	public static JSONObject updateOrganization(long organizationId,
-		long parentOrganizationId, java.lang.String name, boolean location,
-		boolean recursable, long regionId, long countryId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
-				parentOrganizationId, name, location, recursable, regionId,
-				countryId, statusId);
-
-		return OrganizationJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject updateOrganization(long organizationId,
 		long parentOrganizationId, java.lang.String name, int type,
-		boolean recursable, long regionId, long countryId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
-				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId);
-
-		return OrganizationJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject updateOrganization(long organizationId,
+		boolean recursable, long regionId, long countryId, int statusId,
 		java.lang.String comments)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
-				comments);
+				parentOrganizationId, name, type, recursable, regionId,
+				countryId, statusId, comments);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}

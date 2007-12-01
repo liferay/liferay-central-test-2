@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -65,24 +64,10 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			passwordPolicyId, organizationIds);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public Organization addOrganization(
-			long parentOrganizationId, String name, boolean location,
-			boolean recursable, long regionId, long countryId, int statusId)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return addOrganization(
-			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId);
-	}
-
 	public Organization addOrganization(
 			long parentOrganizationId, String name, int type,
-			boolean recursable, long regionId, long countryId, int statusId)
+			boolean recursable, long regionId, long countryId, int statusId,
+			String comments)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -98,7 +83,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId);
+			regionId, countryId, statusId, comments);
 	}
 
 	public void deleteOrganization(long organizationId)
@@ -160,42 +145,17 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			passwordPolicyId, organizationIds);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public Organization updateOrganization(
-			long organizationId, long parentOrganizationId, String name,
-			boolean location, boolean recursable, long regionId, long countryId,
-			int statusId)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return updateOrganization(
-			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId);
-	}
-
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			int type, boolean recursable, long regionId, long countryId,
-			int statusId)
+			int statusId, String comments)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
 		return organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, type, recursable, regionId, countryId, statusId);
-	}
-
-	public Organization updateOrganization(long organizationId, String comments)
-		throws PortalException, SystemException {
-
-		checkPermission(organizationId, ActionKeys.UPDATE);
-
-		return organizationLocalService.updateOrganization(
-			organizationId, comments);
+			name, type, recursable, regionId, countryId, statusId, comments);
 	}
 
 	protected void checkPermission(long organizationId, String actionId)

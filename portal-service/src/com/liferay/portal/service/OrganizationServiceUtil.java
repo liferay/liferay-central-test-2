@@ -71,25 +71,15 @@ public class OrganizationServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
-		long parentOrganizationId, java.lang.String name, boolean location,
-		boolean recursable, long regionId, long countryId, int statusId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.addOrganization(parentOrganizationId, name,
-			location, recursable, regionId, countryId, statusId);
-	}
-
-	public static com.liferay.portal.model.Organization addOrganization(
 		long parentOrganizationId, java.lang.String name, int type,
-		boolean recursable, long regionId, long countryId, int statusId)
+		boolean recursable, long regionId, long countryId, int statusId,
+		java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 		return organizationService.addOrganization(parentOrganizationId, name,
-			type, recursable, regionId, countryId, statusId);
+			type, recursable, regionId, countryId, statusId, comments);
 	}
 
 	public static void deleteOrganization(long organizationId)
@@ -155,36 +145,14 @@ public class OrganizationServiceUtil {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		boolean location, boolean recursable, long regionId, long countryId,
-		int statusId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.updateOrganization(organizationId,
-			parentOrganizationId, name, location, recursable, regionId,
-			countryId, statusId);
-	}
-
-	public static com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, long parentOrganizationId, java.lang.String name,
 		int type, boolean recursable, long regionId, long countryId,
-		int statusId)
+		int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 		return organizationService.updateOrganization(organizationId,
 			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId);
-	}
-
-	public static com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.updateOrganization(organizationId, comments);
+			statusId, comments);
 	}
 }

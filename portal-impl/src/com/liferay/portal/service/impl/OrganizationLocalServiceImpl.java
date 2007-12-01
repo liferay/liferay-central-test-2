@@ -74,7 +74,7 @@ public class OrganizationLocalServiceImpl
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
 			int type, boolean recursable, long regionId, long countryId,
-			int statusId)
+			int statusId, String comments)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -107,6 +107,7 @@ public class OrganizationLocalServiceImpl
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
 		organization.setStatusId(statusId);
+		organization.setComments(comments);
 
 		organizationPersistence.update(organization);
 
@@ -349,22 +350,6 @@ public class OrganizationLocalServiceImpl
 		return false;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public List search(
-			long companyId, long parentOrganizationId, String keywords,
-			boolean location, Long regionId, Long countryId,
-			LinkedHashMap params, int begin, int end)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return search(
-			companyId, parentOrganizationId, keywords, type, regionId,
-			countryId, params, begin, end);
-	}
-
 	public List search(
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId, LinkedHashMap params,
@@ -375,22 +360,6 @@ public class OrganizationLocalServiceImpl
 			companyId, parentOrganizationId, keywords, type, regionId,
 			countryId, params, begin, end,
 			new OrganizationNameComparator(true));
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public List search(
-			long companyId, long parentOrganizationId, String keywords,
-			boolean location, Long regionId, Long countryId,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return search(
-			companyId, parentOrganizationId, keywords, type, regionId,
-			countryId, params, begin, end, obc);
 	}
 
 	public List search(
@@ -413,23 +382,6 @@ public class OrganizationLocalServiceImpl
 			obc);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public List search(
-			long companyId, long parentOrganizationId, String name,
-			boolean location, String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
-			boolean andOperator, int begin, int end)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return search(
-			companyId, parentOrganizationId, name, type, street, city, zip,
-			regionId, countryId, params, andOperator, begin, end);
-	}
-
 	public List search(
 			long companyId, long parentOrganizationId, String name, int type,
 			String street, String city, String zip,
@@ -441,23 +393,6 @@ public class OrganizationLocalServiceImpl
 			companyId, parentOrganizationId, name, type, street, city, zip,
 			regionId, countryId, params, andOperator, begin, end,
 			new OrganizationNameComparator(true));
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public List search(
-			long companyId, long parentOrganizationId, String name,
-			boolean location, String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return search(
-			companyId, parentOrganizationId, name, type, street, city, zip,
-			regionId, countryId, params, andOperator, begin, end, obc);
 	}
 
 	public List search(
@@ -481,22 +416,6 @@ public class OrganizationLocalServiceImpl
 			andOperator, begin, end, obc);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public int searchCount(
-			long companyId, long parentOrganizationId, String keywords,
-			boolean location, Long regionId, Long countryId,
-			LinkedHashMap params)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return searchCount(
-			companyId, parentOrganizationId, keywords, type, regionId,
-			countryId, params);
-	}
-
 	public int searchCount(
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId,
@@ -514,23 +433,6 @@ public class OrganizationLocalServiceImpl
 		return organizationFinder.countByKeywords(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			keywords, type, regionId, countryId, params);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public int searchCount(
-			long companyId, long parentOrganizationId, String name,
-			boolean location, String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
-			boolean andOperator)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return searchCount(
-			companyId, parentOrganizationId, name, type, street, city, zip,
-			regionId, countryId, params, andOperator);
 	}
 
 	public int searchCount(
@@ -578,26 +480,10 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public Organization updateOrganization(
-			long companyId, long organizationId, long parentOrganizationId,
-			String name, boolean location, boolean recursable, long regionId,
-			long countryId, int statusId)
-		throws PortalException, SystemException {
-
-		int type = OrganizationImpl.getType(location);
-
-		return updateOrganization(
-			companyId, organizationId, parentOrganizationId, name, type,
-		    recursable, regionId, countryId, statusId);
-	}
-
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, int type, boolean recursable, long regionId,
-			long countryId, int statusId)
+			long countryId, int statusId, String comments)
 		throws PortalException, SystemException {
 
 		parentOrganizationId = getParentOrganizationId(
@@ -624,18 +510,6 @@ public class OrganizationLocalServiceImpl
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
 		organization.setStatusId(statusId);
-
-		organizationPersistence.update(organization);
-
-		return organization;
-	}
-
-	public Organization updateOrganization(long organizationId, String comments)
-		throws PortalException, SystemException {
-
-		Organization organization = organizationPersistence.findByPrimaryKey(
-			organizationId);
-
 		organization.setComments(comments);
 
 		organizationPersistence.update(organization);
