@@ -25,14 +25,14 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String cmd = ParamUtil.getString(request, Constants.CMD);
 
 tabs1 = "roles";
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 String cur = ParamUtil.getString(request, "cur");
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
@@ -108,6 +108,10 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 
 	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + portletResourceLabel + "</a>";
 }
+
+request.setAttribute("edit_role_permissions.jsp-role", role);
+
+request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 %>
 
 <script type="text/javascript">
@@ -198,7 +202,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
-<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null)?"":StringUtil.merge(modelResources) %>' />
+<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
@@ -219,152 +223,132 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("portlet");
-			headerNames.add("resource");
-			headerNames.add("action");
+		headerNames.add("portlet");
+		headerNames.add("resource");
+		headerNames.add("action");
 
-			if ((role.getType() == RoleImpl.TYPE_REGULAR)) {
-				headerNames.add("scope");
-				headerNames.add("communities");
+		if ((role.getType() == RoleImpl.TYPE_REGULAR)) {
+			headerNames.add("scope");
+			headerNames.add("community");
+		}
+
+		headerNames.add(StringPool.BLANK);
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-role-does-have-any-permissions");
+
+		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
+
+		List permissionsDisplay = new ArrayList(permissions.size());
+
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = (Permission)permissions.get(i);
+
+			Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
+
+			String curPortletName = null;
+			String curPortletLabel = null;
+			String curModelName = null;
+			String curModelLabel = null;
+			String actionId = permission.getActionId();
+			String actionLabel = ResourceActionsUtil.getAction(pageContext, actionId);
+
+			if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resource.getName())) {
+				curPortletName = resource.getName();
+				curModelName = StringPool.BLANK;
+				curModelLabel = StringPool.BLANK;
 			}
+			else {
+				curModelName = resource.getName();
+				curModelLabel = ResourceActionsUtil.getModelResource(pageContext, curModelName);
 
-			headerNames.add(StringPool.BLANK);
+				List portletResources = ResourceActionsUtil.getModelPortletResources(curModelName);
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-role-does-have-any-permissions");
-
-			List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
-
-			List permissionsDisplay = new ArrayList(permissions.size());
-
-			for (int i = 0; i < permissions.size(); i++) {
-				Permission permission = (Permission) permissions.get(i);
-
-				Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
-
-				String curPortletName = null;
-				String curPortletLabel = null;
-				String curModelName = null;
-				String curModelLabel = null;
-				String actionId = permission.getActionId();
-				String actionLabel = ResourceActionsUtil.getAction(pageContext, actionId);
-
-				if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resource.getName())) {
-					curModelName = StringPool.BLANK;
-					curModelLabel = StringPool.BLANK;
-					curPortletName = resource.getName();
-				}
-				else {
-					curModelName = resource.getName();
-					curModelLabel = ResourceActionsUtil.getModelResource(pageContext, curModelName);
-
-					List portletResources = ResourceActionsUtil.getModelPortletResources(curModelName);
-
-					if (portletResources.size() > 0) {
-						curPortletName = (String) portletResources.get(0);
-					}
-				}
-
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletName);
-				curPortletLabel = PortalUtil.getPortletTitle(portlet, application, locale);
-
-				PermissionDisplay permissionDisplay = new PermissionDisplay(permission, resource, curPortletName, curPortletLabel, curModelName, curModelLabel, actionId, actionLabel);
-
-				if (!permissionsDisplay.contains(permissionDisplay)) {
-					permissionsDisplay.add(permissionDisplay);
+				if (portletResources.size() > 0) {
+					curPortletName = (String)portletResources.get(0);
 				}
 			}
 
-			Collections.sort(permissionsDisplay);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletName);
 
-			int total = permissionsDisplay.size();
+			curPortletLabel = PortalUtil.getPortletTitle(portlet, application, locale);
 
-			searchContainer.setTotal(total);
+			PermissionDisplay permissionDisplay = new PermissionDisplay(permission, resource, curPortletName, curPortletLabel, curModelName, curModelLabel, actionId, actionLabel);
 
-			List results = ListUtil.subList(permissionsDisplay, searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				PermissionDisplay permissionDisplay = (PermissionDisplay) results.get(i);
-
-				Permission permission = permissionDisplay.getPermission();
-				Resource resource = permissionDisplay.getResource();
-				String curPortletName = permissionDisplay.getPortletName();
-				String curPortletLabel = permissionDisplay.getPortletLabel();
-				String curModelName = permissionDisplay.getModelName();
-				String curModelLabel = permissionDisplay.getModelLabel();
-				String actionId = permissionDisplay.getActionId();
-				String actionLabel = permissionDisplay.getActionLabel();
-
-				ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
-
-				boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_COMPANY, actionId);
-				boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-				boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP, actionId);
-
-				PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
-
-				editResourcePermissionsURL.setWindowState(WindowState.MAXIMIZED);
-
-				editResourcePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-				editResourcePermissionsURL.setParameter("tabs1", "roles");
-				editResourcePermissionsURL.setParameter("redirect", currentURL);
-				editResourcePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-				editResourcePermissionsURL.setParameter("portletResource", curPortletName);
-
-				row.addText(curPortletLabel, editResourcePermissionsURL);
-				row.addText(curModelLabel);
-				row.addText(actionLabel);
-
-				if (hasCompanyScope) {
-					row.addText(LanguageUtil.get(pageContext, "enterprise"));
-					row.addText(StringPool.BLANK);
-				}
-				else if (hasGroupTemplateScope) {
-				}
-				else if (hasGroupScope) {
-					row.addText(LanguageUtil.get(pageContext, "communities"));
-
-					StringMaker sm = new StringMaker();
-
-					LinkedHashMap groupParams = new LinkedHashMap();
-
-					List rolePermissions = new ArrayList();
-
-					rolePermissions.add(resource.getName());
-					rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
-					rolePermissions.add(actionId);
-					rolePermissions.add(new Long(role.getRoleId()));
-
-					groupParams.put("rolePermissions", rolePermissions);
-
-					List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-					for (int j = 0; j < groups.size(); j++) {
-						Group group = (Group) groups.get(j);
-
-						sm.append(group.getName());
-
-						if ((j + 1) != groups.size()) {
-							sm.append(", ");
-						}
-					}
-
-					row.addText(sm.toString());
-				}
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/permission_action.jsp");
-
-				if (hasCompanyScope || hasGroupTemplateScope || hasGroupScope) {
-					resultRows.add(row);
-				}
+			if (!permissionsDisplay.contains(permissionDisplay)) {
+				permissionsDisplay.add(permissionDisplay);
 			}
+		}
+
+		Collections.sort(permissionsDisplay);
+
+		int total = permissionsDisplay.size();
+
+		searchContainer.setTotal(total);
+
+		List results = ListUtil.subList(permissionsDisplay, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			PermissionDisplay permissionDisplay = (PermissionDisplay) results.get(i);
+
+			Permission permission = permissionDisplay.getPermission();
+			Resource resource = permissionDisplay.getResource();
+			String curPortletName = permissionDisplay.getPortletName();
+			String curPortletLabel = permissionDisplay.getPortletLabel();
+			String curModelName = permissionDisplay.getModelName();
+			String curModelLabel = permissionDisplay.getModelLabel();
+			String actionId = permissionDisplay.getActionId();
+			String actionLabel = permissionDisplay.getActionLabel();
+
+			ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
+
+			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP, actionId);
+
+			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
+
+			editResourcePermissionsURL.setWindowState(WindowState.MAXIMIZED);
+
+			editResourcePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+			editResourcePermissionsURL.setParameter("tabs1", "roles");
+			editResourcePermissionsURL.setParameter("redirect", currentURL);
+			editResourcePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+			editResourcePermissionsURL.setParameter("portletResource", curPortletName);
+
+			row.addText(curPortletLabel, editResourcePermissionsURL);
+			row.addText(curModelLabel);
+			row.addText(actionLabel);
+
+			if (hasCompanyScope) {
+				row.addText(LanguageUtil.get(pageContext, "enterprise"));
+				row.addText(StringPool.BLANK);
+			}
+			else if (hasGroupTemplateScope) {
+			}
+			else if (hasGroupScope) {
+				row.addText(LanguageUtil.get(pageContext, "community"));
+
+				long groupId = GetterUtil.getLong(resource.getPrimKey());
+
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				row.addText(group.getName());
+			}
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/permission_action.jsp");
+
+			if (hasCompanyScope || hasGroupTemplateScope || hasGroupScope) {
+				resultRows.add(row);
+			}
+		}
 		%>
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onclick="<portlet:namespace />addPermissions('portlet');" />
@@ -378,6 +362,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
+		<liferay-ui:error key="missingGroupIdsForAction" message="select-at-least-one-community-for-each-action-with-scope-set-to-communities" />
+
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			<c:choose>
 				<c:when test="<%= portletResource.equals(PortletKeys.PORTAL) %>">
@@ -404,38 +390,31 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 			<%= breadcrumbs %>
 		</div>
 
-		<liferay-ui:error key="missingGroupIdsForAction" message="select-at-least-one-community-for-each-action-with-scope-set-to-communities" />
-
 		<c:if test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
-			<table class="liferay-table">
+			<table class="lfr-table">
 			<tr>
-				<th>
+				<td>
 					<liferay-ui:message key="all" />
-				</th>
-				<th>
-					&nbsp;
-				</th>
-				<th>
+				</td>
+				<td>
 					<input name="<portlet:namespace />actionAllBox" type="checkbox" />
-				</th>
-				<th>
-				</th>
+				</td>
 			</tr>
 			</table>
+
+			<br />
 		</c:if>
 
+		<liferay-ui:tabs names="<%= portletResourceLabel %>" />
+
 		<%
-			String curPortletResource = portletResource;
-			String curModelResource = null;
-			String curModelResourceName = null;
-			List curActions = null;
+		request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 		%>
 
-		<liferay-ui:tabs names="general" />
-
-		<%@ include file="/html/portlet/enterprise_admin/edit_role_permissions_resource.jspf" %>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
 
 		<c:if test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
+
 			<%
 			SearchContainer searchContainer = new SearchContainer();
 
@@ -449,43 +428,49 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 
 			List resultRows = searchContainer.getResultRows();
 
-			curPortletResource = null;
-
 			for (int i = 0; i < modelResources.size(); i++) {
-				curModelResource = (String)modelResources.get(i);
+				String curModelResource = (String)modelResources.get(i);
 
-				curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
+				String curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
 
 				boolean selectable = true;
 
 				if ((role.getType() != RoleImpl.TYPE_REGULAR) && ResourceActionsUtil.isPortalModelResource(curModelResource)) {
 					selectable = false;
 				}
-
 				%>
+
 				<br />
 
 				<liferay-ui:tabs names="<%= curModelResourceName %>" />
-				<%
-				if (selectable) {
-				%>
-					<%@ include file="/html/portlet/enterprise_admin/edit_role_permissions_resource.jspf" %>
-				<%
-				}
-				else {
-				%>
-					<liferay-ui:message key="not-available-for-this-type-of-role"/>
 
-					<br />
-				<%
-				}
+				<c:choose>
+					<c:when test="<%= selectable %>">
+
+						<%
+						request.removeAttribute("edit_role_permissions.jsp-curPortletResource");
+						request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
+						request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
+						%>
+
+						<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="not-available-for-this-type-of-role" />
+
+						<br />
+					</c:otherwise>
+				</c:choose>
+
+			<%
 			}
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 
-		<br/>
+		<br />
+
 		<input type="button" value="<liferay-ui:message key="save" />" onclick="<portlet:namespace />updateActions();" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />

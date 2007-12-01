@@ -21,13 +21,24 @@
  * SOFTWARE.
  */
 %>
+
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+
 <%
-curActions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), curPortletResource, curModelResource);
+Role role = (Role)request.getAttribute("edit_role_permissions.jsp-role");
+
+String portletResource = (String)request.getAttribute("edit_role_permissions.jsp-portletResource");
+
+String curPortletResource = (String)request.getAttribute("edit_role_permissions.jsp-curPortletResource");
+String curModelResource = (String)request.getAttribute("edit_role_permissions.jsp-curModelResource");
+String curModelResourceName = (String)request.getAttribute("edit_role_permissions.jsp-curModelResourceName");
+
+List curActions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), curPortletResource, curModelResource);
 
 Collections.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
 %>
 
-<table class="liferay-table">
+<table class="lfr-table">
 <tr>
 	<th>
 		<liferay-ui:message key="action" />
@@ -39,13 +50,12 @@ Collections.sort(curActions, new ActionComparator(company.getCompanyId(), locale
 			</c:when>
 		</c:choose>
 	</th>
-	<th>
-	</th>
+	<th></th>
 </tr>
 
 <%
-for (int k = 0; k < curActions.size(); k++) {
-	String actionId = (String) curActions.get(k);
+for (int i = 0; i < curActions.size(); i++) {
+	String actionId = (String) curActions.get(i);
 
 	String curResource = null;
 
@@ -83,7 +93,7 @@ for (int k = 0; k < curActions.size(); k++) {
 		<td>
 			<c:choose>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
-					<select name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>')">
+					<select name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
 						<option value=""></option>
 							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
@@ -118,15 +128,19 @@ for (int k = 0; k < curActions.size(); k++) {
 			</c:choose>
 		</td>
 		<td>
+
 			<%
 			StringMaker groupsHTML = new StringMaker();
+
 			String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
 			long[] groupIdsArray = StringUtil.split(groupIds, 0L);
+
 			List groupNames = new ArrayList();
 			%>
-			<c:if test="<%= hasGroupScope %>">
-				<%
 
+			<c:if test="<%= hasGroupScope %>">
+
+				<%
 				LinkedHashMap groupParams = new LinkedHashMap();
 
 				List rolePermissions = new ArrayList();
@@ -163,20 +177,21 @@ for (int k = 0; k < curActions.size(); k++) {
 					if ((l + 1) != groups.size()) {
 						groupsHTML.append(",&nbsp;");
 					}
-
 				}
 				%>
+
 			</c:if>
-				<input name="<portlet:namespace />groupIds<%= target %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
-				<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
 
-				<div id="<portlet:namespace />groupDiv<%= target %>" <%= hasGroupScope?"":"style=\"display: none\"" %>>
-					<span id="<portlet:namespace />groupHTML<%= target %>">
-						<%= groupsHTML.toString() %>
-					</span>
+			<input name="<portlet:namespace />groupIds<%= target %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
+			<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
 
-					<input type="button" value='<liferay-ui:message key="select" />' onClick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= target %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
-				</div>
+			<div id="<portlet:namespace />groupDiv<%= target %>" <%= hasGroupScope ? "" : "style=\"display: none\"" %>>
+				<span id="<portlet:namespace />groupHTML<%= target %>">
+					<%= groupsHTML.toString() %>
+				</span>
+
+				<input type="button" value='<liferay-ui:message key="select" />' onclick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= target %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
+			</div>
 		</td>
 	</tr>
 

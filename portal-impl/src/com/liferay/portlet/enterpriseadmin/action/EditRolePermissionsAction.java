@@ -171,12 +171,12 @@ public class EditRolePermissionsAction extends PortletAction {
 					themeDisplay.getCompanyId(), null, modelResources[i]));
 		}
 
-		Iterator it = resourceActionsMap.keySet().iterator();
+		Iterator itr = resourceActionsMap.keySet().iterator();
 
-		while (it.hasNext()) {
-			String selResource = (String) it.next();
+		while (itr.hasNext()) {
+			String selResource = (String)itr.next();
 
-			List actions = (List) resourceActionsMap.get(selResource);
+			List actions = (List)resourceActionsMap.get(selResource);
 
 			Collections.sort(
 				actions,
