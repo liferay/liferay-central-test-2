@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -356,6 +357,8 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		}
 
 		names.add(RenderRequest.USER_INFO);
+		names.add(JavaConstants.JAVAX_PORTLET_CONFIG);
+		names.add(WebKeys.THEME_DISPLAY);
 
 		return Collections.enumeration(names);
 	}
