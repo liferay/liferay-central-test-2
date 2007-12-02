@@ -192,10 +192,6 @@ public class JournalUtil {
 			article.getDescription());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_SMALL_IMAGE_URL,
-			article.getSmallImageURL());
-
-		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TYPE,
 			article.getType());
 
@@ -214,6 +210,10 @@ public class JournalUtil {
 				JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
 				article.getDisplayDate());
 		}
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_SMALL_IMAGE_URL,
+			article.getSmallImageURL());
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
