@@ -60,6 +60,9 @@ public class JournalStructureImpl
 	public static final String RESERVED_ARTICLE_DISPLAY_DATE =
 		"reserved-article-display-date";
 
+	public static final String RESERVED_ARTICLE_SMALL_IMAGE_URL =
+		"reserved-article-small-image-url";
+
 	public static final String RESERVED_ARTICLE_AUTHOR_ID =
 		"reserved-article-author-id";
 
