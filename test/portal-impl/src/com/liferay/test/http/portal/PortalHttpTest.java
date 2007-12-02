@@ -61,8 +61,7 @@ public class PortalHttpTest extends BaseHttpTest {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = null;
-			long organizationId = 0;
-			long locationId = 0;
+			long[] organizationIds = new long[]{0L};
 			boolean sendMail = false;
 
 			User user = UserServiceHttp.addUser(
@@ -70,7 +69,7 @@ public class PortalHttpTest extends BaseHttpTest {
 				password1, password2, autoScreenName, screenName, emailAddress,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				organizationId, locationId, sendMail);
+				organizationIds, sendMail);
 
 			user = UserServiceHttp.getUserByEmailAddress(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, emailAddress);
