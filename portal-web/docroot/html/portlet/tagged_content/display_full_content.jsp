@@ -22,6 +22,23 @@
  */
 %>
 
+<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+
+<%
+List results = (List)request.getAttribute("view.jsp-results");
+
+int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+
+TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+
+String title = (String)request.getAttribute("view.jsp-title");
+
+String className = (String)request.getAttribute("view.jsp-className");
+long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+
+boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+%>
+
 <c:choose>
 	<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
 

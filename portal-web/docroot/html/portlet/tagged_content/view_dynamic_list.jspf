@@ -36,6 +36,8 @@ List results = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), c
 
 searchContainer.setResults(results);
 
+request.setAttribute("view.jsp-results", results);
+
 for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	TagsAsset asset = (TagsAsset)results.get(assetIndex);
 
@@ -44,11 +46,25 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
 	String title = asset.getTitle();
 	String summary = StringPool.BLANK;
-	String viewURL = null;
+	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;
 	String editURL = StringPool.BLANK;
 
 	boolean show = true;
+
+	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+
+	request.setAttribute("view.jsp-asset", asset);
+
+	request.setAttribute("view.jsp-title", title);
+	request.setAttribute("view.jsp-summary", summary);
+	request.setAttribute("view.jsp-viewURL", viewURL);
+	request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
+
+	request.setAttribute("view.jsp-className", className);
+	request.setAttribute("view.jsp-classPK", new Long(classPK));
+
+	request.setAttribute("view.jsp-show", new Boolean(show));
 
 	try {
 %>
@@ -56,19 +72,19 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 		<c:choose>
 			<c:when test='<%= displayStyle.equals("full-content") %>'>
 				<div>
-					<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+					<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
 				</div>
 			</c:when>
 			<c:when test='<%= displayStyle.equals("abstracts") %>'>
 				<div>
-					<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+					<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
 				</div>
 			</c:when>
 			<c:when test='<%= displayStyle.equals("title-list") %>'>
-				<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+				<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
 			</c:when>
 			<c:when test='<%= displayStyle.equals("table") %>'>
-				<%@ include file="/html/portlet/tagged_content/display_table.jspf" %>
+				<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
 			</c:when>
 			<c:otherwise>
 				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>

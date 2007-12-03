@@ -22,7 +22,25 @@
  */
 %>
 
+<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+
 <%
+List results = (List)request.getAttribute("view.jsp-results");
+
+int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+
+TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+
+String title = (String)request.getAttribute("view.jsp-title");
+String summary = (String)request.getAttribute("view.jsp-summary");
+String viewURL = (String)request.getAttribute("view.jsp-viewURL");
+String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
+
+String className = (String)request.getAttribute("view.jsp-className");
+long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+
+boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
@@ -101,28 +119,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 			title = articleDisplay.getTitle();
 		}
 
-		StringMaker sm = new StringMaker();
-
-		if (articleDisplay.isSmallImage()) {
-			sm.append("<div style=\"float: left; padding-right: 10px;\"><img src=\"");
-
-			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
-				sm.append(articleDisplay.getSmallImageURL());
-			}
-			else {
-				sm.append(themeDisplay.getPathImage());
-				sm.append("/journal/article?img_id=");
-				sm.append(articleDisplay.getSmallImageId());
-				sm.append("&t=");
-				sm.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
-			}
-
-			sm.append("\" /></div>");
-		}
-
-		sm.append(articleDisplay.getDescription());
-
-		summary = sm.toString();
+		summary = articleDisplay.getDescription();
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 
@@ -161,39 +158,29 @@ if (Validator.isNotNull(asset.getUrl())) {
 }
 %>
 
+<c:if test="<%= assetIndex == 0 %>">
+	<ul>
+</c:if>
+
 <c:if test="<%= show %>">
-	<div class="portlet-journal-abstract">
+	<li>
+		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(viewURL) %>">
-				<h3 class="journal-content-title"><a href="<%= viewURL %>"><%= title %></a></h3>
+				<a href="<%= viewURL %>"><%= title %></a>
 			</c:when>
 			<c:otherwise>
-				<h3 class="journal-content-title"><%= title %></h3>
+				<%= title %>
 			</c:otherwise>
 		</c:choose>
 
-		<div class="portlet-journal-metadata">
+		<span class="portlet-journal-metadata">
 			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
-		</div>
+		</span>
+	</li>
+</c:if>
 
-		<p class="portlet-journal-summary">
-			<%= summary %>
-		</p>
-
-		<c:if test="<%= Validator.isNotNull(viewURL) %>">
-			<div class="portlet-journal-more">
-				<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
-			</div>
-		</c:if>
-	</div>
-
-	<div>
-		<br />
-
-		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-	</div>
-
-	<c:if test="<%= (assetIndex + 1) < results.size() %>">
-		<div class="separator"><!-- --></div>
-	</c:if>
+<c:if test="<%= (assetIndex + 1) == results.size() %>">
+	</ul>
 </c:if>

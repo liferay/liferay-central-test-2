@@ -22,7 +22,25 @@
  */
 %>
 
+<%@ include file="/html/portlet/tagged_content/init.jsp" %>
+
 <%
+List results = (List)request.getAttribute("view.jsp-results");
+
+int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue();
+
+TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
+
+String title = (String)request.getAttribute("view.jsp-title");
+String summary = (String)request.getAttribute("view.jsp-summary");
+String viewURL = (String)request.getAttribute("view.jsp-viewURL");
+String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
+
+String className = (String)request.getAttribute("view.jsp-className");
+long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+
+boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
@@ -101,7 +119,28 @@ else if (className.equals(JournalArticle.class.getName())) {
 			title = articleDisplay.getTitle();
 		}
 
-		summary = articleDisplay.getDescription();
+		StringMaker sm = new StringMaker();
+
+		if (articleDisplay.isSmallImage()) {
+			sm.append("<div style=\"float: left; padding-right: 10px;\"><img src=\"");
+
+			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
+				sm.append(articleDisplay.getSmallImageURL());
+			}
+			else {
+				sm.append(themeDisplay.getPathImage());
+				sm.append("/journal/article?img_id=");
+				sm.append(articleDisplay.getSmallImageId());
+				sm.append("&t=");
+				sm.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
+			}
+
+			sm.append("\" /></div>");
+		}
+
+		sm.append(articleDisplay.getDescription());
+
+		summary = sm.toString();
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 
@@ -140,101 +179,39 @@ if (Validator.isNotNull(asset.getUrl())) {
 }
 %>
 
-<c:if test="<%= assetIndex == 0 %>">
-	<table class="taglib-search-iterator">
-	<tr class="portlet-section-header">
-		<th>
-			<liferay-ui:message key="title" />
-		</th>
-
-		<%
-		for (int m = 0; m < metadataFields.length; m++) {
-		%>
-			<th>
-				<liferay-ui:message key="<%= metadataFields[m] %>" />
-			</th>
-		<%
-		}
-		%>
-
-		<th></th>
-	</tr>
-</c:if>
-
 <c:if test="<%= show %>">
+	<div class="portlet-journal-abstract">
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<h3 class="journal-content-title"><a href="<%= viewURL %>"><%= title %></a></h3>
+			</c:when>
+			<c:otherwise>
+				<h3 class="journal-content-title"><%= title %></h3>
+			</c:otherwise>
+		</c:choose>
 
-	<%
-	String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+		<div class="portlet-journal-metadata">
+			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
+		</div>
 
-	if (assetIndex % 2 == 0) {
-		style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
-	}
-	%>
+		<p class="portlet-journal-summary">
+			<%= summary %>
+		</p>
 
-	<tr <%= style %>>
-		<td>
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><%= title %></a>
-				</c:when>
-				<c:otherwise>
-					<%= title %>
-				</c:otherwise>
-			</c:choose>
-		</td>
+		<c:if test="<%= Validator.isNotNull(viewURL) %>">
+			<div class="portlet-journal-more">
+				<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
+			</div>
+		</c:if>
+	</div>
 
-		<%
-		for (int m = 0; m < metadataFields.length; m++) {
-			String value = null;
+	<div>
+		<br />
 
-			if (metadataFields[m].equals("create-date")) {
-				value = dateFormatDate.format(asset.getCreateDate());
-			}
-			else if (metadataFields[m].equals("modified-date")) {
-				value = dateFormatDate.format(asset.getModifiedDate());
-			}
-			else if (metadataFields[m].equals("publish-date")) {
-				if (asset.getPublishDate() == null) {
-					value = StringPool.BLANK;
-				}
-				else {
-					value = dateFormatDate.format(asset.getPublishDate());
-				}
-			}
-			else if (metadataFields[m].equals("expiration-date")) {
-				if (asset.getExpirationDate() == null) {
-					value = StringPool.BLANK;
-				}
-				else {
-					value = dateFormatDate.format(asset.getExpirationDate());
-				}
-			}
-			else if (metadataFields[m].equals("priority")) {
-				value = String.valueOf(asset.getPriority());
-			}
-			else if (metadataFields[m].equals("author")) {
-				value = asset.getUserName();
-			}
-			else if (metadataFields[m].equals("view-count")) {
-				value = String.valueOf(asset.getViewCount());
-			}
+		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+	</div>
 
-			if (value != null) {
-		%>
-
-				<td>
-					<liferay-ui:message key="<%= value %>" />
-				</td>
-
-		<%
-			}
-		}
-		%>
-
-		<td></td>
-	</tr>
-</c:if>
-
-<c:if test="<%= (assetIndex + 1) == results.size() %>">
-	</table>
+	<c:if test="<%= (assetIndex + 1) < results.size() %>">
+		<div class="separator"><!-- --></div>
+	</c:if>
 </c:if>
