@@ -463,6 +463,7 @@ create table JournalTemplate (
 	description STRING null,
 	xsl TEXT null,
 	langType VARCHAR(75) null,
+	cacheable BOOLEAN,
 	smallImage BOOLEAN,
 	smallImageId LONG,
 	smallImageURL VARCHAR(75) null
