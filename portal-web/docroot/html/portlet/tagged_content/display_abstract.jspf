@@ -92,18 +92,9 @@ else if (className.equals(IGImage.class.getName())) {
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
-	JournalArticleDisplay articleDisplay = null;
+	String languageId = LanguageUtil.getLanguageId(request);
 
-	try {
-		String languageId = LanguageUtil.getLanguageId(request);
-
-		articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay);
-	}
-	catch (NoSuchArticleException nsae) {
-
-		// No version has been approved yet, the article should not be rendered
-
-	}
+	JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay);
 
 	if (articleDisplay != null) {
 		if (Validator.isNull(title)) {
