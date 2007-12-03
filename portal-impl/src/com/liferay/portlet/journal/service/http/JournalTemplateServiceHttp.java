@@ -78,7 +78,7 @@ public class JournalTemplateServiceHttp {
 		boolean autoTemplateId, long plid, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
+		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -126,30 +126,33 @@ public class JournalTemplateServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = new BooleanWrapper(smallImage);
+			Object paramObj9 = new BooleanWrapper(cacheable);
 
-			Object paramObj10 = smallImageURL;
+			Object paramObj10 = new BooleanWrapper(smallImage);
+
+			Object paramObj11 = smallImageURL;
 
 			if (smallImageURL == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = smallFile;
+			Object paramObj12 = smallFile;
 
 			if (smallFile == null) {
-				paramObj11 = new NullWrapper("java.io.File");
+				paramObj12 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj12 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj13 = new BooleanWrapper(addCommunityPermissions);
 
-			Object paramObj13 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj14 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
 					"addTemplate",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14
 					});
 
 			Object returnObj = null;
@@ -183,7 +186,7 @@ public class JournalTemplateServiceHttp {
 		boolean autoTemplateId, long plid, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
+		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -231,30 +234,32 @@ public class JournalTemplateServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = new BooleanWrapper(smallImage);
+			Object paramObj9 = new BooleanWrapper(cacheable);
 
-			Object paramObj10 = smallImageURL;
+			Object paramObj10 = new BooleanWrapper(smallImage);
+
+			Object paramObj11 = smallImageURL;
 
 			if (smallImageURL == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = smallFile;
+			Object paramObj12 = smallFile;
 
 			if (smallFile == null) {
-				paramObj11 = new NullWrapper("java.io.File");
+				paramObj12 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj12 = communityPermissions;
+			Object paramObj13 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj12 = new NullWrapper("[Ljava.lang.String;");
+				paramObj13 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj13 = guestPermissions;
+			Object paramObj14 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj13 = new NullWrapper("[Ljava.lang.String;");
+				paramObj14 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
@@ -262,7 +267,8 @@ public class JournalTemplateServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14
 					});
 
 			Object returnObj = null;
@@ -375,7 +381,7 @@ public class JournalTemplateServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -420,18 +426,20 @@ public class JournalTemplateServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = new BooleanWrapper(smallImage);
+			Object paramObj8 = new BooleanWrapper(cacheable);
 
-			Object paramObj9 = smallImageURL;
+			Object paramObj9 = new BooleanWrapper(smallImage);
+
+			Object paramObj10 = smallImageURL;
 
 			if (smallImageURL == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
+				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = smallFile;
+			Object paramObj11 = smallFile;
 
 			if (smallFile == null) {
-				paramObj10 = new NullWrapper("java.io.File");
+				paramObj11 = new NullWrapper("java.io.File");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
@@ -439,7 +447,7 @@ public class JournalTemplateServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;

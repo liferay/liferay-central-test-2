@@ -148,14 +148,6 @@ type = ParamUtil.getString(request, "type", type);
 	<table class="lfr-table">
 	<tr>
 		<td>
-			<liferay-ui:message key="disable-caching" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<liferay-ui:message key="show-available-locales" />
 		</td>
 		<td>

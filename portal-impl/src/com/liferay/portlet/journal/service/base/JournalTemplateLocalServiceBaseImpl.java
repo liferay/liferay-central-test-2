@@ -114,6 +114,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		journalTemplate.setDescription(model.getDescription());
 		journalTemplate.setXsl(model.getXsl());
 		journalTemplate.setLangType(model.getLangType());
+		journalTemplate.setCacheable(model.getCacheable());
 		journalTemplate.setSmallImage(model.getSmallImage());
 		journalTemplate.setSmallImageId(model.getSmallImageId());
 		journalTemplate.setSmallImageURL(model.getSmallImageURL());
@@ -152,6 +153,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		journalTemplate.setDescription(model.getDescription());
 		journalTemplate.setXsl(model.getXsl());
 		journalTemplate.setLangType(model.getLangType());
+		journalTemplate.setCacheable(model.getCacheable());
 		journalTemplate.setSmallImage(model.getSmallImage());
 		journalTemplate.setSmallImageId(model.getSmallImageId());
 		journalTemplate.setSmallImageURL(model.getSmallImageURL());

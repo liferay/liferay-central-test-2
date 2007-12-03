@@ -910,6 +910,8 @@ public class JournalArticleLocalServiceImpl
 		boolean paginate = false;
 		boolean pageFlow = false;
 
+		boolean cacheable = true;
+
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		String xml = article.getContent();
@@ -1032,6 +1034,7 @@ public class JournalArticleLocalServiceImpl
 
 				script = template.getXsl();
 				langType = template.getLangType();
+				cacheable = template.isCacheable();
 			}
 
 			content = JournalUtil.transform(
@@ -1062,7 +1065,7 @@ public class JournalArticleLocalServiceImpl
 			article.getAvailableLocales(), content, article.getType(),
 			article.getStructureId(), templateId, article.isSmallImage(),
 			article.getSmallImageId(), article.getSmallImageURL(),
-			numberOfPages, page, paginate);
+			numberOfPages, page, paginate, cacheable);
 	}
 
 	public List getArticles() throws SystemException {

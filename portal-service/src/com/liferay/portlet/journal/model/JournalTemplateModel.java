@@ -107,6 +107,12 @@ public interface JournalTemplateModel extends BaseModel {
 
 	public void setLangType(String langType);
 
+	public boolean getCacheable();
+
+	public boolean isCacheable();
+
+	public void setCacheable(boolean cacheable);
+
 	public boolean getSmallImage();
 
 	public boolean isSmallImage();

@@ -73,14 +73,14 @@ public class JournalTemplateLocalServiceImpl
 	public JournalTemplate addTemplate(
 			long userId, String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile,
+			boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			description, xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
 			smallFile, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -88,37 +88,37 @@ public class JournalTemplateLocalServiceImpl
 	public JournalTemplate addTemplate(
 			String uuid, long userId, String templateId, boolean autoTemplateId,
 			long plid, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile,
+			String xsl, boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addTemplate(
 			uuid, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, Boolean.valueOf(addCommunityPermissions),
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalTemplate addTemplate(
 			long userId, String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile, String[] communityPermissions,
-			String[] guestPermissions)
+			boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			description, xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
 			smallFile, null, null, communityPermissions, guestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
 			String uuid, long userId, String templateId, boolean autoTemplateId,
 			long plid, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile,
+			String xsl, boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -127,7 +127,7 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplateToGroup(
 			uuid, userId, templateId, autoTemplateId, groupId, structureId,
-			name, description, xsl, formatXsl, langType, smallImage,
+			name, description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
@@ -135,8 +135,8 @@ public class JournalTemplateLocalServiceImpl
 	public JournalTemplate addTemplateToGroup(
 			String uuid, long userId, String templateId, boolean autoTemplateId,
 			long groupId, String structureId, String name, String description,
-			String xsl, boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile,
+			String xsl, boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -197,6 +197,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setDescription(description);
 		template.setXsl(xsl);
 		template.setLangType(langType);
+		template.setCacheable(cacheable);
 		template.setSmallImage(smallImage);
 		template.setSmallImageId(counterLocalService.increment());
 		template.setSmallImageURL(smallImageURL);
@@ -456,7 +457,8 @@ public class JournalTemplateLocalServiceImpl
 	public JournalTemplate updateTemplate(
 			long groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
-			boolean smallImage, String smallImageURL, File smallFile)
+			boolean cacheable, boolean smallImage, String smallImageURL,
+			File smallFile)
 		throws PortalException, SystemException {
 
 		// Template
@@ -512,6 +514,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setDescription(description);
 		template.setXsl(xsl);
 		template.setLangType(langType);
+		template.setCacheable(cacheable);
 		template.setSmallImage(smallImage);
 		template.setSmallImageURL(smallImageURL);
 

@@ -193,6 +193,8 @@ public class EditTemplateAction extends PortletAction {
 		String langType = ParamUtil.getString(
 			uploadReq, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
 
+		boolean cacheable = ParamUtil.getBoolean(uploadReq, "cacheable");
+
 		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
 		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
 		File smallFile = uploadReq.getFile("smallFile");
@@ -210,7 +212,7 @@ public class EditTemplateAction extends PortletAction {
 
 			template = JournalTemplateServiceUtil.addTemplate(
 				templateId, autoTemplateId, layout.getPlid(), structureId, name,
-				description, xsl, formatXsl, langType, smallImage,
+				description, xsl, formatXsl, langType, cacheable, smallImage,
 				smallImageURL, smallFile, communityPermissions,
 				guestPermissions);
 		}
@@ -220,7 +222,8 @@ public class EditTemplateAction extends PortletAction {
 
 			template = JournalTemplateServiceUtil.updateTemplate(
 				groupId, templateId, structureId, name, description, xsl,
-				formatXsl, langType, smallImage, smallImageURL, smallFile);
+				formatXsl, langType, cacheable, smallImage, smallImageURL,
+				smallFile);
 		}
 
 		// Recent templates

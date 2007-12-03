@@ -1023,6 +1023,7 @@ jboss-prefix=پيشوند JBoss
 job-class=کلاس شغل
 job-title=عنوان شغل
 join-room=ورود به اتاق
+journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Junk Mail
 keywords=کلمات کليدی
 kill-session=Kill Session

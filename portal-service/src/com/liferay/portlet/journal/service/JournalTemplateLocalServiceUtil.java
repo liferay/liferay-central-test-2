@@ -263,7 +263,7 @@ public class JournalTemplateLocalServiceUtil {
 		long userId, java.lang.String templateId, boolean autoTemplateId,
 		long plid, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -272,8 +272,8 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.addTemplate(userId, templateId,
 			autoTemplateId, plid, structureId, name, description, xsl,
-			formatXsl, langType, smallImage, smallImageURL, smallFile,
-			addCommunityPermissions, addGuestPermissions);
+			formatXsl, langType, cacheable, smallImage, smallImageURL,
+			smallFile, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
@@ -281,7 +281,7 @@ public class JournalTemplateLocalServiceUtil {
 		boolean autoTemplateId, long plid, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
+		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -290,15 +290,15 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.addTemplate(uuid, userId,
 			templateId, autoTemplateId, plid, structureId, name, description,
-			xsl, formatXsl, langType, smallImage, smallImageURL, smallFile,
-			addCommunityPermissions, addGuestPermissions);
+			xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
+			smallFile, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
 		long plid, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -308,8 +308,8 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.addTemplate(userId, templateId,
 			autoTemplateId, plid, structureId, name, description, xsl,
-			formatXsl, langType, smallImage, smallImageURL, smallFile,
-			communityPermissions, guestPermissions);
+			formatXsl, langType, cacheable, smallImage, smallImageURL,
+			smallFile, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
@@ -317,7 +317,7 @@ public class JournalTemplateLocalServiceUtil {
 		boolean autoTemplateId, long plid, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
+		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -328,9 +328,9 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.addTemplate(uuid, userId,
 			templateId, autoTemplateId, plid, structureId, name, description,
-			xsl, formatXsl, langType, smallImage, smallImageURL, smallFile,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
+			smallFile, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplateToGroup(
@@ -338,7 +338,7 @@ public class JournalTemplateLocalServiceUtil {
 		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
+		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -349,9 +349,9 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.addTemplateToGroup(uuid, userId,
 			templateId, autoTemplateId, groupId, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public static void addTemplateResources(long groupId,
@@ -552,7 +552,7 @@ public class JournalTemplateLocalServiceUtil {
 		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -560,6 +560,6 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.updateTemplate(groupId, templateId,
 			structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile);
+			cacheable, smallImage, smallImageURL, smallFile);
 	}
 }

@@ -673,6 +673,7 @@ ja_en=Japonsky -> Anglicky
 job-class=Druh práce
 job-title=Název práce
 join-room=Vstupní místnost
+journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Junk mail
 keywords=Klíčová slova
 kill-session=Ukonči session

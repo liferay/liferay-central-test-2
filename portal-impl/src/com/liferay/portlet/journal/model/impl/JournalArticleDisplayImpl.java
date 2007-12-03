@@ -39,7 +39,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		String[] availableLocales, String content, String type,
 		String structureId, String templateId, boolean smallImage,
 		long smallImageId, String smallImageURL, int numberOfPages,
-		int currentPage, boolean paginate) {
+		int currentPage, boolean paginate, boolean cacheable) {
 
 		_id = id;
 		_resourcePrimKey = resourcePrimKey;
@@ -60,6 +60,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_numberOfPages = numberOfPages;
 		_currentPage = currentPage;
 		_paginate = paginate;
+		_cacheable = cacheable;
 	}
 
 	public long getId() {
@@ -174,6 +175,14 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_paginate = paginate;
 	}
 
+	public boolean isCacheable() {
+		return _cacheable;
+	}
+
+	public void setCacheable(boolean cacheable) {
+		_cacheable = cacheable;
+	}
+
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
@@ -193,5 +202,6 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private int _numberOfPages;
 	private int _currentPage;
 	private boolean _paginate;
+	private boolean _cacheable;
 
 }

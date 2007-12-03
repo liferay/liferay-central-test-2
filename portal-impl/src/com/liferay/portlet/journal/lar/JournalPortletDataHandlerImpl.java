@@ -741,9 +741,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						template.getUuid(), userId, templateId, autoTemplateId,
 						plid, parentStructureId, template.getName(),
 						template.getDescription(), template.getXsl(), formatXsl,
-						template.getLangType(), template.isSmallImage(),
-						template.getSmallImageURL(), smallFile,
-						addCommunityPermissions, addGuestPermissions);
+						template.getLangType(), template.getCacheable(),
+						template.isSmallImage(), template.getSmallImageURL(),
+						smallFile, addCommunityPermissions,
+						addGuestPermissions);
 			}
 			else {
 				existingTemplate =
@@ -752,8 +753,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						existingTemplate.getTemplateId(),
 						existingTemplate.getStructureId(), template.getName(),
 						template.getDescription(), template.getXsl(), formatXsl,
-						template.getLangType(), template.isSmallImage(),
-						template.getSmallImageURL(), smallFile);
+						template.getLangType(), template.getCacheable(),
+						template.isSmallImage(), template.getSmallImageURL(),
+						smallFile);
 			}
 		}
 		else {
@@ -762,8 +764,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					userId, templateId, autoTemplateId, plid, parentStructureId,
 					template.getName(), template.getDescription(),
 					template.getXsl(), formatXsl, template.getLangType(),
-					template.isSmallImage(), template.getSmallImageURL(),
-					smallFile, addCommunityPermissions, addGuestPermissions);
+					template.getCacheable(), template.isSmallImage(),
+					template.getSmallImageURL(), smallFile,
+					addCommunityPermissions, addGuestPermissions);
 		}
 
 		templatePKs.put(

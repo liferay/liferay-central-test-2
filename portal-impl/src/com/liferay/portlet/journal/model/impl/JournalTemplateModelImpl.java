@@ -104,6 +104,9 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 			{ "langType", new Integer(Types.VARCHAR) },
 			
 
+			{ "cacheable", new Integer(Types.BOOLEAN) },
+			
+
 			{ "smallImage", new Integer(Types.BOOLEAN) },
 			
 
@@ -112,7 +115,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 
 			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalTemplate (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,templateId VARCHAR(75) null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsl TEXT null,langType VARCHAR(75) null,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table JournalTemplate (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,templateId VARCHAR(75) null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsl TEXT null,langType VARCHAR(75) null,cacheable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalTemplate";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalTemplateModel"));
@@ -297,6 +300,20 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getCacheable() {
+		return _cacheable;
+	}
+
+	public boolean isCacheable() {
+		return _cacheable;
+	}
+
+	public void setCacheable(boolean cacheable) {
+		if (cacheable != _cacheable) {
+			_cacheable = cacheable;
+		}
+	}
+
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
@@ -351,6 +368,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		model.setDescription(Html.escape(getDescription()));
 		model.setXsl(Html.escape(getXsl()));
 		model.setLangType(Html.escape(getLangType()));
+		model.setCacheable(getCacheable());
 		model.setSmallImage(getSmallImage());
 		model.setSmallImageId(getSmallImageId());
 		model.setSmallImageURL(Html.escape(getSmallImageURL()));
@@ -381,6 +399,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		clone.setDescription(getDescription());
 		clone.setXsl(getXsl());
 		clone.setLangType(getLangType());
+		clone.setCacheable(getCacheable());
 		clone.setSmallImage(getSmallImage());
 		clone.setSmallImageId(getSmallImageId());
 		clone.setSmallImageURL(getSmallImageURL());
@@ -448,6 +467,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	private String _description;
 	private String _xsl;
 	private String _langType;
+	private boolean _cacheable;
 	private boolean _smallImage;
 	private long _smallImageId;
 	private String _smallImageURL;

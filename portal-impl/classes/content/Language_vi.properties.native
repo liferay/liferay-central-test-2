@@ -708,6 +708,7 @@ items=Các mặt hàng
 ja_en=Japanese to English
 job-class=Loại công việc
 job-title=Tên công việc
+journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Junk Mail
 keywords=Từ khóa
 kilogram=Kilogram

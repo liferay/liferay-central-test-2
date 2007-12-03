@@ -81,9 +81,6 @@ public class ViewAction extends PortletAction {
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		boolean disableCaching = GetterUtil.getBoolean(
-			prefs.getValue("disable-caching", StringPool.BLANK));
-
 		int page = ParamUtil.getInteger(req, "page", 1);
 
 		String xmlRequest = PortletRequestUtil.toXML(req, res);
@@ -93,7 +90,7 @@ public class ViewAction extends PortletAction {
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			articleDisplay = JournalContentUtil.getDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
-				disableCaching, page, xmlRequest);
+				page, xmlRequest);
 		}
 
 		if (articleDisplay != null) {

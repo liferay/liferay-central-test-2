@@ -28,7 +28,7 @@ import java.io.Serializable;
  * <a href="JournalArticleDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public interface JournalArticleDisplay extends Serializable {
@@ -88,5 +88,9 @@ public interface JournalArticleDisplay extends Serializable {
 	public boolean isPaginate();
 
 	public void setPaginate(boolean paginate);
+
+	public boolean isCacheable();
+
+	public void setCacheable(boolean cacheable);
 
 }

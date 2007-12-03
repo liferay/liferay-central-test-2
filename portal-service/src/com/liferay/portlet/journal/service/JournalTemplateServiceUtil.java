@@ -55,7 +55,7 @@ public class JournalTemplateServiceUtil {
 		java.lang.String templateId, boolean autoTemplateId, long plid,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -64,15 +64,15 @@ public class JournalTemplateServiceUtil {
 
 		return journalTemplateService.addTemplate(templateId, autoTemplateId,
 			plid, structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile, addCommunityPermissions,
-			addGuestPermissions);
+			cacheable, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String templateId, boolean autoTemplateId, long plid,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -82,8 +82,8 @@ public class JournalTemplateServiceUtil {
 
 		return journalTemplateService.addTemplate(templateId, autoTemplateId,
 			plid, structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile, communityPermissions,
-			guestPermissions);
+			cacheable, smallImage, smallImageURL, smallFile,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
@@ -107,7 +107,7 @@ public class JournalTemplateServiceUtil {
 		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
+		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -115,6 +115,6 @@ public class JournalTemplateServiceUtil {
 
 		return journalTemplateService.updateTemplate(groupId, templateId,
 			structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile);
+			cacheable, smallImage, smallImageURL, smallFile);
 	}
 }

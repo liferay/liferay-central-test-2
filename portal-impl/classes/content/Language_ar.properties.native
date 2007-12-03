@@ -1225,6 +1225,7 @@ join-date=تاريخ الإنضمام
 join-room=إنضم إلى الغرفة
 join=إنضم
 joined=إنضمَّ
+journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=بريد مهملات
 keywords=الكلمات الرئيسية
 kill-session=أنهي الجلسة

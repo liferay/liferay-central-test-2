@@ -54,7 +54,6 @@ if (Validator.isNotNull(portletResource)) {
 long groupId = GetterUtil.getLong(prefs.getValue("group-id", portletGroupId.toString()));
 String articleId = GetterUtil.getString(prefs.getValue("article-id", StringPool.BLANK));
 String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPool.BLANK));
-boolean disableCaching = GetterUtil.getBoolean(prefs.getValue("disable-caching", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", StringPool.BLANK), true);
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", StringPool.BLANK), true);

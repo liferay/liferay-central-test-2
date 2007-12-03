@@ -80,6 +80,7 @@ hi-x-you-are-impersonating-x=Hi {0}. You are impersonating {1}.
 if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order=If the discount type is <i>Free Shipping</i>, then shipping charges are subtracted from the order. If the discount type is <i>Tax Free</i>, then tax charges are subtracted from the order.
 if-you-are-not-x-logout-and-try-again=If you are not {0}, logout and try again.
 is-temporarily-unavailable={0} is temporarily unavailable.
+journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 last-x-articles=Last {0} Articles
 last-x-structures=Last {0} Structures
 last-x-templates=Last {0} Templates

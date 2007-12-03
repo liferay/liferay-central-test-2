@@ -44,8 +44,8 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 	public JournalTemplate addTemplate(
 			String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile,
+			boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,16 +55,17 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 		return journalTemplateLocalService.addTemplate(
 			getUserId(), templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, addCommunityPermissions, addGuestPermissions);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
 			String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean smallImage,
-			String smallImageURL, File smallFile, String[] communityPermissions,
-			String[] guestPermissions)
+			boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -73,8 +74,8 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 		return journalTemplateLocalService.addTemplate(
 			getUserId(), templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, communityPermissions, guestPermissions);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, communityPermissions, guestPermissions);
 	}
 
 	public void deleteTemplate(long groupId, String templateId)
@@ -98,7 +99,8 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 	public JournalTemplate updateTemplate(
 			long groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
-			boolean smallImage, String smallImageURL, File smallFile)
+			boolean cacheable, boolean smallImage, String smallImageURL,
+			File smallFile)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
@@ -106,7 +108,7 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 		return journalTemplateLocalService.updateTemplate(
 			groupId, templateId, structureId, name, description, xsl, formatXsl,
-			langType, smallImage, smallImageURL, smallFile);
+			langType, cacheable, smallImage, smallImageURL, smallFile);
 	}
 
 }

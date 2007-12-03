@@ -68,6 +68,7 @@ public class JournalTemplateJSONSerializer {
 		JSONUtil.put(jsonObj, "description", model.getDescription());
 		JSONUtil.put(jsonObj, "xsl", model.getXsl());
 		JSONUtil.put(jsonObj, "langType", model.getLangType());
+		JSONUtil.put(jsonObj, "cacheable", model.getCacheable());
 		JSONUtil.put(jsonObj, "smallImage", model.getSmallImage());
 		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
 		JSONUtil.put(jsonObj, "smallImageURL", model.getSmallImageURL());

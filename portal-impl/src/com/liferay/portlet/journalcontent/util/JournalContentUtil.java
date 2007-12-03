@@ -85,17 +85,8 @@ public class JournalContentUtil {
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay) {
 
-		return getContent(
-			groupId, articleId, null, languageId, themeDisplay, false);
-	}
-
-	public static String getContent(
-		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, boolean disableCaching) {
-
 		JournalArticleDisplay articleDisplay = getDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay,
-			disableCaching);
+			groupId, articleId, templateId, languageId, themeDisplay);
 
 		if (articleDisplay != null) {
 			return articleDisplay.getContent();
@@ -107,16 +98,15 @@ public class JournalContentUtil {
 
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, boolean disableCaching) {
+		ThemeDisplay themeDisplay) {
 
 		return getDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay,
-			disableCaching, 1, null);
+			groupId, articleId, templateId, languageId, themeDisplay, 1, null);
 	}
 
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, boolean disableCaching, int page,
+		ThemeDisplay themeDisplay, int page,
 		String xmlRequest) {
 
 		StopWatch stopWatch = null;
@@ -130,12 +120,6 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		if (disableCaching) {
-			return _getArticleDisplay(
-				groupId, articleId, templateId, languageId, page, xmlRequest,
-				themeDisplay);
-		}
-
 		String key =
 			_encodeKey(groupId, articleId, templateId, languageId, page);
 
@@ -147,7 +131,7 @@ public class JournalContentUtil {
 				groupId, articleId, templateId, languageId, page, xmlRequest,
 				themeDisplay);
 
-			if (articleDisplay != null) {
+			if (articleDisplay != null && articleDisplay.isCacheable()) {
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 

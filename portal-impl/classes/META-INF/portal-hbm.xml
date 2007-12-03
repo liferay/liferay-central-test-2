@@ -889,6 +889,7 @@
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="xsl" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="langType" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="cacheable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="smallImageURL" type="com.liferay.util.dao.hibernate.StringType" />
