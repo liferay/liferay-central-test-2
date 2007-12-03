@@ -76,10 +76,9 @@ else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleDisplay articleDisplay = null;
 
 	try {
-		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
 		String languageId = LanguageUtil.getLanguageId(request);
 
-		articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+		articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay);
 	}
 	catch (NoSuchArticleException nsae) {
 
