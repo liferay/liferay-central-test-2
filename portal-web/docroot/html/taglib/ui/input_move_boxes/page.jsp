@@ -96,7 +96,7 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 
 				<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
 			</td>
-			<td align="center" class="bg" valign="top" width="48%">
+			<td align="center" valign="top" width="48%">
 				<table border="0" cellpadding="2" cellspacing="0" width="100%">
 				<tr>
 					<td align="center" class="alpha">

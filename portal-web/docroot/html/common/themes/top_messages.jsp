@@ -31,22 +31,20 @@
 			<table border="0" cellpadding="8" cellspacing="0" width="100%">
 			<tr>
 				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-					<font class="bg" size="2"><span class="bg-neg-alert">
+					<span class="bg-neg-alert">
 
 					<liferay-ui:message key="maintenance-alert" /> &nbsp;&nbsp;&nbsp;<%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(CalendarFactoryUtil.getCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %><br /><br />
 
 					<%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %>
 
-					</span></font>
+					</span>
 				</td>
 			</tr>
 
 			<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
 				<tr>
 					<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-						<font class="bg" size="2">
 						<%= ShutdownUtil.getMessage() %>
-						</font>
 					</td>
 				</tr>
 			</c:if>
@@ -64,7 +62,7 @@
 			<table border="0" cellpadding="8" cellspacing="0" width="100%">
 			<tr>
 				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-					<font class="bg" size="2"><span class="bg-neg-alert">
+					<span class="bg-neg-alert">
 
 					<c:choose>
 						<c:when test="<%= themeDisplay.isSignedIn() %>">
@@ -77,7 +75,7 @@
 
 					<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
 
-					</span></font>
+					</span>
 				</td>
 			</tr>
 			</table>
