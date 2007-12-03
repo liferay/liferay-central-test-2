@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="UnicodeFormatter.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,6 +51,35 @@ public class UnicodeFormatter {
 		return byteToHex(hi) + byteToHex(lo);
 	}
 
+	public static String parseString(String hexString) {
+		StringMaker sm = new StringMaker();
+
+		char[] array = hexString.toCharArray();
+
+		if ((array.length % 6) != 0) {
+			_log.error("String is not in hex format");
+
+			return hexString;
+		}
+
+		for (int i = 2; i < hexString.length(); i = i + 6) {
+			String s = hexString.substring(i, i + 4);
+
+			try {
+				char c = (char)Integer.parseInt(s, 16);
+
+				sm.append(c);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+
+				return hexString;
+			}
+		}
+
+		return sm.toString();
+	}
+
 	public static String toString(char[] array) {
 		StringMaker sm = new StringMaker();
 
@@ -66,5 +98,7 @@ public class UnicodeFormatter {
 
 		return toString(s.toCharArray());
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(UnicodeFormatter.class);
 
 }

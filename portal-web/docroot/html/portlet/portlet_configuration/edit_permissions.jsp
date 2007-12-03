@@ -36,7 +36,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 String modelResource = ParamUtil.getString(request, "modelResource");
-String modelResourceDescription = ParamUtil.getString(request, "modelResourceDescription");
+String modelResourceDescription = UnicodeFormatter.parseString(ParamUtil.getString(request, "modelResourceDescription"));
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
 
 String resourcePrimKey = ParamUtil.getString(request, "resourcePrimKey");
@@ -96,7 +96,7 @@ portletURL.setParameter("redirect", redirect);
 //portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
-portletURL.setParameter("modelResourceDescription", modelResourceDescription);
+portletURL.setParameter("modelResourceDescription", UnicodeFormatter.toString(modelResourceDescription));
 portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 %>
 
