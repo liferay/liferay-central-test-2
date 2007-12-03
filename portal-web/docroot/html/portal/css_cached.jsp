@@ -629,6 +629,12 @@ ul.gamma .tree-item-hover {
 	padding-top: 0;
 }
 
+/* ---------- Portal notifications styling ---------- */
+
+.popup-alert-notice .notice-date {
+	margin: 0 10px;
+}
+
 /* ---------- Tag selector styling ---------- */
 
 .lfr-tag-select-container {

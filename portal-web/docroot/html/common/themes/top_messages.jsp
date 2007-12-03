@@ -25,61 +25,27 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <c:if test="<%= ShutdownUtil.isInProcess() %>">
-	<table border="0" cellpadding="1" cellspacing="0" width="100%">
-	<tr>
-		<td bgcolor="<%= colorScheme.getPortletMsgError() %>">
-			<table border="0" cellpadding="8" cellspacing="0" width="100%">
-			<tr>
-				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-					<span class="bg-neg-alert">
-
-					<liferay-ui:message key="maintenance-alert" /> &nbsp;&nbsp;&nbsp;<%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(CalendarFactoryUtil.getCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %><br /><br />
-
-					<%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %>
-
-					</span>
-				</td>
-			</tr>
-
-			<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
-				<tr>
-					<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-						<%= ShutdownUtil.getMessage() %>
-					</td>
-				</tr>
-			</c:if>
-
-			</table>
-		</td>
-	</tr>
-	</table>
+	<div class="popup-alert-notice">
+		<span class="notice-label"><liferay-ui:message key="maintenance-alert" /></span><span class="notice-date"><%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(CalendarFactoryUtil.getCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %></span>
+		<span class="notice-message"><%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %></span>
+	
+		<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
+			<span class="custom-shutdown-message"><%= ShutdownUtil.getMessage() %></span>
+		</c:if>
+	</div>
 </c:if>
 
 <c:if test="<%= themeDisplay.isImpersonated() %>">
-	<table border="0" cellpadding="1" cellspacing="0" width="100%">
-	<tr>
-		<td bgcolor="<%= colorScheme.getPortletMsgError() %>">
-			<table border="0" cellpadding="8" cellspacing="0" width="100%">
-			<tr>
-				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-					<span class="bg-neg-alert">
-
-					<c:choose>
-						<c:when test="<%= themeDisplay.isSignedIn() %>">
-							<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-x", new Object[] {realUser.getFullName(), user.getFullName()}) %>
-						</c:when>
-						<c:otherwise>
-							<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-the-guest-user", new Object[] {realUser.getFullName()}) %>
-						</c:otherwise>
-					</c:choose>
-
-					<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
-
-					</span>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
+	<div class="popup-alert-notice">
+		<span class="notice-message"><c:choose>
+			<c:when test="<%= themeDisplay.isSignedIn() %>">
+				<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-x", new Object[] {realUser.getFullName(), user.getFullName()}) %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-the-guest-user", new Object[] {realUser.getFullName()}) %>
+			</c:otherwise>
+		</c:choose></span>
+		
+		<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
+	</div>
 </c:if>
