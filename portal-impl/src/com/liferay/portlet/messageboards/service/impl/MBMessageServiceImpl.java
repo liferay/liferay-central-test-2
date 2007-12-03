@@ -25,7 +25,6 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -683,7 +682,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType(ContentTypes.TEXT_HTML);
+			syndContent.setType("html");
 			syndContent.setValue(message.getBody());
 
 			syndEntry.setDescription(syndContent);

@@ -1231,6 +1231,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
+			if (category.isDiscussion()) {
+				return;
+			}
+
 			if (prefs == null) {
 				long ownerId = category.getGroupId();
 				int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;

@@ -25,7 +25,6 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -397,7 +396,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			if (value != null) {
 				SyndContent syndContent = new SyndContentImpl();
 
-				syndContent.setType(ContentTypes.TEXT_HTML);
+				syndContent.setType("html");
 				syndContent.setValue(value);
 
 				syndEntry.setDescription(syndContent);
