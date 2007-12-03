@@ -862,12 +862,16 @@ public class JournalUtil {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Language " + languageId);
+		}
 
+		if (_logTokens.isDebugEnabled()) {
 			String tokensString = PropertiesUtil.list(tokens);
 
-			_log.debug("Tokens\n" + tokensString);
+			_logTokens.debug("Tokens\n" + tokensString);
+		}
 
-			_log.debug("XML before listeners\n" + xml);
+		if (_logBeforeTransform.isDebugEnabled()) {
+			_logBeforeTransform.debug(xml);
 		}
 
 		List listenersList = new ArrayList();
@@ -900,29 +904,29 @@ public class JournalUtil {
 
 			// Modify XML
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("XML before listener\n" + xml);
+			if (_logXmlBeforeListener.isDebugEnabled()) {
+				_logXmlBeforeListener.debug(xml);
 			}
 
 			if (listener != null) {
 				xml = listener.onXml(xml);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("XML after listener\n" + xml);
+				if (_logXmlAfterListener.isDebugEnabled()) {
+					_logXmlAfterListener.debug(xml);
 				}
 			}
 
 			// Modify script
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Transform script before listener\n" + script);
+			if (_logScriptBeforeListener.isDebugEnabled()) {
+				_logScriptBeforeListener.debug(script);
 			}
 
 			if (listener != null) {
 				script = listener.onScript(script);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Transform script after listener\n" + script);
+				if (_logScriptAfterListener.isDebugEnabled()) {
+					_logScriptAfterListener.debug(script);
 				}
 			}
 		}
@@ -949,15 +953,19 @@ public class JournalUtil {
 
 			// Modify output
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Output before listener\n" + output);
+			if (_logOutputBeforeListener.isDebugEnabled()) {
+				_logOutputBeforeListener.debug(output);
 			}
 
 			output = listener.onOutput(output);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Output after listener\n" + output);
+			if (_logOutputAfterListener.isDebugEnabled()) {
+				_logOutputAfterListener.debug(output);
 			}
+		}
+
+		if (_logAfterTransfrom.isDebugEnabled()) {
+			_logAfterTransfrom.debug(output);
 		}
 
 		return output;
@@ -1135,5 +1143,14 @@ public class JournalUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(JournalUtil.class);
+	private static Log _logTokens = LogFactory.getLog(JournalUtil.class.getName() + ".Tokens");
+	private static Log _logBeforeTransform = LogFactory.getLog(JournalUtil.class.getName() + ".BeforeTransform");
+	private static Log _logAfterTransfrom = LogFactory.getLog(JournalUtil.class.getName() + ".AfterTransform");
+	private static Log _logXmlBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".XmlBeforeListener");
+	private static Log _logXmlAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".XmlAfterListener");
+	private static Log _logScriptBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".ScriptBeforeListener");
+	private static Log _logScriptAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".ScriptAfterListener");
+	private static Log _logOutputBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".OutputBeforeListener");
+	private static Log _logOutputAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".OutputAfterListener");
 
 }
