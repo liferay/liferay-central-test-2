@@ -867,11 +867,11 @@ public class JournalUtil {
 		if (_logTokens.isDebugEnabled()) {
 			String tokensString = PropertiesUtil.list(tokens);
 
-			_logTokens.debug("Tokens\n" + tokensString);
+			_logTokens.debug(tokensString);
 		}
 
-		if (_logBeforeTransform.isDebugEnabled()) {
-			_logBeforeTransform.debug(xml);
+		if (_logTransformBefore.isDebugEnabled()) {
+			_logTransformBefore.debug(xml);
 		}
 
 		List listenersList = new ArrayList();
@@ -964,8 +964,8 @@ public class JournalUtil {
 			}
 		}
 
-		if (_logAfterTransfrom.isDebugEnabled()) {
-			_logAfterTransfrom.debug(output);
+		if (_logTransfromAfter.isDebugEnabled()) {
+			_logTransfromAfter.debug(output);
 		}
 
 		return output;
@@ -1143,14 +1143,32 @@ public class JournalUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(JournalUtil.class);
-	private static Log _logTokens = LogFactory.getLog(JournalUtil.class.getName() + ".Tokens");
-	private static Log _logBeforeTransform = LogFactory.getLog(JournalUtil.class.getName() + ".BeforeTransform");
-	private static Log _logAfterTransfrom = LogFactory.getLog(JournalUtil.class.getName() + ".AfterTransform");
-	private static Log _logXmlBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".XmlBeforeListener");
-	private static Log _logXmlAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".XmlAfterListener");
-	private static Log _logScriptBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".ScriptBeforeListener");
-	private static Log _logScriptAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".ScriptAfterListener");
-	private static Log _logOutputBeforeListener = LogFactory.getLog(JournalUtil.class.getName() + ".OutputBeforeListener");
-	private static Log _logOutputAfterListener = LogFactory.getLog(JournalUtil.class.getName() + ".OutputAfterListener");
+
+	private static Log _logOutputAfterListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".OutputAfterListener");
+
+	private static Log _logOutputBeforeListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".OutputBeforeListener");
+
+	private static Log _logScriptAfterListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".ScriptAfterListener");
+
+	private static Log _logScriptBeforeListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".ScriptBeforeListener");
+
+	private static Log _logTransfromAfter = LogFactory.getLog(
+		JournalUtil.class.getName() + ".TransformAfter");
+
+	private static Log _logTransformBefore = LogFactory.getLog(
+		JournalUtil.class.getName() + ".BeforeTransform");
+
+	private static Log _logTokens = LogFactory.getLog(
+		JournalUtil.class.getName() + ".Tokens");
+
+	private static Log _logXmlAfterListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".XmlAfterListener");
+
+	private static Log _logXmlBeforeListener = LogFactory.getLog(
+		JournalUtil.class.getName() + ".XmlBeforeListener");
 
 }
