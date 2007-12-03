@@ -79,6 +79,12 @@ public class SubscriptionLocalServiceImpl
 		return subscription;
 	}
 
+	public void deleteSubscription(long subscriptionId)
+		throws PortalException, SystemException {
+
+		subscriptionPersistence.remove(subscriptionId);
+	}
+
 	public void deleteSubscription(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {

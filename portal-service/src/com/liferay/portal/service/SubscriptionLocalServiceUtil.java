@@ -800,6 +800,14 @@ public class SubscriptionLocalServiceUtil {
 			classPK, frequency);
 	}
 
+	public static void deleteSubscription(long subscriptionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		subscriptionLocalService.deleteSubscription(subscriptionId);
+	}
+
 	public static void deleteSubscription(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.jms;
 
 import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -152,8 +153,18 @@ public class MBMessageConsumer implements MessageListener {
 				sent.add(subscribedUserId);
 			}
 
-			User user = UserLocalServiceUtil.getUserById(
-				subscription.getUserId());
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserById(
+					subscription.getUserId());
+			}
+			catch (NoSuchUserException nsue) {
+				SubscriptionLocalServiceUtil.deleteSubscription(
+					subscription.getSubscriptionId());
+
+				continue;
+			}
 
 			try {
 				InternetAddress from = new InternetAddress(

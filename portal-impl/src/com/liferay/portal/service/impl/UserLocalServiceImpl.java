@@ -698,6 +698,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		passwordTrackerLocalService.deletePasswordTrackers(userId);
 
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(userId);
+
 		// External user ids
 
 		userIdMapperLocalService.deleteUserIdMappers(userId);

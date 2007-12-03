@@ -342,6 +342,10 @@ public interface SubscriptionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteSubscription(long subscriptionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.SystemException, 
