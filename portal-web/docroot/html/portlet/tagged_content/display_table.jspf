@@ -97,7 +97,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay);
 
 	if (articleDisplay != null) {
-
 		if (Validator.isNull(title)) {
 			title = articleDisplay.getTitle();
 		}
