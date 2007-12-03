@@ -145,6 +145,16 @@ public interface MBMessageLocalService {
 	public void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder);
 
+	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
+
+	public void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
+
+	public void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
+
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(

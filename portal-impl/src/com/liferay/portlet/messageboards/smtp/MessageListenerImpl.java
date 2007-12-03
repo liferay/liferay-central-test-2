@@ -119,7 +119,6 @@ public class MessageListenerImpl implements MessageListener {
 
 			Company company = getCompany(recipient);
 			long categoryId = getCategoryId(recipient);
-			long parentMessageId = getParentMessageId(recipient);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Category id " + categoryId);
@@ -131,57 +130,29 @@ public class MessageListenerImpl implements MessageListener {
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);
 
-			// To discover the parent, check the "References" header as
-			// explained in http://cr.yp.to/immhf/thread.html. Some mail clients
-			// such as Yahoo! Mail use the "In-Reply-To" header, so we check
-			// that as well.
+			long parentMessageId = getParentMessageId(recipient, message);
 
-			String parentHeader = null;
-
-			String[] references = message.getHeader("References");
-
-			if ((references != null) && (references.length > 0)) {
-				parentHeader = references[0].substring(
-					references[0].lastIndexOf("<"));
-			}
-
-			if (parentHeader == null) {
-				String[] inReplyToHeaders = message.getHeader("In-Reply-To");
-
-				parentHeader = inReplyToHeaders[0];
+			if (_log.isDebugEnabled()) {
+				_log.debug("Parent message id " + parentMessageId);
 			}
 
 			MBMessage parentMessage = null;
 
-			if (parentHeader != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Parent header " + parentHeader);
+			try {
+				if (parentMessageId > 0) {
+					parentMessage = MBMessageLocalServiceUtil.getMessage(
+						parentMessageId);
 				}
+			}
+			catch (NoSuchMessageException nsme) {
 
-				if (parentMessageId == -1) {
-					parentMessageId = MBUtil.getMessageId(parentHeader);
-				}
+				// If the parent message does not exist we ignore it and post
+				// the message as a new thread.
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Previous message id " + parentMessageId);
-				}
-
-				try {
-					if (parentMessageId > 0) {
-						parentMessage = MBMessageLocalServiceUtil.getMessage(
-							parentMessageId);
-					}
-				}
-				catch (NoSuchMessageException nsme) {
-
-					// If the previous message does not exist we ignore it and
-					// post the message as a new thread.
-
-				}
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Previous message " + parentMessage);
+				_log.debug("Parent message " + parentMessage);
 			}
 
 			MBMailMessage collector = new MBMailMessage();
@@ -304,7 +275,11 @@ public class MessageListenerImpl implements MessageListener {
 		return CompanyLocalServiceUtil.getCompanyByMx(mx);
 	}
 
-	protected long getParentMessageId(String recipient) {
+	protected long getParentMessageId(String recipient, MimeMessage message)
+		throws MessagingException {
+
+		// Get the parent message ID from the recipient address
+
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String target = recipient.substring(
@@ -312,13 +287,55 @@ public class MessageListenerImpl implements MessageListener {
 
 		String[] parts = StringUtil.split(target, ".");
 
-		long messageId = -1;
+		long parentMessageId = 0;
 
 		if (parts.length == 2) {
-		    messageId = GetterUtil.getLong(parts[1]);
+		    parentMessageId = GetterUtil.getLong(parts[1]);
 		}
 
-		return messageId;
+		if (parentMessageId > 0) {
+			return parentMessageId;
+		}
+
+		// If the previous block failed, try to get the parent message ID from
+		// the "References" header as explained in
+		// http://cr.yp.to/immhf/thread.html. Some mail clients such as Yahoo!
+		// Mail use the "In-Reply-To" header, so we check that as well.
+
+		String parentHeader = null;
+
+		String[] references = message.getHeader("References");
+
+		if ((references != null) && (references.length > 0)) {
+			parentHeader = references[0].substring(
+				references[0].lastIndexOf("<"));
+		}
+
+		if (parentHeader == null) {
+			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
+
+			if ((inReplyToHeaders != null) &&
+				(inReplyToHeaders.length > 0)) {
+
+				parentHeader = inReplyToHeaders[0];
+			}
+		}
+
+		if (parentHeader != null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Parent header " + parentHeader);
+			}
+
+			if (parentMessageId == -1) {
+				parentMessageId = MBUtil.getMessageId(parentHeader);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Previous message id " + parentMessageId);
+			}
+		}
+
+		return parentMessageId;
 	}
 
 	private static Log _log = LogFactory.getLog(MessageListenerImpl.class);

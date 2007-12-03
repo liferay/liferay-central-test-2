@@ -47,6 +47,8 @@ import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.GroupServiceFactory;
+import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -67,6 +69,10 @@ import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
+import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -487,6 +493,33 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
+	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
+		return portletPreferencesLocalService;
+	}
+
+	public void setPortletPreferencesLocalService(
+		PortletPreferencesLocalService portletPreferencesLocalService) {
+		this.portletPreferencesLocalService = portletPreferencesLocalService;
+	}
+
+	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		return portletPreferencesPersistence;
+	}
+
+	public void setPortletPreferencesPersistence(
+		PortletPreferencesPersistence portletPreferencesPersistence) {
+		this.portletPreferencesPersistence = portletPreferencesPersistence;
+	}
+
+	public PortletPreferencesFinder getPortletPreferencesFinder() {
+		return portletPreferencesFinder;
+	}
+
+	public void setPortletPreferencesFinder(
+		PortletPreferencesFinder portletPreferencesFinder) {
+		this.portletPreferencesFinder = portletPreferencesFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -805,6 +838,18 @@ public abstract class MBMessageLocalServiceBaseImpl
 			groupFinder = GroupFinderUtil.getFinder();
 		}
 
+		if (portletPreferencesLocalService == null) {
+			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
+		}
+
+		if (portletPreferencesPersistence == null) {
+			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
+		}
+
+		if (portletPreferencesFinder == null) {
+			portletPreferencesFinder = PortletPreferencesFinderUtil.getFinder();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -927,6 +972,9 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected GroupService groupService;
 	protected GroupPersistence groupPersistence;
 	protected GroupFinder groupFinder;
+	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

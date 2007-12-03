@@ -1232,9 +1232,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		try {
 			if (prefs == null) {
-				return;
+				long ownerId = category.getGroupId();
+				int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+				long plid = PortletKeys.PREFS_PLID_SHARED;
+				String portletId = PortletKeys.MESSAGE_BOARDS;
+				String defaultPreferences = null;
+
+				prefs = portletPreferencesLocalService.getPreferences(
+					category.getCompanyId(), ownerId, ownerType, plid,
+					portletId, defaultPreferences);
 			}
-			else if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
+
+			if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
 			}
 			else if (update && MBUtil.getEmailMessageUpdatedEnabled(prefs)) {
 			}

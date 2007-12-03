@@ -291,6 +291,32 @@ public class MBMessageLocalServiceUtil {
 		mbMessageLocalService.setGroupFinder(groupFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getPortletPreferencesPersistence();
+	}
+
+	public static void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getPortletPreferencesFinder();
+	}
+
+	public static void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
