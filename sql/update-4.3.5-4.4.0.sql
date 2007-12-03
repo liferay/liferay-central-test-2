@@ -41,6 +41,9 @@ alter table JournalArticleImage add uuid_ VARCHAR(75) null;
 alter table JournalStructure add uuid_ VARCHAR(75) null;
 
 alter table JournalTemplate add uuid_ VARCHAR(75) null;
+alter table JournalTemplate add cacheable BOOLEAN;
+
+update JournalTemplate set cacheable = TRUE;
 
 alter table MBCategory add uuid_ VARCHAR(75) null;
 
