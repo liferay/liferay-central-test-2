@@ -86,7 +86,7 @@ public class TCKAction extends Action {
 
 			// Guest group
 
-			long groupId = 13;
+			long groupId = 14;
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
 				userId, groupId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
