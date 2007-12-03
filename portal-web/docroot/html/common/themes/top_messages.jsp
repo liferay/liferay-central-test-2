@@ -26,9 +26,9 @@
 
 <c:if test="<%= ShutdownUtil.isInProcess() %>">
 	<div class="popup-alert-notice">
-		<span class="notice-label"><liferay-ui:message key="maintenance-alert" /></span><span class="notice-date"><%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(CalendarFactoryUtil.getCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %></span>
+		<span class="notice-label"><liferay-ui:message key="maintenance-alert" /></span> <span class="notice-date"><%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(CalendarFactoryUtil.getCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %></span>
 		<span class="notice-message"><%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %></span>
-	
+
 		<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
 			<span class="custom-shutdown-message"><%= ShutdownUtil.getMessage() %></span>
 		</c:if>
@@ -37,15 +37,17 @@
 
 <c:if test="<%= themeDisplay.isImpersonated() %>">
 	<div class="popup-alert-notice">
-		<span class="notice-message"><c:choose>
-			<c:when test="<%= themeDisplay.isSignedIn() %>">
-				<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-x", new Object[] {realUser.getFullName(), user.getFullName()}) %>
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-the-guest-user", new Object[] {realUser.getFullName()}) %>
-			</c:otherwise>
-		</c:choose></span>
-		
+		<span class="notice-message">
+			<c:choose>
+				<c:when test="<%= themeDisplay.isSignedIn() %>">
+					<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-x", new Object[] {realUser.getFullName(), user.getFullName()}) %>
+				</c:when>
+				<c:otherwise>
+					<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-the-guest-user", new Object[] {realUser.getFullName()}) %>
+				</c:otherwise>
+			</c:choose>
+		</span>
+
 		<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
 	</div>
 </c:if>
