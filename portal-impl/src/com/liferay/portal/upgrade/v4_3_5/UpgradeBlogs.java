@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_4;
+package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_4.util.BlogsEntryUrlTitleUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_5.util.BlogsEntryUrlTitleUpgradeColumnImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import org.apache.commons.logging.Log;
@@ -54,6 +54,8 @@ public class UpgradeBlogs extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		runSQL("update BlogsEntry set urlTitle = ''");
+
 		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
 
 		UpgradeColumn titleColumn = new TempUpgradeColumnImpl("title");

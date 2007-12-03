@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_3_5.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
 import com.liferay.portal.util.ReleaseInfo;
@@ -44,6 +45,7 @@ public class UpgradeProcess_4_3_5 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
+		upgrade(new UpgradeBlogs());
 		upgrade(new UpgradePermission());
 		upgrade(new UpgradePortletId());
 	}
