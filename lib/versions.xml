@@ -1452,6 +1452,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/mina.jar</file-name>
+		<version>1.0.8</version>
+		<project-name>MINA</project-name>
+		<project-url>http://mina.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/msnm.jar</file-name>
 		<version>1.2.2</version>
 		<project-name>JMSN - Open source MSN messenger clone</project-name>
@@ -1816,7 +1827,7 @@
 	</library>
 	<library>
 		<file-name>portal/subetha-smtp.jar</file-name>
-		<version>1.2.1</version>
+		<version>2.0.0</version>
 		<project-name>SubEtha SMTP</project-name>
 		<project-url>http://subethasmtp.tigris.org</project-url>
 		<licenses>
