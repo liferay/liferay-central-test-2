@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -41,7 +40,6 @@ import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.ProtectedPrincipal;
@@ -355,21 +353,6 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 			if (!name.equals(JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 				names.add(name);
 			}
-		}
-
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.TCK_URL))) {
-
-			// Be strict to pass the TCK
-
-		}
-		else {
-
-			// Be less strict so that ICEfaces portlets work properly. See
-			// LEP-3845.
-
-			names.add(JavaConstants.JAVAX_PORTLET_CONFIG);
-			names.add(RenderRequest.USER_INFO);
-			names.add(WebKeys.THEME_DISPLAY);
 		}
 
 		return Collections.enumeration(names);
