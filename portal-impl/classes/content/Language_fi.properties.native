@@ -1444,7 +1444,6 @@ join-date=Liittymispäivä
 join-room=Liity huoneeseen
 join=Liity
 joined=Liittynyt
-journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Roskaposti
 justify-center=Keskitä
 justify-left=Tasaa vasemmalle

@@ -489,7 +489,6 @@ italian=İtalyanca
 item-description=Madde Açıklaması
 item-information=Madde Bilgisi
 ja_en=Japoncadan İngilizceye
-journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Çöp Posta
 keywords=Başlıklar
 ko_en=Koreceden İngilizceye

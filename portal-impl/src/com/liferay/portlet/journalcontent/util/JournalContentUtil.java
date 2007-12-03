@@ -106,8 +106,7 @@ public class JournalContentUtil {
 
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, int page,
-		String xmlRequest) {
+		ThemeDisplay themeDisplay, int page, String xmlRequest) {
 
 		StopWatch stopWatch = null;
 
@@ -131,7 +130,7 @@ public class JournalContentUtil {
 				groupId, articleId, templateId, languageId, page, xmlRequest,
 				themeDisplay);
 
-			if (articleDisplay != null && articleDisplay.isCacheable()) {
+			if ((articleDisplay != null) && articleDisplay.isCacheable()) {
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 

@@ -209,7 +209,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	</td>
 </tr>
 
-
 <c:if test="<%= template != null %>">
 	<tr>
 		<td colspan="2">

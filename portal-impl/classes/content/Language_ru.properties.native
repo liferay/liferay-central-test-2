@@ -959,7 +959,6 @@ jboss-prefix=Префикс JBoss
 job-class=Тип работы
 job-title=Должность
 join-room=Зайти в комнату
-journal-template-cacheable-help=Only unckeck when developing templates which use request<br/>handling, CMS query API, or other dynamic features.
 junk-mail=Утилизировать почту
 keywords=Ключевые слова
 kill-session=Удалить сессию
