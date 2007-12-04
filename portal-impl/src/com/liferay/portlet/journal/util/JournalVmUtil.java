@@ -121,7 +121,7 @@ public class JournalVmUtil {
 				VelocityException pex = (VelocityException)e;
 
 				throw new TransformException(
-					"Unable to parse velocity template." +
+					"Unable to parse velocity template: " +
 						Html.escape(pex.getMessage()),
 					e);
 			}
