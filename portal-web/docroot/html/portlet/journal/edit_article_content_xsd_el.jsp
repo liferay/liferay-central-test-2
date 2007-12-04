@@ -236,7 +236,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 				<c:if test='<%= elType.equals("image") && Validator.isNotNull(elContent) %>'>
 					<tr>
 						<td>
-							<div id="<portlet:namespace />image_<%= elName %>" style="border: 1px dotted <%= colorScheme.getPortletMenuBg() %>; display: none; overflow: scroll; overflow-x: scroll; overflow-y: scroll; padding: 4px; width: 500px;">
+							<div id="<portlet:namespace />image_<%= elName %>" style="border: 1px dotted; display: none; overflow: scroll; overflow-x: scroll; overflow-y: scroll; padding: 4px; width: 500px;">
 								<table>
 								<tr>
 									<td>

@@ -182,7 +182,7 @@ Assign permissions to users.
 
 		<c:choose>
 			<c:when test="<%= userIdsArray.length == 0 %>">
-				<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+				<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 					Step 3 of 3: Assign the user with the permissions for the
 
 					<c:choose>
@@ -348,7 +348,7 @@ Assign permissions to users.
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource) %>">
 		<c:if test="<%= Validator.isNull(modelResource) %>">
-			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 				Step 2 of 3: Choose a resource or proceed to the next step.
 			</div>
 
@@ -425,7 +425,7 @@ Assign permissions to users.
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 			Step 1 of 3: Choose a portlet.
 		</div>
 

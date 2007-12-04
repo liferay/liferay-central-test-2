@@ -73,7 +73,7 @@ for (int i = 0; i < values.size(); i++) {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table border="1" bordercolor="<%= colorScheme.getPortletMenuBg() %>" cellpadding="4" cellspacing="0">
+<table border="1" cellpadding="4" cellspacing="0">
 <tr>
 
 	<%

@@ -43,7 +43,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 	}
 
 	.portlet-mail-toolbar td {
-		background-color: <%= colorScheme.getPortletBg() %>;
 		border: 1px solid <%= mailLineColor %>;
 		cursor: pointer;
 		padding-left: 10px;
@@ -59,7 +58,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 	}
 
 	#portlet-mail-toolbar-advanced-search {
-		background-color: <%= colorScheme.getPortletBg() %>;
 		border: 1px solid <%= mailLineColor %>;
 		margin: 0px 2px 7px 2px;
 		padding: 10px;
@@ -198,7 +196,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			}
 
 			.portlet-mail-folder-selected {
-				background-color: <%= colorScheme.getPortletSectionSelectedBg() %>;
 			}
 
 			#portlet-mail-folder-pane ul li {
@@ -266,7 +263,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			}
 
 			#portlet-mail-msg-header {
-				background-color: <%= colorScheme.getLayoutTabBg() %>;
 				overflow: hidden;
 			}
 
@@ -605,7 +601,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<input name="<portlet:namespace />folderId" id="portlet-mail-folder-id" type="hidden" />
 		</form>
 
-		<table border="0" cellpadding="0" cellspacing="0" style="background-color: <%= colorScheme.getPortletBg() %>;">
+		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td id="portlet-mail-folder-pane-td" valign="top">
 				<div id="portlet-mail-folder-pane">

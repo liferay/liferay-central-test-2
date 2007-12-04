@@ -104,7 +104,7 @@ if (role != null) {
 
 <c:choose>
 	<c:when test="<%= role == null %>">
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 			Step 1 of 2: Choose a role.
 		</div>
 
@@ -185,7 +185,7 @@ if (role != null) {
 		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
 		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 			Step 2 of 2: <%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
 			<i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.

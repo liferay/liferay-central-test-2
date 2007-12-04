@@ -364,7 +364,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<liferay-ui:error key="missingGroupIdsForAction" message="select-at-least-one-community-for-each-action-with-scope-set-to-communities" />
 
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 			<c:choose>
 				<c:when test="<%= portletResource.equals(PortletKeys.PORTAL) %>">
 					<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"1", String.valueOf(totalSteps)}) %>
@@ -575,7 +575,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		}
 		%>
 
-		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"1", String.valueOf(totalSteps)}) %>
 
 			<liferay-ui:message key="choose-a-portlet" />

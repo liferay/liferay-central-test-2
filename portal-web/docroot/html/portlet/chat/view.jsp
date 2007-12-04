@@ -38,7 +38,7 @@
 		<script type="text/javascript">
 			Messaging.checkRoster = true;
 			MessagingRoster.getEntries();
-			MessagingRoster.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
+			MessagingRoster.highlightColor = "";
 		</script>
 	</c:when>
 	<c:otherwise>
