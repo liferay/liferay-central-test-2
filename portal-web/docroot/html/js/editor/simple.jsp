@@ -33,8 +33,6 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 <html>
 <head>
 	<title>Editor</title>
-	<script src="../sniffer.js" type="text/javascript"></script>
-	<script src="../util.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function getHTML() {
 			return document.getElementById("textArea").value;

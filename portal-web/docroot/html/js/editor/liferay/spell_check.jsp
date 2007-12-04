@@ -24,6 +24,7 @@
 
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portlet.words.util.WordsUtil" %>
 <%@ page import="com.liferay.util.jazzy.InvalidWord" %>
 
@@ -31,6 +32,7 @@
 
 <%
 String text = ParamUtil.getString(request, "text");
+
 text = StringUtil.replace(text, "\n", "\r\n");
 
 List invalidWords = WordsUtil.checkSpelling(text);
@@ -44,8 +46,24 @@ List invalidWords = WordsUtil.checkSpelling(text);
 		.button { width: 100px; }
 	</style>
 
-	<script language="JavaScript" src="../../sniffer.js"></script>
-	<script language="JavaScript" src="../../util.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+			var themeDisplay = {
+				getPathContext: function() {
+					return "<%= PortalUtil.getPathContext() %>";
+				},
+				getPathMain: function() {
+					return "<%= PortalUtil.getPathMain() %>";
+				}
+			}
+		//]]>
+	</script>
+
+	<script language="JavaScript" src="../../jquery/jquery.js"></script>
+	<script language="JavaScript" src="../../jquery/j2browse.js"></script>
+	<script language="JavaScript" src="../../liferay/liferay.js"></script>
+	<script language="JavaScript" src="../../liferay/browser.js"></script>
+	<script language="JavaScript" src="../../liferay/util.js"></script>
 
 	<script type="text/javascript">
 		var invalidWords = new Array();

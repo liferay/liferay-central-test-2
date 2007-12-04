@@ -28,6 +28,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
 String panel = ParamUtil.get(request, "panel", (BrowserSniffer.is_ie_5_5_up(request) ? DEFAULT_PANEL_IE : DEFAULT_PANEL_MOZILLA));
@@ -74,8 +75,24 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 		}
 	</style>
 
-	<script language="JavaScript" src="../sniffer.js"></script>
-	<script language="JavaScript" src="../util.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+			var themeDisplay = {
+				getPathContext: function() {
+					return "<%= PortalUtil.getPathContext() %>";
+				},
+				getPathMain: function() {
+					return "<%= PortalUtil.getPathMain() %>";
+				}
+			}
+		//]]>
+	</script>
+
+	<script language="JavaScript" src="../jquery/jquery.js"></script>
+	<script language="JavaScript" src="../jquery/j2browse.js"></script>
+	<script language="JavaScript" src="../liferay/liferay.js"></script>
+	<script language="JavaScript" src="../liferay/browser.js"></script>
+	<script language="JavaScript" src="../liferay/util.js"></script>
 
 	<script type="text/javascript">
 
@@ -684,7 +701,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 </tr>
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<iframe height="100%" id="textArea" name="textArea" src="../../../common/null.html" width="100%"></iframe>
+		<iframe height="100%" id="textArea" name="textArea" src="../../common/null.html" width="100%"></iframe>
 	</td>
 </tr>
 </table>
