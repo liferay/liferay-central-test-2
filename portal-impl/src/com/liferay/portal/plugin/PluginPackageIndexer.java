@@ -105,13 +105,11 @@ public class PluginPackageIndexer implements Indexer {
 			name + " " + author + " " + shortDescription + " " +
 				longDescription;
 
-		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
-
 		Document doc = new Document();
 
 		doc.add(
 			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, pluginId)));
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 
 		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
 
@@ -196,16 +194,13 @@ public class PluginPackageIndexer implements Indexer {
 		return doc;
 	}
 
-	public static void removePluginPackage(
-			String moduleId, String repositoryURL)
+	public static void removePluginPackage(String moduleId)
 		throws IOException {
-
-		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
 
 		LuceneUtil.deleteDocuments(
 			CompanyImpl.SYSTEM,
 			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, pluginId)));
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 	}
 
 	public static void updatePluginPackage(
@@ -217,7 +212,7 @@ public class PluginPackageIndexer implements Indexer {
 		throws IOException {
 
 		try {
-			removePluginPackage(moduleId, repositoryURL);
+			removePluginPackage(moduleId);
 		}
 		catch (IOException ioe) {
 		}
