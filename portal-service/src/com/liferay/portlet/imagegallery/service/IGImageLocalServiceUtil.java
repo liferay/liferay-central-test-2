@@ -382,6 +382,15 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImage(imageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getImageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List getImages(long folderId)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();

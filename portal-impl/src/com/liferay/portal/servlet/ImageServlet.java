@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -30,6 +31,9 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -101,6 +105,43 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
+	protected Image getImage(HttpServletRequest req, boolean getDefault)
+		throws NoSuchImageException {
+		long imageId = getImageId(req);
+
+		Image image = null;
+
+		if (imageId > 0) {
+			image = ImageLocalUtil.getImage(imageId);
+		}
+		else {
+			String uuid = ParamUtil.getString(req, "uuid");
+			long groupId = ParamUtil.getLong(req, "groupId");
+
+			try {
+				IGImage igImage =
+					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
+						uuid, groupId);
+
+				image = ImageLocalUtil.getImage(igImage.getLargeImageId());
+			}
+			catch (Exception se) {
+			}
+		}
+
+		if (getDefault) {
+			if (image == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Get a default image for " + imageId);
+				}
+
+				image = getDefaultImage(req, imageId);
+			}
+		}
+
+		return image;
+	}
+
 	protected long getImageId(HttpServletRequest req) {
 
 		// The image id may be passed in as image_id, img_id, or i_id
@@ -120,9 +161,7 @@ public class ImageServlet extends HttpServlet {
 
 	protected long getLastModified(HttpServletRequest req) {
 		try {
-			long imageId = getImageId(req);
-
-			Image image = ImageLocalUtil.getImage(imageId);
+			Image image = getImage(req, false);
 
 			if (image == null) {
 				return -1;
@@ -148,17 +187,7 @@ public class ImageServlet extends HttpServlet {
 	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, NoSuchImageException, ServletException {
 
-		long imageId = getImageId(req);
-
-		Image image = ImageLocalUtil.getImage(imageId);
-
-		if (image == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Get a default image for " + imageId);
-			}
-
-			image = getDefaultImage(req, imageId);
-		}
+		Image image = getImage(req, true);
 
 		if (image == null) {
 			throw new NoSuchImageException("Image is null");

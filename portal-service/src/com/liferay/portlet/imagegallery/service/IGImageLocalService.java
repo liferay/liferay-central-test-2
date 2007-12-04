@@ -206,6 +206,11 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage getImageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getImages(long folderId)
 		throws com.liferay.portal.SystemException;
 

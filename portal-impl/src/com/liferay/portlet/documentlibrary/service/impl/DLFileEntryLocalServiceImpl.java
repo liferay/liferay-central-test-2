@@ -480,6 +480,12 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByF_N(folderId, name);
 	}
 
+	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+
+		return dlFileEntryFinder.findByUuid_G(uuid, groupId);
+	}
+
 	public List getFileEntries(long folderId) throws SystemException {
 		return dlFileEntryPersistence.findByFolderId(folderId);
 	}

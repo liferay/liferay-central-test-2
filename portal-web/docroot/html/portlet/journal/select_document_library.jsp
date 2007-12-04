@@ -194,10 +194,10 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("opener.");
 		sm.append(renderResponse.getNamespace());
 		sm.append("selectDocumentLibrary('");
-		sm.append("@main_path@/document_library/get_file?folderId=");
-		sm.append(fileEntry.getFolderId());
-		sm.append("&name=");
-		sm.append(HttpUtil.encodeURL(fileEntry.getName()));
+		sm.append("@main_path@/document_library/get_file?uuid=");
+		sm.append(fileEntry.getUuid());
+		sm.append("&groupId=@group_id@&title=");
+		sm.append(HttpUtil.encodeURL(fileEntry.getTitle()));
 		sm.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());

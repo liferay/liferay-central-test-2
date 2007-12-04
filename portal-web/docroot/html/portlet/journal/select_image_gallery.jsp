@@ -163,9 +163,9 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("opener.");
 		sm.append(renderResponse.getNamespace());
 		sm.append("selectImageGallery('");
-		sm.append("@image_path@/image_gallery?img_id=");
-		sm.append(image.getLargeImageId());
-		sm.append("&t=");
+		sm.append("@image_path@/image_gallery?uuid=");
+		sm.append(image.getUuid());
+		sm.append("&groupId=@group_id@&t=");
 		sm.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
 		sm.append("'); window.close();");
 
