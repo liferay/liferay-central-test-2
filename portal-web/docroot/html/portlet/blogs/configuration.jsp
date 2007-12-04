@@ -71,6 +71,22 @@
 			</select>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-comments" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
+		</td>
+	</tr>
 	</table>
 </fieldset>
 

@@ -154,30 +154,34 @@
 				target="_blank"
 			/>
 
-			<br />
+			<c:if test="<%= enableRatings %>">
+				<br />
 
-			<liferay-ui:ratings
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-				url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
-			/>
+				<liferay-ui:ratings
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+					url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
+				/>
+			</c:if>
 
-			<br />
+			<c:if test="<%= enableComments %>">
+				<br />
 
-			<%
-			long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+				<%
+				long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-			int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
-			%>
+				int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+				%>
 
-			<c:choose>
-				<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-					<%= messagesCount %> <liferay-ui:message key="comments" />
-				</c:when>
-				<c:otherwise>
-					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-				</c:otherwise>
-			</c:choose>
+				<c:choose>
+					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+						<%= messagesCount %> <liferay-ui:message key="comments" />
+					</c:when>
+					<c:otherwise>
+						<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
 		</td>
 	</tr>
 	</table>
