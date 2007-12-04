@@ -64,9 +64,11 @@ public class LiferayResourceLoader extends ResourceLoader {
 	public void init(ExtendedProperties props) {
 		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
 			PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
+		int modificationCheckInterval = GetterUtil.getInteger(PropsUtil.get(
+			PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATIONCHECKINTERVAL));
 
 		setCachingOn(cachingOn);
-		setModificationCheckInterval(0);
+		setModificationCheckInterval(modificationCheckInterval);
 	}
 
 	public InputStream getResourceStream(String source)
