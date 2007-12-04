@@ -464,14 +464,6 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_permission" type="com.liferay.portlet.enterpriseadmin.action.EditPermissionAction">
-			<forward name="portlet.enterprise_admin.edit_permission_action" path="portlet.enterprise_admin.edit_permission_action" />
-			<forward name="portlet.enterprise_admin.edit_permission_communities" path="portlet.enterprise_admin.edit_permission_communities" />
-			<forward name="portlet.enterprise_admin.edit_permission_resource" path="portlet.enterprise_admin.edit_permission_resource" />
-			<forward name="portlet.enterprise_admin.edit_permission_summary" path="portlet.enterprise_admin.edit_permission_summary" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
 		<action path="/enterprise_admin/edit_phone" type="com.liferay.portlet.enterpriseadmin.action.EditPhoneAction">
 			<forward name="portlet.enterprise_admin.edit_phone" path="portlet.enterprise_admin.edit_phone" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -774,10 +766,6 @@
 
 		<action path="/message_boards/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
-		<action path="/message_boards/edit" type="com.liferay.portlet.messageboards.action.EditPreferencesAction">
-			<forward name="portlet.message_boards.edit" path="portlet.message_boards.edit" />
-		</action>
-
 		<action path="/message_boards/edit_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
 			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.edit_category" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
@@ -790,11 +778,6 @@
 
 		<action path="/message_boards/edit_thread" type="com.liferay.portlet.messageboards.action.EditThreadAction">
 			<forward name="portlet.message_boards.edit_thread" path="portlet.message_boards.edit_thread" />
-			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-		</action>
-
-		<action path="/message_boards/edit_topic" type="com.liferay.portlet.messageboards.action.EditTopicAction">
-			<forward name="portlet.message_boards.edit_topic" path="portlet.message_boards.edit_topic" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
@@ -823,11 +806,6 @@
 		<action path="/message_boards/view_message" type="com.liferay.portlet.messageboards.action.ViewMessageAction">
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.view_message" path="portlet.message_boards.view_message" />
-		</action>
-
-		<action path="/message_boards/view_topic" type="com.liferay.portlet.messageboards.action.ViewTopicAction">
-			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-			<forward name="portlet.message_boards.view_topic" path="portlet.message_boards.view_topic" />
 		</action>
 
 		<!-- Messaging -->
@@ -974,11 +952,6 @@
 
 		<action path="/organization_admin/edit_phone" type="com.liferay.portlet.enterpriseadmin.action.EditPhoneAction">
 			<forward name="portlet.enterprise_admin.edit_phone" path="portlet.enterprise_admin.edit_phone" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/organization_admin/edit_service" type="com.liferay.portlet.enterpriseadmin.action.EditServiceAction">
-			<forward name="portlet.enterprise_admin.edit_service" path="portlet.enterprise_admin.edit_service" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
@@ -1148,10 +1121,6 @@
 		<!-- RSS -->
 
 		<action path="/rss/article" forward="portlet.rss.article" />
-
-		<action path="/rss/edit" type="com.liferay.portlet.rss.action.EditPreferencesAction">
-			<forward name="portlet.rss.edit" path="portlet.rss.edit" />
-		</action>
 
 		<action path="/rss/view" forward="portlet.rss.view" />
 

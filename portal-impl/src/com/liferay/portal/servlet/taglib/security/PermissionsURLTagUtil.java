@@ -84,7 +84,7 @@ public class PermissionsURLTagUtil extends TagSupport {
 			portletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_permissions");
 			portletURL.setParameter("redirect", redirect);
-			//portletURL.setParameter("backURL", redirect);
+			portletURL.setParameter("backURL", redirect);
 			portletURL.setParameter("portletResource", portletDisplay.getId());
 			portletURL.setParameter("modelResource", modelResource);
 			portletURL.setParameter(

@@ -703,10 +703,6 @@
 
 	<definition name="portlet.message_boards" extends="portlet" />
 
-	<definition name="portlet.message_boards.edit" extends="portlet.message_boards">
-		<put name="portlet_content" value="/portlet/message_boards/edit.jsp" />
-	</definition>
-
 	<definition name="portlet.message_boards.edit_category" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/edit_category.jsp" />
 	</definition>
@@ -717,10 +713,6 @@
 
 	<definition name="portlet.message_boards.edit_thread" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/edit_thread.jsp" />
-	</definition>
-
-	<definition name="portlet.message_boards.edit_topic" extends="portlet.message_boards">
-		<put name="portlet_content" value="/portlet/message_boards/edit_topic.jsp" />
 	</definition>
 
 	<definition name="portlet.message_boards.error" extends="portlet.message_boards">
@@ -741,10 +733,6 @@
 
 	<definition name="portlet.message_boards.view_message" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/view_message.jsp" />
-	</definition>
-
-	<definition name="portlet.message_boards.view_topic" extends="portlet.message_boards">
-		<put name="portlet_content" value="/portlet/message_boards/view_topic.jsp" />
 	</definition>
 
 	<!-- Messaging -->
