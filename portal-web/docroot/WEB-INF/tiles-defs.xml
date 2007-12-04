@@ -112,19 +112,6 @@
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>
 
-	<!-- Alfresco Content -->
-
-	<definition name="portlet.alfresco_content" extends="portlet" />
-
-	<definition name="portlet.alfresco_content.view_1" extends="portlet.alfresco_content">
-		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
-	</definition>
-
-	<definition name="portlet.alfresco_content.view_2" extends="portlet.alfresco_content">
-		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
-		<put name="portlet_padding" value="false" />
-	</definition>
-
 	<!-- Amazon Rankings -->
 
 	<definition name="portlet.amazon_rankings" extends="portlet" />

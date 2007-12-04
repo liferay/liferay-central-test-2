@@ -134,13 +134,6 @@
 
 		<action path="/admin/view" forward="portlet.admin.view" />
 
-		<!-- Alfresco Content -->
-
-		<action path="/alfresco_content/view" type="com.liferay.portlet.alfrescocontent.action.ViewAction">
-			<forward name="portlet.alfresco_content.view_1" path="portlet.alfresco_content.view_1" />
-			<forward name="portlet.alfresco_content.view_2" path="portlet.alfresco_content.view_2" />
-		</action>
-
 		<!-- Amazon Rankings -->
 
 		<action path="/amazon_rankings/view" forward="portlet.amazon_rankings.view" />
