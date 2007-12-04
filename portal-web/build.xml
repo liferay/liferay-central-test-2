@@ -75,6 +75,7 @@
 		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jcifs.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jcommon.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jfreechart.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jsonrpc.jar" dest="${classpath.jsp}" />
