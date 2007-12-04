@@ -1115,7 +1115,7 @@ ul.gamma .tree-item-hover {
 /* ----------- OpenID ---------- */
 
 input[type="text"].openid_login {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
 	color: #000;
@@ -1123,7 +1123,7 @@ input[type="text"].openid_login {
 }
 
 .ie6 input.text.openid_login {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
 	color: #000;
