@@ -139,6 +139,12 @@ portletURL.setParameter("struts_action", "/communities/edit_pages");
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("private", String.valueOf(privateLayout));
 
+request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
+
+request.setAttribute("edit_pages.jsp-layoutList", layoutList);
+
+request.setAttribute("edit_pages.jsp-portletURL", portletURL);
+
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
@@ -203,7 +209,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<c:when test="<%= !publish %>">
 			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
 
-			<%@ include file="/html/portlet/communities/tree_js.jspf" %>
+			<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
 
 			<script type="text/javascript">
 				jQuery(

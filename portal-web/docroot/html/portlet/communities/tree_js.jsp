@@ -22,6 +22,16 @@
  */
 %>
 
+<%@ include file="/html/portlet/communities/init.jsp" %>
+
+<%
+long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+
+List layoutList = (List)request.getAttribute("edit_pages.jsp-layoutList");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+%>
+
 <script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
 
 <script type="text/javascript">
