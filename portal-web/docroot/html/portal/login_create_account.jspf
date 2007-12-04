@@ -103,12 +103,11 @@
 	<form action="<%= themeDisplay.getPathMain() %>/portal/login" class="uni-form" method="post" name="fm1">
 	<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
 	<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
-	<input name="redirect" type="hidden" value="<%= redirect %>" />
+	<input name="redirect" type="hidden" value="<%= Html.escape(redirect) %>" />
 
 	<%
 	String login = LoginAction.getLogin(request, "login", company);
 	String passwordParam = SessionParameters.get(request, "password");
-	String password = StringPool.BLANK;
 	boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 	%>
 
@@ -127,13 +126,13 @@
 		<div class="ctrl-holder">
 			<label for="login"><liferay-ui:message key="login" /></label>
 
-			<input class="lfr-input-text" id="login" name="login" type="text" value="<%= login %>" />
+			<input class="lfr-input-text" id="login" name="login" type="text" value="<%= Html.escape(login) %>" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for='<%= passwordParam %>'><liferay-ui:message key="password" /></label>
 
-			<input class="lfr-input-text" id="<%= passwordParam %>" name="<%= passwordParam %>" type="password" value="<%= password %>" />
+			<input class="lfr-input-text" id="<%= passwordParam %>" name="<%= passwordParam %>" type="password" value="" />
 
 			<span id="passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 		</div>
@@ -154,6 +153,11 @@
 	</form>
 
 	<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+
+		<%
+		String openId = ParamUtil.getString(request, "openId");
+		%>
+
 		<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" class="uni-form" method="post" name="fm2">
 
 		<fieldset class="block-labels">
@@ -162,7 +166,7 @@
 			<div class="ctrl-holder">
 				<label for="openId"><liferay-ui:message key="open-id" /></label>
 
-				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" />
+				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" value="<%= Html.escape(openId) %>" />
 			</div>
 
 			<div class="button-holder">

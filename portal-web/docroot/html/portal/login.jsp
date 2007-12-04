@@ -41,7 +41,7 @@ if (tabs1Names.equals("already-registered")) {
 	tabs1Names = StringPool.BLANK;
 }
 
-String redirect = ParamUtil.getString(request, "redirect", StringPool.BLANK);
+String redirect = ParamUtil.getString(request, "redirect");
 
 PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 %>
