@@ -108,7 +108,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// User permissions
 
-			if (userId > 0) {
+			long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+			if ((userId > 0) && (userId != defaultUserId)) {
 				userPersistence.addPermissions(userId, permissions);
 			}
 
@@ -122,9 +124,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Guest permissions
 
 			if (guestPermissions != null) {
-				long defaultUserId = userLocalService.getDefaultUserId(
-					companyId);
-
 				List guestPermissionsList =
 					permissionLocalService.getPermissions(
 						companyId, guestPermissions, resource.getResourceId());
@@ -231,7 +230,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// User permissions
 
-			if (userId > 0) {
+			long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+			if ((userId > 0) && (userId != defaultUserId)) {
 				userPersistence.addPermissions(userId, permissions);
 			}
 
