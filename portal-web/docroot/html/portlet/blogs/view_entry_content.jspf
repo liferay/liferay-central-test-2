@@ -23,9 +23,8 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<table class="lfr-table">
-	<tr>
-		<td>
+	<div class="entry-content">
+		<div>
 
 			<%
 			String strutsAction = ParamUtil.getString(request, "struts_action");
@@ -37,7 +36,7 @@
 				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
 
-			<span style="font-size: small;"><b>
+			<span style="font-size: small;" class="entry-title"><b>
 
 			<c:choose>
 				<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
@@ -50,24 +49,17 @@
 
 			</b></span><br />
 
-			<span style="font-size: x-small;"><liferay-ui:message key="by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
+			<span style="font-size: x-small;" class="entry-author"><liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
 
 			<liferay-ui:tags-summary
 				className="<%= BlogsEntry.class.getName() %>"
 				classPK="<%= entry.getEntryId() %>"
 			/>
-		</td>
-	</tr>
+		</div>
 
-	<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
-		<tr>
-			<td>
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table class="lfr-table">
+		<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
+			<div class="edit-controls">
+				<table class="liferay-table">
 				<tr>
 					<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 						<td>
@@ -108,17 +100,10 @@
 					</c:if>
 				</tr>
 				</table>
-			</td>
-		</tr>
-	</c:if>
+			</div>
+		</c:if>
 
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
+		<div class="entry-pager">
 			<c:choose>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>">
 					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), pageAbstractLength) %>
@@ -134,39 +119,34 @@
 					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
 				</c:when>
 			</c:choose>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<portlet:renderURL var="bookmarkURL">
-				<portlet:param name="struts_action" value="/blogs/view_entry" />
-				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
-			</portlet:renderURL>
+		</div>
+		<div class="entry-ugc">
+	</div>
+		<portlet:renderURL var="bookmarkURL">
+			<portlet:param name="struts_action" value="/blogs/view_entry" />
+			<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
+		</portlet:renderURL>
 
+		<div class="social-bookmarks">
 			<liferay-ui:social-bookmarks
 				url="<%= bookmarkURL.toString() %>"
 				title="<%= entry.getTitle() %>"
 				target="_blank"
 			/>
+		</div>
 
-			<c:if test="<%= enableRatings %>">
-				<br />
-
+		<c:if test='<%= enableRatings %>'>
+			<div class="ratings">
 				<liferay-ui:ratings
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
 					url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
 				/>
-			</c:if>
+			</div>
+		</c:if>
 
-			<c:if test="<%= enableComments %>">
-				<br />
-
+		<c:if test='<%= enableComments %>'>
+			<div class="comments">
 				<%
 				long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
@@ -181,8 +161,7 @@
 						<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
 					</c:otherwise>
 				</c:choose>
-			</c:if>
-		</td>
-	</tr>
-	</table>
+			</div>
+		</c:if>
+	</div>
 </c:if>
