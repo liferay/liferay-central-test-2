@@ -687,6 +687,8 @@ public class PropsUtil {
 
 	public static final String LUCENE_MERGE_FACTOR = "lucene.merge.factor";
 
+	public static final String LUCENE_OPTIMIZE_INTERVAL = "lucene.optimize.interval";
+
 	// SourceForge
 
 	public static final String SOURCE_FORGE_MIRRORS = "source.forge.mirrors";

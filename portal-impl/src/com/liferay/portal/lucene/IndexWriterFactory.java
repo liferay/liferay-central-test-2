@@ -252,7 +252,15 @@ public class IndexWriterFactory {
 
 		if (!writerFound) {
 			try {
-				writer.optimize();
+				_optimizeCount++;
+
+				if ((_OPTIMIZE_INTERVAL == 0) ||
+					(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+
+					writer.optimize();
+
+					_optimizeCount = 0;
+				}
 			}
 			finally {
 				writer.close();
@@ -271,7 +279,15 @@ public class IndexWriterFactory {
 					IndexWriter writer = writerData.getWriter();
 
 					try {
-						writer.optimize();
+						_optimizeCount++;
+
+						if ((_OPTIMIZE_INTERVAL == 0) ||
+							(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+
+							writer.optimize();
+
+							_optimizeCount = 0;
+						}
 					}
 					finally {
 						writer.close();
@@ -290,10 +306,14 @@ public class IndexWriterFactory {
 	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.LUCENE_MERGE_FACTOR));
 
+	private static final int _OPTIMIZE_INTERVAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.LUCENE_OPTIMIZE_INTERVAL));
+
 	private static Log _log = LogFactory.getLog(IndexWriterFactory.class);
 
 	private Map _lockLookup = CollectionFactory.getHashMap();
 	private Map _writerLookup = CollectionFactory.getHashMap();
 	private int _needExclusiveLock = 0;
+	private int _optimizeCount = 0;
 
 }
