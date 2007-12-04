@@ -121,15 +121,14 @@ public class PortalSoapTest extends BaseSoapTest {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = null;
-		long organizationId = 0;
-		long locationId = 0;
+		long[] organizationIds = new long[0];
 		boolean sendMail = false;
 
 		UserSoap user = userService.addUser(
 			TestConstants.COMPANY_ID, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+			birthdayDay, birthdayYear, jobTitle, organizationIds,
 			sendMail);
 
 		System.out.println("Creating user " + emailAddress);
