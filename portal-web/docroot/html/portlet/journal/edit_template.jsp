@@ -61,7 +61,11 @@ else {
 
 String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_VM);
 
-boolean cacheable = BeanParamUtil.getBoolean(template, request, "cacheable", true);
+boolean cacheable = BeanParamUtil.getBoolean(template, request, "cacheable");
+
+if (template == null) {
+	cacheable = true;
+}
 
 boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
@@ -203,7 +207,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<liferay-ui:message key="cacheable" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="cacheable" />
+		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="cacheable" defaultValue="<%= new Boolean(cacheable) %>" />
 
 		<liferay-ui:icon-help message="journal-template-cacheable-help" />
 	</td>
