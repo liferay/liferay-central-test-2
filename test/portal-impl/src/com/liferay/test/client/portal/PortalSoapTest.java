@@ -128,8 +128,7 @@ public class PortalSoapTest extends BaseSoapTest {
 			TestConstants.COMPANY_ID, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationIds,
-			sendMail);
+			birthdayDay, birthdayYear, jobTitle, organizationIds, sendMail);
 
 		System.out.println("Creating user " + emailAddress);
 
