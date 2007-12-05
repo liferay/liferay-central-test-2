@@ -73,7 +73,8 @@ public class DLFileEntryFinderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}
 

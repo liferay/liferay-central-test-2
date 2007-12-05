@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -205,7 +206,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	}
 
 	public MBMessage findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchMessageException, SystemException {
 
 		Session session = null;
 
@@ -226,7 +227,15 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No MBMessage exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchMessageException(sm.toString());
 			}
 			else {
 				return (MBMessage)list.get(0);

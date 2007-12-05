@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -284,7 +285,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	}
 
 	public DLFileEntry findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchFileEntryException, SystemException {
 
 		Session session = null;
 
@@ -305,7 +306,15 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No DLFileEntry exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchFileEntryException(sm.toString());
 			}
 			else {
 				return (DLFileEntry)list.get(0);

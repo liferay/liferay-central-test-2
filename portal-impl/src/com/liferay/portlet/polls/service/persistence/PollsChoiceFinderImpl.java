@@ -23,8 +23,10 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -46,7 +48,7 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 		PollsChoiceFinder.class.getName() + ".findByUuid_G";
 
 	public PollsChoice findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchChoiceException, SystemException {
 
 		Session session = null;
 
@@ -67,7 +69,15 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No PollsChoice exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchChoiceException(sm.toString());
 			}
 			else {
 				return (PollsChoice)list.get(0);

@@ -541,23 +541,23 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingMessage = MBMessageFinderUtil.findByUuid_G(
-					message.getUuid(), context.getGroupId());
+				try {
+					existingMessage = MBMessageFinderUtil.findByUuid_G(
+						message.getUuid(), context.getGroupId());
 
-				if (existingMessage == null) {
+					MBMessageLocalServiceUtil.updateMessage(
+						userId, existingMessage.getMessageId(),
+						message.getSubject(), message.getBody(), files,
+						message.getPriority(), tagsEntries, prefs,
+						themeDisplay);
+				}
+				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, categoryId, threadId,
 						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), tagsEntries, prefs,
 						addCommunityPermissions, addGuestPermissions,
-						themeDisplay);
-				}
-				else {
-					MBMessageLocalServiceUtil.updateMessage(
-						userId, existingMessage.getMessageId(),
-						message.getSubject(), message.getBody(), files,
-						message.getPriority(), tagsEntries, prefs,
 						themeDisplay);
 				}
 			}

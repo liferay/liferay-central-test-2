@@ -140,16 +140,16 @@ public class GetFileAction extends PortletAction {
 
 			DLFileEntry fileEntry = null;
 
-			if (Validator.isNotNull(uuid) && groupId > 0) {
+			if (Validator.isNotNull(uuid) && (groupId > 0)) {
 				try {
-					fileEntry =
-						DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					fileEntry = DLFileEntryLocalServiceUtil.
+						getFileEntryByUuidAndGroupId(
 							uuid, groupId);
 
 					folderId = fileEntry.getFolderId();
 					name = fileEntry.getName();
 				}
-				catch(Exception e) {
+				catch (Exception e) {
 				}
 			}
 
@@ -166,8 +166,10 @@ public class GetFileAction extends PortletAction {
 				name = fileShortcut.getToName();
 			}
 
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				folderId, name);
+			if (fileEntry == null) {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					folderId, name);
+			}
 
 			if (version > 0) {
 				is = DLFileEntryLocalServiceUtil.getFileAsStream(

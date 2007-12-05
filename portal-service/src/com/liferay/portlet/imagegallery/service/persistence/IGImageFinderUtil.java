@@ -56,7 +56,8 @@ public class IGImageFinderUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}
 

@@ -56,7 +56,8 @@ public class BookmarksEntryFinderUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchEntryException {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}
 

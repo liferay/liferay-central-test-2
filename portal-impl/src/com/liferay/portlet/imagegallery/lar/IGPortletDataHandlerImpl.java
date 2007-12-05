@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.imagegallery.lar;
 
-import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -36,6 +35,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -163,7 +163,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 						context.getZipWriter().addEntry(
 							getIGImageDir(igImage), largeImage.getTextObj());
 					}
-					catch (NoSuchImageException nsie) {
+					catch (com.liferay.portal.NoSuchImageException nsie) {
 					}
 				}
 			}
@@ -346,21 +346,21 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingImage = IGImageFinderUtil.findByUuid_G(
-					igImage.getUuid(), context.getGroupId());
+				try {
+					existingImage = IGImageFinderUtil.findByUuid_G(
+						igImage.getUuid(), context.getGroupId());
 
-				if (existingImage == null) {
+					IGImageLocalServiceUtil.updateImage(
+						userId, existingImage.getImageId(), folderId,
+						igImage.getDescription(), imageFile,
+						igImage.getImageType(), tagsEntries);
+				}
+				catch (NoSuchImageException nsie) {
 					IGImageLocalServiceUtil.addImage(
 						igImage.getUuid(), userId, folderId,
 						igImage.getDescription(), imageFile,
 						igImage.getImageType(), tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					IGImageLocalServiceUtil.updateImage(
-						userId, existingImage.getImageId(), folderId,
-						igImage.getDescription(), imageFile,
-						igImage.getImageType(), tagsEntries);
 				}
 			}
 			else {

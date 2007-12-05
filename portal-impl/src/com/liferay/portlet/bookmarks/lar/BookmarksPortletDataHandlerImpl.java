@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -248,20 +249,20 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
-					entry.getUuid(), context.getGroupId());
+				try {
+					existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
+						entry.getUuid(), context.getGroupId());
 
-				if (existingEntry == null) {
-					BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), userId, folderId, entry.getName(),
-						entry.getUrl(), entry.getComments(), tagsEntries,
-						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
 					BookmarksEntryLocalServiceUtil.updateEntry(
 						userId, existingEntry.getEntryId(), folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						tagsEntries);
+				}
+				catch (NoSuchEntryException nsee) {
+					BookmarksEntryLocalServiceUtil.addEntry(
+						entry.getUuid(), userId, folderId, entry.getName(),
+						entry.getUrl(), entry.getComments(), tagsEntries,
+						addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {

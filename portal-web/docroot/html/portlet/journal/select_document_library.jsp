@@ -196,9 +196,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("selectDocumentLibrary('");
 		sm.append("@main_path@/document_library/get_file?uuid=");
 		sm.append(fileEntry.getUuid());
-		sm.append("&groupId=@group_id@&title=");
-		sm.append(HttpUtil.encodeURL(fileEntry.getTitle()));
-		sm.append("'); window.close();");
+		sm.append("&groupId=@group_id@'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
 

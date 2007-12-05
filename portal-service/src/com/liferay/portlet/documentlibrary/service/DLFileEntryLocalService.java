@@ -291,21 +291,6 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long fileEntryId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public java.util.List getFileEntries(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -330,6 +315,21 @@ public interface DLFileEntryLocalService {
 
 	public int getFileEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public int getFoldersFileEntriesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException;

@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -394,22 +396,22 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingEntry = DLFileEntryFinderUtil.findByUuid_G(
-					entry.getUuid(), context.getGroupId());
+				try {
+					existingEntry = DLFileEntryFinderUtil.findByUuid_G(
+						entry.getUuid(), context.getGroupId());
 
-				if (existingEntry == null) {
-					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-						entry.getUuid(), userId, folderId, entry.getName(),
-						entry.getTitle(), entry.getDescription(),
-						tagsEntries, entry.getExtraSettings(), byteArray,
-						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
 					existingEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
 						userId, existingEntry.getFolderId(), folderId,
 						existingEntry.getName(), entry.getName(),
 						entry.getTitle(), entry.getDescription(), tagsEntries,
 						entry.getExtraSettings(), byteArray);
+				}
+				catch (NoSuchFileEntryException nsfee) {
+					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
+						entry.getUuid(), userId, folderId, entry.getName(),
+						entry.getTitle(), entry.getDescription(),
+						tagsEntries, entry.getExtraSettings(), byteArray,
+						addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {
@@ -546,19 +548,19 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				DLFileShortcut existingShortcut =
-					DLFileShortcutFinderUtil.findByUuid_G(
-						shortcut.getUuid(), context.getGroupId());
+				try {
+					DLFileShortcut existingShortcut =
+						DLFileShortcutFinderUtil.findByUuid_G(
+							shortcut.getUuid(), context.getGroupId());
 
-				if (existingShortcut == null) {
-					DLFileShortcutLocalServiceUtil.addFileShortcut(
-						shortcut.getUuid(), userId, folderId, toFolderId,
-						toName, addCommunityPermissions, addGuestPermissions);
-				}
-				else {
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(
 						userId, existingShortcut.getFileShortcutId(), folderId,
 						toFolderId, toName);
+				}
+				catch (NoSuchFileShortcutException nsfse) {
+					DLFileShortcutLocalServiceUtil.addFileShortcut(
+						shortcut.getUuid(), userId, folderId, toFolderId,
+						toName, addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {

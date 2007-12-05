@@ -23,10 +23,12 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -191,7 +193,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 	}
 
 	public WikiPage findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchPageException, SystemException {
 
 		Session session = null;
 
@@ -212,7 +214,15 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No WikiPage exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchPageException(sm.toString());
 			}
 			else {
 				return (WikiPage)list.get(0);

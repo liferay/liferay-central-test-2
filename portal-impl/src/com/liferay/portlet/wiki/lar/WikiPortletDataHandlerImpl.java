@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
+import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -288,22 +289,22 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			WikiNodeUtil.findByPrimaryKey(nodeId);
 
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingPage = WikiPageFinderUtil.findByUuid_G(page.getUuid(),
-					context.getGroupId());
+				try {
+					existingPage = WikiPageFinderUtil.findByUuid_G(
+						page.getUuid(), context.getGroupId());
 
-				if (existingPage == null) {
+					existingPage = WikiPageLocalServiceUtil.updatePage(
+						userId, nodeId, existingPage.getTitle(),
+						page.getContent(), page.getFormat(), tagsEntries);
+				}
+				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
 						page.getVersion(), page.getContent(), page.getFormat(),
 						page.getHead(), tagsEntries);
-				}
-				else {
-					existingPage = WikiPageLocalServiceUtil.updatePage(
-						userId, nodeId, existingPage.getTitle(),
-						page.getContent(), page.getFormat(), tagsEntries);
 				}
 			}
 			else {

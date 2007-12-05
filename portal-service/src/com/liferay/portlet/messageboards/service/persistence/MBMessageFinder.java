@@ -47,7 +47,8 @@ public interface MBMessageFinder {
 
 	public com.liferay.portlet.messageboards.model.MBMessage findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageException;
 
 	public java.util.List findByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -235,7 +236,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 	}
 
 	public BookmarksEntry findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchEntryException, SystemException {
 
 		Session session = null;
 
@@ -256,7 +257,15 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No BookmarksEntry exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchEntryException(sm.toString());
 			}
 			else {
 				return (BookmarksEntry)list.get(0);

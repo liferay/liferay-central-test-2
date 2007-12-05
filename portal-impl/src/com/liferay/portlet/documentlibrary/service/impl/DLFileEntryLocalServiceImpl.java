@@ -468,24 +468,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public DLFileEntry getFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
-	}
-
-	public DLFileEntry getFileEntry(long folderId, String name)
-		throws PortalException, SystemException {
-
-		return dlFileEntryPersistence.findByF_N(folderId, name);
-	}
-
-	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
-		throws PortalException, SystemException {
-
-		return dlFileEntryFinder.findByUuid_G(uuid, groupId);
-	}
-
 	public List getFileEntries(long folderId) throws SystemException {
 		return dlFileEntryPersistence.findByFolderId(folderId);
 	}
@@ -539,6 +521,24 @@ public class DLFileEntryLocalServiceImpl
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		return dlFileEntryPersistence.countByFolderId(folderId);
+	}
+
+	public DLFileEntry getFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
+	}
+
+	public DLFileEntry getFileEntry(long folderId, String name)
+		throws PortalException, SystemException {
+
+		return dlFileEntryPersistence.findByF_N(folderId, name);
+	}
+
+	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+
+		return dlFileEntryFinder.findByUuid_G(uuid, groupId);
 	}
 
 	public int getFoldersFileEntriesCount(List folderIds)

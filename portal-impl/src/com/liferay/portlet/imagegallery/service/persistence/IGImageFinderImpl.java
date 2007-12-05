@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -237,7 +238,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 	}
 
 	public IGImage findByUuid_G(String uuid, long groupId)
-		throws SystemException {
+		throws NoSuchImageException, SystemException {
 
 		Session session = null;
 
@@ -258,7 +259,15 @@ public class IGImageFinderImpl implements IGImageFinder {
 			List list = q.list();
 
 			if (list.size() == 0) {
-				return null;
+				StringMaker sm = new StringMaker();
+
+				sm.append("No IGImage exists with the key {uuid=");
+				sm.append(uuid);
+				sm.append(", groupId=");
+				sm.append(groupId);
+				sm.append("}");
+
+				throw new NoSuchImageException(sm.toString());
 			}
 			else {
 				return (IGImage)list.get(0);

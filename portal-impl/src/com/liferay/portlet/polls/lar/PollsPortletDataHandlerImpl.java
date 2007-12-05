@@ -292,18 +292,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingChoice = PollsChoiceFinderUtil.findByUuid_G(
-					choice.getUuid(), context.getGroupId());
+				try {
+					existingChoice = PollsChoiceFinderUtil.findByUuid_G(
+						choice.getUuid(), context.getGroupId());
 
-				if (existingChoice == null) {
-					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-						choice.getUuid(), questionId, choice.getName(),
-						choice.getDescription());
-				}
-				else {
 					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
 						existingChoice.getChoiceId(), questionId,
 						choice.getName(), choice.getDescription());
+				}
+				catch (NoSuchChoiceException nsce) {
+					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+						choice.getUuid(), questionId, choice.getName(),
+						choice.getDescription());
 				}
 			}
 			else {
