@@ -24,8 +24,6 @@
 
 <%@ include file="/html/portlet/update_manager/init.jsp" %>
 
-<%@ include file="/html/portlet/update_manager/css.jspf" %>
-
 <%
 List updatablePackageIds = new ArrayList();
 %>

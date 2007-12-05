@@ -22,8 +22,6 @@
  */
 %>
 
-<%@ include file="/html/portlet/wiki/css.jspf" %>
-
 <%
 String content = null;
 

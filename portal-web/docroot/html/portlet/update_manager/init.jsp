@@ -32,3 +32,5 @@
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
+
+<%@ include file="/html/portlet/update_manager/css.jspf" %>

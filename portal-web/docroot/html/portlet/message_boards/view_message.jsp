@@ -24,8 +24,6 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-<%@ include file="/html/portlet/message_boards/css.jspf" %>
-
 <%
 MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 

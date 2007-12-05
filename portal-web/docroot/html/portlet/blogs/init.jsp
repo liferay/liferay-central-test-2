@@ -76,3 +76,5 @@ else if (rssFormat.equals("atom10")) {
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
+
+<%@ include file="/html/portlet/blogs/css.jspf" %>

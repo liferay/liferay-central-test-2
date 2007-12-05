@@ -22,24 +22,33 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
+<style type="text/css">
+	.portlet-blogs .entry-title {
+		display: block;
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+	
+	.portlet-blogs .edit-actions {
+		margin: 1.5em 0;
+	}
+	
+	.portlet-blogs .taglib-social-bookmarks {
+		margin-top: 1.5em;
+	}
+	
+	.portlet-blogs .entry-author {
+	}
+	
+	.portlet-blogs .entry-content {
+	}
 
-<div class="taglib-social-bookmarks">
-	<table class="lfr-table">
-	<tr>
+	.portlet-blogs .entry-body {
+	}
 	
-		<%
-		for (int i = 0; i < typesArray.length; i++) {
-		%>
-	
-			<td>
-				<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-			</td>
-	
-		<%
-		}
-		%>
-	
-	</tr>
-	</table>
-</div>
+	.portlet-blogs .subscribe {
+	}
+		
+	.portlet-blogs .comments {
+	}
+</style>

@@ -766,6 +766,10 @@ ul.gamma .tree-item-hover {
 	margin-right: 1em;
 }
 
+.portlet-toolbar {
+	margin-bottom: 1.5em;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {
@@ -991,6 +995,9 @@ ul.gamma .tree-item-hover {
 }
 
 /* ---------- Taglib social bookmark ---------- */
+
+.taglib-social-bookmarks {
+}
 
 .taglib-social-bookmark-blinklist {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/blinklist.gif) no-repeat 0 50%;
