@@ -27,19 +27,19 @@
 <div class="taglib-social-bookmarks">
 	<table class="lfr-table">
 	<tr>
-	
+
 		<%
 		for (int i = 0; i < typesArray.length; i++) {
 		%>
-	
+
 			<td>
 				<liferay-ui:social-bookmark type="<%= typesArray[i] %>" url="<%= url %>" title="<%= title %>" target="<%= target %>" />
 			</td>
-	
+
 		<%
 		}
 		%>
-	
+
 	</tr>
 	</table>
 </div>

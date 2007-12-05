@@ -28,15 +28,15 @@
 		<%
 		String strutsAction = ParamUtil.getString(request, "struts_action");
 		%>
-	
+
 		<portlet:renderURL var="viewEntryURL">
 			<portlet:param name="struts_action" value="/blogs/view_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 		</portlet:renderURL>
-	
+
 		<span class="entry-title">
-	
+
 		<c:choose>
 			<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
 				<%= entry.getTitle() %>
@@ -45,11 +45,11 @@
 				<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
 			</c:otherwise>
 		</c:choose>
-	
+
 		</span>
-	
+
 		<span class="entry-author"><liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
-	
+
 		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"
 			classPK="<%= entry.getEntryId() %>"
