@@ -22,29 +22,6 @@
  */
 %>
 
-<style type="text/css">
-	.lfr-table .journal-edit-article-extra {
-		border: 1px solid #CCC;
-		width: 100%;
-	}
-
-	.lfr-table .journal-edit-article-extra tr td {
-		padding: 5px;
-	}
-
-	.journal-article-status-approved {
-		color: green;
-	}
-
-	.journal-article-status-expired {
-		color: red;
-	}
-
-	.journal-article-status-not-approved {
-		color: orange;
-	}
-</style>
-
 <table class="journal-edit-article-extra" width="100%">
 <tr class="portlet-section-header">
 	<td>

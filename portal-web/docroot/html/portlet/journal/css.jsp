@@ -24,42 +24,23 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-section-body.status-installation-in-process td {
-	background-color: #99CCFF;
+.portlet-journal .lfr-table .journal-edit-article-extra {
+	border: 1px solid #CCC;
+	width: 100%;
 }
 
-.portlet-section-alternate.status-installation-in-process td {
-	background-color: #99CCFF;
+.portlet-journal .lfr-table .journal-edit-article-extra tr td {
+	padding: 5px;
 }
 
-.portlet-section-body.status-up-to-date td {
-	background-color: #CCFFCC;
+.portlet-journal .journal-article-status-approved {
+	color: green;
 }
 
-.portlet-section-alternate.status-up-to-date td {
-	background-color: #CCFFCC;
+.portlet-journal .journal-article-status-expired {
+	color: red;
 }
 
-.portlet-section-body.status-unknown td {
-	background-color: #FFFFCC;
-}
-
-.portlet-section-alternate.status-unknown td {
-	background-color: #FFFFCC;
-}
-
-.portlet-section-body.status-update-available td {
-	background-color: #FF9999;
-}
-
-.portlet-section-alternate.status-update-available td {
-	background-color: #FF9999;
-}
-
-.portlet-section-body.status-update-ignored td {
-	background-color: #99CCFF;
-}
-
-.portlet-section-alternate.status-update-ignored td {
-	background-color: #99CCFF;
+.portlet-journal .journal-article-status-not-approved {
+	color: orange;
 }

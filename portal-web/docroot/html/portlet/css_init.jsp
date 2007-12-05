@@ -45,5 +45,6 @@ String cdnHost = PortalUtil.getCDNHost();
 String themeImagesPath = cdnHost + themeContextPath + theme.getImagesPath();
 
 response.addHeader("Cache-Control", "max-age=172801, public");
+response.addHeader("Content-type", "text/css");
 response.addHeader("Expires", "172801");
 %>
