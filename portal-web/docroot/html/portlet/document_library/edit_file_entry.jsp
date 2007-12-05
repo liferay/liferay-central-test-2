@@ -224,31 +224,37 @@ portletURL.setParameter("name", name);
 		</c:if>
 	</portlet:renderURL>
 
-	<script type="text/javascript">
-		jQuery(
-			function() {
-				new Liferay.Upload({
-					allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
-					container: '#<portlet:namespace />fileUpload',
-					fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
-					fallbackContainer: '#<portlet:namespace />fallback',
-					maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) %>,
-					namespace: '<portlet:namespace />',
-					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></liferay-portlet:actionURL>'
-				});
-			}
-		);
-	</script>
+	<c:if test="<%= fileEntry == null %>">
+		<script type="text/javascript">
+			jQuery(
+				function() {
+					new Liferay.Upload({
+						allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+						container: '#<portlet:namespace />fileUpload',
+						fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+						fallbackContainer: '#<portlet:namespace />fallback',
+						maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) %>,
+						namespace: '<portlet:namespace />',
+						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></liferay-portlet:actionURL>'
+					});
+				}
+			);
+		</script>
 
-	<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 
-	<div class="lfr-fallback" id="<portlet:namespace />fallback">
-		<liferay-ui:upload-progress
-			id="<%= uploadProgressId %>"
-			iframeSrc="<%= uploadProgressURL %>"
-			redirect="<%= redirect %>"
-		/>
-	</div>
+		<div class="lfr-fallback" id="<portlet:namespace />fallback">
+	</c:if>
+
+	<liferay-ui:upload-progress
+		id="<%= uploadProgressId %>"
+		iframeSrc="<%= uploadProgressURL %>"
+		redirect="<%= redirect %>"
+	/>
+
+	<c:if test="<%= fileEntry == null %>">
+		</div>
+	</c:if>
 
 	<c:if test="<%= fileEntry != null %>">
 		<br />
