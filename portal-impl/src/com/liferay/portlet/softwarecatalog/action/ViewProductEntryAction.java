@@ -24,7 +24,9 @@ package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
@@ -50,6 +52,13 @@ public class ViewProductEntryAction extends PortletAction {
 
 		try {
 			ActionUtil.getProductEntry(req);
+
+			SCProductEntry productEntry = (SCProductEntry)req.getAttribute(
+				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
+
+			if (productEntry == null) {
+				throw new NoSuchProductEntryException();
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductEntryException ||
