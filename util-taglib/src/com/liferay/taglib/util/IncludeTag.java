@@ -44,9 +44,11 @@ import javax.servlet.jsp.JspException;
 public class IncludeTag extends ParamAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
+		HttpServletRequest req = null;
+
 		try {
 			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
+			req = getServletRequest();
 			StringServletResponse res = getServletResponse();
 
 			Theme theme = (Theme)req.getAttribute(WebKeys.THEME);
@@ -67,6 +69,15 @@ public class IncludeTag extends ParamAncestorTagImpl {
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
+			if (req != null) {
+				String currentURL = (String)req.getAttribute(
+					WebKeys.CURRENT_URL);
+
+				_log.error(
+					"Current URL " + currentURL + " generates exception: " +
+						e.getMessage());
+			}
+
 			LogUtil.log(_log, e);
 
 			return EVAL_PAGE;
