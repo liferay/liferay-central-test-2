@@ -43,5 +43,3 @@
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
-
-<%@ include file="/html/portlet/wiki/css.jspf" %>

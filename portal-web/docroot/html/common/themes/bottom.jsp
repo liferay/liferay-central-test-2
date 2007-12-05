@@ -181,6 +181,10 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 			if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
 				footerPortletCssPaths.add(footerPortletCssPath);
+
+				if (footerPortletCssPath.endsWith(".jsp")) {
+					footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+				}
 	%>
 
 				<link href="<%= footerPortletCssPath %>" rel="stylesheet" type="text/css" />

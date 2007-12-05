@@ -22,6 +22,8 @@
  */
 %>
 
+<%@ include file="/html/portlet/css_init.jsp" %>
+
 <style type="text/css">
 	.portlet-message-boards .code {
 		background: #fff;
@@ -38,13 +40,13 @@
 	}
 
 	.portlet-message-boards .quote {
-		background: #fff url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteleft.png) left top no-repeat;
+		background: #fff url(<%= themeImagesPath %>/message_boards/quoteleft.png) left top no-repeat;
 		border: 1px solid #777;
 		padding: 5px 0px 0px 5px;
 	}
 
 	.portlet-message-boards .quote-content {
-		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteright.png) right bottom no-repeat;
+		background: transparent url(<%= themeImagesPath %>/message_boards/quoteright.png) right bottom no-repeat;
 		padding: 5px 30px 10px 30px;
 	}
 

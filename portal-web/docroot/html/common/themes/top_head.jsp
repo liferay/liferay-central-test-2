@@ -83,6 +83,10 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
 				headerPortletCssPaths.add(headerPortletCssPath);
+
+				if (headerPortletCssPath.endsWith(".jsp")) {
+					headerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+				}
 	%>
 
 				<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />

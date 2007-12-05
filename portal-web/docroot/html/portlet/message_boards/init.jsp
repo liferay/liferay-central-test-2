@@ -78,5 +78,3 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
-
-<%@ include file="/html/portlet/message_boards/css.jspf" %>

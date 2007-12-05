@@ -22,33 +22,46 @@
  */
 %>
 
+<%@ include file="/html/portlet/css_init.jsp" %>
+
 <style type="text/css">
-	.portlet-blogs .entry-title {
-		display: block;
-		font-size: 1.2em;
-		font-weight: bold;
+	.portlet-section-body.status-installation-in-process td {
+		background-color: #99CCFF;
 	}
 
-	.portlet-blogs .edit-actions {
-		margin: 1.5em 0;
+	.portlet-section-alternate.status-installation-in-process td {
+		background-color: #99CCFF;
 	}
 
-	.portlet-blogs .taglib-social-bookmarks {
-		margin-top: 1.5em;
+	.portlet-section-body.status-up-to-date td {
+		background-color: #CCFFCC;
 	}
 
-	.portlet-blogs .entry-author {
+	.portlet-section-alternate.status-up-to-date td {
+		background-color: #CCFFCC;
 	}
 
-	.portlet-blogs .entry-content {
+	.portlet-section-body.status-unknown td {
+		background-color: #FFFFCC;
 	}
 
-	.portlet-blogs .entry-body {
+	.portlet-section-alternate.status-unknown td {
+		background-color: #FFFFCC;
 	}
 
-	.portlet-blogs .subscribe {
+	.portlet-section-body.status-update-available td {
+		background-color: #FF9999;
 	}
 
-	.portlet-blogs .comments {
+	.portlet-section-alternate.status-update-available td {
+		background-color: #FF9999;
+	}
+
+	.portlet-section-body.status-update-ignored td {
+		background-color: #99CCFF;
+	}
+
+	.portlet-section-alternate.status-update-ignored td {
+		background-color: #99CCFF;
 	}
 </style>

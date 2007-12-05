@@ -22,30 +22,36 @@
  */
 %>
 
+<%@ include file="/html/portlet/css_init.jsp" %>
+
 <style type="text/css">
-	.wiki-body .wiki-code {
-		background: #fff;
-		border: 1px solid #777;
-		font-family: monospace;
-		white-space: pre;
+	.portlet-blogs .entry-title {
+		display: block;
+		font-size: 1.2em;
+		font-weight: bold;
 	}
 
-	.wiki-body .wiki-code-lines {
-		border-right: 1px solid #ccc;
-		color: #000;
-		margin-right: 5px;
-		padding: 0px 5px 0px 5px;
+	.portlet-blogs .edit-actions {
+		margin: 1.5em 0;
 	}
 
-	.wiki-body a.wiki-external-link {
-		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/wiki/external.png) right top no-repeat;
-		text-decoration: none;
-		padding-right: 11px;
+	.portlet-blogs .taglib-social-bookmarks {
+		margin-top: 1.5em;
 	}
 
-	.wiki-body a.wiki-external-link:hover {
-		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/wiki/external.png) right top no-repeat;
-		text-decoration: underline;
-		padding-right: 11px;
+	.portlet-blogs .entry-author {
+	}
+
+	.portlet-blogs .entry-content {
+	}
+
+	.portlet-blogs .entry-body {
+	}
+
+	.portlet-blogs .subscribe {
+		margin-bottom: 1.5em;
+	}
+
+	.portlet-blogs .comments {
 	}
 </style>

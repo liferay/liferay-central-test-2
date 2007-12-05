@@ -243,6 +243,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/message_boards/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -407,6 +408,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/blogs/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -436,6 +438,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -1010,6 +1013,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/update_manager/css.jsp</header-portlet-css>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>

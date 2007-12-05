@@ -35,7 +35,7 @@
 			<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 		</portlet:renderURL>
 
-		<span class="entry-title">
+		<div class="entry-title">
 
 		<c:choose>
 			<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
@@ -46,9 +46,11 @@
 			</c:otherwise>
 		</c:choose>
 
-		</span>
+		</div>
 
-		<span class="entry-author"><liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
+		<div class="entry-author">
+			<liferay-ui:message key="written-by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+		</div>
 
 		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"

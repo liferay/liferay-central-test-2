@@ -22,13 +22,32 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
-<%@ page import="com.liferay.util.Version" %>
+<style type="text/css">
+	.wiki-body .wiki-code {
+		background: #fff;
+		border: 1px solid #777;
+		font-family: monospace;
+		white-space: pre;
+	}
 
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
+	.wiki-body .wiki-code-lines {
+		border-right: 1px solid #ccc;
+		color: #000;
+		margin-right: 5px;
+		padding: 0px 5px 0px 5px;
+	}
+
+	.wiki-body a.wiki-external-link {
+		background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
+		text-decoration: none;
+		padding-right: 11px;
+	}
+
+	.wiki-body a.wiki-external-link:hover {
+		background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
+		text-decoration: underline;
+		padding-right: 11px;
+	}
+</style>

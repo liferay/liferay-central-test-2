@@ -22,44 +22,28 @@
  */
 %>
 
-<style type="text/css">
-	.portlet-section-body.status-installation-in-process td {
-		background-color: #99CCFF;
-	}
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.model.Theme" %>
+<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
-	.portlet-section-alternate.status-installation-in-process td {
-		background-color: #99CCFF;
-	}
+<%
+long companyId = PortalUtil.getCompanyId(request);
 
-	.portlet-section-body.status-up-to-date td {
-		background-color: #CCFFCC;
-	}
+String themeId = ParamUtil.getString(request, "themeId");
 
-	.portlet-section-alternate.status-up-to-date td {
-		background-color: #CCFFCC;
-	}
+Theme theme = ThemeLocalUtil.getTheme(companyId, themeId, false);
 
-	.portlet-section-body.status-unknown td {
-		background-color: #FFFFCC;
-	}
+String themeContextPath = request.getContextPath();
 
-	.portlet-section-alternate.status-unknown td {
-		background-color: #FFFFCC;
-	}
+if (theme.isWARFile()) {
+	themeContextPath = theme.getContextPath();
+}
 
-	.portlet-section-body.status-update-available td {
-		background-color: #FF9999;
-	}
+String cdnHost = PortalUtil.getCDNHost();
 
-	.portlet-section-alternate.status-update-available td {
-		background-color: #FF9999;
-	}
+String themeImagesPath = cdnHost + themeContextPath + theme.getImagesPath();
 
-	.portlet-section-body.status-update-ignored td {
-		background-color: #99CCFF;
-	}
-
-	.portlet-section-alternate.status-update-ignored td {
-		background-color: #99CCFF;
-	}
-</style>
+response.addHeader("Cache-Control", "max-age=172801, public");
+response.addHeader("Expires", "172801");
+%>
