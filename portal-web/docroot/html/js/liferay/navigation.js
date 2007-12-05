@@ -11,11 +11,10 @@ Liferay.Navigation = new Class({
 
 		instance._navBlock = jQuery(instance.params.navBlock);
 
+		instance._hasPermission = instance.params.hasPermission;
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
-		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasManageLayoutPermission;
+		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasPermission;
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
-
-		instance._hasManageLayoutPermission = instance.params.hasManageLayoutPermission;
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
@@ -157,7 +156,7 @@ Liferay.Navigation = new Class({
 				'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
 				'</div>';
 
-			if (instance._hasManageLayoutPermission) {
+			if (instance._hasPermission) {
 				navList.after(
 					'<div id="add-page">' +
 					'<a href="javascript:;">' +
@@ -179,7 +178,7 @@ Liferay.Navigation = new Class({
 	_makeDeletable: function() {
 		var instance = this;
 
-		if (instance._isModifiable && instance._hasManageLayoutPermission) {
+		if (instance._isModifiable && instance._hasPermission) {
 			var navItems = instance._navBlock.find('li').not('.selected');
 
 			instance._deleteButton(navItems);
@@ -562,7 +561,7 @@ Liferay.Navigation = new Class({
 	_isSortable: false,
 	_isModifiable: false,
 	_isUseHandle: false,
-	_hasManageLayoutPermission: false,
+	_hasPermission: false,
 	_enterPage: '',
 	_updateURL: ''
 });

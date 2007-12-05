@@ -284,7 +284,7 @@
 						{
 							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
 							navBlock: '#navigation',
-							hasManageLayoutPermission: <%= GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) %>
+							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) %>
 						}
 					);
 
