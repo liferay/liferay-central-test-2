@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -70,6 +71,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 		try {
 			long groupId = getGroupId(req);
+			String version = getVersion(req);
 			String baseImageURL = getBaseImageURL(req);
 			Date oldestDate = getOldestDate(req);
 			int maxNumOfVersions = ParamUtil.getInteger(
@@ -85,8 +87,8 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 			String repositoryXML =
 				SCProductEntryLocalServiceUtil.getRepositoryXML(
-					groupId, baseImageURL, oldestDate, maxNumOfVersions,
-					repoSettings);
+					groupId, version, baseImageURL, oldestDate,
+					maxNumOfVersions, repoSettings);
 
 			String fileName = null;
 			byte[] byteArray = repositoryXML.getBytes("UTF-8");
@@ -204,6 +206,42 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		}
 
 		return repoSettings;
+	}
+
+	protected String getVersion(HttpServletRequest req)
+		throws SystemException, PortalException {
+
+		String version = ParamUtil.getString(req, "version", null);
+
+		String prefix =
+			PluginPackageUtil.REPOSITORY_XML_FILENAME_PREFIX + StringPool.DASH;
+		String extension =
+			StringPool.PERIOD +
+				PluginPackageUtil.REPOSITORY_XML_FILENAME_EXTENSION;
+
+		if (Validator.isNull(version)) {
+			String path = GetterUtil.getString(req.getPathInfo());
+
+			if (Validator.isNotNull(path)) {
+				int x = path.indexOf(prefix);
+
+				if (x != -1) {
+					version = path.substring(
+						x + prefix.length(), path.indexOf(extension, x));
+				}
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (Validator.isNull(version)) {
+				_log.debug("Serving repository for all versions");
+			}
+			else {
+				_log.debug("Serving repository for version " + version);
+			}
+		}
+
+		return version;
 	}
 
 	private static Log _log = LogFactory.getLog(SoftwareCatalogServlet.class);

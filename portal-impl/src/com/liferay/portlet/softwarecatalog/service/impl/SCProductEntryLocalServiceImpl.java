@@ -53,6 +53,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.Time;
+import com.liferay.util.Version;
 import com.liferay.util.lucene.HitsImpl;
 import com.liferay.util.xml.DocUtil;
 
@@ -352,6 +353,15 @@ public class SCProductEntryLocalServiceImpl
 			long groupId, String baseImageURL, Date oldestDate,
 			int maxNumOfVersions, Properties repoSettings)
 		throws PortalException, SystemException {
+		return getRepositoryXML(
+			groupId, null, baseImageURL, oldestDate, maxNumOfVersions,
+			repoSettings);
+	}
+
+	public String getRepositoryXML(
+			long groupId, String version, String baseImageURL, Date oldestDate,
+			int maxNumOfVersions, Properties repoSettings)
+		throws PortalException, SystemException {
 
 		Document doc = DocumentHelper.createDocument();
 
@@ -396,6 +406,12 @@ public class SCProductEntryLocalServiceImpl
 				if ((oldestDate != null) &&
 					(oldestDate.after(productVersion.getModifiedDate()))) {
 
+					continue;
+				}
+
+				if ((Validator.isNotNull(version)) &&
+					(!isVersionSupported(
+						version, productVersion.getFrameworkVersions()))) {
 					continue;
 				}
 
@@ -606,6 +622,28 @@ public class SCProductEntryLocalServiceImpl
 		tags = tags.trim().toLowerCase();
 
 		return StringUtil.merge(StringUtil.split(tags), ", ");
+	}
+
+	protected static boolean isVersionSupported(
+		String version, List supportedVersions) {
+
+		Version currentVersion = Version.getInstance(version);
+
+		Iterator iterator = supportedVersions.iterator();
+
+		while (iterator.hasNext()) {
+			SCFrameworkVersion frameworkVersion =
+				(SCFrameworkVersion)iterator.next();
+
+			Version supportedVersion = Version.getInstance(
+				frameworkVersion.getName());
+
+			if (supportedVersion.includes(currentVersion)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected void populatePluginPackageElement(

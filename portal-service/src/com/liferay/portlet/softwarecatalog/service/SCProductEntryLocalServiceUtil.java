@@ -433,6 +433,18 @@ public class SCProductEntryLocalServiceUtil {
 			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
 	}
 
+	public static java.lang.String getRepositoryXML(long groupId,
+		java.lang.String version, java.lang.String baseImageURL,
+		java.util.Date oldestDate, int maxNumOfVersions,
+		java.util.Properties repoSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getRepositoryXML(groupId, version,
+			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();

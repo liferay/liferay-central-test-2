@@ -94,8 +94,11 @@ import org.dom4j.Element;
  */
 public class PluginPackageUtil {
 
-	public static final String REPOSITORY_XML_FILENAME =
-		"liferay-plugin-repository.xml";
+	public static final String REPOSITORY_XML_FILENAME_PREFIX =
+		"liferay-plugin-repository";
+
+	public static final String REPOSITORY_XML_FILENAME_EXTENSION =
+		"xml";
 
 	public static void endPluginPackageInstallation(String preliminaryContext) {
 		_installedPluginPackages.unregisterPluginPackageInstallation(
@@ -241,12 +244,12 @@ public class PluginPackageUtil {
 	}
 
 	public static boolean isCurrentVersionSupported(List versions) {
+		Version currentVersion = Version.getInstance(
+			ReleaseInfo.getVersion());
+
 		for (int i = 0; i < versions.size(); i++) {
 			Version supportedVersion = Version.getInstance(
 				(String)versions.get(i));
-
-			Version currentVersion = Version.getInstance(
-				ReleaseInfo.getVersion());
 
 			if (supportedVersion.includes(currentVersion)) {
 				return true;
@@ -849,7 +852,9 @@ public class PluginPackageUtil {
 		RemotePluginPackageRepository repository = null;
 
 		String pluginsXmlURL =
-			repositoryURL + StringPool.SLASH + REPOSITORY_XML_FILENAME;
+			repositoryURL + StringPool.SLASH + REPOSITORY_XML_FILENAME_PREFIX +
+				StringPool.DASH + ReleaseInfo.getVersion() + StringPool.PERIOD +
+					REPOSITORY_XML_FILENAME_EXTENSION;
 
 		try {
 			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
@@ -865,9 +870,28 @@ public class PluginPackageUtil {
 					hostConfig, getFileMethod);
 
 				if (responseCode != 200) {
-					throw new PluginPackageException(
-						"Unable to download file " + pluginsXmlURL +
-							" because of response code " + responseCode);
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"A repository for version " +
+								ReleaseInfo.getVersion() + " was not found. " +
+									"Checking general repository");
+					}
+					pluginsXmlURL =
+						repositoryURL + StringPool.SLASH +
+							REPOSITORY_XML_FILENAME_PREFIX + StringPool.PERIOD +
+								REPOSITORY_XML_FILENAME_EXTENSION;
+
+					getFileMethod = new GetMethod(pluginsXmlURL);
+
+					responseCode = client.executeMethod(
+						hostConfig, getFileMethod);
+
+					if (responseCode != 200) {
+
+						throw new PluginPackageException(
+							"Unable to download file " + pluginsXmlURL +
+								" because of response code " + responseCode);
+					}
 				}
 
 				bytes = getFileMethod.getResponseBody();
