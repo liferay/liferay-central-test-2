@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -244,8 +245,7 @@ public class PluginPackageUtil {
 	}
 
 	public static boolean isCurrentVersionSupported(List versions) {
-		Version currentVersion = Version.getInstance(
-			ReleaseInfo.getVersion());
+		Version currentVersion = Version.getInstance(ReleaseInfo.getVersion());
 
 		for (int i = 0; i < versions.size(); i++) {
 			Version supportedVersion = Version.getInstance(
@@ -851,10 +851,17 @@ public class PluginPackageUtil {
 
 		RemotePluginPackageRepository repository = null;
 
-		String pluginsXmlURL =
-			repositoryURL + StringPool.SLASH + REPOSITORY_XML_FILENAME_PREFIX +
-				StringPool.DASH + ReleaseInfo.getVersion() + StringPool.PERIOD +
-					REPOSITORY_XML_FILENAME_EXTENSION;
+		StringMaker sm = new StringMaker();
+
+		sm.append(repositoryURL);
+		sm.append(StringPool.SLASH);
+		sm.append(REPOSITORY_XML_FILENAME_PREFIX);
+		sm.append(StringPool.DASH);
+		sm.append(ReleaseInfo.getVersion());
+		sm.append(StringPool.PERIOD);
+		sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+
+		String pluginsXmlURL = sm.toString();
 
 		try {
 			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
@@ -876,10 +883,16 @@ public class PluginPackageUtil {
 								ReleaseInfo.getVersion() + " was not found. " +
 									"Checking general repository");
 					}
-					pluginsXmlURL =
-						repositoryURL + StringPool.SLASH +
-							REPOSITORY_XML_FILENAME_PREFIX + StringPool.PERIOD +
-								REPOSITORY_XML_FILENAME_EXTENSION;
+
+					sm = new StringMaker();
+
+					sm.append(repositoryURL);
+					sm.append(StringPool.SLASH);
+					sm.append(REPOSITORY_XML_FILENAME_PREFIX);
+					sm.append(StringPool.PERIOD);
+					sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+
+					pluginsXmlURL = sm.toString();
 
 					getFileMethod = new GetMethod(pluginsXmlURL);
 
@@ -887,7 +900,6 @@ public class PluginPackageUtil {
 						hostConfig, getFileMethod);
 
 					if (responseCode != 200) {
-
 						throw new PluginPackageException(
 							"Unable to download file " + pluginsXmlURL +
 								" because of response code " + responseCode);

@@ -25,7 +25,6 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -34,6 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -209,9 +209,9 @@ public class SoftwareCatalogServlet extends HttpServlet {
 	}
 
 	protected String getVersion(HttpServletRequest req)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
-		String version = ParamUtil.getString(req, "version", null);
+		String version = ParamUtil.getString(req, "version");
 
 		String prefix =
 			PluginPackageUtil.REPOSITORY_XML_FILENAME_PREFIX + StringPool.DASH;

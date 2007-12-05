@@ -353,6 +353,7 @@ public class SCProductEntryLocalServiceImpl
 			long groupId, String baseImageURL, Date oldestDate,
 			int maxNumOfVersions, Properties repoSettings)
 		throws PortalException, SystemException {
+
 		return getRepositoryXML(
 			groupId, null, baseImageURL, oldestDate, maxNumOfVersions,
 			repoSettings);
@@ -409,9 +410,10 @@ public class SCProductEntryLocalServiceImpl
 					continue;
 				}
 
-				if ((Validator.isNotNull(version)) &&
-					(!isVersionSupported(
-						version, productVersion.getFrameworkVersions()))) {
+				if (Validator.isNotNull(version) &&
+					!isVersionSupported(
+						version, productVersion.getFrameworkVersions())) {
+
 					continue;
 				}
 
@@ -624,7 +626,7 @@ public class SCProductEntryLocalServiceImpl
 		return StringUtil.merge(StringUtil.split(tags), ", ");
 	}
 
-	protected static boolean isVersionSupported(
+	protected boolean isVersionSupported(
 		String version, List supportedVersions) {
 
 		Version currentVersion = Version.getInstance(version);
