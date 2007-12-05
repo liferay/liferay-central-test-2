@@ -83,9 +83,12 @@ public class SecureFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		String remoteAddr = req.getRemoteAddr();
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		if (isAccessAllowed(req)) {
+		String remoteAddr = httpReq.getRemoteAddr();
+
+		if (isAccessAllowed(httpReq)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Access allowed for " + remoteAddr);
 			}
@@ -94,6 +97,10 @@ public class SecureFilter implements Filter {
 			if (_log.isErrorEnabled()) {
 				_log.error("Access denied for " + remoteAddr);
 			}
+
+			httpRes.sendError(
+				HttpServletResponse.SC_FORBIDDEN,
+				"Access denied for " + remoteAddr);
 
 			return;
 		}
@@ -106,9 +113,6 @@ public class SecureFilter implements Filter {
 				_log.debug("https is not required");
 			}
 		}
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
@@ -148,7 +152,7 @@ public class SecureFilter implements Filter {
 	public void destroy() {
 	}
 
-	protected boolean isAccessAllowed(ServletRequest req) {
+	protected boolean isAccessAllowed(HttpServletRequest req) {
 		String remoteAddr = req.getRemoteAddr();
 		String serverIp = req.getServerName();
 
