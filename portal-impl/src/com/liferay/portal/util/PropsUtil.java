@@ -45,20 +45,6 @@ public class PropsUtil {
 
 	public static final String PORTAL_CTX = "portal.ctx";
 
-	// Error
-
-	public static final String ERROR_MESSAGE_LOG = "error.message.log";
-
-	public static final String ERROR_MESSAGE_PRINT = "error.message.print";
-
-	public static final String ERROR_MESSAGE_SHOW = "error.message.show";
-
-	public static final String ERROR_STACK_TRACE_LOG = "error.stack.trace.log";
-
-	public static final String ERROR_STACK_TRACE_PRINT = "error.stack.trace.print";
-
-	public static final String ERROR_STACK_TRACE_SHOW = "error.stack.trace.show";
-
 	// TCK
 
 	public static final String TCK_URL = "tck.url";

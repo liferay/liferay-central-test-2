@@ -27,25 +27,15 @@
 <%@ page isErrorPage="true" %>
 
 <%
+String userId = request.getRemoteUser();
+String currentURL = PortalUtil.getCurrentURL(request);
+
+_log.error("User ID " + userId);
+_log.error("Current URL " + currentURL);
+
+_log.error(exception, exception);
+
 String message = exception.getMessage();
-
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_MESSAGE_LOG))) {
-	_log.error(message);
-}
-
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_MESSAGE_PRINT))) {
-	System.out.println(message);
-}
-
-String stackTrace = StackTraceUtil.getStackTrace(exception);
-
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_LOG))) {
-	_log.error(stackTrace);
-}
-
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
-	System.out.println(stackTrace);
-}
 %>
 
 <center>
@@ -70,29 +60,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 
 		</font>
 
-		<%
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_MESSAGE_SHOW))) {
-		%>
-
+		<c:if test="<%= message != null %>">
 			<br />
 
-			<c:if test="<%= message != null %>">
-				<%= Html.escape(message) %><br />
-			</c:if>
-
-		<%
-		}
-
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_SHOW))) {
-		%>
-
-<pre>
-<%= stackTrace %>
-</pre>
-
-		<%
-		}
-		%>
+			<%= Html.escape(message) %>
+		</c:if>
 
 	</td>
 </tr>
