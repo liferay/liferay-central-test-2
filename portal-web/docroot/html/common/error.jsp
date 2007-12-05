@@ -77,9 +77,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 			<br />
 
 			<c:if test="<%= message != null %>">
-				<font face="Verdana, Tahoma, Arial" size="2">
-				<%= message %><br />
-				</font>
+				<%= Html.escape(message) %><br />
 			</c:if>
 
 		<%
