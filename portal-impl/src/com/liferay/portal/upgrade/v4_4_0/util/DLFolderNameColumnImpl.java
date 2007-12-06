@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,8 +40,7 @@ import java.util.Set;
 public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFolderNameColumnImpl(
-		TempUpgradeColumnImpl groupIdColumn,
-		TempUpgradeColumnImpl parentFolderIdColumn) {
+		UpgradeColumn groupIdColumn, UpgradeColumn parentFolderIdColumn) {
 
 		super("name", null);
 
@@ -74,8 +74,8 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 		return sm.toString();
 	}
 
-	private TempUpgradeColumnImpl _groupIdColumn;
-	private TempUpgradeColumnImpl _parentFolderIdColumn;
+	private UpgradeColumn _groupIdColumn;
+	private UpgradeColumn _parentFolderIdColumn;
 	private int _counter = 0;
 	private Set _distinctNames = new HashSet();
 
