@@ -1265,9 +1265,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			List categoryIds = new ArrayList();
 
-			categoryIds.addAll(category.getAncestorCategoryIds());
-
 			categoryIds.add(new Long(category.getCategoryId()));
+			categoryIds.addAll(category.getAncestorCategoryIds());
 
 			String messageURL = StringPool.BLANK;
 

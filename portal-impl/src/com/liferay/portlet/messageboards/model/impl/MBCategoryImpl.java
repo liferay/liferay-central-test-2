@@ -22,15 +22,15 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="MBCategoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +45,9 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	public MBCategoryImpl() {
 	}
 
-	public List getAncestorCategoryIds() throws PortalException, SystemException {
+	public List getAncestorCategoryIds()
+		throws PortalException, SystemException {
+
 		List ancestorCategoryIds = new ArrayList();
 
 		MBCategory category = this;
