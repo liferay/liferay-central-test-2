@@ -50,6 +50,7 @@ import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
+import com.liferay.util.Normalizer;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
@@ -409,6 +410,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			return urlTitle;
 		}
+
+		title = Normalizer.normalizeToAscii(title);
 
 		char[] urlTitleCharArray = title.toCharArray();
 
