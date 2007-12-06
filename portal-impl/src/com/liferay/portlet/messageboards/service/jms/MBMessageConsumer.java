@@ -90,7 +90,7 @@ public class MBMessageConsumer implements MessageListener {
 			_onMessage(array);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Error sending message board notifications", e);
 		}
 	}
 
@@ -108,6 +108,12 @@ public class MBMessageConsumer implements MessageListener {
 		String inReplyTo = array[10];
 
 		Set sent = CollectionFactory.getHashSet();
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Sending notification for message " + messageId + " (thread: " +
+					threadId + ", categories + " + array[2] + ")");
+		}
 
 		// Threads
 
@@ -128,6 +134,13 @@ public class MBMessageConsumer implements MessageListener {
 			_sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,
 				sent, replyToAddress, messageId, inReplyTo);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Notifications sent to the following subscribers of message " +
+					messageId + " (thread: " + threadId + ", categories + "
+					+ array[2] + ") :" + sent);
 		}
 	}
 
