@@ -100,7 +100,6 @@ public abstract class SmartUpgradeSchema extends UpgradeProcess {
 		com.liferay.portal.upgrade.v4_3_2.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_3_3.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_3_4.UpgradeSchema.class,
-		com.liferay.portal.upgrade.v4_3_5.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_4_0.UpgradeSchema.class,
 	};
 

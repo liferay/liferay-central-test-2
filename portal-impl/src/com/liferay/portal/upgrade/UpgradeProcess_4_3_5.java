@@ -25,7 +25,6 @@ package com.liferay.portal.upgrade;
 import com.liferay.portal.upgrade.v4_3_5.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
-import com.liferay.portal.upgrade.v4_3_5.UpgradeSchema;
 import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
@@ -46,7 +45,6 @@ public class UpgradeProcess_4_3_5 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
 		upgrade(UpgradePermission.class);
 		upgrade(UpgradePortletId.class);
