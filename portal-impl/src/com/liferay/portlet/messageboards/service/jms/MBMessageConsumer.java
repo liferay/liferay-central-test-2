@@ -150,16 +150,6 @@ public class MBMessageConsumer implements MessageListener {
 		for (int i = 0; i < subscriptions.size(); i++) {
 			Subscription subscription = (Subscription)subscriptions.get(i);
 
-			if (subscription.getUserId() == userId) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Do not send an email to user " + userId +
-							" because he is a subscriber and also the author");
-				}
-
-				continue;
-			}
-
 			Long subscribedUserId = new Long(subscription.getUserId());
 
 			if (sent.contains(subscribedUserId)) {
