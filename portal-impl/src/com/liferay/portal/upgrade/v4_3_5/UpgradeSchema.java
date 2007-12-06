@@ -20,38 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v4_3_5;
 
-import com.liferay.portal.upgrade.v4_3_5.UpgradeBlogs;
-import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
-import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
-import com.liferay.portal.upgrade.v4_3_5.UpgradeSchema;
-import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_5.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_4_3_5 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_3_5_BUILD_NUMBER;
-	}
+public class UpgradeSchema extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeSchema());
-		upgrade(new UpgradeBlogs());
-		upgrade(new UpgradePermission());
-		upgrade(new UpgradePortletId());
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_5.class);
+	protected void doUpgrade() throws Exception {
+		if (_alreadyUpgraded) {
+			return;
+		}
+
+		_alreadyUpgraded = true;
+
+		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
+			com.liferay.portal.upgrade.v4_4_0.UpgradeSchema.class.getName());
+
+		upgradeProcess.upgrade();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
+
+	private boolean _alreadyUpgraded;
 
 }
