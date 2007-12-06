@@ -22,12 +22,20 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.CharPool;
+
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 import java.io.IOException;
 import java.io.StringWriter;
+
+import java.util.List;
+
+import org.jdom.IllegalDataException;
 
 /**
  * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
@@ -60,13 +68,58 @@ public class RSSUtil {
 	public static String export(SyndFeed feed)
 		throws FeedException, IOException {
 
+		feed.setEncoding("UTF-8");
+
 		StringWriter writer = new StringWriter();
 
 		SyndFeedOutput output = new SyndFeedOutput();
 
-		output.output(feed, writer);
+		try {
+			return output.outputString(feed);
+		}
+		catch (IllegalDataException ide) {
 
-		return writer.getBuffer().toString();
+			// LEP-4450
+
+			_regexpStrip(feed);
+
+			return output.outputString(feed);
+		}
 	}
+
+	private static void _regexpStrip(SyndFeed feed) {
+		feed.setTitle(_regexpStrip(feed.getTitle()));
+		feed.setDescription(_regexpStrip(feed.getDescription()));
+
+		List entries = feed.getEntries();
+
+		for (int i = 0; i < entries.size(); i++) {
+			SyndEntry entry = (SyndEntry)entries.get(i);
+
+			entry.setTitle(_regexpStrip(entry.getTitle()));
+
+			SyndContent content = entry.getDescription();
+
+			content.setValue(_regexpStrip(content.getValue()));
+		}
+	}
+
+	private static String _regexpStrip(String text) {
+		text = Normalizer.normalizeToAscii(text);
+
+		char[] array = text.toCharArray();
+
+		for (int i = 0; i < array.length; i++) {
+			String s = String.valueOf(array[i]);
+
+			if (!s.matches(_REGEXP_STRIP)) {
+				array[i] = CharPool.SPACE;
+			}
+		}
+
+		return new String(array);
+	}
+
+	private static final String _REGEXP_STRIP = "[\\d\\w]";
 
 }
