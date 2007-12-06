@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 public class UpgradeSchema extends SmartUpgradeSchema {
 
 	protected void upgradeOnce() throws Exception {
-		runSQLTemplate("update-4.3.5-4.4.0.sql", false);
+		runSQLTemplate("update-4.3.6-4.4.0.sql", false);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeSchema.class);

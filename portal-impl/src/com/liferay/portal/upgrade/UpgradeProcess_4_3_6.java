@@ -22,32 +22,30 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
-import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
+import com.liferay.portal.upgrade.v4_3_6.UpgradeBlogs;
 import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_5.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeProcess_4_3_6.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_4_3_5 extends UpgradeProcess {
+public class UpgradeProcess_4_3_6 extends UpgradeProcess {
 
 	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_3_5_BUILD_NUMBER;
+		return ReleaseInfo.RELEASE_4_3_6_BUILD_NUMBER;
 	}
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradePermission.class);
-		upgrade(UpgradePortletId.class);
+		upgrade(UpgradeBlogs.class);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_5.class);
+	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_6.class);
 
 }

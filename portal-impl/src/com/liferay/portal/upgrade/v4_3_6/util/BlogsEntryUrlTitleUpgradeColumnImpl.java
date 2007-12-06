@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_5.util;
+package com.liferay.portal.upgrade.v4_3_6.util;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
