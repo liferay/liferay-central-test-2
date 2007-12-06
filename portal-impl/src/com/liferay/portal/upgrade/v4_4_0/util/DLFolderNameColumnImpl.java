@@ -51,18 +51,18 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		String newName = (String)oldValue;
 
-		while (_distinctNames.contains(_getTriplet(newName))) {
+		while (_distinctNames.contains(_getKey(newName))) {
 			_counter++;
 
 			newName = newName + StringPool.SPACE + _counter;
 		}
 
-		_distinctNames.add(_getTriplet(newName));
+		_distinctNames.add(_getKey(newName));
 
 		return newName;
 	}
 
-	private String _getTriplet(String name) {
+	private String _getKey(String name) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(_groupIdColumn.getOldValue());

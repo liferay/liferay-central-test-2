@@ -25,7 +25,7 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.FileUtil;
 
@@ -41,34 +41,40 @@ import java.util.Set;
 public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFileEntryTitleColumnImpl(
-			TempUpgradeColumnImpl nameColumn,
-			TempUpgradeColumnImpl folderIdColumn) {
+		UpgradeColumn folderIdColumn, UpgradeColumn nameColumn) {
 
 		super("title", null);
 
-		_nameColumn = nameColumn;
 		_folderIdColumn = folderIdColumn;
+		_nameColumn = nameColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String newTitle = (String)oldValue;
+
 		String name = (String)_nameColumn.getOldValue();
 		String extension = FileUtil.getExtension(name);
 
 		newTitle = DLFileEntryImpl.stripExtension(name, newTitle);
 
-		while (_distinctTitles.contains(_getTriplet(newTitle, extension))) {
+		while (_distinctTitles.contains(_getKey(newTitle, extension))) {
 			_counter++;
 
-			newTitle = newTitle + StringPool.SPACE + _counter;
+			StringMaker sm = new StringMaker();
+
+			sm.append(newTitle);
+			sm.append(StringPool.SPACE);
+			sm.append(_counter);
+
+			newTitle = sm.toString();
 		}
 
-		_distinctTitles.add(_getTriplet(newTitle, extension));
+		_distinctTitles.add(_getKey(newTitle, extension));
 
 		return newTitle;
 	}
 
-	private String _getTriplet(String title, String extension) {
+	private String _getKey(String title, String extension) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(_folderIdColumn.getOldValue());
@@ -80,8 +86,8 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		return sm.toString();
 	}
 
-	private TempUpgradeColumnImpl _folderIdColumn;
-	private TempUpgradeColumnImpl _nameColumn;
+	private UpgradeColumn _folderIdColumn;
+	private UpgradeColumn _nameColumn;
 	private int _counter = 0;
 	private Set _distinctTitles = new HashSet();
 

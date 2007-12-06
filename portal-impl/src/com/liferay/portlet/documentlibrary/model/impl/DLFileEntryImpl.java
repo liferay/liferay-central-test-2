@@ -56,6 +56,23 @@ public class DLFileEntryImpl
 
 	public static final int DEFAULT_READ_COUNT = 0;
 
+	public static String stripExtension(String name, String title) {
+		String extension = FileUtil.getExtension(name);
+
+		if (extension == null) {
+			return title;
+		}
+
+		int pos = title.toLowerCase().lastIndexOf(
+			StringPool.PERIOD + extension);
+
+		if (pos > 0) {
+			title = title.substring(0, pos);
+		}
+
+		return title;
+	}
+
 	public DLFileEntryImpl() {
 	}
 
@@ -82,6 +99,10 @@ public class DLFileEntryImpl
 		return folder;
 	}
 
+	public String getTitleWithExtension() {
+		return getTitleWithExtension(getTitle(), getName());
+	}
+
 	public static String getTitleWithExtension(String title, String name) {
 		String titleWithExtension = title;
 
@@ -91,10 +112,6 @@ public class DLFileEntryImpl
 		}
 
 		return titleWithExtension;
-	}
-
-	public String getTitleWithExtension() {
-		return getTitleWithExtension(getTitle(), getName());
 	}
 
 	public String getExtraSettings() {
@@ -156,23 +173,6 @@ public class DLFileEntryImpl
 		}
 
 		return sm.toString();
-	}
-
-	public static String stripExtension(String name, String title) {
-		String extension = FileUtil.getExtension(name);
-
-		if (extension == null) {
-			return title;
-		}
-
-		int pos =
-			title.toLowerCase().lastIndexOf(StringPool.PERIOD + extension);
-
-		if (pos > 0) {
-			title = title.substring(0, pos);
-		}
-
-		return title;
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);

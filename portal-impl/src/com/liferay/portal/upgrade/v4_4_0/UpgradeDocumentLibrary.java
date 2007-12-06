@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_4_0.util.DLFileEntryTitleColumnImpl;
 import com.liferay.portal.upgrade.v4_4_0.util.DLFolderNameColumnImpl;
@@ -59,11 +60,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFolder
 
-		TempUpgradeColumnImpl groupIdColumn =
-			new TempUpgradeColumnImpl("groupId");
+		UpgradeColumn groupIdColumn = new TempUpgradeColumnImpl("groupId");
 
-		TempUpgradeColumnImpl parentFolderIdColumn =
-			new TempUpgradeColumnImpl("parentFolderId");
+		UpgradeColumn parentFolderIdColumn = new TempUpgradeColumnImpl(
+			"parentFolderId");
 
 		BaseUpgradeColumnImpl dlFolderNameColumn = new DLFolderNameColumnImpl(
 			groupIdColumn, parentFolderIdColumn);
@@ -76,18 +76,16 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileEntry
 
-		TempUpgradeColumnImpl nameColumn =
-			new TempUpgradeColumnImpl("name");
+		UpgradeColumn folderIdColumn = new TempUpgradeColumnImpl("folderId");
 
-		TempUpgradeColumnImpl folderIdColumn =
-			new TempUpgradeColumnImpl("folderId");
+		UpgradeColumn nameColumn = new TempUpgradeColumnImpl("name");
 
 		BaseUpgradeColumnImpl dlFileEntryTitleColumn =
-			new DLFileEntryTitleColumnImpl(nameColumn, folderIdColumn);
+			new DLFileEntryTitleColumnImpl(folderIdColumn, nameColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryModelImpl.TABLE_NAME, DLFileEntryModelImpl.TABLE_COLUMNS,
-			nameColumn, folderIdColumn, dlFileEntryTitleColumn);
+			folderIdColumn, nameColumn, dlFileEntryTitleColumn);
 
 		upgradeTable.updateTable();
 	}

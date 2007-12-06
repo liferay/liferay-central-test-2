@@ -68,8 +68,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * <p>
  * For DLFileEntries, the naming convention for some of the variables is not
- * very informative, due to legacy code.  Each DLFileEntry has a corresponding
- * name and title.  The "name" is a unique identifier for a given file and
+ * very informative, due to legacy code. Each DLFileEntry has a corresponding
+ * name and title. The "name" is a unique identifier for a given file and
  * usually follows the format "DLFE-1234.xls" whereas the "title" is the actual
  * name specified by the user (e.g., "Budget.xls").
  * </p>
@@ -222,7 +222,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		name = getName(name);
-
 		title = DLFileEntryImpl.stripExtension(name, title);
 
 		validate(folderId, name, title, is);
@@ -917,15 +916,15 @@ public class DLFileEntryLocalServiceImpl
 			folderId = newFolderId;
 		}
 
-		Iterator itr =
-			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+		Iterator itr = dlFileEntryPersistence.findByF_T(
+			folderId, title).iterator();
 
 		while (itr.hasNext()) {
 			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
-			String currExtension = FileUtil.getExtension(fileEntry.getName());
+			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (extension.equals(currExtension)) {
+			if (extension.equals(curExtension)) {
 				throw new DuplicateFileException(
 					fileEntry.getTitleWithExtension());
 			}
@@ -940,15 +939,15 @@ public class DLFileEntryLocalServiceImpl
 
 		String extension = FileUtil.getExtension(name);
 
-		Iterator itr =
-			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+		Iterator itr = dlFileEntryPersistence.findByF_T(
+			folderId, title).iterator();
 
 		while (itr.hasNext()) {
 			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
-			String currExtension = FileUtil.getExtension(fileEntry.getName());
+			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (extension.equals(currExtension)) {
+			if (extension.equals(curExtension)) {
 				throw new DuplicateFileException(
 					fileEntry.getTitleWithExtension());
 			}

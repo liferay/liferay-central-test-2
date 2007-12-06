@@ -38,6 +38,12 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
+String extension = StringPool.BLANK;
+
+if (fileEntry != null) {
+	extension = StringPool.PERIOD + FileUtil.getExtension(fileEntry.getName());
+}
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
@@ -115,12 +121,6 @@ if (fileEntry != null) {
 
 <%
 String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) / 1024);
-
-String extension = StringPool.BLANK;
-
-if (fileEntry != null) {
-	extension = StringPool.PERIOD + FileUtil.getExtension(fileEntry.getName());
-}
 %>
 
 <c:if test='<%= !fileMaxSize.equals("0") %>'>
