@@ -152,8 +152,6 @@ td.user-info {
 }
 
 .portlet-message-boards .lfr-textarea.message-edit {
-	font-family: monospace;
-	font-size: 1.5em;
 	height: 378px;
 	min-height: 100%;
 	width: 100%;
