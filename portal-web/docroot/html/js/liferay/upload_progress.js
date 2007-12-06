@@ -87,7 +87,8 @@ function UploadProgress_updateBar(percent, filename) {
 function UploadProgress_updateIFrame(height) {
 	var uploadPollerIFrame = document.getElementById(this.uploadProgressId + "-iframe");
 
-	uploadPollerIFrame.height = height;
+	uploadPollerIFrame.height = height + 20;
+	jQuery(uploadPollerIFrame.contentWindow.document.body).height(height);
 }
 
 function UploadProgress_updateProgress() {
