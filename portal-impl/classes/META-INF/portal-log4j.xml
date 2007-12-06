@@ -476,6 +476,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.messageboards.service.jms.MBMessageConsumer">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portlet.messageboards.smtp.MessageListenerImpl">
 		<priority value="DEBUG" />
 	</category>

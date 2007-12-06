@@ -111,7 +111,7 @@ public class MBMessageConsumer implements MessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notification for message " + messageId + ", thread " +
+				"Sending notifications for message " + messageId + ", thread " +
 					threadId + ", and categories " + array[2]);
 		}
 
@@ -136,11 +136,8 @@ public class MBMessageConsumer implements MessageListener {
 				sent, replyToAddress, messageId, inReplyTo);
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Notifications sent to the following subscribers of message " +
-					messageId + ", thread " + threadId + ", categories " +
-						array[2] + ", and users " + sent);
+		if (_log.isInfoEnabled()) {
+			_log.info("Finished sending notifications");
 		}
 	}
 
@@ -154,15 +151,33 @@ public class MBMessageConsumer implements MessageListener {
 			Subscription subscription = (Subscription)subscriptions.get(i);
 
 			if (subscription.getUserId() == userId) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not send an email to user " + userId +
+							" because he is a subscriber and also the author");
+				}
+
 				continue;
 			}
 
 			Long subscribedUserId = new Long(subscription.getUserId());
 
 			if (sent.contains(subscribedUserId)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not send a duplicate email to user " +
+							subscribedUserId);
+				}
+
 				continue;
 			}
 			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Add user " + subscribedUserId +
+							" to the list of users who have received an email");
+				}
+
 				sent.add(subscribedUserId);
 			}
 
@@ -173,6 +188,12 @@ public class MBMessageConsumer implements MessageListener {
 					subscription.getUserId());
 			}
 			catch (NoSuchUserException nsue) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Subscription " + subscription.getSubscriptionId() +
+							" is stale and will be deleted");
+				}
+
 				SubscriptionLocalServiceUtil.deleteSubscription(
 					subscription.getSubscriptionId());
 
