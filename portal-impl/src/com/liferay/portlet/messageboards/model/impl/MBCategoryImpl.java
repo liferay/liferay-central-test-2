@@ -23,9 +23,14 @@
 package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * <a href="MBCategoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,6 +43,46 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 	public MBCategoryImpl() {
+	}
+
+	public List getAncestorCategoryIds() throws PortalException, SystemException {
+		List ancestorCategoryIds = new ArrayList();
+
+		MBCategory category = this;
+
+		while (true) {
+			if (!category.isRoot()) {
+				category = MBCategoryLocalServiceUtil.getCategory(
+					category.getParentCategoryId());
+
+				ancestorCategoryIds.add(new Long(category.getCategoryId()));
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestorCategoryIds;
+	}
+
+	public List getAncestors() throws PortalException, SystemException {
+		List ancestors = new ArrayList();
+
+		MBCategory category = this;
+
+		while (true) {
+			if (!category.isRoot()) {
+				category = MBCategoryLocalServiceUtil.getCategory(
+					category.getParentCategoryId());
+
+				ancestors.add(category);
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestors;
 	}
 
 	public String getUserUuid() throws SystemException {
