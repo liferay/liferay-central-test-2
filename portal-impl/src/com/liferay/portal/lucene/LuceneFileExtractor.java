@@ -160,7 +160,7 @@ public class LuceneFileExtractor {
 
 				text = sm.toString();
 
-				if (Validator.isNotNull(REGEXP_STRIP)) {
+				if (Validator.isNotNull(_REGEXP_STRIP)) {
 					text = regexpStrip(text);
 				}
 			}
@@ -208,7 +208,7 @@ public class LuceneFileExtractor {
 		for (int i = 0; i < array.length; i++) {
 			String s = String.valueOf(array[i]);
 
-			if (!s.matches(REGEXP_STRIP)) {
+			if (!s.matches(_REGEXP_STRIP)) {
 				array[i] = CharPool.SPACE;
 			}
 		}
@@ -216,7 +216,7 @@ public class LuceneFileExtractor {
 		return new String(array);
 	}
 
-	private static final String REGEXP_STRIP = PropsUtil.get(
+	private static final String _REGEXP_STRIP = PropsUtil.get(
 		PropsUtil.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP);
 
 	private static Log _log = LogFactory.getLog(LuceneFileExtractor.class);
