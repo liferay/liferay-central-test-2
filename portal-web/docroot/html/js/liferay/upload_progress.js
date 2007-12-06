@@ -88,6 +88,7 @@ function UploadProgress_updateIFrame(height) {
 	var uploadPollerIFrame = document.getElementById(this.uploadProgressId + "-iframe");
 
 	uploadPollerIFrame.height = height + 20;
+
 	jQuery(uploadPollerIFrame.contentWindow.document.body).height(height);
 }
 
