@@ -111,8 +111,8 @@ public class MBMessageConsumer implements MessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notification for message " + messageId + " (thread: " +
-					threadId + ", categories + " + array[2] + ")");
+				"Sending notification for message " + messageId + ", thread " +
+					threadId + ", and categories " + array[2]);
 		}
 
 		// Threads
@@ -139,8 +139,8 @@ public class MBMessageConsumer implements MessageListener {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Notifications sent to the following subscribers of message " +
-					messageId + " (thread: " + threadId + ", categories + "
-					+ array[2] + ") :" + sent);
+					messageId + ", thread " + threadId + ", categories " +
+						array[2] + ", and users " + sent);
 		}
 	}
 
