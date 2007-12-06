@@ -98,8 +98,8 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 		message.setCreateDate(temp.getCreateDate());
 		message.setModifiedDate(temp.getModifiedDate());
 		message.setThreadId(temp.getThreadId());
-		message.setSubject(temp.getSubject());
-		message.setBody(temp.getBody());
+		message.setSubject(subject);
+		message.setBody(body);
 		message.setAnonymous(temp.isAnonymous());
 	}
 	else {
