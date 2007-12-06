@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="ext-impl-parent">
+<project name="ext-impl-parent" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common.xml" />
 
 	<property name="jar.file" value="${ant.project.name}" />
@@ -30,7 +30,16 @@
 				/>
 			</try>
 			<catch>
-				<fail>
+				<antelope:stringutil string="${exception.message}" property="exception.message.index">
+					<indexof string="java.lang.reflect.InvocationTargetException" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<not>
+						<equals arg1="${exception.message.index}" arg2="-1" />
+					</not>
+					<then>
+						<fail>
 .
 
 ${exception.message}
@@ -39,7 +48,16 @@ A compilation error occurred because ECJ does not have enough memory.
 
 To fix this, set the environment variable ANT_OPTS to the recommended value of
 "-Xms256M -Xmx512M".
-				</fail>
+						</fail>
+					</then>
+					<else>
+						<fail>
+.
+
+${exception.message}
+						</fail>
+					</else>
+				</if>
 			</catch>
 		</trycatch>
 
