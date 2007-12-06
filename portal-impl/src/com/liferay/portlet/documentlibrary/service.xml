@@ -46,6 +46,10 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
+		<finder name="F_T" return-type="Collection">
+			<finder-column name="folderId" />
+			<finder-column name="title" />
+		</finder>
 
 		<!-- References -->
 

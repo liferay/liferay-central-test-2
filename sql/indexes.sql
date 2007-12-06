@@ -55,6 +55,7 @@ create index IX_25D734CD on Country (active_);
 
 create index IX_24A846D1 on DLFileEntry (folderId);
 create index IX_8F6C75D0 on DLFileEntry (folderId, name);
+create index IX_A9951F17 on DLFileEntry (folderId, title);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
 
 create index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name);

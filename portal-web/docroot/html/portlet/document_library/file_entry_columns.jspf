@@ -45,7 +45,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		sm.append("/document_library/");
 		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
 		sm.append(".png\">");
-		sm.append(fileEntry.getTitle());
+		sm.append(fileEntry.getTitleWithExtension());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
 			sm.append("<br />");

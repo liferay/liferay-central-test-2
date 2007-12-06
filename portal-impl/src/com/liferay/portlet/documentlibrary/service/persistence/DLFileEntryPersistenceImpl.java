@@ -844,6 +844,286 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByF_T(long folderId, String title)
+		throws SystemException {
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "findByF_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(folderId), title };
+
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (title == null) {
+					query.append("title IS NULL");
+				}
+				else {
+					query.append("title = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (title != null) {
+					q.setString(queryPos++, title);
+				}
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByF_T(long folderId, String title, int begin, int end)
+		throws SystemException {
+		return findByF_T(folderId, title, begin, end, null);
+	}
+
+	public List findByF_T(long folderId, String title, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "findByF_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(folderId),
+				
+				title,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (title == null) {
+					query.append("title IS NULL");
+				}
+				else {
+					query.append("title = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("folderId ASC, ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (title != null) {
+					q.setString(queryPos++, title);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public DLFileEntry findByF_T_First(long folderId, String title,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		List list = findByF_T(folderId, title, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("title=" + title);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return (DLFileEntry)list.get(0);
+		}
+	}
+
+	public DLFileEntry findByF_T_Last(long folderId, String title,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		int count = countByF_T(folderId, title);
+
+		List list = findByF_T(folderId, title, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("title=" + title);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return (DLFileEntry)list.get(0);
+		}
+	}
+
+	public DLFileEntry[] findByF_T_PrevAndNext(long fileEntryId, long folderId,
+		String title, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
+		int count = countByF_T(folderId, title);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+			query.append("folderId = ?");
+
+			query.append(" AND ");
+
+			if (title == null) {
+				query.append("title IS NULL");
+			}
+			else {
+				query.append("title = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, folderId);
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileEntry);
+
+			DLFileEntry[] array = new DLFileEntryImpl[3];
+
+			array[0] = (DLFileEntry)objArray[0];
+			array[1] = (DLFileEntry)objArray[1];
+			array[2] = (DLFileEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -980,6 +1260,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		DLFileEntry dlFileEntry = findByF_N(folderId, name);
 
 		remove(dlFileEntry);
+	}
+
+	public void removeByF_T(long folderId, String title)
+		throws SystemException {
+		Iterator itr = findByF_T(folderId, title).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+
+			remove(dlFileEntry);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -1161,6 +1452,82 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				if (name != null) {
 					q.setString(queryPos++, name);
+				}
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByF_T(long folderId, String title)
+		throws SystemException {
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "countByF_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(folderId), title };
+
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (title == null) {
+					query.append("title IS NULL");
+				}
+				else {
+					query.append("title = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (title != null) {
+					q.setString(queryPos++, title);
 				}
 
 				Long count = null;

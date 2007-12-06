@@ -82,15 +82,19 @@ public class DLFileEntryImpl
 		return folder;
 	}
 
-	public String getTitleWithExtension() {
-		String titleWithExtension = getTitle();
+	public static String getTitleWithExtension(String title, String name) {
+		String titleWithExtension = title;
 
 		if (FileUtil.getExtension(titleWithExtension) == null) {
 			titleWithExtension +=
-				StringPool.PERIOD + FileUtil.getExtension(getName());
+				StringPool.PERIOD + FileUtil.getExtension(name);
 		}
 
 		return titleWithExtension;
+	}
+
+	public String getTitleWithExtension() {
+		return getTitleWithExtension(getTitle(), getName());
 	}
 
 	public String getExtraSettings() {
@@ -152,6 +156,23 @@ public class DLFileEntryImpl
 		}
 
 		return sm.toString();
+	}
+
+	public static String stripExtension(String name, String title) {
+		String extension = FileUtil.getExtension(name);
+
+		if (extension == null) {
+			return title;
+		}
+
+		int pos =
+			title.toLowerCase().lastIndexOf(StringPool.PERIOD + extension);
+
+		if (pos > 0) {
+			title = title.substring(0, pos);
+		}
+
+		return title;
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);

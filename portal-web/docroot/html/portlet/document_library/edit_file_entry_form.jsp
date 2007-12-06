@@ -115,6 +115,12 @@ if (fileEntry != null) {
 
 <%
 String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) / 1024);
+
+String extension = StringPool.BLANK;
+
+if (fileEntry != null) {
+	extension = StringPool.PERIOD + FileUtil.getExtension(fileEntry.getName());
+}
 %>
 
 <c:if test='<%= !fileMaxSize.equals("0") %>'>
@@ -170,7 +176,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 		<liferay-ui:message key="title" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" />
+		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" /><%= extension %>
 	</td>
 </tr>
 <tr>

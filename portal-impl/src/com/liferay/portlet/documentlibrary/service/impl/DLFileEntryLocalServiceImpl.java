@@ -42,6 +42,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
+import com.liferay.util.FileUtil;
 import com.liferay.util.MathUtil;
 
 import java.io.BufferedInputStream;
@@ -64,6 +65,14 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * For DLFileEntries, the naming convention for some of the variables is not
+ * very informative, due to legacy code.  Each DLFileEntry has a corresponding
+ * name and title.  The "name" is a unique identifier for a given file and
+ * usually follows the format "DLFE-1234.xls" whereas the "title" is the actual
+ * name specified by the user (e.g., "Budget.xls").
+ * </p>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
@@ -212,13 +221,11 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
-		dlLocalService.validate(name, is);
-
 		name = getName(name);
 
-		if (dlLocalService.hasFile(user.getCompanyId(), folderId, name, 0)) {
-			throw new DuplicateFileException(name);
-		}
+		title = DLFileEntryImpl.stripExtension(name, title);
+
+		validate(folderId, name, title, is);
 
 		long fileEntryId = counterLocalService.increment();
 
@@ -672,10 +679,16 @@ public class DLFileEntryLocalServiceImpl
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		if (Validator.isNull(title)) {
-			title = name;
+			title = sourceFileName;
+
+			if (Validator.isNull(title)) {
+				title = name;
+			}
 		}
 
-		dlLocalService.validate(name, sourceFileName, is);
+		title = DLFileEntryImpl.stripExtension(name, title);
+
+		validate(folderId, newFolderId, name, title, sourceFileName, is);
 
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
 			folderId, name);
@@ -887,6 +900,59 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return name;
+	}
+
+	protected void validate(
+			long folderId, long newFolderId, String name, String title,
+			String sourceFileName, InputStream is)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(sourceFileName)) {
+			dlLocalService.validate(name, sourceFileName, is);
+		}
+
+		String extension = FileUtil.getExtension(name);
+
+		if (newFolderId > 0 && folderId != newFolderId) {
+			folderId = newFolderId;
+		}
+
+		Iterator itr =
+			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = (DLFileEntry)itr.next();
+
+			String currExtension = FileUtil.getExtension(fileEntry.getName());
+
+			if (extension.equals(currExtension)) {
+				throw new DuplicateFileException(
+					fileEntry.getTitleWithExtension());
+			}
+		}
+	}
+
+	protected void validate(
+			long folderId, String name, String title, InputStream is)
+		throws PortalException, SystemException {
+
+		dlLocalService.validate(name, is);
+
+		String extension = FileUtil.getExtension(name);
+
+		Iterator itr =
+			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = (DLFileEntry)itr.next();
+
+			String currExtension = FileUtil.getExtension(fileEntry.getName());
+
+			if (extension.equals(currExtension)) {
+				throw new DuplicateFileException(
+					fileEntry.getTitleWithExtension());
+			}
+		}
 	}
 
 	private static Log _log =

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.File;
@@ -269,27 +270,13 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, String sourceFileName, InputStream is)
 		throws PortalException {
 
-		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+		String fileNameExtension = FileUtil.getExtension(fileName);
+		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
-		if (pos != -1) {
-			String fileNameExtension =
-				fileName.substring(pos, fileName.length());
+		if (Validator.isNull(fileNameExtension) ||
+			!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 
-			pos = sourceFileName.lastIndexOf(StringPool.PERIOD);
-
-			if (pos == -1) {
-				throw new SourceFileNameException(sourceFileName);
-			}
-			else {
-				String sourceFileNameExtension =
-					sourceFileName.substring(pos, sourceFileName.length());
-
-				if (!fileNameExtension.equalsIgnoreCase(
-						sourceFileNameExtension)) {
-
-					throw new SourceFileNameException(sourceFileName);
-				}
-			}
+			throw new SourceFileNameException(sourceFileName);
 		}
 
 		if (is == null) {

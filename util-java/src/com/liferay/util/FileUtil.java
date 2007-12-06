@@ -289,7 +289,7 @@ public class FileUtil {
 		int pos = fileName.lastIndexOf(StringPool.PERIOD);
 
 		if (pos != -1) {
-			return fileName.substring(pos + 1, fileName.length());
+			return fileName.substring(pos + 1, fileName.length()).toLowerCase();
 		}
 		else {
 			return null;

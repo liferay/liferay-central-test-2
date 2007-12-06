@@ -169,6 +169,49 @@ public class DLFileEntryUtil {
 		return getPersistence().fetchByF_N(folderId, name);
 	}
 
+	public static java.util.List findByF_T(long folderId, java.lang.String title)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByF_T(folderId, title);
+	}
+
+	public static java.util.List findByF_T(long folderId,
+		java.lang.String title, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByF_T(folderId, title, begin, end);
+	}
+
+	public static java.util.List findByF_T(long folderId,
+		java.lang.String title, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByF_T(folderId, title, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_First(
+		long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByF_T_First(folderId, title, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_Last(
+		long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByF_T_Last(folderId, title, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByF_T_PrevAndNext(
+		long fileEntryId, long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByF_T_PrevAndNext(fileEntryId, folderId,
+			title, obc);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -214,6 +257,11 @@ public class DLFileEntryUtil {
 		getPersistence().removeByF_N(folderId, name);
 	}
 
+	public static void removeByF_T(long folderId, java.lang.String title)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByF_T(folderId, title);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -231,6 +279,11 @@ public class DLFileEntryUtil {
 	public static int countByF_N(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByF_N(folderId, name);
+	}
+
+	public static int countByF_T(long folderId, java.lang.String title)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByF_T(folderId, title);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

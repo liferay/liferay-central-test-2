@@ -124,6 +124,34 @@ public interface DLFileEntryPersistence {
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findByF_T(long folderId, java.lang.String title)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByF_T(long folderId, java.lang.String title,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByF_T(long folderId, java.lang.String title,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_First(
+		long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_Last(
+		long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByF_T_PrevAndNext(
+		long fileEntryId, long folderId, java.lang.String title,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -151,6 +179,9 @@ public interface DLFileEntryPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
+	public void removeByF_T(long folderId, java.lang.String title)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -160,6 +191,9 @@ public interface DLFileEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public int countByF_T(long folderId, java.lang.String title)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

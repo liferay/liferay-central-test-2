@@ -116,7 +116,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
-			<%= fileEntry.getTitle() %>
+			<%= fileEntry.getTitleWithExtension() %>
 			</a>
 		</td>
 	</tr>
@@ -171,7 +171,7 @@ portletURL.setParameter("name", name);
 			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 			while (true) {
-				sb.insert(0, curFolder.getFolderId());
+				sb.insert(0, curFolder.getName());
 				sb.insert(0, StringPool.SLASH);
 
 				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
