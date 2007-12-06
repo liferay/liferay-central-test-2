@@ -43,7 +43,7 @@ public class UpgradeProcess_4_3_2 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeSchema());
+		upgrade(UpgradeSchema.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_2.class);

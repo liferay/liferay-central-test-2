@@ -22,9 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_5;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,34 +33,11 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeSchema extends UpgradeProcess {
+public class UpgradeSchema extends SmartUpgradeSchema {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
-
-	protected void doUpgrade() throws Exception {
-		if (_alreadyUpgraded) {
-			return;
-		}
-
-		_alreadyUpgraded = true;
-
-		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_4_0.UpgradeSchema.class.getName());
-
-		upgradeProcess.upgrade();
+	protected void upgradeOnce() throws Exception {
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
-
-	private boolean _alreadyUpgraded;
 
 }

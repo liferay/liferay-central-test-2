@@ -47,11 +47,11 @@ public class UpgradeProcess_4_4_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeSchema());
-		upgrade(new UpgradeUUID());
-		upgrade(new UpgradeTags());
-		upgrade(new UpgradeLayout());
-		upgrade(new UpgradeDocumentLibrary());
+		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeUUID.class);
+		upgrade(UpgradeTags.class);
+		upgrade(UpgradeLayout.class);
+		upgrade(UpgradeDocumentLibrary.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_4_0.class);

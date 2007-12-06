@@ -22,9 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,20 +33,9 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeSchema extends UpgradeProcess {
+public class UpgradeSchema extends SmartUpgradeSchema {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
-
-	protected void doUpgrade() throws Exception {
+	protected void upgradeOnce() throws Exception {
 		runSQLTemplate("update-4.2.0-4.3.0.sql", false);
 
 		for (int i = 0; i < _OLD_TABLES.length; i++) {
@@ -58,29 +45,6 @@ public class UpgradeSchema extends UpgradeProcess {
 			catch (Exception e) {
 			}
 		}
-
-		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_3_1.UpgradeSchema.class.getName());
-
-		upgradeProcess.upgrade();
-
-		upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_3_2.UpgradeSchema.class.getName());
-
-		upgradeProcess.upgrade();
-
-		upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_3_3.UpgradeSchema.class.getName());
-
-		upgradeProcess.upgrade();
-
-		upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_3_4.UpgradeSchema.class.getName());
-
-		upgradeProcess = (UpgradeProcess)InstancePool.get(
-			com.liferay.portal.upgrade.v4_4_0.UpgradeSchema.class.getName());
-
-		upgradeProcess.upgrade();
 	}
 
 	private static final String[] _OLD_TABLES = new String[] {

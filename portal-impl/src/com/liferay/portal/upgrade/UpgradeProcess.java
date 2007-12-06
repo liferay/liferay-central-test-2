@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.tools.sql.DBUtil;
 
 import java.io.IOException;
@@ -71,10 +72,19 @@ public abstract class UpgradeProcess {
 
 	public abstract void upgrade() throws UpgradeException;
 
-	public void upgrade(UpgradeProcess upgradeProgress)
+	public void upgrade(Class upgradeProcessClass)
 		throws UpgradeException {
 
-		upgradeProgress.upgrade();
+		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
+			upgradeProcessClass.getName());
+
+		upgradeProcess.upgrade();
+	}
+
+	public void upgrade(UpgradeProcess upgradeProcess)
+		throws UpgradeException {
+
+		upgradeProcess.upgrade();
 	}
 
 }
