@@ -1065,10 +1065,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new SendPasswordException();
 		}*/
 
-		String newPassword = PwdToolkitUtil.generate();
+		String newPassword;
 
 		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
 				PwdEncryptor.TYPE_NONE)) {
+			newPassword = PwdToolkitUtil.generate();
 
 			boolean passwordReset = false;
 
@@ -1084,6 +1085,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordReset(passwordReset);
 
 			userPersistence.update(user);
+		} else {
+			newPassword = user.getPassword();
 		}
 
 		try {
