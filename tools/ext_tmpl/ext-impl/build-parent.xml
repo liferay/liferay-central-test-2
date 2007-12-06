@@ -17,15 +17,31 @@
 	<target name="compile">
 		<mkdir dir="classes" />
 
-		<javac
-			classpathref="project.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="classes"
-			nowarn="${javac.nowarn}"
-			srcdir="src"
-		/>
+		<trycatch property="exception.message">
+			<try>
+				<javac
+					classpathref="project.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="classes"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</try>
+			<catch>
+				<fail>
+.
+
+${exception.message}
+
+A compilation error occurred because ECJ does not have enough memory.
+
+To fix this, set the environment variable ANT_OPTS to the recommended value of
+"-Xms256M -Xmx512M".
+				</fail>
+			</catch>
+		</trycatch>
 
 		<copy todir="classes">
 			<fileset dir="src">

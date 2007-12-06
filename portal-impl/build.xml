@@ -39,7 +39,24 @@
 				</antcall>
 
 				<antcall target="compile-common" />
-				<antcall target="build-common-java.compile" />
+
+				<trycatch property="exception.message">
+					<try>
+						<antcall target="build-common-java.compile" />
+					</try>
+					<catch>
+						<fail>
+.
+
+${exception.message}
+
+A compilation error occurred because ECJ does not have enough memory.
+
+To fix this, set the environment variable ANT_OPTS to the recommended value of
+"-Xms256M -Xmx512M".
+						</fail>
+					</catch>
+				</trycatch>
 			</else>
 		</if>
 
