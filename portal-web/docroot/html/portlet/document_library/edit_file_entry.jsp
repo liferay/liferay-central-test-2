@@ -37,6 +37,7 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
+String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
 String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
@@ -186,7 +187,7 @@ portletURL.setParameter("name", name);
 			sb.insert(0, StringPool.SLASH);
 
 			sb.append(StringPool.SLASH);
-			sb.append(name);
+			sb.append(titleWithExtension);
 			%>
 
 			<liferay-ui:input-resource
