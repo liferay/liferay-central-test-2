@@ -25,7 +25,6 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 import java.util.HashSet;
