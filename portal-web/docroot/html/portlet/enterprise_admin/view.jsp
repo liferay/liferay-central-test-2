@@ -383,7 +383,8 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				headerNames.add("session-id");
 				headerNames.add("user-id");
 				headerNames.add("name");
-				headerNames.add("email-address");
+				headerNames.add("screen-name");
+				//headerNames.add("email-address");
 				headerNames.add("last-request");
 				headerNames.add("num-of-hits");
 
@@ -437,9 +438,13 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 					row.addText(((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
 
+					// Screen Name
+
+					row.addText(((user2 != null) ? user2.getScreenName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
+
 					// Email Address
 
-					row.addText(((user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available")), rowURL);
+					//row.addText(((user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available")), rowURL);
 
 					// Last Request
 
