@@ -35,15 +35,17 @@ public class LayoutCloneFactory {
 
 	public static LayoutClone getInstance() {
 		if (_layoutClone == null) {
-			String layoutCloneImpl = PropsUtil.get(PropsUtil.LAYOUT_CLONE_IMPL);
-
-			if (Validator.isNotNull(layoutCloneImpl)) {
-				_layoutClone = (LayoutClone)InstancePool.get(layoutCloneImpl);
+			if (Validator.isNotNull(_LAYOUT_CLONE_IMPL)) {
+				_layoutClone = (LayoutClone)InstancePool.get(
+					_LAYOUT_CLONE_IMPL);
 			}
 		}
 
 		return _layoutClone;
 	}
+
+	private static final String _LAYOUT_CLONE_IMPL = PropsUtil.get(
+		PropsUtil.LAYOUT_CLONE_IMPL);
 
 	private static LayoutClone _layoutClone;
 
