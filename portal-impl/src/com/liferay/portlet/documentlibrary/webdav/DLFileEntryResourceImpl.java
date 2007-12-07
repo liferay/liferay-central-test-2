@@ -38,8 +38,8 @@ import java.io.InputStream;
  */
 public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
-	public DLFileEntryResourceImpl(WebDAVRequest webDavReq,
-								   DLFileEntry fileEntry, String href) {
+	public DLFileEntryResourceImpl(
+		WebDAVRequest webDavReq, DLFileEntry fileEntry, String href) {
 
 		super(
 			href, fileEntry.getTitleWithExtension(), false,

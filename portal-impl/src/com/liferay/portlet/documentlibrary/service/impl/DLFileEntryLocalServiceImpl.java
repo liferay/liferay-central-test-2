@@ -552,19 +552,19 @@ public class DLFileEntryLocalServiceImpl
 			long folderId, String titleWithExtension)
 		throws PortalException, SystemException {
 
-		String extension = FileUtil.getExtension(titleWithExtension);
 		String title = DLFileEntryImpl.stripExtension(
 			titleWithExtension, titleWithExtension);
+		String extension = FileUtil.getExtension(titleWithExtension);
 
-		Iterator itr =
-			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+		Iterator itr = dlFileEntryPersistence.findByF_T(
+			folderId, title).iterator();
 
 		while (itr.hasNext()) {
 			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
-			String currExtension = FileUtil.getExtension(fileEntry.getName());
+			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (extension.equals(currExtension)) {
+			if (extension.equals(curExtension)) {
 				return fileEntry;
 			}
 		}
