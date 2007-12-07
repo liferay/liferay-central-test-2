@@ -26,12 +26,14 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.ResourceActionsException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionsListFilter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.comparator.ResourceComparator;
@@ -103,34 +105,63 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// Permissions
 
-			List permissions = permissionLocalService.addPermissions(
+			List permissionsList = permissionLocalService.addPermissions(
 				companyId, name, resource.getResourceId(), false);
 
 			// User permissions
 
+			PermissionsListFilter permissionsListFilter =
+				PermissionsListFilterFactory.getInstance();
+
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			if ((userId > 0) && (userId != defaultUserId)) {
-				userPersistence.addPermissions(userId, permissions);
+				List userPermissionsList =
+					permissionsListFilter.filterUserPermissions(
+						companyId, groupId, userId, name, primKey, false,
+						permissionsList);
+
+				userPersistence.addPermissions(userId, userPermissionsList);
 			}
 
 			// Community permissions
 
-			if ((groupId > 0) && (communityPermissions != null)) {
-				addModelPermissions(
-					groupId, resource.getResourceId(), communityPermissions);
+			if (groupId > 0) {
+				Group group = groupPersistence.findByPrimaryKey(groupId);
+
+				if (communityPermissions == null) {
+					communityPermissions = new String[0];
+				}
+
+				List communityPermissionsList =
+					permissionLocalService.getPermissions(
+						companyId, communityPermissions,
+						resource.getResourceId());
+
+				communityPermissionsList =
+					permissionsListFilter.filterCommunityPermissions(
+						companyId, groupId, userId, name, primKey, false,
+						communityPermissionsList);
+
+				groupPersistence.addPermissions(
+					groupId, communityPermissionsList);
 			}
 
 			// Guest permissions
 
-			if (guestPermissions != null) {
-				List guestPermissionsList =
-					permissionLocalService.getPermissions(
-						companyId, guestPermissions, resource.getResourceId());
-
-				userPersistence.addPermissions(
-					defaultUserId, guestPermissionsList);
+			if (guestPermissions == null) {
+				guestPermissions = new String[0];
 			}
+
+			List guestPermissionsList =
+				permissionLocalService.getPermissions(
+					companyId, guestPermissions, resource.getResourceId());
+
+			guestPermissionsList = permissionsListFilter.filterGuestPermissions(
+				companyId, groupId, userId, name, primKey, false,
+				guestPermissionsList);
+
+			userPersistence.addPermissions(defaultUserId, guestPermissionsList);
 		}
 	}
 
@@ -223,17 +254,25 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// Permissions
 
-			List permissions = permissionLocalService.addPermissions(
+			List permissionsList = permissionLocalService.addPermissions(
 				companyId, name, resource.getResourceId(), portletActions);
 
 			logAddResources(name, primKey, stopWatch, 5);
 
 			// User permissions
 
+			PermissionsListFilter permissionsListFilter =
+				PermissionsListFilterFactory.getInstance();
+
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			if ((userId > 0) && (userId != defaultUserId)) {
-				userPersistence.addPermissions(userId, permissions);
+				List userPermissionsList =
+					permissionsListFilter.filterUserPermissions(
+						companyId, groupId, userId, name, primKey,
+						portletActions, permissionsList);
+
+				userPersistence.addPermissions(userId, userPermissionsList);
 			}
 
 			logAddResources(name, primKey, stopWatch, 6);
@@ -242,7 +281,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			if ((groupId > 0) && addCommunityPermissions) {
 				addCommunityPermissions(
-					groupId, name, resource.getResourceId(), portletActions);
+					companyId, groupId, userId, name, resource, portletActions);
 			}
 
 			logAddResources(name, primKey, stopWatch, 7);
@@ -256,7 +295,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				// community.
 
 				addGuestPermissions(
-					companyId, name, resource.getResourceId(), portletActions);
+					companyId, groupId, userId, name, resource, portletActions);
 			}
 
 			logAddResources(name, primKey, stopWatch, 9);
@@ -368,7 +407,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addCommunityPermissions(
-			long groupId, String name, long resourceId, boolean portletActions)
+			long companyId, long groupId, long userId, String name,
+			Resource resource, boolean portletActions)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -380,6 +420,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		long resourceId = resource.getResourceId();
+		String primKey = resource.getPrimKey();
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 1);
 
@@ -400,19 +443,29 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
-		List permissions = permissionLocalService.getPermissions(
+		List communityPermissionsList = permissionLocalService.getPermissions(
 			group.getCompanyId(), actionIds, resourceId);
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 3);
 
-		groupPersistence.addPermissions(groupId, permissions);
+		PermissionsListFilter permissionsListFilter =
+			PermissionsListFilterFactory.getInstance();
+
+		communityPermissionsList =
+			permissionsListFilter.filterCommunityPermissions(
+				companyId, groupId, userId, name, primKey, portletActions,
+				communityPermissionsList);
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 4);
+
+		groupPersistence.addPermissions(groupId, communityPermissionsList);
+
+		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 5);
 	}
 
 	protected void addGuestPermissions(
-			long companyId, String name, long resourceId,
-			boolean portletActions)
+			long companyId, long groupId, long userId, String name,
+			Resource resource, boolean portletActions)
 		throws PortalException, SystemException {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
@@ -430,22 +483,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
-		List permissions = permissionLocalService.getPermissions(
-			companyId, actionIds, resourceId);
+		List guestPermissionsList = permissionLocalService.getPermissions(
+			companyId, actionIds, resource.getResourceId());
 
-		userPersistence.addPermissions(defaultUserId, permissions);
-	}
+		PermissionsListFilter permissionsListFilter =
+			PermissionsListFilterFactory.getInstance();
 
-	protected void addModelPermissions(
-			long groupId, long resourceId, String[] actionIds)
-		throws PortalException, SystemException {
+		guestPermissionsList =
+			permissionsListFilter.filterGuestPermissions(
+				companyId, groupId, userId, name, resource.getPrimKey(),
+				portletActions, guestPermissionsList);
 
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		List permissions = permissionLocalService.getPermissions(
-			group.getCompanyId(), actionIds, resourceId);
-
-		groupPersistence.addPermissions(groupId, permissions);
+		userPersistence.addPermissions(defaultUserId, guestPermissionsList);
 	}
 
 	protected void logAddCommunityPermissions(

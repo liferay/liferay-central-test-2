@@ -461,6 +461,8 @@ public class PropsUtil {
 
 	public static final String PERMISSIONS_USER_CHECK_ALGORITHM = "permissions.user.check.algorithm";
 
+	public static final String PERMISSIONS_LIST_FILTER = "permissions.list.filter";
+
 	// Captcha
 
 	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";
