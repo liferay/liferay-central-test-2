@@ -1157,6 +1157,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>117</portlet-name>
@@ -1167,6 +1168,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<include>false</include>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

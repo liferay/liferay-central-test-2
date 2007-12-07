@@ -47,7 +47,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.messageboards.MBActivityKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -476,10 +475,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				receiverUserId = parentMessage.getUserId();
 			}
 
-			activityTrackerLocalService.addActivityTracker(
+			/*activityTrackerLocalService.addActivityTracker(
 				userId, category.getGroupId(), MBMessage.class.getName(),
 				messageId, MBActivityKeys.ADD, StringPool.BLANK,
-				receiverUserId);
+				receiverUserId);*/
 		}
 
 		logAddMessage(messageId, stopWatch, 10);
