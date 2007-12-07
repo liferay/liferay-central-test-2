@@ -128,7 +128,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		headerNames.add("name");
 		headerNames.add("screen-name");
-		headerNames.add("email-address");
+		//headerNames.add("email-address");
 
 		searchContainer.setHeaderNames(headerNames);
 
@@ -143,7 +143,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 			row.addText(user2.getFullName());
 			row.addText(user2.getScreenName());
-			row.addText(user2.getEmailAddress());
+			//row.addText(user2.getEmailAddress());
 
 			// Add result row
 

@@ -179,7 +179,7 @@ List headerNames = new ArrayList();
 
 headerNames.add("name");
 headerNames.add("screen-name");
-headerNames.add("email-address");
+//headerNames.add("email-address");
 
 searchContainer.setHeaderNames(headerNames);
 
@@ -194,7 +194,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(user2.getFullName());
 	row.addText(user2.getScreenName());
-	row.addText(user2.getEmailAddress());
+	//row.addText(user2.getEmailAddress());
 
 	// Add result row
 

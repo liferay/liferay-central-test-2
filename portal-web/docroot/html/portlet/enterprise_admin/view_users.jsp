@@ -220,7 +220,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		// Email address
 
-		row.addText(user2.getEmailAddress(), rowURL);
+		//row.addText(user2.getEmailAddress(), rowURL);
 
 		// Job title
 

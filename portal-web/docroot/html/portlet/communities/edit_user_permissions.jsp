@@ -244,7 +244,7 @@ Assign permissions to users.
 
 				headerNames.add("name");
 				headerNames.add("screen-name");
-				headerNames.add("email-address");
+				//headerNames.add("email-address");
 				headerNames.add("permissions");
 
 				searchContainer.setHeaderNames(headerNames);
@@ -260,7 +260,7 @@ Assign permissions to users.
 
 					row.addText(user2.getFullName());
 					row.addText(user2.getScreenName());
-					row.addText(user2.getEmailAddress());
+					//row.addText(user2.getEmailAddress());
 
 					// Permissions
 

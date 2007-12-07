@@ -148,7 +148,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				headerNames.add("name");
 				headerNames.add("screen-name");
-				headerNames.add("email-address");
+				//headerNames.add("email-address");
 
 				if (tabs2.equals("current")) {
 					headerNames.add("community-roles");
@@ -168,7 +168,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					row.addText(user2.getFullName());
 					row.addText(user2.getScreenName());
-					row.addText(user2.getEmailAddress());
+					//row.addText(user2.getEmailAddress());
 
 					// Community roles and action
 

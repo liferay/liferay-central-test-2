@@ -366,7 +366,7 @@ else {
 
 				headerNames.add("name");
 				headerNames.add("screen-name");
-				headerNames.add("email-address");
+				//headerNames.add("email-address");
 				headerNames.add("permissions");
 
 				searchContainer.setHeaderNames(headerNames);
@@ -382,7 +382,7 @@ else {
 
 					row.addText(user2.getFullName());
 					row.addText(user2.getScreenName());
-					row.addText(user2.getEmailAddress());
+					//row.addText(user2.getEmailAddress());
 
 					// Permissions
 
@@ -1225,7 +1225,8 @@ else {
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
-		headerNames.add("email-address");
+		headerNames.add("screen-name");
+		//headerNames.add("email-address");
 
 		searchContainer.setHeaderNames(headerNames);
 
@@ -1236,10 +1237,11 @@ else {
 
 			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
-			// Name and email address
+			// Name, screen name, and email address
 
 			row.addText(user2.getFullName());
-			row.addText(user2.getEmailAddress());
+			row.addText(user2.getScreenName());
+			//row.addText(user2.getEmailAddress());
 
 			// Add result row
 

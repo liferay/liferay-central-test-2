@@ -46,7 +46,7 @@ public class UserSearch extends SearchContainer {
 	static {
 		headerNames.add("name");
 		headerNames.add("screen-name");
-		headerNames.add("email-address");
+		//headerNames.add("email-address");
 		headerNames.add("job-title");
 		headerNames.add("organizations");
 	}
