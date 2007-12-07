@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.util.FileUtil;
 
@@ -39,16 +40,20 @@ public class DBBuilder {
 
 	public static void main(String[] args) {
 		if (args.length == 1) {
-			new DBBuilder(args[0]);
+			new DBBuilder(args[0], DBUtil.DB_TYPE_ALL);
+		}
+		else if (args.length == 2) {
+			new DBBuilder(args[0], StringUtil.split(args[1]));
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public DBBuilder(String databaseName) {
+	public DBBuilder(String databaseName, String[] databaseTypes) {
 		try {
 			_databaseName = databaseName;
+			_databaseTypes = databaseTypes;
 
 			_buildSQLFile("portal");
 			_buildSQLFile("portal-minimal");
@@ -69,15 +74,23 @@ public class DBBuilder {
 	}
 
 	private void _buildCreateFile() throws IOException {
-		_getDBUtil(DBUtil.DB_TYPE_DB2).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_INFORMIX).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_ORACLE).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_POSTGRESQL).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_SQLSERVER).buildCreateFile(_databaseName);
-		_getDBUtil(DBUtil.DB_TYPE_SYBASE).buildCreateFile(_databaseName);
+		for (int i = 0; i < _databaseTypes.length; i++) {
+			String databaseType = _databaseTypes[i];
+
+			if (databaseType.equals(DBUtil.DB_TYPE_HYPERSONIC) ||
+				databaseType.equals(DBUtil.DB_TYPE_INTERBASE) ||
+				databaseType.equals(DBUtil.DB_TYPE_JDATASTORE) ||
+				databaseType.equals(DBUtil.DB_TYPE_SAP)) {
+
+				continue;
+			}
+
+			DBUtil dbUtil = _getDBUtil(_databaseTypes[i]);
+
+			if (dbUtil != null) {
+				dbUtil.buildCreateFile(_databaseName);
+			}
+		}
 	}
 
 	private void _buildSQLFile(String fileName) throws IOException {
@@ -85,25 +98,21 @@ public class DBBuilder {
 			return;
 		}
 
-		_getDBUtil(DBUtil.DB_TYPE_DB2).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_HYPERSONIC).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_INFORMIX).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_INTERBASE).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_JDATASTORE).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_ORACLE).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_POSTGRESQL).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_SAP).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_SQLSERVER).buildSQLFile(fileName);
-		_getDBUtil(DBUtil.DB_TYPE_SYBASE).buildSQLFile(fileName);
+		for (int i = 0; i < _databaseTypes.length; i++) {
+			DBUtil dbUtil = _getDBUtil(_databaseTypes[i]);
+
+			if (dbUtil != null) {
+				dbUtil.buildSQLFile(fileName);
+			}
+		}
 	}
 
-	private DBUtil _getDBUtil(int dbType) throws IOException {
+	private DBUtil _getDBUtil(String dbType) {
 		return DBUtil.getInstance(dbType);
 	}
 
 	private String _databaseName;
+
+	private String[] _databaseTypes;
 
 }

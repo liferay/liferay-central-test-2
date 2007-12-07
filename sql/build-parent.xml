@@ -14,6 +14,7 @@
 			newenvironment="true"
 		>
 			<arg value="${database.name}" />
+			<arg value="${database.types}" />
 		</java>
 
 		<delete file="velocity.log" quiet="true" />

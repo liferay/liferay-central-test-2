@@ -75,31 +75,47 @@ import org.hibernate.dialect.SybaseDialect;
  */
 public abstract class DBUtil {
 
-	public static final int DB_TYPE_DB2 = 1;
+	public static final String DB_TYPE_DB2 = "db2";
 
-	public static final int DB_TYPE_DERBY = 2;
+	public static final String DB_TYPE_DERBY = "derby";
 
-	public static final int DB_TYPE_FIREBIRD = 3;
+	public static final String DB_TYPE_FIREBIRD = "firebird";
 
-	public static final int DB_TYPE_HYPERSONIC = 4;
+	public static final String DB_TYPE_HYPERSONIC = "hypersonic";
 
-	public static final int DB_TYPE_INFORMIX = 5;
+	public static final String DB_TYPE_INFORMIX = "informix";
 
-	public static final int DB_TYPE_INTERBASE = 6;
+	public static final String DB_TYPE_INTERBASE = "interbase";
 
-	public static final int DB_TYPE_JDATASTORE = 7;
+	public static final String DB_TYPE_JDATASTORE = "jdatastore";
 
-	public static final int DB_TYPE_MYSQL = 8;
+	public static final String DB_TYPE_MYSQL = "mysql";
 
-	public static final int DB_TYPE_ORACLE = 9;
+	public static final String DB_TYPE_ORACLE = "oracle";
 
-	public static final int DB_TYPE_POSTGRESQL = 10;
+	public static final String DB_TYPE_POSTGRESQL = "postgresql";
 
-	public static final int DB_TYPE_SAP = 11;
+	public static final String DB_TYPE_SAP = "sap";
 
-	public static final int DB_TYPE_SQLSERVER = 12;
+	public static final String DB_TYPE_SQLSERVER = "sqlserver";
 
-	public static final int DB_TYPE_SYBASE = 13;
+	public static final String DB_TYPE_SYBASE = "sybase";
+
+	public static final String[] DB_TYPE_ALL = {
+			DB_TYPE_DB2,
+			DB_TYPE_DERBY,
+			DB_TYPE_FIREBIRD,
+			DB_TYPE_HYPERSONIC,
+			DB_TYPE_INFORMIX,
+			DB_TYPE_INTERBASE,
+			DB_TYPE_JDATASTORE,
+			DB_TYPE_MYSQL,
+			DB_TYPE_ORACLE,
+			DB_TYPE_POSTGRESQL,
+			DB_TYPE_SAP,
+			DB_TYPE_SQLSERVER,
+			DB_TYPE_SYBASE
+		};
 
 	public static DBUtil getInstance() {
 		if (_dbUtil != null) {
@@ -162,46 +178,46 @@ public abstract class DBUtil {
 		return _dbUtil;
 	}
 
-	public static DBUtil getInstance(int dbType) {
+	public static DBUtil getInstance(String dbType) {
 		DBUtil dbUtil = null;
 
-		if (dbType == DB_TYPE_DB2) {
+		if (dbType.equals(DB_TYPE_DB2)) {
 			dbUtil = DB2Util.getInstance();
 		}
-		else if (dbType == DB_TYPE_DERBY) {
+		else if (dbType.equals(DB_TYPE_DERBY)) {
 			dbUtil = DerbyUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_FIREBIRD) {
+		else if (dbType.equals(DB_TYPE_FIREBIRD)) {
 			dbUtil = FirebirdUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_HYPERSONIC) {
+		else if (dbType.equals(DB_TYPE_HYPERSONIC)) {
 			dbUtil = HypersonicUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_INFORMIX) {
+		else if (dbType.equals(DB_TYPE_INFORMIX)) {
 			dbUtil = InformixUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_INTERBASE) {
+		else if (dbType.equals(DB_TYPE_INTERBASE)) {
 			dbUtil = InterBaseUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_JDATASTORE) {
+		else if (dbType.equals(DB_TYPE_JDATASTORE)) {
 			dbUtil = JDataStoreUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_MYSQL) {
+		else if (dbType.equals(DB_TYPE_MYSQL)) {
 			dbUtil = MySQLUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_ORACLE) {
+		else if (dbType.equals(DB_TYPE_ORACLE)) {
 			dbUtil = OracleUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_POSTGRESQL) {
+		else if (dbType.equals(DB_TYPE_POSTGRESQL)) {
 			dbUtil = PostgreSQLUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_SAP) {
+		else if (dbType.equals(DB_TYPE_SAP)) {
 			dbUtil = SAPUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_SQLSERVER) {
+		else if (dbType.equals(DB_TYPE_SQLSERVER)) {
 			dbUtil = SQLServerUtil.getInstance();
 		}
-		else if (dbType == DB_TYPE_SYBASE) {
+		else if (dbType.equals(DB_TYPE_SYBASE)) {
 			dbUtil = SybaseUtil.getInstance();
 		}
 
