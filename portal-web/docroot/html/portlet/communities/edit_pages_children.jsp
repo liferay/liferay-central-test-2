@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
+String tabs5 = (String)request.getAttribute("edit_pages.jsp-tab5");
 
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
@@ -45,22 +45,16 @@ else {
 	selLayoutChildren = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 }
 
-String tabs4Names = "new-page";
+String tabs5Names = "new-page";
 
 if ((selLayoutChildren != null) && (selLayoutChildren.size() > 0)) {
-	tabs4Names += ",display-order";
-}
-
-Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
-
-if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGroup.getGroupId())) {
-	tabs4Names += ",merge-pages";
+	tabs5Names += ",display-order";
 }
 %>
 
 <liferay-ui:tabs
-	names="<%= tabs4Names %>"
-	param="tabs4"
+	names="<%= tabs5Names %>"
+	param="tabs5"
 	url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 />
 
@@ -68,7 +62,7 @@ if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGro
 <input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 <c:choose>
-	<c:when test='<%= tabs4.equals("new-page") %>'>
+	<c:when test='<%= tabs5.equals("new-page") %>'>
 
 		<%
 		String name = ParamUtil.getString(request, "name");
@@ -149,7 +143,7 @@ if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGro
 			</script>
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs4.equals("display-order") %>'>
+	<c:when test='<%= tabs5.equals("display-order") %>'>
 		<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 
 			<%
@@ -202,30 +196,5 @@ if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGro
 		<br />
 
 		<input type="button" value="<liferay-ui:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();" />
-	</c:when>
-	<c:when test='<%= tabs4.equals("merge-pages") %>'>
-
-		<%
-		boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
-		%>
-
-		<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
-
-		<br /><br />
-
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="merge-guest-public-pages" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
-			</td>
-		</tr>
-		</table>
-
-		<br />
-
-		<input type="submit" value="<liferay-ui:message key="save" />" />
 	</c:when>
 </c:choose>

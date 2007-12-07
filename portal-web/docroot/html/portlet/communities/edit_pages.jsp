@@ -27,8 +27,9 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
-String tabs3 = ParamUtil.getString(request, "tabs3", "page");
-String tabs4 = ParamUtil.getString(request, "tabs4");
+String tabs3 = ParamUtil.getString(request, "tabs3", "pages");
+String tabs4 = ParamUtil.getString(request, "tabs4", "page");
+String tabs5 = ParamUtil.getString(request, "tabs5");
 
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
@@ -124,32 +125,26 @@ catch (NoSuchLayoutException nsle) {
 if (selLayout != null) {
 	layoutId = selLayout.getLayoutId();
 
-	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
-		tabs3 = "page";
-	}
-	else if (tabs3.equals("logo") || tabs3.equals("export-import") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap")) || (tabs3.equals("monitoring"))) {
-		tabs3 = "page";
+	if (!PortalUtil.isLayoutParentable(selLayout) && tabs4.equals("children")) {
+		tabs4 = "page";
 	}
 }
 
 if (selLayout == null) {
-	if (tabs3.equals("page")) {
-		tabs3 = "children";
-	}
-	else if (tabs3.equals("sitemap") && privateLayout) {
-		tabs3 = "children";
+	if (tabs4.equals("page")) {
+		tabs4 = "children";
 	}
 }
 
-if (Validator.isNull(tabs4)) {
-	if (tabs3.equals("children")) {
-		tabs4 = "new-page";
+if (Validator.isNull(tabs5)) {
+	if (tabs4.equals("children")) {
+		tabs5 = "new-page";
 	}
-	else if (tabs3.equals("look-and-feel")) {
-		tabs4 = "regular-browsers";
+	else if (tabs4.equals("look-and-feel")) {
+		tabs5 = "regular-browsers";
 	}
-	else if (tabs3.equals("export-import")) {
-		tabs4 = "export";
+	else if (tabs4.equals("export-import")) {
+		tabs5 = "export";
 	}
 }
 
@@ -196,6 +191,7 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 //portletURL.setParameter("tabs4", tabs4);
+s//portletURL.setParameter("tabs5", tabs5);
 portletURL.setParameter("redirect", redirect);
 
 if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
@@ -214,6 +210,7 @@ viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
+request.setAttribute("edit_pages.jsp-tab5", tabs5);
 
 request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
 request.setAttribute("edit_pages.jsp-group", group);
@@ -266,15 +263,15 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<c:when test='<%= tabs3.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
 			</c:when>
-			<c:when test='<%= tabs4.equals("merge-pages") %>'>
+			<c:when test='<%= tabs5.equals("merge-pages") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
 			</c:when>
 			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs4.equals("children") ? Constants.ADD : Constants.UPDATE %>';
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test='<%= tabs3.equals("page") %>'>
+		<c:if test='<%= tabs4.equals("page") %>'>
 			<portlet:namespace />updateLanguage();
 		</c:if>
 
@@ -346,15 +343,16 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
+<input name="<portlet:namespace />tabs5" type="hidden" value="<%= tabs5 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>">
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs5=<%= tabs5 %>&<portlet:namespace />selPlid=<%= selPlid %>">
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>'>
+<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs5.equals("regular-browsers") ? "false" : "true" %>'>
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="">
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
@@ -440,13 +438,13 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				backURL="<%= redirect %>"
 			/>
 		</c:when>
-		<c:otherwise>
+		<c:when test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:tabs
 				names="public,private"
 				param="tabs2"
 				url="<%= portletURL.toString() %>"
 			/>
-		</c:otherwise>
+		</c:when>
 	</c:choose>
 
 	<c:choose>
@@ -457,7 +455,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
 					<portlet:param name="struts_action" value="/communities/export_pages" />
 					<portlet:param name="tabs2" value="<%= tabs2 %>" />
-					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs5=" + tabs5 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 				</portlet:renderURL>
 
@@ -467,7 +465,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
 				<portlet:param name="struts_action" value="/communities/export_pages" />
 				<portlet:param name="tabs2" value="<%= tabs2 %>" />
-				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs5=" + tabs5 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 			</portlet:renderURL>
 
@@ -484,88 +482,53 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		</c:otherwise>
 	</c:choose>
 
+	<%
+		String tabs3Names = "pages";
+
+		if (permissionChecker.isOmniadmin() || GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE))) {
+			tabs3Names += ",look-and-feel";
+		}
+
+		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
+			tabs3Names += ",export-import";
+		}
+
+		tabs3Names += ",settings";
+	%>
+
+	<liferay-ui:tabs
+		names="<%= tabs3Names %>"
+		param="tabs3"
+		url="<%= portletURL.toString() %>"
+	/>
+
 	<table class="lfr-table" width="100%">
 	<tr>
-		<td valign="top">
-			<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
+		<c:if test="<%= tabs3.equals("pages") %>">
+			<td valign="top">
+				<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
 
-			<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
+				<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
 
-			<script type="text/javascript">
-				jQuery(
-					function() {
-						new Tree(
-							{
-								className: "gamma",
-								icons: <portlet:namespace />layoutIcons,
-								nodes: <portlet:namespace />layoutArray,
-								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
-								outputId: '#<%= renderResponse.getNamespace() %>tree-output',
-								treeId: "layoutsTree"
-							}
-						);
-					}
-				);
-			</script>
-		</td>
-		<td valign="top" width="75%">
-
-			<%
-			PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
-			%>
-
-			<c:choose>
-				<c:when test="<%= selLayout != null %>">
-					<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <a href="<%= breadcrumbURL.toString() %>"><%= rootNodeName %></a> &raquo; <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
-				</c:when>
-				<c:otherwise>
-					<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") %>: <a href="<%= breadcrumbURL.toString() %>"><%= rootNodeName %></a>
-				</c:otherwise>
-			</c:choose>
-
-			<br /><br />
-
-			<%
-			String tabs3Names = "page,children";
-
-			if (permissionChecker.isOmniadmin() || GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE))) {
-				tabs3Names += ",look-and-feel";
-			}
-
-			if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
-				tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
-			}
-
-			if (selLayout == null) {
-				tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
-
-				if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
-					if (!tabs1.equals("staging") && company.isCommunityLogo()) {
-						tabs3Names += ",logo";
-					}
-
-					tabs3Names += ",export-import,virtual-host";
-
-					if (!tabs1.equals("staging")) {
-						if (!privateLayout) {
-							tabs3Names += ",sitemap";
+				<script type="text/javascript">
+					jQuery(
+						function() {
+							new Tree(
+								{
+									className: "gamma",
+									icons: <portlet:namespace />layoutIcons,
+									nodes: <portlet:namespace />layoutArray,
+									openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
+									outputId: '#<%= renderResponse.getNamespace() %>tree-output',
+									treeId: "layoutsTree"
+								}
+							);
 						}
-
-						tabs3Names += ",monitoring";
-					}
-				}
-			}
-
-			PortletURL tabs3PortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-
-			tabs3PortletURL.setParameter("tabs4", "");
-			%>
-
-			<liferay-ui:tabs
-				names="<%= tabs3Names %>"
-				param="tabs3"
-				url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
-			/>
+					);
+				</script>
+			</td>
+		</c:if>
+		<td valign="top" width="75%">
 
 			<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
 
@@ -650,181 +613,68 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			</liferay-ui:error>
 
 			<c:choose>
-				<c:when test='<%= tabs3.equals("page") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_page.jsp" />
-				</c:when>
-				<c:when test='<%= tabs3.equals("children") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_children.jsp" />
+				<c:when test='<%= tabs3.equals("pages") %>'>
+					<%
+					PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
+					%>
+
+					<c:choose>
+						<c:when test="<%= selLayout != null %>">
+							<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <a href="<%= breadcrumbURL.toString() %>"><%= rootNodeName %></a> &raquo; <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.get(pageContext, "manage-top-" + (privateLayout ? "private" : "public") + "-pages-for") %>: <a href="<%= breadcrumbURL.toString() %>"><%= rootNodeName %></a>
+						</c:otherwise>
+					</c:choose>
+
+					<br /><br />
+
+					<%
+					String tabs4Names = "page,children";
+
+					if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
+						tabs4Names = StringUtil.replace(tabs4Names, "children,", StringPool.BLANK);
+					}
+
+					if (selLayout == null) {
+						tabs4Names = StringUtil.replace(tabs4Names, "page,", StringPool.BLANK);
+					}
+
+					if (permissionChecker.isOmniadmin() || GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE))) {
+						tabs4Names += ",look-and-feel";
+					}
+
+					PortletURL tabs4PortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+					tabs4PortletURL.setParameter("tabs5", "");
+					%>
+
+					<liferay-ui:tabs
+						names="<%= tabs4Names %>"
+						param="tabs4"
+						url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
+					/>
+
+					<c:choose>
+						<c:when test='<%= tabs4.equals("page") %>'>
+							<liferay-util:include page="/html/portlet/communities/edit_pages_page.jsp" />
+						</c:when>
+						<c:when test='<%= tabs4.equals("children") %>'>
+							<liferay-util:include page="/html/portlet/communities/edit_pages_children.jsp" />
+						</c:when>
+					</c:choose>
 				</c:when>
 				<c:when test='<%= tabs3.equals("look-and-feel") %>'>
 					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
 				</c:when>
-				<c:when test='<%= tabs3.equals("logo") %>'>
-					<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-
-					<%
-					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
-					%>
-
-					<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-" + (privateLayout ? "private" : "public") + "-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
-
-					<br /><br />
-
-					<c:if test="<%= layoutSet.isLogo() %>">
-						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
-
-						<br /><br />
-					</c:if>
-
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="logo" />
-						</td>
-						<td>
-							<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="use-logo" />
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="logo" defaultValue="<%= layoutSet.isLogo() %>" />
-						</td>
-					</tr>
-					</table>
-
-					<br />
-
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
+				<c:when test='<%= tabs3.equals("settings") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
 				</c:when>
 				<c:when test='<%= tabs3.equals("export-import") %>'>
 					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
 				</c:when>
-				<c:when test='<%= tabs3.equals("virtual-host") %>'>
-					<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
-
-					<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {Http.getProtocol(request), PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic()}) %>
-
-					<br /><br />
-
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="public-virtual-host" />
-						</td>
-						<td>
-
-							<%
-							LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
-
-							String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
-							%>
-
-							<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="private-virtual-host" />
-						</td>
-						<td>
-
-							<%
-							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
-
-							String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
-							%>
-
-							<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>" />
-						</td>
-					</tr>
-					</table>
-
-					<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
-						<br />
-
-						<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />
-
-						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic(), PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPrivateGroup()}) %>
-
-						<br /><br />
-
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="friendly-url" />
-							</td>
-							<td>
-
-								<%
-								String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
-								%>
-
-								<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
-							</td>
-						</tr>
-						</table>
-					</c:if>
-
-					<br />
-
-					<input type="submit" value="<liferay-ui:message key="save" />" />
-				</c:when>
-				<c:when test='<%= tabs3.equals("sitemap") %>'>
-
-					<%
-					String host = PortalUtil.getHost(request);
-
-					String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathContext() + "/sitemap.xml";
-
-					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
-
-					String virtualHost = layoutSet.getVirtualHost();
-
-					if (!host.equals(virtualHost)) {
-						sitemapUrl += "?groupId=" + groupId + "&privateLayout=" + privateLayout;
-					}
-					%>
-
-					<liferay-ui:message key="the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website" /> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", "<a href=\"http://www.sitemaps.org\" target=\"_blank\">http://www.sitemaps.org</a>") %>
-
-					<br /><br />
-
-					<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + sitemapUrl + "\">", "</a>"}) %>
-
-					<ul>
-						<li><a href="http://www.google.com/webmasters/sitemaps/ping?sitemap=<%= sitemapUrl %>" target="_blank">Google</a>
-						<li><a href="https://siteexplorer.search.yahoo.com/submit/ping?sitemap=<%= sitemapUrl %>" target="_blank">Yahoo!</a> (<liferay-ui:message key="requires-login" />)
-					</ul>
-				</c:when>
-				<c:when test='<%= tabs3.equals("monitoring") %>'>
-					<liferay-ui:message key="set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages" />
-
-					<br /><br />
-
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="google-analytics-id" />
-						</td>
-						<td>
-
-							<%
-							String googleAnalyticsId = PropertiesParamUtil.getString(groupTypeSettings, request, "googleAnalyticsId");
-							%>
-
-							<input name="<portlet:namespace />googleAnalyticsId" size="30" type="text" value="<%= googleAnalyticsId %>" />
-						</td>
-					</tr>
-					</table>
-
-					<br />
-
-					<input type="submit" value="<liferay-ui:message key="save" />" />
-				</c:when>
 			</c:choose>
+		
 		</td>
 	</tr>
 	</table>

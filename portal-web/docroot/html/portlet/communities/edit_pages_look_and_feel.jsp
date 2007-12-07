@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
+String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browsers");
 
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
