@@ -33,18 +33,18 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class LayoutCloneFactory {
 
-	static LayoutClone layoutClone = null;
-
-	static {
-		String layoutCloneImpl = PropsUtil.get(PropsUtil.LAYOUT_CLONE_IMPL);
-
-		if (Validator.isNotNull(layoutCloneImpl)) {
-			layoutClone = (LayoutClone)InstancePool.get(layoutCloneImpl);
-		}
-	}
-
 	public static LayoutClone getInstance() {
-		return layoutClone;
+		if (_layoutClone == null) {
+			String layoutCloneImpl = PropsUtil.get(PropsUtil.LAYOUT_CLONE_IMPL);
+
+			if (Validator.isNotNull(layoutCloneImpl)) {
+				_layoutClone = (LayoutClone)InstancePool.get(layoutCloneImpl);
+			}
+		}
+
+		return _layoutClone;
 	}
+
+	private static LayoutClone _layoutClone;
 
 }
