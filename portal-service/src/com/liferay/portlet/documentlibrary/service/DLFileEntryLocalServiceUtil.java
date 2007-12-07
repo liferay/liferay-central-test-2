@@ -643,6 +643,16 @@ public class DLFileEntryLocalServiceUtil {
 			groupId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+		long folderId, java.lang.String titleWithExtension)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntryByTitle(folderId,
+			titleWithExtension);
+	}
+
 	public static int getFoldersFileEntriesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();

@@ -35,6 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -545,6 +546,30 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return dlFileEntryFinder.findByUuid_G(uuid, groupId);
+	}
+
+	public DLFileEntry getFileEntryByTitle(
+			long folderId, String titleWithExtension)
+		throws PortalException, SystemException {
+
+		String extension = FileUtil.getExtension(titleWithExtension);
+		String title = DLFileEntryImpl.stripExtension(
+			titleWithExtension, titleWithExtension);
+
+		Iterator itr =
+			dlFileEntryPersistence.findByF_T(folderId, title).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = (DLFileEntry)itr.next();
+
+			String currExtension = FileUtil.getExtension(fileEntry.getName());
+
+			if (extension.equals(currExtension)) {
+				return fileEntry;
+			}
+		}
+
+		throw new NoSuchFileEntryException();
 	}
 
 	public int getFoldersFileEntriesCount(List folderIds)

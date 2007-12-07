@@ -331,6 +331,11 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+		long folderId, java.lang.String titleWithExtension)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public int getFoldersFileEntriesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException;
 

@@ -249,9 +249,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			catch (NoSuchFolderException nsfe) {
 				try {
+					String titleWithExtension = name;
+
 					DLFileEntry fileEntry =
-						DLFileEntryLocalServiceUtil.getFileEntry(
-							parentFolderId, name);
+						DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+							parentFolderId, titleWithExtension);
 
 					DLFileEntryPermission.check(
 						webDavReq.getPermissionChecker(), fileEntry,
@@ -523,7 +525,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		String href = getRootPath() + webDavReq.getPath();
 
 		if (appendPath) {
-			href += StringPool.SLASH + fileEntry.getName();
+			href += StringPool.SLASH + fileEntry.getTitleWithExtension();
 		}
 
 		return new DLFileEntryResourceImpl(webDavReq, fileEntry, href);
@@ -540,7 +542,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		Resource resource = new BaseResourceImpl(
 			href, folder.getName(), true, folder.getCreateDate(),
-			//href, folder.getFolderId(), true, folder.getCreateDate(),
 			folder.getModifiedDate());
 
 		resource.setModel(folder);
