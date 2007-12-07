@@ -178,7 +178,12 @@ public class CachePortlet implements Portlet {
 			stopWatch.start();
 		}
 
-		_invoke(req, res, true);
+		try {
+			_invoke(req, res, true);
+		}
+		catch (PortletException pe) {
+			req.setAttribute(_portletId + PortletException.class.getName(), pe);
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -189,6 +194,13 @@ public class CachePortlet implements Portlet {
 
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
+
+		PortletException portletException = (PortletException)req.getAttribute(
+			_portletId + PortletException.class.getName());
+
+		if (portletException != null) {
+			throw portletException;
+		}
 
 		StopWatch stopWatch = null;
 
