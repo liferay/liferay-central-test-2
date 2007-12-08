@@ -30,6 +30,12 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -37,6 +43,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -479,6 +486,53 @@ public class MBUtil {
 		return rank;
 	}
 
+	public static String getUserRank(
+			PortletPreferences prefs, String languageId, MBStatsUser user)
+		throws Exception {
+
+		String rank = StringPool.BLANK;
+
+		String[] ranks = LocalizationUtil.getPrefsValues(
+			prefs, "ranks", languageId);
+
+		for (int i = 0; i < ranks.length; i++) {
+			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
+
+			String kvpName = kvp[0];
+			String kvpValue = kvp[1];
+			
+			kvp = StringUtil.split(kvpValue, StringPool.COLON);
+
+			if (kvp.length > 1) {
+				if ("group".equals(kvp[0])) {
+					Group group = GroupLocalServiceUtil.getGroup(user.getGroupId());
+					UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(group.getCompanyId(), kvp[1]);
+
+					if (UserLocalServiceUtil.hasUserGroupUser(userGroup.getUserGroupId(), user.getUserId())) {
+						rank = kvpName;
+						break;
+					} 						
+				}
+				else if ("role".equals(kvp[0])) {
+					Group group = GroupLocalServiceUtil.getGroup(user.getGroupId());
+					if (RoleLocalServiceUtil.hasUserRole(user.getUserId(), group.getCompanyId(), kvp[1], true)) {
+						rank = kvpName;
+						break;
+					}
+				}
+			} 
+			else {
+				int kvpPosts = GetterUtil.getInteger(kvpValue);
+	
+				if (user.getMessageCount() >= kvpPosts) {
+					rank = kvpName;
+				}
+			}
+		}
+
+		return rank;
+	}
+	
 	private static String[] _findThreadPriority(
 		double value, ThemeDisplay themeDisplay, String[] priorities) {
 

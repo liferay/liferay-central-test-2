@@ -38,8 +38,9 @@
 					>
 
 						<%
-						int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
-						String rank = MBUtil.getUserRank(portletSetup, themeDisplay.getLanguageId(), posts);
+						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId());
+						int posts = statsUser.getMessageCount();
+						String rank = MBUtil.getUserRank(portletSetup, themeDisplay.getLanguageId(), statsUser);
 						%>
 
 						<liferay-ui:message key="rank" />: <%= rank %><br />

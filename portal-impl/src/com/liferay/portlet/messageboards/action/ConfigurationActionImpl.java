@@ -258,9 +258,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				String[] kvp = StringUtil.split(ranks[j], StringPool.EQUAL);
 
 				String kvpName = kvp[0];
-				Integer kvpPosts = new Integer(GetterUtil.getInteger(kvp[1]));
+				String kvpValue = kvp[1];
 
-				map.put(kvpPosts, kvpName);
+				map.put(kvpValue, kvpName);
 			}
 
 			ranks = new String[map.size()];
@@ -272,11 +272,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			while (itr.hasNext()) {
 				Map.Entry entry = (Map.Entry)itr.next();
 
-				Integer kvpPosts = (Integer)entry.getKey();
+				String kvpValue = (String)entry.getKey();
 				String kvpName = (String)entry.getValue();
 
 				ranks[count++] =
-					kvpName + StringPool.EQUAL + kvpPosts.toString();
+					kvpName + StringPool.EQUAL + kvpValue;
 			}
 
 			LocalizationUtil.setPrefsValues(prefs, "ranks", languageId, ranks);
