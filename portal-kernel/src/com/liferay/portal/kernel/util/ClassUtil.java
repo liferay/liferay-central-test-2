@@ -81,13 +81,11 @@ public class ClassUtil {
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
-				if (Character.isUpperCase(st.sval.charAt(0))) {
-					if (st.sval.indexOf('.') >= 0) {
-						classes.add(st.sval.substring(0, st.sval.indexOf('.')));
-					}
-					else {
-						classes.add(st.sval);
-					}
+				if (st.sval.indexOf('.') >= 0) {
+					classes.add(st.sval.substring(0, st.sval.indexOf('.')));
+				}
+				else {
+					classes.add(st.sval);
 				}
 			}
 			else if (st.ttype != StreamTokenizer.TT_NUMBER &&
