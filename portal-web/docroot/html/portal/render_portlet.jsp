@@ -180,7 +180,12 @@ if (Validator.isNotNull(queryString)) {
 	for (int i = 0; i < params.length; i++) {
 		String[] kvp = StringUtil.split(params[i], StringPool.EQUAL);
 
-		dynamicReq.setParameter(kvp[0], kvp[1]);
+		if (kvp.length > 1) {
+			dynamicReq.setParameter(kvp[0], kvp[1]);
+		}
+		else {
+			dynamicReq.setParameter(kvp[0], StringPool.BLANK);
+		}
 	}
 }
 
