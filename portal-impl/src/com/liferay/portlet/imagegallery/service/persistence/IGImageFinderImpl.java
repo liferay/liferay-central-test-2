@@ -273,6 +273,9 @@ public class IGImageFinderImpl implements IGImageFinder {
 				return (IGImage)list.get(0);
 			}
 		}
+		catch (NoSuchImageException e) {
+			throw e;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}

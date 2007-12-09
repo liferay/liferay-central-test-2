@@ -83,6 +83,9 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 				return (DLFileShortcut)list.get(0);
 			}
 		}
+		catch (NoSuchFileShortcutException e) {
+			throw e;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}

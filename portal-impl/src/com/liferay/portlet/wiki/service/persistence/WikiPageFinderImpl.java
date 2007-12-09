@@ -228,6 +228,9 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 				return (WikiPage)list.get(0);
 			}
 		}
+		catch (NoSuchPageException e) {
+			throw e;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}

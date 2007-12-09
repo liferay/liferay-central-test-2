@@ -83,6 +83,9 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 				return (PollsChoice)list.get(0);
 			}
 		}
+		catch (NoSuchChoiceException e) {
+			throw e;
+		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
