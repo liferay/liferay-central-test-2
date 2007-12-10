@@ -129,6 +129,7 @@ public class EditSettingsAction extends PortletAction {
 		boolean importFromLdap = ParamUtil.getBoolean(req, "importFromLdap");
 		String loginUrl = ParamUtil.getString(req, "loginUrl");
 		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
+		String serverName = ParamUtil.getString(req, "serverName");
 		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
 		String validateUrl = ParamUtil.getString(req, "validateUrl");
 
@@ -138,6 +139,7 @@ public class EditSettingsAction extends PortletAction {
 			PropsUtil.CAS_IMPORT_FROM_LDAP, String.valueOf(importFromLdap));
 		prefs.setValue(PropsUtil.CAS_LOGIN_URL, loginUrl);
 		prefs.setValue(PropsUtil.CAS_LOGOUT_URL, logoutUrl);
+		prefs.setValue(PropsUtil.CAS_SERVER_NAME, serverName);
 		prefs.setValue(PropsUtil.CAS_SERVICE_URL, serviceUrl);
 		prefs.setValue(PropsUtil.CAS_VALIDATE_URL, validateUrl);
 

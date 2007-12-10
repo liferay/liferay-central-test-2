@@ -2461,6 +2461,7 @@ send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=传送文本信
 send=传送
 sent-mail=被传送邮件
+server-name=服务器名称
 server=伺服器
 service-url=服务URL
 service=服务

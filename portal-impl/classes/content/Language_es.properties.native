@@ -2461,6 +2461,7 @@ send-sitemap-information-to-preview=Enviar información del sitemap a {0}Previsu
 send-text-message=Enviar mensaje de texto
 send=Envíar
 sent-mail=Enviados
+server-name=Nombre Del Servidor
 server=Servidor
 service-url=URL del servicio
 service=Servicio

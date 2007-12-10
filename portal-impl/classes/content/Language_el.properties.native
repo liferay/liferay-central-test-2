@@ -2458,6 +2458,7 @@ send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Αποστολή Μηνύματος Κινητού
 send=Αποστολή
 sent-mail=Αποστολή Ταχυδρομείου
+server-name=Όνομα κεντρικών υπολογιστών
 server=Κεντρικός υπολογιστής
 service-url=Υπηρεσία URL
 service=Υπηρεσία

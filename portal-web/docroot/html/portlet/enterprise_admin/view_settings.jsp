@@ -87,6 +87,14 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				</tr>
 				<tr>
 					<td>
+						<liferay-ui:message key="server-name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />serverName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVER_NAME) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<liferay-ui:message key="service-url" />
 					</td>
 					<td>

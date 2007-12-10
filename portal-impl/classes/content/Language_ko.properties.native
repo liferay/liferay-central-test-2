@@ -2460,6 +2460,7 @@ send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=원본 메시지를 보내십시요
 send=보내십시요
 sent-mail=보낸 우편물
+server-name=서버 이름
 server=서버
 service-url=서비스URL
 service=서비스

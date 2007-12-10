@@ -2456,6 +2456,7 @@ send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=テキストメッセージを送りなさい
 send=送りなさい
 sent-mail=送られた郵便
+server-name=サーバー名前
 server=サーバー
 service-url=サービスURL
 service=サービス

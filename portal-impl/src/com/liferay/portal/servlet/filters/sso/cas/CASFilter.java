@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.sso.cas;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -118,12 +119,28 @@ public class CASFilter implements Filter {
 			DynamicFilterConfig config = new DynamicFilterConfig(
 				_filterName, _ctx);
 
+			String serverName = PrefsPropsUtil.getString(
+				companyId, PropsUtil.CAS_SERVER_NAME);
+			String serviceUrl = PrefsPropsUtil.getString(
+				companyId, PropsUtil.CAS_SERVICE_URL);
+
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.LOGIN_INIT_PARAM,
 				PrefsPropsUtil.getString(companyId, PropsUtil.CAS_LOGIN_URL));
-			config.addInitParameter(
-				edu.yale.its.tp.cas.client.filter.CASFilter.SERVICE_INIT_PARAM,
-				PrefsPropsUtil.getString(companyId, PropsUtil.CAS_SERVICE_URL));
+
+			if (Validator.isNotNull(serverName)) {
+				config.addInitParameter(
+					edu.yale.its.tp.cas.client.filter.CASFilter.
+						SERVERNAME_INIT_PARAM,
+					serverName);
+			}
+			else {
+				config.addInitParameter(
+					edu.yale.its.tp.cas.client.filter.CASFilter.
+						SERVICE_INIT_PARAM,
+					serviceUrl);
+			}
+
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.VALIDATE_INIT_PARAM,
 				PrefsPropsUtil.getString(

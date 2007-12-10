@@ -2461,6 +2461,7 @@ send-sitemap-information-to-preview=Sitemap Information zum {0}preview{1} senden
 send-text-message=Text Nachricht verschicken
 send=Verschicken
 sent-mail=Mail versendet
+server-name=Bediener-Name
 server=Server
 service-url=Service URL 
 service=Service
