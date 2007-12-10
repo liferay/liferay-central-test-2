@@ -27,9 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -44,30 +42,6 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class ActionUtil {
-
-	public static void getCategory(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getCategory(httpReq);
-	}
-
-	public static void getCategory(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getCategory(httpReq);
-	}
-
-	public static void getCategory(HttpServletRequest req) throws Exception {
-		long categoryId = ParamUtil.getLong(req, "categoryId");
-
-		BlogsCategory category = null;
-
-		if (categoryId > 0) {
-			category = BlogsCategoryServiceUtil.getCategory(categoryId);
-		}
-
-		req.setAttribute(WebKeys.BLOGS_CATEGORY, category);
-	}
 
 	public static void getEntry(ActionRequest req) throws Exception {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);

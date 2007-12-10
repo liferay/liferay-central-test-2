@@ -148,32 +148,6 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public java.util.List findByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCategoryId(long categoryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCategoryId(long categoryId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_First(
-		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_Last(
-		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry[] findByCategoryId_PrevAndNext(
-		long entryId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
 	public java.util.List findByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -269,9 +243,6 @@ public interface BlogsEntryPersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -294,9 +265,6 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)

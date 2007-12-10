@@ -326,18 +326,6 @@
 		<property name="service" ref="com.liferay.portal.service.WebsiteService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.WebsiteService" />
 	</bean>
-	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsCategoryService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.BlogsCategoryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsCategoryService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.BlogsCategoryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsCategoryService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.BlogsCategoryService" />
-	</bean>
 	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.BlogsEntryService" />

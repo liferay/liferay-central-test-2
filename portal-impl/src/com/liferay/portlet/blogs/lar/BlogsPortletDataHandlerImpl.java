@@ -209,27 +209,26 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEntry == null) {
 				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, plid, entry.getCategoryId(),
-					entry.getTitle(), entry.getContent(), displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, tagsEntries, addCommunityPermissions,
-					addGuestPermissions, themeDisplay);
+					entry.getUuid(), userId, plid, entry.getTitle(),
+					entry.getContent(), displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					tagsEntries, addCommunityPermissions, addGuestPermissions,
+					themeDisplay);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
-					userId, existingEntry.getEntryId(), entry.getCategoryId(),
-					entry.getTitle(), entry.getContent(), displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, tagsEntries, themeDisplay);
+					userId, existingEntry.getEntryId(), entry.getTitle(),
+					entry.getContent(), displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					tagsEntries, themeDisplay);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, plid, entry.getCategoryId(), entry.getTitle(),
-				entry.getContent(), displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				tagsEntries, addCommunityPermissions, addGuestPermissions,
-				themeDisplay);
+				userId, plid, entry.getTitle(), entry.getContent(),
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, tagsEntries,
+				addCommunityPermissions, addGuestPermissions, themeDisplay);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

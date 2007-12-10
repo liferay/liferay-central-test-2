@@ -78,29 +78,6 @@ public class BlogsEntryServiceJSON {
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	public static java.lang.String getCategoryBlogsRSS(long categoryId,
-		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
-				max, type, version, feedURL, entryURL);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getCategoryBlogsRSS(long categoryId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
-				max, type, version, displayStyle, feedURL, entryURL);
-
-		return returnValue;
-	}
-
 	public static JSONArray getCompanyEntries(long companyId, int max)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -188,17 +165,6 @@ public class BlogsEntryServiceJSON {
 				max);
 
 		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static java.lang.String getOrganizationEntriesRSS(
-		long organizationId, int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = BlogsEntryServiceUtil.getOrganizationEntriesRSS(organizationId,
-				max, type, version, feedURL, entryURL);
-
-		return returnValue;
 	}
 
 	public static java.lang.String getOrganizationEntriesRSS(

@@ -51,13 +51,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
 
 	public static void addEntry(
-			long companyId, long groupId, long userId, long categoryId,
-			long entryId, String title, String content, String[] tagsEntries)
+			long companyId, long groupId, long userId, long entryId,
+			String title, String content, String[] tagsEntries)
 		throws IOException {
 
 		Document doc = getAddEntryDocument(
-			companyId, groupId, userId, categoryId, entryId, title, content,
-			tagsEntries);
+			companyId, groupId, userId, entryId, title, content, tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -83,8 +82,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getAddEntryDocument(
-		long companyId, long groupId, long userId, long categoryId,
-		long entryId, String title, String content, String[] tagsEntries) {
+		long companyId, long groupId, long userId, long entryId, String title,
+		String content, String[] tagsEntries) {
 
 		content = Html.stripHtml(content);
 
@@ -103,7 +102,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		LuceneUtil.addModifiedDate(doc);
 
-		LuceneUtil.addKeyword(doc, "categoryId", categoryId);
 		LuceneUtil.addKeyword(doc, "entryId", entryId);
 
 		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
@@ -112,8 +110,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateEntry(
-			long companyId, long groupId, long userId, long categoryId,
-			long entryId, String title, String content, String[] tagsEntries)
+			long companyId, long groupId, long userId, long entryId,
+			String title, String content, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -123,8 +121,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		addEntry(
-			companyId, groupId, userId, categoryId, entryId, title, content,
-			tagsEntries);
+			companyId, groupId, userId, entryId, title, content, tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

@@ -87,9 +87,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "categoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "title", new Integer(Types.VARCHAR) },
 			
 
@@ -101,7 +98,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 
 			{ "displayDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsEntryModel"));
@@ -210,16 +207,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getCategoryId() {
-		return _categoryId;
-	}
-
-	public void setCategoryId(long categoryId) {
-		if (categoryId != _categoryId) {
-			_categoryId = categoryId;
-		}
-	}
-
 	public String getTitle() {
 		return GetterUtil.getString(_title);
 	}
@@ -282,7 +269,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		model.setUserName(Html.escape(getUserName()));
 		model.setCreateDate(getCreateDate());
 		model.setModifiedDate(getModifiedDate());
-		model.setCategoryId(getCategoryId());
 		model.setTitle(Html.escape(getTitle()));
 		model.setUrlTitle(Html.escape(getUrlTitle()));
 		model.setContent(Html.escape(getContent()));
@@ -308,7 +294,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setCategoryId(getCategoryId());
 		clone.setTitle(getTitle());
 		clone.setUrlTitle(getUrlTitle());
 		clone.setContent(getContent());
@@ -373,7 +358,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _categoryId;
 	private String _title;
 	private String _urlTitle;
 	private String _content;

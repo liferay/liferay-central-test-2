@@ -149,7 +149,6 @@ model.resource.com.liferay.portal.model.PasswordPolicy=密码政策
 model.resource.com.liferay.portal.model.Role=角色
 model.resource.com.liferay.portal.model.User=用户
 model.resource.com.liferay.portal.model.UserGroup=用户群
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=部落格类别
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=部落格项目
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=书签项目
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=书签文件夹

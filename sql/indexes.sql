@@ -11,9 +11,6 @@ create index IX_923BD178 on Address (companyId, classNameId, classPK, mailing);
 create index IX_9226DBB4 on Address (companyId, classNameId, classPK, primary_);
 create index IX_5BC8B0D4 on Address (userId);
 
-create index IX_C49DD10C on BlogsCategory (parentCategoryId);
-
-create index IX_B0608DF4 on BlogsEntry (categoryId);
 create index IX_72EF6041 on BlogsEntry (companyId);
 create index IX_8CACE77B on BlogsEntry (companyId, userId);
 create index IX_81A50303 on BlogsEntry (groupId);

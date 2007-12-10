@@ -32,16 +32,6 @@ import com.liferay.portal.upgrade.util.ValueMapper;
  */
 public class AvailableMappersUtil {
 
-	public static ValueMapper getBlogsCategoryIdMapper() {
-		return _blogsCategoryIdMapper;
-	}
-
-	public static void setBlogsCategoryIdMapper(
-		ValueMapper blogsCategoryIdMapper) {
-
-		_blogsCategoryIdMapper = blogsCategoryIdMapper;
-	}
-
 	public static ValueMapper getBlogsEntryIdMapper() {
 		return _blogsEntryIdMapper;
 	}
@@ -294,7 +284,6 @@ public class AvailableMappersUtil {
 		_wikiPageIdMapper = wikiPageIdMapper;
 	}
 
-	private static ValueMapper _blogsCategoryIdMapper;
 	private static ValueMapper _blogsEntryIdMapper;
 	private static ValueMapper _bookmarksEntryIdMapper;
 	private static ValueMapper _bookmarksFolderIdMapper;

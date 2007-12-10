@@ -149,7 +149,6 @@ model.resource.com.liferay.portal.model.PasswordPolicy=암호 방침
 model.resource.com.liferay.portal.model.Role=역할
 model.resource.com.liferay.portal.model.User=사용자
 model.resource.com.liferay.portal.model.UserGroup=사용자 그룹
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Blogs종류
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Blogs입장
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=갈피표 입장
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=갈피표 폴더

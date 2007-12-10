@@ -70,15 +70,9 @@ import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
-import com.liferay.portlet.blogs.service.BlogsCategoryService;
-import com.liferay.portlet.blogs.service.BlogsCategoryServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
-import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
-import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
@@ -141,7 +135,6 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		blogsEntry.setUserName(model.getUserName());
 		blogsEntry.setCreateDate(model.getCreateDate());
 		blogsEntry.setModifiedDate(model.getModifiedDate());
-		blogsEntry.setCategoryId(model.getCategoryId());
 		blogsEntry.setTitle(model.getTitle());
 		blogsEntry.setUrlTitle(model.getUrlTitle());
 		blogsEntry.setContent(model.getContent());
@@ -175,40 +168,12 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		blogsEntry.setUserName(model.getUserName());
 		blogsEntry.setCreateDate(model.getCreateDate());
 		blogsEntry.setModifiedDate(model.getModifiedDate());
-		blogsEntry.setCategoryId(model.getCategoryId());
 		blogsEntry.setTitle(model.getTitle());
 		blogsEntry.setUrlTitle(model.getUrlTitle());
 		blogsEntry.setContent(model.getContent());
 		blogsEntry.setDisplayDate(model.getDisplayDate());
 
 		return blogsEntryPersistence.update(blogsEntry);
-	}
-
-	public BlogsCategoryLocalService getBlogsCategoryLocalService() {
-		return blogsCategoryLocalService;
-	}
-
-	public void setBlogsCategoryLocalService(
-		BlogsCategoryLocalService blogsCategoryLocalService) {
-		this.blogsCategoryLocalService = blogsCategoryLocalService;
-	}
-
-	public BlogsCategoryService getBlogsCategoryService() {
-		return blogsCategoryService;
-	}
-
-	public void setBlogsCategoryService(
-		BlogsCategoryService blogsCategoryService) {
-		this.blogsCategoryService = blogsCategoryService;
-	}
-
-	public BlogsCategoryPersistence getBlogsCategoryPersistence() {
-		return blogsCategoryPersistence;
-	}
-
-	public void setBlogsCategoryPersistence(
-		BlogsCategoryPersistence blogsCategoryPersistence) {
-		this.blogsCategoryPersistence = blogsCategoryPersistence;
 	}
 
 	public BlogsEntryPersistence getBlogsEntryPersistence() {
@@ -547,18 +512,6 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		if (blogsCategoryLocalService == null) {
-			blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getImpl();
-		}
-
-		if (blogsCategoryService == null) {
-			blogsCategoryService = BlogsCategoryServiceFactory.getImpl();
-		}
-
-		if (blogsCategoryPersistence == null) {
-			blogsCategoryPersistence = BlogsCategoryUtil.getPersistence();
-		}
-
 		if (blogsEntryPersistence == null) {
 			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
 		}
@@ -720,9 +673,6 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		}
 	}
 
-	protected BlogsCategoryLocalService blogsCategoryLocalService;
-	protected BlogsCategoryService blogsCategoryService;
-	protected BlogsCategoryPersistence blogsCategoryPersistence;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;

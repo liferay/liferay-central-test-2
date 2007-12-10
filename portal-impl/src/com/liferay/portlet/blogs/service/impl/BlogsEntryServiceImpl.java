@@ -35,7 +35,6 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
@@ -65,9 +64,9 @@ import java.util.List;
 public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long plid, long categoryId, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			long plid, String title, String content, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -77,16 +76,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, categoryId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, addCommunityPermissions, addGuestPermissions,
-			themeDisplay);
+			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			long plid, long categoryId, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			long plid, String title, String content, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -96,9 +94,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, categoryId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, communityPermissions, guestPermissions, themeDisplay);
+			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
+			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public void deleteEntry(long entryId)
@@ -108,50 +106,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), entryId, ActionKeys.DELETE);
 
 		blogsEntryLocalService.deleteEntry(entryId);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public String getCategoryBlogsRSS(
-			long categoryId, int max, String type, double version,
-			String feedURL, String entryURL)
-		throws PortalException, SystemException {
-
-		return getOrganizationEntriesRSS(
-			categoryId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
-			feedURL, entryURL);
-	}
-
-	public String getCategoryBlogsRSS(
-			long categoryId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL)
-		throws PortalException, SystemException {
-
-		BlogsCategory category = blogsCategoryLocalService.getCategory(
-			categoryId);
-
-		String name = category.getName();
-		String description = category.getDescription();
-
-		List blogsEntries = blogsEntryLocalService.getEntries(
-			categoryId, 0, max);
-
-		Iterator itr = blogsEntries.iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
-
-			if (!BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return exportToRSS(
-			name, description, type, version, displayStyle, feedURL, entryURL,
-			blogsEntries);
 	}
 
 	public List getCompanyEntries(long companyId, int max)
@@ -292,19 +246,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entries;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public String getOrganizationEntriesRSS(
-			long organizationId, int max, String type, double version,
-			String feedURL, String entryURL)
-		throws PortalException, SystemException {
-
-		return getOrganizationEntriesRSS(
-			organizationId, max, type, version,
-			RSSUtil.DISPLAY_STYLE_FULL_CONTENT, feedURL, entryURL);
-	}
-
 	public String getOrganizationEntriesRSS(
 			long organizationId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL)
@@ -323,9 +264,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			long entryId, long categoryId, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			long entryId, String title, String content, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, String[] tagsEntries,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -333,7 +274,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return blogsEntryLocalService.updateEntry(
-			getUserId(), entryId, categoryId, title, content, displayDateMonth,
+			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			tagsEntries, themeDisplay);
 	}

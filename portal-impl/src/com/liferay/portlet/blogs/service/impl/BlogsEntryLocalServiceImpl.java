@@ -41,11 +41,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
-import com.liferay.portlet.blogs.NoSuchCategoryException;
-import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
-import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Http;
@@ -63,11 +60,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
-import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -80,64 +75,63 @@ import org.apache.lucene.search.TermQuery;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, long plid, long categoryId, String title,
-			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+			long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, plid, categoryId, title, content, displayDateMonth,
+			null, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, long categoryId, String title,
-			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+			String uuid, long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			uuid, userId, plid, categoryId, title, content, displayDateMonth,
+			uuid, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			long userId, long plid, long categoryId, String title,
-			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
+			long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, plid, categoryId, title, content, displayDateMonth,
+			null, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			tagsEntries, null, null, communityPermissions, guestPermissions,
 			themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, long categoryId, String title,
-			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
+			String uuid, long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
-		categoryId = getCategoryId(user.getCompanyId(), categoryId);
 		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(
@@ -158,7 +152,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setUserName(user.getFullName());
 		entry.setCreateDate(now);
 		entry.setModifiedDate(now);
-		entry.setCategoryId(categoryId);
 		entry.setTitle(title);
 		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
 		entry.setContent(content);
@@ -192,8 +185,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		try {
 			Indexer.addEntry(
-				entry.getCompanyId(), entry.getGroupId(), userId, categoryId,
-				entryId, title, content, tagsEntries);
+				entry.getCompanyId(), entry.getGroupId(), userId, entryId,
+				title, content, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -306,12 +299,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		blogsEntryPersistence.remove(entry.getEntryId());
 	}
 
-	public int getCategoriesEntriesCount(List categoryIds)
-		throws SystemException {
-
-		return blogsEntryFinder.countByCategoryIds(categoryIds);
-	}
-
 	public List getCompanyEntries(long companyId, int begin, int end)
 		throws SystemException {
 
@@ -328,16 +315,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return blogsEntryPersistence.countByCompanyId(companyId);
-	}
-
-	public List getEntries(long categoryId, int begin, int end)
-		throws SystemException {
-
-		return blogsEntryPersistence.findByCategoryId(categoryId, begin, end);
-	}
-
-	public int getEntriesCount(long categoryId) throws SystemException {
-		return blogsEntryPersistence.countByCategoryId(categoryId);
 	}
 
 	public BlogsEntry getEntry(long entryId)
@@ -457,7 +434,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				long groupId = entry.getGroupId();
 				long userId = entry.getUserId();
-				long categoryId = entry.getCategoryId();
 				long entryId = entry.getEntryId();
 				String title = entry.getTitle();
 				String content = entry.getContent();
@@ -467,8 +443,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				try {
 					Document doc = Indexer.getAddEntryDocument(
-						companyId, groupId, userId, categoryId, entryId, title,
-						content, tagsEntries);
+						companyId, groupId, userId, entryId, title, content,
+						tagsEntries);
 
 					writer.addDocument(doc);
 				}
@@ -496,8 +472,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long userId, long[] categoryIds,
-			String keywords)
+			long companyId, long groupId, long userId, String keywords)
 		throws SystemException {
 
 		Searcher searcher = null;
@@ -518,20 +493,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (userId > 0) {
 				LuceneUtil.addRequiredTerm(
 					contextQuery, LuceneFields.USER_ID, userId);
-			}
-
-			if ((categoryIds != null) && (categoryIds.length > 0)) {
-				BooleanQuery categoryIdsQuery = new BooleanQuery();
-
-				for (int i = 0; i < categoryIds.length; i++) {
-					Term term = new Term(
-						"categoryId", String.valueOf(categoryIds[i]));
-					TermQuery termQuery = new TermQuery(term);
-
-					categoryIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
-				}
-
-				contextQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			BooleanQuery searchQuery = new BooleanQuery();
@@ -563,16 +524,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			long userId, long entryId, long categoryId, String title,
-			String content, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, ThemeDisplay themeDisplay)
+			long userId, long entryId, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, String[] tagsEntries,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		categoryId = getCategoryId(user.getCompanyId(), categoryId);
 		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(
@@ -585,7 +545,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		entry.setModifiedDate(now);
-		entry.setCategoryId(categoryId);
 		entry.setTitle(title);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, entry.getGroupId(), title));
@@ -613,8 +572,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		try {
 			Indexer.updateEntry(
-				entry.getCompanyId(), entry.getGroupId(), userId, categoryId,
-				entryId, title, content, tagsEntries);
+				entry.getCompanyId(), entry.getGroupId(), userId, entryId,
+				title, content, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -636,29 +595,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entry.getEntryId(), tagsEntries, null, null, null, null,
 			ContentTypes.TEXT_HTML, entry.getTitle(), null, null, null, 0, 0,
 			null);
-	}
-
-	protected long getCategoryId(long companyId, long categoryId)
-		throws PortalException, SystemException {
-
-		if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-
-			// Ensure category exists and belongs to the proper company
-
-			try {
-				BlogsCategory category =
-					blogsCategoryPersistence.findByPrimaryKey(categoryId);
-
-				if (companyId != category.getCompanyId()) {
-					categoryId = BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
-				}
-			}
-			catch (NoSuchCategoryException nsfe) {
-				categoryId = BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
-			}
-		}
-
-		return categoryId;
 	}
 
 	protected String getUniqueUrlTitle(

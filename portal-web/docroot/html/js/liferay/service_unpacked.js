@@ -1142,51 +1142,12 @@ Liferay.Service.Blogs = {
 	servicePackage: "com.liferay.portlet.blogs.service.http."
 };
 
-Liferay.Service.Blogs.BlogsCategory = {
-	serviceClassName: Liferay.Service.Blogs.servicePackage + "BlogsCategory" + Liferay.Service.classNameSuffix,
-
-	addCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
 Liferay.Service.Blogs.BlogsEntry = {
 	serviceClassName: Liferay.Service.Blogs.servicePackage + "BlogsEntry" + Liferay.Service.classNameSuffix,
 
 	deleteEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategoryBlogsRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategoryBlogsRSS";
 
 		return Liferay.Service.ajax(params, callback);
 	},

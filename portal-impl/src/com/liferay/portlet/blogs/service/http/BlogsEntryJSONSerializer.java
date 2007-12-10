@@ -62,7 +62,6 @@ public class BlogsEntryJSONSerializer {
 		JSONUtil.put(jsonObj, "userName", model.getUserName());
 		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
 		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
 		JSONUtil.put(jsonObj, "title", model.getTitle());
 		JSONUtil.put(jsonObj, "urlTitle", model.getUrlTitle());
 		JSONUtil.put(jsonObj, "content", model.getContent());

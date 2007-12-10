@@ -132,10 +132,6 @@
 
 	<definition name="portlet.blogs" extends="portlet" />
 
-	<definition name="portlet.blogs.edit_category" extends="portlet.blogs">
-		<put name="portlet_content" value="/portlet/blogs/edit_category.jsp" />
-	</definition>
-
 	<definition name="portlet.blogs.edit_entry" extends="portlet.blogs">
 		<put name="portlet_content" value="/portlet/blogs/edit_entry.jsp" />
 	</definition>
@@ -146,10 +142,6 @@
 
 	<definition name="portlet.blogs.search" extends="portlet.blogs">
 		<put name="portlet_content" value="/portlet/blogs/search.jsp" />
-	</definition>
-
-	<definition name="portlet.blogs.select_category" extends="portlet.blogs">
-		<put name="portlet_content" value="/portlet/blogs/select_category.jsp" />
 	</definition>
 
 	<definition name="portlet.blogs.view" extends="portlet.blogs">

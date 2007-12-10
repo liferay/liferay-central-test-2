@@ -29,11 +29,6 @@ package com.liferay.portlet.blogs.service.persistence;
  *
  */
 public class BlogsEntryFinderUtil {
-	public static int countByCategoryIds(java.util.List categoryIds)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByCategoryIds(categoryIds);
-	}
-
 	public static int countByOrganizationId(long organizationId)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByOrganizationId(organizationId);

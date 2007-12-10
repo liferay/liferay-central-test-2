@@ -83,10 +83,6 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public long getCategoryId();
-
-	public void setCategoryId(long categoryId);
-
 	public String getTitle();
 
 	public void setTitle(String title);

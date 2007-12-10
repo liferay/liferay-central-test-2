@@ -47,9 +47,6 @@ import org.hibernate.Session;
  */
 public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
-	public static String COUNT_BY_CATEGORY_IDS =
-		BlogsEntryFinder.class.getName() + ".countByCategoryIds";
-
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
 
@@ -58,49 +55,6 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
-
-	public int countByCategoryIds(List categoryIds) throws SystemException {
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
-
-			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = (Long)categoryIds.get(i);
-
-				qPos.add(categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
 
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
@@ -224,20 +178,6 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-	}
-
-	protected String getCategoryIds(List categoryIds) {
-		StringMaker sm = new StringMaker();
-
-		for (int i = 0; i < categoryIds.size(); i++) {
-			sm.append("categoryId = ? ");
-
-			if ((i + 1) != categoryIds.size()) {
-				sm.append("OR ");
-			}
-		}
-
-		return sm.toString();
 	}
 
 	protected String getOrganizationIds(List organizationIds) {

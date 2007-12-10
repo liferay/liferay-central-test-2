@@ -137,7 +137,6 @@ model.resource.com.liferay.portal.model.Organization=منظمة
 model.resource.com.liferay.portal.model.Role=دور
 model.resource.com.liferay.portal.model.User=مستخدم
 model.resource.com.liferay.portal.model.UserGroup=مجموعة المستخدمين
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=تصنيف المدوّنات
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=إدخال المدوّنات
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=إدخال الأدلة المسجلة
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=مجلّد الأدلة المسجلة

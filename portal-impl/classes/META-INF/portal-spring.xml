@@ -2152,69 +2152,6 @@
 			<ref bean="com.liferay.portal.service.persistence.WebsitePersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryLocalService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.blogs.service.BlogsCategoryLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED</prop>
-				<prop key="check*">PROPAGATION_REQUIRED</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED</prop>
-				<prop key="set*">PROPAGATION_REQUIRED</prop>
-				<prop key="update*">PROPAGATION_REQUIRED</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.blogs.service.BlogsCategoryLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.blogs.service.BlogsCategoryService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED</prop>
-				<prop key="check*">PROPAGATION_REQUIRED</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED</prop>
-				<prop key="set*">PROPAGATION_REQUIRED</prop>
-				<prop key="update*">PROPAGATION_REQUIRED</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryServiceFactory" class="com.liferay.portlet.blogs.service.BlogsCategoryServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.blogs.service.BlogsCategoryService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

@@ -84,19 +84,6 @@ public class BlogsStatsUserLocalServiceUtil {
 		return blogsStatsUserLocalService.updateBlogsStatsUser(model);
 	}
 
-	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {
-		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
-
-		return blogsStatsUserLocalService.getBlogsCategoryPersistence();
-	}
-
-	public static void setBlogsCategoryPersistence(
-		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence) {
-		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
-
-		blogsStatsUserLocalService.setBlogsCategoryPersistence(blogsCategoryPersistence);
-	}
-
 	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 

@@ -74,7 +74,6 @@ create table BlogsEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	categoryId LONG,
 	title VARCHAR(150) null,
 	urlTitle VARCHAR(150) null,
 	content TEXT null,

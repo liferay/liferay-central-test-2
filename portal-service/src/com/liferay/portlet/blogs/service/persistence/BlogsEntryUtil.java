@@ -207,45 +207,6 @@ public class BlogsEntryUtil {
 			obc);
 	}
 
-	public static java.util.List findByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCategoryId(categoryId);
-	}
-
-	public static java.util.List findByCategoryId(long categoryId, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCategoryId(categoryId, begin, end);
-	}
-
-	public static java.util.List findByCategoryId(long categoryId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCategoryId(categoryId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_First(
-		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException {
-		return getPersistence().findByCategoryId_First(categoryId, obc);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_Last(
-		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException {
-		return getPersistence().findByCategoryId_Last(categoryId, obc);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByCategoryId_PrevAndNext(
-		long entryId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.blogs.NoSuchEntryException {
-		return getPersistence().findByCategoryId_PrevAndNext(entryId,
-			categoryId, obc);
-	}
-
 	public static java.util.List findByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId);
@@ -391,11 +352,6 @@ public class BlogsEntryUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCategoryId(categoryId);
-	}
-
 	public static void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_U(groupId, userId);
@@ -434,11 +390,6 @@ public class BlogsEntryUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
-	}
-
-	public static int countByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCategoryId(categoryId);
 	}
 
 	public static int countByG_U(long groupId, long userId)

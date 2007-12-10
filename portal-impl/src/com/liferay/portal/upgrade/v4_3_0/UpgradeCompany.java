@@ -179,7 +179,7 @@ public class UpgradeCompany extends UpgradeProcess {
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
+		"Account_", "Address", "BlogsEntry", "BookmarksEntry",
 		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileRank",
 		"DLFileShortcut", "DLFileVersion", "DLFolder", "EmailAddress", "Group_",
 		"IGFolder", "Layout", "LayoutSet", "MBCategory", "Organization_",

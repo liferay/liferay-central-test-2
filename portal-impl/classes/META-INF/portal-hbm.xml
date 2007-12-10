@@ -574,20 +574,6 @@
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl" table="BlogsCategory">
-		<cache usage="read-write" />
-		<id name="categoryId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="parentCategoryId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
-	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" table="BlogsEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="long">
@@ -600,7 +586,6 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="categoryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="urlTitle" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />

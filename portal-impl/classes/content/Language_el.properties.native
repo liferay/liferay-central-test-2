@@ -149,7 +149,6 @@ model.resource.com.liferay.portal.model.PasswordPolicy=Πολιτική κωδι
 model.resource.com.liferay.portal.model.Role=Ρόλος
 model.resource.com.liferay.portal.model.User=Χρήστης
 model.resource.com.liferay.portal.model.UserGroup=Ομάδα χρηστών
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Κατηγορία Blogs
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Είσοδος Blogs
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Είσοδος σελιδοδεικτών
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Φάκελλος σελιδοδεικτών

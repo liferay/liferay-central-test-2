@@ -37,6 +37,12 @@ public class UpgradeSchema extends SmartUpgradeSchema {
 
 	protected void upgradeOnce() throws Exception {
 		runSQLTemplate("update-4.3.6-4.4.0.sql", false);
+
+		try {
+			runSQL("drop table BlogsCategory");
+		}
+		catch (Exception e) {
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeSchema.class);

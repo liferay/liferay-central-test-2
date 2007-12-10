@@ -65,11 +65,6 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portlet.blogs.model.BlogsStatsUser model)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence();
-
-	public void setBlogsCategoryPersistence(
-		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence);
-
 	public com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence();
 
 	public void setBlogsEntryPersistence(

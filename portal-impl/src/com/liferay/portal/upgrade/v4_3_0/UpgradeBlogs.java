@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
@@ -32,7 +31,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import java.sql.Types;
@@ -62,7 +60,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 
-		// BlogsCategory
+		// BlogsEntry
 
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
@@ -72,41 +70,11 @@ public class UpgradeBlogs extends UpgradeProcess {
 			AvailableMappersUtil.getUserIdMapper());
 
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
-			"categoryId", true);
+			"entryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeUserIdColumn);
-
-		upgradeTable.setCreateSQL(BlogsCategoryImpl.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-
-		ValueMapper categoryIdMapper = new DefaultPKMapper(
-			upgradePKColumn.getValueMapper());
-
-		AvailableMappersUtil.setBlogsCategoryIdMapper(categoryIdMapper);
-
-		UpgradeColumn upgradeParentCategoryIdColumn = new SwapUpgradeColumnImpl(
-			"parentCategoryId", categoryIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			upgradeParentCategoryIdColumn);
-
-		upgradeTable.updateTable();
-
-		UpgradeColumn upgradeCategoryIdColumn = new SwapUpgradeColumnImpl(
-			"categoryId", categoryIdMapper);
-
-		// BlogsEntry
-
-		upgradePKColumn = new PKUpgradeColumnImpl("entryId", true);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
-			upgradeCategoryIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BlogsEntryImpl.TABLE_SQL_CREATE);
 

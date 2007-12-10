@@ -149,7 +149,6 @@ model.resource.com.liferay.portal.model.PasswordPolicy=Politique De Mot de passe
 model.resource.com.liferay.portal.model.Role=Rôle
 model.resource.com.liferay.portal.model.User=Utilisateur
 model.resource.com.liferay.portal.model.UserGroup=Groupe d'utilisateur
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Catégorie
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrée
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Entrée
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Dossier

@@ -37,7 +37,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -108,7 +107,6 @@ public class RSSAction extends PortletAction {
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long organizationId = ParamUtil.getLong(req, "organizationId");
-		long categoryId = ParamUtil.getLong(req, "categoryId");
 		int max = ParamUtil.getInteger(
 			req, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
@@ -166,22 +164,6 @@ public class RSSAction extends PortletAction {
 			catch (NoSuchOrganizationException nsge) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(nsge);
-				}
-			}
-		}
-		else if (categoryId > 0) {
-			feedURL += "p_l_id=" + plid;
-
-			entryURL = feedURL;
-
-			try {
-				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
-					categoryId, max, type, version, displayStyle, feedURL,
-					entryURL);
-			}
-			catch (NoSuchCategoryException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsce);
 				}
 			}
 		}

@@ -121,7 +121,6 @@ model.resource.com.liferay.portal.model.Location=منطقه
 model.resource.com.liferay.portal.model.Organization=سازمان
 model.resource.com.liferay.portal.model.Role=نقش
 model.resource.com.liferay.portal.model.User=کاربر
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=شاخه
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=ورودی
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=ورودی
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=پوشه

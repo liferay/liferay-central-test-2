@@ -1,16 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.countByCategoryIds">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				BlogsEntry
-			WHERE
-				[$CATEGORY_ID$]
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.countByOrganizationIds">
 		<![CDATA[
 			SELECT

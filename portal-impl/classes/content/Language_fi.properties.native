@@ -149,7 +149,6 @@ model.resource.com.liferay.portal.model.PasswordPolicy=Salasana policy
 model.resource.com.liferay.portal.model.Role=Rooli
 model.resource.com.liferay.portal.model.User=Käyttäjä
 model.resource.com.liferay.portal.model.UserGroup=Käyttäjäryhmä
-model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Kategoria
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Merkintä
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksEntry=Merkintä
 model.resource.com.liferay.portlet.bookmarks.model.BookmarksFolder=Kansio

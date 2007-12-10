@@ -50,20 +50,18 @@ package com.liferay.portlet.blogs.service;
  */
 public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
-		long categoryId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
-		long categoryId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
-		java.lang.String[] tagsEntries,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -71,18 +69,6 @@ public interface BlogsEntryService {
 			com.liferay.portal.PortalException;
 
 	public void deleteEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public java.lang.String getCategoryBlogsRSS(long categoryId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public java.lang.String getCategoryBlogsRSS(long categoryId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -133,21 +119,15 @@ public interface BlogsEntryService {
 
 	public java.lang.String getOrganizationEntriesRSS(long organizationId,
 		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public java.lang.String getOrganizationEntriesRSS(long organizationId,
-		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		long entryId, long categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
+		long entryId, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 

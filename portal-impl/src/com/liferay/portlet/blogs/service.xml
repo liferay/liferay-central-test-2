@@ -3,45 +3,6 @@
 
 <service-builder package-path="com.liferay.portlet.blogs">
 	<namespace>Blogs</namespace>
-	<entity name="BlogsCategory" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="categoryId" type="long" primary="true" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="parentCategoryId" type="long" />
-		<column name="name" type="String" />
-		<column name="description" type="String" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="name" case-sensitive="false" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="ParentCategoryId" return-type="Collection">
-			<finder-column name="parentCategoryId" />
-		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
-	</entity>
 	<entity name="BlogsEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -62,7 +23,6 @@
 
 		<!-- Other fields -->
 
-		<column name="categoryId" type="long" />
 		<column name="title" type="String" />
 		<column name="urlTitle" type="String" />
 		<column name="content" type="String" />
@@ -81,9 +41,6 @@
 		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
-		</finder>
-		<finder name="CategoryId" return-type="Collection">
-			<finder-column name="categoryId" />
 		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
@@ -167,7 +124,6 @@
 		<reference package-path="com.liferay.portal" entity="Group" />
 	</entity>
 	<exceptions>
-		<exception>CategoryName</exception>
 		<exception>EntryContent</exception>
 		<exception>EntryDisplayDate</exception>
 		<exception>EntryTitle</exception>

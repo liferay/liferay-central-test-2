@@ -67,17 +67,11 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
-import com.liferay.portlet.blogs.service.BlogsCategoryService;
-import com.liferay.portlet.blogs.service.BlogsCategoryServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
-import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
-import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
@@ -125,33 +119,6 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	implements BlogsEntryService, InitializingBean {
-	public BlogsCategoryLocalService getBlogsCategoryLocalService() {
-		return blogsCategoryLocalService;
-	}
-
-	public void setBlogsCategoryLocalService(
-		BlogsCategoryLocalService blogsCategoryLocalService) {
-		this.blogsCategoryLocalService = blogsCategoryLocalService;
-	}
-
-	public BlogsCategoryService getBlogsCategoryService() {
-		return blogsCategoryService;
-	}
-
-	public void setBlogsCategoryService(
-		BlogsCategoryService blogsCategoryService) {
-		this.blogsCategoryService = blogsCategoryService;
-	}
-
-	public BlogsCategoryPersistence getBlogsCategoryPersistence() {
-		return blogsCategoryPersistence;
-	}
-
-	public void setBlogsCategoryPersistence(
-		BlogsCategoryPersistence blogsCategoryPersistence) {
-		this.blogsCategoryPersistence = blogsCategoryPersistence;
-	}
-
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}
@@ -497,18 +464,6 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	}
 
 	public void afterPropertiesSet() {
-		if (blogsCategoryLocalService == null) {
-			blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getImpl();
-		}
-
-		if (blogsCategoryService == null) {
-			blogsCategoryService = BlogsCategoryServiceFactory.getImpl();
-		}
-
-		if (blogsCategoryPersistence == null) {
-			blogsCategoryPersistence = BlogsCategoryUtil.getPersistence();
-		}
-
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}
@@ -674,9 +629,6 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	protected BlogsCategoryLocalService blogsCategoryLocalService;
-	protected BlogsCategoryService blogsCategoryService;
-	protected BlogsCategoryPersistence blogsCategoryPersistence;
 	protected BlogsEntryLocalService blogsEntryLocalService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;

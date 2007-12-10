@@ -36,7 +36,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
-import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -126,8 +125,7 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCategoryException ||
-				e instanceof NoSuchEntryException ||
+			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -187,7 +185,6 @@ public class EditEntryAction extends PortletAction {
 
 		long entryId = ParamUtil.getLong(req, "entryId");
 
-		long categoryId = ParamUtil.getLong(req, "categoryId");
 		String title = ParamUtil.getString(req, "title");
 		String content = ParamUtil.getString(req, "content");
 
@@ -218,7 +215,7 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			entry = BlogsEntryServiceUtil.addEntry(
-				layout.getPlid(), categoryId, title, content, displayDateMonth,
+				layout.getPlid(), title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, tagsEntries, communityPermissions,
 				guestPermissions, themeDisplay);
@@ -235,9 +232,9 @@ public class EditEntryAction extends PortletAction {
 			String tempOldUrlTitle = entry.getUrlTitle();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
-				entryId, categoryId, title, content, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, tagsEntries, themeDisplay);
+				entryId, title, content, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				tagsEntries, themeDisplay);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

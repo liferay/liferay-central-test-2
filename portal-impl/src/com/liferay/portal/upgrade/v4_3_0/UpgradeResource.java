@@ -43,7 +43,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.MBMessageIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -94,13 +93,6 @@ public class UpgradeResource extends UpgradeProcess {
 
 	protected Map getClassPKContainers() {
 		Map classPKContainers = CollectionFactory.getHashMap();
-
-		// BlogsCategory
-
-		classPKContainers.put(
-			new Long(PortalUtil.getClassNameId(BlogsCategory.class.getName())),
-			new ClassPKContainer(
-				AvailableMappersUtil.getBlogsCategoryIdMapper(), true));
 
 		// BlogsEntry
 

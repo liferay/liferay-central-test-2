@@ -181,10 +181,6 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		// the other tables.
 
 		ValueMapperUtil.persist(
-			AvailableMappersUtil.getBlogsCategoryIdMapper(),
-			"blogs-category-id");
-
-		ValueMapperUtil.persist(
 			AvailableMappersUtil.getBlogsEntryIdMapper(), "blogs-entry-id");
 
 		ValueMapperUtil.persist(

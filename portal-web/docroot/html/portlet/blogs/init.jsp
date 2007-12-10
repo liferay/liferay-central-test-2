@@ -33,7 +33,6 @@
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
-<%@ page import="com.liferay.portlet.blogs.util.BlogsUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 
 <%@ page import="com.liferay.util.Html" %>
