@@ -100,9 +100,22 @@ public class BookmarksFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			folder.getGroupId(), BookmarksFolder.class.getName(),
-			folder.getFolderId(), actionId);
+		long folderId = folder.getFolderId();
+
+		while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+
+			folderId = folder.getParentFolderId();
+
+			if (permissionChecker.hasPermission(
+					folder.getGroupId(), BookmarksFolder.class.getName(),
+					folder.getFolderId(), actionId)) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

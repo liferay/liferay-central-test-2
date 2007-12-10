@@ -98,9 +98,22 @@ public class DLFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			folder.getGroupId(), DLFolder.class.getName(), folder.getFolderId(),
-			actionId);
+		long folderId = folder.getFolderId();
+
+		while (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			folderId = folder.getParentFolderId();
+
+			if (permissionChecker.hasPermission(
+					folder.getGroupId(), DLFolder.class.getName(),
+					folder.getFolderId(), actionId)) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

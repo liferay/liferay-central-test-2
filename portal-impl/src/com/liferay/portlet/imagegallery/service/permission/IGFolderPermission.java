@@ -98,9 +98,22 @@ public class IGFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			folder.getGroupId(), IGFolder.class.getName(), folder.getFolderId(),
-			actionId);
+		long folderId = folder.getFolderId();
+
+		while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			folderId = folder.getParentFolderId();
+
+			if (permissionChecker.hasPermission(
+					folder.getGroupId(), IGFolder.class.getName(),
+					folder.getFolderId(), actionId)) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

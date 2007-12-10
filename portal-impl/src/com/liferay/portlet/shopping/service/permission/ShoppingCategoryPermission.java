@@ -100,9 +100,22 @@ public class ShoppingCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			category.getGroupId(), ShoppingCategory.class.getName(),
-			category.getCategoryId(), actionId);
+		long categoryId = category.getCategoryId();
+
+		while (categoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+			category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+			categoryId = category.getParentCategoryId();
+
+			if (permissionChecker.hasPermission(
+					category.getGroupId(), ShoppingCategory.class.getName(),
+					category.getCategoryId(), actionId)) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }
