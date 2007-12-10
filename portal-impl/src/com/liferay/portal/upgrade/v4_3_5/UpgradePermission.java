@@ -117,8 +117,8 @@ public class UpgradePermission extends UpgradeProcess {
 		deleteStalePermissions(
 			DLFolder.class.getName(), "DLFolder", "folderId", guestGroupId);
 		deleteStalePermissions(
-			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId", "DLFolder",
-			"folderId", guestGroupId);
+			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId",
+			"DLFolder", "folderId", guestGroupId);
 		deleteStalePermissions(
 			DLFileShortcut.class.getName(), "DLFileShortcut", "fileShortcutId",
 			"DLFolder", "folderId", guestGroupId);
