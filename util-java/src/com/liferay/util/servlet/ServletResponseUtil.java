@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.FileUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -240,6 +241,14 @@ public class ServletResponseUtil {
 				if (_log.isWarnEnabled()) {
 					_log.warn(e);
 				}
+			}
+
+			String extension = GetterUtil.getString(
+				FileUtil.getExtension(fileName));
+
+			if (extension.equals("pdf")) {
+				contentDisposition = StringUtil.replace(
+					contentDisposition, "attachment; ", "inline; ");
 			}
 
 			res.setHeader(HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
