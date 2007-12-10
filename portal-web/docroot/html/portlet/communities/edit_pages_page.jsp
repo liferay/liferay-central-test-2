@@ -262,7 +262,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 
 <liferay-security:permissionsURL
 	modelResource="<%= Layout.class.getName() %>"
-	modelResourceDescription="<%= selLayout.getName() %>"
+	modelResourceDescription="<%= selLayout.getName(locale) %>"
 	resourcePrimKey="<%= String.valueOf(selLayout.getPlid()) %>"
 	var="permissionURL"
 />
