@@ -39,15 +39,15 @@ long organizationId = organization.getOrganizationId();
 <liferay-ui:icon-menu>
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:actionURL>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
@@ -58,8 +58,8 @@ long organizationId = organization.getOrganizationId();
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="organizationIds" value="<%= String.valueOf(organizationId) %>" />
-		<portlet:param name="organizationName" value="<%= organization.getName() %>" />
 	</portlet:renderURL>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
@@ -77,7 +77,6 @@ long organizationId = organization.getOrganizationId();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 		<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-		<portlet:param name="parentOrganizationName" value="<%= organization.getName() %>" />
 	</portlet:renderURL>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
