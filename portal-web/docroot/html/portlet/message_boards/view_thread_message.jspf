@@ -39,6 +39,7 @@
 
 						<%
 						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId());
+
 						int posts = statsUser.getMessageCount();
 						String rank = MBUtil.getUserRank(portletSetup, themeDisplay.getLanguageId(), statsUser);
 						%>

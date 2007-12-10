@@ -31,10 +31,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
@@ -63,6 +67,9 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBUtil.java.html"><b><i>View Source</i></b></a>
@@ -487,10 +494,15 @@ public class MBUtil {
 	}
 
 	public static String getUserRank(
-			PortletPreferences prefs, String languageId, MBStatsUser user)
+			PortletPreferences prefs, String languageId, MBStatsUser statsUser)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			statsUser.getGroupId());
+
+		long companyId = group.getCompanyId();
 
 		String[] ranks = LocalizationUtil.getPrefsValues(
 			prefs, "ranks", languageId);
@@ -498,34 +510,35 @@ public class MBUtil {
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
 
-			String kvpName = kvp[0];
-			String kvpValue = kvp[1];
+			String curRank = kvp[0];
+			String curRankValue = kvp[1];
 
-			kvp = StringUtil.split(kvpValue, StringPool.COLON);
+			String[] curRankValueKvp = StringUtil.split(
+				curRankValue, StringPool.COLON);
 
-			if (kvp.length > 1) {
-				if ("group".equals(kvp[0])) {
-					Group group = GroupLocalServiceUtil.getGroup(user.getGroupId());
-					UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(group.getCompanyId(), kvp[1]);
+			if (curRankValueKvp.length <= 1) {
+				int kvpPosts = GetterUtil.getInteger(curRankValue);
 
-					if (UserLocalServiceUtil.hasUserGroupUser(userGroup.getUserGroupId(), user.getUserId())) {
-						rank = kvpName;
-						break;
-					}
+				if (statsUser.getMessageCount() >= kvpPosts) {
+					rank = curRank;
 				}
-				else if ("role".equals(kvp[0])) {
-					Group group = GroupLocalServiceUtil.getGroup(user.getGroupId());
-					if (RoleLocalServiceUtil.hasUserRole(user.getUserId(), group.getCompanyId(), kvp[1], true)) {
-						rank = kvpName;
-						break;
-					}
+
+				continue;
+			}
+
+			String entityType = curRankValueKvp[0];
+			String entityValue = curRankValueKvp[1];
+
+			try {
+				if (_isEntityRank(
+						companyId, statsUser, entityType, entityValue)) {
+
+					return curRank;
 				}
 			}
-			else {
-				int kvpPosts = GetterUtil.getInteger(kvpValue);
-
-				if (user.getMessageCount() >= kvpPosts) {
-					rank = kvpName;
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
 				}
 			}
 		}
@@ -559,5 +572,58 @@ public class MBUtil {
 
 		return null;
 	}
+
+	private static boolean _isEntityRank(
+			long companyId, MBStatsUser statsUser, String entityType,
+			String entityValue)
+		throws Exception {
+
+		long groupId = statsUser.getGroupId();
+		long userId = statsUser.getUserId();
+
+		if (entityType.equals("community-role") ||
+			entityType.equals("organization-role")) {
+
+			Role role = RoleLocalServiceUtil.getRole(companyId, entityValue);
+
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					userId, groupId, role.getRoleId())) {
+
+				return true;
+			}
+		}
+		else if (entityType.equals("organization")) {
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(
+					companyId, entityValue);
+
+			if (OrganizationLocalServiceUtil.hasUserOrganization(
+					userId, organization.getOrganizationId())) {
+
+				return true;
+			}
+		}
+		else if (entityType.equals("regular-role")) {
+			if (RoleLocalServiceUtil.hasUserRole(
+					userId, companyId, entityValue, true)) {
+
+				return true;
+			}
+		}
+		else if (entityType.equals("user-group")) {
+			UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				companyId, entityValue);
+
+			if (UserLocalServiceUtil.hasUserGroupUser(
+					userGroup.getUserGroupId(), userId)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private static Log _log = LogFactory.getLog(MBUtil.class);
 
 }

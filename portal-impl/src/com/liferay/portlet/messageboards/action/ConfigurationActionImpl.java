@@ -274,8 +274,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				String kvpValue = (String)entry.getKey();
 				String kvpName = (String)entry.getValue();
 
-				ranks[count++] =
-					kvpName + StringPool.EQUAL + kvpValue;
+				ranks[count++] = kvpName + StringPool.EQUAL + kvpValue;
 			}
 
 			LocalizationUtil.setPrefsValues(prefs, "ranks", languageId, ranks);
