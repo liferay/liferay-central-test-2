@@ -500,7 +500,7 @@ public class MBUtil {
 
 			String kvpName = kvp[0];
 			String kvpValue = kvp[1];
-			
+
 			kvp = StringUtil.split(kvpValue, StringPool.COLON);
 
 			if (kvp.length > 1) {
@@ -511,7 +511,7 @@ public class MBUtil {
 					if (UserLocalServiceUtil.hasUserGroupUser(userGroup.getUserGroupId(), user.getUserId())) {
 						rank = kvpName;
 						break;
-					} 						
+					}
 				}
 				else if ("role".equals(kvp[0])) {
 					Group group = GroupLocalServiceUtil.getGroup(user.getGroupId());
@@ -520,10 +520,10 @@ public class MBUtil {
 						break;
 					}
 				}
-			} 
+			}
 			else {
 				int kvpPosts = GetterUtil.getInteger(kvpValue);
-	
+
 				if (user.getMessageCount() >= kvpPosts) {
 					rank = kvpName;
 				}
@@ -532,7 +532,7 @@ public class MBUtil {
 
 		return rank;
 	}
-	
+
 	private static String[] _findThreadPriority(
 		double value, ThemeDisplay themeDisplay, String[] priorities) {
 

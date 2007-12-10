@@ -271,8 +271,8 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 				return (BookmarksEntry)list.get(0);
 			}
 		}
-		catch (NoSuchEntryException e) {
-			throw e;
+		catch (NoSuchEntryException nsee) {
+			throw nsee;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -241,8 +241,8 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 				return (MBMessage)list.get(0);
 			}
 		}
-		catch (NoSuchMessageException e) {
-			throw e;
+		catch (NoSuchMessageException nsme) {
+			throw nsme;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -320,8 +320,8 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 				return (DLFileEntry)list.get(0);
 			}
 		}
-		catch (NoSuchFileEntryException e) {
-			throw e;
+		catch (NoSuchFileEntryException nsfee) {
+			throw nsfee;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
