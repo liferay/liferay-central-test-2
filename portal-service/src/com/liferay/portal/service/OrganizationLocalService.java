@@ -375,6 +375,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Organization getOrganization(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -256,6 +256,12 @@ public class OrganizationLocalServiceImpl
 		return organizationPersistence.findByPrimaryKey(organizationId);
 	}
 
+	public Organization getOrganization(long companyId, String name)
+		throws PortalException, SystemException {
+
+		return organizationPersistence.findByC_N(companyId, name);
+	}
+
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 

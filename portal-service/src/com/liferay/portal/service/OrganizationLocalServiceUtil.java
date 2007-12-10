@@ -862,6 +862,15 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganization(organizationId);
 	}
 
+	public static com.liferay.portal.model.Organization getOrganization(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getOrganization(companyId, name);
+	}
+
 	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
