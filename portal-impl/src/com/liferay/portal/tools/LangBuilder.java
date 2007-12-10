@@ -105,6 +105,16 @@ public class LangBuilder {
 			props.load(new FileInputStream(propsFile));
 		}
 
+		File nativePropsFile = new File(
+			_langDir + "/" + _langFile + "_" + languageId +
+				".properties.native");
+
+		Properties nativeProps = new Properties();
+
+		if (nativePropsFile.exists()) {
+			nativeProps.load(new FileInputStream(nativePropsFile));
+		}
+
 		String translationId = "en_" + languageId;
 
 		if (translationId.equals("en_zh_CN")) {
@@ -115,9 +125,7 @@ public class LangBuilder {
 		}
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(
-			_langDir + "/" + _langFile + "_" + languageId +
-				".properties.native"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(nativePropsFile));
 
 		String line = null;
 
@@ -163,6 +171,12 @@ public class LangBuilder {
 					}
 
 					bw.write(key + "=" + translatedText);
+
+					bw.newLine();
+					bw.flush();
+				}
+				else if (nativeProps.containsKey(key)) {
+					bw.write(key + "=");
 
 					bw.newLine();
 					bw.flush();

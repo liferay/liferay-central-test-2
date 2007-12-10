@@ -1293,7 +1293,7 @@ go-to-paypal-and-set-up-ipn-to-post-to-x=Mene PayPal:iin ja aseta IPN lähettä�
 go=Mene
 google-analytics-id=Google Analytics ID
 google-license=Google lisenssi
-googles-spelling-suggestion-for=Google&#39;n oikeinkirjoitus-ehdotus sanalle {0} on {1}.
+googles-spelling-suggestion-for=Google'n oikeinkirjoitus-ehdotus sanalle {0} on {1}.
 government=Hallitus
 grace-limit-help=Tämä kertoo kuinka monta kertaa käyttäjä voi kirjautua salasanan vanhenemisen jälkeen ennen kuin hänen täytyy vaihtaa uusi salasana.
 grace-limit=Rajoitus
@@ -1483,11 +1483,6 @@ kilometer=Kilometri
 ko_en=Koreasta englanniksi
 korean=Korealainen
 language-type=Kielityyppi
-
-##
-## Language settings
-##
-
 language=Kieli
 large-image-url=Suuren kuvan URL
 large-image=Suuri kuva
