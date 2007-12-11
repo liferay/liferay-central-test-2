@@ -270,6 +270,7 @@ public class LDAPAuth implements Authenticator {
 
 				env.put(Context.SECURITY_PRINCIPAL, userDN);
 				env.put(Context.SECURITY_CREDENTIALS, password);
+				env.put(Context.REFERRAL, "follow");
 
 				ctx = new InitialLdapContext(env, null);
 
