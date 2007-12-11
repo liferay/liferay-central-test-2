@@ -30,6 +30,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 
 import java.util.List;
@@ -57,8 +58,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermissionUtil.check(
-		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		PasswordPolicyPermissionUtil.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		organizationLocalService.addPasswordPolicyOrganizations(
 			passwordPolicyId, organizationIds);
@@ -138,8 +139,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermissionUtil.check(
-		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		PasswordPolicyPermissionUtil.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		organizationLocalService.unsetPasswordPolicyOrganizations(
 			passwordPolicyId, organizationIds);

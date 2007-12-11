@@ -37,6 +37,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
@@ -68,8 +69,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermissionUtil.check(
-		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		PasswordPolicyPermissionUtil.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
@@ -273,8 +274,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermissionUtil.check(
-		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+		PasswordPolicyPermissionUtil.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
