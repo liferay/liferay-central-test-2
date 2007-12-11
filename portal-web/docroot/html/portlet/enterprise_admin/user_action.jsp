@@ -72,7 +72,7 @@
 			<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
 		</c:if>
 
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.IMPERSONATE) %>">
 				<liferay-security:doAsURL
 					doAsUserId="<%= user2.getUserId() %>"

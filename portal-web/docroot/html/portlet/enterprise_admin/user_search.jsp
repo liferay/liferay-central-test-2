@@ -68,7 +68,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		</td>
 
 		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 				<td>
 					<liferay-ui:message key="active" />
 				</td>
@@ -87,7 +87,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		</td>
 
 		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 				<td>
 					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
 						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
