@@ -182,7 +182,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					}
 				}
 
-				// If we are checking permissions an object that belongs to a
+				// If we are checking permissions on an object that belongs to a
 				// community, then it's only necessary to check the group that
 				// represents the community and not all the groups that the user
 				// belongs to. This is so because an object cannot belong to
@@ -434,15 +434,14 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		while (itr.hasNext()){
 			Organization organization = (Organization)itr.next();
 
+			organizations.add(organization);
+
 			if (!organization.isLocation()) {
 				List recursableAncestorOrgs = OrganizationLocalServiceUtil.
 					getRecursableAncestorOrganizations(
 						organization.getOrganizationId());
 
 				organizations.addAll(recursableAncestorOrgs);
-			}
-			else {
-				organizations.add(organization);
 			}
 		}
 
