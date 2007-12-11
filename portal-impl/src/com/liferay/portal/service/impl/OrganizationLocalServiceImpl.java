@@ -297,10 +297,10 @@ public class OrganizationLocalServiceImpl
 
 		Iterator itr = getAncestorOrganizations(organizationId).iterator();
 
-		while (itr.hasNext()){
+		while (itr.hasNext()) {
 			Organization organization = (Organization)itr.next();
 
-			if (organization.isRecursable()){
+			if (organization.isRecursable()) {
 				organizations.add(organization);
 			}
 		}
@@ -343,11 +343,11 @@ public class OrganizationLocalServiceImpl
 		Iterator itr = getAncestorOrganizations(
 			ancestorOrganizationId).iterator();
 
-		while (itr.hasNext()){
+		while (itr.hasNext()) {
 			Organization ancestor = (Organization)itr.next();
 
 			if (ancestor.getOrganizationId() ==
-					location.getParentOrganizationId()){
+					location.getParentOrganizationId()) {
 
 				return true;
 			}

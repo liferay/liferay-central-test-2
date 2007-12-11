@@ -351,7 +351,9 @@ public class MailEngine {
 				Transport transport = session.getTransport("smtp");
 
 				transport.connect(smtpHost, user, password);
+
 				transport.sendMessage(msg, msg.getAllRecipients());
+
 				transport.close();
 			}
 			else {

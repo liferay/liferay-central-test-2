@@ -58,10 +58,9 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	public PermissionCheckerBagImpl() {
 	}
 
-	public PermissionCheckerBagImpl(long userId, List userGroups,
-									List userOrgs, List userOrgGroups,
-									List userUserGroupGroups, List groups,
-									List roles) {
+	public PermissionCheckerBagImpl(
+		long userId, List userGroups, List userOrgs, List userOrgGroups,
+		List userUserGroupGroups, List groups, List roles) {
 
 		_userId = userId;
 		_userGroups = userGroups;
