@@ -255,8 +255,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupPermissionUtil.check(
-			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+		if (!UserGroupPermissionUtil.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
+			!UserGroupPermissionUtil.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
+
+			throw new PrincipalException();
+		}
 
 		userLocalService.setUserGroupUsers(userGroupId, userIds);
 	}
