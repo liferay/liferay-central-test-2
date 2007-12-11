@@ -46,7 +46,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/message_boards/select_category");
-
+portletURL.setParameter("categoryId", Long.toString(categoryId));
+	
 List headerNames = new ArrayList();
 
 headerNames.add("category");
@@ -55,7 +56,7 @@ headerNames.add("num-of-threads");
 headerNames.add("num-of-posts");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, headerNames, null);
 
 int total = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
 
