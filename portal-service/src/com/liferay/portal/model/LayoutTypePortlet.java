@@ -44,7 +44,7 @@ public interface LayoutTypePortlet extends LayoutType {
 		long userId, String newLayoutTemplateId, boolean checkPermission);
 
 	public void addNestedLayoutTemplate(
-		LayoutTemplate layoutTemplate, String containerId);
+		LayoutTemplate layoutTemplate, String portletId);
 
 	public int getNumOfColumns();
 
@@ -87,6 +87,8 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void removePortletId(String portletId, boolean modeAndState);
 
 	public void setPortletIds(String columnId, String portletIds);
+
+	void reorganizePortlets(List newColumns, List oldColumns);
 
 	public String getStateMax();
 
@@ -211,5 +213,7 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void resetModes();
 
 	public void removeModesPortletId(String portletId);
+
+	void removeNestedColumns(String portletId);
 
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
@@ -46,6 +47,7 @@ import com.liferay.util.PwdGenerator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -55,6 +57,8 @@ import org.apache.commons.logging.LogFactory;
  * <a href="LayoutTypePortletImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Berentey Zsolt
+ * @author Jorge Ferrer
  *
  */
 public class LayoutTypePortletImpl
@@ -187,54 +191,37 @@ public class LayoutTypePortletImpl
 		List oldColumns = oldLayoutTemplate.getColumns();
 		List newColumns = newLayoutTemplate.getColumns();
 
-		if (newColumns.size() < oldColumns.size()) {
-			String lastNewColumnId =
-				(String)newColumns.get(newColumns.size() - 1);
-			String lastNewColumnValue =
-				getTypeSettingsProperties().getProperty(lastNewColumnId);
-
-			for (int i = newColumns.size() - 1; i < oldColumns.size(); i++) {
-				String oldColumnId = (String)oldColumns.get(i);
-				String oldColumnValue =
-					(String)getTypeSettingsProperties().remove(oldColumnId);
-
-				String[] portletIds = StringUtil.split(oldColumnValue);
-
-				for (int j = 0; j < portletIds.length; j++) {
-					lastNewColumnValue =
-						StringUtil.add(lastNewColumnValue, portletIds[j]);
-				}
-			}
-
-			getTypeSettingsProperties().setProperty(
-				lastNewColumnId, lastNewColumnValue);
-		}
+		reorganizePortlets(newColumns, oldColumns);
 	}
 
 	public void addNestedLayoutTemplate(
-		LayoutTemplate template, String containerId) {
+		LayoutTemplate template, String portletId) {
 
 		String nestedLayoutTemplateIds = GetterUtil.getString(
 			getTypeSettingsProperties().getProperty(
 				NESTED_LAYOUT_TEMPLATE_IDS));
 
 		if (nestedLayoutTemplateIds.indexOf(
-				containerId + NESTED_LAYOUT_TEMPLATE_SEPARATOR +
+				portletId + NESTED_LAYOUT_TEMPLATE_SEPARATOR +
 					template.getLayoutTemplateId()) == -1) {
 
 			if (nestedLayoutTemplateIds.indexOf(
-					containerId + NESTED_LAYOUT_TEMPLATE_SEPARATOR) > -1) {
+					portletId + NESTED_LAYOUT_TEMPLATE_SEPARATOR) > -1) {
 
-				// This must be an old instance
+				// Remove any previous entry for this portlet id
 
 				nestedLayoutTemplateIds = StringUtils.replace(
 					nestedLayoutTemplateIds,
-					containerId + NESTED_LAYOUT_TEMPLATE_SEPARATOR + ".*?,",
+					portletId + NESTED_LAYOUT_TEMPLATE_SEPARATOR + ".*?,",
 					",");
 			}
 
+			if (nestedLayoutTemplateIds.length() != 0) {
+				nestedLayoutTemplateIds += StringPool.COMMA;
+			}
+
 			nestedLayoutTemplateIds +=
-				containerId + NESTED_LAYOUT_TEMPLATE_SEPARATOR +
+				portletId + NESTED_LAYOUT_TEMPLATE_SEPARATOR +
 					template.getLayoutTemplateId();
 
 			getTypeSettingsProperties().setProperty(
@@ -590,20 +577,7 @@ public class LayoutTypePortletImpl
 		Layout layout = getLayout();
 
 		try {
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				layout.getCompanyId(), portletId);
-
-			if (portlet != null) {
-				PortletLayoutListener portletLayoutListener =
-					(PortletLayoutListener)portlet.getPortletLayoutListener();
-
-				if (_enablePortletLayoutListener &&
-					(portletLayoutListener != null)) {
-
-					portletLayoutListener.onRemoveFromLayout(
-						portletId, layout.getPlid());
-				}
-			}
+			onRemoveFromLayout(portletId, layout);
 		}
 		catch (Exception e) {
 			_log.error("Unable to fire portlet layout listener event", e);
@@ -612,6 +586,34 @@ public class LayoutTypePortletImpl
 
 	public void setPortletIds(String columnId, String portletIds) {
 		getTypeSettingsProperties().setProperty(columnId, portletIds);
+	}
+
+	public void reorganizePortlets(List newColumns, List oldColumns) {
+		String lastNewColumnId =
+			(String)newColumns.get(newColumns.size() - 1);
+		String lastNewColumnValue =
+			getTypeSettingsProperties().getProperty(lastNewColumnId);
+
+		Iterator it = oldColumns.iterator();
+
+		while (it.hasNext()) {
+			String oldColumnId = (String) it.next();
+
+			if (!newColumns.contains(oldColumnId)) {
+				String oldColumnValue =
+					(String)getTypeSettingsProperties().remove(oldColumnId);
+
+				String[] portletIds = StringUtil.split(oldColumnValue);
+
+				for (int j = 0; j < portletIds.length; j++) {
+					lastNewColumnValue =
+						StringUtil.add(lastNewColumnValue, portletIds[j]);
+				}
+			}
+		}
+
+		getTypeSettingsProperties().setProperty(
+			lastNewColumnId, lastNewColumnValue);
 	}
 
 	// Maximized state
@@ -973,6 +975,19 @@ public class LayoutTypePortletImpl
 		removeModePrintPortletId(portletId);
 	}
 
+	public void removeNestedColumns(String portletId) {
+		Properties props = getTypeSettingsProperties();
+		Iterator it = props.keySet().iterator();
+
+		while (it.hasNext()) {
+			String key = (String)it.next();
+
+			if (key.startsWith(portletId)) {
+				it.remove();
+			}
+		}
+	}
+
 	// Protected methods
 
 	protected List getColumns() {
@@ -1004,7 +1019,7 @@ public class LayoutTypePortletImpl
 				nestedLayoutTemplateIdsArray[i],
 				NESTED_LAYOUT_TEMPLATE_SEPARATOR);
 
-			String containerId = kvp[0];
+			String portletId = kvp[0];
 			String layoutTemplateId = kvp[1];
 
 			LayoutTemplate layoutTemplate =
@@ -1016,7 +1031,7 @@ public class LayoutTypePortletImpl
 			while (itr.hasNext()) {
 				String columnId = (String)itr.next();
 
-				nestedColumns.add(containerId + "_" + columnId);
+				nestedColumns.add(portletId + "_" + columnId);
 			}
 		}
 
@@ -1155,6 +1170,49 @@ public class LayoutTypePortletImpl
 		}
 
 		return false;
+	}
+
+	protected void onRemoveFromLayout(String portletId, Layout layout)
+		throws SystemException {
+
+		if (!_enablePortletLayoutListener) {
+			return;
+		}
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), portletId);
+
+		if (portlet != null) {
+			PortletLayoutListener portletLayoutListener =
+				portlet.getPortletLayoutListener();
+
+			if ((portletLayoutListener != null)) {
+
+				portletLayoutListener.onRemoveFromLayout(
+					portletId, layout.getPlid());
+			}
+
+			if (portlet.getRootPortletId().equals(PortletKeys.NESTED_LAYOUTS)) {
+				Properties props = getTypeSettingsProperties();
+				Iterator it = props.keySet().iterator();
+
+				while (it.hasNext()) {
+					String key = (String)it.next();
+
+					if (key.startsWith(portlet.getPortletId())) {
+
+						String portletIds = props.getProperty(key);
+
+						String[] portletIdsArray =
+							StringUtil.split(portletIds);
+
+						for (int i = 0; i < portletIdsArray.length; i++) {
+							onRemoveFromLayout(portletIdsArray[i], layout);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutTypePortletImpl.class);

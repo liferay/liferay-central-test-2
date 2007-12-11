@@ -28,6 +28,7 @@
 		<portlet id="105" />
 		<portlet id="106" />
 		<portlet id="110" />
+		<portlet id="118" />
 	</category>
 	<category name="category.collaboration">
 		<portlet id="1" />

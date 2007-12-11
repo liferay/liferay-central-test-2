@@ -1075,6 +1075,12 @@ public class PropsUtil {
 
     public static final String MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.community.private.sites.with.no.layouts";
 
+	// Nested Portlet Portlet
+
+	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT = "nested.portlets.layout.template.default";
+	
+	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED = "nested.portlets.layout.template.unsupported";
+
 	// Portlet CSS Portlet
 
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";

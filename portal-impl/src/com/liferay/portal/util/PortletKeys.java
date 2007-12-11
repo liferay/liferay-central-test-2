@@ -82,6 +82,8 @@ public class PortletKeys {
 
 	public static final String MY_PLACES = "49";
 
+	public static final Object NESTED_LAYOUTS = "118";
+
 	public static final String ORGANIZATION_ADMIN = "80";
 
 	public static final String PAGE_COMMENTS = "107";

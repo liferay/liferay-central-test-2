@@ -1170,6 +1170,19 @@
 		<render-weight>1</render-weight>
 		<include>false</include>
 	</portlet>
+	<portlet>
+		<portlet-name>118</portlet-name>
+		<icon>/html/portlet/nested_portlets/icon.png</icon>
+		<struts-path>nested_portlets</struts-path>
+		<configuration-action-class>com.liferay.portlet.nestedportlets.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-layout-listener-class>com.liferay.portlet.nestedportlets.NestedPortletsPortletLayoutListener</portlet-layout-listener-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
