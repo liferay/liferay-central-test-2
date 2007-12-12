@@ -32,6 +32,14 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Modules ---------- */
 
+/* ---------- Generic module styling ---------- */
+
+.lfr-component, .lfr-component ul, .lfr-component li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
 /* ---------- Add content styles ---------- */
 
 .portal-add-content-search {
@@ -66,6 +74,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	cursor: pointer;
 	font-size: 1.1em;
 	font-weight: bold;
+	margin: 0;
 }
 
 .lfr-add-content.collapsed h2, .lfr-add-content .lfr-add-content.collapsed h2 {
@@ -121,6 +130,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-portlet-item p {
 	font-size: 1em;
+	margin: 0;
 	padding-right: 30px;
 	position: relative;
 }
@@ -359,6 +369,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .js .interactive-mode .my-places .show-my-places li .my-places-toggle h3 {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/expand_community.png) no-repeat 100% 50%;
+	font-size: 1em;
+	margin: 0;
 	padding-right: 1.8em;
 }
 
@@ -567,11 +579,11 @@ ul.gamma .tree-item-hover {
 	padding: 5px;
 }
 
-.toggle-expand {
+li.toggle-expand {
 	padding-bottom: 10px;
 }
 
-.toggle-expand a {
+li.toggle-expand a {
 	padding: 2px 0 2px 20px;
 }
 

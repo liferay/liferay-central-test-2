@@ -7,6 +7,8 @@ Liferay.Dock = {
 		if (!dock.is('.interactive-mode')) {
 			return;
 		}
+		
+		dock.addClass('lfr-component');
 
 		var dockList = dock.find('.lfr-dock-list');
 

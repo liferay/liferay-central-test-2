@@ -35,6 +35,42 @@ html, body {
 body.portal-popup {
 }
 
+table {
+}
+
+abbr, acronym {
+}
+
+blockquote, ul, ol, dl {
+}
+
+ol, ul, dl {
+}
+
+ol li, ul ol li {
+}
+
+ul li, ol ul li {
+}
+
+ul ul li {
+}
+
+ol ol li {
+}
+
+dl dd {
+}
+
+th {
+}
+
+caption {
+}
+
+p, fieldset, table, pre {
+}
+
 /* ---------- Links ---------- */
 
 a {
@@ -50,20 +86,15 @@ a:visited {
 
 h1 {
 }
-
 h2 {
 }
-
 h3 {
 }
 
-h4 {
+h1, h2, h3 {
 }
 
-h5 {
-}
-
-h6 {
+h1, h2, h3, h4, h5, h6, strong {
 }
 
 /* ---------- Text formatting ---------- */
@@ -118,6 +149,9 @@ body.staging {
 .drop-area {
 }
 
+.ie .drop-area {
+}
+
 .drop-position-top {
 }
 
@@ -145,6 +179,12 @@ body.staging {
 }
 
 .popup-message {
+}
+
+.popup-alert-notice {
+}
+
+.popup-alert-warning {
 }
 
 /* ---------- Portal add content ---------- */
@@ -178,7 +218,7 @@ body.staging {
 
 /* ---------- Separator ---------- */
 
-.separator {
+hr, .separator {
 }
 
 /* ---------- Update Manager ---------- */

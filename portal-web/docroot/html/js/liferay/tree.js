@@ -101,7 +101,7 @@ var Tree = new Class({
 
 			var node = instance.nodes[0];
 
-			var tree = jQuery('<ul class="' + instance.className + '"></ul>');
+			var tree = jQuery('<ul class="lfr-component ' + instance.className + '"></ul>');
 			var treeEl = tree.get(0);
 
 			var mainLi  = jQuery(
