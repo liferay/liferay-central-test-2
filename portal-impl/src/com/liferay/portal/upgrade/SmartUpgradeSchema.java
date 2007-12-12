@@ -96,6 +96,7 @@ public abstract class SmartUpgradeSchema extends UpgradeProcess {
 	protected abstract void upgradeOnce() throws Exception;
 
 	private static final Class[] _UPGRADE_PROGRESS_CLASSES = new Class[] {
+		com.liferay.portal.upgrade.v4_3_0.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_3_1.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_3_2.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v4_3_3.UpgradeSchema.class,
