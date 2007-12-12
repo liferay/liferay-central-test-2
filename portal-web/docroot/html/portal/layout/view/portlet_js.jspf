@@ -26,7 +26,9 @@ var loadingAnimation = new Image();
 
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImages() %>/progress_bar/loading_animation.gif";
 
-function addPortletHTML(url, placeHolder) {
+function addPortletHTML(url, placeHolder, returnPortlet) {
+	var portletBoundary;
+
 	var addPortletReturn = function(html) {
 		var container = placeHolder.parentNode;
 		var addDiv = document.createElement("div");
@@ -79,15 +81,31 @@ function addPortletHTML(url, placeHolder) {
 		if (window.location.hash) {
 			window.location.hash = "p_" + portletId;
 		}
+		portletBoundary = portletBound;
 
 		return portletId;
 	};
+	var complete = function(xHR) {
+		addPortletReturn(xHR.responseText);
+	}
 
-	AjaxUtil.request(url, {
-		onComplete: function(xmlHttpReq){
-			addPortletReturn(xmlHttpReq.responseText);
-		}
-	});
+	if (!returnPortlet) {
+		AjaxUtil.request(url, {
+			onComplete: complete
+		});
+	}
+	else {
+		jQuery.ajax(
+			{
+				url: url,
+				complete: function(xHR) {
+					complete(xHR);
+				},
+				async: false
+			}
+		);
+		return portletBoundary;
+	}
 }
 
 function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
@@ -115,6 +133,9 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 		}
 
 		Liferay.Portlet.remove(portletId);
+
+		Liferay.Publisher.register('closePortlet');
+		Liferay.Publisher.deliver('closePortlet', {plid: plid, portletId: portletId});
 	}
 	else {
 		self.focus();

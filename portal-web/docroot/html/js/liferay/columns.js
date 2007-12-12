@@ -26,7 +26,7 @@
 			});
 		},
 
-		add: function(portlet) {
+		add: function(portlet, options) {
 			var instance = this;
 			var jPortlet = jQuery(portlet);
 			var jHandle = jPortlet.find(instance._handle);
@@ -34,7 +34,7 @@
 			jHandle.css({cursor: "move"});
 			jPortlet.css({position: "relative"});
 
-			jPortlet.lDrag({
+			var defaultOptions = {
 				clone: true,
 				dragClass: "drag-indicator",
 				handle: jPortlet.find(instance._handle)[0],
@@ -43,7 +43,13 @@
 				onStart: function(s) {instance._onStart(s);},
 				threshold: 2,
 				scroll: true
-			});
+			};
+			
+			if (options) {
+				defaultOptions = jQuery.extend(defaultOptions, options);
+			}
+			jPortlet.lDrag(defaultOptions);
+			
 		},
 
 		_clearCache: function() {
@@ -90,6 +96,7 @@
 						data.quadrant = quadrant;
 						rt = this;
 					}
+					return false;
 				}
 			});
 
@@ -279,6 +286,7 @@
 			jQuery(settings.container).css({top: 0, left: 0});
 			var instance = this;
 			var foundContainer = instance._findContainer(mousePos);
+			var canDrop = true;
 
 			instance._hidePosition();
 			instance._hideArea();
@@ -304,9 +312,14 @@
 					});
 				}
 			}
+			else {
+				canDrop = false;
+			}
 
 			instance._grid.removeClass("dragging");
 			instance._clearCache();
+
+			return canDrop;
 		},
 
 		_onStart: function(settings) {

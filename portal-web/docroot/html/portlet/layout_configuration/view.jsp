@@ -34,19 +34,16 @@
 
 	<div id="portal_add_content">
 		<div class="portal-add-content">
-			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="<portlet:namespace />fm">
+			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" class="uni-form" method="post" name="<portlet:namespace />fm">
 			<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 			<input name="<%= Constants.CMD %>" type="hidden" value="template" />
 			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
 			<input name="refresh" type="hidden" value="true" />
 
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
 					<div class="portal-add-content-search">
-						<span id="portal_add_content_title" style="margin-right: 5px; cursor: move;"><liferay-ui:message key="content" /></span>
+						<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
 
-						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" onKeyUp="LayoutConfiguration.startShowTimer(this.value);" />
+						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
 					</div>
 
 					<%
@@ -67,11 +64,9 @@
 					<%
 					}
 					%>
-
-				</td>
-			</tr>
-			</table>
-
+					<p class="portlet-msg-info">
+						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+					</p>
 			</form>
 		</div>
 	</div>

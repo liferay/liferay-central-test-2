@@ -28,6 +28,7 @@ javax.portlet.title.114=Πρόσφατο Bloggers
 javax.portlet.title.115=Blogs Aggregator
 javax.portlet.title.116=Οι δραστηριότητές μου
 javax.portlet.title.117=Οι δραστηριότητές μας
+javax.portlet.title.118=//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html><head><title>Yahoo! - 999 Unable to process request at this time -- error 999</title><style> /* nn4 hide */  /*/*/ body {font:small/1.2em arial,helvetica,clean,sans-serif;font:x-small;text-align:center;}table {font-size:inherit;font:x-small;} html>body {font:83%/1.2em arial,helvetica,clean,sans-serif;}input {font-size:100%;vertical-align:middle;}p, form {margin:0;padding:0;} p {padding-bottom:6px;margin-bottom:10px;}#doc {width:48.5em;margin:0 auto;border:1px solid #fff;text-align:center;}#ygma {text-align:right;margin-bottom:53px} #ygma img {float:left;}#ygma div {border-bottom:1px solid #ccc;padding-bottom:8px;margin-left:152px;}#bd {clear:both;text-align:left;width:75%;margin:0 auto 20px;} h1 {font-size:135%;text-align:center;margin:0 0 15px;}legend {display:none;}fieldset {border:0 solid #fff;padding:.8em 0 .8em 4.5em;} form {position:relative;background:#eee;margin-bottom:15px;border:1px solid #ccc;border-width:1px 0;} #s1p {width:15em;margin-right:.1em;} form span {position:absolute;left:70%;top:.8em;}form a {font:78%/1.2em arial;display:block;padding-left:.8em;white-space:nowrap;background: url(http://us.i1.yimg.com/us.yimg.com/i/s/bullet.gif) no-repeat left center;}  form .sep {display:none;}.more {text-align:center;}#ft {padding-top:10px;border-top:1px solid #999;}#ft p {text-align:center;font:78% arial;} /* end nn4 hide */ </style></head> <body><div id="doc"> <div id="ygma"><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com"><img src=http://us.i1.yimg.com/us.yimg.com/i/yahoo.gif width=147 height=31 border=0 alt="Yahoo!"></a><div><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com">Yahoo!</a>  - <a href="http://us.rd.yahoo.com/500/*http://help.yahoo.com">Help</a>
 javax.portlet.title.11=Κατάλογος
 javax.portlet.title.12=Χρηματιστήριο
 javax.portlet.title.13=Υπολογιστής
@@ -403,6 +404,8 @@ address1=Διεύθυνση 1
 address2=Διεύθυνση 2
 address3=Διεύθυνση 3
 address=Διεύθυνση
+
+
 addresses-and-phone-numbers=Διευθύνσεις και Αριθμοί Τηλεφώνων
 addresses=Διευθύνσεις
 administer-nodes=Διαχειριστείτε τους κόμβους
@@ -1091,6 +1094,7 @@ en_zh=Αγγλικά σε Κινέζικα
 en_zt=Αγγλικά σε Κινέζικα (Ταϊβάν)
 enable-comments=Επιτρέψτε τα σχόλια
 enable-ratings=Επιτρέψτε τις εκτιμήσεις
+enabled=//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html><head><title>Yahoo! - 999 Unable to process request at this time -- error 999</title><style> /* nn4 hide */  /*/*/ body {font:small/1.2em arial,helvetica,clean,sans-serif;font:x-small;text-align:center;}table {font-size:inherit;font:x-small;} html>body {font:83%/1.2em arial,helvetica,clean,sans-serif;}input {font-size:100%;vertical-align:middle;}p, form {margin:0;padding:0;} p {padding-bottom:6px;margin-bottom:10px;}#doc {width:48.5em;margin:0 auto;border:1px solid #fff;text-align:center;}#ygma {text-align:right;margin-bottom:53px} #ygma img {float:left;}#ygma div {border-bottom:1px solid #ccc;padding-bottom:8px;margin-left:152px;}#bd {clear:both;text-align:left;width:75%;margin:0 auto 20px;} h1 {font-size:135%;text-align:center;margin:0 0 15px;}legend {display:none;}fieldset {border:0 solid #fff;padding:.8em 0 .8em 4.5em;} form {position:relative;background:#eee;margin-bottom:15px;border:1px solid #ccc;border-width:1px 0;} #s1p {width:15em;margin-right:.1em;} form span {position:absolute;left:70%;top:.8em;}form a {font:78%/1.2em arial;display:block;padding-left:.8em;white-space:nowrap;background: url(http://us.i1.yimg.com/us.yimg.com/i/s/bullet.gif) no-repeat left center;}  form .sep {display:none;}.more {text-align:center;}#ft {padding-top:10px;border-top:1px solid #999;}#ft p {text-align:center;font:78% arial;} /* end nn4 hide */ </style></head> <body><div id="doc"> <div id="ygma"><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com"><img src=http://us.i1.yimg.com/us.yimg.com/i/yahoo.gif width=147 height=31 border=0 alt="Yahoo!"></a><div><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com">Yahoo!</a>  - <a href="http://us.rd.yahoo.com/500/*http://help.yahoo.com">Help</a>
 encryption-type=Τύπος κρυπτογράφησης
 end-at=Τέλος σε
 end-by=Τέλος μέχρι
@@ -1832,7 +1836,9 @@ old-group-name-is-a-required-system-group=Το παλαιό όνομα ομάδ�
 old-name=Παλαιό όνομα
 old-role-name-is-a-required-system-role=Το παλαιό όνομα ρόλου είναι ένας απαραίτητος ρόλος συστημάτων.
 older-version-installed=Μη εκσυγχρονισμένος
+on-date=//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html><head><title>Yahoo! - 999 Unable to process request at this time -- error 999</title><style> /* nn4 hide */  /*/*/ body {font:small/1.2em arial,helvetica,clean,sans-serif;font:x-small;text-align:center;}table {font-size:inherit;font:x-small;} html>body {font:83%/1.2em arial,helvetica,clean,sans-serif;}input {font-size:100%;vertical-align:middle;}p, form {margin:0;padding:0;} p {padding-bottom:6px;margin-bottom:10px;}#doc {width:48.5em;margin:0 auto;border:1px solid #fff;text-align:center;}#ygma {text-align:right;margin-bottom:53px} #ygma img {float:left;}#ygma div {border-bottom:1px solid #ccc;padding-bottom:8px;margin-left:152px;}#bd {clear:both;text-align:left;width:75%;margin:0 auto 20px;} h1 {font-size:135%;text-align:center;margin:0 0 15px;}legend {display:none;}fieldset {border:0 solid #fff;padding:.8em 0 .8em 4.5em;} form {position:relative;background:#eee;margin-bottom:15px;border:1px solid #ccc;border-width:1px 0;} #s1p {width:15em;margin-right:.1em;} form span {position:absolute;left:70%;top:.8em;}form a {font:78%/1.2em arial;display:block;padding-left:.8em;white-space:nowrap;background: url(http://us.i1.yimg.com/us.yimg.com/i/s/bullet.gif) no-repeat left center;}  form .sep {display:none;}.more {text-align:center;}#ft {padding-top:10px;border-top:1px solid #999;}#ft p {text-align:center;font:78% arial;} /* end nn4 hide */ </style></head> <body><div id="doc"> <div id="ygma"><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com"><img src=http://us.i1.yimg.com/us.yimg.com/i/yahoo.gif width=147 height=31 border=0 alt="Yahoo!"></a><div><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com">Yahoo!</a>  - <a href="http://us.rd.yahoo.com/500/*http://help.yahoo.com">Help</a>
 on-hold=Σε αναμονή
+on=//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html><head><title>Yahoo! - 999 Unable to process request at this time -- error 999</title><style> /* nn4 hide */  /*/*/ body {font:small/1.2em arial,helvetica,clean,sans-serif;font:x-small;text-align:center;}table {font-size:inherit;font:x-small;} html>body {font:83%/1.2em arial,helvetica,clean,sans-serif;}input {font-size:100%;vertical-align:middle;}p, form {margin:0;padding:0;} p {padding-bottom:6px;margin-bottom:10px;}#doc {width:48.5em;margin:0 auto;border:1px solid #fff;text-align:center;}#ygma {text-align:right;margin-bottom:53px} #ygma img {float:left;}#ygma div {border-bottom:1px solid #ccc;padding-bottom:8px;margin-left:152px;}#bd {clear:both;text-align:left;width:75%;margin:0 auto 20px;} h1 {font-size:135%;text-align:center;margin:0 0 15px;}legend {display:none;}fieldset {border:0 solid #fff;padding:.8em 0 .8em 4.5em;} form {position:relative;background:#eee;margin-bottom:15px;border:1px solid #ccc;border-width:1px 0;} #s1p {width:15em;margin-right:.1em;} form span {position:absolute;left:70%;top:.8em;}form a {font:78%/1.2em arial;display:block;padding-left:.8em;white-space:nowrap;background: url(http://us.i1.yimg.com/us.yimg.com/i/s/bullet.gif) no-repeat left center;}  form .sep {display:none;}.more {text-align:center;}#ft {padding-top:10px;border-top:1px solid #999;}#ft p {text-align:center;font:78% arial;} /* end nn4 hide */ </style></head> <body><div id="doc"> <div id="ygma"><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com"><img src=http://us.i1.yimg.com/us.yimg.com/i/yahoo.gif width=147 height=31 border=0 alt="Yahoo!"></a><div><a href="http://us.rd.yahoo.com/500/*http://www.yahoo.com">Yahoo!</a>  - <a href="http://us.rd.yahoo.com/500/*http://help.yahoo.com">Help</a>
 one-column=Μια στήλη
 one-of-your-fields-contain-invalid-characters=Ένας από τους τομείς σας περιέχει τους άκυρους χαρακτήρες.
 online-now=Θ*ον-ληνε τώρα
@@ -2361,6 +2367,7 @@ search-articles=Αρθρα αναζήτησης
 search-by-id-or-url=Αναζήτηση από την ταυτότητα ή URL
 search-categories=Κατηγορίες αναζήτησης
 search-communities=Κοινότητες αναζήτησης
+search-content-searches-as-you-type=Περιεχόμενο αναζήτησης (αναζητήσεις όπως εσείς τύπος).
 search-coupons=Δελτία αναζήτησης
 search-definitions=Ορισμοί αναζήτησης
 search-documents=Αναζήτηση Εγγράφων
@@ -2881,6 +2888,7 @@ time=Ώρα
 timestamp=Timestamp
 title-list=Κατάλογος τίτλου
 title=Τίτλος
+to-add-a-portlet-to-the-page-just-drag-it=Για να προσθέσετε ένα portlet στη σελίδα, σέρετε ακριβώς το στοιχείο ανωτέρω όπου θα επιθυμούσατε να το τοποθετήσετε.
 to-email-joebloggs=* Για να στείλετε ηλεκ. μήνυμα σε joebloggs@{0}, απλά εισάγετε <i>joebloggs</i>
 to-this-location=Σε αυτή τη τοποθεσία
 to=Προς

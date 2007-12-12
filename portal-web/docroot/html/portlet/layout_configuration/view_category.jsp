@@ -68,6 +68,7 @@ while (itr1.hasNext()) {
 		else if (!portlet.isActive()) {
 		}
 		else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
+			portlets.add(portlet);
 		}
 		else if (!portlet.hasAddPortletPermission(user.getUserId())) {
 		}
@@ -91,87 +92,58 @@ while (itr1.hasNext()) {
 
 Collections.sort(portlets, new PortletTitleComparator(application, locale));
 
+boolean portletInstanceable = true;
+boolean portletUsed = false;
+boolean portletLocked = false;
+
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>
+	<div class="lfr-add-content collapsed" id="<%= newCategoryPath %>">
+	<h2><span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span></h2>
+		<div class="lfr-content-category hidden">
+			<%
+			Iterator itr2 = categories.iterator();
 
-	<div class="layout_configuration_category" id="<%= newCategoryPath %>">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<div style="padding: 2px; font-weight: bold;">
-					<a href="javascript: void(0);" onClick="LayoutConfiguration.toggleCategory(this);">
-					<img src="<%= themeDisplay.getPathThemeImages() + "/arrows/01_right.png" %>" /> <%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %>
-					</a>
+			while (itr2.hasNext()) {
+				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr2.next());
+				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, newCategoryPath);
+			%>
+
+				<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
+
+			<%
+				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, oldCategoryPath);
+			}
+
+			itr2 = portlets.iterator();
+			System.out.println(itr2.hasNext() + ": ");
+			while (itr2.hasNext()) {
+				Portlet portlet = (Portlet)itr2.next();
+
+				divId = new StringMaker();
+				
+				portletInstanceable = portlet.isInstanceable();
+				portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
+				portletLocked = (!portletInstanceable && portletUsed);
+
+				divId.append(newCategoryPath);
+				divId.append(":");
+
+				matcher = pattern.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
+
+				while (matcher.find()) {
+					divId.append(matcher.group());
+				}
+			%>
+				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId %>" instanceable="<c:choose><c:when test="<%= !portletInstanceable %>">false</c:when><c:otherwise>true</c:otherwise></c:choose>" portletId="<%= portlet.getPortletId() %>" plid="<%= plid %>">
+					<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td style="padding-left: 20px;">
-				<div class="layout_configuration_category_pane" style="display: none;">
+			<%
+			}
+			%>
 
-					<%
-					Iterator itr2 = categories.iterator();
-
-					while (itr2.hasNext()) {
-						request.setAttribute(WebKeys.PORTLET_CATEGORY, itr2.next());
-						request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, newCategoryPath);
-					%>
-
-						<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
-
-					<%
-						request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, oldCategoryPath);
-					}
-
-					itr2 = portlets.iterator();
-
-					while (itr2.hasNext()) {
-						Portlet portlet = (Portlet)itr2.next();
-
-						divId = new StringMaker();
-
-						divId.append(newCategoryPath);
-						divId.append(":");
-
-						matcher = pattern.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
-
-						while (matcher.find()) {
-							divId.append(matcher.group());
-						}
-					%>
-
-						<div class="layout_configuration_portlet" id="<%= divId %>">
-							<table border="0" cellpadding="2" cellspacing="0" width="100%">
-							<tr>
-								<td width="99%">
-									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
-								</td>
-								<td align="right">
-									<input type="button" value="<liferay-ui:message key="add" />"
-										onClick="
-											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
-
-											if (<%= !portlet.isInstanceable() %>) {
-												var div = document.getElementById('<%= divId %>');
-
-												div.parentNode.removeChild(div);
-											};"
-									>
-								</td>
-							</tr>
-							</table>
-						</div>
-
-					<%
-					}
-					%>
-
-				</div>
-			</td>
-		</tr>
-		</table>
+		</div>
 	</div>
-
 <%
 }
 %>

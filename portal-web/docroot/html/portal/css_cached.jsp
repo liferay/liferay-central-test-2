@@ -38,24 +38,112 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 8px;
 }
 
-.portal-add-content img {
-	vertical-align: middle;
+.portal-add-content .lfr-portlet-used {
+	color: #ccc;
+	cursor: default;
 }
 
-.portal-add-content table td {
-	padding: 0 5px;
+.portal-add-content .portlet-msg-info {
+	color: #333;
+	margin-bottom: 0;
 }
 
-.portal-add-content table td {
-	padding: 0 5px;
+.portal-add-content .lfr-portlet-used a {
+	display: none;
 }
 
-.portal-add-content table td:first-child, .portal-add-content table td.first-child {
-	padding-left: 0;
+.lfr-add-content {
+	margin-bottom: 0.5em;
 }
 
-.portal-add-content table td:last-child, .portal-add-content table td.last-child {
-	padding-right: 0;
+.lfr-add-content.collapsed {
+}
+
+.lfr-add-content.expanded {
+}
+
+.lfr-add-content h2 {
+	cursor: pointer;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.lfr-add-content.collapsed h2, .lfr-add-content .lfr-add-content.collapsed h2 {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/03_plus.png) no-repeat 100% 50%;
+	border: none;
+}
+
+.lfr-add-content.expanded h2, .lfr-add-content .lfr-add-content.expanded h2 {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/03_minus.png) no-repeat 100% 50%;
+}
+.lfr-add-content h2 span {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_category.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+.lfr-content-category {
+	padding-left: 10px;
+	padding-top: 3px;
+}
+.lfr-content-category.hidden {
+	display: none;
+}
+.lfr-content-category.visible {
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	display: block;
+}
+
+.ie6 .lfr-content-category.visible {
+	height: 1%;
+}
+
+.lfr-portlet-item {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_item.png) no-repeat 0 50%;
+	border: 1px solid #fff;
+	cursor: move;
+	font-size: 1.1em;
+	margin-bottom: 3px;
+	padding: 0 5px 0 20px;
+}
+
+.lfr-portlet-item.lfr-instanceable {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_item_instanceable.png);
+}
+
+.lfr-portlet-item:hover, .lfr-portlet-item.over {
+	background-color: #ffc;
+	border-color: #fc0;
+}
+
+.ie .lfr-portlet-item {
+	height: 1%;
+}
+
+.lfr-portlet-item p {
+	font-size: 1em;
+	padding-right: 30px;
+	position: relative;
+}
+
+.lfr-portlet-item p a {
+	cursor: move;
+	font-size: 0.9em;
+	font-weight: bold;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ie .lfr-portlet-item p a {
+	top: -2px;
+}
+
+.ie6 .lfr-portlet-item p a {
+	right: 20px;
+}
+
+#layout_configuration_content {
+	width: 95%;
 }
 
 /* ---------- Color picker ---------- */
