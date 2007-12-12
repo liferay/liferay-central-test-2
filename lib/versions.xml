@@ -1431,7 +1431,7 @@
 	</library>
 	<library>
 		<file-name>portal/log4j.jar</file-name>
-		<version>1.2.14</version>
+		<version>1.2.15</version>
 		<project-name>Log4j</project-name>
 		<project-url>http://logging.apache.org/log4j/docs</project-url>
 		<licenses>
