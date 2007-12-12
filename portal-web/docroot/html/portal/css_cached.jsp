@@ -69,12 +69,12 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-add-content.collapsed h2, .lfr-add-content .lfr-add-content.collapsed h2 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/03_plus.png) no-repeat 100% 50%;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png) no-repeat 100% 50%;
 	border: none;
 }
 
 .lfr-add-content.expanded h2, .lfr-add-content .lfr-add-content.expanded h2 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/03_minus.png) no-repeat 100% 50%;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png) no-repeat 100% 50%;
 }
 .lfr-add-content h2 span {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_category.png) no-repeat 0 50%;
