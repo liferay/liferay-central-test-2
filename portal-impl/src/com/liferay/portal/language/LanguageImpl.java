@@ -266,7 +266,18 @@ public class LanguageImpl implements Language {
 			MessageResources resources = (MessageResources)WebAppPool.get(
 				String.valueOf(companyId), Globals.MESSAGES_KEY);
 
-			value = resources.getMessage(locale, key);
+			if (resources == null) {
+
+				// LEP-4505
+
+				ResourceBundle bundle = ResourceBundle.getBundle(
+					"content/Language", locale);
+
+				value = bundle.getString(key);
+			}
+			else {
+				value = resources.getMessage(locale, key);
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
