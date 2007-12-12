@@ -164,6 +164,10 @@ var LayoutConfiguration = {
 						portlet.Highlight(750, '#ffe98f');
 					}
 					else {
+						if (isInstanceable) {
+							portletId = portletBound.id;
+							portletId = portletId.replace(/^p_p_id_(.*)_$/, '$1');
+						}
 						closePortlet(plid, portletId, doAsUserId, true);
 					}
 				}
