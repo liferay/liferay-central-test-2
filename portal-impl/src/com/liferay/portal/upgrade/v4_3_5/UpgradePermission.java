@@ -395,7 +395,7 @@ public class UpgradePermission extends UpgradeProcess {
 			"inner join " + tableName + " on " + tableName + "." + tablePKCol +
 				" = Resource_.primKey " +
 			"where Groups_Permissions.groupId = " + guestGroupId + " and " +
-				tableName + ".groupId != " + guestGroupId + ";";
+				tableName + ".groupId != " + guestGroupId;
 
 		return sql;
 	}
@@ -419,7 +419,7 @@ public class UpgradePermission extends UpgradeProcess {
 			"inner join " + tableName2 + " on " + tableName2 + "." +
 				tablePKCol2 + " = " + tableName1 + "." + tablePKCol2 + " " +
 			"where Groups_Permissions.groupId = " + guestGroupId + " and " +
-				tableName2 + ".groupId != " + guestGroupId + ";";
+				tableName2 + ".groupId != " + guestGroupId;
 
 		return sql;
 	}
@@ -436,7 +436,7 @@ public class UpgradePermission extends UpgradeProcess {
 				"Permission_.resourceId " +
 			"inner join ResourceCode on ResourceCode.codeId = " +
 				"Resource_.codeId and Resource_.primKey = '" + primKey + "' " +
-			"where Groups_Permissions.groupId = " + guestGroupId + ";";
+			"where Groups_Permissions.groupId = " + guestGroupId;
 
 		return sql;
 	}
