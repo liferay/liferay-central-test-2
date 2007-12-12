@@ -214,7 +214,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			<script type="text/javascript">
 				jQuery(
 					function() {
-						new Tree(
+						new Liferay.Tree(
 							{
 								className: "gamma",
 								icons: <portlet:namespace />layoutIcons,

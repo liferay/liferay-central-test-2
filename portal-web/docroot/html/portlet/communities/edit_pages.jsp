@@ -494,7 +494,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<script type="text/javascript">
 				jQuery(
 					function() {
-						new Tree(
+						new Liferay.Tree(
 							{
 								className: "gamma",
 								icons: <portlet:namespace />layoutIcons,

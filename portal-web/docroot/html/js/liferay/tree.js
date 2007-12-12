@@ -1,4 +1,4 @@
-var Tree = new Class({
+Liferay.Tree = new Class({
 	initialize: function(params) {
 		var instance = this;
 
