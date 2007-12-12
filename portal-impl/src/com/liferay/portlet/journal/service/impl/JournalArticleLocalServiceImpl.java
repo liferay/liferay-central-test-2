@@ -1244,6 +1244,10 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
+
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		IndexWriter writer = null;

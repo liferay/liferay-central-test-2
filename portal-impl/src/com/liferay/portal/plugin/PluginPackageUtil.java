@@ -539,6 +539,10 @@ public class PluginPackageUtil {
 	}
 
 	public static void reIndex() throws SystemException {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
+
 		IndexWriter writer = null;
 
 		try {

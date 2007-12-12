@@ -65,6 +65,10 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void reIndex() {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info("Reindexing Lucene started");
 		}

@@ -24,6 +24,7 @@ package com.liferay.portal.lucene;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -82,6 +83,9 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  *
  */
 public class LuceneUtil {
+
+	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(PropsUtil.get(
+		PropsUtil.INDEX_READ_ONLY), false);
 
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");
@@ -226,6 +230,10 @@ public class LuceneUtil {
 	}
 
 	public static void checkLuceneDir(long companyId) {
+		if (INDEX_READ_ONLY) {
+			return;
+		}
+		
 		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
 		IndexWriter writer = null;
@@ -403,6 +411,10 @@ public class LuceneUtil {
 	}
 
 	public void _delete(long companyId) {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
+
 		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
 
 		if (_log.isDebugEnabled()) {

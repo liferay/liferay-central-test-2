@@ -657,6 +657,8 @@ public class PropsUtil {
 
 	// Lucene Search
 
+	public static final String INDEX_READ_ONLY = "index.read.only";
+
 	public static final String INDEX_ON_STARTUP = "index.on.startup";
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";

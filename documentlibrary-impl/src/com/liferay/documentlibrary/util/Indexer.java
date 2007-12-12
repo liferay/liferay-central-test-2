@@ -93,16 +93,18 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries);
 
-		IndexWriter writer = null;
+		if (!LuceneUtil.INDEX_READ_ONLY) {
+			IndexWriter writer = null;
 
-		try {
-			writer = LuceneUtil.getWriter(companyId);
+			try {
+				writer = LuceneUtil.getWriter(companyId);
 
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
+				writer.addDocument(doc);
+			}
+			finally {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
 			}
 		}
 	}
@@ -289,6 +291,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
+
 		Hook hook = HookFactory.getInstance();
 
 		hook.reIndex(ids);

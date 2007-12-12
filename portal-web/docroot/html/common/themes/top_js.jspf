@@ -159,7 +159,7 @@
 
 				var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
 				var portletBound = addPortletHTML(queryString, loadingDiv, returnPortlet);
-				
+
 				return portletBound;
 			}
 		}

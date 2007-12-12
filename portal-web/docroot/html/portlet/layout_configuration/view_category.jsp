@@ -121,7 +121,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 				Portlet portlet = (Portlet)itr2.next();
 
 				divId = new StringMaker();
-				
+
 				portletInstanceable = portlet.isInstanceable();
 				portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 				portletLocked = (!portletInstanceable && portletUsed);
