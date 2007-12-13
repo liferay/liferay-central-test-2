@@ -162,7 +162,7 @@ public class FileUploadManagedBean implements Renderable {
 	}
 
 	protected void addErrorMessage(String key) {
-		addErrorMessage(key);
+		addErrorMessage(key, null);
 	}
 
 	protected void addErrorMessage(String key, String argument) {
