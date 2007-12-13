@@ -121,7 +121,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			String code = tag.getElement().replaceAll("\t", "    ");
-			String[] lines = Html.escape(code).split("\\n");
+			String[] lines = code.split("\\n");
 			int digits = Integer.toString(lines.length + 1).length();
 
 			sm = new StringMaker(preTag);
