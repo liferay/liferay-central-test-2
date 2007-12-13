@@ -47,7 +47,7 @@
 			<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
 			</b></span><br />
 
-			<span style="font-size: x-small;"><liferay-ui:message key="by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
+			<span style="font-size: x-small;"><liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
 
 			<liferay-ui:tags-summary
 				className="<%= BlogsEntry.class.getName() %>"
