@@ -46,6 +46,7 @@ import com.liferay.util.UniqueList;
 
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -135,15 +136,19 @@ public class ResourceActionsUtil {
 	}
 
 	public static List getActionsNames(PageContext pageContext, List actions) {
-		List list = new UniqueList();
+		List uniqueList = new UniqueList();
 
 		Iterator itr = actions.iterator();
 
 		while (itr.hasNext()) {
 			String action = (String)itr.next();
 
-			list.add(getAction(pageContext, action));
+			uniqueList.add(getAction(pageContext, action));
 		}
+
+		List list = new ArrayList();
+
+		list.addAll(uniqueList);
 
 		Collections.sort(list);
 
