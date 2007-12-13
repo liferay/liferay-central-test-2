@@ -186,7 +186,7 @@ public class RSSAction extends PortletAction {
 			}
 		}
 
-		return rss.getBytes();
+		return rss.getBytes("UTF-8");
 	}
 
 	private static Log _log = LogFactory.getLog(RSSAction.class);
