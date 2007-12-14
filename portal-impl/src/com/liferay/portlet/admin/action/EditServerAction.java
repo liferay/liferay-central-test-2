@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -44,8 +46,11 @@ import com.liferay.util.Time;
 import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.lang.reflect.Method;
+
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -120,6 +125,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(req);
+		}
+		else if (cmd.equals("threadDump")) {
+			threadDump();
 		}
 		else if (cmd.equals("updateLogLevels")) {
 			updateLogLevels(req);
@@ -303,6 +311,102 @@ public class EditServerAction extends PortletAction {
 		}
 		else {
 			ShutdownUtil.shutdown(minutes, message);
+		}
+	}
+
+	protected void threadDump() throws Exception {
+		String jvm =
+			System.getProperty("java.vm.name") + " " +
+			System.getProperty("java.vm.version");
+
+		StringBuffer sb;
+
+		try {
+			sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
+
+			Map stackTraces = (Map)PortalClassInvoker.invoke(
+				Thread.class.getName(), "getAllStackTraces", false);
+
+			Class[] nullParams = new Class[] {};
+			Object[] nullArgs = new Object[] {};
+
+			Method getId = Thread.class.getMethod("getId", nullParams);
+			Method getState = Thread.class.getMethod("getState", nullParams);
+
+			Iterator itr = stackTraces.keySet().iterator();
+
+			while (itr.hasNext()) {
+				Thread thread = (Thread)itr.next();
+
+				StackTraceElement[] elements =
+					(StackTraceElement[])stackTraces.get(thread);
+
+				sb.append(StringPool.QUOTE);
+				sb.append(thread.getName());
+				sb.append(StringPool.QUOTE);
+
+				if (thread.getThreadGroup() != null) {
+					sb.append(StringPool.SPACE);
+					sb.append(StringPool.OPEN_PARENTHESIS);
+					sb.append(thread.getThreadGroup().getName());
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+				}
+
+				sb.append(", priority=" + thread.getPriority());
+				sb.append(", id=" + getId.invoke(thread, nullArgs));
+				sb.append(", state=" + getState.invoke(thread, nullArgs));
+				sb.append("\n");
+
+				for (int i = 0; i < elements.length; i++) {
+					sb.append("\t" + elements[i] + "\n");
+				}
+
+				sb.append("\n");
+			}
+		}
+		catch (Exception e) {
+			ThreadGroup root = Thread.currentThread().getThreadGroup();
+			while (root.getParent() != null) {
+		    	root = root.getParent();
+			}
+
+			sb = new StringBuffer("Summarized thread dump " + jvm + "\n\n");
+
+			jvm4ThreadDump(sb, root);
+		}
+
+		_log.info(sb.toString());
+	}
+
+	protected void jvm4ThreadDump(StringBuffer sb, ThreadGroup group) {
+		Thread[] threads = new Thread[group.activeCount()];
+
+		group.enumerate(threads, false);
+
+		for (int i = 0; i < threads.length && threads[i] != null; i++) {
+			Thread thread = threads[i];
+
+			sb.append(StringPool.QUOTE);
+			sb.append(thread.getName());
+			sb.append(StringPool.QUOTE);
+
+			if (thread.getThreadGroup() != null) {
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(thread.getThreadGroup().getName());
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+
+			sb.append(", priority=" + thread.getPriority());
+			sb.append("\n");
+		}
+
+		ThreadGroup[] groups = new ThreadGroup[group.activeGroupCount()];
+
+		group.enumerate(groups, false);
+
+		for (int i = 0; i < groups.length && groups[i] != null; i++) {
+			jvm4ThreadDump(sb, groups[i]);
 		}
 	}
 
