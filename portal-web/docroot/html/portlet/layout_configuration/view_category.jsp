@@ -116,7 +116,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 			}
 
 			itr2 = portlets.iterator();
-			System.out.println(itr2.hasNext() + ": ");
+
 			while (itr2.hasNext()) {
 				Portlet portlet = (Portlet)itr2.next();
 
