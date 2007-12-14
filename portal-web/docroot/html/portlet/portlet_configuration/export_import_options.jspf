@@ -42,9 +42,9 @@
 					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
 				</c:when>
 				<c:otherwise>
-					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "." + selPortlet.getPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
+					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + selPortlet.getPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "." + selPortlet.getPortletId() %>"><liferay-ui:message key="data" /></label>
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + StringPool.UNDERLINE + selPortlet.getPortletId() %>"><liferay-ui:message key="data" /></label>
 				</c:otherwise>
 			</c:choose>
 
@@ -86,11 +86,11 @@
 						<ul>
 							<li>
 								<input checked id="<portlet:namespace />mirror" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY%>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR%>" />
-								<label for="<portlet:namespace />mirror"><liferay-ui:message key="mirror" /></label>
+								<label for="<portlet:namespace />mirror"><liferay-ui:message key="mirror" /></label> <liferay-ui:icon-help message="import-data-strategy-mirror-help" />
 							</li>
 							<li>
 								<input id="<portlet:namespace />copy_as_new" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW%>" />
-								<label for="<portlet:namespace />copy_as_new"><liferay-ui:message key="copy-as-new" /></label>
+								<label for="<portlet:namespace />copy_as_new"><liferay-ui:message key="copy-as-new" /></label> <liferay-ui:icon-help message="import-data-strategy-copy-as-new-help" />
 							</li>
 						</ul>
 					</li>
