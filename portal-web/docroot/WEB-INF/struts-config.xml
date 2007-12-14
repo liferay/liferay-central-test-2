@@ -172,10 +172,7 @@
 
 		<!-- Blogs Aggregator -->
 
-		<action path="/blogs_aggregator/view" type="com.liferay.portlet.blogs.action.ViewAction">
-			<forward name="portlet.blogs.error" path="portlet.blogs_aggregator.error" />
-			<forward name="portlet.blogs.view" path="portlet.blogs_aggregator.view" />
-		</action>
+		<action path="/blogs_aggregator/view" forward="portlet.blogs_aggregator.view" />
 
 		<!-- Bookmarks -->
 
