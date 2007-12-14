@@ -27,11 +27,30 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.documentlibrary.service.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalServiceFactory;
+import com.liferay.documentlibrary.service.DLService;
+import com.liferay.documentlibrary.service.DLServiceFactory;
+
+import com.liferay.portal.service.ActivityTrackerLocalService;
+import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ActivityTrackerFinder;
+import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
+import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
+import com.liferay.portal.service.persistence.ActivityTrackerUtil;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -40,6 +59,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
+import com.liferay.portlet.messageboards.service.MBBanServiceFactory;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
@@ -55,7 +75,6 @@ import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBThreadService;
-import com.liferay.portlet.messageboards.service.MBThreadServiceFactory;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
@@ -78,23 +97,39 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <a href="MBBanServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MBBanServiceBaseImpl extends PrincipalBean
-	implements MBBanService, InitializingBean {
+public abstract class MBThreadServiceBaseImpl extends PrincipalBean
+	implements MBThreadService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
 
 	public void setMBBanLocalService(MBBanLocalService mbBanLocalService) {
 		this.mbBanLocalService = mbBanLocalService;
+	}
+
+	public MBBanService getMBBanService() {
+		return mbBanService;
+	}
+
+	public void setMBBanService(MBBanService mbBanService) {
+		this.mbBanService = mbBanService;
 	}
 
 	public MBBanPersistence getMBBanPersistence() {
@@ -235,14 +270,6 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 		this.mbThreadLocalService = mbThreadLocalService;
 	}
 
-	public MBThreadService getMBThreadService() {
-		return mbThreadService;
-	}
-
-	public void setMBThreadService(MBThreadService mbThreadService) {
-		this.mbThreadService = mbThreadService;
-	}
-
 	public MBThreadPersistence getMBThreadPersistence() {
 		return mbThreadPersistence;
 	}
@@ -273,6 +300,82 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	public DLService getDLService() {
+		return dlService;
+	}
+
+	public void setDLService(DLService dlService) {
+		this.dlService = dlService;
+	}
+
+	public ActivityTrackerLocalService getActivityTrackerLocalService() {
+		return activityTrackerLocalService;
+	}
+
+	public void setActivityTrackerLocalService(
+		ActivityTrackerLocalService activityTrackerLocalService) {
+		this.activityTrackerLocalService = activityTrackerLocalService;
+	}
+
+	public ActivityTrackerPersistence getActivityTrackerPersistence() {
+		return activityTrackerPersistence;
+	}
+
+	public void setActivityTrackerPersistence(
+		ActivityTrackerPersistence activityTrackerPersistence) {
+		this.activityTrackerPersistence = activityTrackerPersistence;
+	}
+
+	public ActivityTrackerFinder getActivityTrackerFinder() {
+		return activityTrackerFinder;
+	}
+
+	public void setActivityTrackerFinder(
+		ActivityTrackerFinder activityTrackerFinder) {
+		this.activityTrackerFinder = activityTrackerFinder;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -307,9 +410,47 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
+	}
+
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
+	}
+
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
+	}
+
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
+	}
+
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
+	}
+
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
+		}
+
+		if (mbBanService == null) {
+			mbBanService = MBBanServiceFactory.getImpl();
 		}
 
 		if (mbBanPersistence == null) {
@@ -376,10 +517,6 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 			mbThreadLocalService = MBThreadLocalServiceFactory.getImpl();
 		}
 
-		if (mbThreadService == null) {
-			mbThreadService = MBThreadServiceFactory.getImpl();
-		}
-
 		if (mbThreadPersistence == null) {
 			mbThreadPersistence = MBThreadUtil.getPersistence();
 		}
@@ -394,6 +531,42 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (dlLocalService == null) {
+			dlLocalService = DLLocalServiceFactory.getImpl();
+		}
+
+		if (dlService == null) {
+			dlService = DLServiceFactory.getImpl();
+		}
+
+		if (activityTrackerLocalService == null) {
+			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (activityTrackerPersistence == null) {
+			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
+		}
+
+		if (activityTrackerFinder == null) {
+			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
 		}
 
 		if (userLocalService == null) {
@@ -411,9 +584,26 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (tagsAssetLocalService == null) {
+			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
+		}
+
+		if (tagsAssetService == null) {
+			tagsAssetService = TagsAssetServiceFactory.getImpl();
+		}
+
+		if (tagsAssetPersistence == null) {
+			tagsAssetPersistence = TagsAssetUtil.getPersistence();
+		}
+
+		if (tagsAssetFinder == null) {
+			tagsAssetFinder = TagsAssetFinderUtil.getFinder();
+		}
 	}
 
 	protected MBBanLocalService mbBanLocalService;
+	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
 	protected MBCategoryLocalService mbCategoryLocalService;
 	protected MBCategoryService mbCategoryService;
@@ -430,13 +620,25 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 	protected MBStatsUserLocalService mbStatsUserLocalService;
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected MBThreadLocalService mbThreadLocalService;
-	protected MBThreadService mbThreadService;
 	protected MBThreadPersistence mbThreadPersistence;
 	protected MBThreadFinder mbThreadFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected DLLocalService dlLocalService;
+	protected DLService dlService;
+	protected ActivityTrackerLocalService activityTrackerLocalService;
+	protected ActivityTrackerPersistence activityTrackerPersistence;
+	protected ActivityTrackerFinder activityTrackerFinder;
+	protected ResourceLocalService resourceLocalService;
+	protected ResourceService resourceService;
+	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected TagsAssetLocalService tagsAssetLocalService;
+	protected TagsAssetService tagsAssetService;
+	protected TagsAssetPersistence tagsAssetPersistence;
+	protected TagsAssetFinder tagsAssetFinder;
 }

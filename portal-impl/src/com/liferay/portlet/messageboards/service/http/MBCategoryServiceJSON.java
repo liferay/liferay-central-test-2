@@ -117,12 +117,6 @@ public class MBCategoryServiceJSON {
 		return returnValue;
 	}
 
-	public static void moveThread(long categoryId, long threadId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		MBCategoryServiceUtil.moveThread(categoryId, threadId);
-	}
-
 	public static void subscribeCategory(long categoryId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {

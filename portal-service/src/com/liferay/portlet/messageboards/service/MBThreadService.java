@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.service;
 
 
 /**
- * <a href="MBCategoryService.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,7 +33,7 @@ package com.liferay.portlet.messageboards.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.messageboards.service.impl.MBCategoryServiceImpl</code>.
+ * <code>com.liferay.portlet.messageboards.service.impl.MBThreadServiceImpl</code>.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
@@ -44,46 +44,19 @@ package com.liferay.portlet.messageboards.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBCategoryServiceFactory
- * @see com.liferay.portlet.messageboards.service.MBCategoryServiceUtil
+ * @see com.liferay.portlet.messageboards.service.MBThreadServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBThreadServiceUtil
  *
  */
-public interface MBCategoryService {
-	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+public interface MBThreadService {
+	public com.liferay.portlet.messageboards.model.MBThread moveThread(
+		long categoryId, long threadId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public java.util.List getCategories(long groupId, long parentCategoryId,
-		int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public int getCategoriesCount(long groupId, long parentCategoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
-
-	public void subscribeCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void unsubscribeCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		long categoryId, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+	public com.liferay.portlet.messageboards.model.MBThread splitThread(
+		long messageId, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

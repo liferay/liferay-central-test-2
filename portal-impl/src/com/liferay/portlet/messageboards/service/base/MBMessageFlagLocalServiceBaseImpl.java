@@ -57,6 +57,8 @@ import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBThreadService;
+import com.liferay.portlet.messageboards.service.MBThreadServiceFactory;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
@@ -276,6 +278,14 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		this.mbThreadLocalService = mbThreadLocalService;
 	}
 
+	public MBThreadService getMBThreadService() {
+		return mbThreadService;
+	}
+
+	public void setMBThreadService(MBThreadService mbThreadService) {
+		this.mbThreadService = mbThreadService;
+	}
+
 	public MBThreadPersistence getMBThreadPersistence() {
 		return mbThreadPersistence;
 	}
@@ -409,6 +419,10 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 			mbThreadLocalService = MBThreadLocalServiceFactory.getImpl();
 		}
 
+		if (mbThreadService == null) {
+			mbThreadService = MBThreadServiceFactory.getImpl();
+		}
+
 		if (mbThreadPersistence == null) {
 			mbThreadPersistence = MBThreadUtil.getPersistence();
 		}
@@ -459,6 +473,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	protected MBStatsUserLocalService mbStatsUserLocalService;
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected MBThreadLocalService mbThreadLocalService;
+	protected MBThreadService mbThreadService;
 	protected MBThreadPersistence mbThreadPersistence;
 	protected MBThreadFinder mbThreadFinder;
 	protected CounterLocalService counterLocalService;

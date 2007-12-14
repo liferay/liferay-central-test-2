@@ -28,8 +28,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
 
@@ -37,8 +40,11 @@ import java.io.IOException;
 
 import java.rmi.RemoteException;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -227,6 +233,136 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return mbThreadPersistence.countByCategoryId(categoryId);
 	}
 
+	public MBThread moveThread(long categoryId, long threadId)
+		throws PortalException, SystemException {
+
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			threadId);
+
+		long oldCategoryId = thread.getCategoryId();
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		// Messages
+
+		Iterator itr = mbMessagePersistence.findByC_T(
+			oldCategoryId, thread.getThreadId()).iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			message.setCategoryId(category.getCategoryId());
+
+			mbMessagePersistence.update(message);
+
+			// Lucene
+
+			try {
+				if (!category.isDiscussion()) {
+					Indexer.updateMessage(
+						message.getCompanyId(), category.getGroupId(),
+						message.getUserName(), category.getCategoryId(),
+						message.getThreadId(), message.getMessageId(),
+						message.getSubject(), message.getBody(),
+						message.getTagsEntries());
+				}
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + message.getMessageId(), ioe);
+			}
+		}
+
+		// Thread
+
+		thread.setCategoryId(category.getCategoryId());
+
+		mbThreadPersistence.update(thread);
+
+		return thread;
+	}
+
+	public MBThread splitThread(
+			long messageId, PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		long oldThreadId = message.getThreadId();
+		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
+			message.getCategoryId());
+
+		// Create new thread
+
+		MBThread thread = addThread(message.getCategoryId(), message);
+
+		// Update message
+
+		message.setThreadId(thread.getThreadId());
+		message.setParentMessageId(0);
+
+		mbMessagePersistence.update(message);
+
+		try {
+			if (!category.isDiscussion()) {
+				Indexer.updateMessage(
+					message.getCompanyId(), category.getGroupId(),
+					message.getUserName(), category.getCategoryId(),
+					message.getThreadId(), message.getMessageId(),
+					message.getSubject(), message.getBody(),
+					message.getTagsEntries());
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + message.getMessageId(), ioe);
+		}
+
+		// Update children
+
+		Iterator itr = mbMessagePersistence.findByT_P(
+			oldThreadId, message.getMessageId()).iterator();
+
+		int messagesMoved = 1;
+
+		while (itr.hasNext()) {
+			MBMessage curMessage = (MBMessage)itr.next();
+
+			curMessage.setCategoryId(message.getCategoryId());
+			curMessage.setThreadId(message.getThreadId());
+
+			mbMessagePersistence.update(curMessage);
+
+			messagesMoved ++;
+
+			try {
+				if (!category.isDiscussion()) {
+					Indexer.updateMessage(
+						curMessage.getCompanyId(), category.getGroupId(),
+						curMessage.getUserName(), category.getCategoryId(),
+						curMessage.getThreadId(), curMessage.getMessageId(),
+						curMessage.getSubject(), curMessage.getBody(),
+						curMessage.getTagsEntries());
+				}
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + curMessage.getMessageId(), ioe);
+			}
+		}
+
+		// Update old thread
+
+		MBThread oldThread = mbThreadPersistence.findByPrimaryKey(oldThreadId);
+
+		oldThread.setMessageCount(oldThread.getMessageCount() - messagesMoved);
+
+		mbThreadPersistence.update(oldThread);
+
+		return thread;
+
+	}
+
 	public boolean hasReadThread(long userId, long threadId)
 		throws PortalException, SystemException {
 
@@ -256,6 +392,35 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		mbThreadPersistence.update(thread);
 
+		return thread;
+	}
+
+	protected MBThread addThread(long categoryId, MBMessage message)
+		throws SystemException, PortalException {
+
+		long threadId = counterLocalService.increment();
+
+		MBThread thread = mbThreadPersistence.create(threadId);
+
+		thread.setCategoryId(categoryId);
+		thread.setRootMessageId(message.getMessageId());
+
+		thread.setMessageCount(thread.getMessageCount() + 1);
+
+		if (message.isAnonymous()) {
+			thread.setLastPostByUserId(0);
+		}
+		else {
+			thread.setLastPostByUserId(message.getUserId());
+		}
+
+		thread.setLastPostDate(message.getCreateDate());
+
+		if (message.getPriority() != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+			thread.setPriority(message.getPriority());
+		}
+
+		mbThreadPersistence.update(thread);
 		return thread;
 	}
 

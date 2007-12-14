@@ -264,7 +264,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="MBThread" local-service="true" remote-service="false">
+	<entity name="MBThread" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -295,6 +295,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
 		<reference package-path="com.liferay.portal" entity="Resource" />

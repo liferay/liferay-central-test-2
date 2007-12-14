@@ -23,9 +23,11 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
@@ -33,11 +35,12 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
@@ -55,12 +58,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditThreadAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SplitThreadAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class EditThreadAction extends PortletAction {
+public class SplitThreadAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -68,7 +71,7 @@ public class EditThreadAction extends PortletAction {
 		throws Exception {
 
 		try {
-			moveThread(req, res);
+			splitThread(req, res);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException ||
@@ -96,7 +99,7 @@ public class EditThreadAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getThreadMessage(req);
+			ActionUtil.getMessage(req);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchMessageException ||
@@ -112,10 +115,10 @@ public class EditThreadAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.message_boards.edit_thread"));
+			getForward(req, "portlet.message_boards.split_thread"));
 	}
 
-	protected void moveThread(ActionRequest req, ActionResponse res)
+	protected void splitThread(ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
@@ -123,12 +126,15 @@ public class EditThreadAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		long threadId = ParamUtil.getLong(req, "threadId");
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
-		MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-		MBCategoryServiceUtil.moveThread(categoryId, threadId);
+		long oldThreadId = message.getThreadId();
+		long oldParentMessageId = message.getParentMessageId();
+
+		MBThread newThread = MBThreadServiceUtil.splitThread(
+			messageId, prefs, themeDisplay);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
 			req, "addExplanationPost");
@@ -137,10 +143,27 @@ public class EditThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(req, "subject");
 			String body = ParamUtil.getString(req, "body");
 
+			String portalURL = PortalUtil.getPortalURL(themeDisplay);
+			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+
+			String newThreadURL =
+				portalURL + layoutURL + "/message_boards/message/" +
+					message.getMessageId();
+
+			body = StringUtil.replace(
+				body,
+				new String[] {
+					"[$NEW_THREAD_URL$]",
+				},
+				new String[] {
+					newThreadURL
+				});
+
 			MBMessageServiceUtil.addMessage(
-				categoryId, threadId, thread.getRootMessageId(), subject, body,
-				new ArrayList(), false, MBThreadImpl.PRIORITY_NOT_GIVEN,
-			    null, prefs, true, true, themeDisplay);
+				message.getCategoryId(), oldThreadId, oldParentMessageId,
+				subject, body, new ArrayList(), false,
+				MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
+				themeDisplay);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
@@ -148,7 +171,7 @@ public class EditThreadAction extends PortletAction {
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(
-			"messageId", String.valueOf(thread.getRootMessageId()));
+			"messageId", String.valueOf(newThread.getRootMessageId()));
 
 		res.sendRedirect(portletURL.toString());
 	}

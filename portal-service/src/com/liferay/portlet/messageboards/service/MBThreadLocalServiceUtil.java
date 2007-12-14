@@ -436,6 +436,25 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getThreadsCount(categoryId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
+		long categoryId, long threadId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.moveThread(categoryId, threadId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
+		long messageId, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.splitThread(messageId, prefs, themeDisplay);
+	}
+
 	public static boolean hasReadThread(long userId, long threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

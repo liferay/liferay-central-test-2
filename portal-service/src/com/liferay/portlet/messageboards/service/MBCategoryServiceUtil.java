@@ -97,14 +97,6 @@ public class MBCategoryServiceUtil {
 		return mbCategoryService.getCategoriesCount(groupId, parentCategoryId);
 	}
 
-	public static void moveThread(long categoryId, long threadId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		mbCategoryService.moveThread(categoryId, threadId);
-	}
-
 	public static void subscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

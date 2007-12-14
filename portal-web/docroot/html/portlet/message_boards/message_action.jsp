@@ -83,7 +83,7 @@ MBCategory category = message.getCategory();
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="moveThreadURL">
-			<portlet:param name="struts_action" value="/message_boards/edit_thread" />
+			<portlet:param name="struts_action" value="/message_boards/move_thread" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 		</portlet:renderURL>

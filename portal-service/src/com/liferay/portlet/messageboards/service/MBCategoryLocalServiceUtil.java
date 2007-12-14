@@ -514,14 +514,6 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.getSystemCategory();
 	}
 
-	public static void moveThread(long categoryId, long threadId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
-
-		mbCategoryLocalService.moveThread(categoryId, threadId);
-	}
-
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();

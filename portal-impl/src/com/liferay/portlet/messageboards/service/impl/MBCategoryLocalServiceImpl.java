@@ -337,15 +337,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return category;
 	}
 
-	public void moveThread(long categoryId, long threadId)
-		throws PortalException, SystemException {
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			threadId);
-
-		moveThread(categoryId, thread);
-	}
-
 	public void reIndex(String[] ids) throws SystemException {
 		if (LuceneUtil.INDEX_READ_ONLY) {
 			return;
@@ -642,50 +633,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscription(
 			userId, MBCategory.class.getName(), categoryId);
-	}
-
-	protected void moveThread(long categoryId, MBThread thread)
-		throws PortalException, SystemException {
-
-		long oldCategoryId = thread.getCategoryId();
-
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			categoryId);
-
-		// Messages
-
-		Iterator itr = mbMessagePersistence.findByC_T(
-			oldCategoryId, thread.getThreadId()).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
-
-			message.setCategoryId(category.getCategoryId());
-
-			mbMessagePersistence.update(message);
-
-			// Lucene
-
-			try {
-				if (!category.isDiscussion()) {
-					Indexer.updateMessage(
-						message.getCompanyId(), category.getGroupId(),
-						message.getUserName(), category.getCategoryId(),
-						message.getThreadId(), message.getMessageId(),
-						message.getSubject(), message.getBody(),
-						message.getTagsEntries());
-				}
-			}
-			catch (IOException ioe) {
-				_log.error("Indexing " + message.getMessageId(), ioe);
-			}
-		}
-
-		// Thread
-
-		thread.setCategoryId(category.getCategoryId());
-
-		mbThreadPersistence.update(thread);
 	}
 
 	protected void validate(String name) throws PortalException {

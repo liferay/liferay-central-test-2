@@ -252,10 +252,6 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void moveThread(long categoryId, long threadId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

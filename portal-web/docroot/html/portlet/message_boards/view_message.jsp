@@ -64,14 +64,10 @@ else {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />scrollIntoView(messageId) {
-		document.getElementById("<portlet:namespace />messageScroll" + messageId).scrollIntoView(true);
-	}
-
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
 		jQuery(document).ready(
 			function() {
-				<portlet:namespace />scrollIntoView(<%= message.getMessageId() %>);
+				document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);
 			}
 		);
 	</c:if>
@@ -206,7 +202,7 @@ else {
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 				<td>
 					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editThreadURL">
-						<portlet:param name="struts_action" value="/message_boards/edit_thread" />
+						<portlet:param name="struts_action" value="/message_boards/move_thread" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 					</portlet:renderURL>
@@ -237,7 +233,7 @@ else {
 	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 	%>
 
-	<div class="message-scroll" id="<portlet:namespace />messageScroll0"></div>
+	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
 
 	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
 		<liferay-ui:toggle

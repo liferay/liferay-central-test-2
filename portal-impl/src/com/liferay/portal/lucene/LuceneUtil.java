@@ -233,7 +233,7 @@ public class LuceneUtil {
 		if (INDEX_READ_ONLY) {
 			return;
 		}
-		
+
 		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
 		IndexWriter writer = null;

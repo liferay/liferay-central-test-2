@@ -66,7 +66,7 @@ boolean quote = false;
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />moveThread(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/move_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />moveThread(); return false;">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 

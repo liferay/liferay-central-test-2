@@ -57,7 +57,11 @@ if (treeWalker.isOdd()) {
 		</c:if>
 
 		<%
-		String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+		String portalURL = PortalUtil.getPortalURL(themeDisplay);
+		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+
+		String messageURL = portalURL + layoutURL + "/message_boards/message/" + selMessage.getMessageId();
+		String rowHREF = messageURL + "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
 		%>
 
 		<a href="<%= rowHREF %>">

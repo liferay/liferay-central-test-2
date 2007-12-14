@@ -756,11 +756,6 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
-		<action path="/message_boards/edit_thread" type="com.liferay.portlet.messageboards.action.EditThreadAction">
-			<forward name="portlet.message_boards.edit_thread" path="portlet.message_boards.edit_thread" />
-			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-		</action>
-
 		<action path="/message_boards/find_category" type="com.liferay.portlet.messageboards.action.FindCategoryAction" />
 
 		<action path="/message_boards/find_message" type="com.liferay.portlet.messageboards.action.FindMessageAction" />
@@ -769,12 +764,22 @@
 
 		<action path="/message_boards/get_message_attachment" type="com.liferay.portlet.messageboards.action.GetMessageAttachmentAction" />
 
+		<action path="/message_boards/move_thread" type="com.liferay.portlet.messageboards.action.MoveThreadAction">
+			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
 		<action path="/message_boards/rss" type="com.liferay.portlet.messageboards.action.RSSAction" />
 
 		<action path="/message_boards/search" forward="portlet.message_boards.search" />
 
 		<action path="/message_boards/select_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
 			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.select_category" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+		<action path="/message_boards/split_thread" type="com.liferay.portlet.messageboards.action.SplitThreadAction">
+			<forward name="portlet.message_boards.split_thread" path="portlet.message_boards.split_thread" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
