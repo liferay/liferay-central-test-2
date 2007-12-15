@@ -84,8 +84,8 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  */
 public class LuceneUtil {
 
-	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(PropsUtil.get(
-		PropsUtil.INDEX_READ_ONLY), false);
+	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.INDEX_READ_ONLY));
 
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");

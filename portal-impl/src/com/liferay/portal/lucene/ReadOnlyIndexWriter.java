@@ -40,49 +40,41 @@ import org.apache.lucene.store.Directory;
  * @author Jorge Ferrer
  */
 public class ReadOnlyIndexWriter extends IndexWriter {
+
 	public ReadOnlyIndexWriter(
-		Directory luceneDir, Analyzer analyzer, boolean b) throws IOException {
+			Directory luceneDir, Analyzer analyzer, boolean create)
+		throws IOException {
 
-		super(luceneDir, analyzer, b);
+		super(luceneDir, analyzer, create);
 	}
 
-	public synchronized void deleteDocuments(Term term)
+	public void addDocument(Document document)
 		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to deleteDocuments");
+			_log.debug("Ignoring invocation to addDocument");
 		}
 	}
 
-	public synchronized void deleteDocuments(Term[] terms)
+	public void addDocument(Document document, Analyzer analyzer)
 		throws CorruptIndexException, IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to deleteDocuments");
-		}
-	}
 
-	public void updateDocument(Term term, Document document)
-		throws CorruptIndexException, IOException {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to updateDocument");
-		}
-	}
-
-	public void updateDocument(Term term, Document document, Analyzer analyzer)
-		throws CorruptIndexException, IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to updateDocument");
-		}
-	}
-
-	public synchronized void optimize()
-		throws CorruptIndexException, IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to optimize");
+			_log.debug("Ignoring invocation to addDocument");
 		}
 	}
 
 	public synchronized void addIndexes(Directory[] directories)
 		throws CorruptIndexException, IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Ignoring invocation to addIndexes");
+		}
+	}
+
+	public synchronized void addIndexes(IndexReader[] indexReaders)
+		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Ignoring invocation to addIndexes");
 		}
@@ -90,29 +82,49 @@ public class ReadOnlyIndexWriter extends IndexWriter {
 
 	public synchronized void addIndexesNoOptimize(Directory[] directories)
 		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Ignoring invocation to addIndexesNoOptimize");
 		}
 	}
 
-	public synchronized void addIndexes(IndexReader[] indexReaders)
+	public synchronized void deleteDocuments(Term term)
 		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to addIndexes");
+			_log.debug("Ignoring invocation to deleteDocuments");
 		}
 	}
 
-	public void addDocument(Document document, Analyzer analyzer)
+	public synchronized void deleteDocuments(Term[] terms)
 		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to addDocument");
+			_log.debug("Ignoring invocation to deleteDocuments");
 		}
 	}
 
-	public void addDocument(Document document)
+	public void updateDocument(Term term, Document document)
 		throws CorruptIndexException, IOException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Ignoring invocation to addDocument");
+			_log.debug("Ignoring invocation to updateDocument");
+		}
+	}
+
+	public void updateDocument(Term term, Document document, Analyzer analyzer)
+		throws CorruptIndexException, IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Ignoring invocation to updateDocument");
+		}
+	}
+
+	public synchronized void optimize()
+		throws CorruptIndexException, IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Ignoring invocation to optimize");
 		}
 	}
 

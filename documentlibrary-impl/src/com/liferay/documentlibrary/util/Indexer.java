@@ -93,18 +93,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries);
 
-		if (!LuceneUtil.INDEX_READ_ONLY) {
-			IndexWriter writer = null;
+		IndexWriter writer = null;
 
-			try {
-				writer = LuceneUtil.getWriter(companyId);
+		try {
+			writer = LuceneUtil.getWriter(companyId);
 
-				writer.addDocument(doc);
-			}
-			finally {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
 			}
 		}
 	}

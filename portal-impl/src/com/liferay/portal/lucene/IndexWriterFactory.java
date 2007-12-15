@@ -72,22 +72,23 @@ import org.apache.lucene.store.FSDirectory;
 public class IndexWriterFactory {
 
 	public IndexWriterFactory() {
+		if (LuceneUtil.INDEX_READ_ONLY) {
+			return;
+		}
 
 		// Create semaphores for all companies
 
 		try {
-			if (!LuceneUtil.INDEX_READ_ONLY) {
-				List companies = CompanyLocalServiceUtil.getCompanies();
+			List companies = CompanyLocalServiceUtil.getCompanies();
 
-				for (int i = 0; i < companies.size(); i++) {
-					Company company = (Company)companies.get(i);
+			for (int i = 0; i < companies.size(); i++) {
+				Company company = (Company)companies.get(i);
 
-					_lockLookup.put(
-						new Long(company.getCompanyId()), new Semaphore(1));
-				}
-
-				_lockLookup.put(new Long(CompanyImpl.SYSTEM), new Semaphore(1));
+				_lockLookup.put(
+					new Long(company.getCompanyId()), new Semaphore(1));
 			}
+
+			_lockLookup.put(new Long(CompanyImpl.SYSTEM), new Semaphore(1));
 		}
 		catch (SystemException se) {
 			_log.error(se);
@@ -96,6 +97,7 @@ public class IndexWriterFactory {
 
 	public void acquireLock(long companyId, boolean needExclusive)
 		throws InterruptedException {
+
 		if (LuceneUtil.INDEX_READ_ONLY) {
 			return;
 		}
@@ -134,6 +136,7 @@ public class IndexWriterFactory {
 
 	public void deleteDocuments(long companyId, Term term)
 		throws InterruptedException, IOException {
+
 		if (LuceneUtil.INDEX_READ_ONLY) {
 			return;
 		}
@@ -163,7 +166,7 @@ public class IndexWriterFactory {
 		throws IOException {
 
 		if (LuceneUtil.INDEX_READ_ONLY) {
-			return _getReadOnlyIndexWriter();
+			return getReadOnlyIndexWriter();
 		}
 
 		Long companyIdObj = new Long(companyId);
@@ -222,22 +225,6 @@ public class IndexWriterFactory {
 				}
 			}
 		}
-	}
-
-	private IndexWriter _getReadOnlyIndexWriter() {
-		if (_readOnlyIndexWriter == null) {
-			try {
-				_log.info("Disabling writing to index for this process");
-
-				_readOnlyIndexWriter = new ReadOnlyIndexWriter(
-					getDummyLuceneDir(), new SimpleAnalyzer(), true);
-			}
-			catch (IOException ioe) {
-				throw new RuntimeException(ioe);
-			}
-		}
-
-		return _readOnlyIndexWriter;
 	}
 
 	public void releaseLock(long companyId) {
@@ -348,19 +335,36 @@ public class IndexWriterFactory {
 		}
 	}
 
-	protected Directory getDummyLuceneDir() throws IOException {
-		if (_dummyLuceneDir == null) {
+	protected IndexWriter getReadOnlyIndexWriter() {
+		if (_readOnlyIndexWriter == null) {
+			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Disabling writing to index for this process");
+				}
+
+				_readOnlyIndexWriter = new ReadOnlyIndexWriter(
+					getReadOnlyLuceneDir(), new SimpleAnalyzer(), true);
+			}
+			catch (IOException ioe) {
+				throw new RuntimeException(ioe);
+			}
+		}
+
+		return _readOnlyIndexWriter;
+	}
+
+	protected Directory getReadOnlyLuceneDir() throws IOException {
+		if (_readOnlyLuceneDir == null) {
 			String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
-			File dir = new File(
-				tmpDir + "/liferay/lucene/dummy");
+			File dir = new File(tmpDir + "/liferay/lucene/empty");
 
 			dir.mkdir();
 
-			_dummyLuceneDir = FSDirectory.getDirectory(dir.getPath(), false);
+			_readOnlyLuceneDir = FSDirectory.getDirectory(dir.getPath(), false);
 		}
 
-		return _dummyLuceneDir;
+		return _readOnlyLuceneDir;
 	}
 
 	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
@@ -371,7 +375,7 @@ public class IndexWriterFactory {
 
 	private static Log _log = LogFactory.getLog(IndexWriterFactory.class);
 
-	private FSDirectory _dummyLuceneDir = null;
+	private FSDirectory _readOnlyLuceneDir = null;
 	private IndexWriter _readOnlyIndexWriter = null;
 	private Map _lockLookup = CollectionFactory.getHashMap();
 	private Map _writerLookup = CollectionFactory.getHashMap();
