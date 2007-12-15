@@ -18156,7 +18156,7 @@ Liferay.Dock = {
 		if (!dock.is('.interactive-mode')) {
 			return;
 		}
-		
+
 		dock.addClass('lfr-component');
 
 		var dockList = dock.find('.lfr-dock-list');
@@ -18327,7 +18327,7 @@ Liferay.Dock = {
 		var myPlacesList = myPlaces.find('> ul');
 
 		myPlacesList.toggleClass('show-my-places');
-		
+
 		if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
 			myPlacesList.find('li ul li').css('position', 'relative');
 		}
@@ -18632,7 +18632,7 @@ var LayoutConfiguration = {
 			var popup = Liferay.Popup({
 				width: 250,
 				noCenter: true,
-				title: Liferay.Language.get("add-content"),
+				title: Liferay.Language.get("add-application"),
 				onClose: function() {
 					instance.menu = null;
 				}

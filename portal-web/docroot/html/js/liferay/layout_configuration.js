@@ -45,7 +45,7 @@ var LayoutConfiguration = {
 			var popup = Liferay.Popup({
 				width: 250,
 				noCenter: true,
-				title: Liferay.Language.get("add-content"),
+				title: Liferay.Language.get("add-application"),
 				onClose: function() {
 					instance.menu = null;
 				}
