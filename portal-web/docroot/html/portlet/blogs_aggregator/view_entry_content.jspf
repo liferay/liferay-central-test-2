@@ -24,6 +24,7 @@
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
 	<div class="entry-content">
+
 		<%
 		StringMaker sm = new StringMaker();
 
@@ -68,6 +69,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 		<div class="comments">
 			<c:choose>
 				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
