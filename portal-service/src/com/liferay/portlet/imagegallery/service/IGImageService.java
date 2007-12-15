@@ -77,6 +77,11 @@ public interface IGImageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
+		long smallImageId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

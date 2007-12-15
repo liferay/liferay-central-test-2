@@ -89,7 +89,20 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	public IGImage getImageByLargeImageId(long largeImageId)
 		throws PortalException, SystemException {
 
-		IGImage image = igImageLocalService.getImageByLargeImageId(largeImageId);
+		IGImage image = igImageLocalService.getImageByLargeImageId(
+			largeImageId);
+
+		IGImagePermission.check(
+			getPermissionChecker(), image.getImageId(), ActionKeys.VIEW);
+
+		return image;
+	}
+
+	public IGImage getImageBySmallImageId(long smallImageId)
+		throws PortalException, SystemException {
+
+		IGImage image = igImageLocalService.getImageBySmallImageId(
+			smallImageId);
 
 		IGImagePermission.check(
 			getPermissionChecker(), image.getImageId(), ActionKeys.VIEW);

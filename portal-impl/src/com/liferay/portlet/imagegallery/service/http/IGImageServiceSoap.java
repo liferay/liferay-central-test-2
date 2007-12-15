@@ -120,5 +120,19 @@ public class IGImageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImageBySmallImageId(
+		long smallImageId) throws RemoteException {
+		try {
+			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageBySmallImageId(smallImageId);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(IGImageServiceSoap.class);
 }

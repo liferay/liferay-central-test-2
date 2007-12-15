@@ -720,6 +720,95 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public IGImage findBySmallImageId(long smallImageId)
+		throws NoSuchImageException, SystemException {
+		IGImage igImage = fetchBySmallImageId(smallImageId);
+
+		if (igImage == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("smallImageId=" + smallImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchImageException(msg.toString());
+		}
+
+		return igImage;
+	}
+
+	public IGImage fetchBySmallImageId(long smallImageId)
+		throws SystemException {
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "fetchBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("imageId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (IGImage)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (IGImage)list.get(0);
+			}
+		}
+	}
+
 	public IGImage findByLargeImageId(long largeImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByLargeImageId(largeImageId);
@@ -939,6 +1028,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeBySmallImageId(long smallImageId)
+		throws NoSuchImageException, SystemException {
+		IGImage igImage = findBySmallImageId(smallImageId);
+
+		remove(igImage);
+	}
+
 	public void removeByLargeImageId(long largeImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByLargeImageId(largeImageId);
@@ -1051,6 +1147,66 @@ public class IGImagePersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, folderId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countBySmallImageId(long smallImageId) throws SystemException {
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "countBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
 
 				Long count = null;
 

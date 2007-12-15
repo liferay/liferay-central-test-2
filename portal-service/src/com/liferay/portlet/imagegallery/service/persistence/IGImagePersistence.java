@@ -113,6 +113,14 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.SystemException, 
@@ -144,6 +152,10 @@ public interface IGImagePersistence {
 	public void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
 	public void removeByLargeImageId(long largeImageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -154,6 +166,9 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByFolderId(long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByLargeImageId(long largeImageId)
