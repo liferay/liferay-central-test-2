@@ -32,6 +32,12 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUEST
 List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
+
+boolean viewResults = ParamUtil.getBoolean(request, "viewResults", false);
+	
+if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE)) {
+	viewResults = false;
+}
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
@@ -53,7 +59,7 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 <br /><br />
 
 <c:choose>
-	<c:when test='<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
+	<c:when test='<%= !viewResults && !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
 		<table class="lfr-table">
 
 		<%
@@ -81,7 +87,18 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
 		</table>
 
-		<br />
+		<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
+				<portlet:param name="struts_action" value="/polls/view_question" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
+				<portlet:param name="viewResults" value="1" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="view" label="<%= true %>" message="view-results" url="<%= viewResultsURL %>" />
+		</c:if>
+
+		<br /><br />
 
 		<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
