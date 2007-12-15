@@ -33,122 +33,122 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post">
 
 <fieldset class="block-labels">
-<legend><%= title %></legend>
+	<legend><%= title %></legend>
 
-<p class="description"><%= description %></p>
+	<p class="description"><%= description %></p>
 
-<liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
-<liferay-ui:success key="saveToFileSuccees" message="the-file-was-saved-successfully" />
+	<liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
+	<liferay-ui:success key="saveToFileSuccees" message="the-file-was-saved-successfully" />
 
-<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-<liferay-ui:error key="allFieldsRequired" message="please-complete-all-fields" />
-<liferay-ui:error key="emailNotSent" message="the-email-could-not-be-sent" />
-<liferay-ui:error key="saveToFileFailure" message="the-file-could-not-be-saved" />
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error key="allFieldsRequired" message="please-complete-all-fields" />
+	<liferay-ui:error key="emailNotSent" message="the-email-could-not-be-sent" />
+	<liferay-ui:error key="saveToFileFailure" message="the-file-could-not-be-saved" />
 
-<%
-int i = 1;
+	<%
+	int i = 1;
 
-String fieldName = "field" + i;
-String fieldLabel = prefs.getValue("fieldLabel" + i, "");
-boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
-String fieldValue = ParamUtil.getString(request, fieldName);
+	String fieldName = "field" + i;
+	String fieldLabel = prefs.getValue("fieldLabel" + i, "");
+	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
+	String fieldValue = ParamUtil.getString(request, fieldName);
 
-while ((i == 1) || (fieldLabel.trim().length() > 0)) {
-	if (Validator.isNull(fieldLabel)) {
-       continue;
-    }
+	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
+		if (Validator.isNull(fieldLabel)) {
+		   continue;
+		}
 
-	String fieldType = prefs.getValue("fieldType" + i, "text");
-	String fieldOptions = prefs.getValue("fieldOptions" + i, "unknown");
-%>
+		String fieldType = prefs.getValue("fieldType" + i, "text");
+		String fieldOptions = prefs.getValue("fieldOptions" + i, "unknown");
+	%>
 
-	<c:choose>
-		<c:when test='<%= fieldType.equals("paragraph") %>'>
-			<p class="lfr-webform"><%= fieldOptions %></p>
-		</c:when>
-		<c:when test='<%= fieldType.equals("text") %>'>
-			<div class="ctrl-holder">
-				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+		<c:choose>
+			<c:when test='<%= fieldType.equals("paragraph") %>'>
+				<p class="lfr-webform"><%= fieldOptions %></p>
+			</c:when>
+			<c:when test='<%= fieldType.equals("text") %>'>
+				<div class="ctrl-holder">
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
-				<input class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
-			</div>
-		</c:when>
-		<c:when test='<%= fieldType.equals("textarea") %>'>
-			<div class="ctrl-holder">
-				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+					<input class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
+				</div>
+			</c:when>
+			<c:when test='<%= fieldType.equals("textarea") %>'>
+				<div class="ctrl-holder">
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
-				<textarea class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
-			</div>
-		</c:when>
-		<c:when test='<%= fieldType.equals("checkbox") %>'>
-		<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" /> <%= fieldLabel %></label>
-			</div>
-		</c:when>
-		<c:when test='<%= fieldType.equals("radio") %>'>
-
-
-			<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-				<%
-				String[] options = WebFormUtil.split(fieldOptions);
-
-				for (int j = 0; j < options.length; j++) {
-				%>
-
-					<label><input type="radio" name="<portlet:namespace /><%= fieldName %>" <%= fieldValue.equals(options[j]) ? "checked=\"true\"" : "" %> value="<%= options[j] %>" /> <%= options[j] %></label>
-				<%
-				}
-				%>
-
-			</div>
-		</c:when>
-		<c:when test='<%= fieldType.equals("options") %>'>
-
-
-			<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-				<%
-				String[] options = WebFormUtil.split(fieldOptions);
-				%>
-
-				<select name="<portlet:namespace /><%= fieldName %>">
+					<textarea class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
+				</div>
+			</c:when>
+			<c:when test='<%= fieldType.equals("checkbox") %>'>
+				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" /> <%= fieldLabel %></label>
+				</div>
+			</c:when>
+			<c:when test='<%= fieldType.equals("radio") %>'>
+				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 					<%
+					String[] options = WebFormUtil.split(fieldOptions);
+
 					for (int j = 0; j < options.length; j++) {
 					%>
 
-						<option <%= fieldValue.equals(options[j]) ? "selected" : "" %> value="<%= options[j] %>"><%= options[j] %></option>
+						<label><input type="radio" name="<portlet:namespace /><%= fieldName %>" <%= fieldValue.equals(options[j]) ? "checked=\"true\"" : "" %> value="<%= options[j] %>" /> <%= options[j] %></label>
 
 					<%
 					}
 					%>
 
-				</select>
-			</div>
-		</c:when>
-	</c:choose>
-<%
-    i++;
+				</div>
+			</c:when>
+			<c:when test='<%= fieldType.equals("options") %>'>
+				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
-    fieldName = "field" + i;
-    fieldLabel = prefs.getValue("fieldLabel" + i, "");
-    fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
-    fieldValue = ParamUtil.getString(request, fieldName);
-}
-%>
+					<%
+					String[] options = WebFormUtil.split(fieldOptions);
+					%>
 
-<c:if test="<%= requireCaptcha %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-		<portlet:param name="struts_action" value="/web_form/captcha" />
-	</portlet:actionURL>
+					<select name="<portlet:namespace /><%= fieldName %>">
 
-	<liferay-ui:captcha url="<%= captchaURL %>" />
-</c:if>
+						<%
+						for (int j = 0; j < options.length; j++) {
+						%>
 
-<div class="button-holder">
-	<input type="submit" value="<liferay-ui:message key="send" />" />
-</div>
+							<option <%= fieldValue.equals(options[j]) ? "selected" : "" %> value="<%= options[j] %>"><%= options[j] %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+				</div>
+			</c:when>
+		</c:choose>
+
+	<%
+		i++;
+
+		fieldName = "field" + i;
+		fieldLabel = prefs.getValue("fieldLabel" + i, "");
+		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
+		fieldValue = ParamUtil.getString(request, fieldName);
+	}
+	%>
+
+	<c:if test="<%= requireCaptcha %>">
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+			<portlet:param name="struts_action" value="/web_form/captcha" />
+		</portlet:actionURL>
+
+		<liferay-ui:captcha url="<%= captchaURL %>" />
+	</c:if>
+
+	<div class="button-holder">
+		<input type="submit" value="<liferay-ui:message key="send" />" />
+	</div>
 </fieldset>
 
 </form>
