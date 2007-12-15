@@ -317,9 +317,9 @@ public class EditServerAction extends PortletAction {
 	protected void threadDump() throws Exception {
 		String jvm =
 			System.getProperty("java.vm.name") + " " +
-			System.getProperty("java.vm.version");
+				System.getProperty("java.vm.version");
 
-		StringBuffer sb;
+		StringBuffer sb = null;
 
 		try {
 			sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
@@ -366,6 +366,7 @@ public class EditServerAction extends PortletAction {
 		}
 		catch (Exception e) {
 			ThreadGroup root = Thread.currentThread().getThreadGroup();
+
 			while (root.getParent() != null) {
 		    	root = root.getParent();
 			}
