@@ -48,7 +48,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 /**
- * <a href="CalendarPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalendarPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  *
