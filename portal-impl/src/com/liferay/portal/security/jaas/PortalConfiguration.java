@@ -67,7 +67,8 @@ public class PortalConfiguration extends Configuration {
 			}
 
 			AppConfigurationEntry ace = new AppConfigurationEntry(
-				com.liferay.portal.kernel.security.jaas.PortalLoginModule.class.getName(),
+				com.liferay.portal.kernel.security.jaas.PortalLoginModule.class.
+					getName(),
 				AppConfigurationEntry.LoginModuleControlFlag.SUFFICIENT,
 				options);
 
