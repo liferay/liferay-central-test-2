@@ -41,16 +41,7 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
 
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-List headerNames = new ArrayList();
-
-headerNames.add("name");
-headerNames.add("parent-organization");
-headerNames.add("type");
-headerNames.add("city");
-headerNames.add("region");
-headerNames.add("country");
-
-searchContainer.setHeaderNames(headerNames);
+List headerNames = searchContainer.getHeaderNames();
 
 headerNames.add(StringPool.BLANK);
 
@@ -78,7 +69,11 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	LinkedHashMap orgParams = new LinkedHashMap();
 
 	if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		orgParams.put("organizationsUsers", new Long(user.getUserId()));
+		List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+
+		Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
+
+		orgParams.put("organizations", manageableOrganizationIds);
 	}
 
 	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
@@ -101,10 +96,10 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	List results = null;
 
 	if (searchTerms.isAdvancedSearch()) {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 	}
 	else {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchContainer.getStart(), searchContainer.getEnd());
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 	}
 
 	searchContainer.setResults(results);

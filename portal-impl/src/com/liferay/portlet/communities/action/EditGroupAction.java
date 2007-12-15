@@ -137,7 +137,7 @@ public class EditGroupAction extends PortletAction {
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
-		String type = ParamUtil.getString(req, "type");
+		int type = ParamUtil.getInteger(req, "type");
 		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
 		boolean active = ParamUtil.getBoolean(req, "active");
 

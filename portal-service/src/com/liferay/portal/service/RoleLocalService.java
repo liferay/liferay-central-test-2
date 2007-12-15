@@ -408,12 +408,14 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type, int begin, int end)
+		java.lang.String description, java.lang.Integer type, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List search(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,

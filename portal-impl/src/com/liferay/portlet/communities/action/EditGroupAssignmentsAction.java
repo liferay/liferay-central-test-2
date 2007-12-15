@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
@@ -76,7 +77,16 @@ public class EditGroupAssignmentsAction extends PortletAction {
 				updateUserGroupRole(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				String redirect = ParamUtil.getString(
+					req, "assignmentsRedirect");
+
+				if (Validator.isNull(redirect)) {
+					redirect = ParamUtil.getString(req, "redirect");
+				}
+
+				sendRedirect(req, res, redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||

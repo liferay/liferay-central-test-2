@@ -927,22 +927,24 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type, int begin, int end)
+		java.lang.String description, java.lang.Integer type, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.search(companyId, name, description, type,
-			begin, end);
+			begin, end, obc);
 	}
 
 	public static java.util.List search(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.search(companyId, name, description, type,
-			params, begin, end);
+			params, begin, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

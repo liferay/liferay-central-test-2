@@ -22,7 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.util.PropsUtil;
 
 /**
  * <a href="CountryImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +34,9 @@ import com.liferay.portal.model.Country;
  */
 public class CountryImpl extends CountryModelImpl implements Country {
 
-	public static final int DEFAULT_COUNTRY_ID = 19;
+	public static final int DEFAULT_COUNTRY_ID =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_COUNTRY_COUNTRY_ID));
 
 	public CountryImpl() {
 	}

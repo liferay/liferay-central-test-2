@@ -26,6 +26,16 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+
+List manageableOrganizations = null;
+
+Long[] manageableOrganizationIds = null;
+
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+
+	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
+}
 %>
 
 <input name="<portlet:namespace />deleteUserIds" type="hidden" value="" />
@@ -65,33 +75,16 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	long roleId = searchTerms.getRoleId();
 	long userGroupId = searchTerms.getUserGroupId();
 
-	List allowedOrganizations = null;
-
-	if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		allowedOrganizations = user.getOrganizations();
-
-		long firstUserOrganizationId = user.getOrganization().getOrganizationId();
-
-		if ((organizationId <= 0) || (organizationId == firstUserOrganizationId)) {
-			organizationId = firstUserOrganizationId;
-		}
-		else {
-			try {
-				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-				if (!allowedOrganizations.contains(organization)) {
-					organizationId = firstUserOrganizationId;
-				}
-			}
-			catch (Exception e) {
-				organizationId = firstUserOrganizationId;
-			}
-		}
-	}
-
 	LinkedHashMap userParams = new LinkedHashMap();
 
-	userParams.put("usersOrgs", new Long(organizationId));
+	if (organizationId > 0) {
+		userParams.put("usersOrgs", new Long(organizationId));
+	}
+	else {
+		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+			userParams.put("usersOrgs", manageableOrganizationIds);
+		}
+	}
 
 	if (roleId > 0) {
 		userParams.put("usersRoles", new Long(roleId));
@@ -141,31 +134,9 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	</c:if>
 
 	<c:if test="<%= organization != null %>">
-		<liferay-ui:message key="filter-by-organization" />:
+		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-		<c:choose>
-			<c:when test="<%= (allowedOrganizations == null) || (allowedOrganizations.size() == 1) %>">
-				<%= organization.getName() %>
-			</c:when>
-			<c:otherwise>
-				<select name="<portlet:namespace />organizationId" onchange="submitForm(this.form);">
-
-					<%
-					Iterator itr = allowedOrganizations.iterator();
-
-					while (itr.hasNext()) {
-						Organization curOrg = (Organization)itr.next();
-					%>
-
-						<option <%= (organizationId == curOrg.getOrganizationId()) ? "selected" : "" %> value="<%= curOrg.getOrganizationId() %>"><%= curOrg.getName() %></option>
-
-					<%
-					}
-					%>
-
-				</select>
-			</c:otherwise>
-		</c:choose>
+		<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
 	</c:if>
 
 	<c:if test="<%= role != null %>">
@@ -210,9 +181,13 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
-		// Name
+		// First name
 
-		row.addText(user2.getFullName(), rowURL);
+		row.addText(user2.getFirstName(), rowURL);
+
+		// Last name
+
+		row.addText(user2.getLastName(), rowURL);
 
 		// Screen name
 
@@ -230,9 +205,13 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		// Organizations
 
-		List userOrgs = user2.getOrganizations();
+		List organizations = user2.getOrganizations();
 
-		row.addText(ListUtil.toString(userOrgs, "name", ", "), rowURL);
+		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+			organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
+		}
+
+		row.addText(ListUtil.toString(organizations, "name", ", "), rowURL);
 
 		// Action
 

@@ -84,9 +84,9 @@ public interface GroupModel extends BaseModel {
 
 	public void setDescription(String description);
 
-	public String getType();
+	public int getType();
 
-	public void setType(String type);
+	public void setType(int type);
 
 	public String getTypeSettings();
 

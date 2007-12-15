@@ -56,6 +56,12 @@ public class RoleImpl extends RoleModelImpl implements Role {
 	public static final String ORGANIZATION_ADMINISTRATOR =
 		RoleNames.ORGANIZATION_ADMINISTRATOR;
 
+	public static final String ORGANIZATION_MEMBER =
+		RoleNames.ORGANIZATION_MEMBER;
+
+	public static final String ORGANIZATION_OWNER =
+		RoleNames.ORGANIZATION_OWNER;
+
 	public static final String[] SYSTEM_ORGANIZATION_ROLES =
 		RoleNames.SYSTEM_ORGANIZATION_ROLES;
 

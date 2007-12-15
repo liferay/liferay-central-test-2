@@ -80,7 +80,7 @@ int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerm
 
 searchContainer.setTotal(total);
 
-List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 searchContainer.setResults(results);
 %>
@@ -117,17 +117,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Type
 
-	String type = GetterUtil.getString(group.getType());
-
-	if (type.equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
-		row.addText(LanguageUtil.get(pageContext, "open"));
-	}
-	else if (type.equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
-		row.addText(LanguageUtil.get(pageContext, "restricted"));
-	}
-	else {
-		row.addText(LanguageUtil.get(pageContext, "private"));
-	}
+	row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowHREF);
 
 	// Members
 

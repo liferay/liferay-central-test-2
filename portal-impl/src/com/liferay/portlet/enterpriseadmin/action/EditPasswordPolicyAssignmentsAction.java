@@ -68,7 +68,10 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				String redirect = ParamUtil.getString(
+					req, "assignmentsRedirect");
+
+				sendRedirect(req, res, redirect);
 			}
 		}
 		catch (Exception e) {

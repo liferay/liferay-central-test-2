@@ -244,10 +244,6 @@
 		<put name="portlet_content" value="/portlet/communities/edit_pages.jsp" />
 	</definition>
 
-	<definition name="portlet.communities.edit_user_permissions" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_user_permissions.jsp" />
-	</definition>
-
 	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
 	</definition>
@@ -379,6 +375,10 @@
 
 	<definition name="portlet.enterprise_admin.edit_organization" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.edit_organization_assignments" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_password_policy" extends="portlet.enterprise_admin">

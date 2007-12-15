@@ -22,9 +22,17 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * <a href="GroupPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +45,7 @@ public class GroupPermissionImpl implements GroupPermission {
 	public void check(
 			PermissionChecker permissionChecker, long groupId,
 			String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, groupId, actionId)) {
 			throw new PrincipalException();
@@ -45,7 +53,44 @@ public class GroupPermissionImpl implements GroupPermission {
 	}
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long groupId, String actionId) {
+			PermissionChecker permissionChecker, long groupId, String actionId)
+		throws PortalException, SystemException {
+
+		if (actionId.equals(ActionKeys.MANAGE_LAYOUTS)) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isOrganization()) {
+				long organizationId = group.getClassPK();
+
+				return OrganizationPermissionUtil.contains(
+					permissionChecker, organizationId, actionId);
+			}
+			else if (group.isUser()) {
+
+				// An individual user would never reach this block because he
+				// would be an administrator of his own layouts. However, a user
+				// who manages a set of organizations may be modifying pages of
+				// a user he manages.
+
+				long userId = group.getClassPK();
+
+				List organizations =
+					OrganizationLocalServiceUtil.getUserOrganizations(
+						userId);
+
+				for (int i = 0; i < organizations.size(); i++) {
+					Organization organization =
+						(Organization)organizations.get(i);
+
+					if (OrganizationPermissionUtil.contains(
+							permissionChecker, organization.getOrganizationId(),
+							ActionKeys.MANAGE_USERS)) {
+
+						return true;
+					}
+				}
+			}
+		}
 
 		// Group id must be set so that users can modify their personal pages
 

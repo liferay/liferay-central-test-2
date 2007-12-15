@@ -34,53 +34,19 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Organization organization = (Organization)row.getObject();
 
 long organizationId = organization.getOrganizationId();
+
+long organizationGroupId = organization.getGroup().getGroupId();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:renderURL>
-
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:actionURL>
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
-	</portlet:renderURL>
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="organizationIds" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:renderURL>
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
-		<portlet:param name="tabs1" value="users" />
-		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:renderURL>
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
-		<portlet:param name="tabs1" value="organizations" />
-		<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:renderURL>
-
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-		<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-	</portlet:renderURL>
-
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
+			</portlet:renderURL>
+
 			<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 		</c:if>
 
@@ -95,34 +61,83 @@ long organizationId = organization.getOrganizationId();
 			<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
 		</c:if>
 
-		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-			<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 		</c:if>
 
-		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
-			<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
-
+		<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
 		</c:if>
+
+		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_MEMBERS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+		</c:if>
+
+		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_USERS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="organizationIds" value="<%= String.valueOf(organizationId) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
+		</c:if>
 	</c:if>
+
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/view" />
+		<portlet:param name="tabs1" value="users" />
+		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
+	</portlet:renderURL>
 
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
 	<c:if test="<%= organization.isRegular() %>">
-		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
+		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+			</portlet:renderURL>
+
 			<liferay-ui:icon image="add_location" message="add-suborganization" url="<%= addSuborganizationURL %>" />
 		</c:if>
+
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/view" />
+			<portlet:param name="tabs1" value="organizations" />
+			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+		</portlet:renderURL>
 
 		<liferay-ui:icon image="view_locations" message="view-suborganizations" url="<%= viewSuborganizationsURL %>" />
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+	<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
+		</portlet:actionURL>
+
 		<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

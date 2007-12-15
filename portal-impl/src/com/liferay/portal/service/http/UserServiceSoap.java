@@ -92,6 +92,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void addOrganizationUsers(long organizationId, long[] userIds)
+		throws RemoteException {
+		try {
+			UserServiceUtil.addOrganizationUsers(organizationId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds) throws RemoteException {
 		try {
@@ -322,18 +334,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setGroupUsers(long groupId, long[] userIds)
-		throws RemoteException {
-		try {
-			UserServiceUtil.setGroupUsers(groupId, userIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {
@@ -362,6 +362,18 @@ public class UserServiceSoap {
 		throws RemoteException {
 		try {
 			UserServiceUtil.unsetGroupUsers(groupId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsetOrganizationUsers(long organizationId,
+		long[] userIds) throws RemoteException {
+		try {
+			UserServiceUtil.unsetOrganizationUsers(organizationId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

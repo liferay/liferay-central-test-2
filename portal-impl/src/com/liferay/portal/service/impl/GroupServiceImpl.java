@@ -44,7 +44,7 @@ import java.util.List;
 public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public Group addGroup(
-			String name, String description, String type, String friendlyURL,
+			String name, String description, int type, String friendlyURL,
 			boolean active)
 		throws PortalException, SystemException {
 
@@ -56,7 +56,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	public Group addGroup(
-			long liveGroupId, String name, String description, String type,
+			long liveGroupId, String name, String description, int type,
 			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
@@ -156,7 +156,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	public Group updateGroup(
-			long groupId, String name, String description, String type,
+			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 

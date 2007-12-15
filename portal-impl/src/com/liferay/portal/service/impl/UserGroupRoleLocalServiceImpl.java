@@ -26,6 +26,8 @@ import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
@@ -176,7 +178,7 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
 
@@ -189,6 +191,20 @@ public class UserGroupRoleLocalServiceImpl
 		else {
 			return false;
 		}
+	}
+
+	public boolean hasUserGroupRole(long userId, long groupId, String roleName)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		long companyId = user.getCompanyId();
+
+		Role role = rolePersistence.findByC_N(companyId, roleName);
+
+		long roleId = role.getRoleId();
+
+		return hasUserGroupRole(userId, groupId, roleId);
 	}
 
 	protected void checkGroupResource(long groupId)

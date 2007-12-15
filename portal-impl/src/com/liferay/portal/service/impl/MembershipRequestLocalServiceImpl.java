@@ -36,10 +36,10 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.RoleNames;
 import com.liferay.util.UniqueList;
 
 import java.io.IOException;
@@ -277,8 +277,7 @@ public class MembershipRequestLocalServiceImpl
 		List admins = new UniqueList();
 
 		Role communityAdminRole = roleLocalService.getRole(
-			membershipRequest.getCompanyId(),
-			RoleNames.COMMUNITY_ADMINISTRATOR);
+			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
 
 		List communityAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
@@ -286,8 +285,8 @@ public class MembershipRequestLocalServiceImpl
 
 		admins.addAll(communityAdmins);
 
-		Role communityOwnerRole = roleLocalService.getRole(
-			membershipRequest.getCompanyId(), RoleNames.COMMUNITY_OWNER);
+		Role communityOwnerRole = rolePersistence.findByC_N(
+			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
 		List communityOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(

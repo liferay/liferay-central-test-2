@@ -161,11 +161,11 @@ public class GroupSoap implements Serializable {
 		_description = description;
 	}
 
-	public String getType() {
+	public int getType() {
 		return _type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		_type = type;
 	}
 
@@ -206,7 +206,7 @@ public class GroupSoap implements Serializable {
 	private long _liveGroupId;
 	private String _name;
 	private String _description;
-	private String _type;
+	private int _type;
 	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;

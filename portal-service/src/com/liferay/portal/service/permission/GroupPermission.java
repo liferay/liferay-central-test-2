@@ -22,8 +22,9 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.security.auth.PrincipalException;
 
 /**
  * <a href="GroupPermission.java.html"><b><i>View Source</i></b></a>
@@ -36,9 +37,10 @@ public interface GroupPermission {
 	public void check(
 			PermissionChecker permissionChecker, long groupId,
 			String actionId)
-		throws PrincipalException;
+		throws PortalException, SystemException;
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long groupId, String actionId);
+			PermissionChecker permissionChecker, long groupId, String actionId)
+		throws PortalException, SystemException;
 
 }

@@ -30,6 +30,8 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
 String cur = ParamUtil.getString(request, "cur");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PASSWORD_POLICY);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -40,21 +42,22 @@ portletURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updatePasswordPolicyOrganizations(redirect) {
+	function <portlet:namespace />updatePasswordPolicyOrganizations(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "password_policy_organizations";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updatePasswordPolicyUsers(redirect) {
+	function <portlet:namespace />updatePasswordPolicyUsers(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "password_policy_users";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
@@ -66,12 +69,8 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
-
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="password-policies" />
-</liferay-util:include>
 
 <liferay-ui:message key="edit-assignments-for-password-policy" />: <%= passwordPolicy.getName() %>
 
@@ -81,6 +80,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 	names="users,organizations"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
+	backURL="<%= redirect %>"
 />
 
 <c:choose>
@@ -195,15 +195,6 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		<br /><br />
 
 		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-		headerNames.add("parent-organization");
-		headerNames.add("type");
-		headerNames.add("city");
-
-		searchContainer.setHeaderNames(headerNames);
-
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
@@ -235,11 +226,43 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
-			// Address
+			// City
 
 			Address address = organization.getAddress();
 
 			row.addText(address.getCity());
+
+			// Region
+
+			String regionName = address.getRegion().getName();
+
+			if (Validator.isNull(regionName)) {
+				try {
+					Region region = RegionServiceUtil.getRegion(organization.getRegionId());
+
+					regionName = LanguageUtil.get(pageContext, region.getName());
+				}
+				catch (NoSuchRegionException nsce) {
+				}
+			}
+
+			row.addText(regionName);
+
+			// Country
+
+			String countryName = address.getCountry().getName();
+
+			if (Validator.isNull(countryName)) {
+				try {
+					Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+
+					countryName = LanguageUtil.get(pageContext, country.getName());
+				}
+				catch (NoSuchCountryException nsce) {
+				}
+			}
+
+			row.addText(countryName);
 
 			// Add result row
 

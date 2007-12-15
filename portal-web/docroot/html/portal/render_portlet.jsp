@@ -70,9 +70,9 @@ catch (NoSuchResourceException nsre) {
 				}
 			}
 			else if (group.isOrganization()) {
-				Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+				long organizationId = group.getClassPK();
 
-				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
+				if (OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS)) {
 					addDefaultResource = true;
 				}
 			}
@@ -386,7 +386,7 @@ else {
 }
 
 urlConfiguration.setParameter("redirect", currentURL);
-urlConfiguration.setParameter("backURL", currentURL);
+urlConfiguration.setParameter("returnToFullPageURL", currentURL);
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
 urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 
@@ -579,13 +579,13 @@ else if (portletDisplay.isStateMax()) {
 
 		urlBack = urlMax.toString() + "#p_" + portletResource;*/
 
-		//urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
+		//urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
 	//}
 	//else {
 	//	urlBack = urlMax.toString();
 	//}
 
-	urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
+	urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
 
 	if (Validator.isNull(urlBack)) {
 		urlBack = urlMax.toString();

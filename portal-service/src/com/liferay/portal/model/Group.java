@@ -49,8 +49,6 @@ package com.liferay.portal.model;
  *
  */
 public interface Group extends GroupModel {
-	public java.lang.String getDescriptiveName();
-
 	public boolean isCommunity();
 
 	public boolean isOrganization();
@@ -64,6 +62,10 @@ public interface Group extends GroupModel {
 	public boolean hasStagingGroup();
 
 	public boolean isStagingGroup();
+
+	public java.lang.String getDescriptiveName();
+
+	public java.lang.String getTypeLabel();
 
 	public java.lang.String getTypeSettings();
 

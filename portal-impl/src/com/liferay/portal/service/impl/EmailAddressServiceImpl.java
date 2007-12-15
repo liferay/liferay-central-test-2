@@ -45,7 +45,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return emailAddressLocalService.addEmailAddress(
@@ -58,7 +58,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 		EmailAddress emailAddress = emailAddressPersistence.findByPrimaryKey(
 			emailAddressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 
@@ -71,7 +71,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 		EmailAddress emailAddress = emailAddressPersistence.findByPrimaryKey(
 			emailAddressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.VIEW);
 
@@ -81,7 +81,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 	public List getEmailAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return emailAddressLocalService.getEmailAddresses(
@@ -95,7 +95,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 		EmailAddress emailAddress = emailAddressPersistence.findByPrimaryKey(
 			emailAddressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 

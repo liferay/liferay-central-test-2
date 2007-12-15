@@ -31,7 +31,7 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 String cur = ParamUtil.getString(request, "cur");
 
 String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL");
+String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
@@ -93,7 +93,7 @@ portletURL.setParameter("struts_action", "/portlet_configuration/edit_permission
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("backURL", backURL);
+portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 portletURL.setParameter("modelResourceDescription", UnicodeFormatter.toString(modelResourceDescription));
@@ -267,6 +267,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
 	}
 	else if (group.isOrganization()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 	}
 
@@ -280,9 +281,11 @@ else {
 	Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 	if (group.isUser()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
 	}
 	else if (group.isOrganization()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 	}
 }
@@ -529,7 +532,7 @@ else {
 				headerNames.add("type");
 				headerNames.add("city");
 				headerNames.add("permissions");
-				headerNames.add("exclusive");
+				//headerNames.add("exclusive");
 
 				searchContainer.setHeaderNames(headerNames);
 
@@ -564,7 +567,7 @@ else {
 
 					row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
-					// Address
+					// City
 
 					Address address = organization.getAddress();
 
@@ -572,29 +575,29 @@ else {
 
 					// Permissions
 
-					boolean organizationIntersection = false;
+					//boolean organizationIntersection = false;
 
 					List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
-					if (permissions.size() == 0) {
+					/*if (permissions.size() == 0) {
 						permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
 						if (permissions.size() > 0) {
 							organizationIntersection = true;
 						}
-					}
+					}*/
 
 					List actions = ResourceActionsUtil.getActions(permissions);
 					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
 					row.addText(StringUtil.merge(actionsNames, ", "));
 
-					if (permissions.size() == 0) {
+					/*if (permissions.size() == 0) {
 						row.addText(StringPool.BLANK);
 					}
 					else {
 						row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
-					}
+					}*/
 
 					// Add result row
 
@@ -613,17 +616,17 @@ else {
 				<liferay-ui:tabs names="<%= Html.escape(organization.getName()) %>" />
 
 				<%
-				boolean organizationIntersection = false;
+				//boolean organizationIntersection = false;
 
 				List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
-				if (permissions.size() == 0) {
+				/*if (permissions.size() == 0) {
 					permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
 					if (permissions.size() > 0) {
 						organizationIntersection = true;
 					}
-				}
+				}*/
 
 				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 				List actions2 = ResourceActionsUtil.getActions(permissions);
@@ -667,7 +670,7 @@ else {
 
 				<br />
 
-				<table class="lfr-table">
+				<%--<table class="lfr-table">
 				<tr>
 					<td>
 						<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
@@ -681,7 +684,7 @@ else {
 				</tr>
 				</table>
 
-				<br />
+				<br />--%>
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -743,7 +746,7 @@ else {
 
 				searchContainer.setTotal(total);
 
-				List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
+				List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 				searchContainer.setResults(results);
 				%>
@@ -858,7 +861,7 @@ else {
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles")%>'>
+	<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
 
 		<%
 		String roleIds = ParamUtil.getString(request, "roleIds");
@@ -914,7 +917,7 @@ else {
 
 				searchContainer.setTotal(total);
 
-				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams, searchContainer.getStart(), searchContainer.getEnd());
+				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 				searchContainer.setResults(results);
 				%>
@@ -929,6 +932,7 @@ else {
 				List headerNames = new ArrayList();
 
 				headerNames.add("name");
+				headerNames.add("type");
 				headerNames.add("permissions");
 
 				searchContainer.setHeaderNames(headerNames);
@@ -943,6 +947,10 @@ else {
 					// Name
 
 					row.addText(role.getName());
+
+					// Type
+
+					row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
 
 					// Permissions
 
@@ -1029,7 +1037,7 @@ else {
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("community") %>'>
+	<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
 
 		<%
 		Group group = GroupLocalServiceUtil.getGroup(groupId);

@@ -255,7 +255,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.PERMISSIONS) &&
 				 !permissionChecker.hasPermission(
-					groupId, name, primKey, ActionKeys.ADD_PERMISSIONS)) {
+					groupId, name, primKey, ActionKeys.DEFINE_PERMISSIONS)) {
 
 			throw new PrincipalException();
 		}

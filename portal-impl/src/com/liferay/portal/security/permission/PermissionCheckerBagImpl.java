@@ -22,26 +22,16 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.PermissionServiceUtil;
-import com.liferay.portal.service.ResourceServiceUtil;
-import com.liferay.portal.service.RoleServiceUtil;
-import com.liferay.portal.util.PortalUtil;
-
-import java.rmi.RemoteException;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,99 +85,139 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return _roles;
 	}
 
-	public boolean isCompanyAdmin(long companyId) throws Exception {
-		String key = String.valueOf(companyId);
+	public boolean isCommunityAdmin(
+			PermissionChecker permissionChecker, Object groupObj)
+		throws Exception {
 
-		Boolean value = (Boolean)_isCompanyAdmin.get(key);
+		Group group = (Group)groupObj;
+
+		String key = String.valueOf(group.getGroupId());
+
+		Boolean value = (Boolean)_communityAdmins.get(key);
 
 		if (value == null) {
-			boolean hasAdminRole = RoleServiceUtil.hasUserRole(
-				_userId, companyId, RoleImpl.ADMINISTRATOR, true);
+			value = Boolean.valueOf(
+				isCommunityAdminImpl(permissionChecker, group));
 
-			value = Boolean.valueOf(hasAdminRole);
-
-			_isCompanyAdmin.put(key, value);
+			_communityAdmins.put(key, value);
 		}
 
 		return value.booleanValue();
 	}
 
-	public boolean isCommunityAdmin(
-			PermissionChecker permissionChecker, long companyId, long groupId,
-			String name)
+	public boolean isCommunityOwner(
+			PermissionChecker permissionChecker, Object groupObj)
 		throws Exception {
 
-		String key =
-			companyId + StringPool.PIPE + groupId + StringPool.PIPE + name;
+		Group group = (Group)groupObj;
 
-		Boolean value = (Boolean)_isCommunityAdmin.get(key);
+		String key = String.valueOf(group.getGroupId());
+
+		Boolean value = (Boolean)_communityOwners.get(key);
 
 		if (value == null) {
 			value = Boolean.valueOf(
-				isCommunityAdminImpl(
-					permissionChecker, companyId, groupId, name));
+				isCommunityOwnerImpl(permissionChecker, group));
 
-			_isCommunityAdmin.put(key, value);
+			_communityOwners.put(key, value);
 		}
 
 		return value.booleanValue();
 	}
 
 	protected boolean isCommunityAdminImpl(
-			PermissionChecker permissionChecker, long companyId, long groupId,
-			String name)
-		throws PortalException, RemoteException, SystemException {
+			PermissionChecker permissionChecker, Group group)
+		throws PortalException, SystemException {
 
-		if (groupId <= 0) {
-			return false;
-		}
-
-		try {
-			Resource resource = ResourceServiceUtil.getResource(
-				companyId, Group.class.getName(), ResourceImpl.SCOPE_INDIVIDUAL,
-				String.valueOf(groupId));
-
-			if (PermissionServiceUtil.hasUserPermission(
-					_userId, ActionKeys.ADMINISTRATE,
-					resource.getResourceId())) {
-
-				return true;
-			}
-
-			if (permissionChecker.hasUserPermission(
-					groupId, Group.class.getName(), String.valueOf(groupId),
-					ActionKeys.ADMINISTRATE, false)) {
+		if (group.isCommunity()) {
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(),
+					RoleImpl.COMMUNITY_ADMINISTRATOR) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(), RoleImpl.COMMUNITY_OWNER)) {
 
 				return true;
 			}
 		}
-		catch (NoSuchResourceException nsre) {
+		else if (group.isOrganization()) {
+			long organizationId = group.getClassPK();
+
+			while (organizationId !=
+						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				Group organizationGroup = organization.getGroup();
+
+				long organizationGroupId = organizationGroup.getGroupId();
+
+				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						_userId, organizationGroupId,
+						RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
+					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						_userId, organizationGroupId,
+						RoleImpl.ORGANIZATION_OWNER)) {
+
+					return true;
+				}
+
+				organizationId = organization.getParentOrganizationId();
+			}
 		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (RemoteException re) {
-			throw re;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		else if (group.isUser()) {
+			long userId = group.getClassPK();
+
+			if (userId == _userId) {
+				return true;
+			}
 		}
 
-		try {
-			Group group = GroupServiceUtil.getGroup(groupId);
+		return false;
+	}
 
-			long userClassNameId = PortalUtil.getClassNameId(User.class);
+	protected boolean isCommunityOwnerImpl(
+			PermissionChecker permissionChecker, Group group)
+		throws PortalException, SystemException {
 
-			if ((group.getClassNameId() == userClassNameId) &&
-				(group.getClassPK() == _userId)) {
+		if (group.isCommunity()) {
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(), RoleImpl.COMMUNITY_OWNER)) {
 
 				return true;
 			}
 		}
-		catch (NoSuchGroupException nsge) {
+		else if (group.isOrganization()) {
+			long organizationId = group.getClassPK();
+
+			while (organizationId !=
+						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				Group organizationGroup = organization.getGroup();
+
+				long organizationGroupId = organizationGroup.getGroupId();
+
+				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						_userId, organizationGroupId,
+						RoleImpl.ORGANIZATION_OWNER)) {
+
+					return true;
+				}
+
+				organizationId = organization.getParentOrganizationId();
+			}
+		}
+		else if (group.isUser()) {
+			long userId = group.getClassPK();
+
+			if (userId == _userId) {
+				return true;
+			}
 		}
 
 		return false;
@@ -200,7 +230,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	private List _userUserGroupGroups;
 	private List _groups;
 	private List _roles;
-	private Map _isCompanyAdmin = new HashMap();
-	private Map _isCommunityAdmin = new HashMap();
+	private Map _communityAdmins = new HashMap();
+	private Map _communityOwners = new HashMap();
 
 }

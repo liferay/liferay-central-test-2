@@ -34,39 +34,6 @@ long organizationId = BeanParamUtil.getLong(organization, request, "organization
 
 long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	List allowedOrganizations = user.getOrganizations();
-
-	if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-		organizationId = user.getOrganization().getOrganizationId();
-
-		if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-			try {
-				Organization curParentOrg = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
-
-				if (!allowedOrganizations.contains(curParentOrg)) {
-					parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-				}
-			}
-			catch (NoSuchOrganizationException nsoe) {
-				parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
-		}
-	}
-	else {
-		try {
-			Organization curOrg = OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-			if (!allowedOrganizations.contains(curOrg)) {
-				organizationId = user.getOrganization().getOrganizationId();
-			}
-		}
-		catch (NoSuchOrganizationException nsoe) {
-			organizationId = user.getOrganization().getOrganizationId();
-		}
-	}
-}
-
 boolean editable = false;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
@@ -76,7 +43,7 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(Portl
 		editable = false;
 	}
 
-	if ((organizationId <= 0) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) {
+	if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.MANAGE_SUBORGANIZATIONS))) {
 		editable = true;
 	}
 }

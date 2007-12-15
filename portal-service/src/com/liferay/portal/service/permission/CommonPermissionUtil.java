@@ -35,21 +35,21 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
  */
 public class CommonPermissionUtil {
 
-	public static void checkPermission(
+	public static void check(
 			PermissionChecker permissionChecker, long classNameId,
 			long classPK, String actionId)
 		throws PortalException, SystemException {
 
-		getCommonPermission().checkPermission(
+		getCommonPermission().check(
 			permissionChecker, classNameId, classPK, actionId);
 	}
 
-	public static void checkPermission(
+	public static void check(
 			PermissionChecker permissionChecker, String className,
 			long classPK, String actionId)
 		throws PortalException, SystemException {
 
-		getCommonPermission().checkPermission(
+		getCommonPermission().check(
 			permissionChecker, className, classPK, actionId);
 	}
 

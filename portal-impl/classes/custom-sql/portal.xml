@@ -70,7 +70,7 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N_D">
 		<![CDATA[
 			SELECT
-				Group_.groupId AS groupId, Group_.name AS groupName
+				Group_.groupId AS groupId, Group_.name AS groupName, Group_.type_ AS groupType
 			FROM
 				Group_
 			[$JOIN$]

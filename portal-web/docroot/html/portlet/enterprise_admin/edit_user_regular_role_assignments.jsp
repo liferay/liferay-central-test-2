@@ -74,10 +74,6 @@ portletURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 <%
 RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
-
-List headerNames = searchContainer.getHeaderNames();
-
-headerNames.add("type");
 %>
 
 <liferay-ui:search-form
@@ -96,14 +92,14 @@ if (tabs2.equals("current")) {
 	roleParams.put("usersRoles", new Long(user2.getUserId()));
 }
 
-List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_REGULAR), roleParams, searchContainer.getStart(), searchContainer.getEnd());
+List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_REGULAR), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 Iterator itr = results.iterator();
 
 while (itr.hasNext()) {
 	Role role = (Role)itr.next();
 
-	if (!RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
+	if (!RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
 		itr.remove();
 	}
 }

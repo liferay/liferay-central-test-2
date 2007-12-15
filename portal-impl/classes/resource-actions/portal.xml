@@ -7,12 +7,11 @@
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
@@ -21,11 +20,11 @@
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
@@ -34,11 +33,11 @@
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
@@ -47,11 +46,11 @@
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
@@ -65,12 +64,9 @@
 			<action-key>ADD_USER</action-key>
 			<action-key>ADD_USER_GROUP</action-key>
 		</supports>
-		<community-defaults>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
-		<guest-unsupported>
-		</guest-unsupported>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported />
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portal.model.Group</model-name>
@@ -79,20 +75,16 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADMINISTRATE</action-key>
-			<action-key>ASSIGN_USERS</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 		</supports>
-		<community-defaults>
-		</community-defaults>
-		<guest-defaults>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
-			<action-key>ADMINISTRATE</action-key>
-			<action-key>ASSIGN_USERS</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>PERMISSIONS</action-key>
@@ -109,24 +101,24 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_USER</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
-			<action-key>DELETE_USER</action-key>
+			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
-			<action-key>PERMISSIONS_USER</action-key>			
 			<action-key>UPDATE</action-key>
-			<action-key>UPDATE_USER</action-key>
 			<action-key>VIEW</action-key>
-			<action-key>VIEW_USER</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-			<action-key>VIEW_USER</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_USERS</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
@@ -139,25 +131,26 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_LOCATION</action-key>
-			<action-key>ADD_USER</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
-			<action-key>DELETE_USER</action-key>
+			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
+			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
-			<action-key>PERMISSIONS_USER</action-key>			
 			<action-key>UPDATE</action-key>
-			<action-key>UPDATE_USER</action-key>
 			<action-key>VIEW</action-key>
-			<action-key>VIEW_USER</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-			<action-key>VIEW_USER</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
+			<action-key>MANAGE_USERS</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
@@ -167,18 +160,20 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
@@ -188,20 +183,22 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_PERMISSIONS</action-key>
-			<action-key>ASSIGN_USERS</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DEFINE_PERMISSIONS</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DEFINE_PERMISSIONS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
@@ -220,13 +217,15 @@
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>DELETE</action-key>
+			<action-key>IMPERSONATE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported />
+		</guest-unsupported>
 	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portal.model.UserGroup</model-name>
@@ -238,19 +237,20 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ASSIGN_USERS</action-key>
+			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 </resource-action-mapping>

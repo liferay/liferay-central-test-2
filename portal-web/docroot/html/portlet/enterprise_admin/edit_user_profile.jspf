@@ -56,24 +56,6 @@ else {
 	}
 }
 
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	List allowedOrganizations = user.getOrganizations();
-
-	Iterator itr = organizations.iterator();
-
-	while (itr.hasNext()) {
-		Organization curOrg = (Organization)itr.next();
-
-		if (!allowedOrganizations.contains(curOrg)) {
-			itr.remove();
-		}
-	}
-
-	if (organizations.size() == 0) {
-		organizations.add(user.getOrganization());
-	}
-}
-
 List organizationNames = new ArrayList();
 
 StringMaker organizationsHTML = new StringMaker();
@@ -84,16 +66,16 @@ if (organizations != null) {
 	Iterator itr = organizations.iterator();
 
 	for (int i = 0; itr.hasNext(); i++) {
-		Organization curOrg = (Organization)itr.next();
+		Organization curOrganization = (Organization)itr.next();
 
-		organizationIdsArray[i] = curOrg.getOrganizationId();
+		organizationIdsArray[i] = curOrganization.getOrganizationId();
 
-		organizationNames.add(curOrg.getName());
+		organizationNames.add(curOrganization.getName());
 
 		organizationsHTML.append("<span>");
-		organizationsHTML.append(curOrg.getName());
+		organizationsHTML.append(curOrganization.getName());
 
-		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable) {
+		if ((portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable) {
 			organizationsHTML.append("&nbsp;[<a href='javascript: ");
 			organizationsHTML.append(renderResponse.getNamespace());
 			organizationsHTML.append("removeOrganization(");
@@ -174,8 +156,6 @@ if (organizations != null) {
 <liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="please-select-an-organization" />
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization-for-the-selected-location" />
 <liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
@@ -357,8 +337,8 @@ if (organizations != null) {
 					<%= organizationsHTML.toString() %>
 				</span>
 
-				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="locationStrictValidation" value="<%= String.valueOf(GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION))) %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 				</c:if>
 			</td>
 		</tr>

@@ -56,8 +56,12 @@ public class RoleNames {
 	public static final String ORGANIZATION_ADMINISTRATOR =
 		"Organization Administrator";
 
+	public static final String ORGANIZATION_MEMBER = "Organization Member";
+
+	public static final String ORGANIZATION_OWNER = "Organization Owner";
+
 	public static final String[] SYSTEM_ORGANIZATION_ROLES = {
-		ORGANIZATION_ADMINISTRATOR
+		ORGANIZATION_ADMINISTRATOR, ORGANIZATION_MEMBER, ORGANIZATION_OWNER
 	};
 
 }

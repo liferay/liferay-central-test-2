@@ -351,7 +351,7 @@
 		<column name="liveGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="type" type="String" />
+		<column name="type" type="int" />
 		<column name="typeSettings" type="String" />
 		<column name="friendlyURL" type="String" />
 		<column name="active" type="boolean" />

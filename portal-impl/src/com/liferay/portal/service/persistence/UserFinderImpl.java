@@ -392,14 +392,14 @@ public class UserFinderImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key));
+				sm.append(getWhere(key, value));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	protected String getWhere(String key) {
+	protected String getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
@@ -413,6 +413,26 @@ public class UserFinderImpl implements UserFinder {
 		}
 		else if (key.equals("usersOrgs")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
+
+			if (value instanceof Long[]) {
+				Long[] organizationIds = (Long[])value;
+
+				StringMaker sm = new StringMaker();
+
+				sm.append("WHERE (");
+
+				for (int i = 0; i < organizationIds.length; i++) {
+					sm.append("(Users_Orgs.organizationId = ?) ");
+
+					if ((i + 1) < organizationIds.length) {
+						sm.append("OR ");
+					}
+				}
+
+				sm.append(")");
+
+				join = sm.toString();
+			}
 		}
 		else if (key.equals("usersPasswordPolicies")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_PASSWORD_POLICIES);
@@ -452,7 +472,7 @@ public class UserFinderImpl implements UserFinder {
 					}
 				}
 				else if (value instanceof Long[]) {
-					Long[] valueArray = (Long[]) value;
+					Long[] valueArray = (Long[])value;
 
 					for (int i = 0; i < valueArray.length; i++) {
 						if (Validator.isNotNull(valueArray[i])) {
@@ -468,7 +488,7 @@ public class UserFinderImpl implements UserFinder {
 					}
 				}
 				else if (value instanceof String[]) {
-					String[] valueArray = (String[]) value;
+					String[] valueArray = (String[])value;
 
 					for (int i = 0; i < valueArray.length; i++) {
 						if (Validator.isNotNull(valueArray[i])) {

@@ -308,7 +308,7 @@ create table Group_ (
 	liveGroupId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
-	type_ VARCHAR(75) null,
+	type_ INTEGER,
 	typeSettings STRING null,
 	friendlyURL VARCHAR(100) null,
 	active_ BOOLEAN

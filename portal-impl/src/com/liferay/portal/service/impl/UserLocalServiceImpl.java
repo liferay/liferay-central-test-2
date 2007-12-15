@@ -30,11 +30,9 @@ import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
@@ -50,6 +48,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -97,7 +96,6 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -122,11 +120,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.addUsers(groupId, userIds);
 
-		// Community roles
-
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		Role role = roleLocalService.getRole(
+		Role role = rolePersistence.findByC_N(
 			group.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
 
 		for (int i = 0; i < userIds.length; i++) {
@@ -136,7 +132,30 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		// Permission cache
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void addOrganizationUsers(long organizationId, long[] userIds)
+		throws PortalException, SystemException {
+
+		organizationPersistence.addUsers(organizationId, userIds);
+
+		Organization organization = organizationPersistence.findByPrimaryKey(
+			organizationId);
+
+		Group group = organization.getGroup();
+
+		long groupId = group.getGroupId();
+
+		Role role = rolePersistence.findByC_N(
+			group.getCompanyId(), RoleImpl.ORGANIZATION_MEMBER);
+
+		for (int i = 0; i < userIds.length; i++) {
+			long userId = userIds[i];
+
+			userGroupRoleLocalService.addUserGroupRoles(
+				userId, groupId, new long[] {role.getRoleId()});
+		}
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -191,8 +210,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validate(
 			companyId, autoPassword, password1, password2, autoScreenName,
 			screenName, emailAddress, firstName, lastName, organizationIds);
-
-		validateOrganizations(companyId, organizationIds);
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
@@ -302,7 +319,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		contactPersistence.update(contact);
 
-		// Organization and location
+		// Organizations
 
 		updateOrganizations(userId, organizationIds);
 
@@ -310,7 +327,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
-			null, null, null, true);
+			null, 0, null, true);
 
 		// Default groups
 
@@ -607,6 +624,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void clearOrganizationUsers(long organizationId)
+		throws PortalException, SystemException {
+
+		organizationPersistence.clearUsers(organizationId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void clearUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 
@@ -794,6 +819,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return groupPersistence.getUsers(groupId);
 	}
 
+	public List getOrganizationUsers(long organizationId)
+		throws PortalException, SystemException {
+
+		return organizationPersistence.getUsers(organizationId);
+	}
+
 	public List getPermissionUsers(
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
@@ -915,6 +946,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return groupPersistence.containsUser(groupId, userId);
+	}
+
+	public boolean hasOrganizationUser(long organizationId, long userId)
+		throws PortalException, SystemException {
+
+		return organizationPersistence.containsUser(organizationId, userId);
 	}
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
@@ -1181,6 +1218,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void setOrganizationUsers(long organizationId, long[] userIds)
+		throws PortalException, SystemException {
+
+		organizationPersistence.setUsers(organizationId, userIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
@@ -1203,6 +1248,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
 
 		groupPersistence.removeUsers(groupId, userIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void unsetOrganizationUsers(long organizationId, long[] userIds)
+		throws PortalException, SystemException {
+
+		Organization organization = organizationPersistence.findByPrimaryKey(
+			organizationId);
+
+		Group group = organization.getGroup();
+
+		long groupId = group.getGroupId();
+
+		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
+
+		organizationPersistence.removeUsers(organizationId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1358,13 +1420,32 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void updateOrganizations(
-			long userId, long[] organizationIds)
+			long userId, long[] newOrganizationIds)
 		throws PortalException, SystemException {
 
-		userPersistence.clearOrganizations(userId);
+		List oldOrganizations = userPersistence.getOrganizations(userId);
 
-		for (int i = 0; i < organizationIds.length; i++) {
-			userPersistence.addOrganization(userId, organizationIds[i]);
+		List oldOrganizationIds = new ArrayList(oldOrganizations.size());
+
+		for (int i = 0; i < oldOrganizations.size(); i++) {
+			Organization oldOrganization =
+				(Organization)oldOrganizations.get(i);
+
+			long oldOrganizationId = oldOrganization.getOrganizationId();
+
+			oldOrganizationIds.add(new Long(oldOrganizationId));
+
+			if (!ArrayUtil.contains(newOrganizationIds, oldOrganizationId)) {
+				unsetOrganizationUsers(oldOrganizationId, new long[] {userId});
+			}
+		}
+
+		for (int i = 0; i < newOrganizationIds.length; i++) {
+			long newOrganizationId = newOrganizationIds[i];
+
+			if (!oldOrganizationIds.contains(new Long(newOrganizationId))) {
+				addOrganizationUsers(newOrganizationId, new long[] {userId});
+			}
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1559,8 +1640,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(
 			user.getCompanyId());
 
-		validateOrganizations(user.getCompanyId(), organizationIds);
-
 		user.setModifiedDate(now);
 
 		if (user.getContactId() <= 0) {
@@ -1653,7 +1732,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		contactPersistence.update(contact);
 
-		// Organization and location
+		// Organizations
 
 		updateOrganizations(userId, organizationIds);
 
@@ -2081,89 +2160,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			emailAddress.startsWith("postmaster@")) {
 
 			throw new UserEmailAddressException();
-		}
-	}
-
-	protected void validateOrganizations(
-			long companyId, long[] organizationIds)
-		throws PortalException, SystemException {
-
-		boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED));
-
-		boolean locationRequired = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED));
-
-		boolean strictLocationValidation = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION));
-
-		if (locationRequired) {
-			organizationRequired = true;
-		}
-
-		List regularOrganizations = new ArrayList();
-
-		List locations = new ArrayList();
-
-		for (int i = 0; i < organizationIds.length; i++) {
-			long organizationId = organizationIds[i];
-
-			if (organizationId > 0) {
-				Organization organization =
-					organizationPersistence.findByPrimaryKey(organizationId);
-
-				if (organization.isRegular()) {
-					regularOrganizations.add(organization);
-				}
-				else {
-					locations.add(organization);
-				}
-			}
-		}
-
-		if (organizationRequired && (regularOrganizations.size() == 0)) {
-			throw new NoSuchOrganizationException(
-				"User must have at least one regular organization");
-		}
-
-		if (locationRequired && (locations.size() == 0)) {
-			throw new NoSuchOrganizationException(
-				"User must have at least one location");
-		}
-
-		if (strictLocationValidation) {
-			Iterator itr1 = locations.iterator();
-
-			while (itr1.hasNext()) {
-				Organization location = (Organization)itr1.next();
-
-				// Each location must belong to one of the ancestors of the
-				// regular organizations
-
-				boolean validLocation = false;
-
-				Iterator itr2 = regularOrganizations.iterator();
-
-				while (itr2.hasNext()) {
-					Organization organization = (Organization)itr2.next();
-
-					if (organizationLocalService.isAncestor(
-							location.getOrganizationId(),
-							organization.getOrganizationId())) {
-
-						validLocation = true;
-
-						break;
-					}
-				}
-
-				if (!validLocation) {
-					throw new OrganizationParentException(
-						"Location " + location.getOrganizationId() +
-							" is not valid for the organizations: " +
-								StringUtil.merge(organizationIds));
-				}
-			}
 		}
 	}
 

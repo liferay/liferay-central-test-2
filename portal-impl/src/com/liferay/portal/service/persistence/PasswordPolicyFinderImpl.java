@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -91,7 +92,9 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 		}
 	}
 
-	public List findByC_N(long companyId, String name, int begin, int end)
+	public List findByC_N(
+			long companyId, String name, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -102,6 +105,8 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

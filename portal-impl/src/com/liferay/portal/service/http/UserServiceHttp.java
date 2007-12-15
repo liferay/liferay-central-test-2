@@ -110,6 +110,45 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void addOrganizationUsers(HttpPrincipal httpPrincipal,
+		long organizationId, long[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"addOrganizationUsers",
+					new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void addPasswordPolicyUsers(HttpPrincipal httpPrincipal,
 		long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
@@ -810,44 +849,6 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void setGroupUsers(HttpPrincipal httpPrincipal, long groupId,
-		long[] userIds)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = userIds;
-
-			if (userIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"setGroupUsers", new Object[] { paramObj0, paramObj1 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static void setRoleUsers(HttpPrincipal httpPrincipal, long roleId,
 		long[] userIds)
 		throws com.liferay.portal.SystemException, 
@@ -939,6 +940,45 @@ public class UserServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"unsetGroupUsers", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unsetOrganizationUsers(HttpPrincipal httpPrincipal,
+		long organizationId, long[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"unsetOrganizationUsers",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

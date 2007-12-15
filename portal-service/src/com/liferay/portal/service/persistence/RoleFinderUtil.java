@@ -72,9 +72,10 @@ public class RoleFinderUtil {
 	public static java.util.List findByC_N_D_T(long companyId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Integer type, java.util.LinkedHashMap params, int begin,
-		int end) throws com.liferay.portal.SystemException {
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_N_D_T(companyId, name, description, type,
-			params, begin, end);
+			params, begin, end, obc);
 	}
 
 	public static java.util.Map findByC_N_S_P(long companyId,

@@ -45,7 +45,7 @@
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+				<portlet:param name="p_u_i_d" value="<%= String.valueOf(userId) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:icon image="edit" url="<%= editUserURL %>" />
@@ -55,7 +55,7 @@
 			<liferay-security:permissionsURL
 				modelResource="<%= User.class.getName() %>"
 				modelResourceDescription="<%= user2.getFullName() %>"
-				resourcePrimKey="<%= String.valueOf(user2.getUserId()) %>"
+				resourcePrimKey="<%= String.valueOf(userId) %>"
 				var="permissionsUserURL"
 			/>
 
@@ -63,19 +63,19 @@
 		</c:if>
 
 		<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+			<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 		</c:if>
 
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.IMPERSONATE) %>">
+			<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (userId != user.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.IMPERSONATE) %>">
 				<liferay-security:doAsURL
-					doAsUserId="<%= user2.getUserId() %>"
+					doAsUserId="<%= userId %>"
 					var="impersonateUserURL"
 				/>
 
@@ -101,14 +101,16 @@
 					<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 				</portlet:actionURL>
 
-				<c:choose>
-					<c:when test="<%= searchTerms.isActive() %>">
-						<liferay-ui:icon-deactivate url="<%= deleteUserURL %>" />
-					</c:when>
-					<c:when test="<%= !searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)) %>">
-						<liferay-ui:icon-delete url="<%= deleteUserURL %>" />
-					</c:when>
-				</c:choose>
+				<c:if test="<%= userId != user.getUserId() %>">
+					<c:choose>
+						<c:when test="<%= searchTerms.isActive() %>">
+							<liferay-ui:icon-deactivate url="<%= deleteUserURL %>" />
+						</c:when>
+						<c:when test="<%= !searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)) %>">
+							<liferay-ui:icon-delete url="<%= deleteUserURL %>" />
+						</c:when>
+					</c:choose>
+				</c:if>
 			</c:if>
 		</c:if>
 	</liferay-ui:icon-menu>

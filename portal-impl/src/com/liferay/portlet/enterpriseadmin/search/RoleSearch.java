@@ -23,12 +23,24 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.util.CollectionFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RoleSearch.java.html"><b><i>View Source</i></b></a>
@@ -39,9 +51,14 @@ import javax.portlet.RenderRequest;
 public class RoleSearch extends SearchContainer {
 
 	static List headerNames = new ArrayList();
+	static Map orderableHeaders = CollectionFactory.getHashMap();
 
 	static {
 		headerNames.add("name");
+		headerNames.add("type");
+
+		orderableHeaders.put("name", "name");
+		orderableHeaders.put("type", "type");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-roles-were-found";
@@ -58,6 +75,45 @@ public class RoleSearch extends SearchContainer {
 			RoleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			RoleDisplayTerms.TYPE, String.valueOf(displayTerms.getType()));
+
+		try {
+			PortalPreferences prefs =
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+
+			String orderByCol = ParamUtil.getString(req, "orderByCol");
+			String orderByType = ParamUtil.getString(req, "orderByType");
+
+			if (Validator.isNotNull(orderByCol) &&
+				Validator.isNotNull(orderByType)) {
+
+				prefs.setValue(
+					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col",
+					orderByCol);
+				prefs.setValue(
+					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type",
+					orderByType);
+			}
+			else {
+				orderByCol = prefs.getValue(
+					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col", "name");
+				orderByType = prefs.getValue(
+					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type", "asc");
+			}
+
+			OrderByComparator orderByComparator =
+				EnterpriseAdminUtil.getRoleOrderByComparator(
+					orderByCol, orderByType);
+
+			setOrderableHeaders(orderableHeaders);
+			setOrderByCol(orderByCol);
+			setOrderByType(orderByType);
+			setOrderByComparator(orderByComparator);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
+
+	private static Log _log = LogFactory.getLog(RoleSearch.class);
 
 }

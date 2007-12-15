@@ -204,10 +204,6 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 <input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
-</liferay-util:include>
-
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
 

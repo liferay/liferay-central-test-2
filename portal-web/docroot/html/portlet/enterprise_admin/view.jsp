@@ -154,7 +154,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			searchContainer.setTotal(total);
 
-			List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd());
+			List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 			searchContainer.setResults(results);
 
@@ -212,7 +212,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		List headerNames = searchContainer.getHeaderNames();
 
-		headerNames.add("type");
 		headerNames.add(StringPool.BLANK);
 		%>
 
@@ -230,7 +229,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			searchContainer.setTotal(total);
 
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 			searchContainer.setResults(results);
 
@@ -293,7 +292,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		List headerNames = searchContainer.getHeaderNames();
 
-		headerNames.add("description");
 		headerNames.add(StringPool.BLANK);
 		%>
 
@@ -313,7 +311,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			searchContainer.setTotal(total);
 
-			List results = PasswordPolicyLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = PasswordPolicyLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 			searchContainer.setResults(results);
 

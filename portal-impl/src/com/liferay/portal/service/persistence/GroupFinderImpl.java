@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -293,7 +294,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 	public List findByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end)
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -372,9 +373,8 @@ public class GroupFinderImpl implements GroupFinder {
 			sm.append(")");
 		}
 
-		sm.append(" ORDER BY groupName ASC");
-
 		sql = sm.toString();
+		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		String finderSQL = sql;
 		String[] finderClassNames = new String[] {
@@ -733,7 +733,7 @@ public class GroupFinderImpl implements GroupFinder {
 					List values = (List)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {
-						String value = (String)values.get(i);
+						Integer value = (Integer)values.get(i);
 
 						qPos.add(value);
 					}

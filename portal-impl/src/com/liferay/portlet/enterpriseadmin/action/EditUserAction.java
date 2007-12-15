@@ -26,9 +26,7 @@ import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
-import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
@@ -54,6 +52,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -132,11 +131,18 @@ public class EditUserAction extends PortletAction {
 						String friendlyURLPath = group.getPathFriendlyURL(
 							layout.isPrivateLayout(), themeDisplay);
 
-						redirect = StringUtil.replace(
-							redirect,
-							friendlyURLPath + StringPool.SLASH + oldScreenName,
+						String oldPath =
+							friendlyURLPath + StringPool.SLASH + oldScreenName;
+						String newPath =
 							friendlyURLPath + StringPool.SLASH +
-								user.getScreenName());
+								user.getScreenName();
+
+						redirect = StringUtil.replace(
+							redirect, oldPath, newPath);
+
+						redirect = StringUtil.replace(
+							redirect, HttpUtil.encodeURL(oldPath),
+							HttpUtil.encodeURL(newPath));
 					}
 				}
 
@@ -157,8 +163,6 @@ public class EditUserAction extends PortletAction {
 					 e instanceof ContactLastNameException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof DuplicateUserScreenNameException ||
-					 e instanceof NoSuchOrganizationException ||
-					 e instanceof OrganizationParentException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof ReservedUserScreenNameException ||

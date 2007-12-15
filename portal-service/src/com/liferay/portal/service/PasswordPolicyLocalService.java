@@ -377,7 +377,8 @@ public interface PasswordPolicyLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;

@@ -46,7 +46,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 			long countryId, int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return addressLocalService.addAddress(
@@ -59,7 +59,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 
 		Address address = addressPersistence.findByPrimaryKey(addressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
@@ -71,7 +71,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 
 		Address address = addressPersistence.findByPrimaryKey(addressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.VIEW);
 
@@ -81,7 +81,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 	public List getAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return addressLocalService.getAddresses(
@@ -96,7 +96,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 
 		Address address = addressPersistence.findByPrimaryKey(addressId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 

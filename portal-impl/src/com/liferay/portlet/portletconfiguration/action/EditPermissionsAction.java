@@ -198,18 +198,18 @@ public class EditPermissionsAction extends PortletAction {
 			req, "organizationIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "organizationIdActionIds"));
-		boolean organizationIntersection = ParamUtil.getBoolean(
-			req, "organizationIntersection");
+		//boolean organizationIntersection = ParamUtil.getBoolean(
+		//	req, "organizationIntersection");
 
-		if (!organizationIntersection) {
+		//if (!organizationIntersection) {
 			PermissionServiceUtil.setGroupPermissions(
 				Organization.class.getName(), String.valueOf(organizationId),
 				layout.getGroupId(), actionIds, resourceId);
-		}
+		/*}
 		else {
 			PermissionServiceUtil.setOrgGroupPermissions(
 				organizationId, layout.getGroupId(), actionIds, resourceId);
-		}
+		}*/
 	}
 
 	protected void updateRolePermissions(ActionRequest req)

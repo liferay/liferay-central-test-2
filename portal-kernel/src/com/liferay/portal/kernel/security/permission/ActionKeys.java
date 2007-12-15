@@ -63,8 +63,6 @@ public class ActionKeys {
 
 	public static final String ADD_LICENSE = "ADD_LICENSE";
 
-	public static final String ADD_LOCATION = "ADD_LOCATION";
-
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
 
 	public static final String ADD_NODE = "ADD_NODE";
@@ -74,8 +72,6 @@ public class ActionKeys {
 	public static final String ADD_PAGE = "ADD_PAGE";
 
 	public static final String ADD_PASSWORD_POLICY = "ADD_PASSWORD_POLICY";
-
-	public static final String ADD_PERMISSIONS = "ADD_PERMISSIONS";
 
 	public static final String ADD_PRODUCT_ENTRY = "ADD_PRODUCT_ENTRY";
 
@@ -101,15 +97,15 @@ public class ActionKeys {
 
 	public static final String ADD_VOTE = "ADD_VOTE";
 
-	public static final String ADMINISTRATE = "ADMINISTRATE";
-
 	public static final String APPROVE_ARTICLE = "APPROVE_ARTICLE";
 
-	public static final String ASSIGN_USERS = "ASSIGN_USERS";
+	public static final String ASSIGN_MEMBERS = "ASSIGN_MEMBERS";
 
 	public static final String BAN_USER = "BAN_USER";
 
 	public static final String CONFIGURATION = "CONFIGURATION";
+
+	public static final String DEFINE_PERMISSIONS = "DEFINE_PERMISSIONS";
 
 	public static final String DELEGATE = "DELEGATE";
 
@@ -136,6 +132,11 @@ public class ActionKeys {
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";
 
 	public static final String MANAGE_ORDERS = "MANAGE_ORDERS";
+
+	public static final String MANAGE_SUBORGANIZATIONS =
+		"MANAGE_SUBORGANIZATIONS";
+
+	public static final String MANAGE_USERS = "MANAGE_USERS";
 
 	public static final String MOVE_THREAD = "MOVE_THREAD";
 

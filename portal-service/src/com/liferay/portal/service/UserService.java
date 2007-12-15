@@ -53,6 +53,10 @@ public interface UserService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addOrganizationUsers(long organizationId, long[] userIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -129,10 +133,6 @@ public interface UserService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setGroupUsers(long groupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -142,6 +142,10 @@ public interface UserService {
 			com.liferay.portal.PortalException;
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

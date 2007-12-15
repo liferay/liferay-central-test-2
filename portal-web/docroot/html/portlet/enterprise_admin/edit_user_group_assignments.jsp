@@ -29,6 +29,8 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 String cur = ParamUtil.getString(request, "cur");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 UserGroup userGroup = (UserGroup)request.getAttribute(WebKeys.USER_GROUP);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -38,13 +40,14 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_user_group_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateUserGroupUsers(redirect) {
+	function <portlet:namespace />updateUserGroupUsers(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_users";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
@@ -55,12 +58,8 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="user-groups" />
-</liferay-util:include>
 
 <liferay-ui:message key="edit-assignments-for-user-group" />: <%= userGroup.getName() %>
 
@@ -70,6 +69,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	names="current,available"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
+	backURL="<%= redirect %>"
 />
 
 <input name="<portlet:namespace />addUserIds" type="hidden" value="" />
@@ -91,80 +91,18 @@ UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 LinkedHashMap userParams = new LinkedHashMap();
 
-long organizationId = searchTerms.getOrganizationId();
-
-List allowedOrganizations = null;
-
 if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	allowedOrganizations = user.getOrganizations();
+	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
-	long firstUserOrganizationId = user.getOrganization().getOrganizationId();
+	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
 
-	if ((organizationId <= 0) || (organizationId == firstUserOrganizationId)) {
-		organizationId = firstUserOrganizationId;
-	}
-	else {
-		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-			if (!allowedOrganizations.contains(organization)) {
-				organizationId = firstUserOrganizationId;
-			}
-		}
-		catch (Exception e) {
-			organizationId = firstUserOrganizationId;
-		}
-	}
-}
-
-Organization organization = null;
-
-if ((organizationId > 0)) {
-	try {
-		organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-	}
-	catch (NoSuchOrganizationException nsoe) {
-	}
-}
-
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	userParams.put("usersOrgs", new Long(organizationId));
+	userParams.put("usersOrgs", manageableOrganizationIds);
 }
 
 if (tabs2.equals("current")) {
 	userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
 }
 %>
-
-<c:if test="<%= (organization != null)  %>">
-	<br />
-
-	<liferay-ui:message key="filter-by-organization" />:
-
-	<c:choose>
-		<c:when test="<%= (allowedOrganizations == null) || (allowedOrganizations.size() == 1) %>">
-			<%= organization.getName() %>
-		</c:when>
-		<c:otherwise>
-			<select name="<portlet:namespace />organizationId" onchange="submitForm(this.form);">
-
-				<%
-				Iterator itr = allowedOrganizations.iterator();
-
-				while (itr.hasNext()) {
-					Organization curOrg = (Organization)itr.next();
-				%>
-
-					<option <%= (organizationId == curOrg.getOrganizationId()) ? "selected" : "" %> value="<%= curOrg.getOrganizationId() %>"><%= curOrg.getName() %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-		</c:otherwise>
-	</c:choose>
-</c:if>
 
 <%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 

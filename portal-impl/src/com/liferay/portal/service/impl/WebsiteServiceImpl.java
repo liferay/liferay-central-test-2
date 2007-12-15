@@ -44,7 +44,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return websiteLocalService.addWebsite(
@@ -56,7 +56,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
 		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
@@ -68,7 +68,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
 		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.VIEW);
 
@@ -78,7 +78,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 	public List getWebsites(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return websiteLocalService.getWebsites(
@@ -91,7 +91,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
 		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
-		CommonPermissionUtil.checkPermission(
+		CommonPermissionUtil.check(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 

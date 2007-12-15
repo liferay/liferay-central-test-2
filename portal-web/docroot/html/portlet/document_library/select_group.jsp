@@ -56,7 +56,7 @@ int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerm
 
 searchContainer.setTotal(total);
 
-List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 searchContainer.setResults(results);
 
@@ -82,6 +82,10 @@ for (int i = 0; i < results.size(); i++) {
 	// Name
 
 	row.addText(group.getName(), rowHREF);
+
+	// Type
+
+	row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowHREF);
 
 	// Add result row
 

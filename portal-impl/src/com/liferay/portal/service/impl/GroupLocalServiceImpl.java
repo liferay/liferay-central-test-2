@@ -32,6 +32,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,6 +53,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.comparator.GroupNameComparator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -69,7 +71,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			long userId, String className, long classPK, String name,
-			String description, String type, String friendlyURL, boolean active)
+			String description, int type, String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
 		return addGroup(
@@ -79,7 +81,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			long userId, String className, long classPK, long liveGroupId,
-			String name, String description, String type, String friendlyURL,
+			String name, String description, int type, String friendlyURL,
 			boolean active)
 		throws PortalException, SystemException {
 
@@ -196,8 +198,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 
 				group = addGroup(
-					defaultUserId, null, 0, systemGroups[i], null, null,
-					friendlyURL, true);
+					defaultUserId, null, 0, systemGroups[i], null,
+					GroupImpl.TYPE_COMMUNITY_OPEN, friendlyURL, true);
 			}
 
 			if (group.getName().equals(GroupImpl.GUEST)) {
@@ -451,7 +453,20 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return groupFinder.findByC_N_D(
-			companyId, name, description, params, begin, end);
+			companyId, name, description, params, begin, end, null);
+	}
+
+	public List search(
+			long companyId, String name, String description,
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
+		}
+
+		return groupFinder.findByC_N_D(
+			companyId, name, description, params, begin, end, obc);
 	}
 
 	public int searchCount(
@@ -495,7 +510,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public Group updateGroup(
-			long groupId, String name, String description, String type,
+			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 

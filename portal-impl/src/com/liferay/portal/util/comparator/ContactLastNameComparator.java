@@ -53,8 +53,7 @@ public class ContactLastNameComparator extends OrderByComparator {
 		User user1 = (User)obj1;
 		User user2 = (User)obj2;
 
-		int value =
-			user1.getLastName().compareTo(user2.getLastName());
+		int value = user1.getLastName().compareTo(user2.getLastName());
 
 		if (value == 0) {
 			value = user1.getFirstName().compareTo(user2.getFirstName());

@@ -39,10 +39,15 @@ public interface PermissionChecker {
 		long groupId, String name, String primKey, String actionId);
 
 	public boolean hasUserPermission(
-			long groupId, String name, String primKey, String actionId,
-			boolean checkAdmin)
-		throws Exception;
+		long groupId, String name, String primKey, String actionId,
+		boolean checkAdmin);
 
 	public boolean isOmniadmin();
+
+	public boolean isCompanyAdmin(long companyId);
+
+	public boolean isCommunityAdmin(long groupId);
+
+	public boolean isCommunityOwner(long groupId);
 
 }

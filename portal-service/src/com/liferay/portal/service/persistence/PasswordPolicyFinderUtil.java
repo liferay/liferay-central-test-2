@@ -35,9 +35,10 @@ public class PasswordPolicyFinderUtil {
 	}
 
 	public static java.util.List findByC_N(long companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N(companyId, name, begin, end);
+		return getFinder().findByC_N(companyId, name, begin, end, obc);
 	}
 
 	public static PasswordPolicyFinder getFinder() {

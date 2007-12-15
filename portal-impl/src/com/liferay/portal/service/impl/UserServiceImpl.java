@@ -30,13 +30,12 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
@@ -59,18 +58,58 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if ((userIds != null) && (userIds.length > 0)) {
-			checkUpdatePermission(groupId, userIds);
-
-			userLocalService.addGroupUsers(groupId, userIds);
+		try {
+			GroupPermissionUtil.check(
+				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 		}
+		catch (PrincipalException pe) {
+
+			// Allow any user to join open communities
+
+			boolean hasPermission = false;
+
+			if (userIds.length == 0) {
+				hasPermission = true;
+			}
+			else if (userIds.length == 1) {
+				User user = getUser();
+
+				if (user.getUserId() == userIds[0]) {
+					Group group = groupPersistence.findByPrimaryKey(groupId);
+
+					if (user.getCompanyId() == group.getCompanyId()) {
+						int type = group.getType();
+
+						if (type == GroupImpl.TYPE_COMMUNITY_OPEN) {
+							hasPermission = true;
+						}
+					}
+				}
+			}
+
+			if (!hasPermission) {
+				throw new PrincipalException();
+			}
+		}
+
+		userLocalService.addGroupUsers(groupId, userIds);
+	}
+
+	public void addOrganizationUsers(long organizationId, long[] userIds)
+		throws PortalException, SystemException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.ASSIGN_MEMBERS);
+
+		userLocalService.addOrganizationUsers(organizationId, userIds);
 	}
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
 		PasswordPolicyPermissionUtil.check(
-			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+			getPermissionChecker(), passwordPolicyId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
@@ -79,7 +118,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
-			getPermissionChecker(), roleId, ActionKeys.UPDATE);
+			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.addRoleUsers(roleId, userIds);
 	}
@@ -87,13 +126,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.addUserGroupUsers(userGroupId, userIds);
 	}
@@ -139,7 +173,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void deleteRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.deleteRoleUser(roleId, userId);
 	}
@@ -234,20 +269,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.hasRoleUser(roleId, userId);
 	}
 
-	public void setGroupUsers(long groupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
-
-		userLocalService.setGroupUsers(groupId, userIds);
-	}
-
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
-			getPermissionChecker(), roleId, ActionKeys.UPDATE);
+			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.setRoleUsers(roleId, userIds);
 	}
@@ -255,13 +281,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.setUserGroupUsers(userGroupId, userIds);
 	}
@@ -269,18 +290,60 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if ((userIds != null) && (userIds.length > 0)) {
-			checkUnsetPermission(groupId, userIds);
-
-			userLocalService.unsetGroupUsers(groupId, userIds);
+		try {
+			GroupPermissionUtil.check(
+				getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 		}
+		catch (PrincipalException pe) {
+
+			// Allow any user to leave open and restricted communities
+
+			boolean hasPermission = false;
+
+			if (userIds.length == 0) {
+				hasPermission = true;
+			}
+			else if (userIds.length == 1) {
+				User user = getUser();
+
+				if (user.getUserId() == userIds[0]) {
+					Group group = groupPersistence.findByPrimaryKey(groupId);
+
+					if (user.getCompanyId() == group.getCompanyId()) {
+						int type = group.getType();
+
+						if ((type == GroupImpl.TYPE_COMMUNITY_OPEN) ||
+							(type == GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
+
+							hasPermission = true;
+						}
+					}
+				}
+			}
+
+			if (!hasPermission) {
+				throw new PrincipalException();
+			}
+		}
+
+		userLocalService.unsetGroupUsers(groupId, userIds);
+	}
+
+	public void unsetOrganizationUsers(long organizationId, long[] userIds)
+		throws PortalException, SystemException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.ASSIGN_MEMBERS);
+
+		userLocalService.unsetOrganizationUsers(organizationId, userIds);
 	}
 
 	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
 		PasswordPolicyPermissionUtil.check(
-			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+			getPermissionChecker(), passwordPolicyId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
@@ -289,7 +352,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
-			getPermissionChecker(), roleId, ActionKeys.UPDATE);
+			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.unsetRoleUsers(roleId, userIds);
 	}
@@ -297,13 +360,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 	}
@@ -442,63 +500,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, organizationIds, actionId);
-	}
-
-	protected void checkUnsetPermission(long groupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		User user = getUser();
-
-		Role ownerRole = roleLocalService.getRole(
-			user.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
-
-		if (!userGroupRoleLocalService.hasUserGroupRole(
-				user.getUserId(), groupId, ownerRole.getRoleId())) {
-
-			Role adminRole = roleLocalService.getRole(
-				user.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
-
-			for (int i = 0; i < userIds.length; i++) {
-				if (userGroupRoleLocalService.hasUserGroupRole(
-						userIds[i], groupId, ownerRole.getRoleId()) ||
-					userGroupRoleLocalService.hasUserGroupRole(
-						userIds[i], groupId, adminRole.getRoleId()) ) {
-
-					throw new PrincipalException();
-				}
-			}
-		}
-
-		checkUpdatePermission(groupId, userIds);
-	}
-
-	protected void checkUpdatePermission(long groupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		try {
-			GroupPermissionUtil.check(
-				getPermissionChecker(), groupId, ActionKeys.UPDATE);
-		}
-		catch (PrincipalException pe) {
-
-			// Allow users to join and leave open communities
-
-			boolean hasPermission = false;
-
-			long userId = getUserId();
-
-			if ((userIds.length == 1) && (userId == userIds[0])) {
-				Group group = groupPersistence.findByPrimaryKey(groupId);
-
-				if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
-					hasPermission = true;
-				}
-			}
-
-			if (!hasPermission) {
-				throw new PrincipalException();
-			}
-		}
 	}
 
 }

@@ -50,7 +50,7 @@ public class MembershipRequestServiceImpl
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		membershipRequestLocalService.deleteMembershipRequests(
 			groupId, statusId);
@@ -72,7 +72,7 @@ public class MembershipRequestServiceImpl
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), membershipRequest.getGroupId(),
-			ActionKeys.ASSIGN_USERS);
+			ActionKeys.ASSIGN_MEMBERS);
 
 		membershipRequestLocalService.updateStatus(
 			getUserId(), membershipRequestId, reviewComments, statusId);

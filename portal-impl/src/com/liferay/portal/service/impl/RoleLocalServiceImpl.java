@@ -28,16 +28,14 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -126,36 +124,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				roleFinder.findByC_N(companyId, systemCommunityRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
-				Role role = addRole(
+				addRole(
 					0, companyId, systemCommunityRoles[i],
 					RoleImpl.TYPE_COMMUNITY);
-
-				if (systemCommunityRoles[i].equals(RoleImpl.COMMUNITY_OWNER)) {
-					List actions = ResourceActionsUtil.getModelResourceActions(
-						Group.class.getName());
-
-					permissionLocalService.setRolePermissions(
-						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(),
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						(String[])actions.toArray(new String[0]));
-				}
-				else if (systemCommunityRoles[i].equals(
-							RoleImpl.COMMUNITY_ADMINISTRATOR)) {
-
-					String[] actionIds = new String[] {
-						ActionKeys.ASSIGN_USERS, ActionKeys.MANAGE_LAYOUTS,
-						ActionKeys.UPDATE
-					};
-
-					permissionLocalService.setRolePermissions(
-						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(),
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						actionIds);
-				}
 			}
 		}
 
@@ -169,23 +140,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				roleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
-				Role role = addRole(
+				addRole(
 					0, companyId, systemOrganizationRoles[i],
 					RoleImpl.TYPE_ORGANIZATION);
-
-				if (systemOrganizationRoles[i].equals(
-						RoleImpl.ORGANIZATION_ADMINISTRATOR)) {
-
-					List actions = ResourceActionsUtil.getModelResourceActions(
-						Group.class.getName());
-
-					permissionLocalService.setRolePermissions(
-						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(),
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						(String[])actions.toArray(new String[0]));
-				}
 			}
 		}
 	}
@@ -344,21 +301,21 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public List search(
 			long companyId, String name, String description, Integer type,
-			int begin, int end)
+			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return search(
 			companyId, name, description, type, new LinkedHashMap(), begin,
-			end);
+			end, obc);
 	}
 
 	public List search(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap params, int begin, int end)
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return roleFinder.findByC_N_D_T(
-			companyId, name, description, type, params, begin, end);
+			companyId, name, description, type, params, begin, end, obc);
 	}
 
 	public int searchCount(

@@ -862,12 +862,20 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static boolean hasUserGroupRole(long userId, long groupId,
-		long roleId)
+		long roleId) throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.hasUserGroupRole(userId, groupId,
+			roleId);
+	}
+
+	public static boolean hasUserGroupRole(long userId, long groupId,
+		java.lang.String roleName)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
 		return userGroupRoleLocalService.hasUserGroupRole(userId, groupId,
-			roleId);
+			roleName);
 	}
 }

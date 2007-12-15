@@ -862,10 +862,12 @@ public class PasswordPolicyLocalServiceUtil {
 	}
 
 	public static java.util.List search(long companyId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
-		return passwordPolicyLocalService.search(companyId, name, begin, end);
+		return passwordPolicyLocalService.search(companyId, name, begin, end,
+			obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name)

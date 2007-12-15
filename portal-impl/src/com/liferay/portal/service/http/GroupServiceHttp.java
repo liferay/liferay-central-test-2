@@ -74,8 +74,8 @@ import com.liferay.portal.service.GroupServiceUtil;
 public class GroupServiceHttp {
 	public static com.liferay.portal.model.Group addGroup(
 		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -91,11 +91,7 @@ public class GroupServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = type;
-
-			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj2 = new IntegerWrapper(type);
 
 			Object paramObj3 = friendlyURL;
 
@@ -139,8 +135,8 @@ public class GroupServiceHttp {
 
 	public static com.liferay.portal.model.Group addGroup(
 		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -158,11 +154,7 @@ public class GroupServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = type;
-
-			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj3 = new IntegerWrapper(type);
 
 			Object paramObj4 = friendlyURL;
 
@@ -650,8 +642,8 @@ public class GroupServiceHttp {
 
 	public static com.liferay.portal.model.Group updateGroup(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -669,11 +661,7 @@ public class GroupServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = type;
-
-			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj3 = new IntegerWrapper(type);
 
 			Object paramObj4 = friendlyURL;
 

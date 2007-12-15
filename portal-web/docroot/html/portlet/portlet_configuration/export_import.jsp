@@ -28,7 +28,7 @@
 String tabs2 = ParamUtil.getString(request, "tabs2", "export");
 
 String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL");
+String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
@@ -42,7 +42,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/portlet_configuration/export_import");
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("backURL", backURL);
+portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 
 boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass());

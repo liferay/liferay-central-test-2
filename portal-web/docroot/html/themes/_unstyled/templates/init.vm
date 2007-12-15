@@ -70,10 +70,10 @@
 #set ($show_add_content = $theme_display.isShowAddContentIcon())
 
 #if ($show_add_content)
-	#set ($add_content_text = $languageUtil.get($company_id, $locale, "add-content"))
+	#set ($add_content_text = $languageUtil.get($company_id, $locale, "add-application"))
 	#set ($add_content_url = $theme_display.getURLAddContent())
 
-	#set ($layout_text = $languageUtil.get($company_id, $locale, "layout"))
+	#set ($layout_text = $languageUtil.get($company_id, $locale, "layout-template"))
 	#set ($layout_url = $theme_display.getURLLayoutTemplates())
 #end
 
@@ -94,7 +94,7 @@
 #set ($show_page_settings = $theme_display.isShowPageSettingsIcon())
 
 #if ($show_page_settings)
-	#set ($page_settings_text = $languageUtil.get($company_id, $locale, "page-settings"))
+	#set ($page_settings_text = $languageUtil.get($company_id, $locale, "manage-pages"))
 	#set ($page_settings_url = $theme_display.getURLPageSettings().toString())
 #end
 

@@ -36,14 +36,17 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
+import com.liferay.util.UniqueList;
 
 import java.rmi.RemoteException;
 
@@ -82,6 +85,7 @@ public class OrganizationLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		parentOrganizationId = getParentOrganizationId(
 			user.getCompanyId(), parentOrganizationId);
+		recursable = true;
 
 		validate(
 			user.getCompanyId(), parentOrganizationId, name, type, countryId,
@@ -113,9 +117,21 @@ public class OrganizationLocalServiceImpl
 
 		// Group
 
-		groupLocalService.addGroup(
-			userId, Organization.class.getName(),
-			organization.getOrganizationId(), null, null, null, null, true);
+		Group group = groupLocalService.addGroup(
+			userId, Organization.class.getName(), organizationId, null, null, 0,
+			null, true);
+
+		// Role
+
+		Role role = roleLocalService.getRole(
+			organization.getCompanyId(), RoleImpl.ORGANIZATION_OWNER);
+
+		userGroupRoleLocalService.addUserGroupRoles(
+			userId, group.getGroupId(), new long[] {role.getRoleId()});
+
+		// User
+
+		userPersistence.addOrganization(userId, organizationId);
 
 		// Resources
 
@@ -223,31 +239,31 @@ public class OrganizationLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	public List getAncestorOrganizations(long organizationId)
-		throws PortalException, SystemException {
-
-		List organizations = null;
-
-		if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-			organizations = new ArrayList();
-		}
-		else {
-			Organization organization =
-				organizationPersistence.findByPrimaryKey(organizationId);
-
-			organizations = getAncestorOrganizations(
-				organization.getParentOrganizationId());
-
-			organizations.add(organization);
-		}
-
-		return organizations;
-	}
-
 	public List getGroupOrganizations(long groupId)
 		throws PortalException, SystemException {
 
 		return groupPersistence.getOrganizations(groupId);
+	}
+
+	/**
+	 * Gets a list of organizations that a user has access to administrate. This
+	 * includes organizations that a user belongs to and all suborganizations of
+	 * those organizations.
+	 *
+	 * @param		userId the user id of the user
+	 * @return		a list of organizations
+	 */
+	public List getManageableOrganizations(long userId)
+		throws PortalException, SystemException {
+
+		List manageableOrganizations = new UniqueList();
+
+		List userOrganizations = userPersistence.getOrganizations(userId);
+
+		manageableOrganizations.addAll(userOrganizations);
+		manageableOrganizations.addAll(getSuborganizations(userOrganizations));
+
+		return manageableOrganizations;
 	}
 
 	public Organization getOrganization(long organizationId)
@@ -290,22 +306,53 @@ public class OrganizationLocalServiceImpl
 		return organizations;
 	}
 
-	public List getRecursableAncestorOrganizations(long organizationId)
+	public List getParentOrganizations(long organizationId)
 		throws PortalException, SystemException {
 
-		List organizations = new ArrayList();
+		if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+			return new ArrayList();
+		}
 
-		Iterator itr = getAncestorOrganizations(organizationId).iterator();
+		Organization organization =
+			organizationPersistence.findByPrimaryKey(organizationId);
+
+		return getParentOrganizations(organization, true);
+	}
+
+	public List getSuborganizations(List organizations)
+		throws SystemException {
+
+		List allSuborganizations = new ArrayList();
+
+		for (int i = 0; i < organizations.size(); i++) {
+			Organization organization = (Organization)organizations.get(i);
+
+			List suborganizations = organizationPersistence.findByC_P(
+				organization.getCompanyId(), organization.getOrganizationId());
+
+			addSuborganizations(allSuborganizations, suborganizations);
+		}
+
+		return allSuborganizations;
+	}
+
+	public List getSubsetOrganizations(
+			List allOrganizations, List availableOrganizations)
+		throws PortalException, SystemException {
+
+		List subsetOrganizations = new ArrayList();
+
+		Iterator itr = allOrganizations.iterator();
 
 		while (itr.hasNext()) {
 			Organization organization = (Organization)itr.next();
 
-			if (organization.isRecursable()) {
-				organizations.add(organization);
+			if (availableOrganizations.contains(organization)) {
+				subsetOrganizations.add(organization);
 			}
 		}
 
-		return organizations;
+		return subsetOrganizations;
 	}
 
 	public List getUserOrganizations(long userId)
@@ -332,28 +379,6 @@ public class OrganizationLocalServiceImpl
 
 		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
 			passwordPolicyId, Organization.class.getName(), organizationId);
-	}
-
-	public boolean isAncestor(long locationId, long ancestorOrganizationId)
-		throws PortalException, SystemException {
-
-		Organization location = organizationPersistence.findByPrimaryKey(
-			locationId);
-
-		Iterator itr = getAncestorOrganizations(
-			ancestorOrganizationId).iterator();
-
-		while (itr.hasNext()) {
-			Organization ancestor = (Organization)itr.next();
-
-			if (ancestor.getOrganizationId() ==
-					location.getParentOrganizationId()) {
-
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public List search(
@@ -494,6 +519,7 @@ public class OrganizationLocalServiceImpl
 
 		parentOrganizationId = getParentOrganizationId(
 			companyId, parentOrganizationId);
+		recursable = true;
 
 		validate(
 			companyId, organizationId, parentOrganizationId, name, type,
@@ -523,6 +549,25 @@ public class OrganizationLocalServiceImpl
 		return organization;
 	}
 
+	protected void addSuborganizations(
+			List allSuborganizations, List organizations)
+		throws SystemException {
+
+		for (int i = 0; i < organizations.size(); i++) {
+			Organization organization = (Organization)organizations.get(i);
+
+			if (!allSuborganizations.contains(organization)) {
+				allSuborganizations.add(organization);
+
+				List suborganizations = organizationPersistence.findByC_P(
+					organization.getCompanyId(),
+					organization.getOrganizationId());
+
+				addSuborganizations(allSuborganizations, suborganizations);
+			}
+		}
+	}
+
 	protected long getParentOrganizationId(
 			long companyId, long parentOrganizationId)
 		throws PortalException, SystemException {
@@ -550,6 +595,56 @@ public class OrganizationLocalServiceImpl
 		}
 
 		return parentOrganizationId;
+	}
+
+	protected List getParentOrganizations(
+			Organization organization, boolean lastOrganization)
+		throws PortalException, SystemException {
+
+		List organizations = new ArrayList();
+
+		if (!lastOrganization) {
+			organizations.add(organization);
+		}
+
+		long parentOrganizationId = organization.getParentOrganizationId();
+
+		if (parentOrganizationId ==
+				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+			return organizations;
+		}
+
+		Organization parentOrganization =
+			organizationPersistence.findByPrimaryKey(parentOrganizationId);
+
+		List parentOrganizatons = getParentOrganizations(
+			parentOrganization, false);
+
+		organizations.addAll(parentOrganizatons);
+
+		return organizations;
+	}
+
+	protected boolean isParentOrganization(
+			long parentOrganizationId, long organizationId)
+		throws PortalException, SystemException {
+
+		// Return true if parentOrganizationId is among the parent organizatons
+		// of organizationId
+
+		Organization parentOrganization =
+			organizationPersistence.findByPrimaryKey(
+				parentOrganizationId);
+
+		List parentOrganizations = getParentOrganizations(organizationId);
+
+		if (parentOrganizations.contains(parentOrganization)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected void validate(
@@ -586,7 +681,17 @@ public class OrganizationLocalServiceImpl
 			catch (NoSuchOrganizationException nsoe) {
 				throw new OrganizationParentException();
 			}
+		}
 
+		if ((organizationId > 0) &&
+			(parentOrganizationId !=
+				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+
+			// Prevent circular organizational references
+
+			if (isParentOrganization(organizationId, parentOrganizationId)) {
+				throw new OrganizationParentException();
+			}
 		}
 
 		if (Validator.isNull(name)) {

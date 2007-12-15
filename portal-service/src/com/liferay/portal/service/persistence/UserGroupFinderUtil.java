@@ -44,10 +44,11 @@ public class UserGroupFinderUtil {
 
 	public static java.util.List findByC_N_D(long companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_N_D(companyId, name, description, params,
-			begin, end);
+			begin, end, obc);
 	}
 
 	public static UserGroupFinder getFinder() {

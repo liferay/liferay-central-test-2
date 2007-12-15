@@ -50,14 +50,14 @@ package com.liferay.portal.service;
  */
 public interface GroupService {
 	public com.liferay.portal.model.Group addGroup(java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group addGroup(long liveGroupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -107,8 +107,8 @@ public interface GroupService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

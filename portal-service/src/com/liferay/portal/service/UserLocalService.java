@@ -381,6 +381,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void addOrganizationUsers(long organizationId, long[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -453,6 +457,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void clearOrganizationUsers(long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -487,6 +495,10 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List getGroupUsers(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getOrganizationUsers(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -554,6 +566,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasOrganizationUser(long organizationId, long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -607,6 +623,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void setOrganizationUsers(long organizationId, long[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -616,6 +636,10 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

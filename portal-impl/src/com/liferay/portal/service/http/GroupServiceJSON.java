@@ -73,8 +73,8 @@ import org.json.JSONObject;
  */
 public class GroupServiceJSON {
 	public static JSONObject addGroup(java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
@@ -84,8 +84,8 @@ public class GroupServiceJSON {
 	}
 
 	public static JSONObject addGroup(long liveGroupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
@@ -178,8 +178,8 @@ public class GroupServiceJSON {
 	}
 
 	public static JSONObject updateGroup(long groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,

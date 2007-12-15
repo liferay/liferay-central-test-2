@@ -148,7 +148,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 
 		for (int i = 0; i < roleIds.length; i++) {
 			RolePermissionUtil.check(
-				getPermissionChecker(), roleIds[i], ActionKeys.UPDATE);
+				getPermissionChecker(), roleIds[i], ActionKeys.ASSIGN_MEMBERS);
 		}
 	}
 

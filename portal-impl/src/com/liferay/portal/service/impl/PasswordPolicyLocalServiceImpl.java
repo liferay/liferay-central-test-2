@@ -30,6 +30,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
@@ -244,10 +245,12 @@ public class PasswordPolicyLocalServiceImpl
 		return getPasswordPolicy(user.getCompanyId(), organizationIds);
 	}
 
-	public List search(long companyId, String name, int begin, int end)
+	public List search(
+			long companyId, String name, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return passwordPolicyFinder.findByC_N(companyId, name, begin, end);
+		return passwordPolicyFinder.findByC_N(companyId, name, begin, end, obc);
 	}
 
 	public int searchCount(long companyId, String name)

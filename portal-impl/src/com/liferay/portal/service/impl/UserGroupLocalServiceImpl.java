@@ -28,6 +28,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -80,7 +81,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		groupLocalService.addGroup(
 			userId, UserGroup.class.getName(), userGroup.getUserGroupId(), null,
-			null, null, null, true);
+			null, 0, null, true);
 
 		// Resources
 
@@ -162,11 +163,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public List search(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end)
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return userGroupFinder.findByC_N_D(
-			companyId, name, description, params, begin, end);
+			companyId, name, description, params, begin, end, obc);
 	}
 
 	public int searchCount(

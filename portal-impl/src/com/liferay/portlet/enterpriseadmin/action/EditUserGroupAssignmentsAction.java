@@ -59,10 +59,15 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			updateUserGroupUsers(req);
+			if (cmd.equals("user_group_users")) {
+				updateUserGroupUsers(req);
+			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				String redirect = ParamUtil.getString(
+					req, "assignmentsRedirect");
+
+				sendRedirect(req, res, redirect);
 			}
 		}
 		catch (Exception e) {

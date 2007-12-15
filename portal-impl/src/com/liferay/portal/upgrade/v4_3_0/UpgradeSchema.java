@@ -24,9 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
@@ -55,7 +52,5 @@ public class UpgradeSchema extends SmartUpgradeSchema {
 		"ProjProject", "ProjTask", "ProjTime", "ResourceType",
 		"Users_ComicEntries", "Users_ProjProjects"
 	};
-
-	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
 
 }

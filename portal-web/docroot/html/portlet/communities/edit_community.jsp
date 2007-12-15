@@ -31,7 +31,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 long groupId = BeanParamUtil.getLong(group, request, "groupId");
 
-String type = BeanParamUtil.getString(group, request, "type");
+int type = BeanParamUtil.getInteger(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
@@ -80,9 +80,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
-			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_CLOSED)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_CLOSED %>"><liferay-ui:message key="private" /></option>
-			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_RESTRICTED %>"><liferay-ui:message key="restricted" /></option>
-			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_OPEN)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>"><liferay-ui:message key="open" /></option>
+			<option <%= (type == GroupImpl.TYPE_COMMUNITY_OPEN) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>"><liferay-ui:message key="open" /></option>
+			<option <%= (type == GroupImpl.TYPE_COMMUNITY_RESTRICTED) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_RESTRICTED %>"><liferay-ui:message key="restricted" /></option>
+			<option <%= (type == GroupImpl.TYPE_COMMUNITY_PRIVATE) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_PRIVATE %>"><liferay-ui:message key="private" /></option>
 		</select>
 	</td>
 </tr>

@@ -22,7 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.util.PropsUtil;
 
 /**
  * <a href="RegionImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +34,9 @@ import com.liferay.portal.model.Region;
  */
 public class RegionImpl extends RegionModelImpl implements Region {
 
-	public static final int DEFAULT_REGION_ID = 5;
+	public static final int DEFAULT_REGION_ID =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID));
 
 	public RegionImpl() {
 	}

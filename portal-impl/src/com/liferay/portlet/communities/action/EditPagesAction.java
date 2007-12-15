@@ -47,7 +47,6 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -58,7 +57,6 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
@@ -255,13 +253,10 @@ public class EditPagesAction extends PortletAction {
 				ActionKeys.MANAGE_LAYOUTS);
 		}
 		else if (group.isOrganization()) {
-			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(
-					group.getClassPK());
+			long organizationId = group.getClassPK();
 
 			OrganizationPermissionUtil.check(
-				permissionChecker, organization.getOrganizationId(),
-				ActionKeys.UPDATE);
+				permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS);
 		}
 		else if (group.isUser()) {
 			long groupUserId = group.getClassPK();
@@ -896,7 +891,7 @@ public class EditPagesAction extends PortletAction {
 
 			Group stagingGroup = GroupServiceUtil.addGroup(
 				group.getGroupId(), group.getName() + " (Staging)",
-				group.getDescription(), GroupImpl.TYPE_COMMUNITY_CLOSED, null,
+				group.getDescription(), GroupImpl.TYPE_COMMUNITY_PRIVATE, null,
 				group.isActive());
 
 			if (group.hasPrivateLayouts()) {

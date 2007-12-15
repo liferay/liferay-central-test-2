@@ -1014,8 +1014,8 @@ public class GroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1026,8 +1026,8 @@ public class GroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, long liveGroupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1187,6 +1187,16 @@ public class GroupLocalServiceUtil {
 			begin, end);
 	}
 
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.util.LinkedHashMap params,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.search(companyId, name, description, params,
+			begin, end, obc);
+	}
+
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException {
@@ -1229,8 +1239,8 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();

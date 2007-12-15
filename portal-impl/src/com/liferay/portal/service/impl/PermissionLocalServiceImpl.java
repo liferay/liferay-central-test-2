@@ -377,9 +377,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// this method if the user has one of the permissions set at the
 		// intersection because that takes priority.
 
-		if (checkOrgGroupPermission(userOrgs, userGroups, permissions)) {
-			return true;
-		}
+		//if (checkOrgGroupPermission(userOrgs, userGroups, permissions)) {
+		//	return true;
+		//}
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 

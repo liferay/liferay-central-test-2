@@ -362,11 +362,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAncestorOrganizations(long organizationId)
+	public java.util.List getGroupOrganizations(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupOrganizations(long groupId)
+	public java.util.List getManageableOrganizations(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -388,8 +388,15 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRecursableAncestorOrganizations(
-		long organizationId)
+	public java.util.List getParentOrganizations(long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getSuborganizations(java.util.List organizations)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getSubsetOrganizations(
+		java.util.List allOrganizations, java.util.List availableOrganizations)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -407,10 +414,6 @@ public interface OrganizationLocalService {
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public boolean isAncestor(long locationId, long ancestorOrganizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -81,8 +81,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	else if (tabs1.equals("available-communities")) {
 		List types = new ArrayList();
 
-		types.add(GroupImpl.TYPE_COMMUNITY_OPEN);
-		types.add(GroupImpl.TYPE_COMMUNITY_RESTRICTED);
+		types.add(new Integer(GroupImpl.TYPE_COMMUNITY_OPEN));
+		types.add(new Integer(GroupImpl.TYPE_COMMUNITY_RESTRICTED));
 
 		groupParams.put("types", types);
 		groupParams.put("active", Boolean.TRUE);
@@ -92,7 +92,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 	searchContainer.setTotal(total);
 
-	List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+	List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 	searchContainer.setResults(results);
 	%>
@@ -151,9 +151,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("<b>");
 		sm.append(group.getName());
-		sm.append("</b>");
 
 		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
@@ -168,7 +166,6 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
 
 			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small;\">");
 
 			if (publicLayoutsPageCount > 0) {
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
@@ -239,25 +236,13 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 					sm.append("</a>");
 				}
 			}
-
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString());
 
 		// Type
 
-		String type = GetterUtil.getString(group.getType());
-
-		if (type.equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
-			row.addText(LanguageUtil.get(pageContext, "open"));
-		}
-		else if (type.equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
-			row.addText(LanguageUtil.get(pageContext, "restricted"));
-		}
-		else {
-			row.addText(LanguageUtil.get(pageContext, "private"));
-		}
+		row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
 
 		// Members
 
@@ -286,7 +271,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		if (tabs1.equals("communities-owned")) {
 			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
 
-			if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
+			if (group.getType() == GroupImpl.TYPE_COMMUNITY_RESTRICTED) {
 				row.addText(Integer.toString(pendingRequests));
 			}
 			else {

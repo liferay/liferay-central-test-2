@@ -56,7 +56,11 @@ List results = new ArrayList();
 
 if (!className.equals(Organization.class.getName()) && (organizationIdsArray.length > 0)) {
 	for (int i = 0; i < organizationIdsArray.length; i++) {
-		results.addAll(AddressServiceUtil.getAddresses(Organization.class.getName(), organizationIdsArray[i]));
+		try {
+			results.addAll(AddressServiceUtil.getAddresses(Organization.class.getName(), organizationIdsArray[i]));
+		}
+		catch (PrincipalException pe) {
+		}
 	}
 }
 

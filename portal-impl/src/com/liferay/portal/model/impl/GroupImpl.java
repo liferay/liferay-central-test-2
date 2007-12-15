@@ -65,42 +65,31 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
 
-	public static final String TYPE_COMMUNITY_OPEN = "COMMUNITY_OPEN";
+	public static final int TYPE_COMMUNITY_OPEN = 1;
 
-	public static final String TYPE_COMMUNITY_CLOSED = "COMMUNITY_CLOSED";
+	public static final String TYPE_COMMUNITY_OPEN_LABEL = "open";
 
-	public static final String TYPE_COMMUNITY_RESTRICTED =
-		"COMMUNITY_RESTRICTED";
+	public static final int TYPE_COMMUNITY_PRIVATE = 3;
 
-	public GroupImpl() {
+	public static final String TYPE_COMMUNITY_PRIVATE_LABEL = "private";
+
+	public static final int TYPE_COMMUNITY_RESTRICTED = 2;
+
+	public static final String TYPE_COMMUNITY_RESTRICTED_LABEL = "restricted";
+
+	public static String getTypeLabel(int type) {
+		if (type == TYPE_COMMUNITY_OPEN) {
+			return TYPE_COMMUNITY_OPEN_LABEL;
+		}
+		else if (type == TYPE_COMMUNITY_PRIVATE) {
+			return TYPE_COMMUNITY_PRIVATE_LABEL;
+		}
+		else {
+			return TYPE_COMMUNITY_RESTRICTED_LABEL;
+		}
 	}
 
-	public String getDescriptiveName() {
-		String name = getName();
-
-		try {
-			if (isOrganization()) {
-				long organizationId = getClassPK();
-
-				Organization organization =
-					OrganizationLocalServiceUtil.getOrganization(
-						organizationId);
-
-				name = organization.getName();
-			}
-			else if (isUser()) {
-				long userId = getClassPK();
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				name = user.getFullName();
-			}
-		}
-		catch (Exception e) {
-			_log.error("Error getting descriptive name for " + getGroupId(), e);
-		}
-
-		return name;
+	public GroupImpl() {
 	}
 
 	public boolean isCommunity() {
@@ -214,6 +203,38 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return true;
 		}
+	}
+
+	public String getDescriptiveName() {
+		String name = getName();
+
+		try {
+			if (isOrganization()) {
+				long organizationId = getClassPK();
+
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				name = organization.getName();
+			}
+			else if (isUser()) {
+				long userId = getClassPK();
+
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				name = user.getFullName();
+			}
+		}
+		catch (Exception e) {
+			_log.error("Error getting descriptive name for " + getGroupId(), e);
+		}
+
+		return name;
+	}
+
+	public String getTypeLabel() {
+		return getTypeLabel(getType());
 	}
 
 	public String getTypeSettings() {

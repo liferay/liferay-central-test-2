@@ -56,9 +56,10 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= true %>">
+	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 		</portlet:renderURL>
 

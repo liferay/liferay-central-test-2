@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
@@ -101,12 +100,6 @@ public class UserPermissionImpl implements UserPermission {
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
 
-		String organizationActionId = actionId + "_USER";
-
-		if (actionId.equals(ActionKeys.ADD_USER)) {
-			organizationActionId = actionId;
-		}
-
 		if (permissionCheckerImpl.getUserId() == userId) {
 			return true;
 		}
@@ -116,39 +109,26 @@ public class UserPermissionImpl implements UserPermission {
 			return true;
 		}
 		else {
-			if (organizationIds == null) {
-				try  {
+			try {
+				if (organizationIds == null) {
 					User user = UserLocalServiceUtil.getUserById(userId);
 
 					organizationIds = user.getOrganizationIds();
 				}
-				catch (Exception e) {
-					_log.warn(e);
+
+				for (int i = 0; i < organizationIds.length; i++) {
+					long organizationId = organizationIds[i];
+
+					if (OrganizationPermissionUtil.contains(
+							permissionChecker, organizationId,
+							ActionKeys.MANAGE_USERS)) {
+
+						return true;
+					}
 				}
 			}
-
-			if ((organizationIds != null) && (organizationIds.length > 0) &&
-				(hasOrganizationPermission(
-					permissionChecker, organizationIds,
-					organizationActionId))) {
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	protected boolean hasOrganizationPermission(
-		PermissionChecker permissionChecker, long[] organizationIds,
-		String organizationActionId) {
-
-		for (int i = 0; i < organizationIds.length; i++) {
-			if (permissionChecker.hasPermission(
-					0, Organization.class.getName(), organizationIds[i],
-					organizationActionId)) {
-
-				return true;
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 

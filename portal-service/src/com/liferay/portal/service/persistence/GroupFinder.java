@@ -43,5 +43,6 @@ public interface GroupFinder {
 
 	public java.util.List findByC_N_D(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 }

@@ -856,11 +856,12 @@ public class UserGroupLocalServiceUtil {
 
 	public static java.util.List search(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		return userGroupLocalService.search(companyId, name, description,
-			params, begin, end);
+			params, begin, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

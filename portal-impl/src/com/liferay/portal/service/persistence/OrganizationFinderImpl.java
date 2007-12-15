@@ -859,7 +859,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key));
+				sm.append(getWhere(key, value));
 			}
 		}
 
@@ -867,10 +867,33 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 	}
 
 	protected String getWhere(String key) {
+		return getWhere(key, null);
+	}
+
+	protected String getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsPermissions")) {
 			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
+		}
+		else if (key.equals("organizations")) {
+			Long[] organizationIds = (Long[])value;
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("WHERE (");
+
+			for (int i = 0; i < organizationIds.length; i++) {
+				sm.append("(Organization_.organizationId = ?) ");
+
+				if ((i + 1) < organizationIds.length) {
+					sm.append("OR ");
+				}
+			}
+
+			sm.append(")");
+
+			join = sm.toString();
 		}
 		else if (key.equals("organizationsGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS);
@@ -918,6 +941,15 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 					if (Validator.isNotNull(valueLong)) {
 						qPos.add(valueLong);
+					}
+				}
+				else if (value instanceof Long[]) {
+					Long[] valueArray = (Long[])value;
+
+					for (int i = 0; i < valueArray.length; i++) {
+						if (Validator.isNotNull(valueArray[i])) {
+							qPos.add(valueArray[i]);
+						}
 					}
 				}
 				else if (value instanceof String) {

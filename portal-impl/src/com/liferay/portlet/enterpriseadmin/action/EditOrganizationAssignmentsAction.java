@@ -20,14 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.enterpriseadmin.action;
 
-import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -42,12 +43,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditUserPermissionsAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditOrganizationAssignmentsAction.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Charles May
+ * @author Brian Wing Shun Chan
  *
  */
-public class EditUserPermissionsAction extends PortletAction {
+public class EditOrganizationAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -57,19 +59,24 @@ public class EditUserPermissionsAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("user_permissions")) {
-				updateUserPermissions(req);
+			if (cmd.equals("organization_users")) {
+				updateOrganizationUsers(req);
 			}
 
-			String redirect = ParamUtil.getString(req, "permissionsRedirect");
+			if (Validator.isNotNull(cmd)) {
+				String redirect = ParamUtil.getString(
+					req, "assignmentsRedirect");
 
-			sendRedirect(req, res, redirect);
+				sendRedirect(req, res, redirect);
+			}
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException) {
+			if (e instanceof NoSuchOrganizationException ||
+				e instanceof PrincipalException) {
+
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(req, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -83,34 +90,35 @@ public class EditUserPermissionsAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getGroup(req);
+			ActionUtil.getOrganization(req);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.communities.edit_user_permissions"));
+		return mapping.findForward(getForward(
+			req, "portlet.enterprise_admin.edit_organization_assignments"));
 	}
 
-	protected void updateUserPermissions(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		long resourceId = ParamUtil.getLong(req, "resourceId");
-		long userId = ParamUtil.getLong(req, "userIdsPosValue");
-		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "userIdActionIds"));
+	protected void updateOrganizationUsers(ActionRequest req) throws Exception {
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 
-		PermissionServiceUtil.setUserPermissions(
-			userId, groupId, actionIds, resourceId);
+		long[] addUserIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserIds"), 0L);
+		long[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserIds"), 0L);
+
+		UserServiceUtil.addOrganizationUsers(organizationId, addUserIds);
+		UserServiceUtil.unsetOrganizationUsers(organizationId, removeUserIds);
 	}
 
 }

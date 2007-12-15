@@ -837,20 +837,20 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.deleteOrganization(organization);
 	}
 
-	public static java.util.List getAncestorOrganizations(long organizationId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getAncestorOrganizations(organizationId);
-	}
-
 	public static java.util.List getGroupOrganizations(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getGroupOrganizations(groupId);
+	}
+
+	public static java.util.List getManageableOrganizations(long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getManageableOrganizations(userId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
@@ -887,13 +887,29 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganizations(organizationIds);
 	}
 
-	public static java.util.List getRecursableAncestorOrganizations(
-		long organizationId)
+	public static java.util.List getParentOrganizations(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
-		return organizationLocalService.getRecursableAncestorOrganizations(organizationId);
+		return organizationLocalService.getParentOrganizations(organizationId);
+	}
+
+	public static java.util.List getSuborganizations(
+		java.util.List organizations) throws com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getSuborganizations(organizations);
+	}
+
+	public static java.util.List getSubsetOrganizations(
+		java.util.List allOrganizations, java.util.List availableOrganizations)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getSubsetOrganizations(allOrganizations,
+			availableOrganizations);
 	}
 
 	public static java.util.List getUserOrganizations(long userId)
@@ -930,16 +946,6 @@ public class OrganizationLocalServiceUtil {
 
 		return organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
 			organizationId);
-	}
-
-	public static boolean isAncestor(long locationId,
-		long ancestorOrganizationId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.isAncestor(locationId,
-			ancestorOrganizationId);
 	}
 
 	public static java.util.List search(long companyId,

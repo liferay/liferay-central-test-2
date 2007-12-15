@@ -169,6 +169,20 @@ public class PropsUtil {
 
 	public static final String JAVASCRIPT_LOG_ENABLED = "javascript.log.enabled";
 
+	// SQL Data
+
+    public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_COUNTRY_COUNTRY_ID = "sql.data.com.liferay.portal.model.Country.country.id";
+
+	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID = "sql.data.com.liferay.portal.model.Region.region.id";
+
+	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_ADDRESS = "sql.data.com.liferay.portal.model.ListType.account.address";
+
+	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_EMAIL_ADDRESS = "sql.data.com.liferay.portal.model.ListType.account.email.address";
+
+	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_CONTACT_EMAIL_ADDRESS = "sql.data.com.liferay.portal.model.ListType.contact.email.address";
+
+	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ORGANIZATION_STATUS = "sql.data.com.liferay.portal.model.ListType.organization.status";
+
 	// Company
 
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
@@ -225,15 +239,9 @@ public class PropsUtil {
 
 	public static final String TIME_ZONES = "time.zones";
 
-	// Organizations and Locations
-
-	public static final String ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED = "organizations.parent.organization.required";
+	// Organizations
 
 	public static final String ORGANIZATIONS_COUNTRY_REQUIRED = "organizations.country.required";
-
-	public static final String ORGANIZATIONS_LOCATION_REQUIRED = "organizations.location.required";
-
-	public static final String ORGANIZATIONS_LOCATION_STRICT_VALIDATION = "organizations.location.strict.validation";
 
 	// Look and Feel
 
@@ -626,6 +634,8 @@ public class PropsUtil {
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE = "field.enable.com.liferay.portal.model.Contact.male";
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY = "field.enable.com.liferay.portal.model.Contact.birthday";
+
+	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS = "field.enable.com.liferay.portal.model.Organization.status";
 
 	// Mime Types
 

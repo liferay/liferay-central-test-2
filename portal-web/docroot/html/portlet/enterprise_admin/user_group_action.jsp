@@ -57,13 +57,14 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 		</c:if>
 
-		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_USERS) %>">
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="assign" url="<%= assignURL %>" />
+			<liferay-ui:icon image="assign" message="assign-members" url="<%= assignURL %>" />
 		</c:if>
 	</c:if>
 

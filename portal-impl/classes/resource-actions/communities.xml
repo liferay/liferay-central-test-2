@@ -38,5 +38,5 @@
 			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
-	</model-resource>	
+	</model-resource>
 </resource-action-mapping>

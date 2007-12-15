@@ -24,15 +24,6 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-tabs1 = "organizations";
-String tabs2 = ParamUtil.getString(request, "tabs2", "regular");
-
-boolean locationStrictValidation = ParamUtil.getBoolean(request, "locationStrictValidation");
-
-String searchFilter = StringPool.BLANK;
-%>
-
 <script type="text/javascript">
 	function <portlet:namespace/>setOrgType(url, type) {
 		if (type == 'locations') {
@@ -46,23 +37,6 @@ String searchFilter = StringPool.BLANK;
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="organizations" />
-
-<c:choose>
-	<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
-		<liferay-ui:message key="please-select-at-least-one-regular-organization-and-one-location" />
-
-		<br /><br />
-	</c:when>
-	<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
-		<liferay-ui:message key="please-select-at-least-one-regular-organization" />
-
-		<br /><br />
-	</c:when>
-</c:choose>
-
-<c:if test="<%= locationStrictValidation %>">
-	<liferay-ui:tabs param="tabs2" names="regular,locations" url="<%= currentURL %>" onClick='<%= renderResponse.getNamespace() + "setOrgType" %>' />
-</c:if>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -95,55 +69,38 @@ searchContainer.setHeaderNames(headerNames);
 <%
 OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-if (locationStrictValidation && tabs2.equals("regular")) {
-	searchTerms.setType(OrganizationImpl.TYPE_REGULAR);
-}
-else if (locationStrictValidation) {
-	searchTerms.setType(OrganizationImpl.TYPE_LOCATION);
+LinkedHashMap orgParams = new LinkedHashMap();
+
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
+
+	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
+
+	orgParams.put("organizations", manageableOrganizationIds);
 }
 
 int total = 0;
-List results = null;
 
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	total = 1;
-
-	results = new ArrayList();
-
-	results.addAll(user.getOrganizations());
-}
-else if (locationStrictValidation && tabs2.equals("locations")) {
-%>
-
-	<%@ include file="/html/portlet/enterprise_admin/location_strict_validation_search_results.jspf" %>
-
-<%
+if (searchTerms.isAdvancedSearch()) {
+	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator());
 }
 else {
-	if (searchTerms.isAdvancedSearch()) {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
-	}
-	else {
-		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null);
-	}
-
-	if (searchTerms.isAdvancedSearch()) {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
-	}
-	else {
-		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
-	}
+	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams);
 }
 
 searchContainer.setTotal(total);
+
+List results = null;
+
+if (searchTerms.isAdvancedSearch()) {
+	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+}
+else {
+	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), orgParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+}
+
 searchContainer.setResults(results);
 %>
-
-<c:if test="<%= Validator.isNotNull(searchFilter) %>">
-	<br />
-
-	<%= searchFilter %>
-</c:if>
 
 <div class="separator"><!-- --></div>
 

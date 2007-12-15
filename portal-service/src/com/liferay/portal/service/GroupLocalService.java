@@ -424,15 +424,15 @@ public interface GroupLocalService {
 
 	public com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL, boolean active)
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, long liveGroupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -512,6 +512,11 @@ public interface GroupLocalService {
 		java.lang.String description, java.util.LinkedHashMap params,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.util.LinkedHashMap params,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
@@ -533,8 +538,8 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -103,45 +103,50 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			<td>
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
 
-				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
+				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
 					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="<%= "organizations" %>" /><portlet:param name="type" value="<%= String.valueOf(OrganizationImpl.TYPE_REGULAR) %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 
 					<input <%= (parentOrganizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
 				</c:if>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="recursable-permissions" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="recursable" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="status" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />statusId">
-					<option value=""></option>
 
-					<%
-					List statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
+		<%
+		boolean fieldEnableOrganizationStatus = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
+		%>
 
-					for (int i = 0; i < statuses.size(); i++) {
-						ListType status = (ListType)statuses.get(i);
-					%>
+		<c:choose>
+			<c:when test="<%= fieldEnableOrganizationStatus %>">
+				<tr>
+					<td>
+						<liferay-ui:message key="status" />
+					</td>
+					<td>
+						<select name="<portlet:namespace />statusId">
+							<option value=""></option>
 
-						<option <%= status.getListTypeId() == statusId ? "selected" : "" %> value="<%= String.valueOf(status.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, status.getName()) %></option>
+							<%
+							List statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
 
-					<%
-					}
-					%>
+							for (int i = 0; i < statuses.size(); i++) {
+								ListType status = (ListType)statuses.get(i);
+							%>
 
-				</select>
-			</td>
-		</tr>
+								<option <%= status.getListTypeId() == statusId ? "selected" : "" %> value="<%= String.valueOf(status.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, status.getName()) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
+			</c:otherwise>
+		</c:choose>
+
 		</table>
 	</td>
 	<td valign="top">

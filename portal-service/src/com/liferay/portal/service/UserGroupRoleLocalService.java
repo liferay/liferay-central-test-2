@@ -370,6 +370,10 @@ public interface UserGroupRoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public boolean hasUserGroupRole(long userId, long groupId,
+		java.lang.String roleName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

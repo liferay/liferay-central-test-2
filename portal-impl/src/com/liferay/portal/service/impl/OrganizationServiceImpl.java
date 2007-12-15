@@ -48,7 +48,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		organizationLocalService.addGroupOrganizations(
 			groupId, organizationIds);
@@ -73,7 +73,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		if (!OrganizationPermissionUtil.contains(
 				getPermissionChecker(), parentOrganizationId,
-				ActionKeys.ADD_LOCATION) &&
+				ActionKeys.MANAGE_SUBORGANIZATIONS) &&
 			!PortalPermissionUtil.contains(
 				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
 
@@ -119,7 +119,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		organizationLocalService.setGroupOrganizations(
 			groupId, organizationIds);
@@ -129,7 +129,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		organizationLocalService.unsetGroupOrganizations(
 			groupId, organizationIds);

@@ -22,10 +22,12 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.util.PropsUtil;
 
 /**
  * <a href="ListTypeImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,12 +52,16 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 	public static final String ACCOUNT_ADDRESS =
 		Account.class.getName() + ADDRESS;
 
-	public static final int ACCOUNT_ADDRESS_DEFAULT = 10000;
+	public static final int ACCOUNT_ADDRESS_DEFAULT =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_ADDRESS));
 
 	public static final String ACCOUNT_EMAIL_ADDRESS =
 		Account.class.getName() + EMAIL_ADDRESS;
 
-	public static final int ACCOUNT_EMAIL_ADDRESS_DEFAULT = 10004;
+	public static final int ACCOUNT_EMAIL_ADDRESS_DEFAULT =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_EMAIL_ADDRESS));
 
 	public static final String ACCOUNT_PHONE =
 		Account.class.getName() + PHONE;
@@ -71,7 +77,9 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 	public static final String CONTACT_EMAIL_ADDRESS =
 		Contact.class.getName() + EMAIL_ADDRESS;
 
-	public static final int CONTACT_EMAIL_ADDRESS_DEFAULT = 11003;
+	public static final int CONTACT_EMAIL_ADDRESS_DEFAULT =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_CONTACT_EMAIL_ADDRESS));
 
 	public static final String CONTACT_PHONE =
 		Contact.class.getName() + PHONE;
@@ -102,7 +110,9 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 	public static final String ORGANIZATION_STATUS =
 		Organization.class.getName() + ".status";
 
-	public static final int ORGANIZATION_STATUS_DEFAULT = 12017;
+	public static final int ORGANIZATION_STATUS_DEFAULT =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ORGANIZATION_STATUS));
 
 	public static final String ORGANIZATION_WEBSITE =
 		Organization.class.getName() + WEBSITE;

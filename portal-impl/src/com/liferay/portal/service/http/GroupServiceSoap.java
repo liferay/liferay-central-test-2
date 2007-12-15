@@ -81,9 +81,8 @@ import java.rmi.RemoteException;
  */
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupSoap addGroup(
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
-		throws RemoteException {
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
 					description, type, friendlyURL, active);
@@ -99,7 +98,7 @@ public class GroupServiceSoap {
 
 	public static com.liferay.portal.model.GroupSoap addGroup(
 		long liveGroupId, java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
+		int type, java.lang.String friendlyURL, boolean active)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
@@ -266,9 +265,8 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL, boolean active)
-		throws RemoteException {
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 					name, description, type, friendlyURL, active);

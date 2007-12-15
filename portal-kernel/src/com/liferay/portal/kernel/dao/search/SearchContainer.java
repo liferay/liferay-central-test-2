@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class SearchContainer {
 	public SearchContainer() {
 	}
 
-	public SearchContainer(RenderRequest req, DisplayTerms displayTerms,
-						   DisplayTerms searchTerms, String curParam, int delta,
-						   PortletURL iteratorURL, List headerNames,
-						   String emptyResultsMessage) {
+	public SearchContainer(
+		RenderRequest req, DisplayTerms displayTerms, DisplayTerms searchTerms,
+		String curParam, int delta, PortletURL iteratorURL, List headerNames,
+		String emptyResultsMessage) {
 
 		_displayTerms = displayTerms;
 		_searchTerms = searchTerms;
@@ -192,6 +193,14 @@ public class SearchContainer {
 		_orderByType = orderByType;
 	}
 
+	public OrderByComparator getOrderByComparator() {
+		return _orderByComparator;
+	}
+
+	public void setOrderByComparator(OrderByComparator orderByComparator) {
+		_orderByComparator = orderByComparator;
+	}
+
 	public String getEmptyResultsMessage() {
 		return _emptyResultsMessage;
 	}
@@ -243,6 +252,7 @@ public class SearchContainer {
 	private Map _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByType;
+	private OrderByComparator _orderByComparator;
 	private String _emptyResultsMessage;
 	private RowChecker _rowChecker;
 	private boolean _hover = true;

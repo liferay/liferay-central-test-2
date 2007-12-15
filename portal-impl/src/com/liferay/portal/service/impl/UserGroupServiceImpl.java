@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.UserGroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -47,7 +46,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
 	}
@@ -76,15 +75,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.VIEW);
 
 		return userGroupLocalService.getUserGroup(userGroupId);
 	}
@@ -97,15 +89,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 
 		long userGroupId = userGroup.getUserGroupId();
 
-		if (!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermissionUtil.contains(
-				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.VIEW);
 
 		return userGroup;
 	}
@@ -120,7 +105,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
 	}

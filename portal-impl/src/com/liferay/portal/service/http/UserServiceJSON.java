@@ -78,6 +78,12 @@ public class UserServiceJSON {
 		UserServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
+	public static void addOrganizationUsers(long organizationId, long[] userIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		UserServiceUtil.addOrganizationUsers(organizationId, userIds);
+	}
+
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
@@ -216,12 +222,6 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
-	public static void setGroupUsers(long groupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		UserServiceUtil.setGroupUsers(groupId, userIds);
-	}
-
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -238,6 +238,13 @@ public class UserServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		UserServiceUtil.unsetGroupUsers(groupId, userIds);
+	}
+
+	public static void unsetOrganizationUsers(long organizationId,
+		long[] userIds)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		UserServiceUtil.unsetOrganizationUsers(organizationId, userIds);
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,

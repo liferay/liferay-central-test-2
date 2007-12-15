@@ -817,6 +817,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	addOrganizationUsers: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addOrganizationUsers";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	addPasswordPolicyUsers: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addPasswordPolicyUsers";
@@ -929,13 +936,6 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	setGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	setRoleUsers: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "setRoleUsers";
@@ -953,6 +953,13 @@ Liferay.Service.Portal.User = {
 	unsetGroupUsers: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "unsetGroupUsers";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	unsetOrganizationUsers: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "unsetOrganizationUsers";
 
 		return Liferay.Service.ajax(params, callback);
 	},

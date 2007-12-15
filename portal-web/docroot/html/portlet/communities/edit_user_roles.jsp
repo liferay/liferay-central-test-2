@@ -56,8 +56,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/communities/edit_user_roles");
-portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 portletURL.setParameter("roleId", String.valueOf(roleId));
 
@@ -120,10 +120,6 @@ if (role != null) {
 
 		<%
 		RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
-
-		List headerNames = searchContainer.getHeaderNames();
-
-		headerNames.add("type");
 		%>
 
 		<liferay-ui:search-form
@@ -140,7 +136,7 @@ if (role != null) {
 
 			searchContainer.setTotal(total);
 
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), searchContainer.getStart(), searchContainer.getEnd());
+			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 			searchContainer.setResults(results);
 			%>

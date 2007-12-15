@@ -272,21 +272,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return new OrganizationImpl();
 	}
 
-	public List getOrganizations() {
-		try {
-			return OrganizationLocalServiceUtil.getUserOrganizations(
-				getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to get organizations for user " + getUserId());
-			}
-		}
-
-		return new ArrayList();
-	}
-
 	public long[] getOrganizationIds() {
 		List organizations = getOrganizations();
 
@@ -301,6 +286,21 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return organizationIds;
+	}
+
+	public List getOrganizations() {
+		try {
+			return OrganizationLocalServiceUtil.getUserOrganizations(
+				getUserId());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get organizations for user " + getUserId());
+			}
+		}
+
+		return new ArrayList();
 	}
 
 	public boolean hasOrganization() {

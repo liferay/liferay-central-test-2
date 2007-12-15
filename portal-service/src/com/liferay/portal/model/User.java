@@ -105,9 +105,9 @@ public interface User extends UserModel {
 
 	public com.liferay.portal.model.Organization getOrganization();
 
-	public java.util.List getOrganizations();
-
 	public long[] getOrganizationIds();
+
+	public java.util.List getOrganizations();
 
 	public boolean hasOrganization();
 

@@ -85,7 +85,7 @@ public class GroupModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
-			{ "type_", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.INTEGER) },
 			
 
 			{ "typeSettings", new Integer(Types.VARCHAR) },
@@ -96,7 +96,7 @@ public class GroupModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Group_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.GroupModel"));
@@ -211,14 +211,12 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getType() {
-		return GetterUtil.getString(_type);
+	public int getType() {
+		return _type;
 	}
 
-	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+	public void setType(int type) {
+		if (type != _type) {
 			_type = type;
 		}
 	}
@@ -275,7 +273,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		model.setLiveGroupId(getLiveGroupId());
 		model.setName(Html.escape(getName()));
 		model.setDescription(Html.escape(getDescription()));
-		model.setType(Html.escape(getType()));
+		model.setType(getType());
 		model.setTypeSettings(Html.escape(getTypeSettings()));
 		model.setFriendlyURL(Html.escape(getFriendlyURL()));
 		model.setActive(getActive());
@@ -363,7 +361,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	private long _liveGroupId;
 	private String _name;
 	private String _description;
-	private String _type;
+	private int _type;
 	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;

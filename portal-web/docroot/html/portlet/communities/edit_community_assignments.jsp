@@ -34,7 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-User selectedUser = PortalUtil.getSelectedUser(request, false);
+User selUser = PortalUtil.getSelectedUser(request, false);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -48,33 +48,33 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateGroupOrganizations(redirect) {
+	function <portlet:namespace />updateGroupOrganizations(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_organizations";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />updateGroupUserGroups(redirect) {
+	function <portlet:namespace />updateGroupUserGroups(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_user_groups";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />updateGroupUsers(redirect) {
+	function <portlet:namespace />updateGroupUsers(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_users";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />updateUserGroupRole(redirect) {
+	function <portlet:namespace />updateUserGroupRole(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_role";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
@@ -85,26 +85,36 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 
-<div>
-	<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
-</div>
+<c:choose>
+	<c:when test="<%= selUser == null %>">
+		<div>
+			<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
+		</div>
 
-<br />
+		<br />
 
-<liferay-ui:tabs
-	names="users,organizations,user-groups"
-	param="tabs1"
-	url="<%= portletURL.toString() %>"
-	backURL="<%= redirect %>"
-/>
+		<liferay-ui:tabs
+			names="users,organizations,user-groups"
+			param="tabs1"
+			url="<%= portletURL.toString() %>"
+			backURL="<%= redirect %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="roles"
+			backURL="<%= redirect %>"
+		/>
+	</c:otherwise>
+</c:choose>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("users") %>'>
 		<c:choose>
-			<c:when test="<%= selectedUser == null %>">
+			<c:when test="<%= selUser == null %>">
 				<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
 				<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
@@ -205,20 +215,18 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selectedUser.getUserId() %>" />
+				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 				<input name="<portlet:namespace />addRoleIds" type="hidden" value="" />
 				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="" />
 
-				<liferay-ui:message key="edit-community-roles-for-user" />: <%= selectedUser.getFullName() %>
+				<liferay-ui:message key="edit-community-roles-for-user" />: <%= selUser.getFullName() %>
 
 				<br /><br />
 
 				<%
 				RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-				searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selectedUser, group));
-
-				List headerNames = searchContainer.getHeaderNames();
+				searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUser, group));
 				%>
 
 				<liferay-ui:search-form
@@ -235,7 +243,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					searchContainer.setTotal(total);
 
-					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd());
+					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 					searchContainer.setResults(results);
 
@@ -246,7 +254,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
 					updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
 					updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
-					updateRoleAssignmentsURL.setParameter("redirect", HttpUtil.decodeURL(Http.getParameter(redirect, renderResponse.getNamespace() + "redirect", false)));
+					updateRoleAssignmentsURL.setParameter("redirect", redirect);
+					updateRoleAssignmentsURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 
@@ -267,6 +276,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 						// Name
 
 						row.addText(role.getName());
+
+						// Type
+
+						row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
 
 						// Add result row
 
@@ -321,15 +334,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<br /><br />
 
 		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-		headerNames.add("parent-organization");
-		headerNames.add("type");
-		headerNames.add("city");
-
-		searchContainer.setHeaderNames(headerNames);
-
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
@@ -361,11 +365,43 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
-			// Address
+			// City
 
 			Address address = organization.getAddress();
 
 			row.addText(address.getCity());
+
+			// Region
+
+			String regionName = address.getRegion().getName();
+
+			if (Validator.isNull(regionName)) {
+				try {
+					Region region = RegionServiceUtil.getRegion(organization.getRegionId());
+
+					regionName = LanguageUtil.get(pageContext, region.getName());
+				}
+				catch (NoSuchRegionException nsce) {
+				}
+			}
+
+			row.addText(regionName);
+
+			// Country
+
+			String countryName = address.getCountry().getName();
+
+			if (Validator.isNull(countryName)) {
+				try {
+					Country country = CountryServiceUtil.getCountry(organization.getCountryId());
+
+					countryName = LanguageUtil.get(pageContext, country.getName());
+				}
+				catch (NoSuchCountryException nsce) {
+				}
+			}
+
+			row.addText(countryName);
 
 			// Add result row
 
@@ -409,7 +445,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		searchContainer.setTotal(total);
 
-		List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
+		List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 		searchContainer.setResults(results);
 		%>
