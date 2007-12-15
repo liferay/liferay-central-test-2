@@ -140,7 +140,7 @@ public class RSSAction extends Action {
 				threadId, max, type, version, feedURL, entryURL, prefs);
 		}
 
-		return rss.getBytes();
+		return rss.getBytes(StringPool.UTF8);
 	}
 
 	private static Log _log = LogFactory.getLog(RSSAction.class);
