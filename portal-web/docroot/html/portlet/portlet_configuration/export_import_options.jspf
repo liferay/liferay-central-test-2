@@ -22,7 +22,7 @@
  */
 %>
 
-<ul class="gamma">
+<ul class="gamma lfr-component">
 	<c:if test="<%= supportsSetup %>">
 		<li class="tree-item">
 			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_SETUP %>" defaultValue="<%= true %>" />
