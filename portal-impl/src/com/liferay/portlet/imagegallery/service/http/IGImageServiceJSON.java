@@ -84,4 +84,12 @@ public class IGImageServiceJSON {
 
 		return IGImageJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject getImageByLargeImageId(long largeImageId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByLargeImageId(largeImageId);
+
+		return IGImageJSONSerializer.toJSONObject(returnValue);
+	}
 }

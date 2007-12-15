@@ -1499,6 +1499,13 @@ Liferay.Service.IG.IGImage = {
 		params.serviceMethodName = "getImage";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	getImageByLargeImageId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getImageByLargeImageId";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

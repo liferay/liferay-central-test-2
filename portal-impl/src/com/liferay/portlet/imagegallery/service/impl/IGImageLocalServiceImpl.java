@@ -324,6 +324,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public IGImage getImageByLargeImageId(long largeImageId)
+		throws PortalException, SystemException {
+
+		return igImagePersistence.findByLargeImageId(largeImageId);
+	}
+
 	public IGImage getImageByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 

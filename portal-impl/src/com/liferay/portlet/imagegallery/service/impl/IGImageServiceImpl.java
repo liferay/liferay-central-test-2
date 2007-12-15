@@ -86,6 +86,17 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		return igImageLocalService.getImage(imageId);
 	}
 
+	public IGImage getImageByLargeImageId(long largeImageId)
+		throws PortalException, SystemException {
+
+		IGImage image = igImageLocalService.getImageByLargeImageId(largeImageId);
+
+		IGImagePermission.check(
+			getPermissionChecker(), image.getImageId(), ActionKeys.VIEW);
+
+		return image;
+	}
+
 	public IGImage updateImage(
 			long imageId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries)

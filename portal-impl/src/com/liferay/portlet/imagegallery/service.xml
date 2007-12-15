@@ -84,6 +84,9 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
+		<finder name="LargeImageId" return-type="IGImage">
+			<finder-column name="largeImageId" />
+		</finder>
 
 		<!-- References -->
 

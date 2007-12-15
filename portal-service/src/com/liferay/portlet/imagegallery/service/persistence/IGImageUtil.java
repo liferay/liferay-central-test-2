@@ -156,6 +156,18 @@ public class IGImageUtil {
 			obc);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
+		long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence().findByLargeImageId(largeImageId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
+		long largeImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByLargeImageId(largeImageId);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -195,6 +207,12 @@ public class IGImageUtil {
 		getPersistence().removeByFolderId(folderId);
 	}
 
+	public static void removeByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		getPersistence().removeByLargeImageId(largeImageId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -207,6 +225,11 @@ public class IGImageUtil {
 	public static int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByFolderId(folderId);
+	}
+
+	public static int countByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByLargeImageId(largeImageId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {
