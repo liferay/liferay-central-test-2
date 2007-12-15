@@ -407,8 +407,6 @@ address1=Endereço 1
 address2=Endereço 2
 address3=Endereço 3
 address=Endereço
-
-
 addresses-and-phone-numbers=Endereços e números de telefone
 addresses=Endereços
 administer-nodes=Administre Nós
@@ -992,6 +990,7 @@ download=Download
 downloading=Downloading
 downloads=Downloads
 drafts=Esboços
+drag-portlets-below-to-nest-them=Portlets do arrasto abaixo para aninhá-los.
 driving-directions=Sentidos Dirigindo
 due-date=Data Devida
 duration=Duração

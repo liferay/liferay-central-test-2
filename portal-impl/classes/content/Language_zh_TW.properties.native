@@ -407,8 +407,6 @@ address1=地址1
 address2=地址2
 address3=地址3
 address=地址
-
-
 addresses-and-phone-numbers=地址和電話號碼
 addresses=地址
 administer-nodes=執行結
@@ -992,6 +990,7 @@ download=下載
 downloading=下載
 downloads=下載
 drafts=草稿
+drag-portlets-below-to-nest-them=阻力portlets 如下築巢他們。
 driving-directions=行駛方向
 due-date=到期日
 duration=期間

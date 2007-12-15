@@ -69,15 +69,15 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 		<c:when test='<%= fieldType.equals("text") %>'>
 			<div class="ctrl-holder">
 				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-	
-				<input class="<%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
+
+				<input class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("textarea") %>'>
 			<div class="ctrl-holder">
 				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-	
-				<textarea class="<%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
+
+				<textarea class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("checkbox") %>'>
@@ -86,7 +86,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("radio") %>'>
-			
+
 
 			<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
 				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
@@ -104,10 +104,10 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("options") %>'>
-			
+
 
 			<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-				<label class="<%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+				<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 				<%
 				String[] options = WebFormUtil.split(fieldOptions);
 				%>

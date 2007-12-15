@@ -407,8 +407,6 @@ address1=Dirección 1
 address2=Dirección 2
 address3=Dirección 3
 address=Dirección
-
-
 addresses-and-phone-numbers=Direcciones y números de teléfono
 addresses=Direcciones
 administer-nodes=Administre Los Nodos
@@ -992,6 +990,7 @@ download=Descargar
 downloading=Descargando
 downloads=Descargas
 drafts=Borradores
+drag-portlets-below-to-nest-them=Portlets de la fricción abajo para jerarquizarlos.
 driving-directions=Como llegar
 due-date=Fecha límite
 duration=Duración

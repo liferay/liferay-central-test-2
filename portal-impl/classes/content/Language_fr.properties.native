@@ -407,8 +407,6 @@ address1=Adresse 1
 address2=Adresse 2
 address3=Adresse 3
 address=Adresse
-
-
 addresses-and-phone-numbers=Adresses et numéros de téléphones
 addresses=Adresses
 administer-nodes=Administrez Les Noeuds
@@ -992,6 +990,7 @@ download=Téléchargement
 downloading=Téléchargement
 downloads=Téléchargements
 drafts=Brouillons
+drag-portlets-below-to-nest-them=Portlets de drague ci-dessous pour les nicher.
 driving-directions=Chemin à prendre
 due-date=Date d'échéance
 duration=Durée

@@ -139,7 +139,7 @@ containerStyles = sm.toString();
 					</div>
 				</c:if>
 			</c:when>
-				<c:otherwise>
+			<c:otherwise>
 				<div class="portlet-borderless-container" <%= containerStyles %>>
 					<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) || portletDisplay.isShowBackIcon() %>">
 						<div class="portlet-borderless-bar">

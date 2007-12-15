@@ -594,10 +594,10 @@ public class LayoutTypePortletImpl
 		String lastNewColumnValue =
 			getTypeSettingsProperties().getProperty(lastNewColumnId);
 
-		Iterator it = oldColumns.iterator();
+		Iterator itr = oldColumns.iterator();
 
-		while (it.hasNext()) {
-			String oldColumnId = (String) it.next();
+		while (itr.hasNext()) {
+			String oldColumnId = (String)itr.next();
 
 			if (!newColumns.contains(oldColumnId)) {
 				String oldColumnValue =
@@ -605,9 +605,9 @@ public class LayoutTypePortletImpl
 
 				String[] portletIds = StringUtil.split(oldColumnValue);
 
-				for (int j = 0; j < portletIds.length; j++) {
+				for (int i = 0; i < portletIds.length; i++) {
 					lastNewColumnValue =
-						StringUtil.add(lastNewColumnValue, portletIds[j]);
+						StringUtil.add(lastNewColumnValue, portletIds[i]);
 				}
 			}
 		}
@@ -977,13 +977,14 @@ public class LayoutTypePortletImpl
 
 	public void removeNestedColumns(String portletId) {
 		Properties props = getTypeSettingsProperties();
-		Iterator it = props.keySet().iterator();
 
-		while (it.hasNext()) {
-			String key = (String)it.next();
+		Iterator itr = props.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String key = (String)itr.next();
 
 			if (key.startsWith(portletId)) {
-				it.remove();
+				itr.remove();
 			}
 		}
 	}
@@ -1187,24 +1188,22 @@ public class LayoutTypePortletImpl
 				portlet.getPortletLayoutListener();
 
 			if ((portletLayoutListener != null)) {
-
 				portletLayoutListener.onRemoveFromLayout(
 					portletId, layout.getPlid());
 			}
 
 			if (portlet.getRootPortletId().equals(PortletKeys.NESTED_LAYOUTS)) {
 				Properties props = getTypeSettingsProperties();
-				Iterator it = props.keySet().iterator();
 
-				while (it.hasNext()) {
-					String key = (String)it.next();
+				Iterator itr = props.keySet().iterator();
+
+				while (itr.hasNext()) {
+					String key = (String)itr.next();
 
 					if (key.startsWith(portlet.getPortletId())) {
-
 						String portletIds = props.getProperty(key);
 
-						String[] portletIdsArray =
-							StringUtil.split(portletIds);
+						String[] portletIdsArray = StringUtil.split(portletIds);
 
 						for (int i = 0; i < portletIdsArray.length; i++) {
 							onRemoveFromLayout(portletIdsArray[i], layout);

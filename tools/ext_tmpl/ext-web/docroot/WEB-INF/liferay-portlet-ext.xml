@@ -503,6 +503,11 @@
 		<struts-path>our_activities</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>118</portlet-name>
+		<struts-path>nested_portlets</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

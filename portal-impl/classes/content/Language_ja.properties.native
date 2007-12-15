@@ -407,8 +407,6 @@ address1=住所1
 address2=住所2
 address3=住所3
 address=住所
-
-
 addresses-and-phone-numbers=住所と電話数
 addresses=住所
 administer-nodes=ノードを管理しなさい
@@ -992,6 +990,7 @@ download=ダウンロード
 downloading=ダウンロード
 downloads=ダウンロード
 drafts=草案
+drag-portlets-below-to-nest-them=それらに入り込む次の抗力portlets 。
 driving-directions=運転方向
 due-date=支払期日
 duration=持続期間

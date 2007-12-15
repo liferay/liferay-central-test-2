@@ -35,7 +35,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= redirect %>" />
 	<input name="refresh" type="hidden" value="true" />
 
-	<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px;">
+	<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
 
 	<%
 	int CELLS_PER_ROW = 4;
@@ -74,7 +74,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
 			<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
+
 			<input <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="layoutTemplateId<%= i %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+
 			<label for="layoutTemplateId<%= i %>"><%= layoutTemplate.getName() %></label>
 		</td>
 

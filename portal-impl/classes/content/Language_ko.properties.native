@@ -407,8 +407,6 @@ address1=주소 1
 address2=주소 2
 address3=주소 3
 address=주소
-
-
 addresses-and-phone-numbers=주소와 전화 번호
 addresses=주소
 administer-nodes=마디를 관리하십시요
@@ -992,6 +990,7 @@ download=다운로드
 downloading=데이터를 전송
 downloads=다운로드
 drafts=초안
+drag-portlets-below-to-nest-them=그들을 아래에의 끌기portlets.
 driving-directions=모는 방향
 due-date=만기가 되는 날짜
 duration=내구

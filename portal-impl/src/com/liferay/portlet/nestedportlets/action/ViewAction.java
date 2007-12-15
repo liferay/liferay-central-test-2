@@ -25,6 +25,7 @@ package com.liferay.portlet.nestedportlets.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
@@ -59,15 +60,14 @@ import org.apache.struts.action.ActionMapping;
 public class ViewAction extends PortletAction {
 
 	public ActionForward render(
-		ActionMapping mapping, ActionForm form, PortletConfig config,
-
-		RenderRequest req, RenderResponse res) throws Exception {
-
-		Portlet portlet = (Portlet) req.getAttribute(WebKeys.RENDER_PORTLET);
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
-		Theme theme = themeDisplay.getTheme();
+
+		Portlet portlet = (Portlet)req.getAttribute(WebKeys.RENDER_PORTLET);
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
@@ -82,17 +82,23 @@ public class ViewAction extends PortletAction {
 		String content = StringPool.BLANK;
 
 		if (Validator.isNotNull(layoutTemplateId)) {
-			LayoutTemplate template = LayoutTemplateLocalUtil.getLayoutTemplate(
-				layoutTemplateId, false, theme.getThemeId());
+			Theme theme = themeDisplay.getTheme();
+
+			LayoutTemplate layoutTemplate =
+				LayoutTemplateLocalUtil.getLayoutTemplate(
+					layoutTemplateId, false, theme.getThemeId());
 
 			content = renameTemplateColumnsAndIds(
-				template.getContent(), portlet);
+				layoutTemplate.getContent(), portlet);
 
-			themeDisplay.getLayoutTypePortlet().addNestedLayoutTemplate(
-				template, portlet.getPortletId());
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			layoutTypePortlet.addNestedLayoutTemplate(
+				layoutTemplate, portlet.getPortletId());
 		}
 
-		req.setAttribute("layout-content", content);
+		req.setAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT, content);
 
 		return mapping.findForward("portlet.nested_portlets.view");
 	}
@@ -108,21 +114,23 @@ public class ViewAction extends PortletAction {
 			if (Validator.isNotNull(m.group(1))) {
 				columnIds.add(m.group(1));
 			}
+
 			if (Validator.isNotNull(m.group(2))) {
 				columnIds.add(m.group(2));
 			}
 		}
 
-		Iterator it = columnIds.iterator();
+		Iterator itr = columnIds.iterator();
 
-		while (it.hasNext()) {
-			String columnId = (String) it.next();
+		while (itr.hasNext()) {
+			String columnId = (String)itr.next();
 
 			if (columnId.indexOf(portlet.getPortletId()) == -1) {
 				content = content.replaceAll(
 					columnId, portlet.getPortletId() + "_" + columnId);
 			}
 		}
+
 		return content;
 	}
 

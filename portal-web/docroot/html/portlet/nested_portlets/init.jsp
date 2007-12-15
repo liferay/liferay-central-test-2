@@ -21,11 +21,10 @@
  * SOFTWARE.
  */
 %>
+
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.model.impl.LayoutImpl"%>
-
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 
 <%@ page import="java.util.MissingResourceException" %>

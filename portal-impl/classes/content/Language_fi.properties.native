@@ -400,8 +400,6 @@ address1=Osoite 1
 address2=Osoite 2
 address3=Osoite 3
 address=Osoite
-
-
 addresses-and-phone-numbers=Osoitteet ja puhelinnumerot
 addresses=Osoitteet
 administer-nodes=Ylläpidä solmuja

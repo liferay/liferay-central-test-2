@@ -407,8 +407,6 @@ address1=Διεύθυνση 1
 address2=Διεύθυνση 2
 address3=Διεύθυνση 3
 address=Διεύθυνση
-
-
 addresses-and-phone-numbers=Διευθύνσεις και Αριθμοί Τηλεφώνων
 addresses=Διευθύνσεις
 administer-nodes=Διαχειριστείτε τους κόμβους
@@ -992,6 +990,7 @@ download=Μεταφόρτωση (Download)
 downloading=Μεταφόρτωση
 downloads=Μεταφορτώνει
 drafts=Πρόχειρα
+drag-portlets-below-to-nest-them=Portlets έλξης για να τους τοποθετηθεί κατωτέρω.
 driving-directions=Οδηγίες Οδήγησης
 due-date=Ημερομηνία Εξόφλησης
 duration=Διάρκεια

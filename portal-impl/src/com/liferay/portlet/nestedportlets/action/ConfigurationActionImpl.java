@@ -35,6 +35,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.UniqueList;
@@ -76,13 +77,15 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
+		String defaultLayoutTemplateId = PropsUtil.get(
+			PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
+
 		String oldLayoutTemplateId = prefs.getValue(
-			"layout-template-id", StringPool.BLANK);
+			"layout-template-id", defaultLayoutTemplateId);
 
 		if (!oldLayoutTemplateId.equals(layoutTemplateId)) {
 			reorganizePortlets(
-				req, portletResource, layoutTemplateId,
-				oldLayoutTemplateId);
+				req, portletResource, layoutTemplateId, oldLayoutTemplateId);
 		}
 
 		prefs.setValue("layout-template-id", layoutTemplateId);
@@ -113,50 +116,51 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		List columnNames = new UniqueList();
 
-		Iterator it = columnIds.iterator();
+		Iterator itr = columnIds.iterator();
 
-		while (it.hasNext()) {
-			String columnId = (String) it.next();
+		while (itr.hasNext()) {
+			String columnId = (String)itr.next();
 
 			if (columnId.indexOf(portletId) == -1) {
 				columnNames.add(portletId + StringPool.UNDERLINE + columnId);
 			}
 		}
+
 		return columnNames;
 	}
 
 	protected void reorganizePortlets(
-		ActionRequest req, String portletResource, String newLayoutTemplateId,
-		String oldLayoutTemplateId) throws SystemException, PortalException {
+			ActionRequest req, String portletResource,
+			String newLayoutTemplateId, String oldLayoutTemplateId)
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		Layout layout = themeDisplay.getLayout();
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
 		Theme theme = themeDisplay.getTheme();
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
-
-		LayoutTemplate newTemplate = LayoutTemplateLocalUtil.getLayoutTemplate(
-			newLayoutTemplateId, false, theme.getThemeId());
+		LayoutTemplate newLayoutTemplate =
+			LayoutTemplateLocalUtil.getLayoutTemplate(
+				newLayoutTemplateId, false, theme.getThemeId());
 
 		List newColumns = getColumnNames(
-			newTemplate.getContent(), portletResource);
+			newLayoutTemplate.getContent(), portletResource);
 
-		LayoutTemplate oldTemplate = LayoutTemplateLocalUtil.getLayoutTemplate(
-			oldLayoutTemplateId, false, theme.getThemeId());
+		LayoutTemplate oldLayoutTemplate =
+			LayoutTemplateLocalUtil.getLayoutTemplate(
+				oldLayoutTemplateId, false, theme.getThemeId());
 
 		List oldColumns = getColumnNames(
-			oldTemplate.getContent(), portletResource);
+			oldLayoutTemplate.getContent(), portletResource);
 
 		layoutTypePortlet.reorganizePortlets(newColumns, oldColumns);
 
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId(), layout.getTypeSettings());
-
 	}
 
 	private static Pattern _searchColumnsPattern = Pattern.compile(

@@ -21,29 +21,31 @@
  * SOFTWARE.
  */
 %>
+
 <%@ include file="/html/portlet/nested_portlets/init.jsp" %>
 
-<c:if test="<%= (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
-	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none">
+<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
 		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
 	</div>
 </c:if>
 
 <%
-String content = (String) request.getAttribute("layout-content");
+String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
 
 try {
-	out.println(RuntimePortletUtil.processTemplate((ServletContext) request.getAttribute(WebKeys.CTX), request, response, pageContext, content));
+%>
+
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
+
+<%
 }
 catch (Exception e) {
-	_log.error("Cannot render portlet container: ", e);
-}
-finally {
-	((RenderRequestImpl) renderRequest).defineObjects(portletConfig, (RenderResponseImpl) renderResponse);
+	_log.error("Cannot render Nested Portlets portlet", e);
 }
 %>
 
-<c:if test="<%= (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 	<script type="text/javascript">
 		jQuery(
 			function() {
@@ -57,10 +59,9 @@ finally {
 					message.show();
 				}
 			}
-		)
+		);
 	</script>
 </c:if>
-
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.nested_portlets.view.jsp");
