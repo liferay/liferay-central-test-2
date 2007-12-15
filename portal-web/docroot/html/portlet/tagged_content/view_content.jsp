@@ -40,8 +40,29 @@ try {
 	long classPK = asset.getClassPK();
 
 	String title = asset.getTitle();
+	String summary = StringPool.BLANK;
+	String viewURL = StringPool.BLANK;
+	String viewURLMessage = StringPool.BLANK;
+	String editURL = StringPool.BLANK;
 
 	boolean show = true;
+
+	request.setAttribute("view.jsp-results", results);
+
+	request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+
+	request.setAttribute("view.jsp-asset", asset);
+
+	request.setAttribute("view.jsp-title", title);
+	request.setAttribute("view.jsp-summary", summary);
+	request.setAttribute("view.jsp-viewURL", viewURL);
+	request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
+
+	request.setAttribute("view.jsp-className", className);
+	request.setAttribute("view.jsp-classPK", new Long(classPK));
+
+	request.setAttribute("view.jsp-show", new Boolean(show));
+
 %>
 
 	<div align="right">
@@ -49,7 +70,7 @@ try {
 	</div>
 
 	<div>
-		<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+		<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
 	</div>
 
 <%
