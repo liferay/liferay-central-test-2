@@ -700,7 +700,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateOrganizations(long userId, long[] organizationIds)
+	public void updateOrganizations(long userId, long[] newOrganizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

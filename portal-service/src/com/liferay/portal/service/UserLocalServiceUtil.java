@@ -1524,12 +1524,13 @@ public class UserLocalServiceUtil {
 		return userLocalService.updateModifiedDate(userId, modifiedDate);
 	}
 
-	public static void updateOrganizations(long userId, long[] organizationIds)
+	public static void updateOrganizations(long userId,
+		long[] newOrganizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		userLocalService.updateOrganizations(userId, organizationIds);
+		userLocalService.updateOrganizations(userId, newOrganizationIds);
 	}
 
 	public static com.liferay.portal.model.User updatePassword(long userId,

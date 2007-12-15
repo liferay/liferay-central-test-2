@@ -208,6 +208,10 @@ public interface MBThreadLocalService {
 	public int getThreadsCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public boolean hasReadThread(long userId, long threadId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.SystemException, 
@@ -216,10 +220,6 @@ public interface MBThreadLocalService {
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public boolean hasReadThread(long userId, long threadId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

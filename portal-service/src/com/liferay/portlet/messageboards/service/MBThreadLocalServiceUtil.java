@@ -436,6 +436,14 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getThreadsCount(categoryId);
 	}
 
+	public static boolean hasReadThread(long userId, long threadId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.hasReadThread(userId, threadId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException, 
@@ -453,14 +461,6 @@ public class MBThreadLocalServiceUtil {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.splitThread(messageId, prefs, themeDisplay);
-	}
-
-	public static boolean hasReadThread(long userId, long threadId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-
-		return mbThreadLocalService.hasReadThread(userId, threadId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread updateThread(

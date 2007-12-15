@@ -68,7 +68,7 @@ ol, ul, dl {
 }
 
 ol li, ul ol li {
-	list-style: decimal outside;	
+	list-style: decimal outside;
 }
 
 ul li, ol ul li {
@@ -118,13 +118,15 @@ a:visited {
 /* ---------- Headers ---------- */
 
 h1 {
-	font-size: 1.8em;  
+	font-size: 1.8em;
 }
+
 h2 {
-	font-size: 1.6em; 
+	font-size: 1.6em;
 }
+
 h3 {
-	font-size: 1.4em;  
+	font-size: 1.4em;
 }
 
 h1, h2, h3 {
@@ -132,7 +134,7 @@ h1, h2, h3 {
 }
 
 h1, h2, h3, h4, h5, h6, strong {
-	font-weight: bold; 
+	font-weight: bold;
 }
 
 /* ---------- Text formatting ---------- */
