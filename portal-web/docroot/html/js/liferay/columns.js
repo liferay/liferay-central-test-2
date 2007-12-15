@@ -44,12 +44,12 @@
 				threshold: 2,
 				scroll: true
 			};
-			
+
 			if (options) {
 				defaultOptions = jQuery.extend(defaultOptions, options);
 			}
+
 			jPortlet.lDrag(defaultOptions);
-			
 		},
 
 		_clearCache: function() {
@@ -96,6 +96,7 @@
 						data.quadrant = quadrant;
 						rt = this;
 					}
+
 					return false;
 				}
 			});
@@ -286,7 +287,7 @@
 			jQuery(settings.container).css({top: 0, left: 0});
 			var instance = this;
 			var foundContainer = instance._findContainer(mousePos);
-			var canDrop = true;
+			var dropable = true;
 
 			instance._hidePosition();
 			instance._hideArea();
@@ -296,7 +297,9 @@
 
 				if (foundPortlet) {
 					if (instance._hasMoved(settings.container, foundPortlet.position, foundPortlet.data.quadrant) && !foundPortlet.position.isStatic) {
+
 						// Move if not in the same position
+
 						instance._onDrop({
 							portlet: settings.container,
 							neighbor: foundPortlet.position,
@@ -305,7 +308,9 @@
 					}
 				}
 				else {
+
 					// Add portlet to empty column
+
 					instance._onDrop({
 						portlet: settings.container,
 						container: foundContainer.area
@@ -313,13 +318,13 @@
 				}
 			}
 			else {
-				canDrop = false;
+				dropable = false;
 			}
 
 			instance._grid.removeClass("dragging");
 			instance._clearCache();
 
-			return canDrop;
+			return dropable;
 		},
 
 		_onStart: function(settings) {

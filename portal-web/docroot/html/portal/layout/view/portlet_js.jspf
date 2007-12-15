@@ -81,10 +81,12 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 		if (window.location.hash) {
 			window.location.hash = "p_" + portletId;
 		}
+
 		portletBoundary = portletBound;
 
 		return portletId;
 	};
+
 	var complete = function(xHR) {
 		addPortletReturn(xHR.responseText);
 	}
@@ -104,6 +106,7 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 				async: false
 			}
 		);
+
 		return portletBoundary;
 	}
 }

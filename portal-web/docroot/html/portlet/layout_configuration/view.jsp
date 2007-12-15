@@ -64,6 +64,7 @@
 					<%
 					}
 					%>
+
 					<p class="portlet-msg-info">
 						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
 					</p>
