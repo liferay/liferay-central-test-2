@@ -29,9 +29,6 @@ long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId")
 
 long userId = 0;
 
-String categoryIds = ParamUtil.getString(request, "categoryIds");
-long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
-
 String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -42,11 +39,9 @@ portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
-portletURL.setParameter("categoryIds", categoryIds);
 %>
 
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
-<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
 
 <liferay-ui:tabs names="entries" backURL="<%= configurationRenderURL.toString() %>" />
 
@@ -82,7 +77,7 @@ portletURL.setParameter("categoryIds", categoryIds);
 		Hits hits = null;
 
 		try {
-			hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), userId, categoryIdsArray, keywords);
+			hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), userId, keywords);
 
 			Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 			int total = hits.getLength();
