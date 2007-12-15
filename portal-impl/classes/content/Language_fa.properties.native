@@ -1875,6 +1875,7 @@ the-link-could-not-be-found=لينک يافت نشد
 the-message-board-is-empty=تالار پيام ها خالی است
 the-message-could-not-be-found=پيام يافت نشد
 the-message-object-has-expired-and-is-no-longer-available=پيام منقضی شده است و يافت نشد. لطفا پيام خود را {0} کنيد.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=گره يافت نشد
 the-node-you-selected-does-not-have-pages-configured=به گره انتخاب شده صفحه ای تخصيص داده نشده است 
 the-order-could-not-be-found=سفارش يافت نشد.

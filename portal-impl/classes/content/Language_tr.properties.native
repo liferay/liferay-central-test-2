@@ -906,6 +906,7 @@ the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port<
 the-message-board-is-empty=İleti tahtası boş.
 the-message-could-not-be-found=İleti bulunamdı.
 the-message-object-has-expired-and-is-no-longer-available=İletinin süresi dolduğundan artık geçerli değil. Lütfen kendiniz yazınız {0}.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=Bu düğüm bulunamadı.
 the-order-could-not-be-found=Bu sipariş bulunmadı.
 the-page-content-cannot-be-parsed-by-the-selected-format=Sayfa içeriği seçiminize göre biçimlendirilemiyor.

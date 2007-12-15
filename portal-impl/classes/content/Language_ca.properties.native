@@ -1842,6 +1842,7 @@ the-link-could-not-be-found=L'acoplament no es podia trobar.
 the-message-board-is-empty=El fòrum está buit
 the-message-could-not-be-found=No s'ha trobat el missatge.
 the-message-object-has-expired-and-is-no-longer-available=El missatge ha expirat i ja no es troba disponible. si us plau, {0} la seva composició.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=El nodus no s'ha trobat.
 the-node-you-selected-does-not-have-pages-configured=El nodus que vosté seleccionà no te pàginas configurades.
 the-order-could-not-be-found=La comanda no ha estat trobada.

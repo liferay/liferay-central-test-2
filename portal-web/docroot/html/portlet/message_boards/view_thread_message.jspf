@@ -138,6 +138,7 @@
 
 								<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
 							</li>
+
 							<c:if test="<%= (message.getParentMessageId() != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 								<li>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="splitThreadURL">

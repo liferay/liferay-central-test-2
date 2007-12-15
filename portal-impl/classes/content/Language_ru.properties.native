@@ -1797,6 +1797,7 @@ the-link-could-not-be-found=Ссылка не найдена.
 the-message-board-is-empty=Доска сообщений пуста.
 the-message-could-not-be-found=Сообщение не найдено.
 the-message-object-has-expired-and-is-no-longer-available=Объект сообщения устарел и более недоступен. Please {0} your composition.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=Узел не найден.
 the-node-you-selected-does-not-have-pages-configured=Выбранный Вами узел не имеет настроенных страниц.
 the-order-could-not-be-found=Заказ на нейден.

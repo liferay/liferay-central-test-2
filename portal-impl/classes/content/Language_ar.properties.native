@@ -2236,6 +2236,7 @@ the-message-body=متن الرسالة
 the-message-could-not-be-found=لم يتم العثور على الرسالة.
 the-message-object-has-expired-and-is-no-longer-available=انتهت مدة صلاحية الرسالة وأصبحت غير متوفرة. يرجى {0} كتابتك.
 the-name-of-the-email-recipient=إسم مستقبل الرسالة الإلكترونية
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=لم يتم العثور على العقدة.
 the-node-you-selected-does-not-have-pages-configured=العقدة المختارة لا تحتوي صفحات معدّة.
 the-order-could-not-be-found=لم يتم العثور على الطلبية.

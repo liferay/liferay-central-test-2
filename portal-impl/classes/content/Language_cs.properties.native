@@ -1341,6 +1341,7 @@ the-link-could-not-be-found=Odkaz nenalezen.
 the-message-board-is-empty=Nástěnka je prázdná.
 the-message-could-not-be-found=Zpráva nenalezena.
 the-message-object-has-expired-and-is-no-longer-available=Zpráva vyexpirovala a je nadále nedostupná. Prosím {0} vaše zadání.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=Uzel nenalezen.
 the-node-you-selected-does-not-have-pages-configured=Vybraný uzel nemá žádné nakonfigurované stránky.
 the-order-could-not-be-found=Objednávka nenalezena.

@@ -138,7 +138,7 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 <table class="lfr-table" id="<portlet:namespace/>explanationPost" style="display: none;">
 <tr>
 	<td colspan="2">
-		<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message"/>
+		<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message" />
 	</td>
 </tr>
 <tr>
@@ -167,8 +167,9 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
 		<input name="<portlet:namespace />body" type="hidden" value="" />
+
 		<script type="text/javascript">
-			<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %> [url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]');
+			<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
 		</script>
 	</td>
 </tr>

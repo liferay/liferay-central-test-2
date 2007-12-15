@@ -66,10 +66,6 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			getPermissionChecker(), message.getCategoryId(),
 			ActionKeys.MOVE_THREAD);
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), message.getCategoryId(),
-			ActionKeys.MOVE_THREAD);
-
 		return mbThreadLocalService.splitThread(messageId, prefs, themeDisplay);
 	}
 

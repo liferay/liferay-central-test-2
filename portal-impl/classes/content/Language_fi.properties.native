@@ -2735,6 +2735,7 @@ the-message-could-not-be-found=Viestiä ei löytynyt.
 the-message-id=Viesti ID
 the-message-object-has-expired-and-is-no-longer-available=Viesti on vanhentunut tai sitä ei ole enään saatavilla. Ole hyvä ja {0} viestisi.
 the-name-of-the-email-recipient=Sähköpostin vastaanottaja
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=Solmua ei löydy.
 the-node-you-selected-does-not-have-pages-configured=Solmu jonka valitsit ei sisällä konfiguroituja sivuja.
 the-openid-provider-did-not-send-the-required-attributes=OpenID tarjoaja ei lähettänyt vaadittuja attribuutteeja.

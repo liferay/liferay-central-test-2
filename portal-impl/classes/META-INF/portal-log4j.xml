@@ -485,7 +485,7 @@
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.util.MBUtil">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.portletconfiguration.action">

@@ -40,7 +40,6 @@ import java.io.IOException;
 
 import java.rmi.RemoteException;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -233,6 +232,26 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return mbThreadPersistence.countByCategoryId(categoryId);
 	}
 
+	public boolean hasReadThread(long userId, long threadId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		if (user.isDefaultUser()) {
+			return true;
+		}
+
+		int total = mbMessagePersistence.countByThreadId(threadId);
+		int read = mbMessageFlagFinder.countByU_T(userId, threadId);
+
+		if (total != read) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public MBThread moveThread(long categoryId, long threadId)
 		throws PortalException, SystemException {
 
@@ -286,8 +305,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			long messageId, PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
-
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		long oldThreadId = message.getThreadId();
@@ -334,7 +351,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			mbMessagePersistence.update(curMessage);
 
-			messagesMoved ++;
+			messagesMoved++;
 
 			try {
 				if (!category.isDiscussion()) {
@@ -361,26 +378,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		return thread;
 
-	}
-
-	public boolean hasReadThread(long userId, long threadId)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		if (user.isDefaultUser()) {
-			return true;
-		}
-
-		int total = mbMessagePersistence.countByThreadId(threadId);
-		int read = mbMessageFlagFinder.countByU_T(userId, threadId);
-
-		if (total != read) {
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 
 	public MBThread updateThread(long threadId, int viewCount)
@@ -421,6 +418,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		mbThreadPersistence.update(thread);
+
 		return thread;
 	}
 

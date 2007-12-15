@@ -762,8 +762,8 @@
 		<action path="/message_boards/get_message_attachment" type="com.liferay.portlet.messageboards.action.GetMessageAttachmentAction" />
 
 		<action path="/message_boards/move_thread" type="com.liferay.portlet.messageboards.action.MoveThreadAction">
-			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
 		</action>
 
 		<action path="/message_boards/rss" type="com.liferay.portlet.messageboards.action.RSSAction" />
@@ -776,8 +776,8 @@
 		</action>
 
 		<action path="/message_boards/split_thread" type="com.liferay.portlet.messageboards.action.SplitThreadAction">
-			<forward name="portlet.message_boards.split_thread" path="portlet.message_boards.split_thread" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.split_thread" path="portlet.message_boards.split_thread" />
 		</action>
 
 		<action path="/message_boards/view" type="com.liferay.portlet.messageboards.action.ViewAction">

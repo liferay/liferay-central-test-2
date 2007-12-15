@@ -1347,6 +1347,7 @@ the-link-could-not-be-found=Không tìm thấy liên kết.
 the-message-board-is-empty=Chưa có gì.
 the-message-could-not-be-found=Bản tin khôn tìm thấy.
 the-message-object-has-expired-and-is-no-longer-available=Bản tin đã hết hạn và không còn tồn tại. Xin {0} hệ soạn của bạn.
+the-new-thread-can-be-found-at-x=The new thread can be found at {0}.
 the-node-could-not-be-found=Nút không tìm thấy
 the-node-you-selected-does-not-have-pages-configured=Nút bạn chọn không có trang nào cấu hình.
 the-order-could-not-be-found=Không tìm thấy đặt hàng.
