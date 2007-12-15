@@ -49,8 +49,8 @@ else {
 String rssURL = sm.toString();
 %>
 
-<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
-
-<br /><br />
+<div class="subscribe">
+	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
+</div>
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

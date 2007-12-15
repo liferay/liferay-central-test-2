@@ -23,85 +23,67 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<table class="lfr-table">
-	<tr>
-		<td>
+	<div class="entry-content">
+		<%
+		StringMaker sm = new StringMaker();
 
-			<%
-			StringMaker sm = new StringMaker();
+		sm.append(themeDisplay.getPathMain());
+		sm.append("/blogs/find_entry?entryId=");
+		sm.append(entry.getEntryId());
 
-			sm.append(themeDisplay.getPathMain());
-			sm.append("/blogs/find_entry?entryId=");
-			sm.append(entry.getEntryId());
+		String viewEntryURL = sm.toString();
 
-			String viewEntryURL = sm.toString();
+		sm.append("&showAllEntries=1");
 
-			sm.append("&showAllEntries=1");
+		String viewAllEntriesURL = sm.toString();
 
-			String viewAllEntriesURL = sm.toString();
+		User user2 = UserLocalServiceUtil.getUserById(entry.getUserId());
+		%>
 
-			User user2 = UserLocalServiceUtil.getUserById(entry.getUserId());
-			%>
-
-			<span style="font-size: small;"><b>
+		<div class="entry-title">
 			<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
-			</b></span><br />
+		</div>
 
-			<span style="font-size: x-small;"><liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
+		<div class="entry-author">
+			<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+		</div>
 
-			<liferay-ui:tags-summary
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-			/>
-		</td>
-	</tr>
+		<liferay-ui:tags-summary
+			className="<%= BlogsEntry.class.getName() %>"
+			classPK="<%= entry.getEntryId() %>"
+		/>
+	</div>
 
 	<c:if test='<%= !displayStyle.equals("title") %>'>
-		<tr>
-			<td>
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:if test='<%= displayStyle.endsWith("-image") %>'>
-					<a href="<%= viewAllEntriesURL %>"><img align="left" border="0" hspace="0" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="65" /></a>
-				</c:if>
-				<c:choose>
-					<c:when test='<%= displayStyle.startsWith("abstract") %>'>
-						<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), 200, StringPool.BLANK) %>
-					</c:when>
-					<c:otherwise>
-						<%= entry.getContent() %>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<c:choose>
-					<c:when test='<%= displayStyle.startsWith("abstract") %>'>
-						<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
-					</c:when>
-					<c:otherwise>
+		<div class="abstract">
+			<c:if test='<%= displayStyle.endsWith("-image") %>'>
+				<a href="<%= viewAllEntriesURL %>"><img align="left" border="0" hspace="0" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="65" /></a>
+			</c:if>
+			<c:choose>
+				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
+					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), 200, StringPool.BLANK) %>
+				</c:when>
+				<c:otherwise>
+					<%= entry.getContent() %>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div class="comments">
+			<c:choose>
+				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
+					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
+				</c:when>
+				<c:otherwise>
 
-						<%
-						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+					<%
+					long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
-						%>
+					int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+					%>
 
-						<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
+					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</c:if>
-
-	</table>
 </c:if>
