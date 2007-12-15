@@ -62,7 +62,6 @@ try {
 	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
-
 %>
 
 	<div align="right">
