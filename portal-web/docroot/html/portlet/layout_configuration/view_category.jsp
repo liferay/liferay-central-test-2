@@ -53,12 +53,12 @@ Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(
 
 List portlets = new ArrayList();
 
-Iterator itr1 = portletCategory.getPortlets().iterator();
+Iterator itr = portletCategory.getPortlets().iterator();
 
 String externalPortletCategory = null;
 
-while (itr1.hasNext()) {
-	String portletId = (String)itr1.next();
+while (itr.hasNext()) {
+	String portletId = (String)itr.next();
 
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
 
@@ -92,20 +92,21 @@ while (itr1.hasNext()) {
 
 Collections.sort(portlets, new PortletTitleComparator(application, locale));
 
-boolean portletInstanceable = true;
-boolean portletUsed = false;
-boolean portletLocked = false;
-
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>
-	<div class="lfr-add-content collapsed" id="<%= newCategoryPath %>">
-	<h2><span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span></h2>
-		<div class="lfr-content-category hidden">
-			<%
-			Iterator itr2 = categories.iterator();
 
-			while (itr2.hasNext()) {
-				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr2.next());
+	<div class="lfr-add-content collapsed" id="<%= newCategoryPath %>">
+		<h2>
+			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
+		</h2>
+
+		<div class="lfr-content-category hidden">
+
+			<%
+			itr = categories.iterator();
+
+			while (itr.hasNext()) {
+				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
 				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, newCategoryPath);
 			%>
 
@@ -115,16 +116,12 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, oldCategoryPath);
 			}
 
-			itr2 = portlets.iterator();
+			itr = portlets.iterator();
 
-			while (itr2.hasNext()) {
-				Portlet portlet = (Portlet)itr2.next();
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
 
 				divId = new StringMaker();
-
-				portletInstanceable = portlet.isInstanceable();
-				portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
-				portletLocked = (!portletInstanceable && portletUsed);
 
 				divId.append(newCategoryPath);
 				divId.append(":");
@@ -134,16 +131,23 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 				while (matcher.find()) {
 					divId.append(matcher.group());
 				}
+
+				boolean portletInstanceable = portlet.isInstanceable();
+				boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
+				boolean portletLocked = (!portletInstanceable && portletUsed);
 			%>
-				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId %>" instanceable="<c:choose><c:when test="<%= !portletInstanceable %>">false</c:when><c:otherwise>true</c:otherwise></c:choose>" portletId="<%= portlet.getPortletId() %>" plid="<%= plid %>">
+
+				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
 					<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
 				</div>
+
 			<%
 			}
 			%>
 
 		</div>
 	</div>
+
 <%
 }
 %>
