@@ -25,21 +25,18 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Html;
-
-import java.io.StringReader;
 
 import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ContentTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -84,9 +81,7 @@ public class ContentTransformerListener extends TransformerListener {
 	 */
 	protected String replaceContent(String xml) {
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = PortalUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 
@@ -138,7 +133,7 @@ public class ContentTransformerListener extends TransformerListener {
 							JournalArticleLocalServiceUtil.getArticle(
 								groupId, articleId);
 
-						dynamicContent.setText(StringPool.BLANK);
+						dynamicContent.clearContent();
 						dynamicContent.addCDATA(
 							_getDynamicContent(
 								article.getContent(), elementName));
@@ -162,9 +157,7 @@ public class ContentTransformerListener extends TransformerListener {
 		String content = null;
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = PortalUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 
