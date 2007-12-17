@@ -242,9 +242,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(curArticle.getTitle(), rowHREF);
 
+	// Modified date
+
+	row.addText(dateFormatDate.format(curArticle.getModifiedDate()), rowHREF);
+
 	// Display date
 
-	row.addText(dateFormatDateTime.format(curArticle.getDisplayDate()), rowHREF);
+	row.addText(dateFormatDate.format(curArticle.getDisplayDate()), rowHREF);
 
 	// Author
 

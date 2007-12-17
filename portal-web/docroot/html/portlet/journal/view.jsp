@@ -88,26 +88,11 @@ portletURL.setParameter("tabs1", tabs1);
 		<input name="<portlet:namespace />expireArticleIds" type="hidden" value="" />
 
 		<%
-		String orderByCol = ParamUtil.getString(request, "orderByCol");
-		String orderByType = ParamUtil.getString(request, "orderByType");
-
-		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-			prefs.setValue(PortletKeys.JOURNAL, "articles-order-by-col", orderByCol);
-			prefs.setValue(PortletKeys.JOURNAL, "articles-order-by-type", orderByType);
-		}
-		else {
-			orderByCol = prefs.getValue(PortletKeys.JOURNAL, "articles-order-by-col", "id");
-			orderByType = prefs.getValue(PortletKeys.JOURNAL, "articles-order-by-type", "asc");
-		}
-
-		OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(orderByCol, orderByType);
-
 		ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 
 		List headerNames = searchContainer.getHeaderNames();
 
 		headerNames.add(3, "status");
-		headerNames.add(4, "modified-date");
 		headerNames.add(StringPool.BLANK);
 
 		searchContainer.setRowChecker(new RowChecker(renderResponse));

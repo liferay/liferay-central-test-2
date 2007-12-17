@@ -58,5 +58,5 @@ boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-availa
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", StringPool.BLANK), true);
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", StringPool.BLANK), true);
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

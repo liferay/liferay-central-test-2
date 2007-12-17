@@ -39,25 +39,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 <liferay-ui:tabs names="articles" backURL="<%= configurationRenderURL.toString() %>" />
 
 <%
-String articlesOrderByCol = ParamUtil.getString(request, "orderByCol");
-String articlesOrderByType = ParamUtil.getString(request, "orderByType");
-
-if (Validator.isNotNull(articlesOrderByCol) && Validator.isNotNull(articlesOrderByType)) {
-	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-col", articlesOrderByCol);
-	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-type", articlesOrderByType);
-}
-else {
-	articlesOrderByCol = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-col", "id");
-	articlesOrderByType = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-type", "asc");
-}
-
-OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(articlesOrderByCol, articlesOrderByType);
-
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
-
-List headerNames = searchContainer.getHeaderNames();
-
-headerNames.add(3, "modified-date");
 %>
 
 <liferay-ui:search-form
@@ -69,7 +51,7 @@ headerNames.add(3, "modified-date");
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 %>
 
-<%@ include file="/html/portlet/tagged_content/article_search_results.jspf" %>
+<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
 <div class="separator"><!-- --></div>
 

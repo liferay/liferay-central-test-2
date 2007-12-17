@@ -24,9 +24,13 @@ package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.ArrayList;
@@ -55,6 +59,7 @@ public class ArticleSearch extends SearchContainer {
 		headerNames.add("id");
 		headerNames.add("name");
 		headerNames.add("version");
+		headerNames.add("modified-date");
 		headerNames.add("display-date");
 		headerNames.add("author");
 
@@ -112,14 +117,32 @@ public class ArticleSearch extends SearchContainer {
 			PortalPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
-			String orderByCol = prefs.getValue(
-				PortletKeys.JOURNAL, "articles-order-by-col", "id");
-			String orderByType = prefs.getValue(
-				PortletKeys.JOURNAL, "articles-order-by-type", "asc");
+			String orderByCol = ParamUtil.getString(req, "orderByCol");
+			String orderByType = ParamUtil.getString(req, "orderByType");
+
+			if (Validator.isNotNull(orderByCol) &&
+				Validator.isNotNull(orderByType)) {
+
+				prefs.setValue(
+					PortletKeys.JOURNAL, "articles-order-by-col", orderByCol);
+				prefs.setValue(
+					PortletKeys.JOURNAL, "articles-order-by-type", orderByType);
+			}
+			else {
+				orderByCol = prefs.getValue(
+					PortletKeys.JOURNAL, "articles-order-by-col", "id");
+				orderByType = prefs.getValue(
+					PortletKeys.JOURNAL, "articles-order-by-type", "asc");
+			}
+
+			OrderByComparator orderByComparator =
+				JournalUtil.getArticleOrderByComparator(
+					orderByCol, orderByType);
 
 			setOrderableHeaders(orderableHeaders);
 			setOrderByCol(orderByCol);
 			setOrderByType(orderByType);
+			setOrderByComparator(orderByComparator);
 		}
 		catch (Exception e) {
 			_log.error(e);

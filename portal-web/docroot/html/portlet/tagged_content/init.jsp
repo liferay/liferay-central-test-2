@@ -65,7 +65,6 @@
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
-<%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.taggedcontent.util.AssetPublisherUtil" %>
