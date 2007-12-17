@@ -163,6 +163,38 @@ public class EditServerAction extends PortletAction {
 		Runtime.getRuntime().gc();
 	}
 
+	protected void jvm4ThreadDump(StringBuffer sb, ThreadGroup group) {
+		Thread[] threads = new Thread[group.activeCount()];
+
+		group.enumerate(threads, false);
+
+		for (int i = 0; i < threads.length && threads[i] != null; i++) {
+			Thread thread = threads[i];
+
+			sb.append(StringPool.QUOTE);
+			sb.append(thread.getName());
+			sb.append(StringPool.QUOTE);
+
+			if (thread.getThreadGroup() != null) {
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(thread.getThreadGroup().getName());
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+
+			sb.append(", priority=" + thread.getPriority());
+			sb.append("\n");
+		}
+
+		ThreadGroup[] groups = new ThreadGroup[group.activeGroupCount()];
+
+		group.enumerate(groups, false);
+
+		for (int i = 0; i < groups.length && groups[i] != null; i++) {
+			jvm4ThreadDump(sb, groups[i]);
+		}
+	}
+
 	protected void precompile(ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -377,38 +409,6 @@ public class EditServerAction extends PortletAction {
 		}
 
 		_log.info(sb.toString());
-	}
-
-	protected void jvm4ThreadDump(StringBuffer sb, ThreadGroup group) {
-		Thread[] threads = new Thread[group.activeCount()];
-
-		group.enumerate(threads, false);
-
-		for (int i = 0; i < threads.length && threads[i] != null; i++) {
-			Thread thread = threads[i];
-
-			sb.append(StringPool.QUOTE);
-			sb.append(thread.getName());
-			sb.append(StringPool.QUOTE);
-
-			if (thread.getThreadGroup() != null) {
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(thread.getThreadGroup().getName());
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
-
-			sb.append(", priority=" + thread.getPriority());
-			sb.append("\n");
-		}
-
-		ThreadGroup[] groups = new ThreadGroup[group.activeGroupCount()];
-
-		group.enumerate(groups, false);
-
-		for (int i = 0; i < groups.length && groups[i] != null; i++) {
-			jvm4ThreadDump(sb, groups[i]);
-		}
 	}
 
 	protected void updateLogLevels(ActionRequest req) throws Exception {
