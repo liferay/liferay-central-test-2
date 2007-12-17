@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
+event = event.toEscapedModel();
+
 Recurrence recurrence = null;
 
 int recurrenceType = ParamUtil.getInteger(request, "recurrenceType", Recurrence.NO_RECURRENCE);

@@ -69,6 +69,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	DLFolder curFolder = (DLFolder)results.get(i);
 
+	curFolder = curFolder.toEscapedModel();
+
 	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();

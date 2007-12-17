@@ -111,6 +111,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					for (int i = 0; i < results.size(); i++) {
 						DLFolder curFolder = (DLFolder)results.get(i);
 
+						curFolder = curFolder.toEscapedModel();
+
 						ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 						PortletURL rowURL = renderResponse.createRenderURL();
@@ -238,6 +240,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 						for (int i = 0; i < folders.size(); i++) {
 							DLFolder curFolder = (DLFolder)folders.get(i);
+
+							curFolder = curFolder.toEscapedModel();
 
 							ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
@@ -468,11 +472,18 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				if (result instanceof DLFileEntry) {
 					fileEntry = (DLFileEntry)result;
 
+					fileEntry = fileEntry.toEscapedModel();
+
 					primaryKey = fileEntry.getFileEntryId();
 				}
 				else {
 					fileShortcut = (DLFileShortcut)result;
+
+					fileShortcut = fileShortcut.toEscapedModel();
+
 					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), fileShortcut.getToName());
+
+					fileEntry = fileEntry.toEscapedModel();
 
 					primaryKey = fileShortcut.getFileShortcutId();
 				}
@@ -576,6 +587,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		for (int i = 0; i < results.size(); i++) {
 			DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+
+			fileEntry = fileEntry.toEscapedModel();
 
 			ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 

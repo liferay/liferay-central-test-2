@@ -95,6 +95,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Group group = (Group)results.get(i);
 
+	group = group.toEscapedModel();
+
 	ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
 	StringMaker sm = new StringMaker();

@@ -190,6 +190,8 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 			for (int j = 0; j < events.size(); j++) {
 				CalEvent event = (CalEvent)events.get(j);
 
+				event = event.toEscapedModel();
+
 				className = "portlet-section-body";
 				String classHoverName = "portlet-section-body-hover";
 

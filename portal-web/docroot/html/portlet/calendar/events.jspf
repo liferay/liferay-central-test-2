@@ -48,6 +48,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	CalEvent event = (CalEvent)results.get(i);
 
+	event = event.toEscapedModel();
+
 	ResultRow row = new ResultRow(event, event.getEventId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();

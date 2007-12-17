@@ -61,6 +61,8 @@
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);
 
+			community = community.toEscapedModel();
+
 			boolean organizationCommunity = community.isOrganization();
 			boolean regularCommunity = community.isCommunity();
 			boolean userCommunity = community.isUser();

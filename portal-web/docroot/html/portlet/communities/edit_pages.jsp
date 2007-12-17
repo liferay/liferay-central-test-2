@@ -39,6 +39,8 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
+selGroup = selGroup.toEscapedModel();
+
 Group liveGroup = null;
 Group stagingGroup = null;
 

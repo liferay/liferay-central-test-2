@@ -149,6 +149,8 @@ for (int i = 0; i < 7; i++) {
 					for (int j = 0; j < events.size(); j++) {
 						CalEvent event = (CalEvent)events.get(j);
 
+						event = event.toEscapedModel();
+
 						className = "portlet-section-body";
 						String classHoverName = "portlet-section-body-hover";
 

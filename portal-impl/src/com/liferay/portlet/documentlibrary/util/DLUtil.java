@@ -118,6 +118,8 @@ public class DLUtil {
 
 		if (folder != null) {
 			for (int i = 0;; i++) {
+				folder = folder.toEscapedModel();
+
 				PortletURL portletURL = res.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
@@ -163,6 +165,8 @@ public class DLUtil {
 		breadcrumbs = foldersLink + " &raquo; " + breadcrumbs;
 
 		if (fileEntry != null) {
+			fileEntry = fileEntry.toEscapedModel();
+
 			PortletURL fileEntryURL = res.createRenderURL();
 
 			fileEntryURL.setWindowState(WindowState.MAXIMIZED);

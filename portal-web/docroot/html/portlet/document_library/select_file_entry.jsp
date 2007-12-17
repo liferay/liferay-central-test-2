@@ -71,6 +71,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	DLFolder curFolder = (DLFolder)results.get(i);
 
+	curFolder = curFolder.toEscapedModel();
+
 	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
@@ -143,6 +145,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	for (int i = 0; i < results.size(); i++) {
 		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+
+		fileEntry = fileEntry.toEscapedModel();
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
