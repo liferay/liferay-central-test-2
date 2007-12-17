@@ -96,6 +96,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 					try {
 						IGFolder parentFolder = IGFolderLocalServiceUtil.getFolder(parentFolderId);
 
+						parentFolder = parentFolder.toEscapedModel();
+
 						parentFolderName = parentFolder.getName();
 					}
 					catch (NoSuchFolderException nscce) {

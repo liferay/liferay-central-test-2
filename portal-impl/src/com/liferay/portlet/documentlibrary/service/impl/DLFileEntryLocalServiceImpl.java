@@ -937,7 +937,7 @@ public class DLFileEntryLocalServiceImpl
 
 		String extension = FileUtil.getExtension(name);
 
-		if (newFolderId > 0 && folderId != newFolderId) {
+		if (newFolderId > 0 && (folderId != newFolderId)) {
 			folderId = newFolderId;
 		}
 
@@ -947,11 +947,14 @@ public class DLFileEntryLocalServiceImpl
 		while (itr.hasNext()) {
 			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
-			String curExtension = FileUtil.getExtension(fileEntry.getName());
+			if (!name.equals(fileEntry.getName())) {
+				String curExtension = FileUtil.getExtension(
+					fileEntry.getName());
 
-			if (extension.equals(curExtension)) {
-				throw new DuplicateFileException(
-					fileEntry.getTitleWithExtension());
+				if (extension.equals(curExtension)) {
+					throw new DuplicateFileException(
+						fileEntry.getTitleWithExtension());
+				}
 			}
 		}
 	}

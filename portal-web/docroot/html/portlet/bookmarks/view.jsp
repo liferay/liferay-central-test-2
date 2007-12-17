@@ -128,6 +128,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				for (int j = 0; j < subfolders.size(); j++) {
 					BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
 
+					subfolder = subfolder.toEscapedModel();
+
 					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
 					sm.append("<a href=\"");

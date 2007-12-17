@@ -109,6 +109,8 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 			if (folderId > 0) {
 				IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
 
+				folder = folder.toEscapedModel();
+
 				folderId = folder.getFolderId();
 				folderName = folder.getName();
 			}

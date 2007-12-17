@@ -42,18 +42,20 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValu
 			try {
 				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileRank.getFolderId(), fileRank.getName());
 
+				fileEntry = fileEntry.toEscapedModel();
+
 				PortletURL rowURL = renderResponse.createActionURL();
 
 				rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 				rowURL.setParameter("struts_action", "/recent_documents/get_file");
 				rowURL.setParameter("folderId", String.valueOf(fileRank.getFolderId()));
-				rowURL.setParameter("name", fileRank.getName());
+				rowURL.setParameter("name", Html.unescape(fileRank.getName()));
 		%>
 
 				<tr>
 					<td>
-						<a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitle() %></a>
+						<a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitleWithExtension() %></a>
 					</td>
 				</tr>
 

@@ -106,6 +106,8 @@ public class IGUtil {
 
 		if (folder != null) {
 			for (int i = 0;; i++) {
+				folder = folder.toEscapedModel();
+
 				PortletURL portletURL = res.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
@@ -148,6 +150,8 @@ public class IGUtil {
 		breadcrumbs = foldersLink + " &raquo; " + breadcrumbs;
 
 		if (image != null) {
+			image = image.toEscapedModel();
+
 			PortletURL imageURL = res.createRenderURL();
 
 			imageURL.setWindowState(WindowState.MAXIMIZED);

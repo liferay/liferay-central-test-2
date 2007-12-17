@@ -53,7 +53,7 @@
 <div id="<%= randomNamespace %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
 	<label for="<%= randomNamespace %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
 
-	<input id="<%= randomNamespace %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= displayTerms.getKeywords() %>" />
+	<input id="<%= randomNamespace %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= Html.escape(displayTerms.getKeywords()) %>" />
 
 	&nbsp;<a href="javascript: <%= randomNamespace %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
 </div>

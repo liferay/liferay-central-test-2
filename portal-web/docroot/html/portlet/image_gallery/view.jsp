@@ -83,6 +83,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		for (int i = 0; i < results.size(); i++) {
 			IGFolder curFolder = (IGFolder)results.get(i);
 
+			curFolder = curFolder.toEscapedModel();
+
 			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
@@ -125,6 +127,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				for (int j = 0; j < subfolders.size(); j++) {
 					IGFolder subfolder = (IGFolder)subfolders.get(j);
+
+					subfolder = subfolder.toEscapedModel();
 
 					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
