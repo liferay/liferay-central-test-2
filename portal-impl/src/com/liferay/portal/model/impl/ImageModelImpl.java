@@ -178,22 +178,27 @@ public class ImageModelImpl extends BaseModelImpl {
 	}
 
 	public Image toEscapedModel() {
-		Image model = new ImageImpl();
+		if (isEscapedModel()) {
+			return (Image)this;
+		}
+		else {
+			Image model = new ImageImpl();
 
-		model.setImageId(getImageId());
-		model.setModifiedDate(getModifiedDate());
-		model.setText(Html.escape(getText()));
-		model.setType(Html.escape(getType()));
-		model.setHeight(getHeight());
-		model.setWidth(getWidth());
-		model.setSize(getSize());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setImageId(getImageId());
+			model.setModifiedDate(getModifiedDate());
+			model.setText(Html.escape(getText()));
+			model.setType(Html.escape(getType()));
+			model.setHeight(getHeight());
+			model.setWidth(getWidth());
+			model.setSize(getSize());
+
 			model = (Image)Proxy.newProxyInstance(Image.class.getClassLoader(),
 					new Class[] { Image.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -118,19 +118,24 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	}
 
 	public UserGroupRole toEscapedModel() {
-		UserGroupRole model = new UserGroupRoleImpl();
+		if (isEscapedModel()) {
+			return (UserGroupRole)this;
+		}
+		else {
+			UserGroupRole model = new UserGroupRoleImpl();
 
-		model.setUserId(getUserId());
-		model.setGroupId(getGroupId());
-		model.setRoleId(getRoleId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUserId(getUserId());
+			model.setGroupId(getGroupId());
+			model.setRoleId(getRoleId());
+
 			model = (UserGroupRole)Proxy.newProxyInstance(UserGroupRole.class.getClassLoader(),
 					new Class[] { UserGroupRole.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -188,24 +188,29 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	}
 
 	public MBThread toEscapedModel() {
-		MBThread model = new MBThreadImpl();
+		if (isEscapedModel()) {
+			return (MBThread)this;
+		}
+		else {
+			MBThread model = new MBThreadImpl();
 
-		model.setThreadId(getThreadId());
-		model.setCategoryId(getCategoryId());
-		model.setRootMessageId(getRootMessageId());
-		model.setMessageCount(getMessageCount());
-		model.setViewCount(getViewCount());
-		model.setLastPostByUserId(getLastPostByUserId());
-		model.setLastPostDate(getLastPostDate());
-		model.setPriority(getPriority());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setThreadId(getThreadId());
+			model.setCategoryId(getCategoryId());
+			model.setRootMessageId(getRootMessageId());
+			model.setMessageCount(getMessageCount());
+			model.setViewCount(getViewCount());
+			model.setLastPostByUserId(getLastPostByUserId());
+			model.setLastPostDate(getLastPostDate());
+			model.setPriority(getPriority());
+
 			model = (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
 					new Class[] { MBThread.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

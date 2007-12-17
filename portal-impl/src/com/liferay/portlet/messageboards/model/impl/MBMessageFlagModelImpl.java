@@ -130,20 +130,25 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 	}
 
 	public MBMessageFlag toEscapedModel() {
-		MBMessageFlag model = new MBMessageFlagImpl();
+		if (isEscapedModel()) {
+			return (MBMessageFlag)this;
+		}
+		else {
+			MBMessageFlag model = new MBMessageFlagImpl();
 
-		model.setMessageFlagId(getMessageFlagId());
-		model.setUserId(getUserId());
-		model.setMessageId(getMessageId());
-		model.setFlag(getFlag());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setMessageFlagId(getMessageFlagId());
+			model.setUserId(getUserId());
+			model.setMessageId(getMessageId());
+			model.setFlag(getFlag());
+
 			model = (MBMessageFlag)Proxy.newProxyInstance(MBMessageFlag.class.getClassLoader(),
 					new Class[] { MBMessageFlag.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -148,21 +148,26 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	}
 
 	public UserGroup toEscapedModel() {
-		UserGroup model = new UserGroupImpl();
+		if (isEscapedModel()) {
+			return (UserGroup)this;
+		}
+		else {
+			UserGroup model = new UserGroupImpl();
 
-		model.setUserGroupId(getUserGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setParentUserGroupId(getParentUserGroupId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUserGroupId(getUserGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setParentUserGroupId(getParentUserGroupId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+
 			model = (UserGroup)Proxy.newProxyInstance(UserGroup.class.getClassLoader(),
 					new Class[] { UserGroup.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

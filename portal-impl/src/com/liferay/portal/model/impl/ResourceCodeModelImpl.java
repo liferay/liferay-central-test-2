@@ -132,20 +132,25 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	}
 
 	public ResourceCode toEscapedModel() {
-		ResourceCode model = new ResourceCodeImpl();
+		if (isEscapedModel()) {
+			return (ResourceCode)this;
+		}
+		else {
+			ResourceCode model = new ResourceCodeImpl();
 
-		model.setCodeId(getCodeId());
-		model.setCompanyId(getCompanyId());
-		model.setName(Html.escape(getName()));
-		model.setScope(getScope());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCodeId(getCodeId());
+			model.setCompanyId(getCompanyId());
+			model.setName(Html.escape(getName()));
+			model.setScope(getScope());
+
 			model = (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),
 					new Class[] { ResourceCode.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

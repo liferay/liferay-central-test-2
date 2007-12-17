@@ -223,26 +223,31 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 	}
 
 	public MembershipRequest toEscapedModel() {
-		MembershipRequest model = new MembershipRequestImpl();
+		if (isEscapedModel()) {
+			return (MembershipRequest)this;
+		}
+		else {
+			MembershipRequest model = new MembershipRequestImpl();
 
-		model.setMembershipRequestId(getMembershipRequestId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setGroupId(getGroupId());
-		model.setComments(Html.escape(getComments()));
-		model.setReplyComments(Html.escape(getReplyComments()));
-		model.setReplyDate(getReplyDate());
-		model.setReplierUserId(getReplierUserId());
-		model.setStatusId(getStatusId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setMembershipRequestId(getMembershipRequestId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setGroupId(getGroupId());
+			model.setComments(Html.escape(getComments()));
+			model.setReplyComments(Html.escape(getReplyComments()));
+			model.setReplyDate(getReplyDate());
+			model.setReplierUserId(getReplierUserId());
+			model.setStatusId(getStatusId());
+
 			model = (MembershipRequest)Proxy.newProxyInstance(MembershipRequest.class.getClassLoader(),
 					new Class[] { MembershipRequest.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

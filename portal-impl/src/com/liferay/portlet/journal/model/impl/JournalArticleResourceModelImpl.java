@@ -122,19 +122,24 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 	}
 
 	public JournalArticleResource toEscapedModel() {
-		JournalArticleResource model = new JournalArticleResourceImpl();
+		if (isEscapedModel()) {
+			return (JournalArticleResource)this;
+		}
+		else {
+			JournalArticleResource model = new JournalArticleResourceImpl();
 
-		model.setResourcePrimKey(getResourcePrimKey());
-		model.setGroupId(getGroupId());
-		model.setArticleId(Html.escape(getArticleId()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setResourcePrimKey(getResourcePrimKey());
+			model.setGroupId(getGroupId());
+			model.setArticleId(Html.escape(getArticleId()));
+
 			model = (JournalArticleResource)Proxy.newProxyInstance(JournalArticleResource.class.getClassLoader(),
 					new Class[] { JournalArticleResource.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -148,21 +148,26 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 	}
 
 	public ServiceComponent toEscapedModel() {
-		ServiceComponent model = new ServiceComponentImpl();
+		if (isEscapedModel()) {
+			return (ServiceComponent)this;
+		}
+		else {
+			ServiceComponent model = new ServiceComponentImpl();
 
-		model.setServiceComponentId(getServiceComponentId());
-		model.setBuildNamespace(Html.escape(getBuildNamespace()));
-		model.setBuildNumber(getBuildNumber());
-		model.setBuildDate(getBuildDate());
-		model.setData(Html.escape(getData()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setServiceComponentId(getServiceComponentId());
+			model.setBuildNamespace(Html.escape(getBuildNamespace()));
+			model.setBuildNumber(getBuildNumber());
+			model.setBuildDate(getBuildDate());
+			model.setData(Html.escape(getData()));
+
 			model = (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
 					new Class[] { ServiceComponent.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -533,44 +533,49 @@ public class UserModelImpl extends BaseModelImpl {
 	}
 
 	public User toEscapedModel() {
-		User model = new UserImpl();
+		if (isEscapedModel()) {
+			return (User)this;
+		}
+		else {
+			User model = new UserImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setUserId(getUserId());
-		model.setCompanyId(getCompanyId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setDefaultUser(getDefaultUser());
-		model.setContactId(getContactId());
-		model.setPassword(Html.escape(getPassword()));
-		model.setPasswordEncrypted(getPasswordEncrypted());
-		model.setPasswordReset(getPasswordReset());
-		model.setPasswordModifiedDate(getPasswordModifiedDate());
-		model.setGraceLoginCount(getGraceLoginCount());
-		model.setScreenName(Html.escape(getScreenName()));
-		model.setEmailAddress(Html.escape(getEmailAddress()));
-		model.setPortraitId(getPortraitId());
-		model.setLanguageId(Html.escape(getLanguageId()));
-		model.setTimeZoneId(Html.escape(getTimeZoneId()));
-		model.setGreeting(Html.escape(getGreeting()));
-		model.setComments(Html.escape(getComments()));
-		model.setLoginDate(getLoginDate());
-		model.setLoginIP(Html.escape(getLoginIP()));
-		model.setLastLoginDate(getLastLoginDate());
-		model.setLastLoginIP(Html.escape(getLastLoginIP()));
-		model.setLastFailedLoginDate(getLastFailedLoginDate());
-		model.setFailedLoginAttempts(getFailedLoginAttempts());
-		model.setLockout(getLockout());
-		model.setLockoutDate(getLockoutDate());
-		model.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setUserId(getUserId());
+			model.setCompanyId(getCompanyId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setDefaultUser(getDefaultUser());
+			model.setContactId(getContactId());
+			model.setPassword(Html.escape(getPassword()));
+			model.setPasswordEncrypted(getPasswordEncrypted());
+			model.setPasswordReset(getPasswordReset());
+			model.setPasswordModifiedDate(getPasswordModifiedDate());
+			model.setGraceLoginCount(getGraceLoginCount());
+			model.setScreenName(Html.escape(getScreenName()));
+			model.setEmailAddress(Html.escape(getEmailAddress()));
+			model.setPortraitId(getPortraitId());
+			model.setLanguageId(Html.escape(getLanguageId()));
+			model.setTimeZoneId(Html.escape(getTimeZoneId()));
+			model.setGreeting(Html.escape(getGreeting()));
+			model.setComments(Html.escape(getComments()));
+			model.setLoginDate(getLoginDate());
+			model.setLoginIP(Html.escape(getLoginIP()));
+			model.setLastLoginDate(getLastLoginDate());
+			model.setLastLoginIP(Html.escape(getLastLoginIP()));
+			model.setLastFailedLoginDate(getLastFailedLoginDate());
+			model.setFailedLoginAttempts(getFailedLoginAttempts());
+			model.setLockout(getLockout());
+			model.setLockoutDate(getLockoutDate());
+			model.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
+			model.setActive(getActive());
+
 			model = (User)Proxy.newProxyInstance(User.class.getClassLoader(),
 					new Class[] { User.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

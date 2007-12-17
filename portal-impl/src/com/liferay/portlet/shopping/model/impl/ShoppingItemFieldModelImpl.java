@@ -153,21 +153,26 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingItemField toEscapedModel() {
-		ShoppingItemField model = new ShoppingItemFieldImpl();
+		if (isEscapedModel()) {
+			return (ShoppingItemField)this;
+		}
+		else {
+			ShoppingItemField model = new ShoppingItemFieldImpl();
 
-		model.setItemFieldId(getItemFieldId());
-		model.setItemId(getItemId());
-		model.setName(Html.escape(getName()));
-		model.setValues(Html.escape(getValues()));
-		model.setDescription(Html.escape(getDescription()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setItemFieldId(getItemFieldId());
+			model.setItemId(getItemId());
+			model.setName(Html.escape(getName()));
+			model.setValues(Html.escape(getValues()));
+			model.setDescription(Html.escape(getDescription()));
+
 			model = (ShoppingItemField)Proxy.newProxyInstance(ShoppingItemField.class.getClassLoader(),
 					new Class[] { ShoppingItemField.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

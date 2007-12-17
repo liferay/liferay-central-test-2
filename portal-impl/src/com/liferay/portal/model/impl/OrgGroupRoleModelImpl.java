@@ -118,19 +118,24 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 	}
 
 	public OrgGroupRole toEscapedModel() {
-		OrgGroupRole model = new OrgGroupRoleImpl();
+		if (isEscapedModel()) {
+			return (OrgGroupRole)this;
+		}
+		else {
+			OrgGroupRole model = new OrgGroupRoleImpl();
 
-		model.setOrganizationId(getOrganizationId());
-		model.setGroupId(getGroupId());
-		model.setRoleId(getRoleId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrganizationId(getOrganizationId());
+			model.setGroupId(getGroupId());
+			model.setRoleId(getRoleId());
+
 			model = (OrgGroupRole)Proxy.newProxyInstance(OrgGroupRole.class.getClassLoader(),
 					new Class[] { OrgGroupRole.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

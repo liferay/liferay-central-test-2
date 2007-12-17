@@ -259,28 +259,33 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	}
 
 	public PollsQuestion toEscapedModel() {
-		PollsQuestion model = new PollsQuestionImpl();
+		if (isEscapedModel()) {
+			return (PollsQuestion)this;
+		}
+		else {
+			PollsQuestion model = new PollsQuestionImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setQuestionId(getQuestionId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setExpirationDate(getExpirationDate());
-		model.setLastVoteDate(getLastVoteDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setQuestionId(getQuestionId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setExpirationDate(getExpirationDate());
+			model.setLastVoteDate(getLastVoteDate());
+
 			model = (PollsQuestion)Proxy.newProxyInstance(PollsQuestion.class.getClassLoader(),
 					new Class[] { PollsQuestion.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

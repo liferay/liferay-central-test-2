@@ -324,32 +324,37 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	}
 
 	public SCProductEntry toEscapedModel() {
-		SCProductEntry model = new SCProductEntryImpl();
+		if (isEscapedModel()) {
+			return (SCProductEntry)this;
+		}
+		else {
+			SCProductEntry model = new SCProductEntryImpl();
 
-		model.setProductEntryId(getProductEntryId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setName(Html.escape(getName()));
-		model.setType(Html.escape(getType()));
-		model.setTags(Html.escape(getTags()));
-		model.setShortDescription(Html.escape(getShortDescription()));
-		model.setLongDescription(Html.escape(getLongDescription()));
-		model.setPageURL(Html.escape(getPageURL()));
-		model.setAuthor(Html.escape(getAuthor()));
-		model.setRepoGroupId(Html.escape(getRepoGroupId()));
-		model.setRepoArtifactId(Html.escape(getRepoArtifactId()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setProductEntryId(getProductEntryId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setName(Html.escape(getName()));
+			model.setType(Html.escape(getType()));
+			model.setTags(Html.escape(getTags()));
+			model.setShortDescription(Html.escape(getShortDescription()));
+			model.setLongDescription(Html.escape(getLongDescription()));
+			model.setPageURL(Html.escape(getPageURL()));
+			model.setAuthor(Html.escape(getAuthor()));
+			model.setRepoGroupId(Html.escape(getRepoGroupId()));
+			model.setRepoArtifactId(Html.escape(getRepoArtifactId()));
+
 			model = (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
 					new Class[] { SCProductEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

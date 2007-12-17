@@ -228,26 +228,31 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingOrderItem toEscapedModel() {
-		ShoppingOrderItem model = new ShoppingOrderItemImpl();
+		if (isEscapedModel()) {
+			return (ShoppingOrderItem)this;
+		}
+		else {
+			ShoppingOrderItem model = new ShoppingOrderItemImpl();
 
-		model.setOrderItemId(getOrderItemId());
-		model.setOrderId(getOrderId());
-		model.setItemId(Html.escape(getItemId()));
-		model.setSku(Html.escape(getSku()));
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setProperties(Html.escape(getProperties()));
-		model.setPrice(getPrice());
-		model.setQuantity(getQuantity());
-		model.setShippedDate(getShippedDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrderItemId(getOrderItemId());
+			model.setOrderId(getOrderId());
+			model.setItemId(Html.escape(getItemId()));
+			model.setSku(Html.escape(getSku()));
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setProperties(Html.escape(getProperties()));
+			model.setPrice(getPrice());
+			model.setQuantity(getQuantity());
+			model.setShippedDate(getShippedDate());
+
 			model = (ShoppingOrderItem)Proxy.newProxyInstance(ShoppingOrderItem.class.getClassLoader(),
 					new Class[] { ShoppingOrderItem.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

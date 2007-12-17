@@ -226,26 +226,31 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingCategory toEscapedModel() {
-		ShoppingCategory model = new ShoppingCategoryImpl();
+		if (isEscapedModel()) {
+			return (ShoppingCategory)this;
+		}
+		else {
+			ShoppingCategory model = new ShoppingCategoryImpl();
 
-		model.setCategoryId(getCategoryId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentCategoryId(getParentCategoryId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCategoryId(getCategoryId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentCategoryId(getParentCategoryId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+
 			model = (ShoppingCategory)Proxy.newProxyInstance(ShoppingCategory.class.getClassLoader(),
 					new Class[] { ShoppingCategory.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

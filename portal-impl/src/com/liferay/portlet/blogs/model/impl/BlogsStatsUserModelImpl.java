@@ -200,25 +200,30 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	}
 
 	public BlogsStatsUser toEscapedModel() {
-		BlogsStatsUser model = new BlogsStatsUserImpl();
+		if (isEscapedModel()) {
+			return (BlogsStatsUser)this;
+		}
+		else {
+			BlogsStatsUser model = new BlogsStatsUserImpl();
 
-		model.setStatsUserId(getStatsUserId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setEntryCount(getEntryCount());
-		model.setLastPostDate(getLastPostDate());
-		model.setRatingsTotalEntries(getRatingsTotalEntries());
-		model.setRatingsTotalScore(getRatingsTotalScore());
-		model.setRatingsAverageScore(getRatingsAverageScore());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setStatsUserId(getStatsUserId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setEntryCount(getEntryCount());
+			model.setLastPostDate(getLastPostDate());
+			model.setRatingsTotalEntries(getRatingsTotalEntries());
+			model.setRatingsTotalScore(getRatingsTotalScore());
+			model.setRatingsAverageScore(getRatingsAverageScore());
+
 			model = (BlogsStatsUser)Proxy.newProxyInstance(BlogsStatsUser.class.getClassLoader(),
 					new Class[] { BlogsStatsUser.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

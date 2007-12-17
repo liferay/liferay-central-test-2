@@ -169,22 +169,27 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	}
 
 	public Release toEscapedModel() {
-		Release model = new ReleaseImpl();
+		if (isEscapedModel()) {
+			return (Release)this;
+		}
+		else {
+			Release model = new ReleaseImpl();
 
-		model.setReleaseId(getReleaseId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setBuildNumber(getBuildNumber());
-		model.setBuildDate(getBuildDate());
-		model.setVerified(getVerified());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setReleaseId(getReleaseId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setBuildNumber(getBuildNumber());
+			model.setBuildDate(getBuildDate());
+			model.setVerified(getVerified());
+
 			model = (Release)Proxy.newProxyInstance(Release.class.getClassLoader(),
 					new Class[] { Release.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

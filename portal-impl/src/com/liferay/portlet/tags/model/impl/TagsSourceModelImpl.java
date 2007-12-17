@@ -137,20 +137,25 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 	}
 
 	public TagsSource toEscapedModel() {
-		TagsSource model = new TagsSourceImpl();
+		if (isEscapedModel()) {
+			return (TagsSource)this;
+		}
+		else {
+			TagsSource model = new TagsSourceImpl();
 
-		model.setSourceId(getSourceId());
-		model.setParentSourceId(getParentSourceId());
-		model.setName(Html.escape(getName()));
-		model.setAcronym(Html.escape(getAcronym()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setSourceId(getSourceId());
+			model.setParentSourceId(getParentSourceId());
+			model.setName(Html.escape(getName()));
+			model.setAcronym(Html.escape(getAcronym()));
+
 			model = (TagsSource)Proxy.newProxyInstance(TagsSource.class.getClassLoader(),
 					new Class[] { TagsSource.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

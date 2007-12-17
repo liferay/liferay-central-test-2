@@ -352,34 +352,39 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	}
 
 	public JournalTemplate toEscapedModel() {
-		JournalTemplate model = new JournalTemplateImpl();
+		if (isEscapedModel()) {
+			return (JournalTemplate)this;
+		}
+		else {
+			JournalTemplate model = new JournalTemplateImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setId(getId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setTemplateId(Html.escape(getTemplateId()));
-		model.setStructureId(Html.escape(getStructureId()));
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setXsl(Html.escape(getXsl()));
-		model.setLangType(Html.escape(getLangType()));
-		model.setCacheable(getCacheable());
-		model.setSmallImage(getSmallImage());
-		model.setSmallImageId(getSmallImageId());
-		model.setSmallImageURL(Html.escape(getSmallImageURL()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setId(getId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setTemplateId(Html.escape(getTemplateId()));
+			model.setStructureId(Html.escape(getStructureId()));
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setXsl(Html.escape(getXsl()));
+			model.setLangType(Html.escape(getLangType()));
+			model.setCacheable(getCacheable());
+			model.setSmallImage(getSmallImage());
+			model.setSmallImageId(getSmallImageId());
+			model.setSmallImageURL(Html.escape(getSmallImageURL()));
+
 			model = (JournalTemplate)Proxy.newProxyInstance(JournalTemplate.class.getClassLoader(),
 					new Class[] { JournalTemplate.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

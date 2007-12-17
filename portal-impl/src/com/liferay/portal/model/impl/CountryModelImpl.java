@@ -182,23 +182,28 @@ public class CountryModelImpl extends BaseModelImpl {
 	}
 
 	public Country toEscapedModel() {
-		Country model = new CountryImpl();
+		if (isEscapedModel()) {
+			return (Country)this;
+		}
+		else {
+			Country model = new CountryImpl();
 
-		model.setCountryId(getCountryId());
-		model.setName(Html.escape(getName()));
-		model.setA2(Html.escape(getA2()));
-		model.setA3(Html.escape(getA3()));
-		model.setNumber(Html.escape(getNumber()));
-		model.setIdd(Html.escape(getIdd()));
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCountryId(getCountryId());
+			model.setName(Html.escape(getName()));
+			model.setA2(Html.escape(getA2()));
+			model.setA3(Html.escape(getA3()));
+			model.setNumber(Html.escape(getNumber()));
+			model.setIdd(Html.escape(getIdd()));
+			model.setActive(getActive());
+
 			model = (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),
 					new Class[] { Country.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -174,22 +174,27 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	}
 
 	public SCLicense toEscapedModel() {
-		SCLicense model = new SCLicenseImpl();
+		if (isEscapedModel()) {
+			return (SCLicense)this;
+		}
+		else {
+			SCLicense model = new SCLicenseImpl();
 
-		model.setLicenseId(getLicenseId());
-		model.setName(Html.escape(getName()));
-		model.setUrl(Html.escape(getUrl()));
-		model.setOpenSource(getOpenSource());
-		model.setActive(getActive());
-		model.setRecommended(getRecommended());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setLicenseId(getLicenseId());
+			model.setName(Html.escape(getName()));
+			model.setUrl(Html.escape(getUrl()));
+			model.setOpenSource(getOpenSource());
+			model.setActive(getActive());
+			model.setRecommended(getRecommended());
+
 			model = (SCLicense)Proxy.newProxyInstance(SCLicense.class.getClassLoader(),
 					new Class[] { SCLicense.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

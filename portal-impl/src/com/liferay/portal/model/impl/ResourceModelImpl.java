@@ -120,19 +120,24 @@ public class ResourceModelImpl extends BaseModelImpl {
 	}
 
 	public Resource toEscapedModel() {
-		Resource model = new ResourceImpl();
+		if (isEscapedModel()) {
+			return (Resource)this;
+		}
+		else {
+			Resource model = new ResourceImpl();
 
-		model.setResourceId(getResourceId());
-		model.setCodeId(getCodeId());
-		model.setPrimKey(Html.escape(getPrimKey()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setResourceId(getResourceId());
+			model.setCodeId(getCodeId());
+			model.setPrimKey(Html.escape(getPrimKey()));
+
 			model = (Resource)Proxy.newProxyInstance(Resource.class.getClassLoader(),
 					new Class[] { Resource.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

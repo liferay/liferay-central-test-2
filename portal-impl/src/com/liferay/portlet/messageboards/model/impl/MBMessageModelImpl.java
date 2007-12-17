@@ -287,30 +287,35 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	}
 
 	public MBMessage toEscapedModel() {
-		MBMessage model = new MBMessageImpl();
+		if (isEscapedModel()) {
+			return (MBMessage)this;
+		}
+		else {
+			MBMessage model = new MBMessageImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setMessageId(getMessageId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setCategoryId(getCategoryId());
-		model.setThreadId(getThreadId());
-		model.setParentMessageId(getParentMessageId());
-		model.setSubject(Html.escape(getSubject()));
-		model.setBody(Html.escape(getBody()));
-		model.setAttachments(getAttachments());
-		model.setAnonymous(getAnonymous());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setMessageId(getMessageId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setCategoryId(getCategoryId());
+			model.setThreadId(getThreadId());
+			model.setParentMessageId(getParentMessageId());
+			model.setSubject(Html.escape(getSubject()));
+			model.setBody(Html.escape(getBody()));
+			model.setAttachments(getAttachments());
+			model.setAnonymous(getAnonymous());
+
 			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
 					new Class[] { MBMessage.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

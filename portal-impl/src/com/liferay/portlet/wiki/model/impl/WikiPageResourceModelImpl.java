@@ -121,19 +121,24 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 	}
 
 	public WikiPageResource toEscapedModel() {
-		WikiPageResource model = new WikiPageResourceImpl();
+		if (isEscapedModel()) {
+			return (WikiPageResource)this;
+		}
+		else {
+			WikiPageResource model = new WikiPageResourceImpl();
 
-		model.setResourcePrimKey(getResourcePrimKey());
-		model.setNodeId(getNodeId());
-		model.setTitle(Html.escape(getTitle()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setResourcePrimKey(getResourcePrimKey());
+			model.setNodeId(getNodeId());
+			model.setTitle(Html.escape(getTitle()));
+
 			model = (WikiPageResource)Proxy.newProxyInstance(WikiPageResource.class.getClassLoader(),
 					new Class[] { WikiPageResource.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

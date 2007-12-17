@@ -166,22 +166,27 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	}
 
 	public DLFileRank toEscapedModel() {
-		DLFileRank model = new DLFileRankImpl();
+		if (isEscapedModel()) {
+			return (DLFileRank)this;
+		}
+		else {
+			DLFileRank model = new DLFileRankImpl();
 
-		model.setFileRankId(getFileRankId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setFolderId(getFolderId());
-		model.setName(Html.escape(getName()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setFileRankId(getFileRankId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setFolderId(getFolderId());
+			model.setName(Html.escape(getName()));
+
 			model = (DLFileRank)Proxy.newProxyInstance(DLFileRank.class.getClassLoader(),
 					new Class[] { DLFileRank.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

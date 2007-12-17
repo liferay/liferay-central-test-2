@@ -106,18 +106,23 @@ public class ClassNameModelImpl extends BaseModelImpl {
 	}
 
 	public ClassName toEscapedModel() {
-		ClassName model = new ClassNameImpl();
+		if (isEscapedModel()) {
+			return (ClassName)this;
+		}
+		else {
+			ClassName model = new ClassNameImpl();
 
-		model.setClassNameId(getClassNameId());
-		model.setValue(Html.escape(getValue()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setClassNameId(getClassNameId());
+			model.setValue(Html.escape(getValue()));
+
 			model = (ClassName)Proxy.newProxyInstance(ClassName.class.getClassLoader(),
 					new Class[] { ClassName.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

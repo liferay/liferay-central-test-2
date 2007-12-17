@@ -875,67 +875,72 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingOrder toEscapedModel() {
-		ShoppingOrder model = new ShoppingOrderImpl();
+		if (isEscapedModel()) {
+			return (ShoppingOrder)this;
+		}
+		else {
+			ShoppingOrder model = new ShoppingOrderImpl();
 
-		model.setOrderId(getOrderId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setNumber(Html.escape(getNumber()));
-		model.setTax(getTax());
-		model.setShipping(getShipping());
-		model.setAltShipping(Html.escape(getAltShipping()));
-		model.setRequiresShipping(getRequiresShipping());
-		model.setInsure(getInsure());
-		model.setInsurance(getInsurance());
-		model.setCouponCodes(Html.escape(getCouponCodes()));
-		model.setCouponDiscount(getCouponDiscount());
-		model.setBillingFirstName(Html.escape(getBillingFirstName()));
-		model.setBillingLastName(Html.escape(getBillingLastName()));
-		model.setBillingEmailAddress(Html.escape(getBillingEmailAddress()));
-		model.setBillingCompany(Html.escape(getBillingCompany()));
-		model.setBillingStreet(Html.escape(getBillingStreet()));
-		model.setBillingCity(Html.escape(getBillingCity()));
-		model.setBillingState(Html.escape(getBillingState()));
-		model.setBillingZip(Html.escape(getBillingZip()));
-		model.setBillingCountry(Html.escape(getBillingCountry()));
-		model.setBillingPhone(Html.escape(getBillingPhone()));
-		model.setShipToBilling(getShipToBilling());
-		model.setShippingFirstName(Html.escape(getShippingFirstName()));
-		model.setShippingLastName(Html.escape(getShippingLastName()));
-		model.setShippingEmailAddress(Html.escape(getShippingEmailAddress()));
-		model.setShippingCompany(Html.escape(getShippingCompany()));
-		model.setShippingStreet(Html.escape(getShippingStreet()));
-		model.setShippingCity(Html.escape(getShippingCity()));
-		model.setShippingState(Html.escape(getShippingState()));
-		model.setShippingZip(Html.escape(getShippingZip()));
-		model.setShippingCountry(Html.escape(getShippingCountry()));
-		model.setShippingPhone(Html.escape(getShippingPhone()));
-		model.setCcName(Html.escape(getCcName()));
-		model.setCcType(Html.escape(getCcType()));
-		model.setCcNumber(Html.escape(getCcNumber()));
-		model.setCcExpMonth(getCcExpMonth());
-		model.setCcExpYear(getCcExpYear());
-		model.setCcVerNumber(Html.escape(getCcVerNumber()));
-		model.setComments(Html.escape(getComments()));
-		model.setPpTxnId(Html.escape(getPpTxnId()));
-		model.setPpPaymentStatus(Html.escape(getPpPaymentStatus()));
-		model.setPpPaymentGross(getPpPaymentGross());
-		model.setPpReceiverEmail(Html.escape(getPpReceiverEmail()));
-		model.setPpPayerEmail(Html.escape(getPpPayerEmail()));
-		model.setSendOrderEmail(getSendOrderEmail());
-		model.setSendShippingEmail(getSendShippingEmail());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrderId(getOrderId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setNumber(Html.escape(getNumber()));
+			model.setTax(getTax());
+			model.setShipping(getShipping());
+			model.setAltShipping(Html.escape(getAltShipping()));
+			model.setRequiresShipping(getRequiresShipping());
+			model.setInsure(getInsure());
+			model.setInsurance(getInsurance());
+			model.setCouponCodes(Html.escape(getCouponCodes()));
+			model.setCouponDiscount(getCouponDiscount());
+			model.setBillingFirstName(Html.escape(getBillingFirstName()));
+			model.setBillingLastName(Html.escape(getBillingLastName()));
+			model.setBillingEmailAddress(Html.escape(getBillingEmailAddress()));
+			model.setBillingCompany(Html.escape(getBillingCompany()));
+			model.setBillingStreet(Html.escape(getBillingStreet()));
+			model.setBillingCity(Html.escape(getBillingCity()));
+			model.setBillingState(Html.escape(getBillingState()));
+			model.setBillingZip(Html.escape(getBillingZip()));
+			model.setBillingCountry(Html.escape(getBillingCountry()));
+			model.setBillingPhone(Html.escape(getBillingPhone()));
+			model.setShipToBilling(getShipToBilling());
+			model.setShippingFirstName(Html.escape(getShippingFirstName()));
+			model.setShippingLastName(Html.escape(getShippingLastName()));
+			model.setShippingEmailAddress(Html.escape(getShippingEmailAddress()));
+			model.setShippingCompany(Html.escape(getShippingCompany()));
+			model.setShippingStreet(Html.escape(getShippingStreet()));
+			model.setShippingCity(Html.escape(getShippingCity()));
+			model.setShippingState(Html.escape(getShippingState()));
+			model.setShippingZip(Html.escape(getShippingZip()));
+			model.setShippingCountry(Html.escape(getShippingCountry()));
+			model.setShippingPhone(Html.escape(getShippingPhone()));
+			model.setCcName(Html.escape(getCcName()));
+			model.setCcType(Html.escape(getCcType()));
+			model.setCcNumber(Html.escape(getCcNumber()));
+			model.setCcExpMonth(getCcExpMonth());
+			model.setCcExpYear(getCcExpYear());
+			model.setCcVerNumber(Html.escape(getCcVerNumber()));
+			model.setComments(Html.escape(getComments()));
+			model.setPpTxnId(Html.escape(getPpTxnId()));
+			model.setPpPaymentStatus(Html.escape(getPpPaymentStatus()));
+			model.setPpPaymentGross(getPpPaymentGross());
+			model.setPpReceiverEmail(Html.escape(getPpReceiverEmail()));
+			model.setPpPayerEmail(Html.escape(getPpPayerEmail()));
+			model.setSendOrderEmail(getSendOrderEmail());
+			model.setSendShippingEmail(getSendShippingEmail());
+
 			model = (ShoppingOrder)Proxy.newProxyInstance(ShoppingOrder.class.getClassLoader(),
 					new Class[] { ShoppingOrder.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

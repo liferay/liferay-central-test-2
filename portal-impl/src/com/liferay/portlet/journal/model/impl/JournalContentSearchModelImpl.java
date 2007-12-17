@@ -181,23 +181,28 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	}
 
 	public JournalContentSearch toEscapedModel() {
-		JournalContentSearch model = new JournalContentSearchImpl();
+		if (isEscapedModel()) {
+			return (JournalContentSearch)this;
+		}
+		else {
+			JournalContentSearch model = new JournalContentSearchImpl();
 
-		model.setContentSearchId(getContentSearchId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setPrivateLayout(getPrivateLayout());
-		model.setLayoutId(getLayoutId());
-		model.setPortletId(Html.escape(getPortletId()));
-		model.setArticleId(Html.escape(getArticleId()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setContentSearchId(getContentSearchId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setPrivateLayout(getPrivateLayout());
+			model.setLayoutId(getLayoutId());
+			model.setPortletId(Html.escape(getPortletId()));
+			model.setArticleId(Html.escape(getArticleId()));
+
 			model = (JournalContentSearch)Proxy.newProxyInstance(JournalContentSearch.class.getClassLoader(),
 					new Class[] { JournalContentSearch.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

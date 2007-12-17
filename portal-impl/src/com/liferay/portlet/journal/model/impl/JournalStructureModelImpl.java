@@ -257,28 +257,33 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	}
 
 	public JournalStructure toEscapedModel() {
-		JournalStructure model = new JournalStructureImpl();
+		if (isEscapedModel()) {
+			return (JournalStructure)this;
+		}
+		else {
+			JournalStructure model = new JournalStructureImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setId(getId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setStructureId(Html.escape(getStructureId()));
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setXsd(Html.escape(getXsd()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setId(getId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setStructureId(Html.escape(getStructureId()));
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setXsd(Html.escape(getXsd()));
+
 			model = (JournalStructure)Proxy.newProxyInstance(JournalStructure.class.getClassLoader(),
 					new Class[] { JournalStructure.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -216,26 +216,31 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingItemPrice toEscapedModel() {
-		ShoppingItemPrice model = new ShoppingItemPriceImpl();
+		if (isEscapedModel()) {
+			return (ShoppingItemPrice)this;
+		}
+		else {
+			ShoppingItemPrice model = new ShoppingItemPriceImpl();
 
-		model.setItemPriceId(getItemPriceId());
-		model.setItemId(getItemId());
-		model.setMinQuantity(getMinQuantity());
-		model.setMaxQuantity(getMaxQuantity());
-		model.setPrice(getPrice());
-		model.setDiscount(getDiscount());
-		model.setTaxable(getTaxable());
-		model.setShipping(getShipping());
-		model.setUseShippingFormula(getUseShippingFormula());
-		model.setStatus(getStatus());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setItemPriceId(getItemPriceId());
+			model.setItemId(getItemId());
+			model.setMinQuantity(getMinQuantity());
+			model.setMaxQuantity(getMaxQuantity());
+			model.setPrice(getPrice());
+			model.setDiscount(getDiscount());
+			model.setTaxable(getTaxable());
+			model.setShipping(getShipping());
+			model.setUseShippingFormula(getUseShippingFormula());
+			model.setStatus(getStatus());
+
 			model = (ShoppingItemPrice)Proxy.newProxyInstance(ShoppingItemPrice.class.getClassLoader(),
 					new Class[] { ShoppingItemPrice.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

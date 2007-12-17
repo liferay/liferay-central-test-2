@@ -345,34 +345,39 @@ public class AddressModelImpl extends BaseModelImpl {
 	}
 
 	public Address toEscapedModel() {
-		Address model = new AddressImpl();
+		if (isEscapedModel()) {
+			return (Address)this;
+		}
+		else {
+			Address model = new AddressImpl();
 
-		model.setAddressId(getAddressId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setStreet1(Html.escape(getStreet1()));
-		model.setStreet2(Html.escape(getStreet2()));
-		model.setStreet3(Html.escape(getStreet3()));
-		model.setCity(Html.escape(getCity()));
-		model.setZip(Html.escape(getZip()));
-		model.setRegionId(getRegionId());
-		model.setCountryId(getCountryId());
-		model.setTypeId(getTypeId());
-		model.setMailing(getMailing());
-		model.setPrimary(getPrimary());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setAddressId(getAddressId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setStreet1(Html.escape(getStreet1()));
+			model.setStreet2(Html.escape(getStreet2()));
+			model.setStreet3(Html.escape(getStreet3()));
+			model.setCity(Html.escape(getCity()));
+			model.setZip(Html.escape(getZip()));
+			model.setRegionId(getRegionId());
+			model.setCountryId(getCountryId());
+			model.setTypeId(getTypeId());
+			model.setMailing(getMailing());
+			model.setPrimary(getPrimary());
+
 			model = (Address)Proxy.newProxyInstance(Address.class.getClassLoader(),
 					new Class[] { Address.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

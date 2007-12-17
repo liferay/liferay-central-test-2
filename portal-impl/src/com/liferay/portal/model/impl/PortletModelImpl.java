@@ -152,21 +152,26 @@ public class PortletModelImpl extends BaseModelImpl {
 	}
 
 	public Portlet toEscapedModel() {
-		Portlet model = new PortletImpl();
+		if (isEscapedModel()) {
+			return (Portlet)this;
+		}
+		else {
+			Portlet model = new PortletImpl();
 
-		model.setId(getId());
-		model.setCompanyId(getCompanyId());
-		model.setPortletId(Html.escape(getPortletId()));
-		model.setRoles(Html.escape(getRoles()));
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setId(getId());
+			model.setCompanyId(getCompanyId());
+			model.setPortletId(Html.escape(getPortletId()));
+			model.setRoles(Html.escape(getRoles()));
+			model.setActive(getActive());
+
 			model = (Portlet)Proxy.newProxyInstance(Portlet.class.getClassLoader(),
 					new Class[] { Portlet.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

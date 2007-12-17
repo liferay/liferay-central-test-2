@@ -133,20 +133,25 @@ public class PermissionModelImpl extends BaseModelImpl {
 	}
 
 	public Permission toEscapedModel() {
-		Permission model = new PermissionImpl();
+		if (isEscapedModel()) {
+			return (Permission)this;
+		}
+		else {
+			Permission model = new PermissionImpl();
 
-		model.setPermissionId(getPermissionId());
-		model.setCompanyId(getCompanyId());
-		model.setActionId(Html.escape(getActionId()));
-		model.setResourceId(getResourceId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPermissionId(getPermissionId());
+			model.setCompanyId(getCompanyId());
+			model.setActionId(Html.escape(getActionId()));
+			model.setResourceId(getResourceId());
+
 			model = (Permission)Proxy.newProxyInstance(Permission.class.getClassLoader(),
 					new Class[] { Permission.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

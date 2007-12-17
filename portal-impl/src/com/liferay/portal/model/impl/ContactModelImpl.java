@@ -487,43 +487,48 @@ public class ContactModelImpl extends BaseModelImpl {
 	}
 
 	public Contact toEscapedModel() {
-		Contact model = new ContactImpl();
+		if (isEscapedModel()) {
+			return (Contact)this;
+		}
+		else {
+			Contact model = new ContactImpl();
 
-		model.setContactId(getContactId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setAccountId(getAccountId());
-		model.setParentContactId(getParentContactId());
-		model.setFirstName(Html.escape(getFirstName()));
-		model.setMiddleName(Html.escape(getMiddleName()));
-		model.setLastName(Html.escape(getLastName()));
-		model.setPrefixId(getPrefixId());
-		model.setSuffixId(getSuffixId());
-		model.setMale(getMale());
-		model.setBirthday(getBirthday());
-		model.setSmsSn(Html.escape(getSmsSn()));
-		model.setAimSn(Html.escape(getAimSn()));
-		model.setIcqSn(Html.escape(getIcqSn()));
-		model.setJabberSn(Html.escape(getJabberSn()));
-		model.setMsnSn(Html.escape(getMsnSn()));
-		model.setSkypeSn(Html.escape(getSkypeSn()));
-		model.setYmSn(Html.escape(getYmSn()));
-		model.setEmployeeStatusId(Html.escape(getEmployeeStatusId()));
-		model.setEmployeeNumber(Html.escape(getEmployeeNumber()));
-		model.setJobTitle(Html.escape(getJobTitle()));
-		model.setJobClass(Html.escape(getJobClass()));
-		model.setHoursOfOperation(Html.escape(getHoursOfOperation()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setContactId(getContactId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setAccountId(getAccountId());
+			model.setParentContactId(getParentContactId());
+			model.setFirstName(Html.escape(getFirstName()));
+			model.setMiddleName(Html.escape(getMiddleName()));
+			model.setLastName(Html.escape(getLastName()));
+			model.setPrefixId(getPrefixId());
+			model.setSuffixId(getSuffixId());
+			model.setMale(getMale());
+			model.setBirthday(getBirthday());
+			model.setSmsSn(Html.escape(getSmsSn()));
+			model.setAimSn(Html.escape(getAimSn()));
+			model.setIcqSn(Html.escape(getIcqSn()));
+			model.setJabberSn(Html.escape(getJabberSn()));
+			model.setMsnSn(Html.escape(getMsnSn()));
+			model.setSkypeSn(Html.escape(getSkypeSn()));
+			model.setYmSn(Html.escape(getYmSn()));
+			model.setEmployeeStatusId(Html.escape(getEmployeeStatusId()));
+			model.setEmployeeNumber(Html.escape(getEmployeeNumber()));
+			model.setJobTitle(Html.escape(getJobTitle()));
+			model.setJobClass(Html.escape(getJobClass()));
+			model.setHoursOfOperation(Html.escape(getHoursOfOperation()));
+
 			model = (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
 					new Class[] { Contact.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

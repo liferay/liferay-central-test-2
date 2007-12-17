@@ -255,28 +255,33 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	}
 
 	public MBCategory toEscapedModel() {
-		MBCategory model = new MBCategoryImpl();
+		if (isEscapedModel()) {
+			return (MBCategory)this;
+		}
+		else {
+			MBCategory model = new MBCategoryImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setCategoryId(getCategoryId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentCategoryId(getParentCategoryId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setLastPostDate(getLastPostDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setCategoryId(getCategoryId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentCategoryId(getParentCategoryId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setLastPostDate(getLastPostDate());
+
 			model = (MBCategory)Proxy.newProxyInstance(MBCategory.class.getClassLoader(),
 					new Class[] { MBCategory.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -256,27 +256,32 @@ public class PhoneModelImpl extends BaseModelImpl {
 	}
 
 	public Phone toEscapedModel() {
-		Phone model = new PhoneImpl();
+		if (isEscapedModel()) {
+			return (Phone)this;
+		}
+		else {
+			Phone model = new PhoneImpl();
 
-		model.setPhoneId(getPhoneId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setNumber(Html.escape(getNumber()));
-		model.setExtension(Html.escape(getExtension()));
-		model.setTypeId(getTypeId());
-		model.setPrimary(getPrimary());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPhoneId(getPhoneId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setNumber(Html.escape(getNumber()));
+			model.setExtension(Html.escape(getExtension()));
+			model.setTypeId(getTypeId());
+			model.setPrimary(getPrimary());
+
 			model = (Phone)Proxy.newProxyInstance(Phone.class.getClassLoader(),
 					new Class[] { Phone.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

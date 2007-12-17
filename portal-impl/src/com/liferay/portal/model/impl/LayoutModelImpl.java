@@ -405,37 +405,42 @@ public class LayoutModelImpl extends BaseModelImpl {
 	}
 
 	public Layout toEscapedModel() {
-		Layout model = new LayoutImpl();
+		if (isEscapedModel()) {
+			return (Layout)this;
+		}
+		else {
+			Layout model = new LayoutImpl();
 
-		model.setPlid(getPlid());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setPrivateLayout(getPrivateLayout());
-		model.setLayoutId(getLayoutId());
-		model.setParentLayoutId(getParentLayoutId());
-		model.setName(Html.escape(getName()));
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setType(Html.escape(getType()));
-		model.setTypeSettings(Html.escape(getTypeSettings()));
-		model.setHidden(getHidden());
-		model.setFriendlyURL(Html.escape(getFriendlyURL()));
-		model.setIconImage(getIconImage());
-		model.setIconImageId(getIconImageId());
-		model.setThemeId(Html.escape(getThemeId()));
-		model.setColorSchemeId(Html.escape(getColorSchemeId()));
-		model.setWapThemeId(Html.escape(getWapThemeId()));
-		model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
-		model.setCss(Html.escape(getCss()));
-		model.setPriority(getPriority());
-		model.setDlFolderId(getDlFolderId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPlid(getPlid());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setPrivateLayout(getPrivateLayout());
+			model.setLayoutId(getLayoutId());
+			model.setParentLayoutId(getParentLayoutId());
+			model.setName(Html.escape(getName()));
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setType(Html.escape(getType()));
+			model.setTypeSettings(Html.escape(getTypeSettings()));
+			model.setHidden(getHidden());
+			model.setFriendlyURL(Html.escape(getFriendlyURL()));
+			model.setIconImage(getIconImage());
+			model.setIconImageId(getIconImageId());
+			model.setThemeId(Html.escape(getThemeId()));
+			model.setColorSchemeId(Html.escape(getColorSchemeId()));
+			model.setWapThemeId(Html.escape(getWapThemeId()));
+			model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
+			model.setCss(Html.escape(getCss()));
+			model.setPriority(getPriority());
+			model.setDlFolderId(getDlFolderId());
+
 			model = (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
 					new Class[] { Layout.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

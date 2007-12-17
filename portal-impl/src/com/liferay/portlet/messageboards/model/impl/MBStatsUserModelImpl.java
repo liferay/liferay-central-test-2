@@ -148,21 +148,26 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	}
 
 	public MBStatsUser toEscapedModel() {
-		MBStatsUser model = new MBStatsUserImpl();
+		if (isEscapedModel()) {
+			return (MBStatsUser)this;
+		}
+		else {
+			MBStatsUser model = new MBStatsUserImpl();
 
-		model.setStatsUserId(getStatsUserId());
-		model.setGroupId(getGroupId());
-		model.setUserId(getUserId());
-		model.setMessageCount(getMessageCount());
-		model.setLastPostDate(getLastPostDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setStatsUserId(getStatsUserId());
+			model.setGroupId(getGroupId());
+			model.setUserId(getUserId());
+			model.setMessageCount(getMessageCount());
+			model.setLastPostDate(getLastPostDate());
+
 			model = (MBStatsUser)Proxy.newProxyInstance(MBStatsUser.class.getClassLoader(),
 					new Class[] { MBStatsUser.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

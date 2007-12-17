@@ -240,27 +240,32 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	}
 
 	public EmailAddress toEscapedModel() {
-		EmailAddress model = new EmailAddressImpl();
+		if (isEscapedModel()) {
+			return (EmailAddress)this;
+		}
+		else {
+			EmailAddress model = new EmailAddressImpl();
 
-		model.setEmailAddressId(getEmailAddressId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setAddress(Html.escape(getAddress()));
-		model.setTypeId(getTypeId());
-		model.setPrimary(getPrimary());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setEmailAddressId(getEmailAddressId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setAddress(Html.escape(getAddress()));
+			model.setTypeId(getTypeId());
+			model.setPrimary(getPrimary());
+
 			model = (EmailAddress)Proxy.newProxyInstance(EmailAddress.class.getClassLoader(),
 					new Class[] { EmailAddress.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

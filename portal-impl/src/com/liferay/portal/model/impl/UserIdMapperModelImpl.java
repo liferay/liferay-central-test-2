@@ -151,21 +151,26 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	}
 
 	public UserIdMapper toEscapedModel() {
-		UserIdMapper model = new UserIdMapperImpl();
+		if (isEscapedModel()) {
+			return (UserIdMapper)this;
+		}
+		else {
+			UserIdMapper model = new UserIdMapperImpl();
 
-		model.setUserIdMapperId(getUserIdMapperId());
-		model.setUserId(getUserId());
-		model.setType(Html.escape(getType()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setExternalUserId(Html.escape(getExternalUserId()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUserIdMapperId(getUserIdMapperId());
+			model.setUserId(getUserId());
+			model.setType(Html.escape(getType()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setExternalUserId(Html.escape(getExternalUserId()));
+
 			model = (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
 					new Class[] { UserIdMapper.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

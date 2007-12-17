@@ -174,22 +174,27 @@ public class RoleModelImpl extends BaseModelImpl {
 	}
 
 	public Role toEscapedModel() {
-		Role model = new RoleImpl();
+		if (isEscapedModel()) {
+			return (Role)this;
+		}
+		else {
+			Role model = new RoleImpl();
 
-		model.setRoleId(getRoleId());
-		model.setCompanyId(getCompanyId());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setType(getType());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setRoleId(getRoleId());
+			model.setCompanyId(getCompanyId());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setType(getType());
+
 			model = (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
 					new Class[] { Role.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

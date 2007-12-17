@@ -255,28 +255,33 @@ public class DLFolderModelImpl extends BaseModelImpl {
 	}
 
 	public DLFolder toEscapedModel() {
-		DLFolder model = new DLFolderImpl();
+		if (isEscapedModel()) {
+			return (DLFolder)this;
+		}
+		else {
+			DLFolder model = new DLFolderImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setFolderId(getFolderId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentFolderId(getParentFolderId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setLastPostDate(getLastPostDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setFolderId(getFolderId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentFolderId(getParentFolderId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setLastPostDate(getLastPostDate());
+
 			model = (DLFolder)Proxy.newProxyInstance(DLFolder.class.getClassLoader(),
 					new Class[] { DLFolder.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

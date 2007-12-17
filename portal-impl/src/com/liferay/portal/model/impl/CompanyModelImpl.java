@@ -177,23 +177,28 @@ public class CompanyModelImpl extends BaseModelImpl {
 	}
 
 	public Company toEscapedModel() {
-		Company model = new CompanyImpl();
+		if (isEscapedModel()) {
+			return (Company)this;
+		}
+		else {
+			Company model = new CompanyImpl();
 
-		model.setCompanyId(getCompanyId());
-		model.setAccountId(getAccountId());
-		model.setWebId(Html.escape(getWebId()));
-		model.setKey(Html.escape(getKey()));
-		model.setVirtualHost(Html.escape(getVirtualHost()));
-		model.setMx(Html.escape(getMx()));
-		model.setLogoId(getLogoId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCompanyId(getCompanyId());
+			model.setAccountId(getAccountId());
+			model.setWebId(Html.escape(getWebId()));
+			model.setKey(Html.escape(getKey()));
+			model.setVirtualHost(Html.escape(getVirtualHost()));
+			model.setMx(Html.escape(getMx()));
+			model.setLogoId(getLogoId());
+
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
 					new Class[] { Company.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

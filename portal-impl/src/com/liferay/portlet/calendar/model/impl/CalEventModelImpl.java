@@ -409,38 +409,43 @@ public class CalEventModelImpl extends BaseModelImpl {
 	}
 
 	public CalEvent toEscapedModel() {
-		CalEvent model = new CalEventImpl();
+		if (isEscapedModel()) {
+			return (CalEvent)this;
+		}
+		else {
+			CalEvent model = new CalEventImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setEventId(getEventId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setStartDate(getStartDate());
-		model.setEndDate(getEndDate());
-		model.setDurationHour(getDurationHour());
-		model.setDurationMinute(getDurationMinute());
-		model.setAllDay(getAllDay());
-		model.setTimeZoneSensitive(getTimeZoneSensitive());
-		model.setType(Html.escape(getType()));
-		model.setRepeating(getRepeating());
-		model.setRecurrence(Html.escape(getRecurrence()));
-		model.setRemindBy(Html.escape(getRemindBy()));
-		model.setFirstReminder(getFirstReminder());
-		model.setSecondReminder(getSecondReminder());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setEventId(getEventId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setStartDate(getStartDate());
+			model.setEndDate(getEndDate());
+			model.setDurationHour(getDurationHour());
+			model.setDurationMinute(getDurationMinute());
+			model.setAllDay(getAllDay());
+			model.setTimeZoneSensitive(getTimeZoneSensitive());
+			model.setType(Html.escape(getType()));
+			model.setRepeating(getRepeating());
+			model.setRecurrence(Html.escape(getRecurrence()));
+			model.setRemindBy(Html.escape(getRemindBy()));
+			model.setFirstReminder(getFirstReminder());
+			model.setSecondReminder(getSecondReminder());
+
 			model = (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
 					new Class[] { CalEvent.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

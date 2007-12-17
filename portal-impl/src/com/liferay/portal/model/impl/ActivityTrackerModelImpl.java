@@ -252,28 +252,33 @@ public class ActivityTrackerModelImpl extends BaseModelImpl {
 	}
 
 	public ActivityTracker toEscapedModel() {
-		ActivityTracker model = new ActivityTrackerImpl();
+		if (isEscapedModel()) {
+			return (ActivityTracker)this;
+		}
+		else {
+			ActivityTracker model = new ActivityTrackerImpl();
 
-		model.setActivityTrackerId(getActivityTrackerId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setActivity(Html.escape(getActivity()));
-		model.setExtraData(Html.escape(getExtraData()));
-		model.setReceiverUserId(getReceiverUserId());
-		model.setReceiverUserName(Html.escape(getReceiverUserName()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setActivityTrackerId(getActivityTrackerId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setActivity(Html.escape(getActivity()));
+			model.setExtraData(Html.escape(getExtraData()));
+			model.setReceiverUserId(getReceiverUserId());
+			model.setReceiverUserName(Html.escape(getReceiverUserName()));
+
 			model = (ActivityTracker)Proxy.newProxyInstance(ActivityTracker.class.getClassLoader(),
 					new Class[] { ActivityTracker.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

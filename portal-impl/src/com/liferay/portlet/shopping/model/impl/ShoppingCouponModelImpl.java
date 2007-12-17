@@ -352,34 +352,39 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingCoupon toEscapedModel() {
-		ShoppingCoupon model = new ShoppingCouponImpl();
+		if (isEscapedModel()) {
+			return (ShoppingCoupon)this;
+		}
+		else {
+			ShoppingCoupon model = new ShoppingCouponImpl();
 
-		model.setCouponId(getCouponId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setCode(Html.escape(getCode()));
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setStartDate(getStartDate());
-		model.setEndDate(getEndDate());
-		model.setActive(getActive());
-		model.setLimitCategories(Html.escape(getLimitCategories()));
-		model.setLimitSkus(Html.escape(getLimitSkus()));
-		model.setMinOrder(getMinOrder());
-		model.setDiscount(getDiscount());
-		model.setDiscountType(Html.escape(getDiscountType()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCouponId(getCouponId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setCode(Html.escape(getCode()));
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setStartDate(getStartDate());
+			model.setEndDate(getEndDate());
+			model.setActive(getActive());
+			model.setLimitCategories(Html.escape(getLimitCategories()));
+			model.setLimitSkus(Html.escape(getLimitSkus()));
+			model.setMinOrder(getMinOrder());
+			model.setDiscount(getDiscount());
+			model.setDiscountType(Html.escape(getDiscountType()));
+
 			model = (ShoppingCoupon)Proxy.newProxyInstance(ShoppingCoupon.class.getClassLoader(),
 					new Class[] { ShoppingCoupon.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

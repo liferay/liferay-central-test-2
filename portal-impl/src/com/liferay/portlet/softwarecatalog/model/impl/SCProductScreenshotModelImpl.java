@@ -169,23 +169,28 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	}
 
 	public SCProductScreenshot toEscapedModel() {
-		SCProductScreenshot model = new SCProductScreenshotImpl();
+		if (isEscapedModel()) {
+			return (SCProductScreenshot)this;
+		}
+		else {
+			SCProductScreenshot model = new SCProductScreenshotImpl();
 
-		model.setProductScreenshotId(getProductScreenshotId());
-		model.setCompanyId(getCompanyId());
-		model.setGroupId(getGroupId());
-		model.setProductEntryId(getProductEntryId());
-		model.setThumbnailId(getThumbnailId());
-		model.setFullImageId(getFullImageId());
-		model.setPriority(getPriority());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setProductScreenshotId(getProductScreenshotId());
+			model.setCompanyId(getCompanyId());
+			model.setGroupId(getGroupId());
+			model.setProductEntryId(getProductEntryId());
+			model.setThumbnailId(getThumbnailId());
+			model.setFullImageId(getFullImageId());
+			model.setPriority(getPriority());
+
 			model = (SCProductScreenshot)Proxy.newProxyInstance(SCProductScreenshot.class.getClassLoader(),
 					new Class[] { SCProductScreenshot.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

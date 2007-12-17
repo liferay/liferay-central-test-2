@@ -521,45 +521,50 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	}
 
 	public JournalArticle toEscapedModel() {
-		JournalArticle model = new JournalArticleImpl();
+		if (isEscapedModel()) {
+			return (JournalArticle)this;
+		}
+		else {
+			JournalArticle model = new JournalArticleImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setId(getId());
-		model.setResourcePrimKey(getResourcePrimKey());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setArticleId(Html.escape(getArticleId()));
-		model.setVersion(getVersion());
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setContent(Html.escape(getContent()));
-		model.setType(Html.escape(getType()));
-		model.setStructureId(Html.escape(getStructureId()));
-		model.setTemplateId(Html.escape(getTemplateId()));
-		model.setDisplayDate(getDisplayDate());
-		model.setApproved(getApproved());
-		model.setApprovedByUserId(getApprovedByUserId());
-		model.setApprovedByUserName(Html.escape(getApprovedByUserName()));
-		model.setApprovedDate(getApprovedDate());
-		model.setExpired(getExpired());
-		model.setExpirationDate(getExpirationDate());
-		model.setReviewDate(getReviewDate());
-		model.setIndexable(getIndexable());
-		model.setSmallImage(getSmallImage());
-		model.setSmallImageId(getSmallImageId());
-		model.setSmallImageURL(Html.escape(getSmallImageURL()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setId(getId());
+			model.setResourcePrimKey(getResourcePrimKey());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setArticleId(Html.escape(getArticleId()));
+			model.setVersion(getVersion());
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setContent(Html.escape(getContent()));
+			model.setType(Html.escape(getType()));
+			model.setStructureId(Html.escape(getStructureId()));
+			model.setTemplateId(Html.escape(getTemplateId()));
+			model.setDisplayDate(getDisplayDate());
+			model.setApproved(getApproved());
+			model.setApprovedByUserId(getApprovedByUserId());
+			model.setApprovedByUserName(Html.escape(getApprovedByUserName()));
+			model.setApprovedDate(getApprovedDate());
+			model.setExpired(getExpired());
+			model.setExpirationDate(getExpirationDate());
+			model.setReviewDate(getReviewDate());
+			model.setIndexable(getIndexable());
+			model.setSmallImage(getSmallImage());
+			model.setSmallImageId(getSmallImageId());
+			model.setSmallImageURL(Html.escape(getSmallImageURL()));
+
 			model = (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
 					new Class[] { JournalArticle.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

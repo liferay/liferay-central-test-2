@@ -207,25 +207,30 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	}
 
 	public DLFileVersion toEscapedModel() {
-		DLFileVersion model = new DLFileVersionImpl();
+		if (isEscapedModel()) {
+			return (DLFileVersion)this;
+		}
+		else {
+			DLFileVersion model = new DLFileVersionImpl();
 
-		model.setFileVersionId(getFileVersionId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setFolderId(getFolderId());
-		model.setName(Html.escape(getName()));
-		model.setVersion(getVersion());
-		model.setSize(getSize());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setFileVersionId(getFileVersionId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setFolderId(getFolderId());
+			model.setName(Html.escape(getName()));
+			model.setVersion(getVersion());
+			model.setSize(getSize());
+
 			model = (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
 					new Class[] { DLFileVersion.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

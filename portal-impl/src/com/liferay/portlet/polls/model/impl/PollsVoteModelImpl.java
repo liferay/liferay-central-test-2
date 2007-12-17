@@ -148,21 +148,26 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 	}
 
 	public PollsVote toEscapedModel() {
-		PollsVote model = new PollsVoteImpl();
+		if (isEscapedModel()) {
+			return (PollsVote)this;
+		}
+		else {
+			PollsVote model = new PollsVoteImpl();
 
-		model.setVoteId(getVoteId());
-		model.setUserId(getUserId());
-		model.setQuestionId(getQuestionId());
-		model.setChoiceId(getChoiceId());
-		model.setVoteDate(getVoteDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setVoteId(getVoteId());
+			model.setUserId(getUserId());
+			model.setQuestionId(getQuestionId());
+			model.setChoiceId(getChoiceId());
+			model.setVoteDate(getVoteDate());
+
 			model = (PollsVote)Proxy.newProxyInstance(PollsVote.class.getClassLoader(),
 					new Class[] { PollsVote.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

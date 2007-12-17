@@ -402,38 +402,43 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	}
 
 	public TagsAsset toEscapedModel() {
-		TagsAsset model = new TagsAssetImpl();
+		if (isEscapedModel()) {
+			return (TagsAsset)this;
+		}
+		else {
+			TagsAsset model = new TagsAssetImpl();
 
-		model.setAssetId(getAssetId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setStartDate(getStartDate());
-		model.setEndDate(getEndDate());
-		model.setPublishDate(getPublishDate());
-		model.setExpirationDate(getExpirationDate());
-		model.setMimeType(Html.escape(getMimeType()));
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setSummary(Html.escape(getSummary()));
-		model.setUrl(Html.escape(getUrl()));
-		model.setHeight(getHeight());
-		model.setWidth(getWidth());
-		model.setPriority(getPriority());
-		model.setViewCount(getViewCount());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setAssetId(getAssetId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setStartDate(getStartDate());
+			model.setEndDate(getEndDate());
+			model.setPublishDate(getPublishDate());
+			model.setExpirationDate(getExpirationDate());
+			model.setMimeType(Html.escape(getMimeType()));
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setSummary(Html.escape(getSummary()));
+			model.setUrl(Html.escape(getUrl()));
+			model.setHeight(getHeight());
+			model.setWidth(getWidth());
+			model.setPriority(getPriority());
+			model.setViewCount(getViewCount());
+
 			model = (TagsAsset)Proxy.newProxyInstance(TagsAsset.class.getClassLoader(),
 					new Class[] { TagsAsset.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

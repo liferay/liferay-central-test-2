@@ -325,33 +325,38 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	}
 
 	public DLFileEntry toEscapedModel() {
-		DLFileEntry model = new DLFileEntryImpl();
+		if (isEscapedModel()) {
+			return (DLFileEntry)this;
+		}
+		else {
+			DLFileEntry model = new DLFileEntryImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setFileEntryId(getFileEntryId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setVersionUserId(getVersionUserId());
-		model.setVersionUserName(Html.escape(getVersionUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setFolderId(getFolderId());
-		model.setName(Html.escape(getName()));
-		model.setTitle(Html.escape(getTitle()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setVersion(getVersion());
-		model.setSize(getSize());
-		model.setReadCount(getReadCount());
-		model.setExtraSettings(Html.escape(getExtraSettings()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setFileEntryId(getFileEntryId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setVersionUserId(getVersionUserId());
+			model.setVersionUserName(Html.escape(getVersionUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setFolderId(getFolderId());
+			model.setName(Html.escape(getName()));
+			model.setTitle(Html.escape(getTitle()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setVersion(getVersion());
+			model.setSize(getSize());
+			model.setReadCount(getReadCount());
+			model.setExtraSettings(Html.escape(getExtraSettings()));
+
 			model = (DLFileEntry)Proxy.newProxyInstance(DLFileEntry.class.getClassLoader(),
 					new Class[] { DLFileEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

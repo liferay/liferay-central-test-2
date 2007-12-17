@@ -162,22 +162,27 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	}
 
 	public PortletPreferences toEscapedModel() {
-		PortletPreferences model = new PortletPreferencesImpl();
+		if (isEscapedModel()) {
+			return (PortletPreferences)this;
+		}
+		else {
+			PortletPreferences model = new PortletPreferencesImpl();
 
-		model.setPortletPreferencesId(getPortletPreferencesId());
-		model.setOwnerId(getOwnerId());
-		model.setOwnerType(getOwnerType());
-		model.setPlid(getPlid());
-		model.setPortletId(Html.escape(getPortletId()));
-		model.setPreferences(Html.escape(getPreferences()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPortletPreferencesId(getPortletPreferencesId());
+			model.setOwnerId(getOwnerId());
+			model.setOwnerType(getOwnerType());
+			model.setPlid(getPlid());
+			model.setPortletId(Html.escape(getPortletId()));
+			model.setPreferences(Html.escape(getPreferences()));
+
 			model = (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
 					new Class[] { PortletPreferences.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

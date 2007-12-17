@@ -578,49 +578,54 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingItem toEscapedModel() {
-		ShoppingItem model = new ShoppingItemImpl();
+		if (isEscapedModel()) {
+			return (ShoppingItem)this;
+		}
+		else {
+			ShoppingItem model = new ShoppingItemImpl();
 
-		model.setItemId(getItemId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setCategoryId(getCategoryId());
-		model.setSku(Html.escape(getSku()));
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setProperties(Html.escape(getProperties()));
-		model.setFields(getFields());
-		model.setFieldsQuantities(Html.escape(getFieldsQuantities()));
-		model.setMinQuantity(getMinQuantity());
-		model.setMaxQuantity(getMaxQuantity());
-		model.setPrice(getPrice());
-		model.setDiscount(getDiscount());
-		model.setTaxable(getTaxable());
-		model.setShipping(getShipping());
-		model.setUseShippingFormula(getUseShippingFormula());
-		model.setRequiresShipping(getRequiresShipping());
-		model.setStockQuantity(getStockQuantity());
-		model.setFeatured(getFeatured());
-		model.setSale(getSale());
-		model.setSmallImage(getSmallImage());
-		model.setSmallImageId(getSmallImageId());
-		model.setSmallImageURL(Html.escape(getSmallImageURL()));
-		model.setMediumImage(getMediumImage());
-		model.setMediumImageId(getMediumImageId());
-		model.setMediumImageURL(Html.escape(getMediumImageURL()));
-		model.setLargeImage(getLargeImage());
-		model.setLargeImageId(getLargeImageId());
-		model.setLargeImageURL(Html.escape(getLargeImageURL()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setItemId(getItemId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setCategoryId(getCategoryId());
+			model.setSku(Html.escape(getSku()));
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setProperties(Html.escape(getProperties()));
+			model.setFields(getFields());
+			model.setFieldsQuantities(Html.escape(getFieldsQuantities()));
+			model.setMinQuantity(getMinQuantity());
+			model.setMaxQuantity(getMaxQuantity());
+			model.setPrice(getPrice());
+			model.setDiscount(getDiscount());
+			model.setTaxable(getTaxable());
+			model.setShipping(getShipping());
+			model.setUseShippingFormula(getUseShippingFormula());
+			model.setRequiresShipping(getRequiresShipping());
+			model.setStockQuantity(getStockQuantity());
+			model.setFeatured(getFeatured());
+			model.setSale(getSale());
+			model.setSmallImage(getSmallImage());
+			model.setSmallImageId(getSmallImageId());
+			model.setSmallImageURL(Html.escape(getSmallImageURL()));
+			model.setMediumImage(getMediumImage());
+			model.setMediumImageId(getMediumImageId());
+			model.setMediumImageURL(Html.escape(getMediumImageURL()));
+			model.setLargeImage(getLargeImage());
+			model.setLargeImageId(getLargeImageId());
+			model.setLargeImageURL(Html.escape(getLargeImageURL()));
+
 			model = (ShoppingItem)Proxy.newProxyInstance(ShoppingItem.class.getClassLoader(),
 					new Class[] { ShoppingItem.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

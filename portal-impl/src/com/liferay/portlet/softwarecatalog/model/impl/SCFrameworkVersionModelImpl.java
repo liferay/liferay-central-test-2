@@ -242,27 +242,32 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	}
 
 	public SCFrameworkVersion toEscapedModel() {
-		SCFrameworkVersion model = new SCFrameworkVersionImpl();
+		if (isEscapedModel()) {
+			return (SCFrameworkVersion)this;
+		}
+		else {
+			SCFrameworkVersion model = new SCFrameworkVersionImpl();
 
-		model.setFrameworkVersionId(getFrameworkVersionId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setName(Html.escape(getName()));
-		model.setUrl(Html.escape(getUrl()));
-		model.setActive(getActive());
-		model.setPriority(getPriority());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setFrameworkVersionId(getFrameworkVersionId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setName(Html.escape(getName()));
+			model.setUrl(Html.escape(getUrl()));
+			model.setActive(getActive());
+			model.setPriority(getPriority());
+
 			model = (SCFrameworkVersion)Proxy.newProxyInstance(SCFrameworkVersion.class.getClassLoader(),
 					new Class[] { SCFrameworkVersion.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

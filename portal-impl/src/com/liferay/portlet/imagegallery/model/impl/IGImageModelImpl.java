@@ -221,26 +221,31 @@ public class IGImageModelImpl extends BaseModelImpl {
 	}
 
 	public IGImage toEscapedModel() {
-		IGImage model = new IGImageImpl();
+		if (isEscapedModel()) {
+			return (IGImage)this;
+		}
+		else {
+			IGImage model = new IGImageImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setImageId(getImageId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setFolderId(getFolderId());
-		model.setDescription(Html.escape(getDescription()));
-		model.setSmallImageId(getSmallImageId());
-		model.setLargeImageId(getLargeImageId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setImageId(getImageId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setFolderId(getFolderId());
+			model.setDescription(Html.escape(getDescription()));
+			model.setSmallImageId(getSmallImageId());
+			model.setLargeImageId(getLargeImageId());
+
 			model = (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
 					new Class[] { IGImage.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

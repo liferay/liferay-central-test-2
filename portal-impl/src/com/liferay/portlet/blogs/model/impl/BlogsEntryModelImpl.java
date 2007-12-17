@@ -259,28 +259,33 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	}
 
 	public BlogsEntry toEscapedModel() {
-		BlogsEntry model = new BlogsEntryImpl();
+		if (isEscapedModel()) {
+			return (BlogsEntry)this;
+		}
+		else {
+			BlogsEntry model = new BlogsEntryImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setEntryId(getEntryId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setTitle(Html.escape(getTitle()));
-		model.setUrlTitle(Html.escape(getUrlTitle()));
-		model.setContent(Html.escape(getContent()));
-		model.setDisplayDate(getDisplayDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setEntryId(getEntryId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setTitle(Html.escape(getTitle()));
+			model.setUrlTitle(Html.escape(getUrlTitle()));
+			model.setContent(Html.escape(getContent()));
+			model.setDisplayDate(getDisplayDate());
+
 			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
 					new Class[] { BlogsEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

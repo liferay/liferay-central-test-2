@@ -321,32 +321,37 @@ public class AccountModelImpl extends BaseModelImpl {
 	}
 
 	public Account toEscapedModel() {
-		Account model = new AccountImpl();
+		if (isEscapedModel()) {
+			return (Account)this;
+		}
+		else {
+			Account model = new AccountImpl();
 
-		model.setAccountId(getAccountId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentAccountId(getParentAccountId());
-		model.setName(Html.escape(getName()));
-		model.setLegalName(Html.escape(getLegalName()));
-		model.setLegalId(Html.escape(getLegalId()));
-		model.setLegalType(Html.escape(getLegalType()));
-		model.setSicCode(Html.escape(getSicCode()));
-		model.setTickerSymbol(Html.escape(getTickerSymbol()));
-		model.setIndustry(Html.escape(getIndustry()));
-		model.setType(Html.escape(getType()));
-		model.setSize(Html.escape(getSize()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setAccountId(getAccountId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentAccountId(getParentAccountId());
+			model.setName(Html.escape(getName()));
+			model.setLegalName(Html.escape(getLegalName()));
+			model.setLegalId(Html.escape(getLegalId()));
+			model.setLegalType(Html.escape(getLegalType()));
+			model.setSicCode(Html.escape(getSicCode()));
+			model.setTickerSymbol(Html.escape(getTickerSymbol()));
+			model.setIndustry(Html.escape(getIndustry()));
+			model.setType(Html.escape(getType()));
+			model.setSize(Html.escape(getSize()));
+
 			model = (Account)Proxy.newProxyInstance(Account.class.getClassLoader(),
 					new Class[] { Account.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

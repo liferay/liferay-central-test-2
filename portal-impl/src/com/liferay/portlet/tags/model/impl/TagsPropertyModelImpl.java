@@ -212,25 +212,30 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 	}
 
 	public TagsProperty toEscapedModel() {
-		TagsProperty model = new TagsPropertyImpl();
+		if (isEscapedModel()) {
+			return (TagsProperty)this;
+		}
+		else {
+			TagsProperty model = new TagsPropertyImpl();
 
-		model.setPropertyId(getPropertyId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setEntryId(getEntryId());
-		model.setKey(Html.escape(getKey()));
-		model.setValue(Html.escape(getValue()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPropertyId(getPropertyId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setEntryId(getEntryId());
+			model.setKey(Html.escape(getKey()));
+			model.setValue(Html.escape(getValue()));
+
 			model = (TagsProperty)Proxy.newProxyInstance(TagsProperty.class.getClassLoader(),
 					new Class[] { TagsProperty.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

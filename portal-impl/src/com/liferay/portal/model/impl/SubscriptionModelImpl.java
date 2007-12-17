@@ -209,25 +209,30 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	}
 
 	public Subscription toEscapedModel() {
-		Subscription model = new SubscriptionImpl();
+		if (isEscapedModel()) {
+			return (Subscription)this;
+		}
+		else {
+			Subscription model = new SubscriptionImpl();
 
-		model.setSubscriptionId(getSubscriptionId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setFrequency(Html.escape(getFrequency()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setSubscriptionId(getSubscriptionId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setFrequency(Html.escape(getFrequency()));
+
 			model = (Subscription)Proxy.newProxyInstance(Subscription.class.getClassLoader(),
 					new Class[] { Subscription.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

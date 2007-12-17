@@ -223,26 +223,31 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	}
 
 	public IGFolder toEscapedModel() {
-		IGFolder model = new IGFolderImpl();
+		if (isEscapedModel()) {
+			return (IGFolder)this;
+		}
+		else {
+			IGFolder model = new IGFolderImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setFolderId(getFolderId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentFolderId(getParentFolderId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setFolderId(getFolderId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentFolderId(getParentFolderId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+
 			model = (IGFolder)Proxy.newProxyInstance(IGFolder.class.getClassLoader(),
 					new Class[] { IGFolder.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

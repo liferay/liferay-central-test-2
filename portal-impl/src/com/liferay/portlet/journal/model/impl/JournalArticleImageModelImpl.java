@@ -184,23 +184,28 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	}
 
 	public JournalArticleImage toEscapedModel() {
-		JournalArticleImage model = new JournalArticleImageImpl();
+		if (isEscapedModel()) {
+			return (JournalArticleImage)this;
+		}
+		else {
+			JournalArticleImage model = new JournalArticleImageImpl();
 
-		model.setArticleImageId(getArticleImageId());
-		model.setGroupId(getGroupId());
-		model.setArticleId(Html.escape(getArticleId()));
-		model.setVersion(getVersion());
-		model.setElName(Html.escape(getElName()));
-		model.setLanguageId(Html.escape(getLanguageId()));
-		model.setTempImage(getTempImage());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setArticleImageId(getArticleImageId());
+			model.setGroupId(getGroupId());
+			model.setArticleId(Html.escape(getArticleId()));
+			model.setVersion(getVersion());
+			model.setElName(Html.escape(getElName()));
+			model.setLanguageId(Html.escape(getLanguageId()));
+			model.setTempImage(getTempImage());
+
 			model = (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),
 					new Class[] { JournalArticleImage.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

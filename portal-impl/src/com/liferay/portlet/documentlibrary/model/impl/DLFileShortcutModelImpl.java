@@ -224,26 +224,31 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	}
 
 	public DLFileShortcut toEscapedModel() {
-		DLFileShortcut model = new DLFileShortcutImpl();
+		if (isEscapedModel()) {
+			return (DLFileShortcut)this;
+		}
+		else {
+			DLFileShortcut model = new DLFileShortcutImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setFileShortcutId(getFileShortcutId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setFolderId(getFolderId());
-		model.setToFolderId(getToFolderId());
-		model.setToName(Html.escape(getToName()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setFileShortcutId(getFileShortcutId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setFolderId(getFolderId());
+			model.setToFolderId(getToFolderId());
+			model.setToName(Html.escape(getToName()));
+
 			model = (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
 					new Class[] { DLFileShortcut.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

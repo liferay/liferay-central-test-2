@@ -272,29 +272,34 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	}
 
 	public LayoutSet toEscapedModel() {
-		LayoutSet model = new LayoutSetImpl();
+		if (isEscapedModel()) {
+			return (LayoutSet)this;
+		}
+		else {
+			LayoutSet model = new LayoutSetImpl();
 
-		model.setLayoutSetId(getLayoutSetId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setPrivateLayout(getPrivateLayout());
-		model.setLogo(getLogo());
-		model.setLogoId(getLogoId());
-		model.setThemeId(Html.escape(getThemeId()));
-		model.setColorSchemeId(Html.escape(getColorSchemeId()));
-		model.setWapThemeId(Html.escape(getWapThemeId()));
-		model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
-		model.setCss(Html.escape(getCss()));
-		model.setPageCount(getPageCount());
-		model.setVirtualHost(Html.escape(getVirtualHost()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setLayoutSetId(getLayoutSetId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setPrivateLayout(getPrivateLayout());
+			model.setLogo(getLogo());
+			model.setLogoId(getLogoId());
+			model.setThemeId(Html.escape(getThemeId()));
+			model.setColorSchemeId(Html.escape(getColorSchemeId()));
+			model.setWapThemeId(Html.escape(getWapThemeId()));
+			model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
+			model.setCss(Html.escape(getCss()));
+			model.setPageCount(getPageCount());
+			model.setVirtualHost(Html.escape(getVirtualHost()));
+
 			model = (LayoutSet)Proxy.newProxyInstance(LayoutSet.class.getClassLoader(),
 					new Class[] { LayoutSet.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

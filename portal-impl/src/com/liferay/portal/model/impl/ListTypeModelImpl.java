@@ -121,19 +121,24 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	}
 
 	public ListType toEscapedModel() {
-		ListType model = new ListTypeImpl();
+		if (isEscapedModel()) {
+			return (ListType)this;
+		}
+		else {
+			ListType model = new ListTypeImpl();
 
-		model.setListTypeId(getListTypeId());
-		model.setName(Html.escape(getName()));
-		model.setType(Html.escape(getType()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setListTypeId(getListTypeId());
+			model.setName(Html.escape(getName()));
+			model.setType(Html.escape(getType()));
+
 			model = (ListType)Proxy.newProxyInstance(ListType.class.getClassLoader(),
 					new Class[] { ListType.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

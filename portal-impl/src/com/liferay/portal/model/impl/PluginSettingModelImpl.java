@@ -168,22 +168,27 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 	}
 
 	public PluginSetting toEscapedModel() {
-		PluginSetting model = new PluginSettingImpl();
+		if (isEscapedModel()) {
+			return (PluginSetting)this;
+		}
+		else {
+			PluginSetting model = new PluginSettingImpl();
 
-		model.setPluginSettingId(getPluginSettingId());
-		model.setCompanyId(getCompanyId());
-		model.setPluginId(Html.escape(getPluginId()));
-		model.setPluginType(Html.escape(getPluginType()));
-		model.setRoles(Html.escape(getRoles()));
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPluginSettingId(getPluginSettingId());
+			model.setCompanyId(getCompanyId());
+			model.setPluginId(Html.escape(getPluginId()));
+			model.setPluginType(Html.escape(getPluginType()));
+			model.setRoles(Html.escape(getRoles()));
+			model.setActive(getActive());
+
 			model = (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),
 					new Class[] { PluginSetting.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

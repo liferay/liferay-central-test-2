@@ -130,20 +130,25 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	}
 
 	public MBDiscussion toEscapedModel() {
-		MBDiscussion model = new MBDiscussionImpl();
+		if (isEscapedModel()) {
+			return (MBDiscussion)this;
+		}
+		else {
+			MBDiscussion model = new MBDiscussionImpl();
 
-		model.setDiscussionId(getDiscussionId());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setThreadId(getThreadId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setDiscussionId(getDiscussionId());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setThreadId(getThreadId());
+
 			model = (MBDiscussion)Proxy.newProxyInstance(MBDiscussion.class.getClassLoader(),
 					new Class[] { MBDiscussion.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

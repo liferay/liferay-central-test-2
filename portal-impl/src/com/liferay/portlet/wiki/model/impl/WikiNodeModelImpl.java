@@ -242,27 +242,32 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	}
 
 	public WikiNode toEscapedModel() {
-		WikiNode model = new WikiNodeImpl();
+		if (isEscapedModel()) {
+			return (WikiNode)this;
+		}
+		else {
+			WikiNode model = new WikiNodeImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setNodeId(getNodeId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setLastPostDate(getLastPostDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setNodeId(getNodeId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setLastPostDate(getLastPostDate());
+
 			model = (WikiNode)Proxy.newProxyInstance(WikiNode.class.getClassLoader(),
 					new Class[] { WikiNode.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

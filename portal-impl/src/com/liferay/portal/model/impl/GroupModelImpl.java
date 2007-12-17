@@ -262,28 +262,33 @@ public class GroupModelImpl extends BaseModelImpl {
 	}
 
 	public Group toEscapedModel() {
-		Group model = new GroupImpl();
+		if (isEscapedModel()) {
+			return (Group)this;
+		}
+		else {
+			Group model = new GroupImpl();
 
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setCreatorUserId(getCreatorUserId());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setParentGroupId(getParentGroupId());
-		model.setLiveGroupId(getLiveGroupId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setType(getType());
-		model.setTypeSettings(Html.escape(getTypeSettings()));
-		model.setFriendlyURL(Html.escape(getFriendlyURL()));
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setCreatorUserId(getCreatorUserId());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setParentGroupId(getParentGroupId());
+			model.setLiveGroupId(getLiveGroupId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setType(getType());
+			model.setTypeSettings(Html.escape(getTypeSettings()));
+			model.setFriendlyURL(Html.escape(getFriendlyURL()));
+			model.setActive(getActive());
+
 			model = (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),
 					new Class[] { Group.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

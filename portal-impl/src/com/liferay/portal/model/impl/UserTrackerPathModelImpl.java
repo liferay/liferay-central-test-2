@@ -137,20 +137,25 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	}
 
 	public UserTrackerPath toEscapedModel() {
-		UserTrackerPath model = new UserTrackerPathImpl();
+		if (isEscapedModel()) {
+			return (UserTrackerPath)this;
+		}
+		else {
+			UserTrackerPath model = new UserTrackerPathImpl();
 
-		model.setUserTrackerPathId(getUserTrackerPathId());
-		model.setUserTrackerId(getUserTrackerId());
-		model.setPath(Html.escape(getPath()));
-		model.setPathDate(getPathDate());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUserTrackerPathId(getUserTrackerPathId());
+			model.setUserTrackerId(getUserTrackerId());
+			model.setPath(Html.escape(getPath()));
+			model.setPathDate(getPathDate());
+
 			model = (UserTrackerPath)Proxy.newProxyInstance(UserTrackerPath.class.getClassLoader(),
 					new Class[] { UserTrackerPath.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

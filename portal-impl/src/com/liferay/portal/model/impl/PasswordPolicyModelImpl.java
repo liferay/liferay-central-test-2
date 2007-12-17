@@ -468,42 +468,47 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	}
 
 	public PasswordPolicy toEscapedModel() {
-		PasswordPolicy model = new PasswordPolicyImpl();
+		if (isEscapedModel()) {
+			return (PasswordPolicy)this;
+		}
+		else {
+			PasswordPolicy model = new PasswordPolicyImpl();
 
-		model.setPasswordPolicyId(getPasswordPolicyId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setDefaultPolicy(getDefaultPolicy());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
-		model.setChangeable(getChangeable());
-		model.setChangeRequired(getChangeRequired());
-		model.setMinAge(getMinAge());
-		model.setCheckSyntax(getCheckSyntax());
-		model.setAllowDictionaryWords(getAllowDictionaryWords());
-		model.setMinLength(getMinLength());
-		model.setHistory(getHistory());
-		model.setHistoryCount(getHistoryCount());
-		model.setExpireable(getExpireable());
-		model.setMaxAge(getMaxAge());
-		model.setWarningTime(getWarningTime());
-		model.setGraceLimit(getGraceLimit());
-		model.setLockout(getLockout());
-		model.setMaxFailure(getMaxFailure());
-		model.setLockoutDuration(getLockoutDuration());
-		model.setRequireUnlock(getRequireUnlock());
-		model.setResetFailureCount(getResetFailureCount());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPasswordPolicyId(getPasswordPolicyId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setDefaultPolicy(getDefaultPolicy());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+			model.setChangeable(getChangeable());
+			model.setChangeRequired(getChangeRequired());
+			model.setMinAge(getMinAge());
+			model.setCheckSyntax(getCheckSyntax());
+			model.setAllowDictionaryWords(getAllowDictionaryWords());
+			model.setMinLength(getMinLength());
+			model.setHistory(getHistory());
+			model.setHistoryCount(getHistoryCount());
+			model.setExpireable(getExpireable());
+			model.setMaxAge(getMaxAge());
+			model.setWarningTime(getWarningTime());
+			model.setGraceLimit(getGraceLimit());
+			model.setLockout(getLockout());
+			model.setMaxFailure(getMaxFailure());
+			model.setLockoutDuration(getLockoutDuration());
+			model.setRequireUnlock(getRequireUnlock());
+			model.setResetFailureCount(getResetFailureCount());
+
 			model = (PasswordPolicy)Proxy.newProxyInstance(PasswordPolicy.class.getClassLoader(),
 					new Class[] { PasswordPolicy.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

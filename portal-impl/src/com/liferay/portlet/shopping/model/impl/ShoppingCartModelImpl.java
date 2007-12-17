@@ -244,27 +244,32 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	}
 
 	public ShoppingCart toEscapedModel() {
-		ShoppingCart model = new ShoppingCartImpl();
+		if (isEscapedModel()) {
+			return (ShoppingCart)this;
+		}
+		else {
+			ShoppingCart model = new ShoppingCartImpl();
 
-		model.setCartId(getCartId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setItemIds(Html.escape(getItemIds()));
-		model.setCouponCodes(Html.escape(getCouponCodes()));
-		model.setAltShipping(getAltShipping());
-		model.setInsure(getInsure());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setCartId(getCartId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setItemIds(Html.escape(getItemIds()));
+			model.setCouponCodes(Html.escape(getCouponCodes()));
+			model.setAltShipping(getAltShipping());
+			model.setInsure(getInsure());
+
 			model = (ShoppingCart)Proxy.newProxyInstance(ShoppingCart.class.getClassLoader(),
 					new Class[] { ShoppingCart.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

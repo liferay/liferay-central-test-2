@@ -184,23 +184,28 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	}
 
 	public TagsEntry toEscapedModel() {
-		TagsEntry model = new TagsEntryImpl();
+		if (isEscapedModel()) {
+			return (TagsEntry)this;
+		}
+		else {
+			TagsEntry model = new TagsEntryImpl();
 
-		model.setEntryId(getEntryId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setName(Html.escape(getName()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setEntryId(getEntryId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setName(Html.escape(getName()));
+
 			model = (TagsEntry)Proxy.newProxyInstance(TagsEntry.class.getClassLoader(),
 					new Class[] { TagsEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

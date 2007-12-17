@@ -195,23 +195,28 @@ public class MBBanModelImpl extends BaseModelImpl {
 	}
 
 	public MBBan toEscapedModel() {
-		MBBan model = new MBBanImpl();
+		if (isEscapedModel()) {
+			return (MBBan)this;
+		}
+		else {
+			MBBan model = new MBBanImpl();
 
-		model.setBanId(getBanId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setBanUserId(getBanUserId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setBanId(getBanId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setBanUserId(getBanUserId());
+
 			model = (MBBan)Proxy.newProxyInstance(MBBan.class.getClassLoader(),
 					new Class[] { MBBan.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

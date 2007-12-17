@@ -221,26 +221,31 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	}
 
 	public Organization toEscapedModel() {
-		Organization model = new OrganizationImpl();
+		if (isEscapedModel()) {
+			return (Organization)this;
+		}
+		else {
+			Organization model = new OrganizationImpl();
 
-		model.setOrganizationId(getOrganizationId());
-		model.setCompanyId(getCompanyId());
-		model.setParentOrganizationId(getParentOrganizationId());
-		model.setName(Html.escape(getName()));
-		model.setLocation(getLocation());
-		model.setRecursable(getRecursable());
-		model.setRegionId(getRegionId());
-		model.setCountryId(getCountryId());
-		model.setStatusId(getStatusId());
-		model.setComments(Html.escape(getComments()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrganizationId(getOrganizationId());
+			model.setCompanyId(getCompanyId());
+			model.setParentOrganizationId(getParentOrganizationId());
+			model.setName(Html.escape(getName()));
+			model.setLocation(getLocation());
+			model.setRecursable(getRecursable());
+			model.setRegionId(getRegionId());
+			model.setCountryId(getCountryId());
+			model.setStatusId(getStatusId());
+			model.setComments(Html.escape(getComments()));
+
 			model = (Organization)Proxy.newProxyInstance(Organization.class.getClassLoader(),
 					new Class[] { Organization.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

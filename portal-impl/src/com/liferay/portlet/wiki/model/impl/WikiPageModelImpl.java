@@ -269,29 +269,34 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	}
 
 	public WikiPage toEscapedModel() {
-		WikiPage model = new WikiPageImpl();
+		if (isEscapedModel()) {
+			return (WikiPage)this;
+		}
+		else {
+			WikiPage model = new WikiPageImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setPageId(getPageId());
-		model.setResourcePrimKey(getResourcePrimKey());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setNodeId(getNodeId());
-		model.setTitle(Html.escape(getTitle()));
-		model.setVersion(getVersion());
-		model.setContent(Html.escape(getContent()));
-		model.setFormat(Html.escape(getFormat()));
-		model.setHead(getHead());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setPageId(getPageId());
+			model.setResourcePrimKey(getResourcePrimKey());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setNodeId(getNodeId());
+			model.setTitle(Html.escape(getTitle()));
+			model.setVersion(getVersion());
+			model.setContent(Html.escape(getContent()));
+			model.setFormat(Html.escape(getFormat()));
+			model.setHead(getHead());
+
 			model = (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
 					new Class[] { WikiPage.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

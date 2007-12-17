@@ -118,19 +118,24 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	}
 
 	public OrgGroupPermission toEscapedModel() {
-		OrgGroupPermission model = new OrgGroupPermissionImpl();
+		if (isEscapedModel()) {
+			return (OrgGroupPermission)this;
+		}
+		else {
+			OrgGroupPermission model = new OrgGroupPermissionImpl();
 
-		model.setOrganizationId(getOrganizationId());
-		model.setGroupId(getGroupId());
-		model.setPermissionId(getPermissionId());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrganizationId(getOrganizationId());
+			model.setGroupId(getGroupId());
+			model.setPermissionId(getPermissionId());
+
 			model = (OrgGroupPermission)Proxy.newProxyInstance(OrgGroupPermission.class.getClassLoader(),
 					new Class[] { OrgGroupPermission.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

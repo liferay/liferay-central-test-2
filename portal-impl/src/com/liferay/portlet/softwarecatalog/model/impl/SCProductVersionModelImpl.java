@@ -264,28 +264,33 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 	}
 
 	public SCProductVersion toEscapedModel() {
-		SCProductVersion model = new SCProductVersionImpl();
+		if (isEscapedModel()) {
+			return (SCProductVersion)this;
+		}
+		else {
+			SCProductVersion model = new SCProductVersionImpl();
 
-		model.setProductVersionId(getProductVersionId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setProductEntryId(getProductEntryId());
-		model.setVersion(Html.escape(getVersion()));
-		model.setChangeLog(Html.escape(getChangeLog()));
-		model.setDownloadPageURL(Html.escape(getDownloadPageURL()));
-		model.setDirectDownloadURL(Html.escape(getDirectDownloadURL()));
-		model.setRepoStoreArtifact(getRepoStoreArtifact());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setProductVersionId(getProductVersionId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setProductEntryId(getProductEntryId());
+			model.setVersion(Html.escape(getVersion()));
+			model.setChangeLog(Html.escape(getChangeLog()));
+			model.setDownloadPageURL(Html.escape(getDownloadPageURL()));
+			model.setDirectDownloadURL(Html.escape(getDirectDownloadURL()));
+			model.setRepoStoreArtifact(getRepoStoreArtifact());
+
 			model = (SCProductVersion)Proxy.newProxyInstance(SCProductVersion.class.getClassLoader(),
 					new Class[] { SCProductVersion.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

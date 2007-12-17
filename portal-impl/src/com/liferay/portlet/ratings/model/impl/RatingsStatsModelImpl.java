@@ -156,22 +156,27 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	}
 
 	public RatingsStats toEscapedModel() {
-		RatingsStats model = new RatingsStatsImpl();
+		if (isEscapedModel()) {
+			return (RatingsStats)this;
+		}
+		else {
+			RatingsStats model = new RatingsStatsImpl();
 
-		model.setStatsId(getStatsId());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setTotalEntries(getTotalEntries());
-		model.setTotalScore(getTotalScore());
-		model.setAverageScore(getAverageScore());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setStatsId(getStatsId());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setTotalEntries(getTotalEntries());
+			model.setTotalScore(getTotalScore());
+			model.setAverageScore(getAverageScore());
+
 			model = (RatingsStats)Proxy.newProxyInstance(RatingsStats.class.getClassLoader(),
 					new Class[] { RatingsStats.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

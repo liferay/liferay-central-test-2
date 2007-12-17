@@ -152,20 +152,25 @@ public class RegionModelImpl extends BaseModelImpl {
 	}
 
 	public Region toEscapedModel() {
-		Region model = new RegionImpl();
+		if (isEscapedModel()) {
+			return (Region)this;
+		}
+		else {
+			Region model = new RegionImpl();
 
-		model.setRegionId(getRegionId());
-		model.setCountryId(getCountryId());
-		model.setRegionCode(Html.escape(getRegionCode()));
-		model.setName(Html.escape(getName()));
-		model.setActive(getActive());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setRegionId(getRegionId());
+			model.setCountryId(getCountryId());
+			model.setRegionCode(Html.escape(getRegionCode()));
+			model.setName(Html.escape(getName()));
+			model.setActive(getActive());
+
 			model = (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),
 					new Class[] { Region.class }, new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -139,20 +139,25 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	}
 
 	public PasswordTracker toEscapedModel() {
-		PasswordTracker model = new PasswordTrackerImpl();
+		if (isEscapedModel()) {
+			return (PasswordTracker)this;
+		}
+		else {
+			PasswordTracker model = new PasswordTrackerImpl();
 
-		model.setPasswordTrackerId(getPasswordTrackerId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setPassword(Html.escape(getPassword()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPasswordTrackerId(getPasswordTrackerId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setPassword(Html.escape(getPassword()));
+
 			model = (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
 					new Class[] { PasswordTracker.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

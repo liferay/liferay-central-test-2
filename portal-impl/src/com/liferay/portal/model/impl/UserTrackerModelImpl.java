@@ -199,24 +199,29 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	}
 
 	public UserTracker toEscapedModel() {
-		UserTracker model = new UserTrackerImpl();
+		if (isEscapedModel()) {
+			return (UserTracker)this;
+		}
+		else {
+			UserTracker model = new UserTrackerImpl();
 
-		model.setUserTrackerId(getUserTrackerId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setModifiedDate(getModifiedDate());
-		model.setSessionId(Html.escape(getSessionId()));
-		model.setRemoteAddr(Html.escape(getRemoteAddr()));
-		model.setRemoteHost(Html.escape(getRemoteHost()));
-		model.setUserAgent(Html.escape(getUserAgent()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUserTrackerId(getUserTrackerId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setModifiedDate(getModifiedDate());
+			model.setSessionId(Html.escape(getSessionId()));
+			model.setRemoteAddr(Html.escape(getRemoteAddr()));
+			model.setRemoteHost(Html.escape(getRemoteHost()));
+			model.setUserAgent(Html.escape(getUserAgent()));
+
 			model = (UserTracker)Proxy.newProxyInstance(UserTracker.class.getClassLoader(),
 					new Class[] { UserTracker.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

@@ -297,33 +297,38 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	}
 
 	public OrgLabor toEscapedModel() {
-		OrgLabor model = new OrgLaborImpl();
+		if (isEscapedModel()) {
+			return (OrgLabor)this;
+		}
+		else {
+			OrgLabor model = new OrgLaborImpl();
 
-		model.setOrgLaborId(getOrgLaborId());
-		model.setOrganizationId(getOrganizationId());
-		model.setTypeId(getTypeId());
-		model.setSunOpen(getSunOpen());
-		model.setSunClose(getSunClose());
-		model.setMonOpen(getMonOpen());
-		model.setMonClose(getMonClose());
-		model.setTueOpen(getTueOpen());
-		model.setTueClose(getTueClose());
-		model.setWedOpen(getWedOpen());
-		model.setWedClose(getWedClose());
-		model.setThuOpen(getThuOpen());
-		model.setThuClose(getThuClose());
-		model.setFriOpen(getFriOpen());
-		model.setFriClose(getFriClose());
-		model.setSatOpen(getSatOpen());
-		model.setSatClose(getSatClose());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setOrgLaborId(getOrgLaborId());
+			model.setOrganizationId(getOrganizationId());
+			model.setTypeId(getTypeId());
+			model.setSunOpen(getSunOpen());
+			model.setSunClose(getSunClose());
+			model.setMonOpen(getMonOpen());
+			model.setMonClose(getMonClose());
+			model.setTueOpen(getTueOpen());
+			model.setTueClose(getTueClose());
+			model.setWedOpen(getWedOpen());
+			model.setWedClose(getWedClose());
+			model.setThuOpen(getThuOpen());
+			model.setThuClose(getThuClose());
+			model.setFriOpen(getFriOpen());
+			model.setFriClose(getFriClose());
+			model.setSatOpen(getSatOpen());
+			model.setSatClose(getSatClose());
+
 			model = (OrgLabor)Proxy.newProxyInstance(OrgLabor.class.getClassLoader(),
 					new Class[] { OrgLabor.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

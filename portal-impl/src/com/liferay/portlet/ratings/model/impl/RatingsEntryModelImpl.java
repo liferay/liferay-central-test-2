@@ -208,25 +208,30 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 	}
 
 	public RatingsEntry toEscapedModel() {
-		RatingsEntry model = new RatingsEntryImpl();
+		if (isEscapedModel()) {
+			return (RatingsEntry)this;
+		}
+		else {
+			RatingsEntry model = new RatingsEntryImpl();
 
-		model.setEntryId(getEntryId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setScore(getScore());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setEntryId(getEntryId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setScore(getScore());
+
 			model = (RatingsEntry)Proxy.newProxyInstance(RatingsEntry.class.getClassLoader(),
 					new Class[] { RatingsEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

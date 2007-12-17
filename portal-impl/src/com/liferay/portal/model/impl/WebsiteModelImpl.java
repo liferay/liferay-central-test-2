@@ -239,27 +239,32 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	}
 
 	public Website toEscapedModel() {
-		Website model = new WebsiteImpl();
+		if (isEscapedModel()) {
+			return (Website)this;
+		}
+		else {
+			Website model = new WebsiteImpl();
 
-		model.setWebsiteId(getWebsiteId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setUserName(Html.escape(getUserName()));
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
-		model.setUrl(Html.escape(getUrl()));
-		model.setTypeId(getTypeId());
-		model.setPrimary(getPrimary());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setWebsiteId(getWebsiteId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setUserName(Html.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+			model.setUrl(Html.escape(getUrl()));
+			model.setTypeId(getTypeId());
+			model.setPrimary(getPrimary());
+
 			model = (Website)Proxy.newProxyInstance(Website.class.getClassLoader(),
 					new Class[] { Website.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

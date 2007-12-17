@@ -128,20 +128,25 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	}
 
 	public PasswordPolicyRel toEscapedModel() {
-		PasswordPolicyRel model = new PasswordPolicyRelImpl();
+		if (isEscapedModel()) {
+			return (PasswordPolicyRel)this;
+		}
+		else {
+			PasswordPolicyRel model = new PasswordPolicyRelImpl();
 
-		model.setPasswordPolicyRelId(getPasswordPolicyRelId());
-		model.setPasswordPolicyId(getPasswordPolicyId());
-		model.setClassNameId(getClassNameId());
-		model.setClassPK(getClassPK());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setPasswordPolicyRelId(getPasswordPolicyRelId());
+			model.setPasswordPolicyId(getPasswordPolicyId());
+			model.setClassNameId(getClassNameId());
+			model.setClassPK(getClassPK());
+
 			model = (PasswordPolicyRel)Proxy.newProxyInstance(PasswordPolicyRel.class.getClassLoader(),
 					new Class[] { PasswordPolicyRel.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {
