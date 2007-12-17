@@ -908,7 +908,14 @@ String[] availableLocales = null;
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		//Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>);
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID)) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />title);
+			</c:when>
+			<c:otherwise>
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>);
+			</c:otherwise>
+		</c:choose>
 	</script>
 </c:if>
 
