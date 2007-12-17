@@ -481,7 +481,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					fileShortcut = fileShortcut.toEscapedModel();
 
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), fileShortcut.getToName());
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), Html.unescape(fileShortcut.getToName()));
 
 					fileEntry = fileEntry.toEscapedModel();
 

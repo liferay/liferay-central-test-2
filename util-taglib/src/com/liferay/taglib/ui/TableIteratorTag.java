@@ -186,7 +186,7 @@ public class TableIteratorTag extends TagSupport {
 	}
 
 	public void setRowBreak(String rowBreak) {
-		_rowBreak = Html.formatFrom(rowBreak);
+		_rowBreak = Html.unescape(rowBreak);
 	}
 
 	private static final String _START_PAGE =

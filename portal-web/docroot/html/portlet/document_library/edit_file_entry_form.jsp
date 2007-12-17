@@ -144,6 +144,8 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 			if (folderId > 0) {
 				DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
+				folder = folder.toEscapedModel();
+
 				folderId = folder.getFolderId();
 				folderName = folder.getName();
 			}

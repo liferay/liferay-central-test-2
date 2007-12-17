@@ -31,6 +31,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.Html;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -122,7 +123,7 @@ public class EditFileShortcutAction extends PortletAction {
 
 		long folderId = ParamUtil.getLong(req, "folderId");
 		long toFolderId = ParamUtil.getLong(req, "toFolderId");
-		String toName = ParamUtil.getString(req, "toName");
+		String toName = Html.unescape(ParamUtil.getString(req, "toName"));
 
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");

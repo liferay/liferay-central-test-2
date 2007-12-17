@@ -121,33 +121,6 @@ public class Html {
 		return sm.toString();
 	}
 
-	public static String formatTo(String text) {
-		return escape(text);
-	}
-
-	public static String formatFrom(String text) {
-		if (text == null) {
-			return null;
-		}
-
-		// Optimize this
-
-		text = StringUtil.replace(text, "&lt;", "<");
-		text = StringUtil.replace(text, "&gt;", ">");
-		text = StringUtil.replace(text, "&amp;", "&");
-		text = StringUtil.replace(text, "&#034;", "\"");
-		text = StringUtil.replace(text, "&#039;", "'");
-		text = StringUtil.replace(text, "&#040;", "(");
-		text = StringUtil.replace(text, "&#041;", ")");
-		text = StringUtil.replace(text, "&#035;", "#");
-		text = StringUtil.replace(text, "&#037;", "%");
-		text = StringUtil.replace(text, "&#059;", ";");
-		text = StringUtil.replace(text, "&#043;", "+");
-		text = StringUtil.replace(text, "&#045;", "-");
-
-		return text;
-	}
-
 	public static String fromInputSafe(String text) {
 		return StringUtil.replace(text, "&amp;", "&");
 	}
@@ -250,6 +223,29 @@ public class Html {
 			text,
 			new String[] {"&", "\""},
 			new String[] {"&amp;", "&quot;"});
+	}
+
+	public static String unescape(String text) {
+		if (text == null) {
+			return null;
+		}
+
+		// Optimize this
+
+		text = StringUtil.replace(text, "&lt;", "<");
+		text = StringUtil.replace(text, "&gt;", ">");
+		text = StringUtil.replace(text, "&amp;", "&");
+		text = StringUtil.replace(text, "&#034;", "\"");
+		text = StringUtil.replace(text, "&#039;", "'");
+		text = StringUtil.replace(text, "&#040;", "(");
+		text = StringUtil.replace(text, "&#041;", ")");
+		text = StringUtil.replace(text, "&#035;", "#");
+		text = StringUtil.replace(text, "&#037;", "%");
+		text = StringUtil.replace(text, "&#059;", ";");
+		text = StringUtil.replace(text, "&#043;", "+");
+		text = StringUtil.replace(text, "&#045;", "-");
+
+		return text;
 	}
 
 	private static boolean _isScriptTag(String text, int start) {

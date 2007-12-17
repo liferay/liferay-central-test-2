@@ -37,14 +37,6 @@ public class Html_IW {
 		return Html.escape(text);
 	}
 
-	public java.lang.String formatTo(java.lang.String text) {
-		return Html.formatTo(text);
-	}
-
-	public java.lang.String formatFrom(java.lang.String text) {
-		return Html.formatFrom(text);
-	}
-
 	public java.lang.String fromInputSafe(java.lang.String text) {
 		return Html.fromInputSafe(text);
 	}
@@ -64,6 +56,10 @@ public class Html_IW {
 
 	public java.lang.String toInputSafe(java.lang.String text) {
 		return Html.toInputSafe(text);
+	}
+
+	public java.lang.String unescape(java.lang.String text) {
+		return Html.unescape(text);
 	}
 
 	private Html_IW() {

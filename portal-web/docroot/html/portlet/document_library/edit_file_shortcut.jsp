@@ -70,7 +70,13 @@ if ((toGroup == null) && (toGroupId > 0)) {
 }
 
 if (toGroup != null) {
+	toGroup = toGroup.toEscapedModel();
+
 	toGroupId = toGroup.getGroupId();
+}
+
+if (toFileEntry != null) {
+	toFileEntry = toFileEntry.toEscapedModel();
 }
 
 Boolean isLocked = Boolean.TRUE;
