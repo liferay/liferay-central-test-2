@@ -158,33 +158,38 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	</#list>
 
 	public ${entity.name} toEscapedModel() {
-		${entity.name} model = new ${entity.name}Impl();
-
-		<#list entity.regularColList as column>
-			model.set${column.methodName}(
-
-			<#if column.EJBName??>
-				(${column.EJBName})get${column.methodName}().clone()
-			<#else>
-				<#if column.type == "String">
-					Html.escape(
-				</#if>
-
-				get${column.methodName}()
-
-				<#if column.type == "String">
-					)
-				</#if>
-			</#if>
-
-			);
-		</#list>
-
-		if (true) {
-			model = (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new ReadOnlyBeanHandler(model));
+		if (isEscapedModel()) {
+			return (${entity.name})this;
 		}
+		else {
+			${entity.name} model = new ${entity.name}Impl();
 
-		return model;
+			model.setEscapedModel(true);
+
+			<#list entity.regularColList as column>
+				model.set${column.methodName}(
+
+				<#if column.EJBName??>
+					(${column.EJBName})get${column.methodName}().clone()
+				<#else>
+					<#if column.type == "String">
+						Html.escape(
+					</#if>
+
+					get${column.methodName}()
+
+					<#if column.type == "String">
+						)
+					</#if>
+				</#if>
+
+				);
+			</#list>
+
+			model = (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new ReadOnlyBeanHandler(model));
+
+			return model;
+		}
 	}
 
 	public Object clone() {

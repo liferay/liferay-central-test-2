@@ -43,8 +43,17 @@ public abstract class BaseModelImpl implements BaseModel {
 		return _new = n;
 	}
 
+	public boolean isEscapedModel() {
+		return _escapedModel;
+	}
+
+	public void setEscapedModel(boolean escapedModel) {
+		_escapedModel = escapedModel;
+	}
+
 	public abstract Object clone();
 
 	private boolean _new;
+	private boolean _escapedModel;
 
 }

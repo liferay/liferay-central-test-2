@@ -251,28 +251,33 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	}
 
 	public BookmarksEntry toEscapedModel() {
-		BookmarksEntry model = new BookmarksEntryImpl();
+		if (isEscapedModel()) {
+			return (BookmarksEntry)this;
+		}
+		else {
+			BookmarksEntry model = new BookmarksEntryImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setEntryId(getEntryId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setFolderId(getFolderId());
-		model.setName(Html.escape(getName()));
-		model.setUrl(Html.escape(getUrl()));
-		model.setComments(Html.escape(getComments()));
-		model.setVisits(getVisits());
-		model.setPriority(getPriority());
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setEntryId(getEntryId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setFolderId(getFolderId());
+			model.setName(Html.escape(getName()));
+			model.setUrl(Html.escape(getUrl()));
+			model.setComments(Html.escape(getComments()));
+			model.setVisits(getVisits());
+			model.setPriority(getPriority());
+
 			model = (BookmarksEntry)Proxy.newProxyInstance(BookmarksEntry.class.getClassLoader(),
 					new Class[] { BookmarksEntry.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {

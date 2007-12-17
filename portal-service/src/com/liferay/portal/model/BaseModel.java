@@ -36,6 +36,10 @@ public interface BaseModel extends Cloneable, Comparable, Serializable {
 
 	public boolean setNew(boolean n);
 
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
 	public Serializable getPrimaryKeyObj();
 
 	public Object clone();

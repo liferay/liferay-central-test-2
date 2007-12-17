@@ -113,6 +113,8 @@ public class BookmarksUtil {
 
 		if (folder != null) {
 			for (int i = 0;; i++) {
+				folder = folder.toEscapedModel();
+
 				PortletURL portletURL = res.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
@@ -154,6 +156,8 @@ public class BookmarksUtil {
 		breadcrumbs = foldersLink + " &raquo; " + breadcrumbs;
 
 		if (entry != null) {
+			entry = entry.toEscapedModel();
+
 			PortletURL entryURL = res.createRenderURL();
 
 			entryURL.setWindowState(WindowState.MAXIMIZED);

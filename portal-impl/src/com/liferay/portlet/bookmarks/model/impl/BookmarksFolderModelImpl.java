@@ -223,26 +223,31 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	}
 
 	public BookmarksFolder toEscapedModel() {
-		BookmarksFolder model = new BookmarksFolderImpl();
+		if (isEscapedModel()) {
+			return (BookmarksFolder)this;
+		}
+		else {
+			BookmarksFolder model = new BookmarksFolderImpl();
 
-		model.setUuid(Html.escape(getUuid()));
-		model.setFolderId(getFolderId());
-		model.setGroupId(getGroupId());
-		model.setCompanyId(getCompanyId());
-		model.setUserId(getUserId());
-		model.setCreateDate(getCreateDate());
-		model.setModifiedDate(getModifiedDate());
-		model.setParentFolderId(getParentFolderId());
-		model.setName(Html.escape(getName()));
-		model.setDescription(Html.escape(getDescription()));
+			model.setEscapedModel(true);
 
-		if (true) {
+			model.setUuid(Html.escape(getUuid()));
+			model.setFolderId(getFolderId());
+			model.setGroupId(getGroupId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
+			model.setParentFolderId(getParentFolderId());
+			model.setName(Html.escape(getName()));
+			model.setDescription(Html.escape(getDescription()));
+
 			model = (BookmarksFolder)Proxy.newProxyInstance(BookmarksFolder.class.getClassLoader(),
 					new Class[] { BookmarksFolder.class },
 					new ReadOnlyBeanHandler(model));
-		}
 
-		return model;
+			return model;
+		}
 	}
 
 	public Object clone() {
