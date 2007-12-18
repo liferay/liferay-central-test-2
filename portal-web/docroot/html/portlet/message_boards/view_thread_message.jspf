@@ -81,7 +81,7 @@
 		<td valign="top">
 			<div class="thread-top float-container">
 				<div class="subject">
-					<b><%= StringUtil.shorten(message.getSubject(), 50) %></b>
+					<b><%= StringUtil.shorten(Html.escape(message.getSubject()), 50) %></b>
 					|
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
@@ -392,7 +392,7 @@
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"
-								modelResourceDescription="<%= message.getSubject() %>"
+								modelResourceDescription="<%= Html.escape(message.getSubject()) %>"
 								resourcePrimKey="<%= String.valueOf(message.getMessageId()) %>"
 								var="permissionsURL"
 							/>

@@ -242,13 +242,11 @@ try {
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
 			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(LanguageUtil.get(pageContext, "id"));
 			sm.append(": ");
 			sm.append(pluginPackageModuleId);
 			sm.append("<br />");
 			sm.append(pluginPackageShortDescription);
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString());

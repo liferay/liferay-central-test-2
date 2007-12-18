@@ -149,6 +149,8 @@ public class MBUtil {
 
 		if (category != null) {
 			for (int i = 0;; i++) {
+				category = category.toEscapedModel();
+
 				PortletURL portletURL = res.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
@@ -191,6 +193,8 @@ public class MBUtil {
 		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
 
 		if (message != null) {
+			message = message.toEscapedModel();
+
 			PortletURL messageURL = res.createRenderURL();
 
 			messageURL.setWindowState(WindowState.MAXIMIZED);

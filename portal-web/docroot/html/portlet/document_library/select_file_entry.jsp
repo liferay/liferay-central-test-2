@@ -177,9 +177,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
 			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(fileEntry.getDescription());
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString(), rowHREF);

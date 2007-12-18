@@ -311,9 +311,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 
 			if (Validator.isNotNull(curProductVersion.getChangeLog())) {
 				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curProductVersion.getChangeLog());
-				sm.append("</span>");
 			}
 
 			sm.append("</a>");

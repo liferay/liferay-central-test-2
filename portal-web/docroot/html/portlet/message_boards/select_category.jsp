@@ -71,6 +71,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	MBCategory curCategory = (MBCategory)results.get(i);
 
+	curCategory = curCategory.toEscapedModel();
+
 	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
@@ -88,9 +90,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	if (Validator.isNotNull(curCategory.getDescription())) {
 		sm.append("<br />");
-		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(curCategory.getDescription());
-		sm.append("</span>");
 	}
 
 	row.addText(sm.toString(), rowURL);

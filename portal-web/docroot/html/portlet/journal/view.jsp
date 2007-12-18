@@ -257,9 +257,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				if (Validator.isNotNull(structure.getDescription())) {
 					sm.append("<br />");
-					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(structure.getDescription());
-					sm.append("</span>");
 				}
 
 				row.addText(sm.toString(), rowURL);

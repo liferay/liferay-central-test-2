@@ -213,9 +213,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
 				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curFolder.getDescription());
-				sm.append("</span>");
 			}
 
 			row.addText(sm.toString(), rowURL);
@@ -303,9 +301,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				if (Validator.isNotNull(fileEntry.getDescription())) {
 					sm.append("<br />");
-					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(fileEntry.getDescription());
-					sm.append("</span>");
 				}
 
 				row.addText(sm.toString(), rowHREF);

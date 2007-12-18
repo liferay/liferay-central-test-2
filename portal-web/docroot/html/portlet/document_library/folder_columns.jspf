@@ -52,9 +52,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 
 		if (Validator.isNotNull(curFolder.getDescription())) {
 			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(curFolder.getDescription());
-			sm.append("</span>");
 		}
 
 		sm.append("</a>");
@@ -62,8 +60,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 		List subfolders = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 		if (subfolders.size() > 0) {
-			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
+			sm.append("<br /><u>");
 			sm.append(LanguageUtil.get(pageContext, "subfolders"));
 			sm.append("</u>: ");
 
@@ -84,8 +81,6 @@ for (int j = 0; j < folderColumns.length; j++) {
 			}
 
 			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString());

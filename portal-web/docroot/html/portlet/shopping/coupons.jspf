@@ -108,9 +108,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 		if (Validator.isNotNull(coupon.getDescription())) {
 			sm.append("<br />");
-			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(coupon.getDescription());
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString(), rowURL);

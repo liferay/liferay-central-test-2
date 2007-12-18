@@ -90,9 +90,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	if (Validator.isNotNull(curCategory.getDescription())) {
 		sm.append("<br />");
-		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(curCategory.getDescription());
-		sm.append("</span>");
 	}
 
 	row.addText(sm.toString(), rowURL);
@@ -249,9 +247,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 			sm.append("\">");
 		}
 		else {
-			sm.append("<span style=\"font-size: xx-small;\">");
 			sm.append(item.getSku());
-			sm.append("</span>");
 		}
 
 		row.addText(sm.toString(), rowURL);
@@ -261,8 +257,6 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		sm = new StringMaker();
 
 		sm.append(item.getName());
-
-		sm.append("<span style=\"font-size: xx-small;\">");
 
 		if (Validator.isNotNull(item.getDescription())) {
 			sm.append("<br />");
@@ -284,8 +278,6 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 			sm.append(": ");
 			sm.append(propsValue);
 		}
-
-		sm.append("</span>");
 
 		row.addText(sm.toString(), rowURL);
 

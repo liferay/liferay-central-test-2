@@ -86,6 +86,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		for (int i = 0; i < results.size(); i++) {
 			MBCategory curCategory = (MBCategory)results.get(i);
 
+			curCategory = curCategory.toEscapedModel();
+
 			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 			boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
@@ -115,9 +117,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
 				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curCategory.getDescription());
-				sm.append("</span>");
 			}
 
 			if (!restricted) {
@@ -126,8 +126,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 				if (subcategories.size() > 0) {
-					sm.append("<br />");
-					sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
+					sm.append("<br /><u>");
 					sm.append(LanguageUtil.get(pageContext, "subcategories"));
 					sm.append("</u>: ");
 
@@ -148,8 +147,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					}
 
 					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
-
-					sm.append("</span>");
 				}
 			}
 
@@ -257,6 +254,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				MBThread thread = (MBThread)results.get(i);
 
 				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+
+				message = message.toEscapedModel();
+
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 				ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
@@ -315,8 +315,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				else {
 					sm = new StringMaker();
 
-					sm.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
-
 					sm.append(LanguageUtil.get(pageContext, "date"));
 					sm.append(": ");
 					sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
@@ -329,8 +327,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 						sm.append(": ");
 						sm.append(lastPostByUserName);
 					}
-
-					sm.append("</span>");
 
 					row.addText(sm.toString(), rowURL);
 				}
@@ -420,6 +416,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			for (int i = 0; i < results.size(); i++) {
 				MBCategory curCategory = (MBCategory)results.get(i);
 
+				curCategory = curCategory.toEscapedModel();
+
 				ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
@@ -449,9 +447,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				if (Validator.isNotNull(curCategory.getDescription())) {
 					sm.append("<br />");
-					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(curCategory.getDescription());
-					sm.append("</span>");
 				}
 
 				row.addText(sm.toString());
@@ -535,6 +531,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			MBThread thread = (MBThread)results.get(i);
 
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+
+			message = message.toEscapedModel();
+
 			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 			ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
@@ -593,8 +592,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			else {
 				sm = new StringMaker();
 
-				sm.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
-
 				sm.append(LanguageUtil.get(pageContext, "date"));
 				sm.append(": ");
 				sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
@@ -607,8 +604,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					sm.append(": ");
 					sm.append(lastPostByUserName);
 				}
-
-				sm.append("</span>");
 
 				row.addText(sm.toString(), rowURL);
 			}

@@ -178,9 +178,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
 				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(productEntry.getShortDescription());
-				sm.append("</span>");
 			}
 
 			row.addText(sm.toString(), rowURL);
@@ -350,9 +348,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
 				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(productEntry.getShortDescription());
-				sm.append("</span>");
 			}
 
 			row.addText(sm.toString(), rowURL);

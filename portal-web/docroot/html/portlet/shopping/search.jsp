@@ -132,9 +132,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("\">");
 	}
 	else {
-		sm.append("<span style=\"font-size: xx-small;\">");
 		sm.append(item.getSku());
-		sm.append("</span>");
 	}
 
 	row.addText(sm.toString(), rowURL);
@@ -144,8 +142,6 @@ for (int i = 0; i < results.size(); i++) {
 	sm = new StringMaker();
 
 	sm.append(item.getName());
-
-	sm.append("<span style=\"font-size: xx-small;\">");
 
 	if (Validator.isNotNull(item.getDescription())) {
 		sm.append("<br />");
@@ -167,8 +163,6 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append(": ");
 		sm.append(propsValue);
 	}
-
-	sm.append("</span>");
 
 	row.addText(sm.toString(), rowURL);
 
