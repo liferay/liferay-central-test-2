@@ -200,7 +200,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 
 						<c:if test="<%= showAddFolderButton %>">
-							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 						</c:if>
 					</div>
 				</c:if>
@@ -226,7 +226,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					<br />
 
-					<ul>
+					<ul class="lfr-component">
 						<li class="header">
 							<span class="col-name"><liferay-ui:message key="name" /></span>
 							<span class="col-folders"><liferay-ui:message key="num-of-folders" /></span>

@@ -125,6 +125,8 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				JournalArticle article = (JournalArticle)results.get(i);
 
+				article = article.toEscapedModel();
+
 				ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
@@ -230,6 +232,8 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				JournalStructure structure = (JournalStructure)results.get(i);
 
+				structure = structure.toEscapedModel();
+
 				ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
@@ -315,6 +319,8 @@ portletURL.setParameter("tabs1", tabs1);
 			for (int i = 0; i < results.size(); i++) {
 				JournalTemplate template = (JournalTemplate)results.get(i);
 
+				template = template.toEscapedModel();
+
 				ResultRow row = new ResultRow(template, template.getTemplateId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
@@ -372,6 +378,8 @@ portletURL.setParameter("tabs1", tabs1);
 				for (int i = recentArticlesSize - 1; i >= 0; i--) {
 					JournalArticle article = (JournalArticle)recentArticles.get(i);
 
+					article = article.toEscapedModel();
+
 					String className = "portlet-section-body";
 					String classHoverName = "portlet-section-body-hover";
 
@@ -409,6 +417,8 @@ portletURL.setParameter("tabs1", tabs1);
 				for (int i = recentStructuresSize - 1; i >= 0; i--) {
 					JournalStructure structure = (JournalStructure)recentStructures.get(i);
 
+					structure = structure.toEscapedModel();
+
 					String className = "portlet-section-body";
 					String classHoverName = "portlet-section-body-hover";
 
@@ -445,6 +455,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 				for (int i = recentTemplatesSize - 1; i >= 0; i--) {
 					JournalTemplate template = (JournalTemplate)recentTemplates.get(i);
+
+					template = template.toEscapedModel();
 
 					String className = "portlet-section-body";
 					String classHoverName = "portlet-section-body-hover";
