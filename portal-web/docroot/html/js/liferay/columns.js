@@ -96,8 +96,6 @@
 						data.quadrant = quadrant;
 						rt = this;
 					}
-
-					return false;
 				}
 			});
 
