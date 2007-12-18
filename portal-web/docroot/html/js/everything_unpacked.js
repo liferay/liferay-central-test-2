@@ -17909,8 +17909,6 @@ Liferay.ColorPicker = new Class({
 						data.quadrant = quadrant;
 						rt = this;
 					}
-
-					return false;
 				}
 			});
 
