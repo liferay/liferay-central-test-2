@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
+question = question.toEscapedModel();
+
 List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
@@ -67,6 +69,8 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 		while (itr.hasNext()) {
 			PollsChoice choice = (PollsChoice)itr.next();
+
+			choice = choice.toEscapedModel();
 		%>
 
 			<tr>
@@ -87,10 +91,12 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 		</table>
 
+		<br />
+
 		<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
 				<portlet:param name="struts_action" value="/polls/view_question" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 				<portlet:param name="viewResults" value="1" />
 			</portlet:renderURL>
@@ -111,7 +117,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>';" />
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
 				<br />

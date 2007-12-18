@@ -29,6 +29,8 @@ String redirect = StringPool.BLANK;
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
+question = question.toEscapedModel();
+
 List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
@@ -82,6 +84,8 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		while (itr.hasNext()) {
 			PollsChoice choice = (PollsChoice)itr.next();
+
+			choice = choice.toEscapedModel();
 		%>
 
 			<tr>

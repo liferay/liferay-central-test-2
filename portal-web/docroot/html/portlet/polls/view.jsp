@@ -56,6 +56,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	PollsQuestion question = (PollsQuestion)results.get(i);
 
+	question = question.toEscapedModel();
+
 	ResultRow row = new ResultRow(question, question.getQuestionId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();

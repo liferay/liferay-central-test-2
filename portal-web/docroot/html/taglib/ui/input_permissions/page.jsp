@@ -50,6 +50,8 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(request, "inputPermissionsShowConfigure");
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
+
+		Group group = layout.getGroup();
 		%>
 
 		<table class="lfr-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
@@ -57,9 +59,20 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />
 			</th>
-			<th style="text-align: center;">
-				<liferay-ui:message key="community" />
-			</th>
+
+			<c:choose>
+				<c:when test="<%= group.isCommunity() %>">
+					<th style="text-align: center;">
+						<liferay-ui:message key="community" />
+					</th>
+				</c:when>
+				<c:when test="<%= group.isOrganization() %>">
+					<th style="text-align: center;">
+						<liferay-ui:message key="organization" />
+					</th>
+				</c:when>
+			</c:choose>
+
 			<th style="text-align: center;">
 				<liferay-ui:message key="guest" />
 			</th>
@@ -93,10 +106,14 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
-				<td style="text-align: center;">
-					<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
-				</td>
-				<td style="text-align: center;">
+
+				<c:if test="<%= group.isCommunity() || group.isOrganization() %>">
+					<td style="text-align: center;">
+						<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
+					</td>
+				</c:if>
+
+				<td style="text-align: right;">
 					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
