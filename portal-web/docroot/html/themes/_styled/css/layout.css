@@ -11,6 +11,10 @@
 	padding: 5px;
 }
 
+.layout-grid {
+	width: 100%;
+}
+
 /* ---------- Column widths ---------- */
 
 #layout-grid.dragging .lfr-column {

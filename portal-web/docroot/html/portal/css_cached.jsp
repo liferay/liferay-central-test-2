@@ -34,6 +34,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Generic module styling ---------- */
 
+.lfr-grid {
+	width: 100%;
+}
+
 .lfr-component, .lfr-component ul, .lfr-component li {
 	margin: 0;
 	padding: 0;
