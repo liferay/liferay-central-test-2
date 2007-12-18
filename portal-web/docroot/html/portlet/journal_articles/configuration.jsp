@@ -47,6 +47,8 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 			<%
 			for (int i = 0; i < communities.size(); i++) {
 				Group group = (Group)communities.get(i);
+
+				group = group.toEscapedModel();
 			%>
 
 				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>

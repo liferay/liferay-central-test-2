@@ -125,7 +125,7 @@ type = ParamUtil.getString(request, "type", type);
 						<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />radioTemplateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onClick="document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = this.value; <portlet:namespace />save();">
 
 						<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></liferay-portlet:renderURL>">
-						<%= tableIteratorObj.getName() %>
+						<%= Html.escape(tableIteratorObj.getName()) %>
 						</a>
 
 						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
@@ -217,6 +217,8 @@ List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	JournalArticle curArticle = (JournalArticle)results.get(i);
+
+	curArticle = curArticle.toEscapedModel();
 
 	ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 

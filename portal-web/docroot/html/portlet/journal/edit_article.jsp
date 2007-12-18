@@ -103,7 +103,7 @@ if (article != null) {
 	}
 }
 
-String type = BeanParamUtil.getString(article, request, "type");
+String type = BeanParamUtil.getString(article, request, "type", "general");
 
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
