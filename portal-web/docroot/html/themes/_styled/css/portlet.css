@@ -315,6 +315,16 @@
 
 /* ---------- Miscellaneous portlet styles ---------- */
 
+.message-board-code {
+	background: #fff;
+	font-family: "Courier New", Courier, Monaco, monospace;
+	white-space: pre;
+}
+
+.message-board-code-lines {
+	margin-right: 1em;
+}
+
 .restricted, .restricted td {
 	background: #FEE1E0;
 	border: none;
