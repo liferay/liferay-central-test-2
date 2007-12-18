@@ -230,7 +230,7 @@ List messages = treeWalker.getMessages();
 			</td>
 			<td valign="top" width="99%">
 				<div>
-					<%= StringUtil.replace(message.getBody(), "\n", "<br />") %>
+					<%= message.getBody(true) %>
 				</div>
 
 				<br />

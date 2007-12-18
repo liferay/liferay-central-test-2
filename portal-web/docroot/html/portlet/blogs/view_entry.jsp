@@ -51,7 +51,7 @@ pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 </form>
 
-<c:if test="<%= true || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= enableComments && BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
 	<br />
 
 	<liferay-ui:tabs names="comments" />

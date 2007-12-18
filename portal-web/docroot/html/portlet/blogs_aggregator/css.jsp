@@ -24,10 +24,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-blogs-aggregator .entry-title {
-	display: block;
-	font-size: 1.2em;
-	font-weight: bold;
+.portlet-blogs-aggregator .abstract {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.portlet-blogs-aggregator .comments {
+	margin-top: 1.5em;
 }
 
 .portlet-blogs-aggregator .entry-author {
@@ -36,14 +39,12 @@
 .portlet-blogs-aggregator .entry-content {
 }
 
+.portlet-blogs-aggregator .entry-title {
+	display: block;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
 .portlet-blogs-aggregator .subscribe {
 	margin-bottom: 1.5em;
-}
-
-.portlet-blogs-aggregator .comments {
-}
-
-.portlet-blogs-aggregator .abstract {
-	margin-top: 1.0em;
-	margin-bottom: 2.0em;
 }

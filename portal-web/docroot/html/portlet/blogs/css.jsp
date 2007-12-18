@@ -24,32 +24,37 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-blogs .entry-title {
-	display: block;
-	font-size: 1.2em;
-	font-weight: bold;
+.portlet-blogs .comments {
+	margin-top: 1.5em;
 }
 
 .portlet-blogs .edit-actions {
 	margin: 1.5em 0;
 }
 
-.portlet-blogs .taglib-social-bookmarks {
-	margin-top: 1.5em;
+.portlet-blogs .entry-author {
 }
 
-.portlet-blogs .entry-author {
+.portlet-blogs .entry-body {
 }
 
 .portlet-blogs .entry-content {
 }
 
-.portlet-blogs .entry-body {
+.portlet-blogs .entry-title {
+	display: block;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 .portlet-blogs .subscribe {
 	margin-bottom: 1.5em;
 }
 
-.portlet-blogs .comments {
+.portlet-blogs .taglib-ratings {
+	margin-top: 1.5em;
+}
+
+.portlet-blogs .taglib-social-bookmarks {
+	margin-top: 1.5em;
 }
