@@ -119,10 +119,13 @@
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jmx-remote.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jug.jar"/>
+	<classpathentry kind="lib" path="lib/portal/juh.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jurt.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
@@ -143,6 +146,7 @@
 	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
 	<classpathentry kind="lib" path="lib/portal/retroweaver.jar"/>
+	<classpathentry kind="lib" path="lib/portal/ridl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>
@@ -157,6 +161,7 @@
 	<classpathentry kind="lib" path="lib/portal/subetha-smtp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/textmining.jar"/>
 	<classpathentry kind="lib" path="lib/portal/trove.jar"/>
+	<classpathentry kind="lib" path="lib/portal/unoil.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>
