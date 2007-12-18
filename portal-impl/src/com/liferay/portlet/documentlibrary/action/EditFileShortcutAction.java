@@ -30,8 +30,8 @@ import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.Html;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
