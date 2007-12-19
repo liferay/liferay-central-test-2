@@ -47,7 +47,7 @@ ${exception.message}
 A compilation error occurred because ECJ does not have enough memory.
 
 To fix this, set the environment variable ANT_OPTS to the recommended value of
-"-Xms256M -Xmx512M".
+"-Xms256m -Xmx512m".
 						</fail>
 					</then>
 					<else>
