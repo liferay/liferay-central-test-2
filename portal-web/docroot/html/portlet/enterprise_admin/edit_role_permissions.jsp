@@ -266,6 +266,10 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 				}
 			}
 
+			if (curPortletName == null) {
+				continue;
+			}
+
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletName);
 
 			curPortletLabel = PortalUtil.getPortletTitle(portlet, application, locale);
