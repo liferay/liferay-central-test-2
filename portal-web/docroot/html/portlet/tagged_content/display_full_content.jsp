@@ -53,6 +53,32 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		<br />
 
 		<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>"><liferay-ui:message key="view-in-context" /> &raquo;</a>
+
+		<c:if test="<%= enableRatings %>">
+			<liferay-ui:ratings
+				className="<%= BlogsEntry.class.getName() %>"
+				classPK="<%= entry.getEntryId() %>"
+				url='<%= themeDisplay.getPathMain() + "/blogs/rate_entry" %>'
+			/>
+		</c:if>
+
+		<c:if test="<%= enableComments %>">
+			<br />
+
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/tagged_content/edit_entry_discussion" />
+			</portlet:actionURL>
+
+			<liferay-ui:discussion
+				formName="<%= "fm" + entry.getEntryId() %>"
+				formAction="<%= discussionURL %>"
+				className="<%= BlogsEntry.class.getName() %>"
+				classPK="<%= entry.getEntryId() %>"
+				userId="<%= entry.getUserId() %>"
+				subject="<%= entry.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
+		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
@@ -79,6 +105,35 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		</a>
 
 		<p class="journal-content-field-description"><%= fileEntry.getDescription() %></p>
+
+		<c:if test="<%= enableRatings %>">
+			<br />
+
+			<liferay-ui:ratings
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= fileEntry.getFileEntryId() %>"
+				url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
+			/>
+		</c:if>
+
+		<c:if test="<%= enableComments %>">
+			<br />
+
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/tagged_content/edit_file_entry_discussion" />
+			</portlet:actionURL>
+
+			<liferay-ui:discussion
+				formName="<%= "fm" + fileEntry.getFileEntryId() %>"
+				formAction="<%= discussionURL %>"
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= fileEntry.getFileEntryId() %>"
+				userId="<%= fileEntry.getUserId() %>"
+				subject="<%= fileEntry.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
+		</c:if>
+
 	</c:when>
 	<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
@@ -164,6 +219,34 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 				<br />
 			</c:if>
+
+			<c:if test="<%= enableRatings %>">
+				<br />
+
+				<liferay-ui:ratings
+					className="<%= JournalArticle.class.getName() %>"
+					classPK="<%= articleDisplay.getResourcePrimKey() %>"
+					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+				/>
+			</c:if>
+
+			<c:if test="<%= enableComments %>">
+				<br />
+
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/tagged_content/edit_article_discussion" />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
+					formName="<%= "fm" + articleDisplay.getResourcePrimKey() %>"
+					formAction="<%= discussionURL %>"
+					className="<%= JournalArticle.class.getName() %>"
+					classPK="<%= articleDisplay.getResourcePrimKey() %>"
+					userId="<%= articleDisplay.getUserId() %>"
+					subject="<%= articleDisplay.getTitle() %>"
+					redirect="<%= currentURL %>"
+				/>
+			</c:if>
 		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(MBMessage.class.getName()) %>">
@@ -215,6 +298,25 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 </pre>
 			</c:if>
 		</div>
+
+		<c:if test="<%= enableComments %>">
+			<br />
+
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/tagged_content/edit_page_discussion" />
+			</portlet:actionURL>
+
+			<liferay-ui:discussion
+				formName="<%= "fm" + wikiPage.getResourcePrimKey() %>"
+				formAction="<%= discussionURL %>"
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= wikiPage.getResourcePrimKey() %>"
+				userId="<%= wikiPage.getUserId() %>"
+				subject="<%= wikiPage.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
+		</c:if>
+
 	</c:when>
 	<c:otherwise>
 		<%= className %> is not a valid type.

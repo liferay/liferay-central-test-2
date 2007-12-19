@@ -139,6 +139,22 @@
 		<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="enable-ratings" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>"  onClick='<%= renderResponse.getNamespace() + "chooseRatings();" %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="enable-comments" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "chooseComments();" %>' />
+	</td>
+</tr>
 
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>
