@@ -144,7 +144,7 @@
 		<liferay-ui:message key="enable-ratings" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>"  onClick='<%= renderResponse.getNamespace() + "chooseRatings();" %>' />
+		<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
 	</td>
 </tr>
 <tr>
@@ -152,7 +152,7 @@
 		<liferay-ui:message key="enable-comments" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "chooseComments();" %>' />
+		<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
 	</td>
 </tr>
 

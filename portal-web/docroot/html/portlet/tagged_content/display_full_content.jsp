@@ -70,7 +70,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
-				formName="<%= "fm" + entry.getEntryId() %>"
+				formName='<%= "fm" + entry.getEntryId() %>'
 				formAction="<%= discussionURL %>"
 				className="<%= BlogsEntry.class.getName() %>"
 				classPK="<%= entry.getEntryId() %>"
@@ -124,7 +124,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
-				formName="<%= "fm" + fileEntry.getFileEntryId() %>"
+				formName='<%= "fm" + fileEntry.getFileEntryId() %>'
 				formAction="<%= discussionURL %>"
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= fileEntry.getFileEntryId() %>"
@@ -133,7 +133,6 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				redirect="<%= currentURL %>"
 			/>
 		</c:if>
-
 	</c:when>
 	<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
@@ -238,7 +237,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					formName="<%= "fm" + articleDisplay.getResourcePrimKey() %>"
+					formName='<%= "fm" + articleDisplay.getResourcePrimKey() %>'
 					formAction="<%= discussionURL %>"
 					className="<%= JournalArticle.class.getName() %>"
 					classPK="<%= articleDisplay.getResourcePrimKey() %>"
@@ -307,7 +306,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
-				formName="<%= "fm" + wikiPage.getResourcePrimKey() %>"
+				formName='<%= "fm" + wikiPage.getResourcePrimKey() %>'
 				formAction="<%= discussionURL %>"
 				className="<%= WikiPage.class.getName() %>"
 				classPK="<%= wikiPage.getResourcePrimKey() %>"
@@ -316,7 +315,6 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				redirect="<%= currentURL %>"
 			/>
 		</c:if>
-
 	</c:when>
 	<c:otherwise>
 		<%= className %> is not a valid type.
