@@ -1215,10 +1215,6 @@
 
 		<!-- Tagged Content -->
 
-		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
-			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
-		</action>
-
 		<action path="/tagged_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
 		</action>
@@ -1233,6 +1229,10 @@
 
 		<action path="/tagged_content/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
+		</action>
+
+		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
+			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
 		</action>
 
 		<action path="/tagged_content/view_content" forward="portlet.tagged_content.view_content" />
