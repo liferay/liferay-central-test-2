@@ -59,7 +59,7 @@ else {
 }
 
 if (Validator.isNull(tabs1)) {
-	if (stagingGroup != null) {
+	if ((portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && stagingGroup != null) {
 		tabs1 = "staging";
 	}
 	else {
@@ -394,9 +394,9 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<%
 		String tabs1Names = "staging";
 
-		if (stagingGroup == null) {
+		//if (stagingGroup == null) {
 			tabs1Names = "live,staging";
-		}
+		//}
 		%>
 
 		<liferay-ui:tabs
