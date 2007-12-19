@@ -809,6 +809,8 @@ public class PropsUtil {
 
 	public static final String WEB_SERVER_PROTOCOL = "web.server.protocol";
 
+	public static final String WEB_SERVER_DISPLAY_NODE = "web.server.display.node";
+
 	// Address Book Portlet
 
 	public static final String ADDRESS_BOOK_CONTACT_JOB_CLASSES = "address.book.contact.job.classes";
@@ -1090,7 +1092,7 @@ public class PropsUtil {
 	// Nested Portlet Portlet
 
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT = "nested.portlets.layout.template.default";
-	
+
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED = "nested.portlets.layout.template.unsupported";
 
 	// Portlet CSS Portlet

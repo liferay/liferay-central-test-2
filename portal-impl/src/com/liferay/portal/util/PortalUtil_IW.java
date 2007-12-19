@@ -112,6 +112,10 @@ public class PortalUtil_IW {
 		return PortalUtil.getCompanyIdByWebId(webId);
 	}
 
+	public java.lang.String getComputerName() {
+		return PortalUtil.getComputerName();
+	}
+
 	public java.lang.String getCurrentURL(
 		javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getCurrentURL(req);

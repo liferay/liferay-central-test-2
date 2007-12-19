@@ -385,6 +385,10 @@ public class PortalUtil {
 		return companyId;
 	}
 
+	public static String getComputerName() {
+		return _instance._computerName;
+	}
+
 	public static String getCurrentURL(HttpServletRequest req) {
 		String currentURL = (String)req.getAttribute(WebKeys.CURRENT_URL);
 
@@ -2117,6 +2121,18 @@ public class PortalUtil {
 
 	private PortalUtil() {
 
+		// Computer name
+
+		_computerName = System.getProperty("env.COMPUTERNAME");
+
+		if (Validator.isNull(_computerName)) {
+			_computerName = System.getProperty("env.HOST");
+		}
+
+		if (Validator.isNull(_computerName)) {
+			_computerName = System.getProperty("env.HOSTNAME");
+		}
+
 		// Portal lib directory
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -2450,6 +2466,7 @@ public class PortalUtil {
 
 	private static PortalUtil _instance = new PortalUtil();
 
+	private String _computerName;
 	private String _portalLibDir;
 	private String _cdnHost;
 	private String _pathContext;

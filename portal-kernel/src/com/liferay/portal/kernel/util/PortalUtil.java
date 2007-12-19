@@ -51,6 +51,18 @@ public class PortalUtil {
 		}
 	}
 
+	public static String getComputerName() throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETCOMPUTERNAME, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static HttpServletRequest getHttpServletRequest(PortletRequest req)
 		throws Exception {
 
@@ -168,6 +180,8 @@ public class PortalUtil {
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
 
 	private static final String _METHOD_GETCDNHOST = "getCDNHost";
+
+	private static final String _METHOD_GETCOMPUTERNAME = "getComputerName";
 
 	private static final String _METHOD_GETHTTPSERVLETREQUEST =
 		"getHttpServletRequest";
