@@ -78,7 +78,6 @@ import com.liferay.util.lucene.HitsImpl;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 
 import java.util.Collections;
 import java.util.Date;
@@ -108,9 +107,6 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
-
-import org.htmlparser.util.ParserException;
-import org.htmlparser.util.ParserUtils;
 
 /**
  * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -1740,7 +1736,7 @@ public class JournalArticleLocalServiceImpl
 					groupId, articleId, version, incrementVersion, el, elName,
 					images);
 			}
-			else if (elType.equals("text_area")) {
+			/*else if (elType.equals("text_area")) {
 				Element dynamicContent = el.element("dynamic-content");
 
 				String text = dynamicContent.getText();
@@ -1759,7 +1755,7 @@ public class JournalArticleLocalServiceImpl
 				}
 
 				dynamicContent.setText(text);
-			}
+			}*/
 
 			format(
 				groupId, articleId, version, incrementVersion, el, images);
