@@ -156,7 +156,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							</c:if>
 
 							<c:if test="<%= showAddFolderButton %>">
-								<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+								<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 							</c:if>
 						</div>
 
@@ -200,7 +200,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 
 						<c:if test="<%= showAddFolderButton %>">
-							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+							<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 						</c:if>
 					</div>
 				</c:if>
@@ -212,14 +212,14 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 						/* This CSS fixes the display of the liferay-actions-menu button. It must be included in view.jsp to work correctly in the Freeform layout on IE6. */
 
-						.lfr-actions {
+						.portlet-document-library .lfr-actions {
 							display: inline;
 							float: none;
 							position: absolute;
 							right: 0%;
 						}
 
-						.ie .lfr-actions {
+						.portlet-document-library .ie .lfr-actions {
 							display: block;
 						}
 					</style>

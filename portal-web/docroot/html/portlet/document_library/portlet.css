@@ -1,16 +1,16 @@
-/* This CSS makes all the content scroll correctly when using position:absolute. */
+/* This CSS makes all the content scroll correctly when using position: absolute. */
 
-.portlet-content-container {
+.portlet-document-library .portlet-content-container {
 	position: relative;
 }
 
-.ie .portlet-content-container {
+.portlet-document-library .ie .portlet-content-container {
 	height: 1%;
 }
 
 /* This CSS overrides the styles for the Actions button. */
 
-.lfr-actions.visible {
+.portlet-document-library .lfr-actions.visible {
 	position: absolute;
 }
 
