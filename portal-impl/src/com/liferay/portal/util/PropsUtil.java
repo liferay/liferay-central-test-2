@@ -551,6 +551,10 @@ public class PropsUtil {
 
 	public static final String LAYOUT_TYPES = "layout.types";
 
+	public static final String LAYOUT_CONFIGURATION_ACTION_UPDATE = "layout.configuration.action.update";
+
+	public static final String LAYOUT_CONFIGURATION_ACTION_DELETE = "layout.configuration.action.delete";
+
 	public static final String LAYOUT_EDIT_PAGE = "layout.edit.page";
 
 	public static final String LAYOUT_VIEW_PAGE = "layout.view.page";

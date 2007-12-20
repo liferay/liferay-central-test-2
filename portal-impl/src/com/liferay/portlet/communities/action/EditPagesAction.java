@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.germinus.easyconf.Filter;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
@@ -33,12 +34,14 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -52,6 +55,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -61,6 +66,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -69,7 +75,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -98,6 +107,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -131,10 +141,10 @@ public class EditPagesAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateLayout(pageForm, req);
+				updateLayout(pageForm, req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteLayout(req);
+				deleteLayout(req, res);
 			}
 			else if (cmd.equals("copy_from_live")) {
 				copyFromLive(req);
@@ -395,10 +405,38 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected void deleteLayout(ActionRequest req) throws Exception {
+	protected void deleteLayout(ActionRequest req, ActionResponse res)
+		throws Exception {
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
+
+		PermissionCheckerImpl permissionChecker =
+			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
+
+		boolean hasDelete =
+			LayoutPermissionUtil.contains(
+				permissionChecker, groupId, privateLayout, layoutId,
+				ActionKeys.DELETE);
+
+		if (hasDelete) {
+			Layout layout =
+				LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
+
+			String[] eventClasses =
+				StringUtil.split(PropsUtil.getComponentProperties().getString(
+					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
+					Filter.by(layout.getType())));
+
+			HttpServletRequest httpReq = (HttpServletRequest)(
+					(ActionRequestImpl)req).getHttpServletRequest();
+
+			HttpServletResponse httpRes = (HttpServletResponse)(
+					(ActionResponseImpl)res).getHttpServletResponse();
+
+			EventsProcessor.process(eventClasses, httpReq, httpRes);
+		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
@@ -633,7 +671,8 @@ public class EditPagesAction extends PortletAction {
 			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
-	protected void updateLayout(PageForm pageForm, ActionRequest req)
+	protected void updateLayout(
+			PageForm pageForm, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		UploadPortletRequest uploadReq =
@@ -791,6 +830,16 @@ public class EditPagesAction extends PortletAction {
 				LayoutServiceUtil.updateLayout(
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
+
+			HttpServletResponse httpRes = (HttpServletResponse)(
+				(ActionResponseImpl)res).getHttpServletResponse();
+
+			String[] eventClasses =
+				StringUtil.split(PropsUtil.getComponentProperties().getString(
+					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
+					Filter.by(type)));
+
+			EventsProcessor.process(eventClasses, uploadReq, httpRes);
 		}
 	}
 
