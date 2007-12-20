@@ -47,16 +47,16 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<%--<td>
-		<input name="<portlet:namespace /><%= displayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getInstanceIdString()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionIdString()) %>" />
 	</td>--%>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionName()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionVersion()) %>" />
 	</td>
 </tr>
 </table>

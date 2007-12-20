@@ -44,10 +44,10 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getTaskName()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionName()) %>" />
 	</td>
 	<td>
 		<select name="<portlet:namespace /><%= displayTerms.ASSIGNED_TO %>">
