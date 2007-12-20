@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.journal.TransformException;
@@ -106,7 +107,12 @@ public class JournalVmUtil {
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("randomNamespace", randomNamespace);
 
-			VelocityVariables.insertHelperUtilities(context);
+			String[] restrictedVariables =
+				PropsUtil.getArray(
+					PropsUtil.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+
+			VelocityVariables.insertHelperUtilities(
+				context, restrictedVariables);
 
 			script = _injectEditInPlace(xml, script);
 

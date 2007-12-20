@@ -945,6 +945,8 @@ public class PropsUtil {
 
 	public static final String JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID = "journal.template.force.autogenerate.id";
 
+	public static final String JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = "journal.template.velocity.restricted.variables";
+
 	public static final String JOURNAL_IMAGE_SMALL_MAX_SIZE = "journal.image.small.max.size";
 
 	public static final String JOURNAL_IMAGE_EXTENSIONS = "journal.image.extensions";

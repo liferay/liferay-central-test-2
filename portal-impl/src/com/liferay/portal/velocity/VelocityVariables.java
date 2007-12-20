@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer_IW;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.DateUtil_IW;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -88,7 +89,8 @@ import org.apache.velocity.VelocityContext;
  */
 public class VelocityVariables {
 
-	public static void insertHelperUtilities(VelocityContext vc) {
+	public static void insertHelperUtilities(VelocityContext vc,
+		String[] restrictedVariables) {
 
 		// Array util
 
@@ -133,16 +135,23 @@ public class VelocityVariables {
 
 		// Portal util
 
-		vc.put("portalUtil", PortalUtil_IW.getInstance());
-		vc.put("portal", PortalUtil_IW.getInstance());
+		if (!ArrayUtil.contains(restrictedVariables, "portalUtil") &&
+				ArrayUtil.contains(restrictedVariables, "portal")) {
+			vc.put("portalUtil", PortalUtil_IW.getInstance());
+			vc.put("portal", PortalUtil_IW.getInstance());
+		}
 
 		// Prefs props util
 
-		vc.put("prefsPropsUtil", PrefsPropsUtil_IW.getInstance());
+		if (!ArrayUtil.contains(restrictedVariables, "prefsPropsUtil")) {
+			vc.put("prefsPropsUtil", PrefsPropsUtil_IW.getInstance());
+		}
 
 		// Props util
 
-		vc.put("propsUtil", PropsUtil_IW.getInstance());
+		if (!ArrayUtil.contains(restrictedVariables, "propsUtil")) {
+			vc.put("propsUtil", PropsUtil_IW.getInstance());
+		}
 
 		// Portlet URL factory
 
@@ -150,7 +159,11 @@ public class VelocityVariables {
 
 		// Portlet preferences
 
-		vc.put("velocityPortletPreferences", new VelocityPortletPreferences());
+		if (!ArrayUtil.contains(
+				restrictedVariables, "velocityPortletPreferences")) {
+			vc.put(
+				"velocityPortletPreferences", new VelocityPortletPreferences());
+		}
 
 		// Randomizer
 
@@ -158,11 +171,15 @@ public class VelocityVariables {
 
 		// Service locator
 
-		vc.put("serviceLocator", ServiceLocator.getInstance());
+		if (!ArrayUtil.contains(restrictedVariables, "serviceLocator")) {
+			vc.put("serviceLocator", ServiceLocator.getInstance());
+		}
 
 		// Session clicks
 
-		vc.put("sessionClicks", SessionClicks_IW.getInstance());
+		if (!ArrayUtil.contains(restrictedVariables, "sessionClicks")) {
+			vc.put("sessionClicks", SessionClicks_IW.getInstance());
+		}
 
 		// Static field getter
 
@@ -329,7 +346,7 @@ public class VelocityVariables {
 
 		// Helper utilities
 
-		insertHelperUtilities(vc);
+		insertHelperUtilities(vc, new String[0]);
 
 		// Insert custom vm variables
 
