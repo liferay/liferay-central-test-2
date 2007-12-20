@@ -110,7 +110,6 @@ public class UpdatePageAction extends JSONAction {
 			ThemeDisplay themeDisplay, HttpServletRequest req)
 		throws Exception {
 
-		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
 		long groupId = ParamUtil.getLong(req, "groupId");
@@ -140,7 +139,8 @@ public class UpdatePageAction extends JSONAction {
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(doAsUserId)) {
-			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
+			layoutURL = Http.addParameter(
+				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
 
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};

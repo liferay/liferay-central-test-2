@@ -252,8 +252,6 @@ public class ServicePreAction extends Action {
 					ppState.equals(WindowState.NORMAL.toString())) {
 
 					layoutTypePortlet.removeStateMaxPortletId(portletId);
-
-					String typeSettings = layout.getTypeSettings();
 				}
 			}
 		}

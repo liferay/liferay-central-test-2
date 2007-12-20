@@ -348,13 +348,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
 
-			Organization location =
-				organizationLocalService.addOrganization(
-					user.getUserId(), organization.getOrganizationId(),
-					"Test Location", OrganizationImpl.TYPE_LOCATION, true,
-					RegionImpl.DEFAULT_REGION_ID,
-					CountryImpl.DEFAULT_COUNTRY_ID,
-					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
+			organizationLocalService.addOrganization(
+				user.getUserId(), organization.getOrganizationId(),
+				"Test Location", OrganizationImpl.TYPE_LOCATION, true,
+				RegionImpl.DEFAULT_REGION_ID, CountryImpl.DEFAULT_COUNTRY_ID,
+				ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
 		}
 
 		return company;

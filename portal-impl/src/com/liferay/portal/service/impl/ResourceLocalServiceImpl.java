@@ -127,7 +127,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Community permissions
 
 			if (groupId > 0) {
-				Group group = groupPersistence.findByPrimaryKey(groupId);
+				groupPersistence.findByPrimaryKey(groupId);
 
 				if (communityPermissions == null) {
 					communityPermissions = new String[0];

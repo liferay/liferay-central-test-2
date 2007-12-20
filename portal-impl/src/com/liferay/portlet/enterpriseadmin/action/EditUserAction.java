@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
@@ -305,8 +304,6 @@ public class EditUserAction extends PortletAction {
 			String newPassword1 = ParamUtil.getString(req, "password1");
 			String newPassword2 = ParamUtil.getString(req, "password2");
 			boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
-
-			Contact contact = user.getContact();
 
 			String tempOldScreenName = user.getScreenName();
 

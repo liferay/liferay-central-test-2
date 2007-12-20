@@ -31,7 +31,6 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import java.util.List;
 
@@ -69,8 +68,6 @@ public class RSSUtil {
 		throws FeedException, IOException {
 
 		feed.setEncoding("UTF-8");
-
-		StringWriter writer = new StringWriter();
 
 		SyndFeedOutput output = new SyndFeedOutput();
 

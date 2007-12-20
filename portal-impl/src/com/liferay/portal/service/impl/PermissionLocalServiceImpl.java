@@ -363,8 +363,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
-		List userGroups = permissionCheckerBag.getUserGroups();
-		List userOrgs = permissionCheckerBag.getUserOrgs();
+		//List userGroups = permissionCheckerBag.getUserGroups();
+		//List userOrgs = permissionCheckerBag.getUserOrgs();
 		//List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
 		//List userUserGroupGroups =
 		//	permissionCheckerBag.getUserUserGroupGroups();

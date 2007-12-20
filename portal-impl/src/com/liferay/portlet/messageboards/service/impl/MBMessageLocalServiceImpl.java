@@ -469,13 +469,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Activity trackers
 
 		if (!message.isDiscussion() && !user.isDefaultUser()) {
-			long receiverUserId = 0;
+			/*long receiverUserId = 0;
 
 			if (parentMessage != null) {
 				receiverUserId = parentMessage.getUserId();
 			}
 
-			/*activityTrackerLocalService.addActivityTracker(
+			activityTrackerLocalService.addActivityTracker(
 				userId, category.getGroupId(), MBMessage.class.getName(),
 				messageId, MBActivityKeys.ADD, StringPool.BLANK,
 				receiverUserId);*/

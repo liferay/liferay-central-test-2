@@ -659,7 +659,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		syndFeed.setEntries(entries);
 
-		int rssContentLength = MBUtil.getRSSContentLength(prefs);
+		//int rssContentLength = MBUtil.getRSSContentLength(prefs);
 
 		Iterator itr = messages.iterator();
 
