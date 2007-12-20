@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.germinus.easyconf.Filter;
+
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
@@ -41,7 +42,6 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -55,8 +55,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -78,7 +76,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -408,32 +405,32 @@ public class EditPagesAction extends PortletAction {
 	protected void deleteLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 
-		PermissionCheckerImpl permissionChecker =
-			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
-
-		boolean hasDelete =
-			LayoutPermissionUtil.contains(
+		if (LayoutPermissionUtil.contains(
 				permissionChecker, groupId, privateLayout, layoutId,
-				ActionKeys.DELETE);
+				ActionKeys.DELETE)) {
 
-		if (hasDelete) {
-			Layout layout =
-				LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
 
-			String[] eventClasses =
-				StringUtil.split(PropsUtil.getComponentProperties().getString(
+			String[] eventClasses = StringUtil.split(
+				PropsUtil.getComponentProperties().getString(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
 					Filter.by(layout.getType())));
 
-			HttpServletRequest httpReq = (HttpServletRequest)(
-					(ActionRequestImpl)req).getHttpServletRequest();
-
-			HttpServletResponse httpRes = (HttpServletResponse)(
-					(ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletRequest httpReq = (HttpServletRequest)
+				((ActionRequestImpl)req).getHttpServletRequest();
+			HttpServletResponse httpRes = (HttpServletResponse)
+				((ActionResponseImpl)res).getHttpServletResponse();
 
 			EventsProcessor.process(eventClasses, httpReq, httpRes);
 		}
@@ -831,11 +828,11 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
 
-			HttpServletResponse httpRes = (HttpServletResponse)(
-				(ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = (HttpServletResponse)
+				((ActionResponseImpl)res).getHttpServletResponse();
 
-			String[] eventClasses =
-				StringUtil.split(PropsUtil.getComponentProperties().getString(
+			String[] eventClasses = StringUtil.split(
+				PropsUtil.getComponentProperties().getString(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 					Filter.by(type)));
 

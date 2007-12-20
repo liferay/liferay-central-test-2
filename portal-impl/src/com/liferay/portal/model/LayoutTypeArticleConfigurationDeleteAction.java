@@ -37,8 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LayoutTypeArticleConfigurationDeleteAction.java.html"><b>
- * <i>View Source</i></b></a>
+ * <a href="LayoutTypeArticleConfigurationDeleteAction.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -56,9 +56,10 @@ public class LayoutTypeArticleConfigurationDeleteAction extends Action {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, layoutId);
 
-			Properties properties = layout.getTypeSettingsProperties();
+			Properties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
 
-			String articleId = properties.getProperty("article-id");
+			String articleId = typeSettingsProperties.getProperty("article-id");
 
 			if (Validator.isNull(articleId)) {
 				return;
@@ -76,4 +77,5 @@ public class LayoutTypeArticleConfigurationDeleteAction extends Action {
 			throw new ActionException(e);
 		}
 	}
+
 }

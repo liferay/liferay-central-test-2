@@ -36,8 +36,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LayoutTypeArticleConfigurationUpdateAction.java.html"><b>
- * <i>View Source</i></b></a>
+ * <a href="LayoutTypeArticleConfigurationUpdateAction.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -53,11 +53,12 @@ public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 			long layoutId = ParamUtil.getLong(req, "layoutId");
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(
-					groupId, privateLayout, layoutId);
+				groupId, privateLayout, layoutId);
 
-			Properties properties = layout.getTypeSettingsProperties();
+			Properties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
 
-			String articleId = properties.getProperty("article-id");
+			String articleId = typeSettingsProperties.getProperty("article-id");
 
 			if (Validator.isNull(articleId)) {
 				return;
@@ -71,4 +72,5 @@ public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 			throw new ActionException(e);
 		}
 	}
+
 }
