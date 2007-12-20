@@ -82,7 +82,7 @@ public class UpdatePageAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 
 		if (cmd.equals("add")) {
-			String[] array = addPage(req);
+			String[] array = addPage(themeDisplay, req);
 
 			jsonObj.put("layoutId", array[0]);
 			jsonObj.put("url", array[1]);
@@ -106,7 +106,10 @@ public class UpdatePageAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String[] addPage(HttpServletRequest req) throws Exception {
+	protected String[] addPage(
+			ThemeDisplay themeDisplay, HttpServletRequest req)
+		throws Exception {
+
 		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
@@ -133,9 +136,6 @@ public class UpdatePageAction extends JSONAction {
 		LayoutServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 
