@@ -89,8 +89,8 @@ import org.apache.velocity.VelocityContext;
  */
 public class VelocityVariables {
 
-	public static void insertHelperUtilities(VelocityContext vc,
-		String[] restrictedVariables) {
+	public static void insertHelperUtilities(
+		VelocityContext vc, String[] restrictedVariables) {
 
 		// Array util
 
@@ -135,23 +135,21 @@ public class VelocityVariables {
 
 		// Portal util
 
-		if (!ArrayUtil.contains(restrictedVariables, "portalUtil") &&
-				ArrayUtil.contains(restrictedVariables, "portal")) {
-			vc.put("portalUtil", PortalUtil_IW.getInstance());
-			vc.put("portal", PortalUtil_IW.getInstance());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "portalUtil", PortalUtil_IW.getInstance());
+		_insertHelperUtility(
+			vc, restrictedVariables, "portal", PortalUtil_IW.getInstance());
 
 		// Prefs props util
 
-		if (!ArrayUtil.contains(restrictedVariables, "prefsPropsUtil")) {
-			vc.put("prefsPropsUtil", PrefsPropsUtil_IW.getInstance());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "prefsPropsUtil",
+			PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
-		if (!ArrayUtil.contains(restrictedVariables, "propsUtil")) {
-			vc.put("propsUtil", PropsUtil_IW.getInstance());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "propsUtil", PropsUtil_IW.getInstance());
 
 		// Portlet URL factory
 
@@ -159,11 +157,9 @@ public class VelocityVariables {
 
 		// Portlet preferences
 
-		if (!ArrayUtil.contains(
-				restrictedVariables, "velocityPortletPreferences")) {
-			vc.put(
-				"velocityPortletPreferences", new VelocityPortletPreferences());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "velocityPortletPreferences",
+			new VelocityPortletPreferences());
 
 		// Randomizer
 
@@ -171,15 +167,15 @@ public class VelocityVariables {
 
 		// Service locator
 
-		if (!ArrayUtil.contains(restrictedVariables, "serviceLocator")) {
-			vc.put("serviceLocator", ServiceLocator.getInstance());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "serviceLocator",
+			ServiceLocator.getInstance());
 
 		// Session clicks
 
-		if (!ArrayUtil.contains(restrictedVariables, "sessionClicks")) {
-			vc.put("sessionClicks", SessionClicks_IW.getInstance());
-		}
+		_insertHelperUtility(
+			vc, restrictedVariables, "sessionClicks",
+			SessionClicks_IW.getInstance());
 
 		// Static field getter
 
@@ -346,7 +342,7 @@ public class VelocityVariables {
 
 		// Helper utilities
 
-		insertHelperUtilities(vc, new String[0]);
+		insertHelperUtilities(vc, null);
 
 		// Insert custom vm variables
 
@@ -365,6 +361,15 @@ public class VelocityVariables {
 					vc.put(key, value);
 				}
 			}
+		}
+	}
+
+	private static void _insertHelperUtility(
+		VelocityContext vc, String[] restrictedVariables, String key,
+		Object value) {
+
+		if (!ArrayUtil.contains(restrictedVariables, key)) {
+			vc.put(key, value);
 		}
 	}
 

@@ -62,6 +62,10 @@ import org.dom4j.io.SAXReader;
  */
 public class JournalVmUtil {
 
+	public static final String[] _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES =
+		PropsUtil.getArray(
+			PropsUtil.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+
 	public static String transform(
 			Map tokens, String languageId, String xml, String script)
 		throws TransformException {
@@ -107,12 +111,8 @@ public class JournalVmUtil {
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("randomNamespace", randomNamespace);
 
-			String[] restrictedVariables =
-				PropsUtil.getArray(
-					PropsUtil.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
-
 			VelocityVariables.insertHelperUtilities(
-				context, restrictedVariables);
+				context, _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
 			script = _injectEditInPlace(xml, script);
 

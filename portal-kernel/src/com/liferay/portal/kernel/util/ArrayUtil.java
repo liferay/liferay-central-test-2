@@ -234,7 +234,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(boolean[] array, boolean value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -249,7 +249,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(char[] array, char value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -264,7 +264,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(double[] array, double value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -279,7 +279,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(long[] array, long value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -294,7 +294,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(int[] array, int value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -309,7 +309,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(short[] array, short value) {
-		if (array == null) {
+		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
 		else {
@@ -324,7 +324,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean contains(Object[] array, Object value) {
-		if ((array == null) || (value == null)) {
+		if ((array == null) || (array.length == 0) || (value == null)) {
 			return false;
 		}
 		else {
