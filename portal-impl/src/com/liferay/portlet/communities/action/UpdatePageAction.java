@@ -134,7 +134,10 @@ public class UpdatePageAction extends JSONAction {
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 
-		String layoutURL = PortalUtil.getLayoutActualURL(layout, mainPath);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(doAsUserId)) {
 			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
