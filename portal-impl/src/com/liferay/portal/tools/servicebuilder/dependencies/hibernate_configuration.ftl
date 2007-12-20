@@ -15,15 +15,13 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
-
 /**
  * <a href="HibernateConfiguration.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateConfiguration extends LocalSessionFactoryBean {
+public class HibernateConfiguration extends TransactionAwareConfiguration {
 
 	protected Configuration newConfiguration() {
 		Configuration cfg = new Configuration();
