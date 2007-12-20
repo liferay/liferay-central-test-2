@@ -1740,26 +1740,26 @@ public class JournalArticleLocalServiceImpl
 					groupId, articleId, version, incrementVersion, el, elName,
 					images);
 			}
-			//else if (elType.equals("text_area")) {
-			//	Element dynamicContent = el.element("dynamic-content");
+			else if (elType.equals("text_area")) {
+				Element dynamicContent = el.element("dynamic-content");
 
-			//	String text = dynamicContent.getText();
+				String text = dynamicContent.getText();
 
 				// LEP-1594
 
-			//	try {
-			//		text = ParserUtils.trimTags(
-			//			text, new String[] {"script"}, false, true);
-			//	}
-			//	catch (ParserException pe) {
-			//		text = pe.getLocalizedMessage();
-			//	}
-			//	catch (UnsupportedEncodingException uee) {
-			//		text = uee.getLocalizedMessage();
-			//	}
+				try {
+					text = ParserUtils.trimTags(
+						text, new String[] {"script"}, false, true);
+				}
+				catch (ParserException pe) {
+					text = pe.getLocalizedMessage();
+				}
+				catch (UnsupportedEncodingException uee) {
+					text = uee.getLocalizedMessage();
+				}
 
-			//	dynamicContent.setText(text);
-			//}
+				dynamicContent.setText(text);
+			}
 
 			format(
 				groupId, articleId, version, incrementVersion, el, images);
