@@ -48,32 +48,33 @@ public class JBPMServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Content type " + contentType);
-		}
-
-		if ((contentType != null) &&
-			(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
-
-			req = new UploadServletRequest(req);
-		}
-
-		WorkflowComponentImpl workflowComponentImpl =
-			new WorkflowComponentImpl();
-
-		String result = workflowComponentImpl.process(req);
-
-		res.setContentType("text/xml");
-
 		try {
+			String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Content type " + contentType);
+			}
+
+			if ((contentType != null) &&
+				(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
+
+				req = new UploadServletRequest(req);
+			}
+
+			WorkflowComponentImpl workflowComponentImpl =
+				new WorkflowComponentImpl();
+
+			String result = workflowComponentImpl.process(req);
+
+			res.setContentType("text/xml");
+
 			ServletResponseUtil.write(res, result);
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			_log.error(e, e);
+
+			res.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
 
