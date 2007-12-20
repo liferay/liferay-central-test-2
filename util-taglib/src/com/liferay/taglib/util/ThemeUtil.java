@@ -44,7 +44,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
-import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
@@ -131,8 +130,6 @@ public class ThemeUtil {
 			String page, Theme theme, boolean write)
 		throws Exception {
 
-		// Get template
-
 		// The servlet context name will be null when the theme is deployed to
 		// the root directory in Tomcat. See
 		// com.liferay.portal.servlet.MainServlet and
@@ -168,8 +165,6 @@ public class ThemeUtil {
 			return null;
 		}
 
-		Template template = Velocity.getTemplate(source);
-
 		StringWriter sw = new StringWriter();
 
 		VelocityContext vc = new VelocityContext();
@@ -193,7 +188,7 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		template.merge(vc, sw);
+		Velocity.mergeTemplate(source, StringPool.UTF8, vc, sw);
 
 		// Print output
 

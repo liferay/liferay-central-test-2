@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
@@ -136,7 +137,7 @@ public class VelocityPortlet extends GenericPortlet {
 	protected Template getTemplate(String name) throws Exception {
 		return RuntimeSingleton.getTemplate(
 			_portletContextName + VelocityResourceListener.SERVLET_SEPARATOR +
-				StrutsUtil.TEXT_HTML_DIR + name);
+				StrutsUtil.TEXT_HTML_DIR + name, StringPool.UTF8);
 	}
 
 	protected Template getTemplate(String name, String encoding)
