@@ -95,7 +95,7 @@ Collections.sort(portlets, new PortletTitleComparator(application, locale));
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>
 
-	<div class="lfr-add-content collapsed" id="<%= newCategoryPath %>">
+	<div class="lfr-add-content collapsed" id="<%= newCategoryPath.replace(':','-') %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
