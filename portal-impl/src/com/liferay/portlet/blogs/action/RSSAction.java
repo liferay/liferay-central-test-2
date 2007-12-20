@@ -170,8 +170,9 @@ public class RSSAction extends PortletAction {
 		else if (layout != null) {
 			groupId = layout.getGroupId();
 
-			feedURL = themeDisplay.getURLPortal() +
-				PortalUtil.getLayoutURL(themeDisplay) + "/blogs/rss";
+			feedURL =
+				themeDisplay.getURLPortal() +
+					PortalUtil.getLayoutURL(themeDisplay) + "/blogs/rss";
 
 			entryURL = feedURL;
 
