@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.germinus.easyconf.Filter;
 
+import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -1235,8 +1236,12 @@ public class LayoutTypePortletImpl
 					layout.getPlid(), portletId);
 			}
 		}
+		catch (NoSuchPortletPreferencesException nsppe) {
+		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 	}
 
