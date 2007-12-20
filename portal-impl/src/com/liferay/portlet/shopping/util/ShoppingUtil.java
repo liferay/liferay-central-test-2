@@ -617,6 +617,8 @@ public class ShoppingUtil {
 
 		if (category != null) {
 			for (int i = 0;; i++) {
+				category = category.toEscapedModel();
+
 				PortletURL portletURL = res.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {

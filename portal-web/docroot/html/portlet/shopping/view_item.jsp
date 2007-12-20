@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 ShoppingItem item = (ShoppingItem)request.getAttribute(WebKeys.SHOPPING_ITEM);
 
+item = item.toEscapedModel();
+
 ShoppingItemField[] itemFields = (ShoppingItemField[])ShoppingItemFieldLocalServiceUtil.getItemFields(item.getItemId()).toArray(new ShoppingItemField[0]);
 ShoppingItemPrice[] itemPrices = (ShoppingItemPrice[])ShoppingItemPriceLocalServiceUtil.getItemPrices(item.getItemId()).toArray(new ShoppingItemPrice[0]);
 

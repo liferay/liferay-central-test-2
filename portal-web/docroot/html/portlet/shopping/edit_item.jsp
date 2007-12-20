@@ -186,6 +186,8 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 			<%
 			ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+			category = category.toEscapedModel();
 			%>
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">

@@ -31,6 +31,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 SCProductEntry productEntry = (SCProductEntry)request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
 
+productEntry = productEntry.toEscapedModel();
+
 long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
 
 SCProductVersion latestProductVersion = productEntry.getLatestVersion();
@@ -299,6 +301,8 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 		for (int i = 0; i < results.size(); i++) {
 			SCProductVersion curProductVersion = (SCProductVersion) results.get(i);
 
+			curProductVersion = curProductVersion.toEscapedModel();
+
 			ResultRow row = new ResultRow(curProductVersion, String.valueOf(curProductVersion.getProductVersionId()), i);
 
 			// Name and description
@@ -343,6 +347,8 @@ public String _getFrameworkVersions(List frameworkVersions) {
 
 	while (itr.hasNext()) {
 		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();
+
+		frameworkVersion = frameworkVersion.toEscapedModel();
 
 		if (Validator.isNotNull(frameworkVersion.getUrl())) {
 			sm.append("<a href='");

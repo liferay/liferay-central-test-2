@@ -33,9 +33,9 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post">
 
 <fieldset class="block-labels">
-	<legend><%= title %></legend>
+	<legend><%= Html.escape(title) %></legend>
 
-	<p class="description"><%= description %></p>
+	<p class="description"><%= Html.escape(description) %></p>
 
 	<liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
 	<liferay-ui:success key="saveToFileSuccees" message="the-file-was-saved-successfully" />
@@ -49,7 +49,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	int i = 1;
 
 	String fieldName = "field" + i;
-	String fieldLabel = prefs.getValue("fieldLabel" + i, "");
+	String fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
 	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 	String fieldValue = ParamUtil.getString(request, fieldName);
 
@@ -68,34 +68,35 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 			</c:when>
 			<c:when test='<%= fieldType.equals("text") %>'>
 				<div class="ctrl-holder">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= Html.escape(fieldLabel) %></label>
 
-					<input class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
+					<input class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= Html.escape(fieldValue) %>" />
 				</div>
 			</c:when>
 			<c:when test='<%= fieldType.equals("textarea") %>'>
 				<div class="ctrl-holder">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= Html.escape(fieldLabel) %></label>
 
-					<textarea class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
+					<textarea class='<%= fieldOptional ? "optional" : "" %>' id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= Html.escape(fieldValue) %></textarea>
 				</div>
 			</c:when>
 			<c:when test='<%= fieldType.equals("checkbox") %>'>
 				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" /> <%= fieldLabel %></label>
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" /> <%= Html.escape(fieldLabel) %></label>
 				</div>
 			</c:when>
 			<c:when test='<%= fieldType.equals("radio") %>'>
 				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= Html.escape(fieldLabel) %></label>
 
 					<%
 					String[] options = WebFormUtil.split(fieldOptions);
 
 					for (int j = 0; j < options.length; j++) {
+						String optionValue = options[j];
 					%>
 
-						<label><input type="radio" name="<portlet:namespace /><%= fieldName %>" <%= fieldValue.equals(options[j]) ? "checked=\"true\"" : "" %> value="<%= options[j] %>" /> <%= options[j] %></label>
+						<label><input type="radio" name="<portlet:namespace /><%= fieldName %>" <%= fieldValue.equals(optionValue) ? "checked=\"true\"" : "" %> value="<%= Html.escape(optionValue) %>" /> <%= Html.escape(optionValue) %></label>
 
 					<%
 					}
@@ -115,9 +116,10 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 						<%
 						for (int j = 0; j < options.length; j++) {
+							String optionValue = options[j];
 						%>
 
-							<option <%= fieldValue.equals(options[j]) ? "selected" : "" %> value="<%= options[j] %>"><%= options[j] %></option>
+							<option <%= fieldValue.equals(optionValue) ? "selected" : "" %> value="<%= Html.escape(optionValue) %>"><%= Html.escape(optionValue) %></option>
 
 						<%
 						}

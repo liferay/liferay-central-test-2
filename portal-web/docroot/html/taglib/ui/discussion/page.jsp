@@ -334,7 +334,7 @@ List messages = treeWalker.getMessages();
 							<br />
 
 							<div>
-								<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= Html.toInputSafe(message.getBody()) %></textarea>
+								<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= Html.escape(message.getBody()) %></textarea>
 							</div>
 
 							<br />

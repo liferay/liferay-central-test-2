@@ -110,7 +110,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 						<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="code" />
 					</c:when>
 					<c:otherwise>
-						<%= code %>
+						<%= Html.escape(code) %>
 					</c:otherwise>
 				</c:choose>
 			</td>

@@ -93,7 +93,7 @@ List updatablePackageIds = new ArrayList();
 						List resultRows = searchContainer.getResultRows();
 
 						for (int i = 0; i < pluginPackages.size(); i++) {
-							PluginPackage pluginPackage = (PluginPackage) pluginPackages.get(i);
+							PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
 
 							PluginPackage availablePluginPackage = null;
 

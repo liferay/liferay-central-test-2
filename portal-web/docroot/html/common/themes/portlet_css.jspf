@@ -300,6 +300,12 @@ JSONObject advancedData = jsonObj.getJSONObject("advancedData");
 
 String customCSS = advancedData.getString("customCSS");
 
+customCSS = StringUtil.replace(
+	customCSS,
+	new String[] {"<", ">", "expression("},
+	new String[] {"&lt;", "&gt;", ""}
+);
+
 // Portlet data
 
 JSONObject portletData = jsonObj.getJSONObject("portletData");

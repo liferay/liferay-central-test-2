@@ -156,7 +156,13 @@ portletURL.setParameter("tabs1", tabs1);
 
 			SCProductEntry productEntry = SCProductEntryLocalServiceUtil.getProductEntry(productEntryId);
 
+			productEntry = productEntry.toEscapedModel();
+
 			SCProductVersion latestProductVersion = productEntry.getLatestVersion();
+
+			if (latestProductVersion != null) {
+				latestProductVersion = latestProductVersion.toEscapedModel();
+			}
 
 			ResultRow row = new ResultRow(productEntry, productEntryId, i);
 
@@ -207,7 +213,9 @@ portletURL.setParameter("tabs1", tabs1);
 			Iterator itr = productEntry.getLicenses().iterator();
 
 			while (itr.hasNext()) {
-				SCLicense license = (SCLicense) itr.next();
+				SCLicense license = (SCLicense)itr.next();
+
+				license = license.toEscapedModel();
 
 				sm.append(license.getName());
 
@@ -237,7 +245,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<div>
 			<label for="<portlet:namespace />keyword"><liferay-ui:message key="search" /></label>
 
-			<input id="<portlet:namespace />keyword" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+			<input id="<portlet:namespace />keyword" name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 
 			<select name="<portlet:namespace/>type">
 				<option value=""></option>
@@ -324,9 +332,15 @@ portletURL.setParameter("tabs1", tabs1);
 		for (int i = 0; i < results.size(); i++) {
 			SCProductEntry productEntry = (SCProductEntry)results.get(i);
 
+			productEntry = productEntry.toEscapedModel();
+
 			long productEntryId = productEntry.getProductEntryId();
 
 			SCProductVersion latestProductVersion = productEntry.getLatestVersion();
+
+			if (latestProductVersion != null) {
+				latestProductVersion = latestProductVersion.toEscapedModel();
+			}
 
 			ResultRow row = new ResultRow(productEntry, productEntryId, i);
 
@@ -377,7 +391,9 @@ portletURL.setParameter("tabs1", tabs1);
 			Iterator itr = productEntry.getLicenses().iterator();
 
 			while (itr.hasNext()) {
-				SCLicense license = (SCLicense) itr.next();
+				SCLicense license = (SCLicense)itr.next();
+
+				license = license.toEscapedModel();
 
 				sm.append(license.getName());
 
@@ -440,6 +456,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 		for (int i = 0; i < results.size(); i++) {
 			SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) results.get(i);
+
+			frameworkVersion = frameworkVersion.toEscapedModel();
 
 			ResultRow row = new ResultRow(frameworkVersion, frameworkVersion.getFrameworkVersionId(), i);
 
@@ -512,7 +530,9 @@ portletURL.setParameter("tabs1", tabs1);
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			SCLicense license = (SCLicense) results.get(i);
+			SCLicense license = (SCLicense)results.get(i);
+
+			license = license.toEscapedModel();
 
 			ResultRow row = new ResultRow(license, license.getLicenseId(), i);
 

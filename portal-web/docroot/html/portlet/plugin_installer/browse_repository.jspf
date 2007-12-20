@@ -58,7 +58,7 @@ try {
 	</tr>
 	<tr>
 		<td>
-			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 		</td>
 		<td>
 			<select name="<portlet:namespace/>tag">

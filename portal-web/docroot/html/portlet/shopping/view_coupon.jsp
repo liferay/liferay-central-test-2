@@ -26,6 +26,8 @@
 
 <%
 ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_COUPON);
+
+coupon = coupon.toEscapedModel();
 %>
 
 <b><%= coupon.getCouponId() %></b>

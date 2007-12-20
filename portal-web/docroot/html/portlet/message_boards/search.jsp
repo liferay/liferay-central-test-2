@@ -90,7 +90,7 @@ headerNames.add("thread-posts");
 headerNames.add("thread-views");
 headerNames.add("score");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
 
 Hits hits = null;
 
@@ -152,7 +152,7 @@ try {
 	}
 %>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 
 	<input type="submit" value="<liferay-ui:message key="search-messages" />" />
 

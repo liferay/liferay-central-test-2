@@ -83,7 +83,7 @@ headerNames.add("image");
 headerNames.add("score");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
 
 Hits hits = null;
 
@@ -146,7 +146,7 @@ try {
 	}
 %>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 
 	<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
 

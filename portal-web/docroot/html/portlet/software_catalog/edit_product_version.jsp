@@ -28,6 +28,9 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
+
+productEntry = productEntry.toEscapedModel();
+
 SCProductVersion productVersion = (SCProductVersion) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION);
 
 long productEntryId = productEntry.getProductEntryId();
@@ -88,7 +91,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <h3><%= productEntry.getName() %></h3>
 
 <fieldset>
-	<legend><%=LanguageUtil.get(pageContext, "main-fields")%></legend>
+	<legend><liferay-ui:message key="main-fields" /></legend>
 
 	<table class="lfr-table">
 	<tr>

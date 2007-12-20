@@ -69,6 +69,8 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	ShoppingCategory curCategory = (ShoppingCategory)results.get(i);
 
+	curCategory = curCategory.toEscapedModel();
+
 	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
