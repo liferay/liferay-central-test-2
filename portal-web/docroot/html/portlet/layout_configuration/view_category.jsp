@@ -95,7 +95,7 @@ Collections.sort(portlets, new PortletTitleComparator(application, locale));
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>
 
-	<div class="lfr-add-content collapsed" id="<%= newCategoryPath.replace(':','-') %>">
+	<div class="lfr-add-content collapsed" id="<%= newCategoryPath.replace(':', '-') %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
@@ -137,7 +137,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 				boolean portletLocked = (!portletInstanceable && portletUsed);
 			%>
 
-				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId.toString().replace(':','-') %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
+				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId.toString().replace(':', '-') %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
 					<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
 				</div>
 
