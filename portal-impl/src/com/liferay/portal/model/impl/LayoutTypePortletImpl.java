@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.germinus.easyconf.Filter;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -1178,7 +1179,7 @@ public class LayoutTypePortletImpl
 		throws SystemException {
 
 		if (!_enablePortletLayoutListener) {
-			_deletePortletPreference(layout, portletId);
+			deletePortletPreference(layout, portletId);
 
 			return;
 		}
@@ -1215,11 +1216,11 @@ public class LayoutTypePortletImpl
 				}
 			}
 
-			_deletePortletPreference(layout, portletId);
+			deletePortletPreference(layout, portletId);
 		}
 	}
 
-	private void _deletePortletPreference(Layout layout, String portletId) {
+	protected void deletePortletPreference(Layout layout, String portletId) {
 		try {
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
@@ -1235,9 +1236,7 @@ public class LayoutTypePortletImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(
-				"Could not delete PortletPreferences for {" +
-					layout.getPlid() + ", " + portletId + "}" , e);
+			_log.error(e, e);
 		}
 	}
 
