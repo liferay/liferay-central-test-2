@@ -26,6 +26,41 @@
 
 <%
 try {
+	String variablePropertyKey = StringPool.BLANK;
+	String variablePropertyValue = StringPool.BLANK;
+
+	int bracketBegin = xmlURL.indexOf("[");
+	int bracketEnd = -1;
+
+	if (bracketBegin > -1) {
+		bracketEnd = xmlURL.indexOf("]", bracketBegin);
+
+		if (bracketEnd > -1 && ((bracketEnd - bracketBegin) > 0)) {
+			variablePropertyKey = xmlURL.substring(bracketBegin + 1, bracketEnd);
+
+			String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+
+			if (compilerEntries.length > 0) {
+				try {
+					TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), compilerEntries[0]);
+
+					TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), variablePropertyKey);
+
+					variablePropertyValue = property.getValue();
+
+					xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
+				}
+
+				catch (NoSuchEntryException nsee) {
+					_log.warn(nsee);
+				}
+				catch (NoSuchPropertyException nspe) {
+					_log.warn(nspe);
+				}
+			}
+		}
+	}
+
 	String content = XSLContentUtil.transform(new URL(xmlURL), new URL(xslURL));
 %>
 

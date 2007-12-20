@@ -26,12 +26,7 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.xslcontent.util.XSLContentUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -58,36 +53,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		URL xmlURL = null;
-
-		try {
-			xmlURL = new URL(ParamUtil.getString(req, "xmlURL"));
-		}
-		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "xmlURL");
-
-			return;
-		}
-
-		URL xslURL = null;
-
-		try {
-			xslURL = new URL(ParamUtil.getString(req, "xslURL"));
-		}
-		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "xslURL");
-
-			return;
-		}
-
-		try {
-			XSLContentUtil.transform(xmlURL, xslURL);
-		}
-		catch (Exception e) {
-			SessionErrors.add(req, "transformation");
-
-			return;
-		}
+		String xmlURL = ParamUtil.getString(req, "xmlURL");
+		String xslURL = ParamUtil.getString(req, "xslURL");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -95,8 +62,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
-		prefs.setValue("xml-url", xmlURL.toString());
-		prefs.setValue("xsl-url", xslURL.toString());
+		prefs.setValue("xml-url", xmlURL);
+		prefs.setValue("xsl-url", xslURL);
 
 		prefs.store();
 
