@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.germinus.easyconf.Filter;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -36,11 +37,15 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -1177,6 +1182,8 @@ public class LayoutTypePortletImpl
 		throws SystemException {
 
 		if (!_enablePortletLayoutListener) {
+			_deletePortletPreference(layout, portletId);
+
 			return;
 		}
 
@@ -1211,6 +1218,30 @@ public class LayoutTypePortletImpl
 					}
 				}
 			}
+
+			_deletePortletPreference(layout, portletId);
+		}
+	}
+
+	private void _deletePortletPreference(Layout layout, String portletId) {
+		try {
+			PortletPreferences portletPreferences =
+				PortletPreferencesLocalServiceUtil.getPortletPreferences(
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+					layout.getPlid(), portletId);
+
+			if (portletPreferences != null) {
+				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+					layout.getPlid(), portletId);
+			}
+		}
+		catch (Exception e) {
+			_log.error(
+				"Could not delete PortletPreferences for {" +
+					layout.getPlid() + ", " + portletId + "}" , e);
 		}
 	}
 
