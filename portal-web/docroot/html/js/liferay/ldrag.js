@@ -164,7 +164,9 @@
 				settings.mouseNwOffset = mousePos.minus(nwOffset);
 				settings.mouseSeOffset = mousePos.minus(seOffset);
 				settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-	
+
+				settings.browserEvent = event;
+
 				$.lDrag._processListeners(settings, "start");
 	
 				$.lDrag._setConstraint(settings);
@@ -220,6 +222,8 @@
 				nwPosition.reposition(container);
 			}
 
+			settings.browserEvent = event;
+
 			$.lDrag._processListeners(settings, "move");
 
 			// once dragging has started, the position of the container
@@ -254,6 +258,8 @@
 
 			jQuery(document).unbind("mousemove", $.lDrag.onMouseMove);
 			jQuery(document).unbind("mouseup", $.lDrag.onMouseUp);
+
+			settings.browserEvent = event;
 
 			$.lDrag._processListeners(settings, "complete");
 			$.lDrag.container = null;

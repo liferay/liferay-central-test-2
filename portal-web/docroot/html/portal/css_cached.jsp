@@ -140,7 +140,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-portlet-item p a {
-	cursor: move;
+	cursor: pointer;
 	font-size: 0.9em;
 	font-weight: bold;
 	position: absolute;
