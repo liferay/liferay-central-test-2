@@ -157,7 +157,7 @@
 
 				jQuery(container).prepend(loadingDiv);
 
-				var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_col_id=column-1&p_p_col_pos=0&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
+				var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=column-1&p_p_col_pos=0&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
 
 				return addPortletHTML(queryString, loadingDiv, returnPortlet);
 			}

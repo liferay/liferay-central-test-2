@@ -42,11 +42,13 @@ var LayoutConfiguration = {
 
 		if (!instance.menu) {
 			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_l_id=" + plid + "&p_p_id=" + ppid + "&doAsUserId=" + doAsUserId + "&p_p_state=exclusive";
+
 			var popupWidth = 250;
 
 			if (instance.offsetMenu) {
 				var body = jQuery('body');
 				var originalPadding = body.css('padding-left');
+
 				body.css('padding-left', popupWidth + 10);
 			}
 
@@ -56,6 +58,7 @@ var LayoutConfiguration = {
 				title: Liferay.Language.get("add-application"),
 				onClose: function() {
 					instance.menu = null;
+
 					if (instance.offsetMenu) {
 						body.css('padding-left', originalPadding);
 					}
@@ -137,8 +140,9 @@ var LayoutConfiguration = {
 
 		Liferay.Publisher.subscribe('closePortlet', instance._onPortletClose, instance);
 
-		var portlets = jQuery('.lfr-portlet-item');
 		var clicked = false;
+
+		var portlets = jQuery('.lfr-portlet-item');
 
 		var options = {
 			threshold: 10,
@@ -151,19 +155,23 @@ var LayoutConfiguration = {
 				}
 				else {
 					clicked = true;
+
 					var portlet = originalTarget.parents('.lfr-portlet-item:first');
+
 					if (!portlet.is('.lfr-portlet-used')) {
 						var plid = portlet.attr('plid');
 						var portletId = portlet.attr('portletId');
 						var isInstanceable = (portlet.attr('instanceable') == 'true');
+
 						addPortlet(plid, portletId, themeDisplay.getDoAsUserIdEncoded());
+
 						if (!isInstanceable) {
 							portlet.addClass('lfr-portlet-used');
 							portlet.unbind('mousedown');
 						}
 					}
 				}
-				
+
 			},
 			onMove: function(s) {
 				Liferay.Columns._onMove(s);
@@ -215,6 +223,7 @@ var LayoutConfiguration = {
 						}
 					}
 				}
+
 				clicked = false;
 			}
 		};

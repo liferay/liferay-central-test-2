@@ -153,27 +153,26 @@
 
 			if (!container._LFR_noDrag) {
 				$.lDrag.container = container;
-	
+
 				var nwOffset = jContainer.northwestOffset(true);
 				var seOffset = nwOffset.plus(jContainer.xySize());
-	
+
 				settings.originalZIndex = container.style.zIndex;
-	
+
 				// Offset of the mouse relative to the dragging container
 				// This should remain constant.
 				settings.mouseNwOffset = mousePos.minus(nwOffset);
 				settings.mouseSeOffset = mousePos.minus(seOffset);
 				settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-
 				settings.browserEvent = event;
 
 				$.lDrag._processListeners(settings, "start");
-	
+
 				$.lDrag._setConstraint(settings);
 
 				jQuery(document).mousemove($.lDrag.onMouseMove);
 				jQuery(document).mouseup($.lDrag.onMouseUp);
-			
+
 				return false;
 			}
 			else {

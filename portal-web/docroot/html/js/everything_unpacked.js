@@ -15968,25 +15968,26 @@ jQuery.fn.xySize = function() {
 
 			if (!container._LFR_noDrag) {
 				$.lDrag.container = container;
-	
+
 				var nwOffset = jContainer.northwestOffset(true);
 				var seOffset = nwOffset.plus(jContainer.xySize());
-	
+
 				settings.originalZIndex = container.style.zIndex;
-	
+
 				// Offset of the mouse relative to the dragging container
 				// This should remain constant.
 				settings.mouseNwOffset = mousePos.minus(nwOffset);
 				settings.mouseSeOffset = mousePos.minus(seOffset);
 				settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-	
+				settings.browserEvent = event;
+
 				$.lDrag._processListeners(settings, "start");
-	
+
 				$.lDrag._setConstraint(settings);
 
 				jQuery(document).mousemove($.lDrag.onMouseMove);
 				jQuery(document).mouseup($.lDrag.onMouseUp);
-			
+
 				return false;
 			}
 			else {
@@ -16035,6 +16036,8 @@ jQuery.fn.xySize = function() {
 				nwPosition.reposition(container);
 			}
 
+			settings.browserEvent = event;
+
 			$.lDrag._processListeners(settings, "move");
 
 			// once dragging has started, the position of the container
@@ -16069,6 +16072,8 @@ jQuery.fn.xySize = function() {
 
 			jQuery(document).unbind("mousemove", $.lDrag.onMouseMove);
 			jQuery(document).unbind("mouseup", $.lDrag.onMouseUp);
+
+			settings.browserEvent = event;
 
 			$.lDrag._processListeners(settings, "complete");
 			$.lDrag.container = null;
@@ -18592,6 +18597,7 @@ var LayoutConfiguration = {
 	menuIframe : null,
 	portlets : [],
 	showTimer : 0,
+	offsetMenu: true,
 
 	init : function () {
 		var instance = this;
@@ -18627,16 +18633,27 @@ var LayoutConfiguration = {
 		if (!instance.menu) {
 			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_l_id=" + plid + "&p_p_id=" + ppid + "&doAsUserId=" + doAsUserId + "&p_p_state=exclusive";
 
+			var popupWidth = 250;
+
+			if (instance.offsetMenu) {
+				var body = jQuery('body');
+				var originalPadding = body.css('padding-left');
+
+				body.css('padding-left', popupWidth + 10);
+			}
+
 			var popup = Liferay.Popup({
-				width: 250,
+				width: popupWidth,
 				noCenter: true,
 				title: Liferay.Language.get("add-application"),
 				onClose: function() {
 					instance.menu = null;
+
+					if (instance.offsetMenu) {
+						body.css('padding-left', originalPadding);
+					}
 				}
 			});
-
-			jQuery(popup).parents('.popup:first').css({top: 10, left: 10});
 
 			AjaxUtil.update(url, popup,
 				{
@@ -18713,58 +18730,91 @@ var LayoutConfiguration = {
 
 		Liferay.Publisher.subscribe('closePortlet', instance._onPortletClose, instance);
 
+		var clicked = false;
+
 		var portlets = jQuery('.lfr-portlet-item');
 
 		var options = {
 			threshold: 10,
-			onMove: function(s) {
-				Liferay.Columns._onMove(s);
-			},
-			onComplete: function(s) {
-				var container = s.container;
+			onStart: function(s) {
+				var event = s.browserEvent;
+				var originalTarget = jQuery(event.originalTarget || event.srcElement);
 
-				var plid = container.getAttribute('plid');
-				var portletId = container.getAttribute('portletId');
+				if (!originalTarget.is('a')) {
+					Liferay.Columns._onStart(s);
+				}
+				else {
+					clicked = true;
 
-				if (plid && portletId) {
-					var portlet = jQuery(s.container);
-					var isInstanceable = (container.getAttribute('instanceable') == 'true');
-					var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
-					var portletBound = addPortlet(plid, portletId, doAsUserId, true);
+					var portlet = originalTarget.parents('.lfr-portlet-item:first');
 
-					if (!isInstanceable) {
-						if (portletBound) {
+					if (!portlet.is('.lfr-portlet-used')) {
+						var plid = portlet.attr('plid');
+						var portletId = portlet.attr('portletId');
+						var isInstanceable = (portlet.attr('instanceable') == 'true');
+
+						addPortlet(plid, portletId, themeDisplay.getDoAsUserIdEncoded());
+
+						if (!isInstanceable) {
 							portlet.addClass('lfr-portlet-used');
 							portlet.unbind('mousedown');
 						}
 					}
-					else {
-						Liferay.Columns.add(portlet, options);
-					}
+				}
 
-					portlet.css(
-						{
-							top: 0,
-							left: 0
+			},
+			onMove: function(s) {
+				Liferay.Columns._onMove(s);
+			},
+			onComplete: function(s) {
+				if (!clicked) {
+					var container = s.container;
+
+					var plid = container.getAttribute('plid');
+					var portletId = container.getAttribute('portletId');
+
+					if (plid && portletId) {
+						var portlet = jQuery(s.container);
+						var isInstanceable = (container.getAttribute('instanceable') == 'true');
+						var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
+						var portletBound = addPortlet(plid, portletId, doAsUserId, true);
+
+						if (!isInstanceable) {
+							if (portletBound) {
+								portlet.addClass('lfr-portlet-used');
+								portlet.unbind('mousedown');
+							}
 						}
-					);
-
-					s.container = portletBound;
-
-					var completed = Liferay.Columns._onComplete(s);
-
-					if (completed) {
-						portlet.Highlight(750, '#ffe98f');
-					}
-					else {
-						if (isInstanceable) {
-							portletId = portletBound.id;
-							portletId = portletId.replace(/^p_p_id_(.*)_$/, '$1');
+						else {
+							Liferay.Columns.add(portlet, options);
 						}
 
-						closePortlet(plid, portletId, doAsUserId, true);
+						portlet.css(
+							{
+								top: 0,
+								left: 0
+							}
+						);
+
+						s.container = portletBound;
+
+						var completed = Liferay.Columns._onComplete(s);
+
+						if (completed) {
+							portlet.Highlight(750, '#ffe98f');
+						}
+						else {
+							if (isInstanceable) {
+								portletId = portletBound.id;
+								portletId = portletId.replace(/^p_p_id_(.*)_$/, '$1');
+							}
+
+							closePortlet(plid, portletId, doAsUserId, true);
+						}
 					}
 				}
+
+				clicked = false;
 			}
 		};
 
