@@ -240,35 +240,27 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			fullPathSM.append(StringPool.QUESTION);
 			fullPathSM.append(req.getQueryString());
 
-			Map paramMap =
-				HttpUtil.parameterMapFromString(req.getQueryString());
+			long plid = ParamUtil.getLong(req, "p_l_id");
+			String portletId = ParamUtil.getString(req, "p_p_id");
 
-			if (path.equals("/portal/layout") &&
-					paramMap.containsKey("p_l_id")) {
-
+			if (path.equals("/portal/layout") && plid < 0) {
 				try {
-					String[] values = (String[])paramMap.get("p_l_id");
-
-					long plid =
-						GetterUtil.getLong(values[0]);
-
 					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+					Portlet portlet = null;
+
+					String portletFriendlyUrl = null;
 
 					fullPathSM = new StringMaker();
 
 					fullPathSM.append(
 						PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
 
-					if (paramMap.containsKey("p_p_id")) {
-						Portlet portlet = null;
-
+					if (Validator.isNotNull(portletId)) {
 						long companyId = PortalUtil.getCompanyId(req);
-						String portletId = ParamUtil.getString(req, "p_p_id");
 
-						if (Validator.isNotNull(portletId)) {
-							portlet = PortletLocalServiceUtil.getPortletById(
-								companyId, portletId);
-						}
+						portlet = PortletLocalServiceUtil.getPortletById(
+							companyId, portletId);
 
 						if (portlet == null) {
 							String strutsPath = path.substring(
@@ -279,48 +271,49 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 								companyId, strutsPath);
 						}
 
-						if (portlet != null && portlet.isActive()) {
-							String namespace =
-								StringPool.UNDERLINE + portletId +
-									StringPool.UNDERLINE;
+					}
 
-							FriendlyURLMapper friendlyURLMapper =
-								portlet.getFriendlyURLMapperInstance();
+					if (portlet != null && portlet.isActive()) {
+						String namespace =
+							StringPool.UNDERLINE + portletId +
+								StringPool.UNDERLINE;
 
-							PortletURLImpl portletURL =
-								PortletURLFactory.getInstance().create(
-									req, portletId, plid, false);
+						FriendlyURLMapper friendlyURLMapper =
+							portlet.getFriendlyURLMapperInstance();
 
-							Iterator requestParamsItr =
-								req.getParameterMap().entrySet().iterator();
+						PortletURLImpl portletURL =
+							PortletURLFactory.getInstance().create(
+								req, portletId, plid, false);
 
-							while (requestParamsItr.hasNext()) {
-								Entry entry = (Entry)requestParamsItr.next();
-								String key = (String)entry.getKey();
+						Iterator requestParamsItr =
+							req.getParameterMap().entrySet().iterator();
 
-								if (key.startsWith(namespace)) {
-									key = key.substring(namespace.length());
+						while (requestParamsItr.hasNext()) {
+							Entry entry = (Entry)requestParamsItr.next();
+							String key = (String)entry.getKey();
 
-									Object valueObj = entry.getValue();
+							if (key.startsWith(namespace)) {
+								key = key.substring(namespace.length());
 
-									if (valueObj instanceof String[]) {
-										portletURL.setParameter(
-											key, (String[])entry.getValue());
-									}
-									else {
-										portletURL.setParameter(
-											key, (String)entry.getValue());
-									}
+								Object valueObj = entry.getValue();
+
+								if (valueObj instanceof String[]) {
+									portletURL.setParameter(
+										key, (String[])entry.getValue());
+								}
+								else {
+									portletURL.setParameter(
+										key, (String)entry.getValue());
 								}
 							}
-
-							String portletFriendlyUrl =
-								friendlyURLMapper.buildPath(portletURL);
-
-							if (portletFriendlyUrl != null) {
-								fullPathSM.append(portletFriendlyUrl);
-							}
 						}
+
+						portletFriendlyUrl =
+							friendlyURLMapper.buildPath(portletURL);
+					}
+
+					if (portletFriendlyUrl != null) {
+						fullPathSM.append(portletFriendlyUrl);
 					}
 				}
 				catch(Exception e) {
