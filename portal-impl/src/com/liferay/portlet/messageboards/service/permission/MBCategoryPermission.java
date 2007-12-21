@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -100,6 +101,10 @@ public class MBCategoryPermission {
 			PermissionChecker permissionChecker, MBCategory category,
 			String actionId)
 		throws PortalException, SystemException {
+
+		if (actionId.equals(ActionKeys.ADD_CATEGORY)) {
+			actionId = ActionKeys.ADD_SUBCATEGORY;
+		}
 
 		if (MBBanLocalServiceUtil.hasBan(
 				category.getGroupId(), permissionChecker.getUserId())) {

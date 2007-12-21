@@ -87,6 +87,10 @@ public class ActionKeys {
 
 	public static final String ADD_STRUCTURE = "ADD_STRUCTURE";
 
+	public static final String ADD_SUBCATEGORY = "ADD_SUBCATEGORY";
+
+	public static final String ADD_SUBFOLDER = "ADD_SUBFOLDER";
+
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";
 
 	public static final String ADD_TOPIC = "ADD_TOPIC";

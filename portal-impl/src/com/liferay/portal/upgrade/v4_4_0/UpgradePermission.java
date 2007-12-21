@@ -31,6 +31,11 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -365,6 +370,21 @@ public class UpgradePermission extends UpgradeProcess {
 	};
 
 	private static Object[][] _UPDATE_PERMISSIONS = new Object[][] {
+		new Object[] {
+			"ADD_CATEGORY", "ADD_SUBCATEGORY", MBCategory.class
+		},
+		new Object[] {
+			"ADD_CATEGORY", "ADD_SUBCATEGORY", ShoppingCategory.class
+		},
+		new Object[] {
+			"ADD_FOLDER", "ADD_SUBFOLDER", DLFolder.class
+		},
+		new Object[] {
+			"ADD_FOLDER", "ADD_SUBFOLDER", IGFolder.class
+		},
+		new Object[] {
+			"ADD_FOLDER", "ADD_SUBFOLDER", BookmarksFolder.class
+		},
 		new Object[] {
 			"ADD_LOCATION", "MANAGE_SUBORGANIZATIONS", Organization.class
 		},

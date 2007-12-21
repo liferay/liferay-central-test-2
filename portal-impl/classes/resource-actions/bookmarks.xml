@@ -24,8 +24,8 @@
 			<portlet-name>28</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_ENTRY</action-key>
+			<action-key>ADD_SUBFOLDER</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
@@ -39,8 +39,8 @@
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
-			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_ENTRY</action-key>
+			<action-key>ADD_SUBFOLDER</action-key>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
 	</model-resource>
