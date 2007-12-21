@@ -27,6 +27,7 @@ import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -44,6 +45,7 @@ import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -57,6 +59,8 @@ import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletURLFactory;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
@@ -68,9 +72,11 @@ import com.liferay.util.servlet.SessionErrors;
 import java.io.IOException;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -233,6 +239,94 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			fullPathSM.append(path);
 			fullPathSM.append(StringPool.QUESTION);
 			fullPathSM.append(req.getQueryString());
+
+			Map paramMap =
+				HttpUtil.parameterMapFromString(req.getQueryString());
+
+			if (path.equals("/portal/layout") &&
+					paramMap.containsKey("p_l_id")) {
+
+				try {
+					String[] values = (String[])paramMap.get("p_l_id");
+
+					long plid =
+						GetterUtil.getLong(values[0]);
+
+					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+					fullPathSM = new StringMaker();
+
+					fullPathSM.append(
+						PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+
+					if (paramMap.containsKey("p_p_id")) {
+						Portlet portlet = null;
+
+						long companyId = PortalUtil.getCompanyId(req);
+						String portletId = ParamUtil.getString(req, "p_p_id");
+
+						if (Validator.isNotNull(portletId)) {
+							portlet = PortletLocalServiceUtil.getPortletById(
+								companyId, portletId);
+						}
+
+						if (portlet == null) {
+							String strutsPath = path.substring(
+								1, path.lastIndexOf(StringPool.SLASH));
+
+							portlet =
+								PortletLocalServiceUtil.getPortletByStrutsPath(
+								companyId, strutsPath);
+						}
+
+						if (portlet != null && portlet.isActive()) {
+							String namespace =
+								StringPool.UNDERLINE + portletId +
+									StringPool.UNDERLINE;
+
+							FriendlyURLMapper friendlyURLMapper =
+								portlet.getFriendlyURLMapperInstance();
+
+							PortletURLImpl portletURL =
+								PortletURLFactory.getInstance().create(
+									req, portletId, plid, false);
+
+							Iterator requestParamsItr =
+								req.getParameterMap().entrySet().iterator();
+
+							while (requestParamsItr.hasNext()) {
+								Entry entry = (Entry)requestParamsItr.next();
+								String key = (String)entry.getKey();
+
+								if (key.startsWith(namespace)) {
+									key = key.substring(namespace.length());
+
+									Object valueObj = entry.getValue();
+
+									if (valueObj instanceof String[]) {
+										portletURL.setParameter(
+											key, (String[])entry.getValue());
+									}
+									else {
+										portletURL.setParameter(
+											key, (String)entry.getValue());
+									}
+								}
+							}
+
+							String portletFriendlyUrl =
+								friendlyURLMapper.buildPath(portletURL);
+
+							if (portletFriendlyUrl != null) {
+								fullPathSM.append(portletFriendlyUrl);
+							}
+						}
+					}
+				}
+				catch(Exception e) {
+					_log.error(e);
+				}
+			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
