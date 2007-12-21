@@ -63,6 +63,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 				Validator.isNotNull(groupId) &&
 				Validator.isNotNull(articleId)) {
 
+				if (portletId.equals(_PORTLET_DEFAULT_INSTANCE)) {
+					portletId = _PORTLET_ID;
+				}
+
 				friendlyURLPath =
 					"/journal_content/" + portletId + "/" + groupId + "/" +
 						articleId;
