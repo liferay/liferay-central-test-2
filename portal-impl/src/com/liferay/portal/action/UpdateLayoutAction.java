@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -90,6 +91,14 @@ public class UpdateLayoutAction extends Action {
 
 		if (cmd.equals(Constants.ADD)) {
 			portletId = layoutTypePortlet.addPortletId(userId, portletId);
+
+			String columnId = ParamUtil.getString(req, "p_p_col_id");
+			int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
+
+			if (Validator.isNotNull(columnId)) {
+				layoutTypePortlet.movePortletId(
+					userId, portletId, columnId, columnPos);
+			}
 		}
 		else if (cmd.equals(Constants.DELETE)) {
 			if (layoutTypePortlet.hasPortletId(portletId)) {
