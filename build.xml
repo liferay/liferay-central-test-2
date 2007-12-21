@@ -246,6 +246,10 @@
 		<ant dir="portal-impl" target="compile" inheritAll="false" />
 	</target>
 
+	<target name="test">
+		<ant dir="util-java" target="test" inheritAll="false" />
+	</target>
+
 	<target name="jar">
 		<ant dir="portal-kernel" target="jar" inheritAll="false" />
 		<ant dir="portal-service" target="jar" inheritAll="false" />

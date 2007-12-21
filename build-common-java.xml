@@ -7,6 +7,8 @@
 		<delete file="${jar.file}.jar" failonerror="false" />
 		<delete dir="${java2html.dir}" />
 		<delete dir="${javadoc.dir}" />
+		<delete dir="test-classes" />
+		<delete dir="test-results" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="classes" excludes="${classes.dir.excludes}" />
@@ -29,6 +31,24 @@
 			nowarn="on"
 			srcdir="src"
 		/>
+	</target>
+
+	<target name="test" depends="compile">
+		<mkdir dir="test-classes" />
+		<mkdir dir="test-results" />
+
+		<javac destdir="test-classes" srcdir="test">
+			<classpath refid="project.classpath" />
+		</javac>
+
+		<junit haltonfailure="no" printsummary="on">
+			<classpath refid="project.classpath" />
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<batchtest todir="test-results">
+				<fileset dir="test-classes" includes="**/*Test.class" />
+			</batchtest>
+		</junit>
 	</target>
 
 	<target name="jar" depends="compile">
