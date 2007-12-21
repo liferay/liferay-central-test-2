@@ -155,7 +155,15 @@
 
 				loadingDiv.className = "loading-animation";
 
-				jQuery(container).prepend(loadingDiv);
+				var jContainer = jQuery(container);
+				var firstPortlet = jContainer.find('.portlet-boundary:first');
+				var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
+				if (!hasStaticPortlet) {
+					jContainer.prepend(loadingDiv);
+				}
+				else {
+					firstPortlet.after(loadingDiv);
+				}
 
 				var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=column-1&p_p_col_pos=0&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
 
