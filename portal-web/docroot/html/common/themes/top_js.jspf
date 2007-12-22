@@ -158,6 +158,7 @@
 				var jContainer = jQuery(container);
 				var firstPortlet = jContainer.find('.portlet-boundary:first');
 				var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
+
 				if (!hasStaticPortlet) {
 					jContainer.prepend(loadingDiv);
 				}
