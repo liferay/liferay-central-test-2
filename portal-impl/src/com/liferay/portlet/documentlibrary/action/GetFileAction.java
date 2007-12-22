@@ -25,6 +25,8 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
@@ -40,6 +42,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
@@ -62,6 +66,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Charles May
+ * @author Bruno Farache
  *
  */
 public class GetFileAction extends PortletAction {
@@ -81,12 +86,15 @@ public class GetFileAction extends PortletAction {
 			String uuid = ParamUtil.getString(req, "uuid");
 			long groupId = ParamUtil.getLong(req, "groupId");
 
+			String targetExtension = ParamUtil.getString(
+				req, "targetExtension");
+
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,
-				themeDisplay, req, res);
+				targetExtension, themeDisplay, req, res);
 
 			return null;
 		}
@@ -111,6 +119,8 @@ public class GetFileAction extends PortletAction {
 		String uuid = ParamUtil.getString(req, "uuid");
 		long groupId = ParamUtil.getLong(req, "groupId");
 
+		String targetExtension = ParamUtil.getString(req, "targetExtension");
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -121,15 +131,16 @@ public class GetFileAction extends PortletAction {
 
 		getFile(
 			folderId, name, version, fileShortcutId, uuid, groupId,
-			themeDisplay, httpReq, httpRes);
+			targetExtension, themeDisplay, httpReq, httpRes);
 
 		setForward(req, ActionConstants.COMMON_NULL);
 	}
 
 	protected void getFile(
 			long folderId, String name, double version, long fileShortcutId,
-			String uuid, long groupId, ThemeDisplay themeDisplay,
-			HttpServletRequest req, HttpServletResponse res)
+			String uuid, long groupId, String targetExtension,
+			ThemeDisplay themeDisplay, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
 		InputStream is = null;
@@ -171,19 +182,45 @@ public class GetFileAction extends PortletAction {
 					folderId, name);
 			}
 
-			if (version > 0) {
-				is = DLFileEntryLocalServiceUtil.getFileAsStream(
-					companyId, userId, folderId, name, version);
-			}
-			else {
-				is = DLFileEntryLocalServiceUtil.getFileAsStream(
-					companyId, userId, folderId, name);
+			if (version == 0) {
+				version = fileEntry.getVersion();
 			}
 
-			String contentType = MimeTypesUtil.getContentType(name);
+			is = DLFileEntryLocalServiceUtil.getFileAsStream(
+				companyId, userId, folderId, name, version);
 
-			ServletResponseUtil.sendFile(
-				res, fileEntry.getTitleWithExtension(), is, contentType);
+			String fileName = fileEntry.getTitleWithExtension();
+
+			if (Validator.isNotNull(targetExtension)) {
+				StringMaker sm = new StringMaker();
+
+				sm.append(fileEntry.getFileEntryId());
+				sm.append(StringPool.PERIOD);
+				sm.append(version);
+
+				String id = sm.toString();
+
+				String sourceExtension = FileUtil.getExtension(name);
+
+				InputStream convertedIS = DocumentConversionUtil.convert(
+					id, is, sourceExtension, targetExtension);
+
+				if ((convertedIS != null) && (convertedIS != is)) {
+					sm = new StringMaker();
+
+					sm.append(fileEntry.getTitle());
+					sm.append(StringPool.PERIOD);
+					sm.append(targetExtension);
+
+					fileName = sm.toString();
+
+					is = convertedIS;
+				}
+			}
+
+			String contentType = MimeTypesUtil.getContentType(fileName);
+
+			ServletResponseUtil.sendFile(res, fileName, is, contentType);
 		}
 		catch (PortalException pe) {
 			if (pe instanceof PrincipalException) {

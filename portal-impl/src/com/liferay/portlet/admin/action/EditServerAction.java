@@ -39,6 +39,8 @@ import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
@@ -57,6 +59,7 @@ import java.util.TreeSet;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -100,6 +103,8 @@ public class EditServerAction extends PortletAction {
 			return;
 		}
 
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		if (cmd.equals("addLogLevel")) {
@@ -131,6 +136,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("updateLogLevels")) {
 			updateLogLevels(req);
+		}
+		else if (cmd.equals("updateOpenOffice")) {
+			updateOpenOffice(req, prefs);
 		}
 
 		sendRedirect(req, res);
@@ -428,6 +436,21 @@ public class EditServerAction extends PortletAction {
 				logger.setLevel(Level.toLevel(priority));
 			}
 		}
+	}
+
+	protected void updateOpenOffice(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		String host = ParamUtil.getString(req, "host");
+		int port = ParamUtil.getInteger(req, "port");
+
+		prefs.setValue(
+			PropsUtil.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsUtil.OPENOFFICE_SERVER_HOST, host);
+		prefs.setValue(PropsUtil.OPENOFFICE_SERVER_PORT, String.valueOf(port));
+
+		prefs.store();
 	}
 
 	private static Log _log = LogFactory.getLog(EditServerAction.class);

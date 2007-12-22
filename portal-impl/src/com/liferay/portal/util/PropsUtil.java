@@ -757,6 +757,14 @@ public class PropsUtil {
 
 	public static final String JCR_JACKRABBIT_CREDENTIALS_PASSWORD = "jcr.jackrabbit.credentials.password";
 
+	// OpenOffice
+
+	public static final String OPENOFFICE_SERVER_ENABLED = "openoffice.server.enabled";
+
+	public static final String OPENOFFICE_SERVER_HOST = "openoffice.server.host";
+
+	public static final String OPENOFFICE_SERVER_PORT = "openoffice.server.port";
+
 	// Reverse AJAX
 
 	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";

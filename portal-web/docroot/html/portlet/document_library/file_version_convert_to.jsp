@@ -37,17 +37,27 @@ Boolean isLocked = (Boolean)objArray[4];
 Boolean hasLock = (Boolean)objArray[5];
 %>
 
-<liferay-ui:icon-menu>
-	<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked.booleanValue() || hasLock.booleanValue()) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
-			<portlet:param name="name" value="<%= fileVersion.getName() %>" />
-			<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />
-		</portlet:actionURL>
+<table class="lfr-table">
+<tr>
 
-		<liferay-ui:icon-delete url="<%= portletURL %>" />
-	</c:if>
-</liferay-ui:icon-menu>
+<%
+for (int i = 0; i < conversions.length; i++) {
+	String conversion = conversions[i];
+
+%>
+
+	<td>
+		<liferay-ui:icon
+			image='<%= "../document_library/" + conversion %>'
+			message="<%= conversion.toUpperCase() %>"
+			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) + "&version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
+			label="<%= true %>"
+		/>
+	</td>
+
+<%
+}
+%>
+
+</tr>
+</table>

@@ -37,9 +37,18 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
+
+String extension = FileUtil.getExtension(name);
+
 String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
 String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
+
+String[] conversions = new String[0];
+
+if (PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED)) {
+	conversions = (String[])DocumentConversionUtil.getConversions(extension);
+}
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
@@ -139,12 +148,65 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="downloads" />
+			<liferay-ui:message key="num-of-downloads" />
 		</td>
 		<td>
 			<%= fileEntry.getReadCount() %>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="download" />
+		</td>
+		<td>
+			<liferay-ui:icon
+				image='<%= "../document_library/" + extension %>'
+				message="<%= extension.toUpperCase() %>"
+				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+
+	<c:if test="<%= conversions.length > 0 %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="convert-to" />
+			</td>
+			<td>
+				<table class="lfr-table">
+				<tr>
+
+				<%
+				for (int i = 0; i < conversions.length; i++) {
+					String conversion = conversions[i];
+
+				%>
+
+					<td>
+						<liferay-ui:icon
+							image='<%= "../document_library/" + conversion %>'
+							message="<%= conversion.toUpperCase() %>"
+							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
+							label="<%= true %>"
+						/>
+					</td>
+
+				<%
+				}
+				%>
+
+				</tr>
+				</table>
+			</td>
+		</tr>
+	</c:if>
+
 	<tr>
 		<td colspan="2">
 			<br />
@@ -298,6 +360,11 @@ portletURL.setParameter("name", name);
 			headerNames.add("version");
 			headerNames.add("date");
 			headerNames.add("size");
+			headerNames.add("download");
+
+			if (conversions.length > 0) {
+				headerNames.add("convert-to");
+			}
 
 			if (strutsAction.equals("/document_library/edit_file_entry")) {
 				headerNames.add(StringPool.BLANK);
@@ -311,7 +378,7 @@ portletURL.setParameter("name", name);
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -330,6 +397,16 @@ portletURL.setParameter("name", name);
 				row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
 				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
 				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+				// Download
+
+				row.addJSP("/html/portlet/document_library/file_version_download.jsp");
+
+				// Convert to
+
+				if (conversions.length > 0) {
+					row.addJSP("/html/portlet/document_library/file_version_convert_to.jsp");
+				}
 
 				// Action
 
