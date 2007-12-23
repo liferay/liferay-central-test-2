@@ -50,6 +50,7 @@ import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
@@ -666,10 +667,12 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 				portletURLImpl.setAnchor(false);
 
-				if (PortalUtil.DEFAULT_P_L_RESET && !resetRenderParameters) {
+				if (PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
+					!resetRenderParameters) {
+
 					portletURLImpl.setParameter("p_l_reset", "0");
 				}
-				else if (!PortalUtil.DEFAULT_P_L_RESET &&
+				else if (!PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
 						 resetRenderParameters) {
 
 					portletURLImpl.setParameter("p_l_reset", "1");
@@ -685,10 +688,12 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return url;
 		}
 
-		if (PortalUtil.DEFAULT_P_L_RESET && !resetRenderParameters) {
+		if (PropsValues.LAYOUT_DEFAULT_P_L_RESET && !resetRenderParameters) {
 			url = Http.addParameter(url, "p_l_reset", 0);
 		}
-		else if (!PortalUtil.DEFAULT_P_L_RESET && resetRenderParameters) {
+		else if (!PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
+				 resetRenderParameters) {
+
 			url = Http.addParameter(url, "p_l_reset", 1);
 		}
 

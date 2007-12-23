@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -132,11 +132,11 @@ public class ColorSchemeImpl implements ColorScheme {
 		"portlet-section-selected-hover-bg";
 
 	public static String getDefaultRegularColorSchemeId() {
-		return PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
+		return PropsValues.DEFAULT_REGULAR_COLOR_SCHEME_ID;
 	}
 
 	public static String getDefaultWapColorSchemeId() {
-		return PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
+		return PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID;
 	}
 
 	public static ColorScheme getNullColorScheme() {

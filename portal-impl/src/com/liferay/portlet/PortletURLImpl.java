@@ -40,6 +40,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
@@ -660,9 +661,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			sm.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
 		}
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.PORTLET_URL_ANCHOR_ENABLE))) {
-
+		if (PropsValues.PORTLET_URL_ANCHOR_ENABLE) {
 			if (_anchor && (_windowState != null) &&
 				(!_windowState.equals(WindowState.MAXIMIZED)) &&
 				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&

@@ -162,9 +162,6 @@ import org.hibernate.util.FastHashMap;
  */
 public class PortalUtil {
 
-	public static final boolean DEFAULT_P_L_RESET = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
-
 	public static final String PATH_IMAGE = "/image";
 
 	public static final String PATH_MAIN = "/c";
@@ -863,30 +860,22 @@ public class PortalUtil {
 
 		StringMaker sm = new StringMaker();
 
-		String serverProtocol = GetterUtil.getString(
-			PropsUtil.get(PropsUtil.WEB_SERVER_PROTOCOL));
-
-		if (secure || Http.HTTPS.equals(serverProtocol)) {
+		if (secure || Http.HTTPS.equals(PropsValues.WEB_SERVER_PROTOCOL)) {
 			sm.append(Http.HTTPS_WITH_SLASH);
 		}
 		else {
 			sm.append(Http.HTTP_WITH_SLASH);
 		}
 
-		String serverHost = PropsUtil.get(PropsUtil.WEB_SERVER_HOST);
-
-		if (Validator.isNull(serverHost)) {
+		if (Validator.isNull(PropsValues.WEB_SERVER_HOST)) {
 			sm.append(serverName);
 		}
 		else {
-			sm.append(serverHost);
+			sm.append(PropsValues.WEB_SERVER_HOST);
 		}
-
-		int serverHttpPort = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.WEB_SERVER_HTTP_PORT), -1);
 
 		if (!secure) {
-			if (serverHttpPort == -1) {
+			if (PropsValues.WEB_SERVER_HTTP_PORT == -1) {
 				if ((serverPort != Http.HTTP_PORT) &&
 					(serverPort != Http.HTTPS_PORT)) {
 
@@ -895,20 +884,17 @@ public class PortalUtil {
 				}
 			}
 			else {
-				if ((serverPort != serverHttpPort) ||
-					(serverHttpPort != Http.HTTP_PORT)) {
+				if ((PropsValues.WEB_SERVER_HTTP_PORT != serverPort) ||
+					(PropsValues.WEB_SERVER_HTTP_PORT != Http.HTTP_PORT)) {
 
 					sm.append(StringPool.COLON);
-					sm.append(serverHttpPort);
+					sm.append(PropsValues.WEB_SERVER_PROTOCOL);
 				}
 			}
 		}
 
-		int serverHttpsPort = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.WEB_SERVER_HTTPS_PORT), -1);
-
 		if (secure) {
-			if (serverHttpsPort == -1) {
+			if (PropsValues.WEB_SERVER_HTTPS_PORT == -1) {
 				if ((serverPort != Http.HTTP_PORT) &&
 					(serverPort != Http.HTTPS_PORT)) {
 
@@ -917,11 +903,11 @@ public class PortalUtil {
 				}
 			}
 			else {
-				if ((serverPort != serverHttpsPort) ||
-					(serverHttpsPort != Http.HTTPS_PORT)) {
+				if ((PropsValues.WEB_SERVER_HTTPS_PORT != serverPort) ||
+					(PropsValues.WEB_SERVER_HTTPS_PORT != Http.HTTPS_PORT)) {
 
 					sm.append(StringPool.COLON);
-					sm.append(serverHttpsPort);
+					sm.append(PropsValues.WEB_SERVER_HTTPS_PORT);
 				}
 			}
 		}
@@ -1377,10 +1363,8 @@ public class PortalUtil {
 			return userIdObj.longValue();
 		}
 
-		if (!GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) &&
-			GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE))) {
+		if (!PropsValues.PORTAL_JAAS_ENABLE &&
+			PropsValues.PORTAL_IMPERSONATION_ENABLE) {
 
 			String doAsUserIdString = ParamUtil.getString(req, "doAsUserId");
 

@@ -31,6 +31,7 @@ import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ListUtil;
 
@@ -54,13 +55,11 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	public static final String PLUGIN_TYPE = "theme";
 
 	public static String getDefaultRegularThemeId() {
-		return PortalUtil.getJsSafePortletId(
-			PropsUtil.get(PropsUtil.DEFAULT_REGULAR_THEME_ID));
+		return _DEFAULT_REGULAR_THEME_ID;
 	}
 
 	public static String getDefaultWapThemeId() {
-		return PortalUtil.getJsSafePortletId(
-			PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID));
+		return _DEFAULT_WAP_THEME_ID;
 	}
 
 	public ThemeImpl() {
@@ -402,6 +401,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 		return available;
 	}
+
+	private static final String _DEFAULT_REGULAR_THEME_ID =
+		PortalUtil.getJsSafePortletId(PropsValues.DEFAULT_REGULAR_THEME_ID);
+
+	private static final String _DEFAULT_WAP_THEME_ID =
+		PortalUtil.getJsSafePortletId(PropsValues.DEFAULT_WAP_THEME_ID);
 
 	private static Log _log = LogFactory.getLog(ThemeImpl.class);
 

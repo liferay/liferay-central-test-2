@@ -47,6 +47,7 @@ import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -2440,14 +2441,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * True if users are shown that they do not have access to the portlet.
 	 */
-	private boolean _showPortletAccessDenied = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_ACCESS_DENIED));
+	private boolean _showPortletAccessDenied =
+		PropsValues.LAYOUT_SHOW_PORTLET_ACCESS_DENIED;
 
 	/**
 	 * True if users are shown that the portlet is inactive.
 	 */
-	private boolean _showPortletInactive = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
+	private boolean _showPortletInactive =
+		PropsValues.LAYOUT_SHOW_PORTLET_INACTIVE;
 
 	/**
 	 * True if an action URL for this portlet should cause an auto redirect.

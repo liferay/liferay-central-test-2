@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -51,10 +50,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.LiveUsers;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.*;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
@@ -334,7 +330,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			StringMaker sm = null;
 
 			try {
-				if (_SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
+				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
 					sm = getFriendlyTrackerPath(path, themeDisplay, req);
 				}
 			}
@@ -442,7 +438,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must agree to Terms of Use
 
 		if ((user != null) && (!user.isAgreedToTermsOfUse())) {
-			if (_TERMS_OF_USE_REQUIRED) {
+			if (PropsValues.TERMS_OF_USE_REQUIRED) {
 				return _PATH_PORTAL_TERMS_OF_USE;
 			}
 		}
@@ -457,7 +453,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users may not be allowed to have simultaneous logins
 
-		if (!_AUTH_SIMULTANEOUS_LOGINS) {
+		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
 			Boolean staleSession =
 				(Boolean)ses.getAttribute(WebKeys.STALE_SESSION);
 
@@ -682,8 +678,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		String portalURL = null;
 
-		if ((_COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) && (httpsInitial != null) &&
-			(!httpsInitial.booleanValue())) {
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
 
 			portalURL = PortalUtil.getPortalURL(req, false);
 		}
@@ -697,7 +693,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		sm.append(themeDisplay.getPathMain());
 		sm.append(_PATH_PORTAL_LAYOUT);
 
-		if (!_AUTH_FORWARD_BY_LAST_PATH) {
+		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
 			if (req.getRemoteUser() != null) {
 
 				// If we do not forward by last path and the user is logged in,
@@ -886,23 +882,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		"/portal/update_terms_of_use";
 
 	private static String _PATH_WSRP = "/wsrp";
-
-	private static boolean _AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));
-
-	private static boolean _AUTH_SIMULTANEOUS_LOGINS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
-
-	private static boolean _COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
-
-	private static boolean _SESSION_TRACKER_FRIENDLY_PATHS_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED));
-
-	private static boolean _TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED));
 
 	private static Log _log = LogFactory.getLog(PortalRequestProcessor.class);
 

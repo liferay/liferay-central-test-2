@@ -22,14 +22,13 @@
 
 package com.liferay.portlet.admin.util;
 
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,12 +53,9 @@ public class OmniadminUtil {
 		}
 
 		try {
-			long[] omniAdminUsers = StringUtil.split(
-				PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
-
-			if (omniAdminUsers.length > 0) {
-				for (int i = 0; i < omniAdminUsers.length; i++) {
-					if (omniAdminUsers[i] == userId) {
+			if (PropsValues.OMNIADMIN_USERS.length > 0) {
+				for (int i = 0; i < PropsValues.OMNIADMIN_USERS.length; i++) {
+					if (PropsValues.OMNIADMIN_USERS[i] == userId) {
 						User user = UserLocalServiceUtil.getUserById(userId);
 
 						if (user.getCompanyId() !=

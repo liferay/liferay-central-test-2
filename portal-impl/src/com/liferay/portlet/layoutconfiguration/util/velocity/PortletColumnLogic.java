@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
@@ -61,14 +60,10 @@ public class PortletColumnLogic extends RuntimeLogic {
 		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
 		_portletsMap = new TreeMap(new PortletRenderWeightComparator());
 
-		_parallelRenderEnable = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
+		_parallelRenderEnable = PropsValues.LAYOUT_PARALLEL_RENDER_ENABLE;
 
 		if (_parallelRenderEnable) {
-			boolean sessionDisabled = GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.SESSION_DISABLED));
-
-			if (sessionDisabled) {
+			if (PropsValues.SESSION_DISABLED) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Parallel rendering should be disabled if sessions " +

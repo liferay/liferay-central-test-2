@@ -54,6 +54,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
@@ -316,9 +317,7 @@ public class LoginAction extends Action {
 		if (ses.getAttribute("j_username") != null &&
 			ses.getAttribute("j_password") != null) {
 
-			if (GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
-
+			if (PropsValues.PORTAL_JAAS_ENABLE) {
 				return mapping.findForward("/portal/touch_protected.jsp");
 			}
 			else {
@@ -334,9 +333,7 @@ public class LoginAction extends Action {
 			try {
 				login(req, res);
 
-				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
-
+				if (PropsValues.PORTAL_JAAS_ENABLE) {
 					return mapping.findForward("/portal/touch_protected.jsp");
 				}
 				else {

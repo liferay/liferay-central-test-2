@@ -53,6 +53,7 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
@@ -328,7 +329,7 @@ public class MainServlet extends ActionServlet {
 
 		// Last modified check
 
-		if (_LAST_MODIFIED_CHECK) {
+		if (PropsValues.LAST_MODIFIED_CHECK) {
 			String path = req.getPathInfo();
 
 			if ((path != null) && _lastModifiedPaths.contains(path)) {
@@ -425,7 +426,7 @@ public class MainServlet extends ActionServlet {
 
 		// Is JAAS enabled?
 
-		if (!_PORTAL_JAAS_ENABLE) {
+		if (!PropsValues.PORTAL_JAAS_ENABLE) {
 			String jRemoteUser = (String)ses.getAttribute("j_remoteuser");
 
 			if (jRemoteUser != null) {
@@ -469,7 +470,7 @@ public class MainServlet extends ActionServlet {
 
 				// Pre login events
 
-				EventsProcessor.process(_LOGIN_EVENTS_PRE, req, res);
+				EventsProcessor.process(PropsValues.LOGIN_EVENTS_PRE, req, res);
 
 				// User
 
@@ -488,7 +489,8 @@ public class MainServlet extends ActionServlet {
 
 				// Post login events
 
-				EventsProcessor.process(_LOGIN_EVENTS_POST, req, res);
+				EventsProcessor.process(
+					PropsValues.LOGIN_EVENTS_POST, req, res);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -498,7 +500,8 @@ public class MainServlet extends ActionServlet {
 		// Process pre service events
 
 		try {
-			EventsProcessor.process(_SERVLET_SERVICE_EVENTS_PRE, req, res);
+			EventsProcessor.process(
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, req, res);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -506,7 +509,8 @@ public class MainServlet extends ActionServlet {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
 			StrutsUtil.forward(
-				_SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE, ctx, req, res);
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE, ctx, req,
+				res);
 		}
 
 		try {
@@ -520,7 +524,8 @@ public class MainServlet extends ActionServlet {
 			// Process post service events
 
 			try {
-				EventsProcessor.process(_SERVLET_SERVICE_EVENTS_POST, req, res);
+				EventsProcessor.process(
+					PropsValues.SERVLET_SERVICE_EVENTS_POST, req, res);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -613,29 +618,8 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	private static final boolean _LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));
-
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =
 		"Liferay-Portal";
-
-	private static final String[] _LOGIN_EVENTS_POST = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_POST);
-
-	private static final String[] _LOGIN_EVENTS_PRE = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_PRE);
-
-	private static final boolean _PORTAL_JAAS_ENABLE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE));
-
-	private static final String[] _SERVLET_SERVICE_EVENTS_POST =
-		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_POST);
-
-	private static final String[] _SERVLET_SERVICE_EVENTS_PRE =
-		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_PRE);
-
-	private static final String _SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE =
-		PropsUtil.get(PropsUtil.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE);
 
 	private static Log _log = LogFactory.getLog(MainServlet.class);
 

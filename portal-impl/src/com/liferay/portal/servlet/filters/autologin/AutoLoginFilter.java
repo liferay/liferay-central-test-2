@@ -31,7 +31,7 @@ import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ProtectedServletRequest;
 
@@ -74,9 +74,9 @@ public class AutoLoginFilter implements Filter {
 		String jUserName = (String)ses.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
-			for (int i = 0; i < _AUTO_LOGIN_HOOKS.length; i++) {
+			for (int i = 0; i < PropsValues.AUTO_LOGIN_HOOKS.length; i++) {
 				AutoLogin autoLogin = (AutoLogin)InstancePool.get(
-					_AUTO_LOGIN_HOOKS[i]);
+					PropsValues.AUTO_LOGIN_HOOKS[i]);
 
 				try {
 					String[] credentials = autoLogin.login(httpReq, httpRes);
@@ -97,7 +97,7 @@ public class AutoLoginFilter implements Filter {
 						req = new ProtectedServletRequest(
 							httpReq, loginRemoteUser);
 
-						if (_PORTAL_JAAS_ENABLE) {
+						if (PropsValues.PORTAL_JAAS_ENABLE) {
 							return;
 						}
 					}
@@ -162,7 +162,7 @@ public class AutoLoginFilter implements Filter {
 					ses.setAttribute(WebKeys.USER_PASSWORD, jPassword);
 				}
 
-				if (_PORTAL_JAAS_ENABLE) {
+				if (PropsValues.PORTAL_JAAS_ENABLE) {
 					res.sendRedirect(
 						PortalUtil.getPathMain() + "/portal/touch_protected");
 				}
@@ -173,12 +173,6 @@ public class AutoLoginFilter implements Filter {
 
 		return null;
 	}
-
-	private static final String[] _AUTO_LOGIN_HOOKS = PropsUtil.getArray(
-		PropsUtil.AUTO_LOGIN_HOOKS);
-
-	private static final boolean _PORTAL_JAAS_ENABLE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE));
 
 	private static Log _log = LogFactory.getLog(AutoLoginFilter.class);
 

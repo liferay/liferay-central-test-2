@@ -133,6 +133,7 @@
 <%@ page import="com.liferay.portal.util.PortletKeys" %>
 <%@ page import="com.liferay.portal.util.PrefsPropsUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
+<%@ page import="com.liferay.portal.util.PropsValues" %>
 <%@ page import="com.liferay.portal.util.Recipient" %>
 <%@ page import="com.liferay.portal.util.ReleaseInfo" %>
 <%@ page import="com.liferay.portal.util.SessionClicks" %>

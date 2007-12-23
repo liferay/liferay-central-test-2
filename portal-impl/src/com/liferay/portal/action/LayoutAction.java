@@ -41,6 +41,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
@@ -130,7 +131,7 @@ public class LayoutAction extends Action {
 
 		long plid = ParamUtil.getLong(req, "p_l_id");
 		boolean resetLayout = ParamUtil.getBoolean(
-			req, "p_l_reset", PortalUtil.DEFAULT_P_L_RESET);
+			req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
 		String action = ParamUtil.getString(req, "p_p_action");
 
 		if (plid > 0) {

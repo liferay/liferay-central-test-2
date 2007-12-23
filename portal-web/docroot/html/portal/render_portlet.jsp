@@ -270,8 +270,8 @@ if (!themeDisplay.isSignedIn() ||
 	!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 	showCloseIcon = false;
-	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));
-	showMinIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MIN_ICON));
+	showMaxIcon = PropsValues.LAYOUT_GUEST_SHOW_MAX_ICON;
+	showMinIcon = PropsValues.LAYOUT_GUEST_SHOW_MIN_ICON;
 	showMoveIcon = false;
 }
 

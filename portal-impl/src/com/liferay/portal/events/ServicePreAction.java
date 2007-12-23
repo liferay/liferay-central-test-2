@@ -79,6 +79,7 @@ import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.CookieUtil;
@@ -1248,11 +1249,9 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}
 
-		boolean termsOfUseRequired = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
-
-		if (!user.isActive() ||
-			(termsOfUseRequired && !user.isAgreedToTermsOfUse())) {
+		if ((!user.isActive()) ||
+			(PropsValues.TERMS_OF_USE_REQUIRED &&
+			 !user.isAgreedToTermsOfUse())) {
 
 			themeDisplay.setShowAddContentIcon(false);
 			themeDisplay.setShowMyAccountIcon(false);
