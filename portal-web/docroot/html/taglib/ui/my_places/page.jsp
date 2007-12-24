@@ -142,13 +142,13 @@
 
 			if (publicLayoutsPageCount == 0) {
 				if (organizationCommunity) {
-					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS));
+					showPublicPlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS;
 				}
 				else if (regularCommunity) {
-					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS));
+					showPublicPlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS;
 				}
 				else if (userCommunity) {
-					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
+					showPublicPlace = PropsValues.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
 				}
 			}
 
@@ -156,13 +156,13 @@
 
 			if (privateLayoutsPageCount == 0) {
 				if (organizationCommunity) {
-					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS));
+					showPrivatePlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
 				else if (regularCommunity) {
-					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS));
+					showPrivatePlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
 				else if (userCommunity) {
-					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS));
+					showPrivatePlace = PropsValues.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
 			}
 		%>

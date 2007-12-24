@@ -40,11 +40,9 @@
 	<c:otherwise>
 
 		<%
-		boolean requiresHttps = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
-
 		boolean secure = request.isSecure();
 
-		if (requiresHttps && !secure) {
+		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS && !secure) {
 			secure = true;
 		}
 
@@ -86,7 +84,7 @@
 			</td>
 		</tr>
 
-		<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
+		<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
 			<tr>
 				<td>
 					<span style="font-size: xx-small;">

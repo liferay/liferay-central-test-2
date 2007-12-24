@@ -22,8 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -84,7 +83,7 @@ public class PortletPreferencesWrapper
 	}
 
 	public void store() throws IOException, ValidatorException {
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.TCK_URL))) {
+		if (PropsValues.TCK_URL) {
 
 			// Be strict to pass the TCK
 

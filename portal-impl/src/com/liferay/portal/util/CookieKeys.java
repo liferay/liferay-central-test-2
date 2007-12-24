@@ -57,7 +57,7 @@ public class CookieKeys {
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES))) {
 
-			if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.TCK_URL))) {
+			if (!PropsValues.TCK_URL) {
 
 				// Setting a cookie will cause the TCK to lose its ability
 				// to track sessions

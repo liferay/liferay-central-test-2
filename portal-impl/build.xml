@@ -103,7 +103,7 @@ ${exception.message}
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="${classes.dir}"
-			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java"
+			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java,**/portal/util/PropsValues.java"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>

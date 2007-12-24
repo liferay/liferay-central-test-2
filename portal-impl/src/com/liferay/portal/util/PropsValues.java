@@ -33,21 +33,32 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class PropsValues {
 
-	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));
+	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));
 
-	public static boolean AUTH_FORWARD_BY_REDIRECT = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_REDIRECT));
+	public static final boolean AUTH_FORWARD_BY_REDIRECT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_REDIRECT));
 
-	public static boolean AUTH_SIMULTANEOUS_LOGINS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
+	public static final boolean AUTH_SIMULTANEOUS_LOGINS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
 
-	public static final String[] AUTO_LOGIN_HOOKS = PropsUtil.getArray(
-		PropsUtil.AUTO_LOGIN_HOOKS);
+	public static final String[] AUTO_LOGIN_HOOKS =
+		PropsUtil.getArray(PropsUtil.AUTO_LOGIN_HOOKS);
 
-	public static boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
+	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
+
+	public static final boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+	public static final int COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE),
+			CookieKeys.MAX_AGE);
 
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
@@ -90,15 +101,17 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
 
-	public static boolean LAYOUT_SHOW_PORTLET_ACCESS_DENIED =
+	public static final boolean LAYOUT_SHOW_PORTLET_ACCESS_DENIED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_ACCESS_DENIED));
 
-	public static boolean LAYOUT_SHOW_PORTLET_INACTIVE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
+	public static final boolean LAYOUT_SHOW_PORTLET_INACTIVE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
 
-	public static boolean LAYOUT_TEMPLATE_CACHE_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
+	public static final boolean LAYOUT_TEMPLATE_CACHE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
 
 	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(
 		PropsUtil.LOGIN_EVENTS_POST);
@@ -106,7 +119,42 @@ public class PropsValues {
 	public static final String[] LOGIN_EVENTS_PRE = PropsUtil.getArray(
 		PropsUtil.LOGIN_EVENTS_PRE);
 
-	public static long[] OMNIADMIN_USERS = StringUtil.split(
+	public static final String LUCENE_DIR = PropsUtil.get(PropsUtil.LUCENE_DIR);
+
+	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
+		PropsUtil.LUCENE_STORE_TYPE);
+
+	public static final boolean
+		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS));
+
+	public static final boolean
+		MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS));
+
+	public static final boolean
+		MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS));
+
+	public static final boolean
+		MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS));
+
+	public static final boolean
+		MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS));
+
+	public static final boolean
+		MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS =
+			GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
+
+	public static final long[] OMNIADMIN_USERS = StringUtil.split(
 		PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
 
 	public static final boolean PORTAL_IMPERSONATION_ENABLE =
@@ -119,8 +167,9 @@ public class PropsValues {
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED));
 
-	public static boolean PORTLET_URL_ANCHOR_ENABLE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
+	public static final boolean PORTLET_URL_ANCHOR_ENABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
 
 	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
@@ -134,27 +183,52 @@ public class PropsValues {
 	public static final String SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE =
 		PropsUtil.get(PropsUtil.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE);
 
-	public static boolean SESSION_DISABLED = GetterUtil.getBoolean(
+	public static final String SESSION_COOKIE_DOMAIN =
+		PropsUtil.get(PropsUtil.SESSION_COOKIE_DOMAIN);
+
+	public static final boolean SESSION_DISABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.SESSION_DISABLED));
 
-	public static boolean SESSION_ENABLE_PERSISTENT_COOKIES =
+	public static final boolean SESSION_ENABLE_PERSISTENT_COOKIES =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES));
 
-	public static boolean SESSION_TEST_COOKIE_SUPPORT = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.SESSION_TEST_COOKIE_SUPPORT));
+	public static final boolean SESSION_ENABLE_PHISHING_PROTECTION =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_ENABLE_PHISHING_PROTECTION));
 
-	public static boolean SESSION_TRACKER_FRIENDLY_PATHS_ENABLED =
+	public static final boolean SESSION_TEST_COOKIE_SUPPORT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_TEST_COOKIE_SUPPORT));
+
+	public static final int SESSION_TIMEOUT = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+
+	public static final boolean SESSION_TIMEOUT_AUTO_EXTEND =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND));
+
+	public static final int SESSION_TIMEOUT_WARNING = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
+
+	public static final boolean SESSION_TRACKER_FRIENDLY_PATHS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED));
 
-	public static boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
+	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
+
+	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TAGS_COMPILER_ENABLED));
 
-	public static boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
+	public static final boolean TCK_URL = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.TCK_URL));
+
+	public static final boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED));
 
-	public static boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
+	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));
 
 	public static final String WEB_SERVER_HOST = PropsUtil.get(

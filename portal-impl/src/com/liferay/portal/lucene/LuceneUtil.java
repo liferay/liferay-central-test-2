@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.dao.DataAccess;
@@ -363,9 +364,7 @@ public class LuceneUtil {
 
 		// Dialect
 
-		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
-				_LUCENE_STORE_TYPE_JDBC)) {
-
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			Connection con = null;
 
 			try {
@@ -415,23 +414,24 @@ public class LuceneUtil {
 			return;
 		}
 
-		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
-
 		if (_log.isDebugEnabled()) {
-			_log.debug("Lucene store type " + storeType);
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 
-		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
 			_deleteFile(companyId);
 		}
-		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
+
 			_deleteJdbc(companyId);
 		}
-		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
 			_deleteRam(companyId);
 		}
 		else {
-			throw new RuntimeException("Invalid store type " + storeType);
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 	}
 
@@ -501,23 +501,24 @@ public class LuceneUtil {
 	}
 
 	private Directory _getLuceneDir(long companyId) {
-		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
-
 		if (_log.isDebugEnabled()) {
-			_log.debug("Lucene store type " + storeType);
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 
-		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
 			return _getLuceneDirFile(companyId);
 		}
-		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
+
 			return _getLuceneDirJdbc(companyId);
 		}
-		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
 			return _getLuceneDirRam(companyId);
 		}
 		else {
-			throw new RuntimeException("Invalid store type " + storeType);
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 	}
 
@@ -611,7 +612,7 @@ public class LuceneUtil {
 	private String _getPath(long companyId) {
 		StringMaker sm = new StringMaker();
 
-		sm.append(PropsUtil.get(PropsUtil.LUCENE_DIR));
+		sm.append(PropsValues.LUCENE_DIR);
 		sm.append(companyId);
 		sm.append(StringPool.SLASH);
 

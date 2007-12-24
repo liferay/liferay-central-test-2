@@ -22,10 +22,9 @@
 
 package com.liferay.portal.captcha;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
@@ -67,10 +66,7 @@ public class CaptchaUtil {
 						_log.debug("Captcha text is valid");
 					}
 
-					int captchaMaxChallenges = GetterUtil.getInteger(
-						PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
-
-					if ((captchaMaxChallenges > 0) &&
+					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 						(Validator.isNotNull(req.getRemoteUser()))) {
 
 						Integer count = (Integer)ses.getAttribute(
@@ -115,10 +111,7 @@ public class CaptchaUtil {
 						_log.debug("Captcha text is valid");
 					}
 
-					int captchaMaxChallenges = GetterUtil.getInteger(
-						PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
-
-					if ((captchaMaxChallenges > 0) &&
+					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 						(Validator.isNotNull(req.getRemoteUser()))) {
 
 						Integer count = (Integer)ses.getAttribute(
@@ -144,22 +137,21 @@ public class CaptchaUtil {
 	}
 
 	public static boolean isEnabled(HttpServletRequest req) {
-		int captchaMaxChallenges = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
-
-		if (captchaMaxChallenges > 0) {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession ses = req.getSession();
 
 			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
 
-			if ((count != null) && (captchaMaxChallenges <= count.intValue())) {
+			if ((count != null) &&
+				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
+
 				return false;
 			}
 			else {
 				return true;
 			}
 		}
-		else if (captchaMaxChallenges < 0) {
+		else if (PropsValues.CAPTCHA_MAX_CHALLENGES < 0) {
 			return false;
 		}
 		else {
@@ -168,22 +160,21 @@ public class CaptchaUtil {
 	}
 
 	public static boolean isEnabled(PortletRequest req) {
-		int captchaMaxChallenges = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
-
-		if (captchaMaxChallenges > 0) {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession ses = req.getPortletSession();
 
 			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
 
-			if ((count != null) && (captchaMaxChallenges <= count.intValue())) {
+			if ((count != null) &&
+				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
+
 				return false;
 			}
 			else {
 				return true;
 			}
 		}
-		else if (captchaMaxChallenges < 0) {
+		else if (PropsValues.CAPTCHA_MAX_CHALLENGES < 0) {
 			return false;
 		}
 		else {

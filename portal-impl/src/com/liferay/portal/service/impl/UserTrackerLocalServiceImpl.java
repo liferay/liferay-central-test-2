@@ -24,11 +24,10 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.base.UserTrackerLocalServiceBaseImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -49,9 +48,7 @@ public class UserTrackerLocalServiceImpl
 			List userTrackerPaths)
 		throws SystemException {
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED))) {
-
+		if (PropsValues.SESSION_TRACKER_PERSISTENCE_ENABLED) {
 			long userTrackerId = counterLocalService.increment(
 				UserTracker.class.getName());
 

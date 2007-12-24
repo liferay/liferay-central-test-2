@@ -53,7 +53,6 @@ import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
@@ -170,8 +169,7 @@ public class LoginAction extends Action {
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.SESSION_ENABLE_PHISHING_PROTECTION))) {
+			if (PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) {
 
 				// Invalidate the previous session to prevent phishing
 
@@ -206,7 +204,7 @@ public class LoginAction extends Action {
 
 			// Set cookies
 
-			String domain = PropsUtil.get(PropsUtil.SESSION_COOKIE_DOMAIN);
+			String domain = PropsValues.SESSION_COOKIE_DOMAIN;
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -222,8 +220,8 @@ public class LoginAction extends Action {
 				CookieKeys.ID,
 				UserLocalServiceUtil.encryptUserId(userIdString));
 
-			if (Validator.isNotNull(domain)) {
-				idCookie.setDomain(domain);
+			if (Validator.isNotNull(PropsValues.SESSION_COOKIE_DOMAIN)) {
+				idCookie.setDomain(PropsValues.SESSION_COOKIE_DOMAIN);
 			}
 
 			idCookie.setPath(StringPool.SLASH);
@@ -238,13 +236,9 @@ public class LoginAction extends Action {
 
 			passwordCookie.setPath(StringPool.SLASH);
 
-			int loginMaxAge = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE),
-				CookieKeys.MAX_AGE);
+			int loginMaxAge = PropsValues.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE;
 
-			if (GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.SESSION_DISABLED))) {
-
+			if (PropsValues.SESSION_DISABLED) {
 				rememberMe = true;
 			}
 
@@ -292,10 +286,9 @@ public class LoginAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		boolean requiresHttps = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS &&
+			!req.isSecure()) {
 
-		if (requiresHttps && !req.isSecure()) {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 

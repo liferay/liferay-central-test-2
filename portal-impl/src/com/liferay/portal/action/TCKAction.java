@@ -22,7 +22,6 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
@@ -34,7 +33,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +59,7 @@ public class TCKAction extends Action {
 		throws Exception {
 
 		try {
-			if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.TCK_URL))) {
+			if (!PropsValues.TCK_URL) {
 				throw new PrincipalException();
 			}
 

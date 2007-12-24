@@ -137,7 +137,7 @@
 			<span id="passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 		</div>
 
-		<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
+		<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
 			<div class="ctrl-holder inline-label">
 				<label for="rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
 
