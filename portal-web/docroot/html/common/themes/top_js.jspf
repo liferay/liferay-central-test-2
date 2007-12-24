@@ -96,7 +96,7 @@
 </script>
 
 <c:choose>
-	<c:when test='<%= ParamUtil.getBoolean(request, "js_fast_load", GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_FAST_LOAD))) %>'>
+	<c:when test='<%= ParamUtil.getBoolean(request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD) %>'>
 
 		<%--
 		everything_packed.js includes all of the JavaScript files. It is
@@ -122,7 +122,7 @@
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+<c:if test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
 	<script src="<%= themeDisplay.getPathJavaScript() %>/firebug/firebug.js" type="text/javascript"></script>
 </c:if>
 
@@ -215,7 +215,7 @@
 				);
 			</c:if>
 
-			<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
+			<c:if test="<%= PropsValues.REVERSE_AJAX_ENABLED && themeDisplay.isSignedIn()%>">
 				if (!Liferay.Browser.is_safari) {
 					jQuery(document).last(
 						function() {

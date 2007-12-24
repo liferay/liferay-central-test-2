@@ -34,6 +34,7 @@ import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
@@ -100,9 +101,7 @@ public class LayoutTemplateLocalUtil {
 			}
 		}
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
-
+		if (PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
 			return layoutTemplate.getContent();
 		}
 		else {

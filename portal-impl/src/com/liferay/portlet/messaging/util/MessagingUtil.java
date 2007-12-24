@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.chat.model.RosterUpdateListener;
 import com.liferay.portlet.messaging.model.JabberSession;
@@ -340,10 +341,7 @@ public class MessagingUtil {
 	}
 
 	public static boolean isJabberEnabled() {
-		boolean jabberEnabled = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.JABBER_XMPP_SERVER_ENABLED));
-
-		return jabberEnabled;
+		return PropsValues.JABBER_XMPP_SERVER_ENABLED;
 	}
 
 	public static void sendMessage(

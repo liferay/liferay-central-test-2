@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.TAGS_COMPILER_ENABLED)) %>">
+<c:if test="<%= PropsValues.TAGS_COMPILER_ENABLED %>">
 	<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
 </c:if>
 
@@ -59,6 +59,6 @@ else {
 }
 %>
 
-<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED)) && themeDisplay.isSignedIn() && !layoutMaximized %>">
+<c:if test="<%= PropsValues.PORTLET_CSS_ENABLED && themeDisplay.isSignedIn() && !layoutMaximized %>">
 	<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
 </c:if>

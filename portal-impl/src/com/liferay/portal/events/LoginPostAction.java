@@ -34,6 +34,7 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
 
@@ -68,9 +69,7 @@ public class LoginPostAction extends Action {
 			long companyId = PortalUtil.getCompanyId(req);
 			long userId = PortalUtil.getUserId(req);
 
-			if (GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED))) {
-
+			if (PropsValues.REVERSE_AJAX_ENABLED) {
 				ses.setAttribute(WebKeys.REVERSE_AJAX, new ReverseAjax());
 			}
 

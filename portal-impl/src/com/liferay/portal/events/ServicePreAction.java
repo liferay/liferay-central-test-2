@@ -881,10 +881,7 @@ public class ServicePreAction extends Action {
 
 		if (layout != null) {
 			try {
-				if (!signedIn &&
-					GetterUtil.getBoolean(PropsUtil.get(
-						PropsUtil.AUTH_FORWARD_BY_REDIRECT))) {
-
+				if (!signedIn && PropsValues.AUTH_FORWARD_BY_REDIRECT) {
 					req.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
 

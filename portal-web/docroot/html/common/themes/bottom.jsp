@@ -264,14 +264,10 @@ if (layout != null) {
 }
 %>
 
-<c:if test="<%= _WEB_SERVER_DISPLAY_NODE %>">
+<c:if test="<%= PropsValues.WEB_SERVER_DISPLAY_NODE %>">
 	<div class="portlet-msg-info">
 		<liferay-ui:message key="node" />: <%= PortalUtil.getComputerName() %>
 	</div>
 </c:if>
 
 <liferay-util:include page="/html/common/themes/bottom-ext.jsp" />
-
-<%!
-private static final boolean _WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));
-%>

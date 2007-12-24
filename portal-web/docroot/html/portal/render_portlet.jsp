@@ -233,7 +233,7 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
 
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED))) {
+		if (PropsValues.PORTLET_CSS_ENABLED) {
 			showPortletCssIcon = true;
 		}
 	}

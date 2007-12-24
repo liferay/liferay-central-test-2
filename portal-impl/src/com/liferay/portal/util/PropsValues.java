@@ -36,6 +36,9 @@ public class PropsValues {
 	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));
 
+	public static boolean AUTH_FORWARD_BY_REDIRECT = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_REDIRECT));
+
 	public static boolean AUTH_SIMULTANEOUS_LOGINS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
 
@@ -57,6 +60,16 @@ public class PropsValues {
 
 	public static final String DEFAULT_WAP_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID);
+
+	public static final boolean JABBER_XMPP_SERVER_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));
+
+	public static final boolean JAVASCRIPT_FAST_LOAD = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.JAVASCRIPT_FAST_LOAD));
+
+	public static final boolean JAVASCRIPT_LOG_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED));
 
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));
@@ -84,6 +97,9 @@ public class PropsValues {
 	public static boolean LAYOUT_SHOW_PORTLET_INACTIVE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
 
+	public static boolean LAYOUT_TEMPLATE_CACHE_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
+
 	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(
 		PropsUtil.LOGIN_EVENTS_POST);
 
@@ -100,8 +116,14 @@ public class PropsValues {
 	public static final boolean PORTAL_JAAS_ENABLE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE));
 
+	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED));
+
 	public static boolean PORTLET_URL_ANCHOR_ENABLE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
+
+	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
 
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_POST);
@@ -115,12 +137,25 @@ public class PropsValues {
 	public static boolean SESSION_DISABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.SESSION_DISABLED));
 
+	public static boolean SESSION_ENABLE_PERSISTENT_COOKIES =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES));
+
+	public static boolean SESSION_TEST_COOKIE_SUPPORT = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.SESSION_TEST_COOKIE_SUPPORT));
+
 	public static boolean SESSION_TRACKER_FRIENDLY_PATHS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED));
 
+	public static boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.TAGS_COMPILER_ENABLED));
+
 	public static boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED));
+
+	public static boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));
 
 	public static final String WEB_SERVER_HOST = PropsUtil.get(
 		PropsUtil.WEB_SERVER_HOST);
