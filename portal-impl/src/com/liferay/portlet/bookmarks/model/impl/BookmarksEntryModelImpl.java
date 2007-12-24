@@ -100,7 +100,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksEntryModel"));
+				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksEntry"));
 
 	public BookmarksEntryModelImpl() {
 	}

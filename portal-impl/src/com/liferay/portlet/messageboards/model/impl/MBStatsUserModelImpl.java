@@ -77,7 +77,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table MBStatsUser";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBStatsUserModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBStatsUser"));
 
 	public MBStatsUserModelImpl() {
 	}

@@ -78,7 +78,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table RatingsStats";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsStatsModel"));
+				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsStats"));
 
 	public RatingsStatsModelImpl() {
 	}

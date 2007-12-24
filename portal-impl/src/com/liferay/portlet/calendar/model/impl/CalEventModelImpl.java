@@ -131,7 +131,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table CalEvent";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.calendar.model.CalEventModel"));
+				"lock.expiration.time.com.liferay.portlet.calendar.model.CalEvent"));
 
 	public CalEventModelImpl() {
 	}

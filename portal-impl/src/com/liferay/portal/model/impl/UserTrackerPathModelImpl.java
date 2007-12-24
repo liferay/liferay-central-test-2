@@ -74,7 +74,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table UserTrackerPath";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.UserTrackerPathModel"));
+				"lock.expiration.time.com.liferay.portal.model.UserTrackerPath"));
 
 	public UserTrackerPathModelImpl() {
 	}

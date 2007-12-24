@@ -80,7 +80,7 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table SCLicense";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCLicenseModel"));
+				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCLicense"));
 
 	public SCLicenseModelImpl() {
 	}

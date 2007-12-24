@@ -101,7 +101,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table SCProductVersion";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductVersionModel"));
+				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
 
 	public SCProductVersionModelImpl() {
 	}

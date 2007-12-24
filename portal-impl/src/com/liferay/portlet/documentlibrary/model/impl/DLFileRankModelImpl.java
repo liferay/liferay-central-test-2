@@ -83,7 +83,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileRank";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileRankModel"));
+				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileRank"));
 
 	public DLFileRankModelImpl() {
 	}

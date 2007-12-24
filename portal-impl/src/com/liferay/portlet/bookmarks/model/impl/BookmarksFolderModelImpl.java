@@ -94,7 +94,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table BookmarksFolder";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksFolderModel"));
+				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksFolder"));
 
 	public BookmarksFolderModelImpl() {
 	}

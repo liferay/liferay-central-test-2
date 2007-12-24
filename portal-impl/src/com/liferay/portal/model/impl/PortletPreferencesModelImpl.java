@@ -78,7 +78,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table PortletPreferences";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PortletPreferencesModel"));
+				"lock.expiration.time.com.liferay.portal.model.PortletPreferences"));
 
 	public PortletPreferencesModelImpl() {
 	}

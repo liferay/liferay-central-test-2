@@ -71,7 +71,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table WikiPageResource";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResourceModel"));
+				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResource"));
 
 	public WikiPageResourceModelImpl() {
 	}

@@ -75,7 +75,7 @@ public class RegionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Region";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.RegionModel"));
+				"lock.expiration.time.com.liferay.portal.model.Region"));
 
 	public RegionModelImpl() {
 	}

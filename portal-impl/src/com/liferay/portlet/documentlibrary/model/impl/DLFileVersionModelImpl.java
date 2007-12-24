@@ -91,7 +91,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersionModel"));
+				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersion"));
 
 	public DLFileVersionModelImpl() {
 	}

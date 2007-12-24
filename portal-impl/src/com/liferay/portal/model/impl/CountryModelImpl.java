@@ -81,7 +81,7 @@ public class CountryModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Country";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.CountryModel"));
+				"lock.expiration.time.com.liferay.portal.model.Country"));
 
 	public CountryModelImpl() {
 	}

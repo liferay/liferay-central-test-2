@@ -77,7 +77,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
 	public static String TABLE_SQL_DROP = "drop table PollsChoice";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.polls.model.PollsChoiceModel"));
+				"lock.expiration.time.com.liferay.portlet.polls.model.PollsChoice"));
 
 	public PollsChoiceModelImpl() {
 	}

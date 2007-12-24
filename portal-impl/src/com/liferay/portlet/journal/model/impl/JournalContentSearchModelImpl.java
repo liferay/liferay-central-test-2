@@ -83,7 +83,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalContentSearch";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearchModel"));
+				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearch"));
 
 	public JournalContentSearchModelImpl() {
 	}

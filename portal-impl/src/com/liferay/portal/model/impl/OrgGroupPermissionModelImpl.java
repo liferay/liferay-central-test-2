@@ -68,7 +68,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
 	public static String TABLE_SQL_DROP = "drop table OrgGroupPermission";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermissionModel"));
+				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermission"));
 
 	public OrgGroupPermissionModelImpl() {
 	}

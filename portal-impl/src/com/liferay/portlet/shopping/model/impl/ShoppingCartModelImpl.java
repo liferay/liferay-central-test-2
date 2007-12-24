@@ -97,7 +97,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ShoppingCart (cartId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,itemIds STRING null,couponCodes VARCHAR(75) null,altShipping INTEGER,insure BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingCart";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCartModel"));
+				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCart"));
 
 	public ShoppingCartModelImpl() {
 	}

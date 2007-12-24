@@ -99,7 +99,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Group_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.GroupModel"));
+				"lock.expiration.time.com.liferay.portal.model.Group"));
 
 	public GroupModelImpl() {
 	}

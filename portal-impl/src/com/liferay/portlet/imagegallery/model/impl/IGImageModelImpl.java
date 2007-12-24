@@ -94,7 +94,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
 	public static String TABLE_SQL_DROP = "drop table IGImage";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGImageModel"));
+				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGImage"));
 
 	public IGImageModelImpl() {
 	}

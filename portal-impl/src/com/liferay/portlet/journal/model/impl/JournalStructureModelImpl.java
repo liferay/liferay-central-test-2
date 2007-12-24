@@ -100,7 +100,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table JournalStructure";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.journal.model.JournalStructureModel"));
+				"lock.expiration.time.com.liferay.portlet.journal.model.JournalStructure"));
 
 	public JournalStructureModelImpl() {
 	}

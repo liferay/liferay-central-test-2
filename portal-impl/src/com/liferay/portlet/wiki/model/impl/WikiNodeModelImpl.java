@@ -97,7 +97,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table WikiNode (uuid_ VARCHAR(75) null,nodeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table WikiNode";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiNodeModel"));
+				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiNode"));
 
 	public WikiNodeModelImpl() {
 	}

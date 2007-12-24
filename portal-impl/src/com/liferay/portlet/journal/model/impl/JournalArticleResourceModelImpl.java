@@ -71,7 +71,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleResource";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleResourceModel"));
+				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleResource"));
 
 	public JournalArticleResourceModelImpl() {
 	}

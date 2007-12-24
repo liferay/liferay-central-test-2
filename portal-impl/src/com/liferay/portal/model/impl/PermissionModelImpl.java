@@ -72,7 +72,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Permission_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PermissionModel"));
+				"lock.expiration.time.com.liferay.portal.model.Permission"));
 
 	public PermissionModelImpl() {
 	}

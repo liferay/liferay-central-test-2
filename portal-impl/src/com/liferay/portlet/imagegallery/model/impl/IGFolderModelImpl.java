@@ -94,7 +94,7 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table IGFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table IGFolder";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGFolderModel"));
+				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGFolder"));
 
 	public IGFolderModelImpl() {
 	}

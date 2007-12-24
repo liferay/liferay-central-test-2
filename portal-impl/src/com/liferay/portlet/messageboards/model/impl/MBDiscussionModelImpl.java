@@ -72,7 +72,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
 	public static String TABLE_SQL_DROP = "drop table MBDiscussion";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussionModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussion"));
 
 	public MBDiscussionModelImpl() {
 	}

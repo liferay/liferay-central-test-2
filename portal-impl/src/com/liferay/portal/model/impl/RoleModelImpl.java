@@ -81,7 +81,7 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table Role_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.RoleModel"));
+				"lock.expiration.time.com.liferay.portal.model.Role"));
 
 	public RoleModelImpl() {
 	}

@@ -109,7 +109,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table OrgLabor";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.OrgLaborModel"));
+				"lock.expiration.time.com.liferay.portal.model.OrgLabor"));
 
 	public OrgLaborModelImpl() {
 	}

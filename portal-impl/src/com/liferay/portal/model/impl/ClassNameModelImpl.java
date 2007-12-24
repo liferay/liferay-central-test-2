@@ -66,7 +66,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
 	public static String TABLE_SQL_DROP = "drop table ClassName_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.ClassNameModel"));
+				"lock.expiration.time.com.liferay.portal.model.ClassName"));
 
 	public ClassNameModelImpl() {
 	}

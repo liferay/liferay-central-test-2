@@ -100,7 +100,7 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table MBCategory";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBCategoryModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBCategory"));
 
 	public MBCategoryModelImpl() {
 	}

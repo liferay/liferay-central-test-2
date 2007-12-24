@@ -77,7 +77,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingItemField";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemFieldModel"));
+				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemField"));
 
 	public ShoppingItemFieldModelImpl() {
 	}

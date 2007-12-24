@@ -94,7 +94,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileShortcutModel"));
+				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileShortcut"));
 
 	public DLFileShortcutModelImpl() {
 	}

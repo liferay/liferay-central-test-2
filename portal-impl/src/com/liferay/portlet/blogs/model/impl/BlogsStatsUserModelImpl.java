@@ -89,7 +89,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null,ratingsTotalEntries INTEGER,ratingsTotalScore DOUBLE,ratingsAverageScore DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table BlogsStatsUser";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsStatsUserModel"));
+				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsStatsUser"));
 
 	public BlogsStatsUserModelImpl() {
 	}

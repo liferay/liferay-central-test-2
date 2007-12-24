@@ -94,7 +94,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ShoppingCategory (categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingCategory";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCategoryModel"));
+				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCategory"));
 
 	public ShoppingCategoryModelImpl() {
 	}

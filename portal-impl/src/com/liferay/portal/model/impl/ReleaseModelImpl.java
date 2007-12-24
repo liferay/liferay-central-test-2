@@ -78,7 +78,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Release_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.ReleaseModel"));
+				"lock.expiration.time.com.liferay.portal.model.Release"));
 
 	public ReleaseModelImpl() {
 	}

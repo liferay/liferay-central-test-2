@@ -68,7 +68,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
 	public static String TABLE_SQL_DROP = "drop table UserGroupRole";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.UserGroupRoleModel"));
+				"lock.expiration.time.com.liferay.portal.model.UserGroupRole"));
 
 	public UserGroupRoleModelImpl() {
 	}

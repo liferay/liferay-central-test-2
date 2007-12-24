@@ -81,7 +81,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table SCProductScreenshot";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel"));
+				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"));
 
 	public SCProductScreenshotModelImpl() {
 	}

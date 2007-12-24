@@ -103,7 +103,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table WikiPage";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageModel"));
+				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPage"));
 
 	public WikiPageModelImpl() {
 	}

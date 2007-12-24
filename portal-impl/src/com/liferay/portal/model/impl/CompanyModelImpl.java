@@ -81,7 +81,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Company";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.CompanyModel"));
+				"lock.expiration.time.com.liferay.portal.model.Company"));
 
 	public CompanyModelImpl() {
 	}

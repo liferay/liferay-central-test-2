@@ -90,7 +90,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 	public static String TABLE_SQL_DROP = "drop table Organization_";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.OrganizationModel"));
+				"lock.expiration.time.com.liferay.portal.model.Organization"));
 
 	public OrganizationModelImpl() {
 	}

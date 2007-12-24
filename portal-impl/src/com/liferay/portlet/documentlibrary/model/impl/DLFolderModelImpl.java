@@ -100,7 +100,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table DLFolder";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFolderModel"));
+				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFolder"));
 
 	public DLFolderModelImpl() {
 	}

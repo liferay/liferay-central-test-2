@@ -97,7 +97,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url STRING null,active_ BOOLEAN,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table SCFrameworkVersion";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionModel"));
+				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"));
 
 	public SCFrameworkVersionModelImpl() {
 	}

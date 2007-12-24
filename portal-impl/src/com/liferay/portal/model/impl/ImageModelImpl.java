@@ -83,7 +83,7 @@ public class ImageModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table Image";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.ImageModel"));
+				"lock.expiration.time.com.liferay.portal.model.Image"));
 
 	public ImageModelImpl() {
 	}

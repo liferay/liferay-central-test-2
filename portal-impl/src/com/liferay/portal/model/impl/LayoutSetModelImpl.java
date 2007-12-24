@@ -99,7 +99,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css VARCHAR(75) null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table LayoutSet";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.LayoutSetModel"));
+				"lock.expiration.time.com.liferay.portal.model.LayoutSet"));
 
 	public LayoutSetModelImpl() {
 	}

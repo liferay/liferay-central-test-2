@@ -72,7 +72,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table MBMessageFlag";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessageFlagModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessageFlag"));
 
 	public MBMessageFlagModelImpl() {
 	}

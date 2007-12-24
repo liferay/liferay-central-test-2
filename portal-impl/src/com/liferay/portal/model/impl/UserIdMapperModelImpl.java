@@ -75,7 +75,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table UserIdMapper";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.UserIdMapperModel"));
+				"lock.expiration.time.com.liferay.portal.model.UserIdMapper"));
 
 	public UserIdMapperModelImpl() {
 	}

@@ -87,7 +87,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table MBThread";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThreadModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThread"));
 
 	public MBThreadModelImpl() {
 	}

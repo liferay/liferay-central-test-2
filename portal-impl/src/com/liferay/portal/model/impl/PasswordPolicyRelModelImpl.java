@@ -70,7 +70,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
 	public static String TABLE_SQL_DROP = "drop table PasswordPolicyRel";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRelModel"));
+				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRel"));
 
 	public PasswordPolicyRelModelImpl() {
 	}

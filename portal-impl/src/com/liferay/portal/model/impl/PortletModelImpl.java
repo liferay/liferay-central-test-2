@@ -75,7 +75,7 @@ public class PortletModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Portlet";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PortletModel"));
+				"lock.expiration.time.com.liferay.portal.model.Portlet"));
 
 	public PortletModelImpl() {
 	}

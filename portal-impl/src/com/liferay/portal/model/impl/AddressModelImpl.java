@@ -117,7 +117,7 @@ public class AddressModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Address (addressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,regionId LONG,countryId LONG,typeId INTEGER,mailing BOOLEAN,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Address";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.AddressModel"));
+				"lock.expiration.time.com.liferay.portal.model.Address"));
 
 	public AddressModelImpl() {
 	}

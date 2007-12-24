@@ -86,7 +86,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
 	public static String TABLE_SQL_DROP = "drop table UserTracker";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.UserTrackerModel"));
+				"lock.expiration.time.com.liferay.portal.model.UserTracker"));
 
 	public UserTrackerModelImpl() {
 	}

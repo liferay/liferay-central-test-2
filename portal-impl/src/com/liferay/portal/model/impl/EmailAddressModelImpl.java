@@ -96,7 +96,7 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table EmailAddress (emailAddressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,address VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table EmailAddress";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.EmailAddressModel"));
+				"lock.expiration.time.com.liferay.portal.model.EmailAddress"));
 
 	public EmailAddressModelImpl() {
 	}

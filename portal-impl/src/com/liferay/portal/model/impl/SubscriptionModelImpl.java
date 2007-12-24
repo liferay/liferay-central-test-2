@@ -89,7 +89,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Subscription (subscriptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,frequency VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table Subscription";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.SubscriptionModel"));
+				"lock.expiration.time.com.liferay.portal.model.Subscription"));
 
 	public SubscriptionModelImpl() {
 	}

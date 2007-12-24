@@ -72,7 +72,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table ResourceCode";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.ResourceCodeModel"));
+				"lock.expiration.time.com.liferay.portal.model.ResourceCode"));
 
 	public ResourceCodeModelImpl() {
 	}

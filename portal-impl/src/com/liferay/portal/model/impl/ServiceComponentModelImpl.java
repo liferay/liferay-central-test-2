@@ -75,7 +75,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table ServiceComponent";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.ServiceComponentModel"));
+				"lock.expiration.time.com.liferay.portal.model.ServiceComponent"));
 
 	public ServiceComponentModelImpl() {
 	}

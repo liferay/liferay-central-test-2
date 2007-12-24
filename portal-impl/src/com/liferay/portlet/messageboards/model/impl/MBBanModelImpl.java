@@ -88,7 +88,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table MBBan (banId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,banUserId LONG)";
 	public static String TABLE_SQL_DROP = "drop table MBBan";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBBanModel"));
+				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBBan"));
 
 	public MBBanModelImpl() {
 	}

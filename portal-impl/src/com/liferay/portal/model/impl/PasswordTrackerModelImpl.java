@@ -75,7 +75,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table PasswordTracker";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PasswordTrackerModel"));
+				"lock.expiration.time.com.liferay.portal.model.PasswordTracker"));
 
 	public PasswordTrackerModelImpl() {
 	}

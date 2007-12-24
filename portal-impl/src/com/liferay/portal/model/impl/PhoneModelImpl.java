@@ -99,7 +99,7 @@ public class PhoneModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table Phone (phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Phone";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.PhoneModel"));
+				"lock.expiration.time.com.liferay.portal.model.Phone"));
 
 	public PhoneModelImpl() {
 	}

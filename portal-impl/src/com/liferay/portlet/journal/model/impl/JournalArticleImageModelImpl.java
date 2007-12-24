@@ -83,7 +83,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImageModel"));
+				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImage"));
 
 	public JournalArticleImageModelImpl() {
 	}

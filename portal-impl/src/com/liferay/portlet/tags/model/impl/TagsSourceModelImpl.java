@@ -74,7 +74,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 	public static String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table TagsSource";
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-				"lock.expiration.time.com.liferay.portlet.tags.model.TagsSourceModel"));
+				"lock.expiration.time.com.liferay.portlet.tags.model.TagsSource"));
 
 	public TagsSourceModelImpl() {
 	}
