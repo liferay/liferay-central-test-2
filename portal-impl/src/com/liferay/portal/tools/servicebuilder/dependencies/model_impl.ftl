@@ -56,7 +56,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	public static String TABLE_SQL_DROP = "drop table ${entity.table}";
 
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get("lock.expiration.time.${packagePath}.model.${entity.name}Model"));
+	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get("lock.expiration.time.${packagePath}.model.${entity.name}"));
 
 	public ${entity.name}ModelImpl() {
 	}
