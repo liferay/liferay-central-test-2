@@ -236,13 +236,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(curArticle.getArticleId(), rowHREF);
 
-	// Version
-
-	row.addText(String.valueOf(curArticle.getVersion()), rowHREF);
-
 	// Title
 
 	row.addText(curArticle.getTitle(), rowHREF);
+
+	// Version
+
+	row.addText(String.valueOf(curArticle.getVersion()), rowHREF);
 
 	// Modified date
 
