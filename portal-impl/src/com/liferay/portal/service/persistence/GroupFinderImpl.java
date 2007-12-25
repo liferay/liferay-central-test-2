@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -38,6 +39,13 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.GroupModelImpl;
+import com.liferay.portal.model.impl.LayoutSetModelImpl;
+import com.liferay.portal.model.impl.PermissionModelImpl;
+import com.liferay.portal.model.impl.ResourceCodeModelImpl;
+import com.liferay.portal.model.impl.ResourceModelImpl;
+import com.liferay.portal.model.impl.RoleModelImpl;
+import com.liferay.portal.model.impl.UserGroupRoleModelImpl;
+import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -109,6 +117,14 @@ public class GroupFinderImpl implements GroupFinder {
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		String finderSQL = Group.class.getName();
+		boolean[] finderClassNamesCacheEnabled = new boolean[] {
+			GroupModelImpl.CACHE_ENABLED,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
+			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
+		};
 		String[] finderClassNames = new String[] {
 			Group.class.getName(), "Groups_Orgs", "Groups_UserGroups",
 			"Users_Groups", "Users_Orgs", "Users_UserGroups"
@@ -121,9 +137,13 @@ public class GroupFinderImpl implements GroupFinder {
 			new Long(groupId), new Long(userId)
 		};
 
-		Object result = FinderCache.getResult(
-			finderSQL, finderClassNames, finderMethodName, finderParams,
-			finderArgs);
+		Object result = null;
+
+		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
+			result = FinderCache.getResult(
+				finderSQL, finderClassNames, finderMethodName, finderParams,
+				finderArgs);
+		}
 
 		if (result == null) {
 			Long userIdObj = new Long(userId);
@@ -150,8 +170,9 @@ public class GroupFinderImpl implements GroupFinder {
 				count += countByGroupId(session, groupId, params3);
 
 				FinderCache.putResult(
-					finderSQL, finderClassNames, finderMethodName, finderParams,
-					finderArgs, new Long(count));
+					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
+					finderMethodName, finderParams, finderArgs,
+					new Long(count));
 
 				return count;
 			}
@@ -379,6 +400,19 @@ public class GroupFinderImpl implements GroupFinder {
 		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		String finderSQL = sql;
+		boolean[] finderClassNamesCacheEnabled = new boolean[] {
+			GroupModelImpl.CACHE_ENABLED, LayoutSetModelImpl.CACHE_ENABLED,
+			PermissionModelImpl.CACHE_ENABLED, ResourceModelImpl.CACHE_ENABLED,
+			ResourceCodeModelImpl.CACHE_ENABLED,
+			UserGroupRoleModelImpl.CACHE_ENABLED,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
+			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS,
+			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
+		};
 		String[] finderClassNames = new String[] {
 			Group.class.getName(), LayoutSet.class.getName(),
 			Permission.class.getName(), Resource.class.getName(),
@@ -398,9 +432,13 @@ public class GroupFinderImpl implements GroupFinder {
 			String.valueOf(begin), String.valueOf(end)
 		};
 
-		Object result = FinderCache.getResult(
-			finderSQL, finderClassNames, finderMethodName, finderParams,
-			finderArgs);
+		Object result = null;
+
+		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
+			result = FinderCache.getResult(
+				finderSQL, finderClassNames, finderMethodName, finderParams,
+				finderArgs);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -451,8 +489,8 @@ public class GroupFinderImpl implements GroupFinder {
 				}
 
 				FinderCache.putResult(
-					finderSQL, finderClassNames, finderMethodName, finderParams,
-					finderArgs, list);
+					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
+					finderMethodName, finderParams, finderArgs, list);
 
 				return list;
 			}

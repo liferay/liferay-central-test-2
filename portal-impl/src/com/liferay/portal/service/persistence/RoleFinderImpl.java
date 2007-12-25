@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -31,8 +32,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
+import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -96,6 +99,14 @@ public class RoleFinderImpl implements RoleFinder {
 
 	public int countByR_U(long roleId, long userId) throws SystemException {
 		String finderSQL = Role.class.getName();
+		boolean[] finderClassNamesCacheEnabled = new boolean[] {
+			GroupModelImpl.CACHE_ENABLED, RoleModelImpl.CACHE_ENABLED,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
+			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.CACHE_ENABLED_USERS_ROLES,
+			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
+		};
 		String[] finderClassNames = new String[] {
 			Group.class.getName(), Role.class.getName(), "Groups_Roles",
 			"Users_Groups", "Users_Orgs", "Users_Roles", "Users_UserGroups"
@@ -106,9 +117,13 @@ public class RoleFinderImpl implements RoleFinder {
 		};
 		Object finderArgs[] = new Object[] {new Long(roleId), new Long(userId)};
 
-		Object result = FinderCache.getResult(
-			finderSQL, finderClassNames, finderMethodName, finderParams,
-			finderArgs);
+		Object result = null;
+
+		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
+			result = FinderCache.getResult(
+				finderSQL, finderClassNames, finderMethodName, finderParams,
+				finderArgs);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -152,8 +167,9 @@ public class RoleFinderImpl implements RoleFinder {
 				}
 
 				FinderCache.putResult(
-					finderSQL, finderClassNames, finderMethodName, finderParams,
-					finderArgs, new Long(count));
+					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
+					finderMethodName, finderParams, finderArgs,
+					new Long(count));
 
 				return count;
 			}

@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -83,10 +84,12 @@ public class FinderCache implements CacheRegistryItem {
 	}
 
 	public static void putResult(
-		String sql, String[] classNames, String methodName, String[] params,
-		Object[] args, Object result) {
+		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
+		String methodName, String[] params, Object[] args, Object result) {
 
-		_instance._putResult(sql, classNames, methodName, params, args, result);
+		_instance._putResult(
+			sql, classNamesCacheEnabled, classNames, methodName, params, args,
+			result);
 	}
 
 	public void invalidate() {
@@ -187,27 +190,14 @@ public class FinderCache implements CacheRegistryItem {
 	}
 
 	private void _putResult(
-		String sql, String[] classNames, String methodName, String[] params,
-		Object[] args, Object result) {
+		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
+		String methodName, String[] params, Object[] args, Object result) {
+
+		if (ArrayUtil.contains(classNamesCacheEnabled, false)) {
+			return;
+		}
 
 		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
-			for (int i = 0; i < classNames.length; i++) {
-				String className = classNames[i];
-
-				StringMaker sm = new StringMaker();
-
-				sm.append(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED);
-				sm.append(StringPool.PERIOD);
-				sm.append(className);
-
-				boolean classNameCacheEnabled = GetterUtil.getBoolean(
-					PropsUtil.get(sm.toString()), true);
-
-				if (!classNameCacheEnabled) {
-					return;
-				}
-			}
-
 			String key = _encodeKey(sql, methodName, params, args);
 
 			for (int i = 0; i < classNames.length; i++) {
