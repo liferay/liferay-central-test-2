@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
+import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -243,13 +244,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public List findByActive(boolean active) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -278,8 +284,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -302,6 +309,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public List findByActive(boolean active, int begin, int end,
 		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] {
@@ -316,8 +324,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -353,8 +365,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -470,6 +483,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public List findByA_R(boolean active, boolean recommended)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByA_R";
 		String[] finderParams = new String[] {
@@ -479,8 +493,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -515,8 +533,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -539,6 +558,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public List findByA_R(boolean active, boolean recommended, int begin,
 		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByA_R";
 		String[] finderParams = new String[] {
@@ -553,8 +573,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -596,8 +620,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -774,6 +799,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -784,8 +810,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -817,8 +847,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -864,13 +895,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public int countByActive(boolean active) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "countByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -906,8 +942,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -925,6 +962,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public int countByA_R(boolean active, boolean recommended)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "countByA_R";
 		String[] finderParams = new String[] {
@@ -934,8 +972,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -977,8 +1019,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -995,13 +1038,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1024,8 +1072,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

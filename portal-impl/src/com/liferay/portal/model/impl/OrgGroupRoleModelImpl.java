@@ -55,8 +55,8 @@ import java.sql.Types;
  *
  */
 public class OrgGroupRoleModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "OrgGroupRole";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "OrgGroupRole";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
 			
 
@@ -65,9 +65,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 
 			{ "roleId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";
-	public static String TABLE_SQL_DROP = "drop table OrgGroupRole";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";
+	public static final String TABLE_SQL_DROP = "drop table OrgGroupRole";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgGroupRole"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupRole"));
 
 	public OrgGroupRoleModelImpl() {

@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class SCProductScreenshotModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "SCProductScreenshot";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "SCProductScreenshot";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "productScreenshotId", new Integer(Types.BIGINT) },
 			
 
@@ -78,9 +78,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table SCProductScreenshot";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table SCProductScreenshot";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"));
 
 	public SCProductScreenshotModelImpl() {

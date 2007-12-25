@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class ListTypeModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ListType";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ListType";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "listTypeId", new Integer(Types.INTEGER) },
 			
 
@@ -66,9 +66,12 @@ public class ListTypeModelImpl extends BaseModelImpl {
 
 			{ "type_", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ListType (listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table ListType";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ListType (listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table ListType";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.ListType"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ListType"));
 
 	public ListTypeModelImpl() {

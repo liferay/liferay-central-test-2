@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LayoutSetImpl;
+import com.liferay.portal.model.impl.LayoutSetModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -240,13 +241,18 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public List findByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -270,8 +276,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -294,6 +301,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
@@ -308,8 +316,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -338,8 +350,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -472,13 +485,18 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public LayoutSet fetchByVirtualHost(String virtualHost)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "fetchByVirtualHost";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -509,8 +527,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -566,6 +585,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "fetchByG_P";
 		String[] finderParams = new String[] {
@@ -575,8 +595,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -606,8 +630,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -685,6 +710,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -695,8 +721,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -721,8 +751,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -771,13 +802,18 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -812,8 +848,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -830,13 +867,18 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public int countByVirtualHost(String virtualHost) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "countByVirtualHost";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -878,8 +920,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -897,6 +940,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "countByG_P";
 		String[] finderParams = new String[] {
@@ -906,8 +950,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -948,8 +996,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -966,13 +1015,18 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -995,8 +1049,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

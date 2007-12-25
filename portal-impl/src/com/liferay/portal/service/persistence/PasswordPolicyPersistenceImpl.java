@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
+import com.liferay.portal.model.impl.PasswordPolicyModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -272,6 +273,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "fetchByC_DP";
 		String[] finderParams = new String[] {
@@ -281,8 +283,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 				new Long(companyId), Boolean.valueOf(defaultPolicy)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -313,8 +319,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -370,6 +377,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 	public PasswordPolicy fetchByC_N(long companyId, String name)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "fetchByC_N";
 		String[] finderParams = new String[] {
@@ -377,8 +385,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -416,8 +428,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -495,6 +508,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -505,8 +519,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -531,8 +549,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -572,6 +591,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 	public int countByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "countByC_DP";
 		String[] finderParams = new String[] {
@@ -581,8 +601,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 				new Long(companyId), Boolean.valueOf(defaultPolicy)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -624,8 +648,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -643,6 +668,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "countByC_N";
 		String[] finderParams = new String[] {
@@ -650,8 +676,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -700,8 +730,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -718,13 +749,18 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -747,8 +783,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class OrganizationModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Organization_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Organization_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
 			
 
@@ -87,9 +87,16 @@ public class OrganizationModelImpl extends BaseModelImpl {
 
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
-	public static String TABLE_SQL_DROP = "drop table Organization_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
+	public static final String TABLE_SQL_DROP = "drop table Organization_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Organization"),
+			true);
+	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Orgs"), true);
+	public static final boolean CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Orgs"), true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Organization"));
 
 	public OrganizationModelImpl() {

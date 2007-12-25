@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class RegionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Region";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Region";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "regionId", new Integer(Types.BIGINT) },
 			
 
@@ -72,9 +72,12 @@ public class RegionModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Region";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Region";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Region"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Region"));
 
 	public RegionModelImpl() {

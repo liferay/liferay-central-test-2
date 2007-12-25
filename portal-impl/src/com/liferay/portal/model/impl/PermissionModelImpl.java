@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class PermissionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Permission_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Permission_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "permissionId", new Integer(Types.BIGINT) },
 			
 
@@ -69,9 +69,18 @@ public class PermissionModelImpl extends BaseModelImpl {
 
 			{ "resourceId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
-	public static String TABLE_SQL_DROP = "drop table Permission_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
+	public static final String TABLE_SQL_DROP = "drop table Permission_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Permission"),
+			true);
+	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Permissions"), true);
+	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Roles_Permissions"), true);
+	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Permissions"), true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Permission"));
 
 	public PermissionModelImpl() {

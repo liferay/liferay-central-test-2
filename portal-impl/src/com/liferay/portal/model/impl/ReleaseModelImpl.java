@@ -56,8 +56,8 @@ import java.util.Date;
  *
  */
 public class ReleaseModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Release_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Release_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "releaseId", new Integer(Types.BIGINT) },
 			
 
@@ -75,9 +75,12 @@ public class ReleaseModelImpl extends BaseModelImpl {
 
 			{ "verified", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Release_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Release_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Release"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Release"));
 
 	public ReleaseModelImpl() {

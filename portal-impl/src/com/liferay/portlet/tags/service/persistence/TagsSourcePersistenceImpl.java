@@ -38,6 +38,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.tags.NoSuchSourceException;
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
+import com.liferay.portlet.tags.model.impl.TagsSourceModelImpl;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -291,6 +292,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsSourceModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsSource.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -301,8 +303,12 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -327,8 +333,9 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -353,13 +360,18 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsSourceModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsSource.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -382,8 +394,9 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

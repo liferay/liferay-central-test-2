@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class PollsVoteModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PollsVote";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PollsVote";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "voteId", new Integer(Types.BIGINT) },
 			
 
@@ -74,9 +74,12 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 
 			{ "voteDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PollsVote (voteId LONG not null primary key,userId LONG,questionId LONG,choiceId LONG,voteDate DATE null)";
-	public static String TABLE_SQL_DROP = "drop table PollsVote";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PollsVote (voteId LONG not null primary key,userId LONG,questionId LONG,choiceId LONG,voteDate DATE null)";
+	public static final String TABLE_SQL_DROP = "drop table PollsVote";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsVote"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsVote"));
 
 	public PollsVoteModelImpl() {

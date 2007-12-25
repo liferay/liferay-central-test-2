@@ -38,9 +38,9 @@ import java.util.Date;
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl {
 
-	public static String TABLE_NAME = "${entity.table}";
+	public static final String TABLE_NAME = "${entity.table}";
 
-	public static Object[][] TABLE_COLUMNS = {
+	public static final Object[][] TABLE_COLUMNS = {
 		<#list entity.getRegularColList() as column>
 			<#assign sqlType = serviceBuilder.getSqlType(packagePath + ".model." + entity.getName(), column.getName(), column.getType())>
 
@@ -52,11 +52,19 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		</#list>
 	};
 
-	public static String TABLE_SQL_CREATE = "${serviceBuilder.getCreateTableSQL(entity)}";
+	public static final String TABLE_SQL_CREATE = "${serviceBuilder.getCreateTableSQL(entity)}";
 
-	public static String TABLE_SQL_DROP = "drop table ${entity.table}";
+	public static final String TABLE_SQL_DROP = "drop table ${entity.table}";
 
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get("lock.expiration.time.${packagePath}.model.${entity.name}"));
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"), true);
+
+	<#list entity.columnList as column>
+		<#if column.mappingTable??>
+			public static final boolean CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} = GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${column.mappingTable}"), true);
+		</#if>
+	</#list>
+
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get("lock.expiration.time.${packagePath}.model.${entity.name}"));
 
 	public ${entity.name}ModelImpl() {
 	}

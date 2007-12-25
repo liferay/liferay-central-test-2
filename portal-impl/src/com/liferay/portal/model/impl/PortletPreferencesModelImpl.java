@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class PortletPreferencesModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PortletPreferences";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PortletPreferences";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },
 			
 
@@ -75,9 +75,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 
 			{ "preferences", new Integer(Types.CLOB) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
-	public static String TABLE_SQL_DROP = "drop table PortletPreferences";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
+	public static final String TABLE_SQL_DROP = "drop table PortletPreferences";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletPreferences"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletPreferences"));
 
 	public PortletPreferencesModelImpl() {

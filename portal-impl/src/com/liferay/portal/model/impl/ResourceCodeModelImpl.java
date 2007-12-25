@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class ResourceCodeModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ResourceCode";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ResourceCode";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "codeId", new Integer(Types.BIGINT) },
 			
 
@@ -69,9 +69,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 
 			{ "scope", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table ResourceCode";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table ResourceCode";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.ResourceCode"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceCode"));
 
 	public ResourceCodeModelImpl() {

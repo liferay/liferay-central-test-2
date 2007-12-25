@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.impl.ServiceComponentImpl;
+import com.liferay.portal.model.impl.ServiceComponentModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -247,13 +248,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public List findByBuildNamespace(String buildNamespace)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findByBuildNamespace";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -290,8 +296,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -314,6 +321,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public List findByBuildNamespace(String buildNamespace, int begin, int end,
 		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findByBuildNamespace";
 		String[] finderParams = new String[] {
@@ -328,8 +336,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -373,8 +385,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -529,6 +542,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "fetchByBNS_BNU";
 		String[] finderParams = new String[] {
@@ -536,8 +550,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -580,8 +598,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -659,6 +678,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -669,8 +689,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -702,8 +726,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -748,13 +773,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public int countByBuildNamespace(String buildNamespace)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "countByBuildNamespace";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -797,8 +827,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -816,6 +847,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "countByBNS_BNU";
 		String[] finderParams = new String[] {
@@ -823,8 +855,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -873,8 +909,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -891,13 +928,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -920,8 +962,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

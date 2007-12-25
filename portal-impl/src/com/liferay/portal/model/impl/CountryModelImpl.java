@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class CountryModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Country";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Country";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "countryId", new Integer(Types.BIGINT) },
 			
 
@@ -78,9 +78,12 @@ public class CountryModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Country";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Country";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Country"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Country"));
 
 	public CountryModelImpl() {

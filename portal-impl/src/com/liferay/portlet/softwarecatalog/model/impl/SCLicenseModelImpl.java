@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class SCLicenseModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "SCLicense";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "SCLicense";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "licenseId", new Integer(Types.BIGINT) },
 			
 
@@ -77,9 +77,12 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 
 			{ "recommended", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table SCLicense";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table SCLicense";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCLicense"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCLicense"));
 
 	public SCLicenseModelImpl() {

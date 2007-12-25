@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class PollsChoiceModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PollsChoice";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PollsChoice";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
 			
 
@@ -74,9 +74,12 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
-	public static String TABLE_SQL_DROP = "drop table PollsChoice";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
+	public static final String TABLE_SQL_DROP = "drop table PollsChoice";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsChoice"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsChoice"));
 
 	public PollsChoiceModelImpl() {

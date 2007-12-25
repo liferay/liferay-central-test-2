@@ -61,8 +61,8 @@ import java.util.Date;
  *
  */
 public class ShoppingCouponModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ShoppingCoupon";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ShoppingCoupon";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "couponId", new Integer(Types.BIGINT) },
 			
 
@@ -116,9 +116,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 
 			{ "discountType", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories STRING null,limitSkus STRING null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table ShoppingCoupon";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories STRING null,limitSkus STRING null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table ShoppingCoupon";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCoupon"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCoupon"));
 
 	public ShoppingCouponModelImpl() {

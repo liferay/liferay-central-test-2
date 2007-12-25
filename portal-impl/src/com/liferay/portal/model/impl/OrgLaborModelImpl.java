@@ -54,8 +54,8 @@ import java.sql.Types;
  *
  */
 public class OrgLaborModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "OrgLabor";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "OrgLabor";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "orgLaborId", new Integer(Types.BIGINT) },
 			
 
@@ -106,9 +106,12 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 			{ "satClose", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table OrgLabor";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table OrgLabor";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgLabor"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgLabor"));
 
 	public OrgLaborModelImpl() {

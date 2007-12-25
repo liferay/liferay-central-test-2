@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class JournalContentSearchModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "JournalContentSearch";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "JournalContentSearch";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },
 			
 
@@ -80,9 +80,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table JournalContentSearch";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table JournalContentSearch";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalContentSearch"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearch"));
 
 	public JournalContentSearchModelImpl() {

@@ -15,9 +15,7 @@
 				</#if>
 			</#if>
 
-			<#assign columnList = entity.getColumnList()>
-
-			<#list columnList as column>
+			<#list entity.columnList as column>
 				<#if !column.isCollection()>
 					<field name="${column.name}" type="${column.type}"
 

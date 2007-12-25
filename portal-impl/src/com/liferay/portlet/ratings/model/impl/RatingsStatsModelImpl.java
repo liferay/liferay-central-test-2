@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class RatingsStatsModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "RatingsStats";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "RatingsStats";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsId", new Integer(Types.BIGINT) },
 			
 
@@ -75,9 +75,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 
 			{ "averageScore", new Integer(Types.DOUBLE) }
 		};
-	public static String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
-	public static String TABLE_SQL_DROP = "drop table RatingsStats";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
+	public static final String TABLE_SQL_DROP = "drop table RatingsStats";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.ratings.model.RatingsStats"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsStats"));
 
 	public RatingsStatsModelImpl() {

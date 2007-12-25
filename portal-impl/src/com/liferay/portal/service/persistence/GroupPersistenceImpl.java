@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -326,13 +327,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByLiveGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -360,8 +366,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -417,6 +424,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_N(long companyId, String name)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_N";
 		String[] finderParams = new String[] {
@@ -424,8 +432,12 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -466,8 +478,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -523,6 +536,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_F(long companyId, String friendlyURL)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_F";
 		String[] finderParams = new String[] {
@@ -530,8 +544,12 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -572,8 +590,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -632,6 +651,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_C_C";
 		String[] finderParams = new String[] {
@@ -641,8 +661,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -682,8 +706,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -761,6 +786,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -771,8 +797,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -803,8 +833,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -857,13 +888,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int countByLiveGroupId(long liveGroupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "countByLiveGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -898,8 +934,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -917,6 +954,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "countByC_N";
 		String[] finderParams = new String[] {
@@ -924,8 +962,12 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -973,8 +1015,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -992,6 +1035,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int countByC_F(long companyId, String friendlyURL)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "countByC_F";
 		String[] finderParams = new String[] {
@@ -999,8 +1043,12 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1048,8 +1096,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1067,6 +1116,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "countByC_C_C";
 		String[] finderParams = new String[] {
@@ -1076,8 +1126,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1124,8 +1178,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1142,13 +1197,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1171,8 +1231,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1200,6 +1261,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getOrganizations(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 		String finderClassName = "Groups_Orgs";
 		String finderMethodName = "getOrganizations";
 		String[] finderParams = new String[] {
@@ -1211,8 +1273,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1248,8 +1314,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -1266,13 +1333,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int getOrganizationsSize(long pk) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 		String finderClassName = "Groups_Orgs";
 		String finderMethodName = "getOrganizationsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1300,8 +1372,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1319,6 +1392,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 		String finderClassName = "Groups_Orgs";
 		String finderMethodName = "containsOrganizations";
 		String[] finderParams = new String[] {
@@ -1332,16 +1406,21 @@ public class GroupPersistenceImpl extends BasePersistence
 				new Long(organizationPK)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsOrganization.contains(
 							pk, organizationPK));
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, value);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
 				return value.booleanValue();
 			}
@@ -1552,6 +1631,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getPermissions(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 		String finderClassName = "Groups_Permissions";
 		String finderMethodName = "getPermissions";
 		String[] finderParams = new String[] {
@@ -1563,8 +1643,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1594,8 +1678,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -1612,13 +1697,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int getPermissionsSize(long pk) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 		String finderClassName = "Groups_Permissions";
 		String finderMethodName = "getPermissionsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1646,8 +1736,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1665,6 +1756,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 		String finderClassName = "Groups_Permissions";
 		String finderMethodName = "containsPermissions";
 		String[] finderParams = new String[] {
@@ -1674,16 +1766,21 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(permissionPK) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsPermission.contains(
 							pk, permissionPK));
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, value);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
 				return value.booleanValue();
 			}
@@ -1893,6 +1990,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 		String finderClassName = "Groups_Roles";
 		String finderMethodName = "getRoles";
 		String[] finderParams = new String[] {
@@ -1904,8 +2002,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1941,8 +2043,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -1959,13 +2062,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int getRolesSize(long pk) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 		String finderClassName = "Groups_Roles";
 		String finderMethodName = "getRolesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1993,8 +2101,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -2011,6 +2120,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 		String finderClassName = "Groups_Roles";
 		String finderMethodName = "containsRoles";
 		String[] finderParams = new String[] {
@@ -2020,15 +2130,20 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(rolePK) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, value);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
 				return value.booleanValue();
 			}
@@ -2237,6 +2352,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getUserGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
 		String finderClassName = "Groups_UserGroups";
 		String finderMethodName = "getUserGroups";
 		String[] finderParams = new String[] {
@@ -2248,8 +2364,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2285,8 +2405,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -2303,13 +2424,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int getUserGroupsSize(long pk) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
 		String finderClassName = "Groups_UserGroups";
 		String finderMethodName = "getUserGroupsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2337,8 +2463,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -2356,6 +2483,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
 		String finderClassName = "Groups_UserGroups";
 		String finderMethodName = "containsUserGroups";
 		String[] finderParams = new String[] {
@@ -2365,16 +2493,21 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userGroupPK) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUserGroup.contains(pk,
 							userGroupPK));
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, value);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
 				return value.booleanValue();
 			}
@@ -2584,6 +2717,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
 		String finderClassName = "Users_Groups";
 		String finderMethodName = "getUsers";
 		String[] finderParams = new String[] {
@@ -2595,8 +2729,12 @@ public class GroupPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2626,8 +2764,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -2644,13 +2783,18 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int getUsersSize(long pk) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
 		String finderClassName = "Users_Groups";
 		String finderMethodName = "getUsersSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2678,8 +2822,9 @@ public class GroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -2696,6 +2841,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
 		String finderClassName = "Users_Groups";
 		String finderMethodName = "containsUsers";
 		String[] finderParams = new String[] {
@@ -2705,15 +2851,20 @@ public class GroupPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, value);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
 				return value.booleanValue();
 			}

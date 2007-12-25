@@ -56,16 +56,19 @@ import java.sql.Types;
  *
  */
 public class ClassNameModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ClassName_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ClassName_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },
 			
 
 			{ "value", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
-	public static String TABLE_SQL_DROP = "drop table ClassName_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
+	public static final String TABLE_SQL_DROP = "drop table ClassName_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.ClassName"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ClassName"));
 
 	public ClassNameModelImpl() {

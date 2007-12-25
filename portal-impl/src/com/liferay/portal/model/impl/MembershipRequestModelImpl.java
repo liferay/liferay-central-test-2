@@ -59,8 +59,8 @@ import java.util.Date;
  *
  */
 public class MembershipRequestModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "MembershipRequest";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "MembershipRequest";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "membershipRequestId", new Integer(Types.BIGINT) },
 			
 
@@ -90,9 +90,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 
 			{ "statusId", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table MembershipRequest";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table MembershipRequest";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.MembershipRequest"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.MembershipRequest"));
 
 	public MembershipRequestModelImpl() {

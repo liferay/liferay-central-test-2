@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class BookmarksEntryModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "BookmarksEntry";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "BookmarksEntry";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
 			
 
@@ -97,9 +97,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table BookmarksEntry";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksEntry"));
 
 	public BookmarksEntryModelImpl() {

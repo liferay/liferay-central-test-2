@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class PasswordPolicyModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PasswordPolicy";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PasswordPolicy";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyId", new Integer(Types.BIGINT) },
 			
 
@@ -137,9 +137,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 
 			{ "resetFailureCount", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minLength INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG)";
-	public static String TABLE_SQL_DROP = "drop table PasswordPolicy";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minLength INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG)";
+	public static final String TABLE_SQL_DROP = "drop table PasswordPolicy";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicy"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicy"));
 
 	public PasswordPolicyModelImpl() {

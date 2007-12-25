@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class UserModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "User_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "User_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
 			
 
@@ -146,9 +146,22 @@ public class UserModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table User_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table User_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.User"),
+			true);
+	public static final boolean CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Groups"), true);
+	public static final boolean CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Orgs"), true);
+	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Permissions"), true);
+	public static final boolean CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Roles"), true);
+	public static final boolean CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_UserGroups"), true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.User"));
 
 	public UserModelImpl() {

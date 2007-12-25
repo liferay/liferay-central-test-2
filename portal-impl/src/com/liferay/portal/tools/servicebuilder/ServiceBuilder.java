@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
@@ -2938,7 +2939,9 @@ public class ServiceBuilder {
 		context.put("outputPath", _outputPath);
 		context.put("serviceOutputPath", _serviceOutputPath);
 		context.put("packagePath", _packagePath);
-		context.put("serviceBuilder",this);
+		context.put("serviceBuilder", this);
+
+		context.put("stringUtil", StringUtil_IW.getInstance());
 
 		try {
 			BeansWrapper wrapper = BeansWrapper.getDefaultInstance();

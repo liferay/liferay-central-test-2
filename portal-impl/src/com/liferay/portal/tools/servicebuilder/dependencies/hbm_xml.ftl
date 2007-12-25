@@ -48,9 +48,7 @@
 				</id>
 			</#if>
 
-			<#assign columnList = entity.getColumnList()>
-
-			<#list columnList as column>
+			<#list entity.columnList as column>
 				<#if column.EJBName??>
 					<#assign ejbName = true>
 				<#else>

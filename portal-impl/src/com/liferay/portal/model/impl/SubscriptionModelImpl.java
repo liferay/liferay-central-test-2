@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class SubscriptionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Subscription";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Subscription";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "subscriptionId", new Integer(Types.BIGINT) },
 			
 
@@ -86,9 +86,12 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 
 			{ "frequency", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Subscription (subscriptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,frequency VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table Subscription";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Subscription (subscriptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,frequency VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table Subscription";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Subscription"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Subscription"));
 
 	public SubscriptionModelImpl() {

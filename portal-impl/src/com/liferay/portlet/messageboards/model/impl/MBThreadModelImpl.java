@@ -59,8 +59,8 @@ import java.util.Date;
  *
  */
 public class MBThreadModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "MBThread";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "MBThread";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },
 			
 
@@ -84,9 +84,12 @@ public class MBThreadModelImpl extends BaseModelImpl {
 
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
-	public static String TABLE_SQL_DROP = "drop table MBThread";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
+	public static final String TABLE_SQL_DROP = "drop table MBThread";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBThread"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThread"));
 
 	public MBThreadModelImpl() {

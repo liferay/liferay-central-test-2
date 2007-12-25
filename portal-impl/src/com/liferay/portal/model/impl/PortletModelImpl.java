@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class PortletModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Portlet";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Portlet";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "id_", new Integer(Types.BIGINT) },
 			
 
@@ -72,9 +72,12 @@ public class PortletModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Portlet";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Portlet";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Portlet"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Portlet"));
 
 	public PortletModelImpl() {

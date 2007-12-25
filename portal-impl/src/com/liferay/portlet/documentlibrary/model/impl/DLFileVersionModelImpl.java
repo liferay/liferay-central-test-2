@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class DLFileVersionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "DLFileVersion";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "DLFileVersion";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileVersionId", new Integer(Types.BIGINT) },
 			
 
@@ -88,9 +88,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 			{ "size_", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table DLFileVersion";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersion"));
 
 	public DLFileVersionModelImpl() {

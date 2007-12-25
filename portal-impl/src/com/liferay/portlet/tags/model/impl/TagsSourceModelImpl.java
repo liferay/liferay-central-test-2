@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class TagsSourceModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "TagsSource";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "TagsSource";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "sourceId", new Integer(Types.BIGINT) },
 			
 
@@ -71,9 +71,12 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 
 			{ "acronym", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table TagsSource";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table TagsSource";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsSource"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsSource"));
 
 	public TagsSourceModelImpl() {

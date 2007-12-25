@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class WikiPageResourceModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "WikiPageResource";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "WikiPageResource";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			
 
@@ -68,9 +68,12 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 
 			{ "title", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table WikiPageResource";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPageResource"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResource"));
 
 	public WikiPageResourceModelImpl() {

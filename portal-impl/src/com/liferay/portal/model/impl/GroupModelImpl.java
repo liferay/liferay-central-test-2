@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class GroupModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Group_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Group_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
 			
 
@@ -96,9 +96,22 @@ public class GroupModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Group_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Group_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Group"),
+			true);
+	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Orgs"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Permissions"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Roles"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_UserGroups"), true);
+	public static final boolean CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Groups"), true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Group"));
 
 	public GroupModelImpl() {

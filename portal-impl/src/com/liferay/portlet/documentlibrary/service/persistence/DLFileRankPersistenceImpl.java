@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -243,13 +244,18 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public List findByUserId(long userId) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -278,8 +284,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -302,6 +309,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public List findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
@@ -316,8 +324,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -353,8 +365,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -469,6 +482,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public List findByF_N(long folderId, String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByF_N";
 		String[] finderParams = new String[] {
@@ -476,8 +490,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -519,8 +537,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -543,6 +562,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public List findByF_N(long folderId, String name, int begin, int end,
 		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByF_N";
 		String[] finderParams = new String[] {
@@ -559,8 +579,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -609,8 +633,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -778,6 +803,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
 		long folderId, String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "fetchByC_U_F_N";
 		String[] finderParams = new String[] {
@@ -790,8 +816,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				name
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -845,8 +875,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -924,6 +955,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -934,8 +966,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -967,8 +1003,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -1021,13 +1058,18 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public int countByUserId(long userId) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1063,8 +1105,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1081,6 +1124,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public int countByF_N(long folderId, String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "countByF_N";
 		String[] finderParams = new String[] {
@@ -1088,8 +1132,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1138,8 +1186,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1157,6 +1206,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public int countByC_U_F_N(long companyId, long userId, long folderId,
 		String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "countByC_U_F_N";
 		String[] finderParams = new String[] {
@@ -1169,8 +1219,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				name
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1231,8 +1285,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1249,13 +1304,18 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1278,8 +1338,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class TagsEntryModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "TagsEntry";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "TagsEntry";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
 			
 
@@ -82,9 +82,15 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 
 			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table TagsEntry";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table TagsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table TagsEntry";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsEntry"),
+			true);
+	public static final boolean CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.TagsAssets_TagsEntries"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsEntry"));
 
 	public TagsEntryModelImpl() {

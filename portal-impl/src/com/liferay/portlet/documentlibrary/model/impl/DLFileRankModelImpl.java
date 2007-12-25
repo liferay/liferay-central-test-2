@@ -61,8 +61,8 @@ import java.util.Date;
  *
  */
 public class DLFileRankModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "DLFileRank";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "DLFileRank";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileRankId", new Integer(Types.BIGINT) },
 			
 
@@ -80,9 +80,12 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 
 			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";
-	public static String TABLE_SQL_DROP = "drop table DLFileRank";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";
+	public static final String TABLE_SQL_DROP = "drop table DLFileRank";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileRank"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileRank"));
 
 	public DLFileRankModelImpl() {

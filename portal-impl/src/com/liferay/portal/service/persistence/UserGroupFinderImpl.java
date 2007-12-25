@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
+import com.liferay.portal.model.impl.UserGroupModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -128,6 +129,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 		name = StringUtil.lowerCase(name);
 
+		boolean finderClassNameCacheEnabled = UserGroupModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroup.class.getName();
 		String finderMethodName = "customFindByC_N";
 		String finderParams[] = new String[] {
@@ -161,8 +163,8 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 					UserGroup userGroup = (UserGroup)itr.next();
 
 					FinderCache.putResult(
-						finderClassName, finderMethodName, finderParams,
-						finderArgs, userGroup);
+						finderClassNameCacheEnabled, finderClassName,
+						finderMethodName, finderParams, finderArgs, userGroup);
 
 					return userGroup;
 				}

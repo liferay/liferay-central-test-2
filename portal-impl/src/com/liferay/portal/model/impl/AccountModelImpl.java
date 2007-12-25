@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class AccountModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Account_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Account_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "accountId", new Integer(Types.BIGINT) },
 			
 
@@ -107,9 +107,12 @@ public class AccountModelImpl extends BaseModelImpl {
 
 			{ "size_", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Account_ (accountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentAccountId LONG,name VARCHAR(75) null,legalName VARCHAR(75) null,legalId VARCHAR(75) null,legalType VARCHAR(75) null,sicCode VARCHAR(75) null,tickerSymbol VARCHAR(75) null,industry VARCHAR(75) null,type_ VARCHAR(75) null,size_ VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table Account_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Account_ (accountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentAccountId LONG,name VARCHAR(75) null,legalName VARCHAR(75) null,legalId VARCHAR(75) null,legalType VARCHAR(75) null,sicCode VARCHAR(75) null,tickerSymbol VARCHAR(75) null,industry VARCHAR(75) null,type_ VARCHAR(75) null,size_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table Account_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Account"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Account"));
 
 	public AccountModelImpl() {

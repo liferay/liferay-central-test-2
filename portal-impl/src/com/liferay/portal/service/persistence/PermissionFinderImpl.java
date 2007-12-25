@@ -30,6 +30,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.PermissionImpl;
+import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -596,6 +597,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 	public List findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
+		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = Permission.class.getName();
 		String finderMethodName = "customFindByA_R";
 		String finderParams[] = new String[] {
@@ -631,8 +633,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 				List list = q.list();
 
 				FinderCache.putResult(
-					finderClassName, finderMethodName, finderParams, finderArgs,
-					list);
+					finderClassNameCacheEnabled, finderClassName,
+					finderMethodName, finderParams, finderArgs, list);
 
 				return list;
 			}

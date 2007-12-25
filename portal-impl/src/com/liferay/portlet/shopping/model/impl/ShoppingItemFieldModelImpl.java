@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class ShoppingItemFieldModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ShoppingItemField";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ShoppingItemField";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "itemFieldId", new Integer(Types.BIGINT) },
 			
 
@@ -74,9 +74,12 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
-	public static String TABLE_SQL_DROP = "drop table ShoppingItemField";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
+	public static final String TABLE_SQL_DROP = "drop table ShoppingItemField";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItemField"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemField"));
 
 	public ShoppingItemFieldModelImpl() {

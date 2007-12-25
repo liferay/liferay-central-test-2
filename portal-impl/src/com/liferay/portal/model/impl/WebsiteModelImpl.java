@@ -59,8 +59,8 @@ import java.util.Date;
  *
  */
 public class WebsiteModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Website";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Website";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "websiteId", new Integer(Types.BIGINT) },
 			
 
@@ -93,9 +93,12 @@ public class WebsiteModelImpl extends BaseModelImpl {
 
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table Website";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table Website";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Website"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Website"));
 
 	public WebsiteModelImpl() {

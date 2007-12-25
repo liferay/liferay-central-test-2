@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class MBDiscussionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "MBDiscussion";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "MBDiscussion";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "discussionId", new Integer(Types.BIGINT) },
 			
 
@@ -69,9 +69,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 
 			{ "threadId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
-	public static String TABLE_SQL_DROP = "drop table MBDiscussion";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
+	public static final String TABLE_SQL_DROP = "drop table MBDiscussion";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBDiscussion"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussion"));
 
 	public MBDiscussionModelImpl() {

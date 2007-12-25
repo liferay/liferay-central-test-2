@@ -54,8 +54,8 @@ import java.sql.Types;
  *
  */
 public class PasswordPolicyRelModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PasswordPolicyRel";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PasswordPolicyRel";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyRelId", new Integer(Types.BIGINT) },
 			
 
@@ -67,9 +67,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 
 			{ "classPK", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
-	public static String TABLE_SQL_DROP = "drop table PasswordPolicyRel";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
+	public static final String TABLE_SQL_DROP = "drop table PasswordPolicyRel";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicyRel"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRel"));
 
 	public PasswordPolicyRelModelImpl() {

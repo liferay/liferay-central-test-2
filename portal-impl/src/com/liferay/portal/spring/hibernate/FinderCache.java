@@ -94,10 +94,11 @@ public class FinderCache implements CacheRegistryItem {
 	}
 
 	public static void putResult(
-		String className, String methodName, String[] params, Object[] args,
-		Object result) {
+		boolean classNameCacheEnabled, String className, String methodName,
+		String[] params, Object[] args, Object result) {
 
-		_instance._putResult(className, methodName, params, args, result);
+		_instance._putResult(
+			classNameCacheEnabled, className, methodName, params, args, result);
 	}
 
 	public static void putResult(
@@ -189,28 +190,18 @@ public class FinderCache implements CacheRegistryItem {
 	}
 
 	private void _putResult(
-		String className, String methodName, String[] params, Object[] args,
-		Object result) {
+		boolean classNameCacheEnabled, String className, String methodName,
+		String[] params, Object[] args, Object result) {
 
-		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
-			StringMaker sm = new StringMaker();
+		if (classNameCacheEnabled && CACHE_ENABLED &&
+			CacheRegistry.isActive() && (result != null)) {
 
-			sm.append(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED);
-			sm.append(StringPool.PERIOD);
-			sm.append(className);
+			String key = _encodeKey(className, methodName, params, args);
 
-			boolean classNameCacheEnabled = GetterUtil.getBoolean(
-				PropsUtil.get(sm.toString()), true);
+			String groupKey = _encodeGroupKey(className);
 
-			if (classNameCacheEnabled) {
-				String key = _encodeKey(className, methodName, params, args);
-
-				String groupKey = _encodeGroupKey(className);
-
-				MultiVMPoolUtil.put(
-					_cache, key, _groups, groupKey,
-					_resultToPrimaryKey(result));
-			}
+			MultiVMPoolUtil.put(
+				_cache, key, _groups, groupKey, _resultToPrimaryKey(result));
 		}
 	}
 

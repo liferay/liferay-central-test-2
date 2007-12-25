@@ -59,8 +59,8 @@ import java.util.Date;
  *
  */
 public class PasswordTrackerModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PasswordTracker";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PasswordTracker";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },
 			
 
@@ -72,9 +72,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table PasswordTracker";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table PasswordTracker";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordTracker"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordTracker"));
 
 	public PasswordTrackerModelImpl() {

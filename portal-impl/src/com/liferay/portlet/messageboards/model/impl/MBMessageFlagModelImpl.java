@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class MBMessageFlagModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "MBMessageFlag";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "MBMessageFlag";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "messageFlagId", new Integer(Types.BIGINT) },
 			
 
@@ -69,9 +69,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 
 			{ "flag", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table MBMessageFlag";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table MBMessageFlag";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBMessageFlag"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessageFlag"));
 
 	public MBMessageFlagModelImpl() {

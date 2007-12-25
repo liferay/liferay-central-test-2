@@ -5,6 +5,7 @@ package ${packagePath}.service.persistence;
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.impl.${entity.name}Impl;
+import ${packagePath}.model.impl.${entity.name}ModelImpl;
 import ${basePersistencePackage}.BasePersistence;
 import ${springHibernatePackage}.FinderCache;
 import ${springHibernatePackage}.HibernateUtil;
@@ -285,6 +286,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			) throws SystemException {
+				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 				String finderClassName = ${entity.name}.class.getName();
 				String finderMethodName = "findBy${finder.name}";
 				String[] finderParams = new String[] {
@@ -318,7 +320,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					</#list>
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					Session session = null;
@@ -391,7 +397,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List list = q.list();
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -430,6 +436,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			int begin, int end, OrderByComparator obc) throws SystemException {
+				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 				String finderClassName = ${entity.name}.class.getName();
 				String finderMethodName = "findBy${finder.name}";
 				String[] finderParams = new String[] {
@@ -461,7 +468,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					Session session = null;
@@ -541,7 +552,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List list = QueryUtil.list(q, getDialect(), begin, end);
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -817,6 +828,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			) throws SystemException {
+				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 				String finderClassName = ${entity.name}.class.getName();
 				String finderMethodName = "fetchBy${finder.name}";
 				String[] finderParams = new String[] {
@@ -850,7 +862,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					</#list>
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					Session session = null;
@@ -923,7 +939,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List list = q.list();
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						if (list.size() == 0) {
 							return null;
@@ -1000,12 +1016,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	}
 
 	public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 		String finderClassName = ${entity.name}.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {"java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"};
 		Object[] finderArgs = new Object[] {String.valueOf(begin), String.valueOf(end), String.valueOf(obc)};
 
-		Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1042,7 +1063,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 				return list;
 			}
@@ -1138,6 +1159,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#list>
 
 		) throws SystemException {
+			boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 			String finderClassName = ${entity.name}.class.getName();
 			String finderMethodName = "countBy${finder.name}";
 			String[] finderParams = new String[] {
@@ -1171,7 +1193,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				</#list>
 			};
 
-			Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+			Object result = null;
+
+			if (finderClassNameCacheEnabled) {
+				result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+			}
 
 			if (result == null) {
 				Session session = null;
@@ -1245,7 +1271,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						count = new Long(0);
 					}
 
-					FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);
+					FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 					return count.intValue();
 				}
@@ -1263,12 +1289,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	</#list>
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 		String finderClassName = ${entity.name}.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {};
 		Object[] finderArgs = new Object[] {};
 
-		Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1290,7 +1321,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1306,7 +1337,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		}
 	}
 
-	<#list entity.getColumnList() as column>
+	<#list entity.columnList as column>
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
@@ -1319,6 +1350,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public List get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+				boolean finderClassNameCacheEnabled =
+					<#if column.mappingTable??>
+						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
+					<#else>
+						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
+					</#if>
+
+					;
 				String finderClassName =
 					<#if column.mappingTable??>
 						"${column.mappingTable}"
@@ -1355,7 +1394,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					, String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					Session session = null;
@@ -1396,7 +1439,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List list = QueryUtil.list(q, getDialect(), begin, end);
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -1413,6 +1456,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
+				boolean finderClassNameCacheEnabled =
+					<#if column.mappingTable??>
+						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
+					<#else>
+						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
+					</#if>
+
+					;
 				String finderClassName =
 					<#if column.mappingTable??>
 						"${column.mappingTable}"
@@ -1447,7 +1498,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					</#if>
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					Session session = null;
@@ -1475,7 +1530,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							count = new Long(0);
 						}
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 						return count.intValue();
 					}
@@ -1492,6 +1547,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
+				boolean finderClassNameCacheEnabled =
+					<#if column.mappingTable??>
+						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
+					<#else>
+						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
+					</#if>
+
+					;
 				String finderClassName =
 					<#if column.mappingTable??>
 						"${column.mappingTable}"
@@ -1548,13 +1611,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					</#if>
 				};
 
-				Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				Object result = null;
+
+				if (finderClassNameCacheEnabled) {
+					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				}
 
 				if (result == null) {
 					try {
 						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 
-						FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, value);
+						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
 
 						return value.booleanValue();
 					}
@@ -1737,7 +1804,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	</#list>
 
 	protected void initDao() {
-		<#list entity.getColumnList() as column>
+		<#list entity.columnList as column>
 			<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
@@ -1752,7 +1819,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#list>
 	}
 
-	<#list entity.getColumnList() as column>
+	<#list entity.columnList as column>
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
@@ -1766,7 +1833,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#if>
 	</#list>
 
-	<#list entity.getColumnList() as column>
+	<#list entity.columnList as column>
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 			<#assign entitySqlType = serviceBuilder.getSqlType(packagePath + ".model." + entity.getName(), entity.getPKVarName(), entity.getPKClassName())>
@@ -1888,7 +1955,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		return null;
 	}
 
-	<#list entity.getColumnList() as column>
+	<#list entity.columnList as column>
 		<#if column.isCollection()>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 

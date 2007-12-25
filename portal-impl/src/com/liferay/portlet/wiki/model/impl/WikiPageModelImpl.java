@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class WikiPageModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "WikiPage";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "WikiPage";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
 			
 
@@ -100,9 +100,12 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 			{ "head", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table WikiPage";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table WikiPage";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPage"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPage"));
 
 	public WikiPageModelImpl() {

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -261,6 +262,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 		name = StringUtil.lowerCase(name);
 
+		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED;
 		String finderClassName = Role.class.getName();
 		String finderMethodName = "customFindByC_N";
 		String finderParams[] = new String[] {
@@ -294,8 +296,8 @@ public class RoleFinderImpl implements RoleFinder {
 					Role role = (Role)itr.next();
 
 					FinderCache.putResult(
-						finderClassName, finderMethodName, finderParams,
-						finderArgs, role);
+						finderClassNameCacheEnabled, finderClassName,
+						finderMethodName, finderParams, finderArgs, role);
 
 					return role;
 				}

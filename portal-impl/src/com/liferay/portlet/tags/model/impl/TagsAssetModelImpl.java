@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class TagsAssetModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "TagsAsset";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "TagsAsset";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "assetId", new Integer(Types.BIGINT) },
 			
 
@@ -127,9 +127,15 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 
 			{ "viewCount", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table TagsAsset";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table TagsAsset";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsAsset"),
+			true);
+	public static final boolean CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.TagsAssets_TagsEntries"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsAsset"));
 
 	public TagsAssetModelImpl() {

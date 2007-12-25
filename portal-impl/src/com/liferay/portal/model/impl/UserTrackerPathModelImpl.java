@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class UserTrackerPathModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "UserTrackerPath";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "UserTrackerPath";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerPathId", new Integer(Types.BIGINT) },
 			
 
@@ -71,9 +71,12 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 
 			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
-	public static String TABLE_SQL_DROP = "drop table UserTrackerPath";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
+	public static final String TABLE_SQL_DROP = "drop table UserTrackerPath";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.UserTrackerPath"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTrackerPath"));
 
 	public UserTrackerPathModelImpl() {

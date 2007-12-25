@@ -58,8 +58,8 @@ import java.sql.Types;
  *
  */
 public class JournalArticleImageModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "JournalArticleImage";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "JournalArticleImage";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "articleImageId", new Integer(Types.BIGINT) },
 			
 
@@ -80,9 +80,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table JournalArticleImage";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticleImage"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImage"));
 
 	public JournalArticleImageModelImpl() {

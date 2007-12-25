@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class LayoutSetModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "LayoutSet";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "LayoutSet";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "layoutSetId", new Integer(Types.BIGINT) },
 			
 
@@ -96,9 +96,12 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 
 			{ "virtualHost", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css VARCHAR(75) null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table LayoutSet";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css VARCHAR(75) null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table LayoutSet";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.LayoutSet"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutSet"));
 
 	public LayoutSetModelImpl() {

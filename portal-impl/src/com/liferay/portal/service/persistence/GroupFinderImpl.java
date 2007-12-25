@@ -37,6 +37,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -231,6 +232,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 		name = StringUtil.lowerCase(name);
 
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "customFindByC_N";
 		String finderParams[] = new String[] {
@@ -264,8 +266,8 @@ public class GroupFinderImpl implements GroupFinder {
 					Group group = (Group)itr.next();
 
 					FinderCache.putResult(
-						finderClassName, finderMethodName, finderParams,
-						finderArgs, group);
+						finderClassNameCacheEnabled, finderClassName,
+						finderMethodName, finderParams, finderArgs, group);
 
 					return group;
 				}

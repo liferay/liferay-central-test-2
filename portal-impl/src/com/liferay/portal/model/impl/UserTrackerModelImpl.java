@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class UserTrackerModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "UserTracker";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "UserTracker";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerId", new Integer(Types.BIGINT) },
 			
 
@@ -83,9 +83,12 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 
 			{ "userAgent", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
-	public static String TABLE_SQL_DROP = "drop table UserTracker";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
+	public static final String TABLE_SQL_DROP = "drop table UserTracker";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.UserTracker"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTracker"));
 
 	public UserTrackerModelImpl() {

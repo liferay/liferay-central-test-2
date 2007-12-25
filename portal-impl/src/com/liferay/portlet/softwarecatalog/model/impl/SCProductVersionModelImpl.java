@@ -61,8 +61,8 @@ import java.util.Date;
  *
  */
 public class SCProductVersionModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "SCProductVersion";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "SCProductVersion";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "productVersionId", new Integer(Types.BIGINT) },
 			
 
@@ -98,9 +98,15 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 
 			{ "repoStoreArtifact", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table SCProductVersion";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table SCProductVersion";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductVersion"),
+			true);
+	public static final boolean CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.SCFrameworkVersi_SCProductVers"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
 
 	public SCProductVersionModelImpl() {

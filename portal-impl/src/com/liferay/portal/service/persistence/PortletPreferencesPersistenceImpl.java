@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
+import com.liferay.portal.model.impl.PortletPreferencesModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -246,13 +247,18 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public List findByPlid(long plid) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByPlid";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(plid) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -277,8 +283,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -301,6 +308,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public List findByPlid(long plid, int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByPlid";
 		String[] finderParams = new String[] {
@@ -315,8 +323,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -346,8 +358,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -458,6 +471,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public List findByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByO_O_P";
 		String[] finderParams = new String[] {
@@ -468,8 +482,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -506,8 +524,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -530,6 +549,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public List findByO_O_P(long ownerId, int ownerType, long plid, int begin,
 		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByO_O_P";
 		String[] finderParams = new String[] {
@@ -545,8 +565,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -588,8 +612,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				List list = QueryUtil.list(q, getDialect(), begin, end);
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -761,6 +786,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "fetchByO_O_P_P";
 		String[] finderParams = new String[] {
@@ -773,8 +799,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				portletId
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -824,8 +854,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				List list = q.list();
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
@@ -903,6 +934,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {
@@ -913,8 +945,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -940,8 +976,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
 
 				return list;
 			}
@@ -996,13 +1033,18 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public int countByPlid(long plid) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "countByPlid";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(plid) };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1038,8 +1080,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1057,6 +1100,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public int countByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "countByO_O_P";
 		String[] finderParams = new String[] {
@@ -1067,8 +1111,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1116,8 +1164,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1135,6 +1184,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public int countByO_O_P_P(long ownerId, int ownerType, long plid,
 		String portletId) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "countByO_O_P_P";
 		String[] finderParams = new String[] {
@@ -1147,8 +1197,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				portletId
 			};
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1209,8 +1263,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1227,13 +1282,18 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "countAll";
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1256,8 +1316,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
 
 				return count.intValue();
 			}

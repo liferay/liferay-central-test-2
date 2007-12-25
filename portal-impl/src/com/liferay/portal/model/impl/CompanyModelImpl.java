@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class CompanyModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Company";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Company";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -78,9 +78,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 
 			{ "logoId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
-	public static String TABLE_SQL_DROP = "drop table Company";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
+	public static final String TABLE_SQL_DROP = "drop table Company";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Company"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Company"));
 
 	public CompanyModelImpl() {

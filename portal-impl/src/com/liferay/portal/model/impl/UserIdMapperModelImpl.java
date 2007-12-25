@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class UserIdMapperModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "UserIdMapper";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "UserIdMapper";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "userIdMapperId", new Integer(Types.BIGINT) },
 			
 
@@ -72,9 +72,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 
 			{ "externalUserId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table UserIdMapper";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table UserIdMapper";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.UserIdMapper"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserIdMapper"));
 
 	public UserIdMapperModelImpl() {

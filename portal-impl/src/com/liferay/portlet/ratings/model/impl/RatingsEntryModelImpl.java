@@ -60,8 +60,8 @@ import java.util.Date;
  *
  */
 public class RatingsEntryModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "RatingsEntry";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "RatingsEntry";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
 			
 
@@ -88,9 +88,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 
 			{ "score", new Integer(Types.DOUBLE) }
 		};
-	public static String TABLE_SQL_CREATE = "create table RatingsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,score DOUBLE)";
-	public static String TABLE_SQL_DROP = "drop table RatingsEntry";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table RatingsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,score DOUBLE)";
+	public static final String TABLE_SQL_DROP = "drop table RatingsEntry";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.ratings.model.RatingsEntry"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsEntry"));
 
 	public RatingsEntryModelImpl() {

@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class ShoppingItemPriceModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ShoppingItemPrice";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ShoppingItemPrice";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "itemPriceId", new Integer(Types.BIGINT) },
 			
 
@@ -87,9 +87,12 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 
 			{ "status", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table ShoppingItemPrice";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table ShoppingItemPrice";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemPrice"));
 
 	public ShoppingItemPriceModelImpl() {

@@ -58,8 +58,8 @@ import java.util.Date;
  *
  */
 public class ImageModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Image";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Image";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "imageId", new Integer(Types.BIGINT) },
 			
 
@@ -80,9 +80,12 @@ public class ImageModelImpl extends BaseModelImpl {
 
 			{ "size_", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table Image";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table Image";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Image"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Image"));
 
 	public ImageModelImpl() {

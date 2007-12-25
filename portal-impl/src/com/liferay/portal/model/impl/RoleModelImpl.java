@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class RoleModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "Role_";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "Role_";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },
 			
 
@@ -78,9 +78,18 @@ public class RoleModelImpl extends BaseModelImpl {
 
 			{ "type_", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
-	public static String TABLE_SQL_DROP = "drop table Role_";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
+	public static final String TABLE_SQL_DROP = "drop table Role_";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.Role"),
+			true);
+	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Groups_Roles"), true);
+	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Roles_Permissions"), true);
+	public static final boolean CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Roles"), true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Role"));
 
 	public RoleModelImpl() {

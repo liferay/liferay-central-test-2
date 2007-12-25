@@ -61,8 +61,8 @@ import java.util.Date;
  *
  */
 public class SCProductEntryModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "SCProductEntry";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "SCProductEntry";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "productEntryId", new Integer(Types.BIGINT) },
 			
 
@@ -110,9 +110,15 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 
 			{ "repoArtifactId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(300) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
-	public static String TABLE_SQL_DROP = "drop table SCProductEntry";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(300) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table SCProductEntry";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
+			true);
+	public static final boolean CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductEntry"));
 
 	public SCProductEntryModelImpl() {

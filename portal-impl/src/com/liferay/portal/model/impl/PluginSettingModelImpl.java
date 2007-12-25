@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class PluginSettingModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "PluginSetting";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "PluginSetting";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "pluginSettingId", new Integer(Types.BIGINT) },
 			
 
@@ -75,9 +75,12 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PluginSetting (pluginSettingId LONG not null primary key,companyId LONG,pluginId VARCHAR(75) null,pluginType VARCHAR(75) null,roles STRING null,active_ BOOLEAN)";
-	public static String TABLE_SQL_DROP = "drop table PluginSetting";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table PluginSetting (pluginSettingId LONG not null primary key,companyId LONG,pluginId VARCHAR(75) null,pluginType VARCHAR(75) null,roles STRING null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_DROP = "drop table PluginSetting";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.PluginSetting"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PluginSetting"));
 
 	public PluginSettingModelImpl() {

@@ -55,8 +55,8 @@ import java.sql.Types;
  *
  */
 public class UserGroupRoleModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "UserGroupRole";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "UserGroupRole";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
@@ -65,9 +65,12 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 
 			{ "roleId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
-	public static String TABLE_SQL_DROP = "drop table UserGroupRole";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
+	public static final String TABLE_SQL_DROP = "drop table UserGroupRole";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.UserGroupRole"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroupRole"));
 
 	public UserGroupRoleModelImpl() {

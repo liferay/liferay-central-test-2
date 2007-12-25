@@ -56,8 +56,8 @@ import java.sql.Types;
  *
  */
 public class ServiceComponentModelImpl extends BaseModelImpl {
-	public static String TABLE_NAME = "ServiceComponent";
-	public static Object[][] TABLE_COLUMNS = {
+	public static final String TABLE_NAME = "ServiceComponent";
+	public static final Object[][] TABLE_COLUMNS = {
 			{ "serviceComponentId", new Integer(Types.BIGINT) },
 			
 
@@ -72,9 +72,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 
 			{ "data_", new Integer(Types.CLOB) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
-	public static String TABLE_SQL_DROP = "drop table ServiceComponent";
-	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
+	public static final String TABLE_SQL_DROP = "drop table ServiceComponent";
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.ServiceComponent"),
+			true);
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ServiceComponent"));
 
 	public ServiceComponentModelImpl() {
