@@ -45,6 +45,7 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
@@ -793,7 +794,10 @@ public class PortalLDAPUtil {
 	public static boolean isAuthEnabled(long companyId)
 		throws PortalException, SystemException {
 
-		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.LDAP_AUTH_ENABLED)) {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.LDAP_AUTH_ENABLED,
+				PropsValues.LDAP_AUTH_ENABLED)) {
+
 			return true;
 		}
 		else {
@@ -859,7 +863,8 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_PASSWORD_POLICY_ENABLED)) {
+				companyId, PropsUtil.LDAP_PASSWORD_POLICY_ENABLED,
+				PropsValues.LDAP_PASSWORD_POLICY_ENABLED)) {
 
 			return true;
 		}

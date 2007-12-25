@@ -304,8 +304,7 @@ public class LiveUsers {
 		UserTracker userTracker = (UserTracker)sessionUsers.get(ses.getId());
 
 		if ((userTracker == null) &&
-			(GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)))) {
+			(PropsValues.SESSION_TRACKER_MEMORY_ENABLED)) {
 
 			userTracker = UserTrackerUtil.create(0);
 

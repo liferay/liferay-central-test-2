@@ -34,6 +34,7 @@ import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.security.Key;
 
@@ -153,32 +154,38 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public boolean isAutoLogin() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
+			PropsValues.COMPANY_SECURITY_AUTO_LOGIN);
 	}
 
 	public boolean isSendPassword() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_SEND_PASSWORD);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_SEND_PASSWORD,
+			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
 	}
 
 	public boolean isStrangers() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS,
+			PropsValues.COMPANY_SECURITY_STRANGERS);
 	}
 
 	public boolean isStrangersWithMx() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX,
+			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
 	}
 
 	public boolean isStrangersVerify() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY,
+			PropsValues.COMPANY_SECURITY_STRANGERS_VERIFY);
 	}
 
 	public boolean isCommunityLogo() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO,
+			PropsValues.COMPANY_SECURITY_COMMUNITY_LOGO);
 	}
 
 	public boolean hasCompanyMx(String emailAddress) {

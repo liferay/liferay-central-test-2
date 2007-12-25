@@ -80,6 +80,31 @@ public class PrefsPropsUtil {
 		return GetterUtil.getBoolean(getString(prefs, companyId, name));
 	}
 
+	public static boolean getBoolean(String name, boolean defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getBoolean(prefs, 0, name, defaultValue);
+	}
+
+	public static boolean getBoolean(
+			long companyId, String name, boolean defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getBoolean(prefs, companyId, name, defaultValue);
+	}
+
+	public static boolean getBoolean(
+		PortletPreferences prefs, long companyId, String name,
+		boolean defaultValue) {
+
+		return GetterUtil.getBoolean(
+			getString(prefs, companyId, name, defaultValue));
+	}
+
 	public static String getContent(String name)
 		throws PortalException, SystemException {
 
@@ -219,6 +244,18 @@ public class PrefsPropsUtil {
 		String value = PropsUtil.get(name);
 
 		return prefs.getValue(name, value);
+	}
+
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		boolean defaultValue) {
+
+		if (defaultValue) {
+			return prefs.getValue(name, StringPool.TRUE);
+		}
+		else {
+			return prefs.getValue(name, StringPool.FALSE);
+		}
 	}
 
 	public static String[] getStringArray(String name)

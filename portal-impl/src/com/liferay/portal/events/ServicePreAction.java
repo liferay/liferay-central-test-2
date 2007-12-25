@@ -231,8 +231,7 @@ public class ServicePreAction extends Action {
 
 			boolean removeStateMax = false;
 
-			if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
-					LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED)) &&
+			if (!PropsValues.LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED &&
 				Validator.isNotNull(portletId)) {
 
 				removeStateMax = true;

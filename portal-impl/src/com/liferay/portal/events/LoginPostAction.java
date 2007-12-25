@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -33,7 +32,6 @@ import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
@@ -77,9 +75,7 @@ public class LoginPostAction extends Action {
 
 			LiveUsers.signIn(req);
 
-			if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
-					LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED))) {
-
+			if (!PropsValues.LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED) {
 				Group group = GroupLocalServiceUtil.getUserGroup(
 					companyId, userId);
 

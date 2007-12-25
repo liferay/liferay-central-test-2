@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
@@ -73,7 +74,8 @@ public class CASFilter implements Filter {
 			long companyId = PortalUtil.getCompanyId(httpReq);
 
 			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.CAS_AUTH_ENABLED)) {
+					companyId, PropsUtil.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
 
 				String pathInfo = httpReq.getPathInfo();
 

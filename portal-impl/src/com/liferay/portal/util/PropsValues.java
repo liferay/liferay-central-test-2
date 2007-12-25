@@ -51,14 +51,41 @@ public class PropsValues {
 	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
 
+	public static final boolean CAS_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.CAS_AUTH_ENABLED));
+
 	public static final boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+	public static final boolean COMPANY_SECURITY_AUTO_LOGIN =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN));
 
 	public static final int COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE),
 			CookieKeys.MAX_AGE);
+
+	public static final boolean COMPANY_SECURITY_COMMUNITY_LOGO =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO));
+
+	public static final boolean COMPANY_SECURITY_SEND_PASSWORD =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_SEND_PASSWORD));
+
+	public static final boolean COMPANY_SECURITY_STRANGERS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS));
+
+	public static final boolean COMPANY_SECURITY_STRANGERS_VERIFY =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY));
+
+	public static final boolean COMPANY_SECURITY_STRANGERS_WITH_MX =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
@@ -101,6 +128,14 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
 
+	public static final boolean LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+			LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED));
+
+	public static final boolean LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+			LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED));
+
 	public static final boolean LAYOUT_SHOW_PORTLET_ACCESS_DENIED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_ACCESS_DENIED));
@@ -112,6 +147,13 @@ public class PropsValues {
 	public static final boolean LAYOUT_TEMPLATE_CACHE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
+
+	public static final boolean LDAP_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LDAP_AUTH_ENABLED));
+
+	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LDAP_PASSWORD_POLICY_ENABLED));
 
 	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(
 		PropsUtil.LOGIN_EVENTS_POST);
@@ -156,6 +198,16 @@ public class PropsValues {
 
 	public static final long[] OMNIADMIN_USERS = StringUtil.split(
 		PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
+
+	public static final boolean OPEN_ID_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.OPEN_ID_AUTH_ENABLED));
+
+	public static final boolean OPEN_SSO_AUTH_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.OPEN_SSO_AUTH_ENABLED));
+
+	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED));
 
 	public static final boolean PORTAL_IMPERSONATION_ENABLE =
 		GetterUtil.getBoolean(
@@ -214,6 +266,10 @@ public class PropsValues {
 	public static final boolean SESSION_TRACKER_FRIENDLY_PATHS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED));
+
+	public static final boolean SESSION_TRACKER_MEMORY_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_TRACKER_MEMORY_ENABLED));
 
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
 		GetterUtil.getBoolean(

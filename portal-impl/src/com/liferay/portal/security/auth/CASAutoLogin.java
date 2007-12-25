@@ -33,6 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
@@ -67,7 +68,8 @@ public class CASAutoLogin implements AutoLogin {
 			long companyId = PortalUtil.getCompanyId(req);
 
 			if (!PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.CAS_AUTH_ENABLED)) {
+					companyId, PropsUtil.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
 
 				return credentials;
 			}

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 
@@ -68,7 +69,8 @@ public class OpenSSOFilter implements Filter {
 			long companyId = PortalUtil.getCompanyId(httpReq);
 
 			boolean enabled = PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED);
+				companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED,
+				PropsValues.OPEN_SSO_AUTH_ENABLED);
 			String loginUrl = PrefsPropsUtil.getString(
 				companyId, PropsUtil.OPEN_SSO_LOGIN_URL);
 			String logoutUrl = PrefsPropsUtil.getString(

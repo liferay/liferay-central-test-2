@@ -39,6 +39,7 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
@@ -323,7 +324,8 @@ public class PluginPackageUtil {
 		throws PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
-				PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED)) {
+				PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
+				PropsValues.PLUGIN_NOTIFICATIONS_ENABLED)) {
 
 			return false;
 		}

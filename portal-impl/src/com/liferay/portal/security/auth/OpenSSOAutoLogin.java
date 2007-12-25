@@ -30,6 +30,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.PwdGenerator;
@@ -70,7 +71,8 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			long companyId = PortalUtil.getCompanyId(req);
 
 			if (!PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED)) {
+					companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED,
+					PropsValues.OPEN_SSO_AUTH_ENABLED)) {
 
 				return credentials;
 			}

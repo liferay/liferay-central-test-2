@@ -62,6 +62,8 @@ public class StringPool {
 
 	public static final String GREATER_THAN = ">";
 
+	public static final String FALSE = "false";
+
 	public static final String FORWARD_SLASH = "/";
 
 	public static final String LESS_THAN = "<";
@@ -111,6 +113,8 @@ public class StringPool {
 	public static final String STAR = "*";
 
 	public static final String TILDE = "~";
+
+	public static final String TRUE = "true";
 
 	public static final String UNDERLINE = "_";
 

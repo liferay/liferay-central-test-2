@@ -23,7 +23,6 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.CookieNotSupportedException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CookieUtil;
 
@@ -54,9 +53,7 @@ public class CookieKeys {
 	public static final int MAX_AGE = 31536000;
 
 	public static void addCookie(HttpServletResponse res, Cookie cookie) {
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES))) {
-
+		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
 			if (!PropsValues.TCK_URL) {
 
 				// Setting a cookie will cause the TCK to lose its ability
