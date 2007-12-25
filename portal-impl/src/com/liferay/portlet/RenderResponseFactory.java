@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.util.CachePropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,7 +53,7 @@ public class RenderResponseFactory {
 			long companyId, long plid)
 		throws Exception {
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
@@ -63,7 +63,7 @@ public class RenderResponseFactory {
 
 		RenderResponseImpl renderResponseImpl = null;
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			renderResponseImpl =
 				(RenderResponseImpl)_instance._pool.borrowObject();
 		}
@@ -79,7 +79,7 @@ public class RenderResponseFactory {
 	public static void recycle(RenderResponseImpl renderResponseImpl)
 		throws Exception {
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +

@@ -41,6 +41,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_REDIRECT));
 
+	public static final boolean AUTH_PIPELINE_ENABLE_LIFERAY_CHECK =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK));
+
 	public static final boolean AUTH_SIMULTANEOUS_LOGINS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
@@ -54,9 +58,15 @@ public class PropsValues {
 	public static final boolean CAS_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.CAS_AUTH_ENABLED));
 
+	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.COMMONS_POOL_ENABLED));
+
 	public static final boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+	public static final String COMPANY_SECURITY_AUTH_TYPE =
+		PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_TYPE);
 
 	public static final boolean COMPANY_SECURITY_AUTO_LOGIN =
 		GetterUtil.getBoolean(
@@ -87,11 +97,20 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
+	public static final String DEFAULT_LANDING_PAGE_PATH =
+		PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
+
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
 
 	public static final String DEFAULT_REGULAR_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_THEME_ID);
+
+	public static final String DEFAULT_USER_LAYOUT_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_NAME);
+
+	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
 
 	public static final String DEFAULT_WAP_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
@@ -155,11 +174,17 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LDAP_PASSWORD_POLICY_ENABLED));
 
-	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_POST);
+	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST));
 
-	public static final String[] LOGIN_EVENTS_PRE = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_PRE);
+	public static final String[] LOCALES =
+		PropsUtil.getArray(PropsUtil.LOCALES);
+
+	public static final String[] LOGIN_EVENTS_POST =
+		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_POST);
+
+	public static final String[] LOGIN_EVENTS_PRE =
+		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_PRE);
 
 	public static final String LUCENE_DIR = PropsUtil.get(PropsUtil.LUCENE_DIR);
 
@@ -204,6 +229,21 @@ public class PropsValues {
 
 	public static final boolean OPEN_SSO_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.OPEN_SSO_AUTH_ENABLED));
+
+	public static final String OPEN_SSO_LOGIN_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_LOGIN_URL);
+
+	public static final String OPEN_SSO_LOGOUT_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_LOGOUT_URL);
+
+	public static final String OPEN_SSO_SERVICE_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_SERVICE_URL);
+
+	public static final String OPEN_SSO_SUBJECT_COOKIE_NAME =
+		PropsUtil.get(PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME);
+
+	public static final String PERMISSIONS_CHECKER =
+		PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER);
 
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(

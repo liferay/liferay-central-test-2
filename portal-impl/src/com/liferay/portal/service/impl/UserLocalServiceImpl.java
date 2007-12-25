@@ -83,6 +83,7 @@ import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
@@ -1842,9 +1843,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Authenticate against the User_ table
 
 		if (authResult == Authenticator.SUCCESS) {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {
-
+			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
 				String encPwd = PwdEncryptor.encrypt(
 					password, user.getPassword());
 

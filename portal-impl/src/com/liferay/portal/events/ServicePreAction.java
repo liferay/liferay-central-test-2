@@ -377,7 +377,7 @@ public class ServicePreAction extends Action {
 	protected void importLayoutsByProperties(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		String name = PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_NAME);
+		String name = PropsValues.DEFAULT_USER_LAYOUT_NAME;
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			userId, groupId, true, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name,
@@ -387,8 +387,7 @@ public class ServicePreAction extends Action {
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
 
-		String layoutTemplateId = PropsUtil.get(
-			PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+		String layoutTemplateId = PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID;
 
 		layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
 
@@ -793,10 +792,7 @@ public class ServicePreAction extends Action {
 
 				// Get locale from the request
 
-				if ((locale == null) &&
-					GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST))) {
-
+				if ((locale == null) && PropsValues.LOCALE_DEFAULT_REQUEST) {
 					locale = req.getLocale();
 				}
 

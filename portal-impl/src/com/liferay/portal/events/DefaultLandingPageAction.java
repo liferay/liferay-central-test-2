@@ -28,6 +28,7 @@ import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.HashMap;
@@ -50,7 +51,7 @@ public class DefaultLandingPageAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		String path = PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
+		String path = PropsValues.DEFAULT_LANDING_PAGE_PATH;
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

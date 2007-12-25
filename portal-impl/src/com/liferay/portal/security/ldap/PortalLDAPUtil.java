@@ -661,7 +661,8 @@ public class PortalLDAPUtil {
 			// Find corresponding portal user
 
 			String authType = PrefsPropsUtil.getString(
-				companyId, PropsUtil.COMPANY_SECURITY_AUTH_TYPE);
+				companyId, PropsUtil.COMPANY_SECURITY_AUTH_TYPE,
+				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 			if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
 				user = UserLocalServiceUtil.getUserByScreenName(

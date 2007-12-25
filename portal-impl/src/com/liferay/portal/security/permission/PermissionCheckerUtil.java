@@ -24,7 +24,7 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +50,7 @@ public class PermissionCheckerUtil {
 
 			if (permissionChecker == null) {
 				permissionChecker = (PermissionCheckerImpl)Class.forName(
-					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
+					PropsValues.PERMISSIONS_CHECKER).newInstance();
 
 				boolean checkGuest = true;
 

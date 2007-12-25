@@ -22,7 +22,7 @@
 
 package com.liferay.portal.theme;
 
-import com.liferay.portal.util.CachePropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
@@ -37,7 +37,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class PortletDisplayFactory {
 
 	public static PortletDisplay create() throws Exception {
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			return (PortletDisplay)_instance._pool.borrowObject();
 		}
 		else {
@@ -46,7 +46,7 @@ public class PortletDisplayFactory {
 	}
 
 	public static void recycle(PortletDisplay portletDisplay) throws Exception {
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(portletDisplay);
 		}
 	}

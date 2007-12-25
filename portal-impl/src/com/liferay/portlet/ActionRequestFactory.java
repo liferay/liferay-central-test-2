@@ -23,7 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.CachePropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -52,7 +52,7 @@ public class ActionRequestFactory {
 
 		ActionRequestImpl actionRequestImpl = null;
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			actionRequestImpl =
 				(ActionRequestImpl)_instance._pool.borrowObject();
 		}
@@ -70,7 +70,7 @@ public class ActionRequestFactory {
 	public static void recycle(ActionRequestImpl actionRequestImpl)
 		throws Exception {
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(actionRequestImpl);
 		}
 	}

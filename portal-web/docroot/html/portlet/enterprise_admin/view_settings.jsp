@@ -56,7 +56,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -154,7 +154,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_ID_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				</table>
@@ -170,7 +170,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_SSO_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -178,7 +178,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="login-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -186,7 +186,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="logout-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -194,7 +194,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="service-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -202,7 +202,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="cookie-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME, PropsValues.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
 					</td>
 				</tr>
 				</table>

@@ -149,7 +149,8 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public String getAuthType() throws PortalException, SystemException {
 		return PrefsPropsUtil.getString(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTH_TYPE);
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTH_TYPE,
+			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 	}
 
 	public boolean isAutoLogin() throws PortalException, SystemException {

@@ -246,6 +246,30 @@ public class PrefsPropsUtil {
 		return prefs.getValue(name, value);
 	}
 
+	public static String getString(String name, String defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getString(prefs, 0, name, defaultValue);
+	}
+
+	public static String getString(
+			long companyId, String name, String defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getString(prefs, companyId, name, defaultValue);
+	}
+
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		String defaultValue) {
+
+		return prefs.getValue(name, defaultValue);
+	}
+
 	public static String getString(
 		PortletPreferences prefs, long companyId, String name,
 		boolean defaultValue) {

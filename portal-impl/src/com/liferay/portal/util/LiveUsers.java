@@ -283,12 +283,9 @@ public class LiveUsers {
 
 		Map sessionUsers = _getSessionUsers(liveUsers);
 
-		boolean simultaenousLogins = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);
-
 		List userTrackers = _getUserTrackers(userId);
 
-		if (!simultaenousLogins) {
+		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
 			if (userTrackers != null) {
 				for (int i = 0; i < userTrackers.size(); i++) {
 					UserTracker userTracker = (UserTracker)userTrackers.get(i);

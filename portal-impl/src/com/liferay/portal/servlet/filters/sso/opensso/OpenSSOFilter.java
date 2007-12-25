@@ -72,13 +72,17 @@ public class OpenSSOFilter implements Filter {
 				companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED,
 				PropsValues.OPEN_SSO_AUTH_ENABLED);
 			String loginUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_LOGIN_URL);
+				companyId, PropsUtil.OPEN_SSO_LOGIN_URL,
+				PropsValues.OPEN_SSO_LOGIN_URL);
 			String logoutUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_LOGOUT_URL);
+				companyId, PropsUtil.OPEN_SSO_LOGOUT_URL,
+				PropsValues.OPEN_SSO_LOGOUT_URL);
 			String serviceUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_SERVICE_URL);
+				companyId, PropsUtil.OPEN_SSO_SERVICE_URL,
+				PropsValues.OPEN_SSO_SERVICE_URL);
 			String cookieName = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME);
+				companyId, PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME,
+				PropsValues.OPEN_SSO_SUBJECT_COOKIE_NAME);
 
 			if (!enabled || Validator.isNull(loginUrl) ||
 				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl) ||

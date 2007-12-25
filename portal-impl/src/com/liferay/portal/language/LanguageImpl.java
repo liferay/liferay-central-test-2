@@ -29,12 +29,11 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.CookieUtil;
@@ -453,20 +452,19 @@ public class LanguageImpl implements Language {
 	}
 
 	private LanguageImpl() {
-		String[] array = StringUtil.split(
-			PropsUtil.get(PropsUtil.LOCALES), StringPool.COMMA);
+		String[] localesArray = PropsValues.LOCALES;
 
-		_locales = new Locale[array.length];
+		_locales = new Locale[localesArray.length];
 		_localesByLanguageCode = CollectionFactory.getHashMap();
 		_charEncodings = CollectionFactory.getHashMap();
 
-		for (int i = 0; i < array.length; i++) {
-			String languageId = array[i];
+		for (int i = 0; i < localesArray.length; i++) {
+			String languageId = localesArray[i];
 
 			int x = languageId.indexOf(StringPool.UNDERLINE);
 
-			String language = array[i].substring(0, x);
-			//String country = array[i].substring(x + 1, array[i].length());
+			String language = languageId.substring(0, x);
+			//String country = languageId.substring(x + 1, languageId.length());
 
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 

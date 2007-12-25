@@ -23,7 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.CachePropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -63,7 +63,7 @@ public class RenderRequestFactory {
 			PortletMode portletMode, PortletPreferences prefs, long plid)
 		throws Exception {
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
@@ -73,7 +73,7 @@ public class RenderRequestFactory {
 
 		RenderRequestImpl renderRequestImpl = null;
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			renderRequestImpl =
 				(RenderRequestImpl)_instance._pool.borrowObject();
 		}
@@ -91,7 +91,7 @@ public class RenderRequestFactory {
 	public static void recycle(RenderRequestImpl renderRequestImpl)
 		throws Exception {
 
-		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
+		if (PropsValues.COMMONS_POOL_ENABLED) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
