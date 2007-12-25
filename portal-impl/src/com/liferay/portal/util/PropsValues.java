@@ -228,6 +228,9 @@ public class PropsValues {
 	public static final boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED));
 
+	public static final boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.THEME_CSS_FAST_LOAD));
+
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));
 

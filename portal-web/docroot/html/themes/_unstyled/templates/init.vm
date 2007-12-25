@@ -22,7 +22,7 @@
 #set ($full_css_path = $fullCssPath)
 #set ($full_templates_path = $fullTemplatesPath)
 
-#if ($paramUtil.getBoolean($request, "css_fast_load", $getterUtil.getBoolean($propsUtil.get("theme.css.fast.load"))))
+#if ($paramUtil.getBoolean($request, "css_fast_load", $theme_display.isThemeCssFastLoad()))
 	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")
 #else
 	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")

@@ -330,6 +330,14 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
+	public boolean isThemeCssFastLoad() {
+		return _themeCssFastLoad;
+	}
+
+	public void setThemeCssFastLoad(boolean themeCssFastLoad) {
+		_themeCssFastLoad = themeCssFastLoad;
+	}
+
 	public boolean isFreeformLayout() {
 		return _freeformLayout;
 	}
@@ -802,6 +810,7 @@ public class ThemeDisplay implements Serializable {
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
+		_themeCssFastLoad = false;
 		_freeformLayout = false;
 		_serverName = StringPool.BLANK;
 		_serverPort = 0;
@@ -883,6 +892,7 @@ public class ThemeDisplay implements Serializable {
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;
+	private boolean _themeCssFastLoad;
 	private boolean _freeformLayout;
 	private String _serverName;
 	private int _serverPort;

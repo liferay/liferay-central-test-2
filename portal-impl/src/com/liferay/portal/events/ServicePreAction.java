@@ -1095,6 +1095,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
+		themeDisplay.setThemeCssFastLoad(PropsValues.THEME_CSS_FAST_LOAD);
 		themeDisplay.setServerName(req.getServerName());
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
