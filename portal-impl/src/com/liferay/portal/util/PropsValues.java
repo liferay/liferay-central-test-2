@@ -199,7 +199,6 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
-
 	public static final String[] IG_IMAGE_EXTENSIONS =
 		PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
 
@@ -213,7 +212,6 @@ public class PropsValues {
 	public static final int IG_IMAGE_THUMBNAIL_MAX_WIDTH =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
-
 
 
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
@@ -459,6 +457,9 @@ public class PropsValues {
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
+
+	public static final boolean SMTP_SERVER_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.SMTP_SERVER_ENABLED));
 
 	public static final String TAGS_ASSET_VALIDATOR = PropsUtil.get(
 		PropsUtil.TAGS_ASSET_VALIDATOR);

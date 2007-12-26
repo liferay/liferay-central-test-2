@@ -35,6 +35,7 @@ import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -109,9 +110,7 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		// SMTP server
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SMTP_SERVER_ENABLED))) {
-
+		if (PropsValues.SMTP_SERVER_ENABLED) {
 			SMTPServerUtil.stop();
 		}
 

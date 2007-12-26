@@ -28,7 +28,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,6 +45,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -1286,9 +1286,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			String mailingListAddress = StringPool.BLANK;
 
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.SMTP_SERVER_ENABLED))) {
-
+			if (PropsValues.SMTP_SERVER_ENABLED) {
 				mailingListAddress = MBUtil.getMailingListAddress(
 					message.getCategoryId(), message.getMessageId(),
 					company.getMx());

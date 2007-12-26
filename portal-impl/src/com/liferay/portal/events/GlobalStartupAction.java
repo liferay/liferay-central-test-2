@@ -178,9 +178,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// SMTP server
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SMTP_SERVER_ENABLED))) {
-
+		if (PropsValues.SMTP_SERVER_ENABLED) {
 			int port = GetterUtil.getInteger(PropsUtil.get(
 				PropsUtil.SMTP_SERVER_PORT));
 
