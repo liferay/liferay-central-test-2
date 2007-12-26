@@ -34,6 +34,7 @@ import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;
 import com.liferay.util.dao.hibernate.DoubleType;
@@ -387,7 +388,8 @@ public abstract class BaseUpgradeTableImpl {
 		boolean isEmpty = true;
 
 		String tempFileName =
-			"temp-db-" + _tableName + "-" + System.currentTimeMillis();
+			SystemProperties.get(SystemProperties.TMP_DIR) + "/temp-db-" +
+				_tableName + "-" + System.currentTimeMillis();
 
 		String selectSQL = getSelectSQL();
 
