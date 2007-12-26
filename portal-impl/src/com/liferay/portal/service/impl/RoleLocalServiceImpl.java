@@ -30,6 +30,7 @@ import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
@@ -38,6 +39,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -111,11 +113,19 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemRoles.length; i++) {
 			String roleName = systemRoles[i];
-			String roleDescription = StringPool.BLANK;
+			String roleDescription = PropsUtil.get(
+				"system.role." + StringUtil.replace(roleName, " ", ".") +
+					".description");
 			int roleType = RoleImpl.TYPE_REGULAR;
 
 			try {
-				roleFinder.findByC_N(companyId, roleName);
+				Role role = roleFinder.findByC_N(companyId, roleName);
+
+				if (!role.getDescription().equals(roleDescription)) {
+					role.setDescription(roleDescription);
+
+					rolePersistence.update(role);
+				}
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(0, companyId, roleName, roleDescription, roleType);
@@ -128,11 +138,19 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemCommunityRoles.length; i++) {
 			String roleName = systemCommunityRoles[i];
-			String roleDescription = StringPool.BLANK;
+			String roleDescription = PropsUtil.get(
+				"system.community.role." +
+					StringUtil.replace(roleName, " ", ".") + ".description");
 			int roleType = RoleImpl.TYPE_COMMUNITY;
 
 			try {
-				roleFinder.findByC_N(companyId, roleName);
+				Role role = roleFinder.findByC_N(companyId, roleName);
+
+				if (!role.getDescription().equals(roleDescription)) {
+					role.setDescription(roleDescription);
+
+					rolePersistence.update(role);
+				}
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(0, companyId, roleName, roleDescription, roleType);
@@ -146,11 +164,19 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemOrganizationRoles.length; i++) {
 			String roleName = systemOrganizationRoles[i];
-			String roleDescription = StringPool.BLANK;
+			String roleDescription = PropsUtil.get(
+				"system.organization.role." +
+					StringUtil.replace(roleName, " ", ".") + ".description");
 			int roleType = RoleImpl.TYPE_ORGANIZATION;
 
 			try {
-				roleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
+				Role role = roleFinder.findByC_N(companyId, roleName);
+
+				if (!role.getDescription().equals(roleDescription)) {
+					role.setDescription(roleDescription);
+
+					rolePersistence.update(role);
+				}
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(0, companyId, roleName, roleDescription, roleType);
