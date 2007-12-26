@@ -42,6 +42,7 @@ if (editable) {
 }
 
 searchContainer.setHeaderNames(headerNames);
+searchContainer.setEmptyResultsMessage("the-organization-does-not-have-any-services");
 
 List results = OrgLaborServiceUtil.getOrgLabors(organization.getOrganizationId());
 
@@ -67,12 +68,10 @@ for (int i = 0; i < results.size(); i++) {
 <c:if test="<%= editable %>">
 	<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" /></portlet:renderURL>';" /><br />
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
-	</c:if>
+	<br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
 	<br />

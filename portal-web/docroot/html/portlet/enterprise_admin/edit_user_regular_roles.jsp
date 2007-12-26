@@ -41,6 +41,13 @@ if (user2.getUserId() != user.getUserId()) {
 
 searchContainer.setHeaderNames(headerNames);
 
+if (user2.getUserId() == user.getUserId()) {
+	searchContainer.setEmptyResultsMessage("you-do-not-have-any-regular-roles");
+}
+else {
+	searchContainer.setEmptyResultsMessage("the-user-does-not-have-any-regular-roles");
+}
+
 List results = RoleLocalServiceUtil.getUserRoles(user2.getUserId());
 List resultRows = searchContainer.getResultRows();
 

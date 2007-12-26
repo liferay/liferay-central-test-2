@@ -44,6 +44,13 @@ if (user2.getUserId() != user.getUserId()) {
 
 searchContainer.setHeaderNames(headerNames);
 
+if (user2.getUserId() == user.getUserId()) {
+	searchContainer.setEmptyResultsMessage("you-do-not-have-any-community-roles");
+}
+else {
+	searchContainer.setEmptyResultsMessage("the-user-does-not-have-any-community-roles");
+}
+
 List results = new ArrayList();
 List resultRows = searchContainer.getResultRows();
 

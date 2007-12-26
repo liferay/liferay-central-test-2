@@ -50,6 +50,18 @@ if (editable) {
 
 searchContainer.setHeaderNames(headerNames);
 
+if (className.equals(Contact.class.getName())) {
+	if (classPK == user.getContactId()) {
+		searchContainer.setEmptyResultsMessage("you-do-not-have-any-phone-numbers");
+	}
+	else {
+		searchContainer.setEmptyResultsMessage("the-user-does-not-have-any-phone-numbers");
+	}
+}
+else {
+	searchContainer.setEmptyResultsMessage("the-organization-does-not-have-any-phone-numbers");
+}
+
 List results = new ArrayList();
 
 if (!className.equals(Organization.class.getName()) && (organizationIdsArray.length > 0)) {
@@ -94,12 +106,10 @@ for (int i = 0; i < results.size(); i++) {
 <c:if test="<%= editable %>">
 	<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_phone" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="className" value="<%= className %>" /><portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" /></portlet:renderURL>';" /><br />
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
-	</c:if>
+	<br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
 	<br />
