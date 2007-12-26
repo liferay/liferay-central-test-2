@@ -31,13 +31,12 @@ import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -57,9 +56,6 @@ import org.apache.lucene.search.TermQuery;
  *
  */
 public class DLLocalServiceImpl implements DLLocalService {
-
-	public static final long FILE_MAX_SIZE = GetterUtil.getLong(
-		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -200,8 +196,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, File file) throws PortalException {
 		validate(fileName);
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((file == null) || (file.length() > FILE_MAX_SIZE))) {
+		if ((PropsValues.DL_FILE_MAX_SIZE > 0) &&
+			((file == null) ||
+			 (file.length() > PropsValues.DL_FILE_MAX_SIZE))) {
 
 			throw new FileSizeException(fileName);
 		}
@@ -212,8 +209,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		validate(fileName);
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
+		if ((PropsValues.DL_FILE_MAX_SIZE > 0) &&
+			((byteArray == null) ||
+			 (byteArray.length > PropsValues.DL_FILE_MAX_SIZE))) {
 
 			throw new FileSizeException(fileName);
 		}
@@ -249,8 +247,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		boolean validFileExtension = false;
 
-		String[] fileExtensions =
-			PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
+		String[] fileExtensions = PropsValues.DL_FILE_EXTENSIONS;
 
 		for (int i = 0; i < fileExtensions.length; i++) {
 			if (StringPool.STAR.equals(fileExtensions[i]) ||

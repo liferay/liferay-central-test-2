@@ -37,7 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -599,7 +599,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws PortalException {
 
 		TagsAssetValidator validator = (TagsAssetValidator)InstancePool.get(
-			PropsUtil.get(PropsUtil.TAGS_ASSET_VALIDATOR));
+			PropsValues.TAGS_ASSET_VALIDATOR);
 
 		validator.validate(className, entryNames);
 	}

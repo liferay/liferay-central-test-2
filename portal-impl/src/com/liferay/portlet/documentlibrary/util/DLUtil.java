@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -204,8 +204,7 @@ public class DLUtil {
 	private DLUtil() {
 		_fileExtensions = CollectionFactory.getHashSet();
 
-		String[] fileExtensions =
-			PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
+		String[] fileExtensions = PropsValues.DL_FILE_EXTENSIONS;
 
 		for (int i = 0; i < fileExtensions.length; i++) {
 

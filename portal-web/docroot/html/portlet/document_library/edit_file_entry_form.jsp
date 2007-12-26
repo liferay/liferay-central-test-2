@@ -101,12 +101,7 @@ if (fileEntry != null) {
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 
 <liferay-ui:error exception="<%= FileNameException.class %>">
-
-	<%
-	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-	%>
-
-	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(fileExtensions, ", ") %>.
+	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
@@ -120,7 +115,7 @@ if (fileEntry != null) {
 <liferay-ui:tags-error />
 
 <%
-String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) / 1024);
+String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
 %>
 
 <c:if test='<%= !fileMaxSize.equals("0") %>'>

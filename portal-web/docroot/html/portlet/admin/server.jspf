@@ -328,7 +328,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED) %>" />
+						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) %>" />
 					</td>
 				</tr>
 				<tr>

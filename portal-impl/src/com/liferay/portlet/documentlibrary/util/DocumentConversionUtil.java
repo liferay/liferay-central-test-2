@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
@@ -98,7 +99,10 @@ public class DocumentConversionUtil {
 			String targetExtension)
 		throws IOException, PortalException, SystemException {
 
-		if (!PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED)){
+		if (!PrefsPropsUtil.getBoolean(
+				PropsUtil.OPENOFFICE_SERVER_ENABLED,
+				PropsValues.OPENOFFICE_SERVER_ENABLED)){
+
 			return null;
 		}
 

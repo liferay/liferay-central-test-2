@@ -24,7 +24,7 @@ package com.liferay.portal.lucene;
 
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 import java.io.IOException;
@@ -138,7 +138,7 @@ public class LuceneFields {
 
 		LuceneFileExtractor fileExtractor =
 			(LuceneFileExtractor)InstancePool.get(
-				PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR));
+				PropsValues.LUCENE_FILE_EXTRACTOR);
 
 		return fileExtractor.getFile(field, is, fileExt);
 	}
@@ -148,7 +148,7 @@ public class LuceneFields {
 
 		LuceneFileExtractor fileExtractor =
 			(LuceneFileExtractor)InstancePool.get(
-				PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR));
+				PropsValues.LUCENE_FILE_EXTRACTOR);
 
 		return fileExtractor.getFile(field, byteArray, fileExt);
 	}
@@ -158,7 +158,7 @@ public class LuceneFields {
 
 		LuceneFileExtractor fileExtractor =
 			(LuceneFileExtractor)InstancePool.get(
-				PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR));
+				PropsValues.LUCENE_FILE_EXTRACTOR);
 
 		return fileExtractor.getFile(field, file, fileExt);
 	}

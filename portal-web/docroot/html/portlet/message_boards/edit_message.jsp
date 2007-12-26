@@ -154,12 +154,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 <liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 
 <liferay-ui:error exception="<%= FileNameException.class %>">
-
-	<%
-	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-	%>
-
-	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(fileExtensions, ", ") %>.
+	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />

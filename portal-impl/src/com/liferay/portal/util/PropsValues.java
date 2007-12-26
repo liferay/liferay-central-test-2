@@ -175,6 +175,12 @@ public class PropsValues {
 	public static final String DEFAULT_WAP_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID);
 
+	public static final String[] DL_FILE_EXTENSIONS =
+		PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
+
+	public static final int DL_FILE_MAX_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
+
 	public static final boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
@@ -271,6 +277,12 @@ public class PropsValues {
 
 	public static final String LUCENE_DIR = PropsUtil.get(PropsUtil.LUCENE_DIR);
 
+	public static final String LUCENE_FILE_EXTRACTOR =
+		PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR);
+
+	public static final String LUCENE_FILE_EXTRACTOR_REGEXP_STRIP =
+		PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP);
+
 	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LUCENE_STORE_JDBC_AUTO_CLEAN_UP));
@@ -328,6 +340,10 @@ public class PropsValues {
 
 	public static final String OPEN_SSO_SUBJECT_COOKIE_NAME =
 		PropsUtil.get(PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME);
+
+	public static final boolean OPENOFFICE_SERVER_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_ENABLED));
 
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER);
@@ -423,6 +439,9 @@ public class PropsValues {
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
+
+	public static final String TAGS_ASSET_VALIDATOR = PropsUtil.get(
+		PropsUtil.TAGS_ASSET_VALIDATOR);
 
 	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TAGS_COMPILER_ENABLED));

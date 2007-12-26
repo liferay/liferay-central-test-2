@@ -46,7 +46,7 @@ String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
 String[] conversions = new String[0];
 
-if (PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED)) {
+if (PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
@@ -292,11 +292,11 @@ portletURL.setParameter("name", name);
 			jQuery(
 				function() {
 					new Liferay.Upload({
-						allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+						allowedFileTypes: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
 						container: '#<portlet:namespace />fileUpload',
-						fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.DL_FILE_EXTENSIONS)) %>',
+						fileDescription: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
 						fallbackContainer: '#<portlet:namespace />fallback',
-						maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) %>,
+						maxFileSize: <%= PropsValues.DL_FILE_MAX_SIZE %>,
 						namespace: '<portlet:namespace />',
 						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></liferay-portlet:actionURL>'
 					});
