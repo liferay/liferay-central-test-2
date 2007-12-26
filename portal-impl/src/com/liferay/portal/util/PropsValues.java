@@ -181,6 +181,9 @@ public class PropsValues {
 	public static final int DL_FILE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
 
+	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
+
 	public static final boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
