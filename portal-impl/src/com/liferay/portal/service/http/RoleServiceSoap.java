@@ -81,10 +81,11 @@ import java.rmi.RemoteException;
  */
 public class RoleServiceSoap {
 	public static com.liferay.portal.model.RoleSoap addRole(
-		java.lang.String name, int type) throws RemoteException {
+		java.lang.String name, java.lang.String description, int type)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
-					type);
+					description, type);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
@@ -263,10 +264,11 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap updateRole(long roleId,
-		java.lang.String name) throws RemoteException {
+		java.lang.String name, java.lang.String description)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-					name);
+					name, description);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}

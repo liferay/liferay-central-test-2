@@ -56,9 +56,11 @@ public class RoleSearch extends SearchContainer {
 	static {
 		headerNames.add("name");
 		headerNames.add("type");
+		headerNames.add("description");
 
 		orderableHeaders.put("name", "name");
 		orderableHeaders.put("type", "type");
+		orderableHeaders.put("description", "description");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-roles-were-found";

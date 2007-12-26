@@ -333,13 +333,13 @@ public interface RoleLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
-		java.lang.String name, int type)
+		java.lang.String name, java.lang.String description, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
-		java.lang.String name, int type, java.lang.String className,
-		long classPK)
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -436,7 +436,7 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

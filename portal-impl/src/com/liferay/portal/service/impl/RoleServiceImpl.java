@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class RoleServiceImpl extends RoleServiceBaseImpl {
 
-	public Role addRole(String name, int type)
+	public Role addRole(String name, String description, int type)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -49,7 +49,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
 		return roleLocalService.addRole(
-			user.getUserId(), user.getCompanyId(), name, type);
+			user.getUserId(), user.getCompanyId(), name, description, type);
 	}
 
 	public void addUserRoles(long userId, long[] roleIds)
@@ -134,13 +134,13 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		roleLocalService.unsetUserRoles(userId, roleIds);
 	}
 
-	public Role updateRole(long roleId, String name)
+	public Role updateRole(long roleId, String name, String description)
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return roleLocalService.updateRole(roleId, name);
+		return roleLocalService.updateRole(roleId, name, description);
 	}
 
 	protected void checkUserRolesPermission(long userId, long[] roleIds)

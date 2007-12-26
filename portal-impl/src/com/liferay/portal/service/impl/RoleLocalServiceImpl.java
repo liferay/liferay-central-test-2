@@ -51,15 +51,17 @@ import java.util.Map;
  */
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
-	public Role addRole(long userId, long companyId, String name, int type)
+	public Role addRole(
+			long userId, long companyId, String name, String description,
+			int type)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, type, null, 0);
+		return addRole(userId, companyId, name, description, type, null, 0);
 	}
 
 	public Role addRole(
-			long userId, long companyId, String name, int type,
-			String className, long classPK)
+			long userId, long companyId, String name, String description,
+			int type, String className, long classPK)
 		throws PortalException, SystemException {
 
 		// Role
@@ -76,6 +78,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setClassNameId(classNameId);
 		role.setClassPK(classPK);
 		role.setName(name);
+		role.setDescription(description);
 		role.setType(type);
 
 		rolePersistence.update(role);
@@ -107,11 +110,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		String[] systemRoles = PortalUtil.getSystemRoles();
 
 		for (int i = 0; i < systemRoles.length; i++) {
+			String roleName = systemRoles[i];
+			String roleDescription = StringPool.BLANK;
+			int roleType = RoleImpl.TYPE_REGULAR;
+
 			try {
-				roleFinder.findByC_N(companyId, systemRoles[i]);
+				roleFinder.findByC_N(companyId, roleName);
 			}
 			catch (NoSuchRoleException nsre) {
-				addRole(0, companyId, systemRoles[i], RoleImpl.TYPE_REGULAR);
+				addRole(0, companyId, roleName, roleDescription, roleType);
 			}
 		}
 
@@ -120,13 +127,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		String[] systemCommunityRoles = PortalUtil.getSystemCommunityRoles();
 
 		for (int i = 0; i < systemCommunityRoles.length; i++) {
+			String roleName = systemCommunityRoles[i];
+			String roleDescription = StringPool.BLANK;
+			int roleType = RoleImpl.TYPE_COMMUNITY;
+
 			try {
-				roleFinder.findByC_N(companyId, systemCommunityRoles[i]);
+				roleFinder.findByC_N(companyId, roleName);
 			}
 			catch (NoSuchRoleException nsre) {
-				addRole(
-					0, companyId, systemCommunityRoles[i],
-					RoleImpl.TYPE_COMMUNITY);
+				addRole(0, companyId, roleName, roleDescription, roleType);
 			}
 		}
 
@@ -136,13 +145,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			PortalUtil.getSystemOrganizationRoles();
 
 		for (int i = 0; i < systemOrganizationRoles.length; i++) {
+			String roleName = systemOrganizationRoles[i];
+			String roleDescription = StringPool.BLANK;
+			int roleType = RoleImpl.TYPE_ORGANIZATION;
+
 			try {
 				roleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
-				addRole(
-					0, companyId, systemOrganizationRoles[i],
-					RoleImpl.TYPE_ORGANIZATION);
+				addRole(0, companyId, roleName, roleDescription, roleType);
 			}
 		}
 	}
@@ -351,7 +362,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public Role updateRole(long roleId, String name)
+	public Role updateRole(long roleId, String name, String description)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
@@ -363,6 +374,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		role.setName(name);
+		role.setDescription(description);
 
 		rolePersistence.update(role);
 

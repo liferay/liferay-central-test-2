@@ -73,7 +73,8 @@ import com.liferay.portal.service.RoleServiceUtil;
  */
 public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
-		HttpPrincipal httpPrincipal, java.lang.String name, int type)
+		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String description, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -83,10 +84,16 @@ public class RoleServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new IntegerWrapper(type);
+			Object paramObj1 = description;
+
+			if (description == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(type);
 
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"addRole", new Object[] { paramObj0, paramObj1 });
+					"addRole", new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -584,7 +591,8 @@ public class RoleServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Role updateRole(
-		HttpPrincipal httpPrincipal, long roleId, java.lang.String name)
+		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -596,8 +604,15 @@ public class RoleServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"updateRole", new Object[] { paramObj0, paramObj1 });
+					"updateRole",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

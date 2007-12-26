@@ -191,6 +191,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				row.addText(userGroup.getName(), rowURL);
 
+				// Description
+
+				row.addText(userGroup.getDescription(), rowURL);
+
 				// Action
 
 				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_group_action.jsp");
@@ -263,6 +267,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				// Type
 
 				row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
+
+				// Description
+
+				row.addText(role.getDescription(), rowURL);
 
 				// Action
 

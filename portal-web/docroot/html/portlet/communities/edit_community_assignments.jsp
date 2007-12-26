@@ -281,6 +281,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 						row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
 
+						// Description
+
+						row.addText(role.getDescription());
+
 						// Add result row
 
 						resultRows.add(row);
@@ -457,12 +461,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<br /><br />
 
 		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-
-		searchContainer.setHeaderNames(headerNames);
-
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
@@ -473,6 +471,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			// Name
 
 			row.addText(userGroup.getName());
+
+			// Description
+
+			row.addText(userGroup.getDescription());
 
 			// Add result row
 

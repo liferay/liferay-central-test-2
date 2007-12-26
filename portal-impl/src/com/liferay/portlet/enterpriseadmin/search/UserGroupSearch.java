@@ -55,8 +55,10 @@ public class UserGroupSearch extends SearchContainer {
 
 	static {
 		headerNames.add("name");
+		headerNames.add("description");
 
 		orderableHeaders.put("name", "name");
+		orderableHeaders.put("description", "description");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE =

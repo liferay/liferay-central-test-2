@@ -138,6 +138,10 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
 
+	// Description
+
+	row.addText(role.getDescription(), rowURL);
+
 	// Add result row
 
 	resultRows.add(row);

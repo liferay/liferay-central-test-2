@@ -168,6 +168,10 @@ if (role != null) {
 
 				row.addText(LanguageUtil.get(pageContext, curRole.getTypeLabel()), rowURL);
 
+				// Description
+
+				row.addText(curRole.getDescription(), rowURL);
+
 				// Add result row
 
 				resultRows.add(row);

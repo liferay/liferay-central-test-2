@@ -389,12 +389,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<br /><br />
 
 		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-
-		searchContainer.setHeaderNames(headerNames);
-
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
@@ -405,6 +399,10 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			// Name
 
 			row.addText(userGroup.getName());
+
+			// Description
+
+			row.addText(userGroup.getDescription());
 
 			// Add result row
 

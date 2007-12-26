@@ -761,6 +761,7 @@ else {
 				List headerNames = new ArrayList();
 
 				headerNames.add("name");
+				headerNames.add("description");
 				headerNames.add("permissions");
 
 				searchContainer.setHeaderNames(headerNames);
@@ -771,6 +772,10 @@ else {
 					UserGroup userGroup = (UserGroup)results.get(i);
 
 					ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
+
+					// Name
+
+					row.addText(userGroup.getName());
 
 					// Name
 

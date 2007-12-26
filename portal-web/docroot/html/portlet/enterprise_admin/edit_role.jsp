@@ -83,6 +83,14 @@ int roleType = ParamUtil.getInteger(request, "roleType");
 		</tr>
 		<tr>
 			<td>
+				<liferay-ui:message key="description" />
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<liferay-ui:message key="type" />
 			</td>
 			<td>

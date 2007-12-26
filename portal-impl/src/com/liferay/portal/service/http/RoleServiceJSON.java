@@ -72,11 +72,12 @@ import org.json.JSONObject;
  *
  */
 public class RoleServiceJSON {
-	public static JSONObject addRole(java.lang.String name, int type)
+	public static JSONObject addRole(java.lang.String name,
+		java.lang.String description, int type)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
-				type);
+				description, type);
 
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
@@ -180,11 +181,12 @@ public class RoleServiceJSON {
 		RoleServiceUtil.unsetUserRoles(userId, roleIds);
 	}
 
-	public static JSONObject updateRole(long roleId, java.lang.String name)
+	public static JSONObject updateRole(long roleId, java.lang.String name,
+		java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-				name);
+				name, description);
 
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}

@@ -74,6 +74,14 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 		<liferay-ui:input-field model="<%= UserGroup.class %>" bean="<%= userGroup %>" field="name" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="description" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= UserGroup.class %>" bean="<%= userGroup %>" field="description" />
+	</td>
+</tr>
 </table>
 
 <br />

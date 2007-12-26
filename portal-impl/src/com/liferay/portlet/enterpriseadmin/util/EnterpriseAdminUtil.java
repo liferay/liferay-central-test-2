@@ -33,9 +33,11 @@ import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.portal.util.comparator.OrganizationTypeComparator;
 import com.liferay.portal.util.comparator.PasswordPolicyDescriptionComparator;
 import com.liferay.portal.util.comparator.PasswordPolicyNameComparator;
+import com.liferay.portal.util.comparator.RoleDescriptionComparator;
 import com.liferay.portal.util.comparator.RoleNameComparator;
 import com.liferay.portal.util.comparator.RoleTypeComparator;
 import com.liferay.portal.util.comparator.UserEmailAddressComparator;
+import com.liferay.portal.util.comparator.UserGroupDescriptionComparator;
 import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 
@@ -148,6 +150,9 @@ public class EnterpriseAdminUtil {
 		if (orderByCol.equals("name")) {
 			orderByComparator = new RoleNameComparator(orderByAsc);
 		}
+		else if (orderByCol.equals("description")) {
+			orderByComparator = new RoleDescriptionComparator(orderByAsc);
+		}
 		else if (orderByCol.equals("type")) {
 			orderByComparator = new RoleTypeComparator(orderByAsc);
 		}
@@ -167,8 +172,17 @@ public class EnterpriseAdminUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator orderByComparator = new UserGroupNameComparator(
-			orderByAsc);
+		OrderByComparator orderByComparator = null;
+
+		if (orderByCol.equals("name")) {
+			orderByComparator = new UserGroupNameComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("description")) {
+			orderByComparator = new UserGroupDescriptionComparator(orderByAsc);
+		}
+		else {
+			orderByComparator = new UserGroupNameComparator(orderByAsc);
+		}
 
 		return orderByComparator;
 	}
