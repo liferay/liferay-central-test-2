@@ -157,7 +157,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=<%= fileShortcutId %>">
 			<%= toFileEntry.getTitle() %>
 			</a>
 		</td>
@@ -197,7 +197,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?fileShortcutId=" + fileShortcutId %>'
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
 			/>
 		</td>
 	</tr>
@@ -333,7 +333,9 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 				StringMaker sm = new StringMaker();
 
 				sm.append(themeDisplay.getPathMain());
-				sm.append("/document_library/get_file?fileShortcutId=");
+				sm.append("/document_library/get_file?p_l_id=");
+				sm.append(themeDisplay.getPlid());
+				sm.append("&fileShortcutId=");
 				sm.append(fileShortcutId);
 				sm.append("&version=");
 				sm.append(String.valueOf(fileVersion.getVersion()));

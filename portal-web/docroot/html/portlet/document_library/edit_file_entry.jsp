@@ -125,7 +125,7 @@ portletURL.setParameter("name", name);
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
 			<%= Html.escape(fileEntry.getTitleWithExtension()) %>
 			</a>
 		</td>
@@ -167,7 +167,7 @@ portletURL.setParameter("name", name);
 			<liferay-ui:icon
 				image='<%= "../document_library/" + extension %>'
 				message="<%= extension.toUpperCase() %>"
-				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
 				label="<%= true %>"
 			/>
 		</td>
@@ -192,7 +192,7 @@ portletURL.setParameter("name", name);
 						<liferay-ui:icon
 							image='<%= "../document_library/" + conversion %>'
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
+							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
 							label="<%= true %>"
 						/>
 					</td>
@@ -218,7 +218,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
 			/>
 		</td>
 	</tr>
@@ -383,7 +383,9 @@ portletURL.setParameter("name", name);
 				StringMaker sm = new StringMaker();
 
 				sm.append(themeDisplay.getPathMain());
-				sm.append("/document_library/get_file?folderId=");
+				sm.append("/document_library/get_file?p_l_id=");
+				sm.append(themeDisplay.getPlid());
+				sm.append("&folderId=");
 				sm.append(folderId);
 				sm.append("&name=");
 				sm.append(HttpUtil.encodeURL(name));

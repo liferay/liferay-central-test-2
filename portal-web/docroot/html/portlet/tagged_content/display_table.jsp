@@ -88,7 +88,7 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	}
 
 	summary = fileEntry.getDescription();
-	viewURL = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
+	viewURL = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
 	viewURLMessage = "download";
 }
 else if (className.equals(IGImage.class.getName())) {

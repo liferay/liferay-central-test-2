@@ -156,7 +156,9 @@ for (int i = 0; i < results.size(); i++) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(themeDisplay.getPathMain());
-		sm.append("/document_library/get_file?folderId=");
+		sm.append("/document_library/get_file?p_l_id=");
+		sm.append(themeDisplay.getPlid());
+		sm.append("&folderId=");
 		sm.append(folder.getFolderId());
 		sm.append("&name=");
 		sm.append(HttpUtil.encodeURL(fileEntry.getName()));
@@ -194,7 +196,9 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("opener.");
 		sm.append(renderResponse.getNamespace());
 		sm.append("selectDocumentLibrary('");
-		sm.append("@main_path@/document_library/get_file?uuid=");
+		sm.append("@main_path@/document_library/get_file?p_l_id=");
+		sm.append(themeDisplay.getPlid());
+		sm.append("&uuid=");
 		sm.append(fileEntry.getUuid());
 		sm.append("&groupId=@group_id@'); window.close();");
 
