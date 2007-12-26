@@ -38,6 +38,8 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 	<c:when test="<%= modelName != null %>">
 
 		<%
+		Group group = layout.getGroup();
+
 		List communityPermissions = ListUtil.fromArray(request.getParameterValues("communityPermissions"));
 		List guestPermissions = ListUtil.fromArray(request.getParameterValues("guestPermissions"));
 
@@ -50,8 +52,6 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(request, "inputPermissionsShowConfigure");
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
-
-		Group group = layout.getGroup();
 		%>
 
 		<table class="lfr-table" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">

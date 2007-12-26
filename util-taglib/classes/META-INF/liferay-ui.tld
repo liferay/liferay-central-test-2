@@ -743,6 +743,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>input-permissions-params</name>
+		<tag-class>com.liferay.taglib.ui.InputPermissionsParamsTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>modelName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>input-resource</name>
 		<tag-class>com.liferay.taglib.ui.InputResourceTag</tag-class>
 		<body-content>JSP</body-content>

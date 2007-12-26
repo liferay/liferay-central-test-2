@@ -298,7 +298,7 @@ portletURL.setParameter("name", name);
 						fallbackContainer: '#<portlet:namespace />fallback',
 						maxFileSize: <%= PropsValues.DL_FILE_MAX_SIZE %>,
 						namespace: '<portlet:namespace />',
-						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></liferay-portlet:actionURL>'
+						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
 					});
 				}
 			);
