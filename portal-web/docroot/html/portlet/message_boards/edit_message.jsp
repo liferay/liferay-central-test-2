@@ -357,7 +357,7 @@ if (message != null) {
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((threadId <= 0) ? "post-new-thread" : "reply")) %>' />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
 	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);" />
