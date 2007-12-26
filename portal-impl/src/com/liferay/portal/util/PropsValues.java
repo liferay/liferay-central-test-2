@@ -460,6 +460,9 @@ public class PropsValues {
 	public static final boolean SMTP_SERVER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.SMTP_SERVER_ENABLED));
 
+	public static final String SMTP_SERVER_SUBDOMAIN = PropsUtil.get(
+		PropsUtil.SMTP_SERVER_SUBDOMAIN);
+
 	public static final String TAGS_ASSET_VALIDATOR = PropsUtil.get(
 		PropsUtil.TAGS_ASSET_VALIDATOR);
 

@@ -35,7 +35,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -266,11 +266,8 @@ public class MessageListenerImpl implements MessageListener {
 
 		int pos = recipient.indexOf(StringPool.AT);
 
-		String smtpServerSubdomain = PropsUtil.get(
-			PropsUtil.SMTP_SERVER_SUBDOMAIN);
-
 		String mx = recipient.substring(
-			pos + smtpServerSubdomain.length() + 2);
+			pos + PropsValues.SMTP_SERVER_SUBDOMAIN.length() + 2);
 
 		return CompanyLocalServiceUtil.getCompanyByMx(mx);
 	}

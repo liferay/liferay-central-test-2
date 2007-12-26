@@ -44,6 +44,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -360,7 +361,7 @@ public class MBUtil {
 		sm.append(StringPool.PERIOD);
 		sm.append(messageId);
 		sm.append(StringPool.AT);
-		sm.append(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN));
+		sm.append(PropsValues.SMTP_SERVER_SUBDOMAIN);
 		sm.append(StringPool.PERIOD);
 		sm.append(mx);
 		sm.append(StringPool.GREATER_THAN);
@@ -378,7 +379,7 @@ public class MBUtil {
 		sm.append(StringPool.PERIOD);
 		sm.append(messageId);
 		sm.append(StringPool.AT);
-		sm.append(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN));
+		sm.append(PropsValues.SMTP_SERVER_SUBDOMAIN);
 		sm.append(StringPool.PERIOD);
 		sm.append(mx);
 
