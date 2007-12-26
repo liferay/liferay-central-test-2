@@ -31,6 +31,7 @@ import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,9 +93,7 @@ public class LuceneServlet extends HttpServlet {
 				LuceneUtil.checkLuceneDir(companyId);
 			}
 
-			if (GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.LUCENE_STORE_JDBC_AUTO_CLEAN_UP))) {
-
+			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP) {
 				try {
 					JobScheduler.schedule(new CleanUpJob());
 				}

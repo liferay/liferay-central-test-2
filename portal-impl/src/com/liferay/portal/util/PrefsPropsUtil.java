@@ -156,6 +156,31 @@ public class PrefsPropsUtil {
 		return GetterUtil.getDouble(getString(prefs, companyId, name));
 	}
 
+	public static double getDouble(String name, double defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getDouble(prefs, 0, name, defaultValue);
+	}
+
+	public static double getDouble(
+			long companyId, String name, double defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getDouble(prefs, companyId, name, defaultValue);
+	}
+
+	public static double getDouble(
+		PortletPreferences prefs, long companyId, String name,
+		double defaultValue) {
+
+		return GetterUtil.getDouble(
+			getString(prefs, companyId, name, defaultValue));
+	}
+
 	public static int getInteger(String name)
 		throws PortalException, SystemException {
 
@@ -176,6 +201,30 @@ public class PrefsPropsUtil {
 		PortletPreferences prefs, long companyId, String name) {
 
 		return GetterUtil.getInteger(getString(prefs, companyId, name));
+	}
+
+	public static int getInteger(String name, int defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getInteger(prefs, 0, name, defaultValue);
+	}
+
+	public static int getInteger(long companyId, String name, int defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getInteger(prefs, companyId, name, defaultValue);
+	}
+
+	public static int getInteger(
+		PortletPreferences prefs, long companyId, String name,
+		int defaultValue) {
+
+		return GetterUtil.getInteger(
+			getString(prefs, companyId, name, defaultValue));
 	}
 
 	public static long getLong(String name)
@@ -200,6 +249,30 @@ public class PrefsPropsUtil {
 		return GetterUtil.getLong(getString(prefs, companyId, name));
 	}
 
+	public static long getLong(String name, long defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getLong(prefs, 0, name, defaultValue);
+	}
+
+	public static long getLong(long companyId, String name, long defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getLong(prefs, companyId, name, defaultValue);
+	}
+
+	public static long getLong(
+		PortletPreferences prefs, long companyId, String name,
+		long defaultValue) {
+
+		return GetterUtil.getLong(
+			getString(prefs, companyId, name, defaultValue));
+	}
+
 	public static short getShort(String name)
 		throws PortalException, SystemException {
 
@@ -220,6 +293,31 @@ public class PrefsPropsUtil {
 		PortletPreferences prefs, long companyId, String name) {
 
 		return GetterUtil.getShort(getString(prefs, companyId, name));
+	}
+
+	public static short getShort(String name, short defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getShort(prefs, 0, name, defaultValue);
+	}
+
+	public static short getShort(
+			long companyId, String name, short defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getShort(prefs, companyId, name, defaultValue);
+	}
+
+	public static short getShort(
+		PortletPreferences prefs, long companyId, String name,
+		short defaultValue) {
+
+		return GetterUtil.getShort(
+			getString(prefs, companyId, name, defaultValue));
 	}
 
 	public static String getString(String name)
@@ -282,30 +380,95 @@ public class PrefsPropsUtil {
 		}
 	}
 
-	public static String[] getStringArray(String name)
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		double defaultValue) {
+
+		return prefs.getValue(name, String.valueOf(defaultValue));
+	}
+
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		int defaultValue) {
+
+		return prefs.getValue(name, String.valueOf(defaultValue));
+	}
+
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		long defaultValue) {
+
+		return prefs.getValue(name, String.valueOf(defaultValue));
+	}
+
+	public static String getString(
+		PortletPreferences prefs, long companyId, String name,
+		short defaultValue) {
+
+		return prefs.getValue(name, String.valueOf(defaultValue));
+	}
+
+	public static String[] getStringArray(String name, String delimiter)
 		throws PortalException, SystemException {
 
 		PortletPreferences prefs = getPreferences();
 
-		return getStringArray(prefs, 0, name);
+		return getStringArray(prefs, 0, name, delimiter);
 	}
 
-	public static String[] getStringArray(long companyId, String name)
+	public static String[] getStringArray(
+			long companyId, String name, String delimiter)
 		throws PortalException, SystemException {
 
 		PortletPreferences prefs = getPreferences(companyId);
 
-		return getStringArray(prefs, companyId, name);
+		return getStringArray(prefs, companyId, name, delimiter);
 	}
 
 	public static String[] getStringArray(
-			PortletPreferences prefs, long companyId, String name)
+			PortletPreferences prefs, long companyId, String name,
+			String delimiter)
 		throws PortalException, SystemException {
 
 		String value = PropsUtil.get(name);
 
-		return StringUtil.split(
-			prefs.getValue(name, value), StringPool.NEW_LINE);
+		value = prefs.getValue(name, value);
+
+		return StringUtil.split(value, delimiter);
+	}
+
+	public static String[] getStringArray(
+			String name, String delimiter, String[] defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences();
+
+		return getStringArray(prefs, 0, name, delimiter, defaultValue);
+	}
+
+	public static String[] getStringArray(
+			long companyId, String name, String delimiter,
+			String[] defaultValue)
+		throws PortalException, SystemException {
+
+		PortletPreferences prefs = getPreferences(companyId);
+
+		return getStringArray(prefs, companyId, name, delimiter, defaultValue);
+	}
+
+	public static String[] getStringArray(
+			PortletPreferences prefs, long companyId, String name,
+			String delimiter, String[] defaultValue)
+		throws PortalException, SystemException {
+
+		String value = prefs.getValue(name, null);
+
+		if (value == null) {
+			return defaultValue;
+		}
+		else {
+			return StringUtil.split(value, delimiter);
+		}
 	}
 
 }

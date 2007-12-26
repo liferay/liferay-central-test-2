@@ -45,7 +45,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
@@ -276,14 +276,17 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 			groupId = group.getGroupId();
 
 			if (servletPath.startsWith(
-					_LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING) ||
+					PropsValues.
+						LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING) ||
 				servletPath.startsWith(
-					_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING)) {
+					PropsValues.
+						LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING)) {
 
 				privateLayout = true;
 			}
 			else if (servletPath.startsWith(
-						_LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
+						PropsValues.
+							LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
 
 				privateLayout = false;
 			}
@@ -446,19 +449,6 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";
-
-	private static final String
-		_LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING =
-			PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
-
-	private static final String
-		_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING =
-			PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
-
-	private static final String _LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING =
-		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
 	private static final int _PATTERN_FRIENDLY = 0;
 

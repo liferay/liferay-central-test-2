@@ -31,7 +31,7 @@ List updatablePackageIds = new ArrayList();
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
 		<c:choose>
-			<c:when test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
+			<c:when test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
 
 				<%
 				PortletURL configurationURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);

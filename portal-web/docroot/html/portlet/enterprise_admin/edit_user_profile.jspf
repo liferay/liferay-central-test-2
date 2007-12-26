@@ -277,12 +277,8 @@ if (organizations != null) {
 	<td valign="top">
 		<table class="lfr-table">
 
-		<%
-		boolean fieldEnableContactBirthday = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
-		%>
-
 		<c:choose>
-			<c:when test="<%= fieldEnableContactBirthday %>">
+			<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
 				<tr>
 					<td>
 						<liferay-ui:message key="birthday" />
@@ -299,11 +295,7 @@ if (organizations != null) {
 			</c:otherwise>
 		</c:choose>
 
-		<%
-		boolean fieldEnableContactMale = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
-		%>
-
-		<c:if test="<%= fieldEnableContactMale %>">
+		<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="gender" />
@@ -317,7 +309,7 @@ if (organizations != null) {
 			</tr>
 		</c:if>
 
-		<c:if test="<%= fieldEnableContactBirthday || fieldEnableContactMale %>">
+		<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY || PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE %>">
 			<tr>
 				<td colspan="2">
 					<br />
@@ -376,4 +368,10 @@ if (organizations != null) {
 
 <c:if test="<%= user2 != null %>">
 	<br />
+</c:if>
+
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />screenName);
+	</script>
 </c:if>

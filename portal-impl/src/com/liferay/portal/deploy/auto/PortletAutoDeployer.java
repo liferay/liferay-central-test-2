@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,17 +49,21 @@ public class PortletAutoDeployer
 	public PortletAutoDeployer() {
 		try {
 			baseDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 			destDir = DeployUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
 			portletTaglibDTD = DeployUtil.getResourcePath(
 				"liferay-portlet.tld");
 			unpackWar = PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
+				PropsUtil.AUTO_DEPLOY_UNPACK_WAR,
+				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
 			jbossPrefix = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);
+				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX,
+				PropsValues.AUTO_DEPLOY_JBOSS_PREFIX);
 			tomcatLibDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
+				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR,
+				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
 			List jars = new ArrayList();
 

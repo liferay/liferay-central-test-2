@@ -229,9 +229,11 @@ public class PluginPackageUtil {
 	public static String[] getRepositoryURLs() throws PluginPackageException {
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED);
+				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
+				PropsValues.PLUGIN_REPOSITORIES_TRUSTED);
 			String[] untrusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED);
+				PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED, StringPool.NEW_LINE,
+				PropsValues.PLUGIN_REPOSITORIES_UNTRUSTED);
 
 			return ArrayUtil.append(trusted, untrusted);
 		}
@@ -242,7 +244,7 @@ public class PluginPackageUtil {
 	}
 
 	public static String[] getSupportedTypes() {
-		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+		return PropsValues.PLUGIN_TYPES;
 	}
 
 	public static boolean isCurrentVersionSupported(List versions) {
@@ -266,7 +268,9 @@ public class PluginPackageUtil {
 		String packageId = pluginPackage.getPackageId();
 
 		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			StringPool.NEW_LINE,
+			PropsValues.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		for (int i = 0; i < pluginPackagesIgnored.length; i++) {
 			String curPluginPackagesIgnored = pluginPackagesIgnored[i];
@@ -305,7 +309,8 @@ public class PluginPackageUtil {
 
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED);
+				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
+				PropsValues.PLUGIN_REPOSITORIES_TRUSTED);
 
 			if (ArrayUtil.contains(trusted, repositoryURL)) {
 				return true;

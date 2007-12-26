@@ -75,7 +75,7 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
@@ -2458,12 +2458,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String url = GetterUtil.getString(typeSettings.getProperty("url"));
 
-			String friendlyURLPrivateGroupPath = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
-			String friendlyURLPrivateUserPath = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
-			String friendlyURLPublicPath = PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+			String friendlyURLPrivateGroupPath =
+				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+			String friendlyURLPrivateUserPath =
+				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+			String friendlyURLPublicPath =
+				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
 			if (url.startsWith(friendlyURLPrivateGroupPath) ||
 				url.startsWith(friendlyURLPrivateUserPath) ||

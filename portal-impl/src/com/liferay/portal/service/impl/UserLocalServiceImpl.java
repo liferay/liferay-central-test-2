@@ -201,10 +201,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
-		boolean alwaysAutoScreenName = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
-
-		if (alwaysAutoScreenName) {
+		if (PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) {
 			autoScreenName = true;
 		}
 
@@ -335,7 +332,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List groups = new ArrayList();
 
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_GROUP_NAMES);
+			companyId, PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
+			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
 		for (int i = 0; i < defaultGroupNames.length; i++) {
 			try {
@@ -355,7 +353,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List roles = new ArrayList();
 
 		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_ROLE_NAMES);
+			companyId, PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
+			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
 
 		for (int i = 0; i < defaultRoleNames.length; i++) {
 			try {
@@ -375,7 +374,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List userGroups = new ArrayList();
 
 		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES);
+			companyId, PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
 
 		for (int i = 0; i < defaultUserGroupNames.length; i++) {
 			try {
@@ -2082,7 +2082,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 
 			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-				user.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
+				user.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES,
+				StringPool.NEW_LINE,
+				PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
 			for (int i = 0; i < reservedEmailAddresses.length; i++) {
 				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
@@ -2135,7 +2137,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
+			companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
 		for (int i = 0; i < reservedEmailAddresses.length; i++) {
 			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
@@ -2223,7 +2226,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_RESERVED_SCREEN_NAMES);
+			companyId, PropsUtil.ADMIN_RESERVED_SCREEN_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_SCREEN_NAMES);
 
 		for (int i = 0; i < reservedScreenNames.length; i++) {
 			if (screenName.equalsIgnoreCase(reservedScreenNames[i])) {

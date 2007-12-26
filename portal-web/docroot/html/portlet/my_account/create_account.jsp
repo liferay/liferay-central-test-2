@@ -82,7 +82,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			</td>
 		</tr>
 
-		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) %>" >
+		<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE %>" >
 			<tr>
 				<td>
 					<liferay-ui:message key="screen-name" />

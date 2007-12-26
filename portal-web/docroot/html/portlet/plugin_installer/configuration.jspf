@@ -28,7 +28,7 @@
 		<liferay-ui:message key="enabled" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>" />
+		<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>" />
 	</td>
 </tr>
 <tr>
@@ -36,7 +36,7 @@
 		<liferay-ui:message key="deploy-directory" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) %>" />
+		<input name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR, PropsValues.AUTO_DEPLOY_DEPLOY_DIR) %>" />
 	</td>
 </tr>
 <tr>
@@ -44,7 +44,7 @@
 		<liferay-ui:message key="dest-directory" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>" />
+		<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR, PropsValues.AUTO_DEPLOY_DEST_DIR) %>" />
 
 		<liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "plugins-will-be-deployed-to-x-if-this-field-is-left-blank", DeployUtil.getAutoDeployServerDestDir()) %>' />
 	</td>
@@ -58,7 +58,7 @@
 			<option value="0"><liferay-ui:message key="disable" /></option>
 
 			<%
-			long interval = PrefsPropsUtil.getLong(PropsUtil.AUTO_DEPLOY_INTERVAL);
+			long interval = PrefsPropsUtil.getLong(PropsUtil.AUTO_DEPLOY_INTERVAL, PropsValues.AUTO_DEPLOY_INTERVAL);
 
 			for (int i = 0;;) {
 				if (i < Time.MINUTE) {
@@ -89,7 +89,7 @@
 		<select name="<portlet:namespace />blacklistThreshold">
 
 			<%
-			int blacklistThreshold = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
+			int blacklistThreshold = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD, PropsValues.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
 			for (int i = 5; i <= 20; i = i + 5) {
 			%>
@@ -110,7 +110,7 @@
 			<liferay-ui:message key="unpack-war" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
+			<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR, PropsValues.AUTO_DEPLOY_UNPACK_WAR) %>" />
 		</td>
 	</tr>
 </c:if>
@@ -125,7 +125,7 @@
 </tr>
 
 <%
-int jbossPrefix = GetterUtil.getInteger(PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX));
+int jbossPrefix = GetterUtil.getInteger(PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, PropsValues.AUTO_DEPLOY_JBOSS_PREFIX));
 %>
 
 <c:choose>
@@ -163,8 +163,8 @@ int jbossPrefix = GetterUtil.getInteger(PrefsPropsUtil.getString(PropsUtil.AUTO_
 </c:choose>
 
 <%
-String tomcatConfDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR);
-String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
+String tomcatConfDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR, PropsValues.AUTO_DEPLOY_TOMCAT_CONF_DIR);
+String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 %>
 
 <c:choose>

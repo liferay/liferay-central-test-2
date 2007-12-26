@@ -57,7 +57,7 @@ import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletInstanceFactory;
@@ -266,9 +266,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 							portlet.getPreferencesValidator()).newInstance();
 
 					try {
-						if (GetterUtil.getBoolean(PropsUtil.get(
-								PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP))) {
-
+						if (PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
 							prefsValidatorInstance.validate(
 								PortletPreferencesSerializer.fromDefaultXML(
 									portlet.getDefaultPreferences()));

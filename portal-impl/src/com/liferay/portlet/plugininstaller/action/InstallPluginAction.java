@@ -43,6 +43,7 @@ import com.liferay.portal.tools.BaseDeployer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
@@ -279,7 +280,8 @@ public class InstallPluginAction extends PortletAction {
 			String source = file.toString();
 
 			String deployDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 
 			String destination = deployDir + StringPool.SLASH + fileName;
 
@@ -376,7 +378,8 @@ public class InstallPluginAction extends PortletAction {
 				progressId);
 
 			String deployDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 
 			String tmpFilePath =
 				deployDir + StringPool.SLASH + _DOWNLOAD_DIR +
@@ -483,7 +486,9 @@ public class InstallPluginAction extends PortletAction {
 			StringPool.NEW_LINE);
 
 		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			StringPool.NEW_LINE,
+			PropsValues.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		StringMaker sm = new StringMaker();
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 
@@ -46,7 +47,7 @@ public class DeployUtil {
 
 	public static String getAutoDeployDestDir() throws Exception {
 		String destDir = PrefsPropsUtil.getString(
-			PropsUtil.AUTO_DEPLOY_DEST_DIR);
+			PropsUtil.AUTO_DEPLOY_DEST_DIR, PropsValues.AUTO_DEPLOY_DEST_DIR);
 
 		if (Validator.isNull(destDir)) {
 			destDir = getAutoDeployServerDestDir();

@@ -38,7 +38,7 @@ import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
@@ -681,8 +681,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if (!portletModel.isWARFile() &&
 				Validator.isNotNull(prefsValidator) &&
-				GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP))) {
+				PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
 
 				try {
 					PreferencesValidator prefsValidatorObj =

@@ -37,6 +37,7 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 
@@ -137,18 +138,25 @@ public class GlobalStartupAction extends SimpleAction {
 		// Auto deploy
 
 		try {
-			if (PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
+			if (PrefsPropsUtil.getBoolean(
+					PropsUtil.AUTO_DEPLOY_ENABLED,
+					PropsValues.AUTO_DEPLOY_ENABLED)) {
+
 				if (_log.isInfoEnabled()) {
 					_log.info("Registering auto deploy directories");
 				}
 
 				File deployDir = new File(
-					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR));
+					PrefsPropsUtil.getString(
+						PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+						PropsValues.AUTO_DEPLOY_DEPLOY_DIR));
 				File destDir = new File(DeployUtil.getAutoDeployDestDir());
 				long interval = PrefsPropsUtil.getLong(
-					PropsUtil.AUTO_DEPLOY_INTERVAL);
+					PropsUtil.AUTO_DEPLOY_INTERVAL,
+					PropsValues.AUTO_DEPLOY_INTERVAL);
 				int blacklistThreshold = PrefsPropsUtil.getInteger(
-					PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
+					PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
+					PropsValues.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
 				List autoDeployListeners = getAutoDeployListeners();
 

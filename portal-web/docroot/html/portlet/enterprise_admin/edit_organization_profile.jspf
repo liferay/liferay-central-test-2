@@ -111,12 +111,8 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			</td>
 		</tr>
 
-		<%
-		boolean fieldEnableOrganizationStatus = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
-		%>
-
 		<c:choose>
-			<c:when test="<%= fieldEnableOrganizationStatus %>">
+			<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 				<tr>
 					<td>
 						<liferay-ui:message key="status" />

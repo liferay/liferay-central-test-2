@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
@@ -32,6 +33,34 @@ import com.liferay.portal.kernel.util.StringUtil;
  *
  */
 public class PropsValues {
+
+	public static final String[] ADMIN_DEFAULT_GROUP_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.ADMIN_DEFAULT_GROUP_NAMES),
+			StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_DEFAULT_ROLE_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.ADMIN_DEFAULT_ROLE_NAMES),
+			StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_DEFAULT_USER_GROUP_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES),
+			StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_MAIL_HOST_NAMES = StringUtil.split(
+		PropsUtil.get(PropsUtil.ADMIN_MAIL_HOST_NAMES),
+		StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_RESERVED_EMAIL_ADDRESSES =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES),
+			StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_RESERVED_SCREEN_NAMES = StringUtil.split(
+		PropsUtil.get(PropsUtil.ADMIN_RESERVED_SCREEN_NAMES),
+		StringPool.NEW_LINE);
 
 	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
 		GetterUtil.getBoolean(
@@ -48,6 +77,34 @@ public class PropsValues {
 	public static final boolean AUTH_SIMULTANEOUS_LOGINS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS));
+
+	public static final int AUTO_DEPLOY_BLACKLIST_THRESHOLD =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD));
+
+	public static final String AUTO_DEPLOY_DEPLOY_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+
+	public static final String AUTO_DEPLOY_DEST_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEST_DIR);
+
+	public static final boolean AUTO_DEPLOY_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.AUTO_DEPLOY_ENABLED));
+
+	public static final int AUTO_DEPLOY_INTERVAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_INTERVAL));
+
+	public static final String AUTO_DEPLOY_JBOSS_PREFIX =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);
+
+	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR);
+
+	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
+
+	public static final boolean AUTO_DEPLOY_UNPACK_WAR =
+		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.AUTO_DEPLOY_UNPACK_WAR));
 
 	public static final String[] AUTO_LOGIN_HOOKS =
 		PropsUtil.getArray(PropsUtil.AUTO_LOGIN_HOOKS);
@@ -118,6 +175,21 @@ public class PropsValues {
 	public static final String DEFAULT_WAP_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID);
 
+	public static final boolean
+		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
+
+	public static final boolean
+		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
+
+	public static final boolean
+		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
+
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));
@@ -134,6 +206,17 @@ public class PropsValues {
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
+
+	public static final String
+		LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING = PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+
+	public static final String
+		LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING = PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
+
+	public static final String LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING =
+		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
 	public static final boolean LAYOUT_GUEST_SHOW_MAX_ICON =
 		GetterUtil.getBoolean(
@@ -187,6 +270,10 @@ public class PropsValues {
 		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_PRE);
 
 	public static final String LUCENE_DIR = PropsUtil.get(PropsUtil.LUCENE_DIR);
+
+	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LUCENE_STORE_JDBC_AUTO_CLEAN_UP));
 
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsUtil.LUCENE_STORE_TYPE);
@@ -249,6 +336,24 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED));
 
+	public static final String[] PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED),
+			StringPool.NEW_LINE);
+
+	public static final String[] PLUGIN_REPOSITORIES_TRUSTED =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.PLUGIN_REPOSITORIES_TRUSTED),
+			StringPool.NEW_LINE);
+
+	public static final String[] PLUGIN_REPOSITORIES_UNTRUSTED =
+		StringUtil.split(
+			PropsUtil.get(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED),
+			StringPool.NEW_LINE);
+
+	public static final String[] PLUGIN_TYPES =
+		PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+
 	public static final boolean PORTAL_IMPERSONATION_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE));
@@ -262,6 +367,10 @@ public class PropsValues {
 	public static final boolean PORTLET_URL_ANCHOR_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
+
+	public static final boolean PREFERENCE_VALIDATE_ON_STARTUP =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP));
 
 	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
@@ -326,6 +435,10 @@ public class PropsValues {
 
 	public static final boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.THEME_CSS_FAST_LOAD));
+
+	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
 
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));

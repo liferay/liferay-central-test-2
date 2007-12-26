@@ -2167,12 +2167,15 @@ public class PortalUtil {
 			_pathContext = StringPool.BLANK;
 		}
 
-		_pathFriendlyURLPrivateGroup = _pathContext + PropsUtil.get(
-			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
-		_pathFriendlyURLPrivateUser = _pathContext + PropsUtil.get(
-			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
-		_pathFriendlyURLPublic = _pathContext + PropsUtil.get(
-			PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+		_pathFriendlyURLPrivateGroup =
+			_pathContext +
+				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+		_pathFriendlyURLPrivateUser =
+			_pathContext +
+				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+		_pathFriendlyURLPublic =
+			_pathContext +
+				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
