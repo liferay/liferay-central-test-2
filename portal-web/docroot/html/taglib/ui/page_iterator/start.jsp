@@ -138,7 +138,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					}
 					else {
 						sm.append("<a class='journal-article-page-number' href='");
-						sm.append(_getHREF(formName, curParam, i - 1, jsCall, url, urlAnchor));
+						sm.append(_getHREF(formName, curParam, i, jsCall, url, urlAnchor));
 						sm.append("'>");
 					}
 
