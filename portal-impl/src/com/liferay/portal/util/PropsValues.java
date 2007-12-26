@@ -199,6 +199,23 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
+
+	public static final String[] IG_IMAGE_EXTENSIONS =
+		PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
+
+	public static final int IG_IMAGE_MAX_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE));
+
+	public static final int IG_IMAGE_THUMBNAIL_MAX_HEIGHT =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_HEIGHT));
+
+	public static final int IG_IMAGE_THUMBNAIL_MAX_WIDTH =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
+
+
+
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));

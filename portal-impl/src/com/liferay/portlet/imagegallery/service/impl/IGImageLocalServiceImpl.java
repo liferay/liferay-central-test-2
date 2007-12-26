@@ -25,7 +25,6 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,6 +33,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -478,14 +478,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Thumbnail
 
-			int thumbnailMaxHeight = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_HEIGHT));
-
-			int thumbnailMaxWidth = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
-
 			RenderedImage thumbnail = ImageUtil.scale(
-				renderedImage, thumbnailMaxHeight, thumbnailMaxWidth);
+				renderedImage, PropsValues.IG_IMAGE_THUMBNAIL_MAX_HEIGHT,
+				PropsValues.IG_IMAGE_THUMBNAIL_MAX_WIDTH);
 
 			ByteArrayMaker bam = new ByteArrayMaker();
 
@@ -548,11 +543,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			throw new ImageNameException(imageName);
 		}
 
-		long imageMaxSize = GetterUtil.getLong(
-			PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE));
-
-		if ((imageMaxSize > 0) &&
-			((bytes == null) || (bytes.length > imageMaxSize))) {
+		if ((PropsValues.IG_IMAGE_MAX_SIZE > 0) &&
+			((bytes == null) ||
+			 (bytes.length > PropsValues.IG_IMAGE_MAX_SIZE))) {
 
 			throw new ImageSizeException();
 		}

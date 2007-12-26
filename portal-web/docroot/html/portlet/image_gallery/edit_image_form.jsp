@@ -71,12 +71,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
 <liferay-ui:error exception="<%= ImageNameException.class %>">
-
-	<%
-	String[] imageExtensions = PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
-	%>
-
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -85,7 +80,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 <liferay-ui:tags-error />
 
 <%
-String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) / 1024);
+String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 %>
 
 <c:if test='<%= !imageMaxSize.equals("0") %>'>

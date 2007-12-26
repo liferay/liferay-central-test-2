@@ -140,11 +140,11 @@ String uploadProgressId = "igImageUploadProgress";
 		jQuery(
 			function() {
 				new Liferay.Upload({
-					allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
+					allowedFileTypes: '<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS) %>',
 					container: '#<portlet:namespace />fileUpload',
-					fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
+					fileDescription: '<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS) %>',
 					fallbackContainer: '#<portlet:namespace />fallback',
-					maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) %>,
+					maxFileSize: <%= PropsValues.IG_IMAGE_MAX_SIZE %>,
 					namespace: '<portlet:namespace />',
 					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= IGImage.class.getName() %>" />'
 				});
