@@ -83,7 +83,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		{
 			rating: <%= yourScore %>,
 			onComplete: function(rating) {
-				var url = "<%= url %>?className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
+				var url = "<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
 
 				AjaxUtil.request(
 					url,
