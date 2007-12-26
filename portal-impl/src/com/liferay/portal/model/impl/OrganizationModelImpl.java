@@ -92,10 +92,8 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Organization"),
 			true);
-	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Groups_Orgs"), true);
-	public static final boolean CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Users_Orgs"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
+	public static final boolean CACHE_ENABLED_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ORGS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Organization"));
 

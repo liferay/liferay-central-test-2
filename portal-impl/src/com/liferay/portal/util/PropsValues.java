@@ -435,7 +435,7 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TEST_COOKIE_SUPPORT));
 
-	public static final int SESSION_TIMEOUT = GetterUtil.getInteger(
+	public static int SESSION_TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
 
 	public static final boolean SESSION_TIMEOUT_AUTO_EXTEND =

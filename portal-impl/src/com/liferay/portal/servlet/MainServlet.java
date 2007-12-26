@@ -569,8 +569,7 @@ public class MainServlet extends ActionServlet {
 
 		Element root = doc.getRootElement();
 
-		int timeout = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+		int timeout = PropsValues.SESSION_TIMEOUT;
 
 		Element sessionConfig = root.element("session-config");
 
@@ -581,7 +580,9 @@ public class MainServlet extends ActionServlet {
 			timeout = GetterUtil.getInteger(sessionTimeout, timeout);
 		}
 
-		PropsUtil.set(PropsUtil.SESSION_TIMEOUT, Integer.toString(timeout));
+		PropsUtil.set(PropsUtil.SESSION_TIMEOUT, String.valueOf(timeout));
+
+		PropsValues.SESSION_TIMEOUT = timeout;
 	}
 
 	protected void destroyCompany(long companyId) {

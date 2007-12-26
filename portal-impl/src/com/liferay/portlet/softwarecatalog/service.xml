@@ -17,6 +17,10 @@
 		<column name="active" type="boolean" />
 		<column name="recommended" type="boolean" />
 
+		<!-- Relationships -->
+
+		<column name="scProductEntries" type="Collection" entity="SCProductEntry" mapping-table="SCLicenses_SCProductEntries" />
+
 		<!-- Order -->
 
 		<order by="asc">
@@ -61,6 +65,10 @@
 		<column name="url" type="String" />
 		<column name="active" type="boolean" />
 		<column name="priority" type="int" />
+
+		<!-- Relationships -->
+
+		<column name="scProductVersions" type="Collection" entity="SCProductVersion" mapping-table="SCFrameworkVersi_SCProductVers" />
 
 		<!-- Order -->
 

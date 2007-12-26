@@ -83,12 +83,10 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Role"),
 			true);
-	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Groups_Roles"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);
-	public static final boolean CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Users_Roles"), true);
+	public static final boolean CACHE_ENABLED_USERS_ROLES = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ROLES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Role"));
 

@@ -82,6 +82,9 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCLicense"),
 			true);
+	public static final boolean CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),
+			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCLicense"));
 

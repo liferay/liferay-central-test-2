@@ -109,8 +109,7 @@ public class GroupModelImpl extends BaseModelImpl {
 				"value.object.finder.cache.enabled.Groups_Roles"), true);
 	public static final boolean CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_UserGroups"), true);
-	public static final boolean CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Users_Groups"), true);
+	public static final boolean CACHE_ENABLED_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_GROUPS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Group"));
 

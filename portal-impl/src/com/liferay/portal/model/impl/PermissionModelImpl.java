@@ -74,12 +74,9 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Permission"),
 			true);
-	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Groups_Permissions"), true);
-	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Roles_Permissions"), true);
-	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
-				"value.object.finder.cache.enabled.Users_Permissions"), true);
+	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
+	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Permission"));
 

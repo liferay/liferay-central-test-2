@@ -60,7 +60,19 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
-			public static final boolean CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} = GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${column.mappingTable}"), true);
+			public static final boolean CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} =
+
+			<#assign entityShortName = stringUtil.shorten(entity.name, 10, "")>
+
+			<#if stringUtil.startsWith(column.mappingTable, entityShortName)>
+				GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${column.mappingTable}"), true)
+			<#else>
+				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
+
+				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
+			</#if>
+
+			;
 		</#if>
 	</#list>
 

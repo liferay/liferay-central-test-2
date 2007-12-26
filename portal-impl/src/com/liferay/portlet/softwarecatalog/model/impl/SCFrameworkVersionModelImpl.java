@@ -99,6 +99,9 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"),
 			true);
+	public static final boolean CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS = GetterUtil.getBoolean(PropsUtil.get(
+				"value.object.finder.cache.enabled.SCFrameworkVersi_SCProductVers"),
+			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"));
 

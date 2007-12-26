@@ -213,6 +213,121 @@ public class SCLicenseUtil {
 		return getPersistence().countAll();
 	}
 
+	public static java.util.List getSCProductEntries(long pk)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		return getPersistence().getSCProductEntries(pk);
+	}
+
+	public static java.util.List getSCProductEntries(long pk, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		return getPersistence().getSCProductEntries(pk, begin, end);
+	}
+
+	public static java.util.List getSCProductEntries(long pk, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		return getPersistence().getSCProductEntries(pk, begin, end, obc);
+	}
+
+	public static int getSCProductEntriesSize(long pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().getSCProductEntriesSize(pk);
+	}
+
+	public static boolean containsSCProductEntry(long pk, long scProductEntryPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsSCProductEntry(pk, scProductEntryPK);
+	}
+
+	public static boolean containsSCProductEntries(long pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsSCProductEntries(pk);
+	}
+
+	public static void addSCProductEntry(long pk, long scProductEntryPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().addSCProductEntry(pk, scProductEntryPK);
+	}
+
+	public static void addSCProductEntry(long pk,
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().addSCProductEntry(pk, scProductEntry);
+	}
+
+	public static void addSCProductEntries(long pk, long[] scProductEntryPKs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().addSCProductEntries(pk, scProductEntryPKs);
+	}
+
+	public static void addSCProductEntries(long pk,
+		java.util.List scProductEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().addSCProductEntries(pk, scProductEntries);
+	}
+
+	public static void clearSCProductEntries(long pk)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().clearSCProductEntries(pk);
+	}
+
+	public static void removeSCProductEntry(long pk, long scProductEntryPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().removeSCProductEntry(pk, scProductEntryPK);
+	}
+
+	public static void removeSCProductEntry(long pk,
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().removeSCProductEntry(pk, scProductEntry);
+	}
+
+	public static void removeSCProductEntries(long pk, long[] scProductEntryPKs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().removeSCProductEntries(pk, scProductEntryPKs);
+	}
+
+	public static void removeSCProductEntries(long pk,
+		java.util.List scProductEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().removeSCProductEntries(pk, scProductEntries);
+	}
+
+	public static void setSCProductEntries(long pk, long[] scProductEntryPKs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().setSCProductEntries(pk, scProductEntryPKs);
+	}
+
+	public static void setSCProductEntries(long pk,
+		java.util.List scProductEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
+		getPersistence().setSCProductEntries(pk, scProductEntries);
+	}
+
 	public static SCLicensePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}
