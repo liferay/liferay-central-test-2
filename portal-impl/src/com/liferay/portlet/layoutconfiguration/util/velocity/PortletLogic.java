@@ -45,17 +45,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PortletLogic extends RuntimeLogic {
 
-	public PortletLogic(ServletContext ctx, HttpServletRequest req,
-						HttpServletResponse res, String portletId) {
+	public PortletLogic(
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
+		String portletId) {
 
 		this(ctx, req, res, null, null);
 
 		_portletId = portletId;
 	}
 
-	public PortletLogic(ServletContext ctx, HttpServletRequest req,
-						HttpServletResponse res, RenderRequest renderRequest,
-						RenderResponse renderResponse) {
+	public PortletLogic(
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		_ctx = ctx;
 		_req = req;

@@ -51,8 +51,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PortletColumnLogic extends RuntimeLogic {
 
-	public PortletColumnLogic(ServletContext ctx, HttpServletRequest req,
-							  HttpServletResponse res) {
+	public PortletColumnLogic(
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
 
 		_ctx = ctx;
 		_req = req;

@@ -42,8 +42,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TemplateProcessor {
 
-	public TemplateProcessor(ServletContext ctx, HttpServletRequest req,
-							 HttpServletResponse res, String portletId) {
+	public TemplateProcessor(
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
+		String portletId) {
 
 		_ctx = ctx;
 		_req = req;
