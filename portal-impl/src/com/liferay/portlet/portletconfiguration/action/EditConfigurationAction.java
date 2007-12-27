@@ -35,11 +35,14 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -100,14 +103,7 @@ public class EditConfigurationAction extends PortletAction {
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		ServletContext ctx =
-			(ServletContext)req.getAttribute(WebKeys.CTX);
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		res.setTitle(
-			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+		res.setTitle(getTitle(portlet, req));
 
 		ConfigurationAction configurationAction = getConfigurationAction(
 			portlet);
@@ -165,6 +161,30 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
+	}
+
+	protected String getTitle(Portlet portlet, RenderRequest req)
+		throws Exception {
+
+		ServletContext ctx =
+			(ServletContext)req.getAttribute(WebKeys.CTX);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PortletPreferences portletSetup =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portlet.getPortletId(), true, true);
+
+		String title = PortletConfigurationUtil.getPortletTitle(
+			portletSetup, themeDisplay.getLanguageId());
+
+		if (Validator.isNull(title)) {
+			title = PortalUtil.getPortletTitle(
+				portlet, ctx, themeDisplay.getLocale());
+		}
+
+		return title;
 	}
 
 	private static Log _log = LogFactory.getLog(EditConfigurationAction.class);

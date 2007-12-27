@@ -127,14 +127,18 @@ public class ExportImportAction extends EditConfigurationAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		Portlet portlet = null;
+
 		try {
-			getPortlet(req);
+			portlet = getPortlet(req);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
+
+		res.setTitle(getTitle(portlet, req));
 
 		return mapping.findForward(getForward(
 			req, "portlet.portlet_configuration.export_import"));

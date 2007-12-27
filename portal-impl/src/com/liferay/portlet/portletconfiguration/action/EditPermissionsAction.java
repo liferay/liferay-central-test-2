@@ -37,9 +37,7 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -48,8 +46,6 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.ServletContext;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -61,7 +57,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  *
  */
-public class EditPermissionsAction extends PortletAction {
+public class EditPermissionsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -139,13 +135,8 @@ public class EditPermissionsAction extends PortletAction {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);
 
-		ServletContext ctx =
-			(ServletContext)req.getAttribute(WebKeys.CTX);
-
 		if (portlet != null) {
-			res.setTitle(
-				PortalUtil.getPortletTitle(
-					portlet, ctx, themeDisplay.getLocale()));
+			res.setTitle(getTitle(portlet, req));
 		}
 
 		return mapping.findForward(
