@@ -34,9 +34,7 @@
 	<%
 	int CELLS_PER_ROW = 4;
 
-	String defaultLayoutTemplateId = PropsUtil.get(PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
-
-	String layoutTemplateId = prefs.getValue("layout-template-id", defaultLayoutTemplateId);
+	String layoutTemplateId = prefs.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates(theme.getThemeId());
 

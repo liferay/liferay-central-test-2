@@ -31,7 +31,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
@@ -73,11 +73,9 @@ public class ViewAction extends PortletAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portlet.getPortletId(), true, true);
 
-		String defaultLayoutTemplateId = PropsUtil.get(
-			PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
-
 		String layoutTemplateId = prefs.getValue(
-			"layout-template-id", defaultLayoutTemplateId);
+			"layout-template-id",
+			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		String content = StringPool.BLANK;
 

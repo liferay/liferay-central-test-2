@@ -35,7 +35,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.UniqueList;
@@ -77,11 +77,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
-		String defaultLayoutTemplateId = PropsUtil.get(
-			PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
-
 		String oldLayoutTemplateId = prefs.getValue(
-			"layout-template-id", defaultLayoutTemplateId);
+			"layout-template-id",
+			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		if (!oldLayoutTemplateId.equals(layoutTemplateId)) {
 			reorganizePortlets(

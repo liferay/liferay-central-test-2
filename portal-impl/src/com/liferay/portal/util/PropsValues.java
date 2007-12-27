@@ -346,6 +346,9 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
 
+	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT =
+		PropsUtil.get(PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
+
 	public static final long[] OMNIADMIN_USERS = StringUtil.split(
 		PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
 
