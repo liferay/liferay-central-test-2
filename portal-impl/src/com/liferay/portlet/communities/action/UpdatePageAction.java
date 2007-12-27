@@ -37,7 +37,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Http;
 
@@ -130,7 +130,7 @@ public class UpdatePageAction extends JSONAction {
 			(LayoutTypePortlet)layout.getLayoutType();
 
 		layoutTypePortlet.setLayoutTemplateId(
-			0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID), false);
+			0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
 
 		LayoutServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),

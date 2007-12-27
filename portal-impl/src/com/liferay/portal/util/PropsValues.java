@@ -230,6 +230,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
 
+	public static final String LAYOUT_DEFAULT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID);
+
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND =
 		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
 
