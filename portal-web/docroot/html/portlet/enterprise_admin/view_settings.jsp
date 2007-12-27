@@ -371,6 +371,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 			}
 
 			function <portlet:namespace />saveEmails() {
+				document.<portlet:namespace />fm.method = "post";
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "updateEmails";
 
 				<c:if test='<%= tabs3.endsWith("-notification") %>'>
