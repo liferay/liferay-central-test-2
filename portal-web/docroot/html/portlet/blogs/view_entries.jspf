@@ -56,8 +56,8 @@ for (int i = 0; i < results.size(); i++) {
 
 String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
 
-if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION)) {
-	rssURL += "?max=" + rssDelta + "&type=" + rssFormatType + "&version=" + rssFormatVersion + "&displayStyle=" + rssDisplayStyle;
+if (Validator.isNotNull(rssURLParams)) {
+	rssURL += "?" + rssURLParams;
 }
 %>
 

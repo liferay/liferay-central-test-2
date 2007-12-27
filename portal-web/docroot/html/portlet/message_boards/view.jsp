@@ -274,7 +274,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				StringMaker sm = new StringMaker();
 
-				String[] threadPriority = MBUtil.getThreadPriority(portletSetup, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
+				String[] threadPriority = MBUtil.getThreadPriority(prefs, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 				if ((threadPriority != null) && (thread.getPriority() > 0)) {
 					sm.append("<img align=\"left\" alt=\"");
@@ -377,7 +377,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
-			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() %>' target="_blank" />
+			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() + rssURLParams %>' target="_blank" />
 
 			<liferay-ui:message key="recent-posts-rss" />
 
@@ -551,7 +551,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			StringMaker sm = new StringMaker();
 
-			String[] threadPriority = MBUtil.getThreadPriority(portletSetup, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
+			String[] threadPriority = MBUtil.getThreadPriority(prefs, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 			if ((threadPriority != null) && (thread.getPriority() > 0)) {
 				sm.append("<img align=\"left\" alt=\"");

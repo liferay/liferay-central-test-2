@@ -109,23 +109,6 @@ public class BlogsEntryServiceSoap {
 
 	public static java.lang.String getCompanyEntriesRSS(long companyId,
 		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws RemoteException {
-		try {
-			java.lang.String returnValue = BlogsEntryServiceUtil.getCompanyEntriesRSS(companyId,
-					max, type, version, feedURL, entryURL);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.lang.String getCompanyEntriesRSS(long companyId,
-		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL) throws RemoteException {
 		try {
@@ -177,22 +160,6 @@ public class BlogsEntryServiceSoap {
 					max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL) throws RemoteException {
-		try {
-			java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
-					max, type, version, feedURL, entryURL);
-
-			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

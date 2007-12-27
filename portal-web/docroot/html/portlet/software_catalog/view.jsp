@@ -73,12 +73,12 @@ portletURL.setParameter("tabs1", tabs1);
 		String orderByType = ParamUtil.getString(request, "orderByType");
 
 		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
-			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
+			portalPrefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
+			portalPrefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
 		}
 		else {
-			orderByCol = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
-			orderByType = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
+			orderByCol = portalPrefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
+			orderByType = portalPrefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
 		}
 
 		List headerNames = new ArrayList();
@@ -273,12 +273,12 @@ portletURL.setParameter("tabs1", tabs1);
 		String orderByType = ParamUtil.getString(request, "orderByType");
 
 		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
-			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
+			portalPrefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
+			portalPrefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
 		}
 		else {
-			orderByCol = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
-			orderByType = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
+			orderByCol = portalPrefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
+			orderByType = portalPrefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
 		}
 
 		OrderByComparator orderByComparator = SCUtil.getProductEntryOrderByComparator(orderByCol, orderByType);

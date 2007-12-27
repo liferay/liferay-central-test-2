@@ -1715,6 +1715,27 @@ Liferay.Service.MB.MBMessage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getCategoryMessagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCategoryMessagesRSS";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyMessagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyMessagesRSS";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getGroupMessagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getGroupMessagesRSS";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getMessage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getMessage";
@@ -1725,6 +1746,13 @@ Liferay.Service.MB.MBMessage = {
 	getMessageDisplay: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getMessageDisplay";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getThreadMessagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getThreadMessagesRSS";
 
 		return Liferay.Service.ajax(params, callback);
 	},

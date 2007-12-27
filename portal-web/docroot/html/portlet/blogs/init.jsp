@@ -34,8 +34,6 @@
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
-
-<%@ page import="com.liferay.util.Html" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
@@ -44,7 +42,7 @@ PortletPreferences prefs = renderRequest.getPreferences();
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, true);
 }
 
 int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
@@ -71,6 +69,26 @@ else if (rssFormat.equals("rss20")) {
 else if (rssFormat.equals("atom10")) {
 	rssFormatType = RSSUtil.ATOM;
 	rssFormatVersion = 1.0;
+}
+
+String rssURLParams = StringPool.BLANK;
+
+if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
+		rssURLParams += "&max=" + rssDelta;
+	}
+
+	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
+		rssURLParams += "&type=" + rssFormatType;
+	}
+
+	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
+		rssURLParams += "&version=" + rssFormatVersion;
+	}
+
+	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+		rssURLParams += "&displayStyle=" + rssDisplayStyle;
+	}
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

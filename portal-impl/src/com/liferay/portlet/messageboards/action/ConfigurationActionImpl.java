@@ -76,10 +76,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
-		if (tabs2.equals("display-settings")) {
-			updateDisplaySettings(req, prefs);
-		}
-		else if (tabs2.equals("email-from")) {
+		if (tabs2.equals("email-from")) {
 			updateEmailFrom(req, prefs);
 		}
 		else if (tabs2.equals("message-added-email")) {
@@ -87,6 +84,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else if (tabs2.equals("message-updated-email")) {
 			updateEmailMessageUpdated(req, prefs);
+		}
+		else if (tabs2.equals("rss")) {
+			updateRSS(req, prefs);
 		}
 		else if (tabs2.equals("thread-priorities")) {
 			updateThreadPriorities(req, prefs);
@@ -107,15 +107,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/message_boards/configuration.jsp";
-	}
-
-	protected void updateDisplaySettings(
-			ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		int rssContentLength = ParamUtil.getInteger(req, "rssContentLength");
-
-		prefs.setValue("rss-content-length", String.valueOf(rssContentLength));
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
@@ -200,6 +191,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				"email-message-updated-signature",
 				emailMessageUpdatedSignature);
 		}
+	}
+
+	protected void updateRSS(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(req, "rssFormat");
+
+		prefs.setValue("rss-delta", String.valueOf(rssDelta));
+		prefs.setValue("rss-display-style", rssDisplayStyle);
+		prefs.setValue("rss-format", rssFormat);
 	}
 
 	protected void updateThreadPriorities(

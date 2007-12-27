@@ -60,9 +60,16 @@
 <%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
+<%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
-PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), false, true);
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, true);
+}
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
@@ -71,7 +78,47 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-String[] priorities = LocalizationUtil.getPrefsValues(portletSetup, "priorities", currentLanguageId);
+String[] priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", currentLanguageId);
+
+int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+String rssFormat = prefs.getValue("rss-format", "atom10");
+
+String rssFormatType = RSSUtil.DEFAULT_TYPE;
+double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
+
+if (rssFormat.equals("rss10")) {
+	rssFormatType = RSSUtil.RSS;
+	rssFormatVersion = 1.0;
+}
+else if (rssFormat.equals("rss20")) {
+	rssFormatType = RSSUtil.RSS;
+	rssFormatVersion = 2.0;
+}
+else if (rssFormat.equals("atom10")) {
+	rssFormatType = RSSUtil.ATOM;
+	rssFormatVersion = 1.0;
+}
+
+String rssURLParams = StringPool.BLANK;
+
+if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
+		rssURLParams += "&max=" + rssDelta;
+	}
+
+	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
+		rssURLParams += "&type=" + rssFormatType;
+	}
+
+	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
+		rssURLParams += "&version=" + rssFormatVersion;
+	}
+
+	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+		rssURLParams += "&displayStyle=" + rssDisplayStyle;
+	}
+}
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

@@ -149,20 +149,20 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getCategoryMessagesRSS(long categoryId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getCompanyMessagesRSS(long companyId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getGroupMessagesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -177,8 +177,8 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

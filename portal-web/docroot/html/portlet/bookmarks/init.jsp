@@ -40,7 +40,7 @@
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

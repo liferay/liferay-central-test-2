@@ -37,5 +37,5 @@
 <%@ page import="org.dom4j.io.SAXReader" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 %>

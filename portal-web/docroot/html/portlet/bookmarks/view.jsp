@@ -219,12 +219,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			String orderByType = ParamUtil.getString(request, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-				prefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-col", orderByCol);
-				prefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-type", orderByType);
+				portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-col", orderByCol);
+				portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-type", orderByType);
 			}
 			else {
-				orderByCol = prefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-col", "name");
-				orderByType = prefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-type", "asc");
+				orderByCol = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-col", "name");
+				orderByType = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-type", "asc");
 			}
 
 			OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(orderByCol, orderByType);

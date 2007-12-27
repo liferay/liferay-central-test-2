@@ -25,11 +25,14 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -40,6 +43,7 @@ import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
+import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -358,7 +362,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public String getCategoryMessagesRSS(
 			long categoryId, int max, String type, double version,
-			String feedURL, String entryURL, PortletPreferences prefs)
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		MBCategory category = mbCategoryLocalService.getCategory(
@@ -386,13 +390,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages,
-			prefs);
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			messages);
 	}
 
 	public String getCompanyMessagesRSS(
 			long companyId, int max, String type, double version,
-			String feedURL, String entryURL, PortletPreferences prefs)
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -419,13 +423,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages,
-			prefs);
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			messages);
 	}
 
 	public String getGroupMessagesRSS(
 			long groupId, int max, String type, double version,
-			String feedURL, String entryURL, PortletPreferences prefs)
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		String name = StringPool.BLANK;
@@ -457,8 +461,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages,
-			prefs);
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			messages);
 	}
 
 	public MBMessage getMessage(long messageId)
@@ -481,7 +485,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public String getThreadMessagesRSS(
 			long threadId, int max, String type, double version,
-			String feedURL, String entryURL, PortletPreferences prefs)
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		String name = StringPool.BLANK;
@@ -513,8 +517,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages,
-			prefs);
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			messages);
 	}
 
 	public void subscribeMessage(long messageId)
@@ -643,8 +647,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String feedURL, String entryURL, List messages,
-			PortletPreferences prefs)
+			String displayStyle, String feedURL, String entryURL,
+			List messages)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -659,20 +663,29 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		syndFeed.setEntries(entries);
 
-		//int rssContentLength = MBUtil.getRSSContentLength(prefs);
-
 		Iterator itr = messages.iterator();
 
 		while (itr.hasNext()) {
 			MBMessage message = (MBMessage)itr.next();
 
+			String author = PortalUtil.getUserName(
+				message.getUserId(), message.getUserName());
+
+			String value = null;
+
+			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
+				value = StringUtil.shorten(
+					Html.stripHtml(message.getBody()), _RSS_ABSTRACT_LENGTH,
+					StringPool.BLANK);
+			}
+			else {
+				value = message.getBody();
+			}
+
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			if (!message.isAnonymous()) {
-				String userName = PortalUtil.getUserName(
-					message.getUserId(), message.getUserName());
-
-				syndEntry.setAuthor(userName);
+				syndEntry.setAuthor(author);
 			}
 
 			syndEntry.setTitle(message.getSubject());
@@ -683,7 +696,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			SyndContent syndContent = new SyndContentImpl();
 
 			syndContent.setType("html");
-			syndContent.setValue(message.getBody());
+			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
 
@@ -702,5 +715,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	private static final int _MAX_END = 200;
+
+	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));
 
 }

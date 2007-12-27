@@ -66,7 +66,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+				req, portletResource, false, true);
 
 		prefs.setValue("page-delta", String.valueOf(pageDelta));
 		prefs.setValue("page-display-style", pageDisplayStyle);

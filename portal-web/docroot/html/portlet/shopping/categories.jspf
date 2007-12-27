@@ -171,12 +171,12 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	String orderByType = ParamUtil.getString(request, "orderByType");
 
 	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-		prefs.setValue(PortletKeys.SHOPPING, "items-order-by-col", orderByCol);
-		prefs.setValue(PortletKeys.SHOPPING, "items-order-by-type", orderByType);
+		portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-col", orderByCol);
+		portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-type", orderByType);
 	}
 	else {
-		orderByCol = prefs.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
-		orderByType = prefs.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
+		orderByCol = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
+		orderByType = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
 	}
 
 	OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orderByCol, orderByType);

@@ -67,7 +67,7 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.util.SCUtil" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

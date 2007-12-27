@@ -25,10 +25,6 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, true);
-
 String emailFromName = ParamUtil.getString(request, "emailFromName", MBUtil.getEmailFromName(prefs));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUtil.getEmailFromAddress(prefs));
 
@@ -39,8 +35,6 @@ String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAd
 String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
-
-int rssContentLength = ParamUtil.getInteger(request, "rssContentLength", MBUtil.getRSSContentLength(prefs));
 
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
@@ -89,7 +83,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,display-settings"
+	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -814,14 +808,56 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<portlet:namespace />updateLanguageTemps(lastLanguageId);
 		</script>
 	</c:when>
-	<c:when test='<%= tabs2.equals("display-settings") %>'>
+	<c:when test='<%= tabs2.equals("rss") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="rss-feed-content-length" />
+				<liferay-ui:message key="maximum-items-to-display" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />rssContentLength" size="4" type="text" value="<%= rssContentLength %>" />
+				<select name="<portlet:namespace />rssDelta">
+					<option <%= (rssDelta == 1) ? "selected" : "" %> value="1">1</option>
+					<option <%= (rssDelta == 2) ? "selected" : "" %> value="2">2</option>
+					<option <%= (rssDelta == 3) ? "selected" : "" %> value="3">3</option>
+					<option <%= (rssDelta == 4) ? "selected" : "" %> value="4">4</option>
+					<option <%= (rssDelta == 5) ? "selected" : "" %> value="5">5</option>
+					<option <%= (rssDelta == 10) ? "selected" : "" %> value="10">10</option>
+					<option <%= (rssDelta == 15) ? "selected" : "" %> value="15">15</option>
+					<option <%= (rssDelta == 20) ? "selected" : "" %> value="20">20</option>
+					<option <%= (rssDelta == 25) ? "selected" : "" %> value="25">25</option>
+					<option <%= (rssDelta == 30) ? "selected" : "" %> value="30">30</option>
+					<option <%= (rssDelta == 40) ? "selected" : "" %> value="40">40</option>
+					<option <%= (rssDelta == 50) ? "selected" : "" %> value="50">50</option>
+					<option <%= (rssDelta == 60) ? "selected" : "" %> value="60">60</option>
+					<option <%= (rssDelta == 70) ? "selected" : "" %> value="70">70</option>
+					<option <%= (rssDelta == 80) ? "selected" : "" %> value="80">80</option>
+					<option <%= (rssDelta == 90) ? "selected" : "" %> value="90">90</option>
+					<option <%= (rssDelta == 100) ? "selected" : "" %> value="100">100</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="display-style" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />rssDisplayStyle">
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="format" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />rssFormat">
+					<option <%= (rssFormat.equals("rss10")) ? "selected" : "" %> value="rss10">RSS 1.0</option>
+					<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
+					<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
+				</select>
 			</td>
 		</tr>
 		</table>

@@ -33,6 +33,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -131,16 +132,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public String getCompanyEntriesRSS(
 			long companyId, int max, String type, double version,
-			String feedURL, String entryURL)
-		throws PortalException, SystemException {
-		return getCompanyEntriesRSS(
-			companyId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
-			feedURL, entryURL);
-
-	}
-
-	public String getCompanyEntriesRSS(
-			long companyId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
@@ -194,19 +185,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		}
 
 		return entries;
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public String getGroupEntriesRSS(
-			long groupId, int max, String type, double version,
-			String feedURL, String entryURL)
-		throws PortalException, SystemException {
-
-		return getGroupEntriesRSS(
-			groupId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
-			feedURL, entryURL);
 	}
 
 	public String getGroupEntriesRSS(
@@ -302,6 +280,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		while (itr.hasNext()) {
 			BlogsEntry entry = (BlogsEntry)itr.next();
 
+			String author = PortalUtil.getUserName(
+				entry.getUserId(), entry.getUserName());
+
 			String link = entryURL;
 
 			if (link.endsWith("/blogs/rss")) {
@@ -318,30 +299,28 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			String value = null;
 
-			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-				value = entry.getContent();
-			}
-			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
+			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 				value = StringUtil.shorten(
 					Html.stripHtml(entry.getContent()), _RSS_ABSTRACT_LENGTH,
 					StringPool.BLANK);
 			}
+			else {
+				value = entry.getContent();
+			}
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
-			syndEntry.setAuthor(entry.getUserName());
+			syndEntry.setAuthor(author);
 			syndEntry.setTitle(entry.getTitle());
 			syndEntry.setLink(link);
 			syndEntry.setPublishedDate(entry.getCreateDate());
 
-			if (value != null) {
-				SyndContent syndContent = new SyndContentImpl();
+			SyndContent syndContent = new SyndContentImpl();
 
-				syndContent.setType("html");
-				syndContent.setValue(value);
+			syndContent.setType("html");
+			syndContent.setValue(value);
 
-				syndEntry.setDescription(syndContent);
-			}
+			syndEntry.setDescription(syndContent);
 
 			entries.add(syndEntry);
 		}

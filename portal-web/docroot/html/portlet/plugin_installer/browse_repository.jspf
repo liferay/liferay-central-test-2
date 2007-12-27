@@ -128,12 +128,12 @@ try {
 	String orderByType = ParamUtil.getString(request, "orderByType");
 
 	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-		prefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", orderByCol);
-		prefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", orderByType);
+		portalPrefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", orderByCol);
+		portalPrefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", orderByType);
 	}
 	else {
-		orderByCol = prefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", "modified-date");
-		orderByType = prefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", "desc");
+		orderByCol = portalPrefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", "modified-date");
+		orderByType = portalPrefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", "desc");
 	}
 
 	List headerNames = new ArrayList();

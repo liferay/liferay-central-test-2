@@ -106,7 +106,7 @@
 <%@ page import="com.liferay.portlet.shopping.util.ShoppingUtil" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(company.getCompanyId(), portletGroupId.longValue());
 

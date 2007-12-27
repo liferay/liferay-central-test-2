@@ -1087,7 +1087,7 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL = "message.boards.expire.ban.interval";
 
-	public static final String MESSAGE_BOARDS_RSS_CONTENT_LENGTH = "message.boards.rss.content.length";
+	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
 	// My Places Portlet
 

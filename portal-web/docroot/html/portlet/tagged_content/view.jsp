@@ -52,9 +52,9 @@ if (mergeUserTags && themeDisplay.isSignedIn()) {
 
 	// Merge my global tags
 
-	PortalPreferences myGlobalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+	PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-	String[] myGlobalEntries = myGlobalPrefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
+	String[] myGlobalEntries = portalPrefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
 
 	if ((myGlobalEntries != null) && (myGlobalEntries.length > 0)) {
 		String[] newEntries = ArrayUtil.append(entries, myGlobalEntries);

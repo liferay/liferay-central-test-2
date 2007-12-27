@@ -216,6 +216,57 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static java.lang.String getCategoryMessagesRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getCategoryMessagesRSS(categoryId,
+					max, type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getCompanyMessagesRSS(long companyId,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getCompanyMessagesRSS(companyId,
+					max, type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
+					max, type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		long messageId) throws RemoteException {
 		try {
@@ -235,6 +286,23 @@ public class MBMessageServiceSoap {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
 				MBMessageServiceUtil.getMessageDisplay(messageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
+					max, type, version, displayStyle, feedURL, entryURL);
 
 			return returnValue;
 		}

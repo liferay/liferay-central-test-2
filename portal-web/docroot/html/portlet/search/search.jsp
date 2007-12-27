@@ -33,10 +33,10 @@ String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 String primarySearch = ParamUtil.getString(request, "primarySearch");
 
 if (Validator.isNotNull(primarySearch)) {
-	prefs.setValue(PortletKeys.SEARCH, "primary-search", primarySearch);
+	portalPrefs.setValue(PortletKeys.SEARCH, "primary-search", primarySearch);
 }
 else {
-	primarySearch = prefs.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
+	primarySearch = portalPrefs.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
 }
 %>
 

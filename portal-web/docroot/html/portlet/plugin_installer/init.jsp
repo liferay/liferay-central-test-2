@@ -39,7 +39,7 @@
 <%@ page import="org.apache.lucene.document.DateTools" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

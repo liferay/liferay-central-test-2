@@ -28,15 +28,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,10 +75,6 @@ public class RSSAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, PortletKeys.MESSAGE_BOARDS, false, true);
-
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
@@ -93,6 +85,8 @@ public class RSSAction extends Action {
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
+		String displayStyle = ParamUtil.getString(
+			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String entryURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
@@ -104,7 +98,7 @@ public class RSSAction extends Action {
 			String feedURL = StringPool.BLANK;
 
 			rss = MBMessageServiceUtil.getCompanyMessagesRSS(
-				companyId, max, type, version, feedURL, entryURL, prefs);
+				companyId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 		else if (groupId > 0) {
 			String feedURL =
@@ -112,7 +106,7 @@ public class RSSAction extends Action {
 					"/message_boards/find_recent_posts?p_l_id=" + plid;
 
 			rss = MBMessageServiceUtil.getGroupMessagesRSS(
-				groupId, max, type, version, feedURL, entryURL, prefs);
+				groupId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 		else if (categoryId > 0) {
 			String feedURL =
@@ -122,7 +116,8 @@ public class RSSAction extends Action {
 
 			try {
 				rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-					categoryId, max, type, version, feedURL, entryURL, prefs);
+					categoryId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -137,7 +132,7 @@ public class RSSAction extends Action {
 						"&threadId=" + threadId;
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
-				threadId, max, type, version, feedURL, entryURL, prefs);
+				threadId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

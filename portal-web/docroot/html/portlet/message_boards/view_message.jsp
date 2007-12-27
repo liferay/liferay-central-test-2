@@ -51,15 +51,15 @@ MBThread lastThread = messageDisplay.getLastThread();
 boolean isFirstThread = messageDisplay.isFirstThread();
 boolean isLastThread = messageDisplay.isLastThread();
 
-PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 String threadView = ParamUtil.getString(request, "threadView");
 
 if (Validator.isNotNull(threadView)) {
-	prefs.setValue(PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
+	portalPrefs.setValue(PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
 }
 else {
-	threadView = prefs.getValue(PortletKeys.MESSAGE_BOARDS, "thread-view", "combination");
+	threadView = portalPrefs.getValue(PortletKeys.MESSAGE_BOARDS, "thread-view", "combination");
 }
 %>
 

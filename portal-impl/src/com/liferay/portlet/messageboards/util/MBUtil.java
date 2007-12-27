@@ -403,14 +403,6 @@ public class MBUtil {
 		return messageId;
 	}
 
-	public static int getRSSContentLength(PortletPreferences prefs) {
-		String rssContentLength = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_RSS_CONTENT_LENGTH);
-
-		return GetterUtil.getInteger(
-			prefs.getValue("rss-content-length", rssContentLength), 80);
-	}
-
 	public static String[] getThreadPriority(
 			PortletPreferences prefs, String languageId, double value,
 			ThemeDisplay themeDisplay)

@@ -104,17 +104,6 @@ public class BlogsEntryServiceUtil {
 
 	public static java.lang.String getCompanyEntriesRSS(long companyId,
 		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getCompanyEntriesRSS(companyId, max, type,
-			version, feedURL, entryURL);
-	}
-
-	public static java.lang.String getCompanyEntriesRSS(long companyId,
-		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
 		throws com.liferay.portal.PortalException, 
@@ -149,17 +138,6 @@ public class BlogsEntryServiceUtil {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.getGroupEntries(groupId, max);
-	}
-
-	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getGroupEntriesRSS(groupId, max, type,
-			version, feedURL, entryURL);
 	}
 
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
