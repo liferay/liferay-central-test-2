@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -38,7 +39,6 @@ import com.liferay.portlet.messageboards.service.base.MBMessageServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.util.RSSUtil;
 
@@ -669,8 +669,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			if (!message.isAnonymous()) {
-				String userName = MBUtil.getUserName(
-					message.getUserId(), message.getUserName(), prefs);
+				String userName = PortalUtil.getUserName(
+					message.getUserId(), message.getUserName());
 
 				syndEntry.setAuthor(userName);
 			}

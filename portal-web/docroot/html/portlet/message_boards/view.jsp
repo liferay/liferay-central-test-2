@@ -296,7 +296,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 				}
 				else {
-					row.addText(MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup), rowURL);
+					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
 				}
 
 				// Number of posts
@@ -319,7 +319,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					sm.append(": ");
 					sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-					String lastPostByUserName = MBUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK, portletSetup);
+					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
 
 					if (Validator.isNotNull(lastPostByUserName)) {
 						sm.append("<br />");
@@ -573,7 +573,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 			}
 			else {
-				row.addText(MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup), rowURL);
+				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
 			}
 
 			// Number of posts
@@ -596,7 +596,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				sm.append(": ");
 				sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-				String lastPostByUserName = MBUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK, portletSetup);
+				String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
 
 				if (Validator.isNotNull(lastPostByUserName)) {
 					sm.append("<br />");
@@ -706,7 +706,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Name
 
-			row.addText(MBUtil.getUserName(ban.getBanUserId(), StringPool.BLANK, portletSetup));
+			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
 
 			// Ban Date
 

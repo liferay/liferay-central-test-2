@@ -53,7 +53,7 @@ if (threadId > 0) {
 			}
 		}
 
-		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : MBUtil.getUserName(curParentMessage.getUserId(), curParentMessage.getUserName(), portletSetup);
+		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(curParentMessage.getUserId(), curParentMessage.getUserName());
 	}
 	catch (Exception e) {
 	}

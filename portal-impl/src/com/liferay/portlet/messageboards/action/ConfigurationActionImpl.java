@@ -113,11 +113,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String userNameAttribute = ParamUtil.getString(
-			req, "userNameAttribute");
 		int rssContentLength = ParamUtil.getInteger(req, "rssContentLength");
 
-		prefs.setValue("user-name-attribute", userNameAttribute);
 		prefs.setValue("rss-content-length", String.valueOf(rssContentLength));
 	}
 

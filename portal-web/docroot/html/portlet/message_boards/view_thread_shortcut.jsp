@@ -99,7 +99,7 @@ if (treeWalker.isOdd()) {
 				<liferay-ui:message key="anonymous" />
 			</c:when>
 			<c:otherwise>
-				<%= MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup) %>
+				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
 			</c:otherwise>
 		</c:choose>
 

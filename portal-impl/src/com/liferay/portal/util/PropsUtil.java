@@ -1089,8 +1089,6 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_RSS_CONTENT_LENGTH = "message.boards.rss.content.length";
 
-	public static final String MESSAGE_BOARDS_USER_NAME_ATTRIBUTE = "message.boards.user.name.attribute";
-
 	// My Places Portlet
 
     public static final String MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.user.public.sites.with.no.layouts";

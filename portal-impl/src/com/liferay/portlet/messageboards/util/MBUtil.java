@@ -42,7 +42,6 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -66,7 +65,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
@@ -447,29 +445,6 @@ public class MBUtil {
 		cal.add(Calendar.DATE, expireInterval);
 
 		return cal.getTime();
-	}
-
-	public static String getUserName(
-		long userId, String defaultUserName, PortletPreferences prefs) {
-
-		return getUserName(userId, defaultUserName, null, prefs);
-	}
-
-	public static String getUserName(
-		long userId, String defaultUserName, HttpServletRequest req,
-		PortletPreferences prefs) {
-
-		String userAttribute = getUserNameAttribute(prefs);
-
-		return PortalUtil.getUserName(
-			userId, defaultUserName, userAttribute, req);
-	}
-
-	public static String getUserNameAttribute(PortletPreferences prefs) {
-		String userNameAttribute = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_USER_NAME_ATTRIBUTE);
-
-		return prefs.getValue("user-name-attribute", userNameAttribute);
 	}
 
 	public static String getUserRank(
