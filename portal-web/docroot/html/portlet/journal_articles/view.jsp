@@ -45,6 +45,8 @@ double version = ParamUtil.getDouble(request, "version");
 
 		portletURL.setParameter("struts_action", "/journal_articles/view");
 
+		PortletURL articleURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 		ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 
 		searchContainer.setDelta(pageDelta);
@@ -94,11 +96,11 @@ double version = ParamUtil.getDouble(request, "version");
 				rowHREF = sm.toString();
 			}
 			else {
-				portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-				portletURL.setParameter("articleId", article.getArticleId());
-				portletURL.setParameter("version", String.valueOf(article.getVersion()));
+				articleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+				articleURL.setParameter("articleId", article.getArticleId());
+				articleURL.setParameter("version", String.valueOf(article.getVersion()));
 
-				rowHREF = portletURL.toString();
+				rowHREF = articleURL.toString();
 			}
 
 			String target = null;
