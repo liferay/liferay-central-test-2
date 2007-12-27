@@ -472,7 +472,15 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 		String path = req.getParameter("struts_action");
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Getting request parameter path " + path);
+		}
+
 		if (Validator.isNull(path)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Getting request attribute path " + path);
+			}
+
 			path = (String)req.getAttribute(WebKeys.PORTLET_STRUTS_ACTION);
 		}
 
