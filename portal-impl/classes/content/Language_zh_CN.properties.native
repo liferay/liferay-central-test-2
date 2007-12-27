@@ -3208,6 +3208,7 @@ you-cannot-delete-or-deactivate-a-default-price=您无法删除或撤销预设�
 you-cannot-delete-or-deactivate-yourself=您无法删除或撤销您自己。
 you-cannot-delete-organizations-that-have-locations-or-users=您无法删除有地点或用户的组织。
 you-cannot-delete-organizations-that-have-suborganizations-or-users=您无法删除有suborganizations 或用户的组织。
+you-cannot-delete-this-page-because-you-are-currently-accessing-this-page=您无法删除这页因为您当前访问这页。
 you-cannot-delete-user-groups-that-have-users=您无法删除有用户的用户群。
 you-cannot-edit-a-nonexisting-or-invalid-folder=您无法编辑一个不存在或无效文件夹。
 you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=因为已经被 {0} 在 {1} 锁定, 您不可编辑此文件.

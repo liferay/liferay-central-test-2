@@ -3208,6 +3208,7 @@ you-cannot-delete-or-deactivate-a-default-price=あなたはディフォルト�
 you-cannot-delete-or-deactivate-yourself=あなたは削除するか, または非活動化させることができない。
 you-cannot-delete-organizations-that-have-locations-or-users=位置かユーザーがある組織を削除することができない。
 you-cannot-delete-organizations-that-have-suborganizations-or-users=suborganizations かユーザーがある組織を削除することができない。
+you-cannot-delete-this-page-because-you-are-currently-accessing-this-page=現在このページにアクセスしているのでこのページを削除することができない。
 you-cannot-delete-user-groups-that-have-users=ユーザーがあるユーザ・グループを削除することができない。
 you-cannot-edit-a-nonexisting-or-invalid-folder=あなたはnonexisting か, または無効なホールダーを編集するこ
 you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=You cannot edit this page because it was locked by {0} on {1}.

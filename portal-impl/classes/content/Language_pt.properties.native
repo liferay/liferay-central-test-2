@@ -3208,6 +3208,7 @@ you-cannot-delete-or-deactivate-a-default-price=Você não pode suprimir ou desa
 you-cannot-delete-or-deactivate-yourself=Você não pode suprimir ou desativar-se.
 you-cannot-delete-organizations-that-have-locations-or-users=Você não pode suprimir as organizações que têm posições ou usuários.
 you-cannot-delete-organizations-that-have-suborganizations-or-users=Você não pode suprimir as organizações que têm suborganizations ou usuários.
+you-cannot-delete-this-page-because-you-are-currently-accessing-this-page=Você não pode suprimir esta página porque você está alcançando atualmente esta página.
 you-cannot-delete-user-groups-that-have-users=Você não pode suprimir os grupos de usuário que têm usuários.
 you-cannot-edit-a-nonexisting-or-invalid-folder=Você não pode editar um dobrador nonexisting ou inválido.
 you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=You cannot edit this page because it was locked by {0} on {1}.

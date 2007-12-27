@@ -90,7 +90,7 @@ if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PLID);
 long layoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = tabs2.equals("private");
@@ -242,11 +242,18 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />deletePage() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutImpl.DEFAULT_PLID %>";
-			submitForm(document.<portlet:namespace />fm);
-		}
+		<c:choose>
+			<c:when test="<%= selPlid == themeDisplay.getPlid() %>">
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+			</c:when>
+			<c:otherwise>
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+					document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutImpl.DEFAULT_PLID %>";
+					submitForm(document.<portlet:namespace />fm);
+				}
+			</c:otherwise>
+		</c:choose>
 	}
 
 	function <portlet:namespace />exportPages() {

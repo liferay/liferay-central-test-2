@@ -3208,6 +3208,7 @@ you-cannot-delete-or-deactivate-a-default-price=U kunt een standaardprijs niet v
 you-cannot-delete-or-deactivate-yourself=U kunt uzelf niet verwijderen of deactiveren.
 you-cannot-delete-organizations-that-have-locations-or-users=U kunt organisaties niet verwijderen wanneer deze locaties of gebruikers bevat.
 you-cannot-delete-organizations-that-have-suborganizations-or-users=U kunt organisaties niet verwijderen die suborganisaties of gebruikers hebben.
+you-cannot-delete-this-page-because-you-are-currently-accessing-this-page=U kunt deze pagina schrappen niet omdat u momenteel tot deze pagina toegang hebt.
 you-cannot-delete-user-groups-that-have-users=U kunt gebruikersgroepen niet verwijderen wanneer deze gebruikers bevat.
 you-cannot-edit-a-nonexisting-or-invalid-folder=U kunt een onbestaande of ongeldige map niet wijzigen.
 you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=U kunt deze pagina niet wijzigen omdat hij geblokkeerd is door {0} op {1}.
