@@ -439,16 +439,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>105</portlet-name>
-		<struts-path>my_global_tags</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>106</portlet-name>
-		<struts-path>my_community_tags</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>107</portlet-name>
 		<struts-path>page_comments</struts-path>
 		<include>true</include>

@@ -335,12 +335,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br /><br />
 
-						<liferay-ui:message key="include-tags-specified-in-the-users-my-global-tags-and-my-community-tags-portlets" />
-
-						<liferay-ui:input-checkbox param="mergeUserTags " defaultValue="<%= mergeUserTags %>" />
-
-						<br /><br />
-
 						<liferay-ui:message key="search-operator" />
 
 						<select name="<portlet:namespace />andOperator">

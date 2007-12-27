@@ -1019,30 +1019,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>105</portlet-name>
-		<icon>/html/portlet/my_global_tags/icon.png</icon>
-		<struts-path>my_global_tags</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<maximize-edit>true</maximize-edit>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
-		<portlet-name>106</portlet-name>
-		<icon>/html/portlet/my_community_tags/icon.png</icon>
-		<struts-path>my_community_tags</struts-path>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<maximize-edit>true</maximize-edit>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>107</portlet-name>
 		<icon>/html/portlet/page_comments/icon.png</icon>
 		<struts-path>page_comments</struts-path>

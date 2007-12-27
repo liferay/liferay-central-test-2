@@ -25,9 +25,6 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
-
-// Merge URL tags
-
 if (mergeUrlTags) {
 	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
@@ -46,33 +43,6 @@ if (mergeUrlTags) {
 	portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
 
 	renderResponse.setTitle(portletTitle);
-}
-
-if (mergeUserTags && themeDisplay.isSignedIn()) {
-
-	// Merge my global tags
-
-	PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-	String[] myGlobalEntries = portalPrefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
-
-	if ((myGlobalEntries != null) && (myGlobalEntries.length > 0)) {
-		String[] newEntries = ArrayUtil.append(entries, myGlobalEntries);
-
-		entries = newEntries;
-	}
-
-	// Merge my community tags
-
-	PortletPreferences myCommunityPrefs = PortletPreferencesFactoryUtil.getPortletPreferences(request, PortletKeys.MY_COMMUNITY_TAGS);
-
-	String[] myCommunityEntries = myCommunityPrefs.getValues("entries", new String[0]);
-
-	if ((myCommunityEntries != null) && (myCommunityEntries.length > 0)) {
-		String[] newEntries = ArrayUtil.append(entries, myCommunityEntries);
-
-		entries = newEntries;
-	}
 }
 
 entries = ArrayUtil.distinct(entries, new StringComparator());

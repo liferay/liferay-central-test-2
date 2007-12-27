@@ -205,7 +205,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String[] notEntries = StringUtil.split(
 			ParamUtil.getString(req, "notEntries"));
 		boolean mergeUrlTags = ParamUtil.getBoolean(req, "mergeUrlTags");
-		boolean mergeUserTags  = ParamUtil.getBoolean(req, "mergeUserTags ");
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
 		long classNameId = ParamUtil.getLong(req, "classNameId");
@@ -229,7 +228,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValues("entries", entries);
 		prefs.setValues("not-entries", notEntries);
 		prefs.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
-		prefs.setValue("merge-user-tags", String.valueOf(mergeUserTags));
 		prefs.setValue("and-operator", String.valueOf(andOperator));
 
 		prefs.setValue("class-name-id", String.valueOf(classNameId));
