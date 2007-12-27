@@ -230,6 +230,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
 
+	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND =
+		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
+
 	public static final String
 		LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING = PropsUtil.get(
 			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
@@ -260,6 +263,9 @@ public class PropsValues {
 	public static final boolean LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 			LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED));
+
+	public static final boolean LAYOUT_SHOW_HTTP_STATUS = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LAYOUT_SHOW_HTTP_STATUS));
 
 	public static final boolean LAYOUT_SHOW_PORTLET_ACCESS_DENIED =
 		GetterUtil.getBoolean(
