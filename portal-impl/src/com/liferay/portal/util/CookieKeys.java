@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.CookieNotSupportedException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CookieUtil;
 
@@ -72,6 +73,27 @@ public class CookieKeys {
 		cookieSupportCookie.setMaxAge(CookieKeys.MAX_AGE);
 
 		addCookie(res, cookieSupportCookie);
+	}
+
+	public static String getDomain(HttpServletRequest req) {
+
+		// See LEP-4602 and	LEP-4618
+
+		if (Validator.isNotNull(PropsValues.SESSION_COOKIE_DOMAIN)) {
+			return PropsValues.SESSION_COOKIE_DOMAIN;
+		}
+
+		String host = req.getServerName();
+
+		int pos = host.indexOf(StringPool.PERIOD);
+
+		if (pos != -1) {
+			String domain = host.substring(pos);
+
+			return domain;
+		}
+
+		return host;
 	}
 
 	public static void validateSupportCookie(HttpServletRequest req)

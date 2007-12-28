@@ -204,7 +204,7 @@ public class LoginAction extends Action {
 
 			// Set cookies
 
-			String domain = PropsValues.SESSION_COOKIE_DOMAIN;
+			String domain = CookieKeys.getDomain(req);
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -220,8 +220,8 @@ public class LoginAction extends Action {
 				CookieKeys.ID,
 				UserLocalServiceUtil.encryptUserId(userIdString));
 
-			if (Validator.isNotNull(PropsValues.SESSION_COOKIE_DOMAIN)) {
-				idCookie.setDomain(PropsValues.SESSION_COOKIE_DOMAIN);
+			if (Validator.isNotNull(domain)) {
+				idCookie.setDomain(domain);
 			}
 
 			idCookie.setPath(StringPool.SLASH);
@@ -257,8 +257,8 @@ public class LoginAction extends Action {
 				loginCookie.setDomain(domain);
 			}
 
-			loginCookie.setPath(StringPool.SLASH);
 			loginCookie.setMaxAge(loginMaxAge);
+			loginCookie.setPath(StringPool.SLASH);
 
 			Cookie screenNameCookie = new Cookie(
 				CookieKeys.SCREEN_NAME,
@@ -268,8 +268,8 @@ public class LoginAction extends Action {
 				screenNameCookie.setDomain(domain);
 			}
 
-			screenNameCookie.setPath(StringPool.SLASH);
 			screenNameCookie.setMaxAge(loginMaxAge);
+			screenNameCookie.setPath(StringPool.SLASH);
 
 			CookieKeys.addCookie(res, idCookie);
 			CookieKeys.addCookie(res, passwordCookie);

@@ -24,6 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -58,19 +59,29 @@ public class LogoutAction extends Action {
 			EventsProcessor.process(PropsUtil.getArray(
 				PropsUtil.LOGOUT_EVENTS_PRE), req, res);
 
-			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
+			String domain = CookieKeys.getDomain(req);
 
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
+			Cookie idCookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
 
-			CookieKeys.addCookie(res, cookie);
+			if (Validator.isNotNull(domain)) {
+				idCookie.setDomain(domain);
+			}
 
-			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
+			idCookie.setMaxAge(0);
+			idCookie.setPath(StringPool.SLASH);
 
-			cookie.setMaxAge(0);
-			cookie.setPath(StringPool.SLASH);
+			Cookie passwordCookie = new Cookie(
+				CookieKeys.PASSWORD, StringPool.BLANK);
 
-			CookieKeys.addCookie(res, cookie);
+			if (Validator.isNotNull(domain)) {
+				passwordCookie.setDomain(domain);
+			}
+
+			passwordCookie.setMaxAge(0);
+			passwordCookie.setPath(StringPool.SLASH);
+
+			CookieKeys.addCookie(res, idCookie);
+			CookieKeys.addCookie(res, passwordCookie);
 
 			try {
 				ses.invalidate();
