@@ -48,5 +48,16 @@
 <%@ page import="com.liferay.portlet.workflow.service.permission.WorkflowTaskPermission" %>
 
 <%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+}
+
+String viewType = prefs.getValue("viewType", "administrator");
+String definitionName = prefs.getValue("definitionName", StringPool.BLANK);
+
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

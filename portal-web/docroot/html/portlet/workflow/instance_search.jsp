@@ -38,12 +38,15 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	<td>
 		<liferay-ui:message key="definition-id" />
 	</td>--%>
-	<td>
-		<liferay-ui:message key="definition-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="definition-version" />
-	</td>
+
+	<c:if test='<%= !viewType.equals("user") %>'>
+		<td>
+			<liferay-ui:message key="definition-name" />
+		</td>
+		<td>
+			<liferay-ui:message key="definition-version" />
+		</td>
+	</c:if>
 </tr>
 <tr>
 	<%--<td>
@@ -52,12 +55,15 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	<td>
 		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionIdString()) %>" />
 	</td>--%>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionName()) %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionVersion()) %>" />
-	</td>
+
+	<c:if test='<%= !viewType.equals("user") %>'>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>" />
+		</td>
+	</c:if>
 </tr>
 </table>
 

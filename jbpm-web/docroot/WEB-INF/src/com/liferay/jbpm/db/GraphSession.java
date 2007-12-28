@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -139,7 +140,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	public int countProcessInstancesBySearchTerms(
 		String definitionName, String definitionVersion, String startDateGT,
 		String startDateLT, String endDateGT, String endDateLT,
-		boolean hideEndedTasks, boolean andOperator) {
+		boolean hideEndedTasks, String assignedUserId, boolean andOperator) {
 
 		try {
 			int definitionVersionInt = 0;
@@ -151,21 +152,39 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				definitionVersionInt = GetterUtil.getInteger(definitionVersion);
 			}
 
-			String endDateCheck = "(pi.end IS NULL) ";
+			String assignedUserIdInnerJoin = StringPool.BLANK;
+			String assignedUserIdCheck = StringPool.BLANK;
+
+			if (Validator.isNotNull(assignedUserId)) {
+				assignedUserIdInnerJoin =
+					"INNER JOIN JBPM_TOKEN ON JBPM_TOKEN.PROCESSINSTANCE_ = " +
+						"JBPM_PROCESSINSTANCE.ID_ INNER JOIN " +
+							"JBPM_TASKINSTANCE ON JBPM_TASKINSTANCE.TOKEN_ = " +
+								"JBPM_TOKEN.ID_ ";
+				assignedUserIdCheck = "(JBPM_TASKINSTANCE.ACTORID_ = ?) AND ";
+			}
+
+			String endDateCheck = "(JBPM_PROCESSINSTANCE.END_ IS NULL) ";
 
 			if (!hideEndedTasks) {
 				endDateCheck =
-					"((pi.end >= ? [$AND_OR_NULL_CHECK$]) AND " +
-						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
+					"((JBPM_PROCESSINSTANCE.END_ >= ? [$AND_OR_NULL_CHECK$]) " +
+						"AND (JBPM_PROCESSINSTANCE.END_ <= ? " +
+							"[$AND_OR_NULL_CHECK$])) ";
 			}
 
 			String sql = CustomSQLUtil.get(
 				COUNT_PROCESS_INSTANCES_BY_SEARCH_TERMS);
 
+			sql = StringUtil.replace(
+				sql, "[$ASSIGNED_USER_ID_INNER_JOIN$]",
+				assignedUserIdInnerJoin);
+			sql = StringUtil.replace(
+				sql, "[$ASSIGNED_USER_ID_CHECK$]", assignedUserIdCheck);
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			Query q = _session.createQuery(sql);
+			SQLQuery q = _session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -177,6 +196,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(_getDate(startDateGT, true));
 			qPos.add(_getDate(startDateLT, false));
 			qPos.add(_getDate(startDateLT, false));
+
+			if (assignedUserId != null) {
+				qPos.add(assignedUserId);
+			}
 
 			if (!hideEndedTasks) {
 				qPos.add(_getDate(endDateGT, true));
@@ -318,7 +341,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	public List findProcessInstancesBySearchTerms(
 		String definitionName, String definitionVersion, String startDateGT,
 		String startDateLT, String endDateGT, String endDateLT,
-		boolean hideEndedTasks, boolean andOperator, int begin, int end) {
+		boolean hideEndedTasks, String assignedUserId, boolean andOperator,
+		int begin, int end) {
 
 		List list = new ArrayList();
 
@@ -332,21 +356,41 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				definitionVersionInt = GetterUtil.getInteger(definitionVersion);
 			}
 
-			String endDateCheck = "(pi.end IS NULL) ";
+			String assignedUserIdInnerJoin = StringPool.BLANK;
+			String assignedUserIdCheck = StringPool.BLANK;
+
+			if (Validator.isNotNull(assignedUserId)) {
+				assignedUserIdInnerJoin =
+					"INNER JOIN JBPM_TOKEN ON JBPM_TOKEN.PROCESSINSTANCE_ = " +
+						"JBPM_PROCESSINSTANCE.ID_ INNER JOIN " +
+							"JBPM_TASKINSTANCE ON JBPM_TASKINSTANCE.TOKEN_ = " +
+								"JBPM_TOKEN.ID_ ";
+				assignedUserIdCheck = "(JBPM_TASKINSTANCE.ACTORID_ = ?) AND ";
+			}
+
+			String endDateCheck = "(JBPM_PROCESSINSTANCE.END_ IS NULL) ";
 
 			if (!hideEndedTasks) {
 				endDateCheck =
-					"((pi.end >= ? [$AND_OR_NULL_CHECK$]) AND " +
-						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
+					"((JBPM_PROCESSINSTANCE.END_ >= ? [$AND_OR_NULL_CHECK$]) " +
+						"AND (JBPM_PROCESSINSTANCE.END_ <= ? " +
+							"[$AND_OR_NULL_CHECK$])) ";
 			}
 
 			String sql = CustomSQLUtil.get(
 				FIND_PROCESS_INSTANCES_BY_SEARCH_TERMS);
 
+			sql = StringUtil.replace(
+				sql, "[$ASSIGNED_USER_ID_INNER_JOIN$]",
+				assignedUserIdInnerJoin);
+			sql = StringUtil.replace(
+				sql, "[$ASSIGNED_USER_ID_CHECK$]", assignedUserIdCheck);
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			Query q = _session.createQuery(sql);
+			SQLQuery q = _session.createSQLQuery(sql);
+
+			q.addScalar("instanceId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -359,6 +403,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(_getDate(startDateLT, false));
 			qPos.add(_getDate(startDateLT, false));
 
+			if (Validator.isNotNull(assignedUserId)) {
+				qPos.add(assignedUserId);
+			}
+
 			if (!hideEndedTasks) {
 				qPos.add(_getDate(endDateGT, true));
 				qPos.add(_getDate(endDateGT, true));
@@ -366,13 +414,19 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(_getDate(endDateLT, false));
 			}
 
-			list = QueryUtil.list(q, _dialect, begin, end);
+			Iterator itr = QueryUtil.iterate(q, _dialect, begin, end);
 
-			for (int i = 0; i < list.size(); i++) {
-				ProcessInstance processInstance = (ProcessInstance)list.get(i);
+			while (itr.hasNext()) {
+				Long instanceId = (Long)itr.next();
+
+				ProcessInstance processInstance =
+					_jbpmContext.loadProcessInstance(instanceId.longValue());
 
 				WorkflowUtil.initInstance(processInstance);
+
+				list.add(processInstance);
 			}
+
 		}
 		catch (Exception e) {
 			_log.error(e, e);

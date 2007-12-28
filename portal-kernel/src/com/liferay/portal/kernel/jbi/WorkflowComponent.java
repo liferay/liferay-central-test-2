@@ -65,28 +65,30 @@ public interface WorkflowComponent {
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator, int begin, int end)
+			boolean retrieveUserInstances, boolean andOperator, int begin,
+			int end)
 		throws WorkflowComponentException;
 
 	public int getInstancesCount(
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator)
+			boolean retrieveUserInstances, boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getInstancesCountXml(
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator)
+			boolean retrieveUserInstances, boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getInstancesXml(
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator, int begin, int end)
+			boolean retrieveUserInstances, boolean andOperator, int begin,
+			int end)
 		throws WorkflowComponentException;
 
 	public List getTaskFormElements(long taskId)

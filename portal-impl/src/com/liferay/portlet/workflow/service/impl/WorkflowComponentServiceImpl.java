@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.workflow.jbi.WorkflowURL;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
+import com.liferay.portlet.workflow.model.WorkflowTask;
 import com.liferay.portlet.workflow.service.base.WorkflowComponentServiceBaseImpl;
 
 import java.util.List;
@@ -43,8 +44,7 @@ import java.util.Map;
 public class WorkflowComponentServiceImpl
 	extends WorkflowComponentServiceBaseImpl implements WorkflowComponent {
 
-	public List getCurrentTasks(
-			long instanceId, long tokenId)
+	public List getCurrentTasks(long instanceId, long tokenId)
 		throws WorkflowComponentException {
 
 		try {
@@ -57,8 +57,7 @@ public class WorkflowComponentServiceImpl
 		}
 	}
 
-	public String getCurrentTasksXml(
-			long instanceId, long tokenId)
+	public String getCurrentTasksXml(long instanceId, long tokenId)
 		throws WorkflowComponentException {
 
 		try {
@@ -197,14 +196,15 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator, int begin, int end)
+			boolean retrieveUserInstances, boolean andOperator, int begin,
+			int end)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getInstancesXml(
 				definitionId, instanceId, definitionName, definitionVersion,
 				startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
-				andOperator, begin, end);
+				retrieveUserInstances, andOperator, begin, end);
 
 			return WorkflowXMLUtil.parseList(xml, "instances");
 		}
@@ -217,14 +217,14 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator)
+			boolean retrieveUserInstances, boolean andOperator)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getInstancesCountXml(
 				definitionId, instanceId, definitionName, definitionVersion,
 				startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
-				andOperator);
+				retrieveUserInstances, andOperator);
 
 			return WorkflowXMLUtil.parseInt(xml, "count");
 		}
@@ -237,7 +237,7 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator)
+			boolean retrieveUserInstances, boolean andOperator)
 		throws WorkflowComponentException {
 
 		try {
@@ -253,6 +253,7 @@ public class WorkflowComponentServiceImpl
 			url.setParameter("endDateGT", endDateGT);
 			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
+			url.setParameter("retrieveUserInstances", retrieveUserInstances);
 			url.setParameter("andOperator", andOperator);
 
 			return url.getContent();
@@ -266,7 +267,8 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean andOperator, int begin, int end)
+			boolean retrieveUserInstances, boolean andOperator, int begin,
+			int end)
 		throws WorkflowComponentException {
 
 		try {
@@ -282,9 +284,35 @@ public class WorkflowComponentServiceImpl
 			url.setParameter("endDateGT", endDateGT);
 			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
+			url.setParameter("retrieveUserInstances", retrieveUserInstances);
 			url.setParameter("andOperator", andOperator);
 			url.setParameter("begin", begin);
 			url.setParameter("end", end);
+
+			return url.getContent();
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
+	public WorkflowTask getTask(long taskId) throws WorkflowComponentException {
+		try {
+			String xml = getTaskXml(taskId);
+
+			return WorkflowXMLUtil.parseTask(xml);
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
+	public String getTaskXml(long taskId) throws WorkflowComponentException {
+		try {
+			WorkflowURL url = getWorkflowURL();
+
+			url.setParameter(Constants.CMD, "getTaskXml");
+			url.setParameter("taskId", taskId);
 
 			return url.getContent();
 		}

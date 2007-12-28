@@ -308,6 +308,47 @@ public class WorkflowXMLUtil {
 		return taskFormElements;
 	}
 
+	public static WorkflowTask parseTask(String xml)
+		throws DocumentException, ParseException {
+
+		Document doc = PortalUtil.readDocumentFromXML(xml);
+
+		Element root = doc.getRootElement();
+
+		return parseTask(root.element("task"));
+	}
+
+	public static WorkflowTask parseTask(Element el) throws ParseException {
+		WorkflowTask task = new WorkflowTask();
+
+		long taskId = GetterUtil.getLong(el.elementText("taskId"));
+
+		if (taskId == 0) {
+			return null;
+		}
+
+		String name = el.elementText("name");
+		long assignedUserId = GetterUtil.getLong(
+			el.elementText("assignedUserId"));
+		Date createDate = parseDateTime(el.elementText("createDate"));
+		Date startDate = parseDateTime(el.elementText("startDate"));
+		Date endDate = parseDateTime(el.elementText("endDate"));
+
+		List instances = parseInstances(el);
+
+		WorkflowInstance instance = (WorkflowInstance)instances.get(0);
+
+		task.setTaskId(taskId);
+		task.setName(name);
+		task.setInstance(instance);
+		task.setAssignedUserId(assignedUserId);
+		task.setCreateDate(createDate);
+		task.setStartDate(startDate);
+		task.setEndDate(endDate);
+
+		return task;
+	}
+
 	public static List parseTasks(Element root) throws ParseException {
 		List tasks = new ArrayList();
 
@@ -316,34 +357,11 @@ public class WorkflowXMLUtil {
 		while (itr.hasNext()) {
 			Element el = (Element)itr.next();
 
-			long taskId = GetterUtil.getLong(el.elementText("taskId"));
+			WorkflowTask task = parseTask(el);
 
-			if (taskId == 0) {
-				break;
+			if (task != null) {
+				tasks.add(task);
 			}
-
-			String name = el.elementText("name");
-			long assignedUserId = GetterUtil.getLong(
-				el.elementText("assignedUserId"));
-			Date createDate = parseDateTime(el.elementText("createDate"));
-			Date startDate = parseDateTime(el.elementText("startDate"));
-			Date endDate = parseDateTime(el.elementText("endDate"));
-
-			List instances = parseInstances(el);
-
-			WorkflowInstance instance = (WorkflowInstance)instances.get(0);
-
-			WorkflowTask task = new WorkflowTask();
-
-			task.setTaskId(taskId);
-			task.setName(name);
-			task.setInstance(instance);
-			task.setAssignedUserId(assignedUserId);
-			task.setCreateDate(createDate);
-			task.setStartDate(startDate);
-			task.setEndDate(endDate);
-
-			tasks.add(task);
 		}
 
 		return tasks;

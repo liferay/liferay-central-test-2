@@ -411,6 +411,267 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
+		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
+		try {
+			Object paramObj0 = new LongWrapper(definitionId);
+
+			Object paramObj1 = new LongWrapper(instanceId);
+
+			Object paramObj2 = definitionName;
+
+			if (definitionName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = definitionVersion;
+
+			if (definitionVersion == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = startDateGT;
+
+			if (startDateGT == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = startDateLT;
+
+			if (startDateLT == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = endDateGT;
+
+			if (endDateGT == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = endDateLT;
+
+			if (endDateLT == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
+
+			Object paramObj9 = new BooleanWrapper(retrieveUserInstances);
+
+			Object paramObj10 = new BooleanWrapper(andOperator);
+
+			Object paramObj11 = new IntegerWrapper(begin);
+
+			Object paramObj12 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getInstances",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getInstancesCount(HttpPrincipal httpPrincipal,
+		long definitionId, long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks,
+		boolean retrieveUserInstances, boolean andOperator)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
+		try {
+			Object paramObj0 = new LongWrapper(definitionId);
+
+			Object paramObj1 = new LongWrapper(instanceId);
+
+			Object paramObj2 = definitionName;
+
+			if (definitionName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = definitionVersion;
+
+			if (definitionVersion == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = startDateGT;
+
+			if (startDateGT == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = startDateLT;
+
+			if (startDateLT == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = endDateGT;
+
+			if (endDateGT == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = endDateLT;
+
+			if (endDateLT == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
+
+			Object paramObj9 = new BooleanWrapper(retrieveUserInstances);
+
+			Object paramObj10 = new BooleanWrapper(andOperator);
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getInstancesCount",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getInstancesCountXml(
+		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
+		java.lang.String definitionName, java.lang.String definitionVersion,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
+		boolean hideEndedTasks, boolean retrieveUserInstances,
+		boolean andOperator)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
+		try {
+			Object paramObj0 = new LongWrapper(definitionId);
+
+			Object paramObj1 = new LongWrapper(instanceId);
+
+			Object paramObj2 = definitionName;
+
+			if (definitionName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = definitionVersion;
+
+			if (definitionVersion == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = startDateGT;
+
+			if (startDateGT == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = startDateLT;
+
+			if (startDateLT == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = endDateGT;
+
+			if (endDateGT == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = endDateLT;
+
+			if (endDateLT == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
+
+			Object paramObj9 = new BooleanWrapper(retrieveUserInstances);
+
+			Object paramObj10 = new BooleanWrapper(andOperator);
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getInstancesCountXml",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getInstancesXml(
+		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
+		java.lang.String definitionName, java.lang.String definitionVersion,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
+		boolean hideEndedTasks, boolean retrieveUserInstances,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
@@ -457,181 +718,20 @@ public class WorkflowComponentServiceHttp {
 
 			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
 
-			Object paramObj9 = new BooleanWrapper(andOperator);
+			Object paramObj9 = new BooleanWrapper(retrieveUserInstances);
 
-			Object paramObj10 = new IntegerWrapper(begin);
+			Object paramObj10 = new BooleanWrapper(andOperator);
 
-			Object paramObj11 = new IntegerWrapper(end);
+			Object paramObj11 = new IntegerWrapper(begin);
+
+			Object paramObj12 = new IntegerWrapper(end);
 
 			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
-					"getInstances",
+					"getInstancesXml",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
-					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static int getInstancesCount(HttpPrincipal httpPrincipal,
-		long definitionId, long instanceId, java.lang.String definitionName,
-		java.lang.String definitionVersion, java.lang.String startDateGT,
-		java.lang.String startDateLT, java.lang.String endDateGT,
-		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.kernel.jbi.WorkflowComponentException {
-		try {
-			Object paramObj0 = new LongWrapper(definitionId);
-
-			Object paramObj1 = new LongWrapper(instanceId);
-
-			Object paramObj2 = definitionName;
-
-			if (definitionName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = definitionVersion;
-
-			if (definitionVersion == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = startDateGT;
-
-			if (startDateGT == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = startDateLT;
-
-			if (startDateLT == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = endDateGT;
-
-			if (endDateGT == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = endDateLT;
-
-			if (endDateLT == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
-
-			Object paramObj9 = new BooleanWrapper(andOperator);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
-					"getInstancesCount",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
-					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.lang.String getInstancesCountXml(
-		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
-		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String startDateGT, java.lang.String startDateLT,
-		java.lang.String endDateGT, java.lang.String endDateLT,
-		boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.kernel.jbi.WorkflowComponentException {
-		try {
-			Object paramObj0 = new LongWrapper(definitionId);
-
-			Object paramObj1 = new LongWrapper(instanceId);
-
-			Object paramObj2 = definitionName;
-
-			if (definitionName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = definitionVersion;
-
-			if (definitionVersion == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = startDateGT;
-
-			if (startDateGT == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = startDateLT;
-
-			if (startDateLT == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = endDateGT;
-
-			if (endDateGT == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = endDateLT;
-
-			if (endDateLT == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
-
-			Object paramObj9 = new BooleanWrapper(andOperator);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
-					"getInstancesCountXml",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;
@@ -656,70 +756,47 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
-	public static java.lang.String getInstancesXml(
-		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
-		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String startDateGT, java.lang.String startDateLT,
-		java.lang.String endDateGT, java.lang.String endDateLT,
-		boolean hideEndedTasks, boolean andOperator, int begin, int end)
+	public static com.liferay.portlet.workflow.model.WorkflowTask getTask(
+		HttpPrincipal httpPrincipal, long taskId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
-			Object paramObj0 = new LongWrapper(definitionId);
-
-			Object paramObj1 = new LongWrapper(instanceId);
-
-			Object paramObj2 = definitionName;
-
-			if (definitionName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = definitionVersion;
-
-			if (definitionVersion == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = startDateGT;
-
-			if (startDateGT == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = startDateLT;
-
-			if (startDateLT == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = endDateGT;
-
-			if (endDateGT == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = endDateLT;
-
-			if (endDateLT == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(hideEndedTasks);
-
-			Object paramObj9 = new BooleanWrapper(andOperator);
-
-			Object paramObj10 = new IntegerWrapper(begin);
-
-			Object paramObj11 = new IntegerWrapper(end);
+			Object paramObj0 = new LongWrapper(taskId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
-					"getInstancesXml",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
-					});
+					"getTask", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.workflow.model.WorkflowTask)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getTaskXml(HttpPrincipal httpPrincipal,
+		long taskId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.kernel.jbi.WorkflowComponentException {
+		try {
+			Object paramObj0 = new LongWrapper(taskId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getTaskXml", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 

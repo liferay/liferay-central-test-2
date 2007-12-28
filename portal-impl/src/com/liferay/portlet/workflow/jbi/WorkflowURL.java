@@ -24,7 +24,7 @@ package com.liferay.portlet.workflow.jbi;
 
 import com.liferay.portal.jbi.JBIRequestURL;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="WorkflowURL.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +43,7 @@ public class WorkflowURL extends JBIRequestURL {
 	}
 
 	protected String getURL() {
-		return PropsUtil.get(PropsUtil.JBI_WORKFLOW_URL);
+		return PropsValues.JBI_WORKFLOW_URL;
 	}
 
 }

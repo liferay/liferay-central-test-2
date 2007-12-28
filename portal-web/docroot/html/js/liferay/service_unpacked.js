@@ -2494,6 +2494,20 @@ Liferay.Service.Workflow.WorkflowComponent = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getTask: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTask";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTaskXml: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTaskXml";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getTaskFormElements: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getTaskFormElements";

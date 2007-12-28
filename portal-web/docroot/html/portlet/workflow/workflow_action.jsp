@@ -46,7 +46,7 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 <c:if test="<%= !instance.isEnded() %>">
 	<c:choose>
 		<c:when test="<%= tasks.size() > 0 %>">
-			<c:if test='<%= tabs1.equals("instances") %>'>
+			<c:if test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 					</td>
 				</tr>
 			</c:if>
@@ -67,11 +67,18 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 				}
 			%>
 
-				<c:if test='<%= tabs1.equals("instances") %>'>
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageTaskURL">
+					<portlet:param name="struts_action" value="/workflow/edit_task" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="instanceId" value="<%= instanceId %>" />
+					<portlet:param name="taskId" value="<%= taskId %>" />
+				</portlet:renderURL>
+
+				<c:if test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 					<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-						<td colspan="5"></td>
+						<td colspan="<%= viewType.equals("user") ? "3" : "5" %>"></td>
 						<td>
-							<%= LanguageUtil.get(pageContext, displayName) %>
+							<b><%= LanguageUtil.get(pageContext, "task") %> <%= i + 1 %>:</b> <a href="<%= manageTaskURL %>"><%= LanguageUtil.get(pageContext, displayName) %></a>
 						</td>
 						<td align="right" valign="middle">
 				</c:if>
@@ -89,13 +96,6 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 
 				<c:if test="<%= task.getEndDate() == null %>">
 					<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.MANAGE) %>">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageTaskURL">
-							<portlet:param name="struts_action" value="/workflow/edit_task" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="instanceId" value="<%= instanceId %>" />
-							<portlet:param name="taskId" value="<%= taskId %>" />
-						</portlet:renderURL>
-
 						<liferay-ui:icon image="manage_task" message="manage" url="<%= manageTaskURL %>" />
 					</c:if>
 				</c:if>
@@ -104,17 +104,17 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 			}
 			%>
 
-			<c:if test='<%= tabs1.equals("instances") %>'>
+			<c:if test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 					</td>
 				</tr>
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<c:if test='<%= tabs1.equals("instances") %>'>
+			<c:if test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 					</td>
 				</tr>
 				<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-					<td colspan="5"></td>
+					<td colspan="<%= viewType.equals("user") ? "3" : "5" %>"></td>
 					<td>
 						<%= LanguageUtil.get(pageContext, token.getName()) %>
 					</td>
@@ -145,7 +145,7 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test='<%= tabs1.equals("instances") %>'>
+			<c:if test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 					</td>
 				</tr>
 			</c:if>

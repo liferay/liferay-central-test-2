@@ -35,9 +35,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<liferay-ui:message key="task-name" />
 	</td>
-	<td>
-		<liferay-ui:message key="definition-name" />
-	</td>
+
+	<c:if test='<%= !viewType.equals("user") %>'>
+		<td>
+			<liferay-ui:message key="definition-name" />
+		</td>
+	</c:if>
+
 	<td>
 		<liferay-ui:message key="assigned-to" />
 	</td>
@@ -46,9 +50,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	<td>
 		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getTaskName()) %>" />
 	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionName()) %>" />
-	</td>
+
+	<c:if test='<%= !viewType.equals("user") %>'>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		</td>
+	</c:if>
+
 	<td>
 		<select name="<portlet:namespace /><%= displayTerms.ASSIGNED_TO %>">
 			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><liferay-ui:message key="all" /></option>

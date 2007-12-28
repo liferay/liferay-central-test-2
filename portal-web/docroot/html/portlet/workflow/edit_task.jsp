@@ -253,13 +253,29 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 <br />
 
 <%
-for (int i = 0; i < taskTransitions.size(); i++) {
-	String taskTransition = (String)taskTransitions.get(i);
+WorkflowTask task = null;
+
+List instances = WorkflowComponentServiceUtil.getInstances(0, instanceId, null, null, null, null, null, null, false, true, true, 0, 1);
+
+if (instances.size() > 0) {
+	WorkflowInstance instance = (WorkflowInstance)instances.get(instances.size() - 1);
+
+	List tasks = instance.getToken().getTasks();
+
+	if (tasks.size() > 0) {
+		task = (WorkflowTask)instance.getToken().getTasks().get(0);
+	}
+}
+
+if ((task != null) && (task.getTaskId() == taskId)) {
+	for (int i = 0; i < taskTransitions.size(); i++) {
+		String taskTransition = (String)taskTransitions.get(i);
 %>
 
 	<input type="button" name="<%= LanguageUtil.get(pageContext, taskTransition) %>" value="<%= LanguageUtil.get(pageContext, taskTransition) %>" onClick="<portlet:namespace />saveTask('<%= taskTransition %>');" />
 
 <%
+	}
 }
 %>
 

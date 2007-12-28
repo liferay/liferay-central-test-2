@@ -226,6 +226,9 @@ public class PropsValues {
 	public static final boolean JAVASCRIPT_LOG_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED));
 
+	public static final String JBI_WORKFLOW_URL =
+		PropsUtil.get(PropsUtil.JBI_WORKFLOW_URL);
+
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));
 

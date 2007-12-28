@@ -906,6 +906,7 @@
 		<portlet-name>93</portlet-name>
 		<icon>/html/portlet/workflow/icon.png</icon>
 		<struts-path>workflow</struts-path>
+		<configuration-action-class>com.liferay.portlet.workflow.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

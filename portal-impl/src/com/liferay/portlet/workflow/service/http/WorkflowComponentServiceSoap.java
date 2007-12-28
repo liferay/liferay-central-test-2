@@ -218,12 +218,13 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) throws RemoteException {
+		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getInstances(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					andOperator, begin, end);
+					retrieveUserInstances, andOperator, begin, end);
 
 			return returnValue;
 		}
@@ -238,12 +239,13 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
-		boolean hideEndedTasks, boolean andOperator) throws RemoteException {
+		boolean hideEndedTasks, boolean retrieveUserInstances,
+		boolean andOperator) throws RemoteException {
 		try {
 			int returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					andOperator);
+					retrieveUserInstances, andOperator);
 
 			return returnValue;
 		}
@@ -258,13 +260,14 @@ public class WorkflowComponentServiceSoap {
 		long instanceId, java.lang.String definitionName,
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
-		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
+		java.lang.String endDateLT, boolean hideEndedTasks,
+		boolean retrieveUserInstances, boolean andOperator)
 		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesCountXml(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					andOperator);
+					retrieveUserInstances, andOperator);
 
 			return returnValue;
 		}
@@ -280,12 +283,41 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) throws RemoteException {
+		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesXml(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					andOperator, begin, end);
+					retrieveUserInstances, andOperator, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.workflow.model.WorkflowTask getTask(
+		long taskId) throws RemoteException {
+		try {
+			com.liferay.portlet.workflow.model.WorkflowTask returnValue = WorkflowComponentServiceUtil.getTask(taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getTaskXml(long taskId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getTaskXml(taskId);
 
 			return returnValue;
 		}

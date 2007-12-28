@@ -25,7 +25,16 @@
 <%@ include file="/html/portlet/workflow/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "definitions");
+String tabs1 = ParamUtil.getString(request, "tabs1");
+
+if (Validator.isNull(tabs1)) {
+	if (viewType.equals("user")) {
+		tabs1 = "my-tasks";
+	}
+	else {
+		tabs1 = "definitions";
+	}
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -37,8 +46,17 @@ portletURL.setParameter("tabs1", tabs1);
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 
+<%
+String tabs1Names = "definitions,instances,tasks";
+
+if (viewType.equals("user")) {
+	tabs1Names = "my-tasks,my-workflows";
+}
+%>
+
 <liferay-ui:tabs
-	names="definitions,instances,tasks"
+	names="<%= tabs1Names %>"
+	param="tabs1"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -63,11 +81,15 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			DefinitionSearchTerms searchTerms = (DefinitionSearchTerms)searchContainer.getSearchTerms();
 
-			int total = WorkflowComponentServiceUtil.getDefinitionsCount(searchTerms.getDefinitionId(), searchTerms.getName());
+			if (Validator.isNull(definitionName)) {
+				definitionName = searchTerms.getName();
+			}
+
+			int total = WorkflowComponentServiceUtil.getDefinitionsCount(searchTerms.getDefinitionId(), definitionName);
 
 			searchContainer.setTotal(total);
 
-			List results = WorkflowComponentServiceUtil.getDefinitions(searchTerms.getDefinitionId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = WorkflowComponentServiceUtil.getDefinitions(searchTerms.getDefinitionId(), definitionName, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -119,14 +141,67 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("instances") %>'>
+	<c:when test='<%= tabs1.equals("instances") || tabs1.equals("my-workflows") %>'>
 
 		<%
+		boolean retrieveUserInstances = false;
+
 		InstanceSearch searchContainer = new InstanceSearch(renderRequest, portletURL);
 
-		List headerNames = searchContainer.getHeaderNames();
+		List headerNames = new ArrayList();
+
+		if (viewType.equals("user")) {
+			headerNames.add("instance-id");
+			headerNames.add("start-date");
+			headerNames.add("end-date");
+			headerNames.add("state");
+
+			retrieveUserInstances = true;
+		}
+		else {
+			headerNames = searchContainer.getHeaderNames();
+		}
 
 		headerNames.add(StringPool.BLANK);
+
+		searchContainer.setHeaderNames(headerNames);
+
+		if (viewType.equals("user") && Validator.isNotNull(definitionName)) {
+			List definitions = WorkflowComponentServiceUtil.getDefinitions(0, definitionName, 0, 1);
+
+			if (definitions.size() > 0) {
+				WorkflowDefinition definition = (WorkflowDefinition)definitions.get(0);
+
+				if (WorkflowDefinitionPermission.contains(permissionChecker, definition, ActionKeys.ADD_INSTANCE)) {
+					PortletURL addInstanceRedirectURL = renderResponse.createRenderURL();
+
+					addInstanceRedirectURL.setWindowState(WindowState.MAXIMIZED);
+
+					addInstanceRedirectURL.setParameter("struts_action", "/workflow/view");
+					addInstanceRedirectURL.setParameter("tabs1", "my-workflows");
+
+					PortletURL addInstanceURL = renderResponse.createActionURL();
+
+					addInstanceURL.setWindowState(WindowState.MAXIMIZED);
+
+					addInstanceURL.setParameter("struts_action", "/workflow/edit_instance");
+					addInstanceURL.setParameter(Constants.CMD, Constants.ADD);
+					addInstanceURL.setParameter("redirect", addInstanceRedirectURL.toString());
+					addInstanceURL.setParameter("definitionId", String.valueOf(definition.getDefinitionId()));
+					%>
+
+					<table class="liferay-table">
+					<tr>
+						<td>
+							<input type="button" onclick="self.location = '<%= addInstanceURL %>';" value="<liferay-ui:message key="start-a-new-workflow" />" />
+						</td>
+					</tr>
+					</table>
+
+					<%
+				}
+			}
+		}
 		%>
 
 		<liferay-ui:search-form
@@ -139,11 +214,15 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			InstanceSearchTerms searchTerms = (InstanceSearchTerms)searchContainer.getSearchTerms();
 
-			int total = WorkflowComponentServiceUtil.getInstancesCount(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
+			if (Validator.isNull(definitionName)) {
+				definitionName = searchTerms.getDefinitionName();
+			}
+
+			int total = WorkflowComponentServiceUtil.getInstancesCount(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), definitionName, searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), retrieveUserInstances, searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = WorkflowComponentServiceUtil.getInstances(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = WorkflowComponentServiceUtil.getInstances(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), definitionName, searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), retrieveUserInstances, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -165,25 +244,32 @@ portletURL.setParameter("tabs1", tabs1);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
+				if (viewType.equals("user")) {
+					rowURL = null;
+				}
+				else {
+					rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/workflow/view");
-				rowURL.setParameter("tabs1", "definitions");
-				rowURL.setParameter("definitionId", String.valueOf(definition.getDefinitionId()));
+					rowURL.setParameter("struts_action", "/workflow/view");
+					rowURL.setParameter("tabs1", "definitions");
+					rowURL.setParameter("definitionId", String.valueOf(definition.getDefinitionId()));
 
-				row.setParameter("rowHREF", rowURL.toString());
+					row.setParameter("rowHREF", rowURL.toString());
+				}
 
 				// Instance id
 
 				row.addText(instanceId, rowURL);
 
-				// Definition name
+				if (!viewType.equals("user")) {
+					// Definition name
 
-				row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
+					row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
 
-				// Definition version
+					// Definition version
 
-				row.addText(String.valueOf(definition.getVersion()), rowURL);
+					row.addText(String.valueOf(definition.getVersion()), rowURL);
+				}
 
 				// Start date
 
@@ -215,70 +301,99 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("tasks") %>'>
+	<c:when test='<%= tabs1.equals("tasks") || tabs1.equals("my-tasks") %>'>
 
 		<%
 		TaskSearch searchContainer = new TaskSearch(renderRequest, portletURL);
 
-		List headerNames = searchContainer.getHeaderNames();
+		List headerNames = new ArrayList();
+
+		if (viewType.equals("user")) {
+			headerNames.add("task-id");
+			headerNames.add("task-name");
+			headerNames.add("assigned-to");
+			headerNames.add("create-date");
+			headerNames.add("start-date");
+			headerNames.add("end-date");
+		}
+		else {
+			headerNames = searchContainer.getHeaderNames();
+		}
 
 		headerNames.add(StringPool.BLANK);
+
+		searchContainer.setHeaderNames(headerNames);
 		%>
 
-		<liferay-ui:search-form
-			page="/html/portlet/workflow/task_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<liferay-ui:search-form
+				page="/html/portlet/workflow/task_search.jsp"
+				searchContainer="<%= searchContainer %>"
+			/>
+		</c:if>
+
+		<%
+		TaskSearchTerms searchTerms = (TaskSearchTerms)searchContainer.getSearchTerms();
+
+		if (Validator.isNull(definitionName)) {
+			definitionName = searchTerms.getDefinitionName();
+		}
+
+		boolean hideEndedTasks = true;
+
+		if (windowState.equals(WindowState.MAXIMIZED)) {
+			hideEndedTasks = searchTerms.isHideEndedTasks();
+		}
+
+		int total = WorkflowComponentServiceUtil.getUserTasksCount(searchTerms.getInstanceId(), searchTerms.getTaskName(), definitionName, searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), hideEndedTasks, searchTerms.isAndOperator());
+
+		searchContainer.setTotal(total);
+
+		List results = WorkflowComponentServiceUtil.getUserTasks(searchTerms.getInstanceId(), searchTerms.getTaskName(), definitionName, searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), hideEndedTasks, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+		%>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
-			<%
-			TaskSearchTerms searchTerms = (TaskSearchTerms)searchContainer.getSearchTerms();
-
-			int total = WorkflowComponentServiceUtil.getUserTasksCount(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
-
-			searchContainer.setTotal(total);
-
-			List results = WorkflowComponentServiceUtil.getUserTasks(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-			%>
-
 			<div class="separator"><!-- --></div>
+		</c:if>
 
-			<%
-			List resultRows = searchContainer.getResultRows();
+		<%
+		List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				WorkflowTask task = (WorkflowTask)results.get(i);
+		for (int i = 0; i < results.size(); i++) {
+			WorkflowTask task = (WorkflowTask)results.get(i);
 
-				String taskId = String.valueOf(task.getTaskId());
+			String taskId = String.valueOf(task.getTaskId());
 
-				WorkflowInstance instance = task.getInstance();
+			WorkflowInstance instance = task.getInstance();
 
-				String instanceId = String.valueOf(instance.getInstanceId());
+			String instanceId = String.valueOf(instance.getInstanceId());
 
-				WorkflowDefinition definition = instance.getDefinition();
+			WorkflowDefinition definition = instance.getDefinition();
 
-				ResultRow row = new ResultRow(task, taskId, i);
+			ResultRow row = new ResultRow(task, taskId, i);
 
-				PortletURL rowURL = renderResponse.createRenderURL();
+			PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
+			rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/workflow/view");
-				rowURL.setParameter("tabs1", "instances");
-				rowURL.setParameter("instanceId", instanceId);
+			rowURL.setParameter("struts_action", "/workflow/edit_task");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("instanceId", instanceId);
+			rowURL.setParameter("taskId", taskId);
 
-				row.setParameter("rowHREF", rowURL.toString());
+			row.setParameter("rowHREF", rowURL.toString());
 
-				// Task id
+			// Task id
 
-				row.addText(taskId, rowURL);
+			row.addText(taskId, rowURL);
 
-				// Task name
+			// Task name
 
-				row.addText(LanguageUtil.get(pageContext, task.getName()), rowURL);
+			row.addText(LanguageUtil.get(pageContext, task.getName()), rowURL);
+
+			if (!viewType.equals("user")) {
 
 				// Instance id
 
@@ -287,45 +402,50 @@ portletURL.setParameter("tabs1", tabs1);
 				// Definition name
 
 				row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
-
-				// Assigned to
-
-				row.addText(PortalUtil.getUserName(task.getAssignedUserId(), String.valueOf(task.getAssignedUserId()), request), rowURL);
-
-				// Create date
-
-				row.addText(dateFormatDateTime.format(task.getCreateDate()), rowURL);
-
-				// Start date
-
-				if (task.getStartDate() == null) {
-					row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-				}
-				else {
-					row.addText(dateFormatDateTime.format(task.getStartDate()), rowURL);
-				}
-
-				// End date
-
-				if (task.getEndDate() == null) {
-					row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-				}
-				else {
-					row.addText(dateFormatDateTime.format(task.getEndDate()), rowURL);
-				}
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/workflow/task_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
 			}
-			%>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</c:if>
+			// Assigned to
+
+			if (task.getAssignedUserId() == 0) {
+				row.addText(LanguageUtil.get(pageContext, "pool"), rowURL);
+			}
+			else {
+				row.addText(PortalUtil.getUserName(task.getAssignedUserId(), String.valueOf(task.getAssignedUserId()), request), rowURL);
+			}
+
+			// Create date
+
+			row.addText(dateFormatDateTime.format(task.getCreateDate()), rowURL);
+
+			// Start date
+
+			if (task.getStartDate() == null) {
+				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+			}
+			else {
+				row.addText(dateFormatDateTime.format(task.getStartDate()), rowURL);
+			}
+
+			// End date
+
+			if (task.getEndDate() == null) {
+				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+			}
+			else {
+				row.addText(dateFormatDateTime.format(task.getEndDate()), rowURL);
+			}
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/workflow/task_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 
