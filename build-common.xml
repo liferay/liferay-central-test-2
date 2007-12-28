@@ -163,7 +163,7 @@ ECJ was automatically installed. Please rerun your task.
 		<echo message="${current.time}" />
 	</target>
 
-	<target name="test" depends="compile">
+	<target name="test">
 		<mkdir dir="test-classes" />
 		<mkdir dir="test-results" />
 
