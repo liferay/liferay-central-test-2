@@ -317,7 +317,7 @@ try {
 }
 catch (PluginPackageException ppe) {
 	if (_log.isWarnEnabled()) {
-		_log.warn("Error browsing the repository", ppe);
+		_log.warn(ppe.getMessage());
 	}
 %>
 
