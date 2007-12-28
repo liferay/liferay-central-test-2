@@ -992,13 +992,12 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	// Protected methods
-
 	protected List getColumns() {
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
 
-		List columns = layoutTemplate.getColumns();
+		List columns = new ArrayList();
 
+		columns.addAll(layoutTemplate.getColumns());
 		columns.addAll(getNestedColumns());
 
 		return columns;
