@@ -322,6 +322,10 @@ public class PropsValues {
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsUtil.LUCENE_STORE_TYPE);
 
+	public static final int MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
+
 	public static final boolean
 		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.

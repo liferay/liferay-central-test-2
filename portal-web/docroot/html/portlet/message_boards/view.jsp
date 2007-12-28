@@ -674,20 +674,19 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	<c:when test='<%= tabs1.equals("banned_users") %>'>
 
 		<%
-		int expireInterval = GetterUtil.getInteger(PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
-
 		List headerNames = new ArrayList();
 
-		headerNames.add("name");
+		headerNames.add("banned-user");
+		headerNames.add("banned-by");
 		headerNames.add("ban-date");
 
-		if (expireInterval > 0) {
+		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL > 0) {
 			headerNames.add("unban-date");
 		}
 
 		headerNames.add(StringPool.BLANK);
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-banned-users");
 
 		int total = MBBanLocalServiceUtil.getBansCount(portletGroupId.longValue());
 
@@ -704,9 +703,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			ResultRow row = new ResultRow(ban, ban.getBanId(), i);
 
-			// Name
+			// Banned User
 
 			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
+
+			// Banned By
+
+			row.addText(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK));
 
 			// Ban Date
 
@@ -714,8 +717,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Unban Date
 
-			if (expireInterval > 0) {
-				row.addText(dateFormatDateTime.format(MBUtil.getUnbanDate(ban, expireInterval)));
+			if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL > 0) {
+				row.addText(dateFormatDateTime.format(MBUtil.getUnbanDate(ban, PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL)));
 			}
 
 			// Action
