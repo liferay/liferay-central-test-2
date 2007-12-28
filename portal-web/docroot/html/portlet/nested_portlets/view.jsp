@@ -24,16 +24,9 @@
 
 <%@ include file="/html/portlet/nested_portlets/init.jsp" %>
 
-<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
-		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
-	</div>
-</c:if>
-
 <%
-String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
-
 try {
+	String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
 %>
 
 	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
@@ -43,9 +36,18 @@ try {
 catch (Exception e) {
 	_log.error("Cannot render Nested Portlets portlet", e);
 }
+finally {
+	RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
+
+	renderRequestImpl.defineObjects(portletConfig, renderResponse);
+}
 %>
 
 <c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
+		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
+	</div>
+
 	<script type="text/javascript">
 		jQuery(
 			function() {
