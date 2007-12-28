@@ -40,34 +40,35 @@
 			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
 			<input name="refresh" type="hidden" value="true" />
 
-					<div class="portal-add-content-search">
-						<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
+			<div class="portal-add-content-search">
+				<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
 
-						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
-					</div>
+				<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
+			</div>
 
-					<%
-					PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+			<%
+			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
-					List categories = ListUtil.fromCollection(portletCategory.getCategories());
+			List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-					Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
+			Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
 
-					Iterator itr = categories.iterator();
+			Iterator itr = categories.iterator();
 
-					while (itr.hasNext()) {
-						request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
-					%>
+			while (itr.hasNext()) {
+				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
+			%>
 
-						<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
+				<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
 
-					<%
-					}
-					%>
+			<%
+			}
+			%>
 
-					<p class="portlet-msg-info">
-						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
-					</p>
+			<p class="portlet-msg-info">
+				<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+			</p>
+
 			</form>
 		</div>
 	</div>
