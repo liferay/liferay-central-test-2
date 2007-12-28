@@ -18,6 +18,8 @@
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/WEB-INF/classes" />
 		<delete dir="docroot/WEB-INF/lib" />
+		<delete dir="test-classes" />
+		<delete dir="test-results" />
 
 		<delete>
 			<fileset dir="docroot" includes="**/Thumbs.db" />

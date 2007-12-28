@@ -48,6 +48,9 @@
 	<classpathentry kind="lib" path="lib/development/resin-util.jar"/>
 	<classpathentry kind="lib" path="lib/development/rhino.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
+	<classpathentry kind="lib" path="lib/development/script-10.jar"/>
+	<classpathentry kind="lib" path="lib/development/selenium-java-client-driver.jar"/>
+	<classpathentry kind="lib" path="lib/development/selenium-server.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>

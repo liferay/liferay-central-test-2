@@ -33,24 +33,6 @@
 		/>
 	</target>
 
-	<target name="test" depends="compile">
-		<mkdir dir="test-classes" />
-		<mkdir dir="test-results" />
-
-		<javac destdir="test-classes" srcdir="test">
-			<classpath refid="project.classpath" />
-		</javac>
-
-		<junit haltonfailure="no" printsummary="on">
-			<classpath refid="project.classpath" />
-			<formatter type="brief" usefile="false" />
-			<formatter type="xml" />
-			<batchtest todir="test-results">
-				<fileset dir="test-classes" includes="**/*Test.class" />
-			</batchtest>
-		</junit>
-	</target>
-
 	<target name="jar" depends="compile">
 		<jar
 			basedir="classes"
