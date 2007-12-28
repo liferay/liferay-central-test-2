@@ -41,14 +41,12 @@ public class PortalRequest extends Request {
 
 		String host = getServerName();
 
-		if (host != null) {
-			int pos = host.indexOf(StringPool.PERIOD);
+		int pos = host.indexOf(StringPool.PERIOD);
 
-			if (pos != -1) {
-				String domain = host.substring(pos);
+		if (pos != -1) {
+			String domain = host.substring(pos);
 
-				cookie.setDomain(domain);
-			}
+			cookie.setDomain(domain);
 		}
 	}
 
