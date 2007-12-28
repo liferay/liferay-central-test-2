@@ -47,7 +47,7 @@ if (Validator.isNotNull(portletResource)) {
 
 int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
 String pageDisplayStyle = prefs.getValue("page-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-int pageAbstractLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
+int pageAbstractLength = PropsValues.BLOGS_PAGE_ABSTRACT_LENGTH;
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", StringPool.BLANK), true);
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", StringPool.BLANK), true);
 

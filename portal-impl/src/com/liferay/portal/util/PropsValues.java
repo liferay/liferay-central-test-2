@@ -109,6 +109,9 @@ public class PropsValues {
 	public static final String[] AUTO_LOGIN_HOOKS =
 		PropsUtil.getArray(PropsUtil.AUTO_LOGIN_HOOKS);
 
+	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
+
 	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
 
