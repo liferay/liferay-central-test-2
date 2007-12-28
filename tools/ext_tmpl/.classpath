@@ -33,6 +33,7 @@
 	<classpathentry kind="lib" path="lib/development/selenium-server.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/development/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>
 	<classpathentry kind="lib" path="lib/development/yuicompressor.jar"/>
 	<classpathentry kind="lib" path="lib/development/zql.jar"/>
