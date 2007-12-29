@@ -100,6 +100,23 @@ String currentURL = PortalUtil.getCurrentURL(request);
 					}
 				}
 			}
+
+			Map renderParameters = RenderParametersPool.get(request, plid.longValue(), ppid);
+
+			Iterator itr = renderParameters.keySet().iterator();
+
+			while (itr.hasNext()) {
+				String name = (String)itr.next();
+
+				String[] values = (String[])renderParameters.get(name);
+
+				for (int i = 0; i < values.length; i++) {
+					url.append(StringPool.AMPERSAND);
+					url.append(name);
+					url.append(StringPool.EQUAL);
+					url.append(HttpUtil.encodeURL(values[i]));
+				}
+			}
 		}
 		%>
 
