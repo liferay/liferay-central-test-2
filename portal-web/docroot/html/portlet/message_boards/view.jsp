@@ -377,9 +377,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
-			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() + rssURLParams %>' target="_blank" />
-
-			<liferay-ui:message key="recent-posts-rss" />
+			<liferay-ui:icon image="rss" message="recent-posts-rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() + rssURLParams %>' target="_blank" label="<%= true %>" />
 
 			<br /><br />
 		</c:if>
@@ -399,7 +397,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			headerNames.add("posts");
 			headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "you-are-not-subscribed-to-any-categories");
 
 			int total = MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(portletGroupId.longValue(), user.getUserId());
 
@@ -502,7 +500,19 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		headerNames.add("last-post");
 		headerNames.add(StringPool.BLANK);
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		String emptyResultsMessage = null;
+
+		if (tabs1.equals("my_posts")) {
+			emptyResultsMessage = "you-do-not-have-any-posts";
+		}
+		else if (tabs1.equals("my_subscriptions")) {
+			emptyResultsMessage = "you-are-not-subscribed-to-any-threads";
+		}
+		else if (tabs1.equals("recent_posts")) {
+			emptyResultsMessage = "there-are-no-recent-posts";
+		}
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
 
 		List results = null;
 
@@ -618,7 +628,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		}
 		%>
 
-		<c:if test="<%= (totalCategories > 0) && (results.size() > 0) %>">
+		<c:if test='<%= tabs1.equals("my_subscriptions") %>'>
 			<br />
 		</c:if>
 
@@ -640,7 +650,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
 				<%
-				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "there-are-no-top-posters");
 
 				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue());
 
