@@ -48,8 +48,23 @@
 						<liferay-ui:message key="posts" />: <%= posts %><br />
 						<liferay-ui:message key="join-date" />: <%= dateFormatDate.format(userDisplay.getCreateDate()) %><br />
 
+						<hr />
+
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="recentPostsURL">
+							<portlet:param name="struts_action" value="/message_boards/view" />
+							<portlet:param name="tabs1" value="recent_posts" />
+							<portlet:param name="groupThreadsUserId" value="<%= String.valueOf(userDisplay.getUserId()) %>" />
+						</portlet:renderURL>
+
+						<liferay-ui:icon
+							image="view"
+							message="recent-posts"
+							url="<%= recentPostsURL.toString() %>"
+							label="<%= true %>"
+						/>
+
 						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
-							<hr />
+							<br />
 
 							<c:choose>
 								<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), userDisplay.getUserId()) %>">
@@ -60,7 +75,12 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(userDisplay.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><liferay-ui:message key="unban-this-user" /></a>
+									<liferay-ui:icon
+										image="../message_boards/unban_user"
+										message="unban-this-user"
+										url="<%= unbanUserURL.toString() %>"
+										label="<%= true %>"
+									/>
 								</c:when>
 								<c:otherwise>
 									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
@@ -70,7 +90,12 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(userDisplay.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><liferay-ui:message key="ban-this-user" /></a>
+									<liferay-ui:icon
+										image="../message_boards/ban_user"
+										message="ban-this-user"
+										url="<%= banUserURL.toString() %>"
+										label="<%= true %>"
+									/>
 								</c:otherwise>
 							</c:choose>
 						</c:if>

@@ -1229,6 +1229,7 @@ filter-by-role=Filter op rol
 filter-by-structure=Filter op structuur
 filter-by-template=Filter op template
 filter-by-user-group=Filter op gebruikersgroep
+filter-by-user=Filter door Gebruiker
 filter-settings=Filter instellingen
 filters=Filters
 find-potential-recipients-from-the-following=Vind potentiéle ontvangers van het volgende:

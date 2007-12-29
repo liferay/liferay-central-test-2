@@ -1229,6 +1229,7 @@ filter-by-role=Role에의한 여과기
 filter-by-structure=Structure에의한 여과기
 filter-by-template=Template에의한 여과기
 filter-by-user-group=사용자 그룹에의한 여과기
+filter-by-user=User에의한 여과기
 filter-settings=여과기 조정
 filters=여과기
 find-potential-recipients-from-the-following=뒤에 오는 것에서 발견 잠재적인 수령인:

@@ -166,6 +166,13 @@ public interface MBMessageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.lang.String getGroupMessagesRSS(long groupId, long userId,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 

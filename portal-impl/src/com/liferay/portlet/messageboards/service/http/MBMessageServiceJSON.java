@@ -196,6 +196,18 @@ public class MBMessageServiceJSON {
 		return returnValue;
 	}
 
+	public static java.lang.String getGroupMessagesRSS(long groupId,
+		long userId, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
+				userId, max, type, version, displayStyle, feedURL, entryURL);
+
+		return returnValue;
+	}
+
 	public static JSONObject getMessage(long messageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {

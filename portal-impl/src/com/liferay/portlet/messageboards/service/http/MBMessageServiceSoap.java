@@ -267,6 +267,23 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static java.lang.String getGroupMessagesRSS(long groupId,
+		long userId, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
+					userId, max, type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		long messageId) throws RemoteException {
 		try {

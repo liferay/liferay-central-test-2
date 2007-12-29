@@ -39,6 +39,11 @@ public class MBMessageFinderUtil {
 		return getFinder().countByGroupId(groupId);
 	}
 
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByG_U(groupId, userId);
+	}
+
 	public static java.util.List findByGroupId(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end);
@@ -60,6 +65,17 @@ public class MBMessageFinderUtil {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getFinder().findByG_U(groupId, userId, begin, end);
+	}
+
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByG_U(groupId, userId, begin, end, obc);
 	}
 
 	public static java.util.List findByC_C(long classNameId, long classPK)

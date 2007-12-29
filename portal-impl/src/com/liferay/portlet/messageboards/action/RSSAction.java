@@ -78,6 +78,7 @@ public class RSSAction extends Action {
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
+		long userId = ParamUtil.getLong(req, "userId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long threadId = ParamUtil.getLong(req, "threadId");
 		int max = ParamUtil.getInteger(
@@ -105,8 +106,16 @@ public class RSSAction extends Action {
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/message_boards/find_recent_posts?p_l_id=" + plid;
 
-			rss = MBMessageServiceUtil.getGroupMessagesRSS(
-				groupId, max, type, version, displayStyle, feedURL, entryURL);
+			if (userId > 0) {
+				rss = MBMessageServiceUtil.getGroupMessagesRSS(
+					groupId, userId, max, type, version, displayStyle, feedURL,
+					entryURL);
+			}
+			else {
+				rss = MBMessageServiceUtil.getGroupMessagesRSS(
+					groupId, max, type, version, displayStyle, feedURL,
+					entryURL);
+			}
 		}
 		else if (categoryId > 0) {
 			String feedURL =

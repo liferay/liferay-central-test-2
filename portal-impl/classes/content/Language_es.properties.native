@@ -1229,6 +1229,7 @@ filter-by-role=Filtrar por rol
 filter-by-structure=Filtrar por estructura
 filter-by-template=Filtrar por plantilla
 filter-by-user-group=Filtrar por grupo de usuario
+filter-by-user=Filtro de User
 filter-settings=Preferencias de filtrado
 filters=Filtros
 find-potential-recipients-from-the-following=Recipientes potenciales del hallazgo del siguiente:

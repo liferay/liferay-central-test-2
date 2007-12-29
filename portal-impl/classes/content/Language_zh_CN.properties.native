@@ -1229,6 +1229,7 @@ filter-by-role=过滤器由Role
 filter-by-structure=过滤器由Structure
 filter-by-template=过滤器由Template
 filter-by-user-group=过滤器由用户群
+filter-by-user=过滤器由User
 filter-settings=过滤器设定
 filters=过滤器
 find-potential-recipients-from-the-following=发现潜在的接收者从以下:

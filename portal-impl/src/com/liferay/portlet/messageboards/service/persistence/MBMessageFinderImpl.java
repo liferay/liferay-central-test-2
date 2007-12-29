@@ -55,6 +55,9 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	public static String COUNT_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".countByGroupId";
 
+	public static String COUNT_BY_G_U =
+		MBMessageFinder.class.getName() + ".countByG_U";
+
 	public static String FIND_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".findByGroupId";
 
@@ -63,6 +66,9 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 
 	public static String FIND_BY_UUID_G =
 		MBMessageFinder.class.getName() + ".findByUuid_G";
+
+	public static String FIND_BY_G_U =
+		MBMessageFinder.class.getName() + ".findByG_U";
 
 	public static String FIND_BY_C_C =
 		MBMessageFinder.class.getName() + ".findByC_C";
@@ -125,6 +131,43 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
 
@@ -243,6 +286,45 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 		catch (NoSuchMessageException nsme) {
 			throw nsme;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List findByG_U(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		return findByG_U(groupId, userId, begin, end, null);
+	}
+
+	public List findByG_U(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBMessage", MBMessageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -465,6 +465,44 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages);
 	}
 
+	public String getGroupMessagesRSS(
+			long groupId, long userId, int max, String type, double version,
+			String displayStyle, String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
+
+		List messages = new ArrayList();
+
+		MessageCreateDateComparator comparator =
+			new MessageCreateDateComparator(false, true);
+
+		Iterator itr = mbMessageLocalService.getGroupMessages(
+			groupId, userId, 0, _MAX_END, comparator).iterator();
+
+		while (itr.hasNext() && (messages.size() < max)) {
+			MBMessage message = (MBMessage)itr.next();
+
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+				messages.add(message);
+			}
+		}
+
+		if (messages.size() > 0) {
+			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+
+			name = message.getSubject();
+			description = message.getSubject();
+		}
+
+		return exportToRSS(
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			messages);
+	}
+
 	public MBMessage getMessage(long messageId)
 		throws PortalException, SystemException {
 

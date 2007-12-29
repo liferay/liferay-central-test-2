@@ -56,18 +56,18 @@
 				(MBCategory.groupId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
 			FROM
-				MBMessageFlag
+				MBMessage
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBMessageFlag.messageId)
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
 			WHERE
-				(MBMessageFlag.userId = ?) AND
-				(MBMessage.threadId = ?)
+				(MBCategory.groupId = ?) AND
+				(MBMessage.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByGroupId">
@@ -103,7 +103,7 @@
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByUuid_G">
 		<![CDATA[
 			SELECT
-				DISTINCT {MBMessage.*}
+				{MBMessage.*}
 			FROM
 				MBMessage
 			INNER JOIN
@@ -112,6 +112,20 @@
 			WHERE
 				(MBMessage.uuid_ = ?) AND
 				(MBCategory.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				{MBMessage.*}
+			FROM
+				MBMessage
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(MBMessage.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByC_C">
@@ -132,6 +146,20 @@
 			ORDER BY
 				MBMessage.createDate ASC,
 				MBMessage.messageId ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessageFlag
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBMessageFlag.messageId)
+			WHERE
+				(MBMessageFlag.userId = ?) AND
+				(MBMessage.threadId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">

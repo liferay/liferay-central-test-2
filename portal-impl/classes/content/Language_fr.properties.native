@@ -1229,6 +1229,7 @@ filter-by-role=Filtre par Role
 filter-by-structure=Filtre par Structure
 filter-by-template=Filtre par Template
 filter-by-user-group=Filtre par le groupe d'utilisateur
+filter-by-user=Filtre par User
 filter-settings=Paramètres du filtre
 filters=Filtres
 find-potential-recipients-from-the-following=Destinataires potentiels de trouvaille de ce qui suit :

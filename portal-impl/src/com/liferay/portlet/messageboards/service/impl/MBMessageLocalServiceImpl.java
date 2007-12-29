@@ -882,8 +882,27 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessageFinder.findByGroupId(groupId, begin, end, obc);
 	}
 
+	public List getGroupMessages(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		return mbMessageFinder.findByG_U(groupId, userId, begin, end);
+	}
+
+	public List getGroupMessages(
+			long groupId, long userId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return mbMessageFinder.findByG_U(groupId, userId, begin, end, obc);
+	}
+
 	public int getGroupMessagesCount(long groupId) throws SystemException {
 		return mbMessageFinder.countByGroupId(groupId);
+	}
+
+	public int getGroupMessagesCount(long groupId, long userId)
+		throws SystemException {
+
+		return mbMessageFinder.countByG_U(groupId, userId);
 	}
 
 	public MBMessage getMessage(long messageId)

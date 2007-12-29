@@ -1230,6 +1230,78 @@ public class MBMessageServiceHttp {
 		}
 	}
 
+	public static java.lang.String getGroupMessagesRSS(
+		HttpPrincipal httpPrincipal, long groupId, long userId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(userId);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new DoubleWrapper(version);
+
+			Object paramObj5 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = feedURL;
+
+			if (feedURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		HttpPrincipal httpPrincipal, long messageId)
 		throws com.liferay.portal.SystemException, 

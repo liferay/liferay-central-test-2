@@ -816,11 +816,35 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getGroupMessages(groupId, begin, end, obc);
 	}
 
+	public static java.util.List getGroupMessages(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupMessages(groupId, userId, begin,
+			end);
+	}
+
+	public static java.util.List getGroupMessages(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupMessages(groupId, userId, begin,
+			end, obc);
+	}
+
 	public static int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getGroupMessagesCount(groupId);
+	}
+
+	public static int getGroupMessagesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupMessagesCount(groupId, userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(

@@ -1229,6 +1229,7 @@ filter-by-role=Role 著フィルター
 filter-by-structure=Structure 著フィルター
 filter-by-template=Template 著フィルター
 filter-by-user-group=ユーザ・グループによるフィルター
+filter-by-user=User 著フィルター
 filter-settings=フィルター設定
 filters=フィルター
 find-potential-recipients-from-the-following=次からの発見の潜在的な受け手:

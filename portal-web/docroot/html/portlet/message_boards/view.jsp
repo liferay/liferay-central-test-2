@@ -376,10 +376,48 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
-		<c:if test='<%= tabs1.equals("recent_posts") %>'>
-			<liferay-ui:icon image="rss" message="recent-posts-rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() + rssURLParams %>' target="_blank" label="<%= true %>" />
 
-			<br /><br />
+		<%
+		long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
+
+		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
+			groupThreadsUserId = user.getUserId();
+		}
+		%>
+
+		<c:if test='<%= tabs1.equals("recent_posts") %>'>
+
+			<%
+			String rssURL = themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
+
+			if (groupThreadsUserId > 0) {
+				rssURL += "&userId=" + groupThreadsUserId;
+			}
+
+			rssURL += rssURLParams;
+			%>
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:icon
+						image="rss"
+						message="recent-posts-rss"
+						url="<%= rssURL %>"
+						target="_blank"
+						label="<%= true %>"
+					/>
+				</td>
+
+				<c:if test="<%= groupThreadsUserId > 0 %>">
+					<td>
+						<liferay-ui:message key="filter-by-user" />: <%= PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK) %>
+					</td>
+				</c:if>
+			</tr>
+			</table>
+
+			<br />
 		</c:if>
 
 		<%
@@ -485,12 +523,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<%
-		long groupThreadsUserId = 0;
-
-		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
-			groupThreadsUserId = user.getUserId();
-		}
-
 		List headerNames = new ArrayList();
 
 		headerNames.add("thread");
