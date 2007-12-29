@@ -124,7 +124,7 @@ public class PortalLDAPUtil {
 			// Create new user in LDAP
 
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
-				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
+				PropsValues.LDAP_USER_IMPL).newInstance();
 
 			ldapUser.setUser(user);
 
@@ -185,7 +185,7 @@ public class PortalLDAPUtil {
 			// Create new user in LDAP
 
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
-				PropsUtil.get(PropsUtil.LDAP_USER_IMPL)).newInstance();
+				PropsValues.LDAP_USER_IMPL).newInstance();
 
 			ldapUser.setUser(user);
 
@@ -525,6 +525,11 @@ public class PortalLDAPUtil {
 			boolean importGroupMembership)
 		throws Exception {
 
+		AttributesTransformer attrsTransformer =
+			AttributesTransformerFactory.getInstance();
+
+		attrs = attrsTransformer.transformGroup(attrs);
+
 		Properties groupMappings = getGroupMappings(companyId);
 
 		LogUtil.debug(_log, groupMappings);
@@ -586,6 +591,11 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, Attributes attrs, String password,
 			boolean importGroupMembership)
 		throws Exception {
+
+		AttributesTransformer attrsTransformer =
+			AttributesTransformerFactory.getInstance();
+
+		attrs = attrsTransformer.transformUser(attrs);
 
 		Properties userMappings = getUserMappings(companyId);
 

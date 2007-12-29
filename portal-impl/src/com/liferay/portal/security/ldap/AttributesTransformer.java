@@ -20,30 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.Validator;
+import javax.naming.directory.Attributes;
 
 /**
- * <a href="LayoutCloneFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="AttributesTransformer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutCloneFactory {
+public class AttributesTransformer {
 
-	public static LayoutClone getInstance() {
-		if (_layoutClone == null) {
-			if (Validator.isNotNull(PropsValues.LAYOUT_CLONE_IMPL)) {
-				_layoutClone = (LayoutClone)InstancePool.get(
-					PropsValues.LAYOUT_CLONE_IMPL);
-			}
-		}
-
-		return _layoutClone;
+	public Attributes transformGroup(Attributes attrs) {
+		return attrs;
 	}
 
-	private static LayoutClone _layoutClone;
+	public Attributes transformUser(Attributes attrs) {
+		return attrs;
+	}
 
 }

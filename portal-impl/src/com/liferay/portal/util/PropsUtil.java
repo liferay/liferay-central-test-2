@@ -333,6 +333,8 @@ public class PropsUtil {
 
 	public static final String LDAP_AUTH_SEARCH_FILTER = "ldap.auth.search.filter";
 
+	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = "ldap.attrs.transformer.impl";
+
 	public static final String LDAP_USER_IMPL = "ldap.user.impl";
 
 	public static final String LDAP_USER_DEFAULT_OBJECT_CLASSES = "ldap.user.default.object.classes";

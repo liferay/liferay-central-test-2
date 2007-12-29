@@ -232,6 +232,9 @@ public class PropsValues {
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));
 
+	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
+		PropsUtil.LAYOUT_CLONE_IMPL);
+
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
@@ -288,12 +291,18 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
 
+	public static final String LDAP_ATTRS_TRANSFORMER_IMPL =
+		PropsUtil.get(PropsUtil.LDAP_ATTRS_TRANSFORMER_IMPL);
+
 	public static final boolean LDAP_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LDAP_AUTH_ENABLED));
 
 	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LDAP_PASSWORD_POLICY_ENABLED));
+
+	public static final String LDAP_USER_IMPL =
+		PropsUtil.get(PropsUtil.LDAP_USER_IMPL);
 
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST));
