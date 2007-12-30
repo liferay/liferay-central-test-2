@@ -118,6 +118,9 @@ public class QueryUtil {
 	public static Comparable[] getPrevAndNext(
 		Query query, int count, OrderByComparator obc, Comparable comparable) {
 
+		int pos = count;
+		int boundary = 0;
+
 		Comparable[] array = new Comparable[3];
 
 		ScrollableResults sr = query.scroll();
@@ -162,20 +165,30 @@ public class QueryUtil {
 					break;
 				}
 
-				if (count == 1) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Scroll count is 1");
-					}
-
+				if (pos == 1) {
 					break;
 				}
 
-				count = (int)Math.ceil(count / 2.0);
+				pos = (int)Math.ceil(pos / 2.0);
 
-				int scrollPos = count;
+				int scrollPos = pos;
 
 				if (value < 0) {
-					scrollPos = scrollPos  * -1;
+					scrollPos = scrollPos * -1;
+				}
+
+				boundary += scrollPos;
+
+				if (boundary < 0) {
+					scrollPos = scrollPos + (boundary * -1) + 1;
+
+					boundary = 0;
+				}
+
+				if (boundary > count) {
+					scrollPos = scrollPos - (boundary - count);
+
+					boundary = scrollPos;
 				}
 
 				if (_log.isDebugEnabled()) {
@@ -184,12 +197,12 @@ public class QueryUtil {
 
 				if (!sr.scroll(scrollPos)) {
 					if (value < 0) {
-						if (!sr.scroll(1)) {
+						if (!sr.next()) {
 							break;
 						}
 					}
 					else {
-						if (!sr.scroll(-1)) {
+						if (!sr.previous()) {
 							break;
 						}
 					}
