@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,25 +34,25 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public javax.portlet.PortletPreferences getPreferences()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getPreferences();
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getPreferences(companyId);
 	}
 
 	public boolean getBoolean(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getBoolean(name);
 	}
 
 	public boolean getBoolean(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getBoolean(companyId, name);
 	}
@@ -63,14 +63,14 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public boolean getBoolean(java.lang.String name, boolean defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getBoolean(name, defaultValue);
 	}
 
 	public boolean getBoolean(long companyId, java.lang.String name,
 		boolean defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getBoolean(companyId, name, defaultValue);
 	}
@@ -81,13 +81,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public java.lang.String getContent(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getContent(name);
 	}
 
 	public java.lang.String getContent(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getContent(companyId, name);
 	}
@@ -98,13 +98,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public double getDouble(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getDouble(name);
 	}
 
 	public double getDouble(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getDouble(companyId, name);
 	}
@@ -115,14 +115,14 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public double getDouble(java.lang.String name, double defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getDouble(name, defaultValue);
 	}
 
 	public double getDouble(long companyId, java.lang.String name,
 		double defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getDouble(companyId, name, defaultValue);
 	}
@@ -133,13 +133,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public int getInteger(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getInteger(name);
 	}
 
 	public int getInteger(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getInteger(companyId, name);
 	}
@@ -150,14 +150,14 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public int getInteger(java.lang.String name, int defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getInteger(name, defaultValue);
 	}
 
 	public int getInteger(long companyId, java.lang.String name,
 		int defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getInteger(companyId, name, defaultValue);
 	}
@@ -168,13 +168,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public long getLong(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getLong(name);
 	}
 
 	public long getLong(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getLong(companyId, name);
 	}
@@ -185,13 +185,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public long getLong(java.lang.String name, long defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getLong(name, defaultValue);
 	}
 
 	public long getLong(long companyId, java.lang.String name, long defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getLong(companyId, name, defaultValue);
 	}
@@ -202,13 +202,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public short getShort(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getShort(name);
 	}
 
 	public short getShort(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getShort(companyId, name);
 	}
@@ -219,14 +219,14 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public short getShort(java.lang.String name, short defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getShort(name, defaultValue);
 	}
 
 	public short getShort(long companyId, java.lang.String name,
 		short defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getShort(companyId, name, defaultValue);
 	}
@@ -237,13 +237,13 @@ public class PrefsPropsUtil_IW {
 	}
 
 	public java.lang.String getString(java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getString(name);
 	}
 
 	public java.lang.String getString(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getString(companyId, name);
 	}
@@ -255,14 +255,14 @@ public class PrefsPropsUtil_IW {
 
 	public java.lang.String getString(java.lang.String name,
 		java.lang.String defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getString(name, defaultValue);
 	}
 
 	public java.lang.String getString(long companyId, java.lang.String name,
 		java.lang.String defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getString(companyId, name, defaultValue);
 	}
@@ -299,14 +299,14 @@ public class PrefsPropsUtil_IW {
 
 	public java.lang.String[] getStringArray(java.lang.String name,
 		java.lang.String delimiter)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(name, delimiter);
 	}
 
 	public java.lang.String[] getStringArray(long companyId,
 		java.lang.String name, java.lang.String delimiter)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(companyId, name, delimiter);
 	}
@@ -314,14 +314,14 @@ public class PrefsPropsUtil_IW {
 	public java.lang.String[] getStringArray(
 		javax.portlet.PortletPreferences prefs, long companyId,
 		java.lang.String name, java.lang.String delimiter)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter);
 	}
 
 	public java.lang.String[] getStringArray(java.lang.String name,
 		java.lang.String delimiter, java.lang.String[] defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(name, delimiter, defaultValue);
 	}
@@ -329,7 +329,7 @@ public class PrefsPropsUtil_IW {
 	public java.lang.String[] getStringArray(long companyId,
 		java.lang.String name, java.lang.String delimiter,
 		java.lang.String[] defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(companyId, name, delimiter,
 			defaultValue);
@@ -339,7 +339,7 @@ public class PrefsPropsUtil_IW {
 		javax.portlet.PortletPreferences prefs, long companyId,
 		java.lang.String name, java.lang.String delimiter,
 		java.lang.String[] defaultValue)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter,
 			defaultValue);
