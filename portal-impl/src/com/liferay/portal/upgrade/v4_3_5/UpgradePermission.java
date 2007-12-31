@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_5;
 
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -96,105 +95,117 @@ public class UpgradePermission extends UpgradeProcess {
 				defaultUserId + ", Groups_Permissions.permissionId from " +
 					"Groups_Permissions where groupId = " + guestGroupId);
 
-		deleteStalePortletPermissions(guestGroupId);
+		deletePortletPermissionIds(guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			Layout.class.getName(), "Layout", "plid", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			BlogsEntry.class.getName(), "BlogsEntry", "entryId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			BookmarksFolder.class.getName(), "BookmarksFolder", "folderId",
 			guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			BookmarksEntry.class.getName(), "BookmarksEntry", "entryId",
 			"BookmarksFolder", "folderId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			CalEvent.class.getName(), "CalEvent", "eventId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			DLFolder.class.getName(), "DLFolder", "folderId", guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId",
 			"DLFolder", "folderId", guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			DLFileShortcut.class.getName(), "DLFileShortcut", "fileShortcutId",
 			"DLFolder", "folderId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			IGFolder.class.getName(), "IGFolder", "folderId", guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			IGImage.class.getName(), "IGImage", "imageId", "IGFolder",
 			"folderId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			JournalArticle.class.getName(), "JournalArticle", "resourcePrimKey",
 			guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			JournalStructure.class.getName(), "JournalStructure", "id_",
 			guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			JournalTemplate.class.getName(), "JournalTemplate", "id_",
 			guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			MBCategory.class.getName(), "MBCategory", "categoryId",
 			guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			MBMessage.class.getName(), "MBMessage", "messageId", "MBCategory",
 			"categoryId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			PollsQuestion.class.getName(), "PollsQuestion", "questionId",
 			guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			SCFrameworkVersion.class.getName(), "SCFrameworkVersion",
 			"frameworkVersionId", guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			SCProductEntry.class.getName(), "SCProductEntry", "productEntryId",
 			guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			ShoppingCategory.class.getName(), "ShoppingCategory", "categoryId",
 			guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			ShoppingItem.class.getName(), "ShoppingItem", "itemId",
 			"ShoppingCategory", "categoryId", guestGroupId);
 
-		deleteStalePermissions(
+		deletePermissionIds(
 			WikiNode.class.getName(), "WikiNode", "nodeId", guestGroupId);
-		deleteStalePermissions(
+		deletePermissionIds(
 			WikiPage.class.getName(), "WikiPage", "resourcePrimKey", "WikiNode",
 			"nodeId", guestGroupId);
 	}
 
-	protected void deleteStalePermissions(
+	protected void deletePermissionIds(
 			String className, String tableName, String tablePKCol,
 			long guestGroupId)
 		throws Exception {
 
-		String sql = getStalePermissionsSQL(
+		List permissionIds = getPermissionIds(
 			className, tableName, tablePKCol, guestGroupId);
 
-		deleteStalePermissions(sql, guestGroupId);
+		deletePermissionIds(permissionIds, guestGroupId);
 	}
 
-	protected void deleteStalePermissions(
+	protected void deletePermissionIds(
 			String className, String tableName1, String tablePKCol1,
 			String tableName2, String tablePKCol2, long guestGroupId)
 		throws Exception {
 
-		String sql = getStalePermissionsSQL(
+		List permissionIds = getPermissionIds(
 			className, tableName1, tablePKCol1, tableName2, tablePKCol2,
 			guestGroupId);
 
-		deleteStalePermissions(sql, guestGroupId);
+		deletePermissionIds(permissionIds, guestGroupId);
 	}
 
-	protected void deleteStalePermissions(String sql, long guestGroupId)
+	protected void deletePermissionIds(List permissionIds, long guestGroupId)
+		throws Exception {
+
+		for (int i = 0; i < permissionIds.size(); i++) {
+			long permissionId = ((Long)permissionIds.get(i)).longValue();
+
+			runSQL(
+				"delete from Groups_Permissions where groupId = " +
+					guestGroupId + " and permissionId = " + permissionId);
+		}
+	}
+
+	protected void deletePortletPermissionIds(long guestGroupId)
 		throws Exception {
 
 		Connection con = null;
@@ -204,35 +215,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = HibernateUtil.getConnection();
 
-			ps = con.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long permissionId = rs.getLong("permissionId");
-
-				runSQL(
-					"delete from Groups_Permissions where groupId = " +
-						guestGroupId + " and permissionId = " + permissionId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void deleteStalePortletPermissions(long guestGroupId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			Iterator itr = getPlidsWithStalePermissions(
-				guestGroupId).iterator();
+			Iterator itr = getPlids(guestGroupId).iterator();
 
 			while (itr.hasNext()) {
 				Long plid = (Long)itr.next();
@@ -247,10 +230,10 @@ public class UpgradePermission extends UpgradeProcess {
 				while (rs.next()) {
 					String primKey = rs.getString("primKey");
 
-					String sql = getStalePortletPermissionsSQL(
+					List permissionIds = getPermissionIds(
 						primKey, guestGroupId);
 
-					deleteStalePermissions(sql, guestGroupId);
+					deletePermissionIds(permissionIds, guestGroupId);
 				}
 			}
 		}
@@ -341,9 +324,143 @@ public class UpgradePermission extends UpgradeProcess {
 		return groupId;
 	}
 
-	protected List getPlidsWithStalePermissions(long guestGroupId)
+	protected List getPermissionIds(String primKey, long guestGroupId)
 		throws Exception {
 
+		List permissionIds = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(_GET_PERMISSION_IDS_1);
+
+			ps.setLong(1, guestGroupId);
+			ps.setString(2, primKey);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long permissionId = rs.getLong("permissionId");
+
+				permissionIds.add(new Long(permissionId));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return permissionIds;
+	}
+
+	protected List getPermissionIds(
+			String className, String tableName, String tablePKCol,
+			long guestGroupId)
+		throws Exception {
+
+		List permissionIds = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(
+				"select " + tablePKCol + " from " + tableName + " " +
+				"where groupId != " + guestGroupId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String primKey = String.valueOf(rs.getLong(tablePKCol));
+
+				permissionIds.addAll(
+					getPermissionIds(className, primKey, guestGroupId));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return permissionIds;
+	}
+
+	protected List getPermissionIds(
+			String className, String tableName1, String tablePKCol1,
+			String tableName2, String tablePKCol2, long guestGroupId)
+		throws Exception {
+
+		List permissionIds = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(
+				"select " + tablePKCol1 + " from " + tableName1 + " " +
+				"inner join " + tableName2 + " on " + tableName2 + "." +
+					tablePKCol2 + " = " + tableName1 + "." + tablePKCol2 + " " +
+				"where groupId != " + guestGroupId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String primKey = String.valueOf(rs.getLong(tablePKCol1));
+
+				permissionIds.addAll(
+					getPermissionIds(className, primKey, guestGroupId));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return permissionIds;
+	}
+
+	protected List getPermissionIds(
+			String className, String primKey, long guestGroupId)
+		throws Exception {
+
+		List permissionIds = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(_GET_PERMISSION_IDS_2);
+
+			ps.setLong(1, guestGroupId);
+			ps.setString(2, primKey);
+			ps.setString(3, className);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long permissionId = rs.getLong("permissionId");
+
+				permissionIds.add(new Long(permissionId));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return permissionIds;
+	}
+
+	protected List getPlids(long guestGroupId) throws Exception {
 		List plids = new ArrayList();
 
 		Connection con = null;
@@ -353,15 +470,10 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = HibernateUtil.getConnection();
 
-			String sql = getStalePermissionsSQL(
-				Layout.class.getName(), "Layout", "plid", guestGroupId);
+			ps = con.prepareStatement(_GET_PLIDS);
 
-			sql = StringUtil.replace(
-				sql,
-				"select Groups_Permissions.permissionId ",
-				"select Layout.plid ");
-
-			ps = con.prepareStatement(sql);
+			ps.setLong(1, guestGroupId);
+			ps.setLong(2, guestGroupId);
 
 			rs = ps.executeQuery();
 
@@ -378,69 +490,6 @@ public class UpgradePermission extends UpgradeProcess {
 		return plids;
 	}
 
-	protected String getStalePermissionsSQL(
-			String className, String tableName, String tablePKCol,
-			long guestGroupId)
-		throws Exception {
-
-		String sql =
-			"select Groups_Permissions.permissionId from Groups_Permissions " +
-			"inner join Permission_ on Permission_.permissionId = " +
-				"Groups_Permissions.permissionId " +
-			"inner join Resource_ on Resource_.resourceId = " +
-				"Permission_.resourceId " +
-			"inner join ResourceCode on ResourceCode.codeId = " +
-				"Resource_.codeId and ResourceCode.name = '" + className +
-					"' " +
-			"inner join " + tableName + " on " + tableName + "." + tablePKCol +
-				" = Resource_.primKey " +
-			"where Groups_Permissions.groupId = " + guestGroupId + " and " +
-				tableName + ".groupId != " + guestGroupId;
-
-		return sql;
-	}
-
-	protected String getStalePermissionsSQL(
-			String className, String tableName1, String tablePKCol1,
-			String tableName2, String tablePKCol2, long guestGroupId)
-		throws Exception {
-
-		String sql =
-			"select Groups_Permissions.permissionId from Groups_Permissions " +
-			"inner join Permission_ on Permission_.permissionId = " +
-				"Groups_Permissions.permissionId " +
-			"inner join Resource_ on Resource_.resourceId = " +
-				"Permission_.resourceId " +
-			"inner join ResourceCode on ResourceCode.codeId = " +
-				"Resource_.codeId and ResourceCode.name = '" + className +
-					"' " +
-			"inner join " + tableName1 + " on " + tableName1 + "." +
-				tablePKCol1 + " = Resource_.primKey " +
-			"inner join " + tableName2 + " on " + tableName2 + "." +
-				tablePKCol2 + " = " + tableName1 + "." + tablePKCol2 + " " +
-			"where Groups_Permissions.groupId = " + guestGroupId + " and " +
-				tableName2 + ".groupId != " + guestGroupId;
-
-		return sql;
-	}
-
-	protected String getStalePortletPermissionsSQL(
-			String primKey, long guestGroupId)
-		throws Exception {
-
-		String sql =
-			"select Groups_Permissions.permissionId from Groups_Permissions " +
-			"inner join Permission_ on Permission_.permissionId = " +
-				"Groups_Permissions.permissionId " +
-			"inner join Resource_ on Resource_.resourceId = " +
-				"Permission_.resourceId " +
-			"inner join ResourceCode on ResourceCode.codeId = " +
-				"Resource_.codeId and Resource_.primKey = '" + primKey + "' " +
-			"where Groups_Permissions.groupId = " + guestGroupId;
-
-		return sql;
-	}
-
 	private static final String _GET_COMPANY_IDS =
 		"select companyId from Company";
 
@@ -449,6 +498,36 @@ public class UpgradePermission extends UpgradeProcess {
 
 	private static final String _GET_GUEST_GROUP_ID =
 		"select groupId from Group_ where companyId = ? and name = ?";
+
+	private static final String _GET_PERMISSION_IDS_1 =
+		"select Groups_Permissions.permissionId from Groups_Permissions " +
+		"inner join Permission_ on Permission_.permissionId = " +
+			"Groups_Permissions.permissionId " +
+		"inner join Resource_ on Resource_.resourceId = " +
+			"Permission_.resourceId " +
+		"inner join ResourceCode on ResourceCode.codeId = Resource_.codeId " +
+		"where Groups_Permissions.groupId = ? and Resource_.primKey = ?";
+
+	private static final String _GET_PERMISSION_IDS_2 =
+		"select Groups_Permissions.permissionId from Groups_Permissions " +
+		"inner join Permission_ on Permission_.permissionId = " +
+			"Groups_Permissions.permissionId " +
+		"inner join Resource_ on Resource_.resourceId = " +
+			"Permission_.resourceId " +
+		"inner join ResourceCode on ResourceCode.codeId = Resource_.codeId " +
+		"where Groups_Permissions.groupId = ? and Resource_.primKey = ? and " +
+			"ResourceCode.name = ?";
+
+	private static final String _GET_PLIDS =
+		"select Layout.plid from Groups_Permissions " +
+		"inner join Permission_ on Permission_.permissionId = " +
+			"Groups_Permissions.permissionId " +
+		"inner join Resource_ on Resource_.resourceId = " +
+			"Permission_.resourceId " +
+		"inner join ResourceCode on ResourceCode.codeId = Resource_.codeId " +
+			"and ResourceCode.name = 'com.liferay.portal.model.Layout' " +
+		"inner join Layout on Layout.plid = Resource_.primKey " +
+		"where Groups_Permissions.groupId = ? and Layout.groupId != ?";
 
 	private static Log _log = LogFactory.getLog(UpgradePermission.class);
 
