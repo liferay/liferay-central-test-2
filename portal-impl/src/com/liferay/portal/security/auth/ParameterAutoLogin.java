@@ -48,14 +48,13 @@ public class ParameterAutoLogin implements AutoLogin {
 		throws AutoLoginException {
 
 		try {
-			String login = ParamUtil.getString(req, "parameterAutoLoginLogin");
+			String login = ParamUtil.getString(req, getLoginParam());
 
 			if (Validator.isNull(login)) {
 				return null;
 			}
 
-			String password = ParamUtil.getString(
-				req, "parameterAutoLoginPassword");
+			String password = ParamUtil.getString(req, getPasswordParam());
 
 			if (Validator.isNull(password)) {
 				return null;
@@ -92,6 +91,18 @@ public class ParameterAutoLogin implements AutoLogin {
 			throw new AutoLoginException(e);
 		}
 	}
+
+	protected String getLoginParam() {
+		return _LOGIN_PARAM;
+	}
+
+	protected String getPasswordParam() {
+		return _PASSWORD_PARAM;
+	}
+
+	private static final String _LOGIN_PARAM = "parameterAutoLoginLogin";
+
+	private static final String _PASSWORD_PARAM = "parameterAutoLoginPassword";
 
 	private static Log _log = LogFactory.getLog(ParameterAutoLogin.class);
 
