@@ -39,8 +39,8 @@ import java.util.Date;
  *
  */
 public class ReportsEntryModelImpl extends BaseModelImpl {
-    public static String TABLE_NAME = "ReportsEntry";
-    public static Object[][] TABLE_COLUMNS = {
+    public static final String TABLE_NAME = "ReportsEntry";
+    public static final Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
             
 
@@ -61,10 +61,13 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
 
             { "name", new Integer(Types.VARCHAR) }
         };
-    public static String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
-    public static String TABLE_SQL_DROP = "drop table ReportsEntry";
-    public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
-                "lock.expiration.time.com.ext.portlet.reports.model.ReportsEntryModel"));
+    public static final String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+    public static final String TABLE_SQL_DROP = "drop table ReportsEntry";
+    public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+                "value.object.finder.cache.enabled.com.ext.portlet.reports.model.ReportsEntry"),
+            true);
+    public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+                "lock.expiration.time.com.ext.portlet.reports.model.ReportsEntry"));
     private String _entryId;
     private String _companyId;
     private String _userId;
@@ -179,23 +182,27 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
     }
 
     public ReportsEntry toEscapedModel() {
-        ReportsEntry model = new ReportsEntryImpl();
+        if (isEscapedModel()) {
+            return (ReportsEntry) this;
+        } else {
+            ReportsEntry model = new ReportsEntryImpl();
 
-        model.setEntryId(Html.escape(getEntryId()));
-        model.setCompanyId(Html.escape(getCompanyId()));
-        model.setUserId(Html.escape(getUserId()));
-        model.setUserName(Html.escape(getUserName()));
-        model.setCreateDate(getCreateDate());
-        model.setModifiedDate(getModifiedDate());
-        model.setName(Html.escape(getName()));
+            model.setEscapedModel(true);
 
-        if (true) {
+            model.setEntryId(Html.escape(getEntryId()));
+            model.setCompanyId(Html.escape(getCompanyId()));
+            model.setUserId(Html.escape(getUserId()));
+            model.setUserName(Html.escape(getUserName()));
+            model.setCreateDate(getCreateDate());
+            model.setModifiedDate(getModifiedDate());
+            model.setName(Html.escape(getName()));
+
             model = (ReportsEntry) Proxy.newProxyInstance(ReportsEntry.class.getClassLoader(),
                     new Class[] { ReportsEntry.class },
                     new ReadOnlyBeanHandler(model));
-        }
 
-        return model;
+            return model;
+        }
     }
 
     public Object clone() {

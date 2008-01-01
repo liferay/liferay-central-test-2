@@ -1,7 +1,5 @@
 package com.ext.portlet.reports.service.base;
 
-import com.ext.portlet.reports.model.ReportsEntry;
-import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.ext.portlet.reports.service.ReportsEntryService;
 import com.ext.portlet.reports.service.persistence.ReportsEntryPersistence;
 import com.ext.portlet.reports.service.persistence.ReportsEntryUtil;

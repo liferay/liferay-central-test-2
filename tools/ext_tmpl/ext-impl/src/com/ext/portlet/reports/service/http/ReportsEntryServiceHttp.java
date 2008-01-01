@@ -1,8 +1,5 @@
 package com.ext.portlet.reports.service.http;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 
 /**
  * <a href="ReportsEntryServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -44,5 +41,4 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  *
  */
 public class ReportsEntryServiceHttp {
-    private static Log _log = LogFactoryUtil.getLog(ReportsEntryServiceHttp.class);
 }

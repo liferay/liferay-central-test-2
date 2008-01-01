@@ -1,7 +1,5 @@
 package com.ext.portlet.reports.service.http;
 
-import com.ext.portlet.reports.service.ReportsEntryServiceUtil;
-
 
 /**
  * <a href="ReportsEntryServiceJSON.java.html"><b><i>View Source</i></b></a>

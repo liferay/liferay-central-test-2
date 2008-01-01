@@ -1,10 +1,5 @@
 package com.ext.portlet.reports.service.http;
 
-import com.ext.portlet.reports.service.ReportsEntryServiceUtil;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 
 /**
  * <a href="ReportsEntryServiceSoap.java.html"><b><i>View Source</i></b></a>
@@ -58,5 +53,4 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  *
  */
 public class ReportsEntryServiceSoap {
-    private static Log _log = LogFactoryUtil.getLog(ReportsEntryServiceSoap.class);
 }

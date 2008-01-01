@@ -3,6 +3,7 @@ package com.ext.portlet.reports.service.persistence;
 import com.ext.portlet.reports.NoSuchEntryException;
 import com.ext.portlet.reports.model.ReportsEntry;
 import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
+import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
@@ -209,13 +210,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public List findByCompanyId(String companyId) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -250,8 +256,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 List list = q.list();
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, list);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, list);
 
                 return list;
             } catch (Exception e) {
@@ -271,6 +278,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findByCompanyId(String companyId, int begin, int end,
         OrderByComparator obc) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] {
@@ -285,8 +293,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -327,8 +339,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 List list = QueryUtil.list(q, getDialect(), begin, end);
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, list);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, list);
 
                 return list;
             } catch (Exception e) {
@@ -442,13 +455,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public List findByUserId(String userId) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -483,8 +501,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 List list = q.list();
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, list);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, list);
 
                 return list;
             } catch (Exception e) {
@@ -504,6 +523,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findByUserId(String userId, int begin, int end,
         OrderByComparator obc) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] {
@@ -518,8 +538,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -560,8 +584,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 List list = QueryUtil.list(q, getDialect(), begin, end);
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, list);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, list);
 
                 return list;
             } catch (Exception e) {
@@ -720,6 +745,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findAll(int begin, int end, OrderByComparator obc)
         throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findAll";
         String[] finderParams = new String[] {
@@ -730,8 +756,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -761,8 +791,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                     Collections.sort(list);
                 }
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, list);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, list);
 
                 return list;
             } catch (Exception e) {
@@ -804,13 +835,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public int countByCompanyId(String companyId) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "countByCompanyId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -852,8 +888,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                     count = new Long(0);
                 }
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, count);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, count);
 
                 return count.intValue();
             } catch (Exception e) {
@@ -867,13 +904,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public int countByUserId(String userId) throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "countByUserId";
         String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -915,8 +957,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                     count = new Long(0);
                 }
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, count);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, count);
 
                 return count.intValue();
             } catch (Exception e) {
@@ -930,13 +973,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public int countAll() throws SystemException {
+        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "countAll";
         String[] finderParams = new String[] {  };
         Object[] finderArgs = new Object[] {  };
 
-        Object result = FinderCache.getResult(finderClassName,
-                finderMethodName, finderParams, finderArgs, getSessionFactory());
+        Object result = null;
+
+        if (finderClassNameCacheEnabled) {
+            result = FinderCache.getResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, getSessionFactory());
+        }
 
         if (result == null) {
             Session session = null;
@@ -959,8 +1007,9 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                     count = new Long(0);
                 }
 
-                FinderCache.putResult(finderClassName, finderMethodName,
-                    finderParams, finderArgs, count);
+                FinderCache.putResult(finderClassNameCacheEnabled,
+                    finderClassName, finderMethodName, finderParams,
+                    finderArgs, count);
 
                 return count.intValue();
             } catch (Exception e) {
