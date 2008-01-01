@@ -167,16 +167,25 @@ ECJ was automatically installed. Please rerun your task.
 		<mkdir dir="test-classes" />
 		<mkdir dir="test-results" />
 
+		<copy todir="test-classes">
+			<fileset dir="test" includes="**/*.properties,**/*.xml" />
+		</copy>
+
 		<javac destdir="test-classes" srcdir="test">
 			<classpath refid="project.classpath" />
 		</javac>
 
-		<junit haltonfailure="no" printsummary="on">
-			<classpath refid="project.classpath" />
+		<junit fork="on" haltonfailure="no" printsummary="on">
+			<classpath>
+				<pathelement path="${classpath}" />
+				<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+				<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+				<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
+			</classpath>
 			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
 			<batchtest todir="test-results">
-				<fileset dir="test-classes" includes="**/*Test.class" />
+				<fileset dir="test-classes" includes="**/*TestSuite.class" />
 			</batchtest>
 		</junit>
 	</target>

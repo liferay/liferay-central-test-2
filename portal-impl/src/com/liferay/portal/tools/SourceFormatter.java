@@ -244,7 +244,7 @@ public class SourceFormatter {
 		ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
-		ds.setIncludes(new String[] {"**\\test\\src\\**\\*.java",});
+		ds.setIncludes(new String[] {"**\\test\\**\\*.java",});
 
 		ds.scan();
 

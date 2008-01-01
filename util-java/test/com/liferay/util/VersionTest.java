@@ -32,64 +32,48 @@ import junit.framework.TestCase;
  */
 public class VersionTest extends TestCase {
 
-	public void testPlus() {
-		_assertNotIncludes("1+", "0");
-		_assertIncludes("1+", "1");
-		_assertIncludes("1+", "2");
-		_assertNotIncludes("1.1+", "1.0");
-		_assertIncludes("1.1+", "1.1");
-		_assertIncludes("1.1+", "1.10");
-		_assertIncludes("1.1+", "1.2");
-		_assertNotIncludes("1.1+", "2");
-		_assertNotIncludes("1.1.2+", "1.1.1");
-		_assertIncludes("1.1.2+", "1.1.2");
-		_assertIncludes("1.1.2+", "1.1.13");
-		_assertNotIncludes("1.1.2+", "1.2");
-	}
-
-	public void testStar() {
-		_assertIncludes("1.1.*", "1.1.0");
-		_assertIncludes("1.*", "1.1");
-		_assertIncludes("*", "1");
-		_assertIncludes("*", "1.2");
-		_assertIncludes("*", "1.2.3");
-	}
-
 	public void testBugFixNumber() {
-		_assertPrevious("1.1.0", "1.1.1");
-		_assertLater("1.1.1", "1.1.0");
-		_assertLater("1.2.0", "1.1.1");
-	}
-
-	public void testMinorNumber() {
-		_assertPrevious("1.1", "1.1.1");
-		_assertLater("1.2", "1.1.1");
-		_assertLater("1.2", "1.1");
+		assertPrevious("1.1.0", "1.1.1");
+		assertLater("1.1.1", "1.1.0");
+		assertLater("1.2.0", "1.1.1");
 	}
 
 	public void testMajorNumber() {
-		_assertPrevious("1.1", "1.1.1");
-		_assertLater("2", "1.1.1");
-		_assertLater("2", "1");
+		assertPrevious("1.1", "1.1.1");
+		assertLater("2", "1.1.1");
+		assertLater("2", "1");
 	}
 
-	private void _assertPrevious(String first, String second) {
-		Version firstVersion = Version.getInstance(first);
-
-		assertTrue(
-			first + " is not previous than " + second,
-			firstVersion.isPreviousVersionThan(second));
+	public void testMinorNumber() {
+		assertPrevious("1.1", "1.1.1");
+		assertLater("1.2", "1.1.1");
+		assertLater("1.2", "1.1");
 	}
 
-	private void _assertLater(String first, String second) {
-		Version firstVersion = Version.getInstance(first);
-
-		assertTrue(
-			first + " is not later than " + second,
-			firstVersion.isLaterVersionThan(second.toString()));
+	public void testPlus() {
+		assertNotIncludes("1+", "0");
+		assertIncludes("1+", "1");
+		assertIncludes("1+", "2");
+		assertNotIncludes("1.1+", "1.0");
+		assertIncludes("1.1+", "1.1");
+		assertIncludes("1.1+", "1.10");
+		assertIncludes("1.1+", "1.2");
+		assertNotIncludes("1.1+", "2");
+		assertNotIncludes("1.1.2+", "1.1.1");
+		assertIncludes("1.1.2+", "1.1.2");
+		assertIncludes("1.1.2+", "1.1.13");
+		assertNotIncludes("1.1.2+", "1.2");
 	}
 
-	private void _assertIncludes(String first, String second) {
+	public void testStar() {
+		assertIncludes("1.1.*", "1.1.0");
+		assertIncludes("1.*", "1.1");
+		assertIncludes("*", "1");
+		assertIncludes("*", "1.2");
+		assertIncludes("*", "1.2.3");
+	}
+
+	protected void assertIncludes(String first, String second) {
 		Version firstVersion = Version.getInstance(first);
 		Version secondVersion = Version.getInstance(second);
 
@@ -98,13 +82,29 @@ public class VersionTest extends TestCase {
 			firstVersion.includes(secondVersion));
 	}
 
-	private void _assertNotIncludes(String first, String second) {
+	protected void assertLater(String first, String second) {
+		Version firstVersion = Version.getInstance(first);
+
+		assertTrue(
+			first + " is not later than " + second,
+			firstVersion.isLaterVersionThan(second.toString()));
+	}
+
+	protected void assertNotIncludes(String first, String second) {
 		Version firstVersion = Version.getInstance(first);
 		Version secondVersion = Version.getInstance(second);
 
 		assertFalse(
 			first + " includes " + second,
 			firstVersion.includes(secondVersion));
+	}
+
+	protected void assertPrevious(String first, String second) {
+		Version firstVersion = Version.getInstance(first);
+
+		assertTrue(
+			first + " is not previous than " + second,
+			firstVersion.isPreviousVersionThan(second));
 	}
 
 }
