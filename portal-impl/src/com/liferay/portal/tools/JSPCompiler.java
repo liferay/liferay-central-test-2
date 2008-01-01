@@ -43,7 +43,7 @@ import java.util.List;
  */
 public class JSPCompiler {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		if (args.length == 4) {
 			new JSPCompiler(args[0], args[1], args[2], args[3], false);
 		}
@@ -57,26 +57,23 @@ public class JSPCompiler {
 		}
 	}
 
-	public JSPCompiler(String appServerType, String compiler, String classPath,
-					   String directory, boolean checkTimeStamp) {
+	public JSPCompiler(
+			String appServerType, String compiler, String classPath,
+			String directory, boolean checkTimeStamp)
+		throws Exception {
 
-		try {
-			_compiler = compiler;
+		_compiler = compiler;
 
-			if (!_compiler.equals("jikes")) {
-				_compiler = "javac";
-			}
-
-			_classPath = StringUtil.replace(
-				classPath, ";", System.getProperty("path.separator"));
-			_directory = directory;
-			_checkTimeStamp = checkTimeStamp;
-
-			_compile(new File(directory));
+		if (!_compiler.equals("jikes")) {
+			_compiler = "javac";
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		_classPath = StringUtil.replace(
+			classPath, ";", System.getProperty("path.separator"));
+		_directory = directory;
+		_checkTimeStamp = checkTimeStamp;
+
+		_compile(new File(directory));
 	}
 
 	private void _compile(File directory) throws Exception {
@@ -127,32 +124,25 @@ public class JSPCompiler {
 
 				Runtime rt = Runtime.getRuntime();
 
-				try {
-					Process p = rt.exec(cmd);
+				Process p = rt.exec(cmd);
 
-					BufferedReader br = new BufferedReader(
-						new InputStreamReader(p.getErrorStream()));
+				BufferedReader br = new BufferedReader(
+					new InputStreamReader(p.getErrorStream()));
 
-					StringMaker sm = new StringMaker();
-					String line = null;
+				StringMaker sm = new StringMaker();
+				String line = null;
 
-					while ((line = br.readLine()) != null) {
-						sm.append(line).append("\n");
-					}
-
-					br.close();
-
-					p.waitFor();
-					p.destroy();
-
-					if (!classFile.exists()) {
-						FileUtil.write(
-							classFile.toString() + ".jspc_error",
-							sm.toString());
-					}
+				while ((line = br.readLine()) != null) {
+					sm.append(line).append("\n");
 				}
-				catch (Exception e) {
-					e.printStackTrace();
+
+				br.close();
+
+				p.waitFor();
+				p.destroy();
+
+				if (!classFile.exists()) {
+					throw new Exception(sm.toString());
 				}
 			}
 		}
