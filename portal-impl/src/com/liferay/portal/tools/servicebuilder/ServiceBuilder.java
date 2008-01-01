@@ -122,6 +122,7 @@ public class ServiceBuilder {
 			String propsUtilPackage = "com.liferay.portal.util";
 			String springHibernatePackage = "com.liferay.portal.spring.hibernate";
 			String springUtilPackage = "com.liferay.portal.spring.util";
+			String testDir = "";
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
@@ -129,7 +130,7 @@ public class ServiceBuilder {
 				remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
 				baseModelImplPackage, basePersistencePackage,
 				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
-				springHibernatePackage, springUtilPackage);
+				springHibernatePackage, springUtilPackage, testDir);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -151,6 +152,7 @@ public class ServiceBuilder {
 			String propsUtilPackage = System.getProperty("service.props.util.package");
 			String springHibernatePackage = System.getProperty("service.spring.hibernate.package");
 			String springUtilPackage = System.getProperty("service.spring.util.package");
+			String testDir = System.getProperty("service.test.dir");
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
@@ -158,7 +160,7 @@ public class ServiceBuilder {
 				remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
 				baseModelImplPackage, basePersistencePackage,
 				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
-				springHibernatePackage, springUtilPackage);
+				springHibernatePackage, springUtilPackage, testDir);
 		}
 
 		if (serviceBuilder == null) {
@@ -475,7 +477,7 @@ public class ServiceBuilder {
 		String baseModelImplPackage, String basePersistencePackage,
 		String beanLocatorUtilPackage, String principalBeanPackage,
 		String propsUtilPackage, String springHibernatePackage,
-		String springUtilPackage) {
+		String springUtilPackage, String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
@@ -483,7 +485,7 @@ public class ServiceBuilder {
 			remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
 			baseModelImplPackage, basePersistencePackage,
 			beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
-			springHibernatePackage, springUtilPackage, true);
+			springHibernatePackage, springUtilPackage, testDir, true);
 	}
 
 	public ServiceBuilder(
@@ -494,7 +496,7 @@ public class ServiceBuilder {
 		String baseModelImplPackage, String basePersistencePackage,
 		String beanLocatorUtilPackage, String principalBeanPackage,
 		String propsUtilPackage, String springHibernatePackage,
-		String springUtilPackage, boolean build) {
+		String springUtilPackage, String testDir, boolean build) {
 
 		_tplBaseModeImpl = _getTplProperty("base_mode_impl", _tplBaseModeImpl);
 		_tplBasePersistence = _getTplProperty(
@@ -573,6 +575,7 @@ public class ServiceBuilder {
 			_propsUtilPackage = propsUtilPackage;
 			_springHibernatePackage = springHibernatePackage;
 			_springUtilPackage = springUtilPackage;
+			_testDir = testDir;
 
 			Document doc = PortalUtil.readDocumentFromFile(
 				new File(fileName), true);
@@ -586,6 +589,11 @@ public class ServiceBuilder {
 
 			_serviceOutputPath =
 				_apiDir + "/" + StringUtil.replace(packagePath, ".", "/");
+
+			if (Validator.isNotNull(_testDir)) {
+				_testOutputPath =
+					_testDir + "/" + StringUtil.replace(packagePath, ".", "/");
+			}
 
 			_packagePath = packagePath;
 
@@ -603,6 +611,8 @@ public class ServiceBuilder {
 				_outputPath += "/" + _portletPackageName;
 
 				_serviceOutputPath += "/" + _portletPackageName;
+
+				_testOutputPath += "/" + _portletPackageName;
 
 				_packagePath += "." + _portletPackageName;
 			}
@@ -959,6 +969,10 @@ public class ServiceBuilder {
 							_createPersistence(entity);
 							_createPersistenceUtil(entity);
 
+							if (Validator.isNotNull(_testDir)) {
+								_createPersistenceTest(entity);
+							}
+
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
 
@@ -1151,7 +1165,7 @@ public class ServiceBuilder {
 				_baseModelImplPackage, _basePersistencePackage,
 				_beanLocatorUtilPackage, _principalBeanPackage,
 				_propsUtilPackage, _springHibernatePackage, _springUtilPackage,
-				false);
+				_testDir, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -1972,6 +1986,24 @@ public class ServiceBuilder {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"PersistenceImpl.java");
+
+		writeFile(ejbFile, content);
+	}
+
+	private void _createPersistenceTest(Entity entity) throws Exception {
+		Map context = _getContext();
+
+		context.put("entity", entity);
+
+		// Content
+
+		String content = _processTemplate(_tplPersistenceTest, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_testOutputPath + "/service/persistence/" + entity.getName() +
+				"PersistenceTest.java");
 
 		writeFile(ejbFile, content);
 	}
@@ -3183,6 +3215,7 @@ public class ServiceBuilder {
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
+	private String _tplPersistenceTest = _TPL_ROOT + "persistence_test.ftl";
 	private String _tplPersistenceUtil = _TPL_ROOT + "persistence_util.ftl";
 	private String _tplPrincipalBean = _TPL_ROOT + "principal_bean.ftl";
 	private String _tplProps = _TPL_ROOT + "props.ftl";
@@ -3222,11 +3255,13 @@ public class ServiceBuilder {
 	private String _propsUtilPackage;
 	private String _springHibernatePackage;
 	private String _springUtilPackage;
+	private String _testDir;
 	private String _portletName = StringPool.BLANK;
 	private String _portletShortName = StringPool.BLANK;
 	private String _portletPackageName = StringPool.BLANK;
 	private String _outputPath;
 	private String _serviceOutputPath;
+	private String _testOutputPath;
 	private String _packagePath;
 	private List _ejbList;
 
