@@ -513,6 +513,7 @@ ${exception.message}
 			<jvmarg value="-Dservice.props.util.package=com.liferay.portal.util" />
 			<jvmarg value="-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate" />
 			<jvmarg value="-Dservice.spring.util.package=com.liferay.portal.spring.util" />
+			<jvmarg value="-Dservice.test.dir=test" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
