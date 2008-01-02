@@ -98,7 +98,7 @@
 	#set ($page_settings_url = $theme_display.getURLPageSettings().toString())
 #end
 
-#set ($show_publish_to_live = $theme_display.getLayout().getGroup().isStagingGroup())
+#set ($show_publish_to_live = $theme_display.getLayout().getGroup().isStagingGroup() && $theme_display.getURLPublishToLive())
 
 #if ($show_publish_to_live)
 	#set ($publish_to_live_text = $languageUtil.get($company_id, $locale, "publish-to-live"))
