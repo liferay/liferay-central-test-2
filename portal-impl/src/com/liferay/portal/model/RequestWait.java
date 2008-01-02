@@ -22,8 +22,7 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="RequestWait.java.html"><b><i>View Source</i></b></a>
@@ -79,12 +78,9 @@ public class RequestWait {
 	}
 
 	public synchronized void waitForRequest() throws InterruptedException {
-		int heartbeatCycle = GetterUtil.getInteger(PropsUtil.get(
-			PropsUtil.REVERSE_AJAX_HEARTBEAT));
-
 		_timedOut = true;
 
-		wait(heartbeatCycle);
+		wait(PropsValues.REVERSE_AJAX_HEARTBEAT);
 	}
 
 	private String _cmd;

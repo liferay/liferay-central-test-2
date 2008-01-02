@@ -820,7 +820,8 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_EXPORT_ENABLED)) {
+				companyId, PropsUtil.LDAP_EXPORT_ENABLED,
+				PropsValues.LDAP_EXPORT_ENABLED)) {
 
 			return true;
 		}
@@ -833,7 +834,8 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_IMPORT_ENABLED)) {
+				companyId, PropsUtil.LDAP_IMPORT_ENABLED,
+				PropsValues.LDAP_IMPORT_ENABLED)) {
 
 			return true;
 		}

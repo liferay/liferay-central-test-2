@@ -560,7 +560,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="import-enabled" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="importEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "importEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ENABLED)) %>' />
+		<liferay-ui:input-checkbox param="importEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "importEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED)) %>' />
 	</td>
 </tr>
 <tbody id="<portlet:namespace />importEnabledSettings">
@@ -599,7 +599,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:message key="export-enabled" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="exportEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "exportEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_EXPORT_ENABLED)) %>' />
+		<liferay-ui:input-checkbox param="exportEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "exportEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED)) %>' />
 	</td>
 </tr>
 <tbody id="<portlet:namespace />exportEnabledSettings">

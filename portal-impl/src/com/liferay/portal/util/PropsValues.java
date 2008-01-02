@@ -297,6 +297,12 @@ public class PropsValues {
 	public static final boolean LDAP_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LDAP_AUTH_ENABLED));
 
+	public static final boolean LDAP_EXPORT_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LDAP_EXPORT_ENABLED));
+
+	public static final boolean LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LDAP_IMPORT_ENABLED));
+
 	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LDAP_PASSWORD_POLICY_ENABLED));
@@ -441,6 +447,9 @@ public class PropsValues {
 
 	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
+
+	public static final int REVERSE_AJAX_HEARTBEAT = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.REVERSE_AJAX_HEARTBEAT));
 
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_POST);
