@@ -478,6 +478,10 @@ ${exception.message}
 		</java>
 	</target>
 
+	<target name="build-selenium">
+		<ant dir="../portal-web" target="build-selenium" />
+	</target>
+
 	<target name="build-service">
 		<java
 			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"

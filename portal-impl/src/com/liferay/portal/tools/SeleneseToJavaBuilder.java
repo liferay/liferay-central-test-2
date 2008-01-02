@@ -26,18 +26,11 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 
 import java.io.File;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.tools.ant.DirectoryScanner;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="SeleneseToJavaBuilder.java.html"><b><i>View Source</i></b></a>
@@ -86,6 +79,22 @@ public class SeleneseToJavaBuilder {
 		}
 	}
 
+	protected String[] getParams(String step) throws Exception {
+		String[] params = new String[3];
+
+		int x = 0;
+		int y = 0;
+
+		for (int i = 0; i < 3; i++) {
+			x = step.indexOf("<td>", x) + 4;
+			y = step.indexOf("</td>", x);
+
+			params[i] =	step.substring(x, y);
+		}
+
+		return params;
+	}
+
 	protected void translate(String basedir, String file) throws Exception {
 		file = StringUtil.replace(
 			file, StringPool.BACK_SLASH, StringPool.SLASH);
@@ -117,20 +126,27 @@ public class SeleneseToJavaBuilder {
 
 		xml = xml.substring(x, y + 8);
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		x = 0;
+		y = 0;
 
-		Element root = doc.getRootElement();
+		while (true) {
+			x = xml.indexOf("<tr>", x);
+			y = xml.indexOf("</tr>", x);
 
-		Iterator itr = root.elements().iterator();
+			if ((x == -1) || (y == -1)) {
+				break;
+			}
 
-		while (itr.hasNext()) {
-			Element steps = (Element)itr.next();
+			x += 6;
+			y--;
 
-			List params = steps.elements();
+			String step = xml.substring(x, y);
 
-			String param1 = ((Element)params.get(0)).getText();
-			String param2 = ((Element)params.get(1)).getText();
-			String param3 = ((Element)params.get(2)).getText();
+			String[] params = getParams(step);
+
+			String param1 = params[0];
+			String param2 = params[1];
+			String param3 = params[2];
 
 			if (param1.equals("clickAndWait")) {
 				sm.append("selenium.click(\"");
