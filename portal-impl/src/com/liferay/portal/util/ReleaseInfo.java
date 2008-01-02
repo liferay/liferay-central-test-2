@@ -40,7 +40,7 @@ public class ReleaseInfo {
 
 	static String version = "4.4.0";
 
-	static String codeName = "Owen";
+	static String codeName = "Spurgeon";
 
 	static String build = "4400";
 
