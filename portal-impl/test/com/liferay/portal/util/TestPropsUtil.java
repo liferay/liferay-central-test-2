@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import java.io.InputStream;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -46,7 +48,17 @@ public class TestPropsUtil {
 		try {
 			ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
-			_props.load(classLoader.getResourceAsStream("test.properties"));
+			InputStream is = classLoader.getResourceAsStream(
+				"test-portal-impl.properties");
+
+			_props.load(is);
+
+			is = classLoader.getResourceAsStream(
+				"test-portal-impl-ext.properties");
+
+			if (is != null) {
+				_props.load(is);
+			}
 
 			List keys = Collections.list(_props.propertyNames());
 
