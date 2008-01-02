@@ -31,16 +31,21 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.util.servlet.DynamicServletRequest;
 
 import javax.portlet.PortletPreferences;
 
@@ -184,10 +189,38 @@ public class UpdateLayoutAction extends Action {
 		}
 		else {
 			if (cmd.equals(Constants.ADD) && (portletId != null)) {
+
+				// Run the render portlet action to add a portlet without
+				// refreshing.
+
 				Action renderPortletAction = (Action)InstancePool.get(
 					RenderPortletAction.class.getName());
 
-				renderPortletAction.execute(mapping, form, req, res);
+				// Pass in the portlet id because the portlet id may be the
+				// instance id. Namespace the request if necessary. See
+				// LEP-4644.
+
+				long companyId = PortalUtil.getCompanyId(req);
+
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					companyId, portletId);
+
+				DynamicServletRequest dynamicReq = null;
+
+				if (portlet.isPrivateRequestAttributes()) {
+					String portletNamespace =
+						PortalUtil.getPortletNamespace(portlet.getPortletId());
+
+					dynamicReq = new NamespaceServletRequest(
+						req, portletNamespace, portletNamespace);
+				}
+				else {
+					dynamicReq = new DynamicServletRequest(req);
+				}
+
+				dynamicReq.setParameter("p_p_id", portletId);
+
+				renderPortletAction.execute(mapping, form, dynamicReq, res);
 			}
 
 			return null;
