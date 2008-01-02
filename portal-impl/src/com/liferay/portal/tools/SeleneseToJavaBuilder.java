@@ -87,7 +87,8 @@ public class SeleneseToJavaBuilder {
 
 		for (int i = 0; i < 3; i++) {
 			x = step.indexOf("<td>", x) + 4;
-			y = step.indexOf("</td>", x);
+			y = step.indexOf("\n", x);
+			y = step.lastIndexOf("</td>", y);
 
 			params[i] =	step.substring(x, y);
 		}
@@ -131,14 +132,14 @@ public class SeleneseToJavaBuilder {
 
 		while (true) {
 			x = xml.indexOf("<tr>", x);
-			y = xml.indexOf("</tr>", x);
+			y = xml.indexOf("\n</tr>", x);
 
 			if ((x == -1) || (y == -1)) {
 				break;
 			}
 
 			x += 6;
-			y--;
+			y++;
 
 			String step = xml.substring(x, y);
 
