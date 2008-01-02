@@ -505,14 +505,8 @@ public class ServicePreAction extends Action {
 			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		// Public layouts are always viewable
-
-		if (!privateLayout) {
-			return true;
-		}
-
 		// User private layouts are only viewable by the user and anyone who can
-		// update the user
+		// update the user. The user must also be active.
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -525,16 +519,29 @@ public class ServicePreAction extends Action {
 			else {
 				User groupUser = UserLocalServiceUtil.getUserById(groupUserId);
 
-				if (UserPermissionUtil.contains(
-						permissionChecker, groupUserId,
-						groupUser.getOrganizationIds(), ActionKeys.UPDATE)) {
-
-					return true;
-				}
-				else {
+				if (!groupUser.isActive()) {
 					return false;
 				}
+
+				if (privateLayout) {
+					if (UserPermissionUtil.contains(
+							permissionChecker, groupUserId,
+							groupUser.getOrganizationIds(),
+							ActionKeys.UPDATE)) {
+
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
 			}
+		}
+
+		// Most public layouts are viewable
+
+		if (!privateLayout) {
+			return true;
 		}
 
 		// If the current group is staging, the live group should be checked
