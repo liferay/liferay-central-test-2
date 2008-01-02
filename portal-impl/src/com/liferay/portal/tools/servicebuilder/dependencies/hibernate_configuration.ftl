@@ -5,7 +5,6 @@ package ${springHibernatePackage};
 
 import com.liferay.portal.kernel.util.Validator;
 import ${propsUtilPackage}.PropsUtil;
-import com.liferay.util.spring.hibernate.TransactionAwareConfiguration;
 
 import java.io.InputStream;
 
@@ -21,7 +20,7 @@ import org.hibernate.cfg.Environment;
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateConfiguration extends TransactionAwareConfiguration {
+public class HibernateConfiguration extends org.springframework.orm.hibernate3.LocalSessionFactoryBean {
 
 	protected Configuration newConfiguration() {
 		Configuration cfg = new Configuration();
