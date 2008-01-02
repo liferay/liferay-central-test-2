@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -34,7 +34,7 @@ import com.liferay.portlet.journal.model.JournalStructure;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalStructurePersistenceTest extends BasePersistenceTest {
+public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

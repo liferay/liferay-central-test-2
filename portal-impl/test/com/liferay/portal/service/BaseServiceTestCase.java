@@ -38,12 +38,12 @@ import com.liferay.portal.util.TestPropsValues;
 import junit.framework.TestCase;
 
 /**
- * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseServiceTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class BaseServiceTest extends TestCase {
+public class BaseServiceTestCase extends TestCase {
 
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());

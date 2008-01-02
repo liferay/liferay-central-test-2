@@ -23,7 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchItemFieldException;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
@@ -34,7 +34,7 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemFieldPersistenceTest extends BasePersistenceTest {
+public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

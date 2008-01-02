@@ -23,7 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -34,7 +34,7 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCLicensePersistenceTest extends BasePersistenceTest {
+public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

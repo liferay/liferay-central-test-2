@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -34,7 +34,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileShortcutPersistenceTest extends BasePersistenceTest {
+public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

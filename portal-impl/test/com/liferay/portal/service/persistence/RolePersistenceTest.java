@@ -25,7 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 /**
  * <a href="RolePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -33,7 +33,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTest;
  * @author Brian Wing Shun Chan
  *
  */
-public class RolePersistenceTest extends BasePersistenceTest {
+public class RolePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

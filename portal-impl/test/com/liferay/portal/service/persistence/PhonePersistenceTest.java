@@ -25,7 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 /**
  * <a href="PhonePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -33,7 +33,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTest;
  * @author Brian Wing Shun Chan
  *
  */
-public class PhonePersistenceTest extends BasePersistenceTest {
+public class PhonePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

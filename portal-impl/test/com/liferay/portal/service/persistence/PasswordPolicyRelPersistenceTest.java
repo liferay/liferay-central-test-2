@@ -25,7 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.PasswordPolicyRel;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 /**
  * <a href="PasswordPolicyRelPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -33,7 +33,7 @@ import com.liferay.portal.service.persistence.BasePersistenceTest;
  * @author Brian Wing Shun Chan
  *
  */
-public class PasswordPolicyRelPersistenceTest extends BasePersistenceTest {
+public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

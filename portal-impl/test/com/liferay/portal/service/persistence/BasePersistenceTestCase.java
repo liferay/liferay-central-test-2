@@ -33,12 +33,12 @@ import java.util.Random;
 import junit.framework.TestCase;
 
 /**
- * <a href="BasePersistenceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceTest extends TestCase {
+public class BasePersistenceTestCase extends TestCase {
 
 	protected void assertEquals(double expected, double actual)
 		throws Exception {

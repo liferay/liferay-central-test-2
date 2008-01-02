@@ -23,7 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -34,7 +34,7 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBDiscussionPersistenceTest extends BasePersistenceTest {
+public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

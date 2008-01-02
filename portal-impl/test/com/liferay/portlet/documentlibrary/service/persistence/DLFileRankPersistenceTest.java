@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -34,7 +34,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileRankPersistenceTest extends BasePersistenceTest {
+public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

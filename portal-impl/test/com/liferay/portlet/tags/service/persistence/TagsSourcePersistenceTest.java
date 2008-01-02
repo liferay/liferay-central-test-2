@@ -23,7 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tags.NoSuchSourceException;
 import com.liferay.portlet.tags.model.TagsSource;
@@ -34,7 +34,7 @@ import com.liferay.portlet.tags.model.TagsSource;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsSourcePersistenceTest extends BasePersistenceTest {
+public class TagsSourcePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

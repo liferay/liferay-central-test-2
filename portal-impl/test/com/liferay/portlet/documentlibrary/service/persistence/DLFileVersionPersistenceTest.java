@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -34,7 +34,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileVersionPersistenceTest extends BasePersistenceTest {
+public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

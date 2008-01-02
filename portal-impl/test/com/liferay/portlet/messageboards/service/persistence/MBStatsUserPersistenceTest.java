@@ -23,7 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -34,7 +34,7 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBStatsUserPersistenceTest extends BasePersistenceTest {
+public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

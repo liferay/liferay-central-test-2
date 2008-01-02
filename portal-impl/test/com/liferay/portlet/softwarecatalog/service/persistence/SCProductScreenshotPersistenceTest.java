@@ -23,7 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
@@ -34,7 +34,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductScreenshotPersistenceTest extends BasePersistenceTest {
+public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

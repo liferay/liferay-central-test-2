@@ -23,7 +23,7 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -34,7 +34,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryPersistenceTest extends BasePersistenceTest {
+public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

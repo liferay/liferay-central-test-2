@@ -23,7 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
@@ -34,7 +34,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFlagPersistenceTest extends BasePersistenceTest {
+public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

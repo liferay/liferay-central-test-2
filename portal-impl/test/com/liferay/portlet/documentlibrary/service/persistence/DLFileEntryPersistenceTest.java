@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -34,7 +34,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileEntryPersistenceTest extends BasePersistenceTest {
+public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

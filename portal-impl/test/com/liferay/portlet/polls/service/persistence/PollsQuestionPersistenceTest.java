@@ -23,7 +23,7 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -34,7 +34,7 @@ import com.liferay.portlet.polls.model.PollsQuestion;
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsQuestionPersistenceTest extends BasePersistenceTest {
+public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

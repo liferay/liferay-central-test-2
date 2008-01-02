@@ -23,7 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -34,7 +34,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductEntryPersistenceTest extends BasePersistenceTest {
+public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

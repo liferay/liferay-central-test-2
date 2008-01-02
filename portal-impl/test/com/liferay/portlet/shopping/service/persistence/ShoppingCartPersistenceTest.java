@@ -23,7 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.persistence.BasePersistenceTest;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchCartException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
@@ -34,7 +34,7 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingCartPersistenceTest extends BasePersistenceTest {
+public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 

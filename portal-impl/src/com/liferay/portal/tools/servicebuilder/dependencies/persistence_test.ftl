@@ -4,10 +4,10 @@ package ${packagePath}.service.persistence;
 
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
-import ${basePersistencePackage}.BasePersistenceTest;
+import ${basePersistencePackage}.BasePersistenceTestCase;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
-public class ${entity.name}PersistenceTest extends BasePersistenceTest {
+public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();

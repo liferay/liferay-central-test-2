@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service;
 
-import com.liferay.portal.service.BaseServiceTest;
+import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
@@ -32,7 +32,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryServiceTest extends BaseServiceTest {
+public class BookmarksEntryServiceTest extends BaseServiceTestCase {
 
 	public void testAddEntry() throws Exception {
 		BookmarksEntryServiceTestHelper.addEntry();
