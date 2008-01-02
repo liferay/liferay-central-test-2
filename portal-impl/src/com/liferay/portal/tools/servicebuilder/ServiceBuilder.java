@@ -1376,6 +1376,11 @@ public class ServiceBuilder {
 		String fileName = StringUtil.replace(file.toString(), "\\", "/");
 
 		int x = fileName.indexOf("src/");
+
+		if (x == -1) {
+			x = fileName.indexOf("test/");
+		}
+
 		int y = fileName.lastIndexOf("/");
 
 		fileName = fileName.substring(x + 4, y);

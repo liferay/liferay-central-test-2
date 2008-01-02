@@ -206,6 +206,7 @@ public class SourceFormatter {
 				"**\\portal-service\\**\\model\\*Soap.java",
 				"**\\model\\impl\\*ModelImpl.java",
 				"**\\portal\\service\\**", "**\\portal-client\\**",
+				"**\\portal-web\\test\\**\\*Test.java",
 				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
 				"**\\util-wsrp\\**"
 			});
@@ -221,6 +222,7 @@ public class SourceFormatter {
 		ds.setExcludes(
 			new String[] {
 				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+				"**\\test\\**\\*PersistenceTest.java"
 			});
 		ds.setIncludes(
 			new String[] {
@@ -230,22 +232,13 @@ public class SourceFormatter {
 				"**\\service\\permission\\*.java",
 				"**\\service\\persistence\\BasePersistence.java",
 				"**\\service\\persistence\\*FinderImpl.java",
+				"**\\portal-impl\\test\\**\\*.java",
 				"**\\portal-service\\**\\liferay\\counter\\**.java",
 				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
 				"**\\portal-service\\**\\liferay\\lock\\**.java",
 				"**\\portal-service\\**\\liferay\\mail\\**.java",
 				"**\\util-bridges\\**\\*.java"
 			});
-
-		ds.scan();
-
-		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
-
-		ds = new DirectoryScanner();
-
-		ds.setBasedir(basedir);
-		ds.setExcludes(new String[] {"**\\test\\**\\*PersistenceTest.java"});
-		ds.setIncludes(new String[] {"**\\test\\**\\*.java"});
 
 		ds.scan();
 

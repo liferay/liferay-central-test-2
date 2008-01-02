@@ -645,6 +645,17 @@
 		</antcall>
 	</target>
 
+	<target name="build-selenium">
+		<java
+			classname="com.liferay.portal.tools.SeleneseToJavaBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg line="test" />
+		</java>
+	</target>
+
 	<target name="build-themes">
 		<for param="module.name">
 			<path>
