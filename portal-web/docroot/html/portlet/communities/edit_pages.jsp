@@ -537,7 +537,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<%
 			String tabs3Names = "page,children";
 
-			if (permissionChecker.isOmniadmin() || GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE))) {
+			if (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE) {
 				tabs3Names += ",look-and-feel";
 			}
 

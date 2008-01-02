@@ -322,6 +322,10 @@ public class PropsValues {
 	public static final String[] LOGIN_EVENTS_PRE =
 		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_PRE);
 
+	public static final boolean LOOK_AND_FEEL_MODIFIABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE));
+
 	public static final String LUCENE_DIR = PropsUtil.get(PropsUtil.LUCENE_DIR);
 
 	public static final String LUCENE_FILE_EXTRACTOR =
