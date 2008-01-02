@@ -72,11 +72,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		userGroupRole.add(new Long(role.getRoleId()));
 
 		groupParams.put("userGroupRole", userGroupRole);
-		groupParams.put("active", Boolean.TRUE);
+		//groupParams.put("active", Boolean.TRUE);
 	}
 	else if (tabs1.equals("communities-joined")) {
 		groupParams.put("usersGroups", new Long(user.getUserId()));
-		groupParams.put("active", Boolean.TRUE);
+		//groupParams.put("active", Boolean.TRUE);
 	}
 	else if (tabs1.equals("available-communities")) {
 		List types = new ArrayList();
@@ -124,8 +124,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	headerNames.add("members");
 	headerNames.add("online-now");
 
-	if (tabs1.equals("communities-owned")) {
+	if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) {
 		headerNames.add("active");
+	}
+
+	if (tabs1.equals("communities-owned")) {
 		headerNames.add("pending-requests");
 	}
 
@@ -264,7 +267,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		// Active
 
-		if (tabs1.equals("communities-owned")) {
+		if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) {
 			row.addText(LanguageUtil.get(pageContext, (group.isActive() ? "yes" : "no")));
 		}
 
