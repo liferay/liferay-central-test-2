@@ -1966,14 +1966,16 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content);
 
-		ejbFile = new File(
-			_outputPath + "/service/persistence/" + entity.getName() +
-				"Persistence.java");
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/persistence/" + entity.getName() +
+					"Persistence.java");
 
-		if (ejbFile.exists()) {
-			System.out.println("Relocating " + ejbFile);
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
 
-			ejbFile.delete();
+				ejbFile.delete();
+			}
 		}
 	}
 
@@ -2035,14 +2037,16 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content);
 
-		ejbFile = new File(
-			_outputPath + "/service/persistence/" + entity.getName() +
-				"Util.java");
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/persistence/" + entity.getName() +
+					"Util.java");
 
-		if (ejbFile.exists()) {
-			System.out.println("Relocating " + ejbFile);
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
 
-			ejbFile.delete();
+				ejbFile.delete();
+			}
 		}
 	}
 
