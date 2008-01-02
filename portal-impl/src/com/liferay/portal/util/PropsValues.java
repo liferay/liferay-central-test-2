@@ -432,6 +432,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
 
+	public static final String PORTLET_VIRTUAL_PATH =
+		PropsUtil.get(PropsUtil.PORTLET_VIRTUAL_PATH);
+
 	public static final boolean PREFERENCE_VALIDATE_ON_STARTUP =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP));

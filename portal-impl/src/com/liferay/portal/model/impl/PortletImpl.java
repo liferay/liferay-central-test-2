@@ -46,7 +46,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
@@ -376,8 +375,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setVirtualPath(String virtualPath) {
 		if (_warFile && Validator.isNull(virtualPath)) {
-			virtualPath = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.PORTLET_VIRTUAL_PATH));
+			virtualPath = PropsValues.PORTLET_VIRTUAL_PATH;
 		}
 
 		_virtualPath = virtualPath;
