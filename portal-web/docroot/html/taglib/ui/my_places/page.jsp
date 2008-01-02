@@ -84,6 +84,7 @@
 					addPageURL.setPortletMode(PortletMode.VIEW);
 
 					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("redirect", currentURL);
 					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
@@ -102,6 +103,7 @@
 					addPageURL.setPortletMode(PortletMode.VIEW);
 
 					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("redirect", currentURL);
 					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
@@ -120,6 +122,7 @@
 
 				publicAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				publicAddPageURL.setParameter("tabs2", "public");
+				publicAddPageURL.setParameter("redirect", currentURL);
 				publicAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 
 				publicAddPageHREF = publicAddPageURL.toString();
@@ -133,6 +136,7 @@
 
 				privateAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				privateAddPageURL.setParameter("tabs2", "private");
+				privateAddPageURL.setParameter("redirect", currentURL);
 				privateAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 
 				privateAddPageHREF = privateAddPageURL.toString();
