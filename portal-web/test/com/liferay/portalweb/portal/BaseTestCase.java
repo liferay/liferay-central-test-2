@@ -46,7 +46,7 @@ public class BaseTestCase extends SeleneseTestCase {
 
 		selenium.start();
 
-		selenium.setContext(this.getClass().getSimpleName() + "." + getName());
+		selenium.setContext(this.getClass().getName() + "." + getName());
 	}
 
 }
