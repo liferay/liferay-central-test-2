@@ -22,9 +22,8 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.util.TestPropsValues;
+import com.liferay.portalweb.portal.util.SeleniumUtil;
 
-import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.SeleneseTestCase;
 
 /**
@@ -36,17 +35,10 @@ import com.thoughtworks.selenium.SeleneseTestCase;
 public class BaseTestCase extends SeleneseTestCase {
 
 	public void setUp() throws Exception {
-		String seleniumHost = TestPropsValues.SELINIUM_HOST;
-		int seleniumPort = TestPropsValues.SELINIUM_PORT;
-		String browserType = TestPropsValues.BROWSER_TYPE;
-		String portalURL = TestPropsValues.PORTAL_URL;
+		selenium = SeleniumUtil.getSelenium();
+	}
 
-		selenium = new DefaultSelenium(
-			seleniumHost, seleniumPort, browserType, portalURL);
-
-		selenium.start();
-
-		selenium.setContext(this.getClass().getName() + "." + getName());
+	public void tearDown() throws Exception {
 	}
 
 }
