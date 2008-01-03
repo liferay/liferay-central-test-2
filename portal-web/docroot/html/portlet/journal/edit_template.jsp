@@ -142,7 +142,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	</td>
 	<td>
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
+			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
 				<c:choose>
 					<c:when test="<%= template == null %>">
 						<liferay-ui:message key="autogenerate-id" />
@@ -379,7 +379,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
+			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>

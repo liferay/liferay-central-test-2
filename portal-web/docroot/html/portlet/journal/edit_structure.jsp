@@ -212,7 +212,7 @@ int tabIndex = 1;
 	</td>
 	<td>
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
+			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
 				<c:choose>
 					<c:when test="<%= structure == null %>">
 						<liferay-ui:message key="autogenerate-id" />
@@ -376,7 +376,7 @@ tabIndex = tabIndexWrapper.getValue();
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
+			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>

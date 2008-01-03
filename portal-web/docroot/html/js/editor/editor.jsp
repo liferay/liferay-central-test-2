@@ -26,10 +26,10 @@
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.struts.StrutsUtil" %>
-<%@ page import="com.liferay.portal.util.PropsUtil" %>
+<%@ page import="com.liferay.portal.util.PropsValues" %>
 
 <%
-String editorImpl = ParamUtil.getString(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+String editorImpl = ParamUtil.getString(request, "editorImpl", PropsValues.EDITOR_WYSIWYG_DEFAULT);
 
 if (BrowserSniffer.is_safari(request)) {
 	if (editorImpl.indexOf("simple") == -1) {
@@ -54,7 +54,3 @@ rd.include(request, response);
 %>
 
 <%--<jsp:include page='<%= StrutsUtil.TEXT_HTML_DIR + "/js/editor/" + editorImpl + ".jsp" %>' />--%>
-
-<%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.default";
-%>

@@ -187,6 +187,9 @@ public class PropsValues {
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
 
+	public static final String EDITOR_WYSIWYG_DEFAULT =
+		PropsUtil.get(PropsUtil.EDITOR_WYSIWYG_DEFAULT);
+
 	public static final boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
@@ -228,6 +231,22 @@ public class PropsValues {
 
 	public static final String JBI_WORKFLOW_URL =
 		PropsUtil.get(PropsUtil.JBI_WORKFLOW_URL);
+
+	public static final boolean JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID));
+
+	public static final boolean JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
+
+	public static final boolean JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID));
+
+	public static final boolean JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID));
 
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));

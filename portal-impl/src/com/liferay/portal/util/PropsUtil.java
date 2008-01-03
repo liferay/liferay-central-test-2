@@ -637,6 +637,10 @@ public class PropsUtil {
 
 	public static final String IMAGE_DEFAULT_USER_PORTRAIT = "image.default.user.portrait";
 
+	// Editors
+
+	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
+
 	// Fields
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE = "field.enable.com.liferay.portal.model.Contact.male";

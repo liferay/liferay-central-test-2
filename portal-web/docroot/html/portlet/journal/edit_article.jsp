@@ -173,7 +173,7 @@ else {
 
 boolean disableIncrementVersion = false;
 
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION))) {
+if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(article.getGroupId(), articleId, version));
 
 	if (!latestVersion) {
@@ -561,7 +561,7 @@ String[] availableLocales = null;
 			</td>
 			<td>
 				<c:choose>
-					<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID)) %>">
+					<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
 						<c:choose>
 							<c:when test="<%= article == null %>">
 								<liferay-ui:message key="autogenerate-id" />
@@ -909,7 +909,7 @@ String[] availableLocales = null;
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID)) %>">
+			<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />title);
 			</c:when>
 			<c:otherwise>

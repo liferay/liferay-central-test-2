@@ -32,7 +32,7 @@ String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:inpu
 String editorImpl = (String)request.getAttribute("liferay-ui:input-editor:editorImpl");
 
 if (Validator.isNull(editorImpl)) {
-	editorImpl = PropsUtil.get("editor.wysiwyg.default");
+	editorImpl = PropsValues.EDITOR_WYSIWYG_DEFAULT;
 }
 else {
 	editorImpl = PropsUtil.get(editorImpl);
