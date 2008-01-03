@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="CookieKeys.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Minhchau Dang
  *
  */
 public class CookieKeys {
@@ -77,7 +78,7 @@ public class CookieKeys {
 
 	public static String getDomain(HttpServletRequest req) {
 
-		// See LEP-4602 and	LEP-4618
+		// See LEP-4602 and	LEP-4618.
 
 		if (Validator.isNotNull(PropsValues.SESSION_COOKIE_DOMAIN)) {
 			return PropsValues.SESSION_COOKIE_DOMAIN;
@@ -85,15 +86,41 @@ public class CookieKeys {
 
 		String host = req.getServerName();
 
-		int pos = host.indexOf(StringPool.PERIOD);
+		return getDomain(host);
+	}
 
-		if (pos != -1) {
-			String domain = host.substring(pos);
+	public static String getDomain(String host) {
 
-			return domain;
+		// See LEP-4602 and LEP-4645.
+
+		if (host == null) {
+			return null;
 		}
 
-		return host;
+		int x = host.lastIndexOf(StringPool.PERIOD);
+
+		if (x <= 0) {
+			return null;
+		}
+
+		int y = host.lastIndexOf(StringPool.PERIOD, x - 1);
+
+		if (y <= 0) {
+			return StringPool.PERIOD + host;
+		}
+
+		int z = host.lastIndexOf(StringPool.PERIOD, y - 1);
+
+		String domain = null;
+
+		if (z <= 0) {
+			domain = host.substring(y);
+		}
+		else {
+			domain = host.substring(z);
+		}
+
+		return domain;
 	}
 
 	public static void validateSupportCookie(HttpServletRequest req)

@@ -41,13 +41,45 @@ public class PortalRequest extends Request {
 
 		String host = getServerName();
 
-		int pos = host.indexOf(StringPool.PERIOD);
+		String domain = getDomain(host);
 
-		if (pos != -1) {
-			String domain = host.substring(pos);
-
+		if (domain != null) {
 			cookie.setDomain(domain);
 		}
+	}
+
+	public static String getDomain(String host) {
+
+		// See LEP-4602 and LEP-4645.
+
+		if (host == null) {
+			return null;
+		}
+
+		int x = host.lastIndexOf(StringPool.PERIOD);
+
+		if (x <= 0) {
+			return null;
+		}
+
+		int y = host.lastIndexOf(StringPool.PERIOD, x - 1);
+
+		if (y <= 0) {
+			return StringPool.PERIOD + host;
+		}
+
+		int z = host.lastIndexOf(StringPool.PERIOD, y - 1);
+
+		String domain = null;
+
+		if (z <= 0) {
+			domain = host.substring(y);
+		}
+		else {
+			domain = host.substring(z);
+		}
+
+		return domain;
 	}
 
 }
