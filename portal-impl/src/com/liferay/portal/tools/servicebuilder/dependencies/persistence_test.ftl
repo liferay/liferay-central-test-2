@@ -5,7 +5,7 @@ package ${packagePath}.service.persistence;
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
 import ${basePersistencePackage}.BasePersistenceTestCase;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import ${beanLocatorUtilPackage}.BeanLocatorUtil;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 

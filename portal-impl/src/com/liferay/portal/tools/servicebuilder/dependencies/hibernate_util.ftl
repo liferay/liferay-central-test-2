@@ -4,7 +4,7 @@
 package ${springHibernatePackage};
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import ${beanLocatorUtilPackage}.BeanLocatorUtil;
 import com.liferay.portal.kernel.util.Validator;
 import ${propsUtilPackage}.PropsUtil;
 import com.liferay.util.CollectionFactory;
