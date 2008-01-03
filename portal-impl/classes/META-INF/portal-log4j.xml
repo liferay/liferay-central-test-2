@@ -68,6 +68,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.editor.fckeditor.ConnectorAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.EventsProcessor">
 		<priority value="ERROR" />
 	</category>
