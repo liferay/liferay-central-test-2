@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="WikiNodeLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class WikiNodeLocalServiceFactory {
 
 	public static WikiNodeLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (WikiNodeLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (WikiNodeLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class WikiNodeLocalServiceFactory {
 
 	public static WikiNodeLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WikiNodeLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WikiNodeLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class WikiNodeLocalServiceFactory {
 
 	private static WikiNodeLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WikiNodeLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (WikiNodeLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="MBCategoryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class MBCategoryLocalServiceFactory {
 
 	public static MBCategoryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MBCategoryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (MBCategoryLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class MBCategoryLocalServiceFactory {
 
 	public static MBCategoryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBCategoryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBCategoryLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class MBCategoryLocalServiceFactory {
 
 	private static MBCategoryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBCategoryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBCategoryLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

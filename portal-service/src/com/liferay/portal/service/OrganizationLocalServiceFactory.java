@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="OrganizationLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class OrganizationLocalServiceFactory {
 
 	public static OrganizationLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (OrganizationLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class OrganizationLocalServiceFactory {
 
 	public static OrganizationLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (OrganizationLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class OrganizationLocalServiceFactory {
 
 	private static OrganizationLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (OrganizationLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (OrganizationLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

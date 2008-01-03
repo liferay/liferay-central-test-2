@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="AddressServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class AddressServiceFactory {
 
 	public static AddressService getImpl() {
 		if (_impl == null) {
-			_impl = (AddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (AddressService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class AddressServiceFactory {
 
 	public static AddressService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (AddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (AddressService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class AddressServiceFactory {
 
 	private static AddressServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (AddressServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (AddressServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

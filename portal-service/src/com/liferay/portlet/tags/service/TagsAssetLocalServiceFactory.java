@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="TagsAssetLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class TagsAssetLocalServiceFactory {
 
 	public static TagsAssetLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsAssetLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsAssetLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class TagsAssetLocalServiceFactory {
 
 	public static TagsAssetLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsAssetLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsAssetLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class TagsAssetLocalServiceFactory {
 
 	private static TagsAssetLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsAssetLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsAssetLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

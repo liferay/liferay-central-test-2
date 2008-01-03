@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="BlogsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class BlogsEntryLocalServiceFactory {
 
 	public static BlogsEntryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (BlogsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (BlogsEntryLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class BlogsEntryLocalServiceFactory {
 
 	public static BlogsEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (BlogsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (BlogsEntryLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class BlogsEntryLocalServiceFactory {
 
 	private static BlogsEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (BlogsEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (BlogsEntryLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

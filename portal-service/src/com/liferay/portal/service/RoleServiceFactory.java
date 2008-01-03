@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="RoleServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class RoleServiceFactory {
 
 	public static RoleService getImpl() {
 		if (_impl == null) {
-			_impl = (RoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (RoleService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class RoleServiceFactory {
 
 	public static RoleService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (RoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (RoleService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class RoleServiceFactory {
 
 	private static RoleServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (RoleServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (RoleServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

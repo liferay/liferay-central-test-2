@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="PasswordPolicyLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class PasswordPolicyLocalServiceFactory {
 
 	public static PasswordPolicyLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PasswordPolicyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (PasswordPolicyLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class PasswordPolicyLocalServiceFactory {
 
 	public static PasswordPolicyLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PasswordPolicyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PasswordPolicyLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class PasswordPolicyLocalServiceFactory {
 
 	private static PasswordPolicyLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PasswordPolicyLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PasswordPolicyLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

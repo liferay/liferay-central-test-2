@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="SCLicenseServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class SCLicenseServiceFactory {
 
 	public static SCLicenseService getImpl() {
 		if (_impl == null) {
-			_impl = (SCLicenseService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (SCLicenseService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class SCLicenseServiceFactory {
 
 	public static SCLicenseService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SCLicenseService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SCLicenseService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class SCLicenseServiceFactory {
 
 	private static SCLicenseServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SCLicenseServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SCLicenseServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

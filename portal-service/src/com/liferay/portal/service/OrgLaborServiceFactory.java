@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="OrgLaborServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class OrgLaborServiceFactory {
 
 	public static OrgLaborService getImpl() {
 		if (_impl == null) {
-			_impl = (OrgLaborService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (OrgLaborService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class OrgLaborServiceFactory {
 
 	public static OrgLaborService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (OrgLaborService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (OrgLaborService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class OrgLaborServiceFactory {
 
 	private static OrgLaborServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (OrgLaborServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (OrgLaborServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

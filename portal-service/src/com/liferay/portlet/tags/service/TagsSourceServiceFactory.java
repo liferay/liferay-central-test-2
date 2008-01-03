@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="TagsSourceServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class TagsSourceServiceFactory {
 
 	public static TagsSourceService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsSourceService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsSourceService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class TagsSourceServiceFactory {
 
 	public static TagsSourceService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsSourceService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsSourceService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class TagsSourceServiceFactory {
 
 	private static TagsSourceServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsSourceServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsSourceServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

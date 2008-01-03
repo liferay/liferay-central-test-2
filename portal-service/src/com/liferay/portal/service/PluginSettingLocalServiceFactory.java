@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="PluginSettingLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +58,7 @@ public class PluginSettingLocalServiceFactory {
 
 	public static PluginSettingLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PluginSettingLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (PluginSettingLocalService)BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +66,7 @@ public class PluginSettingLocalServiceFactory {
 
 	public static PluginSettingLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PluginSettingLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PluginSettingLocalService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +78,7 @@ public class PluginSettingLocalServiceFactory {
 
 	private static PluginSettingLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PluginSettingLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PluginSettingLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;
