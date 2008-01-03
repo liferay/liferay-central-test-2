@@ -76,6 +76,8 @@ public class SeleniumUtil {
 		if (_selenium != null) {
 			_selenium.stop();
 		}
+
+		_selenium = null;
 	}
 
 	private static SeleniumUtil _instance = new SeleniumUtil();
