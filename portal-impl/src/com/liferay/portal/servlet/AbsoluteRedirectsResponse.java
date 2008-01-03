@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,31 +23,37 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 /**
  * <a href="AbsoluteRedirectsResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
+
 	public AbsoluteRedirectsResponse(
 		HttpServletRequest req, HttpServletResponse res) {
 
 		super(res);
 
-		this._req = req;
+		_req = req;
 	}
 
 	public void sendRedirect(String redirect) throws IOException {
 		String portalURL = getPortalURL();
 
-		if (redirect.startsWith(StringPool.SLASH) && (portalURL != null)) {
+		if (Validator.isNotNull(portalURL) &&
+			redirect.startsWith(StringPool.SLASH)) {
+
 			redirect = portalURL + redirect;
 		}
 
@@ -58,6 +64,6 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 		return PortalUtil.getPortalURL(_req);
 	}
 
-	private HttpServletRequest _req = null;
-	
+	private HttpServletRequest _req;
+
 }
