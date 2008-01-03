@@ -541,14 +541,14 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setArticleId(Html.escape(getArticleId()));
+			model.setArticleId(getArticleId());
 			model.setVersion(getVersion());
 			model.setTitle(Html.escape(getTitle()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setContent(Html.escape(getContent()));
 			model.setType(Html.escape(getType()));
-			model.setStructureId(Html.escape(getStructureId()));
-			model.setTemplateId(Html.escape(getTemplateId()));
+			model.setStructureId(getStructureId());
+			model.setTemplateId(getTemplateId());
 			model.setDisplayDate(getDisplayDate());
 			model.setApproved(getApproved());
 			model.setApprovedByUserId(getApprovedByUserId());

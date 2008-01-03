@@ -792,6 +792,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="articleId" type="String">
 			<hint name="upper-case">true</hint>
+			<hint name="auto-escape">false</hint>
 		</field>
 		<field name="version" type="double" />
 		<field name="title" type="String">
@@ -805,8 +806,12 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="type" type="String" />
-		<field name="structureId" type="String" />
-		<field name="templateId" type="String" />
+		<field name="structureId" type="String">
+			<hint name="auto-escape">false</hint>
+		</field>
+		<field name="templateId" type="String">
+			<hint name="auto-escape">false</hint>
+		</field>
 		<field name="displayDate" type="Date" />
 		<field name="approved" type="boolean" />
 		<field name="approvedByUserId" type="long" />
@@ -858,6 +863,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="structureId" type="String">
 			<hint name="upper-case">true</hint>
+			<hint name="auto-escape">false</hint>
 		</field>
 		<field name="name" type="String" />
 		<field name="description" type="String">
@@ -878,8 +884,11 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="templateId" type="String">
 			<hint name="upper-case">true</hint>
+			<hint name="auto-escape">false</hint>
 		</field>
-		<field name="structureId" type="String" />
+		<field name="structureId" type="String">
+			<hint name="auto-escape">false</hint>
+		</field>
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />

@@ -276,7 +276,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setStructureId(Html.escape(getStructureId()));
+			model.setStructureId(getStructureId());
 			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setXsd(Html.escape(getXsd()));

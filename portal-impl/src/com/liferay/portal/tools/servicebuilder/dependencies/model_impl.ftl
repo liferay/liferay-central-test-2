@@ -192,13 +192,29 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 				<#if column.EJBName??>
 					(${column.EJBName})get${column.methodName}().clone()
 				<#else>
-					<#if column.type == "String">
+					<#assign autoEscape = true>
+
+					<#assign modelName = packagePath + ".model." + entity.name>
+
+					<#if modelHintsUtil.getHints(modelName, column.name)??>
+						<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
+
+						<#if hints.get("auto-escape")??>
+							<#assign autoEscapeHintValue = hints.get("auto-escape")>
+
+							<#if autoEscapeHintValue == "false">
+								<#assign autoEscape = false>
+							</#if>
+						</#if>
+					</#if>
+
+					<#if autoEscape && (column.type == "String")>
 						Html.escape(
 					</#if>
 
 					get${column.methodName}()
 
-					<#if column.type == "String">
+					<#if autoEscape && (column.type == "String")>
 						)
 					</#if>
 				</#if>

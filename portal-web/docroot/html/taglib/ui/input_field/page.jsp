@@ -218,7 +218,15 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				value = defaultString;
 			}
 
-			value = Html.escape(value);
+			boolean autoEscape = true;
+
+			if (hints != null) {
+				autoEscape = GetterUtil.getBoolean((String)hints.get("auto-escape"), true);
+			}
+
+			if (autoEscape) {
+				value = Html.escape(value);
+			}
 
 			String displayHeight = ModelHintsDefaults.TEXT_DISPLAY_HEIGHT;
 			String displayWidth = ModelHintsDefaults.TEXT_DISPLAY_WIDTH;

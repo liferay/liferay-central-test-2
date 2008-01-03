@@ -371,8 +371,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setTemplateId(Html.escape(getTemplateId()));
-			model.setStructureId(Html.escape(getStructureId()));
+			model.setTemplateId(getTemplateId());
+			model.setStructureId(getStructureId());
 			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setXsl(Html.escape(getXsl()));
