@@ -138,6 +138,7 @@ create index IX_1B12CA20 on JournalTemplate (templateId);
 create index IX_2857419D on JournalTemplate (uuid_);
 create index IX_62D1B3AD on JournalTemplate (uuid_, groupId);
 
+create index IX_C7FBC998 on Layout (companyId);
 create index IX_FAD05595 on Layout (dlFolderId);
 create index IX_C099D61A on Layout (groupId);
 create index IX_705F5AA3 on Layout (groupId, privateLayout);

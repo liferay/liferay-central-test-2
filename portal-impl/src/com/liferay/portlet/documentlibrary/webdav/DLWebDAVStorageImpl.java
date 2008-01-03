@@ -79,7 +79,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			if (webDavReq.getHttpServletRequest().getContentLength() > 0) {
+			HttpServletRequest req = webDavReq.getHttpServletRequest();
+
+			if (req.getContentLength() > 0) {
 				return new Status(
 					HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 			}

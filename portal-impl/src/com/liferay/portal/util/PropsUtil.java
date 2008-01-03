@@ -65,10 +65,6 @@ public class PropsUtil {
 
 	public static final String VERIFY_FREQUENCY = "verify.frequency";
 
-	// WebDAV
-	
-	public static final String WEBDAV_LITMUS = "webdav.litmus";
-
 	// Auto Deploy
 
 	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";
@@ -835,9 +831,9 @@ public class PropsUtil {
 
 	public static final String WEB_SERVER_DISPLAY_NODE = "web.server.display.node";
 
-	// Address Book Portlet
+	// WebDAV
 
-	public static final String ADDRESS_BOOK_CONTACT_JOB_CLASSES = "address.book.contact.job.classes";
+	public static final String WEBDAV_LITMUS = "webdav.litmus";
 
 	// Admin Portlet
 

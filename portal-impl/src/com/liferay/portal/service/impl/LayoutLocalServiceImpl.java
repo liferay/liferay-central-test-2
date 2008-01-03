@@ -723,11 +723,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	public long getDefaultPlid(long groupId)
-		throws SystemException {
-
+	public long getDefaultPlid(long groupId) throws SystemException {
 		if (groupId > 0) {
-			List layouts = layoutPersistence.findByG(groupId, 0, 1);
+			List layouts = layoutPersistence.findByGroupId(groupId, 0, 1);
 
 			if (layouts.size() > 0) {
 				Layout layout = (Layout)layouts.get(0);
@@ -759,7 +757,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout getDLFolderLayout(long dlFolderId)
 		throws PortalException, SystemException {
 
-		return layoutPersistence.findByDLF(dlFolderId);
+		return layoutPersistence.findByDLFolderId(dlFolderId);
 	}
 
 	public Layout getFriendlyURLLayout(

@@ -58,37 +58,64 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByPrimaryKey(long plid)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Layout findByDLF(long dlFolderId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchLayoutException;
-
-	public com.liferay.portal.model.Layout fetchByDLF(long dlFolderId)
+	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG(long groupId)
+	public java.util.List findByGroupId(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG(long groupId, int begin, int end,
+	public java.util.List findByGroupId(long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Layout findByG_First(long groupId,
+	public com.liferay.portal.model.Layout findByGroupId_First(long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
 
-	public com.liferay.portal.model.Layout findByG_Last(long groupId,
+	public com.liferay.portal.model.Layout findByGroupId_Last(long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
 
-	public com.liferay.portal.model.Layout[] findByG_PrevAndNext(long plid,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portal.model.Layout[] findByGroupId_PrevAndNext(
+		long plid, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
+
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Layout findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout[] findByCompanyId_PrevAndNext(
+		long plid, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout findByDLFolderId(long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List findByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
@@ -183,12 +210,15 @@ public interface LayoutPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByDLF(long dlFolderId)
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
-
-	public void removeByG(long groupId)
-		throws com.liferay.portal.SystemException;
 
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
@@ -207,10 +237,14 @@ public interface LayoutPersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByDLF(long dlFolderId)
+	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG(long groupId) throws com.liferay.portal.SystemException;
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByDLFolderId(long dlFolderId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;

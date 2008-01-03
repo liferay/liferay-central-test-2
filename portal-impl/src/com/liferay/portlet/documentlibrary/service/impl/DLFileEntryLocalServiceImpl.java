@@ -565,8 +565,8 @@ public class DLFileEntryLocalServiceImpl
 
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (PropsValues.WEBDAV_LITMUS && (curExtension == null) &&
-				(extension == null)) {
+			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(curExtension) &&
+				Validator.isNull(extension)) {
 
 				return fileEntry;
 			}

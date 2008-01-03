@@ -481,11 +481,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="DLF" return-type="Layout">
-			<finder-column name="dlFolderId" />
-		</finder>
-		<finder name="G" return-type="Collection">
+		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="DLFolderId" return-type="Layout">
+			<finder-column name="dlFolderId" />
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
