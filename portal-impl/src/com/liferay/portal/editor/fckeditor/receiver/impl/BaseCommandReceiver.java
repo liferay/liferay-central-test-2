@@ -29,6 +29,12 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
 
@@ -37,6 +43,7 @@ import java.io.PrintWriter;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,7 +113,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
 			getPath(arg));
 
-		getFolders(arg, root, doc);
+		getFolders(arg, doc, root);
 
 		_writeDocument(doc, res);
 	}
@@ -120,7 +127,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
 			getPath(arg));
 
-		getFoldersAndFiles(arg, root, doc);
+		getFoldersAndFiles(arg, doc, root);
 
 		_writeDocument(doc, res);
 	}
@@ -201,10 +208,53 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		CommandArgument arg, String fileName, File file, String extension);
 
 	protected abstract void getFolders(
-		CommandArgument arg, Node root, Document doc);
+		CommandArgument arg, Document doc, Node root);
 
 	protected abstract void getFoldersAndFiles(
-		CommandArgument arg, Node root, Document doc);
+		CommandArgument arg, Document doc, Node root);
+
+	protected void getRootFolders(
+			CommandArgument arg, Document doc, Element foldersEl)
+		throws Exception {
+
+		LinkedHashMap groupParams = new LinkedHashMap();
+
+		groupParams.put("usersGroups", new Long(arg.getUserId()));
+
+		List groups = GroupLocalServiceUtil.search(
+			arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+
+		User user = UserLocalServiceUtil.getUserById(arg.getUserId());
+
+		List userOrgs = user.getOrganizations();
+
+		Iterator itr = userOrgs.iterator();
+
+		while (itr.hasNext()) {
+			Organization organization = (Organization)itr.next();
+
+			groups.add(0, organization.getGroup());
+		}
+
+		if (user.isLayoutsRequired()) {
+			Group userGroup = user.getGroup();
+
+			groups.add(0, userGroup);
+		}
+
+		for (int i = 0; i < groups.size(); ++i) {
+			Group group = (Group)groups.get(i);
+
+			Element folderEl = doc.createElement("Folder");
+
+			foldersEl.appendChild(folderEl);
+
+			folderEl.setAttribute(
+				"name",
+				group.getGroupId() + " - " + group.getDescriptiveName());
+		}
+	}
 
 	protected String getPath(CommandArgument arg) {
 		return StringPool.BLANK;

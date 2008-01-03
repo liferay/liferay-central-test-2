@@ -131,6 +131,18 @@ function GetFoldersAndFilesCallBack( fckXml )
 	{
 		var sFolderName = oNodes[i].attributes.getNamedItem('name').value ;
 		oHtml.Append( oListManager.GetFolderRowHtml( sFolderName, sCurrentFolderPath + sFolderName + "/" ) ) ;
+
+		// Liferay
+
+		/*var sFolderDisplayName = sFolderName;
+
+		var x = sFolderDisplayName.indexOf(" - ");
+
+		if (x != -1) {
+			sFolderDisplayName = sFolderDisplayName.substring(x + 3);
+		}
+
+		oHtml.Append( oListManager.GetFolderRowHtml( sFolderDisplayName, sCurrentFolderPath + sFolderName + "/" ) ) ;*/
 	}
 
 	// Add the Files.

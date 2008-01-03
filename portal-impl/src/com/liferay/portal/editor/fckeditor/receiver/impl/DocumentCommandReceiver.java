@@ -27,9 +27,9 @@ import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -39,11 +39,9 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.HttpUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -61,8 +59,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 	protected String createFolder(CommandArgument arg) {
 		try {
-			Group group = GroupLocalServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+			Group group = arg.getCurrentGroup();
 
 			DLFolder folder = _getFolder(
 				group.getGroupId(), "/" + arg.getCurrentFolder());
@@ -82,8 +79,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		CommandArgument arg, String fileName, File file, String extension) {
 
 		try {
-			Group group = GroupLocalServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+			Group group = arg.getCurrentGroup();
 
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
@@ -104,9 +100,9 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	protected void getFolders(CommandArgument arg, Node root, Document doc) {
+	protected void getFolders(CommandArgument arg, Document doc, Node root) {
 		try {
-			_getFolders(arg, root, doc);
+			_getFolders(arg, doc, root);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -114,27 +110,26 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected void getFoldersAndFiles(
-		CommandArgument arg, Node root, Document doc) {
+		CommandArgument arg, Document doc, Node root) {
 
 		try {
-			_getFolders(arg, root, doc);
-			_getFiles(arg, root, doc);
+			_getFolders(arg, doc, root);
+			_getFiles(arg, doc, root);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
 		}
 	}
 
-	private void _getFiles(CommandArgument arg, Node root, Document doc)
+	private void _getFiles(CommandArgument arg, Document doc, Node root)
 		throws Exception {
 
 		Element filesEl = doc.createElement("Files");
 
 		root.appendChild(filesEl);
 
-		if (!arg.getCurrentGroupName().equals("")) {
-			Group group = GroupLocalServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+		if (Validator.isNotNull(arg.getCurrentGroupName())) {
+			Group group = arg.getCurrentGroup();
 
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
@@ -199,7 +194,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return folder;
 	}
 
-	private void _getFolders(CommandArgument arg, Node root, Document doc)
+	private void _getFolders(CommandArgument arg, Document doc, Node root)
 		throws Exception {
 
 		Element foldersEl = doc.createElement("Folders");
@@ -207,27 +202,10 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		root.appendChild(foldersEl);
 
 		if (arg.getCurrentFolder().equals("/")) {
-			LinkedHashMap groupParams = new LinkedHashMap();
-
-			groupParams.put("usersGroups", new Long(arg.getUserId()));
-
-			List groups = GroupLocalServiceUtil.search(
-				arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-			for (int i = 0; i < groups.size(); ++i) {
-				Group group = (Group)groups.get(i);
-
-				Element folderEl = doc.createElement("Folder");
-
-				foldersEl.appendChild(folderEl);
-
-				folderEl.setAttribute("name", group.getName());
-			}
+			getRootFolders(arg, doc, foldersEl);
 		}
 		else {
-			Group group = GroupLocalServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+			Group group = arg.getCurrentGroup();
 
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());

@@ -28,15 +28,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.w3c.dom.Document;
@@ -61,9 +57,9 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	protected void getFolders(CommandArgument arg, Node root, Document doc) {
+	protected void getFolders(CommandArgument arg, Document doc, Node root) {
 		try {
-			_getFolders(arg, root, doc);
+			_getFolders(arg, doc, root);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -71,11 +67,11 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected void getFoldersAndFiles(
-		CommandArgument arg, Node root, Document doc) {
+		CommandArgument arg, Document doc, Node root) {
 
 		try {
-			_getFolders(arg, root, doc);
-			_getFiles(arg, root, doc);
+			_getFolders(arg, doc, root);
+			_getFiles(arg, doc, root);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -138,7 +134,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		return layoutName;
 	}
 
-	private void _getFiles(CommandArgument arg, Node root, Document doc)
+	private void _getFiles(CommandArgument arg, Document doc, Node root)
 		throws Exception {
 
 		if (!arg.getCurrentFolder().equals("/")) {
@@ -146,8 +142,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 			root.appendChild(filesEl);
 
-			Group group = GroupServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+			Group group = arg.getCurrentGroup();
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
 				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
@@ -206,7 +201,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
-	private void _getFolders(CommandArgument arg, Node root, Document doc)
+	private void _getFolders(CommandArgument arg, Document doc, Node root)
 		throws Exception {
 
 		Element foldersEl = doc.createElement("Folders");
@@ -214,28 +209,10 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		root.appendChild(foldersEl);
 
 		if (arg.getCurrentFolder().equals("/")) {
-			LinkedHashMap groupParams = new LinkedHashMap();
-
-			groupParams.put("usersGroups", new Long(arg.getUserId()));
-			groupParams.put("layoutSet", Boolean.FALSE);
-
-			List groups = GroupLocalServiceUtil.search(
-				arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-			for (int i = 0; i < groups.size(); ++i) {
-				Group group = (Group)groups.get(i);
-
-				Element folderEl = doc.createElement("Folder");
-
-				foldersEl.appendChild(folderEl);
-
-				folderEl.setAttribute("name", group.getName());
-			}
+			getRootFolders(arg, doc, foldersEl);
 		}
 		else {
-			Group group = GroupServiceUtil.getGroup(
-				arg.getCompanyId(), arg.getCurrentGroupName());
+			Group group = arg.getCurrentGroup();
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
 				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
