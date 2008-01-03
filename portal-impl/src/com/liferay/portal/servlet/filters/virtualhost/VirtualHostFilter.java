@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
+import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -101,6 +102,11 @@ public class VirtualHostFilter implements Filter {
 		httpReq.setCharacterEncoding(ENCODING);
 		httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
+		// Make sure all redirects issued by the portal are absolute
+		
+		HttpServletResponse wrappedRes = new AbsoluteRedirectsResponse(
+			httpReq, httpRes);
+
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls
 
@@ -127,7 +133,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!USE_FILTER) {
-			chain.doFilter(req, res);
+			chain.doFilter(req, wrappedRes);
 
 			return;
 		}
@@ -139,7 +145,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!isValidRequestURL(requestURL)) {
-			chain.doFilter(req, res);
+			chain.doFilter(req, wrappedRes);
 
 			return;
 		}
@@ -163,7 +169,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!isValidFriendlyURL(friendlyURL)) {
-			chain.doFilter(req, res);
+			chain.doFilter(req, wrappedRes);
 
 			return;
 		}
@@ -213,7 +219,7 @@ public class VirtualHostFilter implements Filter {
 				RequestDispatcher rd =
 					_ctx.getRequestDispatcher(redirect.toString());
 
-				rd.forward(req, res);
+				rd.forward(req, wrappedRes);
 
 				return;
 			}
@@ -222,7 +228,7 @@ public class VirtualHostFilter implements Filter {
 			}
 		}
 
-		chain.doFilter(req, res);
+		chain.doFilter(req, wrappedRes);
 	}
 
 	public void destroy() {
