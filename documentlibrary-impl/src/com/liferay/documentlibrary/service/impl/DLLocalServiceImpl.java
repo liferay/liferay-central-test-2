@@ -249,18 +249,20 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		String[] fileExtensions = PropsValues.DL_FILE_EXTENSIONS;
 
-		for (int i = 0; i < fileExtensions.length; i++) {
-			if (StringPool.STAR.equals(fileExtensions[i]) ||
-				StringUtil.endsWith(fileName, fileExtensions[i])) {
+		if (!PropsValues.WEBDAV_LITMUS) {
+			for (int i = 0; i < fileExtensions.length; i++) {
+				if (StringPool.STAR.equals(fileExtensions[i]) ||
+					StringUtil.endsWith(fileName, fileExtensions[i])) {
 
-				validFileExtension = true;
+					validFileExtension = true;
 
-				break;
+					break;
+				}
 			}
-		}
 
-		if (!validFileExtension) {
-			throw new FileNameException(fileName);
+			if (!validFileExtension) {
+				throw new FileNameException(fileName);
+			}
 		}
 	}
 
@@ -270,10 +272,12 @@ public class DLLocalServiceImpl implements DLLocalService {
 		String fileNameExtension = FileUtil.getExtension(fileName);
 		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
-		if (Validator.isNull(fileNameExtension) ||
-			!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if (Validator.isNull(fileNameExtension) ||
+				!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 
-			throw new SourceFileNameException(sourceFileName);
+				throw new SourceFileNameException(sourceFileName);
+			}
 		}
 
 		if (is == null) {

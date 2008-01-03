@@ -25,6 +25,7 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -79,8 +80,8 @@ public class WebDAVServlet extends HttpServlet {
 
 			String remoteUser = req.getRemoteUser();
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Remote user " + remoteUser);
+			if (_log.isInfoEnabled()) {
+				_log.info("Remote user " + remoteUser);
 			}
 
 			if (remoteUser != null) {
@@ -104,8 +105,9 @@ public class WebDAVServlet extends HttpServlet {
 			WebDAVRequest webDavReq = new WebDAVRequest(
 				_storage, req, res, permissionChecker);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Path " + webDavReq.getPath());
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					req.getMethod() + StringPool.SPACE + req.getRequestURI());
 			}
 
 			method.process(webDavReq);

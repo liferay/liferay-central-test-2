@@ -23,10 +23,12 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
@@ -34,6 +36,7 @@ import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -76,11 +79,25 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavReq.getPathArray();
+			if (webDavReq.getHttpServletRequest().getContentLength() > 0) {
+				return new Status(
+					HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+			}
 
-			long plid = getPlid(webDavReq.getGroupId());
+			String[] pathArray = webDavReq.getPathArray();
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getEntryName(pathArray);
+
+			try {
+				DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+					parentFolderId, name);
+
+				return new Status(HttpServletResponse.SC_CONFLICT);
+			}
+			catch (Exception e) {
+			}
+
+			long plid = getPlid(webDavReq.getGroupId());
 			String description = StringPool.BLANK;
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
@@ -92,6 +109,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String location = StringUtil.merge(pathArray, StringPool.SLASH);
 
 			return new Status(location, HttpServletResponse.SC_CREATED);
+		}
+		catch (DuplicateFolderNameException dfne) {
+			return new Status(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+		}
+		catch (NoSuchFolderException nsfe) {
+			return new Status(HttpServletResponse.SC_CONFLICT);
 		}
 		catch (PrincipalException pe) {
 			return new Status(HttpServletResponse.SC_FORBIDDEN);
@@ -403,7 +426,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(pe.getMessage());
+				_log.warn(pe, pe);
 			}
 
 			return HttpServletResponse.SC_CONFLICT;
@@ -517,6 +540,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected long getParentFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, true);
+	}
+
+	protected long getPlid(long groupId) throws SystemException {
+		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
 	}
 
 	protected Resource toResource(

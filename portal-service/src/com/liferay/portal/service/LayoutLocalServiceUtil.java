@@ -962,6 +962,13 @@ public class LayoutLocalServiceUtil {
 			parameterMap);
 	}
 
+	public static long getDefaultPlid(long groupId)
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getDefaultPlid(groupId);
+	}
+
 	public static long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();

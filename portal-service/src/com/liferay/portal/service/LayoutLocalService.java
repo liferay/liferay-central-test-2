@@ -420,6 +420,9 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public long getDefaultPlid(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 

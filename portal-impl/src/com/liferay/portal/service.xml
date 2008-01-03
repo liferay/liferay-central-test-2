@@ -484,6 +484,9 @@
 		<finder name="DLF" return-type="Layout">
 			<finder-column name="dlFolderId" />
 		</finder>
+		<finder name="G" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />

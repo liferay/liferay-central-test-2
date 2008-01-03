@@ -65,6 +65,10 @@ public class PropsUtil {
 
 	public static final String VERIFY_FREQUENCY = "verify.frequency";
 
+	// WebDAV
+	
+	public static final String WEBDAV_LITMUS = "webdav.litmus";
+
 	// Auto Deploy
 
 	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";

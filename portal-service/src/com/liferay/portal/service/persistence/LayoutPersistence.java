@@ -65,6 +65,31 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByDLF(long dlFolderId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findByG(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Layout findByG_First(long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout findByG_Last(long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout[] findByG_PrevAndNext(long plid,
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
 	public java.util.List findByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -162,6 +187,9 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
 
+	public void removeByG(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -181,6 +209,8 @@ public interface LayoutPersistence {
 
 	public int countByDLF(long dlFolderId)
 		throws com.liferay.portal.SystemException;
+
+	public int countByG(long groupId) throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;

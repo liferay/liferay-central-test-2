@@ -563,4 +563,7 @@ public class PropsValues {
 	public static final String WEB_SERVER_PROTOCOL = PropsUtil.get(
 		PropsUtil.WEB_SERVER_PROTOCOL);
 
+	public static final boolean WEBDAV_LITMUS = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.WEBDAV_LITMUS));
+
 }

@@ -723,6 +723,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	public long getDefaultPlid(long groupId)
+		throws SystemException {
+
+		if (groupId > 0) {
+			List layouts = layoutPersistence.findByG(groupId, 0, 1);
+
+			if (layouts.size() > 0) {
+				Layout layout = (Layout)layouts.get(0);
+
+				return layout.getPlid();
+			}
+		}
+
+		return LayoutImpl.DEFAULT_PLID;
+	}
+
 	public long getDefaultPlid(long groupId, boolean privateLayout)
 		throws SystemException {
 

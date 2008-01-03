@@ -35,6 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -564,7 +565,12 @@ public class DLFileEntryLocalServiceImpl
 
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (extension.equals(curExtension)) {
+			if (PropsValues.WEBDAV_LITMUS && (curExtension == null) &&
+				(extension == null)) {
+
+				return fileEntry;
+			}
+			else if (extension.equals(curExtension)) {
 				return fileEntry;
 			}
 		}
