@@ -4,13 +4,13 @@
 	position: relative;
 }
 
-.portlet-document-library .ie .portlet-content-container {
+.ie .portlet-document-library .portlet-content-container {
 	height: 1%;
 }
 
 /* This CSS overrides the styles for the Actions button. */
 
-.portlet-document-library .lfr-actions.visible {
+.portlet-document-library li .lfr-actions.visible {
 	position: absolute;
 }
 

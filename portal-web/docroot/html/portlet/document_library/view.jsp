@@ -212,14 +212,14 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 						/* This CSS fixes the display of the liferay-actions-menu button. It must be included in view.jsp to work correctly in the Freeform layout on IE6. */
 
-						.portlet-document-library .lfr-actions {
+						.portlet-document-library li .lfr-actions {
 							display: inline;
 							float: none;
 							position: absolute;
 							right: 0%;
 						}
 
-						.portlet-document-library .ie .lfr-actions {
+						.ie .portlet-document-library li .lfr-actions {
 							display: block;
 						}
 					</style>
