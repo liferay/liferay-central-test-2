@@ -141,8 +141,8 @@ int delta = GetterUtil.getInteger(prefs.getValue("delta", StringPool.BLANK), Sea
 String paginationType = GetterUtil.getString(prefs.getValue("pagination-type", "none"));
 boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
-boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null), false);
-boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null), false);
+boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null));
+boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null));
 
 String defaultMetadataFields = "";
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
