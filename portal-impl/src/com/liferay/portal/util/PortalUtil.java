@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -100,6 +101,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.lang.reflect.Method;
 import java.net.URL;
 
 import java.rmi.RemoteException;
@@ -130,6 +132,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 
@@ -549,6 +552,11 @@ public class PortalUtil {
 			PortletResponseWrapper resWrapper = (PortletResponseWrapper)res;
 
 			return getHttpServletResponse(resWrapper.getPortletResponse());
+		}
+		else if (res instanceof RenderResponse) {
+			RenderResponseImpl resImpl = getRenderResponseImpl((RenderResponse)res);
+
+			return resImpl.getHttpServletResponse();
 		}
 		else {
 			throw new RuntimeException(
@@ -1135,6 +1143,32 @@ public class PortalUtil {
 
 			return prefsValidator;
 		}
+	}
+
+	public static RenderResponseImpl getRenderResponseImpl(RenderResponse res) {
+		RenderResponseImpl resImpl = null;
+
+		if (res instanceof RenderResponseImpl) {
+			resImpl = (RenderResponseImpl)res;
+		}
+		else {
+
+			// LEP-4033
+
+			try {
+				Method method = MethodCache.get(
+					res.getClass().getName(), "getResponse");
+
+				Object obj = method.invoke(res, null);
+
+				resImpl = getRenderResponseImpl((RenderResponse)obj);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		return resImpl;
 	}
 
 	public static User getSelectedUser(HttpServletRequest req)
