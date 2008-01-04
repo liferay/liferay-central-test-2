@@ -72,6 +72,7 @@ import java.util.TreeSet;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexWriter;
@@ -587,43 +588,18 @@ public class PluginPackageUtil {
 		if (_updateAvailable != null) {
 			return _updateAvailable.booleanValue();
 		}
+		else if (!_settingUpdateAvailable) {
+			_settingUpdateAvailable = true;
 
-		Iterator itr = _installedPluginPackages.getPluginPackages().iterator();
+			Thread indexerThread = indexerThread = new Thread(
+				new UpdateAvailableRunner(), PluginPackageUtil.class.getName());
 
-		while (itr.hasNext()) {
-			PluginPackage pluginPackage = (PluginPackage)itr.next();
+			indexerThread.setPriority(Thread.MIN_PRIORITY);
 
-			PluginPackage availablePluginPackage = null;
-
-			if (_isIgnored(pluginPackage)) {
-				continue;
-			}
-
-			try {
-				availablePluginPackage =
-					PluginPackageUtil.getLatestAvailablePluginPackage(
-						pluginPackage.getGroupId(),
-						pluginPackage.getArtifactId());
-
-				if ((availablePluginPackage != null) &&
-					Version.getInstance(
-						availablePluginPackage.getVersion()).isLaterVersionThan(
-							pluginPackage.getVersion())) {
-
-					_updateAvailable = Boolean.TRUE;
-
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
+			indexerThread.start();
 		}
 
-		if (_updateAvailable == null) {
-			_updateAvailable = Boolean.FALSE;
-		}
-
-		return _updateAvailable.booleanValue();
+		return false;
 	}
 
 	private RemotePluginPackageRepository _loadRepository(String repositoryURL)
@@ -1314,5 +1290,75 @@ public class PluginPackageUtil {
 	private Set _availableTagsCache;
 	private Date _lastUpdateDate;
 	private Boolean _updateAvailable;
+	private boolean _settingUpdateAvailable;
+
+	private class UpdateAvailableRunner implements Runnable {
+
+		public void run() {
+			try {
+				setUpdateAvailable();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		protected void setUpdateAvailable() throws Exception {
+			StopWatch stopWatch = null;
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Checking for available updates");
+
+				stopWatch = new StopWatch();
+
+				stopWatch.start();
+			}
+
+			Iterator itr =
+				_installedPluginPackages.getPluginPackages().iterator();
+
+			while (itr.hasNext()) {
+				PluginPackage pluginPackage = (PluginPackage)itr.next();
+
+				PluginPackage availablePluginPackage = null;
+
+				if (_isIgnored(pluginPackage)) {
+					continue;
+				}
+
+				availablePluginPackage =
+					PluginPackageUtil.getLatestAvailablePluginPackage(
+						pluginPackage.getGroupId(),
+						pluginPackage.getArtifactId());
+
+				if (availablePluginPackage == null) {
+					continue;
+				}
+
+				Version availablePluginPackageVersion = Version.getInstance(
+					availablePluginPackage.getVersion());
+
+				if (availablePluginPackageVersion.isLaterVersionThan(
+						pluginPackage.getVersion())) {
+
+					_updateAvailable = Boolean.TRUE;
+
+					break;
+				}
+			}
+
+			if (_updateAvailable == null) {
+				_updateAvailable = Boolean.FALSE;
+			}
+
+			_settingUpdateAvailable = false;
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Finished checking for available updates in " +
+						stopWatch.getTime() + " ms");
+			}
+		}
+	}
 
 }
