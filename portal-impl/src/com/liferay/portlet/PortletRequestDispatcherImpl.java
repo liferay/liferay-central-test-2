@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Portlet;
@@ -35,6 +36,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;
+
+import java.lang.reflect.Method;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -93,7 +96,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 		try {
 			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-			RenderResponseImpl resImpl = (RenderResponseImpl)res;
+			RenderResponseImpl resImpl = getRenderResponseImpl(res);
 
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 			HttpServletResponse httpRes =
@@ -249,6 +252,32 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 			throw new PortletException(se);
 		}
+	}
+
+	protected RenderResponseImpl getRenderResponseImpl(RenderResponse res) {
+		RenderResponseImpl resImpl = null;
+
+		if (res instanceof RenderResponseImpl) {
+			resImpl = (RenderResponseImpl)res;
+		}
+		else {
+
+			// LEP-4033
+
+			try {
+				Method method = MethodCache.get(
+					res.getClass().getName(), "getResponse");
+
+				Object obj = method.invoke(res, null);
+
+				resImpl = getRenderResponseImpl((RenderResponse)obj);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		return resImpl;
 	}
 
 	private static Log _log =
