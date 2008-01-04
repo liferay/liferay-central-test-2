@@ -103,21 +103,213 @@ public class PluginPackageUtil {
 		"xml";
 
 	public static void endPluginPackageInstallation(String preliminaryContext) {
-		_installedPluginPackages.unregisterPluginPackageInstallation(
-			preliminaryContext);
+		_instance._endPluginPackageInstallation(preliminaryContext);
 	}
 
 	public static List getAllAvailablePluginPackages()
 		throws PluginPackageException {
 
+		return _instance._getAllAvailablePluginPackages();
+	}
+
+	public static Collection getAvailableTags() {
+		return _instance._getAvailableTags();
+	}
+
+	public static List getInstalledPluginPackages() {
+		return _instance._getInstalledPluginPackages();
+	}
+
+	public static PluginPackage getLatestAvailablePluginPackage(
+			String groupId, String artifactId)
+		throws SystemException {
+
+		return _instance._getLatestAvailablePluginPackage(groupId, artifactId);
+	}
+
+	public static PluginPackage getLatestInstalledPluginPackage(
+		String groupId, String artifactId) {
+
+		return _instance._getLatestInstalledPluginPackage(groupId, artifactId);
+	}
+
+	public static Date getLastUpdateDate() {
+		return _instance._getLastUpdateDate();
+	}
+
+	public static PluginPackage getPluginPackageByModuleId(
+			String moduleId, String repositoryURL)
+		throws DocumentException, IOException, PluginPackageException {
+
+		return _instance._getPluginPackageByModuleId(moduleId, repositoryURL);
+	}
+
+	public static PluginPackage getPluginPackageByURL(String url)
+		throws PluginPackageException {
+
+		return _instance._getPluginPackageByURL(url);
+	}
+
+	public static RemotePluginPackageRepository getRepository(
+			String repositoryURL)
+		throws PluginPackageException {
+
+		return _instance._getRepository(repositoryURL);
+	}
+
+	public static String[] getRepositoryURLs() throws PluginPackageException {
+		return _instance._getRepositoryURLs();
+	}
+
+	public static String[] getSupportedTypes() {
+		return _instance._getSupportedTypes();
+	}
+
+	public static boolean isCurrentVersionSupported(List versions) {
+		return _instance._isCurrentVersionSupported(versions);
+	}
+
+	public static boolean isIgnored(PluginPackage pluginPackage)
+		throws PortalException, SystemException {
+
+		return _instance._isIgnored(pluginPackage);
+	}
+
+	public static boolean isInstallationInProcess(String context) {
+		return _instance._isInstallationInProcess(context);
+	}
+
+	public static boolean isTrusted(String repositoryURL)
+		throws PluginPackageException {
+
+		return _instance._isTrusted(repositoryURL);
+	}
+
+	public static boolean isUpdateAvailable()
+		throws PortalException, SystemException {
+
+		return _instance._isUpdateAvailable();
+	}
+
+	public static PluginPackage readPluginPackageProps(
+		String displayName, Properties props) {
+
+		return _instance._readPluginPackageProps(displayName, props);
+	}
+
+	public static PluginPackage readPluginPackageXml(String xml)
+		throws DocumentException {
+
+		return _instance._readPluginPackageXml(xml);
+	}
+
+	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
+		return _instance._readPluginPackageXml(pluginPackageEl);
+	}
+
+	public static void refreshUpdatesAvailableCache() {
+		_instance._refreshUpdatesAvailableCache();
+	}
+
+	public static void reIndex() throws SystemException {
+		_instance._reIndex();
+	}
+
+	public static RepositoryReport reloadRepositories() throws SystemException {
+		return _instance._reloadRepositories();
+	}
+
+	public static void registerInstalledPluginPackage(
+		PluginPackage pluginPackage) {
+
+		_instance._registerInstalledPluginPackage(pluginPackage);
+	}
+
+	public static void registerPluginPackageInstallation(
+		String preliminaryContext) {
+
+		_instance._registerPluginPackageInstallation(preliminaryContext);
+	}
+
+	public static Hits search(
+			String keywords, String type, String tag, String license,
+			String repositoryURL, String status)
+		throws SystemException {
+
+		return _instance._search(
+			keywords, type, tag, license, repositoryURL, status);
+	}
+
+	public static void unregisterInstalledPluginPackage(
+		PluginPackage pluginPackage) {
+
+		_instance._unregisterInstalledPluginPackage(pluginPackage);
+	}
+
+	public static void updateInstallingPluginPackage(
+		String preliminaryContext, PluginPackage pluginPackage) {
+
+		_instance._updateInstallingPluginPackage(
+			preliminaryContext, pluginPackage);
+	}
+
+	private PluginPackageUtil() {
+		_installedPluginPackages = new LocalPluginPackageRepository();
+		_repositoryCache = new HashMap();
+		_availableTagsCache = new TreeSet();
+	}
+
+	private void _checkRepositories(String repositoryURL)
+		throws PluginPackageException {
+
+		String[] repositoryURLs = null;
+
+		if (Validator.isNotNull(repositoryURL)) {
+			repositoryURLs = new String[] {repositoryURL};
+		}
+		else {
+			repositoryURLs = _getRepositoryURLs();
+		}
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			_getRepository(repositoryURLs[i]);
+		}
+	}
+
+	private void _endPluginPackageInstallation(String preliminaryContext) {
+		_installedPluginPackages.unregisterPluginPackageInstallation(
+			preliminaryContext);
+	}
+
+	private PluginPackage _findLatestVersion(List pluginPackages) {
+		PluginPackage pluginPackage = null;
+
+		Iterator itr = pluginPackages.iterator();
+
+		while (itr.hasNext()) {
+			PluginPackage curPluginPackage = (PluginPackage)itr.next();
+
+			if ((pluginPackage == null) ||
+				(curPluginPackage.isLaterVersionThan(pluginPackage))) {
+
+				pluginPackage = curPluginPackage;
+			}
+		}
+
+		return pluginPackage;
+	}
+
+	private List _getAllAvailablePluginPackages()
+		throws PluginPackageException {
+
 		List plugins = new ArrayList();
 
-		String[] repositoryURLs = getRepositoryURLs();
+		String[] repositoryURLs = _getRepositoryURLs();
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			try {
 				RemotePluginPackageRepository repository =
-					getRepository(repositoryURLs[i]);
+					_getRepository(repositoryURLs[i]);
 
 				plugins.addAll(repository.getPluginPackages());
 			}
@@ -138,25 +330,25 @@ public class PluginPackageUtil {
 		return plugins;
 	}
 
-	public static Collection getAvailableTags() {
+	private Collection _getAvailableTags() {
 		return _availableTagsCache;
 	}
 
-	public static List getInstalledPluginPackages() {
+	private List _getInstalledPluginPackages() {
 		return _installedPluginPackages.getSortedPluginPackages();
 	}
 
-	public static PluginPackage getLatestAvailablePluginPackage(
+	private PluginPackage _getLatestAvailablePluginPackage(
 			String groupId, String artifactId)
 		throws SystemException {
 
 		List pluginPackages = new ArrayList();
 
-		String[] repositoryURLs = getRepositoryURLs();
+		String[] repositoryURLs = _getRepositoryURLs();
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			RemotePluginPackageRepository repository =
-				getRepository(repositoryURLs[i]);
+				_getRepository(repositoryURLs[i]);
 
 			List curPluginPackages =
 				repository.findPluginsByGroupIdAndArtifactId(
@@ -170,37 +362,38 @@ public class PluginPackageUtil {
 		return _findLatestVersion(pluginPackages);
 	}
 
-	public static PluginPackage getLatestInstalledPluginPackage(
+	private PluginPackage _getLatestInstalledPluginPackage(
 		String groupId, String artifactId) {
 
 		return _installedPluginPackages.getLatestPluginPackage(
 			groupId, artifactId);
 	}
 
-	public static Date getLastUpdateDate() {
+	private Date _getLastUpdateDate() {
 		return _lastUpdateDate;
 	}
 
-	public static PluginPackage getPluginPackageByModuleId(
+	private PluginPackage _getPluginPackageByModuleId(
 			String moduleId, String repositoryURL)
 		throws DocumentException, IOException, PluginPackageException {
 
-		RemotePluginPackageRepository repository = getRepository(repositoryURL);
+		RemotePluginPackageRepository repository = _getRepository(
+			repositoryURL);
 
 		return repository.findPluginPackageByModuleId(moduleId);
 	}
 
-	public static PluginPackage getPluginPackageByURL(String url)
+	private PluginPackage _getPluginPackageByURL(String url)
 		throws PluginPackageException {
 
-		String[] repositoryURLs = getRepositoryURLs();
+		String[] repositoryURLs = _getRepositoryURLs();
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			String repositoryURL = repositoryURLs[i];
 
 			try {
 				RemotePluginPackageRepository repository =
-					getRepository(repositoryURL);
+					_getRepository(repositoryURL);
 
 				return repository.findPluginByArtifactURL(url);
 			}
@@ -212,7 +405,7 @@ public class PluginPackageUtil {
 		return null;
 	}
 
-	public static RemotePluginPackageRepository getRepository(
+	private RemotePluginPackageRepository _getRepository(
 			String repositoryURL)
 		throws PluginPackageException {
 
@@ -226,7 +419,7 @@ public class PluginPackageUtil {
 		return _loadRepository(repositoryURL);
 	}
 
-	public static String[] getRepositoryURLs() throws PluginPackageException {
+	private String[] _getRepositoryURLs() throws PluginPackageException {
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
 				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
@@ -243,11 +436,67 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static String[] getSupportedTypes() {
+	private String[] _getStatusAndInstalledVersion(
+		PluginPackage pluginPackage) {
+
+		PluginPackage installedPluginPackage =
+			_installedPluginPackages.getLatestPluginPackage(
+				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+
+		String status = null;
+		String installedVersion = null;
+
+		if (installedPluginPackage == null) {
+			status = PluginPackageImpl.STATUS_NOT_INSTALLED;
+		}
+		else {
+			installedVersion = installedPluginPackage.getVersion();
+
+			if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
+				status = PluginPackageImpl.STATUS_NEWER_VERSION_INSTALLED;
+			}
+			else if (installedPluginPackage.isPreviousVersionThan(
+						pluginPackage)) {
+
+				status = PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED;
+			}
+			else {
+				status = PluginPackageImpl.STATUS_SAME_VERSION_INSTALLED;
+			}
+		}
+
+		return new String[] {status, installedVersion};
+	}
+
+	private String[] _getSupportedTypes() {
 		return PropsValues.PLUGIN_TYPES;
 	}
 
-	public static boolean isCurrentVersionSupported(List versions) {
+	private void _indexPluginPackage(PluginPackage pluginPackage) {
+		String[] statusAndInstalledVersion =
+			_getStatusAndInstalledVersion(pluginPackage);
+
+		String status = statusAndInstalledVersion[0];
+		String installedVersion = statusAndInstalledVersion[1];
+
+		try {
+			PluginPackageIndexer.updatePluginPackage(
+				pluginPackage.getModuleId(), pluginPackage.getName(),
+				pluginPackage.getVersion(), pluginPackage.getModifiedDate(),
+				pluginPackage.getAuthor(), pluginPackage.getTypes(),
+				pluginPackage.getTags(), pluginPackage.getLicenses(),
+				pluginPackage.getLiferayVersions(),
+				pluginPackage.getShortDescription(),
+				pluginPackage.getLongDescription(),
+				pluginPackage.getChangeLog(), pluginPackage.getPageURL(),
+				pluginPackage.getRepositoryURL(), status, installedVersion);
+		}
+		catch (Exception e) {
+			_log.error("Error reindexing " + pluginPackage.getModuleId(), e);
+		}
+	}
+
+	private boolean _isCurrentVersionSupported(List versions) {
 		Version currentVersion = Version.getInstance(ReleaseInfo.getVersion());
 
 		for (int i = 0; i < versions.size(); i++) {
@@ -262,7 +511,7 @@ public class PluginPackageUtil {
 		return false;
 	}
 
-	public static boolean isIgnored(PluginPackage pluginPackage)
+	private boolean _isIgnored(PluginPackage pluginPackage)
 		throws PortalException, SystemException {
 
 		String packageId = pluginPackage.getPackageId();
@@ -293,7 +542,7 @@ public class PluginPackageUtil {
 		return false;
 	}
 
-	public static boolean isInstallationInProcess(String context) {
+	private boolean _isInstallationInProcess(String context) {
 		if (_installedPluginPackages.getInstallingPluginPackage(
 				context) != null) {
 
@@ -304,7 +553,7 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static boolean isTrusted(String repositoryURL)
+	private boolean _isTrusted(String repositoryURL)
 		throws PluginPackageException {
 
 		try {
@@ -325,7 +574,7 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static boolean isUpdateAvailable()
+	private boolean _isUpdateAvailable()
 		throws PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
@@ -346,7 +595,7 @@ public class PluginPackageUtil {
 
 			PluginPackage availablePluginPackage = null;
 
-			if (isIgnored(pluginPackage)) {
+			if (_isIgnored(pluginPackage)) {
 				continue;
 			}
 
@@ -377,7 +626,251 @@ public class PluginPackageUtil {
 		return _updateAvailable.booleanValue();
 	}
 
-	public static PluginPackage readPluginPackageProps(
+	private RemotePluginPackageRepository _loadRepository(String repositoryURL)
+		throws PluginPackageException {
+
+		RemotePluginPackageRepository repository = null;
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(repositoryURL);
+		sm.append(StringPool.SLASH);
+		sm.append(REPOSITORY_XML_FILENAME_PREFIX);
+		sm.append(StringPool.DASH);
+		sm.append(ReleaseInfo.getVersion());
+		sm.append(StringPool.PERIOD);
+		sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+
+		String pluginsXmlURL = sm.toString();
+
+		try {
+			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
+
+			HttpClient client = Http.getClient(hostConfig);
+
+			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
+
+			byte[] bytes = null;
+
+			try {
+				int responseCode = client.executeMethod(
+					hostConfig, getFileMethod);
+
+				if (responseCode != 200) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"A repository for version " +
+								ReleaseInfo.getVersion() + " was not found. " +
+									"Checking general repository");
+					}
+
+					sm = new StringMaker();
+
+					sm.append(repositoryURL);
+					sm.append(StringPool.SLASH);
+					sm.append(REPOSITORY_XML_FILENAME_PREFIX);
+					sm.append(StringPool.PERIOD);
+					sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+
+					pluginsXmlURL = sm.toString();
+
+					getFileMethod = new GetMethod(pluginsXmlURL);
+
+					responseCode = client.executeMethod(
+						hostConfig, getFileMethod);
+
+					if (responseCode != 200) {
+						throw new PluginPackageException(
+							"Unable to download file " + pluginsXmlURL +
+								" because of response code " + responseCode);
+					}
+				}
+
+				bytes = getFileMethod.getResponseBody();
+			}
+			finally {
+				getFileMethod.releaseConnection();
+			}
+
+			if ((bytes != null) && (bytes.length > 0)) {
+				repository = _parseRepositoryXml(
+					new String(bytes), repositoryURL);
+
+				_repositoryCache.put(repositoryURL, repository);
+				_availableTagsCache.addAll(repository.getTags());
+				_lastUpdateDate = new Date();
+				_updateAvailable = null;
+
+				return repository;
+			}
+			else {
+				_lastUpdateDate = new Date();
+
+				throw new PluginPackageException("Download returned 0 bytes");
+			}
+		}
+		catch (MalformedURLException mue) {
+			_repositoryCache.remove(repositoryURL);
+
+			throw new PluginPackageException(
+				"Invalid URL " + pluginsXmlURL, mue);
+		}
+		catch (IOException ioe) {
+			_repositoryCache.remove(repositoryURL);
+
+			throw new PluginPackageException(
+				"Unable to communicate with repository " + repositoryURL, ioe);
+		}
+		catch (DocumentException de) {
+			_repositoryCache.remove(repositoryURL);
+
+			throw new PluginPackageException(
+				"Unable to parse plugin list for repository " + repositoryURL,
+				de);
+		}
+	}
+
+	private RemotePluginPackageRepository _parseRepositoryXml(
+			String xml, String repositoryURL)
+		throws DocumentException, IOException {
+
+		List supportedPluginTypes = Arrays.asList(getSupportedTypes());
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Loading plugin repository " + repositoryURL + ":\n" + xml);
+		}
+
+		RemotePluginPackageRepository pluginPackageRepository =
+			new RemotePluginPackageRepository(repositoryURL);
+
+		if (xml == null) {
+			return pluginPackageRepository;
+		}
+
+		Document doc = PortalUtil.readDocumentFromXML(xml);
+
+		Element root = doc.getRootElement();
+
+		Properties settings = _readProperties(
+			root.element("settings"), "setting");
+
+		pluginPackageRepository.setSettings(settings);
+
+		Iterator itr1 = root.elements("plugin-package").iterator();
+
+		while (itr1.hasNext()) {
+			Element pluginPackageEl = (Element)itr1.next();
+
+			PluginPackage pluginPackage = _readPluginPackageXml(
+				pluginPackageEl);
+
+			if (!_isCurrentVersionSupported(
+					pluginPackage.getLiferayVersions())) {
+
+				continue;
+			}
+
+			Iterator itr2 = pluginPackage.getTypes().iterator();
+
+			boolean containsSupportedTypes = false;
+
+			while (itr2.hasNext()) {
+				String type = (String)itr2.next();
+
+				if (supportedPluginTypes.contains(type)) {
+					containsSupportedTypes = true;
+
+					break;
+				}
+			}
+
+			if (!containsSupportedTypes) {
+				continue;
+			}
+
+			pluginPackage.setRepository(pluginPackageRepository);
+
+			pluginPackageRepository.addPluginPackage(pluginPackage);
+
+			_indexPluginPackage(pluginPackage);
+		}
+
+		return pluginPackageRepository;
+	}
+
+	private Date _readDate(String text) {
+		if (Validator.isNotNull(text)) {
+			DateFormat dateFormat = new SimpleDateFormat(
+				Time.RFC822_FORMAT, Locale.US);
+
+			try {
+				return dateFormat.parse(text);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to parse date " + text);
+				}
+			}
+		}
+
+		return new Date();
+	}
+
+	private String _readHtml(String text) {
+		return GetterUtil.getString(text);
+	}
+
+	private List _readLicenseList(Element parent, String childTagName) {
+		List result = new ArrayList();
+
+		Iterator itr = parent.elements(childTagName).iterator();
+
+		while (itr.hasNext()) {
+			Element tagEl = (Element)itr.next();
+
+			License license = new License();
+
+			license.setName(tagEl.getText());
+
+			Attribute osiApproved = tagEl.attribute("osi-approved");
+
+			if (osiApproved != null) {
+				license.setOsiApproved(
+					GetterUtil.getBoolean(osiApproved.getText()));
+			}
+
+			Attribute url = tagEl.attribute("url");
+
+			if (url != null) {
+				license.setUrl(url.getText());
+			}
+
+			result.add(license);
+		}
+
+		return result;
+	}
+
+	private List _readList(Element parent, String childTagName) {
+		List result = new ArrayList();
+
+		if (parent != null) {
+			Iterator itr = parent.elements(childTagName).iterator();
+
+			while (itr.hasNext()) {
+				Element element = (Element)itr.next();
+
+				String text = element.getText().trim().toLowerCase();
+
+				result.add(text);
+			}
+		}
+
+		return result;
+	}
+
+	private PluginPackage _readPluginPackageProps(
 		String displayName, Properties props) {
 
 		int pos = displayName.indexOf("-portlet-");
@@ -482,17 +975,17 @@ public class PluginPackageUtil {
 		return pluginPackage;
 	}
 
-	public static PluginPackage readPluginPackageXml(String xml)
+	private PluginPackage _readPluginPackageXml(String xml)
 		throws DocumentException {
 
 		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
-		return readPluginPackageXml(root);
+		return _readPluginPackageXml(root);
 	}
 
-	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
+	private PluginPackage _readPluginPackageXml(Element pluginPackageEl) {
 		String name = pluginPackageEl.elementText("name");
 
 		if (_log.isDebugEnabled()) {
@@ -541,11 +1034,58 @@ public class PluginPackageUtil {
 		return pluginPackage;
 	}
 
-	public static void refreshUpdatesAvailableCache() {
+	private Properties _readProperties(Element parent, String childTagName) {
+		Properties result = new Properties();
+
+		if (parent != null) {
+			Iterator itr = parent.elements(childTagName).iterator();
+
+			while (itr.hasNext()) {
+				Element tagEl = (Element)itr.next();
+
+				result.setProperty(
+					tagEl.attribute("name").getValue(),
+					tagEl.attribute("value").getValue());
+			}
+		}
+
+		return result;
+	}
+
+	private List _readScreenshots(Element parent) {
+		List result = new ArrayList();
+
+		if (parent != null) {
+			List screenshots = parent.elements("screenshot");
+
+			Iterator itr = screenshots.iterator();
+
+			while (itr.hasNext()) {
+				Element screenshotEl = (Element)itr.next();
+
+				Screenshot screenshot = new Screenshot();
+
+				screenshot.setThumbnailURL(
+					screenshotEl.element("thumbnail-url").getText());
+				screenshot.setLargeImageURL(
+					screenshotEl.element("large-image-url").getText());
+
+				result.add(screenshot);
+			}
+		}
+
+		return result;
+	}
+
+	private String _readText(String text) {
+		return Html.stripHtml(GetterUtil.getString(text));
+	}
+
+	private void _refreshUpdatesAvailableCache() {
 		_updateAvailable = null;
 	}
 
-	public static void reIndex() throws SystemException {
+	private void _reIndex() throws SystemException {
 		if (LuceneUtil.INDEX_READ_ONLY) {
 			return;
 		}
@@ -557,7 +1097,7 @@ public class PluginPackageUtil {
 
 			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
 
-			Iterator itr = getAllAvailablePluginPackages().iterator();
+			Iterator itr = _getAllAvailablePluginPackages().iterator();
 
 			while (itr.hasNext()) {
 				PluginPackage pluginPackage = (PluginPackage)itr.next();
@@ -604,14 +1144,14 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static RepositoryReport reloadRepositories() throws SystemException {
+	private RepositoryReport _reloadRepositories() throws SystemException {
 		if (_log.isInfoEnabled()) {
 			_log.info("Reloading repositories");
 		}
 
 		RepositoryReport report = new RepositoryReport();
 
-		String[] repositoryURLs = getRepositoryURLs();
+		String[] repositoryURLs = _getRepositoryURLs();
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			String repositoryURL = repositoryURLs[i];
@@ -631,12 +1171,12 @@ public class PluginPackageUtil {
 
 		}
 
-		reIndex();
+		_reIndex();
 
 		return report;
 	}
 
-	public static void registerInstalledPluginPackage(
+	private void _registerInstalledPluginPackage(
 		PluginPackage pluginPackage) {
 
 		_installedPluginPackages.addPluginPackage(pluginPackage);
@@ -646,14 +1186,14 @@ public class PluginPackageUtil {
 		_indexPluginPackage(pluginPackage);
 	}
 
-	public static void registerPluginPackageInstallation(
+	private void _registerPluginPackageInstallation(
 		String preliminaryContext) {
 
 		_installedPluginPackages.registerPluginPackageInstallation(
 			preliminaryContext);
 	}
 
-	public static Hits search(
+	private Hits _search(
 			String keywords, String type, String tag, String license,
 			String repositoryURL, String status)
 		throws SystemException {
@@ -750,13 +1290,13 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static void unregisterInstalledPluginPackage(
+	private void _unregisterInstalledPluginPackage(
 		PluginPackage pluginPackage) {
 
 		_installedPluginPackages.removePluginPackage(pluginPackage);
 	}
 
-	public static void updateInstallingPluginPackage(
+	private void _updateInstallingPluginPackage(
 		String preliminaryContext, PluginPackage pluginPackage) {
 
 		_installedPluginPackages.unregisterPluginPackageInstallation(
@@ -765,397 +1305,14 @@ public class PluginPackageUtil {
 			pluginPackage);
 	}
 
-	private static void _checkRepositories(String repositoryURL)
-		throws PluginPackageException {
-
-		String[] repositoryURLs = null;
-
-		if (Validator.isNotNull(repositoryURL)) {
-			repositoryURLs = new String[] {repositoryURL};
-		}
-		else {
-			repositoryURLs = getRepositoryURLs();
-		}
-
-		for (int i = 0; i < repositoryURLs.length; i++) {
-			getRepository(repositoryURLs[i]);
-		}
-	}
-
-	private static PluginPackage _findLatestVersion(List pluginPackages) {
-		PluginPackage pluginPackage = null;
-
-		Iterator itr = pluginPackages.iterator();
-
-		while (itr.hasNext()) {
-			PluginPackage curPluginPackage = (PluginPackage)itr.next();
-
-			if ((pluginPackage == null) ||
-				(curPluginPackage.isLaterVersionThan(pluginPackage))) {
-
-				pluginPackage = curPluginPackage;
-			}
-		}
-
-		return pluginPackage;
-	}
-
-	private static String[] _getStatusAndInstalledVersion(
-		PluginPackage pluginPackage) {
-
-		PluginPackage installedPluginPackage =
-			_installedPluginPackages.getLatestPluginPackage(
-				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
-
-		String status = null;
-		String installedVersion = null;
-
-		if (installedPluginPackage == null) {
-			status = PluginPackageImpl.STATUS_NOT_INSTALLED;
-		}
-		else {
-			installedVersion = installedPluginPackage.getVersion();
-
-			if (installedPluginPackage.isLaterVersionThan(pluginPackage)) {
-				status = PluginPackageImpl.STATUS_NEWER_VERSION_INSTALLED;
-			}
-			else if (installedPluginPackage.isPreviousVersionThan(
-						pluginPackage)) {
-
-				status = PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED;
-			}
-			else {
-				status = PluginPackageImpl.STATUS_SAME_VERSION_INSTALLED;
-			}
-		}
-
-		return new String[] {status, installedVersion};
-	}
-
-	private static void _indexPluginPackage(PluginPackage pluginPackage) {
-		String[] statusAndInstalledVersion =
-			_getStatusAndInstalledVersion(pluginPackage);
-
-		String status = statusAndInstalledVersion[0];
-		String installedVersion = statusAndInstalledVersion[1];
-
-		try {
-			PluginPackageIndexer.updatePluginPackage(
-				pluginPackage.getModuleId(), pluginPackage.getName(),
-				pluginPackage.getVersion(), pluginPackage.getModifiedDate(),
-				pluginPackage.getAuthor(), pluginPackage.getTypes(),
-				pluginPackage.getTags(), pluginPackage.getLicenses(),
-				pluginPackage.getLiferayVersions(),
-				pluginPackage.getShortDescription(),
-				pluginPackage.getLongDescription(),
-				pluginPackage.getChangeLog(), pluginPackage.getPageURL(),
-				pluginPackage.getRepositoryURL(), status, installedVersion);
-		}
-		catch (Exception e) {
-			_log.error("Error reindexing " + pluginPackage.getModuleId(), e);
-		}
-	}
-
-	private static RemotePluginPackageRepository _loadRepository(
-			String repositoryURL)
-		throws PluginPackageException {
-
-		RemotePluginPackageRepository repository = null;
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(repositoryURL);
-		sm.append(StringPool.SLASH);
-		sm.append(REPOSITORY_XML_FILENAME_PREFIX);
-		sm.append(StringPool.DASH);
-		sm.append(ReleaseInfo.getVersion());
-		sm.append(StringPool.PERIOD);
-		sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
-
-		String pluginsXmlURL = sm.toString();
-
-		try {
-			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
-
-			HttpClient client = Http.getClient(hostConfig);
-
-			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
-
-			byte[] bytes = null;
-
-			try {
-				int responseCode = client.executeMethod(
-					hostConfig, getFileMethod);
-
-				if (responseCode != 200) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"A repository for version " +
-								ReleaseInfo.getVersion() + " was not found. " +
-									"Checking general repository");
-					}
-
-					sm = new StringMaker();
-
-					sm.append(repositoryURL);
-					sm.append(StringPool.SLASH);
-					sm.append(REPOSITORY_XML_FILENAME_PREFIX);
-					sm.append(StringPool.PERIOD);
-					sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
-
-					pluginsXmlURL = sm.toString();
-
-					getFileMethod = new GetMethod(pluginsXmlURL);
-
-					responseCode = client.executeMethod(
-						hostConfig, getFileMethod);
-
-					if (responseCode != 200) {
-						throw new PluginPackageException(
-							"Unable to download file " + pluginsXmlURL +
-								" because of response code " + responseCode);
-					}
-				}
-
-				bytes = getFileMethod.getResponseBody();
-			}
-			finally {
-				getFileMethod.releaseConnection();
-			}
-
-			if ((bytes != null) && (bytes.length > 0)) {
-				repository = _parseRepositoryXml(
-					new String(bytes), repositoryURL);
-
-				_repositoryCache.put(repositoryURL, repository);
-				_availableTagsCache.addAll(repository.getTags());
-				_lastUpdateDate = new Date();
-				_updateAvailable = null;
-
-				return repository;
-			}
-			else {
-				_lastUpdateDate = new Date();
-
-				throw new PluginPackageException("Download returned 0 bytes");
-			}
-		}
-		catch (MalformedURLException mue) {
-			_repositoryCache.remove(repositoryURL);
-
-			throw new PluginPackageException(
-				"Invalid URL " + pluginsXmlURL, mue);
-		}
-		catch (IOException ioe) {
-			_repositoryCache.remove(repositoryURL);
-
-			throw new PluginPackageException(
-				"Unable to communicate with repository " + repositoryURL, ioe);
-		}
-		catch (DocumentException de) {
-			_repositoryCache.remove(repositoryURL);
-
-			throw new PluginPackageException(
-				"Unable to parse plugin list for repository " + repositoryURL,
-				de);
-		}
-	}
-
-	private static RemotePluginPackageRepository _parseRepositoryXml(
-			String xml, String repositoryURL)
-		throws DocumentException, IOException {
-
-		List supportedPluginTypes = Arrays.asList(getSupportedTypes());
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Loading plugin repository " + repositoryURL + ":\n" + xml);
-		}
-
-		RemotePluginPackageRepository pluginPackageRepository =
-			new RemotePluginPackageRepository(repositoryURL);
-
-		if (xml == null) {
-			return pluginPackageRepository;
-		}
-
-		Document doc = PortalUtil.readDocumentFromXML(xml);
-
-		Element root = doc.getRootElement();
-
-		Properties settings = _readProperties(
-			root.element("settings"), "setting");
-
-		pluginPackageRepository.setSettings(settings);
-
-		Iterator itr1 = root.elements("plugin-package").iterator();
-
-		while (itr1.hasNext()) {
-			Element pluginPackageEl = (Element)itr1.next();
-
-			PluginPackage pluginPackage = readPluginPackageXml(pluginPackageEl);
-
-			if (!isCurrentVersionSupported(
-					pluginPackage.getLiferayVersions())) {
-
-				continue;
-			}
-
-			Iterator itr2 = pluginPackage.getTypes().iterator();
-
-			boolean containsSupportedTypes = false;
-
-			while (itr2.hasNext()) {
-				String type = (String)itr2.next();
-
-				if (supportedPluginTypes.contains(type)) {
-					containsSupportedTypes = true;
-
-					break;
-				}
-			}
-
-			if (!containsSupportedTypes) {
-				continue;
-			}
-
-			pluginPackage.setRepository(pluginPackageRepository);
-
-			pluginPackageRepository.addPluginPackage(pluginPackage);
-
-			_indexPluginPackage(pluginPackage);
-		}
-
-		return pluginPackageRepository;
-	}
-
-	private static Date _readDate(String text) {
-		if (Validator.isNotNull(text)) {
-			DateFormat dateFormat = new SimpleDateFormat(
-				Time.RFC822_FORMAT, Locale.US);
-
-			try {
-				return dateFormat.parse(text);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Unable to parse date " + text);
-				}
-			}
-		}
-
-		return new Date();
-	}
-
-	private static String _readHtml(String text) {
-		return GetterUtil.getString(text);
-	}
-
-	private static List _readLicenseList(Element parent, String childTagName) {
-		List result = new ArrayList();
-
-		Iterator itr = parent.elements(childTagName).iterator();
-
-		while (itr.hasNext()) {
-			Element tagEl = (Element)itr.next();
-
-			License license = new License();
-
-			license.setName(tagEl.getText());
-
-			Attribute osiApproved = tagEl.attribute("osi-approved");
-
-			if (osiApproved != null) {
-				license.setOsiApproved(
-					GetterUtil.getBoolean(osiApproved.getText()));
-			}
-
-			Attribute url = tagEl.attribute("url");
-
-			if (url != null) {
-				license.setUrl(url.getText());
-			}
-
-			result.add(license);
-		}
-
-		return result;
-	}
-
-	private static List _readList(Element parent, String childTagName) {
-		List result = new ArrayList();
-
-		if (parent != null) {
-			Iterator itr = parent.elements(childTagName).iterator();
-
-			while (itr.hasNext()) {
-				Element element = (Element)itr.next();
-
-				String text = element.getText().trim().toLowerCase();
-
-				result.add(text);
-			}
-		}
-
-		return result;
-	}
-
-	private static Properties _readProperties(
-		Element parent, String childTagName) {
-
-		Properties result = new Properties();
-
-		if (parent != null) {
-			Iterator itr = parent.elements(childTagName).iterator();
-
-			while (itr.hasNext()) {
-				Element tagEl = (Element)itr.next();
-
-				result.setProperty(
-					tagEl.attribute("name").getValue(),
-					tagEl.attribute("value").getValue());
-			}
-		}
-
-		return result;
-	}
-
-	private static List _readScreenshots(Element parent) {
-		List result = new ArrayList();
-
-		if (parent != null) {
-			List screenshots = parent.elements("screenshot");
-
-			Iterator itr = screenshots.iterator();
-
-			while (itr.hasNext()) {
-				Element screenshotEl = (Element)itr.next();
-
-				Screenshot screenshot = new Screenshot();
-
-				screenshot.setThumbnailURL(
-					screenshotEl.element("thumbnail-url").getText());
-				screenshot.setLargeImageURL(
-					screenshotEl.element("large-image-url").getText());
-
-				result.add(screenshot);
-			}
-		}
-
-		return result;
-	}
-
-	private static String _readText(String text) {
-		return Html.stripHtml(GetterUtil.getString(text));
-	}
-
 	private static Log _log = LogFactory.getLog(PluginPackageUtil.class);
 
-	private static LocalPluginPackageRepository _installedPluginPackages =
-		new LocalPluginPackageRepository();
-	private static Map _repositoryCache = new HashMap();
-	private static Set _availableTagsCache = new TreeSet();
-	private static Date _lastUpdateDate;
-	private static Boolean _updateAvailable;
+	private static PluginPackageUtil _instance = new PluginPackageUtil();
+
+	private LocalPluginPackageRepository _installedPluginPackages;
+	private Map _repositoryCache;
+	private Set _availableTagsCache;
+	private Date _lastUpdateDate;
+	private Boolean _updateAvailable;
 
 }
