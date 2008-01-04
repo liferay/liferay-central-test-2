@@ -396,6 +396,11 @@ public class PortalUtil_IW {
 		return PortalUtil.getPreferencesValidator(portlet);
 	}
 
+	public com.liferay.portlet.RenderResponseImpl getRenderResponseImpl(
+		javax.portlet.RenderResponse res) {
+		return PortalUtil.getRenderResponseImpl(res);
+	}
+
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.servlet.http.HttpServletRequest req)
 		throws com.liferay.portal.SystemException, 

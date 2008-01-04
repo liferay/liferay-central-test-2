@@ -102,6 +102,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.lang.reflect.Method;
+
 import java.net.URL;
 
 import java.rmi.RemoteException;
@@ -554,7 +555,8 @@ public class PortalUtil {
 			return getHttpServletResponse(resWrapper.getPortletResponse());
 		}
 		else if (res instanceof RenderResponse) {
-			RenderResponseImpl resImpl = getRenderResponseImpl((RenderResponse)res);
+			RenderResponseImpl resImpl = getRenderResponseImpl(
+				(RenderResponse)res);
 
 			return resImpl.getHttpServletResponse();
 		}
