@@ -394,7 +394,7 @@ Liferay.Util = {
 						var input = jQuery(this);
 						var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
-						cruft = value.match(re);
+						var cruft = value.match(re);
 
 						settings._LFR_ = {};
 						settings._LFR_.oldText = value;
