@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSubcategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LoginTest extends BaseTestCase {
-	public void testLogin() throws Exception {
-		selenium.open("/web/guest/home");
-		selenium.click("link=Sign In");
+public class AddSubcategoryTest extends BaseTestCase {
+	public void testAddSubcategory() throws Exception {
+		selenium.click("//b");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("login", "test@liferay.com");
-		selenium.type("password", "test");
-		selenium.click("//input[@value='Sign In']");
+		selenium.click("//input[@value='Add Subcategory']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.type("_19_name", "Test Subcategory");
+		selenium.type("_19_description", "This is a test subcategory.");
+		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}
 }

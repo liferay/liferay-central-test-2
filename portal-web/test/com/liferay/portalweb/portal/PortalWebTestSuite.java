@@ -22,7 +22,7 @@
 
 package com.liferay.portalweb.portal;
 
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
@@ -30,13 +30,11 @@ import junit.framework.TestSuite;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends TestSuite {
+public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTest.class);
-	}
-
-	public void test() {
+		addTestSuite(MessageBoardsTests.class);
 	}
 
 }

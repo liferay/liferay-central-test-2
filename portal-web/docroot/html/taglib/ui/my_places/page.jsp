@@ -202,7 +202,13 @@
 
 						<c:if test="<%= showPublicPlace %>">
 							<li class="public <%= selectedPlace ? "current" : "" %>">
-								<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
+								<a href="<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"
+
+								<c:if test="<%= userCommunity %>">
+									id="my-community-public-pages"
+								</c:if>
+
+								><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= publicAddPageHREF != null %>">
 									<a class="add-page" href="<%= publicAddPageHREF %>"><liferay-ui:message key="manage-pages" /></a>
@@ -223,7 +229,13 @@
 
 						<c:if test="<%= showPrivatePlace %>">
 							<li class="private <%= selectedPlace ? "current" : "" %>">
-								<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
+								<a href="<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"
+
+								<c:if test="<%= userCommunity %>">
+									id="my-community-private-pages"
+								</c:if>
+
+								><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= privateAddPageHREF != null %>">
 									<a class="add-page" href="<%= privateAddPageHREF %>"><liferay-ui:message key="manage-pages" /></a>

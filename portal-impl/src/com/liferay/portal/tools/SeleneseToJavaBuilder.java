@@ -146,19 +146,28 @@ public class SeleneseToJavaBuilder {
 			String[] params = getParams(step);
 
 			String param1 = params[0];
-			String param2 = params[1];
+			String param2 = StringUtil.replace(params[1], "\"", "\\\"");
 			String param3 = params[2];
 
-			if (param1.equals("clickAndWait")) {
+			if (param1.equals("click") || param1.equals("mouseDown") ||
+				param1.equals("mouseUp") || param1.equals("open")) {
+
+				sm.append("selenium.");
+				sm.append(param1);
+				sm.append("(\"");
+				sm.append(param2);
+				sm.append("\");");
+			}
+			else if (param1.equals("clickAndWait")) {
 				sm.append("selenium.click(\"");
 				sm.append(param2);
 				sm.append("\");");
 				sm.append("selenium.waitForPageToLoad(\"30000\");");
 			}
-			else if (param1.equals("open")) {
-				sm.append("selenium.open(\"");
+			else if (param1.equals("pause")) {
+				sm.append("Thread.sleep(");
 				sm.append(param2);
-				sm.append("\");");
+				sm.append(");");
 			}
 			else if (param1.equals("type")) {
 				sm.append("selenium.type(\"");
@@ -166,6 +175,9 @@ public class SeleneseToJavaBuilder {
 				sm.append("\", \"");
 				sm.append(param3);
 				sm.append("\");");
+			}
+			else {
+				System.out.println(param1 + " was not translated");
 			}
 		}
 

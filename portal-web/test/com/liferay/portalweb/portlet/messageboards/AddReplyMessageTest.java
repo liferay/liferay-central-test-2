@@ -20,26 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddReplyMessageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LoginTest extends BaseTestCase {
-	public void testLogin() throws Exception {
-		selenium.open("/web/guest/home");
-		selenium.click("link=Sign In");
+public class AddReplyMessageTest extends BaseTestCase {
+	public void testAddReplyMessage() throws Exception {
+		Thread.sleep(500);
+		selenium.click("link=Reply");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("login", "test@liferay.com");
-		selenium.type("password", "test");
-		selenium.click("//input[@value='Sign In']");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.type("textArea", "This is a reply to the test message.");
+		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}
 }

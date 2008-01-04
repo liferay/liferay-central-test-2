@@ -22,24 +22,17 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.BaseTestCase;
+import junit.framework.TestSuite;
 
 /**
- * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LoginTest extends BaseTestCase {
-	public void testLogin() throws Exception {
-		selenium.open("/web/guest/home");
-		selenium.click("link=Sign In");
-		selenium.waitForPageToLoad("30000");
-		selenium.type("login", "test@liferay.com");
-		selenium.type("password", "test");
-		selenium.click("//input[@value='Sign In']");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
-		selenium.waitForPageToLoad("30000");
+public class BaseTests extends TestSuite {
+
+	public void test() {
 	}
+
 }
