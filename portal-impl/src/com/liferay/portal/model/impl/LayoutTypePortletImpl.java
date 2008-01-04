@@ -533,7 +533,7 @@ public class LayoutTypePortletImpl
 		removePortletId(portletId, true);
 	}
 
-	public void removePortletId(String portletId, boolean modeAndState) {
+	public void removePortletId(String portletId, boolean cleanUp) {
 		List columns = getColumns();
 
 		String nestedLayoutTemplateIds = GetterUtil.getString(
@@ -572,18 +572,18 @@ public class LayoutTypePortletImpl
 			getTypeSettingsProperties().setProperty(columnId, columnValue);
 		}
 
-		if (modeAndState) {
+		if (cleanUp) {
 			removeStatesPortletId(portletId);
 			removeModesPortletId(portletId);
-		}
 
-		Layout layout = getLayout();
+			Layout layout = getLayout();
 
-		try {
-			onRemoveFromLayout(portletId, layout);
-		}
-		catch (Exception e) {
-			_log.error("Unable to fire portlet layout listener event", e);
+			try {
+				onRemoveFromLayout(portletId, layout);
+			}
+			catch (Exception e) {
+				_log.error("Unable to fire portlet layout listener event", e);
+			}
 		}
 	}
 
