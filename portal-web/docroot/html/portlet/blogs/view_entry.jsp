@@ -51,22 +51,31 @@ pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 </form>
 
-<c:if test="<%= enableComments && BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
-	<br />
+<c:if test="<%= enableComments %>">
 
-	<liferay-ui:tabs names="comments" />
+	<%
+	long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
-	</portlet:actionURL>
+	int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+	%>
 
-	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
-		className="<%= BlogsEntry.class.getName() %>"
-		classPK="<%= entry.getEntryId() %>"
-		userId="<%= entry.getUserId() %>"
-		subject="<%= entry.getTitle() %>"
-		redirect="<%= currentURL %>"
-	/>
+	<c:if test="<%= messagesCount > 0 %>">
+		<br />
+
+		<liferay-ui:tabs names="comments" />
+
+		<portlet:actionURL var="discussionURL">
+			<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
+		</portlet:actionURL>
+
+		<liferay-ui:discussion
+			formName="fm2"
+			formAction="<%= discussionURL %>"
+			className="<%= BlogsEntry.class.getName() %>"
+			classPK="<%= entry.getEntryId() %>"
+			userId="<%= entry.getUserId() %>"
+			subject="<%= entry.getTitle() %>"
+			redirect="<%= currentURL %>"
+		/>
+	</c:if>
 </c:if>
