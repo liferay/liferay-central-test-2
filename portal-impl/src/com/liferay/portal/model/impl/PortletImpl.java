@@ -99,6 +99,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public static final String DEFAULT_PREFERENCES = "<portlet-preferences />";
 
 	/**
+	 * User principal strategy for screen name.
+	 */
+	public static final String USER_PRINCIPAL_STRATEGY_SCREEN_NAME =
+		"screenName";
+
+	/**
+	 * User principal strategy for screen name.
+	 */
+	public static final String USER_PRINCIPAL_STRATEGY_USER_ID = "userId";
+
+	/**
 	 * Gets the root portlet id of the portlet.
 	 *
 	 * @param		portletId the portlet id of the portlet
@@ -184,15 +195,15 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean actionURLRedirect, boolean restoreCurrentView,
 		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
 		boolean layoutCacheable, boolean instanceable,
-		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int renderWeight, boolean ajaxable, List headerPortalCss,
-		List headerPortletCss, List headerPortalJavaScript,
-		List headerPortletJavaScript, List footerPortalCss,
-		List footerPortletCss, List footerPortalJavaScript,
-		List footerPortletJavaScript, String cssClassWrapper,
-		boolean addDefaultResource, String roles, Set unlinkedRoles,
-		Map roleMappers, boolean system, boolean active, boolean include,
-		Map initParams, Integer expCache, Map portletModes,
+		String userPrincipalStrategy, boolean privateRequestAttributes,
+		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
+		List headerPortalCss, List headerPortletCss,
+		List headerPortalJavaScript, List headerPortletJavaScript,
+		List footerPortalCss, List footerPortletCss,
+		List footerPortalJavaScript, List footerPortletJavaScript,
+		String cssClassWrapper, boolean addDefaultResource, String roles,
+		Set unlinkedRoles, Map roleMappers, boolean system, boolean active,
+		boolean include, Map initParams, Integer expCache, Map portletModes,
 		Set supportedLocales, String resourceBundle, PortletInfo portletInfo,
 		Set userAttributes, Map customUserAttributes, String servletContextName,
 		List servletURLPatterns) {
@@ -232,6 +243,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_popUpPrint = popUpPrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
+		_userPrincipalStrategy = userPrincipalStrategy;
 		_privateRequestAttributes = privateRequestAttributes;
 		_privateSessionAttributes = privateSessionAttributes;
 		_renderWeight = renderWeight;
@@ -1248,6 +1260,31 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setInstanceable(boolean instanceable) {
 		_instanceable = instanceable;
+	}
+
+	/**
+	 * Gets the user principal strategy of the portlet.
+	 *
+	 * @return		the user principal strategy of the portlet
+	 */
+	public String getUserPrincipalStrategy() {
+		return _userPrincipalStrategy;
+	}
+
+	/**
+	 * Sets the user principal strategy of the portlet.
+	 *
+	 * @param		userPrincipalStrategy the user principal strategy of the
+	 *				portlet
+	 */
+	public void setUserPrincipalStrategy(String userPrincipalStrategy) {
+		if (Validator.isNull(userPrincipalStrategy)) {
+			_userPrincipalStrategy =
+				PortletImpl.USER_PRINCIPAL_STRATEGY_USER_ID;
+		}
+		else {
+			_userPrincipalStrategy = userPrincipalStrategy;
+		}
 	}
 
 	/**
@@ -2268,15 +2305,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isShowPortletAccessDenied(), isShowPortletInactive(),
 			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
 			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
-			getHeaderPortalCss(), getHeaderPortletCss(),
-			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
-			getFooterPortalCss(), getFooterPortletCss(),
-			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
-			getCssClassWrapper(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			isInstanceable(), getUserPrincipalStrategy(),
+			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
+			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
+			getHeaderPortletCss(), getHeaderPortalJavaScript(),
+			getHeaderPortletJavaScript(), getFooterPortalCss(),
+			getFooterPortletCss(), getFooterPortalJavaScript(),
+			getFooterPortletJavaScript(), getCssClassWrapper(),
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
@@ -2485,6 +2523,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * True if the portlet can be added multiple times to a layout.
 	 */
 	private boolean _instanceable;
+
+	/**
+	 * The user principal strategy of the portlet.
+	 */
+	private String _userPrincipalStrategy;
 
 	/**
 	 * True if the portlet does not share request attributes with the portal or

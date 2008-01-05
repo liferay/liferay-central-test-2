@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.servlet.ProtectedPrincipal;
@@ -38,8 +41,6 @@ import java.security.Principal;
 
 import java.util.Enumeration;
 import java.util.Locale;
-
-import javax.portlet.PortletRequest;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -57,15 +58,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PortletServletRequest extends HttpServletRequestWrapper {
 
-	public PortletServletRequest(HttpServletRequest req,
-								 PortletRequest portletRequest, String pathInfo,
-								 String queryString, String requestURI,
-								 String servletPath) {
+	public PortletServletRequest(
+		HttpServletRequest req, RenderRequestImpl renderReq, String pathInfo,
+		String queryString, String requestURI, String servletPath) {
 
 		super(req);
 
 		_req = req;
-		_portletRequest = portletRequest;
+		_renderReq = renderReq;
 		_pathInfo = GetterUtil.getString(pathInfo);
 		_queryString = GetterUtil.getString(queryString);
 		_requestURI = GetterUtil.getString(requestURI);
@@ -74,13 +74,35 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
-		if ((userId > 0) && (remoteUser == null)) {
-			_remoteUser = String.valueOf(userId);
-			_userPrincipal = new ProtectedPrincipal(_remoteUser);
+		Portlet portlet = renderReq.getPortlet();
+
+		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
+
+		if (userPrincipalStrategy.equals(
+				PortletImpl.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+
+			try {
+				User user = PortalUtil.getUser(req);
+
+				_remoteUser = user.getScreenName();
+				_remoteUserId = user.getUserId();
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 		else {
-			_remoteUser = remoteUser;
-			_userPrincipal = req.getUserPrincipal();
+			if ((userId > 0) && (remoteUser == null)) {
+				_remoteUser = String.valueOf(userId);
+				_remoteUserId = userId;
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			else {
+				_remoteUser = remoteUser;
+				_remoteUserId = GetterUtil.getLong(remoteUser);
+				_userPrincipal = req.getUserPrincipal();
+			}
 		}
 	}
 
@@ -91,14 +113,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			return retVal;
 		}
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)_portletRequest;
-
 		if (ServerDetector.isWebSphere()) {
-			if (reqImpl.getPortlet().isWARFile()) {
+			if (_renderReq.getPortlet().isWARFile()) {
 				if (name.equals(
 						JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
 
-					retVal = _portletRequest.getContextPath();
+					retVal = _renderReq.getContextPath();
 				}
 				else if (name.equals(
 							JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
@@ -164,7 +184,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getContextPath() {
-		return _portletRequest.getContextPath();
+		return _renderReq.getContextPath();
 	}
 
 	public ServletInputStream getInputStream() throws IOException {
@@ -177,11 +197,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Locale getLocale() {
-		return _portletRequest.getLocale();
+		return _renderReq.getLocale();
 	}
 
 	public Enumeration getLocales() {
-		return _portletRequest.getLocales();
+		return _renderReq.getLocales();
 	}
 
 	public String getPathInfo() {
@@ -252,7 +272,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 					userId, companyId, role, true);
 			}
 			catch (Exception e) {
-				_log.warn(e);
+				_log.error(e);
 			}
 
 			return super.isUserInRole(role);
@@ -274,12 +294,13 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _req;
-	private PortletRequest _portletRequest;
+	private RenderRequestImpl _renderReq;
 	private String _pathInfo;
 	private String _queryString;
 	private String _requestURI;
 	private String _servletPath;
 	private String _remoteUser;
+	private long _remoteUserId;
 	private Principal _userPrincipal;
 	private boolean _uploadRequest;
 	private boolean _uploadRequestInvoked;

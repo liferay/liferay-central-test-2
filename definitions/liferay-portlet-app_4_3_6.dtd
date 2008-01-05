@@ -3,8 +3,8 @@ This is the DTD for the Portlet Application parameters that are specific to
 Liferay Portal.
 
 <!DOCTYPE liferay-portlet-app PUBLIC
-	"-//Liferay//DTD Portlet Application 4.4.0//EN"
-	"http://www.liferay.com/dtd/liferay-portlet-app_4_4_0.dtd">
+	"-//Liferay//DTD Portlet Application 4.3.3//EN"
+	"http://www.liferay.com/dtd/liferay-portlet-app_4_3_3.dtd">
 -->
 
 <!--
@@ -20,17 +20,16 @@ The portlet element contains the declarative data of a portlet.
 configuration-path?, configuration-action-class?, indexer-class?,
 open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
-portlet-layout-listener-class?, activity-tracker-interpreter-class?,
-smtp-message-listener-class?, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-pop-up-print?, layout-cacheable?, instanceable?, user-principal-strategy?,
-private-request-attributes?, private-session-attributes?, render-weight?,
-ajaxable?, header-portal-css*, header-portlet-css*, header-portal-javascript*,
-header-portlet-javascript*, footer-portal-css*, footer-portlet-css*,
-footer-portal-javascript*, footer-portlet-javascript*, css-class-wrapper?,
-add-default-resource?, system?, active?, include?)>
+portlet-layout-listener-class?, smtp-message-listener-class?,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, action-url-redirect?, restore-current-view?,
+maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
+user-principal-strategy?, private-request-attributes?,
+private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
+header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
+footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
+footer-portlet-javascript*, add-default-resource?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -78,7 +77,7 @@ users to configure the portlet at runtime.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
 -->
 <!ELEMENT configuration-action-class (#PCDATA)>
 
@@ -89,8 +88,8 @@ search index for the portlet.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
+http://docs.liferay.com/4.3/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -102,8 +101,8 @@ in the OpenSearch 1.1 standard.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
+http://docs.liferay.com/4.3/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
 http://www.opensearch.org
 -->
 <!ELEMENT open-search-class (#PCDATA)>
@@ -115,8 +114,8 @@ portlet.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/job/Scheduler.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portal/job/Scheduler.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -128,7 +127,7 @@ default portlet URL implementation.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -140,7 +139,7 @@ example of its uses.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
@@ -159,8 +158,8 @@ tasks are run.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
+http://docs.liferay.com/4.3/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
 
@@ -171,23 +170,10 @@ is added, moved, or removed from a layout.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
+http://docs.liferay.com/4.3/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
 -->
 <!ELEMENT portlet-layout-listener-class (#PCDATA)>
-
-<!--
-The activity-tracker-interpreter-class value must be a class that implements
-com.liferay.portal.model.ActivityTrackerInterpreter and is called to interpret
-activities into friendly messages that are easily understandable by a human
-being.
-
-See:
-
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/model/ActivityTrackerInterpreter.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/MBActivityTrackerInterpreter.html
--->
-<!ELEMENT activity-tracker-interpreter-class (#PCDATA)>
 
 <!--
 The smtp-message-listener-class value must be a class that implements
@@ -196,8 +182,8 @@ emails.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
+http://docs.liferay.com/4.3/javadocs/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
+http://docs.liferay.com/4.3/javadocs/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
 -->
 <!ELEMENT smtp-message-listener-class (#PCDATA)>
 
@@ -436,12 +422,6 @@ Set the path of JavaScript that will be referenced in the page's footer relative
 to the portlet's context path.
 -->
 <!ELEMENT footer-portlet-javascript (#PCDATA)>
-
-<!--
-Set name of the CSS class that will be injected in the DIV that wraps this
-portlet.
--->
-<!ELEMENT css-class-wrapper (#PCDATA)>
 
 <!--
 If the add-default-resource value is set to false, and the portlet does not

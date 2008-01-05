@@ -241,6 +241,7 @@
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<!--<user-principal-strategy>screenName</user-principal-strategy>-->
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>

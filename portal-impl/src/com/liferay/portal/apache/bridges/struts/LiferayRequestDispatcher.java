@@ -86,7 +86,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		String requestURI = null;
 		String servletPath = null;
 
-		RenderRequestImpl portletReq = (RenderRequestImpl)req.getAttribute(
+		RenderRequestImpl renderReq = (RenderRequestImpl)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletResponse portletRes = (PortletResponse)req.getAttribute(
@@ -103,7 +103,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 			}
 
 			List servletURLPatterns =
-				portletReq.getPortlet().getServletURLPatterns();
+				renderReq.getPortlet().getServletURLPatterns();
 
 			Iterator itr = servletURLPatterns.iterator();
 
@@ -130,11 +130,11 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				servletPath = pathNoQueryString;
 			}
 
-			requestURI = portletReq.getContextPath() + pathNoQueryString;
+			requestURI = renderReq.getContextPath() + pathNoQueryString;
 		}
 
 		PortletServletRequest portletServletReq = new PortletServletRequest(
-			(HttpServletRequest)req, portletReq, pathInfo, queryString,
+			(HttpServletRequest)req, renderReq, pathInfo, queryString,
 			requestURI, servletPath);
 
 		PortletServletResponse portletServletRes =

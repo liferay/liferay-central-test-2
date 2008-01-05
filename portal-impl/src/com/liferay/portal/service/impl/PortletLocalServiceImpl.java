@@ -1004,6 +1004,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setInstanceable(GetterUtil.getBoolean(
 					portlet.elementText("instanceable"),
 					portletModel.isInstanceable()));
+				portletModel.setUserPrincipalStrategy(GetterUtil.getString(
+					portlet.elementText("user-principal-strategy"),
+					portletModel.getUserPrincipalStrategy()));
 				portletModel.setPrivateRequestAttributes(GetterUtil.getBoolean(
 					portlet.elementText("private-request-attributes"),
 					portletModel.isPrivateRequestAttributes()));

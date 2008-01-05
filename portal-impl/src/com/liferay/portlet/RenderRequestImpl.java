@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.PortletContextPool;
@@ -207,7 +208,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 					userId, companyId, role, true);
 			}
 			catch (Exception e) {
-				_log.warn(e);
+				_log.error(e);
 			}
 
 			return _req.isUserInRole(role);
@@ -626,13 +627,33 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
-		if ((userId > 0) && (remoteUser == null)) {
-			_remoteUser = String.valueOf(userId);
-			_userPrincipal = new ProtectedPrincipal(_remoteUser);
+		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
+
+		if (userPrincipalStrategy.equals(
+				PortletImpl.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+
+			try {
+				User user = PortalUtil.getUser(req);
+
+				_remoteUser = user.getScreenName();
+				_remoteUserId = user.getUserId();
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 		else {
-			_remoteUser = remoteUser;
-			_userPrincipal = req.getUserPrincipal();
+			if ((userId > 0) && (remoteUser == null)) {
+				_remoteUser = String.valueOf(userId);
+				_remoteUserId = userId;
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			else {
+				_remoteUser = remoteUser;
+				_remoteUserId = GetterUtil.getLong(remoteUser);
+				_userPrincipal = req.getUserPrincipal();
+			}
 		}
 
 		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
@@ -700,6 +721,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 	private PortletSessionImpl _ses;
 	private String _portalSessionId;
 	private String _remoteUser;
+	private long _remoteUserId;
 	private Principal _userPrincipal;
 	private Locale _locale;
 	private long _plid;

@@ -237,6 +237,10 @@ public interface Portlet extends PortletModel {
 
 	public void setInstanceable(boolean instanceable);
 
+	public java.lang.String getUserPrincipalStrategy();
+
+	public void setUserPrincipalStrategy(java.lang.String userPrincipalStrategy);
+
 	public boolean getPrivateRequestAttributes();
 
 	public boolean isPrivateRequestAttributes();
