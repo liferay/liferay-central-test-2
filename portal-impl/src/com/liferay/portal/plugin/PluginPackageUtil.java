@@ -591,7 +591,7 @@ public class PluginPackageUtil {
 		else if (!_settingUpdateAvailable) {
 			_settingUpdateAvailable = true;
 
-			Thread indexerThread = indexerThread = new Thread(
+			Thread indexerThread = new Thread(
 				new UpdateAvailableRunner(), PluginPackageUtil.class.getName());
 
 			indexerThread.setPriority(Thread.MIN_PRIORITY);
