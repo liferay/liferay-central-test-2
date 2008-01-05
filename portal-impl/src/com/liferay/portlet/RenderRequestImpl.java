@@ -194,18 +194,15 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 	}
 
 	public boolean isUserInRole(String role) {
-		String remoteUser = getRemoteUser();
-
-		if (remoteUser == null) {
+		if (_remoteUserId <= 0) {
 			return false;
 		}
 		else {
 			try {
 				long companyId = PortalUtil.getCompanyId(_req);
-				long userId = GetterUtil.getLong(remoteUser);
 
 				return RoleLocalServiceUtil.hasUserRole(
-					userId, companyId, role, true);
+					_remoteUserId, companyId, role, true);
 			}
 			catch (Exception e) {
 				_log.error(e);
