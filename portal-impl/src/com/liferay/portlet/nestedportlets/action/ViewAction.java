@@ -132,7 +132,7 @@ public class ViewAction extends PortletAction {
 		return content;
 	}
 
-	private static Pattern _searchColumnsAndIdsPattern = Pattern.compile(
+	private static final Pattern _searchColumnsAndIdsPattern = Pattern.compile(
 		"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
 		Pattern.DOTALL);
 

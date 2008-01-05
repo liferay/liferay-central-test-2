@@ -75,7 +75,7 @@ public class MediaWikiLocalLink
 		return key.replaceAll("\\W", "_");
 	}
 
-	private static Pattern _pattern = Pattern.compile(
+	private static final Pattern _pattern = Pattern.compile(
 		"(^|\\p{Punct}|\\p{Space})(\\[\\s*(((\\p{Lu}\\p{Ll}+)\\s?)+)\\s*\\|\\s*((([\\p{Alpha}\\p{Digit}]+)\\s?)+)\\s*\\])(\\z|\\n|\\p{Punct}|\\p{Space})");
 
 	private Container _pages;

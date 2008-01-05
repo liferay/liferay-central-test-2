@@ -161,7 +161,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			layout.getLayoutId(), layout.getTypeSettings());
 	}
 
-	private static Pattern _searchColumnsPattern = Pattern.compile(
+	private static final Pattern _searchColumnsPattern = Pattern.compile(
 		"processColumn[(]\"(.*?)\"[)]", Pattern.DOTALL);
 
 }
