@@ -50,7 +50,7 @@ public class CityStateWebCacheItem implements WebCacheItem {
 		_cityAndState = cityAndState;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		List list = new ArrayList();
 
 		String cityAndState = _cityAndState;

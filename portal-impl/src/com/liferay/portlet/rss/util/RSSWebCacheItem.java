@@ -44,7 +44,7 @@ public class RSSWebCacheItem implements WebCacheItem {
 		_url = url;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		SyndFeed feed = null;
 
 		try {

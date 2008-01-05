@@ -44,7 +44,7 @@ public class VerseWebCacheItem implements WebCacheItem {
 		_versionId = versionId;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		Verse verse = null;
 
 		try {

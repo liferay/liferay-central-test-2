@@ -51,7 +51,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 		_domain = domain;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		Whois whois = null;
 
 		try {

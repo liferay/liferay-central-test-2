@@ -43,7 +43,7 @@ public class WeatherWebCacheItem implements WebCacheItem {
 		_zip = zip;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		Weather weather = null;
 
 		try {

@@ -32,7 +32,7 @@ import java.io.Serializable;
  */
 public interface WebCacheItem extends Serializable {
 
-	public Object convert(String s) throws WebCacheException;
+	public Object convert(String key) throws WebCacheException;
 
 	public long getRefreshTime();
 

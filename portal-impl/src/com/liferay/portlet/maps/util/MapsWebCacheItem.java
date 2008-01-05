@@ -44,7 +44,7 @@ public class MapsWebCacheItem implements WebCacheItem {
 		_csz = csz;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		MapsAddress map = null;
 
 		String street = "";

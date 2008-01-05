@@ -48,7 +48,7 @@ public class ReverendFunWebCacheItem implements WebCacheItem {
 		_date = date;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		Set dates = new TreeSet(new StringComparator(false, true));
 
 		try {

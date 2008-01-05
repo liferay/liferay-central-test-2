@@ -46,7 +46,7 @@ public class TranslationWebCacheItem implements WebCacheItem {
 		_fromText = fromText;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {

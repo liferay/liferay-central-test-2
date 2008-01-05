@@ -53,7 +53,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		_isbn = isbn;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		String isbn = _isbn;
 
 		AmazonRankings amazonRankings = null;

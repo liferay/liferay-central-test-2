@@ -44,7 +44,7 @@ public class StocksWebCacheItem implements WebCacheItem {
 		_symbol = symbol;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		String symbol = _symbol;
 		double lastTrade = 0.0;
 		double change = 0.0;

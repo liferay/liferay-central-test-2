@@ -50,7 +50,7 @@ public class Zip4WebCacheItem implements WebCacheItem {
 		_cityAndState = cityAndState;
 	}
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		List list = new ArrayList();
 
 		String street = _street;

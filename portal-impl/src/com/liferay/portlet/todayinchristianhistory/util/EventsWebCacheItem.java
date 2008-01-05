@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class EventsWebCacheItem implements WebCacheItem {
 
-	public Object convert(String id) throws WebCacheException {
+	public Object convert(String key) throws WebCacheException {
 		List events = new ArrayList();
 
 		try {
