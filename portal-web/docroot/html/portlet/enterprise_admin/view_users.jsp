@@ -178,7 +178,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 		rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 		// First name

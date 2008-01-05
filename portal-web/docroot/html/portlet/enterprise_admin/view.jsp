@@ -184,7 +184,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user_group");
-				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 				rowURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 
 				// Name
@@ -257,7 +257,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
-				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 				rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 				// Name
@@ -345,7 +345,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy");
-				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 				rowURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));
 
 				// Name
