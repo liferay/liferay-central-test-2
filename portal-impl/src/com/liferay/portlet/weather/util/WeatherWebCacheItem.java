@@ -20,81 +20,67 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.network.util;
+package com.liferay.portlet.weather.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.network.model.Whois;
+import com.liferay.portlet.weather.model.Weather;
+import com.liferay.util.Html;
+import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-
-import java.net.Socket;
-
 /**
- * <a href="WhoisConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="WeatherWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WhoisConverter implements WebCacheItem {
+public class WeatherWebCacheItem implements WebCacheItem {
 
-	public static String WHOIS_SERVER = "whois.geektools.com";
-
-	public static int WHOIS_SERVER_PORT = 43;
-
-	public WhoisConverter(String domain) {
-		_domain = domain;
+	public WeatherWebCacheItem(String zip) {
+		_zip = zip;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		Whois whois = null;
+		Weather weather = null;
 
 		try {
-			Socket socket = new Socket(WHOIS_SERVER, WHOIS_SERVER_PORT);
+			String text = Html.stripComments(Http.URLtoString(
+				"http://weather.yahoo.com/search/weather2?p=" +
+					HttpUtil.encodeURL(_zip)));
 
-			BufferedReader br = new BufferedReader(
-				new InputStreamReader(socket.getInputStream()));
+			int x = text.indexOf("forecast-temperature");
 
-			PrintStream out = new PrintStream(socket.getOutputStream());
+			x = text.indexOf("h3>", x) + 3;
 
-			out.println(_domain);
+			int y = text.indexOf("&deg;", x);
 
-			StringMaker sm = new StringMaker();
-			String line = null;
+			float temperature = GetterUtil.getFloat(text.substring(x, y));
 
-			while ((line = br.readLine()) != null) {
-				if (line.startsWith("Results ")) {
-					break;
-				}
+			x = text.indexOf("background:url(", x);
+			x = text.indexOf("http://", x);
 
-				sm.append(line).append("\n");
-			}
+			y = text.indexOf(".png", x) - 1;
 
-			br.close();
-			socket.close();
+			String iconURL = text.substring(x, y) + "s.png";
 
-			whois = new Whois(
-				_domain,
-				StringUtil.replace(sm.toString().trim(), "\n\n", "\n"));
+			weather = new Weather(_zip, iconURL, temperature);
 		}
 		catch (Exception e) {
-			throw new WebCacheException(_domain + " " + e.toString());
+			throw new WebCacheException(_zip);
 		}
 
-		return whois;
+		return weather;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.DAY;
+	private static final long _REFRESH_TIME = Time.MINUTE * 20;
 
-	private String _domain;
+	private String _zip;
 
 }

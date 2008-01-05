@@ -36,7 +36,7 @@ import com.liferay.portlet.stocks.model.Stocks;
 public class StocksUtil {
 
 	public static Stocks getStocks(String symbol) {
-		WebCacheItem wci = new StocksConverter(symbol);
+		WebCacheItem wci = new StocksWebCacheItem(symbol);
 
 		return (Stocks)WebCachePoolUtil.get(
 			StocksUtil.class.getName() + StringPool.PERIOD + symbol, wci);

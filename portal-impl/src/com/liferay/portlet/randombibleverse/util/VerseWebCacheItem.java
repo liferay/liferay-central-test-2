@@ -32,14 +32,14 @@ import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
- * <a href="VerseConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerseWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerseConverter implements WebCacheItem {
+public class VerseWebCacheItem implements WebCacheItem {
 
-	public VerseConverter(String location, String versionId) {
+	public VerseWebCacheItem(String location, String versionId) {
 		_location = location;
 		_versionId = versionId;
 	}

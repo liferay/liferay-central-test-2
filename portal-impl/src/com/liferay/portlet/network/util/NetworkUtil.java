@@ -36,14 +36,14 @@ import com.liferay.portlet.network.model.Whois;
 public class NetworkUtil {
 
 	public static DNSLookup getDNSLookup(String domain) {
-		WebCacheItem wci = new DNSLookupConverter(domain);
+		WebCacheItem wci = new DNSLookupWebCacheItem(domain);
 
 		return (DNSLookup)WebCachePoolUtil.get(
 			NetworkUtil.class.getName() + ".dnslookup." + domain, wci);
 	}
 
 	public static Whois getWhois(String domain) {
-		WebCacheItem wci = new WhoisConverter(domain);
+		WebCacheItem wci = new WhoisWebCacheItem(domain);
 
 		return (Whois)WebCachePoolUtil.get(
 			NetworkUtil.class.getName() + ".whois." + domain, wci);

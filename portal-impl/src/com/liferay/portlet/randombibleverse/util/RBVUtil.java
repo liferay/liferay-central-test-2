@@ -142,7 +142,7 @@ public class RBVUtil {
 	}
 
 	private Verse _getVerse(String location, String versionId) {
-		WebCacheItem wci = new VerseConverter(location, versionId);
+		WebCacheItem wci = new VerseWebCacheItem(location, versionId);
 
 		return (Verse)WebCachePoolUtil.get(
 			RBVUtil.class.getName() + StringPool.PERIOD + location +

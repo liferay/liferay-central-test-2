@@ -20,80 +20,82 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.currencyconverter.util;
+package com.liferay.portlet.reverendfun.util;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
-import java.util.StringTokenizer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.Calendar;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
- * <a href="CurrencyConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReverendFunWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CurrencyConverter implements WebCacheItem {
+public class ReverendFunWebCacheItem implements WebCacheItem {
 
-	public CurrencyConverter(String symbol) {
-		_symbol = symbol;
+	public ReverendFunWebCacheItem(String date) {
+		_date = date;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		String symbol = _symbol;
-		double rate = 0.0;
+		Set dates = new TreeSet(new StringComparator(false, true));
 
 		try {
-			if (symbol.length() == 6) {
-				String fromSymbol = symbol.substring(0, 3);
-				String toSymbol = symbol.substring(3, 6);
+			DateFormat dateFormatYMD = new SimpleDateFormat("yyyyMMdd");
+			DateFormat dateFormatYM = new SimpleDateFormat("yyyyMM");
 
-				if (!CurrencyUtil.isCurrency(fromSymbol) ||
-					!CurrencyUtil.isCurrency(toSymbol)) {
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
-					throw new WebCacheException(symbol);
+			cal.setTime(dateFormatYMD.parse(_date));
+			cal.set(Calendar.DATE, 1);
+
+			Calendar now = CalendarFactoryUtil.getCalendar();
+
+			String url = "http://www.reverendfun.com/artchives/?search=";
+
+			while (cal.before(now)) {
+				String text = Http.URLtoString(
+					url + dateFormatYM.format(cal.getTime()));
+
+				int x = text.indexOf("date=");
+				int y = text.indexOf("\"", x);
+
+				while (x != -1 && y != -1) {
+					String fromDateString = text.substring(x + 5, y);
+
+					dates.add(fromDateString);
+
+					x = text.indexOf("date=", y);
+					y = text.indexOf("\"", x);
 				}
+
+				cal.add(Calendar.MONTH, 1);
 			}
-			else if (symbol.length() == 3) {
-				if (!CurrencyUtil.isCurrency(symbol)) {
-					throw new WebCacheException(symbol);
-				}
-			}
-			else {
-				throw new WebCacheException(symbol);
-			}
-
-			String text = Http.URLtoString(
-				"http://finance.yahoo.com/d/quotes.csv?s=" +
-					symbol + "=X&f=sl1d1t1c1ohgv&e=.csv");
-
-			StringTokenizer st = new StringTokenizer(text, StringPool.COMMA);
-
-			// Skip symbol
-
-			st.nextToken();
-
-			rate = GetterUtil.getDouble(
-				st.nextToken().replace('"', ' ').trim());
 		}
 		catch (Exception e) {
-			throw new WebCacheException(e);
+			throw new WebCacheException(_date + " " + e.toString());
 		}
 
-		return new Currency(symbol, rate);
+		return dates;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.MINUTE * 20;
+	private static final long _REFRESH_TIME = Time.DAY;
 
-	private String _symbol;
+	private String _date;
 
 }

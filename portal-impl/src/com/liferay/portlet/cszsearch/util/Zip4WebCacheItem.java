@@ -38,14 +38,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="Zip4Converter.java.html"><b><i>View Source</i></b></a>
+ * <a href="Zip4WebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Zip4Converter implements WebCacheItem {
+public class Zip4WebCacheItem implements WebCacheItem {
 
-	public Zip4Converter(String street, String cityAndState) {
+	public Zip4WebCacheItem(String street, String cityAndState) {
 		_street = street;
 		_cityAndState = cityAndState;
 	}

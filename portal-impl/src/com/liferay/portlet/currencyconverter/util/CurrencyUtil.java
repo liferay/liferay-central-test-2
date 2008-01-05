@@ -75,7 +75,7 @@ public class CurrencyUtil {
 	}
 
 	public static Currency getCurrency(String symbol) {
-		WebCacheItem wci = new CurrencyConverter(symbol);
+		WebCacheItem wci = new CurrencyWebCacheItem(symbol);
 
 		return (Currency)WebCachePoolUtil.get(
 			CurrencyUtil.class.getName() + StringPool.PERIOD + symbol, wci);

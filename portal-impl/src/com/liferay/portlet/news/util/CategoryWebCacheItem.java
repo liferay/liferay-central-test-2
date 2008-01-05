@@ -43,12 +43,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="CategoryConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="CategoryWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CategoryConverter implements WebCacheItem {
+public class CategoryWebCacheItem implements WebCacheItem {
 
 	public Object convert(String url) throws WebCacheException {
 		try {

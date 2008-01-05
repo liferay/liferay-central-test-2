@@ -20,76 +20,94 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.todayinchristianhistory.util;
+package com.liferay.portlet.cszsearch.util;
 
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.todayinchristianhistory.model.Event;
+import com.liferay.portlet.cszsearch.model.CSZAddress;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
+
+import java.io.BufferedReader;
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="EventsConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="CityStateWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EventsConverter implements WebCacheItem {
+public class CityStateWebCacheItem implements WebCacheItem {
 
-	public EventsConverter() {
+	public CityStateWebCacheItem(String cityAndState) {
+		_cityAndState = cityAndState;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		List events = new ArrayList();
+		List list = new ArrayList();
+
+		String cityAndState = _cityAndState;
+		String city = null;
+		String state = null;
+
+		try {
+			int pos = cityAndState.indexOf(StringPool.COMMA);
+
+			city = cityAndState.substring(0, pos);
+			state = cityAndState.substring(
+				pos + 1, cityAndState.length()).trim();
+		}
+		catch (Exception e) {
+			return list;
+		}
 
 		try {
 			String text = Http.URLtoString(
-				"http://www.studylight.org/his/tich");
+				"http://zip4.usps.com/zip4/zcl_1_results.jsp?pagenumber=all" +
+					"&city=" + HttpUtil.encodeURL(city) + "&state=" +
+						HttpUtil.encodeURL(state));
 
-			int x = text.indexOf("<table cellpadding=3 cellspacing=3>");
-			x = text.indexOf("<tr>", x);
+			int x = text.indexOf("<!-- **");
+			int y = text.lastIndexOf("<!-- **");
 
-			int y = text.indexOf("<tr><td align=center", x);
+			BufferedReader br = new BufferedReader(
+				new StringReader(Html.stripHtml(text.substring(x, y))));
 
-			text = Html.stripComments(text.substring(x, y)).trim();
+			String line = null;
 
-			String[] array = StringUtil.split(text, "<tr>");
+			while ((line = br.readLine()) != null) {
+				line = line.trim();
 
-			for (int i = 0; i < array.length; i++) {
-				x = array[i].indexOf("<b>");
-				y = array[i].indexOf("</b>");
+				if (!line.equals("")) {
 
-				if (x != -1 && y != -1) {
-					String year = array[i].substring(x + 3, y).trim();
-
-					String description = Html.stripHtml(
-						array[i].substring(y, array[i].length())).trim();
-
-					if (description.startsWith("-  ")) {
-						description = description.substring(
-							3, description.length());
+					if (Validator.isNumber(line)) {
+						list.add(new CSZAddress(null, city, state, line));
 					}
-
-					events.add(new Event(Integer.parseInt(year), description));
 				}
 			}
+
+			br.close();
 		}
 		catch (Exception e) {
 			throw new WebCacheException(e);
 		}
 
-		return events;
+		return list;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.HOUR;
+	private static final long _REFRESH_TIME = Time.DAY * 90;
+
+	private String _cityAndState;
 
 }

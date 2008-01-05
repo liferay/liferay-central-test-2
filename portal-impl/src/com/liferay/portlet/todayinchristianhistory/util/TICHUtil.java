@@ -36,7 +36,7 @@ import java.util.List;
 public class TICHUtil {
 
 	public static List getEvents() {
-		WebCacheItem wci = new EventsConverter();
+		WebCacheItem wci = new EventsWebCacheItem();
 
 		return (List)WebCachePoolUtil.get(TICHUtil.class.getName(), wci);
 	}

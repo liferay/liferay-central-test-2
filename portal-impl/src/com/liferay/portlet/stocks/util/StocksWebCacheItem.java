@@ -33,14 +33,14 @@ import com.liferay.util.Time;
 import java.util.StringTokenizer;
 
 /**
- * <a href="StocksConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="StocksWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class StocksConverter implements WebCacheItem {
+public class StocksWebCacheItem implements WebCacheItem {
 
-	public StocksConverter(String symbol) {
+	public StocksWebCacheItem(String symbol) {
 		_symbol = symbol;
 	}
 

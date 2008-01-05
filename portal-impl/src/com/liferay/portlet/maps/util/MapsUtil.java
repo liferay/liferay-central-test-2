@@ -37,7 +37,7 @@ public class MapsUtil {
 	public static MapsAddress getMapsAddress(
 		String street, String cityAndState) {
 
-		WebCacheItem wci = new MapsConverter(street, cityAndState);
+		WebCacheItem wci = new MapsWebCacheItem(street, cityAndState);
 
 		return (MapsAddress)WebCachePoolUtil.get(
 			"maps." + street + "|" + cityAndState, wci);

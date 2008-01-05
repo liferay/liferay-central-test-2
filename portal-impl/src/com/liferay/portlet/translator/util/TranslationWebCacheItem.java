@@ -20,93 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.maps.util;
+package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.maps.model.MapsAddress;
+import com.liferay.portlet.translator.model.Translation;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
+import java.net.URL;
+
 /**
- * <a href="MapsConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="TranslationWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MapsConverter implements WebCacheItem {
+public class TranslationWebCacheItem implements WebCacheItem {
 
-	public MapsConverter(String street, String csz) {
-		_street = street;
-		_csz = csz;
+	public TranslationWebCacheItem(String translationId, String fromText) {
+		_translationId = translationId;
+		_fromText = fromText;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		MapsAddress map = null;
-
-		String street = "";
-		String city = "";
-		String state = "";
-		String zip = "";
-
-		try {
-			street = _street;
-
-			int pos = _csz.indexOf(StringPool.COMMA);
-
-			if (pos != -1) {
-				city = _csz.substring(0, pos).trim();
-
-				state = _csz.substring(pos + 1, _csz.length()).trim();
-			}
-			else {
-				zip = _csz;
-			}
-		}
-		catch (Exception e) {
-			return map;
-		}
+		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
 			StringMaker url = new StringMaker();
 
-			url.append("http://www.mapquest.com/maps/map.adp?country=US");
-			url.append("&address=");
-			url.append(HttpUtil.encodeURL(street));
-			url.append("&city=");
-			url.append(HttpUtil.encodeURL(city));
-			url.append("&state=");
-			url.append(HttpUtil.encodeURL(state));
-			url.append("&zipcode=");
-			url.append(HttpUtil.encodeURL(zip));
+			url.append("http://babelfish.altavista.com/babelfish/tr?doit=done");
+			url.append("&urltext=").append(HttpUtil.encodeURL(_fromText));
+			url.append("&lp=").append(_translationId);
 
-			String text = Http.URLtoString(url.toString());
+			String text = Http.URLtoString(new URL(url.toString()));
 
-			int mapDirectPos = text.indexOf(
-				"GetMapDataDirect=");
+			int begin = text.indexOf("<div style=padding:10px;>") + 25;
+			int end = text.indexOf("</div>", begin);
 
-			if (mapDirectPos != -1) {
-				mapDirectPos = mapDirectPos + 17;
-			}
-			else {
-				return map;
-			}
+			String toText = text.substring(begin, end).trim();
 
-			String mapDirect = text.substring(
-				mapDirectPos, text.indexOf("\"", mapDirectPos));
+			toText = StringUtil.replace(toText, "\n", " ");
 
-			mapDirect = HttpUtil.decodeURL(mapDirect);
-
-			map = new MapsAddress(street, city, state, zip, mapDirect);
+			translation.setToText(toText);
 		}
 		catch (Exception e) {
 			throw new WebCacheException(e);
 		}
 
-		return map;
+		return translation;
 	}
 
 	public long getRefreshTime() {
@@ -115,7 +80,7 @@ public class MapsConverter implements WebCacheItem {
 
 	private static final long _REFRESH_TIME = Time.DAY * 90;
 
-	private String _street;
-	private String _csz;
+	private String _translationId;
+	private String _fromText;
 
 }

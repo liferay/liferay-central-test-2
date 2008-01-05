@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
-import com.liferay.portlet.translator.util.TranslationConverter;
+import com.liferay.portlet.translator.util.TranslationWebCacheItem;
 import com.liferay.util.FileUtil;
 
 import java.io.BufferedReader;
@@ -286,7 +286,7 @@ public class LangBuilder {
 		try {
 			System.out.println("Translating " + translationId + " " + fromText);
 
-			WebCacheItem wci = new TranslationConverter(
+			WebCacheItem wci = new TranslationWebCacheItem(
 				translationId, fromText);
 
 			Translation translation = (Translation)wci.convert("");

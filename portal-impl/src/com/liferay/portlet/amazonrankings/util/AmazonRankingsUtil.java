@@ -44,7 +44,7 @@ public class AmazonRankingsUtil {
 	}
 
 	public static AmazonRankings getAmazonRankings(String isbn) {
-		WebCacheItem wci = new AmazonRankingsConverter(isbn);
+		WebCacheItem wci = new AmazonRankingsWebCacheItem(isbn);
 
 		return (AmazonRankings)WebCachePoolUtil.get(
 			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wci);

@@ -38,7 +38,7 @@ public class TranslatorUtil {
 	public static Translation getTranslation(
 		String translationId, String fromText) {
 
-		WebCacheItem wci = new TranslationConverter(translationId, fromText);
+		WebCacheItem wci = new TranslationWebCacheItem(translationId, fromText);
 
 		return (Translation)WebCachePoolUtil.get(
 			"translator." + translationId + "|" +

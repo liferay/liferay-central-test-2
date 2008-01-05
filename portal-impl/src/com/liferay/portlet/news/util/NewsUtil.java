@@ -68,7 +68,7 @@ public class NewsUtil {
 			return null;
 		}
 		else {
-			WebCacheItem wci = new NewsConverter();
+			WebCacheItem wci = new NewsWebCacheItem();
 
 			return (News)WebCachePoolUtil.get(
 				feed.getShortName() + ";" + xml, wci);
@@ -148,7 +148,7 @@ public class NewsUtil {
 
 	private NewsUtil() {
 		try {
-			WebCacheItem wci = new CategoryConverter();
+			WebCacheItem wci = new CategoryWebCacheItem();
 
 			List list = (List)WebCachePoolUtil.get(
 				"http://w.moreover.com/categories/category_list.tsv2", wci);

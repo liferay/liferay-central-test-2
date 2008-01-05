@@ -111,7 +111,7 @@ public class ReverendFunUtil {
 	}
 
 	private Set _getMoreDates(String date) {
-		WebCacheItem wci = new ReverendFunConverter(date);
+		WebCacheItem wci = new ReverendFunWebCacheItem(date);
 
 		return (Set)WebCachePoolUtil.get(
 			ReverendFunUtil.class.getName() + StringPool.PERIOD + date, wci);

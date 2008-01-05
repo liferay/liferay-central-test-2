@@ -20,67 +20,66 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.translator.util;
+package com.liferay.portlet.rss.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.translator.model.Translation;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
+
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 import java.net.URL;
 
 /**
- * <a href="TranslationConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="RSSWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TranslationConverter implements WebCacheItem {
+public class RSSWebCacheItem implements WebCacheItem {
 
-	public TranslationConverter(String translationId, String fromText) {
-		_translationId = translationId;
-		_fromText = fromText;
+	public RSSWebCacheItem(String url) {
+		_url = url;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		Translation translation = new Translation(_translationId, _fromText);
+		SyndFeed feed = null;
 
 		try {
-			StringMaker url = new StringMaker();
 
-			url.append("http://babelfish.altavista.com/babelfish/tr?doit=done");
-			url.append("&urltext=").append(HttpUtil.encodeURL(_fromText));
-			url.append("&lp=").append(_translationId);
+			// com.liferay.util.Http will break the connection if it spends
+			// more than 5 seconds looking up a location. However, German
+			// umlauts do not get encoded correctly. This may be a bug with
+			// commons-httpclient or with how FeedParser uses java.io.Reader.
 
-			String text = Http.URLtoString(new URL(url.toString()));
+			// Use http://xml.newsisfree.com/feeds/29/629.xml and
+			// http://test.domosoft.com/up/RSS to test if German umlauts show
+			// up correctly.
 
-			int begin = text.indexOf("<div style=padding:10px;>") + 25;
-			int end = text.indexOf("</div>", begin);
+			/*Reader reader = new StringReader(
+				new String(Http.URLtoByteArray(_url)));
 
-			String toText = text.substring(begin, end).trim();
+			channel = FeedParser.parse(builder, reader);*/
 
-			toText = StringUtil.replace(toText, "\n", " ");
+			SyndFeedInput input = new SyndFeedInput();
 
-			translation.setToText(toText);
+			feed = input.build(new XmlReader(new URL(_url)));
 		}
 		catch (Exception e) {
-			throw new WebCacheException(e);
+			throw new WebCacheException(_url + " " + e.toString());
 		}
 
-		return translation;
+		return feed;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.DAY * 90;
+	private static final long _REFRESH_TIME = Time.MINUTE * 20;
 
-	private String _translationId;
-	private String _fromText;
+	private String _url;
 
 }

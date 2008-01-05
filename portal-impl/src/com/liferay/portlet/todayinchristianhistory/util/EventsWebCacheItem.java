@@ -20,77 +20,73 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.network.util;
+package com.liferay.portlet.todayinchristianhistory.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.network.model.DNSLookup;
+import com.liferay.portlet.todayinchristianhistory.model.Event;
+import com.liferay.util.Html;
+import com.liferay.util.Http;
 import com.liferay.util.Time;
 
-import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="DNSLookupConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventsWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DNSLookupConverter implements WebCacheItem {
-
-	public DNSLookupConverter(String domain) {
-		_domain = domain;
-	}
+public class EventsWebCacheItem implements WebCacheItem {
 
 	public Object convert(String id) throws WebCacheException {
-		DNSLookup dnsLookup = null;
+		List events = new ArrayList();
 
 		try {
-			String results = null;
+			String text = Http.URLtoString(
+				"http://www.studylight.org/his/tich");
 
-			char[] array = _domain.trim().toCharArray();
+			int x = text.indexOf("<table cellpadding=3 cellspacing=3>");
+			x = text.indexOf("<tr>", x);
+
+			int y = text.indexOf("<tr><td align=center", x);
+
+			text = Html.stripComments(text.substring(x, y)).trim();
+
+			String[] array = StringUtil.split(text, "<tr>");
 
 			for (int i = 0; i < array.length; i++) {
-				if ((array[i] != '.') && !Character.isDigit(array[i])) {
-					InetAddress ia = InetAddress.getByName(_domain);
+				x = array[i].indexOf("<b>");
+				y = array[i].indexOf("</b>");
 
-					results = ia.getHostAddress();
+				if (x != -1 && y != -1) {
+					String year = array[i].substring(x + 3, y).trim();
 
-					break;
-				}
-			}
+					String description = Html.stripHtml(
+						array[i].substring(y, array[i].length())).trim();
 
-			if (results == null) {
-				StringMaker sm = new StringMaker();
-
-				InetAddress[] ia = InetAddress.getAllByName(_domain);
-
-				for (int i = 0; i < ia.length; i++) {
-					sm.append(ia[i].getHostName());
-
-					if (i + 1 <= ia.length) {
-						sm.append(",");
+					if (description.startsWith("-  ")) {
+						description = description.substring(
+							3, description.length());
 					}
+
+					events.add(new Event(Integer.parseInt(year), description));
 				}
-
-				results = sm.toString();
 			}
-
-			dnsLookup = new DNSLookup(_domain, results);
 		}
 		catch (Exception e) {
-			throw new WebCacheException(_domain + " " + e.toString());
+			throw new WebCacheException(e);
 		}
 
-		return dnsLookup;
+		return events;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.DAY;
-
-	private String _domain;
+	private static final long _REFRESH_TIME = Time.HOUR;
 
 }

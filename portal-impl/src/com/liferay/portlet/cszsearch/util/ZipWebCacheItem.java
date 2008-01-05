@@ -23,13 +23,12 @@
 package com.liferay.portlet.cszsearch.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.cszsearch.model.CSZAddress;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
+import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
@@ -39,46 +38,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="CityStateConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ZipWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CityStateConverter implements WebCacheItem {
+public class ZipWebCacheItem implements WebCacheItem {
 
-	public CityStateConverter(String cityAndState) {
-		_cityAndState = cityAndState;
+	public ZipWebCacheItem(String zip) {
+		_zip = zip;
 	}
 
 	public Object convert(String id) throws WebCacheException {
 		List list = new ArrayList();
 
-		String cityAndState = _cityAndState;
 		String city = null;
 		String state = null;
-
-		try {
-			int pos = cityAndState.indexOf(StringPool.COMMA);
-
-			city = cityAndState.substring(0, pos);
-			state = cityAndState.substring(
-				pos + 1, cityAndState.length()).trim();
-		}
-		catch (Exception e) {
-			return list;
-		}
+		String zip = _zip;
 
 		try {
 			String text = Http.URLtoString(
-				"http://zip4.usps.com/zip4/zcl_1_results.jsp?pagenumber=all" +
-					"&city=" + HttpUtil.encodeURL(city) + "&state=" +
-						HttpUtil.encodeURL(state));
+				"http://zip4.usps.com/zip4/zcl_3_results.jsp?zip5=" + zip);
 
-			int x = text.indexOf("<!-- **");
-			int y = text.lastIndexOf("<!-- **");
-
-			BufferedReader br = new BufferedReader(
-				new StringReader(Html.stripHtml(text.substring(x, y))));
+			BufferedReader br = new BufferedReader(new StringReader(text));
 
 			String line = null;
 
@@ -86,9 +68,31 @@ public class CityStateConverter implements WebCacheItem {
 				line = line.trim();
 
 				if (!line.equals("")) {
+					if (line.indexOf(
+							"<h2 style=\"color:#CC0000;\">Not Acceptable")
+								> -1) {
 
-					if (Validator.isNumber(line)) {
-						list.add(new CSZAddress(null, city, state, line));
+						break;
+					}
+					else if (line.indexOf(
+							"<td valign=\"top\" class=\"main\"") > -1) {
+
+						String cityAndState = Html.stripHtml(line).trim();
+
+						int pos = cityAndState.indexOf(StringPool.COMMA);
+
+						city = cityAndState.substring(0, pos);
+						state = cityAndState.substring(
+							pos + 1, cityAndState.length()).trim();
+
+						if (city != null && state != null) {
+							list.add(new CSZAddress(
+								null, TextFormatter.formatName(city), state,
+								zip));
+
+							city = null;
+							state = null;
+						}
 					}
 				}
 			}
@@ -108,6 +112,6 @@ public class CityStateConverter implements WebCacheItem {
 
 	private static final long _REFRESH_TIME = Time.DAY * 90;
 
-	private String _cityAndState;
+	private String _zip;
 
 }

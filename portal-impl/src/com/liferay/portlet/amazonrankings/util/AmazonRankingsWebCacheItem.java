@@ -42,14 +42,14 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="AmazonRankingsConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="AmazonRankingsWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AmazonRankingsConverter implements WebCacheItem {
+public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
-	public AmazonRankingsConverter(String isbn) {
+	public AmazonRankingsWebCacheItem(String isbn) {
 		_isbn = isbn;
 	}
 

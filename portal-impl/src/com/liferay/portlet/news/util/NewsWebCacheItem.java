@@ -43,12 +43,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="NewsConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="NewsWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class NewsConverter implements WebCacheItem {
+public class NewsWebCacheItem implements WebCacheItem {
 
 	public Object convert(String text) throws WebCacheException {
 		try {

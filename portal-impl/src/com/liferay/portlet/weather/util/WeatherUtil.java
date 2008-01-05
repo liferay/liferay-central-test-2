@@ -36,7 +36,7 @@ import com.liferay.portlet.weather.model.Weather;
 public class WeatherUtil {
 
 	public static Weather getWeather(String zip) {
-		WebCacheItem wci = new WeatherConverter(zip);
+		WebCacheItem wci = new WeatherWebCacheItem(zip);
 
 		return (Weather)WebCachePoolUtil.get(
 			WeatherUtil.class.getName() + StringPool.PERIOD + zip, wci);

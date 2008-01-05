@@ -20,90 +20,93 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.cszsearch.util;
+package com.liferay.portlet.maps.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portlet.cszsearch.model.CSZAddress;
-import com.liferay.util.Html;
+import com.liferay.portlet.maps.model.MapsAddress;
 import com.liferay.util.Http;
-import com.liferay.util.TextFormatter;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
-import java.io.BufferedReader;
-import java.io.StringReader;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * <a href="ZipConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="MapsWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ZipConverter implements WebCacheItem {
+public class MapsWebCacheItem implements WebCacheItem {
 
-	public ZipConverter(String zip) {
-		_zip = zip;
+	public MapsWebCacheItem(String street, String csz) {
+		_street = street;
+		_csz = csz;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		List list = new ArrayList();
+		MapsAddress map = null;
 
-		String city = null;
-		String state = null;
-		String zip = _zip;
+		String street = "";
+		String city = "";
+		String state = "";
+		String zip = "";
 
 		try {
-			String text = Http.URLtoString(
-				"http://zip4.usps.com/zip4/zcl_3_results.jsp?zip5=" + zip);
+			street = _street;
 
-			BufferedReader br = new BufferedReader(new StringReader(text));
+			int pos = _csz.indexOf(StringPool.COMMA);
 
-			String line = null;
+			if (pos != -1) {
+				city = _csz.substring(0, pos).trim();
 
-			while ((line = br.readLine()) != null) {
-				line = line.trim();
+				state = _csz.substring(pos + 1, _csz.length()).trim();
+			}
+			else {
+				zip = _csz;
+			}
+		}
+		catch (Exception e) {
+			return map;
+		}
 
-				if (!line.equals("")) {
-					if (line.indexOf(
-							"<h2 style=\"color:#CC0000;\">Not Acceptable")
-								> -1) {
+		try {
+			StringMaker url = new StringMaker();
 
-						break;
-					}
-					else if (line.indexOf(
-							"<td valign=\"top\" class=\"main\"") > -1) {
+			url.append("http://www.mapquest.com/maps/map.adp?country=US");
+			url.append("&address=");
+			url.append(HttpUtil.encodeURL(street));
+			url.append("&city=");
+			url.append(HttpUtil.encodeURL(city));
+			url.append("&state=");
+			url.append(HttpUtil.encodeURL(state));
+			url.append("&zipcode=");
+			url.append(HttpUtil.encodeURL(zip));
 
-						String cityAndState = Html.stripHtml(line).trim();
+			String text = Http.URLtoString(url.toString());
 
-						int pos = cityAndState.indexOf(StringPool.COMMA);
+			int mapDirectPos = text.indexOf(
+				"GetMapDataDirect=");
 
-						city = cityAndState.substring(0, pos);
-						state = cityAndState.substring(
-							pos + 1, cityAndState.length()).trim();
-
-						if (city != null && state != null) {
-							list.add(new CSZAddress(
-								null, TextFormatter.formatName(city), state,
-								zip));
-
-							city = null;
-							state = null;
-						}
-					}
-				}
+			if (mapDirectPos != -1) {
+				mapDirectPos = mapDirectPos + 17;
+			}
+			else {
+				return map;
 			}
 
-			br.close();
+			String mapDirect = text.substring(
+				mapDirectPos, text.indexOf("\"", mapDirectPos));
+
+			mapDirect = HttpUtil.decodeURL(mapDirect);
+
+			map = new MapsAddress(street, city, state, zip, mapDirect);
 		}
 		catch (Exception e) {
 			throw new WebCacheException(e);
 		}
 
-		return list;
+		return map;
 	}
 
 	public long getRefreshTime() {
@@ -112,6 +115,7 @@ public class ZipConverter implements WebCacheItem {
 
 	private static final long _REFRESH_TIME = Time.DAY * 90;
 
-	private String _zip;
+	private String _street;
+	private String _csz;
 
 }

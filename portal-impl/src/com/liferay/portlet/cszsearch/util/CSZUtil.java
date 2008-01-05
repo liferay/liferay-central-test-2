@@ -37,21 +37,21 @@ import java.util.List;
 public class CSZUtil {
 
 	public static List getCSZAddressByCityAndState(String cityAndState) {
-		WebCacheItem wci = new CityStateConverter(cityAndState);
+		WebCacheItem wci = new CityStateWebCacheItem(cityAndState);
 
 		return (List)WebCachePoolUtil.get(
 			CSZUtil.class.getName() + ".cs." + cityAndState, wci);
 	}
 
 	public static List getCSZAddressByZip(String zip) {
-		WebCacheItem wci = new ZipConverter(zip);
+		WebCacheItem wci = new ZipWebCacheItem(zip);
 
 		return (List)WebCachePoolUtil.get(
 			CSZUtil.class.getName() + ".zip." + zip, wci);
 	}
 
 	public static List getCSZAddressByZip4(String street, String cityAndState) {
-		WebCacheItem wci = new Zip4Converter(street, cityAndState);
+		WebCacheItem wci = new Zip4WebCacheItem(street, cityAndState);
 
 		return (List)WebCachePoolUtil.get(
 			CSZUtil.class.getName() + ".zip4." + street + StringPool.PERIOD +

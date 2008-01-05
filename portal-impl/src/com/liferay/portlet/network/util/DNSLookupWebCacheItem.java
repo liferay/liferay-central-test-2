@@ -20,66 +20,77 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.rss.util;
+package com.liferay.portlet.network.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portlet.network.model.DNSLookup;
 import com.liferay.util.Time;
 
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.SyndFeedInput;
-import com.sun.syndication.io.XmlReader;
-
-import java.net.URL;
+import java.net.InetAddress;
 
 /**
- * <a href="RSSConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="DNSLookupWebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RSSConverter implements WebCacheItem {
+public class DNSLookupWebCacheItem implements WebCacheItem {
 
-	public RSSConverter(String url) {
-		_url = url;
+	public DNSLookupWebCacheItem(String domain) {
+		_domain = domain;
 	}
 
 	public Object convert(String id) throws WebCacheException {
-		SyndFeed feed = null;
+		DNSLookup dnsLookup = null;
 
 		try {
+			String results = null;
 
-			// com.liferay.util.Http will break the connection if it spends
-			// more than 5 seconds looking up a location. However, German
-			// umlauts do not get encoded correctly. This may be a bug with
-			// commons-httpclient or with how FeedParser uses java.io.Reader.
+			char[] array = _domain.trim().toCharArray();
 
-			// Use http://xml.newsisfree.com/feeds/29/629.xml and
-			// http://test.domosoft.com/up/RSS to test if German umlauts show
-			// up correctly.
+			for (int i = 0; i < array.length; i++) {
+				if ((array[i] != '.') && !Character.isDigit(array[i])) {
+					InetAddress ia = InetAddress.getByName(_domain);
 
-			/*Reader reader = new StringReader(
-				new String(Http.URLtoByteArray(_url)));
+					results = ia.getHostAddress();
 
-			channel = FeedParser.parse(builder, reader);*/
+					break;
+				}
+			}
 
-			SyndFeedInput input = new SyndFeedInput();
+			if (results == null) {
+				StringMaker sm = new StringMaker();
 
-			feed = input.build(new XmlReader(new URL(_url)));
+				InetAddress[] ia = InetAddress.getAllByName(_domain);
+
+				for (int i = 0; i < ia.length; i++) {
+					sm.append(ia[i].getHostName());
+
+					if (i + 1 <= ia.length) {
+						sm.append(",");
+					}
+				}
+
+				results = sm.toString();
+			}
+
+			dnsLookup = new DNSLookup(_domain, results);
 		}
 		catch (Exception e) {
-			throw new WebCacheException(_url + " " + e.toString());
+			throw new WebCacheException(_domain + " " + e.toString());
 		}
 
-		return feed;
+		return dnsLookup;
 	}
 
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.MINUTE * 20;
+	private static final long _REFRESH_TIME = Time.DAY;
 
-	private String _url;
+	private String _domain;
 
 }

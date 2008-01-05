@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 public class RSSUtil {
 
 	public static ObjectValuePair getFeed(String url) {
-		WebCacheItem wci = new RSSConverter(url);
+		WebCacheItem wci = new RSSWebCacheItem(url);
 
 		return new ObjectValuePair(url, WebCachePoolUtil.get(
 			RSSUtil.class.getName() + StringPool.PERIOD + url, wci));
