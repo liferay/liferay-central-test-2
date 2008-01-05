@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.lucene.LuceneIndexer;
@@ -42,7 +43,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
-import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Time;
 import com.liferay.util.servlet.NullServletResponse;
@@ -164,7 +164,7 @@ public class EditServerAction extends PortletAction {
 	protected void cacheSingle() throws Exception {
 		LastModifiedCSS.clear();
 		LastModifiedJavaScript.clear();
-		WebCachePool.clear();
+		WebCachePoolUtil.clear();
 	}
 
 	protected void gc() throws Exception {

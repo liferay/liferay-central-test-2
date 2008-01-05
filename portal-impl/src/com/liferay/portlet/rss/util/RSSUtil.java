@@ -24,8 +24,8 @@ package com.liferay.portlet.rss.util;
 
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
 /**
  * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
@@ -36,10 +36,10 @@ import com.liferay.portal.util.WebCacheable;
 public class RSSUtil {
 
 	public static ObjectValuePair getFeed(String url) {
-		WebCacheable wc = new RSSConverter(url);
+		WebCacheItem wci = new RSSConverter(url);
 
-		return new ObjectValuePair(url, WebCachePool.get(
-			RSSUtil.class.getName() + StringPool.PERIOD + url, wc));
+		return new ObjectValuePair(url, WebCachePoolUtil.get(
+			RSSUtil.class.getName() + StringPool.PERIOD + url, wci));
 	}
 
 }

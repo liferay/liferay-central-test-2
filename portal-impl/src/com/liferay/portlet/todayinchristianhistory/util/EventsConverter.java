@@ -23,9 +23,9 @@
 package com.liferay.portlet.todayinchristianhistory.util;
 
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.todayinchristianhistory.model.Event;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
@@ -39,12 +39,12 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class EventsConverter implements WebCacheable {
+public class EventsConverter implements WebCacheItem {
 
 	public EventsConverter() {
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		List events = new ArrayList();
 
 		try {
@@ -80,7 +80,7 @@ public class EventsConverter implements WebCacheable {
 			}
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 
 		return events;

@@ -24,7 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslationConverter;
 import com.liferay.util.FileUtil;
@@ -286,10 +286,10 @@ public class LangBuilder {
 		try {
 			System.out.println("Translating " + translationId + " " + fromText);
 
-			WebCacheable wc =
-				new TranslationConverter(translationId, fromText);
+			WebCacheItem wci = new TranslationConverter(
+				translationId, fromText);
 
-			Translation translation = (Translation)wc.convert("");
+			Translation translation = (Translation)wci.convert("");
 
 			toText = translation.getToText();
 

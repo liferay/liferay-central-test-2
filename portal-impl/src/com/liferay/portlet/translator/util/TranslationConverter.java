@@ -24,9 +24,9 @@ package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
@@ -39,14 +39,14 @@ import java.net.URL;
  * @author Brian Wing Shun Chan
  *
  */
-public class TranslationConverter implements WebCacheable {
+public class TranslationConverter implements WebCacheItem {
 
 	public TranslationConverter(String translationId, String fromText) {
 		_translationId = translationId;
 		_fromText = fromText;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
@@ -68,7 +68,7 @@ public class TranslationConverter implements WebCacheable {
 			translation.setToText(toText);
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 
 		return translation;

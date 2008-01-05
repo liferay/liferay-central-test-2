@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.news.util;
 
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.news.model.Article;
 import com.liferay.portlet.news.model.News;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -48,9 +48,9 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  *
  */
-public class NewsConverter implements WebCacheable {
+public class NewsConverter implements WebCacheItem {
 
-	public Object convert(String text) throws ConverterException {
+	public Object convert(String text) throws WebCacheException {
 		try {
 			int pos = text.indexOf(";");
 
@@ -92,7 +92,7 @@ public class NewsConverter implements WebCacheable {
 			return new News(feedURL, categoryName, list);
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 	}
 

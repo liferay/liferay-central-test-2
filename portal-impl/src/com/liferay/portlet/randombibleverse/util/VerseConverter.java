@@ -23,9 +23,9 @@
 package com.liferay.portlet.randombibleverse.util;
 
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.randombibleverse.model.Verse;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
@@ -37,14 +37,14 @@ import com.liferay.util.Time;
  * @author Brian Wing Shun Chan
  *
  */
-public class VerseConverter implements WebCacheable {
+public class VerseConverter implements WebCacheItem {
 
 	public VerseConverter(String location, String versionId) {
 		_location = location;
 		_versionId = versionId;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		Verse verse = null;
 
 		try {
@@ -112,7 +112,7 @@ public class VerseConverter implements WebCacheable {
 			verse = new Verse(_location, text);
 		}
 		catch (Exception e) {
-			throw new ConverterException(
+			throw new WebCacheException(
 				_location + " " + _versionId + " " + e.toString());
 		}
 

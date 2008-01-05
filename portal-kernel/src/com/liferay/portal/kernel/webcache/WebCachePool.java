@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import java.io.Serializable;
+package com.liferay.portal.kernel.webcache;
 
 /**
- * <a href="Cacheable.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebCachePool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Cacheable extends Serializable {
+public interface WebCachePool {
 
-	public long getRefreshTime();
+	public void clear();
+
+	public Object get(String key, WebCacheItem wci);
+
+	public void remove(String key);
 
 }

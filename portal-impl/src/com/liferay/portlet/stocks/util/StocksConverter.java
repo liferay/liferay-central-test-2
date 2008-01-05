@@ -24,9 +24,9 @@ package com.liferay.portlet.stocks.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.stocks.model.Stocks;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -38,13 +38,13 @@ import java.util.StringTokenizer;
  * @author Brian Wing Shun Chan
  *
  */
-public class StocksConverter implements WebCacheable {
+public class StocksConverter implements WebCacheItem {
 
 	public StocksConverter(String symbol) {
 		_symbol = symbol;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		String symbol = _symbol;
 		double lastTrade = 0.0;
 		double change = 0.0;
@@ -133,11 +133,11 @@ public class StocksConverter implements WebCacheable {
 			}
 
 			if (!stocks.isValid()) {
-				throw new ConverterException(symbol);
+				throw new WebCacheException(symbol);
 			}
 		}
 		catch (Exception e) {
-			throw new ConverterException(symbol + " " + e.toString());
+			throw new WebCacheException(symbol + " " + e.toString());
 		}
 
 		return stocks;

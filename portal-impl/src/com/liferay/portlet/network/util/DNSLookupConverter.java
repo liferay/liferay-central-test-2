@@ -23,9 +23,9 @@
 package com.liferay.portlet.network.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.network.model.DNSLookup;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Time;
 
 import java.net.InetAddress;
@@ -36,13 +36,13 @@ import java.net.InetAddress;
  * @author Brian Wing Shun Chan
  *
  */
-public class DNSLookupConverter implements WebCacheable {
+public class DNSLookupConverter implements WebCacheItem {
 
 	public DNSLookupConverter(String domain) {
 		_domain = domain;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		DNSLookup dnsLookup = null;
 
 		try {
@@ -79,7 +79,7 @@ public class DNSLookupConverter implements WebCacheable {
 			dnsLookup = new DNSLookup(_domain, results);
 		}
 		catch (Exception e) {
-			throw new ConverterException(_domain + " " + e.toString());
+			throw new WebCacheException(_domain + " " + e.toString());
 		}
 
 		return dnsLookup;

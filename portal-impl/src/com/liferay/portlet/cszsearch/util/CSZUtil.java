@@ -23,8 +23,8 @@
 package com.liferay.portlet.cszsearch.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
 import java.util.List;
 
@@ -37,26 +37,26 @@ import java.util.List;
 public class CSZUtil {
 
 	public static List getCSZAddressByCityAndState(String cityAndState) {
-		WebCacheable wc = new CityStateConverter(cityAndState);
+		WebCacheItem wci = new CityStateConverter(cityAndState);
 
-		return (List)WebCachePool.get(
-			CSZUtil.class.getName() + ".cs." + cityAndState, wc);
+		return (List)WebCachePoolUtil.get(
+			CSZUtil.class.getName() + ".cs." + cityAndState, wci);
 	}
 
 	public static List getCSZAddressByZip(String zip) {
-		WebCacheable wc = new ZipConverter(zip);
+		WebCacheItem wci = new ZipConverter(zip);
 
-		return (List)WebCachePool.get(
-			CSZUtil.class.getName() + ".zip." + zip, wc);
+		return (List)WebCachePoolUtil.get(
+			CSZUtil.class.getName() + ".zip." + zip, wci);
 	}
 
 	public static List getCSZAddressByZip4(String street, String cityAndState) {
-		WebCacheable wc = new Zip4Converter(street, cityAndState);
+		WebCacheItem wci = new Zip4Converter(street, cityAndState);
 
-		return (List)WebCachePool.get(
+		return (List)WebCachePoolUtil.get(
 			CSZUtil.class.getName() + ".zip4." + street + StringPool.PERIOD +
 				cityAndState,
-			wc);
+			wci);
 	}
 
 }

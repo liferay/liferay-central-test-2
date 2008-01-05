@@ -24,9 +24,9 @@ package com.liferay.portlet.currencyconverter.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.currencyconverter.model.Currency;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -38,13 +38,13 @@ import java.util.StringTokenizer;
  * @author Brian Wing Shun Chan
  *
  */
-public class CurrencyConverter implements WebCacheable {
+public class CurrencyConverter implements WebCacheItem {
 
 	public CurrencyConverter(String symbol) {
 		_symbol = symbol;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		String symbol = _symbol;
 		double rate = 0.0;
 
@@ -56,16 +56,16 @@ public class CurrencyConverter implements WebCacheable {
 				if (!CurrencyUtil.isCurrency(fromSymbol) ||
 					!CurrencyUtil.isCurrency(toSymbol)) {
 
-					throw new ConverterException(symbol);
+					throw new WebCacheException(symbol);
 				}
 			}
 			else if (symbol.length() == 3) {
 				if (!CurrencyUtil.isCurrency(symbol)) {
-					throw new ConverterException(symbol);
+					throw new WebCacheException(symbol);
 				}
 			}
 			else {
-				throw new ConverterException(symbol);
+				throw new WebCacheException(symbol);
 			}
 
 			String text = Http.URLtoString(
@@ -82,7 +82,7 @@ public class CurrencyConverter implements WebCacheable {
 				st.nextToken().replace('"', ' ').trim());
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 
 		return new Currency(symbol, rate);

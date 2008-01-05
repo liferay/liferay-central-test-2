@@ -20,26 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.weather.util;
+package com.liferay.portal.webcache;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
-import com.liferay.portlet.weather.model.Weather;
+import com.liferay.portal.kernel.webcache.WebCachePool;
+import com.liferay.util.Time;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="WeatherUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebCachePoolImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WeatherUtil {
+public class WebCachePoolImpl implements WebCachePool {
 
-	public static Weather getWeather(String zip) {
-		WebCacheItem wci = new WeatherConverter(zip);
+	public static final String CACHE_NAME = WebCachePool.class.getName();
 
-		return (Weather)WebCachePoolUtil.get(
-			WeatherUtil.class.getName() + StringPool.PERIOD + zip, wci);
+	public void clear() {
+		_cache.removeAll();
 	}
+
+	public Object get(String key, WebCacheItem wci) {
+		Object obj = SingleVMPoolUtil.get(_cache, key);
+
+		if (obj == null) {
+			try {
+				obj = wci.convert(key);
+
+				int timeToLive = (int)(wci.getRefreshTime() / Time.SECOND);
+
+				_cache.put(key, obj, timeToLive);
+			}
+			catch (WebCacheException wce) {
+				_log.error(wce.getMessage());
+			}
+		}
+
+		return obj;
+	}
+
+	public void remove(String key) {
+		SingleVMPoolUtil.remove(_cache, key);
+	}
+
+	private WebCachePoolImpl() {
+		_cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	}
+
+	private static Log _log = LogFactory.getLog(WebCachePoolImpl.class);
+
+	private PortalCache _cache;
 
 }

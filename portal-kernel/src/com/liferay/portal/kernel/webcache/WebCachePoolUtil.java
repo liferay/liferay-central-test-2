@@ -20,30 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.webcache;
+
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
- * <a href="ConverterException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebCachePoolUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ConverterException extends Exception {
+public class WebCachePoolUtil {
 
-	public ConverterException() {
-		super();
+	public static void clear() {
+		getWebCachePool().clear();
 	}
 
-	public ConverterException(String msg) {
-		super(msg);
+	public static Object get(String key, WebCacheItem wci) {
+		return getWebCachePool().get(key, wci);
 	}
 
-	public ConverterException(String msg, Throwable cause) {
-		super(msg, cause);
+	public static WebCachePool getWebCachePool() {
+		return _getUtil()._webCachePool;
 	}
 
-	public ConverterException(Throwable cause) {
-		super(cause);
+	public static void remove(String key) {
+		getWebCachePool().remove(key);
 	}
+
+	public void setWebCachePool(WebCachePool webCachePool) {
+		_webCachePool = webCachePool;
+	}
+
+	private static WebCachePoolUtil _getUtil() {
+		if (_util == null) {
+			_util = (WebCachePoolUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = WebCachePoolUtil.class.getName();
+
+	private static WebCachePoolUtil _util;
+
+	private WebCachePool _webCachePool;
 
 }

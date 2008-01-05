@@ -24,9 +24,9 @@ package com.liferay.portlet.maps.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.maps.model.MapsAddress;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
@@ -37,14 +37,14 @@ import com.liferay.util.Time;
  * @author Brian Wing Shun Chan
  *
  */
-public class MapsConverter implements WebCacheable {
+public class MapsConverter implements WebCacheItem {
 
 	public MapsConverter(String street, String csz) {
 		_street = street;
 		_csz = csz;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		MapsAddress map = null;
 
 		String street = "";
@@ -103,7 +103,7 @@ public class MapsConverter implements WebCacheable {
 			map = new MapsAddress(street, city, state, zip, mapDirect);
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 
 		return map;

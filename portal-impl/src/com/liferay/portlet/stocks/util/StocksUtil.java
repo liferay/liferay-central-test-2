@@ -23,8 +23,8 @@
 package com.liferay.portlet.stocks.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.stocks.model.Stocks;
 
 /**
@@ -36,10 +36,10 @@ import com.liferay.portlet.stocks.model.Stocks;
 public class StocksUtil {
 
 	public static Stocks getStocks(String symbol) {
-		WebCacheable wc = new StocksConverter(symbol);
+		WebCacheItem wci = new StocksConverter(symbol);
 
-		return (Stocks)WebCachePool.get(
-			StocksUtil.class.getName() + StringPool.PERIOD + symbol, wc);
+		return (Stocks)WebCachePoolUtil.get(
+			StocksUtil.class.getName() + StringPool.PERIOD + symbol, wci);
 	}
 
 }

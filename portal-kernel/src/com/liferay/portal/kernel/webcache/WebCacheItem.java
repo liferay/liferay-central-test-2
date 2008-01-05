@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.util.Cacheable;
-import com.liferay.util.Converter;
+package com.liferay.portal.kernel.webcache;
 
 import java.io.Serializable;
 
 /**
- * <a href="WebCacheable.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebCacheItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface WebCacheable extends Cacheable, Converter, Serializable {
+public interface WebCacheItem extends Serializable {
+
+	public Object convert(String s) throws WebCacheException;
+
+	public long getRefreshTime();
+
 }

@@ -24,8 +24,8 @@ package com.liferay.portlet.randombibleverse.util;
 
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.randombibleverse.model.Bible;
 import com.liferay.portlet.randombibleverse.model.Verse;
 
@@ -142,12 +142,12 @@ public class RBVUtil {
 	}
 
 	private Verse _getVerse(String location, String versionId) {
-		WebCacheable wc = new VerseConverter(location, versionId);
+		WebCacheItem wci = new VerseConverter(location, versionId);
 
-		return (Verse)WebCachePool.get(
+		return (Verse)WebCachePoolUtil.get(
 			RBVUtil.class.getName() + StringPool.PERIOD + location +
 				StringPool.PERIOD + versionId,
-			wc);
+			wci);
 	}
 
 	private static Log _log = LogFactory.getLog(RBVUtil.class);

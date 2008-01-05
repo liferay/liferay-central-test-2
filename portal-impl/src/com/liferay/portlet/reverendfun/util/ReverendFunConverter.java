@@ -24,8 +24,8 @@ package com.liferay.portlet.reverendfun.util;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringComparator;
-import com.liferay.portal.util.WebCacheable;
-import com.liferay.util.ConverterException;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -42,13 +42,13 @@ import java.util.TreeSet;
  * @author Brian Wing Shun Chan
  *
  */
-public class ReverendFunConverter implements WebCacheable {
+public class ReverendFunConverter implements WebCacheItem {
 
 	public ReverendFunConverter(String date) {
 		_date = date;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		Set dates = new TreeSet(new StringComparator(false, true));
 
 		try {
@@ -84,7 +84,7 @@ public class ReverendFunConverter implements WebCacheable {
 			}
 		}
 		catch (Exception e) {
-			throw new ConverterException(_date + " " + e.toString());
+			throw new WebCacheException(_date + " " + e.toString());
 		}
 
 		return dates;

@@ -23,9 +23,9 @@
 package com.liferay.portlet.cszsearch.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.cszsearch.model.CSZAddress;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.TextFormatter;
@@ -43,13 +43,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ZipConverter implements WebCacheable {
+public class ZipConverter implements WebCacheItem {
 
 	public ZipConverter(String zip) {
 		_zip = zip;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		List list = new ArrayList();
 
 		String city = null;
@@ -100,7 +100,7 @@ public class ZipConverter implements WebCacheable {
 			br.close();
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 
 		return list;

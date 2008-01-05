@@ -23,8 +23,8 @@
 package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.translator.model.Translation;
 
 /**
@@ -38,12 +38,12 @@ public class TranslatorUtil {
 	public static Translation getTranslation(
 		String translationId, String fromText) {
 
-		WebCacheable wc = new TranslationConverter(translationId, fromText);
+		WebCacheItem wci = new TranslationConverter(translationId, fromText);
 
-		return (Translation)WebCachePool.get(
+		return (Translation)WebCachePoolUtil.get(
 			"translator." + translationId + "|" +
 				Base64.objectToString(fromText),
-			wc);
+			wci);
 	}
 
 }

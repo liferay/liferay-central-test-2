@@ -20,55 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.webcache;
 
-import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
-import com.liferay.util.ConverterException;
-import com.liferay.util.Time;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="WebCachePool.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebCacheException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WebCachePool {
+public class WebCacheException extends PortalException {
 
-	public static final String CACHE_NAME = WebCachePool.class.getName();
-
-	public static void clear() {
-		_cache.removeAll();
+	public WebCacheException() {
+		super();
 	}
 
-	public static Object get(String key, WebCacheable wc) {
-		Object obj = SingleVMPoolUtil.get(_cache, key);
-
-		if (obj == null) {
-			try {
-				obj = wc.convert(key);
-
-				int timeToLive = (int)(wc.getRefreshTime() / Time.SECOND);
-
-				_cache.put(key, obj, timeToLive);
-			}
-			catch (ConverterException ce) {
-				_log.error(ce.getMessage());
-			}
-		}
-
-		return obj;
+	public WebCacheException(String msg) {
+		super(msg);
 	}
 
-	public static void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
+	public WebCacheException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
-	private static Log _log = LogFactory.getLog(WebCachePool.class);
-
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	public WebCacheException(Throwable cause) {
+		super(cause);
+	}
 
 }

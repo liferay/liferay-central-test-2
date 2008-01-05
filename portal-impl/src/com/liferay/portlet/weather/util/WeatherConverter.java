@@ -23,9 +23,9 @@
 package com.liferay.portlet.weather.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.weather.model.Weather;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
@@ -37,13 +37,13 @@ import com.liferay.util.Time;
  * @author Brian Wing Shun Chan
  *
  */
-public class WeatherConverter implements WebCacheable {
+public class WeatherConverter implements WebCacheItem {
 
 	public WeatherConverter(String zip) {
 		_zip = zip;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		Weather weather = null;
 
 		try {
@@ -69,7 +69,7 @@ public class WeatherConverter implements WebCacheable {
 			weather = new Weather(_zip, iconURL, temperature);
 		}
 		catch (Exception e) {
-			throw new ConverterException(_zip);
+			throw new WebCacheException(_zip);
 		}
 
 		return weather;

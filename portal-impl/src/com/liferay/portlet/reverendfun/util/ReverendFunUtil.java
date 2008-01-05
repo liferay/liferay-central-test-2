@@ -25,9 +25,9 @@ package com.liferay.portlet.reverendfun.util;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,10 +111,10 @@ public class ReverendFunUtil {
 	}
 
 	private Set _getMoreDates(String date) {
-		WebCacheable wc = new ReverendFunConverter(date);
+		WebCacheItem wci = new ReverendFunConverter(date);
 
-		return (Set)WebCachePool.get(
-			ReverendFunUtil.class.getName() + StringPool.PERIOD + date, wc);
+		return (Set)WebCachePoolUtil.get(
+			ReverendFunUtil.class.getName() + StringPool.PERIOD + date, wci);
 	}
 
 	private String _getNextDate(String date) {

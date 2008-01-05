@@ -23,9 +23,9 @@
 package com.liferay.portlet.amazonrankings.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 
 import java.util.List;
@@ -44,10 +44,10 @@ public class AmazonRankingsUtil {
 	}
 
 	public static AmazonRankings getAmazonRankings(String isbn) {
-		WebCacheable wc = new AmazonRankingsConverter(isbn);
+		WebCacheItem wci = new AmazonRankingsConverter(isbn);
 
-		return (AmazonRankings)WebCachePool.get(
-			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wc);
+		return (AmazonRankings)WebCachePoolUtil.get(
+			AmazonRankingsUtil.class.getName() + StringPool.PERIOD + isbn, wci);
 	}
 
 	private AmazonRankingsUtil() {

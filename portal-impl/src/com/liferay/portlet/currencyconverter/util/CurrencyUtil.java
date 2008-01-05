@@ -24,8 +24,8 @@ package com.liferay.portlet.currencyconverter.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.CollectionFactory;
 
@@ -75,10 +75,10 @@ public class CurrencyUtil {
 	}
 
 	public static Currency getCurrency(String symbol) {
-		WebCacheable wc = new CurrencyConverter(symbol);
+		WebCacheItem wci = new CurrencyConverter(symbol);
 
-		return (Currency)WebCachePool.get(
-			CurrencyUtil.class.getName() + StringPool.PERIOD + symbol, wc);
+		return (Currency)WebCachePoolUtil.get(
+			CurrencyUtil.class.getName() + StringPool.PERIOD + symbol, wci);
 	}
 
 	public static boolean isCurrency(String symbol) {

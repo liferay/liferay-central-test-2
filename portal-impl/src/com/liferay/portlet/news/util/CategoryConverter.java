@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.news.util;
 
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -48,9 +48,9 @@ import java.util.TreeSet;
  * @author Brian Wing Shun Chan
  *
  */
-public class CategoryConverter implements WebCacheable {
+public class CategoryConverter implements WebCacheItem {
 
-	public Object convert(String url) throws ConverterException {
+	public Object convert(String url) throws WebCacheException {
 		try {
 			Map categoryMap = CollectionFactory.getHashMap();
 			Set categorySet = new TreeSet();
@@ -138,7 +138,7 @@ public class CategoryConverter implements WebCacheable {
 			return list;
 		}
 		catch (Exception e) {
-			throw new ConverterException(e);
+			throw new WebCacheException(e);
 		}
 	}
 

@@ -24,8 +24,8 @@ package com.liferay.portlet.reverendfun.tools;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.reverendfun.util.ReverendFunConverter;
 import com.liferay.util.FileUtil;
 
@@ -59,9 +59,9 @@ public class ReverendFunBuilder {
 
 			String[] dates = StringUtil.split(FileUtil.read(file), "\n");
 
-			WebCacheable wc = new ReverendFunConverter(dates[0]);
+			WebCacheItem wci = new ReverendFunConverter(dates[0]);
 
-			Set moreDates = (Set)wc.convert("");
+			Set moreDates = (Set)wci.convert("");
 
 			if (moreDates.size() > 0) {
 				StringMaker sm = new StringMaker();

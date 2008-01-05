@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.rss.util;
 
-import com.liferay.portal.util.WebCacheable;
-import com.liferay.util.ConverterException;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.util.Time;
 
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -38,13 +38,13 @@ import java.net.URL;
  * @author Brian Wing Shun Chan
  *
  */
-public class RSSConverter implements WebCacheable {
+public class RSSConverter implements WebCacheItem {
 
 	public RSSConverter(String url) {
 		_url = url;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		SyndFeed feed = null;
 
 		try {
@@ -68,7 +68,7 @@ public class RSSConverter implements WebCacheable {
 			feed = input.build(new XmlReader(new URL(_url)));
 		}
 		catch (Exception e) {
-			throw new ConverterException(_url + " " + e.toString());
+			throw new WebCacheException(_url + " " + e.toString());
 		}
 
 		return feed;

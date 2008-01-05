@@ -23,9 +23,9 @@
 package com.liferay.portlet.amazonrankings.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Time;
 
 import java.net.URL;
@@ -47,13 +47,13 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  *
  */
-public class AmazonRankingsConverter implements WebCacheable {
+public class AmazonRankingsConverter implements WebCacheItem {
 
 	public AmazonRankingsConverter(String isbn) {
 		_isbn = isbn;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		String isbn = _isbn;
 
 		AmazonRankings amazonRankings = null;
@@ -73,7 +73,7 @@ public class AmazonRankingsConverter implements WebCacheable {
 			if (itr.hasNext()) {
 				String errorMsg = ((Element)itr.next()).getText();
 
-				throw new ConverterException(isbn + " " + errorMsg);
+				throw new WebCacheException(isbn + " " + errorMsg);
 			}
 
 			Element details = (Element)doc.getRootElement().elements(
@@ -122,11 +122,11 @@ public class AmazonRankingsConverter implements WebCacheable {
 				collectiblePrice, thirdPartyNewPrice, salesRank, media,
 				availability);
 		}
-		catch (ConverterException ce) {
+		catch (WebCacheException ce) {
 			throw ce;
 		}
 		catch (Exception e) {
-			throw new ConverterException(isbn + " " + e.toString());
+			throw new WebCacheException(isbn + " " + e.toString());
 		}
 
 		return amazonRankings;

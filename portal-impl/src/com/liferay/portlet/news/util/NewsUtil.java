@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.news.util;
 
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.portlet.news.model.News;
 import com.liferay.util.CollectionFactory;
@@ -68,9 +68,10 @@ public class NewsUtil {
 			return null;
 		}
 		else {
-			WebCacheable wc = new NewsConverter();
+			WebCacheItem wci = new NewsConverter();
 
-			return (News)WebCachePool.get(feed.getShortName() + ";" + xml, wc);
+			return (News)WebCachePoolUtil.get(
+				feed.getShortName() + ";" + xml, wci);
 		}
 	}
 
@@ -147,10 +148,10 @@ public class NewsUtil {
 
 	private NewsUtil() {
 		try {
-			WebCacheable wc = new CategoryConverter();
+			WebCacheItem wci = new CategoryConverter();
 
-			List list = (List)WebCachePool.get(
-				"http://w.moreover.com/categories/category_list.tsv2", wc);
+			List list = (List)WebCachePoolUtil.get(
+				"http://w.moreover.com/categories/category_list.tsv2", wci);
 
 			_categoryMap = (Map)list.get(0);
 			_categorySet = (Set)list.get(1);

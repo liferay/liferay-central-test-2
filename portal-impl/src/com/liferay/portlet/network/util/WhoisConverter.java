@@ -24,9 +24,9 @@ package com.liferay.portlet.network.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheException;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.network.model.Whois;
-import com.liferay.util.ConverterException;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
@@ -41,7 +41,7 @@ import java.net.Socket;
  * @author Brian Wing Shun Chan
  *
  */
-public class WhoisConverter implements WebCacheable {
+public class WhoisConverter implements WebCacheItem {
 
 	public static String WHOIS_SERVER = "whois.geektools.com";
 
@@ -51,7 +51,7 @@ public class WhoisConverter implements WebCacheable {
 		_domain = domain;
 	}
 
-	public Object convert(String id) throws ConverterException {
+	public Object convert(String id) throws WebCacheException {
 		Whois whois = null;
 
 		try {
@@ -83,7 +83,7 @@ public class WhoisConverter implements WebCacheable {
 				StringUtil.replace(sm.toString().trim(), "\n\n", "\n"));
 		}
 		catch (Exception e) {
-			throw new ConverterException(_domain + " " + e.toString());
+			throw new WebCacheException(_domain + " " + e.toString());
 		}
 
 		return whois;

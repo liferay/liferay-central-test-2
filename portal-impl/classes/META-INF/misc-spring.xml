@@ -116,6 +116,12 @@
 			<ref bean="com.liferay.portal.uuid.PortalUUIDImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.webcache.WebCachePoolImpl" class="com.liferay.portal.webcache.WebCachePoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil" lazy-init="true">
+		<property name="webCachePool">
+			<ref bean="com.liferay.portal.webcache.WebCachePoolImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryImpl" class="com.liferay.portlet.PortletPreferencesFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil" lazy-init="true">
 		<property name="portletPreferencesFactory">

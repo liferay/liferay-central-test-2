@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.maps.util;
 
-import com.liferay.portal.util.WebCachePool;
-import com.liferay.portal.util.WebCacheable;
+import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.maps.model.MapsAddress;
 
 /**
@@ -37,10 +37,10 @@ public class MapsUtil {
 	public static MapsAddress getMapsAddress(
 		String street, String cityAndState) {
 
-		WebCacheable wc = new MapsConverter(street, cityAndState);
+		WebCacheItem wci = new MapsConverter(street, cityAndState);
 
-		return (MapsAddress)WebCachePool.get(
-			"maps." + street + "|" + cityAndState, wc);
+		return (MapsAddress)WebCachePoolUtil.get(
+			"maps." + street + "|" + cityAndState, wci);
 	}
 
 }
