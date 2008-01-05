@@ -35,7 +35,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 public class BookmarksFolderServiceTest extends BaseServiceTestCase {
 
 	public void testAddFolder() throws Exception {
-		BookmarksFolder folder = BookmarksFolderServiceTestHelper.addFolder();
+		BookmarksFolderServiceTestHelper.addFolder();
 	}
 
 	public void testAddSubfolder() throws Exception {
