@@ -42,16 +42,6 @@ portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
-
-long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
-
-if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
-	groupThreadsUserId = user.getUserId();
-}
-
-if (groupThreadsUserId > 0) {
-	portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
-}
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
@@ -386,6 +376,19 @@ if (groupThreadsUserId > 0) {
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
+
+		<%
+		long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
+
+		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
+			groupThreadsUserId = user.getUserId();
+		}
+
+		if (groupThreadsUserId > 0) {
+			portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
+		}
+		%>
+
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
 			<%
