@@ -57,12 +57,22 @@ public class DeployUtil {
 	}
 
 	public static String getAutoDeployServerDestDir() throws Exception {
-		String destDir = PrefsPropsUtil.getString(
-			"auto.deploy." + ServerDetector.getServerId() + ".dest.dir");
+		String destDir = null;
+
+		if (ServerDetector.isTomcat()) {
+			destDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_TOMCAT_DEST_DIR,
+				PropsValues.AUTO_DEPLOY_TOMCAT_DEST_DIR);
+		}
+		else {
+			destDir = PrefsPropsUtil.getString(
+				"auto.deploy." + ServerDetector.getServerId() + ".dest.dir");
+		}
 
 		if (Validator.isNull(destDir)) {
 			destDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR);
+				PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR,
+				PropsValues.AUTO_DEPLOY_DEFAULT_DEST_DIR);
 		}
 
 		destDir = StringUtil.replace(

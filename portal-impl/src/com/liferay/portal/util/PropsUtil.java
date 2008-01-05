@@ -89,6 +89,8 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR = "auto.deploy.tomcat.conf.dir";
 
+	public static final String AUTO_DEPLOY_TOMCAT_DEST_DIR = "auto.deploy.tomcat.dest.dir";
+
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
 
 	public static final String LIBRARY_DOWNLOAD_URL = "library.download.url.";

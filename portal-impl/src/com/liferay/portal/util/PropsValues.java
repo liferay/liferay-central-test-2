@@ -82,6 +82,9 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD));
 
+	public static final String AUTO_DEPLOY_DEFAULT_DEST_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR);
+
 	public static final String AUTO_DEPLOY_DEPLOY_DIR =
 		PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
 
@@ -99,6 +102,9 @@ public class PropsValues {
 
 	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR =
 		PropsUtil.get(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR);
+
+	public static final String AUTO_DEPLOY_TOMCAT_DEST_DIR =
+		PropsUtil.get(PropsUtil.AUTO_DEPLOY_TOMCAT_DEST_DIR);
 
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR =
 		PropsUtil.get(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
