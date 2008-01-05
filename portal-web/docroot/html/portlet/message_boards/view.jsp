@@ -36,6 +36,13 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCateg
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/message_boards/view");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
+
 long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
 
 if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
@@ -45,13 +52,6 @@ if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDispl
 if (groupThreadsUserId > 0) {
 	portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
 }
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
-portletURL.setParameter("struts_action", "/message_boards/view");
-portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
@@ -386,7 +386,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
-
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
 			<%
