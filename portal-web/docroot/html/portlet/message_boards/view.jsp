@@ -36,6 +36,16 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCateg
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
+long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
+
+if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
+	groupThreadsUserId = user.getUserId();
+}
+
+if (groupThreadsUserId > 0) {
+	portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
+}
+
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/message_boards/view");
@@ -376,14 +386,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
-
-		<%
-		long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
-
-		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
-			groupThreadsUserId = user.getUserId();
-		}
-		%>
 
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
