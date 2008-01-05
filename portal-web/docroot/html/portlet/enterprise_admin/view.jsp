@@ -374,7 +374,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	</c:when>
 	<c:when test='<%= tabs1.equals("monitoring") %>'>
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)) %>">
+			<c:when test="<%= PropsValues.SESSION_TRACKER_MEMORY_ENABLED %>">
 				<liferay-ui:tabs
 					names="live-sessions"
 					param="tabs2"
