@@ -336,14 +336,14 @@ public class PortalUtil {
 	public static long getCompanyId(HttpServletRequest req) {
 		Long companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
 
-		long companyId =
-			GetterUtil.getLong(
-				CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
-
 		if (companyIdObj != null) {
 			return companyIdObj.longValue();
 		}
-		else if (companyId > 0) {
+
+		long companyId = GetterUtil.getLong(
+			CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
+
+		if (companyId > 0) {
 			return companyId;
 		}
 		else {

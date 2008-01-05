@@ -217,8 +217,7 @@ public class LoginAction extends Action {
 			ses.setAttribute(WebKeys.USER_PASSWORD, password);
 
 			Cookie companyIdCookie = new Cookie(
-				CookieKeys.COMPANY_ID,
-				String.valueOf(company.getCompanyId()));
+				CookieKeys.COMPANY_ID, String.valueOf(company.getCompanyId()));
 
 			if (Validator.isNotNull(domain)) {
 				companyIdCookie.setDomain(domain);
@@ -258,11 +257,12 @@ public class LoginAction extends Action {
 				passwordCookie.setMaxAge(loginMaxAge);
 			}
 			else {
-				// I changed this explicitly from 0 to -1 so that the cookie
-				// lasts as long as the browser, so that an external servlet
-				// wrapped in AutoLoginFilter will work throughout the client
+
+				// This was explicitly changed from 0 to -1 so that the cookie
+				// lasts as long as the browser. This allows an external servlet
+				// wrapped in AutoLoginFilter to work throughout the client
 				// connection. The cookies ARE removed on an actual logout, so
-				// there is no security issue.
+				// there is no security issue. See LEP-4678.
 
 				companyIdCookie.setMaxAge(-1);
 				idCookie.setMaxAge(-1);

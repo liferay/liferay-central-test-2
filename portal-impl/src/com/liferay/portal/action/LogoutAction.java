@@ -61,8 +61,8 @@ public class LogoutAction extends Action {
 
 			String domain = CookieKeys.getDomain(req);
 
-			Cookie companyIdCookie =
-				new Cookie(CookieKeys.COMPANY_ID, StringPool.BLANK);
+			Cookie companyIdCookie = new Cookie(
+				CookieKeys.COMPANY_ID, StringPool.BLANK);
 
 			if (Validator.isNotNull(domain)) {
 				companyIdCookie.setDomain(domain);
@@ -90,6 +90,7 @@ public class LogoutAction extends Action {
 			passwordCookie.setMaxAge(0);
 			passwordCookie.setPath(StringPool.SLASH);
 
+			CookieKeys.addCookie(res, companyIdCookie);
 			CookieKeys.addCookie(res, idCookie);
 			CookieKeys.addCookie(res, passwordCookie);
 
