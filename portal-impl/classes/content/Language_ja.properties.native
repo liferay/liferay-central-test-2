@@ -312,6 +312,7 @@ ad-format=広告のフォーマット
 ad-type=広告のタイプ
 add-a-css-rule-for-all-portlets-like-this-one=この1 のようなすべてのportlets のためのCSS の規則を加えなさい。
 add-a-css-rule-for-just-this-portlet=ちょうどこのportlet のためのCSS の規則を加えなさい。
+add-a-google-gadget-by-specifying-a-gadget-url,-or-choose-from-the-gadgets-below=Google の小道具を小道具のURL の指定によって加えるか、または小道具から次に選びなさい。
 add-address=住所を加えなさい
 add-all-isbn-numbers-separated-by-spaces=スペースによって分かれているISBN 数すべてを加えなさい。
 add-all-ticker-symbols-separated-by-spaces=スペースによって分かれているチッカーの記号すべてを加えなさい。

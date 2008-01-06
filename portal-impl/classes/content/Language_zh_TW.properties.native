@@ -312,6 +312,7 @@ ad-format=廣告格式
 ad-type=廣告類型
 add-a-css-rule-for-all-portlets-like-this-one=增加一個CSS 規則為所有portlets 像這一個。
 add-a-css-rule-for-just-this-portlet=增加一個CSS 規則為這portlet 。
+add-a-google-gadget-by-specifying-a-gadget-url,-or-choose-from-the-gadgets-below=增加一個Google 小配件由指定小配件URL, 或選擇從小配件如下。
 add-address=增加地址
 add-all-isbn-numbers-separated-by-spaces=增加所有國際標準書號數字由空白分開。
 add-all-ticker-symbols-separated-by-spaces=增加所有斷續裝置標誌由空間分離。
