@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsChoice;
@@ -412,6 +413,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (NoSuchChoiceException nsve) {
 			_log.error(
 				"Could not find the choice for vote " + vote.getVoteId());
+		}
+		catch (DuplicateVoteException dve) {
 		}
 	}
 
