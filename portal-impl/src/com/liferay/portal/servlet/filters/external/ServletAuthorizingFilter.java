@@ -30,7 +30,6 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -76,7 +75,12 @@ public class ServletAuthorizingFilter implements Filter {
 
 		long companyId = PortalInstances.getCompanyId(httpReq);
 
+		// We need to set the COMPANY_ID request attribute explicitly because
+		// the above doesn't.
+
 		httpReq.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
+
+		// Authorize
 
 		long userId = PortalUtil.getUserId(httpReq);
 		String remoteUser = httpReq.getRemoteUser();
