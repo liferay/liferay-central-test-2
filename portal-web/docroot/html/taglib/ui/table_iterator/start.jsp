@@ -26,8 +26,15 @@
 
 <%
 String rowValign = (String)request.getAttribute("liferay-ui:table-iterator:rowValign");
+String width = (String)request.getAttribute("liferay-ui:table-iterator:width");
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0"
+
+<c:if test="<%= Validator.isNotNull(width) %>">
+	width="<%= width %>"
+</c:if>
+
+>
 <tr>
 	<td valign="<%= rowValign %>">

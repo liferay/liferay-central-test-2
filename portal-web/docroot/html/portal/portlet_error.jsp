@@ -30,6 +30,7 @@
 RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
 String portletTitle = renderResponseImpl.getTitle();
+
 if (portletTitle == null) {
 	portletTitle = LanguageUtil.get(pageContext, "portlet");
 }

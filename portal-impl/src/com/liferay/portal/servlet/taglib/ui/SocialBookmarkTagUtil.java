@@ -24,8 +24,8 @@ package com.liferay.portal.servlet.taglib.ui;
 
 import com.germinus.easyconf.Filter;
 
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.HttpUtil;
 

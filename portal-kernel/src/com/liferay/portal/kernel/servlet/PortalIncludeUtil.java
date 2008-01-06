@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 

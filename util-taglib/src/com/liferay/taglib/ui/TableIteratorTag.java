@@ -22,9 +22,10 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.util.Html;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class TableIteratorTag extends TagSupport {
 					"liferay-ui:table-iterator:rowValign", _rowValign);
 				req.setAttribute(
 					"liferay-ui:table-iterator:rowBreak", _rowBreak);
+				req.setAttribute("liferay-ui:table-iterator:width", _width);
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -189,6 +191,10 @@ public class TableIteratorTag extends TagSupport {
 		_rowBreak = Html.unescape(rowBreak);
 	}
 
+	public void setWidth(String width) {
+		_width = width;
+	}
+
 	private static final String _START_PAGE =
 		"/html/taglib/ui/table_iterator/start.jsp";
 
@@ -207,5 +213,6 @@ public class TableIteratorTag extends TagSupport {
 	private String _rowPadding = "0";
 	private String _rowValign = "middle";
 	private String _rowBreak = "<br />";
+	private String _width = StringPool.BLANK;
 
 }

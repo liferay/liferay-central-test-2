@@ -23,9 +23,9 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.ServletRequest;
