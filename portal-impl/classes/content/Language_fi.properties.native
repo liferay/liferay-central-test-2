@@ -312,6 +312,7 @@ ad-format=Mainos muoto
 ad-type=Mainos tyyppi
 add-a-css-rule-for-all-portlets-like-this-one=Lisää CSS sääntö kaikille tämän portletin ilmentymille.
 add-a-css-rule-for-just-this-portlet=Lisää CSS sääntö vain tälle portletille.
+add-a-google-gadget-by-specifying-a-gadget-url,-or-choose-from-the-gadgets-below=Lisää Google gadget määrittämällä gadget URL tai valitse gadget alta.
 add-address=Lisää osoite
 add-all-isbn-numbers-separated-by-spaces=Lisää kaikki ISBN numerot välilyönnein erotettuna.
 add-all-ticker-symbols-separated-by-spaces=Lisää kaikki osakesymbolit välilyönnein erotettuna.
