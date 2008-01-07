@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.external;
+package com.liferay.portal.servlet.filters.servletauthorizing;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
@@ -52,8 +52,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
- * <a href="ExternalServletAuthorizingFilter.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ServletAuthorizingFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -76,7 +75,7 @@ public class ServletAuthorizingFilter implements Filter {
 		long companyId = PortalInstances.getCompanyId(httpReq);
 
 		// We need to set the COMPANY_ID request attribute explicitly because
-		// the above doesn't.
+		// the above does not.
 
 		httpReq.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
 
@@ -167,9 +166,13 @@ public class ServletAuthorizingFilter implements Filter {
 		}
 		finally {
 			try {
+
+				// Clean up the permission checker
+
 				PermissionCheckerFactory.recycle(permissionChecker);
 			}
 			catch (Exception e) {
+				_log.error(e, e);
 			}
 
 			// Clear the company id associated with this thread
@@ -185,7 +188,7 @@ public class ServletAuthorizingFilter implements Filter {
 	public void destroy() {
 	}
 
-	private static final Log _log = LogFactory.getLog(
-		ServletAuthorizingFilter.class);
+	private static final Log _log =
+		LogFactory.getLog(ServletAuthorizingFilter.class);
 
 }
