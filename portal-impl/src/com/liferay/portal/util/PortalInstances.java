@@ -43,6 +43,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.util.CookieUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SetUtil;
 
@@ -129,14 +130,21 @@ public class PortalInstances {
 			_log.debug("Get company id");
 		}
 
-		long companyId = PortalUtil.getCompanyId(req);
+		Long companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Company id from request " + companyId);
+			_log.debug("Company id from request " + companyIdObj);
 		}
 
-		if (companyId > 0) {
-			return companyId;
+		if (companyIdObj != null) {
+			return companyIdObj.longValue();
+		}
+
+		long companyId = GetterUtil.getLong(
+			CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Company id from cookie " + companyId);
 		}
 
 		String host = PortalUtil.getHost(req);
@@ -145,10 +153,12 @@ public class PortalInstances {
 			_log.debug("Host " + host);
 		}
 
-		companyId = _getCompanyIdByVirtualHost(host);
+		if (companyId <= 0) {
+			companyId = _getCompanyIdByVirtualHost(host);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Company id from host " + companyId);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Company id from host " + companyId);
+			}
 		}
 
 		if (companyId <= 0) {

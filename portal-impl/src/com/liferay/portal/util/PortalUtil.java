@@ -87,7 +87,6 @@ import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
@@ -334,21 +333,7 @@ public class PortalUtil {
 	}
 
 	public static long getCompanyId(HttpServletRequest req) {
-		Long companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
-
-		if (companyIdObj != null) {
-			return companyIdObj.longValue();
-		}
-
-		long companyId = GetterUtil.getLong(
-			CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
-
-		if (companyId > 0) {
-			return companyId;
-		}
-		else {
-			 return 0;
-		}
+		return PortalInstances.getCompanyId(req);
 	}
 
 	public static long getCompanyId(ActionRequest req) {
