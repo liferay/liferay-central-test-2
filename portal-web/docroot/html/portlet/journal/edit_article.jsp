@@ -265,7 +265,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	function <portlet:namespace />getArticleContent() {
 		<c:choose>
 			<c:when test="<%= structure == null %>">
-				return parent.<portlet:namespace />editor.getHTML();
+				return window.<portlet:namespace />editor.getHTML();
 			</c:when>
 			<c:otherwise>
 				var stillLocalized = false;
@@ -320,7 +320,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}
 						else if (elTypeValue == "text_area") {
-							eval("elContentValue = parent.<portlet:namespace />structure_el" + i + "_content.getHTML();");
+							eval("elContentValue = window.<portlet:namespace />structure_el" + i + "_content.getHTML();");
 
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}

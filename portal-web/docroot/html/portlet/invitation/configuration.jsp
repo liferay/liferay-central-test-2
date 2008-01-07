@@ -45,7 +45,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	}
 
 	function <portlet:namespace />saveConfiguration() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+		document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>

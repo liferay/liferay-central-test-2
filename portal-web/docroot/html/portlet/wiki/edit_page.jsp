@@ -42,7 +42,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <script type="text/javascript">
 	function <portlet:namespace />changeFormat(formatSel) {
 		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = parent.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
@@ -58,7 +58,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 
 		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = parent.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);

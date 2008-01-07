@@ -60,7 +60,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 	function <portlet:namespace />savePreferences() {
 		<c:if test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);

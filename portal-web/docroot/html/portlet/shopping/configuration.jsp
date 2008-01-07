@@ -71,7 +71,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</c:if>
 
 		<c:if test='<%= tabs3.endsWith("-email") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
