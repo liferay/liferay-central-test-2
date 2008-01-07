@@ -86,22 +86,6 @@ import org.dom4j.Element;
  */
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
-		};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
@@ -119,15 +103,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				while (itr.hasNext()) {
 					JournalArticle article = (JournalArticle)itr.next();
 
-					// Structures
-
-					JournalStructureLocalServiceUtil.deleteStructure(
-						context.getGroupId(), article.getStructureId());
-
 					// Templates
 
 					JournalTemplateLocalServiceUtil.deleteTemplate(
 						context.getGroupId(), article.getTemplateId());
+
+					// Structures
+
+					JournalStructureLocalServiceUtil.deleteStructure(
+						context.getGroupId(), article.getStructureId());
 				}
 
 				// Articles
@@ -243,6 +227,22 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletPreferences importData(

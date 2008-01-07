@@ -105,7 +105,7 @@
 			<li id="<portlet:namespace />deleteDataOption" class="tree-item" style="display: none;">
 				<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 
-				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlets-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
 			</li>
 			<li class="tree-item">
 				<c:choose>

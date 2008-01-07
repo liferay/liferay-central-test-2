@@ -44,23 +44,21 @@ import javax.portlet.PortletPreferences;
 public interface PortletDataHandler {
 
 	/**
-	 * Returns an array of the controls defined for this data handler. These
-	 * controls enable the developer to create fine grained controls over export
-	 * behavior. The controls are rendered in the export UI.
+	 * Deletes the data created by the portlet. Can optionally return a modified
+	 * version of <code>prefs</code> if it contains reference to data that
+	 * does not exist anymore.
 	 *
-	 * @return		an array of PortletDataHandlerControls
-	 */
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException;
-
-	/**
-	 * Returns an array of the controls defined for this data handler. These
-	 * controls enable the developer to create fine grained controls over import
-	 * behavior. The controls are rendered in the import UI.
+	 * @param		context the context of the data deletion
+	 * @param		portletId the portlet id of the portlet
+	 * @param		prefs the portlet preferences of the portlet
 	 *
-	 * @return		An array of PortletDataHandlerControls
+	 * @return		A modified version of prefs that should be saved. Null if
+	 *				the preferences were unmodified by this data handler.
+	 * @throws PortletDataException
 	 */
-	public PortletDataHandlerControl[] getImportControls()
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
 		throws PortletDataException;
 
 	/**
@@ -82,6 +80,26 @@ public interface PortletDataHandler {
 		throws PortletDataException;
 
 	/**
+	 * Returns an array of the controls defined for this data handler. These
+	 * controls enable the developer to create fine grained controls over export
+	 * behavior. The controls are rendered in the export UI.
+	 *
+	 * @return		an array of PortletDataHandlerControls
+	 */
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException;
+
+	/**
+	 * Returns an array of the controls defined for this data handler. These
+	 * controls enable the developer to create fine grained controls over import
+	 * behavior. The controls are rendered in the import UI.
+	 *
+	 * @return		An array of PortletDataHandlerControls
+	 */
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException;
+
+	/**
 	 * Handles any special processing of the data when the portlet is imported
 	 * into a new layout. Can optionally return a modified version of
 	 * <code>prefs</code> to be saved in the new portlet.
@@ -99,25 +117,6 @@ public interface PortletDataHandler {
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
-		throws PortletDataException;
-
-	/**
-	 * Deletes the data created by the portlet. Can optionally return a modified
-	 * version of <code>prefs</code> if it contains reference to data that
-	 * doesn't exist anymore.
-	 *
-	 * @param		context the context of the data deletion
-	 * @param		portletId the portlet id of the portlet
-	 * @param		prefs the portlet preferences of the portlet
-	 *
-	 * @return		A modified version of prefs that should be
-	 *				saved. Null if the preferences were unmodified by this data
-	 *				handler.
-	 * @throws PortletDataException
-	 */
-	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
 		throws PortletDataException;
 
 }

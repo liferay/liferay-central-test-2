@@ -81,28 +81,13 @@ import org.dom4j.Element;
  */
 public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
-		};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
 
 		try {
+
 			// Categories
 
 			if (!context.addPrimaryKey(
@@ -300,6 +285,22 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
+		};
 	}
 
 	public PortletPreferences importData(

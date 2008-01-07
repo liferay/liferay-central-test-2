@@ -41,18 +41,6 @@ import javax.portlet.PortletPreferences;
  */
 public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_comments};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_comments};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
@@ -82,6 +70,18 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_comments};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_comments};
 	}
 
 	public PortletPreferences importData(

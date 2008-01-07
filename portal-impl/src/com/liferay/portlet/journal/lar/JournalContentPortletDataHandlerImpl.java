@@ -72,22 +72,6 @@ import org.dom4j.Element;
 public class JournalContentPortletDataHandlerImpl
 	implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_selectedArticles, _images, _comments, _ratings, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_selectedArticles, _images, _comments, _ratings, _tags
-		};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
@@ -216,6 +200,22 @@ public class JournalContentPortletDataHandlerImpl
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_selectedArticles, _images, _comments, _ratings, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_selectedArticles, _images, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletPreferences importData(

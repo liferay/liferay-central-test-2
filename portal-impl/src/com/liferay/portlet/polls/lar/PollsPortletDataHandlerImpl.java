@@ -74,24 +74,13 @@ import org.dom4j.Element;
  */
 public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_questions, _votes};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_questions, _votes};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
 
 		try {
+
 			// Questions
 
 			if (!context.addPrimaryKey(
@@ -218,6 +207,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_questions, _votes};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
 	public PortletPreferences importData(

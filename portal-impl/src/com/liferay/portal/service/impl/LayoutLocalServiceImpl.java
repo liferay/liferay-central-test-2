@@ -1116,17 +1116,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			// the portlet permissions. The import of the portlet data
 			// assumes that portlet preferences already exist.
 
-			// Portlet preferences
-
-			importPortletPreferences(
-				layoutSet.getCompanyId(), layout.getPlid(), layoutEl,
-				importPortletSetup, importPortletUserPreferences);
-
 			// Delete portlet data
 
 			if (deletePortletData) {
 				deletePortletData(context, layout, layoutEl);
 			}
+
+			// Portlet preferences
+
+			importPortletPreferences(
+				layoutSet.getCompanyId(), layout.getPlid(), layoutEl,
+				importPortletSetup, importPortletUserPreferences);
 
 			// Portlet data
 
@@ -1285,13 +1285,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		readRatings(context, root);
 		readTags(context, root);
 
-		// Portlet preferences
-
-		importPortletPreferences(
-			layout.getCompanyId(), plid, root, importPortletSetup,
-			importUserPreferences);
-
-		// Delete Portlet Data
+		// Delete portlet data
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Deleting portlet data");
@@ -1301,7 +1295,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			deletePortletData(context, layout, root);
 		}
 
-		// Portlet Data
+		// Portlet preferences
+
+		importPortletPreferences(
+			layout.getCompanyId(), plid, root, importPortletSetup,
+			importUserPreferences);
+
+		// Portlet data
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Importing portlet data");
@@ -1715,6 +1715,88 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+	}
+
+	protected void deletePortletData(
+			PortletDataContext context, Layout layout, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = parentEl.elements("portlet-data").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String portletId = el.attributeValue("portlet-id");
+
+			try {
+				PortletPreferences portletPreferences =
+					portletPreferencesPersistence.findByO_O_P_P(
+						PortletKeys.PREFS_OWNER_ID_DEFAULT,
+						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
+						portletId);
+
+				String preferences = deletePortletData(
+					context, portletId, portletPreferences, el);
+
+				if (preferences != null) {
+					portletPreferences.setPreferences(preferences);
+
+					portletPreferencesPersistence.update(portletPreferences);
+				}
+			}
+			catch (NoSuchPortletPreferencesException nsppe) {
+			}
+		}
+	}
+
+	protected String deletePortletData(
+			PortletDataContext context, String portletId,
+			PortletPreferences portletPreferences, Element parentEl)
+		throws PortalException, SystemException {
+
+		Portlet portlet = portletLocalService.getPortletById(
+			context.getCompanyId(), portletId);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not delete portlet data for " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return null;
+		}
+
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
+
+		if (portletDataHandler == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not delete portlet data for " + portletId +
+						" because the portlet does not have a " +
+							"PortletDataHandler");
+			}
+
+			return null;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Deleting data for " + portletId);
+		}
+
+		PortletPreferencesImpl prefsImpl =
+			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
+				portletPreferences.getPreferences());
+
+		prefsImpl = (PortletPreferencesImpl)portletDataHandler.deleteData(
+			context, portletId, prefsImpl);
+
+		if (prefsImpl == null) {
+			return null;
+		}
+
+		return PortletPreferencesSerializer.toXML(prefsImpl);
 	}
 
 	protected void exportComments(PortletDataContext context, Element root)
@@ -2788,88 +2870,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",
 			rolesEl);
-	}
-
-	protected void deletePortletData(
-			PortletDataContext context, Layout layout, Element parentEl)
-		throws PortalException, SystemException {
-
-		Iterator itr = parentEl.elements("portlet-data").iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
-			String portletId = el.attributeValue("portlet-id");
-
-			try {
-				PortletPreferences portletPreferences =
-					portletPreferencesPersistence.findByO_O_P_P(
-						PortletKeys.PREFS_OWNER_ID_DEFAULT,
-						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-						portletId);
-
-				String preferences = deletePortletData(
-					context, portletId, portletPreferences, el);
-
-				if (preferences != null) {
-					portletPreferences.setPreferences(preferences);
-
-					portletPreferencesPersistence.update(portletPreferences);
-				}
-			}
-			catch (NoSuchPortletPreferencesException nsppe) {
-			}
-		}
-	}
-
-	protected String deletePortletData(
-			PortletDataContext context, String portletId,
-			PortletPreferences portletPreferences, Element parentEl)
-		throws PortalException, SystemException {
-
-		Portlet portlet = portletLocalService.getPortletById(
-			context.getCompanyId(), portletId);
-
-		if (portlet == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Do not delete portlet data for " + portletId +
-						" because the portlet does not exist");
-			}
-
-			return null;
-		}
-
-		PortletDataHandler portletDataHandler =
-			portlet.getPortletDataHandlerInstance();
-
-		if (portletDataHandler == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Do not delete portlet data for " + portletId +
-						" because the portlet does not have a " +
-							"PortletDataHandler");
-			}
-
-			return null;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Deleting data for " + portletId);
-		}
-
-		PortletPreferencesImpl prefsImpl =
-			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				portletPreferences.getPreferences());
-
-		prefsImpl = (PortletPreferencesImpl)portletDataHandler.deleteData(
-			context, portletId, prefsImpl);
-
-		if (prefsImpl == null) {
-			return null;
-		}
-
-		return PortletPreferencesSerializer.toXML(prefsImpl);
 	}
 
 	protected void importPortletData(

@@ -74,24 +74,13 @@ import org.dom4j.Element;
  */
 public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
 
 		try {
+
 			// Folders
 
 			if (!context.addPrimaryKey(
@@ -202,6 +191,18 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
 	}
 
 	public PortletPreferences importData(

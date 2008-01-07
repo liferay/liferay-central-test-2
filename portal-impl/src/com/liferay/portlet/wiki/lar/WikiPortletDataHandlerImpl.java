@@ -65,28 +65,13 @@ import org.dom4j.Element;
  */
 public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _comments, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _comments, _tags
-		};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
 
 		try {
+
 			// Nodes
 
 			if (!context.addPrimaryKey(
@@ -191,6 +176,22 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_nodesAndPages, _comments, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_nodesAndPages, _comments, _tags
+		};
 	}
 
 	public PortletPreferences importData(

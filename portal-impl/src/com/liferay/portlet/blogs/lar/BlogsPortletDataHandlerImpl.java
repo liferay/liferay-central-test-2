@@ -55,28 +55,13 @@ import org.dom4j.Element;
  */
 public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
-		return new PortletDataHandlerControl[] {
-			_entries, _comments, _ratings, _tags
-		};
-	}
-
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
 
 		try {
+
 			// Entries
 
 			if (!context.addPrimaryKey(
@@ -153,6 +138,22 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_entries, _comments, _ratings, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException {
+
+		return new PortletDataHandlerControl[] {
+			_entries, _comments, _ratings, _tags
+		};
 	}
 
 	public PortletPreferences importData(
