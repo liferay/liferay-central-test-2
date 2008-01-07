@@ -151,7 +151,7 @@ public class JSFPortletUtil {
 		String value = defaultValue;
 
 		if (portletPreferences != null) {
-			portletPreferences.getValue(preferenceName, defaultValue);
+			value = portletPreferences.getValue(preferenceName, defaultValue);
 		}
 
 		return value;
