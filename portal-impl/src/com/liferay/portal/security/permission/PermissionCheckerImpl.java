@@ -258,10 +258,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		if (user == null) {
-			return false;
-		}
-
 		Boolean value = PermissionCacheUtil.hasPermission(
 			user.getUserId(), groupId, name, primKey, actionId);
 
