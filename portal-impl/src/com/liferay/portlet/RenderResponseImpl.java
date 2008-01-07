@@ -234,6 +234,8 @@ public class RenderResponseImpl implements RenderResponse {
 
 			if (contentType.startsWith(resContentType)) {
 				valid = true;
+
+				break;
 			}
 		}
 
