@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet.taglib.security;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.util.UnicodeFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.PortletDisplay;
@@ -92,8 +91,7 @@ public class PermissionsURLTagUtil extends TagSupport {
 			portletURL.setParameter("portletResource", portletDisplay.getId());
 			portletURL.setParameter("modelResource", modelResource);
 			portletURL.setParameter(
-				"modelResourceDescription",
-				UnicodeFormatter.toString(modelResourceDescription));
+				"modelResourceDescription", modelResourceDescription);
 			portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			String portletURLToString = portletURL.toString();
