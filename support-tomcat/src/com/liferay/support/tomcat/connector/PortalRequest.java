@@ -41,14 +41,14 @@ public class PortalRequest extends Request {
 
 		String host = getServerName();
 
-		String domain = getDomain(host);
+		String domain = _getDomain(host);
 
 		if (domain != null) {
 			cookie.setDomain(domain);
 		}
 	}
 
-	public static String getDomain(String host) {
+	private String _getDomain(String host) {
 
 		// See LEP-4602 and LEP-4645.
 
