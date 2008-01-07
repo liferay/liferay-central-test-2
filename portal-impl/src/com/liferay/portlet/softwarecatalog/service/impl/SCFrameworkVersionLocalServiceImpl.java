@@ -32,6 +32,7 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -171,6 +172,26 @@ public class SCFrameworkVersionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		scFrameworkVersionPersistence.remove(frameworkVersionId);
+	}
+
+	public void deleteFrameworkVersion(SCFrameworkVersion frameworkVersion)
+		throws PortalException, SystemException {
+
+		scFrameworkVersionPersistence.remove(frameworkVersion);
+	}
+
+	public void deleteFrameworkVersions(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = scFrameworkVersionPersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			SCFrameworkVersion frameworkVersion =
+				(SCFrameworkVersion)itr.next();
+
+			deleteFrameworkVersion(frameworkVersion);
+		}
 	}
 
 	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)

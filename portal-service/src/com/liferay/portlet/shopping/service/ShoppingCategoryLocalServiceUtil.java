@@ -371,6 +371,14 @@ public class ShoppingCategoryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
+	public static void deleteCategories(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		shoppingCategoryLocalService.deleteCategories(groupId);
+	}
+
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

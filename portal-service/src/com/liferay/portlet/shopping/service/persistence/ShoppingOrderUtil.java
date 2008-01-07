@@ -77,6 +77,44 @@ public class ShoppingOrderUtil {
 		return getPersistence().fetchByPrimaryKey(orderId);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByGroupId_PrevAndNext(
+		long orderId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence().findByGroupId_PrevAndNext(orderId, groupId, obc);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.SystemException, 
@@ -167,6 +205,11 @@ public class ShoppingOrderUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByNumber(java.lang.String number)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderException {
@@ -181,6 +224,11 @@ public class ShoppingOrderUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByNumber(java.lang.String number)

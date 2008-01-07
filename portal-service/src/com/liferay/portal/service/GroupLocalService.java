@@ -385,6 +385,26 @@ public interface GroupLocalService {
 	public void setJournalArticleFinder(
 		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
 
+	public com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence();
+
+	public void setJournalStructurePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalStructureFinder getJournalStructureFinder();
+
+	public void setJournalStructureFinder(
+		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
+
+	public void setJournalTemplatePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplateFinder getJournalTemplateFinder();
+
+	public void setJournalTemplateFinder(
+		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder);
+
 	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();
 
 	public void setMBBanPersistence(
@@ -414,6 +434,41 @@ public interface GroupLocalService {
 
 	public void setShoppingCartPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence getShoppingCategoryPersistence();
+
+	public void setShoppingCategoryPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence getShoppingCouponPersistence();
+
+	public void setShoppingCouponPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder getShoppingCouponFinder();
+
+	public void setShoppingCouponFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence getShoppingOrderPersistence();
+
+	public void setShoppingOrderPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder getShoppingOrderFinder();
+
+	public void setShoppingOrderFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence();
+
+	public void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence();
+
+	public void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence);
 
 	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
 

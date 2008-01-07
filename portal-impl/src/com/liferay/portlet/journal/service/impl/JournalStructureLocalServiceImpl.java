@@ -292,6 +292,19 @@ public class JournalStructureLocalServiceImpl
 		journalStructurePersistence.remove(structure.getPrimaryKey());
 	}
 
+	public void deleteStructures(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = journalStructurePersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			JournalStructure structure = (JournalStructure)itr.next();
+
+			deleteStructure(structure);
+		}
+	}
+
 	public JournalStructure getStructure(long id)
 		throws PortalException, SystemException {
 

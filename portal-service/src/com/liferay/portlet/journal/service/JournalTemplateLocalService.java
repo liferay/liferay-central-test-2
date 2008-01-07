@@ -227,6 +227,10 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteTemplates(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getStructureTemplates(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 

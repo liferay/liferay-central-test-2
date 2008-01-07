@@ -408,6 +408,14 @@ public class JournalStructureLocalServiceUtil {
 		journalStructureLocalService.deleteStructure(structure);
 	}
 
+	public static void deleteStructures(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		journalStructureLocalService.deleteStructures(groupId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long id)
 		throws com.liferay.portal.PortalException, 

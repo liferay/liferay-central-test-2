@@ -169,6 +169,19 @@ public class ShoppingCategoryLocalServiceImpl
 			category.getCategoryId(), communityPermissions, guestPermissions);
 	}
 
+	public void deleteCategories(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = shoppingCategoryPersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			ShoppingCategory category = (ShoppingCategory)itr.next();
+
+			deleteCategory(category);
+		}
+	}
+
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 

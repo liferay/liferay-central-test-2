@@ -216,6 +216,10 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteStructures(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long id)
 		throws com.liferay.portal.SystemException, 

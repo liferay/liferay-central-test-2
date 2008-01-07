@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -325,6 +326,19 @@ public class JournalTemplateLocalServiceImpl
 		// Template
 
 		journalTemplatePersistence.remove(template.getPrimaryKey());
+	}
+
+	public void deleteTemplates(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = journalTemplatePersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			JournalTemplate template = (JournalTemplate)itr.next();
+
+			deleteTemplate(template);
+		}
 	}
 
 	public List getStructureTemplates(long groupId, String structureId)

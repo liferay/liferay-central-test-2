@@ -190,6 +190,10 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteCategories(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

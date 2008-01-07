@@ -296,6 +296,7 @@ create index IX_6D5F9B87 on ShoppingItemField (itemId);
 
 create index IX_EA6FD516 on ShoppingItemPrice (itemId);
 
+create index IX_1D15553E on ShoppingOrder (groupId);
 create index IX_119B5630 on ShoppingOrder (groupId, userId, ppPaymentStatus);
 create index IX_D7D6E87A on ShoppingOrder (number_);
 

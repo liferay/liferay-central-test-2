@@ -197,6 +197,19 @@ public class ShoppingOrderLocalServiceImpl
 		shoppingOrderPersistence.remove(order.getOrderId());
 	}
 
+	public void deleteOrders(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = shoppingOrderPersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			ShoppingOrder order = (ShoppingOrder)itr.next();
+
+			deleteOrder(order);
+		}
+	}
+
 	public ShoppingOrder getLatestOrder(long userId, long groupId)
 		throws PortalException, SystemException {
 

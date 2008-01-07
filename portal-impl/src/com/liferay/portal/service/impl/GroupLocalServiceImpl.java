@@ -279,6 +279,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Journal
 
+		journalTemplateLocalService.deleteTemplates(groupId);
+		journalStructureLocalService.deleteStructures(groupId);
 		journalArticleLocalService.deleteArticles(groupId);
 
 		// Message boards
@@ -294,6 +296,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Shopping
 
 		shoppingCartLocalService.deleteGroupCarts(groupId);
+		shoppingCategoryLocalService.deleteCategories(groupId);
+		shoppingCouponLocalService.deleteCoupons(groupId);
+		shoppingOrderLocalService.deleteOrders(groupId);
+
+		// Software catalog
+
+		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
+		scProductEntryLocalService.deleteProductEntries(groupId);
 
 		// Wiki
 

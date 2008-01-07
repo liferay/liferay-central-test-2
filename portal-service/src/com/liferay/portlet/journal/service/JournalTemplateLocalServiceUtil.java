@@ -424,6 +424,14 @@ public class JournalTemplateLocalServiceUtil {
 		journalTemplateLocalService.deleteTemplate(template);
 	}
 
+	public static void deleteTemplates(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		journalTemplateLocalService.deleteTemplates(groupId);
+	}
+
 	public static java.util.List getStructureTemplates(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();

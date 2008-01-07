@@ -163,6 +163,10 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteOrders(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
 		long userId, long groupId)
 		throws com.liferay.portal.SystemException, 

@@ -245,6 +245,245 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingOrder.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingOrder.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("createDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public ShoppingOrder findByGroupId_First(long groupId, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
+		List list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingOrder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchOrderException(msg.toString());
+		}
+		else {
+			return (ShoppingOrder)list.get(0);
+		}
+	}
+
+	public ShoppingOrder findByGroupId_Last(long groupId, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
+		int count = countByGroupId(groupId);
+
+		List list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingOrder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchOrderException(msg.toString());
+		}
+		else {
+			return (ShoppingOrder)list.get(0);
+		}
+	}
+
+	public ShoppingOrder[] findByGroupId_PrevAndNext(long orderId,
+		long groupId, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
+		ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
+
+		int count = countByGroupId(groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					shoppingOrder);
+
+			ShoppingOrder[] array = new ShoppingOrderImpl[3];
+
+			array[0] = (ShoppingOrder)objArray[0];
+			array[1] = (ShoppingOrder)objArray[1];
+			array[2] = (ShoppingOrder)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public ShoppingOrder findByNumber(String number)
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = fetchByNumber(number);
@@ -785,6 +1024,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByGroupId(long groupId) throws SystemException {
+		Iterator itr = findByGroupId(groupId).iterator();
+
+		while (itr.hasNext()) {
+			ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
+
+			remove(shoppingOrder);
+		}
+	}
+
 	public void removeByNumber(String number)
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByNumber(number);
@@ -809,6 +1058,72 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((ShoppingOrder)itr.next());
+		}
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingOrder.class.getName();
+		String finderMethodName = "countByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

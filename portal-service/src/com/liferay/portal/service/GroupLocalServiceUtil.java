@@ -915,6 +915,58 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setJournalArticleFinder(journalArticleFinder);
 	}
 
+	public static com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalStructurePersistence();
+	}
+
+	public static void setJournalStructurePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setJournalStructurePersistence(journalStructurePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalStructureFinder getJournalStructureFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalStructureFinder();
+	}
+
+	public static void setJournalStructureFinder(
+		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setJournalStructureFinder(journalStructureFinder);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalTemplatePersistence();
+	}
+
+	public static void setJournalTemplatePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalTemplateFinder getJournalTemplateFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalTemplateFinder();
+	}
+
+	public static void setJournalTemplateFinder(
+		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setJournalTemplateFinder(journalTemplateFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
@@ -991,6 +1043,97 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.setShoppingCartPersistence(shoppingCartPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence getShoppingCategoryPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingCategoryPersistence();
+	}
+
+	public static void setShoppingCategoryPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setShoppingCategoryPersistence(shoppingCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence getShoppingCouponPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingCouponPersistence();
+	}
+
+	public static void setShoppingCouponPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder getShoppingCouponFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingCouponFinder();
+	}
+
+	public static void setShoppingCouponFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setShoppingCouponFinder(shoppingCouponFinder);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence getShoppingOrderPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingOrderPersistence();
+	}
+
+	public static void setShoppingOrderPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder getShoppingOrderFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingOrderFinder();
+	}
+
+	public static void setShoppingOrderFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setShoppingOrderFinder(shoppingOrderFinder);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getSCFrameworkVersionPersistence();
+	}
+
+	public static void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getSCProductEntryPersistence();
+	}
+
+	public static void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {

@@ -188,6 +188,10 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteProductEntries(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteProductEntry(long productEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

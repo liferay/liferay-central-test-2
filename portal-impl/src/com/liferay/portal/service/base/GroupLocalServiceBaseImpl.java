@@ -303,10 +303,26 @@ import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
+import com.liferay.portlet.journal.service.JournalStructureLocalService;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalStructureService;
+import com.liferay.portlet.journal.service.JournalStructureServiceFactory;
+import com.liferay.portlet.journal.service.JournalTemplateLocalService;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalTemplateService;
+import com.liferay.portlet.journal.service.JournalTemplateServiceFactory;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
+import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
+import com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -333,8 +349,42 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingCategoryService;
+import com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingCouponLocalService;
+import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingCouponService;
+import com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalService;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingOrderService;
+import com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -1589,6 +1639,78 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		this.journalArticleFinder = journalArticleFinder;
 	}
 
+	public JournalStructureLocalService getJournalStructureLocalService() {
+		return journalStructureLocalService;
+	}
+
+	public void setJournalStructureLocalService(
+		JournalStructureLocalService journalStructureLocalService) {
+		this.journalStructureLocalService = journalStructureLocalService;
+	}
+
+	public JournalStructureService getJournalStructureService() {
+		return journalStructureService;
+	}
+
+	public void setJournalStructureService(
+		JournalStructureService journalStructureService) {
+		this.journalStructureService = journalStructureService;
+	}
+
+	public JournalStructurePersistence getJournalStructurePersistence() {
+		return journalStructurePersistence;
+	}
+
+	public void setJournalStructurePersistence(
+		JournalStructurePersistence journalStructurePersistence) {
+		this.journalStructurePersistence = journalStructurePersistence;
+	}
+
+	public JournalStructureFinder getJournalStructureFinder() {
+		return journalStructureFinder;
+	}
+
+	public void setJournalStructureFinder(
+		JournalStructureFinder journalStructureFinder) {
+		this.journalStructureFinder = journalStructureFinder;
+	}
+
+	public JournalTemplateLocalService getJournalTemplateLocalService() {
+		return journalTemplateLocalService;
+	}
+
+	public void setJournalTemplateLocalService(
+		JournalTemplateLocalService journalTemplateLocalService) {
+		this.journalTemplateLocalService = journalTemplateLocalService;
+	}
+
+	public JournalTemplateService getJournalTemplateService() {
+		return journalTemplateService;
+	}
+
+	public void setJournalTemplateService(
+		JournalTemplateService journalTemplateService) {
+		this.journalTemplateService = journalTemplateService;
+	}
+
+	public JournalTemplatePersistence getJournalTemplatePersistence() {
+		return journalTemplatePersistence;
+	}
+
+	public void setJournalTemplatePersistence(
+		JournalTemplatePersistence journalTemplatePersistence) {
+		this.journalTemplatePersistence = journalTemplatePersistence;
+	}
+
+	public JournalTemplateFinder getJournalTemplateFinder() {
+		return journalTemplateFinder;
+	}
+
+	public void setJournalTemplateFinder(
+		JournalTemplateFinder journalTemplateFinder) {
+		this.journalTemplateFinder = journalTemplateFinder;
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -1708,6 +1830,158 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	public void setShoppingCartPersistence(
 		ShoppingCartPersistence shoppingCartPersistence) {
 		this.shoppingCartPersistence = shoppingCartPersistence;
+	}
+
+	public ShoppingCategoryLocalService getShoppingCategoryLocalService() {
+		return shoppingCategoryLocalService;
+	}
+
+	public void setShoppingCategoryLocalService(
+		ShoppingCategoryLocalService shoppingCategoryLocalService) {
+		this.shoppingCategoryLocalService = shoppingCategoryLocalService;
+	}
+
+	public ShoppingCategoryService getShoppingCategoryService() {
+		return shoppingCategoryService;
+	}
+
+	public void setShoppingCategoryService(
+		ShoppingCategoryService shoppingCategoryService) {
+		this.shoppingCategoryService = shoppingCategoryService;
+	}
+
+	public ShoppingCategoryPersistence getShoppingCategoryPersistence() {
+		return shoppingCategoryPersistence;
+	}
+
+	public void setShoppingCategoryPersistence(
+		ShoppingCategoryPersistence shoppingCategoryPersistence) {
+		this.shoppingCategoryPersistence = shoppingCategoryPersistence;
+	}
+
+	public ShoppingCouponLocalService getShoppingCouponLocalService() {
+		return shoppingCouponLocalService;
+	}
+
+	public void setShoppingCouponLocalService(
+		ShoppingCouponLocalService shoppingCouponLocalService) {
+		this.shoppingCouponLocalService = shoppingCouponLocalService;
+	}
+
+	public ShoppingCouponService getShoppingCouponService() {
+		return shoppingCouponService;
+	}
+
+	public void setShoppingCouponService(
+		ShoppingCouponService shoppingCouponService) {
+		this.shoppingCouponService = shoppingCouponService;
+	}
+
+	public ShoppingCouponPersistence getShoppingCouponPersistence() {
+		return shoppingCouponPersistence;
+	}
+
+	public void setShoppingCouponPersistence(
+		ShoppingCouponPersistence shoppingCouponPersistence) {
+		this.shoppingCouponPersistence = shoppingCouponPersistence;
+	}
+
+	public ShoppingCouponFinder getShoppingCouponFinder() {
+		return shoppingCouponFinder;
+	}
+
+	public void setShoppingCouponFinder(
+		ShoppingCouponFinder shoppingCouponFinder) {
+		this.shoppingCouponFinder = shoppingCouponFinder;
+	}
+
+	public ShoppingOrderLocalService getShoppingOrderLocalService() {
+		return shoppingOrderLocalService;
+	}
+
+	public void setShoppingOrderLocalService(
+		ShoppingOrderLocalService shoppingOrderLocalService) {
+		this.shoppingOrderLocalService = shoppingOrderLocalService;
+	}
+
+	public ShoppingOrderService getShoppingOrderService() {
+		return shoppingOrderService;
+	}
+
+	public void setShoppingOrderService(
+		ShoppingOrderService shoppingOrderService) {
+		this.shoppingOrderService = shoppingOrderService;
+	}
+
+	public ShoppingOrderPersistence getShoppingOrderPersistence() {
+		return shoppingOrderPersistence;
+	}
+
+	public void setShoppingOrderPersistence(
+		ShoppingOrderPersistence shoppingOrderPersistence) {
+		this.shoppingOrderPersistence = shoppingOrderPersistence;
+	}
+
+	public ShoppingOrderFinder getShoppingOrderFinder() {
+		return shoppingOrderFinder;
+	}
+
+	public void setShoppingOrderFinder(ShoppingOrderFinder shoppingOrderFinder) {
+		this.shoppingOrderFinder = shoppingOrderFinder;
+	}
+
+	public SCFrameworkVersionLocalService getSCFrameworkVersionLocalService() {
+		return scFrameworkVersionLocalService;
+	}
+
+	public void setSCFrameworkVersionLocalService(
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService) {
+		this.scFrameworkVersionLocalService = scFrameworkVersionLocalService;
+	}
+
+	public SCFrameworkVersionService getSCFrameworkVersionService() {
+		return scFrameworkVersionService;
+	}
+
+	public void setSCFrameworkVersionService(
+		SCFrameworkVersionService scFrameworkVersionService) {
+		this.scFrameworkVersionService = scFrameworkVersionService;
+	}
+
+	public SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		return scFrameworkVersionPersistence;
+	}
+
+	public void setSCFrameworkVersionPersistence(
+		SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		this.scFrameworkVersionPersistence = scFrameworkVersionPersistence;
+	}
+
+	public SCProductEntryLocalService getSCProductEntryLocalService() {
+		return scProductEntryLocalService;
+	}
+
+	public void setSCProductEntryLocalService(
+		SCProductEntryLocalService scProductEntryLocalService) {
+		this.scProductEntryLocalService = scProductEntryLocalService;
+	}
+
+	public SCProductEntryService getSCProductEntryService() {
+		return scProductEntryService;
+	}
+
+	public void setSCProductEntryService(
+		SCProductEntryService scProductEntryService) {
+		this.scProductEntryService = scProductEntryService;
+	}
+
+	public SCProductEntryPersistence getSCProductEntryPersistence() {
+		return scProductEntryPersistence;
+	}
+
+	public void setSCProductEntryPersistence(
+		SCProductEntryPersistence scProductEntryPersistence) {
+		this.scProductEntryPersistence = scProductEntryPersistence;
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {
@@ -2292,6 +2566,38 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 			journalArticleFinder = JournalArticleFinderUtil.getFinder();
 		}
 
+		if (journalStructureLocalService == null) {
+			journalStructureLocalService = JournalStructureLocalServiceFactory.getImpl();
+		}
+
+		if (journalStructureService == null) {
+			journalStructureService = JournalStructureServiceFactory.getImpl();
+		}
+
+		if (journalStructurePersistence == null) {
+			journalStructurePersistence = JournalStructureUtil.getPersistence();
+		}
+
+		if (journalStructureFinder == null) {
+			journalStructureFinder = JournalStructureFinderUtil.getFinder();
+		}
+
+		if (journalTemplateLocalService == null) {
+			journalTemplateLocalService = JournalTemplateLocalServiceFactory.getImpl();
+		}
+
+		if (journalTemplateService == null) {
+			journalTemplateService = JournalTemplateServiceFactory.getImpl();
+		}
+
+		if (journalTemplatePersistence == null) {
+			journalTemplatePersistence = JournalTemplateUtil.getPersistence();
+		}
+
+		if (journalTemplateFinder == null) {
+			journalTemplateFinder = JournalTemplateFinderUtil.getFinder();
+		}
+
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}
@@ -2346,6 +2652,74 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 
 		if (shoppingCartPersistence == null) {
 			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
+		}
+
+		if (shoppingCategoryLocalService == null) {
+			shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getImpl();
+		}
+
+		if (shoppingCategoryService == null) {
+			shoppingCategoryService = ShoppingCategoryServiceFactory.getImpl();
+		}
+
+		if (shoppingCategoryPersistence == null) {
+			shoppingCategoryPersistence = ShoppingCategoryUtil.getPersistence();
+		}
+
+		if (shoppingCouponLocalService == null) {
+			shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getImpl();
+		}
+
+		if (shoppingCouponService == null) {
+			shoppingCouponService = ShoppingCouponServiceFactory.getImpl();
+		}
+
+		if (shoppingCouponPersistence == null) {
+			shoppingCouponPersistence = ShoppingCouponUtil.getPersistence();
+		}
+
+		if (shoppingCouponFinder == null) {
+			shoppingCouponFinder = ShoppingCouponFinderUtil.getFinder();
+		}
+
+		if (shoppingOrderLocalService == null) {
+			shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getImpl();
+		}
+
+		if (shoppingOrderService == null) {
+			shoppingOrderService = ShoppingOrderServiceFactory.getImpl();
+		}
+
+		if (shoppingOrderPersistence == null) {
+			shoppingOrderPersistence = ShoppingOrderUtil.getPersistence();
+		}
+
+		if (shoppingOrderFinder == null) {
+			shoppingOrderFinder = ShoppingOrderFinderUtil.getFinder();
+		}
+
+		if (scFrameworkVersionLocalService == null) {
+			scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getImpl();
+		}
+
+		if (scFrameworkVersionService == null) {
+			scFrameworkVersionService = SCFrameworkVersionServiceFactory.getImpl();
+		}
+
+		if (scFrameworkVersionPersistence == null) {
+			scFrameworkVersionPersistence = SCFrameworkVersionUtil.getPersistence();
+		}
+
+		if (scProductEntryLocalService == null) {
+			scProductEntryLocalService = SCProductEntryLocalServiceFactory.getImpl();
+		}
+
+		if (scProductEntryService == null) {
+			scProductEntryService = SCProductEntryServiceFactory.getImpl();
+		}
+
+		if (scProductEntryPersistence == null) {
+			scProductEntryPersistence = SCProductEntryUtil.getPersistence();
 		}
 
 		if (wikiNodeLocalService == null) {
@@ -2500,6 +2874,14 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected JournalArticleService journalArticleService;
 	protected JournalArticlePersistence journalArticlePersistence;
 	protected JournalArticleFinder journalArticleFinder;
+	protected JournalStructureLocalService journalStructureLocalService;
+	protected JournalStructureService journalStructureService;
+	protected JournalStructurePersistence journalStructurePersistence;
+	protected JournalStructureFinder journalStructureFinder;
+	protected JournalTemplateLocalService journalTemplateLocalService;
+	protected JournalTemplateService journalTemplateService;
+	protected JournalTemplatePersistence journalTemplatePersistence;
+	protected JournalTemplateFinder journalTemplateFinder;
 	protected MBBanLocalService mbBanLocalService;
 	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
@@ -2514,6 +2896,23 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected PollsQuestionPersistence pollsQuestionPersistence;
 	protected ShoppingCartLocalService shoppingCartLocalService;
 	protected ShoppingCartPersistence shoppingCartPersistence;
+	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
+	protected ShoppingCategoryService shoppingCategoryService;
+	protected ShoppingCategoryPersistence shoppingCategoryPersistence;
+	protected ShoppingCouponLocalService shoppingCouponLocalService;
+	protected ShoppingCouponService shoppingCouponService;
+	protected ShoppingCouponPersistence shoppingCouponPersistence;
+	protected ShoppingCouponFinder shoppingCouponFinder;
+	protected ShoppingOrderLocalService shoppingOrderLocalService;
+	protected ShoppingOrderService shoppingOrderService;
+	protected ShoppingOrderPersistence shoppingOrderPersistence;
+	protected ShoppingOrderFinder shoppingOrderFinder;
+	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	protected SCFrameworkVersionService scFrameworkVersionService;
+	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	protected SCProductEntryLocalService scProductEntryLocalService;
+	protected SCProductEntryService scProductEntryService;
+	protected SCProductEntryPersistence scProductEntryPersistence;
 	protected WikiNodeLocalService wikiNodeLocalService;
 	protected WikiNodeService wikiNodeService;
 	protected WikiNodePersistence wikiNodePersistence;

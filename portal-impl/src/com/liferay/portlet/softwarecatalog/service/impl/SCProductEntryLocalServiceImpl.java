@@ -248,6 +248,19 @@ public class SCProductEntryLocalServiceImpl
 			guestPermissions);
 	}
 
+	public void deleteProductEntries(long groupId)
+		throws PortalException, SystemException {
+
+		Iterator itr = scProductEntryPersistence.findByGroupId(
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			SCProductEntry productEntry = (SCProductEntry)itr.next();
+
+			deleteProductEntry(productEntry);
+		}
+	}
+
 	public void deleteProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 

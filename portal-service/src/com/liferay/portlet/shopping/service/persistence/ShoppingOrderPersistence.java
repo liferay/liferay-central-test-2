@@ -59,6 +59,32 @@ public interface ShoppingOrderPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
 		long orderId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder[] findByGroupId_PrevAndNext(
+		long orderId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.SystemException, 
@@ -116,6 +142,9 @@ public interface ShoppingOrderPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByNumber(java.lang.String number)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderException;
@@ -125,6 +154,9 @@ public interface ShoppingOrderPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByNumber(java.lang.String number)
 		throws com.liferay.portal.SystemException;

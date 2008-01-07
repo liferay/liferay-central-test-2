@@ -349,6 +349,14 @@ public class SCProductEntryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
+	public static void deleteProductEntries(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		scProductEntryLocalService.deleteProductEntries(groupId);
+	}
+
 	public static void deleteProductEntry(long productEntryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

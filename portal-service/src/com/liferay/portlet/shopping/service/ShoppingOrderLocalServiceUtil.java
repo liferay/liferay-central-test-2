@@ -328,6 +328,14 @@ public class ShoppingOrderLocalServiceUtil {
 		shoppingOrderLocalService.deleteOrder(order);
 	}
 
+	public static void deleteOrders(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+
+		shoppingOrderLocalService.deleteOrders(groupId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
 		long userId, long groupId)
 		throws com.liferay.portal.PortalException, 
