@@ -81,6 +81,26 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Nodes
+
+			if (!context.addPrimaryKey(
+					WikiPortletDataHandlerImpl.class, "deleteData")) {
+
+				WikiNodeLocalServiceUtil.deleteNodes(context.getGroupId());
+			}
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

@@ -93,6 +93,27 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Folders
+
+			if (!context.addPrimaryKey(
+					DLPortletDataHandlerImpl.class, "deleteData")) {
+
+				DLFolderLocalServiceUtil.deleteFolders(context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

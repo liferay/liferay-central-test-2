@@ -86,6 +86,27 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		return new PortletDataHandlerControl[] {_foldersAndImages, _tags};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Folders
+
+			if (!context.addPrimaryKey(
+					IGPortletDataHandlerImpl.class, "deleteData")) {
+
+				IGFolderLocalServiceUtil.deleteFolders(context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

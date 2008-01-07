@@ -80,6 +80,28 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		return new PortletDataHandlerControl[] {_foldersAndEntries, _tags};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Folders
+
+			if (!context.addPrimaryKey(
+					BookmarksPortletDataHandlerImpl.class, "deleteData")) {
+
+				BookmarksFolderLocalServiceUtil.deleteFolders(
+					context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

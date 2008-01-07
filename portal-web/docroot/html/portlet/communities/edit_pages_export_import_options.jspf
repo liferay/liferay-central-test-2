@@ -52,6 +52,7 @@
 	}
 
 	function <portlet:namespace />importLess() {
+		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "none";
 		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "none";
 		document.getElementById("<portlet:namespace />permissionsUl").style.display = "none";
 
@@ -60,6 +61,7 @@
 	}
 
 	function <portlet:namespace />importMore() {
+		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "";
 		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "";
 		document.getElementById("<portlet:namespace />permissionsUl").style.display = "";
 
@@ -99,6 +101,11 @@
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
 
 				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox"><liferay-ui:message key="user-preferences" /></label>
+			</li>
+			<li id="<portlet:namespace />deleteDataOption" class="tree-item" style="display: none;">
+				<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlets-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
 			</li>
 			<li class="tree-item">
 				<c:choose>

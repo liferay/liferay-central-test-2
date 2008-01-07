@@ -71,6 +71,27 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Entries
+
+			if (!context.addPrimaryKey(
+					BlogsPortletDataHandlerImpl.class, "deleteData")) {
+
+				BlogsEntryLocalServiceUtil.deleteEntries(context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

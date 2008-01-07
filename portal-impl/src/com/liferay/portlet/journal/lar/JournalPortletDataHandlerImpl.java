@@ -102,6 +102,47 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			if (!context.addPrimaryKey(
+					JournalPortletDataHandlerImpl.class, "deleteData")) {
+
+				List articles = JournalArticleUtil.findByGroupId(
+					context.getGroupId());
+
+				Iterator itr = articles.iterator();
+
+				while (itr.hasNext()) {
+					JournalArticle article = (JournalArticle)itr.next();
+
+					// Structures
+
+					JournalStructureLocalServiceUtil.deleteStructure(
+						context.getGroupId(), article.getStructureId());
+
+					// Templates
+
+					JournalTemplateLocalServiceUtil.deleteTemplate(
+						context.getGroupId(), article.getTemplateId());
+				}
+
+				// Articles
+
+				JournalArticleLocalServiceUtil.deleteArticles(
+					context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

@@ -86,6 +86,28 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Questions
+
+			if (!context.addPrimaryKey(
+					PollsPortletDataHandlerImpl.class, "deleteData")) {
+
+				PollsQuestionLocalServiceUtil.deleteQuestions(
+					context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

@@ -132,6 +132,7 @@ import org.dom4j.io.SAXReader;
  * @author Charles May
  * @author Raymond Augé
  * @author Jorge Ferrer
+ * @author Bruno Farache
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
@@ -856,6 +857,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
+		boolean deletePortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
@@ -872,6 +875,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Delete portlet data " + deletePortletData);
 			_log.debug("Import permissions " + importPermissions);
 			_log.debug("Import user permissions " + importUserPermissions);
 			_log.debug("Import portlet data " + importPortletData);
@@ -1118,6 +1122,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layoutSet.getCompanyId(), layout.getPlid(), layoutEl,
 				importPortletSetup, importPortletUserPreferences);
 
+			// Delete portlet data
+
+			if (deletePortletData) {
+				deletePortletData(context, layout, layoutEl);
+			}
+
 			// Portlet data
 
 			if (importPortletData) {
@@ -1182,6 +1192,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			InputStream is)
 		throws PortalException, SystemException {
 
+		boolean deletePortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletSetup = MapUtil.getBoolean(
@@ -1278,6 +1290,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		importPortletPreferences(
 			layout.getCompanyId(), plid, root, importPortletSetup,
 			importUserPreferences);
+
+		// Delete Portlet Data
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Deleting portlet data");
+		}
+
+		if (deletePortletData) {
+			deletePortletData(context, layout, root);
+		}
 
 		// Portlet Data
 
@@ -2768,6 +2790,88 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			rolesEl);
 	}
 
+	protected void deletePortletData(
+			PortletDataContext context, Layout layout, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = parentEl.elements("portlet-data").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String portletId = el.attributeValue("portlet-id");
+
+			try {
+				PortletPreferences portletPreferences =
+					portletPreferencesPersistence.findByO_O_P_P(
+						PortletKeys.PREFS_OWNER_ID_DEFAULT,
+						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
+						portletId);
+
+				String preferences = deletePortletData(
+					context, portletId, portletPreferences, el);
+
+				if (preferences != null) {
+					portletPreferences.setPreferences(preferences);
+
+					portletPreferencesPersistence.update(portletPreferences);
+				}
+			}
+			catch (NoSuchPortletPreferencesException nsppe) {
+			}
+		}
+	}
+
+	protected String deletePortletData(
+			PortletDataContext context, String portletId,
+			PortletPreferences portletPreferences, Element parentEl)
+		throws PortalException, SystemException {
+
+		Portlet portlet = portletLocalService.getPortletById(
+			context.getCompanyId(), portletId);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not delete portlet data for " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return null;
+		}
+
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
+
+		if (portletDataHandler == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not delete portlet data for " + portletId +
+						" because the portlet does not have a " +
+							"PortletDataHandler");
+			}
+
+			return null;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Deleting data for " + portletId);
+		}
+
+		PortletPreferencesImpl prefsImpl =
+			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
+				portletPreferences.getPreferences());
+
+		prefsImpl = (PortletPreferencesImpl)portletDataHandler.deleteData(
+			context, portletId, prefsImpl);
+
+		if (prefsImpl == null) {
+			return null;
+		}
+
+		return PortletPreferencesSerializer.toXML(prefsImpl);
+	}
+
 	protected void importPortletData(
 			PortletDataContext context, Layout layout, Element parentEl)
 		throws PortalException, SystemException {
@@ -2821,7 +2925,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		PortletDataHandler portletDataHandler =
 			portlet.getPortletDataHandlerInstance();
 
-		if (portlet == null) {
+		if (portletDataHandler == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not import portlet data for " + portletId +

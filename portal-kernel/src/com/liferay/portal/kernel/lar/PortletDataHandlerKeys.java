@@ -53,6 +53,8 @@ public class PortletDataHandlerKeys {
 	public static final String DELETE_MISSING_LAYOUTS =
 		"DELETE_MISSING_LAYOUTS";
 
+	public static final String DELETE_PORTLET_DATA = "DELETE_PORTLET_DATA";
+
 	public static final String DATA_STRATEGY = "DATA_STRATEGY";
 
 	public static final String DATA_STRATEGY_MIRROR = "DATA_STRATEGY_MIRROR";

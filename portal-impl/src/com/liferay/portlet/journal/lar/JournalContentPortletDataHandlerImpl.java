@@ -88,6 +88,22 @@ public class JournalContentPortletDataHandlerImpl
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			prefs.setValue("group-id", StringPool.BLANK);
+			prefs.setValue("article-id", StringPool.BLANK);
+
+			return prefs;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

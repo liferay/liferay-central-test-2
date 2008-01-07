@@ -491,6 +491,9 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.toString());
 		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			Boolean.FALSE.toString());
+		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 		parameterMap.put(

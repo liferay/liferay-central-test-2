@@ -68,6 +68,26 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		return new PortletDataHandlerControl[] {_events};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Events
+
+			if (!context.addPrimaryKey(
+					CalendarPortletDataHandlerImpl.class, "deleteData")) {
+
+				CalEventLocalServiceUtil.deleteEvents(context.getGroupId());
+			}
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

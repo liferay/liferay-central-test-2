@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.model.Layout;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
 
@@ -50,6 +51,22 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {_comments};
+	}
+
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			MBMessageLocalServiceUtil.deleteDiscussionMessages(
+				Layout.class.getName(), context.getPlid());
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
 	}
 
 	public String exportData(

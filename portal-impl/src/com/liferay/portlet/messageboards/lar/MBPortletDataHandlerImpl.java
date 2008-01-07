@@ -97,6 +97,28 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		};
 	}
 
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
+		throws PortletDataException {
+
+		try {
+			// Categories
+
+			if (!context.addPrimaryKey(
+					MBPortletDataHandlerImpl.class, "deleteData")) {
+
+				MBCategoryLocalServiceUtil.deleteCategories(
+					context.getGroupId());
+			}
+
+			return null;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)

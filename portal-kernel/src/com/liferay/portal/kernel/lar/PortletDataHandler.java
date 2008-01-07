@@ -38,6 +38,7 @@ import javax.portlet.PortletPreferences;
  *
  * @author Raymond Augé
  * @author Joel Kozikowski
+ * @author Bruno Farache
  *
  */
 public interface PortletDataHandler {
@@ -98,6 +99,25 @@ public interface PortletDataHandler {
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
+		throws PortletDataException;
+
+	/**
+	 * Deletes the data created by the portlet. Can optionally return a modified
+	 * version of <code>prefs</code> if it contains reference to data that
+	 * doesn't exist anymore.
+	 *
+	 * @param		context the context of the data deletion
+	 * @param		portletId the portlet id of the portlet
+	 * @param		prefs the portlet preferences of the portlet
+	 *
+	 * @return		A modified version of prefs that should be
+	 *				saved. Null if the preferences were unmodified by this data
+	 *				handler.
+	 * @throws PortletDataException
+	 */
+	public PortletPreferences deleteData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
 		throws PortletDataException;
 
 }
