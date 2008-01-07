@@ -59,6 +59,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
+import com.liferay.util.Normalizer;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.File;
@@ -89,7 +90,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHost = getVirtualHost(virtualHost);
 
 		if ((Validator.isNull(webId)) ||
 			(webId.equals(CompanyImpl.DEFAULT_WEB_ID)) ||
@@ -394,7 +395,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company getCompanyByVirtualHost(String virtualHost)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHost = getVirtualHost(virtualHost);
 
 		return companyPersistence.findByVirtualHost(virtualHost);
 	}
@@ -476,7 +477,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateCompany(long companyId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHost = getVirtualHost(virtualHost);
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
@@ -501,7 +502,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHost = getVirtualHost(virtualHost);
 		Date now = new Date();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -621,6 +622,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		catch (PortletException pe) {
 			throw new SystemException(pe);
 		}
+	}
+
+	protected String getVirtualHost(String virtualHost) {
+		return Normalizer.normalizeToAscii(virtualHost.trim().toLowerCase());
 	}
 
 	protected void validate(String name) throws PortalException {

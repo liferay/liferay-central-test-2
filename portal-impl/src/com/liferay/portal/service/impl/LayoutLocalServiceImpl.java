@@ -87,6 +87,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.Normalizer;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -196,6 +197,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
+		friendlyURL = getFriendlyURL(friendlyURL);
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
@@ -768,6 +770,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (Validator.isNull(friendlyURL)) {
 			throw new NoSuchLayoutException();
 		}
+
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		return layoutPersistence.findByG_P_F(
 			groupId, privateLayout, friendlyURL);
@@ -1411,6 +1415,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		validate(
 			groupId, privateLayout, layoutId, parentLayoutId, type, hidden,
@@ -2620,6 +2625,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return actions;
 	}
 
+	protected String getFriendlyURL(String friendlyURL) {
+		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
+	}
+
 	protected long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
@@ -3439,8 +3448,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long parentLayoutId, String type, boolean hidden,
 			String friendlyURL)
 		throws PortalException, SystemException {
-
-		friendlyURL = friendlyURL.toLowerCase();
 
 		boolean firstLayout = false;
 

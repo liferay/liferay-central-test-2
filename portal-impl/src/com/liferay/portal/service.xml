@@ -381,7 +381,7 @@
 		</finder>
 		<finder name="C_F" return-type="Group">
 			<finder-column name="companyId" />
-			<finder-column name="friendlyURL" />
+			<finder-column name="friendlyURL" case-sensitive="false" />
 		</finder>
 		<finder name="C_C_C" return-type="Group">
 			<finder-column name="companyId" />

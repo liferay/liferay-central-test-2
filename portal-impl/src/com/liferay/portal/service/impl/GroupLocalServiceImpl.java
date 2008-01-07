@@ -54,6 +54,7 @@ import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.comparator.GroupNameComparator;
+import com.liferay.util.Normalizer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -347,7 +348,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			throw new NoSuchGroupException();
 		}
 
-		friendlyURL = friendlyURL.toLowerCase();
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		return groupPersistence.findByC_F(companyId, friendlyURL);
 	}
@@ -579,7 +580,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			friendlyURL = PropsUtil.get(PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
 		}
 
-		friendlyURL = friendlyURL.toLowerCase();
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		Layout layout = layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), false,
@@ -608,6 +609,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			layout.getTypeSettings());
 	}
 
+	protected String getFriendlyURL(String friendlyURL) {
+		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
+	}
+
 	protected String getFriendlyURL(long classNameId, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -619,9 +624,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		friendlyURL = GetterUtil.getString(friendlyURL);
-
-		return friendlyURL.toLowerCase();
+		return getFriendlyURL(GetterUtil.getString(friendlyURL));
 	}
 
 	protected void validateFriendlyURL(
