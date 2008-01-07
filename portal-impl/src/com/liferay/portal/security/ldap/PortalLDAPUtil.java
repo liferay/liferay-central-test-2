@@ -100,8 +100,8 @@ public class PortalLDAPUtil {
 			return;
 		}
 
-		User user = UserLocalServiceUtil.getUserById(
-			companyId, contact.getUserId());
+		User user = UserLocalServiceUtil.getUserByContactId(
+			contact.getContactId());
 
 		Properties userMappings = getUserMappings(companyId);
 		Binding binding = getUser(contact.getCompanyId(), user.getScreenName());
