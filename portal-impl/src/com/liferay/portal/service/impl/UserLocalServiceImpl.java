@@ -86,6 +86,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
+import com.liferay.util.Normalizer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -197,7 +198,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
-		screenName = screenName.trim().toLowerCase();
+		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
@@ -918,7 +919,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User getUserByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
-		screenName = screenName.trim().toLowerCase();
+		screenName = getScreenName(screenName);
 
 		return userPersistence.findByC_SN(companyId, screenName);
 	}
@@ -936,7 +937,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public long getUserIdByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
-		screenName = screenName.trim().toLowerCase();
+		screenName = getScreenName(screenName);
 
 		User user = userPersistence.findByC_SN(companyId, screenName);
 
@@ -1623,7 +1624,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User
 
 		String password = oldPassword;
-		screenName = screenName.trim().toLowerCase();
+		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
 
@@ -1969,6 +1970,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return authResult;
+	}
+
+	protected String getScreenName(String screenName) {
+		return Normalizer.normalizeToAscii(screenName.trim().toLowerCase());
 	}
 
 	protected void sendEmail(User user, String password)
