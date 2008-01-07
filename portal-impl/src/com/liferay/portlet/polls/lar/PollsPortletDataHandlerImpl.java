@@ -406,6 +406,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PollsVoteLocalServiceUtil.addVote(
 				userId, questionId, choiceId);
 		}
+		catch (DuplicateVoteException dve) {
+		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
 				"Could not find the question for vote " + vote.getVoteId());
@@ -413,8 +415,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (NoSuchChoiceException nsve) {
 			_log.error(
 				"Could not find the choice for vote " + vote.getVoteId());
-		}
-		catch (DuplicateVoteException dve) {
 		}
 	}
 
