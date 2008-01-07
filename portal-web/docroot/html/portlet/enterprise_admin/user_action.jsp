@@ -106,7 +106,7 @@
 						<c:when test="<%= searchTerms.isActive() %>">
 							<liferay-ui:icon-deactivate url="<%= deleteUserURL %>" />
 						</c:when>
-						<c:when test="<%= !searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)) %>">
+						<c:when test="<%= !searchTerms.isActive() && PropsValues.USERS_DELETE %>">
 							<liferay-ui:icon-delete url="<%= deleteUserURL %>" />
 						</c:when>
 					</c:choose>

@@ -218,7 +218,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
 				(ScreenNameGenerator)InstancePool.get(
-					PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_GENERATOR));
+					PropsValues.USERS_SCREEN_NAME_GENERATOR);
 
 			try {
 				screenName = screenNameGenerator.generate(companyId, userId);
@@ -699,7 +699,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void deleteUser(long userId)
 		throws PortalException, SystemException {
 
-		if (!GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE))) {
+		if (!PropsValues.USERS_DELETE) {
 			throw new RequiredUserException();
 		}
 
@@ -2195,7 +2195,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ScreenNameValidator screenNameValidator =
 			(ScreenNameValidator)InstancePool.get(
-				PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_VALIDATOR));
+				PropsValues.USERS_SCREEN_NAME_VALIDATOR);
 
 		if (screenNameValidator != null) {
 			if (!screenNameValidator.validate(companyId, screenName)) {

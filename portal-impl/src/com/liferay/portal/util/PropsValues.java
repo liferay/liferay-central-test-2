@@ -550,9 +550,18 @@ public class PropsValues {
 	public static final boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.THEME_CSS_FAST_LOAD));
 
+	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.USERS_DELETE));
+
 	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
+
+	public static final String USERS_SCREEN_NAME_GENERATOR = PropsUtil.get(
+		PropsUtil.USERS_SCREEN_NAME_GENERATOR);
+
+	public static final String USERS_SCREEN_NAME_VALIDATOR = PropsUtil.get(
+		PropsUtil.USERS_SCREEN_NAME_VALIDATOR);
 
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEB_SERVER_DISPLAY_NODE));

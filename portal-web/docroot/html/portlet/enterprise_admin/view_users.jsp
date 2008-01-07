@@ -154,7 +154,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 	<div class="separator"><!-- --></div>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE))) %>">
+		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
 			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 		</c:if>
 
