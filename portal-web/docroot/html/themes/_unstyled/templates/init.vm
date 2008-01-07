@@ -130,6 +130,10 @@
 #set ($is_maximized = $layoutTypePortlet.hasStateMax())
 #set ($is_freeform = $themeDisplay.isFreeformLayout())
 
+#set ($page_javascript_1 = "")
+#set ($page_javascript_2 = "")
+#set ($page_javascript_3 = "")
+
 #if ($layout)
 	#set ($page = $layout)
 
@@ -153,8 +157,13 @@
 		#if ($layoutTypePortlet.hasStateMax())
 			#set ($maximized_portlet_id = $layoutTypePortlet.getStateMaxPortletId())
 		#end
-
 	#end
+
+	#set ($typeSettingsProperties = $layout.getTypeSettingsProperties())
+
+	#set ($page_javascript_1 = $typeSettingsProperties.getProperty("javascript-1"))
+	#set ($page_javascript_2 = $typeSettingsProperties.getProperty("javascript-2"))
+	#set ($page_javascript_3 = $typeSettingsProperties.getProperty("javascript-3"))
 #end
 
 #if ($layout.getHTMLTitle($locale))
