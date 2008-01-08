@@ -106,12 +106,6 @@ public class ServletAuthorizingFilter implements Filter {
 
 		req = new ProtectedServletRequest(httpReq, remoteUser);
 
-		httpReq = (HttpServletRequest)req;
-
-		ses = httpReq.getSession();
-
-		User user = null;
-
 		PermissionCheckerImpl permissionChecker = null;
 
 		if ((userId > 0) || (remoteUser != null)) {
@@ -134,7 +128,7 @@ public class ServletAuthorizingFilter implements Filter {
 
 				// User
 
-				user = UserLocalServiceUtil.getUserById(userId);
+				User user = UserLocalServiceUtil.getUserById(userId);
 
 				// Permission checker
 
