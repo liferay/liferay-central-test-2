@@ -1,69 +1,69 @@
 /* This CSS makes all the content scroll correctly when using position: absolute. */
 
-.portlet-document-library .portlet-content-container {
+.portlet-document-library .portlet-content-container, .portlet-document-library-display .portlet-content-container {
 	position: relative;
 }
 
-.ie .portlet-document-library .portlet-content-container {
+.ie .portlet-document-library .portlet-content-container, .ie .portlet-document-library-display .portlet-content-container {
 	height: 1%;
 }
 
 /* This CSS overrides the styles for the Actions button. */
 
-.portlet-document-library li .lfr-actions.visible {
+.portlet-document-library li .lfr-actions.visible, .portlet-document-library-display li .lfr-actions.visible {
 	position: absolute;
 }
 
 /* This CSS sets the default styles for the windows explorer display style. */
 
-.portlet-document-library .col-folders {
+.portlet-document-library .col-folders, .portlet-document-library-display .col-folders {
 	left: 45%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.portlet-document-library .col-documents {
+.portlet-document-library .col-documents, .portlet-document-library-display .col-documents {
 	left: 65%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.portlet-document-library .col-name {
+.portlet-document-library .col-name, .portlet-document-library-display .col-name {
 	left: 12px;
 	line-height: 20px;
 	position: absolute;
 }
 
-.portlet-document-library .folder-image {
+.portlet-document-library .folder-image, .portlet-document-library-display .folder-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: bottom;
 }
 
-.portlet-document-library .expand-image {
+.portlet-document-library .expand-image, .portlet-document-library-display .expand-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: length;
 }
 
-.ie .portlet-document-library .folder-image,.ie .portlet-document-library .expand-image {
+.ie .portlet-document-library .folder-image,.ie .portlet-document-library .expand-image, .ie .portlet-document-library-display .folder-image, .ie .portlet-document-library-display .expand-image {
 	vertical-align: middle;
 }
 
-.portlet-document-library .header {
+.portlet-document-library .header, .portlet-document-library-display .header {
 	background-color: #E6E6E6;
 	font-weight: bold;
 	line-height: 20px;
 	height: 20px;
 }
 
-.portlet-document-library .list-item {
+.portlet-document-library .list-item, .portlet-document-library-display .list-item {
 	padding: 8px 0 0 20px;
 }
 
-.portlet-document-library .top-row {
+.portlet-document-library .top-row, .portlet-document-library-display .top-row {
 	border-bottom: 1px solid #E6E6E6;
 	padding: 5px 0 8px 0;
 }
