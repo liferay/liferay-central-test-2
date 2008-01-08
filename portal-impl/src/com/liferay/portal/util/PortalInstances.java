@@ -140,25 +140,16 @@ public class PortalInstances {
 			return companyIdObj.longValue();
 		}
 
-		long companyId = GetterUtil.getLong(
-			CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Company id from cookie " + companyId);
-		}
-
 		String host = PortalUtil.getHost(req);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Host " + host);
 		}
 
-		if (companyId <= 0) {
-			companyId = _getCompanyIdByVirtualHost(host);
+		long companyId = _getCompanyIdByVirtualHost(host);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Company id from host " + companyId);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("Company id from host " + companyId);
 		}
 
 		if (companyId <= 0) {
@@ -174,6 +165,15 @@ public class PortalInstances {
 				}
 
 				req.setAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
+			}
+		}
+
+		if (companyId <= 0) {
+			companyId = GetterUtil.getLong(
+				CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Company id from cookie " + companyId);
 			}
 		}
 

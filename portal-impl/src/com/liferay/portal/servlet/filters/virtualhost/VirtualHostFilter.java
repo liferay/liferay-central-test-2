@@ -176,6 +176,10 @@ public class VirtualHostFilter implements Filter {
 		LayoutSet layoutSet = (LayoutSet)req.getAttribute(
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Layout set " + layoutSet);
+		}
+
 		if (layoutSet != null) {
 			try {
 				StringMaker prefix = new StringMaker();
