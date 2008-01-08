@@ -228,7 +228,7 @@ if (message != null) {
 
 </c:if>
 
-<c:if test="<%= message == null %>">
+<c:if test="<%= message == null && allowAnonymousPosting %>">
 	<tr>
 		<td colspan="2">
 			<br />

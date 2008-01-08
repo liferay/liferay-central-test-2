@@ -83,6 +83,7 @@ String[] priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", curre
 int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 String rssFormat = prefs.getValue("rss-format", "atom10");
+boolean allowAnonymousPosting = MBUtil.getAllowAnonymousPosting(prefs);
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

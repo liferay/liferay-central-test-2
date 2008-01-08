@@ -297,6 +297,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 		anonymous = user.isDefaultUser() ? true : anonymous;
+
+		if (prefs == null) {
+			long ownerId = category.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.MESSAGE_BOARDS;
+			String defaultPreferences = null;
+
+			prefs = portletPreferencesLocalService.getPreferences(
+				category.getCompanyId(), ownerId, ownerType, plid,
+				portletId, defaultPreferences);
+		}
+
+		if (!MBUtil.getAllowAnonymousPosting(prefs)) {
+			anonymous = false;
+		}
+
 		Date now = new Date();
 
 		validate(subject, body);

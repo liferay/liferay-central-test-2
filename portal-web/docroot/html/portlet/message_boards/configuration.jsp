@@ -83,7 +83,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss"
+	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss,anonymous-posting"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -858,6 +858,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
 					<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
 				</select>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test="<%= tabs2.equals("anonymous-posting") %>">
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="allow-anonymous-posting" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.getAllowAnonymousPosting(prefs) %>" />
 			</td>
 		</tr>
 		</table>

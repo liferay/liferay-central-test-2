@@ -76,7 +76,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
-		if (tabs2.equals("email-from")) {
+		if (tabs2.equals("anonymous-posting")) {
+			updateAnonymousPosting(req, prefs);
+		}
+		else if (tabs2.equals("email-from")) {
 			updateEmailFrom(req, prefs);
 		}
 		else if (tabs2.equals("message-added-email")) {
@@ -107,6 +110,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/message_boards/configuration.jsp";
+	}
+
+	protected void updateAnonymousPosting(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String allowAnonymousPosting = ParamUtil.getString(
+			req, "allowAnonymousPosting");
+
+		prefs.setValue("allow-anonymous-posting", allowAnonymousPosting);
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
