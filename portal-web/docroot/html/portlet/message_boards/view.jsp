@@ -341,6 +341,12 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			}
 
 			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE);
+
+			if (showAddMessageButton && !themeDisplay.isSignedIn()) {
+				if (!allowAnonymousPosting) {
+					showAddMessageButton = false;
+				}
+			}
 			%>
 
 			<c:if test="<%= showAddMessageButton || (results.size() > 0) %>">

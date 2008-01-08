@@ -40,6 +40,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -296,22 +297,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			categoryId);
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
-		anonymous = user.isDefaultUser() ? true : anonymous;
 
-		if (prefs == null) {
-			long ownerId = category.getGroupId();
-			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-			long plid = PortletKeys.PREFS_PLID_SHARED;
-			String portletId = PortletKeys.MESSAGE_BOARDS;
-			String defaultPreferences = null;
-
-			prefs = portletPreferencesLocalService.getPreferences(
-				category.getCompanyId(), ownerId, ownerType, plid,
-				portletId, defaultPreferences);
+		if (prefs != null) {
+			if (!MBUtil.isAllowAnonymousPosting(prefs)) {
+				if (anonymous || user.isDefaultUser()) {
+					throw new PrincipalException();
+				}
+			}
 		}
 
-		if (!MBUtil.getAllowAnonymousPosting(prefs)) {
-			anonymous = false;
+		if (user.isDefaultUser()) {
+			anonymous = true;
 		}
 
 		Date now = new Date();

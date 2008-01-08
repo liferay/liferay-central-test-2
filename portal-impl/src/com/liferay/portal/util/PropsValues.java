@@ -366,6 +366,10 @@ public class PropsValues {
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsUtil.LUCENE_STORE_TYPE);
 
+	public static final boolean MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED));
+
 	public static final int MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));

@@ -213,19 +213,6 @@ public class MBUtil {
 		return breadcrumbs;
 	}
 
-	public static boolean getAllowAnonymousPosting(PortletPreferences prefs) {
-		String allowAnonymousPosting = prefs.getValue(
-			"allow-anonymous-posting", StringPool.BLANK);
-
-		if (Validator.isNotNull(allowAnonymousPosting)) {
-			return GetterUtil.getBoolean(allowAnonymousPosting);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING));
-		}
-	}
-
 	public static String getEmailFromAddress(PortletPreferences prefs) {
 		String emailFromAddress = PropsUtil.get(
 			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
@@ -529,6 +516,18 @@ public class MBUtil {
 		}
 
 		return rank;
+	}
+
+	public static boolean isAllowAnonymousPosting(PortletPreferences prefs) {
+		String allowAnonymousPosting = prefs.getValue(
+			"allow-anonymous-posting", StringPool.BLANK);
+
+		if (Validator.isNotNull(allowAnonymousPosting)) {
+			return GetterUtil.getBoolean(allowAnonymousPosting);
+		}
+		else {
+			return PropsValues.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED;
+		}
 	}
 
 	private static String[] _findThreadPriority(

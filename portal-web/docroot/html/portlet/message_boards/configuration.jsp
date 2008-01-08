@@ -862,14 +862,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		</table>
 	</c:when>
-	<c:when test="<%= tabs2.equals("anonymous-posting") %>">
+	<c:when test='<%= tabs2.equals("anonymous-posting") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td>
 				<liferay-ui:message key="allow-anonymous-posting" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.getAllowAnonymousPosting(prefs) %>" />
+				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(prefs) %>" />
 			</td>
 		</tr>
 		</table>

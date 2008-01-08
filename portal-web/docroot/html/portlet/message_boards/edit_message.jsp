@@ -228,7 +228,7 @@ if (message != null) {
 
 </c:if>
 
-<c:if test="<%= message == null && allowAnonymousPosting %>">
+<c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
 	<tr>
 		<td colspan="2">
 			<br />
