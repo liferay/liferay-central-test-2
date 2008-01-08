@@ -57,6 +57,17 @@ public interface TagsAssetService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.lang.String getAssetsRSS(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) throws java.rmi.RemoteException;
 
@@ -70,6 +81,12 @@ public interface TagsAssetService {
 
 	public int getCompanyAssetsCount(long companyId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public java.lang.String getCompanyAssetsRSS(long companyId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)

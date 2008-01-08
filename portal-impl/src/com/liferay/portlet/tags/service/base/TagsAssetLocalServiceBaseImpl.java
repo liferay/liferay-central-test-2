@@ -29,10 +29,24 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
+import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.CompanyServiceFactory;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -345,6 +359,62 @@ public abstract class TagsAssetLocalServiceBaseImpl
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	public CompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -687,6 +757,34 @@ public abstract class TagsAssetLocalServiceBaseImpl
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (companyLocalService == null) {
+			companyLocalService = CompanyLocalServiceFactory.getImpl();
+		}
+
+		if (companyService == null) {
+			companyService = CompanyServiceFactory.getImpl();
+		}
+
+		if (companyPersistence == null) {
+			companyPersistence = CompanyUtil.getPersistence();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -832,6 +930,13 @@ public abstract class TagsAssetLocalServiceBaseImpl
 	protected TagsSourcePersistence tagsSourcePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected CompanyLocalService companyLocalService;
+	protected CompanyService companyService;
+	protected CompanyPersistence companyPersistence;
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

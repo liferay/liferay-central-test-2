@@ -1237,6 +1237,10 @@
 
 		<action path="/tagged_content/view_content" forward="portlet.tagged_content.view_content" />
 
+		<!-- Tags -->
+
+		<action path="/tags/rss" type="com.liferay.portlet.tags.action.RSSAction" />
+
 		<!-- Tags Admin -->
 
 		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />

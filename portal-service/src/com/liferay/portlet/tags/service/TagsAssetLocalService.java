@@ -105,6 +105,21 @@ public interface TagsAssetLocalService {
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
 
+	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
+
+	public void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
+
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
 	public void setUserPersistence(

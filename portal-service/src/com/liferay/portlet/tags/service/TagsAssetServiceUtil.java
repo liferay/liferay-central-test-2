@@ -68,6 +68,24 @@ public class TagsAssetServiceUtil {
 		return tagsAssetService.getAsset(assetId);
 	}
 
+	public static java.lang.String getAssetsRSS(long groupId,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getAssetsRSS(groupId, classNameIds, entryIds,
+			notEntryIds, andOperator, orderByCol1, orderByCol2, orderByType1,
+			orderByType2, excludeZeroViewCount, publishDate, expirationDate,
+			max, type, version, displayStyle, feedURL, entryURL);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) throws java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
@@ -98,6 +116,17 @@ public class TagsAssetServiceUtil {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
 		return tagsAssetService.getCompanyAssetsCount(companyId);
+	}
+
+	public static java.lang.String getCompanyAssetsRSS(long companyId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getCompanyAssetsRSS(companyId, max, type,
+			version, displayStyle, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(

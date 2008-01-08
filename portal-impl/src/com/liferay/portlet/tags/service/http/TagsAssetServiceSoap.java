@@ -106,6 +106,31 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static java.lang.String getAssetsRSS(long groupId,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = TagsAssetServiceUtil.getAssetsRSS(groupId,
+					classNameIds, entryIds, notEntryIds, andOperator,
+					orderByCol1, orderByCol2, orderByType1, orderByType2,
+					excludeZeroViewCount, publishDate, expirationDate, max,
+					type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) throws RemoteException {
 		try {
@@ -155,6 +180,23 @@ public class TagsAssetServiceSoap {
 		throws RemoteException {
 		try {
 			int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getCompanyAssetsRSS(long companyId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = TagsAssetServiceUtil.getCompanyAssetsRSS(companyId,
+					max, type, version, displayStyle, feedURL, entryURL);
 
 			return returnValue;
 		}

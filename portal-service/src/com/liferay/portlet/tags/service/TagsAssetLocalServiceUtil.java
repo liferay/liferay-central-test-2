@@ -187,6 +187,45 @@ public class TagsAssetLocalServiceUtil {
 		tagsAssetLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		tagsAssetLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		tagsAssetLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		tagsAssetLocalService.setGroupFinder(groupFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 

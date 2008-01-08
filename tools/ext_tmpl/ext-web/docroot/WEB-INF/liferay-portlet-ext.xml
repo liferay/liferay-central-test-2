@@ -498,11 +498,20 @@
 		<struts-path>nested_portlets</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>119</portlet-name>
+		<struts-path>tags</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>guest</role-name>
+		<role-link>Guest</role-link>
 	</role-mapper>
 	<role-mapper>
 		<role-name>power-user</role-name>

@@ -86,6 +86,25 @@ public class TagsAssetServiceJSON {
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static java.lang.String getAssetsRSS(long groupId,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = TagsAssetServiceUtil.getAssetsRSS(groupId,
+				classNameIds, entryIds, notEntryIds, andOperator, orderByCol1,
+				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
+				publishDate, expirationDate, max, type, version, displayStyle,
+				feedURL, entryURL);
+
+		return returnValue;
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) throws java.rmi.RemoteException {
 		com.liferay.portlet.tags.model.TagsAssetType[] returnValue = TagsAssetServiceUtil.getAssetTypes(languageId);
@@ -114,6 +133,17 @@ public class TagsAssetServiceJSON {
 	public static int getCompanyAssetsCount(long companyId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
+
+		return returnValue;
+	}
+
+	public static java.lang.String getCompanyAssetsRSS(long companyId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = TagsAssetServiceUtil.getCompanyAssetsRSS(companyId,
+				max, type, version, displayStyle, feedURL, entryURL);
 
 		return returnValue;
 	}
