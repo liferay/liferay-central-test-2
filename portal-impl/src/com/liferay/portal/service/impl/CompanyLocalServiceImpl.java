@@ -33,7 +33,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
@@ -57,6 +56,7 @@ import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -291,21 +291,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		if (userPersistence.countByCompanyId(companyId) == 1) {
 			long creatorUserId = 0;
 			boolean autoPassword = false;
-			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
+			String password1 = PropsValues.DEFAULT_ADMIN_PASSWORD;
 			String password2 = password1;
 			boolean autoScreenName = false;
-			String screenName = PropsUtil.get(
-				PropsUtil.DEFAULT_ADMIN_SCREEN_NAME);
+			String screenName = PropsValues.DEFAULT_ADMIN_SCREEN_NAME;
 			String emailAddress =
-				PropsUtil.get(
-					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +
-				"@" + mx;
+				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" + mx;
 			Locale locale = defaultUser.getLocale();
-			String firstName = PropsUtil.get(
-				PropsUtil.DEFAULT_ADMIN_FIRST_NAME);
-			String middleName = PropsUtil.get(
-				PropsUtil.DEFAULT_ADMIN_MIDDLE_NAME);
-			String lastName = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_LAST_NAME);
+			String firstName = PropsValues.DEFAULT_ADMIN_FIRST_NAME;
+			String middleName = PropsValues.DEFAULT_ADMIN_MIDDLE_NAME;
+			String lastName = PropsValues.DEFAULT_ADMIN_LAST_NAME;
 			int prefixId = 0;
 			int suffixId = 0;
 			boolean male = true;
@@ -485,7 +480,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		company.setVirtualHost(virtualHost);
 
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE))) {
+		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
 		}
 
@@ -512,7 +507,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		company.setVirtualHost(virtualHost);
 
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE))) {
+		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
 		}
 

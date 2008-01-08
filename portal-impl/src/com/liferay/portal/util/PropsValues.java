@@ -163,6 +163,24 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
+	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX);
+
+	public static final String DEFAULT_ADMIN_FIRST_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_FIRST_NAME);
+
+	public static final String DEFAULT_ADMIN_LAST_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_LAST_NAME);
+
+	public static final String DEFAULT_ADMIN_MIDDLE_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_MIDDLE_NAME);
+
+	public static final String DEFAULT_ADMIN_PASSWORD =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
+
+	public static final String DEFAULT_ADMIN_SCREEN_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_SCREEN_NAME);
+
 	public static final String DEFAULT_LANDING_PAGE_PATH =
 		PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
 
@@ -189,6 +207,9 @@ public class PropsValues {
 
 	public static final int DL_FILE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
+
+	public static final String DL_HOOK_IMPL =
+		PropsUtil.get(PropsUtil.DL_HOOK_IMPL);
 
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
@@ -366,6 +387,12 @@ public class PropsValues {
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsUtil.LUCENE_STORE_TYPE);
 
+	public static final String MAIL_HOOK_IMPL = PropsUtil.get(
+		PropsUtil.MAIL_HOOK_IMPL);
+
+	public static final boolean MAIL_MX_UPDATE = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.MAIL_MX_UPDATE));
+
 	public static final boolean MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED));
@@ -431,6 +458,13 @@ public class PropsValues {
 	public static final boolean OPENOFFICE_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_ENABLED));
+
+	public static final boolean ORGANIZATIONS_COUNTRY_REQUIRED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
+
+	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
+		PropsUtil.get(PropsUtil.PASSWORDS_DEFAULT_POLICY_NAME);
 
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER);

@@ -23,7 +23,7 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +35,7 @@ public class HookFactory {
 
 	public static Hook getInstance() {
 		if (_hook == null) {
-			_hook = (Hook)InstancePool.get(
-				PropsUtil.get(PropsUtil.DL_HOOK_IMPL));
+			_hook = (Hook)InstancePool.get(PropsValues.DL_HOOK_IMPL);
 		}
 
 		return _hook;

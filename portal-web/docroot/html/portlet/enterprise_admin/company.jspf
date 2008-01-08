@@ -119,7 +119,7 @@ User user2 = company.getDefaultUser();
 				<liferay-ui:message key="mail-domain" />
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE)) %>" />
+				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" />
 			</td>
 		</tr>
 		</table>

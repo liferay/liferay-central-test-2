@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -52,10 +52,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addForward");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "addForward",
+			PropsValues.MAIL_HOOK_IMPL, "addForward",
 			new Object[] {
 				new LongWrapper(userId), filters, emailAddresses,
 				new BooleanWrapper(leaveCopy)
@@ -73,10 +71,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addUser");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "addUser",
+			PropsValues.MAIL_HOOK_IMPL, "addUser",
 			new Object[] {
 				new LongWrapper(userId), password, firstName, middleName,
 				lastName, emailAddress
@@ -93,10 +89,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addVacationMessage");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "addVacationMessage",
+			PropsValues.MAIL_HOOK_IMPL, "addVacationMessage",
 			new Object[] {
 				new LongWrapper(userId), emailAddress, vacationMessage
 			});
@@ -109,10 +103,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("deleteEmailAddress");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "deleteEmailAddress",
+			PropsValues.MAIL_HOOK_IMPL, "deleteEmailAddress",
 			new Object[] {new LongWrapper(userId)});
 
 		MailProducer.produce(methodWrapper);
@@ -123,10 +115,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("deleteUser");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "deleteUser", new Object[] {new LongWrapper(userId)});
+			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
+			new Object[] {new LongWrapper(userId)});
 
 		MailProducer.produce(methodWrapper);
 	}
@@ -146,10 +137,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updateBlocked");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "updateBlocked",
+			PropsValues.MAIL_HOOK_IMPL, "updateBlocked",
 			new Object[] {new LongWrapper(userId), blocked});
 
 		MailProducer.produce(methodWrapper);
@@ -162,10 +151,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updateEmailAddress");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "updateEmailAddress",
+			PropsValues.MAIL_HOOK_IMPL, "updateEmailAddress",
 			new Object[] {new LongWrapper(userId), emailAddress});
 
 		MailProducer.produce(methodWrapper);
@@ -178,10 +165,8 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updatePassword");
 		}
 
-		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
-
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "updatePassword",
+			PropsValues.MAIL_HOOK_IMPL, "updatePassword",
 			new Object[] {new LongWrapper(userId), password});
 
 		MailProducer.produce(methodWrapper);

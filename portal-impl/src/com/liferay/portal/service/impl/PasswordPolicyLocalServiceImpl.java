@@ -29,7 +29,6 @@ import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,7 +39,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.Date;
 import java.util.List;
@@ -118,8 +117,8 @@ public class PasswordPolicyLocalServiceImpl
 	public void checkDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
-		String defaultPasswordPolicyName = GetterUtil.getString(
-			PropsUtil.get(PropsUtil.PASSWORDS_DEFAULT_POLICY_NAME));
+		String defaultPasswordPolicyName =
+			PropsValues.PASSWORDS_DEFAULT_POLICY_NAME;
 
 		try {
 			passwordPolicyPersistence.findByC_N(

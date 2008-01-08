@@ -29,7 +29,6 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,7 +43,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.util.UniqueList;
 
@@ -715,10 +714,7 @@ public class OrganizationLocalServiceImpl
 		}
 
 		try {
-			boolean countryRequired = GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
-
-			if ((countryId > 0) || countryRequired) {
+			if ((countryId > 0) || PropsValues.ORGANIZATIONS_COUNTRY_REQUIRED) {
 				countryPersistence.findByPrimaryKey(countryId);
 			}
 
