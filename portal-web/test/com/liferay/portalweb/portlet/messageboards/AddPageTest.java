@@ -32,8 +32,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
+		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");
-		selenium.type("new_page", "Message Boards Test Page");
+		Thread.sleep(500);
+		selenium.typeKeys("new_page", "Message Boards Test Page");
 		selenium.click("link=Save");
 		Thread.sleep(500);
 		selenium.click("link=Message Boards Test Page");

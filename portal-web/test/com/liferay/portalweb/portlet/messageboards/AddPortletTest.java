@@ -32,7 +32,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
-		selenium.open("/user/joebloggs/3");
 		selenium.click("link=Add Application");
 		Thread.sleep(500);
 		selenium.mouseDown("//div[@id=\"Collaboration-MessageBoards\"]/p/a");

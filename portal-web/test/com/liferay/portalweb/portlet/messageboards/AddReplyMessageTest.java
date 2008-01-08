@@ -32,10 +32,9 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddReplyMessageTest extends BaseTestCase {
 	public void testAddReplyMessage() throws Exception {
-		Thread.sleep(500);
-		selenium.click("link=Reply");
+		selenium.click("//a[text()='Reply']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("textArea", "This is a reply to the test message.");
+		selenium.typeKeys("textArea", "This is a test reply message!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}

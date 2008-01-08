@@ -22,6 +22,7 @@
 
 package com.liferay.portalweb.portal;
 
+import com.liferay.portalweb.portlet.blogs.BlogsTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 
 /**
@@ -34,6 +35,7 @@ public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTest.class);
+		addTestSuite(BlogsTests.class);
 		addTestSuite(MessageBoardsTests.class);
 	}
 
