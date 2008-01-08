@@ -79,6 +79,14 @@ public class SeleneseToJavaBuilder {
 		}
 	}
 
+	protected String fixParam(String param) {
+		return StringUtil.replace(
+			param,
+			new String[] {"\"", "<br />"},
+			new String[] {"\\\"", "\\n"}
+		);
+	}
+
 	protected String[] getParams(String step) throws Exception {
 		String[] params = new String[3];
 
@@ -146,7 +154,7 @@ public class SeleneseToJavaBuilder {
 			String[] params = getParams(step);
 
 			String param1 = params[0];
-			String param2 = StringUtil.replace(params[1], "\"", "\\\"");
+			String param2 = fixParam(params[1]);
 			String param3 = params[2];
 
 			if (param1.equals("click") || param1.equals("mouseDown") ||
