@@ -150,7 +150,8 @@ public class SeleneseToJavaBuilder {
 			String param3 = params[2];
 
 			if (param1.equals("click") || param1.equals("mouseDown") ||
-				param1.equals("mouseUp") || param1.equals("open")) {
+				param1.equals("mouseUp") || param1.equals("open") ||
+				param1.equals("selectFrame")) {
 
 				sm.append("selenium.");
 				sm.append(param1);
@@ -169,12 +170,33 @@ public class SeleneseToJavaBuilder {
 				sm.append(param2);
 				sm.append(");");
 			}
-			else if (param1.equals("type")) {
-				sm.append("selenium.type(\"");
+			else if (param1.equals("type") || param1.equals("typeKeys")) {
+				sm.append("selenium.");
+				sm.append(param1);
+				sm.append("(\"");
 				sm.append(param2);
 				sm.append("\", \"");
 				sm.append(param3);
 				sm.append("\");");
+			}
+			else if (param1.equals("waitForElementPresent")) {
+				sm.append("for (int second = 0;; second++) {");
+				sm.append("if (second >= 60) {");
+				sm.append("fail(\"timeout\");");
+				sm.append("}");
+
+				sm.append("try {");
+				sm.append("if (selenium.isElementPresent(\"");
+				sm.append(param2);
+				sm.append("\")) {");
+				sm.append("break;");
+				sm.append("}");
+				sm.append("}");
+				sm.append("catch (Exception e) {");
+				sm.append("}");
+
+				sm.append("Thread.sleep(1000);");
+				sm.append("}");
 			}
 			else {
 				System.out.println(param1 + " was not translated");
