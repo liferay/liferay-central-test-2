@@ -88,6 +88,9 @@ public class RenderResponseFactory {
 
 			_instance._pool.returnObject(renderResponseImpl);
 		}
+		else if (renderResponseImpl != null) {
+			renderResponseImpl.recycle();
+		}
 	}
 
 	private RenderResponseFactory() {

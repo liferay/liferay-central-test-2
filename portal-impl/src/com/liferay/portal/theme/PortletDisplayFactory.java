@@ -49,6 +49,9 @@ public class PortletDisplayFactory {
 		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(portletDisplay);
 		}
+		else if (portletDisplay != null) {
+			portletDisplay.recycle();
+		}
 	}
 
 	private PortletDisplayFactory() {

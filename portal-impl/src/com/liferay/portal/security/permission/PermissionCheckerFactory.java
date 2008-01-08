@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 
@@ -68,7 +67,7 @@ public class PermissionCheckerFactory {
 		return permissionChecker;
 	}
 
-	public static void recycle(PermissionChecker permissionChecker)
+	public static void recycle(PermissionCheckerImpl permissionChecker)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -83,6 +82,9 @@ public class PermissionCheckerFactory {
 			}
 
 			_instance._pool.returnObject(permissionChecker);
+		}
+		else if (permissionChecker != null) {
+			permissionChecker.recycle();
 		}
 	}
 

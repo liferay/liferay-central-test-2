@@ -100,6 +100,9 @@ public class RenderRequestFactory {
 
 			_instance._pool.returnObject(renderRequestImpl);
 		}
+		else if (renderRequestImpl != null) {
+			renderRequestImpl.recycle();
+		}
 	}
 
 	private RenderRequestFactory() {

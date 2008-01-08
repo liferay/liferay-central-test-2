@@ -73,6 +73,9 @@ public class ActionRequestFactory {
 		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(actionRequestImpl);
 		}
+		else if (actionRequestImpl != null) {
+			actionRequestImpl.recycle();
+		}
 	}
 
 	private ActionRequestFactory() {

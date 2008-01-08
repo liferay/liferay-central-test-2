@@ -71,6 +71,9 @@ public class ActionResponseFactory {
 		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(actionResponseImpl);
 		}
+		else if (actionResponseImpl != null) {
+			actionResponseImpl.recycle();
+		}
 	}
 
 	private ActionResponseFactory() {

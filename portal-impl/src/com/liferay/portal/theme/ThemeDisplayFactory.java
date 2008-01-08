@@ -49,6 +49,9 @@ public class ThemeDisplayFactory {
 		if (PropsValues.COMMONS_POOL_ENABLED) {
 			_instance._pool.returnObject(themeDisplay);
 		}
+		else if (themeDisplay != null) {
+			themeDisplay.recycle();
+		}
 	}
 
 	private ThemeDisplayFactory() {
