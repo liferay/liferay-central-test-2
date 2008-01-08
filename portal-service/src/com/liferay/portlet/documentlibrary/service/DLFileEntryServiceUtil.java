@@ -97,6 +97,15 @@ public class DLFileEntryServiceUtil {
 		dlFileEntryService.deleteFileEntry(folderId, name, version);
 	}
 
+	public static void deleteFileEntryByTitle(long folderId,
+		java.lang.String titleWithExtension)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		dlFileEntryService.deleteFileEntryByTitle(folderId, titleWithExtension);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
@@ -104,6 +113,16 @@ public class DLFileEntryServiceUtil {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
 		return dlFileEntryService.getFileEntry(folderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+		long folderId, java.lang.String titleWithExtension)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		return dlFileEntryService.getFileEntryByTitle(folderId,
+			titleWithExtension);
 	}
 
 	public static void lockFileEntry(long folderId, java.lang.String name)

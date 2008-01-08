@@ -25,10 +25,6 @@ package com.liferay.portal.webdav.methods;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
-import com.liferay.portal.webdav.WebDAVUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="PutMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,16 +34,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PutMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		HttpServletRequest req = webDavReq.getHttpServletRequest();
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-		String destination = WebDAVUtil.getDestination(req);
-
-		int status = storage.putResource(webDavReq, destination);
-
-		res.setStatus(status);
+		return storage.putResource(webDavReq);
 	}
 
 }

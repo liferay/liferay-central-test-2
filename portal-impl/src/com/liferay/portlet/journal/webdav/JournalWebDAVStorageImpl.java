@@ -57,13 +57,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Status addFolder(WebDAVRequest webDavReq)
+	public Status addCollection(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
 		return new Status(HttpServletResponse.SC_FORBIDDEN);
 	}
 
-	public int copyResource(WebDAVRequest webDavReq, String destination)
+	public int copyCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite, long depth)
+		throws WebDAVException {
+
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public int copySimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException {
 
 		return HttpServletResponse.SC_FORBIDDEN;
@@ -186,15 +196,23 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public int moveResource(WebDAVRequest webDavReq, String destination)
+	public int moveCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException {
 
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
-	public int putResource(WebDAVRequest webDavReq, String destination)
+	public int moveSimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException {
 
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
 		try {
 			Resource resource = getResource(webDavReq);
 

@@ -42,17 +42,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MkcolMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
 		HttpServletRequest req = webDavReq.getHttpServletRequest();
 		HttpServletResponse res = webDavReq.getHttpServletResponse();
 		long groupId = webDavReq.getGroupId();
 
-		if (groupId == 0) {
-			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		}
-		else {
-			Status status = storage.addFolder(webDavReq);
+		int statusCode = HttpServletResponse.SC_FORBIDDEN;
+
+		if (groupId != 0) {
+			Status status = storage.addCollection(webDavReq);
 
 			if (Validator.isNotNull(status.getLocation())) {
 				res.setHeader(
@@ -61,8 +60,10 @@ public class MkcolMethodImpl implements Method {
 						StringPool.SLASH + status.getLocation());
 			}
 
-			res.setStatus(status.getCode());
+			statusCode = status.getCode();
 		}
+
+		return statusCode;
 	}
 
 }

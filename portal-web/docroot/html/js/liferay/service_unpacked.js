@@ -1341,9 +1341,23 @@ Liferay.Service.DL.DLFileEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	deleteFileEntryByTitle: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteFileEntryByTitle";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getFileEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getFileEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getFileEntryByTitle: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFileEntryByTitle";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -1408,6 +1422,13 @@ Liferay.Service.DL.DLFolder = {
 	addFolder: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "addFolder";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	copyFolder: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "copyFolder";
 
 		return Liferay.Service.ajax(params, callback);
 	},

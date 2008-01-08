@@ -96,10 +96,30 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject copyFolder(long plid, long sourceFolderId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(plid,
+				sourceFolderId, parentFolderId, name, description,
+				addCommunityPermissions, addGuestPermissions);
+
+		return DLFolderJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteFolder(long folderId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		DLFolderServiceUtil.deleteFolder(folderId);
+	}
+
+	public static void deleteFolder(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		DLFolderServiceUtil.deleteFolder(groupId, parentFolderId, name);
 	}
 
 	public static JSONObject getFolder(long folderId)

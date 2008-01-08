@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
@@ -77,7 +78,8 @@ public class EditFolderAction extends PortletAction {
 
 				setForward(req, "portlet.document_library.error");
 			}
-			else if (e instanceof DuplicateFolderNameException ||
+			else if (e instanceof DuplicateFileException ||
+					 e instanceof DuplicateFolderNameException ||
 					 e instanceof FolderNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());

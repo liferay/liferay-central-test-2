@@ -34,22 +34,24 @@ import java.util.Date;
  */
 public class BaseResourceImpl implements Resource {
 
-	public BaseResourceImpl(String href, String displayName, boolean folder) {
-		this(href, displayName, folder, null, null);
+	public BaseResourceImpl(
+		String href, String displayName, boolean collection) {
+
+		this(href, displayName, collection, null, null);
 	}
 
-	public BaseResourceImpl(String href, String displayName, boolean folder,
+	public BaseResourceImpl(String href, String displayName, boolean collection,
 							Date createDate, Date modifiedDate) {
 
-		this(href, displayName, folder, createDate, modifiedDate, 0);
+		this(href, displayName, collection, createDate, modifiedDate, 0);
 	}
 
-	public BaseResourceImpl(String href, String displayName, boolean folder,
+	public BaseResourceImpl(String href, String displayName, boolean collection,
 							Date createDate, Date modifiedDate, int size) {
 
 		_href = href;
 		_displayName = displayName;
-		_folder = folder;
+		_collection = collection;
 
 		if (createDate == null) {
 			_createDate = new Date();
@@ -76,8 +78,8 @@ public class BaseResourceImpl implements Resource {
 		return _displayName;
 	}
 
-	public boolean isFolder() {
-		return _folder;
+	public boolean isCollection() {
+		return _collection;
 	}
 
  	public Date getCreateDate() {
@@ -106,7 +108,7 @@ public class BaseResourceImpl implements Resource {
 
 	private String _href;
 	private String _displayName;
-	private boolean _folder;
+	private boolean _collection;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private int _size;

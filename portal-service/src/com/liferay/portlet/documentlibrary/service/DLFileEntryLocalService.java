@@ -263,6 +263,15 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
+		long userId, long folderId, java.lang.String name,
+		java.lang.String sourceName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.File file,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteFileEntries(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

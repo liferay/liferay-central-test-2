@@ -26,8 +26,6 @@ import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * <a href="DeleteMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,13 +34,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DeleteMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-		int status = storage.deleteResource(webDavReq);
-
-		res.setStatus(status);
+		return storage.deleteResource(webDavReq);
 	}
 
 }

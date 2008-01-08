@@ -112,11 +112,29 @@ public class DLFileEntryServiceJSON {
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
 	}
 
+	public static void deleteFileEntryByTitle(long folderId,
+		java.lang.String titleWithExtension)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		DLFileEntryServiceUtil.deleteFileEntryByTitle(folderId,
+			titleWithExtension);
+	}
+
 	public static JSONObject getFileEntry(long folderId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 				name);
+
+		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getFileEntryByTitle(long folderId,
+		java.lang.String titleWithExtension)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntryByTitle(folderId,
+				titleWithExtension);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}

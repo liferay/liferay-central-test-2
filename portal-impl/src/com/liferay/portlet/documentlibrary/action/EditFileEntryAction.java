@@ -38,6 +38,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
@@ -114,6 +115,7 @@ public class EditFileEntryAction extends PortletAction {
 				setForward(req, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
+					 e instanceof DuplicateFolderNameException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||

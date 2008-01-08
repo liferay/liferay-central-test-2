@@ -22,6 +22,8 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.webdav.InvalidDepthException;
+import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
@@ -30,29 +32,77 @@ import com.liferay.portal.webdav.WebDAVUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CopyMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class CopyMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
 		HttpServletRequest req = webDavReq.getHttpServletRequest();
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-		String destination = WebDAVUtil.getDestination(req);
+		String destination =
+			WebDAVUtil.getDestination(req, storage.getRootPath());
 
-		if (destination.equals(webDavReq.getPath())) {
-			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		StringBuffer infoMsg = new StringBuffer();
+
+		if (_log.isInfoEnabled()) {
+			infoMsg.append("Destination is " + destination);
 		}
-		else {
-			int status = storage.copyResource(webDavReq, destination);
 
-			res.setStatus(status);
+		int status = HttpServletResponse.SC_FORBIDDEN;
+
+		if (!destination.equals(webDavReq.getPath()) &&
+			(WebDAVUtil.getGroupId(destination) == webDavReq.getGroupId())) {
+
+			Resource resource = storage.getResource(webDavReq);
+
+			if (resource == null) {
+				status = HttpServletResponse.SC_NOT_FOUND;
+			}
+			else if (resource.isCollection()) {
+				try {
+					boolean overwrite = WebDAVUtil.isOverwrite(req);
+					long depth = WebDAVUtil.getDepth(req);
+
+					if (_log.isInfoEnabled()) {
+						infoMsg.append(", overwrite is " + overwrite);
+						infoMsg.append(", depth is " + depth);
+
+						_log.info(infoMsg);
+					}
+
+					status = storage.copyCollectionResource(
+						webDavReq, resource, destination, overwrite, depth);
+				}
+				catch (InvalidDepthException e) {
+					status = HttpServletResponse.SC_BAD_REQUEST;
+				}
+			}
+			else {
+				boolean overwrite = WebDAVUtil.isOverwrite(req);
+
+				if (_log.isInfoEnabled()) {
+					infoMsg.append(", overwrite is " + overwrite);
+
+					_log.info(infoMsg);
+				}
+
+				status = storage.copySimpleResource(
+					webDavReq, resource, destination, overwrite);
+			}
 		}
+
+		return status;
 	}
+
+	private static Log _log = LogFactory.getLog(CopyMethodImpl.class);
 
 }

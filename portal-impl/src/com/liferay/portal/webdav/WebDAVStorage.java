@@ -28,6 +28,7 @@ import java.util.List;
  * <a href="WebDAVStorage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public interface WebDAVStorage {
@@ -36,9 +37,16 @@ public interface WebDAVStorage {
 
 	public void setRootPath(String rootPath);
 
-	public Status addFolder(WebDAVRequest webDavReq) throws WebDAVException;
+	public Status addCollection(WebDAVRequest webDavReq) throws WebDAVException;
 
-	public int copyResource(WebDAVRequest webDavReq, String destination)
+	public int copyCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite, long depth)
+		throws WebDAVException;
+
+	public int copySimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException;
 
 	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException;
@@ -51,10 +59,16 @@ public interface WebDAVStorage {
 
 	public boolean isAvailable(WebDAVRequest webDavReq) throws WebDAVException;
 
-	public int moveResource(WebDAVRequest webDavReq, String destination)
+	public int moveCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException;
 
-	public int putResource(WebDAVRequest webDavReq, String destination)
+	public int moveSimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
 		throws WebDAVException;
+
+	public int putResource(WebDAVRequest webDavReq) throws WebDAVException;
 
 }

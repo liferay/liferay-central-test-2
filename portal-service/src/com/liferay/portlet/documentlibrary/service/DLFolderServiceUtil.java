@@ -75,12 +75,33 @@ public class DLFolderServiceUtil {
 			description, communityPermissions, guestPermissions);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
+		long plid, long sourceFolderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+
+		return dlFolderService.copyFolder(plid, sourceFolderId, parentFolderId,
+			name, description, addCommunityPermissions, addGuestPermissions);
+	}
+
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
 		dlFolderService.deleteFolder(folderId);
+	}
+
+	public static void deleteFolder(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+
+		dlFolderService.deleteFolder(groupId, parentFolderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(

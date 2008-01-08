@@ -34,6 +34,8 @@ import com.liferay.portal.upgrade.v4_4_0.util.DLFolderNameColumnImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
+import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -65,7 +67,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn parentFolderIdColumn = new TempUpgradeColumnImpl(
 			"parentFolderId");
 
-		BaseUpgradeColumnImpl dlFolderNameColumn = new DLFolderNameColumnImpl(
+		DLFolderNameColumnImpl dlFolderNameColumn = new DLFolderNameColumnImpl(
 			groupIdColumn, parentFolderIdColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
@@ -74,6 +76,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		Set distinctNames = dlFolderNameColumn.getDistintNames();
+
 		// DLFileEntry
 
 		UpgradeColumn folderIdColumn = new TempUpgradeColumnImpl("folderId");
@@ -81,7 +85,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn nameColumn = new TempUpgradeColumnImpl("name");
 
 		BaseUpgradeColumnImpl dlFileEntryTitleColumn =
-			new DLFileEntryTitleColumnImpl(folderIdColumn, nameColumn);
+			new DLFileEntryTitleColumnImpl(
+				groupIdColumn, folderIdColumn, nameColumn, distinctNames);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryModelImpl.TABLE_NAME, DLFileEntryModelImpl.TABLE_COLUMNS,

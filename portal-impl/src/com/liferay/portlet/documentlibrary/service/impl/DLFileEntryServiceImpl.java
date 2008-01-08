@@ -136,6 +136,16 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 	}
 
+	public void deleteFileEntryByTitle(
+			long folderId, String titleWithExtension)
+		throws PortalException, RemoteException, SystemException {
+
+		DLFileEntry fileEntry =
+			getFileEntryByTitle(folderId, titleWithExtension);
+
+		deleteFileEntry(folderId, fileEntry.getName());
+	}
+
 	public DLFileEntry getFileEntry(long folderId, String name)
 		throws PortalException, SystemException {
 
@@ -143,6 +153,19 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), folderId, name, ActionKeys.VIEW);
 
 		return dlFileEntryLocalService.getFileEntry(folderId, name);
+	}
+
+	public DLFileEntry getFileEntryByTitle(
+			long folderId, String titleWithExtension)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntryByTitle(
+			folderId, titleWithExtension);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntry, ActionKeys.VIEW);
+
+		return fileEntry;
 	}
 
 	public void lockFileEntry(long folderId, String name)

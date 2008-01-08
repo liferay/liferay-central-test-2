@@ -100,6 +100,8 @@ if (fileEntry != null) {
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 
+<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
+
 <liferay-ui:error exception="<%= FileNameException.class %>">
 	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>

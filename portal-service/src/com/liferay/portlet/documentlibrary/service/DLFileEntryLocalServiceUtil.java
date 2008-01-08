@@ -501,6 +501,21 @@ public class DLFileEntryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
+		long userId, long folderId, java.lang.String name,
+		java.lang.String sourceName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.File file,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.addOrOverwriteFileEntry(userId,
+			folderId, name, sourceName, title, description, tagsEntries,
+			extraSettings, file, addCommunityPermissions, addGuestPermissions);
+	}
+
 	public static void deleteFileEntries(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -69,14 +69,13 @@ import org.dom4j.io.SAXReader;
  */
 public class PropfindMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		try {
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
 			String xml = getResponseXML(webDavReq);
 
 			res.setContentType("text/xml; charset=UTF-8");
-			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
 			try {
 				ServletResponseUtil.write(res, xml);
@@ -86,6 +85,8 @@ public class PropfindMethodImpl implements Method {
 					_log.warn(e);
 				}
 			}
+
+			return WebDAVUtil.SC_MULTI_STATUS;
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
@@ -113,7 +114,7 @@ public class PropfindMethodImpl implements Method {
 			prop, "D:getlastmodified",
 			modifiedDateFormat.format(resource.getModifiedDate()));
 
-		if (resource.isFolder()) {
+		if (resource.isCollection()) {
 			DocUtil.add(prop, "D:getcontenttype", "httpd/unix-directory");
 		}
 		else {
@@ -123,7 +124,7 @@ public class PropfindMethodImpl implements Method {
 
 		Element resourcetype = prop.addElement("D:resourcetype");
 
-		if (resource.isFolder()) {
+		if (resource.isCollection()) {
 			resourcetype.addElement("D:collection");
 		}
 

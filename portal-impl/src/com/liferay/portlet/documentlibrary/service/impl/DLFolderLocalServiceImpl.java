@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -40,6 +41,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -485,6 +487,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			(name.indexOf("//") != -1)) {
 
 			throw new FolderNameException();
+		}
+
+		try {
+			dlFileEntryLocalService.getFileEntryByTitle(parentFolderId, name);
+
+			throw new DuplicateFileException();
+		}
+		catch (NoSuchFileEntryException nsfee) {
 		}
 
 		try {

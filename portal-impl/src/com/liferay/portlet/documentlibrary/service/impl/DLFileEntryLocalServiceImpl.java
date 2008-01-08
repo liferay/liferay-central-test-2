@@ -36,6 +36,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -226,7 +227,7 @@ public class DLFileEntryLocalServiceImpl
 		name = getName(name);
 		title = DLFileEntryImpl.stripExtension(name, title);
 
-		validate(folderId, name, title, is);
+		validate(folder.getGroupId(), folderId, name, title, is);
 
 		long fileEntryId = counterLocalService.increment();
 
@@ -332,6 +333,50 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getCompanyId(), folder.getGroupId(),
 			fileEntry.getUserId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), communityPermissions, guestPermissions);
+	}
+
+	public DLFileEntry addOrOverwriteFileEntry(
+			long userId, long folderId, String name, String sourceName,
+			String title, String description, String[] tagsEntries,
+			String extraSettings, File file, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		boolean update = false;
+		String extension = FileUtil.getExtension(name);
+
+		Iterator itr = dlFileEntryPersistence.findByF_T(
+			folderId, title).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = (DLFileEntry)itr.next();
+
+			String curExtension = FileUtil.getExtension(fileEntry.getName());
+
+			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
+				if (Validator.isNull(curExtension)) {
+					update = true;
+					name = fileEntry.getName();
+					break;
+				}
+			}
+			else if (extension.equals(curExtension)) {
+				update = true;
+				break;
+			}
+		}
+
+		if (update) {
+			return updateFileEntry(
+				userId, folderId, folderId, name, sourceName, title,
+				description, tagsEntries, extraSettings, file);
+		}
+		else {
+			return addFileEntry(
+				userId, folderId, name, title, description, tagsEntries,
+				extraSettings, file, addCommunityPermissions,
+				addGuestPermissions);
+		}
 	}
 
 	public void deleteFileEntries(long folderId)
@@ -565,10 +610,10 @@ public class DLFileEntryLocalServiceImpl
 
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(curExtension) &&
-				Validator.isNull(extension)) {
-
-				return fileEntry;
+			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
+				if (Validator.isNull(curExtension)) {
+					return fileEntry;
+				}
 			}
 			else if (extension.equals(curExtension)) {
 				return fileEntry;
@@ -718,7 +763,9 @@ public class DLFileEntryLocalServiceImpl
 
 		title = DLFileEntryImpl.stripExtension(name, title);
 
-		validate(folderId, newFolderId, name, title, sourceFileName, is);
+		validate(
+			folder.getGroupId(), folderId, newFolderId, name, title,
+			sourceFileName, is);
 
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
 			folderId, name);
@@ -933,18 +980,33 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long folderId, long newFolderId, String name, String title,
-			String sourceFileName, InputStream is)
+			long groupId, long folderId, long newFolderId, String name,
+			String title, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
 			dlLocalService.validate(name, sourceFileName, is);
 		}
 
-		String extension = FileUtil.getExtension(name);
-
 		if (newFolderId > 0 && (folderId != newFolderId)) {
 			folderId = newFolderId;
+		}
+
+		String extension = FileUtil.getExtension(name);
+
+		try {
+			String titleWithException = title;
+
+			if (Validator.isNotNull(extension)) {
+				title += extension;
+			}
+
+			dlFolderLocalService.getFolder(
+				groupId, newFolderId, titleWithException);
+
+			throw new DuplicateFolderNameException();
+		}
+		catch (NoSuchFolderException nsfe) {
 		}
 
 		Iterator itr = dlFileEntryPersistence.findByF_T(
@@ -957,7 +1019,13 @@ public class DLFileEntryLocalServiceImpl
 				String curExtension = FileUtil.getExtension(
 					fileEntry.getName());
 
-				if (extension.equals(curExtension)) {
+				if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
+					if (Validator.isNull(curExtension)) {
+						throw new DuplicateFileException(
+							fileEntry.getTitleWithExtension());
+					}
+				}
+				else if (extension.equals(curExtension)) {
 					throw new DuplicateFileException(
 						fileEntry.getTitleWithExtension());
 				}
@@ -966,12 +1034,28 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long folderId, String name, String title, InputStream is)
+			long groupId, long folderId, String name, String title,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		dlLocalService.validate(name, is);
 
 		String extension = FileUtil.getExtension(name);
+
+		try {
+			String titleWithException = title;
+
+			if (Validator.isNotNull(extension)) {
+				title += extension;
+			}
+
+			dlFolderLocalService.getFolder(
+				groupId, folderId, titleWithException);
+
+			throw new DuplicateFolderNameException();
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
 
 		Iterator itr = dlFileEntryPersistence.findByF_T(
 			folderId, title).iterator();
@@ -981,7 +1065,13 @@ public class DLFileEntryLocalServiceImpl
 
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
-			if (extension.equals(curExtension)) {
+			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
+				if (Validator.isNull(curExtension)) {
+					throw new DuplicateFileException(
+						fileEntry.getTitleWithExtension());
+				}
+			}
+			else if (extension.equals(curExtension)) {
 				throw new DuplicateFileException(
 					fileEntry.getTitleWithExtension());
 			}

@@ -66,6 +66,6 @@ public interface Method {
 	public static final String SUPPORTED_METHODS =
 		StringUtil.merge(SUPPORTED_METHODS_ARRAY);
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException;
+	public int process(WebDAVRequest webDavReq) throws WebDAVException;
 
 }

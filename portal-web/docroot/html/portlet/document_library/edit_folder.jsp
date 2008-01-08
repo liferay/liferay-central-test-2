@@ -70,6 +70,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	backURL="<%= redirect %>"
 />
 
+<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-folder-name" />
 <liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 

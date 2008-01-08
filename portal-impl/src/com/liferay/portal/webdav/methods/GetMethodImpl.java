@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GetMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		InputStream is = null;
 
 		try {
@@ -63,12 +63,9 @@ public class GetMethodImpl implements Method {
 				}
 			}
 
-			if (is == null) {
-				res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			}
-			else {
-				res.setStatus(HttpServletResponse.SC_OK);
+			int status = HttpServletResponse.SC_NOT_FOUND;
 
+			if (is != null) {
 				try {
 					ServletResponseUtil.write(res, is);
 				}
@@ -77,7 +74,11 @@ public class GetMethodImpl implements Method {
 						_log.warn(e);
 					}
 				}
+
+				status = HttpServletResponse.SC_OK;
 			}
+
+			return status;
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

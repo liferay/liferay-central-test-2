@@ -145,11 +145,40 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
+	public static void deleteFileEntryByTitle(long folderId,
+		java.lang.String titleWithExtension) throws RemoteException {
+		try {
+			DLFileEntryServiceUtil.deleteFileEntryByTitle(folderId,
+				titleWithExtension);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
 		long folderId, java.lang.String name) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 					name);
+
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntryByTitle(
+		long folderId, java.lang.String titleWithExtension)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntryByTitle(folderId,
+					titleWithExtension);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}

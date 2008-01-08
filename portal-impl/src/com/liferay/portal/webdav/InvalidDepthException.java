@@ -20,29 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.webdav.methods;
+package com.liferay.portal.webdav;
 
-import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.portal.webdav.WebDAVRequest;
-
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="OptionsMethodImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvalidDepthException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OptionsMethodImpl implements Method {
+public class InvalidDepthException extends PortalException {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
+	public InvalidDepthException() {
+		super();
+	}
 
-		res.addHeader("DAV", "1");
-		res.addHeader("Allow", Method.SUPPORTED_METHODS);
-		res.addHeader("MS-Author-Via", "DAV");
+	public InvalidDepthException(String msg) {
+		super(msg);
+	}
 
-		return HttpServletResponse.SC_OK;
+	public InvalidDepthException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public InvalidDepthException(Throwable cause) {
+		super(cause);
 	}
 
 }

@@ -47,6 +47,10 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 		_parentFolderIdColumn = parentFolderIdColumn;
 	}
 
+	public Set getDistintNames() {
+		return _distinctNames;
+	}
+
 	public Object getNewValue(Object oldValue) throws Exception {
 		String newName = (String)oldValue;
 

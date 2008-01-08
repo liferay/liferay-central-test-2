@@ -38,6 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WebDAVUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class WebDAVUtil {
@@ -71,8 +72,28 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static String getDestination(HttpServletRequest req) {
-		String destination = req.getHeader("Destination");
+	public static long getDepth(HttpServletRequest req)
+		throws InvalidDepthException {
+
+		String value = GetterUtil.getString(req.getHeader("Depth"));
+
+		if (value.equals("0")) {
+			return 0;
+		}
+		else if (value.equalsIgnoreCase("infinity")){
+			return -1;
+		}
+		else {
+			throw new InvalidDepthException(value);
+		}
+	}
+
+	public static String getDestination(
+			HttpServletRequest req, String rootPath) {
+
+		String headerDestination = req.getHeader("Destination");
+		String[] pathSegments = StringUtil.split(headerDestination, rootPath);
+		String destination = pathSegments[pathSegments.length - 1];
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destination " + destination);
@@ -157,6 +178,17 @@ public class WebDAVUtil {
 		}
 		else {
 			return false;
+		}
+	}
+
+	public static boolean isOverwrite(HttpServletRequest req) {
+		String value = GetterUtil.getString(req.getHeader("Overwrite"));
+
+		if (value.equalsIgnoreCase("F") || !GetterUtil.getBoolean(value)) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 

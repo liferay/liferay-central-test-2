@@ -24,12 +24,12 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.FileUtil;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -41,12 +41,15 @@ import java.util.Set;
 public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFileEntryTitleColumnImpl(
-		UpgradeColumn folderIdColumn, UpgradeColumn nameColumn) {
+		UpgradeColumn groupIdColumn, UpgradeColumn folderIdColumn,
+		UpgradeColumn nameColumn, Set distinctTitles) {
 
 		super("title", null);
 
+		_groupIdColumn = groupIdColumn;
 		_folderIdColumn = folderIdColumn;
 		_nameColumn = nameColumn;
+		_distinctTitles = distinctTitles;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -77,18 +80,22 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 	private String _getKey(String title, String extension) {
 		StringMaker sm = new StringMaker();
 
+		sm.append(_groupIdColumn.getOldValue());
+		sm.append(StringPool.UNDERLINE);
 		sm.append(_folderIdColumn.getOldValue());
 		sm.append(StringPool.UNDERLINE);
 		sm.append(title);
-		sm.append(StringPool.UNDERLINE);
-		sm.append(extension);
+		if (Validator.isNotNull(extension)) {
+			sm.append(StringPool.PERIOD + extension);
+		}
 
 		return sm.toString();
 	}
 
+	private UpgradeColumn _groupIdColumn;
 	private UpgradeColumn _folderIdColumn;
 	private UpgradeColumn _nameColumn;
 	private int _counter = 0;
-	private Set _distinctTitles = new HashSet();
+	private Set _distinctTitles;
 
 }

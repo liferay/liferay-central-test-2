@@ -42,7 +42,7 @@ public interface Resource {
 
  	public Date getModifiedDate();
 
-	public boolean isFolder();
+	public boolean isCollection();
 
  	public int getSize();
 

@@ -67,8 +67,9 @@ public class WebDAVServlet extends HttpServlet {
 
 		PermissionCheckerImpl permissionChecker = null;
 
-		try {
+		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 
+		try {
 			// Set the path only if it hasn't already been set. This works if
 			// and only if the servlet is not mapped to more than one URL.
 
@@ -79,10 +80,6 @@ public class WebDAVServlet extends HttpServlet {
 			// Permission checker
 
 			String remoteUser = req.getRemoteUser();
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Remote user " + remoteUser);
-			}
 
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
@@ -107,15 +104,22 @@ public class WebDAVServlet extends HttpServlet {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
+					"Remote user " + remoteUser + StringPool.SPACE +
 					req.getMethod() + StringPool.SPACE + req.getRequestURI());
 			}
 
-			method.process(webDavReq);
+			status = method.process(webDavReq);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 		finally {
+			res.setStatus(status);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Returning status code " + status);
+			}
+
 			try {
 				PermissionCheckerFactory.recycle(permissionChecker);
 			}

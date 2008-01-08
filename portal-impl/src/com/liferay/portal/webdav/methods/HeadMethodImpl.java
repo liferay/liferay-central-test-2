@@ -37,24 +37,28 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HeadMethodImpl implements Method {
 
-	public void process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		try {
 			WebDAVStorage storage = webDavReq.getWebDAVStorage();
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
 			Resource resource = storage.getResource(webDavReq);
 
+			int status = HttpServletResponse.SC_NOT_FOUND;
+
 			if (resource == null) {
 				res.sendError(
 					HttpServletResponse.SC_NOT_FOUND, webDavReq.getPath());
 			}
 			else {
-				if (!resource.isFolder()) {
+				if (!resource.isCollection()) {
 					res.setContentLength(resource.getSize());
 				}
 
-				res.setStatus(HttpServletResponse.SC_OK);
+				status = HttpServletResponse.SC_OK;
 			}
+
+			return status;
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

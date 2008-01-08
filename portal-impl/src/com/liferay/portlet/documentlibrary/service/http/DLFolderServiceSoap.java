@@ -117,9 +117,40 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap copyFolder(
+		long plid, long sourceFolderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(plid,
+					sourceFolderId, parentFolderId, name, description,
+					addCommunityPermissions, addGuestPermissions);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteFolder(long folderId) throws RemoteException {
 		try {
 			DLFolderServiceUtil.deleteFolder(folderId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteFolder(long groupId, long parentFolderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			DLFolderServiceUtil.deleteFolder(groupId, parentFolderId, name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
