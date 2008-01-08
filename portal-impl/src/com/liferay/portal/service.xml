@@ -275,6 +275,10 @@
 		<finder name="Active" return-type="Collection">
 			<finder-column name="active" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="EmailAddress" local-service="true" remote-service="true">
 
@@ -1100,6 +1104,10 @@
 			<finder-column name="countryId" />
 			<finder-column name="active" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Release" local-service="true" remote-service="false">
 
@@ -1624,6 +1632,11 @@
 		<exception>ContactBirthday</exception>
 		<exception>ContactFirstName</exception>
 		<exception>ContactLastName</exception>
+		<exception>CountryA2</exception>
+		<exception>CountryA3</exception>
+		<exception>CountryIdd</exception>
+		<exception>CountryName</exception>
+		<exception>CountryNumber</exception>
 		<exception>DuplicateGroup</exception>
 		<exception>DuplicateOrganization</exception>
 		<exception>DuplicatePasswordPolicy</exception>
@@ -1653,6 +1666,8 @@
 		<exception>PhoneNumber</exception>
 		<exception>PortletActive</exception>
 		<exception>PortletDefaultPreferences</exception>
+		<exception>RegionCode</exception>
+		<exception>RegionName</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
 		<exception>RequiredOrganization</exception>

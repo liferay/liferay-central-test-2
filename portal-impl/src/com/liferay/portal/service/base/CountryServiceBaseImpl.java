@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -1228,6 +1233,22 @@ public abstract class CountryServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -1684,6 +1705,14 @@ public abstract class CountryServiceBaseImpl extends PrincipalBean
 		if (websitePersistence == null) {
 			websitePersistence = WebsiteUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -1800,4 +1829,6 @@ public abstract class CountryServiceBaseImpl extends PrincipalBean
 	protected WebsiteLocalService websiteLocalService;
 	protected WebsiteService websiteService;
 	protected WebsitePersistence websitePersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

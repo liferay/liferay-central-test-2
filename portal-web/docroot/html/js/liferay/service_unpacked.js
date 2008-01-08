@@ -87,6 +87,13 @@ Liferay.Service.Portal.Company = {
 Liferay.Service.Portal.Country = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Country" + Liferay.Service.classNameSuffix,
 
+	addCountry: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addCountry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getCountries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getCountries";
@@ -685,6 +692,13 @@ Liferay.Service.Portal.Portlet = {
 
 Liferay.Service.Portal.Region = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Region" + Liferay.Service.classNameSuffix,
+
+	addRegion: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addRegion";
+
+		return Liferay.Service.ajax(params, callback);
+	},
 
 	getRegions: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;

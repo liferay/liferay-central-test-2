@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.RegionServiceUtil;
 
@@ -70,6 +71,58 @@ import com.liferay.portal.service.RegionServiceUtil;
  *
  */
 public class RegionServiceHttp {
+	public static com.liferay.portal.model.Region addRegion(
+		HttpPrincipal httpPrincipal, long countryId,
+		java.lang.String regionCode, java.lang.String name, boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(countryId);
+
+			Object paramObj1 = regionCode;
+
+			if (regionCode == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"addRegion",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Region)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List getRegions(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.SystemException {
 		try {

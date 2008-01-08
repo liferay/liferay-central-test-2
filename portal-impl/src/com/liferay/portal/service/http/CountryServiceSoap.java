@@ -80,6 +80,23 @@ import java.rmi.RemoteException;
  *
  */
 public class CountryServiceSoap {
+	public static com.liferay.portal.model.CountrySoap addCountry(
+		java.lang.String name, java.lang.String a2, java.lang.String a3,
+		java.lang.String number, java.lang.String idd, boolean active)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Country returnValue = CountryServiceUtil.addCountry(name,
+					a2, a3, number, idd, active);
+
+			return com.liferay.portal.model.CountrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.CountrySoap[] getCountries()
 		throws RemoteException {
 		try {

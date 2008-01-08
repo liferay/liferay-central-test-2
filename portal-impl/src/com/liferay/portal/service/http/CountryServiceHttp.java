@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.CountryServiceUtil;
 
@@ -70,6 +71,78 @@ import com.liferay.portal.service.CountryServiceUtil;
  *
  */
 public class CountryServiceHttp {
+	public static com.liferay.portal.model.Country addCountry(
+		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String a2, java.lang.String a3, java.lang.String number,
+		java.lang.String idd, boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = a2;
+
+			if (a2 == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = a3;
+
+			if (a3 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = number;
+
+			if (number == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = idd;
+
+			if (idd == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(CountryServiceUtil.class.getName(),
+					"addCountry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Country)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List getCountries(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.SystemException {
 		try {

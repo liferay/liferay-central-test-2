@@ -72,6 +72,17 @@ import org.json.JSONObject;
  *
  */
 public class CountryServiceJSON {
+	public static JSONObject addCountry(java.lang.String name,
+		java.lang.String a2, java.lang.String a3, java.lang.String number,
+		java.lang.String idd, boolean active)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portal.model.Country returnValue = CountryServiceUtil.addCountry(name,
+				a2, a3, number, idd, active);
+
+		return CountryJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONArray getCountries()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List returnValue = CountryServiceUtil.getCountries();

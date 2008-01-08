@@ -49,6 +49,11 @@ package com.liferay.portal.service;
  *
  */
 public interface RegionService {
+	public com.liferay.portal.model.Region addRegion(long countryId,
+		java.lang.String regionCode, java.lang.String name, boolean active)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getRegions()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 

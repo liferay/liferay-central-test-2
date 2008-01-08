@@ -72,6 +72,16 @@ import org.json.JSONObject;
  *
  */
 public class RegionServiceJSON {
+	public static JSONObject addRegion(long countryId,
+		java.lang.String regionCode, java.lang.String name, boolean active)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		com.liferay.portal.model.Region returnValue = RegionServiceUtil.addRegion(countryId,
+				regionCode, name, active);
+
+		return RegionJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONArray getRegions()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List returnValue = RegionServiceUtil.getRegions();

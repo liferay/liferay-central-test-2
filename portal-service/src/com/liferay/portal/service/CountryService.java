@@ -49,6 +49,12 @@ package com.liferay.portal.service;
  *
  */
 public interface CountryService {
+	public com.liferay.portal.model.Country addCountry(java.lang.String name,
+		java.lang.String a2, java.lang.String a3, java.lang.String number,
+		java.lang.String idd, boolean active)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getCountries()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 

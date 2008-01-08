@@ -23,8 +23,13 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.RegionCodeException;
+import com.liferay.portal.RegionNameException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.RegionServiceBaseImpl;
 
 import java.util.List;
@@ -36,6 +41,38 @@ import java.util.List;
  *
  */
 public class RegionServiceImpl extends RegionServiceBaseImpl {
+
+	public Region addRegion(
+			long countryId, String regionCode, String name, boolean active)
+		throws PortalException, SystemException {
+
+		if (!getPermissionChecker().isOmniadmin()) {
+			throw new PrincipalException();
+		}
+
+		Country country = countryPersistence.findByPrimaryKey(countryId);
+
+		if (Validator.isNull(regionCode)) {
+			throw new RegionCodeException();
+		}
+
+		if (Validator.isNull(name)) {
+			throw new RegionNameException();
+		}
+
+		long regionId = counterLocalService.increment();
+
+		Region region = regionPersistence.create(regionId);
+
+		region.setCountryId(countryId);
+		region.setRegionCode(regionCode);
+		region.setName(name);
+		region.setActive(active);
+
+		regionPersistence.update(region);
+
+		return region;
+	}
 
 	public List getRegions() throws SystemException {
 		return regionPersistence.findAll();
