@@ -48,7 +48,7 @@ if (Validator.isNull(src)) {
 }
 
 String url = (String)request.getAttribute("liferay-ui:icon:url");
-String target = (String)request.getAttribute("liferay-ui:icon:target");
+String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:target"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
 

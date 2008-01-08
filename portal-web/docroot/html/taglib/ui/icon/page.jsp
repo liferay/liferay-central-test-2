@@ -24,11 +24,19 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
+<%
+String targetHtml = StringPool.BLANK;
+
+if (!target.equals("_self")) {
+	targetHtml = "target=\"" + target + "\"";
+}
+%>
+
 <c:choose>
 	<c:when test="<%= (iconMenuIconCount != null) && (iconMenuSingleIcon == null) %>">
-		<li><nobr><a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
+		<li><nobr><a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
 	</c:when>
 	<c:otherwise>
-		<a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a><c:if test="<%= label %>"> <a href="<%= url %>" target="<%= target %>"><liferay-ui:message key="<%= message %>" /></a></c:if>
+		<a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a><c:if test="<%= label %>"> <a href="<%= url %>" <%= targetHtml %>><liferay-ui:message key="<%= message %>" /></a></c:if>
 	</c:otherwise>
 </c:choose>

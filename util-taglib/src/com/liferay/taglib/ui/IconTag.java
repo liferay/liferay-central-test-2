@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.ServletRequest;
@@ -87,8 +86,7 @@ public class IconTag extends IncludeTag {
 	private String _message;
 	private String _src;
 	private String _url;
-	//private String _target = "_self"; // LEP-4705
-	private String _target = StringPool.BLANK;
+	private String _target = "_self";
 	private boolean _label;
 	private boolean _toolTip = true;
 
