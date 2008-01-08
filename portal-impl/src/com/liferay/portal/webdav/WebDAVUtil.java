@@ -89,10 +89,11 @@ public class WebDAVUtil {
 	}
 
 	public static String getDestination(
-			HttpServletRequest req, String rootPath) {
+		HttpServletRequest req, String rootPath) {
 
 		String headerDestination = req.getHeader("Destination");
 		String[] pathSegments = StringUtil.split(headerDestination, rootPath);
+
 		String destination = pathSegments[pathSegments.length - 1];
 
 		if (_log.isDebugEnabled()) {

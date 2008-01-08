@@ -39,6 +39,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="GetMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class GetMethodImpl implements Method {

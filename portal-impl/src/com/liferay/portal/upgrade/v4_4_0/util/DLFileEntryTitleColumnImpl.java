@@ -85,8 +85,10 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		sm.append(_folderIdColumn.getOldValue());
 		sm.append(StringPool.UNDERLINE);
 		sm.append(title);
+
 		if (Validator.isNotNull(extension)) {
-			sm.append(StringPool.PERIOD + extension);
+			sm.append(StringPool.PERIOD);
+			sm.append(extension);
 		}
 
 		return sm.toString();

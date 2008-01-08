@@ -27,7 +27,7 @@ import com.liferay.portal.PortalException;
 /**
  * <a href="InvalidDepthException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class InvalidDepthException extends PortalException {

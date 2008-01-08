@@ -423,14 +423,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			Object model = resource.getModel();
-
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			int status = HttpServletResponse.SC_CREATED;
-
-			DLFolder folder = (DLFolder)model;
+			DLFolder folder = (DLFolder)resource.getModel();
 
 			long groupId = webDavReq.getGroupId();
 			long folderId = folder.getFolderId();
@@ -441,6 +437,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (parentFolderId != folder.getParentFolderId()) {
 				name = folder.getName();
 			}
+
+			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
 				try {
@@ -489,14 +487,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			Object model = resource.getModel();
-
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			int status = HttpServletResponse.SC_CREATED;
-
-			DLFileEntry fileEntry = (DLFileEntry)model;
+			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
 			long folderId = fileEntry.getFolderId();
 			long newFolderId = getParentFolderId(destinationArray);
@@ -511,6 +505,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (newFolderId != folderId) {
 				title = fileEntry.getTitle();
 			}
+
+			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
 				try {

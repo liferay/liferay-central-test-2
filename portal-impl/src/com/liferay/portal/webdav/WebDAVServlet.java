@@ -25,7 +25,6 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -50,6 +49,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WebDAVServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class WebDAVServlet extends HttpServlet {
@@ -70,6 +70,7 @@ public class WebDAVServlet extends HttpServlet {
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 
 		try {
+
 			// Set the path only if it hasn't already been set. This works if
 			// and only if the servlet is not mapped to more than one URL.
 
@@ -104,8 +105,8 @@ public class WebDAVServlet extends HttpServlet {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Remote user " + remoteUser + StringPool.SPACE +
-					req.getMethod() + StringPool.SPACE + req.getRequestURI());
+					"Remote user " + remoteUser + " " + req.getMethod() + " " +
+						req.getRequestURI());
 			}
 
 			status = method.process(webDavReq);

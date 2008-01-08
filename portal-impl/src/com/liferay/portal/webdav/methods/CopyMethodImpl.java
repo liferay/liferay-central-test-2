@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.webdav.InvalidDepthException;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
@@ -48,18 +49,18 @@ public class CopyMethodImpl implements Method {
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
 		HttpServletRequest req = webDavReq.getHttpServletRequest();
 
-		String destination =
-			WebDAVUtil.getDestination(req, storage.getRootPath());
+		String destination = WebDAVUtil.getDestination(
+			req, storage.getRootPath());
 
-		StringBuffer infoMsg = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		if (_log.isInfoEnabled()) {
-			infoMsg.append("Destination is " + destination);
+			sm.append("Destination is " + destination);
 		}
 
 		int status = HttpServletResponse.SC_FORBIDDEN;
 
-		if (!destination.equals(webDavReq.getPath()) &&
+		if ((!destination.equals(webDavReq.getPath())) &&
 			(WebDAVUtil.getGroupId(destination) == webDavReq.getGroupId())) {
 
 			Resource resource = storage.getResource(webDavReq);
@@ -73,16 +74,16 @@ public class CopyMethodImpl implements Method {
 					long depth = WebDAVUtil.getDepth(req);
 
 					if (_log.isInfoEnabled()) {
-						infoMsg.append(", overwrite is " + overwrite);
-						infoMsg.append(", depth is " + depth);
+						sm.append(", overwrite is " + overwrite);
+						sm.append(", depth is " + depth);
 
-						_log.info(infoMsg);
+						_log.info(sm.toString());
 					}
 
 					status = storage.copyCollectionResource(
 						webDavReq, resource, destination, overwrite, depth);
 				}
-				catch (InvalidDepthException e) {
+				catch (InvalidDepthException ide) {
 					status = HttpServletResponse.SC_BAD_REQUEST;
 				}
 			}
@@ -90,9 +91,9 @@ public class CopyMethodImpl implements Method {
 				boolean overwrite = WebDAVUtil.isOverwrite(req);
 
 				if (_log.isInfoEnabled()) {
-					infoMsg.append(", overwrite is " + overwrite);
+					sm.append(", overwrite is " + overwrite);
 
-					_log.info(infoMsg);
+					_log.info(sm.toString());
 				}
 
 				status = storage.copySimpleResource(

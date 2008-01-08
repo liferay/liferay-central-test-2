@@ -30,6 +30,7 @@ import com.liferay.portal.webdav.WebDAVStorage;
  * <a href="DeleteMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class DeleteMethodImpl implements Method {

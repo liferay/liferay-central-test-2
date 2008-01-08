@@ -99,7 +99,6 @@ if (fileEntry != null) {
 <input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
-
 <liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
 
 <liferay-ui:error exception="<%= FileNameException.class %>">

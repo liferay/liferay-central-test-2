@@ -30,6 +30,7 @@ import java.util.Date;
  * <a href="BaseResourceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class BaseResourceImpl implements Resource {
@@ -40,14 +41,16 @@ public class BaseResourceImpl implements Resource {
 		this(href, displayName, collection, null, null);
 	}
 
-	public BaseResourceImpl(String href, String displayName, boolean collection,
-							Date createDate, Date modifiedDate) {
+	public BaseResourceImpl(
+		String href, String displayName, boolean collection, Date createDate,
+		Date modifiedDate) {
 
 		this(href, displayName, collection, createDate, modifiedDate, 0);
 	}
 
-	public BaseResourceImpl(String href, String displayName, boolean collection,
-							Date createDate, Date modifiedDate, int size) {
+	public BaseResourceImpl(
+		String href, String displayName, boolean collection, Date createDate,
+		Date modifiedDate, int size) {
 
 		_href = href;
 		_displayName = displayName;

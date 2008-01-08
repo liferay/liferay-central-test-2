@@ -65,6 +65,7 @@ import org.dom4j.io.SAXReader;
  * <a href="PropfindMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class PropfindMethodImpl implements Method {

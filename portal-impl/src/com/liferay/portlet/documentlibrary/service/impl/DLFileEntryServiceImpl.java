@@ -136,12 +136,11 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 	}
 
-	public void deleteFileEntryByTitle(
-			long folderId, String titleWithExtension)
+	public void deleteFileEntryByTitle(long folderId, String titleWithExtension)
 		throws PortalException, RemoteException, SystemException {
 
-		DLFileEntry fileEntry =
-			getFileEntryByTitle(folderId, titleWithExtension);
+		DLFileEntry fileEntry = getFileEntryByTitle(
+			folderId, titleWithExtension);
 
 		deleteFileEntry(folderId, fileEntry.getName());
 	}

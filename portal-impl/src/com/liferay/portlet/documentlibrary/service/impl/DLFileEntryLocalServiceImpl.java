@@ -343,6 +343,7 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		boolean update = false;
+
 		String extension = FileUtil.getExtension(name);
 
 		Iterator itr = dlFileEntryPersistence.findByF_T(
@@ -356,12 +357,15 @@ public class DLFileEntryLocalServiceImpl
 			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
 				if (Validator.isNull(curExtension)) {
 					update = true;
+
 					name = fileEntry.getName();
+
 					break;
 				}
 			}
 			else if (extension.equals(curExtension)) {
 				update = true;
+
 				break;
 			}
 		}

@@ -97,10 +97,11 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			ActionKeys.ADD_FOLDER);
 
 		DLFolder destFolder = addFolder(
-			plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
+			plid, parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
 
-		copyFolder(srcFolder, destFolder, addCommunityPermissions,
+		copyFolder(
+			srcFolder, destFolder, addCommunityPermissions,
 			addGuestPermissions);
 
 		return destFolder;
@@ -175,22 +176,23 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			folderId, parentFolderId, name, description);
 	}
 
-	protected void copyFolder(DLFolder srcFolder, DLFolder destFolder,
+	protected void copyFolder(
+			DLFolder srcFolder, DLFolder destFolder,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		long srcFolderId = srcFolder.getFolderId();
-		long destFolderId = destFolder.getFolderId();
 		long companyId = srcFolder.getCompanyId();
 		long userId = getUserId();
+		long srcFolderId = srcFolder.getFolderId();
+		long destFolderId = destFolder.getFolderId();
 
 		// Copy all viewable files
 
-		Iterator filesItr =
-			dlFileEntryLocalService.getFileEntries(srcFolderId).iterator();
+		Iterator itr = dlFileEntryLocalService.getFileEntries(
+			srcFolderId).iterator();
 
-		while (filesItr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)filesItr.next();
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
 			if (DLFileEntryPermission.contains(
 				getPermissionChecker(), fileEntry, ActionKeys.VIEW)) {
@@ -209,8 +211,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 					String fileName =
 						SystemProperties.get(SystemProperties.TMP_DIR) +
-						StringPool.SLASH + Time.getTimestamp() +
-						PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
+							StringPool.SLASH + Time.getTimestamp() +
+								PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
 
 					file = new File(fileName);
 
@@ -231,20 +233,19 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		String uuid = StringPool.BLANK;
 		long groupId = destFolder.getGroupId();
-		Boolean addCommunityPermissionsObj =
-			Boolean.valueOf(addCommunityPermissions);
-		Boolean addGuestPermissionsObj =
-			Boolean.valueOf(addGuestPermissions);
+		Boolean addCommunityPermissionsObj = Boolean.valueOf(
+			addCommunityPermissions);
+		Boolean addGuestPermissionsObj = Boolean.valueOf(addGuestPermissions);
 		String[] communityPermissions = null;
 		String[] guestPermissions = null;
 
 		// Copy all viewable folders
 
-		Iterator folderItr = dlFolderLocalService.getFolders(
+		itr = dlFolderLocalService.getFolders(
 			srcFolder.getGroupId(), srcFolderId).iterator();
 
-		while (folderItr.hasNext()) {
-			DLFolder folder = (DLFolder)folderItr.next();
+		while (itr.hasNext()) {
+			DLFolder folder = (DLFolder)itr.next();
 
 			if (DLFolderPermission.contains(
 					getPermissionChecker(), folder, ActionKeys.VIEW)) {
@@ -252,7 +253,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				String name = folder.getName();
 				String description = folder.getDescription();
 
-				DLFolder subFolder = dlFolderLocalService.addFolderToGroup(
+				DLFolder subfolder = dlFolderLocalService.addFolderToGroup(
 					uuid, userId, groupId, destFolderId, name, description,
 					addCommunityPermissionsObj, addGuestPermissionsObj,
 					communityPermissions, guestPermissions);
@@ -260,7 +261,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				// Recursively copy all subfolders
 
 				copyFolder(
-					folder, subFolder, addCommunityPermissions,
+					folder, subfolder, addCommunityPermissions,
 					addGuestPermissions);
 			}
 		}
