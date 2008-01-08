@@ -106,6 +106,14 @@ public class ServletAuthorizingFilter implements Filter {
 
 		req = new ProtectedServletRequest(httpReq, remoteUser);
 
+		httpReq = (HttpServletRequest)req;
+
+		ses = httpReq.getSession();
+
+		User user = null;
+
+		PermissionCheckerImpl permissionChecker = null;
+
 		if ((userId > 0) || (remoteUser != null)) {
 
 			// Set the principal associated with this thread
@@ -117,22 +125,22 @@ public class ServletAuthorizingFilter implements Filter {
 			}
 
 			PrincipalThreadLocal.setName(name);
-		}
 
-		PermissionCheckerImpl permissionChecker = null;
+			// User id
 
-		User user = null;
+			userId = GetterUtil.getLong(name);
 
-		if ((userId <= 0) && (remoteUser != null)) {
 			try {
-
-				// User id
-
-				userId = GetterUtil.getLong(remoteUser);
 
 				// User
 
 				user = UserLocalServiceUtil.getUserById(userId);
+
+				// Permission checker
+
+				permissionChecker = PermissionCheckerFactory.create(user, true);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 				// User id
 
@@ -141,20 +149,6 @@ public class ServletAuthorizingFilter implements Filter {
 				// User locale
 
 				ses.setAttribute(Globals.LOCALE_KEY, user.getLocale());
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-
-		if (user != null) {
-			try {
-
-				// Permission checker
-
-				permissionChecker = PermissionCheckerFactory.create(user, true);
-
-				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
