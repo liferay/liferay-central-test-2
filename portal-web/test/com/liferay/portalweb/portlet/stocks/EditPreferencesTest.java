@@ -20,31 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.stocks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditPreferencesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
-		Thread.sleep(500);
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
+public class EditPreferencesTest extends BaseTestCase {
+	public void testEditPreferences() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
+				if (selenium.isElementPresent("//img[@title='Preferences']")) {
 					break;
 				}
 			}
@@ -53,5 +47,14 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("//img[@title='Preferences']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_12_symbols", "MOT NOK SBUX YHOO GOOG");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=GOOG");
 	}
 }

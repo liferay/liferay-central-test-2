@@ -20,38 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.stocks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
+		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//div/a/span");
 		Thread.sleep(500);
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.typeKeys("new_page", "Stocks Test Page");
+		selenium.click("link=Save");
+		Thread.sleep(500);
+		selenium.click("link=Stocks Test Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }

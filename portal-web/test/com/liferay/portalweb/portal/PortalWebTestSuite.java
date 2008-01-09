@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portlet.stocks.StocksTests;
 
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +38,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LoginTest.class);
 		addTestSuite(BlogsTests.class);
 		addTestSuite(MessageBoardsTests.class);
+		addTestSuite(StocksTests.class);
 	}
 
 }

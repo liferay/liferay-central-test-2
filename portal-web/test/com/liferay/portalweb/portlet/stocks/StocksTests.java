@@ -20,38 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.stocks;
 
-import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="StocksTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
-		Thread.sleep(500);
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
+public class StocksTests extends BaseTests {
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+	public StocksTests() {
+		addTestSuite(AddPageTest.class);
+		addTestSuite(AddPortletTest.class);
+		addTestSuite(EditPreferencesTest.class);
 	}
+
 }

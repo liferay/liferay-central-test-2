@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.stocks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
@@ -34,24 +34,7 @@ public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
 		selenium.click("link=Add Application");
 		Thread.sleep(500);
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.mouseDown("//div[@id=\"Finance-Stocks\"]/p/a");
+		selenium.mouseUp("//div[@id=\"Finance-Stocks\"]/p/a");
 	}
 }
