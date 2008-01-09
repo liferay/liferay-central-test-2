@@ -22,8 +22,8 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.struts.Action;
-import com.liferay.portal.struts.ActionException;
+import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.ActionException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

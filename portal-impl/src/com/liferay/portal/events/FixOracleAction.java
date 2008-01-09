@@ -24,9 +24,9 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.struts.ActionException;
-import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.action.ExportAction;
 import com.liferay.portlet.journal.model.JournalArticle;

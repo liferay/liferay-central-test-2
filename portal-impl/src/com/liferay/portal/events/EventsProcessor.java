@@ -22,12 +22,12 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.events.SessionAction;
+import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.Action;
-import com.liferay.portal.struts.ActionException;
-import com.liferay.portal.struts.SessionAction;
-import com.liferay.portal.struts.SimpleAction;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Set;

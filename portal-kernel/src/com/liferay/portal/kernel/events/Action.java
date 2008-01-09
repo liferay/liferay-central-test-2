@@ -20,45 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.events;
+package com.liferay.portal.kernel.events;
 
-import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.util.PortalUtil;
 
-import java.text.NumberFormat;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * <a href="LogMemoryUsageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="Action.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LogMemoryUsageAction extends Action {
+public abstract class Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public abstract void run(HttpServletRequest req, HttpServletResponse res)
+		throws ActionException;
+
+	public void run(RenderRequest req, RenderResponse res)
 		throws ActionException {
 
-		Runtime runtime = Runtime.getRuntime();
+		try {
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletResponse httpRes =
+				PortalUtil.getHttpServletResponse(res);
 
-		NumberFormat nf = NumberFormat.getInstance();
-
-		String freeMemory = nf.format(runtime.freeMemory());
-		String totalMemory = nf.format(runtime.totalMemory());
-		String maxMemory = nf.format(runtime.maxMemory());
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Memory Usage:\t" + freeMemory + "\t" + totalMemory + "\t" +
-					maxMemory);
+			run(httpReq, httpRes);
+		}
+		catch (ActionException ae) {
+			throw ae;
+		}
+		catch (Exception e) {
+			throw new ActionException(e);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(LogMemoryUsageAction.class);
 
 }

@@ -22,32 +22,14 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.util.PortalUtil;
-
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * <a href="Action.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.events</code>.
+ *
  */
-public abstract class Action {
-
-	public abstract void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException;
-
-	public void run(RenderRequest req, RenderResponse res)
-		throws ActionException {
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
-
-		run(httpReq, httpRes);
-	}
-
+public abstract class Action extends com.liferay.portal.kernel.events.Action {
 }

@@ -23,10 +23,10 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;

@@ -22,12 +22,12 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.struts.Action;
-import com.liferay.portal.struts.ActionException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.Properties;

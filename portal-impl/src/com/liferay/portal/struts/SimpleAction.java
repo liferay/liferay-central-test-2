@@ -27,9 +27,10 @@ package com.liferay.portal.struts;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.events</code>.
+ *
  */
-public abstract class SimpleAction {
-
-	public abstract void run(String[] ids) throws ActionException;
-
+public abstract class SimpleAction
+	extends com.liferay.portal.kernel.events.SimpleAction {
 }

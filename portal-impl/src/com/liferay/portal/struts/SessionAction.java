@@ -22,16 +22,15 @@
 
 package com.liferay.portal.struts;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * <a href="SessionAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.events</code>.
+ *
  */
-public abstract class SessionAction {
-
-	public abstract void run(HttpSession ses) throws ActionException;
-
+public abstract class SessionAction
+	extends com.liferay.portal.kernel.events.SessionAction {
 }

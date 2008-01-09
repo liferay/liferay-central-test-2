@@ -22,8 +22,8 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.struts.ActionException;
-import com.liferay.portal.struts.SimpleAction;
+import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.events.SimpleAction;
 
 /**
  * <a href="AppStartupAction.java.html"><b><i>View Source</i></b></a>

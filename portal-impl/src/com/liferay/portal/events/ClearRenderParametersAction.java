@@ -22,8 +22,8 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.struts.Action;
-import com.liferay.portal.struts.ActionException;
+import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Map;

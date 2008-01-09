@@ -20,45 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.events;
-
-import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
-
-import java.text.NumberFormat;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package com.liferay.portal.kernel.events;
 
 /**
- * <a href="LogMemoryUsageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SimpleAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LogMemoryUsageAction extends Action {
+public abstract class SimpleAction {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
-		Runtime runtime = Runtime.getRuntime();
-
-		NumberFormat nf = NumberFormat.getInstance();
-
-		String freeMemory = nf.format(runtime.freeMemory());
-		String totalMemory = nf.format(runtime.totalMemory());
-		String maxMemory = nf.format(runtime.maxMemory());
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Memory Usage:\t" + freeMemory + "\t" + totalMemory + "\t" +
-					maxMemory);
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(LogMemoryUsageAction.class);
+	public abstract void run(String[] ids) throws ActionException;
 
 }

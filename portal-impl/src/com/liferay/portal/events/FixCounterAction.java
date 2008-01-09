@@ -23,12 +23,12 @@
 package com.liferay.portal.events;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.struts.ActionException;
-import com.liferay.portal.struts.SimpleAction;
 
 /**
  * <a href="FixCounterAction.java.html"><b><i>View Source</i></b></a>
