@@ -275,19 +275,18 @@
 							boxSelector: ".portlet-boundary"
 						});
 					}
-					else {
-						Liferay.Columns({
-							columnSelector: "div.lfr-portlet-column",
-							grid: '#layout-grid',
-							handleSelector: ".portlet-title:first, .portlet-title-default:first",
-							boxSelector: ".portlet-boundary" ,
-							positionClass: "drop-position",
-							areaClass: "drop-area",
-							onComplete: function(d) {
-								Liferay.Portlet.move(d);
-							}
-						});
-					}
+					
+					Liferay.Columns({
+						columnSelector: "div.lfr-portlet-column",
+						grid: '#layout-grid',
+						handleSelector: ".portlet-title:first, .portlet-title-default:first",
+						boxSelector: ".portlet-boundary" ,
+						positionClass: "drop-position",
+						areaClass: "drop-area",
+						onComplete: function(d) {
+							Liferay.Portlet.move(d);
+						}
+					});
 
 					new Liferay.Navigation(
 						{

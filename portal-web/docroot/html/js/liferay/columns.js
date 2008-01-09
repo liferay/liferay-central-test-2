@@ -27,29 +27,31 @@
 		},
 
 		add: function(portlet, options) {
-			var instance = this;
-			var jPortlet = jQuery(portlet);
-			var jHandle = jPortlet.find(instance._handle);
+			if (options || !themeDisplay.isFreeformLayout()) {
+				var instance = this;
+				var jPortlet = jQuery(portlet);
+				var jHandle = jPortlet.find(instance._handle);
 
-			jHandle.css({cursor: "move"});
-			jPortlet.css({position: "relative"});
+				jHandle.css({cursor: "move"});
+				jPortlet.css({position: "relative"});
 
-			var defaultOptions = {
-				clone: true,
-				dragClass: "drag-indicator",
-				handle: jPortlet.find(instance._handle)[0],
-				onMove: function(s) {instance._onMove(s)},
-				onComplete: function(s) {instance._onComplete(s);},
-				onStart: function(s) {instance._onStart(s);},
-				threshold: 2,
-				scroll: true
-			};
+				var defaultOptions = {
+					clone: true,
+					dragClass: "drag-indicator",
+					handle: jPortlet.find(instance._handle)[0],
+					onMove: function(s) {instance._onMove(s)},
+					onComplete: function(s) {instance._onComplete(s);},
+					onStart: function(s) {instance._onStart(s);},
+					threshold: 2,
+					scroll: true
+				};
 
-			if (options) {
-				defaultOptions = jQuery.extend(defaultOptions, options);
+				if (options) {
+					defaultOptions = jQuery.extend(defaultOptions, options);
+				}
+
+				jPortlet.lDrag(defaultOptions);
 			}
-
-			jPortlet.lDrag(defaultOptions);
 		},
 
 		_clearCache: function() {
