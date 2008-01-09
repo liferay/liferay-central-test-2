@@ -473,7 +473,6 @@ public class UpgradePermission extends UpgradeProcess {
 			ps = con.prepareStatement(_GET_PLIDS);
 
 			ps.setLong(1, guestGroupId);
-			ps.setLong(2, guestGroupId);
 
 			rs = ps.executeQuery();
 
@@ -519,15 +518,7 @@ public class UpgradePermission extends UpgradeProcess {
 			"ResourceCode.name = ?";
 
 	private static final String _GET_PLIDS =
-		"select Layout.plid from Groups_Permissions " +
-		"inner join Permission_ on Permission_.permissionId = " +
-			"Groups_Permissions.permissionId " +
-		"inner join Resource_ on Resource_.resourceId = " +
-			"Permission_.resourceId " +
-		"inner join ResourceCode on ResourceCode.codeId = Resource_.codeId " +
-			"and ResourceCode.name = 'com.liferay.portal.model.Layout' " +
-		"inner join Layout on Layout.plid = Resource_.primKey " +
-		"where Groups_Permissions.groupId = ? and Layout.groupId != ?";
+		"select plid from Layout where Layout.groupId != ?";
 
 	private static Log _log = LogFactory.getLog(UpgradePermission.class);
 
