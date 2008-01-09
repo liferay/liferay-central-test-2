@@ -4,7 +4,7 @@
 	position: relative;
 }
 
-.ie .portlet-document-library .portlet-content-container {
+.ie6 .portlet-document-library .portlet-content-container {
 	height: 1%;
 }
 
