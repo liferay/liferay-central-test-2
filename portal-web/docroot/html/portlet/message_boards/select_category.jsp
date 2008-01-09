@@ -46,7 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/message_boards/select_category");
-portletURL.setParameter("categoryId", Long.toString(categoryId));
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 List headerNames = new ArrayList();
 

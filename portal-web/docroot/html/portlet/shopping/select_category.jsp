@@ -46,6 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/shopping/select_category");
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 List headerNames = new ArrayList();
 

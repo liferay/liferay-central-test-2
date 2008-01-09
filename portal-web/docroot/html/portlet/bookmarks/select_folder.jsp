@@ -46,6 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/bookmarks/select_folder");
+portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List headerNames = new ArrayList();
 
