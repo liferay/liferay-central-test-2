@@ -123,6 +123,8 @@ public class PropsUtil {
 
 	public static final String THEME_LOADER_STORAGE_PATH = "theme.loader.storage.path";
 
+	public static final String THEME_LOADER_NEW_THEME_ID_ON_IMPORT = "theme.loader.new.theme.id.on.import";
+
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";

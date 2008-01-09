@@ -588,6 +588,10 @@ public class PropsValues {
 	public static final boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.THEME_CSS_FAST_LOAD));
 
+	public static final boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.USERS_DELETE));
 

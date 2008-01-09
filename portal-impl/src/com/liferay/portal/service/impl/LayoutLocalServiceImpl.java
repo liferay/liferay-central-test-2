@@ -3192,10 +3192,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String lookAndFeelXML = new String(
 			(byte[])entries.get("liferay-look-and-feel.xml"));
 
-		Date now = new Date();
+		String themeId = String.valueOf(layoutSet.getGroupId());
 
-		String themeId =
-			layoutSet.getGroupId() + "-" + Time.getShortTimestamp(now);
+		if (layoutSet.isPrivateLayout()) {
+			themeId += "-private";
+		}
+		else {
+			themeId += "-public";
+		}
+
+		if (PropsValues.THEME_LOADER_NEW_THEME_ID_ON_IMPORT) {
+			Date now = new Date();
+
+			themeId += "-" + Time.getShortTimestamp(now);
+		}
+
 		String themeName = themeId;
 
 		lookAndFeelXML = StringUtil.replace(
@@ -3207,6 +3218,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				String.valueOf(layoutSet.getGroupId()), themeId, themeName
 			}
 		);
+
+		FileUtil.deltree(themeLoader.getFileStorage() + "/" + themeId);
 
 		Iterator itr = entries.entrySet().iterator();
 
