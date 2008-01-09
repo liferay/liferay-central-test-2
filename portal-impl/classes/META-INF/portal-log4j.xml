@@ -285,7 +285,7 @@
 	</category>
 
 	<category name="com.liferay.portal.smtp.SubEthaMessageListenerImpl">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.spring">
