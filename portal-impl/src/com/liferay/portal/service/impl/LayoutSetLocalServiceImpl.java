@@ -39,6 +39,7 @@ import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.base.LayoutSetLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Http;
 
 import java.io.File;
@@ -174,7 +175,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		layoutSetPersistence.update(layoutSet);
 
-		if (PrefsPropsUtil.getBoolean(PropsUtil.THEME_SYNC_ON_GROUP)) {
+		if (PrefsPropsUtil.getBoolean(
+				PropsUtil.THEME_SYNC_ON_GROUP,
+				PropsValues.THEME_SYNC_ON_GROUP)) {
+
 			LayoutSet otherLayoutSet = layoutSetPersistence.findByG_P(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout());
 

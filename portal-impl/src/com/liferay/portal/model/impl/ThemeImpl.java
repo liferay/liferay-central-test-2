@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,7 +29,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ListUtil;
@@ -172,8 +170,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 	public void setVirtualPath(String virtualPath) {
 		if (_warFile && Validator.isNull(virtualPath)) {
-			virtualPath = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.THEME_VIRTUAL_PATH));
+			virtualPath = PropsValues.THEME_VIRTUAL_PATH;
 		}
 
 		_virtualPath = virtualPath;

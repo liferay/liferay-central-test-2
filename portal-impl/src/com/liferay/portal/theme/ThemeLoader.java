@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 
@@ -132,8 +132,7 @@ public class ThemeLoader {
 			_themesPath = GetterUtil.getString(
 				root.elementText("themes-path"), "/themes");
 
-			String fileStorageValue = GetterUtil.getString(PropsUtil.get(
-				PropsUtil.THEME_LOADER_STORAGE_PATH));
+			String fileStorageValue = PropsValues.THEME_LOADER_STORAGE_PATH;
 
 			fileStorageValue = GetterUtil.getString(
 				root.elementText("file-storage"), fileStorageValue);

@@ -592,6 +592,15 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
 
+	public static final String THEME_LOADER_STORAGE_PATH = PropsUtil.get(
+		PropsUtil.THEME_LOADER_STORAGE_PATH);
+
+	public static final boolean THEME_SYNC_ON_GROUP = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.THEME_SYNC_ON_GROUP));
+
+	public static final String THEME_VIRTUAL_PATH = PropsUtil.get(
+		PropsUtil.THEME_VIRTUAL_PATH);
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.USERS_DELETE));
 
