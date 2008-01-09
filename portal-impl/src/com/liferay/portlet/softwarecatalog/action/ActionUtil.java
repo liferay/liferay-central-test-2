@@ -144,6 +144,8 @@ public class ActionUtil {
 		throws Exception {
 
 		long productVersionId = ParamUtil.getLong(req, "productVersionId");
+		long copyProductVersionId = ParamUtil.getLong(
+			req, "copyProductVersionId");
 
 		SCProductVersion productVersion = null;
 		SCProductEntry productEntry = null;
@@ -151,6 +153,19 @@ public class ActionUtil {
 		if (productVersionId > 0) {
 			productVersion = SCProductVersionServiceUtil.getProductVersion(
 				productVersionId);
+
+			productEntry = SCProductEntryServiceUtil.getProductEntry(
+				productVersion.getProductEntryId());
+
+			req.setAttribute(
+				WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION, productVersion);
+
+			req.setAttribute(
+				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
+		}
+		else if (copyProductVersionId > 0) {
+			productVersion = SCProductVersionServiceUtil.getProductVersion(
+				copyProductVersionId);
 
 			productEntry = SCProductEntryServiceUtil.getProductEntry(
 				productVersion.getProductEntryId());

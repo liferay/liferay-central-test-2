@@ -48,9 +48,17 @@ SCProductVersion productVersion = (SCProductVersion) row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
-	</c:if>
 
-	<c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productVersion.getProductEntryId(), ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="copyURL">
+			<portlet:param name="struts_action" value="/software_catalog/edit_product_version" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="productEntryId" value="<%= String.valueOf(productVersion.getProductEntryId()) %>" />
+			<portlet:param name="productVersionId" value="0" />
+			<portlet:param name="copyProductVersionId" value="<%= String.valueOf(productVersion.getProductVersionId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="copy" url="<%= copyURL %>" />
+
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/software_catalog/edit_product_version" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

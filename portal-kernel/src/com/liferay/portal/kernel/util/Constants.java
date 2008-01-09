@@ -40,6 +40,8 @@ public interface Constants {
 
 	public static final String CMD = "cmd";
 
+	public static final String COPY = "copy";
+
 	public static final String DEACTIVATE = "deactivate";
 
 	public static final String DELETE = "delete";
