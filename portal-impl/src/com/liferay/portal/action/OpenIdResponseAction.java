@@ -205,7 +205,7 @@ public class OpenIdResponseAction extends Action {
 
 				int pos = fullName.indexOf(StringPool.SPACE);
 
-				if ((pos != -1) && ((pos + 1) < pos.length())) {
+				if ((pos != -1) && ((pos + 1) < fullName.length())) {
 					firstName = fullName.substring(0, pos);
 					lastName = fullName.substring(pos + 1);
 				}
