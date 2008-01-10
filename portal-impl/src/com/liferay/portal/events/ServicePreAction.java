@@ -453,8 +453,7 @@ public class ServicePreAction extends Action {
 	}
 
 	protected void initImportLARFiles() {
-		String privateLARFileName = PropsUtil.get(
-			PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_LAR);
+		String privateLARFileName = PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_LAR;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reading private LAR file " + privateLARFileName);
@@ -476,8 +475,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		String publicLARFileName = PropsUtil.get(
-			PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_LAR);
+		String publicLARFileName = PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_LAR;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reading public LAR file " + publicLARFileName);

@@ -36,7 +36,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigImpl;
@@ -82,8 +82,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		throws ServletException {
 
 		try {
-			String className = PropsUtil.get(
-				PropsUtil.STRUTS_PORTLET_REQUEST_PROCESSOR);
+			String className = PropsValues.STRUTS_PORTLET_REQUEST_PROCESSOR;
 
 			Class clazz = Class.forName(className);
 

@@ -196,6 +196,12 @@ public class PropsValues {
 	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
 
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_LAR =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_LAR);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_LAR);
+
 	public static final String DEFAULT_WAP_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
 
@@ -572,6 +578,9 @@ public class PropsValues {
 
 	public static final String SMTP_SERVER_SUBDOMAIN = PropsUtil.get(
 		PropsUtil.SMTP_SERVER_SUBDOMAIN);
+
+	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
+		PropsUtil.STRUTS_PORTLET_REQUEST_PROCESSOR);
 
 	public static final String TAGS_ASSET_VALIDATOR = PropsUtil.get(
 		PropsUtil.TAGS_ASSET_VALIDATOR);
