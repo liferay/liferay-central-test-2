@@ -86,6 +86,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
+import com.liferay.util.Html;
 import com.liferay.util.Normalizer;
 
 import java.io.IOException;
@@ -1166,7 +1167,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					remoteHost,
 					toAddress,
 					toName,
-					userAgent,
+					Html.escape(userAgent),
 					String.valueOf(user.getUserId()),
 					newPassword
 				});
@@ -1193,7 +1194,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					remoteHost,
 					toAddress,
 					toName,
-					userAgent,
+					Html.escape(userAgent),
 					String.valueOf(user.getUserId()),
 					newPassword
 				});
