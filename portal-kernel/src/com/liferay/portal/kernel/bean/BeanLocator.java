@@ -32,4 +32,6 @@ public interface BeanLocator {
 
 	public Object locate(String name) throws BeanLocatorException;
 
+	public Object locate(String name, boolean warn) throws BeanLocatorException;
+
 }

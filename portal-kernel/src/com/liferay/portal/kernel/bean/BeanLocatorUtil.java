@@ -57,6 +57,31 @@ public class BeanLocatorUtil {
 		}
 	}
 
+	public static Object locate(String name, boolean warn)
+		throws BeanLocatorException {
+
+		if (_beanLocator == null) {
+			_log.error("BeanLocator is null");
+
+			throw new BeanLocatorException("BeanLocator has not been set");
+		}
+		else {
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(
+					PortalClassLoaderUtil.getClassLoader());
+
+				return _beanLocator.locate(name, warn);
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
+		}
+	}
+
 	public static void setBeanLocator(BeanLocator beanLocator) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Setting BeanLocator " + beanLocator.hashCode());

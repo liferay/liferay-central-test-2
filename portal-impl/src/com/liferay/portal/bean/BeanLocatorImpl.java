@@ -43,11 +43,19 @@ import org.springframework.context.ApplicationContext;
 public class BeanLocatorImpl implements BeanLocator {
 
 	public Object locate(String name) throws BeanLocatorException {
-		if (_beans.contains(name)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Cache the reference to " + name + " for better " +
-						"performance");
+		return locate(name, _DEFAULT_WARN);
+	}
+
+	public Object locate(String name, boolean warn)
+		throws BeanLocatorException {
+
+		if (warn) {
+			if (_beans.contains(name)) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Cache the reference to " + name + " for better " +
+							"performance");
+				}
 			}
 		}
 
@@ -59,10 +67,14 @@ public class BeanLocatorImpl implements BeanLocator {
 
 		Object obj = ctx.getBean(name);
 
-		_beans.add(name);
+		if (warn) {
+			_beans.add(name);
+		}
 
 		return obj;
 	}
+
+	private static final boolean _DEFAULT_WARN = false;
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
 
