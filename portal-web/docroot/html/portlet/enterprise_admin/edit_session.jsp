@@ -32,6 +32,8 @@ String sessionId = ParamUtil.getString(request, "sessionId");
 Map liveUsers = LiveUsers.getSessionUsers();
 
 UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
+
+userTracker = userTracker.toEscapedModel();
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
