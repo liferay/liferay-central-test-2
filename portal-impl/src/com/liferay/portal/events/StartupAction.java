@@ -78,7 +78,7 @@ public class StartupAction extends SimpleAction {
 			Runtime.getRuntime().addShutdownHook(
 				new Thread(new ShutdownHook()));
 
-			// Preinitialize Spring beans. See LEP-1234.
+			// Preinitialize Spring beans. See LEP-4734.
 
 			ApplicationContext context = SpringUtil.getContext();
 
