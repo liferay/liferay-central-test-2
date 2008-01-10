@@ -20,29 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.stocks;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
-
+public class SearchTest extends BaseTestCase {
+	public void testSearch() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
 					break;
 				}
 			}
@@ -52,8 +48,11 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Stocks Test Page");
-		selenium.click("link=Save");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_19_keywords1", "Tést");
+		selenium.click("//input[@value='Search Messages']");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +60,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Stocks Test Page")) {
+				if (selenium.isElementPresent("link=Tést Message")) {
 					break;
 				}
 			}
@@ -71,7 +70,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Stocks Test Page");
+		selenium.click("link=Tést Message");
 		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("This is a test reply message!"));
 	}
 }

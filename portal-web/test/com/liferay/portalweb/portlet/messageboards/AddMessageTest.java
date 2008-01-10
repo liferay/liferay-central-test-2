@@ -37,8 +37,8 @@ public class AddMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_subject", "Test Message");
-		selenium.typeKeys("textArea", "This is a test message!");
+		selenium.typeKeys("_19_subject", "Tést Message");
+		selenium.typeKeys("textArea", "This is a tést message!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}

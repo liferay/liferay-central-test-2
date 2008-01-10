@@ -35,10 +35,42 @@ public class AddPageTest extends BaseTestCase {
 		selenium.click("//a[@id=\"my-community-private-pages\"]");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("new_page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("new_page", "Blogs Test Page");
 		selenium.click("link=Save");
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Blogs Test Page");
 		selenium.waitForPageToLoad("30000");
 	}

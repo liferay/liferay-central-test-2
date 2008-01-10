@@ -20,21 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.stocks;
+package com.liferay.portalweb.portlet.weather;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditPreferencesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+public class EditPreferencesTest extends BaseTestCase {
+	public void testEditPreferences() throws Exception {
+		selenium.click("//img[@title='Preferences']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
+		selenium.type("_4_zips",
+			"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -42,7 +47,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
+				if (selenium.isElementPresent("link=Diamond Bar, California")) {
 					break;
 				}
 			}
@@ -51,27 +56,5 @@ public class AddPageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.typeKeys("new_page", "Stocks Test Page");
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Stocks Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Stocks Test Page");
-		selenium.waitForPageToLoad("30000");
 	}
 }

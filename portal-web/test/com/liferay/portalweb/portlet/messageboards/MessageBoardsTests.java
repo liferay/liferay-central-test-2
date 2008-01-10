@@ -39,6 +39,7 @@ public class MessageBoardsTests extends BaseTests {
 		addTestSuite(AddSubcategoryTest.class);
 		addTestSuite(AddMessageTest.class);
 		addTestSuite(AddReplyMessageTest.class);
+		addTestSuite(SearchTest.class);
 	}
 
 }

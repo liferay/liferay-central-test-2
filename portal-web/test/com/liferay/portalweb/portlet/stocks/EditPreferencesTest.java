@@ -50,11 +50,12 @@ public class EditPreferencesTest extends BaseTestCase {
 
 		selenium.click("//img[@title='Preferences']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_12_symbols", "MOT NOK SBUX YHOO GOOG");
+		selenium.type("_12_symbols", "GOOG");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=GOOG");
+		selenium.waitForPageToLoad("30000");
 	}
 }
