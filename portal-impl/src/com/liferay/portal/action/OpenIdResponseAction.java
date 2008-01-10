@@ -23,6 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -199,11 +200,15 @@ public class OpenIdResponseAction extends Action {
 			if (ext instanceof SRegResponse) {
 				SRegResponse sregResp = (SRegResponse)ext;
 
-				String fullName = sregResp.getAttributeValue("fullname");
-				firstName = fullName.substring(
-					0, fullName.indexOf(StringPool.SPACE));
-				lastName = fullName.substring(
-					fullName.indexOf(StringPool.SPACE) + 1);
+				String fullName = GetterUtil.getString(
+					sregResp.getAttributeValue("fullname"));
+
+				int pos = fullName.indexOf(StringPool.SPACE);
+
+				if ((pos != -1) && ((pos + 1) < pos.length())) {
+					firstName = fullName.substring(0, pos);
+					lastName = fullName.substring(pos + 1);
+				}
 
 				emailAddress = sregResp.getAttributeValue("email");
 			}
@@ -223,12 +228,12 @@ public class OpenIdResponseAction extends Action {
 
 				if (Validator.isNull(lastName)) {
 					lastName = getFirstValue(
-							fetchResp.getAttributeValues("lastName"));
+						fetchResp.getAttributeValues("lastName"));
 				}
 
 				if (Validator.isNull(emailAddress)) {
 					emailAddress = getFirstValue(
-							fetchResp.getAttributeValues("email"));
+						fetchResp.getAttributeValues("email"));
 				}
 			}
 		}
