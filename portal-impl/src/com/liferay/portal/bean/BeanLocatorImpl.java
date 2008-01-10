@@ -74,7 +74,7 @@ public class BeanLocatorImpl implements BeanLocator {
 		return obj;
 	}
 
-	private static final boolean _DEFAULT_WARN = false;
+	private static final boolean _DEFAULT_WARN = true;
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
 
