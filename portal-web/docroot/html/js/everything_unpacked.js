@@ -17845,29 +17845,31 @@ Liferay.ColorPicker = new Class({
 		},
 
 		add: function(portlet, options) {
-			var instance = this;
-			var jPortlet = jQuery(portlet);
-			var jHandle = jPortlet.find(instance._handle);
+			if (options || !themeDisplay.isFreeformLayout()) {
+				var instance = this;
+				var jPortlet = jQuery(portlet);
+				var jHandle = jPortlet.find(instance._handle);
 
-			jHandle.css({cursor: "move"});
-			jPortlet.css({position: "relative"});
+				jHandle.css({cursor: "move"});
+				jPortlet.css({position: "relative"});
 
-			var defaultOptions = {
-				clone: true,
-				dragClass: "drag-indicator",
-				handle: jPortlet.find(instance._handle)[0],
-				onMove: function(s) {instance._onMove(s)},
-				onComplete: function(s) {instance._onComplete(s);},
-				onStart: function(s) {instance._onStart(s);},
-				threshold: 2,
-				scroll: true
-			};
+				var defaultOptions = {
+					clone: true,
+					dragClass: "drag-indicator",
+					handle: jPortlet.find(instance._handle)[0],
+					onMove: function(s) {instance._onMove(s)},
+					onComplete: function(s) {instance._onComplete(s);},
+					onStart: function(s) {instance._onStart(s);},
+					threshold: 2,
+					scroll: true
+				};
 
-			if (options) {
-				defaultOptions = jQuery.extend(defaultOptions, options);
+				if (options) {
+					defaultOptions = jQuery.extend(defaultOptions, options);
+				}
+
+				jPortlet.lDrag(defaultOptions);
 			}
-
-			jPortlet.lDrag(defaultOptions);
 		},
 
 		_clearCache: function() {
@@ -18606,6 +18608,8 @@ var LayoutConfiguration = {
 
 		instance.menu = menu;
 
+		instance._isFreeform = themeDisplay.isFreeformLayout();
+
 		if (menu.length) {
 			var list = menu.childNodes;
 
@@ -18624,6 +18628,12 @@ var LayoutConfiguration = {
 					instance.startShowTimer(event, this);
 				}
 			);
+		}
+
+		if (instance._isFreeform) {
+			instance._grid = jQuery('body .freeform #column-1:first');
+			instance._offsetL = instance._grid[0].offsetLeft;
+			instance._offsetT = instance._grid[0].offsetTop;
 		}
 	},
 
@@ -18764,7 +18774,9 @@ var LayoutConfiguration = {
 
 			},
 			onMove: function(s) {
-				Liferay.Columns._onMove(s);
+				if (!instance._isFreeform) {
+					Liferay.Columns._onMove(s);
+				}
 			},
 			onComplete: function(s) {
 				if (!clicked) {
@@ -18800,16 +18812,30 @@ var LayoutConfiguration = {
 
 						var completed = Liferay.Columns._onComplete(s);
 
-						if (completed) {
+						if (!instance._isFreeform) {
+							if (!completed) {
+								if (isInstanceable) {
+									portletId = portletBound.id;
+									portletId = portletId.replace(/^p_p_id_(.*)_$/, '$1');
+								}
+
+								closePortlet(plid, portletId, doAsUserId, true);
+							}
+						}
+
+						if (completed || instance._isFreeform) {
 							portlet.Highlight(750, '#ffe98f');
 						}
-						else {
-							if (isInstanceable) {
-								portletId = portletBound.id;
-								portletId = portletId.replace(/^p_p_id_(.*)_$/, '$1');
-							}
 
-							closePortlet(plid, portletId, doAsUserId, true);
+						if (instance._isFreeform) {
+							var jPortlet = jQuery(portletBound);
+
+							jPortlet.css(
+								{
+									left: (mousePos.x - instance._offsetL) + 'px',
+									top: (mousePos.y - instance._offsetT) + 'px'
+								}
+							);
 						}
 					}
 				}

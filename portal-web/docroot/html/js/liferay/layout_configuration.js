@@ -37,7 +37,7 @@ var LayoutConfiguration = {
 				}
 			);
 		}
-		
+
 		if (instance._isFreeform) {
 			instance._grid = jQuery('body .freeform #column-1:first');
 			instance._offsetL = instance._grid[0].offsetLeft;
@@ -183,7 +183,7 @@ var LayoutConfiguration = {
 			},
 			onMove: function(s) {
 				if (!instance._isFreeform) {
-					Liferay.Columns._onMove(s);	
+					Liferay.Columns._onMove(s);
 				}
 			},
 			onComplete: function(s) {
@@ -228,19 +228,20 @@ var LayoutConfiguration = {
 								}
 
 								closePortlet(plid, portletId, doAsUserId, true);
-							}	
+							}
 						}
 
 						if (completed || instance._isFreeform) {
 							portlet.Highlight(750, '#ffe98f');
 						}
-						
+
 						if (instance._isFreeform) {
 							var jPortlet = jQuery(portletBound);
+
 							jPortlet.css(
 								{
 									left: (mousePos.x - instance._offsetL) + 'px',
-									top: (mousePos.y - instance._offsetT) + 'px', 
+									top: (mousePos.y - instance._offsetT) + 'px'
 								}
 							);
 						}

@@ -275,7 +275,7 @@
 							boxSelector: ".portlet-boundary"
 						});
 					}
-					
+
 					Liferay.Columns({
 						columnSelector: "div.lfr-portlet-column",
 						grid: '#layout-grid',
