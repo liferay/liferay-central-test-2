@@ -1529,6 +1529,32 @@ public class PortalUtil {
 		}
 	}
 
+	public static boolean isMethodGet(PortletRequest req) {
+		HttpServletRequest httpReq = getHttpServletRequest(req);
+
+		String method = GetterUtil.getString(httpReq.getMethod());
+
+		if (method.equalsIgnoreCase(_METHOD_GET)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isMethodPost(PortletRequest req) {
+		HttpServletRequest httpReq = getHttpServletRequest(req);
+
+		String method = GetterUtil.getString(httpReq.getMethod());
+
+		if (method.equalsIgnoreCase(_METHOD_POST)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isLayoutFriendliable(Layout layout) {
 		return PropsUtil.getComponentProperties().getBoolean(
 			PropsUtil.LAYOUT_URL_FRIENDLIABLE,
@@ -2472,6 +2498,10 @@ public class PortalUtil {
 
 		return false;
 	}
+
+	private static final String _METHOD_GET = "get";
+
+	private static final String _METHOD_POST = "post";
 
 	private static Log _log = LogFactory.getLog(PortalUtil.class);
 

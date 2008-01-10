@@ -557,6 +557,14 @@ public class PortalUtil_IW {
 		return PortalUtil.getUserValue(userId, param, defaultValue);
 	}
 
+	public boolean isMethodGet(javax.portlet.PortletRequest req) {
+		return PortalUtil.isMethodGet(req);
+	}
+
+	public boolean isMethodPost(javax.portlet.PortletRequest req) {
+		return PortalUtil.isMethodPost(req);
+	}
+
 	public boolean isLayoutFriendliable(com.liferay.portal.model.Layout layout) {
 		return PortalUtil.isLayoutFriendliable(layout);
 	}
