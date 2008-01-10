@@ -187,6 +187,11 @@ public class SeleneseToJavaBuilder {
 				sm.append(param3);
 				sm.append("\");");
 			}
+			else if (param1.equals("verifyTextPresent")) {
+				sm.append("verifyTrue(selenium.isTextPresent(\"");
+				sm.append(param2);
+				sm.append("\"));");
+			}
 			else if (param1.equals("waitForElementPresent")) {
 				sm.append("for (int second = 0;; second++) {");
 				sm.append("if (second >= 60) {");
