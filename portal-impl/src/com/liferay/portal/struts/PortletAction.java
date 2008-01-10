@@ -168,6 +168,10 @@ public class PortletAction extends Action {
 		return getResources();
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected void sendRedirect(ActionRequest req, ActionResponse res)
 		throws IOException {
 
@@ -208,6 +212,8 @@ public class PortletAction extends Action {
 			return false;
 		}
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = true;
 
 	private static Log _log = LogFactory.getLog(PortletAction.class);
 

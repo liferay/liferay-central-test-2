@@ -160,6 +160,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
+			if (action.isCheckMethodOnProcessAction()) {
+				if (!PortalUtil.isMethodPost(req)) {
+					throw new PrincipalException();
+				}
+			}
+
 			action.processAction(mapping, form, portletConfig, req, res);
 		}
 		catch (Exception e) {

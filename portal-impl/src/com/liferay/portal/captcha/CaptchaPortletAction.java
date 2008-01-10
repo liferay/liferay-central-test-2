@@ -86,6 +86,12 @@ public class CaptchaPortletAction extends PortletAction {
 		}
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
+
 	private static Log _log = LogFactory.getLog(CaptchaPortletAction.class);
 
 	private CaptchaProducer _producer;

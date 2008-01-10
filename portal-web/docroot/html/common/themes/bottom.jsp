@@ -283,4 +283,6 @@ if (layout != null) {
 	</div>
 </c:if>
 
+<form method="post" name="hrefFm"></form>
+
 <liferay-util:include page="/html/common/themes/bottom-ext.jsp" />

@@ -89,10 +89,6 @@ public class EditServerAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		if (!PortalUtil.isMethodPost(req)) {
-			throw new PrincipalException();
-		}
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
