@@ -23,24 +23,17 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.job.Scheduler;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
-import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CookieUtil;
@@ -58,8 +51,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
-
-import org.quartz.ObjectAlreadyExistsException;
 
 /**
  * <a href="PortalInstances.java.html"><b><i>View Source</i></b></a>
@@ -350,97 +341,6 @@ public class PortalInstances {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
-		}
-
-		// Scheduler
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Scheduler");
-		}
-
-		try {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.SCHEDULER_ENABLED))) {
-
-				Iterator itr = PortletLocalServiceUtil.getPortlets(
-					companyId).iterator();
-
-				while (itr.hasNext()) {
-					Portlet portlet = (Portlet)itr.next();
-
-					String className = portlet.getSchedulerClass();
-
-					if (portlet.isActive() && Validator.isNotNull(className)) {
-						Scheduler scheduler =
-							(Scheduler)InstancePool.get(className);
-
-						scheduler.schedule();
-					}
-				}
-			}
-		}
-		catch (ObjectAlreadyExistsException oaee) {
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		// Activity tracker interpreter
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Activity tracker interpreter");
-		}
-
-		try {
-			Iterator itr = PortletLocalServiceUtil.getPortlets(
-				companyId).iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
-
-				ActivityTrackerInterpreter activityTrackerInterpreter =
-					portlet.getActivityTrackerInterpreterInstance();
-
-				if (portlet.isActive() &&
-					(activityTrackerInterpreter != null)) {
-
-					activityTrackerInterpreter =
-						new ActivityTrackerInterpreterImpl(
-							activityTrackerInterpreter);
-
-					ActivityTrackerInterpreterUtil.
-						addActivityTrackerInterpreter(
-							activityTrackerInterpreter);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		// SMTP message listener
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("SMTP message listener");
-		}
-
-		try {
-			Iterator itr = PortletLocalServiceUtil.getPortlets(
-				companyId).iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
-
-				MessageListener smtpMessageListener =
-					portlet.getSmtpMessageListenerInstance();
-
-				if (portlet.isActive() && (smtpMessageListener != null)) {
-					SMTPServerUtil.addListener(smtpMessageListener);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 
 		// LDAP Import

@@ -25,20 +25,25 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
+import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
+import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedAction;
+import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -46,8 +51,10 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
+import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -67,6 +74,7 @@ import com.liferay.util.servlet.ProtectedServletRequest;
 import java.io.IOException;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -87,6 +95,8 @@ import org.apache.struts.tiles.TilesUtilImpl;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+
+import org.quartz.ObjectAlreadyExistsException;
 
 /**
  * <a href="MainServlet.java.html"><b><i>View Source</i></b></a>
@@ -164,6 +174,8 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Initialize portlets");
 		}
 
+		List portlets = PortletLocalServiceUtil.getPortlets();
+
 		try {
 			String[] xmls = new String[] {
 				Http.URLtoString(ctx.getResource(
@@ -179,7 +191,7 @@ public class MainServlet extends ActionServlet {
 
 			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
 
-			Iterator itr = PortletLocalServiceUtil.getPortlets().iterator();
+			Iterator itr = portlets.iterator();
 
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();
@@ -226,6 +238,94 @@ public class MainServlet extends ActionServlet {
 			};
 
 			ThemeLocalUtil.init(ctx, null, true, xmls, pluginPackage);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Scheduler
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Scheduler");
+		}
+
+		try {
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.SCHEDULER_ENABLED))) {
+
+				Iterator itr = portlets.iterator();
+
+				while (itr.hasNext()) {
+					Portlet portlet = (Portlet)itr.next();
+
+					String className = portlet.getSchedulerClass();
+
+					if (portlet.isActive() && Validator.isNotNull(className)) {
+						Scheduler scheduler =
+							(Scheduler)InstancePool.get(className);
+
+						scheduler.schedule();
+					}
+				}
+			}
+		}
+		catch (ObjectAlreadyExistsException oaee) {
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Activity tracker interpreter
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Activity tracker interpreter");
+		}
+
+		try {
+			Iterator itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				ActivityTrackerInterpreter activityTrackerInterpreter =
+					portlet.getActivityTrackerInterpreterInstance();
+
+				if (portlet.isActive() &&
+					(activityTrackerInterpreter != null)) {
+
+					activityTrackerInterpreter =
+						new ActivityTrackerInterpreterImpl(
+							activityTrackerInterpreter);
+
+					ActivityTrackerInterpreterUtil.
+						addActivityTrackerInterpreter(
+							activityTrackerInterpreter);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// SMTP message listener
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("SMTP message listener");
+		}
+
+		try {
+			Iterator itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				MessageListener smtpMessageListener =
+					portlet.getSmtpMessageListenerInstance();
+
+				if (portlet.isActive() && (smtpMessageListener != null)) {
+					SMTPServerUtil.addListener(smtpMessageListener);
+				}
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
