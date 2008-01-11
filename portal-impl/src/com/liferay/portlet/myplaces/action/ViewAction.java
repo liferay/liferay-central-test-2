@@ -138,4 +138,10 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.my_places.view");
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
+
 }
