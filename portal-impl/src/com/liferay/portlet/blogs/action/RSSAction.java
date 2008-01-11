@@ -191,6 +191,12 @@ public class RSSAction extends PortletAction {
 		return rss.getBytes(StringPool.UTF8);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
+
 	private static Log _log = LogFactory.getLog(RSSAction.class);
 
 }
