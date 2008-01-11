@@ -166,7 +166,7 @@
 			<arg value="-namingport" />
 			<arg value="9191" />
 			<arg value="-httpport" />
-			<arg value="8181" />
+			<arg value="8080" />
 		</exec>
 
 		<copy

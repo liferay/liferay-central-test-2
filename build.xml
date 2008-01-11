@@ -734,38 +734,86 @@
 
 		<antcall target="deploy" inheritAll="false" />
 
+		<delete file="app.server.${user.name}.properties" />
+
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.geronimo-tomcat.deploy.dir}" />
 			<param name="deployer.app.server.type" value="geronimo-tomcat" />
 		</antcall>
-
-		<delete file="app.server.${user.name}.properties" />
 
 		<delete>
 			<fileset dir="${app.server.geronimo-tomcat.dir}/var/log" includes="*.log" />
 		</delete>
 	</target>
 
-	<target name="build-dist-jboss-jetty">
-		<echo file="app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
+	<target name="build-dist-glassfish">
+		<delete dir="${app.server.glassfish.dir}" />
 
+		<ant antfile="${lp.ext.dir}/servers/build.xml" target="install-glassfish" inheritAll="false" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=glassfish</echo>
+
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
+			<param name="deployer.app.server.type" value="glassfish" />
+		</antcall>
+
+		<parallel>
+			<exec dir="${app.server.glassfish.bin.dir}" executable="asadmin.bat" resolveexecutable="true">
+				<arg value="start-domain" />
+				<arg value="domain1" />
+			</exec>
+			<sequential>
+				<waitfor>
+					<available file="${app.server.glassfish.portal.dir}_deployed" />
+				</waitfor>
+				<exec dir="${app.server.glassfish.bin.dir}" executable="asadmin.bat" resolveexecutable="true">
+					<arg value="stop-domain" />
+					<arg value="domain1" />
+				</exec>
+			</sequential>
+		</parallel>
+
+		<delete dir="${app.server.glassfish.log.dir}" />
+		<mkdir dir="${app.server.glassfish.log.dir}" />
+	</target>
+
+	<target name="build-dist-jboss-jetty">
 		<delete dir="${app.server.jboss-jetty.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jboss-jetty-4.0.5.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
 	<target name="build-dist-jboss-tomcat">
-		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+		<antcall target="build-dist-jboss-tomcat-4.0" />
+		<antcall target="build-dist-jboss-tomcat-4.2" />
+	</target>
 
+	<target name="build-dist-jboss-tomcat-4.0">
 		<delete dir="${app.server.jboss-tomcat.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.0.5.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+
+		<ant target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${user.name}.properties" />
+	</target>
+
+	<target name="build-dist-jboss-tomcat-4.2">
+		<delete dir="${app.server.parent.dir}/jboss-tomcat-4.2.2" />
+
+		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.2.2.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat
 
@@ -773,59 +821,154 @@ app.server.jboss-tomcat.version=4.2
 app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 </echo>
 
-		<delete dir="${app.server.parent.dir}/jboss-tomcat-4.2.2" />
-
-		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.2.2.zip" dest="${app.server.parent.dir}" />
-
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
 	<target name="build-dist-jetty">
-		<echo file="app.server.${user.name}.properties">app.server.type=jetty</echo>
-
 		<delete dir="${app.server.jetty.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jetty-5.1.10.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=jetty</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
 	<target name="build-dist-jonas-jetty">
-		<echo file="app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
-
 		<delete dir="${app.server.jonas-jetty.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jonas-jetty-4.8.6.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
 	<target name="build-dist-jonas-tomcat">
-		<echo file="app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
-
 		<delete dir="${app.server.jonas-tomcat.dir}" />
 
 		<unzip src="${app.server.parent.dir}/jonas-tomcat-4.8.6.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
-	<target name="build-dist-resin">
-		<echo file="app.server.${user.name}.properties">app.server.type=resin</echo>
+	<target name="build-dist-pramati">
+		<delete dir="${app.server.pramati.dir}" />
 
+		<copy file="tools/ext_tmpl/servers/pramati/silent_install.xml.template" tofile="silent_install.xml" overwrite="yes">
+			<filterset>
+				<filter token="install.path" value="${app.server.pramati.dir}" />
+				<filter token="java.home" value="${env.JAVA_HOME}" />
+			</filterset>
+		</copy>
+
+		<java jar="${app.server.parent.dir}/PServer50.jar" fork="true">
+			<arg value="-silent" />
+			<arg value="silent_install.xml" />
+		</java>
+
+		<delete file="silent_install.xml" />
+
+		<replace
+			file="${app.server.pramati.dir}/server/templates/deploy-config.xml"
+			token="poll-interval-seconds>5"
+			value="poll-interval-seconds>15"
+		/>
+
+		<exec dir="${app.server.pramati.dir}/server/bin" executable="nodecreator.bat" resolveexecutable="true">
+			<arg value="-createj2ee" />
+			<arg value="-name" />
+			<arg value="liferay" />
+			<arg value="-ip" />
+			<arg value="localhost" />
+			<arg value="-namingport" />
+			<arg value="9191" />
+			<arg value="-httpport" />
+			<arg value="8080" />
+		</exec>
+
+		<copy
+			file="${app.server.pramati.dir}/server/bin/runserver.bat"
+			tofile="${app.server.pramati.dir}/server/bin/runliferay.bat"
+		/>
+
+		<replace file="${app.server.pramati.dir}/server/bin/runliferay.bat">
+			<replacefilter
+				token="-server"
+				value="-Xmx768m -XX:MaxPermSize=128m -server"
+			/>
+			<replacefilter
+				token="com.pramati.Server"
+				value="com.pramati.Server -node liferay"
+			/>
+		</replace>
+
+		<delete dir="${app.server.pramati.dir}/server/lf" />
+
+		<copy todir="${app.server.pramati.dir}/server" overwrite="yes">
+			<fileset dir="tools/ext_tmpl/servers/pramati/server" />
+		</copy>
+
+		<echo file="app.server.${user.name}.properties">app.server.type=pramati</echo>
+
+		<antcall target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${user.name}.properties" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.pramati.deploy.dir}" />
+			<param name="deployer.app.server.type" value="pramati" />
+		</antcall>
+
+		<parallel>
+			<exec dir="${app.server.pramati.bin.dir}" executable="runliferay.bat" resolveexecutable="true" />
+
+			<sequential>
+				<sleep seconds="300" />
+
+				<copy
+					file="tools/ext_tmpl/servers/pramati/stop.txt"
+					todir="${app.server.pramati.bin.dir}"
+				/>
+
+				<exec dir="${app.server.pramati.bin.dir}" executable="remoteshell.bat" resolveexecutable="true">
+					<arg value="-file" />
+					<arg value="stop.txt" />
+				</exec>
+
+				<sleep seconds="30" />
+
+				<delete file="${app.server.pramati.bin.dir}/stop.txt" />
+			</sequential>
+		</parallel>
+
+		<delete dir="${app.server.pramati.dir}/server/lf" />
+
+		<copy
+			file="tools/ext_tmpl/servers/pramati/server/license.key"
+			todir="${app.server.pramati.dir}/server"
+			overwrite="yes"
+		/>
+	</target>
+
+	<target name="build-dist-resin">
 		<delete dir="${app.server.resin.dir}" />
 
 		<unzip src="${app.server.parent.dir}/resin-3.0.19.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=resin</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
@@ -836,18 +979,22 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	</target>
 
 	<target name="build-dist-tomcat-5.5">
-		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
-
 		<delete dir="${app.server.tomcat.dir}" />
 
 		<unzip src="${app.server.parent.dir}/tomcat-5.5.25.zip" dest="${app.server.parent.dir}" />
 
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
 
 	<target name="build-dist-tomcat-6.0">
+		<delete dir="${app.server.parent.dir}/tomcat-6.0.14" />
+
+		<unzip src="${app.server.parent.dir}/tomcat-6.0.14.zip" dest="${app.server.parent.dir}" />
+
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
 
 app.server.tomcat.version=6.0
@@ -860,11 +1007,7 @@ app.server.tomcat.support.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.name}.zip
 </echo>
 
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.14" />
-
-		<unzip src="${app.server.parent.dir}/tomcat-6.0.14.zip" dest="${app.server.parent.dir}" />
-
-		<ant dir="${project.dir}" target="deploy" inheritAll="false" />
+		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 	</target>
@@ -983,81 +1126,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<copy todir="${lp.ext.dir}" filtering="true" preservelastmodified="true">
 			<fileset dir="tools/ext_tmpl" />
 		</copy>
-	</target>
-
-	<target name="build-ext-glassfish">
-		<delete dir="${app.server.glassfish.dir}" />
-
-		<ant antfile="${lp.ext.dir}/servers/build.xml" target="install-glassfish" inheritAll="false" />
-
-		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=glassfish</echo>
-
-		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
-		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
-
-		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
-			<param name="deployer.app.server.type" value="glassfish" />
-		</antcall>
-
-		<parallel>
-			<exec dir="${app.server.glassfish.bin.dir}" executable="asadmin.bat" resolveexecutable="true">
-				<arg value="start-domain" />
-				<arg value="domain1" />
-			</exec>
-			<sequential>
-				<waitfor>
-					<available file="${app.server.glassfish.portal.dir}_deployed" />
-				</waitfor>
-				<exec dir="${app.server.glassfish.bin.dir}" executable="asadmin.bat" resolveexecutable="true">
-					<arg value="stop-domain" />
-					<arg value="domain1" />
-				</exec>
-			</sequential>
-		</parallel>
-
-		<delete dir="${app.server.glassfish.log.dir}" />
-		<mkdir dir="${app.server.glassfish.log.dir}" />
-	</target>
-
-	<target name="build-ext-pramati">
-		<delete dir="${app.server.pramati.dir}" />
-
-		<ant dir="${lp.ext.dir}/servers" target="install-pramati" inheritAll="false" />
-
-		<echo file="app.server.${env.COMPUTERNAME}.properties">app.server.type=pramati</echo>
-
-		<antcall target="deploy" inheritAll="false" />
-
-		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.pramati.deploy.dir}" />
-			<param name="deployer.app.server.type" value="pramati" />
-		</antcall>
-
-		<delete file="app.server.${env.COMPUTERNAME}.properties" />
-
-		<parallel>
-			<exec dir="${app.server.pramati.bin.dir}" executable="runliferay.bat" resolveexecutable="true" />
-
-			<sequential>
-				<sleep seconds="300" />
-
-				<exec dir="${app.server.pramati.bin.dir}" executable="remoteshell.bat" resolveexecutable="true">
-					<arg value="-file" />
-					<arg value="${lp.ext.dir}/servers/pramati/stop.txt" />
-				</exec>
-
-				<sleep seconds="30" />
-			</sequential>
-		</parallel>
-
-		<delete dir="${app.server.pramati.dir}/server/lf" />
-
-		<copy
-			file="tools/ext_tmpl/servers/pramati/server/license.key"
-			todir="${app.server.pramati.dir}/server"
-			overwrite="yes"
-		/>
 	</target>
 
 	<target name="sync-ext">
@@ -1644,8 +1712,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="dist-jdk5">
-		<antcall target="build-ext-glassfish" />
-		<antcall target="build-ext-pramati" />
+		<antcall target="build-dist-glassfish" />
+		<antcall target="build-dist-pramati" />
 
 		<antcall target="zip-glassfish" />
 		<antcall target="zip-pramati" />
