@@ -1278,11 +1278,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				portlet
 	 */
 	public void setUserPrincipalStrategy(String userPrincipalStrategy) {
-		if (Validator.isNull(userPrincipalStrategy)) {
-			_userPrincipalStrategy =
-				PortletImpl.USER_PRINCIPAL_STRATEGY_USER_ID;
-		}
-		else {
+		if (Validator.isNotNull(userPrincipalStrategy)) {
 			_userPrincipalStrategy = userPrincipalStrategy;
 		}
 	}
@@ -2527,7 +2523,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The user principal strategy of the portlet.
 	 */
-	private String _userPrincipalStrategy;
+	private String _userPrincipalStrategy =
+		PortletImpl.USER_PRINCIPAL_STRATEGY_USER_ID;
 
 	/**
 	 * True if the portlet does not share request attributes with the portal or
