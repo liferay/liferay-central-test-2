@@ -421,6 +421,10 @@ public class PortalUtil {
 		return currentURL;
 	}
 
+	public static String getCurrentURL(PortletRequest req) {
+		return (String)req.getAttribute(WebKeys.CURRENT_URL);
+	}
+
 	public static Date getDate(
 			int month, int day, int year, PortalException pe)
 		throws PortalException {

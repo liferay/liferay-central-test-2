@@ -162,7 +162,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		try {
 			if (action.isCheckMethodOnProcessAction()) {
 				if (!PortalUtil.isMethodPost(req)) {
-					throw new PrincipalException();
+					String currentURL = PortalUtil.getCurrentURL(req);
+
+					throw new PrincipalException(currentURL);
 				}
 			}
 
