@@ -339,6 +339,12 @@ public class LayoutTypePortletImpl
 			portlet = PortletLocalServiceUtil.getPortletById(
 				layout.getCompanyId(), portletId);
 
+			if (portlet == null) {
+				_log.error(
+					"Portlet " + portletId +
+						" cannot be added because it is not registered");
+			}
+
 			if (checkPermission && !portlet.hasAddPortletPermission(userId)) {
 				return null;
 			}
