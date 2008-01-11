@@ -913,7 +913,7 @@
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat
 
 app.server.jboss-tomcat.version=4.2
-app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.0
+app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 </echo>
 
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
@@ -1004,7 +1004,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.0
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat
 
 app.server.tomcat.version=6.0
-app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.13
+app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.14
 app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/lib
 app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
@@ -1228,13 +1228,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version.file.name}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.0/server/default/deploy" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.2/server/default/deploy" />
 			<param name="deployer.app.server.type" value="jboss-tomcat" />
 		</antcall>
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jboss-tomcat-4.2" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.0" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.2" />
 		</antcall>
 	</target>
 
@@ -1553,13 +1553,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.13/webapps" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.14/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
 		</antcall>
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-6.0" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.13" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.14" />
 		</antcall>
 	</target>
 
