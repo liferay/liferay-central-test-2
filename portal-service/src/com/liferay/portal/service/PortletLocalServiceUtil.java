@@ -815,6 +815,12 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getPortletByStrutsPath(companyId, strutsPath);
 	}
 
+	public static java.util.List getPortlets() {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getPortlets();
+	}
+
 	public static java.util.List getPortlets(long companyId)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();

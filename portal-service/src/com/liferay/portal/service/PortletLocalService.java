@@ -348,6 +348,8 @@ public interface PortletLocalService {
 		long companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getPortlets();
+
 	public java.util.List getPortlets(long companyId)
 		throws com.liferay.portal.SystemException;
 

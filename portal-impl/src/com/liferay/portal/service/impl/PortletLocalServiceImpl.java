@@ -145,6 +145,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return getPortletById(companyId, _getPortletId(strutsPath));
 	}
 
+	public List getPortlets() {
+		Map portletsPool = _getPortletsPool();
+
+		return ListUtil.fromCollection(portletsPool.values());
+	}
+
 	public List getPortlets(long companyId) throws SystemException {
 		return getPortlets(companyId, true, true);
 	}

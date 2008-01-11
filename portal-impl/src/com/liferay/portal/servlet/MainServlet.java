@@ -178,6 +178,14 @@ public class MainServlet extends ActionServlet {
 			};
 
 			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
+
+			Iterator itr = PortletLocalServiceUtil.getPortlets().iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				PortletInstanceFactory.create(portlet, ctx);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -545,6 +553,19 @@ public class MainServlet extends ActionServlet {
 	}
 
 	public void destroy() {
+		try {
+			Iterator itr = PortletLocalServiceUtil.getPortlets().iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				PortletInstanceFactory.destroy(portlet);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (int i = 0; i < companyIds.length; i++) {
@@ -558,8 +579,6 @@ public class MainServlet extends ActionServlet {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Parent
 
 		super.destroy();
 	}
@@ -586,25 +605,6 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void destroyCompany(long companyId) {
-
-		// Destroy portlets
-
-		try {
-			Iterator itr = PortletLocalServiceUtil.getPortlets(
-				companyId).iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
-
-				PortletInstanceFactory.destroy(portlet);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		// Process shutdown events
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process shutdown events");
 		}

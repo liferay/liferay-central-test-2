@@ -335,6 +335,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 					resourceBundles, customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
+
+				PortletInstanceFactory.create(portlet, ctx);
 			}
 
 			// Struts bridges

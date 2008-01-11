@@ -117,12 +117,18 @@ public class CachePortlet implements Portlet {
 		return getResponses(((PortletSessionImpl)ses).getHttpSession());
 	}
 
-	public CachePortlet(Portlet portlet, PortletContext portletCtx,
-						Integer expCache) {
+	public CachePortlet(
+		Portlet portlet, PortletContext portletCtx, Integer expCache) {
 
 		_portlet = portlet;
 		_portletCtx = (PortletContextImpl)portletCtx;
 		_expCache = expCache;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Create root cache wrapper for " +
+					_portletCtx.getPortlet().getPortletId());
+		}
 
 		if (ClassUtil.isSubclass(
 				_portlet.getClass(), PortletDeployer.JSF_MYFACES) ||
@@ -139,8 +145,35 @@ public class CachePortlet implements Portlet {
 			"org.apache.portals.bridges.struts.StrutsPortlet");
 	}
 
-	public void init(PortletConfig config) throws PortletException {
-		_portletConfig = (PortletConfigImpl)config;
+	public CachePortlet(
+		Portlet portlet, PortletConfig portletConfig, PortletContext portletCtx,
+		Integer expCache, boolean facesPortlet, boolean strutsPortlet,
+		boolean strutsBridgePortlet) {
+
+		// From constructor
+
+		_portlet = portlet;
+		_portletCtx = (PortletContextImpl)portletCtx;
+		_expCache = expCache;
+		_facesPortlet = facesPortlet;
+		_strutsPortlet = strutsPortlet;
+		_strutsBridgePortlet = strutsBridgePortlet;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Create instance cache wrapper for " +
+					_portletCtx.getPortlet().getPortletId());
+		}
+
+		// From init
+
+		_portletConfig = (PortletConfigImpl)portletConfig;
+
+		_portletId = _portletConfig.getPortletId();
+	}
+
+	public void init(PortletConfig portletConfig) throws PortletException {
+		_portletConfig = (PortletConfigImpl)portletConfig;
 
 		_portletId = _portletConfig.getPortletId();
 
@@ -155,7 +188,7 @@ public class CachePortlet implements Portlet {
 					portletClassLoader);
 			}
 
-			_portlet.init(config);
+			_portlet.init(portletConfig);
 		}
 		finally {
 			if (portletClassLoader != null) {
@@ -305,6 +338,10 @@ public class CachePortlet implements Portlet {
 
 	public PortletContextImpl getPortletContext() {
 		return _portletCtx;
+	}
+
+	public Integer getExpCache() {
+		return _expCache;
 	}
 
 	public boolean isDestroyable() {

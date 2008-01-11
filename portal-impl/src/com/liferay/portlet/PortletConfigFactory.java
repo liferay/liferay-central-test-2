@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.util.CollectionFactory;
 
@@ -55,32 +53,12 @@ public class PortletConfigFactory {
 	}
 
 	private PortletConfig _create(Portlet portlet, ServletContext ctx) {
-		String poolId = PortletConfigFactory.class.getName();
-
-		if (!portlet.isWARFile()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(poolId);
-			sm.append(StringPool.PERIOD);
-			sm.append(portlet.getCompanyId());
-
-			poolId = sm.toString();
-		}
-
-		Map map = (Map)_pool.get(poolId);
-
-		if (map == null) {
-			map = CollectionFactory.getSyncHashMap();
-
-			_pool.put(poolId, map);
-		}
-
-		Map portletConfigs = (Map)map.get(portlet.getRootPortletId());
+		Map portletConfigs = (Map)_pool.get(portlet.getRootPortletId());
 
 		if (portletConfigs == null) {
 			portletConfigs = CollectionFactory.getSyncHashMap();
 
-			map.put(portlet.getRootPortletId(), portletConfigs);
+			_pool.put(portlet.getRootPortletId(), portletConfigs);
 		}
 
 		PortletConfig portletConfig =
@@ -101,25 +79,7 @@ public class PortletConfigFactory {
 	}
 
 	private void _destroy(Portlet portlet) {
-		String poolId = PortletConfigFactory.class.getName();
-
-		if (!portlet.isWARFile()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(poolId);
-			sm.append(".");
-			sm.append(portlet.getCompanyId());
-
-			poolId = sm.toString();
-		}
-
-		Map map = (Map)_pool.get(poolId);
-
-		if (map == null) {
-			return;
-		}
-
-		map.remove(portlet.getRootPortletId());
+		_pool.remove(portlet.getRootPortletId());
 	}
 
 	private static PortletConfigFactory _instance = new PortletConfigFactory();

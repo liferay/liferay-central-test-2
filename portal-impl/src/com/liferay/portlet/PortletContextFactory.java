@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -58,32 +56,12 @@ public class PortletContextFactory {
 	}
 
 	private PortletContext _create(Portlet portlet, ServletContext ctx) {
-		String poolId = PortletContextFactory.class.getName();
-
-		if (!portlet.isWARFile()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(poolId);
-			sm.append(StringPool.PERIOD);
-			sm.append(portlet.getCompanyId());
-
-			poolId = sm.toString();
-		}
-
-		Map map = (Map)_pool.get(poolId);
-
-		if (map == null) {
-			map = CollectionFactory.getSyncHashMap();
-
-			_pool.put(poolId, map);
-		}
-
-		Map portletContexts = (Map)map.get(portlet.getRootPortletId());
+		Map portletContexts = (Map)_pool.get(portlet.getRootPortletId());
 
 		if (portletContexts == null) {
 			portletContexts = CollectionFactory.getSyncHashMap();
 
-			map.put(portlet.getRootPortletId(), portletContexts);
+			_pool.put(portlet.getRootPortletId(), portletContexts);
 		}
 
 		PortletContext portletContext =
@@ -116,25 +94,7 @@ public class PortletContextFactory {
 	}
 
 	private void _destroy(Portlet portlet) {
-		String poolId = PortletContextFactory.class.getName();
-
-		if (!portlet.isWARFile()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(poolId);
-			sm.append(StringPool.PERIOD);
-			sm.append(portlet.getCompanyId());
-
-			poolId = sm.toString();
-		}
-
-		Map map = (Map)_pool.get(poolId);
-
-		if (map == null) {
-			return;
-		}
-
-		Map portletContexts = (Map)map.remove(portlet.getRootPortletId());
+		Map portletContexts = (Map)_pool.remove(portlet.getRootPortletId());
 
 		if (portletContexts == null) {
 			return;
