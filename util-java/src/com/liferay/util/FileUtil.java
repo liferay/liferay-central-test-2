@@ -416,6 +416,10 @@ public class FileUtil {
 	}
 
 	public static File[] sortFiles(File[] files) {
+		if (files == null) {
+			return null;
+		}
+
 		Arrays.sort(files, new FileComparator());
 
 		List directoryList = new ArrayList();

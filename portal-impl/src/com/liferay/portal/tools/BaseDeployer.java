@@ -331,7 +331,15 @@ public class BaseDeployer {
 
 	protected void deploy() throws Exception  {
 		try {
-			File[] files = FileUtil.sortFiles(new File(baseDir).listFiles());
+			File baseDirFile = new File(baseDir);
+
+			File[] files = baseDirFile.listFiles();
+
+			if (files == null) {
+				return;
+			}
+
+			files = FileUtil.sortFiles(files);
 
 			for (int i = 0; i < files.length; i++) {
 				File srcFile = files[i];
