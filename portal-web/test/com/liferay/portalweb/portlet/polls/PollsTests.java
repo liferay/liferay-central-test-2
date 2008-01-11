@@ -20,31 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.polls;
 
-import com.liferay.portalweb.portlet.blogs.BlogsTests;
-import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
-import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
-import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends BaseTests {
+public class PollsTests extends BaseTests {
 
-	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(BookmarksTests.class);
-		addTestSuite(MessageBoardsTests.class);
-		addTestSuite(PollsTests.class);
-		addTestSuite(StocksTests.class);
-		addTestSuite(WeatherTests.class);
+	public PollsTests() {
+		addTestSuite(AddPageTest.class);
+		addTestSuite(AddPortletTest.class);
+		addTestSuite(AddQuestionTest.class);
+		addTestSuite(AddVoteTest.class);
+		addTestSuite(ViewGraphsTest.class);
 	}
 
 }

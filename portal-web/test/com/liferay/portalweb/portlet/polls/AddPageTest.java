@@ -20,31 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.polls;
 
-import com.liferay.portalweb.portlet.blogs.BlogsTests;
-import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
-import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
-import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends BaseTests {
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
+		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//div/a/span");
 
-	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(BookmarksTests.class);
-		addTestSuite(MessageBoardsTests.class);
-		addTestSuite(PollsTests.class);
-		addTestSuite(StocksTests.class);
-		addTestSuite(WeatherTests.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("new_page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("new_page", "Polls Test Page");
+		selenium.click("link=Save");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Polls Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Polls Test Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

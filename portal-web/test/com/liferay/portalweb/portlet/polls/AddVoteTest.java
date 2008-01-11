@@ -20,31 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.polls;
 
-import com.liferay.portalweb.portlet.blogs.BlogsTests;
-import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
-import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
-import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddVoteTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends BaseTests {
+public class AddVoteTest extends BaseTestCase {
+	public void testAddVote() throws Exception {
+		selenium.click("link=Test Poll Question");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("document._25_fm._25_choiceId[2]");
+		selenium.click("//input[@value='Vote']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("100%"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 
-	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(BookmarksTests.class);
-		addTestSuite(MessageBoardsTests.class);
-		addTestSuite(PollsTests.class);
-		addTestSuite(StocksTests.class);
-		addTestSuite(WeatherTests.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Poll Question")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }
