@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.weather;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="StocksTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="WeatherTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
