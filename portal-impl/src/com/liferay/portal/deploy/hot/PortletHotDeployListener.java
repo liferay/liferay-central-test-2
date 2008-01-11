@@ -336,7 +336,14 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 
-				PortletInstanceFactory.create(portlet, ctx);
+				try {
+					PortletInstanceFactory.create(portlet, ctx);
+				}
+				catch (Exception e1) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e1.getMessage());
+					}
+				}
 			}
 
 			// Struts bridges
