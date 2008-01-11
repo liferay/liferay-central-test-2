@@ -159,7 +159,7 @@ public class SeleneseToJavaBuilder {
 
 			if (param1.equals("click") || param1.equals("mouseDown") ||
 				param1.equals("mouseUp") || param1.equals("open") ||
-				param1.equals("selectFrame")) {
+				param1.equals("selectFrame") || param1.equals("selectWindow")) {
 
 				sm.append("selenium.");
 				sm.append(param1);
@@ -173,12 +173,19 @@ public class SeleneseToJavaBuilder {
 				sm.append("\");");
 				sm.append("selenium.waitForPageToLoad(\"30000\");");
 			}
+			else if (param1.equals("close")) {
+				sm.append("selenium.");
+				sm.append(param1);
+				sm.append("();");
+			}
 			else if (param1.equals("pause")) {
 				sm.append("Thread.sleep(");
 				sm.append(param2);
 				sm.append(");");
 			}
-			else if (param1.equals("type") || param1.equals("typeKeys")) {
+			else if (param1.equals("type") || param1.equals("typeKeys") ||
+					 param1.equals("waitForPopUp")) {
+
 				sm.append("selenium.");
 				sm.append(param1);
 				sm.append("(\"");
