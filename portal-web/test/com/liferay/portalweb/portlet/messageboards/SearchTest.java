@@ -60,7 +60,7 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tést Message")) {
+				if (selenium.isElementPresent("link=Tést Méssagé")) {
 					break;
 				}
 			}
@@ -70,8 +70,8 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Tést Message");
+		selenium.click("link=Tést Méssagé");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test reply message!"));
+		verifyTrue(selenium.isTextPresent("This is a tést réply méssagé!"));
 	}
 }

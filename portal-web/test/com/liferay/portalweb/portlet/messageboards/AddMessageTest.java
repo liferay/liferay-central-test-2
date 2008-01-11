@@ -33,12 +33,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class AddMessageTest extends BaseTestCase {
 	public void testAddMessage() throws Exception {
 		selenium.click(
-			"//a[text()='Test Subcategory\nThis is a test subcategory!']");
+			"//a[text()='Tést Subcatégory\nThis is a tést subcatégory!']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_subject", "Tést Message");
-		selenium.typeKeys("textArea", "This is a tést message!");
+		selenium.typeKeys("_19_subject", "Tést Méssagé");
+		selenium.typeKeys("textArea", "This is a tést méssagé!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}

@@ -52,7 +52,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Message Boards Test Page");
+		selenium.typeKeys("new_page", "Méssagé Boards Tést Pagé");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -61,7 +61,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isElementPresent("link=Méssagé Boards Tést Pagé")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Message Boards Test Page");
+		selenium.click("link=Méssagé Boards Tést Pagé");
 		selenium.waitForPageToLoad("30000");
 	}
 }
