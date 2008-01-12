@@ -82,7 +82,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		if (!oldLayoutTemplateId.equals(layoutTemplateId)) {
-			reorganizePortlets(
+			reorganizeNestedColumns(
 				req, portletResource, layoutTemplateId, oldLayoutTemplateId);
 		}
 
@@ -127,7 +127,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		return columnNames;
 	}
 
-	protected void reorganizePortlets(
+	protected void reorganizeNestedColumns(
 			ActionRequest req, String portletResource,
 			String newLayoutTemplateId, String oldLayoutTemplateId)
 		throws PortalException, SystemException {
@@ -154,7 +154,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		List oldColumns = getColumnNames(
 			oldLayoutTemplate.getContent(), portletResource);
 
-		layoutTypePortlet.reorganizePortlets(newColumns, oldColumns);
+		layoutTypePortlet.reorganizeNestedColumns(
+			portletResource, newColumns, oldColumns);
 
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),

@@ -43,9 +43,6 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void setLayoutTemplateId(
 		long userId, String newLayoutTemplateId, boolean checkPermission);
 
-	public void addNestedLayoutTemplate(
-		LayoutTemplate layoutTemplate, String portletId);
-
 	public int getNumOfColumns();
 
 	public List getAllPortlets(String columnId) throws SystemException;
@@ -87,6 +84,9 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void removePortletId(String portletId, boolean modeAndState);
 
 	public void setPortletIds(String columnId, String portletIds);
+
+	void reorganizeNestedColumns(
+		String portletId, List newColumns, List oldColumns);
 
 	void reorganizePortlets(List newColumns, List oldColumns);
 

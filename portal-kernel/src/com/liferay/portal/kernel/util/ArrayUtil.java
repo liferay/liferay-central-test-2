@@ -22,7 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -383,6 +385,20 @@ public class ArrayUtil {
 		else {
 			return array[pos];
 		}
+	}
+
+	public static String[] removeByPrefix(String[] array, String prefix) {
+		List filteredList = new ArrayList();
+
+		for (int i = 0; i < array.length; i++) {
+			String item = array[i];
+
+			if (!item.startsWith(prefix)) {
+				filteredList.add(item);
+			}
+		}
+
+		return (String[])filteredList.toArray(new String[filteredList.size()]);
 	}
 
 	public static Boolean[] toObjectArray(boolean[] array) {

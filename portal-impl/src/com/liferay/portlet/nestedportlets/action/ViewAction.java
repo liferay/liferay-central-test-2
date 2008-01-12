@@ -25,7 +25,6 @@ package com.liferay.portlet.nestedportlets.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
@@ -88,12 +87,6 @@ public class ViewAction extends PortletAction {
 
 			content = renameTemplateColumnsAndIds(
 				layoutTemplate.getContent(), portlet);
-
-			LayoutTypePortlet layoutTypePortlet =
-				themeDisplay.getLayoutTypePortlet();
-
-			layoutTypePortlet.addNestedLayoutTemplate(
-				layoutTemplate, portlet.getPortletId());
 		}
 
 		req.setAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT, content);

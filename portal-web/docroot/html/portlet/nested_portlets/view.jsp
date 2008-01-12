@@ -24,6 +24,28 @@
 
 <%@ include file="/html/portlet/nested_portlets/init.jsp" %>
 
+<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
+		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
+	</div>
+
+	<script type="text/javascript">
+		jQuery(
+			function() {
+				var portletWrapper = jQuery('#portlet-wrapper-<%= portletDisplay.getId() %>');
+
+				var message = portletWrapper.find('#<portlet:namespace />nested-portlets-msg');
+
+				var nestedPortlets = portletWrapper.find('.portlet, .portlet-borderless-container');
+
+				if (!nestedPortlets.length) {
+					message.show();
+				}
+			}
+		);
+	</script>
+</c:if>
+
 <%
 try {
 	String content = (String)request.getAttribute(WebKeys.LAYOUT_TEMPLATE_CONTENT);
@@ -42,28 +64,6 @@ finally {
 	renderRequestImpl.defineObjects(portletConfig, renderResponse);
 }
 %>
-
-<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
-		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
-	</div>
-
-	<script type="text/javascript">
-		jQuery(
-			function() {
-				var portletWrapper = jQuery('#portlet-wrapper-<%= portletDisplay.getId() %>');
-
-				var message = portletWrapper.find('#<portlet:namespace />nested-portlets-msg');
-
-				var nestedPortlets = portletWrapper.find('.portlet');
-
-				if (!nestedPortlets.length) {
-					message.show();
-				}
-			}
-		);
-	</script>
-</c:if>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.nested_portlets.view.jsp");
