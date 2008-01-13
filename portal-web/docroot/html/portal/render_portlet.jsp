@@ -607,6 +607,10 @@ if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
 
 boolean portletException = false;
 
+if (portletDisplay.isStateExclusive()) {
+	renderRequestImpl.setWindowState(LiferayWindowState.EXCLUSIVE);
+}
+
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
 		cachePortlet.render(renderRequestImpl, renderResponseImpl);
