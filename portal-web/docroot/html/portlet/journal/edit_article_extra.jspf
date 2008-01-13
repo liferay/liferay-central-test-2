@@ -240,13 +240,13 @@
 
 		<liferay-ui:message key="display-date" /><br />
 
-		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" defaultValue="<%= displayDate %>" />
+		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" formName="fm1" defaultValue="<%= displayDate %>" />
 
 		<br /><br />
 
 		<liferay-ui:message key="expiration-date" /><br />
 
-		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" /><br />
+		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="expirationDate" formName="fm1" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" /><br />
 
 		<liferay-ui:message key="never-auto-expire" />
 
@@ -256,7 +256,7 @@
 
 		<liferay-ui:message key="review-date" /><br />
 
-		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="reviewDate" defaultValue="<%= reviewDate %>" disabled="<%= neverReview %>" /><br />
+		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="reviewDate" formName="fm1" defaultValue="<%= reviewDate %>" disabled="<%= neverReview %>" /><br />
 
 		<liferay-ui:message key="never-review" />
 
