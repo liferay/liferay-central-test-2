@@ -29,7 +29,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 
 import javax.servlet.http.Cookie;
@@ -61,9 +60,6 @@ public class RememberMeAutoLogin implements AutoLogin {
 				Validator.isNotNull(autoPassword)) {
 
 				Company company = PortalUtil.getCompany(req);
-
-				req.setAttribute(WebKeys.COMPANY_ID,
-					new Long(company.getCompanyId()));
 
 				KeyValuePair kvp = null;
 
