@@ -31,6 +31,7 @@ String model = (String)request.getAttribute("liferay-ui:input-field:model");
 Object bean = request.getAttribute("liferay-ui:input-field:bean");
 String field = (String)request.getAttribute("liferay-ui:input-field:field");
 String fieldParam = (String)request.getAttribute("liferay-ui:input-field:fieldParam");
+String formName = (String)request.getAttribute("liferay-ui:input-field:formName");
 Object defaultValue = request.getAttribute("liferay-ui:input-field:defaultValue");
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-field:disabled"));
 
@@ -57,7 +58,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>
 
-			<liferay-ui:input-checkbox param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
+			<liferay-ui:input-checkbox param="<%= field %>" formName="<%= formName %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
 		</c:when>
 		<c:when test='<%= type.equals("Date") %>'>
 
@@ -165,7 +166,8 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				yearRangeEnd="<%= yearRangeEnd %>"
 				firstDayOfWeek="<%= firstDayOfWeek %>"
 				imageInputId='<%= fieldParam + "ImageInputId" %>'
-				disabled="<%= disabled %>"
+ 				formName="<%= formName %>"
+ 				disabled="<%= disabled %>"
 			/>
 
 			<c:if test="<%= showTime %>">

@@ -652,6 +652,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>formName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>defaultValue</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
