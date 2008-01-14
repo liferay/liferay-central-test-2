@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -81,10 +82,15 @@ public class GetArticleAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+			String languageId = LanguageUtil.getLanguageId(req);
+
+			if (Validator.isNull(languageId)) {
+				languageId = themeDisplay.getLanguageId();
+			}
+
 			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
-			String xml = article.getContentByLocale(
-				themeDisplay.getLanguageId());
+			String xml = article.getContentByLocale(languageId);
 
 			String contentType = ContentTypes.TEXT_HTML_UTF8;
 
