@@ -173,14 +173,10 @@ public class GetArticlesAction extends Action {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		if (Validator.isNull(languageId)) {
-			languageId = themeDisplay.getLanguageId();
-		}
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 

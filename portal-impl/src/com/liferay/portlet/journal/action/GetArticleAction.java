@@ -75,18 +75,14 @@ public class GetArticleAction extends Action {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId =  ParamUtil.getString(req, "articleId");
 
+			String languageId = LanguageUtil.getLanguageId(req);
+
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
 					groupId, articleId, Boolean.TRUE);
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-			String languageId = LanguageUtil.getLanguageId(req);
-
-			if (Validator.isNull(languageId)) {
-				languageId = themeDisplay.getLanguageId();
-			}
 
 			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
