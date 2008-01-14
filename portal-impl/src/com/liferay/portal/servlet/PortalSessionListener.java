@@ -30,6 +30,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
 import com.liferay.portlet.messaging.util.MessagingUtil;
@@ -50,6 +51,10 @@ import org.apache.commons.logging.LogFactory;
 public class PortalSessionListener implements HttpSessionListener {
 
 	public void sessionCreated(HttpSessionEvent event) {
+		if (PropsValues.SESSION_DISABLED) {
+			return;
+		}
+
 		HttpSession ses = event.getSession();
 
 		PortalSessionContext.put(ses.getId(), ses);
@@ -66,6 +71,12 @@ public class PortalSessionListener implements HttpSessionListener {
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
+		if (PropsValues.SESSION_DISABLED) {
+			return;
+		}
+
+		PortalSessionContext.remove(ses.getId());
+
 		HttpSession ses = event.getSession();
 
 		try {
@@ -100,8 +111,6 @@ public class PortalSessionListener implements HttpSessionListener {
 		ses.removeAttribute(WebKeys.REVERSE_AJAX);
 
 		MessagingUtil.closeXMPPConnection(ses);
-
-		PortalSessionContext.remove(ses.getId());
 
 		// Process session destroyed events
 
