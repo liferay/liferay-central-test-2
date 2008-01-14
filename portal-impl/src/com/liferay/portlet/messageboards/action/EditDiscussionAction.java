@@ -115,6 +115,10 @@ public class EditDiscussionAction extends PortletAction {
 			groupId, className, classPK, messageId);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected MBMessage updateMessage(ActionRequest req) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -150,5 +154,7 @@ public class EditDiscussionAction extends PortletAction {
 
 		return message;
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }
