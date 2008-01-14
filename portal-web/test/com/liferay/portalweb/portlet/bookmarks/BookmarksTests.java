@@ -37,7 +37,7 @@ public class BookmarksTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddFolderTest.class);
 		addTestSuite(AddSubfolderTest.class);
-		addTestSuite(AddBookmarkTest.class);
+		addTestSuite(AddEntryTest.class);
 	}
 
 }

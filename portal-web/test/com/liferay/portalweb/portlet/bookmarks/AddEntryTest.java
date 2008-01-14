@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddBookmarkTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddBookmarkTest extends BaseTestCase {
-	public void testAddBookmark() throws Exception {
+public class AddEntryTest extends BaseTestCase {
+	public void testAddEntry() throws Exception {
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", "Test Bookmark");
