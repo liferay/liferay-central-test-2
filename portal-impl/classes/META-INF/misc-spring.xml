@@ -2,13 +2,27 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" lazy-init="true">
+		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
+	</bean>
+	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" lazy-init="true">
+		<property name="portalCacheManager">
+			<ref bean="com.liferay.portal.cache.MultiVMPortalCacheManager" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil" lazy-init="true">
 		<property name="multiVMPool">
 			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.cache.SingleVMPoolImpl" class="com.liferay.portal.cache.SingleVMPoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" lazy-init="true">
+		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
+	</bean>
+	<bean id="com.liferay.portal.cache.SingleVMPoolImpl" class="com.liferay.portal.cache.SingleVMPoolImpl" lazy-init="true">
+		<property name="portalCacheManager">
+			<ref bean="com.liferay.portal.cache.SingleVMPortalCacheManager" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil" lazy-init="true">
 		<property name="singleVMPool">
 			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />

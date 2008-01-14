@@ -24,19 +24,13 @@ package com.liferay.portal.cache;
 
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.util.CollectionFactory;
 
 import java.io.Serializable;
 
-import java.net.URL;
-
 import java.util.Map;
 import java.util.Set;
-
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 
 /**
  * <a href="MultiVMPoolImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +42,7 @@ import net.sf.ehcache.Element;
 public class MultiVMPoolImpl implements MultiVMPool {
 
 	public void clear() {
-		_cacheManager.clearAll();
+		_portalCacheManager.clearAll();
 	}
 
 	public void clear(String name) {
@@ -89,26 +83,11 @@ public class MultiVMPoolImpl implements MultiVMPool {
 	}
 
 	public Object get(PortalCache portalCache, String key) {
-		Element element = (Element)portalCache.get(key);
-
-		if (element == null) {
-			return null;
-		}
-		else {
-			return element.getObjectValue();
-		}
+		return portalCache.get(key);
 	}
 
 	public PortalCache getCache(String name) {
-		Cache cache = _cacheManager.getCache(name);
-
-		if (cache == null) {
-			_cacheManager.addCache(name);
-
-			cache = _cacheManager.getCache(name);
-		}
-
-		return new PortalCacheImpl(cache);
+		return _portalCacheManager.getCache(name);
 	}
 
 	public void put(String name, String key, Object obj) {
@@ -159,6 +138,10 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		portalCache.remove(key);
 	}
 
+	public void setPortalCacheManager(PortalCacheManager portalCacheManager) {
+		_portalCacheManager = portalCacheManager;
+	}
+
 	public void updateGroup(Map groups, String groupKey, String key) {
 		Set groupKeys = null;
 
@@ -174,15 +157,6 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		groupKeys.add(key);
 	}
 
-	private MultiVMPoolImpl() {
-		String configLocation = PropsUtil.get(
-			PropsUtil.EHCACHE_MULTI_VM_CONFIG_LOCATION);
-
-		URL url = getClass().getResource(configLocation);
-
-		_cacheManager = new CacheManager(url);
-	}
-
-	private CacheManager _cacheManager;
+	private PortalCacheManager _portalCacheManager;
 
 }

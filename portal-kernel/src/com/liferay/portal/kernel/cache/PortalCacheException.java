@@ -20,67 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cache;
-
-import com.liferay.portal.kernel.cache.PortalCache;
-
-import java.io.Serializable;
-
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
+package com.liferay.portal.kernel.cache;
 
 /**
- * <a href="PortalCacheImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalCacheException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Joseph Shum
  *
  */
-public class PortalCacheImpl implements PortalCache {
+public class PortalCacheException extends RuntimeException {
 
-	public PortalCacheImpl(Cache cache) {
-		_cache = cache;
+	public PortalCacheException() {
+		super();
 	}
 
-	public Object get(String key) {
-		return _cache.get(key);
+	public PortalCacheException(String msg) {
+		super(msg);
 	}
 
-	public void put(String key, Object obj) {
-		Element element = new Element(key, obj);
-
-		_cache.put(element);
+	public PortalCacheException(Throwable cause) {
+		super(cause);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
-		Element element = new Element(key, obj);
-
-		element.setTimeToLive(timeToLive);
-
-		_cache.put(element);
+	public PortalCacheException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
-
-	public void put(String key, Serializable obj) {
-		Element element = new Element(key, obj);
-
-		_cache.put(element);
-	}
-
-	public void put(String key, Serializable obj, int timeToLive) {
-		Element element = new Element(key, obj);
-
-		element.setTimeToLive(timeToLive);
-
-		_cache.put(element);
-	}
-
-	public void remove(String key) {
-		_cache.remove(key);
-	}
-
-	public void removeAll() {
-		_cache.removeAll();
-	}
-
-	private Cache _cache;
 
 }

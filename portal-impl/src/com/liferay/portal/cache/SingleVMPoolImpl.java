@@ -23,16 +23,10 @@
 package com.liferay.portal.cache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.cache.SingleVMPool;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
-
-import java.net.URL;
-
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 
 /**
  * <a href="SingleVMPoolImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +38,7 @@ import net.sf.ehcache.Element;
 public class SingleVMPoolImpl implements SingleVMPool {
 
 	public void clear() {
-		_cacheManager.clearAll();
+		_portalCacheManager.clearAll();
 	}
 
 	public void clear(String name) {
@@ -60,26 +54,11 @@ public class SingleVMPoolImpl implements SingleVMPool {
 	}
 
 	public Object get(PortalCache portalCache, String key) {
-		Element element = (Element)portalCache.get(key);
-
-		if (element == null) {
-			return null;
-		}
-		else {
-			return element.getObjectValue();
-		}
+		return portalCache.get(key);
 	}
 
 	public PortalCache getCache(String name) {
-		Cache cache = _cacheManager.getCache(name);
-
-		if (cache == null) {
-			_cacheManager.addCache(name);
-
-			cache = _cacheManager.getCache(name);
-		}
-
-		return new PortalCacheImpl(cache);
+		return _portalCacheManager.getCache(name);
 	}
 
 	public void put(String name, String key, Object obj) {
@@ -112,15 +91,10 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		portalCache.remove(key);
 	}
 
-	private SingleVMPoolImpl() {
-		String configLocation = PropsUtil.get(
-			PropsUtil.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
-
-		URL url = getClass().getResource(configLocation);
-
-		_cacheManager = new CacheManager(url);
+	public void setPortalCacheManager(PortalCacheManager portalCacheManager) {
+		_portalCacheManager = portalCacheManager;
 	}
 
-	private CacheManager _cacheManager;
+	private PortalCacheManager _portalCacheManager;
 
 }
