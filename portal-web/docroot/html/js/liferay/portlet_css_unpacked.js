@@ -11,6 +11,7 @@ Liferay.PortletCSS = {
 		instance._curPortletWrapperId = instance._curPortlet.attr('id');
 		instance._portletBoundaryId = curPortletBoundaryId;
 		instance._newPanel = jQuery('#portlet-set-properties');
+		instance._currentLanguage = themeDisplay.getLanguageId();
 
 		if (!instance._curPortlet.length) {
 			instance._curPortlet = obj;
@@ -28,7 +29,7 @@ Liferay.PortletCSS = {
 				// Portlet config
 
 				instance._customTitleInput = jQuery('#custom-title');
-				instance._defaultPortletTitle = instance._curPortlet.find('.portlet-title').text();
+				instance._defaultPortletTitle = instance._curPortlet.find('.portlet-title').eq(0).text();
 				instance._customTitleCheckbox = jQuery('#use-custom-title-checkbox');
 				instance._showBorders = jQuery('#show-borders');
 				instance._borderNote = jQuery('#border-note');
@@ -960,7 +961,7 @@ Liferay.PortletCSS = {
 					title = jQuery.trim(customTitleInput.val());
 
 					if (title == '') {
-						title = instance._curPortlet.find('.portlet-title').text();
+						title = instance._curPortlet.find('.portlet-title').eq(0).text();
 						title = jQuery.trim(title);
 						customTitleInput.val(title);
 					}
@@ -974,17 +975,17 @@ Liferay.PortletCSS = {
 					title = instance._defaultPortletTitle;
 				}
 
-				instance._curPortlet.find('.portlet-title').text(title);
+				instance._curPortlet.find('.portlet-title').eq(0).text(title);
 			}
 		);
 
 		customTitleInput.unbind().keyup(
 			function() {
-				if (!portletData.useCustomTitle) {
+				if (!portletData.useCustomTitle || instance._portletLanguage.find('option:selected').val() != instance._currentLanguage) {
 					return;
 				}
 
-				instance._curPortlet.find('.portlet-title').text(this.value);
+				instance._curPortlet.find('.portlet-title').eq(0).text(this.value);
 				portletData.title = this.value;
 				instance._portletTitles(false, this.value);
 			}
@@ -1092,7 +1093,7 @@ Liferay.PortletCSS = {
 		instance._setInput(instance._customTitleInput, portletTitle);
 		instance._setCheckbox(instance._customTitleCheckbox, portletData.useCustomTitle);
 		instance._setCheckbox(instance._showBorders, portletData.showBorders);
-		instance._setSelect(instance._portletLanguage, portletData.language);
+		instance._setSelect(instance._portletLanguage, instance._currentLanguage);
 		instance._setSelect(instance._portletLinksTarget, portletData.portletLinksTarget);
 
 		if (!portletData.useCustomTitle) {
