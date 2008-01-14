@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
 import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
+import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portlet.polls.PollsTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
@@ -41,6 +42,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LoginTest.class);
 		addTestSuite(BlogsTests.class);
 		addTestSuite(BookmarksTests.class);
+		addTestSuite(LoanCalculatorTests.class);
 		addTestSuite(MessageBoardsTests.class);
 		addTestSuite(PollsTests.class);
 		addTestSuite(StocksTests.class);
