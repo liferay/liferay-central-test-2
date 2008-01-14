@@ -134,7 +134,10 @@ PortletContext portletCtx = portletConfig.getPortletContext();
 
 WindowState windowState = WindowState.NORMAL;
 
-if (themeDisplay.isStatePopUp()) {
+if (themeDisplay.isStateExclusive()) {
+	windowState = LiferayWindowState.EXCLUSIVE;
+}
+else if (themeDisplay.isStatePopUp()) {
 	windowState = LiferayWindowState.POP_UP;
 }
 else if (stateMax) {
@@ -606,10 +609,6 @@ if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
 // Render portlet
 
 boolean portletException = false;
-
-if (portletDisplay.isStateExclusive()) {
-	renderRequestImpl.setWindowState(LiferayWindowState.EXCLUSIVE);
-}
 
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
