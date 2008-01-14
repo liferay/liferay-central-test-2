@@ -75,9 +75,9 @@ public class PortalSessionListener implements HttpSessionListener {
 			return;
 		}
 
-		PortalSessionContext.remove(ses.getId());
-
 		HttpSession ses = event.getSession();
+
+		PortalSessionContext.remove(ses.getId());
 
 		try {
 			Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
