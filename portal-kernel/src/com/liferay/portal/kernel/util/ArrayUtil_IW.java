@@ -180,6 +180,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.getValue(array, pos);
 	}
 
+	public java.lang.String[] removeByPrefix(java.lang.String[] array,
+		java.lang.String prefix) {
+		return ArrayUtil.removeByPrefix(array, prefix);
+	}
+
 	public java.lang.Boolean[] toObjectArray(boolean[] array) {
 		return ArrayUtil.toObjectArray(array);
 	}

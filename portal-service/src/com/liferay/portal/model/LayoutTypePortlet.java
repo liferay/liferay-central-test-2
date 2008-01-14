@@ -85,10 +85,10 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void setPortletIds(String columnId, String portletIds);
 
-	void reorganizeNestedColumns(
+	public void reorganizeNestedColumns(
 		String portletId, List newColumns, List oldColumns);
 
-	void reorganizePortlets(List newColumns, List oldColumns);
+	public void reorganizePortlets(List newColumns, List oldColumns);
 
 	public String getStateMax();
 

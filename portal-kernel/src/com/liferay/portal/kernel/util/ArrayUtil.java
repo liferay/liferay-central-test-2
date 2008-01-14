@@ -388,17 +388,17 @@ public class ArrayUtil {
 	}
 
 	public static String[] removeByPrefix(String[] array, String prefix) {
-		List filteredList = new ArrayList();
+		List list = new ArrayList();
 
 		for (int i = 0; i < array.length; i++) {
-			String item = array[i];
+			String s = array[i];
 
-			if (!item.startsWith(prefix)) {
-				filteredList.add(item);
+			if (!s.startsWith(prefix)) {
+				list.add(s);
 			}
 		}
 
-		return (String[])filteredList.toArray(new String[filteredList.size()]);
+		return (String[])list.toArray(new String[list.size()]);
 	}
 
 	public static Boolean[] toObjectArray(boolean[] array) {

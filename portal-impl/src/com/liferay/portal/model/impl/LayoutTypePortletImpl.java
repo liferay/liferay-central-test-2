@@ -539,18 +539,16 @@ public class LayoutTypePortletImpl
 	public void reorganizeNestedColumns(
 		String portletId, List newColumns, List oldColumns) {
 
-		String nestedColumnIds =
-			getTypeSettingsProperties().getProperty(
-				NESTED_COLUMN_IDS);
+		String nestedColumnIds = getTypeSettingsProperties().getProperty(
+			NESTED_COLUMN_IDS);
 
-		String[] nestedColumnIdsArray = StringUtil.split(
-			nestedColumnIds);
+		String[] nestedColumnIdsArray = StringUtil.split(nestedColumnIds);
 
 		nestedColumnIdsArray = ArrayUtil.removeByPrefix(
 			nestedColumnIdsArray, portletId);
 
 		getTypeSettingsProperties().setProperty(
-				NESTED_COLUMN_IDS, StringUtil.merge(nestedColumnIdsArray));
+			NESTED_COLUMN_IDS, StringUtil.merge(nestedColumnIdsArray));
 
 		reorganizePortlets(newColumns, oldColumns);
 	}
@@ -960,8 +958,7 @@ public class LayoutTypePortletImpl
 		getLayout().setTypeSettingsProperties(newProps);
 
 		String nestedColumnIds = GetterUtil.getString(
-			getTypeSettingsProperties().getProperty(
-				NESTED_COLUMN_IDS));
+			getTypeSettingsProperties().getProperty(NESTED_COLUMN_IDS));
 
 		String[] nestedColumnIdsArray = ArrayUtil.removeByPrefix(
 			StringUtil.split(nestedColumnIds), portletId);
@@ -971,13 +968,11 @@ public class LayoutTypePortletImpl
 	}
 
 	protected void addNestedColumn(String columnId) {
-		String nestedColumnIds =
-			getTypeSettingsProperties().getProperty(
-				NESTED_COLUMN_IDS, StringPool.BLANK);
+		String nestedColumnIds = getTypeSettingsProperties().getProperty(
+			NESTED_COLUMN_IDS, StringPool.BLANK);
 
 		if (nestedColumnIds.indexOf(columnId) == -1) {
-			nestedColumnIds = StringUtil.add(
-				nestedColumnIds, columnId);
+			nestedColumnIds = StringUtil.add(nestedColumnIds, columnId);
 
 			getTypeSettingsProperties().setProperty(
 				NESTED_COLUMN_IDS, nestedColumnIds);
@@ -996,9 +991,8 @@ public class LayoutTypePortletImpl
 	}
 
 	protected List getNestedColumns() {
-		String nestedColumnIds =
-			getTypeSettingsProperties().getProperty(
-				NESTED_COLUMN_IDS);
+		String nestedColumnIds = getTypeSettingsProperties().getProperty(
+			NESTED_COLUMN_IDS);
 
 		return ListUtil.fromArray(StringUtil.split(nestedColumnIds));
 	}
@@ -1137,48 +1131,46 @@ public class LayoutTypePortletImpl
 		return false;
 	}
 
-	protected void onRemoveFromLayout(String portletId)
-		throws SystemException {
-
+	protected void onRemoveFromLayout(String portletId) throws SystemException {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			getLayout().getCompanyId(), portletId);
 
-		if (portlet != null) {
-			if (portlet.getRootPortletId().equals(
-				PortletKeys.NESTED_PORTLETS)) {
+		if (portlet == null) {
+			return;
+		}
 
-				Properties props = getTypeSettingsProperties();
+		if (portlet.getRootPortletId().equals(PortletKeys.NESTED_PORTLETS)) {
+			Properties props = getTypeSettingsProperties();
 
-				Iterator itr = props.keySet().iterator();
+			Iterator itr = props.keySet().iterator();
 
-				while (itr.hasNext()) {
-					String key = (String)itr.next();
+			while (itr.hasNext()) {
+				String key = (String)itr.next();
 
-					if (key.startsWith(portlet.getPortletId())) {
-						String portletIds = props.getProperty(key);
+				if (key.startsWith(portlet.getPortletId())) {
+					String portletIds = props.getProperty(key);
 
-						String[] portletIdsArray = StringUtil.split(portletIds);
+					String[] portletIdsArray = StringUtil.split(portletIds);
 
-						for (int i = 0; i < portletIdsArray.length; i++) {
-							onRemoveFromLayout(portletIdsArray[i]);
-						}
+					for (int i = 0; i < portletIdsArray.length; i++) {
+						onRemoveFromLayout(portletIdsArray[i]);
 					}
 				}
-
-				removeNestedColumns(portletId);
 			}
 
-			deletePortletSetup(portletId);
+			removeNestedColumns(portletId);
+		}
 
-			if (_enablePortletLayoutListener) {
-				PortletLayoutListener portletLayoutListener =
-					portlet.getPortletLayoutListener();
+		deletePortletSetup(portletId);
 
-				long plid = getLayout().getPlid();
+		if (_enablePortletLayoutListener) {
+			PortletLayoutListener portletLayoutListener =
+				portlet.getPortletLayoutListener();
 
-				if ((portletLayoutListener != null)) {
-					portletLayoutListener.onRemoveFromLayout(portletId, plid);
-				}
+			long plid = getLayout().getPlid();
+
+			if ((portletLayoutListener != null)) {
+				portletLayoutListener.onRemoveFromLayout(portletId, plid);
 			}
 		}
 	}
