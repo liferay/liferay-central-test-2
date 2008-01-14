@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.dao.DAOParamUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -175,6 +176,12 @@ public class GetArticlesAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		String languageId = LanguageUtil.getLanguageId(req);
+
+		if (Validator.isNull(languageId)) {
+			languageId = themeDisplay.getLanguageId();
+		}
+
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		Document resultsDoc =
@@ -192,7 +199,7 @@ public class GetArticlesAction extends Action {
 			Element resultEl = resultSetEl.addElement("result");
 
 			Document articleDoc = reader.read(new StringReader(
-				article.getContentByLocale(themeDisplay.getLanguageId())));
+				article.getContentByLocale(languageId)));
 
 			resultEl.content().add(
 				articleDoc.getRootElement().createCopy());
