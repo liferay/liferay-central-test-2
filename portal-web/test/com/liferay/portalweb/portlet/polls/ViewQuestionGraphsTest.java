@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.polls;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ViewGraphsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewQuestionGraphsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewGraphsTest extends BaseTestCase {
-	public void testViewGraphs() throws Exception {
+public class ViewQuestionGraphsTest extends BaseTestCase {
+	public void testViewQuestionGraphs() throws Exception {
 		selenium.click("link=Test Poll Question");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Area");

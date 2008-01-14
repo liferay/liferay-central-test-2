@@ -37,7 +37,7 @@ public class PollsTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddQuestionTest.class);
 		addTestSuite(AddVoteTest.class);
-		addTestSuite(ViewGraphsTest.class);
+		addTestSuite(ViewQuestionGraphsTest.class);
 	}
 
 }
