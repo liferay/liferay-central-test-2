@@ -37,16 +37,20 @@ public class InputFieldTag extends IncludeTag {
 	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute("liferay-ui:input-field:formName", _formName);
 		req.setAttribute("liferay-ui:input-field:model", _model.getName());
 		req.setAttribute("liferay-ui:input-field:bean", _bean);
 		req.setAttribute("liferay-ui:input-field:field", _field);
 		req.setAttribute("liferay-ui:input-field:fieldParam", _fieldParam);
-		req.setAttribute("liferay-ui:input-field:formName", _formName);
 		req.setAttribute("liferay-ui:input-field:defaultValue", _defaultValue);
 		req.setAttribute(
 			"liferay-ui:input-field:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setFormName(String formName) {
+		_formName = formName;
 	}
 
 	public void setModel(Class model) {
@@ -65,10 +69,6 @@ public class InputFieldTag extends IncludeTag {
 		_fieldParam = fieldParam;
 	}
 
-	public void setFormName(String formName) {
-		_formName = formName;
-	}
-
 	public void setDefaultValue(Object defaultValue) {
 		_defaultValue = defaultValue;
 	}
@@ -83,11 +83,11 @@ public class InputFieldTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_field/page.jsp";
 
+	private String _formName = "fm";
 	private Class _model;
 	private Object _bean;
 	private String _field;
 	private String _fieldParam;
-	private String _formName = "fm";
 	private Object _defaultValue;
 	private boolean _disabled;
 
