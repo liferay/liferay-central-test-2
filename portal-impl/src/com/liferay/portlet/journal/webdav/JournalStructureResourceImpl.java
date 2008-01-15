@@ -53,6 +53,14 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 		_structure = structure;
 	}
 
+	public boolean isCollection() {
+		return false;
+	}
+
+	public String getContentType() {
+		return ContentTypes.TEXT_XML;
+	}
+
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			return new ByteArrayInputStream(
@@ -61,14 +69,6 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
-	}
-
-	public String getContentType() {
-		return ContentTypes.TEXT_XML;
-	}
-
-	public boolean isCollection() {
-		return false;
 	}
 
 	private JournalStructure _structure;

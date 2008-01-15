@@ -53,8 +53,6 @@ public interface WebDAVProps extends WebDAVPropsModel {
 
 	public java.util.Set getPropsSet() throws java.lang.Exception;
 
-	public void store() throws java.lang.Exception;
-
 	public java.lang.String getText(java.lang.String name,
 		java.lang.String prefix, java.lang.String uri)
 		throws java.lang.Exception;
@@ -67,4 +65,6 @@ public interface WebDAVProps extends WebDAVPropsModel {
 
 	public void removeProp(java.lang.String name, java.lang.String prefix,
 		java.lang.String uri) throws java.lang.Exception;
+
+	public void store() throws java.lang.Exception;
 }

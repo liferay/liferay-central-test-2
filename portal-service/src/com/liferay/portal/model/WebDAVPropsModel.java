@@ -53,6 +53,10 @@ public interface WebDAVPropsModel extends BaseModel {
 
 	public void setWebDavPropsId(long webDavPropsId);
 
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
+
 	public Date getCreateDate();
 
 	public void setCreateDate(Date createDate);

@@ -284,6 +284,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		webDAVProps.setNew(true);
 
 		webDAVProps.setWebDavPropsId(model.getWebDavPropsId());
+		webDAVProps.setCompanyId(model.getCompanyId());
 		webDAVProps.setCreateDate(model.getCreateDate());
 		webDAVProps.setModifiedDate(model.getModifiedDate());
 		webDAVProps.setClassNameId(model.getClassNameId());
@@ -311,6 +312,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		webDAVProps.setNew(false);
 
 		webDAVProps.setWebDavPropsId(model.getWebDavPropsId());
+		webDAVProps.setCompanyId(model.getCompanyId());
 		webDAVProps.setCreateDate(model.getCreateDate());
 		webDAVProps.setModifiedDate(model.getModifiedDate());
 		webDAVProps.setClassNameId(model.getClassNameId());

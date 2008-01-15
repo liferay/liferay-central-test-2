@@ -51,6 +51,7 @@ public class WebDAVPropsSoap implements Serializable {
 		WebDAVPropsSoap soapModel = new WebDAVPropsSoap();
 
 		soapModel.setWebDavPropsId(model.getWebDavPropsId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setClassNameId(model.getClassNameId());
@@ -89,6 +90,14 @@ public class WebDAVPropsSoap implements Serializable {
 
 	public void setWebDavPropsId(long webDavPropsId) {
 		_webDavPropsId = webDavPropsId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public Date getCreateDate() {
@@ -132,6 +141,7 @@ public class WebDAVPropsSoap implements Serializable {
 	}
 
 	private long _webDavPropsId;
+	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;

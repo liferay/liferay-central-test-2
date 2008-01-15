@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.base.WebDAVPropsLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.webdav.WebDAVException;
 
 import java.util.Date;
@@ -40,38 +41,38 @@ import java.util.Date;
 public class WebDAVPropsLocalServiceImpl
 	extends WebDAVPropsLocalServiceBaseImpl {
 
-	public void deleteProps(String className, long classPK)
+	public void deleteWebDAVProps(String className, long classPK)
 		throws PortalException, SystemException {
 
-		long classNameId =
-			classNameLocalService.getClassName(className).getClassNameId();
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		try {
 			webDAVPropsPersistence.removeByC_C(classNameId, classPK);
 		}
-		catch (NoSuchWebDAVPropsException nswdpe) {
+		catch (NoSuchWebDAVPropsException nswdavpe) {
 		}
 	}
 
-	public WebDAVProps getProps(String className, long classPK)
+	public WebDAVProps getWebDAVProps(
+			long companyId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		long classNameId =
-			classNameLocalService.getClassName(className).getClassNameId();
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		try {
 			return webDAVPropsPersistence.findByC_C(classNameId, classPK);
 		}
 		catch (NoSuchWebDAVPropsException nswdpe) {
-			WebDAVProps webDavProps =
-				webDAVPropsPersistence.create(counterLocalService.increment());
+			WebDAVProps webDavProps = webDAVPropsPersistence.create(
+				counterLocalService.increment());
 
 			Date now = new Date();
 
-			webDavProps.setClassNameId(classNameId);
-			webDavProps.setClassPK(classPK);
+			webDavProps.setCompanyId(companyId);
 			webDavProps.setCreateDate(now);
 			webDavProps.setModifiedDate(now);
+			webDavProps.setClassNameId(classNameId);
+			webDavProps.setClassPK(classPK);
 
 			webDAVPropsPersistence.update(webDavProps);
 
@@ -79,7 +80,7 @@ public class WebDAVPropsLocalServiceImpl
 		}
 	}
 
-	public void updateProps(WebDAVProps webDavProps)
+	public void storeWebDAVProps(WebDAVProps webDavProps)
 		throws PortalException, SystemException {
 
 		try {

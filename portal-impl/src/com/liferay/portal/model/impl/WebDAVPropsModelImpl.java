@@ -63,6 +63,9 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 			{ "webDavPropsId", new Integer(Types.BIGINT) },
 			
 
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			
 
@@ -77,7 +80,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 
 			{ "props", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WebDAVProps (webDavPropsId LONG not null primary key,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,props TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table WebDAVProps (webDavPropsId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,props TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table WebDAVProps";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.WebDAVProps"),
@@ -107,6 +110,16 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	public void setWebDavPropsId(long webDavPropsId) {
 		if (webDavPropsId != _webDavPropsId) {
 			_webDavPropsId = webDavPropsId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -178,6 +191,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setWebDavPropsId(getWebDavPropsId());
+			model.setCompanyId(getCompanyId());
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
@@ -196,6 +210,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 		WebDAVPropsImpl clone = new WebDAVPropsImpl();
 
 		clone.setWebDavPropsId(getWebDavPropsId());
+		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setClassNameId(getClassNameId());
@@ -254,6 +269,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	}
 
 	private long _webDavPropsId;
+	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;

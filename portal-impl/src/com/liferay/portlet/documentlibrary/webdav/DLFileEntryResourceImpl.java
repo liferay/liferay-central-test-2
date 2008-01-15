@@ -54,6 +54,14 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		_fileEntry = fileEntry;
 	}
 
+	public boolean isCollection() {
+		return false;
+	}
+
+	public String getContentType() {
+		return ContentTypeUtil.getContentType(_fileEntry.getName());
+	}
+
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			return DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -63,14 +71,6 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
-	}
-
-	public String getContentType() {
-		return ContentTypeUtil.getContentType(_fileEntry.getName());
-	}
-
-	public boolean isCollection() {
-		return false;
 	}
 
 	private WebDAVRequest _webDavReq;

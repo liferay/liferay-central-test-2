@@ -23,13 +23,14 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Tuple;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -66,8 +67,6 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			Set props = getProps(webDavReq);
 
 			String xml = getResponseXML(webDavReq, props);
-
-			// Must set the status PRIOR to writing the XML
 
 			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
@@ -107,7 +106,8 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Request XML: \n" + XMLFormatter.toString(xml, "    "));
+					"Request XML: \n" +
+						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}
 
 			SAXReader reader = new SAXReader();

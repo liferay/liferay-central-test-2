@@ -562,6 +562,7 @@
 	</model>
 	<model name="com.liferay.portal.model.WebDAVProps">
 		<field name="webDavPropsId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />

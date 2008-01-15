@@ -86,6 +86,7 @@ alter table User_ add uuid_ VARCHAR(75) null;
 
 create table WebDAVProps (
 	webDavPropsId LONG not null primary key,
+	companyId LONG,
 	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,

@@ -289,7 +289,7 @@ public class JournalStructureLocalServiceImpl
 
 		// WebDAVProps
 
-		webDAVPropsLocalService.deleteProps(
+		webDAVPropsLocalService.deleteWebDAVProps(
 			JournalStructure.class.getName(), structure.getPrimaryKey());
 
 		// Structure

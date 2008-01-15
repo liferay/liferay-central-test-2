@@ -563,6 +563,7 @@
 		<id name="webDavPropsId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />

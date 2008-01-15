@@ -69,6 +69,7 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 
 		WebDAVProps newWebDAVProps = _persistence.create(pk);
 
+		newWebDAVProps.setCompanyId(nextLong());
 		newWebDAVProps.setCreateDate(nextDate());
 		newWebDAVProps.setModifiedDate(nextDate());
 		newWebDAVProps.setClassNameId(nextLong());
@@ -81,6 +82,8 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingWebDAVProps.getWebDavPropsId(),
 			newWebDAVProps.getWebDavPropsId());
+		assertEquals(existingWebDAVProps.getCompanyId(),
+			newWebDAVProps.getCompanyId());
 		assertEquals(existingWebDAVProps.getCreateDate(),
 			newWebDAVProps.getCreateDate());
 		assertEquals(existingWebDAVProps.getModifiedDate(),
@@ -133,6 +136,7 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 
 		WebDAVProps webDAVProps = _persistence.create(pk);
 
+		webDAVProps.setCompanyId(nextLong());
 		webDAVProps.setCreateDate(nextDate());
 		webDAVProps.setModifiedDate(nextDate());
 		webDAVProps.setClassNameId(nextLong());

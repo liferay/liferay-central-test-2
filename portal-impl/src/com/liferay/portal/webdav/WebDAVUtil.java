@@ -43,6 +43,8 @@ import org.dom4j.Namespace;
  */
 public class WebDAVUtil {
 
+	public static final Namespace DAV_URI = Namespace.get("D", "DAV:");
+
 	public static final int SC_MULTI_STATUS = 207;
 
 	public static String fixPath(String path) {
@@ -80,7 +82,9 @@ public class WebDAVUtil {
 		if (value.equals("0")) {
 			return 0;
 		}
-		else if (value.equalsIgnoreCase("infinity") || Validator.isNull(value)){
+		else if (value.equalsIgnoreCase("infinity") ||
+				 Validator.isNull(value)) {
+
 			return -1;
 		}
 		else {
@@ -182,6 +186,5 @@ public class WebDAVUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
-	public static final Namespace DAV_URI = Namespace.get("D", "DAV:");
 
 }

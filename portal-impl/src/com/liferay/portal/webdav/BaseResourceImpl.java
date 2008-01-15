@@ -95,22 +95,6 @@ public class BaseResourceImpl implements Resource {
 		return _modifiedDateFormatter.format(_modifiedDate);
 	}
 
- 	public String getClassName() {
- 		return _className;
- 	}
-
- 	public void setClassName(String className) {
- 		_className = className;
- 	}
-
- 	public long getPrimaryKey() {
- 		return _pk;
- 	}
-
- 	public void setPrimaryKey(long pk) {
- 		_pk = pk;
- 	}
-
 	public int getSize() {
 		return _size;
 	}
@@ -123,6 +107,22 @@ public class BaseResourceImpl implements Resource {
 		_model = model;
 	}
 
+ 	public String getClassName() {
+ 		return _className;
+ 	}
+
+ 	public void setClassName(String className) {
+ 		_className = className;
+ 	}
+
+ 	public long getPrimaryKey() {
+ 		return _primaryKey;
+ 	}
+
+ 	public void setPrimaryKey(long primaryKey) {
+ 		_primaryKey = primaryKey;
+ 	}
+
 	public String getContentType() {
 		return ContentTypes.HTTPD_UNIX_DIRECTORY;
 	}
@@ -131,18 +131,19 @@ public class BaseResourceImpl implements Resource {
 		return null;
 	}
 
+	private static DateFormat _createDateFormatter =
+		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+
+	private static DateFormat _modifiedDateFormatter =
+		new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+
 	private String _href;
 	private String _displayName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _className;
-	private long _pk = -1;
 	private int _size;
 	private Object _model;
-
-	private static DateFormat _createDateFormatter =
-		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-	private static DateFormat _modifiedDateFormatter =
-		new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+	private String _className;
+	private long _primaryKey = -1;
 
 }

@@ -19,11 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
@@ -34,7 +37,6 @@ import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Tuple;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -72,7 +74,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			String xml = getResponseXML(webDavReq, props);
 
-			// Must set the status PRIOR to writing the XML
+			// Must set the status prior to writing the XML
 
 			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
@@ -100,6 +102,30 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		}
 	}
 
+	protected WebDAVProps getStoredProperties(WebDAVRequest webDavReq)
+		throws PortalException, SystemException {
+
+		WebDAVStorage storage = webDavReq.getWebDAVStorage();
+
+		Resource resource = storage.getResource(webDavReq);
+
+		WebDAVProps webDavProps = null;
+
+		if (resource.getPrimaryKey() <= 0) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("There is no primary key set for resource");
+			}
+
+			throw new InvalidRequestException();
+		}
+
+		webDavProps = WebDAVPropsLocalServiceUtil.getWebDAVProps(
+			webDavReq.getCompanyId(), resource.getClassName(),
+			resource.getPrimaryKey());
+
+		return webDavProps;
+	}
+
 	protected Set processInstructions(WebDAVRequest webDavReq)
 		throws InvalidRequestException {
 
@@ -118,7 +144,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Request XML: \n" + XMLFormatter.toString(xml, "    "));
+					"Request XML: \n" +
+						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}
 
 			SAXReader reader = new SAXReader();
@@ -136,8 +163,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 				if (list.size() != 1) {
 					throw new InvalidRequestException(
-						"There should only be one <prop /> per " +
-						"set or remove instruction.");
+						"There should only be one <prop /> per set or remove " +
+							"instruction.");
 				}
 
 				Element prop = (Element)list.get(0);
@@ -160,9 +187,9 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 				Element customProp = (Element)list.get(0);
 
 				String name = customProp.getName();
-				String text = customProp.getText();
 				String prefix = customProp.getNamespacePrefix();
 				String uri = customProp.getNamespaceURI();
+				String text = customProp.getText();
 
 				Namespace namespace = null;
 
@@ -192,38 +219,17 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 				else {
 					throw new InvalidRequestException(
 						"Instead of set/remove instruction, received " +
-						instruction);
+							instruction);
 				}
 			}
 
-			WebDAVPropsLocalServiceUtil.updateProps(webDavProps);
+			WebDAVPropsLocalServiceUtil.storeWebDAVProps(webDavProps);
 
 			return newProps;
 		}
 		catch (Exception e) {
 			throw new InvalidRequestException(e);
 		}
-	}
-
-	protected WebDAVProps getStoredProperties(WebDAVRequest webDavReq)
-		throws PortalException, SystemException {
-
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		Resource resource = storage.getResource(webDavReq);
-		WebDAVProps webDavProps;
-
-		if (resource.getPrimaryKey() <= 0) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("There is no primary key set for resource");
-			}
-
-			throw new InvalidRequestException();
-		}
-
-		webDavProps = WebDAVPropsLocalServiceUtil.getProps(
-			resource.getClassName(), resource.getPrimaryKey());
-
-		return webDavProps;
 	}
 
 	private static Log _log = LogFactory.getLog(ProppatchMethodImpl.class);

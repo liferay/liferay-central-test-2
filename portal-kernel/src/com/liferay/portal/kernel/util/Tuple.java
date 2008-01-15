@@ -19,7 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.util;
+
+package com.liferay.portal.kernel.util;
 
 /**
  * <a href="Tuple.java.html"><b><i>View Source</i></b></a>
@@ -29,36 +30,44 @@ package com.liferay.util;
  */
 public class Tuple {
 
-	public Tuple(Object o0, Object o1) {
-		_objArr = new Object[] {o0, o1};
+	public Tuple(Object obj0, Object obj1) {
+		_array = new Object[] {obj0, obj1};
 	}
 
-	public Tuple(Object o0, Object o1, Object o2) {
-		_objArr = new Object[] {o0, o1, o2};
+	public Tuple(Object obj0, Object obj1, Object obj2) {
+		_array = new Object[] {obj0, obj1, obj2};
 	}
 
-	public Tuple(Object[] objArr) {
-		_objArr = objArr;
+	public Tuple(Object obj0, Object obj1, Object obj2, Object obj3) {
+		_array = new Object[] {obj0, obj1, obj2, obj3};
 	}
 
-	public boolean equals(Object x) {
-		if (!(x instanceof Tuple)) {
+	public Tuple(Object[] array) {
+		_array = array;
+	}
+
+	public Object getObject(int i) {
+		return _array[i];
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Tuple)) {
 			return false;
 		}
 
-		Tuple tuple = (Tuple)x;
+		Tuple tuple = (Tuple)obj;
 
-		if (tuple._objArr.length != _objArr.length) {
+		if (tuple._array.length != _array.length) {
 			return false;
 		}
 
-		for (int i = 0; i < _objArr.length; i++) {
-			if ((tuple._objArr != null) && (_objArr[i] != null) &&
-				!_objArr[i].equals(tuple._objArr[i])) {
+		for (int i = 0; i < _array.length; i++) {
+			if ((tuple._array != null) && (_array[i] != null) &&
+				(!_array[i].equals(tuple._array[i]))) {
 
 				return false;
 			}
-			else if ((tuple._objArr[i]) == null || (_objArr[i] == null)) {
+			else if ((tuple._array[i] == null) || (_array[i] == null)) {
 				return false;
 			}
 		}
@@ -69,17 +78,13 @@ public class Tuple {
 	public int hashCode() {
 		int hashCode = 0;
 
-		for (int i = 0; i < _objArr.length; i++) {
-			hashCode = hashCode ^ _objArr[i].hashCode();
+		for (int i = 0; i < _array.length; i++) {
+			hashCode = hashCode ^ _array[i].hashCode();
 		}
 
 		return hashCode;
 	}
 
-	public Object getObject(int i) {
-		return _objArr[i];
-	}
-
-	private Object[] _objArr;
+	private Object[] _array;
 
 }

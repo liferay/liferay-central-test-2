@@ -326,7 +326,7 @@ public class JournalTemplateLocalServiceImpl
 
 		// WebDAVProps
 
-		webDAVPropsLocalService.deleteProps(
+		webDAVPropsLocalService.deleteWebDAVProps(
 			JournalTemplate.class.getName(), template.getPrimaryKey());
 
 		// Template

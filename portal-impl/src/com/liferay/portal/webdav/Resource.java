@@ -37,11 +37,17 @@ public interface Resource {
 
 	public String getDisplayName();
 
-	public String getContentType();
+	public boolean isCollection();
 
  	public String getCreateDate();
 
  	public String getModifiedDate();
+
+ 	public int getSize();
+
+	public Object getModel();
+
+	public void setModel(Object model);
 
  	public String getClassName();
 
@@ -49,15 +55,9 @@ public interface Resource {
 
  	public long getPrimaryKey();
 
- 	public void setPrimaryKey(long pk);
+ 	public void setPrimaryKey(long primaryKey);
 
-	public boolean isCollection();
-
- 	public int getSize();
-
-	public Object getModel();
-
-	public void setModel(Object model);
+	public String getContentType();
 
 	public InputStream getContentAsStream() throws WebDAVException ;
 

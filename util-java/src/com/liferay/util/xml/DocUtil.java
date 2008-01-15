@@ -73,7 +73,7 @@ public class DocUtil {
 	}
 
 	public static void add(
-			Element el, String name, Namespace ns, boolean text) {
+		Element el, String name, Namespace ns, boolean text) {
 
 		add(el, name, ns, String.valueOf(text));
 	}

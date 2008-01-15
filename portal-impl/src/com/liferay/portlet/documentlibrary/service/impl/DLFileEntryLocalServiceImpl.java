@@ -487,7 +487,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// WebDAVProps
 
-		webDAVPropsLocalService.deleteProps(
+		webDAVPropsLocalService.deleteWebDAVProps(
 			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
 
 		// File entry

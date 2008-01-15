@@ -22,10 +22,11 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.util.Tuple;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.StringReader;
@@ -57,7 +58,7 @@ public class WebDAVPropsImpl
 		String props = super.getProps();
 
 		if (Validator.isNull(props)) {
-			return "<properties />";
+			return _PROPS;
 		}
 		else {
 			return props;
@@ -95,16 +96,6 @@ public class WebDAVPropsImpl
 		}
 
 		return propsSet;
-	}
-
-	public void store() throws Exception {
-		if (_document != null) {
-			String xml = XMLFormatter.toString(_document, "    ");
-
-			setProps(xml);
-
-			_document = null;
-		}
 	}
 
 	public String getText(String name, String prefix, String uri)
@@ -185,6 +176,17 @@ public class WebDAVPropsImpl
 		_removeExisting(qname);
 	}
 
+	public void store() throws Exception {
+		if (_document != null) {
+			String xml = XMLFormatter.toString(
+				_document, StringPool.FOUR_SPACES);
+
+			setProps(xml);
+
+			_document = null;
+		}
+	}
+
 	private Document _getPropsDocument() throws DocumentException {
 		if (_document == null) {
 			SAXReader reader = new SAXReader();
@@ -195,9 +197,7 @@ public class WebDAVPropsImpl
 		return _document;
 	}
 
-	private Element _removeExisting(QName qname)
-		throws Exception {
-
+	private Element _removeExisting(QName qname) throws Exception {
 		Document doc = _getPropsDocument();
 
 		Element root = doc.getRootElement();
@@ -212,6 +212,8 @@ public class WebDAVPropsImpl
 
 		return root;
 	}
+
+	private static final String _PROPS = "<properties />";
 
 	private Document _document = null;
 

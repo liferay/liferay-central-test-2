@@ -66,6 +66,8 @@ public class StringPool {
 
 	public static final String FORWARD_SLASH = "/";
 
+	public static final String FOUR_SPACES = "    ";
+
 	public static final String LESS_THAN = "<";
 
 	public static final String LIKE = "LIKE";
