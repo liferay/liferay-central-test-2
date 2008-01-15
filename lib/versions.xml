@@ -227,6 +227,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jbi_rt.jar</file-name>
+		<version>2.0 UR1</version>
+		<project-name>Glassfish</project-name>
+		<project-url>https://glassfish.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jms.jar</file-name>
 		<version>1.1</version>
 		<project-name>Java Message Services (JMS)</project-name>
