@@ -172,24 +172,24 @@ User user2 = company.getDefaultUser();
 			</td>
 		</tr>
 		</table>
+
+		<br />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="communityLogo" defaultValue="<%= company.isCommunityLogo() %>" />
+			</td>
+		</tr>
+		</table>
 	</td>
 	<td align="center" valign="top">
 		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" /><br />
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a><br />
-	</td>
-</tr>
-</table>
-
-<br />
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="communityLogo" defaultValue="<%= company.isCommunityLogo() %>" />
 	</td>
 </tr>
 </table>

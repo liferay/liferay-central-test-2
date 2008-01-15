@@ -91,7 +91,7 @@ public class InputTimeZoneTag extends IncludeTag {
 	private String _value = TimeZoneUtil.getDefault().getID();
 	private boolean _nullable;
 	private boolean _daylight;
-	private int _displayStyle = TimeZone.SHORT;
+	private int _displayStyle = TimeZone.LONG;
 	private boolean _disabled;
 
 }
