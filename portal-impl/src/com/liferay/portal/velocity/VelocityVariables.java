@@ -80,6 +80,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 import org.apache.velocity.VelocityContext;
+import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.EscapeTool;
+import org.apache.velocity.tools.generic.IteratorTool;
+import org.apache.velocity.tools.generic.ListTool;
+import org.apache.velocity.tools.generic.MathTool;
+import org.apache.velocity.tools.generic.NumberTool;
+import org.apache.velocity.tools.generic.SortTool;
 
 /**
  * <a href="VelocityVariables.java.html"><b><i>View Source</i></b></a>
@@ -104,9 +111,17 @@ public class VelocityVariables {
 
 		vc.put("dateFormats", DateFormats_IW.getInstance());
 
+		// Date tool
+
+		vc.put("dateTool", new DateTool());
+
 		// Date util
 
 		vc.put("dateUtil", DateUtil_IW.getInstance());
+
+		// Escape tool
+
+		vc.put("escapeTool", new EscapeTool());
 
 		// Getter util
 
@@ -124,10 +139,26 @@ public class VelocityVariables {
 
 		vc.put("imageToken", ImageServletTokenUtil.getImageServletToken());
 
+		// Iterator tool
+
+		vc.put("iteratorTool", new IteratorTool());
+
 		// Language util
 
 		vc.put("languageUtil", LanguageUtil.getLanguage());
 		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+
+		// List tool
+
+		vc.put("listTool", new ListTool());
+
+		// Math tool
+
+		vc.put("mathTool", new MathTool());
+
+		// Number tool
+
+		vc.put("numberTool", new NumberTool());
 
 		// Param util
 
@@ -176,6 +207,10 @@ public class VelocityVariables {
 		_insertHelperUtility(
 			vc, restrictedVariables, "sessionClicks",
 			SessionClicks_IW.getInstance());
+
+		// Sort tool
+
+		vc.put("sortTool", new SortTool());
 
 		// Static field getter
 
