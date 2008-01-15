@@ -183,7 +183,8 @@ public class SeleneseToJavaBuilder {
 				sm.append(param2);
 				sm.append(");");
 			}
-			else if (param1.equals("type") || param1.equals("typeKeys") ||
+			else if (param1.equals("select") || param1.equals("type") ||
+					 param1.equals("typeKeys") ||
 					 param1.equals("waitForPopUp")) {
 
 				sm.append("selenium.");
