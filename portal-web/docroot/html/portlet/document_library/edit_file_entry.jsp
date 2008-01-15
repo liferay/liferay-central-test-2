@@ -125,7 +125,7 @@ portletURL.setParameter("name", name);
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
 			<%= Html.escape(fileEntry.getTitleWithExtension()) %>
 			</a>
 		</td>

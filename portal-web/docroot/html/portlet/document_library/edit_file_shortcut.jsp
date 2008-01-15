@@ -157,7 +157,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=<%= fileShortcutId %>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&fileShortcutId=<%= fileShortcutId %>">
 			<%= toFileEntry.getTitle() %>
 			</a>
 		</td>
