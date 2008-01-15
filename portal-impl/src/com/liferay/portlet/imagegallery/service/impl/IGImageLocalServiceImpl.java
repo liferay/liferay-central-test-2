@@ -114,14 +114,15 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
+			byte[] bytes = FileUtil.getBytes(file);
+
+			validate(file, bytes);
+
 			User user = userPersistence.findByPrimaryKey(userId);
 			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 			RenderedImage renderedImage = ImageUtil.read(
 				file).getRenderedImage();
-			byte[] bytes = FileUtil.getBytes(file);
 			Date now = new Date();
-
-			validate(file, bytes);
 
 			long imageId = counterLocalService.increment();
 
