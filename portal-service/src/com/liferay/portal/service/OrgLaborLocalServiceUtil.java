@@ -759,6 +759,19 @@ public class OrgLaborLocalServiceUtil {
 		orgLaborLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		orgLaborLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 

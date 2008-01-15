@@ -558,6 +558,17 @@
 		<property name="path" column="path_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pathDate" />
 	</class>
+	<class name="com.liferay.portal.model.impl.WebDAVPropsImpl" table="WebDAVProps">
+		<cache usage="read-write" />
+		<id name="webDavPropsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="props" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.WebsiteImpl" table="Website">
 		<cache usage="read-write" />
 		<id name="websiteId" type="long">

@@ -278,6 +278,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
 	</entity>
 	<entity name="JournalTemplate" uuid="true" local-service="true" remote-service="true">
 
@@ -338,6 +339,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
 	</entity>
 	<exceptions>
 		<exception>ArticleContent</exception>

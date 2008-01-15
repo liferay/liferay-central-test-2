@@ -43,6 +43,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
@@ -52,6 +54,8 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
@@ -362,6 +366,24 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public WebDAVPropsLocalService getWebDAVPropsLocalService() {
+		return webDAVPropsLocalService;
+	}
+
+	public void setWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		this.webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
+	public WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		return webDAVPropsPersistence;
+	}
+
+	public void setWebDAVPropsPersistence(
+		WebDAVPropsPersistence webDAVPropsPersistence) {
+		this.webDAVPropsPersistence = webDAVPropsPersistence;
+	}
+
 	public MBMessageLocalService getMBMessageLocalService() {
 		return mbMessageLocalService;
 	}
@@ -565,6 +587,14 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 			userFinder = UserFinderUtil.getFinder();
 		}
 
+		if (webDAVPropsLocalService == null) {
+			webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getImpl();
+		}
+
+		if (webDAVPropsPersistence == null) {
+			webDAVPropsPersistence = WebDAVPropsUtil.getPersistence();
+		}
+
 		if (mbMessageLocalService == null) {
 			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
 		}
@@ -635,6 +665,8 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;

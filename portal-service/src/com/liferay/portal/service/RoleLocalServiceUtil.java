@@ -759,6 +759,19 @@ public class RoleLocalServiceUtil {
 		roleLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		roleLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 

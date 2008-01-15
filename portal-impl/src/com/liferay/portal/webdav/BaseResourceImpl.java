@@ -22,9 +22,15 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.kernel.util.ContentTypes;
+
 import java.io.InputStream;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * <a href="BaseResourceImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,26 +41,22 @@ import java.util.Date;
  */
 public class BaseResourceImpl implements Resource {
 
-	public BaseResourceImpl(
-		String href, String displayName, boolean collection) {
-
-		this(href, displayName, collection, null, null);
+	public BaseResourceImpl(String href, String displayName) {
+		this(href, displayName, null, null);
 	}
 
 	public BaseResourceImpl(
-		String href, String displayName, boolean collection, Date createDate,
-		Date modifiedDate) {
+		String href, String displayName, Date createDate, Date modifiedDate) {
 
-		this(href, displayName, collection, createDate, modifiedDate, 0);
+		this(href, displayName, createDate, modifiedDate, 0);
 	}
 
 	public BaseResourceImpl(
-		String href, String displayName, boolean collection, Date createDate,
-		Date modifiedDate, int size) {
+		String href, String displayName, Date createDate, Date modifiedDate,
+		int size) {
 
 		_href = href;
 		_displayName = displayName;
-		_collection = collection;
 
 		if (createDate == null) {
 			_createDate = new Date();
@@ -82,16 +84,32 @@ public class BaseResourceImpl implements Resource {
 	}
 
 	public boolean isCollection() {
-		return _collection;
+		return true;
 	}
 
- 	public Date getCreateDate() {
-		return _createDate;
+ 	public String getCreateDate() {
+		return _createDateFormatter.format(_createDate);
 	}
 
- 	public Date getModifiedDate() {
-		return _modifiedDate;
+ 	public String getModifiedDate() {
+		return _modifiedDateFormatter.format(_modifiedDate);
 	}
+
+ 	public String getClassName() {
+ 		return _className;
+ 	}
+
+ 	public void setClassName(String className) {
+ 		_className = className;
+ 	}
+
+ 	public long getPrimaryKey() {
+ 		return _pk;
+ 	}
+
+ 	public void setPrimaryKey(long pk) {
+ 		_pk = pk;
+ 	}
 
 	public int getSize() {
 		return _size;
@@ -105,16 +123,26 @@ public class BaseResourceImpl implements Resource {
 		_model = model;
 	}
 
+	public String getContentType() {
+		return ContentTypes.HTTPD_UNIX_DIRECTORY;
+	}
+
 	public InputStream getContentAsStream() throws WebDAVException {
 		return null;
 	}
 
 	private String _href;
 	private String _displayName;
-	private boolean _collection;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _className;
+	private long _pk = -1;
 	private int _size;
 	private Object _model;
+
+	private static DateFormat _createDateFormatter =
+		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+	private static DateFormat _modifiedDateFormatter =
+		new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 }

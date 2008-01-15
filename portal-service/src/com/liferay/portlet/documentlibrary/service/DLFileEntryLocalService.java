@@ -130,6 +130,11 @@ public interface DLFileEntryLocalService {
 	public void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder);
 
+	public com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence();
+
+	public void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence);
+
 	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
 
 	public void setMBMessagePersistence(

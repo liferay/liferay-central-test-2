@@ -19,14 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.WebDAVProps;
+import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
 import com.liferay.portal.webdav.InvalidRequestException;
+import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
+import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Tuple;
@@ -37,6 +42,7 @@ import java.io.StringReader;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,19 +57,18 @@ import org.dom4j.Namespace;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="PropfindMethodImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProppatchMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Alexander Chow
  *
  */
-public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
+public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 	public int process(WebDAVRequest webDavReq) throws WebDAVException {
 		try {
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-			Set props = getProps(webDavReq);
+			Set props = processInstructions(webDavReq);
 
 			String xml = getResponseXML(webDavReq, props);
 
@@ -84,6 +89,10 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			return -1;
 		}
 		catch (InvalidRequestException ire) {
+			if (_log.isInfoEnabled()) {
+				_log.info(ire.getMessage(), ire);
+			}
+
 			return HttpServletResponse.SC_BAD_REQUEST;
 		}
 		catch (Exception e) {
@@ -91,18 +100,20 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		}
 	}
 
-	protected Set getProps(WebDAVRequest webDavReq)
+	protected Set processInstructions(WebDAVRequest webDavReq)
 		throws InvalidRequestException {
 
 		try {
-			Set props = new HashSet();
+			Set newProps = new HashSet();
 
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
+
+			WebDAVProps webDavProps = getStoredProperties(webDavReq);
 
 			String xml = new String(FileUtil.getBytes(req.getInputStream()));
 
 			if (Validator.isNull(xml)) {
-				return props;
+				return newProps;
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -116,15 +127,42 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			Element root = doc.getRootElement();
 
-			Element prop = root.element("prop");
-
-			Iterator itr = prop.elements().iterator();
+			Iterator itr = root.elements().iterator();
 
 			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
+				Element instruction = (Element)itr.next();
 
-				String prefix = el.getNamespacePrefix();
-				String uri = el.getNamespaceURI();
+				List list = instruction.elements();
+
+				if (list.size() != 1) {
+					throw new InvalidRequestException(
+						"There should only be one <prop /> per " +
+						"set or remove instruction.");
+				}
+
+				Element prop = (Element)list.get(0);
+
+				if (!prop.getName().equals("prop") ||
+					!prop.getNamespaceURI().equals(
+						WebDAVUtil.DAV_URI.getURI())) {
+
+					throw new InvalidRequestException(
+						"Invalid <prop /> element " + prop);
+				}
+
+				list = prop.elements();
+
+				if (list.size() != 1) {
+					throw new InvalidRequestException(
+						"<prop /> should only have one subelement.");
+				}
+
+				Element customProp = (Element)list.get(0);
+
+				String name = customProp.getName();
+				String text = customProp.getText();
+				String prefix = customProp.getNamespacePrefix();
+				String uri = customProp.getNamespaceURI();
 
 				Namespace namespace = null;
 
@@ -138,16 +176,56 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 					namespace = Namespace.get(prefix, uri);
 				}
 
-				props.add(new Tuple(el.getName(), namespace));
+				if (instruction.getName().equals("set")) {
+					if (Validator.isNull(text)) {
+						webDavProps.addProp(name, prefix, uri);
+					}
+					else {
+						webDavProps.addProp(name, prefix, uri, text);
+					}
+
+					newProps.add(new Tuple(customProp.getName(), namespace));
+				}
+				else if (instruction.getName().equals("remove")) {
+					webDavProps.removeProp(name, prefix, uri);
+				}
+				else {
+					throw new InvalidRequestException(
+						"Instead of set/remove instruction, received " +
+						instruction);
+				}
 			}
 
-			return props;
+			WebDAVPropsLocalServiceUtil.updateProps(webDavProps);
+
+			return newProps;
 		}
 		catch (Exception e) {
 			throw new InvalidRequestException(e);
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PropfindMethodImpl.class);
+	protected WebDAVProps getStoredProperties(WebDAVRequest webDavReq)
+		throws PortalException, SystemException {
+
+		WebDAVStorage storage = webDavReq.getWebDAVStorage();
+		Resource resource = storage.getResource(webDavReq);
+		WebDAVProps webDavProps;
+
+		if (resource.getPrimaryKey() <= 0) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("There is no primary key set for resource");
+			}
+
+			throw new InvalidRequestException();
+		}
+
+		webDavProps = WebDAVPropsLocalServiceUtil.getProps(
+			resource.getClassName(), resource.getPrimaryKey());
+
+		return webDavProps;
+	}
+
+	private static Log _log = LogFactory.getLog(ProppatchMethodImpl.class);
 
 }

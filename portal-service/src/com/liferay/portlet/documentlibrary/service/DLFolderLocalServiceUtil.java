@@ -278,6 +278,19 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.setUserFinder(userFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		dlFolderLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 

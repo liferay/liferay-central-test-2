@@ -759,6 +759,19 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 

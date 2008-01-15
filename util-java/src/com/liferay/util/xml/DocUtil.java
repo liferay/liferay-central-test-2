@@ -25,6 +25,8 @@ package com.liferay.util.xml;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.dom4j.Element;
+import org.dom4j.Namespace;
+import org.dom4j.QName;
 
 /**
  * <a href="DocUtil.java.html"><b><i>View Source</i></b></a>
@@ -58,12 +60,50 @@ public class DocUtil {
 		add(el, name, String.valueOf(text));
 	}
 
+	public static void add(Element el, String name, Object text) {
+		add(el, name, String.valueOf(text));
+	}
+
 	public static void add(Element el, String name, String text) {
 		el.addElement(name).addText(GetterUtil.getString(text));
 	}
 
-	public static void add(Element el, String name, Object obj) {
-		el.addElement(name).addText(String.valueOf(obj));
+	public static Element add(Element el, String name, Namespace ns) {
+		return el.addElement(new QName(name, ns));
+	}
+
+	public static void add(
+			Element el, String name, Namespace ns, boolean text) {
+
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, double text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, float text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, int text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, long text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, short text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, Object text) {
+		add(el, name, ns, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, Namespace ns, String text) {
+		el.addElement(new QName(name, ns)).addText(GetterUtil.getString(text));
 	}
 
 }

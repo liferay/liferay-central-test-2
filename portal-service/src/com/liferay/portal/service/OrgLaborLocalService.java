@@ -325,6 +325,11 @@ public interface OrgLaborLocalService {
 	public void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence);
 
+	public com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence();
+
+	public void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence);
+
 	public com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence();
 
 	public void setWebsitePersistence(

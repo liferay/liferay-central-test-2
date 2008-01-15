@@ -113,7 +113,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 				name = user.getFullName();
 			}
 
-			return new BaseResourceImpl(href, name, true);
+			return new BaseResourceImpl(href, name);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

@@ -115,10 +115,12 @@ public class WebDAVServlet extends HttpServlet {
 			_log.error(e, e);
 		}
 		finally {
-			res.setStatus(status);
+			if (status > 0) {
+				res.setStatus(status);
 
-			if (_log.isInfoEnabled()) {
-				_log.info("Returning status code " + status);
+				if (_log.isInfoEnabled()) {
+					_log.info("Returning status code " + status);
+				}
 			}
 
 			try {

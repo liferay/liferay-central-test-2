@@ -759,6 +759,19 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		phoneLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

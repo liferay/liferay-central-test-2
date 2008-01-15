@@ -151,6 +151,8 @@ import com.liferay.portal.service.UserTrackerLocalService;
 import com.liferay.portal.service.UserTrackerLocalServiceFactory;
 import com.liferay.portal.service.UserTrackerPathLocalService;
 import com.liferay.portal.service.UserTrackerPathLocalServiceFactory;
+import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AccountUtil;
@@ -256,6 +258,8 @@ import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
@@ -1271,6 +1275,24 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		this.userTrackerPathPersistence = userTrackerPathPersistence;
 	}
 
+	public WebDAVPropsLocalService getWebDAVPropsLocalService() {
+		return webDAVPropsLocalService;
+	}
+
+	public void setWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		this.webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
+	public WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		return webDAVPropsPersistence;
+	}
+
+	public void setWebDAVPropsPersistence(
+		WebDAVPropsPersistence webDAVPropsPersistence) {
+		this.webDAVPropsPersistence = webDAVPropsPersistence;
+	}
+
 	public WebsitePersistence getWebsitePersistence() {
 		return websitePersistence;
 	}
@@ -1744,6 +1766,14 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 			userTrackerPathPersistence = UserTrackerPathUtil.getPersistence();
 		}
 
+		if (webDAVPropsLocalService == null) {
+			webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getImpl();
+		}
+
+		if (webDAVPropsPersistence == null) {
+			webDAVPropsPersistence = WebDAVPropsUtil.getPersistence();
+		}
+
 		if (websitePersistence == null) {
 			websitePersistence = WebsiteUtil.getPersistence();
 		}
@@ -1869,6 +1899,8 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	protected UserTrackerPersistence userTrackerPersistence;
 	protected UserTrackerPathLocalService userTrackerPathLocalService;
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
 	protected WebsitePersistence websitePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

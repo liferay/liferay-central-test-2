@@ -24,8 +24,6 @@ package com.liferay.portal.webdav;
 
 import java.io.InputStream;
 
-import java.util.Date;
-
 /**
  * <a href="Resource.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,9 +37,19 @@ public interface Resource {
 
 	public String getDisplayName();
 
- 	public Date getCreateDate();
+	public String getContentType();
 
- 	public Date getModifiedDate();
+ 	public String getCreateDate();
+
+ 	public String getModifiedDate();
+
+ 	public String getClassName();
+
+ 	public void setClassName(String className);
+
+ 	public long getPrimaryKey();
+
+ 	public void setPrimaryKey(long pk);
 
 	public boolean isCollection();
 

@@ -140,6 +140,11 @@ public interface DLFolderLocalService {
 	public void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder);
 
+	public com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence();
+
+	public void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(

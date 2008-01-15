@@ -741,10 +741,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 
 		Resource resource = new BaseResourceImpl(
-			href, folder.getName(), true, folder.getCreateDate(),
+			href, folder.getName(), folder.getCreateDate(),
 			folder.getModifiedDate());
 
 		resource.setModel(folder);
+		resource.setClassName(DLFolder.class.getName());
+		resource.setPrimaryKey(folder.getPrimaryKey());
 
 		return resource;
 	}

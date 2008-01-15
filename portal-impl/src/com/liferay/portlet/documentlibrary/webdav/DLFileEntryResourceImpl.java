@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.webdav;
 
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -42,11 +43,12 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		WebDAVRequest webDavReq, DLFileEntry fileEntry, String href) {
 
 		super(
-			href, fileEntry.getTitleWithExtension(), false,
-			fileEntry.getCreateDate(), fileEntry.getModifiedDate(),
-			fileEntry.getSize());
+			href, fileEntry.getTitleWithExtension(), fileEntry.getCreateDate(),
+			fileEntry.getModifiedDate(), fileEntry.getSize());
 
 		setModel(fileEntry);
+		setClassName(DLFileEntry.class.getName());
+		setPrimaryKey(fileEntry.getPrimaryKey());
 
 		_webDavReq = webDavReq;
 		_fileEntry = fileEntry;
@@ -61,6 +63,14 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
+	}
+
+	public String getContentType() {
+		return ContentTypeUtil.getContentType(_fileEntry.getName());
+	}
+
+	public boolean isCollection() {
+		return false;
 	}
 
 	private WebDAVRequest _webDavReq;

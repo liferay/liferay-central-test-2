@@ -44,6 +44,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutFinderUtil;
@@ -57,6 +59,8 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
@@ -371,6 +375,24 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public WebDAVPropsLocalService getWebDAVPropsLocalService() {
+		return webDAVPropsLocalService;
+	}
+
+	public void setWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		this.webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
+	public WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		return webDAVPropsPersistence;
+	}
+
+	public void setWebDAVPropsPersistence(
+		WebDAVPropsPersistence webDAVPropsPersistence) {
+		this.webDAVPropsPersistence = webDAVPropsPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
@@ -499,6 +521,14 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (webDAVPropsLocalService == null) {
+			webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getImpl();
+		}
+
+		if (webDAVPropsPersistence == null) {
+			webDAVPropsPersistence = WebDAVPropsUtil.getPersistence();
+		}
 	}
 
 	protected DLFileEntryLocalService dlFileEntryLocalService;
@@ -533,4 +563,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
 }

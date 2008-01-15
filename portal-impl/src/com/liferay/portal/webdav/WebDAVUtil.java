@@ -25,14 +25,14 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.FileUtil;
-
-import java.io.IOException;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Namespace;
 
 /**
  * <a href="WebDAVUtil.java.html"><b><i>View Source</i></b></a>
@@ -73,18 +73,18 @@ public class WebDAVUtil {
 	}
 
 	public static long getDepth(HttpServletRequest req)
-		throws InvalidDepthException {
+		throws InvalidRequestException {
 
 		String value = GetterUtil.getString(req.getHeader("Depth"));
 
 		if (value.equals("0")) {
 			return 0;
 		}
-		else if (value.equalsIgnoreCase("infinity")){
+		else if (value.equalsIgnoreCase("infinity") || Validator.isNull(value)){
 			return -1;
 		}
 		else {
-			throw new InvalidDepthException(value);
+			throw new InvalidRequestException(value);
 		}
 	}
 
@@ -151,18 +151,6 @@ public class WebDAVUtil {
 		return StringUtil.split(path, StringPool.SLASH);
 	}
 
-	public static String getRequestXML(HttpServletRequest req)
-		throws IOException {
-
-		String xml = new String(FileUtil.getBytes(req.getInputStream()));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Request XML\n" + xml);
-		}
-
-		return xml;
-	}
-
 	public static boolean isGroupPath(String path) {
 		return isGroupPath(path, false);
 	}
@@ -194,5 +182,6 @@ public class WebDAVUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
+	public static final Namespace DAV_URI = Namespace.get("D", "DAV:");
 
 }

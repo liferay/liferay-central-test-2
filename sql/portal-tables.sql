@@ -1274,6 +1274,15 @@ create table UserTrackerPath (
 	pathDate DATE null
 );
 
+create table WebDAVProps (
+	webDavPropsId LONG not null primary key,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	props TEXT null
+);
+
 create table Website (
 	websiteId LONG not null primary key,
 	companyId LONG,

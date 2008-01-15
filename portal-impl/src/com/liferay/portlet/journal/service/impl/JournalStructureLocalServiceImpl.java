@@ -287,6 +287,11 @@ public class JournalStructureLocalServiceImpl
 			structure.getCompanyId(), JournalStructure.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, structure.getId());
 
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteProps(
+			JournalStructure.class.getName(), structure.getPrimaryKey());
+
 		// Structure
 
 		journalStructurePersistence.remove(structure.getPrimaryKey());

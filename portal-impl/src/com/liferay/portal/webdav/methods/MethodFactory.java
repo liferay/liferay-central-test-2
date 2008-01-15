@@ -63,6 +63,7 @@ public class MethodFactory {
 		_methods.put("MKCOL", InstancePool.get(_MKCOL_METHOD_IMPL));
 		_methods.put("MOVE", InstancePool.get(_MOVE_METHOD_IMPL));
 		_methods.put("OPTIONS", InstancePool.get(_OPTIONS_METHOD_IMPL));
+		_methods.put("PROPPATCH", InstancePool.get(_PROPPATCH_METHOD_IMPL));
 		_methods.put("PROPFIND", InstancePool.get(_PROPFIND_METHOD_IMPL));
 		_methods.put("PUT", InstancePool.get(_PUT_METHOD_IMPL));
 	}
@@ -122,6 +123,10 @@ public class MethodFactory {
 	private static final String _PROPFIND_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".PROPFIND"),
 		PropfindMethodImpl.class.getName());
+
+	private static final String _PROPPATCH_METHOD_IMPL = GetterUtil.getString(
+		PropsUtil.get(MethodFactory.class.getName() + ".PROPPATCH"),
+		ProppatchMethodImpl.class.getName());
 
 	private static final String _PUT_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".PUT"),

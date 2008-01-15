@@ -23,7 +23,7 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.webdav.InvalidDepthException;
+import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -83,7 +83,7 @@ public class CopyMethodImpl implements Method {
 					status = storage.copyCollectionResource(
 						webDavReq, resource, destination, overwrite, depth);
 				}
-				catch (InvalidDepthException ide) {
+				catch (InvalidRequestException ire) {
 					status = HttpServletResponse.SC_BAD_REQUEST;
 				}
 			}

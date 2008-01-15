@@ -25,26 +25,26 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="InvalidDepthException.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvalidRequestException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class InvalidDepthException extends PortalException {
+public class InvalidRequestException extends PortalException {
 
-	public InvalidDepthException() {
+	public InvalidRequestException() {
 		super();
 	}
 
-	public InvalidDepthException(String msg) {
+	public InvalidRequestException(String msg) {
 		super(msg);
 	}
 
-	public InvalidDepthException(String msg, Throwable cause) {
+	public InvalidRequestException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidDepthException(Throwable cause) {
+	public InvalidRequestException(Throwable cause) {
 		super(cause);
 	}
 

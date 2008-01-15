@@ -485,6 +485,11 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
 
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteProps(
+			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+
 		// File entry
 
 		dlFileEntryPersistence.remove(fileEntry.getPrimaryKey());

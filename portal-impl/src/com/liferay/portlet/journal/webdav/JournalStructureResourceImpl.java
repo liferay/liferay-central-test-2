@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.webdav;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -42,10 +43,12 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 		JournalStructure structure, String href) {
 
 		super(
-			href, structure.getStructureId(), false, structure.getCreateDate(),
+			href, structure.getStructureId(), structure.getCreateDate(),
 			structure.getModifiedDate(), structure.getXsd().length());
 
 		setModel(structure);
+		setClassName(JournalStructure.class.getName());
+		setPrimaryKey(structure.getPrimaryKey());
 
 		_structure = structure;
 	}
@@ -58,6 +61,14 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
+	}
+
+	public String getContentType() {
+		return ContentTypes.TEXT_XML;
+	}
+
+	public boolean isCollection() {
+		return false;
 	}
 
 	private JournalStructure _structure;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.webdav;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -39,10 +40,12 @@ public class JournalTemplateResourceImpl extends BaseResourceImpl {
 
 	public JournalTemplateResourceImpl(JournalTemplate template, String href) {
 		super(
-			href, template.getTemplateId(), false, template.getCreateDate(),
+			href, template.getTemplateId(), template.getCreateDate(),
 			template.getModifiedDate(), template.getXsl().length());
 
 		setModel(template);
+		setClassName(JournalTemplate.class.getName());
+		setPrimaryKey(template.getPrimaryKey());
 
 		_template = template;
 	}
@@ -55,6 +58,14 @@ public class JournalTemplateResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
+	}
+
+	public String getContentType() {
+		return ContentTypes.TEXT_XML;
+	}
+
+	public boolean isCollection() {
+		return false;
 	}
 
 	private JournalTemplate _template;

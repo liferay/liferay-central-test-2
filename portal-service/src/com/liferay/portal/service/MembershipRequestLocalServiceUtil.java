@@ -760,6 +760,19 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		return membershipRequestLocalService.getWebDAVPropsPersistence();
+	}
+
+	public static void setWebDAVPropsPersistence(
+		com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence) {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		membershipRequestLocalService.setWebDAVPropsPersistence(webDAVPropsPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 

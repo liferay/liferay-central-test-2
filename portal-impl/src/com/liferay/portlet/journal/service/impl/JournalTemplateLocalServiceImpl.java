@@ -81,8 +81,8 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
-			smallFile, Boolean.valueOf(addCommunityPermissions),
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -111,8 +111,9 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, smallImage, smallImageURL,
-			smallFile, null, null, communityPermissions, guestPermissions);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
@@ -322,6 +323,11 @@ public class JournalTemplateLocalServiceImpl
 		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, template.getId());
+
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteProps(
+			JournalTemplate.class.getName(), template.getPrimaryKey());
 
 		// Template
 

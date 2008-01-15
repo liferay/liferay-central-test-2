@@ -37,6 +37,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -45,6 +47,8 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -386,6 +390,24 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
+	public WebDAVPropsLocalService getWebDAVPropsLocalService() {
+		return webDAVPropsLocalService;
+	}
+
+	public void setWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		this.webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
+	public WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		return webDAVPropsPersistence;
+	}
+
+	public void setWebDAVPropsPersistence(
+		WebDAVPropsPersistence webDAVPropsPersistence) {
+		this.webDAVPropsPersistence = webDAVPropsPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -490,6 +512,14 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (webDAVPropsLocalService == null) {
+			webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getImpl();
+		}
+
+		if (webDAVPropsPersistence == null) {
+			webDAVPropsPersistence = WebDAVPropsUtil.getPersistence();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
@@ -518,4 +548,6 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
 }

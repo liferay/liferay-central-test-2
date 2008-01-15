@@ -348,6 +348,8 @@ create index IX_E0422BDA on User_ (uuid_);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 
+create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
+
 create index IX_96F07007 on Website (companyId);
 create index IX_4F0F0CA7 on Website (companyId, classNameId);
 create index IX_F960131C on Website (companyId, classNameId, classPK);

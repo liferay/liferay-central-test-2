@@ -319,7 +319,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			href += StringPool.SLASH + type;
 		}
 
-		Resource resource = new BaseResourceImpl(href, type, true);
+		Resource resource = new BaseResourceImpl(href, type);
 
 		resource.setModel(type);
 

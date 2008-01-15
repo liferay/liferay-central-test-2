@@ -84,6 +84,15 @@ update TagsAsset set priority = 0, viewCount = 0;
 
 alter table User_ add uuid_ VARCHAR(75) null;
 
+create table WebDAVProps (
+	webDavPropsId LONG not null primary key,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	props TEXT null
+);
+
 alter table WikiNode add uuid_ VARCHAR(75) null;
 
 alter table WikiPage add uuid_ VARCHAR(75) null;
