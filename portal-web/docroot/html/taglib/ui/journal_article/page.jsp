@@ -24,15 +24,15 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil"%>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource"%>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay"%>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource"%>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil"%>
 
 <%
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:classPK"));
-int articlePage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:journal-article:page"));
 String languageId = (String)request.getAttribute("liferay-ui:journal-article:languageId");
+int articlePage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:journal-article:articlePage"));
 String xmlRequest = (String)request.getAttribute("liferay-ui:journal-article:xmlRequest");
 boolean showTitle = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showTitle"));
 boolean showAvailableLocales = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showAvailableLocales"));
@@ -42,10 +42,12 @@ JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.
 JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay, articlePage, xmlRequest);
 
 String title = null;
+
 if (articleDisplay != null) {
 	title = articleDisplay.getTitle();
 }
 %>
+
 <c:if test="<%= articleDisplay != null %>">
 	<c:if test="<%= showTitle %>">
 		<h3 class="journal-content-title"><%= title %></h3>
