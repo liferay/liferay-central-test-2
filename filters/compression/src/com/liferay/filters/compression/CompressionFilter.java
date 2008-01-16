@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 
@@ -99,7 +100,7 @@ public class CompressionFilter implements Filter {
 
 		if (useFilter && isCompress(httpReq) && !isInclude(httpReq) &&
 			BrowserSniffer.acceptsGzip(httpReq) &&
-			!isAlreadyFiltered(httpReq)) {
+			!isAlreadyFiltered(httpReq) && isValidContentType(httpRes)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
@@ -166,6 +167,19 @@ public class CompressionFilter implements Filter {
 		}
 		else {
 			return true;
+		}
+	}
+
+	protected boolean isValidContentType(HttpServletResponse res) {
+		String contentType = GetterUtil.getString(res.getContentType());
+
+		if (Validator.isNull(contentType) ||
+			contentType.toLowerCase().indexOf("text/") != -1) {
+
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
