@@ -38,8 +38,7 @@
 String mainPath = PortalUtil.getPathMain();
 
 if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
-	mainPath = PortalUtil.getURLWithSessionId(
-		PortalUtil.getPathMain(), session.getId());
+	mainPath = PortalUtil.getURLWithSessionId(PortalUtil.getPathMain(), session.getId());
 }
 %>
 

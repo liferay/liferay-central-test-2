@@ -2550,11 +2550,11 @@ public class PortalUtil {
 		return false;
 	}
 
+	private static final String _JSESSIONID = ";jsessionid=";
+
 	private static final String _METHOD_GET = "get";
 
 	private static final String _METHOD_POST = "post";
-
-	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static Log _log = LogFactory.getLog(PortalUtil.class);
 
