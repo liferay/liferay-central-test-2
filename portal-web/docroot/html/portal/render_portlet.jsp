@@ -727,6 +727,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 			else {
 				if (useDefaultTemplate) {
 					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+
 					if (themeDisplay.isStateExclusive()) {
 						renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
 					}
@@ -745,6 +746,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 		}
 		else {
 			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+
 			if (themeDisplay.isStateExclusive()) {
 				renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
 			}

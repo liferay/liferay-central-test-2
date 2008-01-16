@@ -24,8 +24,8 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.LiferayRenderResponse;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -54,7 +54,6 @@ import java.util.Map;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -68,8 +67,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class RenderResponseImpl
-	implements RenderResponse, LiferayRenderResponse {
+public class RenderResponseImpl implements LiferayRenderResponse {
 
 	public void addProperty(String key, String value) {
 	}
@@ -245,7 +243,7 @@ public class RenderResponseImpl
 			}
 		}
 
-		if (_req.getWindowState() == LiferayWindowState.EXCLUSIVE) {
+		if (_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
 			valid = true;
 		}
 
@@ -354,6 +352,152 @@ public class RenderResponseImpl
 		return _portlet;
 	}
 
+	public void addDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			Long[] values = (Long[])_headers.get(name);
+
+			ArrayUtil.append(values, new Long(date));
+
+			_headers.put(name, values);
+		}
+		else {
+			setDateHeader(name, date);
+		}
+	}
+
+	public void setDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (date <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Long[] {new Long(date)});
+		}
+	}
+
+	public void addHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			String[] values = (String[])_headers.get(name);
+
+			ArrayUtil.append(values, value);
+
+			_headers.put(name, values);
+		}
+		else {
+			setHeader(name, value);
+		}
+	}
+
+	public void setHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (Validator.isNull(value)) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new String[] {value});
+		}
+	}
+
+	public void addIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			Integer[] values = (Integer[])_headers.get(name);
+
+			ArrayUtil.append(values, new Integer(value));
+
+			_headers.put(name, values);
+		}
+		else {
+			setIntHeader(name, value);
+		}
+	}
+
+	public void setIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (value <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Integer[] {new Integer(value)});
+		}
+	}
+
+	public String getResourceName() {
+		return _resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		_resourceName = resourceName;
+	}
+
+	public void transferHeaders(HttpServletResponse res) {
+		Iterator itr = _headers.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String name = (String)entry.getKey();
+			Object values = entry.getValue();
+
+			if (values instanceof Integer[]) {
+				Integer[] intValues = (Integer[])values;
+
+				for (int i = 0; i < intValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addIntHeader(name, intValues[i].intValue());
+					}
+					else {
+						res.addIntHeader(name, intValues[i].intValue());
+					}
+				}
+			}
+			else if (values instanceof Long[]) {
+				Long[] dateValues = (Long[])values;
+
+				for (int i = 0; i < dateValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addDateHeader(name, dateValues[i].longValue());
+					}
+					else {
+						res.addDateHeader(name, dateValues[i].longValue());
+					}
+				}
+			}
+			else if (values instanceof String[]) {
+				String[] stringValues = (String[])values;
+
+				for (int i = 0; i < stringValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addHeader(name, stringValues[i]);
+					}
+					else {
+						res.addHeader(name, stringValues[i]);
+					}
+				}
+			}
+		}
+	}
+
 	protected RenderResponseImpl() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());
@@ -368,9 +512,8 @@ public class RenderResponseImpl
 		_res = res;
 		_portletName = portletName;
 		_companyId = companyId;
-		_headers = new LinkedHashMap();
-		_resourceName = null;
 		setPlid(plid);
+		_headers.clear();
 	}
 
 	protected void recycle() {
@@ -392,6 +535,7 @@ public class RenderResponseImpl
 		_calledGetPortletOutputStream = false;
 		_calledGetWriter = false;
 		_headers = null;
+		_resourceName = null;
 	}
 
 	protected RenderRequestImpl getReq() {
@@ -438,156 +582,6 @@ public class RenderResponseImpl
 		return _calledGetWriter;
 	}
 
-	// The methods bellow implement the ResourceRenderResponse interface
-	// which enable portlets in EXCLUSIVE window state to return non-text/html
-	// resources directly. (a.k.a. file downloads, ajax responses, etc.)
-
-	public void addDateHeader(String name, long date) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			Long[] values = (Long[])_headers.get(name);
-
-			ArrayUtil.append(values, new Long(date));
-
-			_headers.put(name, values);
-		}
-		else {
-			setDateHeader(name, date);
-		}
-	}
-
-	public void setDateHeader(String name, long date) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (date <= 0) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new Long[]{new Long(date)});
-		}
-	}
-
-	public void addHeader(String name, String value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			String[] values = (String[])_headers.get(name);
-
-			ArrayUtil.append(values, value);
-
-			_headers.put(name, values);
-		}
-		else {
-			setHeader(name, value);
-		}
-	}
-
-	public void setHeader(String name, String value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (Validator.isNull(value)) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new String[]{value});
-		}
-	}
-
-	public void addIntHeader(String name, int value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			Integer[] values = (Integer[])_headers.get(name);
-
-			ArrayUtil.append(values, new Integer(value));
-
-			_headers.put(name, values);
-		}
-		else {
-			setIntHeader(name, value);
-		}
-	}
-
-	public void setIntHeader(String name, int value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (value <= 0) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new Integer[]{new Integer(value)});
-		}
-	}
-
-	public String getResourceName() {
-		return _resourceName;
-	}
-
-	public void setResourceName(String resourceName) {
-		_resourceName = resourceName;
-	}
-
-	public void transferHeaders(HttpServletResponse res) {
-		Iterator itr = _headers.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String name = (String)entry.getKey();
-			Object values = entry.getValue();
-
-			if (values instanceof String[]) {
-				String[] stringValues = (String[])values;
-
-				for (int i = 0; i<stringValues.length; i++) {
-					if (res.containsHeader(name)) {
-						res.addHeader(name, stringValues[i]);
-					}
-					else {
-						res.addHeader(name, stringValues[i]);
-					}
-				}
-			}
-			else if (values instanceof Long[]) {
-				Long[] dateValues = (Long[])values;
-
-				for (int i = 0; i<dateValues.length; i++) {
-					if (res.containsHeader(name)) {
-						res.addDateHeader(name, dateValues[i].longValue());
-					}
-					else {
-						res.addDateHeader(name, dateValues[i].longValue());
-					}
-				}
-			}
-			else if (values instanceof Integer[]) {
-				Integer[] intValues = (Integer[])values;
-
-				for (int i = 0; i<intValues.length; i++) {
-					if (res.containsHeader(name)) {
-						res.addIntHeader(name, intValues[i].intValue());
-					}
-					else {
-						res.addIntHeader(name, intValues[i].intValue());
-					}
-				}
-			}
-		}
-	}
-
 	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
 	private RenderRequestImpl _req;
@@ -604,7 +598,7 @@ public class RenderResponseImpl
 	private String _contentType;
 	private boolean _calledGetPortletOutputStream;
  	private boolean _calledGetWriter;
-	private LinkedHashMap _headers;
+	private LinkedHashMap _headers = new LinkedHashMap();
 	private String _resourceName;
 
 }

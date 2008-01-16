@@ -63,6 +63,7 @@ import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -72,6 +73,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -478,7 +480,7 @@ public class LayoutAction extends Action {
 
 		renderResponseImpl.transferHeaders(res);
 
-		if (stringServletResponse.calledGetOutputStream()) {
+		if (stringServletResponse.isCalledGetOutputStream()) {
 			InputStream is = new ByteArrayInputStream(
 				stringServletResponse.getByteArrayMaker().toByteArray());
 
