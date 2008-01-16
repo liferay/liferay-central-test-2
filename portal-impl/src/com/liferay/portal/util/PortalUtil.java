@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -575,71 +576,6 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_VIEW_PAGE, Filter.by(layout.getType()));
 	}
 
-	public static long getPlidIdFromFriendlyURL(
-			long companyId, String friendlyURL) {
-
-		String[] urlParts = friendlyURL.split("\\/", 4);
-
-		if (friendlyURL.charAt(0) != '/' &&
-				urlParts.length != 4) {
-			return 0;
-		}
-
-		boolean privateLayout = true;
-		Group group = null;
-		Layout layout = null;
-		String urlPrefix = StringPool.FORWARD_SLASH + urlParts[1];
-
-		if (getPathFriendlyURLPublic().equals(urlPrefix)) {
-			privateLayout = false;
-		}
-		else if (getPathFriendlyURLPrivateGroup().equals(urlPrefix) ||
-			getPathFriendlyURLPrivateUser().equals(urlPrefix)) {
-
-			privateLayout = true;
-		}
-		else {
-			return 0;
-		}
-
-		try {
-			group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				companyId, "/" + urlParts[2]);
-		}
-		catch (Exception e) {
-		}
-
-		if (group != null) {
-			try {
-				// Try parsing the last of the url parts as a layoutId,
-				// because it's faster to eliminate this possibility first.
-
-				long layoutId = Long.parseLong(urlParts[3]);
-
-				layout = LayoutLocalServiceUtil.getLayout(
-					group.getGroupId(), privateLayout, layoutId);
-
-				return layout.getPlid();
-			}
-			catch (Exception e1) {
-				try {
-					// Now try the last part as a friendly url.
-
-					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-							group.getGroupId(), privateLayout, "/" + urlParts[3]);
-				}
-				catch (Exception e2) {
-				}
-			}
-
-			if (layout != null) {
-				return layout.getPlid();
-			}
-		}
-
-		return 0;
-	}
-
 	public static String getLayoutURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -889,6 +825,78 @@ public class PortalUtil {
 
 	public static String getPathMain() {
 		return _instance._getPathMain();
+	}
+
+	public static long getPlidIdFromFriendlyURL(
+		long companyId, String friendlyURL) {
+
+		String[] urlParts = friendlyURL.split("\\/", 4);
+
+		if ((friendlyURL.charAt(0) != CharPool.SLASH) &&
+			(urlParts.length != 4)) {
+
+			return LayoutImpl.DEFAULT_PLID;
+		}
+
+		boolean privateLayout = true;
+
+		String urlPrefix = StringPool.SLASH + urlParts[1];
+
+		if (getPathFriendlyURLPublic().equals(urlPrefix)) {
+			privateLayout = false;
+		}
+		else if (getPathFriendlyURLPrivateGroup().equals(urlPrefix) ||
+				 getPathFriendlyURLPrivateUser().equals(urlPrefix)) {
+
+			privateLayout = true;
+		}
+		else {
+			return LayoutImpl.DEFAULT_PLID;
+		}
+
+		Group group = null;
+
+		try {
+			group = GroupLocalServiceUtil.getFriendlyURLGroup(
+				companyId, StringPool.SLASH + urlParts[2]);
+		}
+		catch (Exception e) {
+		}
+
+		if (group != null) {
+			Layout layout = null;
+
+			try {
+
+				// Try parsing the last of the url parts as a layoutId
+				// because it's faster to eliminate this possibility first
+
+				long layoutId = GetterUtil.getLong(urlParts[3]);
+
+				layout = LayoutLocalServiceUtil.getLayout(
+					group.getGroupId(), privateLayout, layoutId);
+
+				return layout.getPlid();
+			}
+			catch (Exception e1) {
+				try {
+
+					// Try the last part as a friendly url
+
+					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+						group.getGroupId(), privateLayout,
+						StringPool.SLASH + urlParts[3]);
+				}
+				catch (Exception e2) {
+				}
+			}
+
+			if (layout != null) {
+				return layout.getPlid();
+			}
+		}
+
+		return LayoutImpl.DEFAULT_PLID;
 	}
 
 	public static String getPortalLibDir() {
