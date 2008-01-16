@@ -41,7 +41,7 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test event!")) {
+				if (selenium.isElementPresent("link=Test Event")) {
 					break;
 				}
 			}
@@ -60,7 +60,7 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test event!")) {
+				if (selenium.isElementPresent("link=Test Event")) {
 					break;
 				}
 			}
@@ -79,7 +79,7 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test event!")) {
+				if (selenium.isElementPresent("link=Test Event")) {
 					break;
 				}
 			}
@@ -98,7 +98,7 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test event!")) {
+				if (selenium.isElementPresent("link=Test Event")) {
 					break;
 				}
 			}
