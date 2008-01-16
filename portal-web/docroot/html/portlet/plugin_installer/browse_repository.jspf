@@ -199,6 +199,16 @@ try {
 		String pluginPackageTags = doc.get("tags");
 
 		PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(pluginPackageModuleId, pluginPackageRepositoryURL);
+
+		if (pluginPackage == null) {
+
+			// This null check should not be needed now but is left in place
+			// in case Lucene is out of sync so that the user does not see a
+			// nasty error. See LEP-4783.
+
+			continue;
+		}
+
 		PluginPackage installedPluginPackage = PluginPackageUtil.getLatestInstalledPluginPackage(pluginPackageGroupId, pluginPackageArtifactId);
 
 		ResultRow row = new ResultRow(doc, pluginPackageModuleId, i);

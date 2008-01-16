@@ -22,30 +22,34 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.plugin.PluginPackageUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyPlugins.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class VerifyProcessSuite extends VerifyProcess {
+public class VerifyPlugins extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying integrity");
 
-		verify(new VerifyPlugins());
-		verify(new VerifyBlogs());
-		verify(new VerifyBookmarks());
-		verify(new VerifyDocumentLibrary());
-		verify(new VerifyImageGallery());
-		verify(new VerifyJournal());
-		verify(new VerifyMessageBoards());
-		verify(new VerifyWiki());
+		try {
+			verifyPlugins();
+		}
+		catch (Exception e) {
+			throw new VerifyException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyProcessSuite.class);
+	protected void verifyPlugins() throws Exception {
+		PluginPackageUtil.reloadRepositories();
+	}
+
+	private static Log _log = LogFactory.getLog(VerifyPlugins.class);
 
 }
