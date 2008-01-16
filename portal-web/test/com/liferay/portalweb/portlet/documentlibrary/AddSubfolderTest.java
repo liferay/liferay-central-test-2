@@ -20,37 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.documentlibrary;
 
-import com.liferay.portalweb.portlet.blogs.BlogsTests;
-import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
-import com.liferay.portalweb.portlet.calendar.CalendarTests;
-import com.liferay.portalweb.portlet.documentlibrary.DocumentLibraryTests;
-import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
-import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
-import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSubfolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends BaseTests {
+public class AddSubfolderTest extends BaseTestCase {
+	public void testAddSubfolder() throws Exception {
+		selenium.click("link=This is a test folder");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add Subfolder']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_20_name", "This is a test subfolder");
+		selenium.type("_20_description", "This is a test subfolder");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
 
-	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(BookmarksTests.class);
-		addTestSuite(CalendarTests.class);
-		addTestSuite(DocumentLibraryTests.class);
-		addTestSuite(LoanCalculatorTests.class);
-		addTestSuite(MessageBoardsTests.class);
-		addTestSuite(PollsTests.class);
-		addTestSuite(StocksTests.class);
-		addTestSuite(WeatherTests.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=This is a test subfolder")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

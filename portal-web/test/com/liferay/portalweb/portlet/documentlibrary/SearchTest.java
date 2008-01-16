@@ -20,37 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portlet.documentlibrary;
 
-import com.liferay.portalweb.portlet.blogs.BlogsTests;
-import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
-import com.liferay.portalweb.portlet.calendar.CalendarTests;
-import com.liferay.portalweb.portlet.documentlibrary.DocumentLibraryTests;
-import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
-import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
-import com.liferay.portalweb.portlet.stocks.StocksTests;
-import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebTestSuite extends BaseTests {
+public class SearchTest extends BaseTestCase {
+	public void testSearch() throws Exception {
+		selenium.type("_20_keywords2", "Test Document");
+		selenium.click("//input[@value='Search File Entries']");
+		selenium.waitForPageToLoad("30000");
 
-	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(BookmarksTests.class);
-		addTestSuite(CalendarTests.class);
-		addTestSuite(DocumentLibraryTests.class);
-		addTestSuite(LoanCalculatorTests.class);
-		addTestSuite(MessageBoardsTests.class);
-		addTestSuite(PollsTests.class);
-		addTestSuite(StocksTests.class);
-		addTestSuite(WeatherTests.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=This is a test document")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
