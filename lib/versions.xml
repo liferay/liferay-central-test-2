@@ -1304,6 +1304,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/java-diff.jar</file-name>
+		<version>1.0.5</version>
+		<project-name>Java Diff</project-name>
+		<project-url>http://www.incava.org/projects/java/java-diff</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jaxen.jar</file-name>
 		<version>1.1b4</version>
 		<project-name>Jaxen</project-name>
