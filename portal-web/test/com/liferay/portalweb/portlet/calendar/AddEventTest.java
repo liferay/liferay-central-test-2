@@ -34,7 +34,7 @@ public class AddEventTest extends BaseTestCase {
 	public void testAddEvent() throws Exception {
 		selenium.click("//input[@value='Add Event']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_8_title", "This is a test event!");
+		selenium.type("_8_title", "Test Event");
 		selenium.type("_8_description", "This is a test event!");
 		selenium.select("_8_type", "label=Appointment");
 		selenium.click("//input[@value='Save']");
@@ -46,7 +46,7 @@ public class AddEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("Link=This is a test event!")) {
+				if (selenium.isElementPresent("Link=Test Event")) {
 					break;
 				}
 			}

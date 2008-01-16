@@ -35,7 +35,7 @@ public class AddQuestionTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Question']");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_25_title", "Test Poll Question");
-		selenium.typeKeys("_25_description", "This is a test poll description.");
+		selenium.typeKeys("_25_description", "This is a test poll description!");
 		selenium.typeKeys("_25_choiceDescriptiona", "Test Choice A");
 		selenium.typeKeys("_25_choiceDescriptionb", "Test Choice B");
 		selenium.click("//input[@value='Add Choice']");

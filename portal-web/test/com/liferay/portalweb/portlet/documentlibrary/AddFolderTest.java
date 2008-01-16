@@ -34,8 +34,8 @@ public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
 		selenium.click("//input[@value='Add Folder']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name", "This is a test folder");
-		selenium.typeKeys("_20_description", "This is a test folder");
+		selenium.typeKeys("_20_name", "Test Folder");
+		selenium.typeKeys("_20_description", "This is a test folder!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
@@ -45,7 +45,7 @@ public class AddFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test folder")) {
+				if (selenium.isElementPresent("link=Test Folder")) {
 					break;
 				}
 			}

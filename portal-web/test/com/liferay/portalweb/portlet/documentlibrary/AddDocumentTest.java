@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddDocumentTest extends BaseTestCase {
 	public void testAddDocument() throws Exception {
-		selenium.click("link=This is a test subfolder");
+		selenium.click("link=Test Subfolder");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Document']");
 		selenium.waitForPageToLoad("30000");
@@ -89,8 +89,8 @@ public class AddDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt");
-		selenium.type("_20_title", "This is a test document.");
-		selenium.type("_20_description", "This is a test document.");
+		selenium.type("_20_title", "Test Document");
+		selenium.type("_20_description", "This is a test document!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
@@ -101,7 +101,7 @@ public class AddDocumentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=This is a test document.txt\nThis is a test document.")) {
+							"link=Test Document.txt\nThis is a test document!")) {
 					break;
 				}
 			}

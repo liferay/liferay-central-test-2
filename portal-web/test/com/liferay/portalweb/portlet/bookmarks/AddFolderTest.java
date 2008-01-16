@@ -34,11 +34,25 @@ public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
 		selenium.click("//input[@value='Add Folder']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_28_name", "Test Folder");
+		selenium.typeKeys("_28_name", "Test Folder");
 		selenium.typeKeys("_28_description", "This is a test folder!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//b");
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//b")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

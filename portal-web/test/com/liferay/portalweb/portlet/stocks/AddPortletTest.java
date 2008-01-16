@@ -52,5 +52,21 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.mouseDown("//div[@id=\"Finance-Stocks\"]/p/a");
 		selenium.mouseUp("//div[@id=\"Finance-Stocks\"]/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@title='Preferences']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

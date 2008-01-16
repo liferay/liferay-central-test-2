@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
-		selenium.type("_20_keywords2", "Test Document");
+		selenium.typeKeys("_20_keywords2", "Test Document");
 		selenium.click("//input[@value='Search File Entries']");
 		selenium.waitForPageToLoad("30000");
 
@@ -42,7 +42,7 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=This is a test document")) {
+				if (selenium.isElementPresent("link=Test Document")) {
 					break;
 				}
 			}

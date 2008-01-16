@@ -32,13 +32,29 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddSubfolderTest extends BaseTestCase {
 	public void testAddSubfolder() throws Exception {
+		selenium.click("//b");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subfolder']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", "Test Subfolder");
 		selenium.typeKeys("_28_description", "This is a test subfolder!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//b");
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//b")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
