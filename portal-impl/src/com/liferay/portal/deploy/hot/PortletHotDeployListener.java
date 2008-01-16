@@ -445,8 +445,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			ObjectValuePair ovp =
-				(ObjectValuePair)_vars.remove(servletContextName);
+			ObjectValuePair ovp = (ObjectValuePair)_vars.remove(
+				servletContextName);
 
 			if (ovp == null) {
 				return;

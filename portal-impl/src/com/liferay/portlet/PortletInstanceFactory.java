@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.util.CollectionFactory;
@@ -180,6 +181,8 @@ public class PortletInstanceFactory {
 
 		PortletConfigFactory.destroy(portlet);
 		PortletContextFactory.destroy(portlet);
+
+		PortletLocalServiceUtil.destroyPortlet(portlet);
 	}
 
 	private CachePortlet _init(Portlet portlet, PortletConfig portletConfig)

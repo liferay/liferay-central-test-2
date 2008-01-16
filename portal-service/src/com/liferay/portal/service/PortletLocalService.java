@@ -337,6 +337,8 @@ public interface PortletLocalService {
 
 	public void afterPropertiesSet();
 
+	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
+
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException;
 

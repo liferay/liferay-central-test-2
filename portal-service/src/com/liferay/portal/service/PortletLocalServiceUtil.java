@@ -791,6 +791,12 @@ public class PortletLocalServiceUtil {
 		portletLocalService.afterPropertiesSet();
 	}
 
+	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		portletLocalService.destroyPortlet(portlet);
+	}
+
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();

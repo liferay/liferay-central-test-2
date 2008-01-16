@@ -75,6 +75,14 @@ import org.dom4j.io.XMLWriter;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
+	public void destroyPortlet(Portlet portlet) {
+		Map portletsPool = _getPortletsPool();
+
+		portletsPool.remove(portlet.getRootPortletId());
+
+		_clearCaches();
+	}
+
 	public PortletCategory getEARDisplay(String xml) throws SystemException {
 		try {
 			return _readLiferayDisplayXML(xml);
@@ -355,13 +363,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_log.error(e, e);
 		}
 
-		// Refresh security path to portlet id mapping for all portlets
-
-		_portletIdsByStrutsPath.clear();
-
-		// Refresh company portlets
-
-		_companyPortletsPool.clear();
+		_clearCaches();
 
 		return portlets;
 	}
@@ -394,6 +396,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portlet.setActive(active);
 
 		return portlet;
+	}
+
+	private void _clearCaches() {
+
+		// Refresh security path to portlet id mapping for all portlets
+
+		_portletIdsByStrutsPath.clear();
+
+		// Refresh company portlets
+
+		_companyPortletsPool.clear();
 	}
 
 	private List _getFriendlyURLMappers() {
