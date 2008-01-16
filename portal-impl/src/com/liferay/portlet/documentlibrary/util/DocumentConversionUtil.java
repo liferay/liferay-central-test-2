@@ -170,9 +170,11 @@ public class DocumentConversionUtil {
 
 		if ((_connection == null) || (_converter == null)) {
 			String host = PrefsPropsUtil.getString(
-				PropsUtil.OPENOFFICE_SERVER_HOST);
+				PropsUtil.OPENOFFICE_SERVER_HOST,
+				PropsValues.OPENOFFICE_SERVER_HOST);
 			int port = PrefsPropsUtil.getInteger(
-				PropsUtil.OPENOFFICE_SERVER_PORT);
+				PropsUtil.OPENOFFICE_SERVER_PORT,
+				PropsValues.OPENOFFICE_SERVER_PORT);
 
 			_connection = new SocketOpenOfficeConnection(host, port);
 			_converter = new StreamOpenOfficeDocumentConverter(_connection);

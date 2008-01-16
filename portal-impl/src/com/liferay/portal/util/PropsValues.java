@@ -469,6 +469,12 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_ENABLED));
 
+	public static final String OPENOFFICE_SERVER_HOST =
+		PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_HOST);
+
+	public static final int OPENOFFICE_SERVER_PORT = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_PORT));
+
 	public static final boolean ORGANIZATIONS_COUNTRY_REQUIRED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
