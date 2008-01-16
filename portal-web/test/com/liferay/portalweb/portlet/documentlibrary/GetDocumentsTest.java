@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="GetDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetDocumentsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GetDocumentTest extends BaseTestCase {
-	public void testGetDocument() throws Exception {
+public class GetDocumentsTest extends BaseTestCase {
+	public void testGetDocuments() throws Exception {
 		selenium.click("link=My Documents");
 		selenium.waitForPageToLoad("30000");
 

@@ -42,7 +42,7 @@ public class DocumentLibraryTests extends BaseTests {
 
 		//addTestSuite(AddDocumentTest.class);
 		//addTestSuite(SearchTest.class);
-		//addTestSuite(VerifyDocumentTest.class);
+		//addTestSuite(GetDocumentsTest.class);
 	}
 
 }
