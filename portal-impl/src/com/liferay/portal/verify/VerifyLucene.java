@@ -20,38 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0;
+package com.liferay.portal.verify;
 
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeLucene.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyLucene.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeLucene extends UpgradeProcess {
+public class VerifyLucene extends VerifyProcess {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public void verify() throws VerifyException {
+		_log.info("Verifying integrity");
 
 		try {
-			doUpgrade();
+			verifyLucene();
 		}
 		catch (Exception e) {
-			throw new UpgradeException(e);
+			throw new VerifyException(e);
 		}
 	}
 
-	protected void doUpgrade() throws Exception {
+	protected void verifyLucene() throws Exception {
 		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeLucene.class);
+	private static Log _log = LogFactory.getLog(VerifyLucene.class);
 
 }

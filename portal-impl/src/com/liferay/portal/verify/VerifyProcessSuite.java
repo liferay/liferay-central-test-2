@@ -36,7 +36,7 @@ public class VerifyProcessSuite extends VerifyProcess {
 	public void verify() throws VerifyException {
 		_log.info("Verifying integrity");
 
-		verify(new VerifyPlugins());
+		verify(new VerifyLucene());
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyDocumentLibrary());
