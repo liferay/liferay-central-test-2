@@ -82,6 +82,10 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD));
 
+	public static final boolean AUTO_DEPLOY_CUSTOM_PORTLET_XML =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML));
+
 	public static final String AUTO_DEPLOY_DEFAULT_DEST_DIR =
 		PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR);
 

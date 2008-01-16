@@ -120,7 +120,7 @@
 		<liferay-ui:message key="custom-portlet-xml" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="customPortletXml" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML) %>" />
+		<liferay-ui:input-checkbox param="customPortletXml" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML, PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML) %>" />
 	</td>
 </tr>
 

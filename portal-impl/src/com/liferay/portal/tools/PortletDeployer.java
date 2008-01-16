@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
@@ -478,7 +479,8 @@ public class PortletDeployer extends BaseDeployer {
 	protected void updateDeployDirectory(File srcFile) throws Exception {
 		try {
 			if (!PrefsPropsUtil.getBoolean(
-					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+					PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
 
 				return;
 			}
@@ -489,9 +491,7 @@ public class PortletDeployer extends BaseDeployer {
 			// classical way where the WAR file is actually massaged and
 			// packaged.
 
-			if (!GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML))) {
-
+			if (!PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML) {
 				return;
 			}
 		}

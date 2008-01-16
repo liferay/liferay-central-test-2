@@ -1062,7 +1062,8 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
 
 			return PORTLET_XML_FILE_NAME_CUSTOM;
 		}
