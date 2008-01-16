@@ -1346,6 +1346,52 @@ public class PortalUtil {
 		return UP_TIME;
 	}
 
+	public static String getURLWithSessionId(String url, String sessionId) {
+
+		// LEP-4787
+
+		int x = url.indexOf(StringPool.SEMICOLON);
+
+		if (x != -1) {
+			return url;
+		}
+
+		x = url.indexOf(StringPool.QUESTION);
+
+		if (x != -1) {
+			StringMaker sm = new StringMaker();
+
+			sm.append(url.substring(0, x));
+			sm.append(_JSESSIONID);
+			sm.append(sessionId);
+			sm.append(url.substring(x));
+
+			return sm.toString();
+		}
+
+		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
+		// but http://www.abc.com/;jsessionid=XYZ does work.
+
+		x = url.indexOf(StringPool.DOUBLE_SLASH);
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(url);
+
+		if (x != -1) {
+			int y = url.lastIndexOf(StringPool.SLASH);
+
+			if (x + 1 == y) {
+				sm.append(StringPool.SLASH);
+			}
+		}
+
+		sm.append(_JSESSIONID);
+		sm.append(sessionId);
+
+		return sm.toString();
+	}
+
 	public static User getUser(HttpServletRequest req)
 		throws PortalException, SystemException {
 
@@ -2507,6 +2553,8 @@ public class PortalUtil {
 	private static final String _METHOD_GET = "get";
 
 	private static final String _METHOD_POST = "post";
+
+	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static Log _log = LogFactory.getLog(PortalUtil.class);
 

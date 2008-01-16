@@ -684,6 +684,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String url = PortalUtil.getLayoutURL(this, themeDisplay);
 
+		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+			url = PortalUtil.getURLWithSessionId(url, req.getSession().getId());
+		}
+
 		if (!resetMaxState && !resetMaxState) {
 			return url;
 		}

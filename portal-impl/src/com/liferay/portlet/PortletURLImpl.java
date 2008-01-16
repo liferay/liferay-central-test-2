@@ -675,12 +675,15 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			}
 		}
 
-		// Remove trailing question mark
-
 		String result = sm.toString();
 
 		if (result.endsWith(StringPool.QUESTION)) {
 			result = result.substring(0, result.length() - 1);
+		}
+
+		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+			result = PortalUtil.getURLWithSessionId(
+				result, _req.getSession().getId());
 		}
 
 		return result;

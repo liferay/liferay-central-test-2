@@ -1138,8 +1138,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 
-		String currentURL = PortalUtil.getCurrentURL(req);
-
 		PortletURL createAccountURL = new PortletURLImpl(
 			req, PortletKeys.MY_ACCOUNT, plid, true);
 
@@ -1151,8 +1149,17 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCreateAccount(createAccountURL);
 
+		String currentURL = PortalUtil.getCurrentURL(req);
+
 		themeDisplay.setURLCurrent(currentURL);
-		themeDisplay.setURLHome(PortalUtil.getPortalURL(req) + contextPath);
+
+		String urlHome = PortalUtil.getPortalURL(req) + contextPath;
+
+		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+			urlHome = PortalUtil.getURLWithSessionId(urlHome, ses.getId());
+		}
+
+		themeDisplay.setURLHome(urlHome);
 
 		if (layout != null) {
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
