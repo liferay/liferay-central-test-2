@@ -55,7 +55,7 @@ public class AddImageTest extends BaseTestCase {
 		}
 
 		selenium.type("_31_file",
-			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\Test_IMG.jpg");
+			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg");
 		selenium.typeKeys("_31_description", "This is the Liferay logo!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
