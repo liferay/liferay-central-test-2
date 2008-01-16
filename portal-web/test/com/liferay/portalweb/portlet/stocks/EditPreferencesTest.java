@@ -32,22 +32,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@title='Preferences']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//img[@title='Preferences']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_12_symbols", "GOOG");

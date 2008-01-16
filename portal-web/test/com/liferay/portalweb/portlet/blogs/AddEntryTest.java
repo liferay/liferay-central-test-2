@@ -107,5 +107,21 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=0 Comments")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

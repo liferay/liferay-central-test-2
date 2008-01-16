@@ -32,13 +32,21 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddEntryCommentTest extends BaseTestCase {
 	public void testAddEntryComment() throws Exception {
+		selenium.click("link=0 Comments");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Post Reply");
+		selenium.typeKeys("_33_postReplyBody0", "This is a test entry comment!");
+		selenium.click("_33_postReplyButton0");
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
+				if (selenium.isElementPresent(
+							"link=This is a test entry comment!")) {
 					break;
 				}
 			}
@@ -47,12 +55,5 @@ public class AddEntryCommentTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.click("link=0 Comments");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Post Reply");
-		selenium.typeKeys("_33_postReplyBody0", "This is a test entry comment!");
-		selenium.click("_33_postReplyButton0");
-		selenium.waitForPageToLoad("30000");
 	}
 }
