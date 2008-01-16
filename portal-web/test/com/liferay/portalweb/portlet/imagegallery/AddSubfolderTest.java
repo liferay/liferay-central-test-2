@@ -36,8 +36,8 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subfolder']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_31_name", "Subfolder");
-		selenium.typeKeys("_31_description", "This is a subfolder!");
+		selenium.type("_31_name", "Test Subfolder");
+		selenium.typeKeys("_31_description", "This is a test subfolder!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
