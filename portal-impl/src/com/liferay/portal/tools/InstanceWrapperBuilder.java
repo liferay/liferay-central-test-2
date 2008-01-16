@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
+import com.liferay.portal.util.InitUtil;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -51,6 +52,10 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class InstanceWrapperBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 1) {

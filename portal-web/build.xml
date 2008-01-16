@@ -652,7 +652,6 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg line="test" />
 		</java>
 	</target>
