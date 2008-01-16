@@ -727,6 +727,9 @@ if (portlet.isActive() && access && supportsMimeType) {
 			else {
 				if (useDefaultTemplate) {
 					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+					if (themeDisplay.isStateExclusive()) {
+						renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
+					}
 		%>
 
 					<tiles:insert template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
@@ -742,6 +745,9 @@ if (portlet.isActive() && access && supportsMimeType) {
 		}
 		else {
 			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+			if (themeDisplay.isStateExclusive()) {
+				renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
+			}
 
 			String portletContent = StringPool.BLANK;
 
@@ -829,8 +835,14 @@ if (showPortletCssIcon) {
 SessionMessages.clear(renderRequestImpl);
 SessionErrors.clear(renderRequestImpl);
 
-RenderRequestFactory.recycle(renderRequestImpl);
-RenderResponseFactory.recycle(renderResponseImpl);
+if (themeDisplay.isStateExclusive()) {
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderRequestImpl);
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponseImpl);
+}
+else {
+	RenderRequestFactory.recycle(renderRequestImpl);
+	RenderResponseFactory.recycle(renderResponseImpl);
+}
 %>
 
 <%!

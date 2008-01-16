@@ -47,6 +47,10 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super(res);
 	}
 
+	public boolean calledGetOutputStream() {
+		return _callGetOutputStream;
+	}
+
 	public String getContentType() {
 		return _contentType;
 	}
@@ -68,6 +72,10 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_callGetOutputStream = true;
 
 		return _sos;
+	}
+
+	public ByteArrayMaker getByteArrayMaker() {
+		return _bam;
 	}
 
 	public int getStatus() {

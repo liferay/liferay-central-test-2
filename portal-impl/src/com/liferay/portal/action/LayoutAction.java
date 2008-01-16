@@ -53,9 +53,16 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
+import com.liferay.portlet.RenderRequestFactory;
+import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portlet.RenderResponseFactory;
+import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.Http;
+import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -65,7 +72,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -174,6 +180,12 @@ public class LayoutAction extends Action {
 					// subtitle
 
 					includeLayoutContent(req, res, themeDisplay, layout);
+
+					if (themeDisplay.isStateExclusive()) {
+						serverExclusiveResource(req, res, themeDisplay);
+
+						return null;
+					}
 				}
 
 				return mapping.findForward("portal.layout");
@@ -448,6 +460,42 @@ public class LayoutAction extends Action {
 		}
 
 		res.sendRedirect(portletURL.toString());
+	}
+
+	protected void serverExclusiveResource(
+			HttpServletRequest req, HttpServletResponse res,
+			ThemeDisplay themeDisplay)
+		throws Exception {
+
+		RenderRequestImpl renderRequestImpl = (RenderRequestImpl)
+			req.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		RenderResponseImpl renderResponseImpl = (RenderResponseImpl)
+			req.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		StringServletResponse stringServletResponse = (StringServletResponse)
+			renderRequestImpl.getAttribute(WebKeys.STRING_SERVLET_RESPONSE);
+
+		renderResponseImpl.transferHeaders(res);
+
+		if (stringServletResponse.calledGetOutputStream()) {
+			InputStream is = new ByteArrayInputStream(
+				stringServletResponse.getByteArrayMaker().toByteArray());
+
+			ServletResponseUtil.sendFile(
+				res, renderResponseImpl.getResourceName(), is,
+				renderResponseImpl.getContentType());
+		}
+		else {
+			byte[] content = stringServletResponse.getString().getBytes();
+
+			ServletResponseUtil.sendFile(
+				res, renderResponseImpl.getResourceName(), content,
+				renderResponseImpl.getContentType());
+		}
+
+		RenderRequestFactory.recycle(renderRequestImpl);
+		RenderResponseFactory.recycle(renderResponseImpl);
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutAction.class);
