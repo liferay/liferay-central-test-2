@@ -22,27 +22,57 @@
 
 package com.liferay.portalweb.portlet.documentlibrary;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DocumentLibraryTests extends BaseTests {
+public class GetDocumentTest extends BaseTestCase {
+	public void testGetDocument() throws Exception {
+		selenium.click("link=My Documents");
+		selenium.waitForPageToLoad("30000");
 
-	public DocumentLibraryTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddFolderTest.class);
-		addTestSuite(AddSubfolderTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		// Javascript security prevents automatically uploading files.
+			try {
+				if (selenium.isElementPresent(
+							"link=This is a test document.txt\nThis is a test document")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		//addTestSuite(AddDocumentTest.class);
-		//addTestSuite(SearchTest.class);
-		//addTestSuite(GetDocumentsTest.class);
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Recent Documents");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=This is a test document.txt\nThis is a test document")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
