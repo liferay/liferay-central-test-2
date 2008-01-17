@@ -127,6 +127,7 @@ public class SeleneseToJavaBuilder {
 
 		sm.append("package " + testPackagePath + ";\n\n");
 
+		sm.append("import com.liferay.portal.kernel.util.StringPool;\n");
 		sm.append("import com.liferay.portalweb.portal.BaseTestCase;\n\n");
 
 		sm.append("public class " + testName + " extends BaseTestCase {");
@@ -206,6 +207,14 @@ public class SeleneseToJavaBuilder {
 				sm.append(param3);
 				sm.append("\");");
 			}
+			else if (param1.equals("selectAndWait")) {
+				sm.append("selenium.select(\"");
+				sm.append(param1);
+				sm.append("\", \"");
+				sm.append(param2);
+				sm.append("\");");
+				sm.append("selenium.waitForPageToLoad(\"30000\");");
+			}
 			else if (param1.equals("verifyTextPresent")) {
 				sm.append("verifyTrue(selenium.isTextPresent(\"");
 				sm.append(param2);
@@ -232,6 +241,25 @@ public class SeleneseToJavaBuilder {
 				sm.append("(\"");
 				sm.append(param2);
 				sm.append("\")) {");
+				sm.append("break;");
+				sm.append("}");
+				sm.append("}");
+				sm.append("catch (Exception e) {");
+				sm.append("}");
+
+				sm.append("Thread.sleep(1000);");
+				sm.append("}");
+			}
+			else if (param1.equals("waitForTable")) {
+				sm.append("for (int second = 0;; second++) {");
+				sm.append("if (second >= 60) {");
+				sm.append("fail(\"timeout\");");
+				sm.append("}");
+
+				sm.append("try {");
+				sm.append("if (StringPool.BLANK.equals(selenium.getTable(\"");
+				sm.append(param2);
+				sm.append("\"))) {");
 				sm.append("break;");
 				sm.append("}");
 				sm.append("}");
