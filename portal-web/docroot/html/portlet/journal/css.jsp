@@ -24,12 +24,12 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-journal .lfr-table .journal-edit-article-extra {
+.portlet-journal .journal-edit-article-extra {
 	border: 1px solid #CCC;
 	width: 100%;
 }
 
-.portlet-journal .lfr-table .journal-edit-article-extra tr td {
+.portlet-journal .journal-edit-article-extra tr td {
 	padding: 5px;
 }
 

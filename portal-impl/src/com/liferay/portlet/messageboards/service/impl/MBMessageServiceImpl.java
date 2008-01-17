@@ -692,7 +692,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		SyndFeed syndFeed = new SyndFeedImpl();
 
 		syndFeed.setFeedType(type + "_" + version);
-
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);

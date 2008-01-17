@@ -119,6 +119,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_ARTICLE_GROUP_ID = "JOURNAL_ARTICLE_GROUP_ID";
 
+	public static final String JOURNAL_FEED = "JOURNAL_FEED";
+
 	public static final String JOURNAL_RECENT_ARTICLES = "JOURNAL_RECENT_ARTICLES";
 
 	public static final String JOURNAL_RECENT_STRUCTURES = "JOURNAL_RECENT_STRUCTURES";
@@ -134,8 +136,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String JOURNAL_STRUCTURE_EL_DEPTH = "JOURNAL_STRUCTURE_EL_DEPTH";
 
 	public static final String JOURNAL_STRUCTURE_EL_SIBLINGS = "JOURNAL_STRUCTURE_EL_SIBLINGS";
-
-	public static final String JOURNAL_SYNDICATED_FEED = "JOURNAL_SYNDICATED_FEED";
 
 	public static final String JOURNAL_TEMPLATE = "JOURNAL_TEMPLATE";
 

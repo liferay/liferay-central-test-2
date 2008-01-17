@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -41,27 +41,30 @@ import javax.portlet.PortletMode;
  * @author Raymond Augé
  *
  */
-public class JournalFriendlyURLMapper implements FriendlyURLMapper {
+public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String getMapping() {
 		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
 		String strutsAction = GetterUtil.getString(
-				portletURL.getParameter("struts_action"));
+			portletURL.getParameter("struts_action"));
 
-		if (strutsAction.equals("/journal/rss") &&
-			portletURL.getWindowState() == LiferayWindowState.EXCLUSIVE &&
-			!portletURL.isAction()) {
+		if ((strutsAction.equals("/journal/rss")) &&
+			(portletURL.getWindowState() == LiferayWindowState.EXCLUSIVE) &&
+			(!portletURL.isAction())) {
 
 			String groupId = portletURL.getParameter("groupId");
 			String feedId = portletURL.getParameter("feedId");
 
-			if (Validator.isNotNull(groupId) &&
-					Validator.isNotNull(feedId)) {
+			if (Validator.isNotNull(groupId) && Validator.isNotNull(feedId)) {
 				friendlyURLPath = "/journal/rss/" + groupId + "/" + feedId;
 
 				portletURL.addParameterIncludedInPath("groupId");
@@ -78,30 +81,23 @@ public class JournalFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
-		String[] parts = StringUtil.split(friendlyURLPath, "/");
+		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
-		if (parts.length >= 4 && parts[2].equals("rss")) {
-			processRssPath(parts, params);
-		}
-	}
+		if ((parts.length >= 4) && parts[2].equals("rss")) {
+			params.put("p_p_id", _PORTLET_ID);
+			params.put("p_p_action", "0");
+			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
+			params.put("p_p_mode", PortletMode.VIEW.toString());
 
-	protected void processRssPath(String[] parts, Map params) {
-		String namespace =
-			StringPool.UNDERLINE + _PORTLET_ID + StringPool.UNDERLINE;
+			addParam(params, "struts_action", "/journal/rss");
 
-		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_action", "0");
-		params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
-		params.put("p_p_mode", PortletMode.VIEW.toString());
-
-		params.put(namespace + "struts_action", "/journal/rss");
-
-		if (parts.length == 4) {
-			params.put(namespace + "synFeedId", parts[3]);
-		}
-		else if (parts.length == 5) {
-			params.put(namespace + "groupId", parts[3]);
-			params.put(namespace + "feedId", parts[4]);
+			if (parts.length == 4) {
+				addParam(params, "feedId", parts[3]);
+			}
+			else if (parts.length == 5) {
+				addParam(params, "groupId", parts[3]);
+				addParam(params, "feedId", parts[4]);
+			}
 		}
 	}
 

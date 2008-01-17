@@ -49,6 +49,8 @@ public class ActionKeys {
 
 	public static final String ADD_EVENT = "ADD_EVENT";
 
+	public static final String ADD_FEED = "ADD_FEED";
+
 	public static final String ADD_FILE = "ADD_FILE";
 
 	public static final String ADD_FOLDER = "ADD_FOLDER";
@@ -90,8 +92,6 @@ public class ActionKeys {
 	public static final String ADD_SUBCATEGORY = "ADD_SUBCATEGORY";
 
 	public static final String ADD_SUBFOLDER = "ADD_SUBFOLDER";
-
-	public static final String ADD_SYNDICATED_FEED = "ADD_SYNDICATED_FEED";
 
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";
 

@@ -22,7 +22,7 @@
  */
 %>
 
-<table class="journal-edit-article-extra" width="100%">
+<table class="journal-edit-article-extra">
 <tr class="portlet-section-header">
 	<td>
 		<b><liferay-ui:message key="workflow" /></b>
@@ -86,7 +86,7 @@
 
 <br />
 
-<table class="journal-edit-article-extra" width="100%">
+<table class="journal-edit-article-extra">
 <tr class="portlet-section-header">
 	<td>
 		<b><liferay-ui:message key="form-and-presentation" /></b>
@@ -154,8 +154,7 @@
 					<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
 
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
-					<%= tableIteratorObj.getName() %>
-					</a>
+					<%= tableIteratorObj.getName() %></a>
 
 					<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 						<br />
@@ -171,7 +170,7 @@
 
 <br />
 
-<table class="journal-edit-article-extra" width="100%">
+<table class="journal-edit-article-extra">
 <tr class="portlet-section-header">
 	<td>
 		<b><liferay-ui:message key="categorization" /></b>

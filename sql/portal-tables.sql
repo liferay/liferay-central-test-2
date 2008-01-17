@@ -432,6 +432,32 @@ create table JournalContentSearch (
 	articleId VARCHAR(75) null
 );
 
+create table JournalFeed (
+	uuid_ VARCHAR(75) null,
+	id_ LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	feedId VARCHAR(75) null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	structureId VARCHAR(75) null,
+	templateId VARCHAR(75) null,
+	rendererTemplateId VARCHAR(75) null,
+	delta INTEGER,
+	orderByCol VARCHAR(75) null,
+	orderByType VARCHAR(75) null,
+	targetLayoutFriendlyUrl VARCHAR(75) null,
+	targetPortletId VARCHAR(75) null,
+	contentField VARCHAR(75) null,
+	feedType VARCHAR(75) null,
+	feedVersion DOUBLE
+);
+
 create table JournalStructure (
 	uuid_ VARCHAR(75) null,
 	id_ LONG not null primary key,
@@ -445,32 +471,6 @@ create table JournalStructure (
 	name VARCHAR(75) null,
 	description STRING null,
 	xsd TEXT null
-);
-
-create table JournalSyndicatedFeed (
-	uuid_ VARCHAR(75) null,
-	id_ LONG not null primary key,
-	groupId LONG,
-	feedId VARCHAR(75) null,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description STRING null,
-	type_ VARCHAR(75) null,
-	structureId VARCHAR(75) null,
-	templateId VARCHAR(75) null,
-	rendererTemplateId VARCHAR(75) null,
-	delta INTEGER,
-	orderByCol VARCHAR(75) null,
-	orderByType VARCHAR(75) null,
-	targetLayoutFriendlyUrl VARCHAR(75) null,
-	targetPortletId VARCHAR(75) null,
-	contentField VARCHAR(75) null,
-	feedType VARCHAR(75) null,
-	feedVersion DOUBLE
 );
 
 create table JournalTemplate (

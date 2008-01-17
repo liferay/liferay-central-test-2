@@ -49,9 +49,10 @@ public class TemplateSearch extends SearchContainer {
 		"no-templates-were-found";
 
 	public TemplateSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new TemplateDisplayTerms(req), new TemplateSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+		super(
+			req, new TemplateDisplayTerms(req), new TemplateSearchTerms(req),
+			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
+			EMPTY_RESULTS_MESSAGE);
 
 		TemplateDisplayTerms displayTerms =
 			(TemplateDisplayTerms)getDisplayTerms();

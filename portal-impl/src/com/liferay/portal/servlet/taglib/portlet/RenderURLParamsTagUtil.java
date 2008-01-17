@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 
 import java.util.StringTokenizer;
@@ -78,7 +77,7 @@ public class RenderURLParamsTagUtil {
 
 		String url = portletURL.toString();
 
-		String queryString = Http.getQueryString(url);
+		String queryString = HttpUtil.getQueryString(url);
 
 		StringTokenizer st = new StringTokenizer(
 			queryString, StringPool.AMPERSAND);

@@ -1580,6 +1580,38 @@ Liferay.Service.Journal.JournalArticle = {
 	}
 };
 
+Liferay.Service.Journal.JournalFeed = {
+	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalFeed" + Liferay.Service.classNameSuffix,
+
+	addFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Journal.JournalStructure = {
 	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalStructure" + Liferay.Service.classNameSuffix,
 
@@ -1607,38 +1639,6 @@ Liferay.Service.Journal.JournalStructure = {
 	updateStructure: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Journal.JournalSyndicatedFeed = {
-	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalSyndicatedFeed" + Liferay.Service.classNameSuffix,
-
-	addSyndicatedFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addSyndicatedFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteSyndicatedFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteSyndicatedFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getSyndicatedFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getSyndicatedFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateSyndicatedFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateSyndicatedFeed";
 
 		return Liferay.Service.ajax(params, callback);
 	}

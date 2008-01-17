@@ -57,7 +57,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		String folderDisplayStyle = ParamUtil.getString(req, "folderDisplayStyle");
+		String folderDisplayStyle = ParamUtil.getString(
+			req, "folderDisplayStyle");
 
 		long rootFolderId = ParamUtil.getLong(req, "rootFolderId");
 

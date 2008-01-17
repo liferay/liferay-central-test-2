@@ -83,6 +83,21 @@ public class HttpUtil {
 		}
 	}
 
+	public static String getQueryString(String url) {
+		if (Validator.isNull(url)) {
+			return url;
+		}
+
+		int pos = url.indexOf(StringPool.QUESTION);
+
+		if (pos == -1) {
+			return StringPool.BLANK;
+		}
+		else {
+			return url.substring(pos + 1, url.length());
+		}
+	}
+
 	public static Map parameterMapFromString(String queryString) {
 		Map parameterMap = new LinkedHashMap();
 

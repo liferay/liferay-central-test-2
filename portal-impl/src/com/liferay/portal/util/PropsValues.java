@@ -277,6 +277,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
 
+	public static final boolean JOURNAL_FEED_FORCE_AUTOGENERATE_ID =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JOURNAL_FEED_FORCE_AUTOGENERATE_ID));
+
 	public static final boolean JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID));

@@ -174,7 +174,6 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		SyndFeed syndFeed = new SyndFeedImpl();
 
 		syndFeed.setFeedType(type + "_" + version);
-
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(GetterUtil.getString(description, name));

@@ -542,16 +542,16 @@
 		<put name="portlet_content" value="/portlet/journal/edit_article.jsp" />
 	</definition>
 
+	<definition name="portlet.journal.edit_feed" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/edit_feed.jsp" />
+	</definition>
+
 	<definition name="portlet.journal.edit_structure" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/edit_structure.jsp" />
 	</definition>
 
 	<definition name="portlet.journal.edit_structure_xsd" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/edit_structure_xsd.jsp" />
-	</definition>
-
-	<definition name="portlet.journal.edit_syndicated_feed" extends="portlet.journal">
-		<put name="portlet_content" value="/portlet/journal/edit_syndicated_feed.jsp" />
 	</definition>
 
 	<definition name="portlet.journal.edit_template" extends="portlet.journal">

@@ -23,22 +23,22 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
-import com.liferay.portlet.journal.model.JournalSyndicatedFeed;
+import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.util.HttpUtil;
+
 import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEnclosureImpl;
 import com.sun.syndication.feed.synd.SyndLink;
@@ -49,6 +49,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalRSSUtil.java.html"><b><i>View Source</i></b></a>
@@ -58,116 +60,71 @@ import java.util.Map;
  */
 public class JournalRSSUtil {
 
-	public static DLFileEntry getDLFileEntryFromURL(String url) {
-		String queryString = url.substring(url.indexOf('?') + 1);
+	public static List getArticles(JournalFeed feed) throws SystemException {
+		long companyId = feed.getCompanyId();
+		long groupId = feed.getGroupId();
+		String articleId = null;
+		Double version = null;
+		String title = null;
+		String description = null;
+		String content = null;
 
-		DLFileEntry entry = null;
+		String type = feed.getType();
 
-		Map parameters = HttpUtil.parameterMapFromString(queryString);
-
-		if (parameters.containsKey("folderId") &&
-			parameters.containsKey("name")) {
-
-			try {
-				long folderId =
-					Long.parseLong(((String[])parameters.get("folderId"))[0]);
-				String name = ((String[])parameters.get("name"))[0];
-
-				entry =
-					DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
-			}
-			catch (Exception e) {
-			}
-		}
-		else if (parameters.containsKey("groupId") &&
-			parameters.containsKey("uuid")) {
-
-			try {
-				long groupId =
-					Long.parseLong(((String[])parameters.get("groupId"))[0]);
-				String uuid = ((String[])parameters.get("uuid"))[0];
-
-				entry =
-					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
-						uuid, groupId);
-			}
-			catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+		if (Validator.isNull(type)) {
+			type = null;
 		}
 
-		return entry;
+		String structureId = feed.getStructureId();
+
+		if (Validator.isNull(structureId)) {
+			structureId = null;
+		}
+
+		String templateId = feed.getTemplateId();
+
+		if (Validator.isNull(templateId)) {
+			templateId = null;
+		}
+
+		Date displayDateGT = null;
+		Date displayDateLT = new Date();
+		Boolean approved = Boolean.TRUE;
+		Boolean expired = Boolean.FALSE;
+		Date reviewDate = null;
+		boolean andOperator = true;
+		int begin = 0;
+		int end = feed.getDelta();
+
+		String orderByCol = feed.getOrderByCol();
+		String orderByType = feed.getOrderByType();
+		boolean orderByAsc = orderByType.equals("asc");
+
+		OrderByComparator obc = new ArticleModifiedDateComparator(orderByAsc);
+
+		if (orderByCol.equals("display-date")) {
+			obc = new ArticleDisplayDateComparator(orderByAsc);
+		}
+
+		return JournalArticleLocalServiceUtil.search(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static Image getImageFromURL(String url) {
-		String queryString = url.substring(url.indexOf('?') + 1);
-
-		Image entry = null;
-
-		Map parameters = HttpUtil.parameterMapFromString(queryString);
-
-		if (parameters.containsKey("image_id") ||
-			parameters.containsKey("img_id") ||
-			parameters.containsKey("i_id")) {
-
-			try {
-				long imageId = 0;
-
-				if (parameters.get("image_id") != null) {
-					imageId =
-						Long.parseLong(
-							((String[])parameters.get("image_id"))[0]);
-				}
-				else if (parameters.get("img_id") != null) {
-					imageId =
-						Long.parseLong(
-							((String[])parameters.get("img_id"))[0]);
-				}
-				else if (parameters.get("i_id") != null) {
-					imageId =
-						Long.parseLong(
-							((String[])parameters.get("i_id"))[0]);
-				}
-
-				entry = ImageLocalUtil.getImage(imageId);
-			}
-			catch (Exception e) {
-			}
-		}
-		else if (parameters.containsKey("groupId") &&
-			parameters.containsKey("uuid")) {
-
-			try {
-				long groupId =
-					Long.parseLong(((String[])parameters.get("groupId"))[0]);
-				String uuid = ((String[])parameters.get("uuid"))[0];
-
-				IGImage igImage =
-					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
-						uuid, groupId);
-
-				entry = ImageLocalUtil.getImage(igImage.getLargeImageId());
-			}
-			catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-
-		return entry;
-	}
-
-	public static List getDLEnclosuresFromURL(String portalURL, String url) {
+	public static List getDLEnclosures(String portalURL, String url) {
 		List enclosures = new ArrayList();
 
-		DLFileEntry entry = getDLFileEntryFromURL(url);
+		DLFileEntry fileEntry = getDLFileEntry(url);
 
-		if (entry != null) {
+		if (fileEntry != null) {
 			SyndEnclosure enclosure = new SyndEnclosureImpl();
 
-			enclosure.setLength(entry.getSize());
+			enclosure.setLength(fileEntry.getSize());
 
 			enclosure.setType(
-				MimeTypesUtil.getContentType(entry.getTitleWithExtension()));
+				MimeTypesUtil.getContentType(
+					fileEntry.getTitleWithExtension()));
 
 			enclosure.setUrl(portalURL + url);
 
@@ -177,10 +134,80 @@ public class JournalRSSUtil {
 		return enclosures;
 	}
 
-	public static List getIGEnclosuresFromURL(String portalURL, String url) {
+	public static DLFileEntry getDLFileEntry(String url) {
+		DLFileEntry fileEntry = null;
+
+		String queryString = HttpUtil.getQueryString(url);
+
+		Map parameters = HttpUtil.parameterMapFromString(queryString);
+
+		if (parameters.containsKey("folderId") &&
+			parameters.containsKey("name")) {
+
+			try {
+				long folderId = GetterUtil.getLong(
+					((String[])parameters.get("folderId"))[0]);
+				String name = ((String[])parameters.get("name"))[0];
+
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					folderId, name);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+		}
+		else if (parameters.containsKey("uuid") &&
+				 parameters.containsKey("groupId")) {
+
+			try {
+				String uuid = ((String[])parameters.get("uuid"))[0];
+				long groupId = GetterUtil.getLong(
+					((String[])parameters.get("groupId"))[0]);
+
+				fileEntry =
+					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+						uuid, groupId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+		}
+
+		return fileEntry;
+	}
+
+	public static List getDLLinks(String portalURL, String url) {
+		List links = new ArrayList();
+
+		DLFileEntry fileEntry = getDLFileEntry(url);
+
+		if (fileEntry != null) {
+			SyndLink link = new SyndLinkImpl();
+
+			link.setHref(portalURL + url);
+
+			link.setLength(fileEntry.getSize());
+
+			link.setRel("enclosure");
+
+			link.setType(
+				MimeTypesUtil.getContentType(
+					fileEntry.getTitleWithExtension()));
+
+			links.add(link);
+		}
+
+		return links;
+	}
+
+	public static List getIGEnclosures(String portalURL, String url) {
 		List enclosures = new ArrayList();
 
-		Image image = getImageFromURL(url);
+		Image image = getImage(url);
 
 		if (image != null) {
 			SyndEnclosure enclosure = new SyndEnclosureImpl();
@@ -198,22 +225,22 @@ public class JournalRSSUtil {
 		return enclosures;
 	}
 
-	public static List getDLLinksFromURL(String portalURL, String url) {
+	public static List getIGLinks(String portalURL, String url) {
 		List links = new ArrayList();
 
-		DLFileEntry entry = getDLFileEntryFromURL(url);
+		Image image = getImage(url);
 
-		if (entry != null) {
+		if (image != null) {
 			SyndLink link = new SyndLinkImpl();
 
 			link.setHref(portalURL + url);
 
-			link.setLength(entry.getSize());
+			link.setLength(image.getSize());
 
 			link.setRel("enclosure");
 
 			link.setType(
-				MimeTypesUtil.getContentType(entry.getTitleWithExtension()));
+				MimeTypesUtil.getContentType("*." + image.getType()));
 
 			links.add(link);
 		}
@@ -221,79 +248,65 @@ public class JournalRSSUtil {
 		return links;
 	}
 
-	public static List getIGLinksFromURL(String portalURL, String url) {
-		List links = new ArrayList();
+	public static Image getImage(String url) {
+		Image image = null;
 
-		Image entry = getImageFromURL(url);
+		String queryString = HttpUtil.getQueryString(url);
 
-		if (entry != null) {
-			SyndLink link = new SyndLinkImpl();
+		Map parameters = HttpUtil.parameterMapFromString(queryString);
 
-			link.setHref(portalURL + url);
+		if (parameters.containsKey("image_id") ||
+			parameters.containsKey("img_id") ||
+			parameters.containsKey("i_id")) {
 
-			link.setLength(entry.getSize());
+			try {
+				long imageId = 0;
 
-			link.setRel("enclosure");
+				if (parameters.containsKey("image_id")) {
+					imageId = GetterUtil.getLong(
+						((String[])parameters.get("image_id"))[0]);
+				}
+				else if (parameters.containsKey("img_id")) {
+					imageId = GetterUtil.getLong(
+						((String[])parameters.get("img_id"))[0]);
+				}
+				else if (parameters.containsKey("i_id")) {
+					imageId = GetterUtil.getLong(
+						((String[])parameters.get("i_id"))[0]);
+				}
 
-			link.setType(
-				MimeTypesUtil.getContentType("*." + entry.getType()));
+				image = ImageLocalUtil.getImage(imageId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+		}
+		else if (parameters.containsKey("uuid") &&
+				 parameters.containsKey("groupId")) {
 
-			links.add(link);
+			try {
+				String uuid = ((String[])parameters.get("uuid"))[0];
+				long groupId = GetterUtil.getLong(
+					((String[])parameters.get("groupId"))[0]);
+
+				IGImage igImage =
+					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
+						uuid, groupId);
+
+				image = ImageLocalUtil.getImage(igImage.getLargeImageId());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
 		}
 
-		return links;
+		return image;
 	}
 
-	public static List getArticles(JournalSyndicatedFeed synFeed)
-		throws SystemException {
-
-		long companyId = synFeed.getCompanyId();
-		long groupId = synFeed.getGroupId();
-		String articleId = null;
-		Double version = null;
-		String title = null;
-		String description = null;
-		String content = null;
-		String type = synFeed.getType();
-		String structureId = synFeed.getStructureId();
-		String templateId = synFeed.getTemplateId();
-
-		if (Validator.isNull(type)) {
-			type = null;
-		}
-
-		if (Validator.isNull(structureId)) {
-			structureId = null;
-		}
-
-		if (Validator.isNull(templateId)) {
-			templateId = null;
-		}
-
-		Date displayDateGT = null;
-		Date displayDateLT = new Date();
-
-		Boolean approved = Boolean.TRUE;
-		Boolean expired = Boolean.FALSE;
-		Date reviewDate = null;
-		boolean andOperator = true;
-		int begin = 0;
-		int end = synFeed.getDelta();
-
-		String orderByCol = synFeed.getOrderByCol();
-		String orderByType = synFeed.getOrderByType();
-		boolean orderByAsc = orderByType.equals("asc");
-
-		OrderByComparator obc = new ArticleModifiedDateComparator(orderByAsc);
-
-		if (orderByCol.equals("display-date")) {
-			obc = new ArticleDisplayDateComparator(orderByAsc);
-		}
-
-		return JournalArticleLocalServiceUtil.search(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, begin, end, obc);
-	}
+	private static Log _log = LogFactory.getLog(JournalRSSUtil.class);
 
 }

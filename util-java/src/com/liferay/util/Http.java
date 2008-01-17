@@ -287,19 +287,12 @@ public class Http {
 		return getProtocol(req.isSecure());
 	}
 
+	/**
+	 * @deprecated This method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
 	public static String getQueryString(String url) {
-		if (Validator.isNull(url)) {
-			return url;
-		}
-
-		int pos = url.indexOf(StringPool.QUESTION);
-
-		if (pos == -1) {
-			return StringPool.BLANK;
-		}
-		else {
-			return url.substring(pos + 1, url.length());
-		}
+		return HttpUtil.getQueryString(url);
 	}
 
 	public static String getRequestURL(HttpServletRequest req) {

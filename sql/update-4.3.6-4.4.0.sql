@@ -44,20 +44,18 @@ alter table JournalArticle add smallImageURL VARCHAR(75) null;
 
 alter table JournalArticleImage add uuid_ VARCHAR(75) null;
 
-alter table JournalStructure add uuid_ VARCHAR(75) null;
-
-create table JournalSyndicatedFeed (
+create table JournalFeed (
 	uuid_ VARCHAR(75) null,
 	id_ LONG not null primary key,
 	groupId LONG,
-	feedId VARCHAR(75) null,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	feedId VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description STRING null,
+	description VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	structureId VARCHAR(75) null,
 	templateId VARCHAR(75) null,
@@ -71,6 +69,8 @@ create table JournalSyndicatedFeed (
 	feedType VARCHAR(75) null,
 	feedVersion DOUBLE
 );
+
+alter table JournalStructure add uuid_ VARCHAR(75) null;
 
 alter table JournalTemplate add uuid_ VARCHAR(75) null;
 alter table JournalTemplate add cacheable BOOLEAN;

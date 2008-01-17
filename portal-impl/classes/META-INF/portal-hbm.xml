@@ -851,6 +851,34 @@
 		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portlet.journal.model.impl.JournalFeedImpl" table="JournalFeed">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="feedId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="structureId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="templateId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="rendererTemplateId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="delta" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="orderByCol" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="orderByType" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="targetLayoutFriendlyUrl" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="targetPortletId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="contentField" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="feedType" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="feedVersion" type="com.liferay.util.dao.hibernate.DoubleType" />
+	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalStructureImpl" table="JournalStructure">
 		<cache usage="read-write" />
 		<id name="id" column="id_" type="long">
@@ -867,34 +895,6 @@
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="xsd" type="com.liferay.util.dao.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portlet.journal.model.impl.JournalSyndicatedFeedImpl" table="JournalSyndicatedFeed">
-		<cache usage="read-write" />
-		<id name="id" column="id_" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="feedId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="structureId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="templateId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="rendererTemplateId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="delta" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="orderByCol" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="orderByType" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="targetLayoutFriendlyUrl" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="targetPortletId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="contentField" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="feedType" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="feedVersion" type="com.liferay.util.dao.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" table="JournalTemplate">
 		<cache usage="read-write" />

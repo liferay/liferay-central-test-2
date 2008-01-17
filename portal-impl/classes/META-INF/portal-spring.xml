@@ -4020,6 +4020,91 @@
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.impl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedService.impl" class="com.liferay.portlet.journal.service.impl.JournalFeedServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.JournalFeedService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedUtil" class="com.liferay.portlet.journal.service.persistence.JournalFeedUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.impl" class="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4103,75 +4188,6 @@
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil" lazy-init="true">
 		<property name="finder">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService.impl" class="com.liferay.portlet.journal.service.impl.JournalSyndicatedFeedLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.impl" class="com.liferay.portlet.journal.service.impl.JournalSyndicatedFeedServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalSyndicatedFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalSyndicatedFeedServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedUtil" class="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistenceImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderImpl" class="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderUtil" lazy-init="true">
-		<property name="finder">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.impl" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" lazy-init="true" />

@@ -74,9 +74,10 @@ public class ArticleSearch extends SearchContainer {
 		"no-articles-were-found";
 
 	public ArticleSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new ArticleDisplayTerms(req), new ArticleSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+		super(
+			req, new ArticleDisplayTerms(req), new ArticleSearchTerms(req),
+			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
+			EMPTY_RESULTS_MESSAGE);
 
 		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);

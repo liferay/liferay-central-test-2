@@ -594,17 +594,17 @@
 			<forward name="portlet.message_boards.error" path="portlet.journal.error" />
 		</action>
 
+		<action path="/journal/edit_feed" type="com.liferay.portlet.journal.action.EditFeedAction">
+			<forward name="portlet.journal.edit_feed" path="portlet.journal.edit_feed" />
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+		</action>
+
 		<action path="/journal/edit_structure" type="com.liferay.portlet.journal.action.EditStructureAction">
 			<forward name="portlet.journal.edit_structure" path="portlet.journal.edit_structure" />
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
 		</action>
 
 		<action path="/journal/edit_structure_xsd" forward="portlet.journal.edit_structure_xsd" />
-
-		<action path="/journal/edit_syndicated_feed" type="com.liferay.portlet.journal.action.EditSyndicatedFeedAction">
-			<forward name="portlet.journal.edit_syndicated_feed" path="portlet.journal.edit_syndicated_feed" />
-			<forward name="portlet.journal.error" path="portlet.journal.error" />
-		</action>
 
 		<action path="/journal/edit_template" type="com.liferay.portlet.journal.action.EditTemplateAction">
 			<forward name="portlet.journal.edit_template" path="portlet.journal.edit_template" />

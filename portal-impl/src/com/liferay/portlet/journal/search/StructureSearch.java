@@ -49,9 +49,10 @@ public class StructureSearch extends SearchContainer {
 		"no-structures-were-found";
 
 	public StructureSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new StructureDisplayTerms(req),
-			  new StructureSearchTerms(req), DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			  iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+		super(
+			req, new StructureDisplayTerms(req), new StructureSearchTerms(req),
+			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
+			EMPTY_RESULTS_MESSAGE);
 
 		StructureDisplayTerms displayTerms =
 			(StructureDisplayTerms)getDisplayTerms();

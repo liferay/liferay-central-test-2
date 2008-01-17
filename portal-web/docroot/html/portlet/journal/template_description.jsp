@@ -40,10 +40,7 @@ String rowHREF = (String)row.getParameter("rowHREF");
 	</c:when>
 	<c:otherwise>
 		<%= template.getName() %><br />
-
-		<span style="font-size: xx-small;">
 		<%= template.getDescription() %>
-		</span>
 	</c:otherwise>
 </c:choose>
 

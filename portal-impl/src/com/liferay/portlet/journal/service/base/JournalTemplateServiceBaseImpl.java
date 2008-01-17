@@ -59,14 +59,14 @@ import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalFeedLocalService;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalFeedService;
+import com.liferay.portlet.journal.service.JournalFeedServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureService;
 import com.liferay.portlet.journal.service.JournalStructureServiceFactory;
-import com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService;
-import com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceFactory;
-import com.liferay.portlet.journal.service.JournalSyndicatedFeedService;
-import com.liferay.portlet.journal.service.JournalSyndicatedFeedServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateService;
@@ -80,14 +80,14 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUti
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
+import com.liferay.portlet.journal.service.persistence.JournalFeedFinder;
+import com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalFeedPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
-import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder;
-import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderUtil;
-import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence;
-import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
@@ -193,6 +193,40 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 		this.journalContentSearchPersistence = journalContentSearchPersistence;
 	}
 
+	public JournalFeedLocalService getJournalFeedLocalService() {
+		return journalFeedLocalService;
+	}
+
+	public void setJournalFeedLocalService(
+		JournalFeedLocalService journalFeedLocalService) {
+		this.journalFeedLocalService = journalFeedLocalService;
+	}
+
+	public JournalFeedService getJournalFeedService() {
+		return journalFeedService;
+	}
+
+	public void setJournalFeedService(JournalFeedService journalFeedService) {
+		this.journalFeedService = journalFeedService;
+	}
+
+	public JournalFeedPersistence getJournalFeedPersistence() {
+		return journalFeedPersistence;
+	}
+
+	public void setJournalFeedPersistence(
+		JournalFeedPersistence journalFeedPersistence) {
+		this.journalFeedPersistence = journalFeedPersistence;
+	}
+
+	public JournalFeedFinder getJournalFeedFinder() {
+		return journalFeedFinder;
+	}
+
+	public void setJournalFeedFinder(JournalFeedFinder journalFeedFinder) {
+		this.journalFeedFinder = journalFeedFinder;
+	}
+
 	public JournalStructureLocalService getJournalStructureLocalService() {
 		return journalStructureLocalService;
 	}
@@ -227,42 +261,6 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 	public void setJournalStructureFinder(
 		JournalStructureFinder journalStructureFinder) {
 		this.journalStructureFinder = journalStructureFinder;
-	}
-
-	public JournalSyndicatedFeedLocalService getJournalSyndicatedFeedLocalService() {
-		return journalSyndicatedFeedLocalService;
-	}
-
-	public void setJournalSyndicatedFeedLocalService(
-		JournalSyndicatedFeedLocalService journalSyndicatedFeedLocalService) {
-		this.journalSyndicatedFeedLocalService = journalSyndicatedFeedLocalService;
-	}
-
-	public JournalSyndicatedFeedService getJournalSyndicatedFeedService() {
-		return journalSyndicatedFeedService;
-	}
-
-	public void setJournalSyndicatedFeedService(
-		JournalSyndicatedFeedService journalSyndicatedFeedService) {
-		this.journalSyndicatedFeedService = journalSyndicatedFeedService;
-	}
-
-	public JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence() {
-		return journalSyndicatedFeedPersistence;
-	}
-
-	public void setJournalSyndicatedFeedPersistence(
-		JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence) {
-		this.journalSyndicatedFeedPersistence = journalSyndicatedFeedPersistence;
-	}
-
-	public JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder() {
-		return journalSyndicatedFeedFinder;
-	}
-
-	public void setJournalSyndicatedFeedFinder(
-		JournalSyndicatedFeedFinder journalSyndicatedFeedFinder) {
-		this.journalSyndicatedFeedFinder = journalSyndicatedFeedFinder;
 	}
 
 	public JournalTemplateLocalService getJournalTemplateLocalService() {
@@ -432,6 +430,22 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 			journalContentSearchPersistence = JournalContentSearchUtil.getPersistence();
 		}
 
+		if (journalFeedLocalService == null) {
+			journalFeedLocalService = JournalFeedLocalServiceFactory.getImpl();
+		}
+
+		if (journalFeedService == null) {
+			journalFeedService = JournalFeedServiceFactory.getImpl();
+		}
+
+		if (journalFeedPersistence == null) {
+			journalFeedPersistence = JournalFeedUtil.getPersistence();
+		}
+
+		if (journalFeedFinder == null) {
+			journalFeedFinder = JournalFeedFinderUtil.getFinder();
+		}
+
 		if (journalStructureLocalService == null) {
 			journalStructureLocalService = JournalStructureLocalServiceFactory.getImpl();
 		}
@@ -446,22 +460,6 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 
 		if (journalStructureFinder == null) {
 			journalStructureFinder = JournalStructureFinderUtil.getFinder();
-		}
-
-		if (journalSyndicatedFeedLocalService == null) {
-			journalSyndicatedFeedLocalService = JournalSyndicatedFeedLocalServiceFactory.getImpl();
-		}
-
-		if (journalSyndicatedFeedService == null) {
-			journalSyndicatedFeedService = JournalSyndicatedFeedServiceFactory.getImpl();
-		}
-
-		if (journalSyndicatedFeedPersistence == null) {
-			journalSyndicatedFeedPersistence = JournalSyndicatedFeedUtil.getPersistence();
-		}
-
-		if (journalSyndicatedFeedFinder == null) {
-			journalSyndicatedFeedFinder = JournalSyndicatedFeedFinderUtil.getFinder();
 		}
 
 		if (journalTemplateLocalService == null) {
@@ -535,14 +533,14 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
 	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	protected JournalFeedLocalService journalFeedLocalService;
+	protected JournalFeedService journalFeedService;
+	protected JournalFeedPersistence journalFeedPersistence;
+	protected JournalFeedFinder journalFeedFinder;
 	protected JournalStructureLocalService journalStructureLocalService;
 	protected JournalStructureService journalStructureService;
 	protected JournalStructurePersistence journalStructurePersistence;
 	protected JournalStructureFinder journalStructureFinder;
-	protected JournalSyndicatedFeedLocalService journalSyndicatedFeedLocalService;
-	protected JournalSyndicatedFeedService journalSyndicatedFeedService;
-	protected JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence;
-	protected JournalSyndicatedFeedFinder journalSyndicatedFeedFinder;
 	protected JournalTemplateLocalService journalTemplateLocalService;
 	protected JournalTemplatePersistence journalTemplatePersistence;
 	protected JournalTemplateFinder journalTemplateFinder;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -39,17 +40,16 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.journal.NoSuchSyndicatedFeedException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
-import com.liferay.portlet.journal.model.JournalSyndicatedFeed;
-import com.liferay.portlet.journal.model.impl.JournalSyndicatedFeedImpl;
+import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalRSSUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.RSSUtil;
+
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -60,6 +60,7 @@ import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -67,15 +68,14 @@ import java.util.List;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.XPath;
@@ -88,12 +88,10 @@ import org.dom4j.XPath;
  */
 public class RSSAction extends PortletAction {
 
-	public ActionForward render(ActionMapping mapping, ActionForm form,
-			PortletConfig config, RenderRequest req, RenderResponse res)
-			throws Exception {
-
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
 
 		if (req.getWindowState() == LiferayWindowState.EXCLUSIVE) {
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
@@ -101,7 +99,7 @@ public class RSSAction extends PortletAction {
 			OutputStream out = res.getPortletOutputStream();
 
 			try {
-				out.write(getRSS(httpReq));
+				out.write(getRSS(req));
 			}
 			finally {
 				out.close();
@@ -111,249 +109,66 @@ public class RSSAction extends PortletAction {
 		return mapping.findForward(ActionConstants.COMMON_NULL);
 	}
 
-	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
-
-		long plid = 0;
-
-		long groupId = ParamUtil.getLong(req, "groupId");
-
-		String feedId = ParamUtil.getString(req, "feedId");
-
-		long synFeedId = ParamUtil.getLong(req, "synFeedId");
-
-		String languageId = LanguageUtil.getLanguageId(req);
-
-		String rss = StringPool.BLANK;
-
-		JournalSyndicatedFeed synFeed = null;
-
-		List articles = new ArrayList();
-
-		try {
-			if (synFeedId > 0) {
-				synFeed =
-					JournalSyndicatedFeedLocalServiceUtil.getSyndicatedFeed(
-						synFeedId);
-			}
-			else {
-				synFeed =
-					JournalSyndicatedFeedLocalServiceUtil.getSyndicatedFeed(
-						groupId, feedId);
-			}
-
-			plid = PortalUtil.getPlidIdFromFriendlyURL(
-				themeDisplay.getCompanyId(),
-				synFeed.getTargetLayoutFriendlyUrl());
-
-			if (plid > 0) {
-				try {
-					layout = LayoutLocalServiceUtil.getLayout(plid);
-				}
-				catch (Exception e) {
-				}
-			}
-
-			String feedURL = themeDisplay.getURLPortal() +
-				PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
-					"/journal/rss/" + synFeed.getId();
-
-			articles = JournalRSSUtil.getArticles(synFeed);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("syndicating " + articles.size() + " articles");
-			}
-
-			StringMaker xmlRequest = new StringMaker();
-
-			xmlRequest.append("<request><parameters>");
-			xmlRequest.append(	"<parameter>");
-			xmlRequest.append(		"<name>rss</name>");
-			xmlRequest.append(		"<value>true</value>");
-			xmlRequest.append(	"</parameter>");
-			xmlRequest.append("</parameters></request>");
-
-			rss = exportToRSS(
-				synFeed, themeDisplay, layout, languageId, feedURL, articles,
-				xmlRequest.toString());
-		}
-		catch (NoSuchSyndicatedFeedException nssfe) {
-			_log.error(nssfe.getMessage(), nssfe);
-		}
-		catch (Exception e) {
-			_log.error("Cannot process SyndicatedFeed for " + synFeedId, e);
-		}
-
-		return rss.getBytes(StringPool.UTF8);
-	}
-
 	protected String exportToRSS(
-			JournalSyndicatedFeed synFeed, ThemeDisplay themeDisplay,
-			Layout layout, String languageId, String feedURL, List articles,
-			String xmlRequest)
-		throws SystemException {
+			JournalFeed feed, String languageId, Layout layout,
+			ThemeDisplay themeDisplay)
+		throws Exception {
 
-		SyndFeed feed = new SyndFeedImpl();
+		String feedURL =
+			themeDisplay.getURLPortal() +
+				PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
+					"/journal/rss/" + feed.getId();
 
-		String contentField = synFeed.getContentField();
+		SyndFeed syndFeed = new SyndFeedImpl();
 
-		String portalURL = themeDisplay.getURLPortal();
-
-		feed.setFeedType(
-			synFeed.getFeedType() + "_" + synFeed.getFeedVersion());
-
-		feed.setTitle(synFeed.getName());
-		feed.setLink(feedURL);
-		feed.setDescription(synFeed.getDescription());
+		syndFeed.setFeedType(feed.getFeedType() + "_" + feed.getFeedVersion());
+		syndFeed.setTitle(feed.getName());
+		syndFeed.setLink(feedURL);
+		syndFeed.setDescription(feed.getDescription());
 
 		List entries = new ArrayList();
 
-		feed.setEntries(entries);
+		syndFeed.setEntries(entries);
+
+		List articles = JournalRSSUtil.getArticles(feed);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Syndicating " + articles.size() + " articles");
+		}
 
 		Iterator itr = articles.iterator();
 
 		while (itr.hasNext()) {
 			JournalArticle article = (JournalArticle)itr.next();
 
+			String author = PortalUtil.getUserName(
+				article.getUserId(), article.getUserName());
+			String link = getEntryURL(feed, article, layout, themeDisplay);
+
 			SyndEntry syndEntry = new SyndEntryImpl();
-			syndEntry.setAuthor(article.getUserName());
 
-			SyndContent description = new SyndContentImpl();
-
-			description.setType("text");
-            description.setValue(article.getDescription());
-
+			syndEntry.setAuthor(author);
 			syndEntry.setTitle(article.getTitle());
-
+			syndEntry.setLink(link);
 			syndEntry.setPublishedDate(article.getCreateDate());
-
-			String entryURL = getEntryURL(
-				themeDisplay, layout, article,
-				synFeed.getTargetLayoutFriendlyUrl(),
-				synFeed.getTargetPortletId());
-
-			syndEntry.setLink(entryURL);
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType("html");
+			String value = article.getDescription();
 
-			String content = article.getDescription();
-
-			if (Validator.isNotNull(contentField)) {
-				if (contentField.equals(
-					JournalSyndicatedFeedImpl.RENDERED_ARTICLE)) {
-
-					String rendererTemplateId = article.getTemplateId();
-
-					if (Validator.isNotNull(synFeed.getRendererTemplateId())) {
-						rendererTemplateId = synFeed.getRendererTemplateId();
-					}
-
-					JournalArticleDisplay articleDisplay =
-						JournalContentUtil.getDisplay(
-							synFeed.getGroupId(), article.getArticleId(),
-							rendererTemplateId, languageId, themeDisplay,
-							1, xmlRequest);
-
-					if (articleDisplay != null) {
-						content = articleDisplay.getContent();
-					}
-				}
-				else if (!contentField.equals(
-					JournalSyndicatedFeedImpl.ARTICLE_DESCRIPTION)) {
-
-					try {
-						Document doc = PortalUtil.readDocumentFromXML(
-							article.getContent());
-
-						XPath xpathSelector = DocumentHelper.createXPath(
-							"//dynamic-element[@name='" + contentField + "']");
-
-						List results = xpathSelector.selectNodes(doc);
-
-						if (results.size() > 0) {
-							Element el = (Element)results.get(0);
-
-							String elType = el.attributeValue("type");
-
-							if (elType.equals("document_library")) {
-								String entryLink =
-									el.element("dynamic-content").getTextTrim();
-
-								entryLink = StringUtil.replace(
-									entryLink,
-									new String[] {
-										"@group_id@",
-										"@main_path@",
-										"@image_path@"
-									},
-									new String[] {
-										String.valueOf(synFeed.getGroupId()),
-										themeDisplay.getPathMain(),
-										themeDisplay.getPathImage()
-									}
-								);
-
-								syndEntry.setLinks(
-									JournalRSSUtil.getDLLinksFromURL(
-										portalURL, entryLink));
-								syndEntry.setEnclosures(
-									JournalRSSUtil.getDLEnclosuresFromURL(
-										portalURL, entryLink));
-							}
-							else if (elType.equals("image") ||
-									elType.equals("image_gallery")) {
-
-								String entryLink =
-									el.element("dynamic-content").getTextTrim();
-
-								entryLink = StringUtil.replace(
-									entryLink,
-									new String[] {
-										"@group_id@",
-										"@main_path@",
-										"@image_path@"
-									},
-									new String[] {
-										String.valueOf(synFeed.getGroupId()),
-										themeDisplay.getPathMain(),
-										themeDisplay.getPathImage()
-									}
-								);
-
-								content =
-									content + "<br/><br/><img src='" + portalURL +
-										entryLink + "' />";
-
-								syndEntry.setLinks(
-									JournalRSSUtil.getIGLinksFromURL(
-										portalURL, entryLink));
-								syndEntry.setEnclosures(
-									JournalRSSUtil.getIGEnclosuresFromURL(
-										portalURL, entryLink));
-							}
-							else if (elType.equals("text_box")) {
-								syndContent.setType("text");
-
-								content = el.element(
-									"dynamic-content").getTextTrim();
-							}
-							else {
-								content = el.element(
-									"dynamic-content").getTextTrim();
-							}
-						}
-					}
-					catch (DocumentException de) {
-					}
+			try {
+				value = processContent(
+					feed, article, languageId, themeDisplay, syndEntry,
+					syndContent);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
 				}
 			}
 
-			syndContent.setValue(content);
+			syndContent.setType("html");
+			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
 
@@ -361,7 +176,7 @@ public class RSSAction extends PortletAction {
 		}
 
 		try {
-			return RSSUtil.export(feed);
+			return RSSUtil.export(syndFeed);
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
@@ -372,57 +187,192 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String getEntryURL(
-			ThemeDisplay themeDisplay, Layout layout, JournalArticle article,
-			String targetLayoutFriendlyUrl, String targetPortletId) {
+			JournalFeed feed, JournalArticle article, Layout layout,
+			ThemeDisplay themeDisplay)
+		throws Exception {
 
-		StringMaker entryURL = new StringMaker();
+		StringMaker sm = new StringMaker();
 
-		List hitLayoutIds = new ArrayList();
+		List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			article.getArticleId());
 
-		try {
-			hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(
+		if (hitLayoutIds.size() > 0) {
+			Long hitLayoutId = (Long)hitLayoutIds.get(0);
+
+			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
-				article.getArticleId());
+				hitLayoutId.longValue());
 
-			if (hitLayoutIds.size() > 0) {
-				Long hitLayoutId = (Long)hitLayoutIds.get(0);
-
-				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					hitLayoutId.longValue());
-
-				return themeDisplay.getURLPortal() +
-					PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-			}
-			else if (Validator.isNotNull(targetLayoutFriendlyUrl)) {
-				entryURL.append(themeDisplay.getURLPortal());
-				entryURL.append(targetLayoutFriendlyUrl);
-			}
-			else {
-				entryURL.append(themeDisplay.getURLPortal());
-				entryURL.append(
-					PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-			}
+			return themeDisplay.getURLPortal() +
+				PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		}
-		catch (Exception se){
-		}
-
-		entryURL.append("/journal_content/");
-
-		if (Validator.isNotNull(targetPortletId)) {
-			entryURL.append(targetPortletId);
+		else if (Validator.isNotNull(feed.getTargetLayoutFriendlyUrl())) {
+			sm.append(themeDisplay.getURLPortal());
+			sm.append(feed.getTargetLayoutFriendlyUrl());
 		}
 		else {
-			entryURL.append(PortletKeys.JOURNAL_CONTENT);
+			sm.append(themeDisplay.getURLPortal());
+			sm.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
 		}
 
-		entryURL.append("/");
-		entryURL.append(article.getGroupId());
-		entryURL.append("/");
-		entryURL.append(article.getArticleId());
+		sm.append("/journal_content/");
 
-		return entryURL.toString();
+		if (Validator.isNotNull(feed.getTargetPortletId())) {
+			sm.append(feed.getTargetPortletId());
+		}
+		else {
+			sm.append(PortletKeys.JOURNAL_CONTENT);
+		}
+
+		sm.append(StringPool.SLASH);
+		sm.append(article.getGroupId());
+		sm.append(StringPool.SLASH);
+		sm.append(article.getArticleId());
+
+		return sm.toString();
 	}
+
+	protected byte[] getRSS(RenderRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		JournalFeed feed = null;
+
+		long id = ParamUtil.getLong(req, "id");
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+		String feedId = ParamUtil.getString(req, "feedId");
+
+		if (id > 0) {
+			feed = JournalFeedLocalServiceUtil.getFeed(id);
+		}
+		else {
+			feed = JournalFeedLocalServiceUtil.getFeed(groupId, feedId);
+		}
+
+		String languageId = LanguageUtil.getLanguageId(req);
+
+		long plid = PortalUtil.getPlidIdFromFriendlyURL(
+			themeDisplay.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
+
+		Layout layout = themeDisplay.getLayout();
+
+		if (plid > 0) {
+			try {
+				layout = LayoutLocalServiceUtil.getLayout(plid);
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+
+		String rss = exportToRSS(feed, languageId, layout, themeDisplay);
+
+		return rss.getBytes(StringPool.UTF8);
+	}
+
+	protected String processContent(
+			JournalFeed feed, JournalArticle article, String languageId,
+			ThemeDisplay themeDisplay, SyndEntry syndEntry,
+			SyndContent syndContent)
+		throws Exception {
+
+		String content = article.getDescription();
+
+		String contentField = feed.getContentField();
+
+		if (contentField.equals(JournalFeedImpl.RENDERED_ARTICLE)) {
+			String rendererTemplateId = article.getTemplateId();
+
+			if (Validator.isNotNull(feed.getRendererTemplateId())) {
+				rendererTemplateId = feed.getRendererTemplateId();
+			}
+
+			JournalArticleDisplay articleDisplay =
+				JournalContentUtil.getDisplay(
+					feed.getGroupId(), article.getArticleId(),
+					rendererTemplateId, languageId, themeDisplay, 1,
+					_XML_REQUUEST);
+
+			if (articleDisplay != null) {
+				content = articleDisplay.getContent();
+			}
+		}
+		else if (!contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION)) {
+			Document doc = PortalUtil.readDocumentFromXML(article.getContent());
+
+			XPath xpathSelector = DocumentHelper.createXPath(
+				"//dynamic-element[@name='" + contentField + "']");
+
+			List results = xpathSelector.selectNodes(doc);
+
+			if (results.size() == 0) {
+				return content;
+			}
+
+			Element el = (Element)results.get(0);
+
+			String elType = el.attributeValue("type");
+
+			if (elType.equals("document_library")) {
+				String url = el.elementText("dynamic-content");
+
+				url = processURL(feed, url, themeDisplay, syndEntry);
+			}
+			else if (elType.equals("image") || elType.equals("image_gallery")) {
+				String url = el.elementText("dynamic-content");
+
+				url = processURL(feed, url, themeDisplay, syndEntry);
+
+				content =
+					content + "<br /><br /><img src='" +
+						themeDisplay.getURLPortal() + url + "' />";
+			}
+			else if (elType.equals("text_box")) {
+				syndContent.setType("text");
+
+				content = el.elementText("dynamic-content");
+			}
+			else {
+				content = el.elementText("dynamic-content");
+			}
+		}
+
+		return content;
+	}
+
+	protected String processURL(
+		JournalFeed feed, String url, ThemeDisplay themeDisplay,
+		SyndEntry syndEntry) {
+
+		url = StringUtil.replace(
+			url,
+			new String[] {
+				"@group_id@",
+				"@image_path@",
+				"@main_path@"
+			},
+			new String[] {
+				String.valueOf(feed.getGroupId()),
+				themeDisplay.getPathImage(),
+				themeDisplay.getPathMain()
+			}
+		);
+
+		List links = JournalRSSUtil.getDLLinks(
+			themeDisplay.getURLPortal(), url);
+		List enclosures = JournalRSSUtil.getDLEnclosures(
+			themeDisplay.getURLPortal(), url);
+
+		syndEntry.setLinks(links);
+		syndEntry.setEnclosures(enclosures);
+
+		return url;
+	}
+
+	private static final String _XML_REQUUEST =
+		"<request><parameters><parameter><name>rss</name><value>true</value>" +
+			"</parameter></parameters></request>";
 
 	private static Log _log = LogFactory.getLog(RSSAction.class);
 

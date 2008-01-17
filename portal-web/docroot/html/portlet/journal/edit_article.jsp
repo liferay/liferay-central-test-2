@@ -545,7 +545,7 @@ Document contentDoc = null;
 String[] availableLocales = null;
 %>
 
-<table class="lfr-table">
+<table class="lfr-table" width="100%">
 <tr>
 	<td valign="top">
 		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
@@ -814,7 +814,7 @@ String[] availableLocales = null;
 
 		<br />
 
-		<table class="journal-edit-article-extra" width="100%">
+		<table class="journal-edit-article-extra">
 		<tr class="portlet-section-header">
 			<td>
 				<b><liferay-ui:message key="abstract" /></b>

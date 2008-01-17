@@ -45,21 +45,21 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 	}
 
+	function <portlet:namespace />deleteFeeds() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-feeds") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />deleteFeedIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+		}
+	}
+
 	function <portlet:namespace />deleteStructures() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-structures") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteStructureIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
-		}
-	}
-
-	function <portlet:namespace />deleteSyndicatedFeeds() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-syndicated-feeds") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
-			document.<portlet:namespace />fm.<portlet:namespace />deleteSyndicatedFeedIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_syndicated_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
 	}
 
@@ -86,7 +86,7 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <liferay-ui:tabs
-	names="articles,structures,templates,syndicated-feeds,recent"
+	names="articles,structures,templates,feeds,recent"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -202,6 +202,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("structures") %>'>
+		<input name="<portlet:namespace />groupId" type="hidden" value="" />
 		<input name="<portlet:namespace />deleteStructureIds" type="hidden" value="" />
 
 		<liferay-ui:error exception="<%= RequiredStructureException.class %>" message="required-structures-could-not-be-deleted" />
@@ -254,8 +255,6 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("groupId", String.valueOf(structure.getGroupId()));
 				rowURL.setParameter("structureId", structure.getStructureId());
 
-				System.out.println(structure.getStructureId());
-
 				// Structure id
 
 				row.addText(structure.getStructureId(), rowURL);
@@ -287,6 +286,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("templates") %>'>
+		<input name="<portlet:namespace />groupId" type="hidden" value="" />
 		<input name="<portlet:namespace />deleteTemplateIds" type="hidden" value="" />
 
 		<liferay-ui:error exception="<%= RequiredTemplateException.class %>" message="required-templates-could-not-be-deleted" />
@@ -364,12 +364,12 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("syndicated-feeds") %>'>
+	<c:when test='<%= tabs1.equals("feeds") %>'>
 		<input name="<portlet:namespace />groupId" type="hidden" value="" />
-		<input name="<portlet:namespace />deleteSyndicatedFeedIds" type="hidden" value="" />
+		<input name="<portlet:namespace />deleteFeedIds" type="hidden" value="" />
 
 		<%
-		SyndicatedFeedSearch searchContainer = new SyndicatedFeedSearch(renderRequest, portletURL);
+		FeedSearch searchContainer = new FeedSearch(renderRequest, portletURL);
 
 		List headerNames = searchContainer.getHeaderNames();
 
@@ -379,21 +379,21 @@ portletURL.setParameter("tabs1", tabs1);
 		%>
 
 		<liferay-ui:search-form
-			page="/html/portlet/journal/syndicated_feed_search.jsp"
+			page="/html/portlet/journal/feed_search.jsp"
 			searchContainer="<%= searchContainer %>"
 		/>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
-			SyndicatedFeedSearchTerms searchTerms = (SyndicatedFeedSearchTerms)searchContainer.getSearchTerms();
+			FeedSearchTerms searchTerms = (FeedSearchTerms)searchContainer.getSearchTerms();
 			%>
 
-			<%@ include file="/html/portlet/journal/syndicated_feed_search_results.jspf" %>
+			<%@ include file="/html/portlet/journal/feed_search_results.jspf" %>
 
 			<div class="separator"><!-- --></div>
 
-			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteSyndicatedFeeds();" />
+			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteFeeds();" />
 
 			<br /><br />
 
@@ -401,34 +401,43 @@ portletURL.setParameter("tabs1", tabs1);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				JournalSyndicatedFeed synFeed = (JournalSyndicatedFeed)results.get(i);
+				JournalFeed feed = (JournalFeed)results.get(i);
 
-				synFeed = synFeed.toEscapedModel();
+				feed = feed.toEscapedModel();
 
-				ResultRow row = new ResultRow(synFeed, synFeed.getFeedId(), i);
+				ResultRow row = new ResultRow(feed, feed.getFeedId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/journal/edit_syndicated_feed");
+				rowURL.setParameter("struts_action", "/journal/edit_feed");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", String.valueOf(synFeed.getGroupId()));
-				rowURL.setParameter("feedId", synFeed.getFeedId());
+				rowURL.setParameter("groupId", String.valueOf(feed.getGroupId()));
+				rowURL.setParameter("feedId", feed.getFeedId());
 
 				row.setParameter("rowHREF", rowURL.toString());
 
-				// SyndicatedFeed id
+				// Feed id
 
-				row.addText(synFeed.getFeedId(), rowURL);
+				row.addText(feed.getFeedId(), rowURL);
 
-				// Name, description, and image
+				// Name and description
 
-				row.addJSP("/html/portlet/journal/syndicated_feed_description.jsp");
+				StringMaker sm = new StringMaker();
+
+				sm.append(feed.getName());
+
+				if (Validator.isNotNull(feed.getDescription())) {
+					sm.append("<br />");
+					sm.append(feed.getDescription());
+				}
+
+				row.addText(sm.toString(), rowURL);
 
 				// Action
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/syndicated_feed_action.jsp");
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/feed_action.jsp");
 
 				// Add result row
 
