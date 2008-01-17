@@ -1612,6 +1612,38 @@ Liferay.Service.Journal.JournalStructure = {
 	}
 };
 
+Liferay.Service.Journal.JournalSyndicatedFeed = {
+	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalSyndicatedFeed" + Liferay.Service.classNameSuffix,
+
+	addSyndicatedFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addSyndicatedFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteSyndicatedFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteSyndicatedFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getSyndicatedFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getSyndicatedFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateSyndicatedFeed: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateSyndicatedFeed";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Journal.JournalTemplate = {
 	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalTemplate" + Liferay.Service.classNameSuffix,
 

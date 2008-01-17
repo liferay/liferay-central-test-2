@@ -280,6 +280,64 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
 	</entity>
+	<entity name="JournalSyndicatedFeed" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="id" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="feedId" type="String" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="type" type="String" />
+		<column name="structureId" type="String" />
+		<column name="templateId" type="String" />
+		<column name="rendererTemplateId" type="String" />
+		<column name="delta" type="int" />
+		<column name="orderByCol" type="String" />
+		<column name="orderByType" type="String" />
+		<column name="targetLayoutFriendlyUrl" type="String" />
+		<column name="targetPortletId" type="String" />
+		<column name="contentField" type="String" />
+		<column name="feedType" type="String" />
+		<column name="feedVersion" type="double" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="feedId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_F" return-type="JournalSyndicatedFeed">
+			<finder-column name="groupId" />
+			<finder-column name="feedId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<entity name="JournalTemplate" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -354,6 +412,7 @@
 		<exception>DuplicateArticleId</exception>
 		<exception>DuplicateArticleImageId</exception>
 		<exception>DuplicateStructureId</exception>
+		<exception>DuplicateSyndicatedFeedId</exception>
 		<exception>DuplicateTemplateId</exception>
 		<exception>RequiredStructure</exception>
 		<exception>RequiredTemplate</exception>
@@ -367,5 +426,11 @@
 		<exception>TemplateSmallImageName</exception>
 		<exception>TemplateSmallImageSize</exception>
 		<exception>TemplateXsl</exception>
+		<exception>SyndicatedFeedId</exception>
+		<exception>SyndicatedFeedName</exception>
+		<exception>SyndicatedFeedDescription</exception>
+		<exception>SyndicatedFeedContentField</exception>
+		<exception>SyndicatedFeedTargetLayoutFriendlyUrl</exception>
+		<exception>SyndicatedFeedTargetPortletId</exception>
 	</exceptions>
 </service-builder>

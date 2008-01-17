@@ -1,0 +1,324 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.journal.service;
+
+
+/**
+ * <a href="JournalSyndicatedFeedLocalService.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is
+ * <code>com.liferay.portlet.journal.service.impl.JournalSyndicatedFeedLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceFactory
+ * @see com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceUtil
+ *
+ */
+public interface JournalSyndicatedFeedLocalService {
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addJournalSyndicatedFeed(
+		com.liferay.portlet.journal.model.JournalSyndicatedFeed model)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed updateJournalSyndicatedFeed(
+		com.liferay.portlet.journal.model.JournalSyndicatedFeed model)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
+
+	public void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder();
+
+	public void setJournalArticleFinder(
+		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence getJournalArticleImagePersistence();
+
+	public void setJournalArticleImagePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence();
+
+	public void setJournalArticleResourcePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence();
+
+	public void setJournalContentSearchPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence();
+
+	public void setJournalStructurePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalStructureFinder getJournalStructureFinder();
+
+	public void setJournalStructureFinder(
+		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder);
+
+	public com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence();
+
+	public void setJournalSyndicatedFeedPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder();
+
+	public void setJournalSyndicatedFeedFinder(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder journalSyndicatedFeedFinder);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
+
+	public void setJournalTemplatePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplateFinder getJournalTemplateFinder();
+
+	public void setJournalTemplateFinder(
+		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder);
+
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
+	public void afterPropertiesSet();
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeed(
+		long userId, long plid, java.lang.String feedId, boolean autoFeedId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.lang.String rendererTemplateId,
+		int delta, java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeed(
+		long userId, long plid, java.lang.String feedId, boolean autoFeedId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.lang.String rendererTemplateId,
+		int delta, java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeed(
+		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
+		boolean autoFeedId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.lang.String rendererTemplateId, int delta,
+		java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeed(
+		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
+		boolean autoFeedId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.lang.String rendererTemplateId, int delta,
+		java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeed(
+		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
+		boolean autoFeedId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.lang.String rendererTemplateId, int delta,
+		java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed addSyndicatedFeedToGroup(
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.lang.String rendererTemplateId, int delta,
+		java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addSyndicatedFeedResources(long synFeedId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addSyndicatedFeedResources(
+		com.liferay.portlet.journal.model.JournalSyndicatedFeed synFeed,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addSyndicatedFeedResources(long synFeedId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addSyndicatedFeedResources(
+		com.liferay.portlet.journal.model.JournalSyndicatedFeed synFeed,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSyndicatedFeed(long synFeedId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSyndicatedFeed(long groupId, java.lang.String feedId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSyndicatedFeed(
+		com.liferay.portlet.journal.model.JournalSyndicatedFeed synFeed)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed getSyndicatedFeed(
+		long synFeedId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed getSyndicatedFeed(
+		long groupId, java.lang.String feedId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getSyndicatedFeeds()
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getSyndicatedFeeds(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getSyndicatedFeeds(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getSyndicatedFeedsCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List search(long companyId, long groupId,
+		java.lang.String keywords, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List search(long companyId, long groupId,
+		java.lang.String feedId, java.lang.String name,
+		java.lang.String description, boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String feedId, java.lang.String name,
+		java.lang.String description, boolean andOperator)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalSyndicatedFeed updateSyndicatedFeed(
+		long groupId, java.lang.String feedId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.lang.String rendererTemplateId, int delta,
+		java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+}

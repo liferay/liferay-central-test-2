@@ -1975,6 +1975,7 @@ use-large-image=Использовать большое изображение
 use-medium-image=Использовать среднее изображение
 use-shipping-formula=Использовать формулу доставки
 use-small-image=Использовать маленькое изображение
+use-template-x=Use Template {0}
 user-added-email=Email добавляемому пользователю
 user-id=ID пользователя
 user-name=Имя пользователя

@@ -2440,6 +2440,7 @@ use-logo=إستخدم شعار
 use-medium-image=إستخدم صورة متوسطة
 use-shipping-formula=إستخدم طريقة الشحن
 use-small-image=إستخدم صورة صغيرة
+use-template-x=Use Template {0}
 user-added-email=الرسالة الإلكترونية عند إضافة مستخدم
 user-groups=مجموعات المستخدم
 user-id=الرمز التعريفي للمستخدم

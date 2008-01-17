@@ -117,6 +117,40 @@
 				structureId ASC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder.countByC_G_F_N_D">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				JournalSyndicatedFeed
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(feedId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder.findByC_G_F_N_D">
+		<![CDATA[
+			SELECT
+				{JournalSyndicatedFeed.*}
+			FROM
+				JournalSyndicatedFeed
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(feedId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+			ORDER BY
+				feedId ASC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.countByC_G_T_S_N_D">
 		<![CDATA[
 			SELECT

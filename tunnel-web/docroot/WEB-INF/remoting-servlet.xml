@@ -458,6 +458,18 @@
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalStructureService" />
 	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalSyndicatedFeedService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalSyndicatedFeedService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalSyndicatedFeedService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalSyndicatedFeedService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalSyndicatedFeedService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.JournalSyndicatedFeedService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalSyndicatedFeedService" />
+	</bean>
 	<bean name="/com_liferay_portlet_journal_service_spring_JournalTemplateService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.journal.service.JournalTemplateService" />

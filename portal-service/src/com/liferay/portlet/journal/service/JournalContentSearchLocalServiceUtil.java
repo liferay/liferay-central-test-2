@@ -175,6 +175,32 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.setJournalStructureFinder(journalStructureFinder);
 	}
 
+	public static com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence() {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getJournalSyndicatedFeedPersistence();
+	}
+
+	public static void setJournalSyndicatedFeedPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence) {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		journalContentSearchLocalService.setJournalSyndicatedFeedPersistence(journalSyndicatedFeedPersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder() {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getJournalSyndicatedFeedFinder();
+	}
+
+	public static void setJournalSyndicatedFeedFinder(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder journalSyndicatedFeedFinder) {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		journalContentSearchLocalService.setJournalSyndicatedFeedFinder(journalSyndicatedFeedFinder);
+	}
+
 	public static com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence() {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 

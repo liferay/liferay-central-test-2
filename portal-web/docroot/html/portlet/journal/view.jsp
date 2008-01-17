@@ -54,6 +54,15 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 	}
 
+	function <portlet:namespace />deleteSyndicatedFeeds() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-syndicated-feeds") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />deleteSyndicatedFeedIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_syndicated_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+		}
+	}
+
 	function <portlet:namespace />deleteTemplates() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-templates") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
@@ -77,7 +86,7 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <liferay-ui:tabs
-	names="articles,structures,templates,recent"
+	names="articles,structures,templates,syndicated-feeds,recent"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -245,6 +254,8 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("groupId", String.valueOf(structure.getGroupId()));
 				rowURL.setParameter("structureId", structure.getStructureId());
 
+				System.out.println(structure.getStructureId());
+
 				// Structure id
 
 				row.addText(structure.getStructureId(), rowURL);
@@ -343,6 +354,81 @@ portletURL.setParameter("tabs1", tabs1);
 				// Action
 
 				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/template_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:if>
+	</c:when>
+	<c:when test='<%= tabs1.equals("syndicated-feeds") %>'>
+		<input name="<portlet:namespace />groupId" type="hidden" value="" />
+		<input name="<portlet:namespace />deleteSyndicatedFeedIds" type="hidden" value="" />
+
+		<%
+		SyndicatedFeedSearch searchContainer = new SyndicatedFeedSearch(renderRequest, portletURL);
+
+		List headerNames = searchContainer.getHeaderNames();
+
+		headerNames.add(StringPool.BLANK);
+
+		searchContainer.setRowChecker(new RowChecker(renderResponse));
+		%>
+
+		<liferay-ui:search-form
+			page="/html/portlet/journal/syndicated_feed_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
+
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+
+			<%
+			SyndicatedFeedSearchTerms searchTerms = (SyndicatedFeedSearchTerms)searchContainer.getSearchTerms();
+			%>
+
+			<%@ include file="/html/portlet/journal/syndicated_feed_search_results.jspf" %>
+
+			<div class="separator"><!-- --></div>
+
+			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteSyndicatedFeeds();" />
+
+			<br /><br />
+
+			<%
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				JournalSyndicatedFeed synFeed = (JournalSyndicatedFeed)results.get(i);
+
+				synFeed = synFeed.toEscapedModel();
+
+				ResultRow row = new ResultRow(synFeed, synFeed.getFeedId(), i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/journal/edit_syndicated_feed");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", String.valueOf(synFeed.getGroupId()));
+				rowURL.setParameter("feedId", synFeed.getFeedId());
+
+				row.setParameter("rowHREF", rowURL.toString());
+
+				// SyndicatedFeed id
+
+				row.addText(synFeed.getFeedId(), rowURL);
+
+				// Name, description, and image
+
+				row.addJSP("/html/portlet/journal/syndicated_feed_description.jsp");
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/syndicated_feed_action.jsp");
 
 				// Add result row
 

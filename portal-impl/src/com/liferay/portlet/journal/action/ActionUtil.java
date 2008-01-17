@@ -28,10 +28,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalSyndicatedFeed;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
+import com.liferay.portlet.journal.service.JournalSyndicatedFeedServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 
@@ -120,6 +122,32 @@ public class ActionUtil {
 		}
 
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
+	}
+
+	public static void getSyndicatedFeed(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getSyndicatedFeed(httpReq);
+	}
+
+	public static void getSyndicatedFeed(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getSyndicatedFeed(httpReq);
+	}
+
+	public static void getSyndicatedFeed(HttpServletRequest req) throws Exception {
+		long groupId = ParamUtil.getLong(req, "groupId");
+		String feedId = ParamUtil.getString(req, "feedId");
+
+		JournalSyndicatedFeed synFeed = null;
+
+		if (Validator.isNotNull(feedId)) {
+			synFeed = JournalSyndicatedFeedServiceUtil.getSyndicatedFeed(
+				groupId, feedId);
+		}
+
+		req.setAttribute(WebKeys.JOURNAL_SYNDICATED_FEED, synFeed);
 	}
 
 	public static void getTemplate(ActionRequest req) throws Exception {

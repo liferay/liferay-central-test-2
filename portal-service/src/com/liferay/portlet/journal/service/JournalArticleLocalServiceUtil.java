@@ -175,6 +175,32 @@ public class JournalArticleLocalServiceUtil {
 		journalArticleLocalService.setJournalStructureFinder(journalStructureFinder);
 	}
 
+	public static com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence() {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getJournalSyndicatedFeedPersistence();
+	}
+
+	public static void setJournalSyndicatedFeedPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence) {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.setJournalSyndicatedFeedPersistence(journalSyndicatedFeedPersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder() {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getJournalSyndicatedFeedFinder();
+	}
+
+	public static void setJournalSyndicatedFeedFinder(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder journalSyndicatedFeedFinder) {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.setJournalSyndicatedFeedFinder(journalSyndicatedFeedFinder);
+	}
+
 	public static com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence() {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 

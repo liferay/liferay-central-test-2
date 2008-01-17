@@ -963,6 +963,8 @@ public class PropsUtil {
 
 	public static final String JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID = "journal.structure.force.autogenerate.id";
 
+	public static final String JOURNAL_SYNDICATED_FEED_FORCE_AUTOGENERATE_ID = "journal.syndicated.feed.force.autogenerate.id";
+
 	public static final String JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID = "journal.template.force.autogenerate.id";
 
 	public static final String JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = "journal.template.velocity.restricted.variables";

@@ -7,6 +7,7 @@
 			<action-key>ADD_ARTICLE</action-key>
 			<action-key>ADD_STRUCTURE</action-key>
 			<action-key>ADD_TEMPLATE</action-key>
+			<action-key>ADD_SYNDICATED_FEED</action-key>
 			<action-key>APPROVE_ARTICLE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
@@ -21,6 +22,7 @@
 			<action-key>ADD_ARTICLE</action-key>
 			<action-key>ADD_STRUCTURE</action-key>
 			<action-key>ADD_TEMPLATE</action-key>
+			<action-key>ADD_SYNDICATED_FEED</action-key>
 			<action-key>APPROVE_ARTICLE</action-key>
 		</guest-unsupported>
 	</portlet-resource>
@@ -65,6 +67,27 @@
 	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.journal.model.JournalStructure</model-name>
+		<portlet-ref>
+			<portlet-name>15</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+			<action-key>UPDATE</action-key>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.portlet.journal.model.JournalSyndicatedFeed</model-name>
 		<portlet-ref>
 			<portlet-name>15</portlet-name>
 		</portlet-ref>

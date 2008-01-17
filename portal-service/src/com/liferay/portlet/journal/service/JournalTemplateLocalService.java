@@ -100,6 +100,16 @@ public interface JournalTemplateLocalService {
 	public void setJournalStructureFinder(
 		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder);
 
+	public com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence();
+
+	public void setJournalSyndicatedFeedPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder();
+
+	public void setJournalSyndicatedFeedFinder(
+		com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder journalSyndicatedFeedFinder);
+
 	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
 
 	public void setJournalTemplatePersistence(

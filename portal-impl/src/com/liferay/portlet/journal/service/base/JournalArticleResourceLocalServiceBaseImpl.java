@@ -45,6 +45,10 @@ import com.liferay.portlet.journal.service.JournalStructureLocalService;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureService;
 import com.liferay.portlet.journal.service.JournalStructureServiceFactory;
+import com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalService;
+import com.liferay.portlet.journal.service.JournalSyndicatedFeedLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalSyndicatedFeedService;
+import com.liferay.portlet.journal.service.JournalSyndicatedFeedServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateService;
@@ -63,6 +67,10 @@ import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
+import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinder;
+import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalSyndicatedFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
@@ -234,6 +242,42 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		this.journalStructureFinder = journalStructureFinder;
 	}
 
+	public JournalSyndicatedFeedLocalService getJournalSyndicatedFeedLocalService() {
+		return journalSyndicatedFeedLocalService;
+	}
+
+	public void setJournalSyndicatedFeedLocalService(
+		JournalSyndicatedFeedLocalService journalSyndicatedFeedLocalService) {
+		this.journalSyndicatedFeedLocalService = journalSyndicatedFeedLocalService;
+	}
+
+	public JournalSyndicatedFeedService getJournalSyndicatedFeedService() {
+		return journalSyndicatedFeedService;
+	}
+
+	public void setJournalSyndicatedFeedService(
+		JournalSyndicatedFeedService journalSyndicatedFeedService) {
+		this.journalSyndicatedFeedService = journalSyndicatedFeedService;
+	}
+
+	public JournalSyndicatedFeedPersistence getJournalSyndicatedFeedPersistence() {
+		return journalSyndicatedFeedPersistence;
+	}
+
+	public void setJournalSyndicatedFeedPersistence(
+		JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence) {
+		this.journalSyndicatedFeedPersistence = journalSyndicatedFeedPersistence;
+	}
+
+	public JournalSyndicatedFeedFinder getJournalSyndicatedFeedFinder() {
+		return journalSyndicatedFeedFinder;
+	}
+
+	public void setJournalSyndicatedFeedFinder(
+		JournalSyndicatedFeedFinder journalSyndicatedFeedFinder) {
+		this.journalSyndicatedFeedFinder = journalSyndicatedFeedFinder;
+	}
+
 	public JournalTemplateLocalService getJournalTemplateLocalService() {
 		return journalTemplateLocalService;
 	}
@@ -339,6 +383,22 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 			journalStructureFinder = JournalStructureFinderUtil.getFinder();
 		}
 
+		if (journalSyndicatedFeedLocalService == null) {
+			journalSyndicatedFeedLocalService = JournalSyndicatedFeedLocalServiceFactory.getImpl();
+		}
+
+		if (journalSyndicatedFeedService == null) {
+			journalSyndicatedFeedService = JournalSyndicatedFeedServiceFactory.getImpl();
+		}
+
+		if (journalSyndicatedFeedPersistence == null) {
+			journalSyndicatedFeedPersistence = JournalSyndicatedFeedUtil.getPersistence();
+		}
+
+		if (journalSyndicatedFeedFinder == null) {
+			journalSyndicatedFeedFinder = JournalSyndicatedFeedFinderUtil.getFinder();
+		}
+
 		if (journalTemplateLocalService == null) {
 			journalTemplateLocalService = JournalTemplateLocalServiceFactory.getImpl();
 		}
@@ -377,6 +437,10 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	protected JournalStructureService journalStructureService;
 	protected JournalStructurePersistence journalStructurePersistence;
 	protected JournalStructureFinder journalStructureFinder;
+	protected JournalSyndicatedFeedLocalService journalSyndicatedFeedLocalService;
+	protected JournalSyndicatedFeedService journalSyndicatedFeedService;
+	protected JournalSyndicatedFeedPersistence journalSyndicatedFeedPersistence;
+	protected JournalSyndicatedFeedFinder journalSyndicatedFeedFinder;
 	protected JournalTemplateLocalService journalTemplateLocalService;
 	protected JournalTemplateService journalTemplateService;
 	protected JournalTemplatePersistence journalTemplatePersistence;

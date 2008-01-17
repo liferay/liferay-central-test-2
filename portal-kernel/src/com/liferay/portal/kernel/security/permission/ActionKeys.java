@@ -91,6 +91,8 @@ public class ActionKeys {
 
 	public static final String ADD_SUBFOLDER = "ADD_SUBFOLDER";
 
+	public static final String ADD_SYNDICATED_FEED = "ADD_SYNDICATED_FEED";
+
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";
 
 	public static final String ADD_TOPIC = "ADD_TOPIC";

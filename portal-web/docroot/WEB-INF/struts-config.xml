@@ -601,6 +601,11 @@
 
 		<action path="/journal/edit_structure_xsd" forward="portlet.journal.edit_structure_xsd" />
 
+		<action path="/journal/edit_syndicated_feed" type="com.liferay.portlet.journal.action.EditSyndicatedFeedAction">
+			<forward name="portlet.journal.edit_syndicated_feed" path="portlet.journal.edit_syndicated_feed" />
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+		</action>
+
 		<action path="/journal/edit_template" type="com.liferay.portlet.journal.action.EditTemplateAction">
 			<forward name="portlet.journal.edit_template" path="portlet.journal.edit_template" />
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
@@ -623,6 +628,8 @@
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
 
 		<action path="/journal/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+
+		<action path="/journal/rss" type="com.liferay.portlet.journal.action.RSSAction" />
 
 		<action path="/journal/select_document_library" type="com.liferay.portlet.documentlibrary.action.ViewAction">
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />

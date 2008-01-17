@@ -184,6 +184,7 @@
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
+		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
@@ -466,6 +467,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<header-portal-css>/html/portlet/rss/css.jsp</header-portal-css>
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>

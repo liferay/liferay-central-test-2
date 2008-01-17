@@ -131,6 +131,11 @@ create index IX_8831E4FC on JournalStructure (structureId);
 create index IX_6702CA92 on JournalStructure (uuid_);
 create index IX_42E86E58 on JournalStructure (uuid_, groupId);
 
+create index IX_69C0BD07 on JournalSyndicatedFeed (groupId);
+create index IX_6BC1F694 on JournalSyndicatedFeed (groupId, feedId);
+create index IX_6A1FE551 on JournalSyndicatedFeed (uuid_);
+create index IX_28B3FA79 on JournalSyndicatedFeed (uuid_, groupId);
+
 create index IX_77923653 on JournalTemplate (groupId);
 create index IX_1701CB2B on JournalTemplate (groupId, structureId);
 create index IX_E802AA3C on JournalTemplate (groupId, templateId);

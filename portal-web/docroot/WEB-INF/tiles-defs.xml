@@ -550,6 +550,10 @@
 		<put name="portlet_content" value="/portlet/journal/edit_structure_xsd.jsp" />
 	</definition>
 
+	<definition name="portlet.journal.edit_syndicated_feed" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/edit_syndicated_feed.jsp" />
+	</definition>
+
 	<definition name="portlet.journal.edit_template" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/edit_template.jsp" />
 	</definition>

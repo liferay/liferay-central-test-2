@@ -135,6 +135,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE_EL_SIBLINGS = "JOURNAL_STRUCTURE_EL_SIBLINGS";
 
+	public static final String JOURNAL_SYNDICATED_FEED = "JOURNAL_SYNDICATED_FEED";
+
 	public static final String JOURNAL_TEMPLATE = "JOURNAL_TEMPLATE";
 
 	public static final String LAST_PATH = "LAST_PATH";
