@@ -220,6 +220,11 @@ public class SeleneseToJavaBuilder {
 				sm.append(param2);
 				sm.append("\"));");
 			}
+			else if (param1.equals("verifyTitle")) {
+				sm.append("verifyEquals(\"");
+				sm.append(param2);
+				sm.append("\", selenium.getTitle());");
+			}
 			else if (param1.equals("waitForElementPresent") ||
 					 param1.equals("waitForTextPresent")) {
 
