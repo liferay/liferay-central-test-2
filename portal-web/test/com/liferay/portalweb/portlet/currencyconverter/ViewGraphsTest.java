@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.currencyconverter;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ViewGraphTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewGraphsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewGraphTest extends BaseTestCase {
-	public void testViewGraph() throws Exception {
+public class ViewGraphsTest extends BaseTestCase {
+	public void testViewGraphs() throws Exception {
 		selenium.click("link=1y");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=2y");
