@@ -22,21 +22,21 @@
 
 package com.liferay.portalweb.portlet.currencyconverter;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="CurrencyConverterTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewGraphTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CurrencyConverterTests extends BaseTests {
-
-	public CurrencyConverterTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(ConvertCurrencyTest.class);
-		addTestSuite(ViewGraphTest.class);
+public class ViewGraphTest extends BaseTestCase {
+	public void testViewGraph() throws Exception {
+		selenium.click("link=1y");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=2y");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=3m");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
