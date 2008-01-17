@@ -35,5 +35,21 @@ public class ConvertCurrencyTest extends BaseTestCase {
 		selenium.select("_16_to", "label=BHD");
 		selenium.click("//input[@value='Convert']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("BHD")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

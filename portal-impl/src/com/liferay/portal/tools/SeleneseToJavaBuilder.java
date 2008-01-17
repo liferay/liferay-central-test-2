@@ -87,8 +87,8 @@ public class SeleneseToJavaBuilder {
 	protected String fixParam(String param) {
 		return StringUtil.replace(
 			param,
-			new String[] {"\"", "<br />"},
-			new String[] {"\\\"", "\\n"}
+			new String[] {"\\", "\\\\n", "\"", "<br />"},
+			new String[] {"\\\\", "\\n", "\\\"", "\\n"}
 		);
 	}
 
@@ -166,7 +166,7 @@ public class SeleneseToJavaBuilder {
 
 			String param1 = params[0];
 			String param2 = fixParam(params[1]);
-			String param3 = params[2];
+			String param3 = fixParam(params[2]);
 
 			if (param1.equals("click") || param1.equals("mouseDown") ||
 				param1.equals("mouseUp") || param1.equals("open") ||
@@ -211,14 +211,25 @@ public class SeleneseToJavaBuilder {
 				sm.append(param2);
 				sm.append("\"));");
 			}
-			else if (param1.equals("waitForElementPresent")) {
+			else if (param1.equals("waitForElementPresent") ||
+					 param1.equals("waitForTextPresent")) {
+
 				sm.append("for (int second = 0;; second++) {");
 				sm.append("if (second >= 60) {");
 				sm.append("fail(\"timeout\");");
 				sm.append("}");
 
 				sm.append("try {");
-				sm.append("if (selenium.isElementPresent(\"");
+				sm.append("if (selenium.");
+
+				if (param1.equals("waitForElementPresent")) {
+					sm.append("isElementPresent");
+				}
+				else if (param1.equals("waitForTextPresent")) {
+					sm.append("isTextPresent");
+				}
+
+				sm.append("(\"");
 				sm.append(param2);
 				sm.append("\")) {");
 				sm.append("break;");

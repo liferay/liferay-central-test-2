@@ -41,5 +41,21 @@ public class EditPreferencesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=GOOG");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Change")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
