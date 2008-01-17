@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -1057,6 +1058,10 @@ public class BaseDeployer {
 	protected void updateGeronimoWebXml(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
+
+		if (!ServerDetector.isGeronimo()) {
+			return;
+		}
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
 
