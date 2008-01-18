@@ -472,6 +472,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.journalcontent.util.JournalContentUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.mail">
 		<priority value="WARN" />
 	</category>
@@ -481,11 +485,11 @@
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.jms.MBMessageConsumer">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.smtp.MessageListenerImpl">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.util.MBUtil">
