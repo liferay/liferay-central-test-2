@@ -22,12 +22,20 @@
 
 package com.liferay.portlet.mail.util;
 
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.mail.util.multiaccount.MailCache;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
 
+import javax.mail.Folder;
+import javax.mail.MessagingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MailSessionLock.java.html"><b><i>View Source</i></b></a>
@@ -54,9 +62,30 @@ public class MailSessionLock {
 
 	private void _cleanUp(HttpSession ses) {
 		try {
-			MailUtil.cleanUp(ses);
+
+			// This method duplicates the same method in MailUtil because of
+			// LEP-4829.
+
+			Folder folder = (Folder)ses.getAttribute(WebKeys.MAIL_FOLDER);
+
+			if ((folder != null) && folder.isOpen()) {
+				try {
+					folder.close(false);
+				}
+				catch (MessagingException me) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(me);
+					}
+				}
+
+				ses.removeAttribute(WebKeys.MAIL_FOLDER);
+			}
+
+			MailCache.clearCache(ses);
+
+			ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
 		}
-		catch (Exception ex) {
+		catch (Exception e) {
 		}
 
 		synchronized (_sessionMap) {
@@ -136,6 +165,8 @@ public class MailSessionLock {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(MailSessionLock.class);
 
 	private static MailSessionLock _instance = new MailSessionLock();
 
