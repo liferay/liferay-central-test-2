@@ -45,6 +45,11 @@ public interface PortletPermission {
 			String actionId)
 		throws PortalException, SystemException;
 
+	public void check(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException;
+
 	public boolean contains(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
@@ -56,8 +61,18 @@ public interface PortletPermission {
 		throws PortalException, SystemException;
 
 	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			String actionId, boolean strict)
 		throws PortalException, SystemException;
 
 	public String getPrimaryKey(long plid, String portletId);

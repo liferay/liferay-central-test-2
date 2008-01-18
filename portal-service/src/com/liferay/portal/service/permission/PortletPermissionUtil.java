@@ -53,6 +53,15 @@ public class PortletPermissionUtil {
 			permissionChecker, plid, portletId, actionId);
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		getPortletPermission().check(
+			permissionChecker, plid, portletId, actionId, strict);
+	}
+
 	public static boolean contains(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
@@ -72,12 +81,30 @@ public class PortletPermissionUtil {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		return getPortletPermission().contains(
+			permissionChecker, plid, portletId, actionId, strict);
+	}
+
+	public static boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId)
 		throws PortalException, SystemException {
 
 		return getPortletPermission().contains(
 			permissionChecker, plid, portlet, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		return getPortletPermission().contains(
+			permissionChecker, plid, portlet, actionId, strict);
 	}
 
 	public static PortletPermission getPortletPermission() {

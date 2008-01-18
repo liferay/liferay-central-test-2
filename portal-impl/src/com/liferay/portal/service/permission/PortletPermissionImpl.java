@@ -41,6 +41,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
  */
 public class PortletPermissionImpl implements PortletPermission {
 
+	public static final boolean DEFAULT_STRICT = false;
+
 	public void check(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
@@ -56,7 +58,15 @@ public class PortletPermissionImpl implements PortletPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, portletId, actionId)) {
+		check(permissionChecker, plid, portletId, actionId, DEFAULT_STRICT);
+	}
+
+	public void check(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, plid, portletId, actionId, strict)) {
 			throw new PrincipalException();
 		}
 	}
@@ -74,6 +84,15 @@ public class PortletPermissionImpl implements PortletPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		return contains(
+			permissionChecker, plid, portletId, actionId, DEFAULT_STRICT);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
 		long groupId = 0;
 		String name = null;
 		String primKey = null;
@@ -85,11 +104,13 @@ public class PortletPermissionImpl implements PortletPermission {
 			name = PortletImpl.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
-			if (LayoutPermissionUtil.contains(
-					permissionChecker, groupId, layout.isPrivateLayout(),
-					layout.getLayoutId(), ActionKeys.UPDATE)) {
+			if (!strict) {
+				if (LayoutPermissionUtil.contains(
+						permissionChecker, groupId, layout.isPrivateLayout(),
+						layout.getLayoutId(), ActionKeys.UPDATE)) {
 
-				return true;
+					return true;
+				}
 			}
 		}
 		else {
@@ -106,8 +127,17 @@ public class PortletPermissionImpl implements PortletPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		return contains(
+			permissionChecker, plid, portlet, actionId, DEFAULT_STRICT);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
 		boolean value = contains(
-			permissionChecker, plid, portlet.getPortletId(), actionId);
+			permissionChecker, plid, portlet.getPortletId(), actionId, strict);
 
 		if (value) {
 			return true;
