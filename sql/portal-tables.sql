@@ -443,7 +443,7 @@ create table JournalFeed (
 	modifiedDate DATE null,
 	feedId VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null,
+	description STRING null,
 	type_ VARCHAR(75) null,
 	structureId VARCHAR(75) null,
 	templateId VARCHAR(75) null,
