@@ -29,7 +29,9 @@
 		StringMaker sm = new StringMaker();
 
 		sm.append(themeDisplay.getPathMain());
-		sm.append("/blogs/find_entry?entryId=");
+		sm.append("/blogs/find_entry?redirect=");
+		sm.append(Http.encodeURL(currentURL));
+		sm.append("&entryId=");
 		sm.append(entry.getEntryId());
 
 		String viewEntryURL = sm.toString();
