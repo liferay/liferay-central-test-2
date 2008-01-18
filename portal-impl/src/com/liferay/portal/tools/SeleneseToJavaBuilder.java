@@ -215,8 +215,17 @@ public class SeleneseToJavaBuilder {
 				sm.append("\");");
 				sm.append("selenium.waitForPageToLoad(\"30000\");");
 			}
-			else if (param1.equals("verifyTextPresent")) {
-				sm.append("verifyTrue(selenium.isTextPresent(\"");
+			else if (param1.equals("verifyTextPresent") ||
+					 param1.equals("verifyTextNotPresent")) {
+
+				if (param1.equals("verifyTextPresent")) {
+					sm.append("verifyTrue");
+				}
+				else if (param1.equals("verifyTextNotPresent")) {
+					sm.append("verifyFalse");
+				}
+
+				sm.append("(selenium.isTextPresent(\"");
 				sm.append(param2);
 				sm.append("\"));");
 			}
