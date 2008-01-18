@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
+import com.liferay.portalweb.portlet.blogsaggregator.BlogsAggregatorTests;
 import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
@@ -32,6 +33,7 @@ import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portlet.polls.PollsTests;
 import com.liferay.portalweb.portlet.pollsdisplay.PollsDisplayTests;
+import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
@@ -47,6 +49,7 @@ public class PortalWebTestSuite extends BaseTests {
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTest.class);
 		addTestSuite(BlogsTests.class);
+		addTestSuite(BlogsAggregatorTests.class);
 		addTestSuite(BookmarksTests.class);
 		addTestSuite(CalendarTests.class);
 		addTestSuite(CurrencyConverterTests.class);
@@ -56,6 +59,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(MessageBoardsTests.class);
 		addTestSuite(PollsTests.class);
 		addTestSuite(PollsDisplayTests.class);
+		addTestSuite(RecentBloggersTests.class);
 		addTestSuite(SiteMapTests.class);
 		addTestSuite(StocksTests.class);
 		addTestSuite(WeatherTests.class);
