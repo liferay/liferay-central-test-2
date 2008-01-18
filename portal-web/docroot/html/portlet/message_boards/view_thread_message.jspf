@@ -191,7 +191,7 @@
 			<div class="thread-body">
 
 				<%
-				String msgBody = message.getBody(false);
+				String msgBody = message.getBody();
 
 				/*String codeStart = "<!--c1--><div class='codetop'>CODE</div><div class='codemain'><!--ec1-->";
 				String codeEnd = "<!--c2--></div><!--ec2-->";

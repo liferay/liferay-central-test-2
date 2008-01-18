@@ -32,6 +32,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
+<%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 
 <%
@@ -230,7 +231,21 @@ List messages = treeWalker.getMessages();
 			</td>
 			<td valign="top" width="99%">
 				<div>
-					<%= message.getBody(true) %>
+
+					<%
+					String msgBody = message.getBody();
+
+					try {
+						msgBody = BBCodeUtil.getHTML(msgBody);
+					}
+					catch (Exception e) {
+						_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
+					}
+
+					msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+					%>
+
+					<%= msgBody %>
 				</div>
 
 				<br />
@@ -366,3 +381,7 @@ List messages = treeWalker.getMessages();
 </c:if>
 
 </form>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.taglib.ui.discussion.page.jsp");
+%>
