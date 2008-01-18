@@ -31,6 +31,7 @@ import com.liferay.portalweb.portlet.imagegallery.ImageGalleryTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portlet.polls.PollsTests;
+import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 
@@ -53,6 +54,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LoanCalculatorTests.class);
 		addTestSuite(MessageBoardsTests.class);
 		addTestSuite(PollsTests.class);
+		addTestSuite(SiteMapTests.class);
 		addTestSuite(StocksTests.class);
 		addTestSuite(WeatherTests.class);
 	}
