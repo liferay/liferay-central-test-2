@@ -130,7 +130,7 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 
 			{ "feedVersion", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalFeed (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,feedId VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,rendererTemplateId VARCHAR(75) null,delta INTEGER,orderByCol VARCHAR(75) null,orderByType VARCHAR(75) null,targetLayoutFriendlyUrl VARCHAR(75) null,targetPortletId VARCHAR(75) null,contentField VARCHAR(75) null,feedType VARCHAR(75) null,feedVersion DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table JournalFeed (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,feedId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,rendererTemplateId VARCHAR(75) null,delta INTEGER,orderByCol VARCHAR(75) null,orderByType VARCHAR(75) null,targetLayoutFriendlyUrl VARCHAR(75) null,targetPortletId VARCHAR(75) null,contentField VARCHAR(75) null,feedType VARCHAR(75) null,feedVersion DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table JournalFeed";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalFeed"),
@@ -449,12 +449,12 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setFeedId(Html.escape(getFeedId()));
+			model.setFeedId(getFeedId());
 			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setType(Html.escape(getType()));
-			model.setStructureId(Html.escape(getStructureId()));
-			model.setTemplateId(Html.escape(getTemplateId()));
+			model.setStructureId(getStructureId());
+			model.setTemplateId(getTemplateId());
 			model.setRendererTemplateId(Html.escape(getRendererTemplateId()));
 			model.setDelta(getDelta());
 			model.setOrderByCol(Html.escape(getOrderByCol()));
