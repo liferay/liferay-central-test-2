@@ -106,8 +106,7 @@
 		<td valign="top">
 			<div class="thread-top float-container">
 				<div class="subject">
-					<b><%= StringUtil.shorten(Html.escape(message.getSubject()), 50) %></b>
-					|
+					<b><%= Html.escape(message.getSubject()) %></b><br />
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 

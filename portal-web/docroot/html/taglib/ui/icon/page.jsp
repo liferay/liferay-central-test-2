@@ -41,6 +41,6 @@ if (!target.equals("_self")) {
 		<li><nobr><a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
 	</c:when>
 	<c:otherwise>
-		<a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a><c:if test="<%= label %>"> <a href="<%= url %>" <%= targetHtml %>><liferay-ui:message key="<%= message %>" /></a></c:if>
+		<nobr><a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a><c:if test="<%= label %>"> <a href="<%= url %>" <%= targetHtml %>><liferay-ui:message key="<%= message %>" /></a></c:if></nobr>
 	</c:otherwise>
 </c:choose>
