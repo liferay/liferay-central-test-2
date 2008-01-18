@@ -481,11 +481,11 @@
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.jms.MBMessageConsumer">
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.smtp.MessageListenerImpl">
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.util.MBUtil">
