@@ -187,6 +187,12 @@ public class JournalContentUtil {
 		int page, String xmlRequest, ThemeDisplay themeDisplay) {
 
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Get article display {" + groupId + ", " + articleId +
+						", " + templateId + "}");
+			}
+
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
 				groupId, articleId, templateId, languageId, page, xmlRequest,
 				themeDisplay);
