@@ -83,9 +83,9 @@
 	</library>
 	<library>
 		<file-name>development/derby.jar</file-name>
-		<version>10.1.1.0</version>
+		<version>10.2.2.0</version>
 		<project-name>Derby</project-name>
-		<project-url>http://db.apache.org/derby/releases/release-10.1.1.0.html</project-url>
+		<project-url>http://db.apache.org/derby</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
