@@ -24,47 +24,21 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-hello
 <%
-com.liferay.portal.pop.POPServerUtil.stop();
+List users = UserLocalServiceUtil.search(company.getCompanyId(), null, Boolean.TRUE, null, 0, 10, null);
+
+request.setAttribute("users", users);
 %>
 
-<%--
-javax.mail.Session ses = com.liferay.util.mail.MailEngine.getSession();
-
-String popHost = ses.getProperty("mail.pop3.host");
-String smtpUser = ses.getProperty("mail.smtp.user");
-String smtpPassword = ses.getProperty("mail.smtp.password");
-
-javax.mail.Store store = ses.getStore("pop3");
-
-store.connect(popHost, smtpUser, smtpPassword);
-
-javax.mail.Folder defaultFolder = store.getDefaultFolder();
-
-javax.mail.Folder[] folders = defaultFolder.list();
-
-javax.mail.Folder inboxFolder = folders[0];
-
-inboxFolder.open(javax.mail.Folder.READ_WRITE);
-
-javax.mail.Message[] messages = inboxFolder.getMessages();
-%>
-
-<%= inboxFolder.getName() %><br />
-<%= messages.length %><br />
+<display:table name="users">
+	<display:column property="userId" title="User ID" />
+	<display:column property="emailAddress" title="Email Address" />
+</display:table>
 
 <%
-for (int i = 0; i < messages.length; i++) {
-	javax.mail.internet.MimeMessage message = (javax.mail.internet.MimeMessage)messages[i];
+System.out.println(request.getClass().getName());
+System.out.println("request.getRemoteUser() " + request.getRemoteUser());
+PortalServiceUtil.test();
 %>
 
-	<%= message.getSubject() %><br />
-
-<%
-}
-%>
-
-<%
-store.close();
-%>--%>
+Test
