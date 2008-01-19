@@ -36,6 +36,7 @@ import com.liferay.portalweb.portlet.pollsdisplay.PollsDisplayTests;
 import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
+import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 
 /**
@@ -62,6 +63,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(RecentBloggersTests.class);
 		addTestSuite(SiteMapTests.class);
 		addTestSuite(StocksTests.class);
+		addTestSuite(UnitConverterTests.class);
 		addTestSuite(WeatherTests.class);
 	}
 
