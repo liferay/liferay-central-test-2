@@ -14522,6 +14522,9 @@ Liferay.Util = {
 	},
 
 	getURLWithSessionId: function(url) {
+		if (propsUtil.SESSION_ENABLE_PERSISTENT_COOKIES) {
+			return url;
+		}
 
 		// LEP-4787
 
@@ -14534,12 +14537,11 @@ Liferay.Util = {
 		x = url.indexOf("?");
 
 		if (x != -1) {
-			return url.substring(0, x) + ";jsessionid=" +
-				themeDisplay.getSessionId() + url.substring(x);
+			return url.substring(0, x) + ";jsessionid=" + themeDisplay.getSessionId() + url.substring(x);
 		}
 
-		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
-		// but http://www.abc.com/;jsessionid=XYZ does work.
+		// In IE6, http://www.abc.com;jsessionid=XYZ does not work, but
+		// http://www.abc.com/;jsessionid=XYZ does work.
 
 		x = url.indexOf("//");
 
