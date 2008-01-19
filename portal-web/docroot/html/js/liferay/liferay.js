@@ -35,6 +35,14 @@ jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };
 
+jQuery.ajaxOld = jQuery.ajax;
+
+jQuery.ajax = function(options) {
+	options.url = Liferay.Util.getURLWithSessionId(options.url);
+
+	return jQuery.ajaxOld(options);
+};
+
 Liferay = function() {
 	var $ = jQuery;
 

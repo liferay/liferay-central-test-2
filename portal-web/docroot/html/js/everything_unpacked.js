@@ -13930,6 +13930,14 @@ jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };
 
+jQuery.ajaxOld = jQuery.ajax;
+
+jQuery.ajax = function(options) {
+	options.url = Liferay.Util.getURLWithSessionId(options.url);
+
+	return jQuery.ajaxOld(options);
+};
+
 Liferay = function() {
 	var $ = jQuery;
 
@@ -14511,6 +14519,39 @@ Liferay.Util = {
 		else {
 			return col[i].value;
 		}
+	},
+
+	getURLWithSessionId: function(url) {
+
+		// LEP-4787
+
+		var x = url.indexOf(";");
+
+		if (x != -1) {
+			return url;
+		}
+
+		x = url.indexOf("?");
+
+		if (x != -1) {
+			return url.substring(0, x) + ";jsessionid=" +
+				themeDisplay.getSessionId() + url.substring(x);
+		}
+
+		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
+		// but http://www.abc.com/;jsessionid=XYZ does work.
+
+		x = url.indexOf("//");
+
+		if (x != -1) {
+			var y = url.lastIndexOf("/");
+
+			if (x + 1 == y) {
+				return url + "/;jsessionid=" + themeDisplay.getSessionId();
+			}
+		}
+
+		return url + ";jsessionid=" + themeDisplay.getSessionId();
 	},
 
 	isArray: function(object) {
@@ -15330,6 +15371,8 @@ function AjaxRequest(url, options) {
 	};
 
 	var send = function(url) {
+		url = Liferay.Util.getURLWithSessionId(url);
+
 		var urlArray = url.split("?");
 		var path = urlArray[0];
 		var query = urlArray[1];

@@ -51,6 +51,8 @@ function AjaxRequest(url, options) {
 	};
 
 	var send = function(url) {
+		url = Liferay.Util.getURLWithSessionId(url);
+
 		var urlArray = url.split("?");
 		var path = urlArray[0];
 		var query = urlArray[1];

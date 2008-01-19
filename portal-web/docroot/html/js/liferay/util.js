@@ -269,6 +269,39 @@ Liferay.Util = {
 		}
 	},
 
+	getURLWithSessionId: function(url) {
+
+		// LEP-4787
+
+		var x = url.indexOf(";");
+
+		if (x != -1) {
+			return url;
+		}
+
+		x = url.indexOf("?");
+
+		if (x != -1) {
+			return url.substring(0, x) + ";jsessionid=" +
+				themeDisplay.getSessionId() + url.substring(x);
+		}
+
+		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
+		// but http://www.abc.com/;jsessionid=XYZ does work.
+
+		x = url.indexOf("//");
+
+		if (x != -1) {
+			var y = url.lastIndexOf("/");
+
+			if (x + 1 == y) {
+				return url + "/;jsessionid=" + themeDisplay.getSessionId();
+			}
+		}
+
+		return url + ";jsessionid=" + themeDisplay.getSessionId();
+	},
+
 	isArray: function(object) {
 		if (!window.Array) {
 			return false;
