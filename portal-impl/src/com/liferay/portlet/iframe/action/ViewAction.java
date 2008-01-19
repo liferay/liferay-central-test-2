@@ -34,7 +34,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-
 import com.liferay.portlet.PortletConfigImpl;
 
 import javax.portlet.PortletConfig;
@@ -66,13 +65,18 @@ public class ViewAction extends PortletAction {
 		}
 
 		req.setAttribute(WebKeys.IFRAME_SRC, src);
+
 		return mapping.findForward("portlet.iframe.view");
 	}
 
 	protected String getSrc(RenderRequest req, RenderResponse res) {
 		PortletPreferences prefs = req.getPreferences();
 
-		return ParamUtil.getString(req, "src", prefs.getValue("src", StringPool.BLANK));
+		String src = prefs.getValue("src", StringPool.BLANK);
+
+		src = ParamUtil.getString(req, "src", src);
+
+		return src;
 	}
 
 	protected String getUserName(RenderRequest req, RenderResponse res) {
