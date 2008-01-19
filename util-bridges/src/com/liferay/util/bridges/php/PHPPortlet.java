@@ -24,9 +24,14 @@ package com.liferay.util.bridges.php;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.util.servlet.DynamicServletConfig;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -120,6 +125,20 @@ public class PHPPortlet extends GenericPortlet {
 			try {
 				quercusServlet = (HttpServlet)Class.forName(
 					_QUERCUS_SERVLET).newInstance();
+
+				Map params = new HashMap();
+
+				Enumeration enu = config.getInitParameterNames();
+
+				while (enu.hasMoreElements()) {
+					String name = (String)enu.nextElement();
+
+					if (!name.equals("portlet-class")) {
+						params.put(name, config.getInitParameter(name));
+					}
+				}
+
+				config = new DynamicServletConfig(config, params);
 
 				quercusServlet.init(config);
 			}

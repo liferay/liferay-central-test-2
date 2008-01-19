@@ -480,7 +480,7 @@
 	</library>
 	<library>
 		<file-name>development/quercus.jar</file-name>
-		<version>3.1</version>
+		<version>3.1.3</version>
 		<project-name>Quercus</project-name>
 		<project-url>http://www.caucho.com/resin-3.1/doc/quercus.xtp</project-url>
 		<licenses>
@@ -491,7 +491,7 @@
 	</library>
 	<library>
 		<file-name>development/resin-util.jar</file-name>
-		<version>3.1</version>
+		<version>3.1.3</version>
 		<project-name>Resin</project-name>
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
@@ -535,7 +535,7 @@
 	</library>
 	<library>
 		<file-name>development/script-10.jar</file-name>
-		<version>3.1</version>
+		<version>3.1.3</version>
 		<project-name>Resin</project-name>
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
