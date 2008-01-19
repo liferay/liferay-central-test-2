@@ -164,6 +164,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.pop">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.security.auth.LDAPAuth">
 		<priority value="ERROR" />
 	</category>
@@ -281,10 +285,6 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.smtp.SubEthaMessageListenerImpl">
 		<priority value="ERROR" />
 	</category>
 
@@ -480,15 +480,15 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.messageboards.pop.MessageListenerImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.jms.MBMessageConsumer">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portlet.messageboards.smtp.MessageListenerImpl">
 		<priority value="ERROR" />
 	</category>
 

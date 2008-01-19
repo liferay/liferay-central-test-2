@@ -980,9 +980,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						portlet.elementText(
 							"activity-tracker-interpreter-class"),
 							portletModel.getActivityTrackerInterpreterClass()));
-				portletModel.setSmtpMessageListenerClass(GetterUtil.getString(
-					portlet.elementText("smtp-message-listener-class"),
-					portletModel.getSmtpMessageListenerClass()));
+				portletModel.setPopMessageListenerClass(GetterUtil.getString(
+					portlet.elementText("pop-message-listener-class"),
+					portletModel.getPopMessageListenerClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

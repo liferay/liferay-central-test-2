@@ -20,29 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.smtp;
+package com.liferay.portal.pop;
 
-import com.liferay.portal.kernel.smtp.MessageListener;
-import com.liferay.portal.kernel.smtp.MessageListenerException;
+import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.pop.MessageListenerException;
 
-import java.io.IOException;
-import java.io.InputStream;
+import javax.mail.Message;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.subethamail.smtp.TooMuchDataException;
-
 /**
- * <a href="SubEthaMessageListenerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageListenerWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SubEthaMessageListenerImpl
-	implements org.subethamail.smtp.MessageListener {
+public class MessageListenerWrapper implements MessageListener {
 
-	public SubEthaMessageListenerImpl(MessageListener listener) {
+	public MessageListenerWrapper(MessageListener listener) {
 		_listener = listener;
 	}
 
@@ -62,35 +58,17 @@ public class SubEthaMessageListenerImpl
 		return value;
 	}
 
-	public void deliver(String from, String recipient, InputStream data)
-		throws IOException, TooMuchDataException {
+	public void deliver(String from, String recipient, Message message)
+		throws MessageListenerException {
 
-		try {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Listener " + _listener.getClass().getName());
-				_log.debug("From " + from);
-				_log.debug("Recipient " + recipient);
-				_log.debug("Data " + data);
-			}
-
-			_listener.deliver(from, recipient, data);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Listener " + _listener.getClass().getName());
+			_log.debug("From " + from);
+			_log.debug("Recipient " + recipient);
+			_log.debug("Message " + message);
 		}
-		catch (MessageListenerException mle) {
-			Throwable cause = mle.getCause();
 
-			if (cause instanceof IOException) {
-				throw (IOException)cause;
-			}
-			else if (cause instanceof TooMuchDataException) {
-				throw (TooMuchDataException)cause;
-			}
-			else if (cause != null) {
-				throw new IOException(cause.getMessage());
-			}
-			else {
-				throw new IOException(mle.getMessage());
-			}
-		}
+		_listener.deliver(from, recipient, message);
 	}
 
 	public String getId() {
@@ -102,10 +80,10 @@ public class SubEthaMessageListenerImpl
 			return false;
 		}
 
-		SubEthaMessageListenerImpl listener = null;
+		MessageListenerWrapper listener = null;
 
 		try {
-			listener = (SubEthaMessageListenerImpl)obj;
+			listener = (MessageListenerWrapper)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;
@@ -121,8 +99,7 @@ public class SubEthaMessageListenerImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactory.getLog(SubEthaMessageListenerImpl.class);
+	private static Log _log = LogFactory.getLog(MessageListenerWrapper.class);
 
 	private MessageListener _listener;
 

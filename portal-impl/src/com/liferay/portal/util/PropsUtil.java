@@ -775,6 +775,14 @@ public class PropsUtil {
 
 	public static final String OPENOFFICE_SERVER_PORT = "openoffice.server.port";
 
+	// POP
+
+	public static final String POP_SERVER_NOTIFICATIONS_ENABLED = "pop.server.notifications.enabled";
+
+	public static final String POP_SERVER_NOTIFICATIONS_INTERVAL = "pop.server.notifications.interval";
+
+	public static final String POP_SERVER_SUBDOMAIN = "pop.server.subdomain";
+
 	// Reverse AJAX
 
 	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
@@ -784,14 +792,6 @@ public class PropsUtil {
 	// Scheduler
 
 	public static final String SCHEDULER_ENABLED = "scheduler.enabled";
-
-	// SMTP
-
-	public static final String SMTP_SERVER_ENABLED = "smtp.server.enabled";
-
-	public static final String SMTP_SERVER_PORT = "smtp.server.port";
-
-	public static final String SMTP_SERVER_SUBDOMAIN = "smtp.server.subdomain";
 
 	// Social Bookmarking
 

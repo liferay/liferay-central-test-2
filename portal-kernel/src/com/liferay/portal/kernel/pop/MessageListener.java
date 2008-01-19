@@ -20,61 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.smtp;
+package com.liferay.portal.kernel.pop;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Html;
-
-import java.util.ArrayList;
-import java.util.List;
+import javax.mail.Message;
 
 /**
- * <a href="MBMailMessage.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ *
  */
-public class MBMailMessage {
+public interface MessageListener {
 
-	public void addFile(String fileName, byte[] data) {
-		_files.add(new ObjectValuePair(fileName, data));
-	}
+	public boolean accept(String from, String recipient);
 
-	public List getFiles() {
-		return _files;
-	}
+	public void deliver(String from, String recipient, Message message)
+		throws MessageListenerException;
 
-	public String getHtmlBody() {
-		return _htmlBody;
-	}
-
-	public void setHtmlBody(String htmlBody) {
-		_htmlBody = htmlBody;
-	}
-
-	public String getPlainBody() {
-		return _plainBody;
-	}
-
-	public void setPlainBody(String plainBody) {
-		_plainBody = plainBody;
-	}
-
-	public String getBody() {
-		if (Validator.isNotNull(_plainBody)) {
-			return GetterUtil.getString(_plainBody);
-		}
-		else if (Validator.isNotNull(_htmlBody)) {
-			return Html.stripHtml(_htmlBody);
-		}
-		else {
-			return "-";
-		}
-	}
-
-	private String _htmlBody;
-	private String _plainBody;
-	private List _files = new ArrayList();
+	public String getId();
 
 }

@@ -1318,7 +1318,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			String mailingListAddress = StringPool.BLANK;
 
-			if (PropsValues.SMTP_SERVER_ENABLED) {
+			if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 				mailingListAddress = MBUtil.getMailingListAddress(
 					message.getCategoryId(), message.getMessageId(),
 					company.getMx());

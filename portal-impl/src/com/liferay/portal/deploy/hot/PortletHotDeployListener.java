@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
@@ -36,7 +37,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.servlet.URLEncoder;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -48,12 +48,12 @@ import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
+import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
-import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -245,17 +245,17 @@ public class PortletHotDeployListener implements HotDeployListener {
 							activityTrackerInterpreterInstance);
 				}
 
-				MessageListener smtpMessageListenerInstance = null;
+				MessageListener popMessageListenerInstance = null;
 
 				if (Validator.isNotNull(
-						portlet.getSmtpMessageListenerClass())) {
+						portlet.getPopMessageListenerClass())) {
 
-					smtpMessageListenerInstance =
+					popMessageListenerInstance =
 						(MessageListener)portletClassLoader.loadClass(
-							portlet.getSmtpMessageListenerClass()).
+							portlet.getPopMessageListenerClass()).
 								newInstance();
 
-					SMTPServerUtil.addListener(smtpMessageListenerInstance);
+					POPServerUtil.addListener(popMessageListenerInstance);
 				}
 
 				PreferencesValidator prefsValidatorInstance = null;
@@ -331,7 +331,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 					urlEncoderInstance, portletDataHandlerInstance,
 					portletLayoutListenerInstance,
 					activityTrackerInterpreterInstance,
-					smtpMessageListenerInstance, prefsValidatorInstance,
+					popMessageListenerInstance, prefsValidatorInstance,
 					resourceBundles, customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
@@ -472,8 +472,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 						deleteActivityTrackerInterpreter(
 							portlet.getActivityTrackerInterpreterInstance());
 
-					SMTPServerUtil.deleteListener(
-						portlet.getSmtpMessageListenerInstance());
+					POPServerUtil.deleteListener(
+						portlet.getPopMessageListenerInstance());
 
 					PortletInstanceFactory.destroy(portlet);
 

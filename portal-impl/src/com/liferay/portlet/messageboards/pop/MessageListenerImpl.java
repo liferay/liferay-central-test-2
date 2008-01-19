@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.smtp;
+package com.liferay.portlet.messageboards.pop;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.smtp.MessageListener;
-import com.liferay.portal.kernel.smtp.MessageListenerException;
+import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.pop.MessageListenerException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -44,12 +44,12 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.mail.JavaMailUtil;
-import com.liferay.util.mail.MailEngine;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.mail.BodyPart;
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Part;
 import javax.mail.internet.MimeMessage;
@@ -70,7 +70,7 @@ public class MessageListenerImpl implements MessageListener {
 
 	public boolean accept(String from, String recipient) {
 		try {
-			if (!recipient.startsWith(MBUtil.SMTP_PORTLET_PREFIX)) {
+			if (!recipient.startsWith(MBUtil.POP_PORTLET_PREFIX)) {
 				return false;
 			}
 
@@ -102,7 +102,7 @@ public class MessageListenerImpl implements MessageListener {
 		}
 	}
 
-	public void deliver(String from, String recipient, InputStream data)
+	public void deliver(String from, String recipient, Message message)
 		throws MessageListenerException {
 
 		try {
@@ -126,9 +126,6 @@ public class MessageListenerImpl implements MessageListener {
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				company.getCompanyId(), from);
-
-			MimeMessage message = new MimeMessage(
-				MailEngine.getSession(), data);
 
 			long parentMessageId = getParentMessageId(recipient, message);
 
@@ -252,7 +249,7 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
+			MBUtil.POP_PORTLET_PREFIX.length(), pos);
 
 		String[] parts = StringUtil.split(target, ".");
 
@@ -267,12 +264,12 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String mx = recipient.substring(
-			pos + PropsValues.SMTP_SERVER_SUBDOMAIN.length() + 2);
+			pos + PropsValues.POP_SERVER_SUBDOMAIN.length() + 2);
 
 		return CompanyLocalServiceUtil.getCompanyByMx(mx);
 	}
 
-	protected long getParentMessageId(String recipient, MimeMessage message)
+	protected long getParentMessageId(String recipient, Message message)
 		throws MessagingException {
 
 		// Get the parent message ID from the recipient address
@@ -280,9 +277,9 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
+			MBUtil.POP_PORTLET_PREFIX.length(), pos);
 
-		String[] parts = StringUtil.split(target, ".");
+		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
 		long parentMessageId = 0;
 

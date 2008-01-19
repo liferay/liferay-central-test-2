@@ -21,7 +21,7 @@ configuration-path?, configuration-action-class?, indexer-class?,
 open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, activity-tracker-interpreter-class?,
-smtp-message-listener-class?, preferences-company-wide?,
+pop-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
@@ -190,16 +190,16 @@ http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboar
 <!ELEMENT activity-tracker-interpreter-class (#PCDATA)>
 
 <!--
-The smtp-message-listener-class value must be a class that implements
-com.liferay.portal.kernel.smtp.MessageListener and is called when processing
+The pop-message-listener-class value must be a class that implements
+com.liferay.portal.kernel.pop.MessageListener and is called when processing
 emails.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
+http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/pop/MessageListener.html
+http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/pop/MessageListenerImpl.html
 -->
-<!ELEMENT smtp-message-listener-class (#PCDATA)>
+<!ELEMENT pop-message-listener-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

@@ -56,7 +56,7 @@ public class JobScheduler {
 
 		Trigger trigger = new SimpleTrigger(
 			intervalJob.getClass().getName() + "_TRIGGER",
-			org.quartz.Scheduler.DEFAULT_GROUP, startTime, endTime,
+			Scheduler.DEFAULT_GROUP, startTime, endTime,
 			SimpleTrigger.REPEAT_INDEFINITELY,
 			intervalJob.getInterval());
 
@@ -83,6 +83,12 @@ public class JobScheduler {
 		_getScheduler().triggerJob(jobName, groupName);
 	}
 
+	public static void unscheduleJob(String className)
+		throws SchedulerException {
+
+		unscheduleJob(className + "_TRIGGER", Scheduler.DEFAULT_GROUP);
+	}
+
 	public static void unscheduleJob(String triggerName, String groupName)
 		throws SchedulerException {
 
@@ -102,6 +108,7 @@ public class JobScheduler {
 
 		try {
 			_scheduler = sf.getScheduler();
+
 			_scheduler.start();
 		}
 		catch (SchedulerException se) {

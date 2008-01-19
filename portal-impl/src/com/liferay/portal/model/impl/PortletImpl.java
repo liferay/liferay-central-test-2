@@ -24,11 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.servlet.URLEncoder;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -187,7 +187,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String portletURLClass, String friendlyURLMapperClass,
 		String urlEncoderClass, String portletDataHandlerClass,
 		String portletLayoutListenerClass,
-		String activityTrackerInterpreterClass, String smtpMessageListenerClass,
+		String activityTrackerInterpreterClass, String popMessageListenerClass,
 		String defaultPreferences, String prefsValidator,
 		boolean prefsCompanyWide, boolean prefsUniquePerLayout,
 		boolean prefsOwnedByGroup, boolean useDefaultTemplate,
@@ -227,7 +227,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_portletLayoutListenerClass = portletLayoutListenerClass;
 		_activityTrackerInterpreterClass = activityTrackerInterpreterClass;
-		_smtpMessageListenerClass = smtpMessageListenerClass;
+		_popMessageListenerClass = popMessageListenerClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -766,40 +766,40 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the SMTP message listener class of the portlet.
+	 * Gets the name of the POP message listener class of the portlet.
 	 *
-	 * @return		the name of the SMTP message listener class of the portlet
+	 * @return		the name of the POP message listener class of the portlet
 	 */
-	public String getSmtpMessageListenerClass() {
-		return _smtpMessageListenerClass;
+	public String getPopMessageListenerClass() {
+		return _popMessageListenerClass;
 	}
 
 	/**
-	 * Sets the name of the SMTP message listener class of the portlet.
+	 * Sets the name of the POP message listener class of the portlet.
 	 *
-	 * @param		smtpMessageListenerClass the name of the SMTP message
-	 *				listener class of the portlet
+	 * @param		popMessageListenerClass the name of the POP message listener
+	 *				class of the portlet
 	 */
-	public void setSmtpMessageListenerClass(String smtpMessageListenerClass) {
-		_smtpMessageListenerClass = smtpMessageListenerClass;
+	public void setPopMessageListenerClass(String popMessageListenerClass) {
+		_popMessageListenerClass = popMessageListenerClass;
 	}
 
 	/**
-	 * Gets the SMTP message listener instance of the portlet.
+	 * Gets the POP message listener instance of the portlet.
 	 *
-	 * @return		the SMTP message listener instance of the portlet
+	 * @return		the POP message listener instance of the portlet
 	 */
-	public MessageListener getSmtpMessageListenerInstance() {
-		if (Validator.isNotNull(getSmtpMessageListenerClass())) {
+	public MessageListener getPopMessageListenerInstance() {
+		if (Validator.isNotNull(getPopMessageListenerClass())) {
 			if (isWARFile()) {
 				PortletContextWrapper pcw =
 					PortletContextPool.get(getRootPortletId());
 
-				return pcw.getSmtpMessageListenerInstance();
+				return pcw.getPopMessageListenerInstance();
 			}
 			else {
 				return (MessageListener)InstancePool.get(
-					getSmtpMessageListenerClass());
+					getPopMessageListenerClass());
 			}
 		}
 
@@ -2294,7 +2294,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
 			getPortletLayoutListenerClass(),
-			getActivityTrackerInterpreterClass(), getSmtpMessageListenerClass(),
+			getActivityTrackerInterpreterClass(), getPopMessageListenerClass(),
 			getDefaultPreferences(), getPreferencesValidator(),
 			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
 			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
@@ -2434,9 +2434,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _activityTrackerInterpreterClass;
 
  	/**
-	 * The name of the SMTP message listener class of the portlet.
+	 * The name of the POP message listener class of the portlet.
 	 */
-	private String _smtpMessageListenerClass;
+	private String _popMessageListenerClass;
 
 	/**
 	 * The default preferences of the portlet.

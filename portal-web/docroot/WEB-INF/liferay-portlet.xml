@@ -238,7 +238,7 @@
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<activity-tracker-interpreter-class>com.liferay.portlet.messageboards.MBActivityTrackerInterpreter</activity-tracker-interpreter-class>
-		<smtp-message-listener-class>com.liferay.portlet.messageboards.smtp.MessageListenerImpl</smtp-message-listener-class>
+		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

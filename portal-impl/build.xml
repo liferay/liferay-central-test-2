@@ -107,17 +107,6 @@ ${exception.message}
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
-
-		<javac
-			classpathref="project.classpath"
-			compiler="modern"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
-			includes="**/portal/smtp/SMTPServerUtil.java"
-			nowarn="${javac.nowarn}"
-			srcdir="src"
-		/>
 	</target>
 
 	<target name="compile-dependencies">

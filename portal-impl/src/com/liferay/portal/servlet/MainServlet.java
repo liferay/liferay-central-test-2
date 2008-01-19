@@ -29,9 +29,9 @@ import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -44,6 +44,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
+import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
@@ -174,7 +174,7 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Initialize portlets");
 		}
 
-		List portlets = PortletLocalServiceUtil.getPortlets();
+		List portlets = null;
 
 		try {
 			String[] xmls = new String[] {
@@ -190,6 +190,8 @@ public class MainServlet extends ActionServlet {
 			};
 
 			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
+
+			portlets = PortletLocalServiceUtil.getPortlets();
 
 			Iterator itr = portlets.iterator();
 
@@ -307,10 +309,10 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// SMTP message listener
+		// POP message listener
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("SMTP message listener");
+			_log.debug("POP message listener");
 		}
 
 		try {
@@ -319,11 +321,11 @@ public class MainServlet extends ActionServlet {
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();
 
-				MessageListener smtpMessageListener =
-					portlet.getSmtpMessageListenerInstance();
+				MessageListener popMessageListener =
+					portlet.getPopMessageListenerInstance();
 
-				if (portlet.isActive() && (smtpMessageListener != null)) {
-					SMTPServerUtil.addListener(smtpMessageListener);
+				if (portlet.isActive() && (popMessageListener != null)) {
+					POPServerUtil.addListener(popMessageListener);
 				}
 			}
 		}

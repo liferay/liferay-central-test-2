@@ -511,6 +511,13 @@ public class PropsValues {
 	public static final String[] PLUGIN_TYPES =
 		PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
 
+	public static final boolean POP_SERVER_NOTIFICATIONS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.POP_SERVER_NOTIFICATIONS_ENABLED));
+
+	public static final String POP_SERVER_SUBDOMAIN = PropsUtil.get(
+		PropsUtil.POP_SERVER_SUBDOMAIN);
+
 	public static final boolean PORTAL_IMPERSONATION_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE));
@@ -586,12 +593,6 @@ public class PropsValues {
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
-
-	public static final boolean SMTP_SERVER_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.SMTP_SERVER_ENABLED));
-
-	public static final String SMTP_SERVER_SUBDOMAIN = PropsUtil.get(
-		PropsUtil.SMTP_SERVER_SUBDOMAIN);
 
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsUtil.STRUTS_PORTLET_REQUEST_PROCESSOR);

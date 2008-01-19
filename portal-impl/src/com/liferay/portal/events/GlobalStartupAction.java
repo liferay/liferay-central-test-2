@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.smtp.SMTPServerUtil;
+import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -176,15 +176,10 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(e);
 		}
 
-		// SMTP server
+		// POP server
 
-		if (PropsValues.SMTP_SERVER_ENABLED) {
-			int port = GetterUtil.getInteger(PropsUtil.get(
-				PropsUtil.SMTP_SERVER_PORT));
-
-			SMTPServerUtil.setPort(port);
-
-			SMTPServerUtil.start();
+		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
+			POPServerUtil.start();
 		}
 
 		// JGroups

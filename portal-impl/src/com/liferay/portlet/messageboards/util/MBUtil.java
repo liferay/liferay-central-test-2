@@ -78,7 +78,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBUtil {
 
-	public static final String SMTP_PORTLET_PREFIX = "mb.";
+	public static final String POP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
 			long categoryId, long messageId, PageContext pageContext,
@@ -354,12 +354,12 @@ public class MBUtil {
 		StringMaker sm = new StringMaker();
 
 		sm.append(StringPool.LESS_THAN);
-		sm.append(SMTP_PORTLET_PREFIX);
+		sm.append(POP_PORTLET_PREFIX);
 		sm.append(categoryId);
 		sm.append(StringPool.PERIOD);
 		sm.append(messageId);
 		sm.append(StringPool.AT);
-		sm.append(PropsValues.SMTP_SERVER_SUBDOMAIN);
+		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
 		sm.append(StringPool.PERIOD);
 		sm.append(mx);
 		sm.append(StringPool.GREATER_THAN);
@@ -372,12 +372,12 @@ public class MBUtil {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append(SMTP_PORTLET_PREFIX);
+		sm.append(POP_PORTLET_PREFIX);
 		sm.append(categoryId);
 		sm.append(StringPool.PERIOD);
 		sm.append(messageId);
 		sm.append(StringPool.AT);
-		sm.append(PropsValues.SMTP_SERVER_SUBDOMAIN);
+		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
 		sm.append(StringPool.PERIOD);
 		sm.append(mx);
 

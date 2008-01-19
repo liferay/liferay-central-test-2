@@ -144,12 +144,12 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.model.ActivityTrackerInterpreter getActivityTrackerInterpreterInstance();
 
-	public java.lang.String getSmtpMessageListenerClass();
+	public java.lang.String getPopMessageListenerClass();
 
-	public void setSmtpMessageListenerClass(
-		java.lang.String smtpMessageListenerClass);
+	public void setPopMessageListenerClass(
+		java.lang.String popMessageListenerClass);
 
-	public com.liferay.portal.kernel.smtp.MessageListener getSmtpMessageListenerInstance();
+	public com.liferay.portal.kernel.pop.MessageListener getPopMessageListenerInstance();
 
 	public java.lang.String getDefaultPreferences();
 

@@ -24,12 +24,12 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 
@@ -60,7 +60,7 @@ public class PortletContextWrapper {
 		PortletDataHandler portletDataHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
 		ActivityTrackerInterpreter activityTrackerInterpreterInstance,
-		MessageListener smtpMessageListenerInstance,
+		MessageListener popMessageListenerInstance,
 		PreferencesValidator prefsValidatorInstance, Map resourceBundles,
 		Map customUserAttributes) {
 
@@ -76,7 +76,7 @@ public class PortletContextWrapper {
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
 		_activityTrackerInterpreterInstance =
 			activityTrackerInterpreterInstance;
-		_smtpMessageListenerInstance = smtpMessageListenerInstance;
+		_popMessageListenerInstance = popMessageListenerInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
 		_customUserAttributes = customUserAttributes;
@@ -130,8 +130,8 @@ public class PortletContextWrapper {
 		return _activityTrackerInterpreterInstance;
 	}
 
-	public MessageListener getSmtpMessageListenerInstance() {
-		return _smtpMessageListenerInstance;
+	public MessageListener getPopMessageListenerInstance() {
+		return _popMessageListenerInstance;
 	}
 
 	public PreferencesValidator getPreferencesValidatorInstance() {
@@ -170,7 +170,7 @@ public class PortletContextWrapper {
 	private PortletDataHandler _portletDataHandlerInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
 	private ActivityTrackerInterpreter _activityTrackerInterpreterInstance;
-	private MessageListener _smtpMessageListenerInstance;
+	private MessageListener _popMessageListenerInstance;
 	private PreferencesValidator _prefsValidatorInstance;
 	private Map _resourceBundles;
 	private Map _customUserAttributes;

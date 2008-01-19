@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.smtp.SMTPServerUtil;
+import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -90,6 +90,12 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
+		// POP server
+
+		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
+			POPServerUtil.stop();
+		}
+
 		// Shutdown JCR
 
 		try {
@@ -106,12 +112,6 @@ public class GlobalShutdownAction extends SimpleAction {
 			JobScheduler.shutdown();
 		}
 		catch (Exception e) {
-		}
-
-		// SMTP server
-
-		if (PropsValues.SMTP_SERVER_ENABLED) {
-			SMTPServerUtil.stop();
 		}
 
 		// Reset log to default JDK 1.4 logger. This will allow WARs dependent

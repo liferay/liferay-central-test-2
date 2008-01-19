@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.smtp;
+package com.liferay.portal.kernel.pop;
 
 import com.liferay.portal.PortalException;
 

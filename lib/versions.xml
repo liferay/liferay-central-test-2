@@ -1936,18 +1936,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/subetha-smtp.jar</file-name>
-		<version>2.0.0</version>
-		<project-name>SubEtha SMTP</project-name>
-		<project-url>http://subethasmtp.tigris.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2006-2007 SubEthaMail.org</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/textmining.jar</file-name>
 		<version>0.4</version>
 		<project-name>TextMining</project-name>

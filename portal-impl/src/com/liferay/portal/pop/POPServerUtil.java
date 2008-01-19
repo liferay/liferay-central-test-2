@@ -20,26 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.smtp;
+package com.liferay.portal.pop;
 
-import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.pop.MessageListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.subethamail.smtp.server.SMTPServer;
-
 /**
- * <a href="SMTPServerUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="POPServerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SMTPServerUtil {
+public class POPServerUtil {
 
 	public static void addListener(MessageListener listener)
 		throws Exception {
@@ -53,8 +53,8 @@ public class SMTPServerUtil {
 		_instance._deleteListener(listener);
 	}
 
-	public static void setPort(int port) {
-		_instance._setPort(port);
+	public static List getListeners() throws Exception {
+		return _instance._getListeners();
 	}
 
 	public static void start() {
@@ -65,8 +65,7 @@ public class SMTPServerUtil {
 		_instance._stop();
 	}
 
-	private SMTPServerUtil() {
-		_smtpServer = new SMTPServer(_listeners);
+	private POPServerUtil() {
 	}
 
 	private void _addListener(MessageListener listener) {
@@ -82,24 +81,24 @@ public class SMTPServerUtil {
 			_log.debug("Add listener " + listener.getClass().getName());
 		}
 
-		SubEthaMessageListenerImpl subEthaListener =
-			new SubEthaMessageListenerImpl(listener);
+		MessageListenerWrapper messageListenerWrapper =
+			new MessageListenerWrapper(listener);
 
-		_deleteListener(subEthaListener);
+		_deleteListener(messageListenerWrapper);
 
-		_listeners.add(subEthaListener);
+		_listeners.add(messageListenerWrapper);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Listeners size " + _listeners.size());
 		}
 	}
 
-	private void _deleteListener(SubEthaMessageListenerImpl listener) {
+	private void _deleteListener(MessageListenerWrapper listener) {
 		Iterator itr = _listeners.iterator();
 
 		while (itr.hasNext()) {
-			SubEthaMessageListenerImpl curListener =
-				(SubEthaMessageListenerImpl)itr.next();
+			MessageListenerWrapper curListener =
+				(MessageListenerWrapper)itr.next();
 
 			if (curListener.equals(listener)) {
 				itr.remove();
@@ -120,22 +119,22 @@ public class SMTPServerUtil {
 			_log.debug("Delete listener " + listener.getClass().getName());
 		}
 
-		SubEthaMessageListenerImpl subEthaListener =
-			new SubEthaMessageListenerImpl(listener);
+		MessageListenerWrapper messageListenerWrapper =
+			new MessageListenerWrapper(listener);
 
-		_deleteListener(subEthaListener);
+		_deleteListener(messageListenerWrapper);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Listeners size " + _listeners.size());
 		}
 	}
 
-	private void _setPort(int port) {
+	private List _getListeners() {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Listen on port " + port);
+			_log.debug("Listeners size " + _listeners.size());
 		}
 
-		_smtpServer.setPort(port);
+		return Collections.unmodifiableList(_listeners);
 	}
 
 	private void _start() {
@@ -143,7 +142,16 @@ public class SMTPServerUtil {
 			_log.debug("Start");
 		}
 
-		_smtpServer.start();
+		try {
+			POPNotificationsJob popNotificationsJob = new POPNotificationsJob();
+
+			JobScheduler.schedule(popNotificationsJob);
+
+			//popNotificationsJob.pollPopServer();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	private void _stop() {
@@ -151,14 +159,18 @@ public class SMTPServerUtil {
 			_log.debug("Stop");
 		}
 
-		_smtpServer.stop();
+		try {
+			JobScheduler.unscheduleJob(POPNotificationsJob.class.getName());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(SMTPServerUtil.class);
+	private static Log _log = LogFactory.getLog(POPServerUtil.class);
 
-	private static SMTPServerUtil _instance = new SMTPServerUtil();
+	private static POPServerUtil _instance = new POPServerUtil();
 
-	private SMTPServer _smtpServer;
 	private List _listeners = new ArrayList();
 
 }
