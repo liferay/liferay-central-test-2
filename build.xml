@@ -1139,8 +1139,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			</filterset>
 		</copy>
 
-		<mkdir dir="${lp.ext.dir}/downloads" />
-
 		<mkdir dir="${lp.ext.dir}/ext-lib" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/global" />
@@ -1194,8 +1192,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<mkdir dir="${lp.ext.dir}/servers/jetty" />
 		<mkdir dir="${lp.ext.dir}/servers/jonas-jetty" />
 		<mkdir dir="${lp.ext.dir}/servers/jonas-tomcat" />
+		<mkdir dir="${lp.ext.dir}/servers/oc4j" />
 		<mkdir dir="${lp.ext.dir}/servers/resin" />
 		<mkdir dir="${lp.ext.dir}/servers/tomcat" />
+		<mkdir dir="${lp.ext.dir}/servers/weblogic" />
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
 		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />

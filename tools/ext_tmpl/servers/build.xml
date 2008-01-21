@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="servers" basedir="." default="install-jboss-jetty">
-	<import file="build-parent.xml" />
-</project>
