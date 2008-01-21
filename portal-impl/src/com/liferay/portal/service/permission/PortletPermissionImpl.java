@@ -112,8 +112,8 @@ public class PortletPermissionImpl implements PortletPermission {
 
 			if (!strict) {
 				if (LayoutPermissionUtil.contains(
-					permissionChecker, groupId, layout.isPrivateLayout(),
-					layout.getLayoutId(), ActionKeys.UPDATE) &&
+						permissionChecker, groupId, layout.isPrivateLayout(),
+						layout.getLayoutId(), ActionKeys.UPDATE) &&
 					hasLayoutManagerPermission(portletId, actionId)) {
 
 					return true;
@@ -182,16 +182,17 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 	}
 
-	private boolean hasLayoutManagerPermissionImpl(
+	protected boolean hasLayoutManagerPermissionImpl(
 			String portletId, String actionId)
 		throws SystemException {
 
 		portletId = PortletImpl.getRootPortletId(portletId);
 
-		List layoutManagerDefaultActions = ResourceActionsUtil.
-			getPortletResourceLayoutManagerDefaultActions(portletId);
+		List layoutManagerActions =
+			ResourceActionsUtil.getPortletResourceLayoutManagerActions(
+				portletId);
 
-		return layoutManagerDefaultActions.contains(actionId);
+		return layoutManagerActions.contains(actionId);
 	}
 
 	private static Log _log = LogFactory.getLog(PortletPermissionImpl.class);
