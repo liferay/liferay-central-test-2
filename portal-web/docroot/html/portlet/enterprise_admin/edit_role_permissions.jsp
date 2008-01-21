@@ -407,7 +407,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		<fieldset>
 			<legend><%= portletResourceLabel %></legend>
-	
+
 			<%
 			request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 			%>
@@ -464,8 +464,8 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 							<br />
 						</c:otherwise>
 					</c:choose>
-
 				</fieldset>
+
 			<%
 			}
 			%>

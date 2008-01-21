@@ -5,9 +5,13 @@ fieldset {
 	padding: 0.7em;
 }
 
+.ie fieldset {
+	padding-top: 0;
+}
+
 legend {
 	font-weight: bold;
-	padding: 0.5em;
+	padding: 0 0.5em;
 }
 
 input[type="text"], input[type="password"], input[type="file"],input[type="submit"], input[type="button"], input[type="reset"], select, textarea, .textarea {
