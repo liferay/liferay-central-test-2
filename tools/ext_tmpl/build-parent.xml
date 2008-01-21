@@ -193,9 +193,16 @@
 				<copy todir="${app.server.lib.portal.dir}">
 					<fileset
 						dir="lib/development"
-						includes="mail.jar,smtp.jar"
+						includes="saxpath.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="j2ee-management.jar"
+					/>
+				</delete>
 			</then>
 		</if>
 

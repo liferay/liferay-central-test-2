@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <connector xmlns="http://geronimo.apache.org/xml/ns/j2ee/connector-1.1">
     <dep:environment xmlns:dep="http://geronimo.apache.org/xml/ns/deployment-1.1">
         <dep:moduleId>
@@ -11,10 +12,15 @@
             <dep:dependency>
                 <dep:groupId>org.apache.derby</dep:groupId>
                 <dep:artifactId>derby</dep:artifactId>
-                <dep:version>10.1.1.0</dep:version>
+                <dep:version>10.2.2.0</dep:version>
                 <dep:type>jar</dep:type>
             </dep:dependency>
-        </dep:dependencies>
+			<dep:dependency>
+				<dep:groupId>org.apache.geronimo.configs</dep:groupId>
+				<dep:artifactId>system-database</dep:artifactId>
+				<dep:type>car</dep:type>
+			</dep:dependency>
+		</dep:dependencies>
     </dep:environment>
     <resourceadapter>
         <outbound-resourceadapter>
@@ -22,14 +28,13 @@
                 <connectionfactory-interface>javax.sql.DataSource</connectionfactory-interface>
                 <connectiondefinition-instance>
                     <name>LiferayPool</name>
-                    <config-property-setting name="Driver">org.apache.derby.jdbc.EmbeddedDriver</config-property-setting>
-                    <config-property-setting name="ConnectionURL">jdbc:derby:lportal</config-property-setting>
+                    <config-property-setting name="DatabaseName">lportal</config-property-setting>
                     <connectionmanager>
-                        <local-transaction/>
+                        <local-transaction />
                         <single-pool>
                             <max-size>10</max-size>
                             <min-size>0</min-size>
-                            <match-one/>
+                            <match-one />
                         </single-pool>
                     </connectionmanager>
                 </connectiondefinition-instance>
