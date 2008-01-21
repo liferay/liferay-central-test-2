@@ -1749,31 +1749,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>81</portlet-name>
-		<display-name>Countdown</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>edit-action</name>
-			<value>/countdown/edit</value>
-		</init-param>
-		<init-param>
-			<name>view-action</name>
-			<value>/countdown/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>82</portlet-name>
 		<display-name>Language</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

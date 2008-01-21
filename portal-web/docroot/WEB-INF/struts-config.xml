@@ -281,12 +281,6 @@
 			<forward name="portlet.communities.view_membership_requests" path="portlet.communities.view_membership_requests" />
 		</action>
 
-		<!-- Countdown -->
-
-		<action path="/countdown/edit" forward="portlet.countdown.edit" />
-
-		<action path="/countdown/view" forward="portlet.countdown.view" />
-
 		<!-- CSZ Search -->
 
 		<action path="/csz_search/view" forward="portlet.csz_search.view" />

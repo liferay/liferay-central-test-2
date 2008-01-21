@@ -349,11 +349,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>81</portlet-name>
-		<struts-path>countdown</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>82</portlet-name>
 		<struts-path>language</struts-path>
 		<include>true</include>

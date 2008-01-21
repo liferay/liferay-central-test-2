@@ -272,18 +272,6 @@
 		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
 	</definition>
 
-	<!-- Countdown -->
-
-	<definition name="portlet.countdown" extends="portlet" />
-
-	<definition name="portlet.countdown.edit" extends="portlet.countdown">
-		<put name="portlet_content" value="/portlet/countdown/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.countdown.view" extends="portlet.countdown">
-		<put name="portlet_content" value="/portlet/countdown/view.jsp" />
-	</definition>
-
 	<!-- CSZ Search -->
 
 	<definition name="portlet.csz_search" extends="portlet" />
