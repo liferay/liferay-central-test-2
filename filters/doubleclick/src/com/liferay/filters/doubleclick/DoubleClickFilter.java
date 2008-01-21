@@ -22,15 +22,16 @@
 
 package com.liferay.filters.doubleclick;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -39,26 +40,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DoubleClickFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class DoubleClickFilter implements Filter {
+public class DoubleClickFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(DoubleClickFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), "UTF-8");
-
-	public void init(FilterConfig config) throws ServletException {
-	}
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
@@ -88,7 +85,7 @@ public class DoubleClickFilter implements Filter {
 			HttpSession ses = httpReq.getSession(false);
 
 			if (ses == null) {
-				chain.doFilter(req, res);
+				doFilter(DoubleClickFilter.class, req, res, chain);
 			}
 			else {
 				DoubleClickController controller = null;
@@ -132,16 +129,13 @@ public class DoubleClickFilter implements Filter {
 			}
 		}
 		else {
-			chain.doFilter(req, res);
+			doFilter(DoubleClickFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	private static final String _CONTROLLER_KEY =
 		DoubleClickFilter.class.getName();
 
-	private static Log _log = LogFactory.getLog(DoubleClickFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(DoubleClickFilter.class);
 
 }

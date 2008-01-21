@@ -22,6 +22,9 @@
 
 package com.liferay.portal.servlet.filters.sso.opensso;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -33,9 +36,7 @@ import com.liferay.util.CookieUtil;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -43,20 +44,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="OpenSSOFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class OpenSSOFilter implements Filter {
-
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
+public class OpenSSOFilter extends BaseFilter {
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
@@ -88,7 +84,7 @@ public class OpenSSOFilter implements Filter {
 				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl) ||
 				Validator.isNull(cookieName)) {
 
-				chain.doFilter(req, res);
+				doFilter(OpenSSOFilter.class, req, res, chain);
 
 				return;
 			}
@@ -104,7 +100,7 @@ public class OpenSSOFilter implements Filter {
 			}
 			else {
 				if (isAuthenticated(httpReq, cookieName)) {
-					chain.doFilter(req, res);
+					doFilter(OpenSSOFilter.class, req, res, chain);
 				}
 				else {
 					httpRes.sendRedirect(loginUrl);
@@ -114,9 +110,6 @@ public class OpenSSOFilter implements Filter {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected boolean isAuthenticated(
@@ -136,6 +129,6 @@ public class OpenSSOFilter implements Filter {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OpenSSOFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(OpenSSOFilter.class);
 
 }

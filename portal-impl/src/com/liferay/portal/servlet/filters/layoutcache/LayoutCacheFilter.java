@@ -24,6 +24,9 @@ package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -54,10 +57,8 @@ import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
-
 import java.util.Properties;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -67,17 +68,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="LayoutCacheFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Javier de Ros
+ * @author Raymond Augé
  *
  */
-public class LayoutCacheFilter implements Filter, PortalInitable {
+public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
@@ -138,7 +137,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 						_log.debug("Layout is not cacheable " + key);
 					}
 
-					chain.doFilter(req, res);
+					doFilter(LayoutCacheFilter.class, req, res, chain);
 
 					return;
 				}
@@ -150,7 +149,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 				CacheResponse cacheResponse = new CacheResponse(
 					httpRes, ENCODING);
 
-				chain.doFilter(req, cacheResponse);
+				doFilter(LayoutCacheFilter.class, req, cacheResponse, chain);
 
 				data = new CacheResponseData(
 					cacheResponse.getData(), cacheResponse.getContentType(),
@@ -185,11 +184,8 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 				_log.debug("Did not request a layout");
 			}
 
-			chain.doFilter(req, res);
+			doFilter(LayoutCacheFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected String getBrowserType(HttpServletRequest req) {
@@ -462,7 +458,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 	private static final String _BROWSER_TYPE_OTHER = "other";
 
-	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutCacheFilter.class);
 
 	private FilterConfig _config;
 	private int _pattern;

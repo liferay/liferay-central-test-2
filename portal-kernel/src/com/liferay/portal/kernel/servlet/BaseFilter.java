@@ -20,68 +20,85 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.sessionid;
+package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="SessionIdFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseFilter.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * http://forum.java.sun.com/thread.jspa?threadID=197150.
- * </p>
- *
- * @author Brian Wing Shun Chan
  * @author Raymond Augé
  *
  */
-public class SessionIdFilter extends BaseFilter {
+public abstract class BaseFilter implements Filter {
 
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(SessionIdFilter.class.getName()), true);
+	private static final String DEPTHER = "DEPTHER";
+
+	private FilterConfig _config;
+
+	public void init(FilterConfig config) throws ServletException {
+		_config = config;
+	}
+
+	public abstract void doFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException;
+
+	public void destroy() {
+	}
 
 	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			Class filterClass, ServletRequest req, ServletResponse res,
+			FilterChain chain)
 		throws IOException, ServletException {
 
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+
+		String depther = (String)req.getAttribute(DEPTHER);
+		String filterName = filterClass.getSimpleName();
+		String path = httpReq.getRequestURI();
+		String threadName = Thread.currentThread().getName();
+
+		long startTime = System.currentTimeMillis();
+
 		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug(
-					"Session id sharing between http and https is enabled");
-			}
-			else {
-				_log.debug(
-					"Session id sharing between http and https is disabled");
-			}
+			depther = (depther == null?"=":depther+"=");
+
+			req.setAttribute(DEPTHER, depther);
+
+			_log.debug("[" + threadName + "]" + depther + "> " + filterName +
+				"   " + path);
 		}
 
-		if (USE_FILTER) {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-			HttpServletResponse httpRes = (HttpServletResponse)res;
+		chain.doFilter(req, res);
 
-			SessionIdServletRequest sessionIdReq =
-				new SessionIdServletRequest(httpReq, httpRes);
+		if (_log.isDebugEnabled()) {
+			long endTime = System.currentTimeMillis();
 
-			doFilter(SessionIdFilter.class, sessionIdReq, httpRes, chain);
-		}
-		else {
-			doFilter(SessionIdFilter.class, req, res, chain);
+			depther = (String)req.getAttribute(DEPTHER);
+
+			_log.debug("[" + threadName + "]" + depther + "< " + filterName +
+				"   " + path + " " + (endTime - startTime) + " ms");
+
+			req.setAttribute(DEPTHER, depther.substring(1));
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SessionIdFilter.class);
+	public FilterConfig getFilterConfig() {
+		return _config;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(BaseFilter.class);
 
 }

@@ -23,7 +23,9 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
-import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,7 +43,6 @@ import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
@@ -52,9 +53,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VirtualHostFilter.java.html"><b><i>View Source</i></b></a>
@@ -69,9 +67,10 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class VirtualHostFilter implements Filter {
+public class VirtualHostFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
@@ -100,7 +99,7 @@ public class VirtualHostFilter implements Filter {
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		httpReq.setCharacterEncoding(ENCODING);
-		httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
+		//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Make sure all redirects issued by the portal are absolute
 
@@ -132,7 +131,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!USE_FILTER) {
-			chain.doFilter(req, httpRes);
+			doFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -144,7 +143,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!isValidRequestURL(requestURL)) {
-			chain.doFilter(req, httpRes);
+			doFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -168,7 +167,7 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		if (!isValidFriendlyURL(friendlyURL)) {
-			chain.doFilter(req, httpRes);
+			doFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -231,10 +230,7 @@ public class VirtualHostFilter implements Filter {
 			}
 		}
 
-		chain.doFilter(req, httpRes);
-	}
-
-	public void destroy() {
+		doFilter(VirtualHostFilter.class, req, httpRes, chain);
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
@@ -291,7 +287,7 @@ public class VirtualHostFilter implements Filter {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);
 
 	private static String _EXT_C = "/c";
 

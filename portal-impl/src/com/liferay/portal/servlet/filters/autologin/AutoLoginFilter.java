@@ -23,6 +23,9 @@
 package com.liferay.portal.servlet.filters.autologin;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,9 +40,7 @@ import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -47,19 +48,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ * @author Raymond Augé
  *
  */
-public class AutoLoginFilter implements Filter {
-
-	public void init(FilterConfig config) throws ServletException {
-	}
+public class AutoLoginFilter extends BaseFilter {
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
@@ -109,10 +106,7 @@ public class AutoLoginFilter implements Filter {
 			}
 		}
 
-		chain.doFilter(req, res);
-	}
-
-	public void destroy() {
+		doFilter(AutoLoginFilter.class, req, res, chain);
 	}
 
 	protected String getLoginRemoteUser(
@@ -174,6 +168,6 @@ public class AutoLoginFilter implements Filter {
 		return null;
 	}
 
-	private static Log _log = LogFactory.getLog(AutoLoginFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);
 
 }

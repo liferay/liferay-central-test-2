@@ -22,21 +22,19 @@
 
 package com.liferay.filters.header;
 
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -48,9 +46,10 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="HeaderFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class HeaderFilter implements Filter {
+public class HeaderFilter extends BaseFilter {
 
 	public void init(FilterConfig config) {
 		_config = config;
@@ -88,10 +87,7 @@ public class HeaderFilter implements Filter {
 			httpRes.addHeader(name, value);
 		}
 
-		chain.doFilter(req, res);
-	}
-
-	public void destroy() {
+		doFilter(HeaderFilter.class, req, res, chain);
 	}
 
 	private static final String _DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";

@@ -22,6 +22,9 @@
 
 package com.liferay.portal.servlet.filters.sso.cas;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -31,12 +34,10 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
 import java.io.IOException;
-
 import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -45,23 +46,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="CASFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class CASFilter implements Filter {
+public class CASFilter extends BaseFilter {
 
 	public static void reload(long companyId) {
 		_casFilters.remove(new Long(companyId));
-	}
-
-	public void init(FilterConfig config) throws ServletException {
 	}
 
 	public void doFilter(
@@ -97,15 +93,12 @@ public class CASFilter implements Filter {
 				}
 			}
 			else {
-				chain.doFilter(req, res);
+				doFilter(CASFilter.class, req, res, chain);
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected Filter getCASFilter(long companyId) throws Exception {
@@ -156,7 +149,7 @@ public class CASFilter implements Filter {
 		return casFilter;
 	}
 
-	private static Log _log = LogFactory.getLog(CASFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(CASFilter.class);
 
 	private static Map _casFilters = CollectionFactory.getSyncHashMap();
 

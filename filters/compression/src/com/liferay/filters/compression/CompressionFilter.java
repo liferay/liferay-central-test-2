@@ -22,6 +22,9 @@
 
 package com.liferay.filters.compression;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -32,25 +35,21 @@ import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="CompressionFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class CompressionFilter implements Filter {
+public class CompressionFilter extends BaseFilter {
 
 	static boolean useFilter = GetterUtil.getBoolean(
 		SystemProperties.get(CompressionFilter.class.getName()), true);
@@ -74,9 +73,6 @@ public class CompressionFilter implements Filter {
 				useFilter = false;
 			}
 		}
-	}
-
-	public void init(FilterConfig config) {
 	}
 
 	public void doFilter(
@@ -110,7 +106,7 @@ public class CompressionFilter implements Filter {
 			CompressionResponse compressionResponse =
 				new CompressionResponse(httpRes);
 
-			chain.doFilter(req, compressionResponse);
+			doFilter(CompressionFilter.class, req, compressionResponse, chain);
 
 			compressionResponse.finishResponse();
 		}
@@ -119,11 +115,8 @@ public class CompressionFilter implements Filter {
 				_log.debug("Not compressing " + completeURL);
 			}
 
-			chain.doFilter(req, res);
+			doFilter(CompressionFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest req) {
@@ -174,6 +167,6 @@ public class CompressionFilter implements Filter {
 
 	private static final String _COMPRESS = "compress";
 
-	private static Log _log = LogFactory.getLog(CompressionFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(CompressionFilter.class);
 
 }

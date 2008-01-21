@@ -22,6 +22,9 @@
 
 package com.liferay.portal.servlet.filters.servletauthorizing;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -38,17 +41,13 @@ import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -57,10 +56,7 @@ import org.apache.struts.Globals;
  * @author Raymond Augé
  *
  */
-public class ServletAuthorizingFilter implements Filter {
-
-	public void init(FilterConfig config) throws ServletException {
-	}
+public class ServletAuthorizingFilter extends BaseFilter {
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
@@ -150,7 +146,7 @@ public class ServletAuthorizingFilter implements Filter {
 		}
 
 		try {
-			chain.doFilter(req, res);
+			doFilter(ServletAuthorizingFilter.class, req, res, chain);
 		}
 		finally {
 			try {
@@ -173,10 +169,7 @@ public class ServletAuthorizingFilter implements Filter {
 		}
 	}
 
-	public void destroy() {
-	}
-
 	private static final Log _log =
-		LogFactory.getLog(ServletAuthorizingFilter.class);
+		LogFactoryUtil.getLog(ServletAuthorizingFilter.class);
 
 }

@@ -22,6 +22,9 @@
 
 package com.liferay.portal.servlet.filters.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -45,12 +48,10 @@ import com.liferay.util.servlet.filters.CacheResponseUtil;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -59,8 +60,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
@@ -68,9 +67,10 @@ import org.apache.velocity.app.Velocity;
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class VelocityFilter implements Filter {
+public class VelocityFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VelocityFilter.class.getName()), true);
@@ -110,7 +110,7 @@ public class VelocityFilter implements Filter {
 			CacheResponse cacheResponse = new CacheResponse(
 				httpRes, ENCODING);
 
-			chain.doFilter(req, cacheResponse);
+			doFilter(VelocityFilter.class, req, cacheResponse, chain);
 
 			VelocityContext context = new VelocityContext();
 
@@ -196,11 +196,8 @@ public class VelocityFilter implements Filter {
 				_log.debug("Not processing " + completeURL);
 			}
 
-			chain.doFilter(req, res);
+			doFilter(VelocityFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected boolean isMatchingURL(String completeURL) {
@@ -209,7 +206,7 @@ public class VelocityFilter implements Filter {
 		return matcher.matches();
 	}
 
-	private static Log _log = LogFactory.getLog(VelocityFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(VelocityFilter.class);
 
 	private Pattern _pattern;
 

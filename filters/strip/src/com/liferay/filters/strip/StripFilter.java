@@ -22,6 +22,9 @@
 
 package com.liferay.filters.strip;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,34 +34,27 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="StripFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class StripFilter implements Filter {
+public class StripFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(StripFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), "UTF-8");
-
-	public void init(FilterConfig config) {
-	}
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
@@ -89,7 +85,7 @@ public class StripFilter implements Filter {
 
 			StripResponse stripResponse = new StripResponse(httpRes);
 
-			chain.doFilter(req, stripResponse);
+			doFilter(StripFilter.class, req, stripResponse, chain);
 
 			String contentType = GetterUtil.getString(
 				stripResponse.getContentType());
@@ -255,11 +251,8 @@ public class StripFilter implements Filter {
 				_log.debug("Not stripping " + completeURL);
 			}
 
-			chain.doFilter(req, res);
+			doFilter(StripFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest req) {
@@ -311,6 +304,6 @@ public class StripFilter implements Filter {
 
 	private static final String _STRIP = "strip";
 
-	private static Log _log = LogFactory.getLog(StripFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
 
 }

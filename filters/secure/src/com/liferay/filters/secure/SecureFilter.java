@@ -22,6 +22,9 @@
 
 package com.liferay.filters.secure;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,10 +35,8 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
 import java.io.IOException;
-
 import java.util.Set;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -44,16 +45,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SecureFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class SecureFilter implements Filter {
+public class SecureFilter extends BaseFilter {
 
 	public void init(FilterConfig config) {
 		String propertyPrefix =
@@ -145,11 +144,8 @@ public class SecureFilter implements Filter {
 				_log.debug("Not securing " + completeURL);
 			}
 
-			chain.doFilter(req, res);
+			doFilter(SecureFilter.class, req, res, chain);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	protected boolean isAccessAllowed(HttpServletRequest req) {
@@ -174,7 +170,7 @@ public class SecureFilter implements Filter {
 
 	private static final String _SERVER_IP = "SERVER_IP";
 
-	private static Log _log = LogFactory.getLog(SecureFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
 	private Set _hostsAllowed = CollectionFactory.getHashSet();
 	private boolean _httpsRequired;
