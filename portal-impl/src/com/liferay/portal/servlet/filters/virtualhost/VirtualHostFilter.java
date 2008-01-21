@@ -79,6 +79,8 @@ public class VirtualHostFilter extends BaseFilter {
 		SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void init(FilterConfig config) throws ServletException {
+		super.init(config);
+
 		_ctx = config.getServletContext();
 	}
 

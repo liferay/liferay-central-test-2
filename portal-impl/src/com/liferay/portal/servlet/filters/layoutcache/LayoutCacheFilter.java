@@ -57,6 +57,7 @@ import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
+
 import java.util.Properties;
 
 import javax.servlet.FilterChain;
@@ -97,6 +98,8 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 	}
 
 	public void init(FilterConfig config) throws ServletException {
+		super.init(config);
+
 		_config = config;
 
 		PortalInitableUtil.init(this);

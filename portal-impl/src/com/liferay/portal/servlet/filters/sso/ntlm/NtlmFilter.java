@@ -68,9 +68,9 @@ import org.apache.commons.logging.LogFactory;
 public class NtlmFilter extends NtlmHttpFilter {
 
 	public void init(FilterConfig config) throws ServletException {
-		_config = new DynamicFilterConfig(config);
-
 		super.init(config);
+
+		_config = new DynamicFilterConfig(config);
 	}
 
 	public void doFilter(

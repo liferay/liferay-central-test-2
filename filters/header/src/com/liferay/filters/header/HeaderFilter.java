@@ -27,8 +27,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
@@ -51,7 +53,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HeaderFilter extends BaseFilter {
 
-	public void init(FilterConfig config) {
+	public void init(FilterConfig config) throws ServletException {
+		super.init(config);
+
 		_config = config;
 		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
 	}

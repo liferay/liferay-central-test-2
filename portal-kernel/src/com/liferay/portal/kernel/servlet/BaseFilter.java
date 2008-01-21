@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 
@@ -43,10 +44,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseFilter implements Filter {
 
-	private static final String DEPTHER = "DEPTHER";
-
-	private FilterConfig _config;
-
 	public void init(FilterConfig config) throws ServletException {
 		_config = config;
 	}
@@ -55,30 +52,47 @@ public abstract class BaseFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException;
 
+	public FilterConfig getFilterConfig() {
+		return _config;
+	}
+
 	public void destroy() {
 	}
 
-	public void doFilter(
+	protected void doFilter(
 			Class filterClass, ServletRequest req, ServletResponse res,
 			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
+		long startTime = 0;
 
-		String depther = (String)req.getAttribute(DEPTHER);
-		String filterName = filterClass.getSimpleName();
-		String path = httpReq.getRequestURI();
-		String threadName = Thread.currentThread().getName();
-
-		long startTime = System.currentTimeMillis();
+		String threadName = null;
+		String depther = null;
+		String path = null;
 
 		if (_log.isDebugEnabled()) {
-			depther = (depther == null?"=":depther+"=");
+			HttpServletRequest httpReq = (HttpServletRequest)req;
 
-			req.setAttribute(DEPTHER, depther);
+			startTime = System.currentTimeMillis();
 
-			_log.debug("[" + threadName + "]" + depther + "> " + filterName +
-				"   " + path);
+			threadName = Thread.currentThread().getName();
+
+			depther = (String)req.getAttribute(_DEPTHER);
+
+			if (depther == null) {
+				depther = null;
+			}
+			else {
+				depther += StringPool.EQUAL;
+			}
+
+			req.setAttribute(_DEPTHER, depther);
+
+			path = httpReq.getRequestURI();
+
+			_log.debug(
+				"[" + threadName + "]" + depther + "> " +
+					filterClass.getName() + " " + path);
 		}
 
 		chain.doFilter(req, res);
@@ -86,19 +100,21 @@ public abstract class BaseFilter implements Filter {
 		if (_log.isDebugEnabled()) {
 			long endTime = System.currentTimeMillis();
 
-			depther = (String)req.getAttribute(DEPTHER);
+			depther = (String)req.getAttribute(_DEPTHER);
 
-			_log.debug("[" + threadName + "]" + depther + "< " + filterName +
-				"   " + path + " " + (endTime - startTime) + " ms");
+			_log.debug(
+				"[" + threadName + "]" + depther + "< " +
+					filterClass.getName() + " " + path + " " +
+						(endTime - startTime) + " ms");
 
-			req.setAttribute(DEPTHER, depther.substring(1));
+			req.setAttribute(_DEPTHER, depther.substring(1));
 		}
 	}
 
-	public FilterConfig getFilterConfig() {
-		return _config;
-	}
+	private static final String _DEPTHER = "DEPTHER";
 
 	private static Log _log = LogFactoryUtil.getLog(BaseFilter.class);
+
+	private FilterConfig _config;
 
 }

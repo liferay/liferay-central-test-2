@@ -35,6 +35,7 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
 import java.io.IOException;
+
 import java.util.Set;
 
 import javax.servlet.FilterChain;
@@ -54,7 +55,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SecureFilter extends BaseFilter {
 
-	public void init(FilterConfig config) {
+	public void init(FilterConfig config) throws ServletException {
+		super.init(config);
+
 		String propertyPrefix =
 			config.getInitParameter("portal_property_prefix");
 

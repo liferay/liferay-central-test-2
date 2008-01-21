@@ -48,6 +48,7 @@ import com.liferay.util.servlet.filters.CacheResponseUtil;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,7 +79,9 @@ public class VelocityFilter extends BaseFilter {
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), "UTF-8");
 
-	public void init(FilterConfig config) {
+	public void init(FilterConfig config) throws ServletException {
+		super.init(config);
+
 		String pattern = config.getInitParameter("pattern");
 
 		_pattern = Pattern.compile(pattern);
