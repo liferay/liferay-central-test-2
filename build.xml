@@ -1314,73 +1314,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		</antcall>
 	</target>
 
-	<target name="zip-glassfish">
-		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.zip" failonerror="false" />
-
-		<zip
-			basedir="${app.server.glassfish.dir}"
-			destfile="dist/liferay-portal-glassfish-${lp.version.file.name}.zip"
-		/>
-
-		<taskdef
-			classname="org.tp23.antinstaller.taskdefs.Installer"
-			classpathref="project.classpath"
-			name="installer"
-		/>
-
-		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.jar" failonerror="false" />
-
-		<copy file="installer/glassfish/installer-config.xml.template" tofile="installer/glassfish/installer-config.xml" overwrite="yes">
-			<filterset>
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
-			</filterset>
-		</copy>
-
-		<pathconvert
-			property="java.home.path.unix"
-			targetos="unix"
-		>
-			<path>
-				<pathelement location="${env.JAVA_HOME}" />
-			</path>
-		</pathconvert>
-
-		<copy file="installer/glassfish/installer-build.properties.template" tofile="installer/glassfish/installer-build.properties" overwrite="yes">
-			<filterset>
-				<filter token="app.server.glassfish.dir" value="${app.server.glassfish.dir}" />
-				<filter token="java.home" value="${java.home.path.unix}" />
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
-			</filterset>
-		</copy>
-
-		<installer
-			antInstallLib="${ant.installer.dir}/lib"
-			antLib="${env.ANT_HOME}/lib"
-			buildFile="installer/glassfish/installer-build.xml"
-			compress="true"
-			extractType="SelfExtractor"
-			failOnError="true"
-			file="dist/liferay-portal-glassfish-${lp.version.file.name}.jar"
-			installConfig="installer/glassfish/installer-config.xml"
-			validateConfig="true"
-		>
-			<fileset dir="installer/glassfish" includes="installer-build.properties" />
-			<fileset dir="dist" includes="liferay-portal-glassfish-${lp.version.file.name}.zip" />
-		</installer>
-
-		<jar
-			destfile="dist/liferay-portal-glassfish-${lp.version.file.name}.jar"
-			update="yes"
-		>
-			<fileset
-				dir="installer"
-				includes="resources/extract-image.png"
-			/>
-		</jar>
-
-		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.zip" failonerror="false" />
-	</target>
-
 	<target name="zip-jboss">
 		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip" failonerror="false" />
 
@@ -1650,7 +1583,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			update="yes"
 		>
 			<fileset
-				dir="installer"
+				dir="installer/pramati"
 				includes="resources/extract-image.png"
 			/>
 		</jar>
@@ -1813,7 +1746,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="build-dist-glassfish" />
 		<antcall target="build-dist-pramati" />
 
-		<antcall target="zip-glassfish" />
 		<antcall target="zip-pramati" />
 	</target>
 </project>
