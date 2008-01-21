@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.rss;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationsTest extends BaseTestCase {
-	public void testEditConfigurations() throws Exception {
+public class EditConfigurationTest extends BaseTestCase {
+	public void testEditConfiguration() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//a/img");
