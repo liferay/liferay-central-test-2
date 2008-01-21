@@ -35,6 +35,7 @@ import com.liferay.portalweb.portlet.polls.PollsTests;
 import com.liferay.portalweb.portlet.pollsdisplay.PollsDisplayTests;
 import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
 import com.liferay.portalweb.portlet.rss.RSSTests;
+import com.liferay.portalweb.portlet.search.SearchTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
@@ -63,6 +64,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(PollsDisplayTests.class);
 		addTestSuite(RecentBloggersTests.class);
 		addTestSuite(RSSTests.class);
+		addTestSuite(SearchTests.class);
 		addTestSuite(SiteMapTests.class);
 		addTestSuite(StocksTests.class);
 		addTestSuite(UnitConverterTests.class);
