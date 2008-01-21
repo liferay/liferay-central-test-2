@@ -31,7 +31,13 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -106,8 +112,9 @@ public class PortletPermissionImpl implements PortletPermission {
 
 			if (!strict) {
 				if (LayoutPermissionUtil.contains(
-						permissionChecker, groupId, layout.isPrivateLayout(),
-						layout.getLayoutId(), ActionKeys.UPDATE)) {
+					permissionChecker, groupId, layout.isPrivateLayout(),
+					layout.getLayoutId(), ActionKeys.UPDATE) &&
+					hasLayoutManagerPermission(portletId, actionId)) {
 
 					return true;
 				}
@@ -161,5 +168,32 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		return sm.toString();
 	}
+
+	public boolean hasLayoutManagerPermission(
+		String portletId, String actionId) {
+
+		try {
+			return hasLayoutManagerPermissionImpl(portletId, actionId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
+	private boolean hasLayoutManagerPermissionImpl(
+			String portletId, String actionId)
+		throws SystemException {
+
+		portletId = PortletImpl.getRootPortletId(portletId);
+
+		List layoutManagerDefaultActions = ResourceActionsUtil.
+			getPortletResourceLayoutManagerDefaultActions(portletId);
+
+		return layoutManagerDefaultActions.contains(actionId);
+	}
+
+	private static Log _log = LogFactory.getLog(PortletPermissionImpl.class);
 
 }

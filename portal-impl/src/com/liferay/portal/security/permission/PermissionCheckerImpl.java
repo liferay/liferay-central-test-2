@@ -27,11 +27,14 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -41,13 +44,13 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.UniqueList;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -554,8 +557,20 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		long companyId = user.getCompanyId();
 
+		boolean hasLayoutManagerPermission = true;
+
+		if (Validator.isNotNull(name) && Validator.isNotNull(primKey) &&
+			StringUtil.endsWith(primKey, PortletImpl.LAYOUT_SEPARATOR + name)) {
+
+			hasLayoutManagerPermission =
+				PortletPermissionUtil.hasLayoutManagerPermission(
+					name, actionId);
+		}
+
 		if (checkAdmin &&
-			(isCompanyAdminImpl(companyId) || isCommunityAdminImpl(groupId))) {
+			(isCompanyAdminImpl(companyId) ||
+				(isCommunityAdminImpl(groupId) &&
+					hasLayoutManagerPermission))) {
 
 			return true;
 		}

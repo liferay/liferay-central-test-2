@@ -77,4 +77,7 @@ public interface PortletPermission {
 
 	public String getPrimaryKey(long plid, String portletId);
 
+	public boolean hasLayoutManagerPermission(
+			String portletId, String actionId);
+
 }

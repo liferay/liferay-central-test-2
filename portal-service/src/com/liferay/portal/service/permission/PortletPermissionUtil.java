@@ -115,6 +115,13 @@ public class PortletPermissionUtil {
 		return getPortletPermission().getPrimaryKey(plid, portletId);
 	}
 
+	public static boolean hasLayoutManagerPermission(
+		String portletId, String actionId) {
+
+		return getPortletPermission().hasLayoutManagerPermission(
+			portletId, actionId);
+	}
+
 	public void setPortletPermission(PortletPermission portletPermission) {
 		_portletPermission = portletPermission;
 	}

@@ -221,6 +221,13 @@ public class ResourceActionsUtil {
 		return _instance._getPortletResourceActions(companyId, name);
 	}
 
+	public static List getPortletResourceLayoutManagerDefaultActions(
+			String name)
+		throws SystemException {
+
+		return _instance._getPortletResourceLayoutManagerDefaultActions(name);
+	}
+
 	public static List getPortletResourceCommunityDefaultActions(String name)
 		throws SystemException {
 
@@ -302,6 +309,8 @@ public class ResourceActionsUtil {
 
 		_portletModelResources = CollectionFactory.getHashMap();
 		_portletResourceActions = CollectionFactory.getHashMap();
+		_portletResourceLayoutManagerDefaultActions =
+			CollectionFactory.getHashMap();
 		_portletResourceCommunityDefaultActions =
 			CollectionFactory.getHashMap();
 		_portletResourceGuestDefaultActions = CollectionFactory.getHashMap();
@@ -345,6 +354,16 @@ public class ResourceActionsUtil {
 	}
 
 	private void _checkPortletActions(List actions) {
+		if (!actions.contains("CONFIGURATION")) {
+			actions.add("CONFIGURATION");
+		}
+
+		if (!actions.contains("VIEW")) {
+			actions.add("VIEW");
+		}
+	}
+
+	private void _checkPortletLayoutManagerDefaultActions(List actions) {
 		if (!actions.contains("CONFIGURATION")) {
 			actions.add("CONFIGURATION");
 		}
@@ -454,6 +473,19 @@ public class ResourceActionsUtil {
 
 				_checkPortletActions(actions);
 
+				List layoutManagerDefaultActions =
+					(List)_portletResourceLayoutManagerDefaultActions.get(name);
+
+				if (layoutManagerDefaultActions == null) {
+					layoutManagerDefaultActions = new UniqueList();
+
+					_portletResourceLayoutManagerDefaultActions.put(
+						name, layoutManagerDefaultActions);
+
+					_checkPortletLayoutManagerDefaultActions(
+						layoutManagerDefaultActions);
+				}
+
 				List communityDefaultActions =
 					(List)_portletResourceCommunityDefaultActions.get(name);
 
@@ -479,6 +511,21 @@ public class ResourceActionsUtil {
 					_checkPortletGuestDefaultActions(guestDefaultActions);
 				}
 			}
+		}
+
+		return actions;
+	}
+
+	private List _getPortletResourceLayoutManagerDefaultActions(String name)
+		throws SystemException {
+
+		name = PortletImpl.getRootPortletId(name);
+
+		List actions =
+			_getActions(_portletResourceLayoutManagerDefaultActions, name);
+
+		if (actions.size() == 0) {
+			_checkPortletLayoutManagerDefaultActions(actions);
 		}
 
 		return actions;
@@ -603,6 +650,44 @@ public class ResourceActionsUtil {
 
 			if (!name.equals(PortletKeys.PORTAL)) {
 				_checkPortletActions(actions);
+			}
+
+			// Layout Manager default actions
+
+			List layoutManagerDefaultActions =
+				_getActions(_portletResourceLayoutManagerDefaultActions, name);
+
+			Element layoutManagerDefaults =
+				resource.element("layout-manager-defaults");
+
+			if (layoutManagerDefaults != null &&
+				layoutManagerDefaults.elements("action-key").size() > 0) {
+
+				itr2 = layoutManagerDefaults.elements("action-key").iterator();
+
+				while (itr2.hasNext()) {
+					Element actionKey = (Element)itr2.next();
+
+					String actionKeyText = actionKey.getText();
+
+					if (Validator.isNotNull(actionKeyText)) {
+						layoutManagerDefaultActions.add(actionKeyText);
+					}
+				}
+			}
+			else {
+				// Set the layout manager defaults to contain all the portlet
+				// resource actions, emulating the previous behavior.
+
+				itr2 = actions.iterator();
+
+				while (itr2.hasNext()) {
+					String actionKeyText = (String)itr2.next();
+
+					if (Validator.isNotNull(actionKeyText)) {
+						layoutManagerDefaultActions.add(actionKeyText);
+					}
+				}
 			}
 
 			// Community default actions
@@ -806,6 +891,7 @@ public class ResourceActionsUtil {
 	private Set _portalModelResources;
 	private Map _portletModelResources;
 	private Map _portletResourceActions;
+	private Map _portletResourceLayoutManagerDefaultActions;
 	private Map _portletResourceCommunityDefaultActions;
 	private Map _portletResourceGuestDefaultActions;
 	private Map _portletResourceGuestUnsupportedActions;
