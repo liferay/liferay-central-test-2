@@ -280,9 +280,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Journal
 
+		journalArticleLocalService.deleteArticles(groupId);
 		journalTemplateLocalService.deleteTemplates(groupId);
 		journalStructureLocalService.deleteStructures(groupId);
-		journalArticleLocalService.deleteArticles(groupId);
 
 		// Message boards
 
