@@ -405,13 +405,15 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			<br />
 		</c:if>
 
-		<liferay-ui:tabs names="<%= portletResourceLabel %>" />
+		<fieldset>
+			<legend><%= portletResourceLabel %></legend>
+	
+			<%
+			request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
+			%>
 
-		<%
-		request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
-		%>
-
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+		</fieldset>
 
 		<c:if test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
 
@@ -442,26 +444,28 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 				<br />
 
-				<liferay-ui:tabs names="<%= curModelResourceName %>" />
+				<fieldset>
+					<legend><%= curModelResourceName %></legend>
 
-				<c:choose>
-					<c:when test="<%= selectable %>">
+					<c:choose>
+						<c:when test="<%= selectable %>">
 
-						<%
-						request.removeAttribute("edit_role_permissions.jsp-curPortletResource");
-						request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
-						request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
-						%>
+							<%
+							request.removeAttribute("edit_role_permissions.jsp-curPortletResource");
+							request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
+							request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
+							%>
 
-						<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message key="not-available-for-this-type-of-role" />
+							<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:message key="not-available-for-this-type-of-role" />
 
-						<br />
-					</c:otherwise>
-				</c:choose>
+							<br />
+						</c:otherwise>
+					</c:choose>
 
+				</fieldset>
 			<%
 			}
 			%>
