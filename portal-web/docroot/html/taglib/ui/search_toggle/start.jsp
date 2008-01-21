@@ -25,40 +25,40 @@
 <%@ include file="/html/taglib/ui/search_toggle/init.jsp" %>
 
 <script type="text/javascript">
-	var <%= randomNamespace %>curClickValue = "<%= clickValue %>";
+	var <%= id %>curClickValue = "<%= clickValue %>";
 
-	function <%= randomNamespace %>toggleSearch() {
-		jQuery("#<%= randomNamespace %>basic").toggle();
-		jQuery("#<%= randomNamespace %>advanced").toggle();
+	function <%= id %>toggleSearch() {
+		jQuery("#<%= id %>basic").toggle();
+		jQuery("#<%= id %>advanced").toggle();
 
-		var advancedSearchObj = jQuery("#<%= randomNamespace %><%= displayTerms.ADVANCED_SEARCH %>");
+		var advancedSearchObj = jQuery("#<%= id %><%= displayTerms.ADVANCED_SEARCH %>");
 
-		if (<%= randomNamespace %>curClickValue == "basic") {
-			<%= randomNamespace %>curClickValue = "advanced";
+		if (<%= id %>curClickValue == "basic") {
+			<%= id %>curClickValue = "advanced";
 
 			advancedSearchObj.val(true);
 		}
 		else {
-			<%= randomNamespace %>curClickValue = "basic";
+			<%= id %>curClickValue = "basic";
 
 			advancedSearchObj.val(false);
 		}
 
-		loadPage(mainPath + "/portal/session_click", "<%= id %>=" + <%= randomNamespace %>curClickValue);
+		loadPage(mainPath + "/portal/session_click", "<%= id %>=" + <%= id %>curClickValue);
 	}
 </script>
 
-<input id="<%= randomNamespace %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
+<input id="<%= id %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
 
-<div id="<%= randomNamespace %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
-	<label for="<%= randomNamespace %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
+<div id="<%= id %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
+	<label for="<%= id %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
 
-	<input id="<%= randomNamespace %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= Html.escape(displayTerms.getKeywords()) %>" />
+	<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= Html.escape(displayTerms.getKeywords()) %>" />
 
-	&nbsp;<a href="javascript: <%= randomNamespace %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
+	&nbsp;<a href="javascript: <%= id %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
 </div>
 
-<div id="<%= randomNamespace %>advanced" style="display: <%= !clickValue.equals("basic") ? "block" : "none" %>;">
+<div id="<%= id %>advanced" style="display: <%= !clickValue.equals("basic") ? "block" : "none" %>;">
 
 	<%
 	StringMaker sm = new StringMaker();
