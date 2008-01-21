@@ -73,14 +73,7 @@ public class FindEntryAction extends Action {
 			boolean showAllEntries = ParamUtil.getBoolean(
 				req, "showAllEntries");
 
-			try {
-				plid = getPlid(plid, entryId);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
-				}
-			}
+			plid = getPlid(plid, entryId);
 
 			String urlTitle = getUrlTitle(entryId);
 
@@ -122,9 +115,14 @@ public class FindEntryAction extends Action {
 	protected long getPlid(long plid, long entryId) throws Exception {
 		if (plid != 0) {
 			try {
-				LayoutLocalServiceUtil.getLayout(plid);
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				return plid;
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				if (layoutTypePortlet.hasPortletId(PortletKeys.BLOGS)) {
+					return plid;
+				}
 			}
 			catch (NoSuchLayoutException nsle) {
 			}
@@ -145,21 +143,16 @@ public class FindEntryAction extends Action {
 				continue;
 			}
 
-			if (i == 0) {
-				plid = layout.getPlid();
-			}
-
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
 			if (layoutTypePortlet.hasPortletId(PortletKeys.BLOGS)) {
-				plid = layout.getPlid();
-
-				break;
+				return layout.getPlid();
 			}
 		}
 
-		return plid;
+		throw new NoSuchLayoutException(
+			"No public page was found with the Blogs portlet.");
 	}
 
 	protected String getUrlTitle(long entryId) {
