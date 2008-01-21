@@ -169,9 +169,17 @@ public class SeleneseToJavaBuilder {
 			String param2 = fixParam(params[1]);
 			String param3 = fixParam(params[2]);
 
-			if (param1.equals("click") || param1.equals("mouseDown") ||
-				param1.equals("mouseUp") || param1.equals("open") ||
-				param1.equals("selectFrame") || param1.equals("selectWindow")) {
+			if (param1.equals("assertConfirmation")) {
+				param2 = StringUtil.replace(param2, "?", "[\\\\s\\\\S]");
+
+				sm.append("assertTrue(selenium.getConfirmation().matches(\"^");
+				sm.append(param2);
+				sm.append("$\"));");
+			}
+			else if (param1.equals("click") || param1.equals("mouseDown") ||
+					 param1.equals("mouseUp") || param1.equals("open") ||
+					 param1.equals("selectFrame") ||
+					 param1.equals("selectWindow")) {
 
 				sm.append("selenium.");
 				sm.append(param1);
