@@ -101,10 +101,12 @@ public class FriendlyURLServlet extends HttpServlet {
 			redirect = getRedirect(
 				req, req.getPathInfo(), mainPath, req.getParameterMap());
 
-			LastPath lastPath = new LastPath(
-				friendlyURLPath, req.getPathInfo(), req.getParameterMap());
+			if (req.getAttribute(WebKeys.LAST_PATH) == null) {
+				LastPath lastPath = new LastPath(
+					friendlyURLPath, req.getPathInfo(), req.getParameterMap());
 
-			req.setAttribute(WebKeys.LAST_PATH, lastPath);
+				req.setAttribute(WebKeys.LAST_PATH, lastPath);
+			}
 		}
 		catch (NoSuchLayoutException nsle) {
 			_log.warn(nsle);

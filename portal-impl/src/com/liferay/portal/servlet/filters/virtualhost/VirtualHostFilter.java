@@ -36,6 +36,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
+import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -183,6 +184,11 @@ public class VirtualHostFilter extends BaseFilter {
 
 		if (layoutSet != null) {
 			try {
+				LastPath lastPath = new LastPath(
+					StringPool.BLANK, friendlyURL, req.getParameterMap());
+
+				req.setAttribute(WebKeys.LAST_PATH, lastPath);
+
 				StringMaker prefix = new StringMaker();
 
 				if (layoutSet.isPrivateLayout()) {
