@@ -67,7 +67,8 @@ var jQBrowser2 = function() {
 
         // Initially set to false, if detected one of the following operating
         // systems will be updated.
-            'linux': false,
+           'iphone': false, 
+			'linux': false,
               'mac': false,
               'win': false
     };
@@ -225,7 +226,11 @@ var jQBrowser2 = function() {
                 { // Linux <http://www.linux.org/>
                           'name': 'Linux',
                             'OS': /Linux/.test(pl)
-                }
+                },
+				{ // iPhone <http://www.apple.com/iphone>
+						  'name': 'iPhone',
+						    'OS': /iPhone/.test(pl) 
+				}
            ];
        i < data.length;
        i++
@@ -301,6 +306,7 @@ var jQBrowser2 = function() {
 
         // A boolean value indicating whether or not the given OS was
         // detected.
+		   'iphone': Private.iphone, 
             'linux': Private.linux,
               'mac': Private.mac,
               'win': Private.win
@@ -326,6 +332,6 @@ var jQBrowser2 = function() {
 																: jQuery.browser.aol // AOL
 																 	? 'aol ' + bn + bv
 																	: '',
-		os=jQuery.browser.linux?'linux':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
+		os=jQuery.browser.linux?'linux':jQuery.browser.iphone?'iphone':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
 		jQuery('html').addClass(b).addClass(os).addClass('js');
 }();
