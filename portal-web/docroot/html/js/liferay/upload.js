@@ -17,7 +17,7 @@ Liferay.Upload = new Class({
 
 		instance._container = jQuery(params.container);
 		instance._fallbackContainer = jQuery(params.fallbackContainer || []);
-		instance._namespaceId = params.namespace || '_liferay_pns_' + Math.ceil(Math.random() * (new Date).getTime()) + '_';
+		instance._namespaceId = params.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
