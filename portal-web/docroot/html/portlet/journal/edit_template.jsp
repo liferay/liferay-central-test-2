@@ -283,7 +283,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<input class="lfr-input-text" name="<portlet:namespace />xsl" type="file" />
 
-		<input type="button" value="<liferay-ui:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();" />
+		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
 
 		<c:if test="<%= template != null %>">
 			<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
@@ -375,6 +375,16 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
+
+<script type="text/javascript">
+	Liferay.Util.inlineEditor(
+		{
+			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value,
+			button: '#<portlet:namespace />editorButton', 
+			textarea: '<portlet:namespace />xslContent'
+		}
+	);
+</script>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

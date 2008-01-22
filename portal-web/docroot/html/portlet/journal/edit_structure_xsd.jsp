@@ -39,7 +39,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 <script type="text/javascript">
 	function getEditorContent() {
-		return opener.<portlet:namespace />getXsd();
+		return <portlet:namespace />getXsd();
 	}
 
 	function <portlet:namespace />updateEditorType() {
@@ -51,29 +51,37 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			newEditorType = "html";
 		}
 		%>
-
-		self.location = "<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>";
+		
+		Liferay.Util.switchEditor(
+			{
+				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
+				textarea: '<portlet:namespace />xsdContent',
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.popup:first')
+			}
+		);
 	}
 
 	function <portlet:namespace />updateStructureXsd() {
-		opener.document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
 
+		var xsdContent = jQuery('input[@name=<portlet:namespace />xsd]');
+		var content = '';
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />xsdContent.getCode();
+				content = <portlet:namespace />xsdContent.getCode();
 			</c:when>
 			<c:otherwise>
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xsd.value = document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value;
+				content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;
 			</c:otherwise>
 		</c:choose>
 
-		submitForm(opener.document.<portlet:namespace />fm);
-
-		self.close();
+		xsdContent.attr('value', content);
+		Liferay.Popup.close(document.<portlet:namespace />editorForm);
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm">
+<form method="post" name="<portlet:namespace />editorForm">
 
 <table class="lfr-table">
 <tr>
@@ -105,7 +113,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 <input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();" />
 
 <c:if test="<%= !useEditorCodepress %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);" />
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent);" />
 </c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
@@ -115,7 +123,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 <script type="text/javascript">
 	jQuery(
 		function() {
-			document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value = getEditorContent();
+			document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
 
 			Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>);
 		}

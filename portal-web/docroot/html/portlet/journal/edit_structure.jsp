@@ -338,7 +338,7 @@ int tabIndex = 1;
 
 <input type="button" value="<liferay-ui:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
 
-<input type="button" value="<liferay-ui:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();" />
+<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
 
 <c:if test="<%= structure != null %>">
 	<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';" />
@@ -372,6 +372,16 @@ tabIndex = tabIndexWrapper.getValue();
 </table>
 
 </form>
+
+<script type="text/javascript">
+	Liferay.Util.inlineEditor(
+		{
+			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>',
+			button: '#<portlet:namespace />editorButton', 
+			textarea: '<portlet:namespace />xsdContent'
+		}
+	);
+</script>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

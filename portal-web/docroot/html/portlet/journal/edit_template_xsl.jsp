@@ -52,8 +52,9 @@ else {
 %>
 
 <script type="text/javascript">
-	function getEditorContent() {
-		var content = decodeURIComponent(opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
+	function <portlet:namespace />getEditorContent() {
+		var xslContent = jQuery('input[@name=<portlet:namespace />xslContent]');
+		var content = decodeURIComponent(xslContent.val());
 
 		if (content == "") {
 			content = "<%= UnicodeFormatter.toString(defaultContent) %>";
@@ -71,25 +72,33 @@ else {
 			newEditorType = "html";
 		}
 		%>
-
-		self.location = "<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>";
+		
+		Liferay.Util.switchEditor(
+			{
+				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
+				textarea: '<portlet:namespace />xslContent',
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.popup:first')
+			}
+		);
 	}
 
 	function <portlet:namespace />updateTemplateXsl() {
+		var xslContent = jQuery('input[@name=<portlet:namespace />xslContent]');
+		var content = '';
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(<portlet:namespace />xslContent.getCode());
+				content = encodeURIComponent(<portlet:namespace />xslContent.getCode());
 			</c:when>
 			<c:otherwise>
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
+				content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
 			</c:otherwise>
 		</c:choose>
-
-		self.close();
+		xslContent.attr('value', content);
+		Liferay.Popup.close(document.<portlet:namespace />editorForm);
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm">
+<form method="post" name="<portlet:namespace />editorForm">
 
 <table class="lfr-table">
 <tr>
@@ -121,19 +130,19 @@ else {
 <input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
 
 <c:if test="<%= !useEditorCodepress %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent);" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 
 </form>
 
 <script type="text/javascript">
 	jQuery(
 		function() {
-			document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = getEditorContent();
+			document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
 
-			Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>);
+			Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 		}
 	);
 </script>

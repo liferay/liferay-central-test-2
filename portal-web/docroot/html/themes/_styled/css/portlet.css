@@ -83,6 +83,10 @@
 	width: 10px;
 }
 
+.popup .portlet-resize-handle {
+	bottom: 2px;
+}
+
 /* ---------- Standard styles defined in the JSR 168 ---------- */
 
 /* ---------- Fonts ---------- */

@@ -303,6 +303,101 @@ Liferay.Util = {
 
 		return url + ";jsessionid=" + themeDisplay.getSessionId();
 	},
+	
+	inlineEditor: function(options) {
+		var instance = this;
+		/*
+			Options:
+			button (jQuery selector | DOM element): The button that opens the popup when clicked
+			url (String): url to open that sets the editor
+			width (Int): The width to set the popup to
+			height (Int): The height to set the popup to
+			textarea (String): the name of the textarea to auto-resize
+		*/
+		if (options.url && options.button) {
+			var url = options.url;
+			var button = options.button;
+			var width = options.width || 680;
+			var height = options.height || 640;
+			var textarea = options.textarea;
+			var clicked = false;
+			
+			var editorButton = jQuery(button);
+			editorButton.click(
+				function(event) {
+					if (!clicked) {
+						var popup = Liferay.Popup(
+							{
+								height: 640,
+								width: 680,
+								noCenter: true,
+								title: '',
+								onClose: function() {
+									jQuery(document).unbind('popupResize');
+									clicked = false;
+								}
+							}
+						);
+						var jPopup = jQuery(popup);
+						var resizeDiv = '<div class="portlet-resize-handle"></div>';
+
+						jQuery.ajax(
+							{
+								url: url,
+								success: function(message) {
+									jPopup.find('.loading-animation').remove();
+									jPopup.append(message);
+									jPopup.after(resizeDiv);
+
+									var form = jPopup.find('form');
+									form.css(
+										{
+											height: 340,
+											width: 680
+										}
+									);
+
+									if (textarea) {
+										var usingPlainEditor = jPopup.find('.lfr-textarea').length;
+										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);	
+									}
+
+									var handle = jQuery('.portlet-resize-handle')[0];
+
+									var mainPopup = jPopup.parents('.popup:first');
+									mainPopup.lResize(
+										{
+											direction: 'horizontal',
+											handle: handle,
+											mode: 'add',
+											onMove: function(settings) {
+												form.css(
+													{
+														height: settings.browserEvent.clientY - 130,
+														width: settings.browserEvent.clientX - 30
+													}
+												);
+												jQuery(document).trigger('popupResize');
+											}
+										}
+									);
+									mainPopup.lResize(
+										{
+											handle: handle,
+											direction: "vertical",
+											mode: "add"
+										}
+									);
+								}
+							}
+						);
+						clicked = true;
+					}
+				}
+			);
+		}
+	},
+	
 
 	isArray: function(object) {
 		if (!window.Array) {
@@ -522,7 +617,7 @@ Liferay.Util = {
 		}
 	},
 
-	resizeTextarea: function(elString, usingRichEditor) {
+	resizeTextarea: function(elString, usingRichEditor, resizeToInlinePopup) {
 		var init = function() {
 			var el = jQuery('#' + elString);
 
@@ -531,7 +626,14 @@ Liferay.Util = {
 			}
 
 			if (el.length) {
-				var pageBody = jQuery('body');
+				var pageBody;
+
+				if (resizeToInlinePopup) {
+					pageBody = el.parents('.popup:first');
+				}
+				else {
+					pageBody = jQuery('body');
+				}
 
 				var resize = function() {
 					var pageBodyHeight = pageBody.height();
@@ -549,21 +651,31 @@ Liferay.Util = {
 						catch (e) {
 						}
 					}
+					
+					var diff = 150;
+					if (!resizeToInlinePopup) {
+						diff = 100;
+					}
 
 					el.css(
 						{
-							height: (pageBodyHeight - 100) + "px",
+							height: (pageBodyHeight - diff) + "px",
 							width: '98%'
 						}
 					);
 				};
 
 				resize();
-
-				jQuery(window).resize(resize);
+				
+				if (resizeToInlinePopup) {
+					jQuery(document).bind('popupResize', resize);
+				}
+				else {
+					jQuery(window).resize(resize);
+				}
 			}
 		};
-
+		
 		jQuery(init);
 	},
 
@@ -692,6 +804,47 @@ Liferay.Util = {
 
 	startsWith: function(str, x) {
 		return (str.indexOf(x) === 0);
+	},
+	
+	switchEditor: function(options) {
+		var instance = this;
+		
+		/*
+			OPTIONS
+			url (String): url to open that sets the editor
+			popup (String|DOM|jQuery element): the popup that contains the editor
+			textarea (String): the name of the textarea to auto-resize
+		*/
+		if (options.url && options.popup) {
+			var url = options.url;
+			var popup = options.popup;
+			var textarea = options.textarea;
+			
+			if (!popup.jquery) {
+				popup = jQuery(popup);
+			}
+			
+			var popupMessage = popup.find('.popup-message');
+			
+			jQuery.ajax(
+				{
+					url: url,
+					beforeSend: function() {
+						popupMessage.empty();
+						popupMessage.append('<div class="loading-animation"><div>');
+					},
+				  	success: function(message) {
+						popupMessage.empty();
+						popupMessage.append(message);
+
+						if (textarea) {
+							var usingPlainEditor = popup.find('.lfr-textarea').length;
+							Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
+						}
+				 	}
+				}
+			);
+		}
 	},
 
 	toggleByIdSpan: function(obj, id) {

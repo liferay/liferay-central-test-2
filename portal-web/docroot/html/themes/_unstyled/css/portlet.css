@@ -43,6 +43,9 @@
 .portlet-resize-handle {
 }
 
+.popup .portlet-resize-handle {
+}
+
 /* ---------- Standard styles defined in the JSR 168 ---------- */
 
 /* ---------- Fonts ---------- */
