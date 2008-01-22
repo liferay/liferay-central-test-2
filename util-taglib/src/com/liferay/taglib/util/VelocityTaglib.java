@@ -55,6 +55,9 @@ import com.liferay.util.HttpUtil;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -88,6 +91,31 @@ public class VelocityTaglib {
 		_pageContext = pageContext;
 
 		return this;
+	}
+
+	public String actionURL(String portletName, String queryString)
+		throws Exception {
+
+		String windowState = WindowState.NORMAL.toString();
+		String portletMode = PortletMode.VIEW.toString();
+
+		return actionURL(windowState, portletMode, portletName, queryString);
+	}
+
+	public String actionURL(
+			String windowState, String portletMode, String portletName,
+			String queryString)
+		throws Exception {
+
+		Boolean secure = null;
+		Boolean anchor = null;
+		Boolean encrypt = null;
+		long doAsUserId = 0;
+		Boolean portletConfiguration = null;
+
+		return actionURL(
+			windowState, portletMode, secure, portletName, anchor, encrypt,
+			doAsUserId, portletConfiguration, queryString);
 	}
 
 	public String actionURL(
@@ -430,6 +458,31 @@ public class VelocityTaglib {
 		PngImageTag.doTag(image, height, width, _ctx, _req, _res);
 
 		return _res.getString();
+	}
+
+	public String renderURL(String portletName, String queryString)
+		throws Exception {
+
+		String windowState = WindowState.NORMAL.toString();
+		String portletMode = PortletMode.VIEW.toString();
+
+		return renderURL(windowState, portletMode, portletName, queryString);
+	}
+
+	public String renderURL(
+			String windowState, String portletMode, String portletName,
+			String queryString)
+		throws Exception {
+
+		Boolean secure = null;
+		Boolean anchor = null;
+		Boolean encrypt = null;
+		long doAsUserId = 0;
+		Boolean portletConfiguration = null;
+
+		return renderURL(
+			windowState, portletMode, secure, portletName, anchor, encrypt,
+			doAsUserId, portletConfiguration, queryString);
 	}
 
 	public String renderURL(

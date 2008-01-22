@@ -164,6 +164,23 @@
 	#set ($page_javascript_1 = $typeSettingsProperties.getProperty("javascript-1"))
 	#set ($page_javascript_2 = $typeSettingsProperties.getProperty("javascript-2"))
 	#set ($page_javascript_3 = $typeSettingsProperties.getProperty("javascript-3"))
+
+	#set ($community_name = $page.getGroup().getDescriptiveName())
+
+	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), true))
+
+	$my_places_portlet_url.setWindowState("normal")
+	$my_places_portlet_url.setPortletMode("view")
+
+	$my_places_portlet_url.setParameter("struts_action", "/my_places/view")
+	$my_places_portlet_url.setParameter("groupId", "$page.getGroupId()")
+	$my_places_portlet_url.setParameter("privateLayout", "false")
+
+	#set ($community_default_public_url = $my_places_portlet_url.toString())
+
+	$my_places_portlet_url.setParameter("privateLayout", "true")
+
+	#set ($community_default_private_url = $my_places_portlet_url.toString())
 #end
 
 #if ($layout.getHTMLTitle($locale))
