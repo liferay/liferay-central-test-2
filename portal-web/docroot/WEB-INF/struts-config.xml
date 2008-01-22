@@ -309,6 +309,11 @@
 
 		<!-- Document Library -->
 
+		<action path="/document_library/compare_versions" type="com.liferay.portlet.documentlibrary.action.CompareVersionsAction">
+			<forward name="portlet.document_library.compare_versions" path="portlet.document_library.compare_versions" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction" name="documentLibraryFileEntryForm">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
 			<forward name="portlet.document_library.edit_file_entry_form" path="portlet.document_library.edit_file_entry_form" />

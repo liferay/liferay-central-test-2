@@ -49,25 +49,15 @@ public class DiffResult {
 
 	public static final String TARGET = "TARGET";
 
-	public DiffResult(String changeType, int linePos, List changedLines) {
-		_changeType = changeType;
+	public DiffResult(int linePos, List changedLines) {
 		_lineNumber = linePos + 1;
 		_changedLines = changedLines;
 	}
 
-	public DiffResult(String changeType, int linePos, String changedLine) {
-		_changeType = changeType;
+	public DiffResult(int linePos, String changedLine) {
 		_lineNumber = linePos + 1;
 		_changedLines = new ArrayList();
 		_changedLines.add(changedLine);
-	}
-
-	public String getChangeType() {
-		return _changeType;
-	}
-
-	public void setChangeType(String changeType) {
-		_changeType = changeType;
 	}
 
 	public List getChangedLines() {
@@ -89,8 +79,7 @@ public class DiffResult {
 	public boolean equals(Object obj) {
 		DiffResult diffResult = (DiffResult)obj;
 
-		if ((diffResult.getChangeType().equals(_changeType)) &&
-			(diffResult.getLineNumber() == _lineNumber) &&
+		if ((diffResult.getLineNumber() == _lineNumber) &&
 			(diffResult.getChangedLines().equals(_changedLines))) {
 
 			return true;
@@ -101,10 +90,6 @@ public class DiffResult {
 
 	public String toString() {
 		StringMaker sm = new StringMaker();
-
-		sm.append("Type: ");
-		sm.append(_changeType);
-		sm.append("\n");
 
 		sm.append("Line: ");
 		sm.append(_lineNumber);
@@ -123,7 +108,6 @@ public class DiffResult {
 		return sm.toString();
 	}
 
-	private String _changeType;
 	private int _lineNumber;
 	private List _changedLines;
 

@@ -52,13 +52,15 @@ import org.incava.util.diff.Difference;
  */
 public class DiffUtil {
 
-	public static final String OPEN_ADD = "<ADD>";
+	public static final String OPEN_INS = "<ins>";
 
-	public static final String CLOSE_ADD = "</ADD>";
+	public static final String CLOSE_INS = "</ins>";
 
-	public static final String OPEN_DEL = "<DEL>";
+	public static final String OPEN_DEL = "<del>";
 
-	public static final String CLOSE_DEL = "</DEL>";
+	public static final String CLOSE_DEL = "</del>";
+
+	public static final String CONTEXT_LINE = "<context-line/>";
 
 	/**
 	 * This is a diff method with default values.
@@ -67,8 +69,11 @@ public class DiffUtil {
 	 * @param		target the <code>Reader</code> of the target text
 	 * @return		a list of <code>DiffResults</code>
 	 */
-	public static List diff(Reader source, Reader target) {
-		return diff(source, target, OPEN_ADD, CLOSE_ADD, OPEN_DEL, CLOSE_DEL);
+	public static List[] diff(Reader source, Reader target) {
+		int margin = 2;
+
+		return diff(
+			source, target, OPEN_INS, CLOSE_INS, OPEN_DEL, CLOSE_DEL, margin);
 	}
 
 	/**
@@ -85,14 +90,21 @@ public class DiffUtil {
 	 * @param		deletedMarkerStart the initial marker for highlighting
 	 * 				removals
 	 * @param		deletedMarkerEnd the end marker for highlighting removals
-	 * @return		A List of <code>DiffResults</code>
+	 * @param		margin the number of lines that will be added before the
+	 * 				first changed line
+	 * @return		An array containing two Lists of <code>DiffResults</code>,
+	 * 				the first element contains DiffResults related to changes
+	 * 				in source and the second element to changes in target
 	 */
-	public static List diff(
+	public static List[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,
-		String deletedMarkerEnd) {
+		String deletedMarkerEnd, int margin) {
 
-		List results = new ArrayList();
+		List sourceResults = new ArrayList();
+		List targetResults = new ArrayList();
+
+		List[] results = new List[]{sourceResults, targetResults};
 
 		// Convert the texts to Lists where each element are lines of the texts.
 
@@ -114,34 +126,74 @@ public class DiffUtil {
 
 				// Lines were deleted from source only.
 
-				_highlight(
-					sourceStringList, difference.getDeletedStart(),
-					difference.getDeletedEnd(), deletedMarkerStart,
-					deletedMarkerEnd);
+				_highlightLines(
+					sourceStringList, deletedMarkerStart,
+					deletedMarkerEnd, difference.getDeletedStart(),
+					difference.getDeletedEnd());
+
+				margin = _calculateMargin(
+					sourceResults, targetResults, difference.getDeletedStart(),
+					difference.getAddedStart(), margin);
+
+				List changedLines = _addMargins(
+					sourceResults, sourceStringList,
+					difference.getDeletedStart(), margin);
+
+				_addResults(
+					sourceResults, sourceStringList, changedLines,
+					difference.getDeletedStart(), difference.getDeletedEnd());
+
+				changedLines = _addMargins(
+					targetResults, targetStringList, difference.getAddedStart(),
+					margin);
+
+				int deletedLines = difference.getDeletedEnd() + 1 -
+					difference.getDeletedStart();
+
+				for (int i = 0; i < deletedLines; i++) {
+					changedLines.add(CONTEXT_LINE);
+				}
 
 				DiffResult diffResult = new DiffResult(
-					DiffResult.SOURCE, difference.getDeletedStart(),
-					sourceStringList.subList(
-						difference.getDeletedStart(),
-						difference.getDeletedEnd() + 1));
+					difference.getDeletedStart(), changedLines);
 
-				results.add(diffResult);
+				targetResults.add(diffResult);
 			}
 			else if (difference.getDeletedEnd() == Difference.NONE) {
 
 				// Lines were added to target only.
 
-				_highlight(
-					targetStringList, difference.getAddedStart(),
-					difference.getAddedEnd(), addedMarkerStart, addedMarkerEnd);
+				_highlightLines(
+					targetStringList, addedMarkerStart, addedMarkerEnd,
+					difference.getAddedStart(), difference.getAddedEnd());
+
+				margin = _calculateMargin(
+					sourceResults, targetResults, difference.getDeletedStart(),
+					difference.getAddedStart(), margin);
+
+				List changedLines = _addMargins(
+					sourceResults, sourceStringList,
+					difference.getDeletedStart(), margin);
+
+				int addedLines = difference.getAddedEnd() + 1 -
+					difference.getAddedStart();
+
+				for (int i = 0; i < addedLines; i++) {
+					changedLines.add(CONTEXT_LINE);
+				}
 
 				DiffResult diffResult = new DiffResult(
-					DiffResult.TARGET, difference.getAddedStart(),
-					targetStringList.subList(
-						difference.getAddedStart(),
-						difference.getAddedEnd() + 1));
+					difference.getAddedStart(), changedLines);
 
-				results.add(diffResult);
+				sourceResults.add(diffResult);
+
+				changedLines = _addMargins(
+					targetResults, targetStringList, difference.getAddedStart(),
+					margin);
+
+				_addResults(
+					targetResults, targetStringList, changedLines,
+					difference.getAddedStart(), difference.getAddedEnd());
 			}
 			else {
 
@@ -149,20 +201,71 @@ public class DiffUtil {
 				// same position. It needs to check for characters differences.
 
 				_checkCharDiffs(
-					addedMarkerStart, addedMarkerEnd, deletedMarkerStart,
-					deletedMarkerEnd, sourceStringList, targetStringList,
-					difference, results);
+					sourceResults, targetResults, sourceStringList,
+					targetStringList, addedMarkerStart, addedMarkerEnd,
+					deletedMarkerStart, deletedMarkerEnd, difference, margin);
 			}
 		}
 
 		return results;
 	}
 
+	private static List _addMargins(
+		List results, List stringList, int beginPos, int margin) {
+
+		List changedLines = new ArrayList();
+
+		if (margin == 0 || beginPos == 0) {
+			return changedLines;
+		}
+
+		int i = beginPos - margin;
+
+		for (; i < 0; i++) {
+			changedLines.add(CONTEXT_LINE);
+		}
+
+		for (; i < beginPos; i++) {
+			if (i < stringList.size()) {
+				changedLines.add(stringList.get(i));
+			}
+		}
+
+		return changedLines;
+	}
+
+	private static void _addResults(
+		List results, List stringList, List changedLines, int start, int end) {
+
+		changedLines.addAll(stringList.subList(start, end + 1));
+
+		DiffResult diffResult = new DiffResult(
+			start, changedLines);
+
+		results.add(diffResult);
+	}
+
+	private static int _calculateMargin(
+		List sourceResults, List targetResults, int sourceBeginPos,
+		int targetBeginPos, int margin) {
+
+		int sourceMargin = _checkOverlapping(
+			sourceResults, sourceBeginPos, margin);
+		int targetMargin = _checkOverlapping(
+			targetResults, targetBeginPos, margin);
+
+		if (sourceMargin < targetMargin) {
+			return sourceMargin;
+		}
+
+		return targetMargin;
+	}
+
 	private static void _checkCharDiffs(
-		String addedMarkerStart, String addedMarkerEnd,
+		List sourceResults, List targetResults, List sourceStringList,
+		List targetStringList, String addedMarkerStart, String addedMarkerEnd,
 		String deletedMarkerStart, String deletedMarkerEnd,
-		List sourceStringList, List targetStringList, Difference difference,
-		List results) {
+		Difference difference, int margin) {
 
 		boolean aligned = false;
 
@@ -177,24 +280,25 @@ public class DiffUtil {
 		for (; i <= difference.getDeletedEnd(); i++) {
 			for (; j <= difference.getAddedEnd(); j++) {
 				if (_lineDiff(
-						sourceStringList, targetStringList, addedMarkerStart,
-						addedMarkerEnd, deletedMarkerStart, deletedMarkerEnd, i,
-						j, false, results)) {
+						sourceResults, targetResults, sourceStringList,
+						targetStringList, addedMarkerStart, addedMarkerEnd,
+						deletedMarkerStart, deletedMarkerEnd, i, j, false)) {
 
 					aligned = true;
 
 					break;
 				}
 				else {
-					_highlight(
-						targetStringList, j, j, addedMarkerStart,
-						addedMarkerEnd);
+					_highlightLines(
+						targetStringList, addedMarkerStart, addedMarkerEnd, j,
+						j);
 
-					DiffResult diffResult = new DiffResult(
-						DiffResult.TARGET, j,
-						targetStringList.subList(j, j + 1));
+					DiffResult targetResult = new DiffResult(
+						j, targetStringList.subList(j, j + 1));
 
-					results.add(diffResult);
+					targetResults.add(targetResult);
+
+					sourceResults.add(new DiffResult(j, CONTEXT_LINE));
 				}
 			}
 
@@ -202,14 +306,16 @@ public class DiffUtil {
 				 break;
 			}
 			else {
-				_highlight(
-					sourceStringList, i, i, deletedMarkerStart,
-					deletedMarkerEnd);
+				_highlightLines(
+					sourceStringList, deletedMarkerStart, deletedMarkerEnd, i,
+					i);
 
-				DiffResult diffResult = new DiffResult(
-					DiffResult.SOURCE, i, sourceStringList.subList(i, i + 1));
+				DiffResult sourceResult = new DiffResult(
+					i, sourceStringList.subList(i, i + 1));
 
-				results.add(diffResult);
+				sourceResults.add(sourceResult);
+
+				targetResults.add(new DiffResult(i, CONTEXT_LINE));
 			}
 		}
 
@@ -222,38 +328,73 @@ public class DiffUtil {
 				i++, j++) {
 
 			_lineDiff(
-				sourceStringList, targetStringList, addedMarkerStart,
-				addedMarkerEnd, deletedMarkerStart, deletedMarkerEnd, i, j,
-				true, results);
+				sourceResults, targetResults, sourceStringList,
+				targetStringList, addedMarkerStart, addedMarkerEnd,
+				deletedMarkerStart, deletedMarkerEnd, i, j, true);
 		}
 
 		// After the for loop above, some lines might remained unchecked.
 		// They are considered as deletions or additions.
 
 		for (; i <= difference.getDeletedEnd();i++) {
-			_highlight(
-				sourceStringList, i, i, deletedMarkerStart, deletedMarkerEnd);
+			_highlightLines(
+				sourceStringList, deletedMarkerStart, deletedMarkerEnd, i, i);
 
-			DiffResult diffResult = new DiffResult(
-				DiffResult.SOURCE, i, sourceStringList.subList(i, i + 1));
+			DiffResult sourceResult = new DiffResult(
+				i, sourceStringList.subList(i, i + 1));
 
-			results.add(diffResult);
+			sourceResults.add(sourceResult);
+
+			targetResults.add(new DiffResult(i, CONTEXT_LINE));
 		}
 
 		for (; j <= difference.getAddedEnd(); j++) {
-			_highlight(
-				targetStringList, j, j, addedMarkerStart, addedMarkerEnd);
+			_highlightLines(
+				targetStringList, addedMarkerStart, addedMarkerEnd, j, j);
 
-			DiffResult diffResult = new DiffResult(
-				DiffResult.TARGET, j, targetStringList.subList(j, j + 1));
+			DiffResult targetResult = new DiffResult(
+				j, targetStringList.subList(j, j + 1));
 
-			results.add(diffResult);
+			targetResults.add(targetResult);
+
+			sourceResults.add(new DiffResult(j, CONTEXT_LINE));
 		}
 	}
 
-	private static void _highlight(
-		List stringList, int beginPos, int endPos, String markerStart,
-		String markerEnd) {
+	private static int _checkOverlapping(
+		List results, int beginPos, int margin) {
+
+		if (results.size() == 0 || (beginPos - margin) < 0) {
+			return margin;
+		}
+
+		DiffResult lastDiff = (DiffResult)results.get(results.size() - 1);
+
+		if (lastDiff.getChangedLines().size() == 0) {
+			return margin;
+		}
+
+		int lastChangedLine = (lastDiff.getLineNumber() - 1) +
+			lastDiff.getChangedLines().size();
+
+		int currentChangedLine = beginPos - margin;
+
+		if ((lastDiff.getChangedLines().size() == 1) &&
+			(lastDiff.getChangedLines().get(0).equals(CONTEXT_LINE))) {
+
+			currentChangedLine = currentChangedLine + 1;
+		}
+
+		if (currentChangedLine < lastChangedLine) {
+			return margin + currentChangedLine - lastChangedLine;
+		}
+
+		return margin;
+	}
+
+	private static void _highlightChars(
+		List stringList, String markerStart, String markerEnd, int beginPos,
+		int endPos) {
 
 		String start = markerStart + stringList.get(beginPos);
 
@@ -264,11 +405,20 @@ public class DiffUtil {
 		stringList.set(endPos, end);
 	}
 
+	private static void _highlightLines(
+		List stringList, String markerStart, String markerEnd, int beginPos,
+		int endPos) {
+
+		for (int i = beginPos; i <= endPos; i++) {
+			stringList.set(i, markerStart + stringList.get(i) + markerEnd);
+		}
+	}
+
 	private static boolean _lineDiff(
-		List sourceStringList, List targetStringList, String addedMarkerStart,
-		String addedMarkerEnd, String deletedMarkerStart,
-		String deletedMarkerEnd, int sourceChangedLine, int targetChangedLine,
-		boolean aligned, List results) {
+		List sourceResults, List targetResults, List sourceStringList,
+		List targetStringList, String addedMarkerStart, String addedMarkerEnd,
+		String deletedMarkerStart, String deletedMarkerEnd,
+		int sourceChangedLine, int targetChangedLine, boolean aligned) {
 
 		String source = (String)sourceStringList.get(sourceChangedLine);
 		String target = (String)targetStringList.get(targetChangedLine);
@@ -330,10 +480,10 @@ public class DiffUtil {
 
 				// Chars were deleted from source only.
 
-				_highlight(
-					sourceList, difference.getDeletedStart(),
-					difference.getDeletedEnd(), deletedMarkerStart,
-					deletedMarkerEnd);
+				_highlightChars(
+					sourceList, deletedMarkerStart,
+					deletedMarkerEnd, difference.getDeletedStart(),
+					difference.getDeletedEnd());
 
 				sourceChanged = true;
 			}
@@ -341,9 +491,9 @@ public class DiffUtil {
 
 				// Chars were added to target only.
 
-				_highlight(
-					targetList, difference.getAddedStart(),
-					difference.getAddedEnd(), addedMarkerStart, addedMarkerEnd);
+				_highlightChars(
+					targetList, addedMarkerStart, addedMarkerEnd,
+					difference.getAddedStart(), difference.getAddedEnd());
 
 				targetChanged = true;
 			}
@@ -351,33 +501,47 @@ public class DiffUtil {
 
 				// Chars were both deleted and added.
 
-				_highlight(
-					sourceList, difference.getDeletedStart(),
-					difference.getDeletedEnd(), deletedMarkerStart,
-					deletedMarkerEnd);
+				_highlightChars(
+					sourceList, deletedMarkerStart,
+					deletedMarkerEnd, difference.getDeletedStart(),
+					difference.getDeletedEnd());
 
 				sourceChanged = true;
 
-				_highlight(
-					targetList, difference.getAddedStart(),
-					difference.getAddedEnd(), addedMarkerStart, addedMarkerEnd);
+				_highlightChars(
+					targetList, addedMarkerStart, addedMarkerEnd,
+					difference.getAddedStart(), difference.getAddedEnd());
 
 				targetChanged = true;
 			}
 		}
 
 		if (sourceChanged) {
-			DiffResult diffResult = new DiffResult(
-				DiffResult.SOURCE, sourceChangedLine, _toString(sourceList));
+			DiffResult sourceResult = new DiffResult(
+				sourceChangedLine, _toString(sourceList));
 
-			results.add(diffResult);
+			sourceResults.add(sourceResult);
+
+			if (!targetChanged) {
+				DiffResult targetResult = new DiffResult(
+					targetChangedLine, target);
+
+				targetResults.add(targetResult);
+			}
 		}
 
 		if (targetChanged) {
-			DiffResult diffResult = new DiffResult(
-				DiffResult.TARGET, targetChangedLine, _toString(targetList));
+			if (!sourceChanged) {
+				DiffResult sourceResult = new DiffResult(
+					sourceChangedLine, source);
 
-			results.add(diffResult);
+				sourceResults.add(sourceResult);
+			}
+
+			DiffResult targetResult = new DiffResult(
+				targetChangedLine, _toString(targetList));
+
+			targetResults.add(targetResult);
 		}
 
 		return true;

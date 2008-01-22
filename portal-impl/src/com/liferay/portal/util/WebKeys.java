@@ -67,6 +67,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CURRENT_URL = "CURRENT_URL";
 
+	public static final String DIFF_RESULTS = "DIFF_RESULTS";
+
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRY = "DOCUMENT_LIBRARY_FILE_ENTRY";
 
 	public static final String DOCUMENT_LIBRARY_FILE_SHORTCUT = "DOCUMENT_LIBRARY_FILE_SHORTCUT";
@@ -285,6 +287,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String SOFTWARE_CATALOG_PRODUCT_VERSION = "SOFTWARE_CATALOG_PRODUCT_VERSION";
 
+	public static final String SOURCE_NAME = "SOURCE_NAME";
+
 	public static final String STALE_SESSION = "STALE_SESSION";
 
 	public static final String STRING_SERVLET_RESPONSE = "STRING_SERVLET_RESPONSE";
@@ -296,6 +300,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String TAB_INDEX = "TAB_INDEX";
 
 	public static final String TAGS_COMPILER_ENTRIES = "TAGS_COMPILER_ENTRIES";
+
+	public static final String TARGET_NAME = "TARGET_NAME";
 
 	public static final String TASK_LIST = "TASK_LIST";
 
