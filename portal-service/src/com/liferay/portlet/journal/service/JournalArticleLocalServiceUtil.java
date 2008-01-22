@@ -667,6 +667,15 @@ public class JournalArticleLocalServiceUtil {
 		journalArticleLocalService.checkNewLine(groupId, articleId, version);
 	}
 
+	public static void checkStructure(long groupId, java.lang.String articleId,
+		double version)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.checkStructure(groupId, articleId, version);
+	}
+
 	public static void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)

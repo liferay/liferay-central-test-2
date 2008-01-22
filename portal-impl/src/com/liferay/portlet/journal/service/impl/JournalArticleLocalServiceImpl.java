@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -59,9 +60,11 @@ import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
+import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
+import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -579,9 +582,9 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		String content = article.getContent();
+		String content = GetterUtil.getString(article.getContent());
 
-		if ((content != null) && (content.indexOf("\\n") != -1)) {
+		if (content.indexOf("\\n") != -1) {
 			content = StringUtil.replace(
 				content,
 				new String[] {"\\n", "\\r"},
@@ -590,6 +593,24 @@ public class JournalArticleLocalServiceImpl
 			article.setContent(content);
 
 			journalArticlePersistence.update(article);
+		}
+	}
+
+	public void checkStructure(long groupId, String articleId, double version)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		if (Validator.isNull(article.getStructureId())) {
+			return;
+		}
+
+		try {
+			checkStructure(article);
+		}
+		catch (DocumentException de) {
+			_log.error(de, de);
 		}
 	}
 
@@ -1683,6 +1704,106 @@ public class JournalArticleLocalServiceImpl
 				article.getDisplayDate(), article.getExpirationDate(),
 				ContentTypes.TEXT_HTML, article.getTitle(),
 				article.getDescription(), null, null, 0, 0, null, false);
+		}
+	}
+
+	protected void checkStructure(JournalArticle article)
+		throws DocumentException, PortalException, SystemException {
+
+		JournalStructure structure = journalStructurePersistence.findByG_S(
+			article.getGroupId(), article.getStructureId());
+
+		String content = GetterUtil.getString(article.getContent());
+
+		SAXReader reader = new SAXReader();
+
+		Document contentDoc = reader.read(new StringReader(content));
+		Document xsdDoc = reader.read(new StringReader(structure.getXsd()));
+
+		try {
+			checkStructure(contentDoc, xsdDoc.getRootElement());
+		}
+		catch (StructureXsdException sxsde) {
+			long groupId = article.getGroupId();
+			String articleId = article.getArticleId();
+			double version = article.getVersion();
+
+			_log.error(
+				"Article {groupId=" + groupId + ", articleId=" + articleId +
+					", version=" + version +
+						"} has content that does not match its structure: " +
+							sxsde.getMessage());
+		}
+	}
+
+	protected void checkStructure(Document contentDoc, Element root)
+		throws PortalException {
+
+		Iterator itr = root.elements().iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			checkStructureField(el, contentDoc);
+
+			checkStructure(contentDoc, el);
+		}
+	}
+
+	protected void checkStructureField(Element el, Document contentDoc)
+		throws PortalException {
+
+		StringMaker elPath = new StringMaker();
+
+		elPath.append(el.attributeValue("name"));
+
+		Element elParent = (Element)el.getParent();
+
+		for (;;) {
+			if ((elParent == null) ||
+				(elParent.getName().equals("root"))) {
+
+				break;
+			}
+
+			elPath.insert(
+				0, elParent.attributeValue("name") + StringPool.COMMA);
+
+			elParent = (Element)elParent.getParent();
+		}
+
+		String[] elPathNames = StringUtil.split(elPath.toString());
+
+		Element contentEl = contentDoc.getRootElement();
+
+		for (int i = 0; i < elPathNames.length; i++) {
+			boolean foundEl = false;
+
+			Iterator itr = contentEl.elements().iterator();
+
+			while (itr.hasNext()) {
+				Element tempEl = (Element)itr.next();
+
+				if (elPathNames[i].equals(
+						tempEl.attributeValue("name", StringPool.BLANK))) {
+
+					contentEl = tempEl;
+					foundEl = true;
+
+					break;
+				}
+			}
+
+			if (!foundEl) {
+				String elType = contentEl.attributeValue(
+					"type", StringPool.BLANK);
+
+				if (!elType.equals("list") && !elType.equals("multi-list")) {
+					throw new StructureXsdException(elPath.toString());
+				}
+
+				break;
+			}
 		}
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -100,16 +101,6 @@ public class VerifyJournal extends VerifyProcess {
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
-			String content = article.getContent();
-
-			String newContent = Html.replaceMsWordCharacters(content);
-
-			if (!content.equals(newContent)) {
-				JournalArticleLocalServiceUtil.updateContent(
-					article.getGroupId(), article.getArticleId(),
-					article.getVersion(), newContent);
-			}
-
 			if (article.getResourcePrimKey() <= 0) {
 				article =
 					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
@@ -140,6 +131,20 @@ public class VerifyJournal extends VerifyProcess {
 					}
 				}
 			}
+
+			String content = GetterUtil.getString(article.getContent());
+
+			String newContent = Html.replaceMsWordCharacters(content);
+
+			if (!content.equals(newContent)) {
+				JournalArticleLocalServiceUtil.updateContent(
+					article.getGroupId(), article.getArticleId(),
+					article.getVersion(), newContent);
+			}
+
+			JournalArticleLocalServiceUtil.checkStructure(
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion());
 		}
 
 		if (_log.isDebugEnabled()) {
