@@ -25,18 +25,14 @@ package com.liferay.portalweb.portlet.pagecomments;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="DeleteReplyTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteReplyTest extends BaseTestCase {
-	public void testDeleteReply() throws Exception {
-		selenium.click("link=Delete");
-		assertTrue(selenium.getConfirmation().matches("^Are you sure you want to delete this[\\s\\S]$"));
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		verifyFalse(selenium.isTextPresent("This is a test page comment!"));
+public class AddCommentTest extends BaseTestCase {
+	public void testAddComment() throws Exception {
+		selenium.click("link=Post Reply");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -44,8 +40,7 @@ public class DeleteReplyTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+				if (selenium.isElementPresent("_107_postReplyBody0")) {
 					break;
 				}
 			}
@@ -54,5 +49,12 @@ public class DeleteReplyTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.typeKeys("_107_postReplyBody0", "This is a test page comment!");
+		selenium.click("_107_postReplyButton0");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		verifyTrue(selenium.isTextPresent("This is a test page comment!"));
 	}
 }

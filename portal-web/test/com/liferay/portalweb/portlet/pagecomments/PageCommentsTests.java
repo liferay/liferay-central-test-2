@@ -35,8 +35,8 @@ public class PageCommentsTests extends BaseTests {
 	public PageCommentsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddReplyTest.class);
-		addTestSuite(DeleteReplyTest.class);
+		addTestSuite(AddCommentTest.class);
+		addTestSuite(DeleteCommentTest.class);
 	}
 
 }
