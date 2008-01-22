@@ -5,6 +5,8 @@
 
 	$.Popup.extendNativeFunctionObject({
 		close: function(link) {
+			var instance = this;
+
 			jQuery(link).parents(".popup:first").remove();
 
 			var jModal = jQuery("#alert-messages .modal:last");
@@ -30,6 +32,10 @@
 
 				jQuery("select").css("visibility", "visible");
 			}
+
+			if (instance.options.onClose) {
+				instance.options.onClose();
+			}
 		},
 
 		count: function() {
@@ -46,8 +52,10 @@
 			 * width (int) - starting width of message box
 			 * onClose (function) - executes after closing
 			 */
+			var instance = this;
 
 			options = options || {};
+			instance.options = options;
 
 			var modal = options.modal;
 			var myMessage = options.message;

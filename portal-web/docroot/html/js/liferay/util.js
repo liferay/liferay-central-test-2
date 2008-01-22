@@ -346,7 +346,7 @@ Liferay.Util = {
 
 						jQuery.ajax(
 							{
-								url: url,
+								url: url + '&rt=' + Liferay.Util.randomInt(),
 								success: function(message) {
 									jPopup.find('.loading-animation').remove();
 									jPopup.append(message);
@@ -559,7 +559,11 @@ Liferay.Util = {
 		document.all[id].selection.text = String.fromCharCode(9);
 		document.all[id].focus();
 	},
-
+	
+	randomInt: function() {
+		return ( Math.ceil(Math.random() * (new Date).getTime()) );
+	},
+	
 	randomMinMax: function(min, max) {
 		return (Math.round(Math.random() * (max - min))) + min;
 	},
