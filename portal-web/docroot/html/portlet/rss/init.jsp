@@ -24,11 +24,35 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+
+<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil"%>
+<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
+<%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
+<%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleDisplayTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAssetType" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsProperty" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
+
 <%@ page import="com.liferay.portlet.rss.util.RSSUtil" %>
 
 <%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndImage"%>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
@@ -41,7 +65,24 @@ if (Validator.isNotNull(portletResource)) {
 
 String[] urls = prefs.getValues("urls", new String[0]);
 String[] titles = prefs.getValues("titles", new String[0]);
-int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", StringPool.BLANK));
+int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", "8"));
+
+boolean showFeedTitle = GetterUtil.getBoolean(prefs.getValue("show-feed-title", Boolean.TRUE.toString()));
+boolean showFeedPublishedDate = GetterUtil.getBoolean(prefs.getValue("show-feed-published-date", Boolean.TRUE.toString()));
+boolean showFeedDescription = GetterUtil.getBoolean(prefs.getValue("show-feed-description", Boolean.TRUE.toString()));
+boolean showFeedImage = GetterUtil.getBoolean(prefs.getValue("show-feed-image", Boolean.TRUE.toString()));
+String feedImageAlignment = prefs.getValue("feed-image-alignment", "right");
+
+String[] headerArticleResouceValues = prefs.getValues("header-article-resouce-values", new String[]{"0",""});
+
+long headerArticleResouceId = GetterUtil.getLong(headerArticleResouceValues[0]);//13009
+String headerArticleResouceTitle = headerArticleResouceValues[1];//Some title
+
+String[] footerArticleResouceValues = prefs.getValues("footer-article-resouce-values", new String[]{"0",""});
+
+long footerArticleResouceId = GetterUtil.getLong(footerArticleResouceValues[0]);//13014
+String footerArticleResouceTitle = footerArticleResouceValues[1];//Another title
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

@@ -27,63 +27,68 @@
 <%
 String url = ParamUtil.getString(request, "url");
 String title = StringPool.BLANK;
-boolean hide = false;
+
+boolean last = false;
+
+String languageId = LanguageUtil.getLanguageId(request);
+String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 %>
 
-<c:choose>
-	<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
+<c:if test="<%= headerArticleResouceId > 0 %>">
+	<liferay-ui:journal-article classPK="<%= headerArticleResouceId %>" languageId="<%= languageId %>" xmlRequest="<%= xmlRequest %>" />
+</c:if>
 
-		<%
-		int i = 0;
-		entriesPerFeed = 20;
-		%>
+<%
+for (int i = 0; i < urls.length; i++) {
+	url = urls[i];
 
-		<%@ include file="/html/portlet/rss/feed.jspf" %>
-	</c:when>
-	<c:otherwise>
+	if (i < titles.length) {
+		title = titles[i];
+	}
+	else {
+		title = StringPool.BLANK;
+	}
 
-		<%
-		for (int i = 0; i < urls.length; i++) {
-			url = urls[i];
+	last = (i == urls.length-1)?true:false;
+%>
 
-			if (i < titles.length) {
-				title = titles[i];
+	<%@ include file="/html/portlet/rss/feed.jspf" %>
+
+<%
+}
+%>
+
+<script type="text/javascript">
+	jQuery(
+		function() {
+			var currentPortlet = jQuery('#p_p_id<portlet:namespace />');
+
+			currentPortlet.Accordion({
+				headerSelector: '.header',
+				panelSelector: '.feeds',
+				panelHeight: jQuery("#p_p_id<portlet:namespace /> .feeds:first").height(),
+				speed: 300
+			});
+
+			if (!jQuery.browser.msie) {
+				currentPortlet.css('overflow', 'visible');
 			}
-			else {
-				title = StringPool.BLANK;
-			}
 
-			if (i == 0) {
-				hide = false;
-			}
-			else {
-				hide = true;
-			}
-		%>
-
-			<%@ include file="/html/portlet/rss/feed.jspf" %>
-
-		<%
-		}
-		%>
-
-		<script type="text/javascript">
-			jQuery(
-				function() {
-					var currentPortlet = jQuery('#p_p_id<portlet:namespace />');
-
-					currentPortlet.Accordion({
-						headerSelector: '.header',
-						panelSelector: '.feeds',
-						panelHeight: jQuery("#p_p_id<portlet:namespace /> .feeds:first").height(),
-						speed: 300
-					});
-
-					if (!jQuery.browser.msie) {
-						currentPortlet.css('overflow', 'visible');
-					}
+			jQuery(".<portlet:namespace />entry-expander").click(function() {
+				if (this.src.match(".*minus\.png")) {
+					jQuery(".feed-entry-content",this.parentNode).slideUp();
+					this.src = themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
 				}
-			);
-		</script>
-	</c:otherwise>
-</c:choose>
+				else {
+					jQuery(".feed-entry-content",this.parentNode).slideDown();
+					this.src = themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
+				}
+			});
+		}
+	);
+</script>
+
+<c:if test="<%= footerArticleResouceId > 0 %>">
+	<liferay-ui:journal-article classPK="<%= footerArticleResouceId %>" languageId="<%= languageId %>" xmlRequest="<%= xmlRequest %>" />
+</c:if>
+

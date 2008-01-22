@@ -25,6 +25,12 @@
 <%
 SyndFeed feed = null;
 
+Date publishedDate = null;
+
+String description = null;
+
+SyndImage feedImage = null;
+
 try {
 	ObjectValuePair ovp = RSSUtil.getFeed(url);
 
@@ -33,81 +39,106 @@ try {
 	if (Validator.isNull(title)) {
 		title = Html.escape(feed.getTitle());
 	}
+
+	publishedDate = feed.getPublishedDate();
+	description = feed.getDescription();
+	feedImage = feed.getImage();
 }
 catch (Exception e) {
 }
+
+boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
+
 %>
 
+<%@page import="com.sun.syndication.feed.synd.SyndEntry"%>
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<div class="header">
-			<%= title %>&nbsp;&nbsp;
+		<c:if test="<%= showFeedTitle %>">
+			<div class="feed-title">
+				<a href="<%= feed.getLink() %>" target="_new"><%= title %></a>
+			</div>
+		</c:if>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal;">
-			<liferay-ui:message key="more" /> &raquo;
-			</a>
-		</div>
+		<c:if test="<%= publishedDate != null && showFeedPublishedDate %>">
+			<div class="feed-published-date">
+				<a href="<%= feed.getLink() %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
+			</div>
+		</c:if>
 
-		<div class="feeds" style="<%= hide ? "display: none" : "" %>">
-			<div style="padding: 0 10px 0 10px;">
-				<div style="height: 10px; font-size: 0;"></div>
+		<c:if test="<%= Validator.isNotNull(description) && showFeedDescription %>">
+			<div class="feed-description">
+				<%= Html.escape(description) %>
+			</div>
+		</c:if>
 
-				<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
-					<ul>
-				</c:if>
+		<c:if test="<%= feedImage != null && showFeedImage %>">
+			<c:choose>
+				<c:when test="<%= feedImageAlignment.equals("right") %>">
+			<div class="feed-image-right">
+				</c:when>
+				<c:otherwise>
+			<div class="feed-image-left">
+				</c:otherwise>
+			</c:choose>
 
-				<%
-				List entries = feed.getEntries();
+				<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img src="<%= feedImage.getUrl() %>" alt="<%= feedImage.getDescription() %>" /></a>
+			</div>
+		</c:if>
 
-				for (int j = 0; j < entries.size(); j++) {
-					SyndEntry entry = (SyndEntry)entries.get(j);
+		<div class="feed-entry" style="padding: 0 10px 0 0;">
 
-					SyndContent content = entry.getDescription();
-				%>
+			<%
+			List entries = feed.getEntries();
 
-					<c:choose>
-						<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-							<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
+			for (int j = 0; j < entries.size(); j++) {
+				SyndEntry entry = (SyndEntry)entries.get(j);
 
+				String author = entry.getAuthor();
+
+				SyndContent content = entry.getDescription();
+			%>
+
+				<div>
+					<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (isMaximized || j==0 ?"minus":"plus") %>.png' />
+					<div style="margin-left: 20px;">
+						<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
+						<div class="feed-entry-content" style='<%= (isMaximized || j==0?"":"display: none") %>'>
 							<c:if test="<%= entry.getPublishedDate() != null %>">
 								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
 							</c:if>
 
+							<c:if test="<%= Validator.isNotNull(author) %>">
+								<span class="feed-entry-author"><%= author %></span>
+							</c:if>
+
 							<c:if test="<%= content != null %>">
-								<div class="font-small">
-									<%= content.getValue() %>
-								</div>
+								<%= content.getValue() %>
 							</c:if>
+							<br/>
+						</div>
+					</div>
+				</div>
 
-							<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
-								<div style="font-size: 0; height: 10px;"></div>
-							</c:if>
-						</c:when>
-						<c:otherwise>
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="articleURL">
-								<portlet:param name="struts_action" value="/rss/article" />
-								<portlet:param name="index" value="<%= String.valueOf(j) %>" />
-								<portlet:param name="url" value="<%= url %>" />
-							</portlet:renderURL>
-
-							<li style="line-height: 1.5;"><a href="<%= articleURL %>"><%= entry.getTitle() %></a></li>
-						</c:otherwise>
-					</c:choose>
-
-				<%
-					if ((j + 1) >= entriesPerFeed) {
-						break;
-					}
+			<%
+				if ((j + 1) >= entriesPerFeed) {
+					break;
 				}
-				%>
+			%>
+				<br/>
+			<%
+			}
+			%>
 
-				<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
-					</ul>
-				</c:if>
-
-				<div style="font-size: 0; height: 10px;"></div>
-			</div>
 		</div>
+
+		<c:if test="<%= !last %>">
+			<br />
+
+			<div class="separator"><!--  --></div>
+
+			<br />
+		</c:if>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-error">

@@ -467,6 +467,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<header-portal-css>/html/portlet/rss/css.jsp</header-portal-css>
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -813,7 +814,7 @@
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
+		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
