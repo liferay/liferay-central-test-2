@@ -380,14 +380,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value,
-			button: '#<portlet:namespace />editorButton', 
+			button: '#<portlet:namespace />editorButton',
 			textarea: '<portlet:namespace />xslContent'
 		}
 	);
-</script>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
@@ -396,5 +394,5 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
-	</script>
-</c:if>
+	</c:if>
+</script>

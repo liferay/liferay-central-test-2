@@ -377,14 +377,12 @@ tabIndex = tabIndexWrapper.getValue();
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>',
-			button: '#<portlet:namespace />editorButton', 
+			button: '#<portlet:namespace />editorButton',
 			textarea: '<portlet:namespace />xsdContent'
 		}
 	);
-</script>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
@@ -393,8 +391,8 @@ tabIndex = tabIndexWrapper.getValue();
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
-	</script>
-</c:if>
+	</c:if>
+</script>
 
 <%!
 private void _format(Element root, IntegerWrapper count, Integer depth, IntegerWrapper tabIndex, PageContext pageContext, HttpServletRequest req) throws Exception {

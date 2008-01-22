@@ -303,17 +303,18 @@ Liferay.Util = {
 
 		return url + ";jsessionid=" + themeDisplay.getSessionId();
 	},
-	
+
 	inlineEditor: function(options) {
 		var instance = this;
+
 		/*
-			Options:
-			button (jQuery selector | DOM element): The button that opens the popup when clicked
-			url (String): url to open that sets the editor
-			width (Int): The width to set the popup to
-			height (Int): The height to set the popup to
-			textarea (String): the name of the textarea to auto-resize
+		button (jQuery selector | DOM element): The button that opens the popup when clicked
+		url (String): url to open that sets the editor
+		width (Int): The width to set the popup to
+		height (Int): The height to set the popup to
+		textarea (String): the name of the textarea to auto-resize
 		*/
+
 		if (options.url && options.button) {
 			var url = options.url;
 			var button = options.button;
@@ -321,8 +322,9 @@ Liferay.Util = {
 			var height = options.height || 640;
 			var textarea = options.textarea;
 			var clicked = false;
-			
+
 			var editorButton = jQuery(button);
+
 			editorButton.click(
 				function(event) {
 					if (!clicked) {
@@ -338,6 +340,7 @@ Liferay.Util = {
 								}
 							}
 						);
+
 						var jPopup = jQuery(popup);
 						var resizeDiv = '<div class="portlet-resize-handle"></div>';
 
@@ -350,6 +353,7 @@ Liferay.Util = {
 									jPopup.after(resizeDiv);
 
 									var form = jPopup.find('form');
+
 									form.css(
 										{
 											height: 340,
@@ -359,12 +363,14 @@ Liferay.Util = {
 
 									if (textarea) {
 										var usingPlainEditor = jPopup.find('.lfr-textarea').length;
-										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);	
+
+										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
 									}
 
 									var handle = jQuery('.portlet-resize-handle')[0];
 
 									var mainPopup = jPopup.parents('.popup:first');
+
 									mainPopup.lResize(
 										{
 											direction: 'horizontal',
@@ -381,6 +387,7 @@ Liferay.Util = {
 											}
 										}
 									);
+
 									mainPopup.lResize(
 										{
 											handle: handle,
@@ -391,13 +398,13 @@ Liferay.Util = {
 								}
 							}
 						);
+
 						clicked = true;
 					}
 				}
 			);
 		}
 	},
-	
 
 	isArray: function(object) {
 		if (!window.Array) {
@@ -651,8 +658,9 @@ Liferay.Util = {
 						catch (e) {
 						}
 					}
-					
+
 					var diff = 150;
+
 					if (!resizeToInlinePopup) {
 						diff = 100;
 					}
@@ -666,7 +674,7 @@ Liferay.Util = {
 				};
 
 				resize();
-				
+
 				if (resizeToInlinePopup) {
 					jQuery(document).bind('popupResize', resize);
 				}
@@ -675,7 +683,7 @@ Liferay.Util = {
 				}
 			}
 		};
-		
+
 		jQuery(init);
 	},
 
@@ -805,27 +813,27 @@ Liferay.Util = {
 	startsWith: function(str, x) {
 		return (str.indexOf(x) === 0);
 	},
-	
+
 	switchEditor: function(options) {
 		var instance = this;
-		
+
 		/*
-			OPTIONS
-			url (String): url to open that sets the editor
-			popup (String|DOM|jQuery element): the popup that contains the editor
-			textarea (String): the name of the textarea to auto-resize
+		url (String): url to open that sets the editor
+		popup (String|DOM|jQuery element): the popup that contains the editor
+		textarea (String): the name of the textarea to auto-resize
 		*/
+
 		if (options.url && options.popup) {
 			var url = options.url;
 			var popup = options.popup;
 			var textarea = options.textarea;
-			
+
 			if (!popup.jquery) {
 				popup = jQuery(popup);
 			}
-			
+
 			var popupMessage = popup.find('.popup-message');
-			
+
 			jQuery.ajax(
 				{
 					url: url,
@@ -839,6 +847,7 @@ Liferay.Util = {
 
 						if (textarea) {
 							var usingPlainEditor = popup.find('.lfr-textarea').length;
+
 							Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
 						}
 				 	}

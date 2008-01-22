@@ -4,7 +4,7 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
-	<property name="codepress.file" value="codepress-v.0.9.5.zip" />
+	<property name="codepress.file" value="codepress-v.0.9.6.zip" />
 	<property name="fckeditor.file" value="FCKeditor_2.5.1.zip" />
 	<property name="tinymce.file" value="tinymce_2_1_3.zip" />
 

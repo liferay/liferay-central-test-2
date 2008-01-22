@@ -72,7 +72,7 @@ else {
 			newEditorType = "html";
 		}
 		%>
-		
+
 		Liferay.Util.switchEditor(
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
@@ -85,6 +85,7 @@ else {
 	function <portlet:namespace />updateTemplateXsl() {
 		var xslContent = jQuery('input[@name=<portlet:namespace />xslContent]');
 		var content = '';
+
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
 				content = encodeURIComponent(<portlet:namespace />xslContent.getCode());
@@ -93,7 +94,9 @@ else {
 				content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
 			</c:otherwise>
 		</c:choose>
+
 		xslContent.attr('value', content);
+
 		Liferay.Popup.close(document.<portlet:namespace />editorForm);
 	}
 </script>

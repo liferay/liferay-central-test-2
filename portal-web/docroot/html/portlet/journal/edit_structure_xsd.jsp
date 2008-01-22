@@ -51,7 +51,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			newEditorType = "html";
 		}
 		%>
-		
+
 		Liferay.Util.switchEditor(
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
@@ -66,6 +66,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		var xsdContent = jQuery('input[@name=<portlet:namespace />xsd]');
 		var content = '';
+
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
 				content = <portlet:namespace />xsdContent.getCode();
@@ -76,7 +77,9 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		</c:choose>
 
 		xsdContent.attr('value', content);
+
 		Liferay.Popup.close(document.<portlet:namespace />editorForm);
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
@@ -116,7 +119,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent);" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 
 </form>
 
