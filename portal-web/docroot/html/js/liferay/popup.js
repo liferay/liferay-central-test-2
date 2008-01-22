@@ -52,9 +52,11 @@
 			 * width (int) - starting width of message box
 			 * onClose (function) - executes after closing
 			 */
+
 			var instance = this;
 
 			options = options || {};
+
 			instance.options = options;
 
 			var modal = options.modal;

@@ -559,11 +559,11 @@ Liferay.Util = {
 		document.all[id].selection.text = String.fromCharCode(9);
 		document.all[id].focus();
 	},
-	
+
 	randomInt: function() {
-		return ( Math.ceil(Math.random() * (new Date).getTime()) );
+		return (Math.ceil(Math.random() * (new Date).getTime()));
 	},
-	
+
 	randomMinMax: function(min, max) {
 		return (Math.round(Math.random() * (max - min))) + min;
 	},

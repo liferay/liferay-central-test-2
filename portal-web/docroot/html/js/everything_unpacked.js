@@ -14604,7 +14604,7 @@ Liferay.Util = {
 
 						jQuery.ajax(
 							{
-								url: url,
+								url: url + '&rt=' + Liferay.Util.randomInt(),
 								success: function(message) {
 									jPopup.find('.loading-animation').remove();
 									jPopup.append(message);
@@ -14816,6 +14816,10 @@ Liferay.Util = {
 	processTab: function(id) {
 		document.all[id].selection.text = String.fromCharCode(9);
 		document.all[id].focus();
+	},
+
+	randomInt: function() {
+		return (Math.ceil(Math.random() * (new Date).getTime()));
 	},
 
 	randomMinMax: function(min, max) {
@@ -16627,6 +16631,8 @@ jQuery.fn.xySize = function() {
 
 	$.Popup.extendNativeFunctionObject({
 		close: function(link) {
+			var instance = this;
+
 			jQuery(link).parents(".popup:first").remove();
 
 			var jModal = jQuery("#alert-messages .modal:last");
@@ -16652,6 +16658,10 @@ jQuery.fn.xySize = function() {
 
 				jQuery("select").css("visibility", "visible");
 			}
+
+			if (instance.options.onClose) {
+				instance.options.onClose();
+			}
 		},
 
 		count: function() {
@@ -16669,7 +16679,11 @@ jQuery.fn.xySize = function() {
 			 * onClose (function) - executes after closing
 			 */
 
+			var instance = this;
+
 			options = options || {};
+
+			instance.options = options;
 
 			var modal = options.modal;
 			var myMessage = options.message;
@@ -20967,7 +20981,7 @@ Liferay.Upload = new Class({
 
 		instance._container = jQuery(params.container);
 		instance._fallbackContainer = jQuery(params.fallbackContainer || []);
-		instance._namespaceId = params.namespace || '_liferay_pns_' + Math.ceil(Math.random() * (new Date).getTime()) + '_';
+		instance._namespaceId = params.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
