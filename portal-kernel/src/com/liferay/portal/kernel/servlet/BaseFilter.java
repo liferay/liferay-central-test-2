@@ -80,7 +80,7 @@ public abstract class BaseFilter implements Filter {
 			depther = (String)req.getAttribute(_DEPTHER);
 
 			if (depther == null) {
-				depther = null;
+				depther = StringPool.BLANK;
 			}
 			else {
 				depther += StringPool.EQUAL;
@@ -107,7 +107,11 @@ public abstract class BaseFilter implements Filter {
 					filterClass.getName() + " " + path + " " +
 						(endTime - startTime) + " ms");
 
-			req.setAttribute(_DEPTHER, depther.substring(1));
+			if (depther.length() > 0) {
+				depther = depther.substring(1);
+			}
+
+			req.setAttribute(_DEPTHER, depther);
 		}
 	}
 
