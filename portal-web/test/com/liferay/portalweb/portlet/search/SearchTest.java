@@ -32,10 +32,10 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
-		selenium.type("_3_keywords", "Tést");
+		selenium.type("_3_keywords", "Test");
 		selenium.click("//input[@type='image']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a tést méssagé!"));
+		verifyTrue(selenium.isTextPresent("Test Bookmark"));
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
