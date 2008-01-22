@@ -332,10 +332,10 @@ public class ExportAction extends Action {
 					article.getVersion())) {
 
 				sm.append("insert into JournalArticle (");
-				sm.append("id_, resourcePrimKey, groupId, companyId, userId, userName, ");
-				sm.append("createDate, modifiedDate, articleId, version, ");
-				sm.append("title, description, content, type_, structureId, ");
-				sm.append("templateId, displayDate, approved, ");
+				sm.append("id_, resourcePrimKey, groupId, companyId, userId, ");
+				sm.append("userName, createDate, modifiedDate, articleId, ");
+				sm.append("version, title, description, content, type_, ");
+				sm.append("structureId, templateId, displayDate, approved, ");
 				sm.append("approvedByUserId, approvedByUserName, expired, ");
 				sm.append("indexable");
 				sm.append(") values (");

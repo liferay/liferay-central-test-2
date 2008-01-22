@@ -125,6 +125,10 @@ public class Html {
 		return StringUtil.replace(text, "&amp;", "&");
 	}
 
+	public static String replaceMsWordCharacters(String text) {
+		return StringUtil.replace(text, _MS_WORD_UNICODE, _MS_WORD_HTML);
+	}
+
 	public static String stripBetween(String text, String tag) {
 		return StringUtil.stripBetween(text, "<" + tag, "</" + tag + ">");
 	}
@@ -271,6 +275,14 @@ public class Html {
 			return false;
 		}
 	}
+
+	private static final String[] _MS_WORD_UNICODE = new String[] {
+		"\u00ae", "\u2019", "\u201c", "\u201d"
+	};
+
+	private static final String[] _MS_WORD_HTML = new String[] {
+		"&reg;", StringPool.APOSTROPHE, StringPool.QUOTE, StringPool.QUOTE
+	};
 
 	private static final char[] _TAG_SCRIPT = {'s', 'c', 'r', 'i', 'p', 't'};
 

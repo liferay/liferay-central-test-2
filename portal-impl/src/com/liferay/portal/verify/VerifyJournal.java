@@ -31,6 +31,7 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.Html;
 
 import java.util.List;
 
@@ -98,6 +99,16 @@ public class VerifyJournal extends VerifyProcess {
 
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
+
+			String content = article.getContent();
+
+			String newContent = Html.replaceMsWordCharacters(content);
+
+			if (!content.equals(newContent)) {
+				JournalArticleLocalServiceUtil.updateContent(
+					article.getGroupId(), article.getArticleId(),
+					article.getVersion(), newContent);
+			}
 
 			if (article.getResourcePrimKey() <= 0) {
 				article =

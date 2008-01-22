@@ -71,6 +71,7 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.Html;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -1714,6 +1715,8 @@ public class JournalArticleLocalServiceImpl
 				_log.error(ioe);
 			}
 		}
+
+		content = Html.replaceMsWordCharacters(content);
 
 		return content;
 	}
