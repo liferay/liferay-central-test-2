@@ -25,12 +25,6 @@
 <%
 SyndFeed feed = null;
 
-Date publishedDate = null;
-
-String description = null;
-
-SyndImage feedImage = null;
-
 try {
 	ObjectValuePair ovp = RSSUtil.getFeed(url);
 
@@ -39,28 +33,27 @@ try {
 	if (Validator.isNull(title)) {
 		title = Html.escape(feed.getTitle());
 	}
-
-	publishedDate = feed.getPublishedDate();
-	description = feed.getDescription();
-	feedImage = feed.getImage();
 }
 catch (Exception e) {
 }
-
-boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
-
 %>
 
-<%@page import="com.sun.syndication.feed.synd.SyndEntry"%>
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
+
+		<%
+		Date publishedDate = feed.getPublishedDate();
+		String description = feed.getDescription();
+		SyndImage feedImage = feed.getImage();
+		%>
+
 		<c:if test="<%= showFeedTitle %>">
 			<div class="feed-title">
 				<a href="<%= feed.getLink() %>" target="_new"><%= title %></a>
 			</div>
 		</c:if>
 
-		<c:if test="<%= publishedDate != null && showFeedPublishedDate %>">
+		<c:if test="<%= (publishedDate != null) && showFeedPublishedDate %>">
 			<div class="feed-published-date">
 				<a href="<%= feed.getLink() %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
 			</div>
@@ -72,21 +65,13 @@ boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
 			</div>
 		</c:if>
 
-		<c:if test="<%= feedImage != null && showFeedImage %>">
-			<c:choose>
-				<c:when test="<%= feedImageAlignment.equals("right") %>">
-			<div class="feed-image-right">
-				</c:when>
-				<c:otherwise>
-			<div class="feed-image-left">
-				</c:otherwise>
-			</c:choose>
-
-				<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img src="<%= feedImage.getUrl() %>" alt="<%= feedImage.getDescription() %>" /></a>
+		<c:if test="<%= (feedImage != null) && showFeedImage %>">
+			<div class="feed-image-<%= feedImageAlignment %>">
+				<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img alt="<%= feedImage.getDescription() %>" src="<%= feedImage.getUrl() %>" /></a>
 			</div>
 		</c:if>
 
-		<div class="feed-entry" style="padding: 0 10px 0 0;">
+		<div class="feed-entry">
 
 			<%
 			List entries = feed.getEntries();
@@ -100,10 +85,12 @@ boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
 			%>
 
 				<div>
-					<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (isMaximized || j==0 ?"minus":"plus") %>.png' />
-					<div style="margin-left: 20px;">
+					<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
+
+					<div>
 						<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
-						<div class="feed-entry-content" style='<%= (isMaximized || j==0?"":"display: none") %>'>
+
+						<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
 							<c:if test="<%= entry.getPublishedDate() != null %>">
 								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
 							</c:if>
@@ -115,7 +102,8 @@ boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
 							<c:if test="<%= content != null %>">
 								<%= content.getValue() %>
 							</c:if>
-							<br/>
+
+							<br />
 						</div>
 					</div>
 				</div>
@@ -125,7 +113,9 @@ boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
 					break;
 				}
 			%>
-				<br/>
+
+				<br />
+
 			<%
 			}
 			%>
@@ -133,11 +123,7 @@ boolean isMaximized = windowState.equals(WindowState.MAXIMIZED);
 		</div>
 
 		<c:if test="<%= !last %>">
-			<br />
-
 			<div class="separator"><!--  --></div>
-
-			<br />
 		</c:if>
 	</c:when>
 	<c:otherwise>

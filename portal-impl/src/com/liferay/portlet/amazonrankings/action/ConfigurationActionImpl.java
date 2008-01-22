@@ -53,35 +53,35 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String[] isbns = StringUtil.split(
+			ParamUtil.getString(req, "isbns").toUpperCase(), StringPool.SPACE);
+
+		Arrays.sort(isbns);
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
+
+		prefs.setValues("isbns", isbns);
+
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
-
-			if (!cmd.equals(Constants.UPDATE)) {
-				return;
-			}
-
-			String[] isbns = StringUtil.split(
-				ParamUtil.getString(req, "isbns").toUpperCase(),
-				StringPool.SPACE);
-
-			Arrays.sort(isbns);
-
-			String portletResource = ParamUtil.getString(
-				req, "portletResource");
-
-			PortletPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource, true, true);
-
-			prefs.setValues("isbns", isbns);
-
 			prefs.store();
-
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 		}
 		catch (ValidatorException ve) {
 			SessionErrors.add(req, ValidatorException.class.getName(), ve);
+
+			return;
 		}
+
+		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

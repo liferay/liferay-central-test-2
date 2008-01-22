@@ -29,14 +29,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
-
-PortletURL configurationRenderURL = renderResponse.createRenderURL();
-
-configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationRenderURL.setParameter("redirect", redirect);
-configurationRenderURL.setParameter("backURL", redirect);
-configurationRenderURL.setParameter("portletResource", portletResource);
+String typeSelection = ParamUtil.getString(request, "typeSelection");
 
 PortletURL configurationActionURL = renderResponse.createActionURL();
 
@@ -45,10 +38,16 @@ configurationActionURL.setParameter("redirect", redirect);
 configurationActionURL.setParameter("backURL", redirect);
 configurationActionURL.setParameter("portletResource", portletResource);
 
+PortletURL configurationRenderURL = renderResponse.createRenderURL();
+
+configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
+configurationRenderURL.setParameter("redirect", redirect);
+configurationRenderURL.setParameter("backURL", redirect);
+configurationRenderURL.setParameter("portletResource", portletResource);
 %>
 
 <script type="text/javascript">
-	<portlet:namespace />addRssRow = function (table) {
+	<portlet:namespace />addRssRow = function(table) {
 		table.insertRow(table.rows.length);
 
 		var row = table.rows[table.rows.length - 1];
@@ -64,6 +63,16 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		table.appendChild(row);
 	}
 
+	function <portlet:namespace />removeSelectionForFooter() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+	}
+
+	function <portlet:namespace />removeSelectionForHeader() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-header-article';
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+	}
+
 	function <portlet:namespace />selectAsset(resourceId, resourceTitle, assetOrder) {
 		if (assetOrder == 1) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
@@ -71,35 +80,21 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		else {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-header-article';
 		}
+
 		document.<portlet:namespace />fm.<portlet:namespace />resourceId.value = resourceId;
 		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
-
 		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />removeSelectionForHeader() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-header-article';
-
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
-	}
-
-	function <portlet:namespace />removeSelectionForFooter() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
-
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
 	function <portlet:namespace />selectionForHeader() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 0;
-
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
 
 	function <portlet:namespace />selectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
-
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
 </script>
@@ -113,7 +108,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 <c:choose>
 	<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
-
 		<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 			<%
@@ -185,45 +179,39 @@ configurationActionURL.setParameter("portletResource", portletResource);
 				<liferay-ui:message key="show-feed-title" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="showFeedTitle" defaultValue="<%= new Boolean(showFeedTitle) %>" />
+				<liferay-ui:input-checkbox param="showFeedTitle" defaultValue="<%= showFeedTitle %>" />
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td>
 				<liferay-ui:message key="show-feed-published-date" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="showFeedPublishedDate" defaultValue="<%= new Boolean(showFeedPublishedDate) %>" />
+				<liferay-ui:input-checkbox param="showFeedPublishedDate" defaultValue="<%= showFeedPublishedDate %>" />
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td>
 				<liferay-ui:message key="show-feed-description" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="showFeedDescription" defaultValue="<%= new Boolean(showFeedDescription) %>" />
+				<liferay-ui:input-checkbox param="showFeedDescription" defaultValue="<%= showFeedDescription %>" />
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td>
 				<liferay-ui:message key="show-feed-image" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= new Boolean(showFeedImage) %>" onClick='<%= "if(this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';}else{document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}" %>' />
+				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick='<%= "if(this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';}else{document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}" %>' />
 			</td>
-		<tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="feed-image-alignment" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />feedImageAlignment" <%= !showFeedImage ? "disabled" : "" %>>
-					<option <%= feedImageAlignment.equals("left") ? "selected" : "" %> value="left"><liferay-ui:message key="left" /></option>
-					<option <%= feedImageAlignment.equals("right") ? "selected" : "" %> value="right"><liferay-ui:message key="right" /></option>
-				</select>
-			</td>
-		<tr>
 		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
 			<td>
 				<liferay-ui:message key="num-of-entries-per-feed" />
 			</td>
@@ -244,38 +232,50 @@ configurationActionURL.setParameter("portletResource", portletResource);
 			</td>
 		</tr>
 		<tr>
+			<td>
+				<liferay-ui:message key="feed-image-alignment" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />feedImageAlignment" <%= !showFeedImage ? "disabled" : "" %>>
+					<option <%= feedImageAlignment.equals("left") ? "selected" : "" %> value="left"><liferay-ui:message key="left" /></option>
+					<option <%= feedImageAlignment.equals("right") ? "selected" : "" %> value="right"><liferay-ui:message key="right" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2">
 				<br />
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="header-article" />:
+				<liferay-ui:message key="header-article" />
 			</td>
 			<td>
 				<%= headerArticleResouceTitle %>
 
 				<input type="button" value="<liferay-ui:message key="select" />" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' />
+
 				<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' />
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="footer-article" />:
+				<liferay-ui:message key="footer-article" />
 			</td>
 			<td>
 				<%= footerArticleResouceTitle %>
 
 				<input type="button" value="<liferay-ui:message key="select" />" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' />
+
 				<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' />
 			</td>
-		<tr>
+		</tr>
 		</table>
 
 		<br />
 
 		<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
 	</c:when>
 	<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
@@ -287,6 +287,5 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		<%@ include file="/html/portlet/rss/select_journal_article.jspf" %>
 	</c:when>
 </c:choose>
-
 
 </form>

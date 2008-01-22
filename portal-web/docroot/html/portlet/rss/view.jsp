@@ -28,10 +28,13 @@
 String url = ParamUtil.getString(request, "url");
 String title = StringPool.BLANK;
 
-boolean last = false;
+String languageId = null;
+String xmlRequest = null;
 
-String languageId = LanguageUtil.getLanguageId(request);
-String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+if ((headerArticleResouceId > 0) || (footerArticleResouceId > 0)) {
+	languageId = LanguageUtil.getLanguageId(request);
+	xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+}
 %>
 
 <c:if test="<%= headerArticleResouceId > 0 %>">
@@ -49,7 +52,11 @@ for (int i = 0; i < urls.length; i++) {
 		title = StringPool.BLANK;
 	}
 
-	last = (i == urls.length-1)?true:false;
+	boolean last = false;
+
+	if (i == urls.length - 1) {
+		last = true;
+	}
 %>
 
 	<%@ include file="/html/portlet/rss/feed.jspf" %>
@@ -74,16 +81,20 @@ for (int i = 0; i < urls.length; i++) {
 				currentPortlet.css('overflow', 'visible');
 			}
 
-			jQuery(".<portlet:namespace />entry-expander").click(function() {
-				if (this.src.match(".*minus\.png")) {
-					jQuery(".feed-entry-content",this.parentNode).slideUp();
-					this.src = themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
+			jQuery(".<portlet:namespace />entry-expander").click(
+				function() {
+					if (this.src.match(".*minus\.png")) {
+						jQuery(".feed-entry-content", this.parentNode).slideUp();
+
+						this.src = themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
+					}
+					else {
+						jQuery(".feed-entry-content", this.parentNode).slideDown();
+
+						this.src = themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
+					}
 				}
-				else {
-					jQuery(".feed-entry-content",this.parentNode).slideDown();
-					this.src = themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
-				}
-			});
+			);
 		}
 	);
 </script>
@@ -91,4 +102,3 @@ for (int i = 0; i < urls.length; i++) {
 <c:if test="<%= footerArticleResouceId > 0 %>">
 	<liferay-ui:journal-article classPK="<%= footerArticleResouceId %>" languageId="<%= languageId %>" xmlRequest="<%= xmlRequest %>" />
 </c:if>
-

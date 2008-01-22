@@ -24,18 +24,31 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-rss .feed-title {
-	font-size: 1.2em;
-	font-weight: bold;
-}
-
-.portlet-rss .feed-published-date a {
-	font-weight: bold;
-	text-decoration: none;
-}
-
 .portlet-rss .feed-description {
  	margin: 0 0 5px 0;
+}
+
+.portlet-rss .feed-entry {
+	font-size: 1.1em;
+}
+
+.portlet-rss .feed-entry-author {
+	display: block;
+	font-size: 0.9em;
+}
+
+.portlet-rss .feed-entry-content {
+}
+
+.portlet-rss .feed-entry-expander {
+	float: left;
+	cursor: pointer;
+}
+
+.portlet-rss .feed-entry-title {
+	font-weight: bold;
+	display: block;
+ 	margin: 0 0 4px 0;
 }
 
 .portlet-rss .feed-image-left {
@@ -48,25 +61,12 @@
  	margin: 0 0 4px 4px;
 }
 
-.portlet-rss .feed-entry-expander {
-	float: left;
-	cursor: pointer;
-}
-
-.portlet-rss .feed-entry {
-	font-size: 1.1em;
-}
-
-.portlet-rss .feed-entry-title {
+.portlet-rss .feed-published-date a {
 	font-weight: bold;
-	display: block;
- 	margin: 0 0 4px 0;
+	text-decoration: none;
 }
 
-.portlet-rss .feed-entry-content {
-}
-
-.portlet-rss .feed-entry-author {
-	display: block;
-	font-size: 0.9em;
+.portlet-rss .feed-title {
+	font-size: 1.2em;
+	font-weight: bold;
 }

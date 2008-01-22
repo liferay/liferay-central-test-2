@@ -814,7 +814,7 @@
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<instanceable>false</instanceable>
+		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>

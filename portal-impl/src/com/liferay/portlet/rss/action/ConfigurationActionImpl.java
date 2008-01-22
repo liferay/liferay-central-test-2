@@ -49,95 +49,42 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			String portletResource = ParamUtil.getString(
-				req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			req, "portletResource");
 
-			PortletPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource, true, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
-			if (cmd.equals("remove-footer-article")) {
-				prefs.setValues("footer-article-resouce-values", new String[]{"0",""});
+		if (cmd.equals("remove-footer-article")) {
+			removeFooterArticle(req, prefs);
+		}
+		else if (cmd.equals("remove-header-article")) {
+			removeHeaderArticle(req, prefs);
+		}
+		else if (cmd.equals("set-footer-article")) {
+			setFooterArticle(req, prefs);
+		}
+		else if (cmd.equals("set-header-article")) {
+			setHeaderArticle(req, prefs);
+		}
+		else if (cmd.equals(Constants.UPDATE)) {
+			updateConfiguration(req, prefs);
+		}
+
+		if (SessionErrors.isEmpty(req)) {
+			try {
+				prefs.store();
 			}
-			else if (cmd.equals("remove-header-article")) {
-				prefs.setValues("header-article-resouce-values", new String[]{"0",""});
-			}
-			else if (cmd.equals("set-footer-article")) {
-				String footerArticleResouceId =
-					ParamUtil.getString(req, "resourceId");
-				String footerArticleResouceTitle =
-					ParamUtil.getString(req, "resourceTitle");
+			catch (ValidatorException ve) {
+				SessionErrors.add(req, ValidatorException.class.getName(), ve);
 
-				prefs.setValues("footer-article-resouce-values",
-					new String[]{
-						footerArticleResouceId,
-						footerArticleResouceTitle});
-			}
-			else if (cmd.equals("set-header-article")) {
-				String headerArticleResouceId =
-					ParamUtil.getString(req, "resourceId");
-				String headerArticleResouceTitle =
-					ParamUtil.getString(req, "resourceTitle");
-
-				prefs.setValues("header-article-resouce-values",
-					new String[]{
-						headerArticleResouceId,
-						headerArticleResouceTitle});
-			}
-			else if (cmd.equals(Constants.UPDATE)){
-				String[] urls = req.getParameterValues("url");
-				String[] titles = req.getParameterValues("title");
-				int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
-				boolean showFeedTitle = ParamUtil.getBoolean(req, "showFeedTitle");
-				boolean showFeedPublishedDate =
-					ParamUtil.getBoolean(req, "showFeedPublishedDate");
-				boolean showFeedDescription =
-					ParamUtil.getBoolean(req, "showFeedDescription");
-				boolean showFeedImage =
-					ParamUtil.getBoolean(req, "showFeedImage");
-				String feedImageAlignment =
-					ParamUtil.getString(req, "feedImageAlignment");
-				long headerArticleResouceId =
-					ParamUtil.getLong(req, "headerArticleResouceId");
-				long footerArticleResouceId =
-					ParamUtil.getLong(req, "footerArticleResouceId");
-
-				if (urls != null && titles != null) {
-					prefs.setValues("urls", urls);
-					prefs.setValues("titles", titles);
-				}
-				else {
-					prefs.setValues("urls", new String[0]);
-					prefs.setValues("titles", new String[0]);
-				}
-
-				prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
-				prefs.setValue("show-feed-title", String.valueOf(showFeedTitle));
-				prefs.setValue("show-feed-published-date",
-					String.valueOf(showFeedPublishedDate));
-				prefs.setValue("show-feed-description",
-					String.valueOf(showFeedDescription));
-				prefs.setValue("show-feed-image", String.valueOf(showFeedImage));
-				prefs.setValue("feed-image-alignment",
-					String.valueOf(feedImageAlignment));
-				prefs.setValue("header-article-resouce-id",
-					String.valueOf(headerArticleResouceId));
-				prefs.setValue("footer-article-resouce-id",
-					String.valueOf(footerArticleResouceId));
-			}
-			else {
 				return;
 			}
 
-			prefs.store();
-
 			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
-		}
-		catch (ValidatorException ve) {
-			SessionErrors.add(req, ValidatorException.class.getName(), ve);
 		}
 	}
 
@@ -146,6 +93,92 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/rss/configuration.jsp";
+	}
+
+	protected void removeFooterArticle(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		prefs.setValues(
+			"footer-article-resouce-values", new String[] {"0", ""});
+	}
+
+	protected void removeHeaderArticle(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		prefs.setValues(
+			"header-article-resouce-values", new String[] {"0", ""});
+	}
+
+	protected void setFooterArticle(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String footerArticleResouceId = ParamUtil.getString(req, "resourceId");
+		String footerArticleResouceTitle = ParamUtil.getString(
+			req, "resourceTitle");
+
+		prefs.setValues(
+			"footer-article-resouce-values",
+			new String[] {footerArticleResouceId, footerArticleResouceTitle});
+	}
+
+	protected void setHeaderArticle(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String headerArticleResouceId = ParamUtil.getString(req, "resourceId");
+		String headerArticleResouceTitle = ParamUtil.getString(
+			req, "resourceTitle");
+
+		prefs.setValues(
+			"header-article-resouce-values",
+		new String[] {headerArticleResouceId, headerArticleResouceTitle});
+	}
+
+	protected void updateConfiguration(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String[] urls = req.getParameterValues("url");
+		String[] titles = req.getParameterValues("title");
+		int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
+		boolean showFeedTitle = ParamUtil.getBoolean(req, "showFeedTitle");
+		boolean showFeedPublishedDate = ParamUtil.getBoolean(
+			req, "showFeedPublishedDate");
+		boolean showFeedDescription = ParamUtil.getBoolean(
+			req, "showFeedDescription");
+		boolean showFeedImage = ParamUtil.getBoolean(req, "showFeedImage");
+		String feedImageAlignment = ParamUtil.getString(
+			req, "feedImageAlignment");
+		long headerArticleResouceId = ParamUtil.getLong(
+			req, "headerArticleResouceId");
+		long footerArticleResouceId = ParamUtil.getLong(
+			req, "footerArticleResouceId");
+
+		if (urls != null && titles != null) {
+			prefs.setValues("urls", urls);
+			prefs.setValues("titles", titles);
+		}
+		else {
+			prefs.setValues("urls", new String[0]);
+			prefs.setValues("titles", new String[0]);
+		}
+
+		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
+		prefs.setValue("show-feed-title", String.valueOf(showFeedTitle));
+		prefs.setValue(
+			"show-feed-published-date", String.valueOf(showFeedPublishedDate));
+		prefs.setValue(
+			"show-feed-description", String.valueOf(showFeedDescription));
+		prefs.setValue("show-feed-image", String.valueOf(showFeedImage));
+		prefs.setValue(
+			"feed-image-alignment", String.valueOf(feedImageAlignment));
+		prefs.setValue(
+			"header-article-resouce-id",
+			String.valueOf(headerArticleResouceId));
+		prefs.setValue(
+			"footer-article-resouce-id",
+			String.valueOf(footerArticleResouceId));
 	}
 
 }
