@@ -455,7 +455,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			if (article.isIndexable()) {
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(), article.getId());
+					JournalArticle.class.getName(),
+					article.getResourcePrimKey());
 
 				Indexer.updateArticle(
 					article.getCompanyId(), article.getGroupId(),
@@ -1286,7 +1287,7 @@ public class JournalArticleLocalServiceImpl
 				JournalArticle article = (JournalArticle)itr.next();
 
 				if (article.isApproved() && article.isIndexable()) {
-					long id = article.getId();
+					long resourcePrimKey = article.getResourcePrimKey();
 					long groupId = article.getGroupId();
 					String articleId = article.getArticleId();
 					double version = article.getVersion();
@@ -1297,7 +1298,7 @@ public class JournalArticleLocalServiceImpl
 					Date displayDate = article.getDisplayDate();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						JournalArticle.class.getName(), id);
+						JournalArticle.class.getName(), resourcePrimKey);
 
 					try {
 						org.apache.lucene.document.Document doc =
