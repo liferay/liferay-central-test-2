@@ -20,43 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.bookmarks.util.comparator;
+package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 /**
- * <a href="BookmarksVisitsComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileEntryModifiedDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksVisitsComparator extends OrderByComparator {
+public class FileEntryModifiedDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "visits ASC";
+	public static String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static String ORDER_BY_DESC = "visits DESC";
+	public static String ORDER_BY_DESC = "modifiedDate DESC";
 
-	public BookmarksVisitsComparator() {
+	public FileEntryModifiedDateComparator() {
 		this(false);
 	}
 
-	public BookmarksVisitsComparator(boolean asc) {
+	public FileEntryModifiedDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		BookmarksEntry entry1 = (BookmarksEntry)obj1;
-		BookmarksEntry entry2 = (BookmarksEntry)obj2;
+		DLFileEntry fileEntry1 = (DLFileEntry)obj1;
+		DLFileEntry fileEntry2 = (DLFileEntry)obj2;
 
-		int value = 0;
-
-		if (entry1.getVisits() < entry2.getVisits()) {
-			value = -1;
-		}
-		else if (entry1.getVisits() > entry2.getVisits()) {
-			value = 1;
-		}
+		int value = DateUtil.compareTo(
+			fileEntry1.getModifiedDate(), fileEntry2.getModifiedDate());
 
 		if (_asc) {
 			return value;

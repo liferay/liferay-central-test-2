@@ -295,6 +295,16 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getCompanyFileEntries(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List getCompanyFileEntries(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getCompanyFileEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public java.io.InputStream getFileAsStream(long companyId, long userId,
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 

@@ -22,26 +22,27 @@
 
 package com.liferay.portlet.bookmarks.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
 /**
- * <a href="BookmarksURLComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntryModifiedDateComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksURLComparator extends OrderByComparator {
+public class EntryModifiedDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "url ASC";
+	public static String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static String ORDER_BY_DESC = "url DESC";
+	public static String ORDER_BY_DESC = "modifiedDate DESC";
 
-	public BookmarksURLComparator() {
+	public EntryModifiedDateComparator() {
 		this(false);
 	}
 
-	public BookmarksURLComparator(boolean asc) {
+	public EntryModifiedDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -49,8 +50,8 @@ public class BookmarksURLComparator extends OrderByComparator {
 		BookmarksEntry entry1 = (BookmarksEntry)obj1;
 		BookmarksEntry entry2 = (BookmarksEntry)obj2;
 
-		int value = entry1.getUrl().toLowerCase().compareTo(
-			entry2.getUrl().toLowerCase());
+		int value = DateUtil.compareTo(
+			entry1.getModifiedDate(), entry2.getModifiedDate());
 
 		if (_asc) {
 			return value;

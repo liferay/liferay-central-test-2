@@ -30,12 +30,12 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksCreateDateComparator;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksModifiedDateComparator;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksNameComparator;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksPriorityComparator;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksURLComparator;
-import com.liferay.portlet.bookmarks.util.comparator.BookmarksVisitsComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryCreateDateComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryNameComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryPriorityComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryURLComparator;
+import com.liferay.portlet.bookmarks.util.comparator.EntryVisitsComparator;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -188,22 +188,22 @@ public class BookmarksUtil {
 		OrderByComparator orderByComparator = null;
 
 		if (orderByCol.equals("create-date")) {
-			orderByComparator = new BookmarksCreateDateComparator(orderByAsc);
+			orderByComparator = new EntryCreateDateComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("modified-date")) {
-			orderByComparator = new BookmarksModifiedDateComparator(orderByAsc);
+			orderByComparator = new EntryModifiedDateComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("name")) {
-			orderByComparator = new BookmarksNameComparator(orderByAsc);
+			orderByComparator = new EntryNameComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("priority")) {
-			orderByComparator = new BookmarksPriorityComparator(orderByAsc);
+			orderByComparator = new EntryPriorityComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("url")) {
-			orderByComparator = new BookmarksURLComparator(orderByAsc);
+			orderByComparator = new EntryURLComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("visits")) {
-			orderByComparator = new BookmarksVisitsComparator(orderByAsc);
+			orderByComparator = new EntryVisitsComparator(orderByAsc);
 		}
 
 		return orderByComparator;

@@ -563,6 +563,30 @@ public class DLFileEntryLocalServiceUtil {
 		dlFileEntryLocalService.deleteFileEntry(fileEntry);
 	}
 
+	public static java.util.List getCompanyFileEntries(long companyId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getCompanyFileEntries(companyId, begin,
+			end);
+	}
+
+	public static java.util.List getCompanyFileEntries(long companyId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getCompanyFileEntries(companyId, begin,
+			end, obc);
+	}
+
+	public static int getCompanyFileEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getCompanyFileEntriesCount(companyId);
+	}
+
 	public static java.io.InputStream getFileAsStream(long companyId,
 		long userId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 

@@ -495,6 +495,26 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntryPersistence.remove(fileEntry.getPrimaryKey());
 	}
 
+	public List getCompanyFileEntries(long companyId, int begin, int end)
+		throws SystemException {
+
+		return dlFileEntryPersistence.findByCompanyId(companyId, begin, end);
+	}
+
+	public List getCompanyFileEntries(
+			long companyId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryPersistence.findByCompanyId(
+			companyId, begin, end, obc);
+	}
+
+	public int getCompanyFileEntriesCount(long companyId)
+		throws SystemException {
+
+		return dlFileEntryPersistence.countByCompanyId(companyId);
+	}
+
 	public InputStream getFileAsStream(
 			long companyId, long userId, long folderId, String name)
 		throws PortalException, SystemException {

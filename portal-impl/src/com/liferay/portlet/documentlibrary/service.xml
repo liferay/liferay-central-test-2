@@ -39,6 +39,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>

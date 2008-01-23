@@ -22,28 +22,26 @@
 
 package com.liferay.portlet.bookmarks.util.comparator;
 
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
 /**
- * <a href="BookmarksCreateDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="EntryVisitsComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksCreateDateComparator extends OrderByComparator {
+public class EntryVisitsComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "createDate ASC";
+	public static String ORDER_BY_ASC = "visits ASC";
 
-	public static String ORDER_BY_DESC = "createDate DESC";
+	public static String ORDER_BY_DESC = "visits DESC";
 
-	public BookmarksCreateDateComparator() {
+	public EntryVisitsComparator() {
 		this(false);
 	}
 
-	public BookmarksCreateDateComparator(boolean asc) {
+	public EntryVisitsComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -51,8 +49,14 @@ public class BookmarksCreateDateComparator extends OrderByComparator {
 		BookmarksEntry entry1 = (BookmarksEntry)obj1;
 		BookmarksEntry entry2 = (BookmarksEntry)obj2;
 
-		int value = DateUtil.compareTo(
-			entry1.getCreateDate(), entry2.getCreateDate());
+		int value = 0;
+
+		if (entry1.getVisits() < entry2.getVisits()) {
+			value = -1;
+		}
+		else if (entry1.getVisits() > entry2.getVisits()) {
+			value = 1;
+		}
 
 		if (_asc) {
 			return value;

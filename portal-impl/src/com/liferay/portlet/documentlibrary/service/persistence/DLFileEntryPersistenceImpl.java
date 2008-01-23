@@ -519,6 +519,248 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByCompanyId(long companyId) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, companyId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByCompanyId(long companyId, int begin, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, begin, end, null);
+	}
+
+	public List findByCompanyId(long companyId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("folderId ASC, ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, companyId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public DLFileEntry findByCompanyId_First(long companyId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		List list = findByCompanyId(companyId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return (DLFileEntry)list.get(0);
+		}
+	}
+
+	public DLFileEntry findByCompanyId_Last(long companyId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+		int count = countByCompanyId(companyId);
+
+		List list = findByCompanyId(companyId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No DLFileEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+		else {
+			return (DLFileEntry)list.get(0);
+		}
+	}
+
+	public DLFileEntry[] findByCompanyId_PrevAndNext(long fileEntryId,
+		long companyId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
+
+		int count = countByCompanyId(companyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+			query.append("companyId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, companyId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileEntry);
+
+			DLFileEntry[] array = new DLFileEntryImpl[3];
+
+			array[0] = (DLFileEntry)objArray[0];
+			array[1] = (DLFileEntry)objArray[1];
+			array[2] = (DLFileEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByFolderId(long folderId) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileEntry.class.getName();
@@ -1294,6 +1536,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByCompanyId(long companyId) throws SystemException {
+		Iterator itr = findByCompanyId(companyId).iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+
+			remove(dlFileEntry);
+		}
+	}
+
 	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
@@ -1372,6 +1624,72 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 				if (uuid != null) {
 					q.setString(queryPos++, uuid);
 				}
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByCompanyId(long companyId) throws SystemException {
+		boolean finderClassNameCacheEnabled = DLFileEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "countByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, companyId);
 
 				Long count = null;
 

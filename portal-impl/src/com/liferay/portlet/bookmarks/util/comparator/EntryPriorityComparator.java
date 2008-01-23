@@ -26,22 +26,22 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
 /**
- * <a href="BookmarksNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntryPriorityComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksNameComparator extends OrderByComparator {
+public class EntryPriorityComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "name ASC";
+	public static String ORDER_BY_ASC = "priority ASC";
 
-	public static String ORDER_BY_DESC = "name DESC";
+	public static String ORDER_BY_DESC = "priority DESC";
 
-	public BookmarksNameComparator() {
+	public EntryPriorityComparator() {
 		this(false);
 	}
 
-	public BookmarksNameComparator(boolean asc) {
+	public EntryPriorityComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -49,8 +49,14 @@ public class BookmarksNameComparator extends OrderByComparator {
 		BookmarksEntry entry1 = (BookmarksEntry)obj1;
 		BookmarksEntry entry2 = (BookmarksEntry)obj2;
 
-		int value = entry1.getName().toLowerCase().compareTo(
-			entry2.getName().toLowerCase());
+		int value = 0;
+
+		if (entry1.getPriority() < entry2.getPriority()) {
+			value = -1;
+		}
+		else if (entry1.getPriority() > entry2.getPriority()) {
+			value = 1;
+		}
 
 		if (_asc) {
 			return value;
