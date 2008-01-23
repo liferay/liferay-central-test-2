@@ -58,7 +58,14 @@ public class WebCachePoolImpl implements WebCachePool {
 				_cache.put(key, obj, timeToLive);
 			}
 			catch (WebCacheException wce) {
-				_log.error(wce.getMessage());
+				Throwable cause = wce.getCause();
+
+				if (cause != null) {
+					_log.error(cause, cause);
+				}
+				else {
+					_log.error(wce, wce);
+				}
 			}
 		}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.news.util;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.ContentUtil;
@@ -105,16 +106,21 @@ public class CategoryWebCacheItem implements WebCacheItem {
 			String temp = "";
 			Set tempSet = null;
 
-			Iterator i = feedSet.iterator();
+			Iterator itr = feedSet.iterator();
 
-			while (i.hasNext()) {
-				Feed feed = (Feed)i.next();
+			while (itr.hasNext()) {
+				Feed feed = (Feed)itr.next();
+
+				if (Validator.isNull(feed.getCategoryName())) {
+					continue;
+				}
 
 				if (temp.equals(feed.getCategoryName())) {
 					tempSet.add(feed);
 				}
 				else {
 					tempSet = new TreeSet();
+
 					categoryMap.put(feed.getCategoryName(), tempSet);
 					tempSet.add(feed);
 				}

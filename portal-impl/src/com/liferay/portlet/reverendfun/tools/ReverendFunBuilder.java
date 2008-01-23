@@ -54,7 +54,7 @@ public class ReverendFunBuilder {
 	public ReverendFunBuilder() {
 		try {
 			File file = new File(
-				"../portal-ejb/src/com/liferay/portlet/reverendfun/" +
+				"../portal-impl/src/com/liferay/portlet/reverendfun/" +
 					"dependencies/dates.txt");
 
 			String[] dates = StringUtil.split(FileUtil.read(file), "\n");
