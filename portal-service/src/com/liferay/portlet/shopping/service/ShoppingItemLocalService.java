@@ -249,6 +249,21 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItem getItemByLargeImageId(
+		long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem getItemByMediumImageId(
+		long mediumImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem getItemBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getItems(long categoryId)
 		throws com.liferay.portal.SystemException;
 

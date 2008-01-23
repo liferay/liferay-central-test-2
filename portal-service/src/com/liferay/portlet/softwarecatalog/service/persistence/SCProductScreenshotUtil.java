@@ -119,6 +119,30 @@ public class SCProductScreenshotUtil {
 			productEntryId, obc);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByThumbnailId(
+		long thumbnailId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
+		return getPersistence().findByThumbnailId(thumbnailId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
+		long thumbnailId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByThumbnailId(thumbnailId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByFullImageId(
+		long fullImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
+		return getPersistence().findByFullImageId(fullImageId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
+		long fullImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByFullImageId(fullImageId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByP_P(
 		long productEntryId, int priority)
 		throws com.liferay.portal.SystemException, 
@@ -166,6 +190,18 @@ public class SCProductScreenshotUtil {
 		getPersistence().removeByProductEntryId(productEntryId);
 	}
 
+	public static void removeByThumbnailId(long thumbnailId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
+		getPersistence().removeByThumbnailId(thumbnailId);
+	}
+
+	public static void removeByFullImageId(long fullImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
+		getPersistence().removeByFullImageId(fullImageId);
+	}
+
 	public static void removeByP_P(long productEntryId, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
@@ -179,6 +215,16 @@ public class SCProductScreenshotUtil {
 	public static int countByProductEntryId(long productEntryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByProductEntryId(productEntryId);
+	}
+
+	public static int countByThumbnailId(long thumbnailId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByThumbnailId(thumbnailId);
+	}
+
+	public static int countByFullImageId(long fullImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByFullImageId(fullImageId);
 	}
 
 	public static int countByP_P(long productEntryId, int priority)

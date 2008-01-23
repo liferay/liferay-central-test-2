@@ -467,6 +467,9 @@ public interface JournalArticleLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getArticlesBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException;
+
 	public int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 

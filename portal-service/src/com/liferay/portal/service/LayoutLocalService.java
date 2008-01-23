@@ -449,6 +449,11 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Layout getLayoutByIconImageId(
+		long iconImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getLayouts(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 

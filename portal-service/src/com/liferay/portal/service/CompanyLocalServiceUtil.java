@@ -843,6 +843,15 @@ public class CompanyLocalServiceUtil {
 		return companyLocalService.getCompanyById(companyId);
 	}
 
+	public static com.liferay.portal.model.Company getCompanyByLogoId(
+		long logoId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.getCompanyByLogoId(logoId);
+	}
+
 	public static com.liferay.portal.model.Company getCompanyByMx(
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException, 

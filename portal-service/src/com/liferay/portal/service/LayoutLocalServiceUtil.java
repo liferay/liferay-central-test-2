@@ -1025,6 +1025,15 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.getLayout(groupId, privateLayout, layoutId);
 	}
 
+	public static com.liferay.portal.model.Layout getLayoutByIconImageId(
+		long iconImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayoutByIconImageId(iconImageId);
+	}
+
 	public static java.util.List getLayouts(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();

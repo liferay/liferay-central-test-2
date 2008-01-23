@@ -514,6 +514,15 @@ public class JournalTemplateLocalServiceUtil {
 		return journalTemplateLocalService.getTemplate(groupId, templateId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate getTemplateBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.getTemplateBySmallImageId(smallImageId);
+	}
+
 	public static java.util.List getTemplates()
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();

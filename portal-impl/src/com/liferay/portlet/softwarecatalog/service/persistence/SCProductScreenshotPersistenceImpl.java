@@ -493,6 +493,198 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public SCProductScreenshot findByThumbnailId(long thumbnailId)
+		throws NoSuchProductScreenshotException, SystemException {
+		SCProductScreenshot scProductScreenshot = fetchByThumbnailId(thumbnailId);
+
+		if (scProductScreenshot == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SCProductScreenshot exists with the key {");
+
+			msg.append("thumbnailId=" + thumbnailId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchProductScreenshotException(msg.toString());
+		}
+
+		return scProductScreenshot;
+	}
+
+	public SCProductScreenshot fetchByThumbnailId(long thumbnailId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductScreenshot.class.getName();
+		String finderMethodName = "fetchByThumbnailId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
+				query.append("thumbnailId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("productEntryId ASC, ");
+				query.append("priority ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, thumbnailId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (SCProductScreenshot)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (SCProductScreenshot)list.get(0);
+			}
+		}
+	}
+
+	public SCProductScreenshot findByFullImageId(long fullImageId)
+		throws NoSuchProductScreenshotException, SystemException {
+		SCProductScreenshot scProductScreenshot = fetchByFullImageId(fullImageId);
+
+		if (scProductScreenshot == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SCProductScreenshot exists with the key {");
+
+			msg.append("fullImageId=" + fullImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchProductScreenshotException(msg.toString());
+		}
+
+		return scProductScreenshot;
+	}
+
+	public SCProductScreenshot fetchByFullImageId(long fullImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductScreenshot.class.getName();
+		String finderMethodName = "fetchByFullImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(fullImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
+				query.append("fullImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("productEntryId ASC, ");
+				query.append("priority ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, fullImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (SCProductScreenshot)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (SCProductScreenshot)list.get(0);
+			}
+		}
+	}
+
 	public SCProductScreenshot findByP_P(long productEntryId, int priority)
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = fetchByP_P(productEntryId,
@@ -731,6 +923,20 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByThumbnailId(long thumbnailId)
+		throws NoSuchProductScreenshotException, SystemException {
+		SCProductScreenshot scProductScreenshot = findByThumbnailId(thumbnailId);
+
+		remove(scProductScreenshot);
+	}
+
+	public void removeByFullImageId(long fullImageId)
+		throws NoSuchProductScreenshotException, SystemException {
+		SCProductScreenshot scProductScreenshot = findByFullImageId(fullImageId);
+
+		remove(scProductScreenshot);
+	}
+
 	public void removeByP_P(long productEntryId, int priority)
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = findByP_P(productEntryId,
@@ -783,6 +989,138 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, productEntryId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByThumbnailId(long thumbnailId) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductScreenshot.class.getName();
+		String finderMethodName = "countByThumbnailId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
+				query.append("thumbnailId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, thumbnailId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByFullImageId(long fullImageId) throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductScreenshot.class.getName();
+		String finderMethodName = "countByFullImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(fullImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
+
+				query.append("fullImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, fullImageId);
 
 				Long count = null;
 

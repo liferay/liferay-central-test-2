@@ -204,6 +204,15 @@
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
+		<finder name="SmallImageId" return-type="ShoppingItem">
+			<finder-column name="smallImageId" />
+		</finder>
+		<finder name="MediumImageId" return-type="ShoppingItem">
+			<finder-column name="mediumImageId" />
+		</finder>
+		<finder name="LargeImageId" return-type="ShoppingItem">
+			<finder-column name="largeImageId" />
+		</finder>
 		<finder name="C_S" return-type="ShoppingItem">
 			<finder-column name="companyId" />
 			<finder-column name="sku" />

@@ -544,6 +544,24 @@ public class ShoppingItemLocalServiceImpl
 		return shoppingItemPersistence.findByC_S(companyId, sku);
 	}
 
+	public ShoppingItem getItemByLargeImageId(long largeImageId)
+		throws PortalException, SystemException {
+
+		return shoppingItemPersistence.findByLargeImageId(largeImageId);
+	}
+
+	public ShoppingItem getItemByMediumImageId(long mediumImageId)
+		throws PortalException, SystemException {
+
+		return shoppingItemPersistence.findByMediumImageId(mediumImageId);
+	}
+
+	public ShoppingItem getItemBySmallImageId(long smallImageId)
+		throws PortalException, SystemException {
+
+		return shoppingItemPersistence.findBySmallImageId(smallImageId);
+	}
+
 	public List getItems(long categoryId) throws SystemException {
 		return shoppingItemPersistence.findByCategoryId(categoryId);
 	}

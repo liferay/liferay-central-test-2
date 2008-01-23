@@ -381,6 +381,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findByPrimaryKey(companyId);
 	}
 
+	public Company getCompanyByLogoId(long logoId)
+		throws PortalException, SystemException {
+
+		return companyPersistence.findByLogoId(logoId);
+	}
+
 	public Company getCompanyByMx(String mx)
 		throws PortalException, SystemException {
 

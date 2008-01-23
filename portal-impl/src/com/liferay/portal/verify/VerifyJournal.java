@@ -28,6 +28,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
@@ -101,17 +102,19 @@ public class VerifyJournal extends VerifyProcess {
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
+			long groupId = article.getGroupId();
+			String articleId = article.getArticleId();
+			double version = article.getVersion();
+
 			if (article.getResourcePrimKey() <= 0) {
 				article =
 					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
-						article.getGroupId(), article.getArticleId(),
-						article.getVersion());
+						groupId, articleId, version);
 			}
 
 			ResourceLocalServiceUtil.addResources(
-				article.getCompanyId(), 0, 0,
-				JournalArticle.class.getName(), article.getResourcePrimKey(),
-				false, true, true);
+				article.getCompanyId(), 0, 0, JournalArticle.class.getName(),
+				article.getResourcePrimKey(), false, true, true);
 
 			try {
 				TagsAssetLocalServiceUtil.getAsset(
@@ -138,13 +141,24 @@ public class VerifyJournal extends VerifyProcess {
 
 			if (!content.equals(newContent)) {
 				JournalArticleLocalServiceUtil.updateContent(
-					article.getGroupId(), article.getArticleId(),
-					article.getVersion(), newContent);
+					groupId, articleId, version, newContent);
 			}
 
 			JournalArticleLocalServiceUtil.checkStructure(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion());
+				groupId, articleId, version);
+
+			List articleContentSearches =
+				JournalContentSearchLocalServiceUtil.getArticleContentSearches(
+					groupId, articleId);
+
+			if (articleContentSearches.size() == 0) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Article {groupId=" + groupId + ", articleId=" +
+							articleId + ", version=" + version +
+								"} is not used on any layouts");
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

@@ -1108,6 +1108,12 @@ public class JournalArticleLocalServiceImpl
 			groupId, begin, end, obc);
 	}
 
+	public List getArticlesBySmallImageId(long smallImageId)
+		throws SystemException {
+
+		return journalArticlePersistence.findBySmallImageId(smallImageId);
+	}
+
 	public int getArticlesCount(long groupId) throws SystemException {
 		return journalArticlePersistence.countByGroupId(groupId);
 	}

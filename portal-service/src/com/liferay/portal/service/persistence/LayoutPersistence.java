@@ -117,6 +117,13 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout findByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout fetchByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -220,6 +227,10 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
 
+	public void removeByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -244,6 +255,9 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByDLFolderId(long dlFolderId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByIconImageId(long iconImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)

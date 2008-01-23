@@ -476,6 +476,33 @@ public class ShoppingItemLocalServiceUtil {
 		return shoppingItemLocalService.getItem(companyId, sku);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem getItemByLargeImageId(
+		long largeImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getItemByLargeImageId(largeImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem getItemByMediumImageId(
+		long mediumImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getItemByMediumImageId(mediumImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem getItemBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getItemBySmallImageId(smallImageId);
+	}
+
 	public static java.util.List getItems(long categoryId)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();

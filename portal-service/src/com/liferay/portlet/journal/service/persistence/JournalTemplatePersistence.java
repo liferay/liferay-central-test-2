@@ -150,6 +150,14 @@ public interface JournalTemplatePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate findBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException;
+
+	public com.liferay.portlet.journal.model.JournalTemplate fetchBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalTemplate findByG_T(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
@@ -217,6 +225,10 @@ public interface JournalTemplatePersistence {
 	public void removeByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException;
+
 	public void removeByG_T(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException;
@@ -236,6 +248,9 @@ public interface JournalTemplatePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByTemplateId(java.lang.String templateId)
+		throws com.liferay.portal.SystemException;
+
+	public int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_T(long groupId, java.lang.String templateId)

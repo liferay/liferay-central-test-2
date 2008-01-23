@@ -79,4 +79,18 @@ public class SCProductScreenshotLocalServiceImpl
 			productEntryId);
 	}
 
+	public SCProductScreenshot getProductScreenshotByFullImageId(
+			long fullImageId)
+		throws PortalException, SystemException {
+
+		return scProductScreenshotPersistence.findByFullImageId(fullImageId);
+	}
+
+	public SCProductScreenshot getProductScreenshotByThumbnailId(
+			long thumbnailId)
+		throws PortalException, SystemException {
+
+		return scProductScreenshotPersistence.findByThumbnailId(thumbnailId);
+	}
+
 }

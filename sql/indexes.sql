@@ -42,6 +42,7 @@ create index IX_5CCE79C8 on CalEvent (uuid_, groupId);
 
 create index IX_B27A301F on ClassName_ (value);
 
+create index IX_38EFE3FD on Company (logoId);
 create index IX_12566EC2 on Company (mx);
 create index IX_975996C0 on Company (virtualHost);
 create index IX_EC00543C on Company (webId);
@@ -107,6 +108,7 @@ create index IX_8DBF1387 on JournalArticle (groupId, articleId, approved);
 create index IX_85C52EEC on JournalArticle (groupId, articleId, version);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
+create index IX_EF9B7028 on JournalArticle (smallImageId);
 create index IX_F029602F on JournalArticle (uuid_);
 create index IX_3463D95B on JournalArticle (uuid_, groupId);
 
@@ -139,6 +141,7 @@ create index IX_42E86E58 on JournalStructure (uuid_, groupId);
 create index IX_77923653 on JournalTemplate (groupId);
 create index IX_1701CB2B on JournalTemplate (groupId, structureId);
 create index IX_E802AA3C on JournalTemplate (groupId, templateId);
+create index IX_25FFB6FA on JournalTemplate (smallImageId);
 create index IX_1B12CA20 on JournalTemplate (templateId);
 create index IX_2857419D on JournalTemplate (uuid_);
 create index IX_62D1B3AD on JournalTemplate (uuid_, groupId);
@@ -150,6 +153,7 @@ create index IX_705F5AA3 on Layout (groupId, privateLayout);
 create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
 create index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
+create index IX_23922F7D on Layout (iconImageId);
 
 create index IX_A40B8BEC on LayoutSet (groupId);
 create index IX_48550691 on LayoutSet (groupId, privateLayout);
@@ -276,8 +280,10 @@ create index IX_5D25244F on SCProductEntry (companyId);
 create index IX_72F87291 on SCProductEntry (groupId);
 create index IX_98E6A9CB on SCProductEntry (groupId, userId);
 
+create index IX_AE8224CC on SCProductScreenshot (fullImageId);
 create index IX_467956FD on SCProductScreenshot (productEntryId);
 create index IX_DA913A55 on SCProductScreenshot (productEntryId, priority);
+create index IX_6C572DAC on SCProductScreenshot (thumbnailId);
 
 create index IX_8377A211 on SCProductVersion (productEntryId);
 
@@ -296,6 +302,9 @@ create index IX_3251AF16 on ShoppingCoupon (groupId);
 
 create index IX_C8EACF2E on ShoppingItem (categoryId);
 create index IX_1C717CA6 on ShoppingItem (companyId, sku);
+create index IX_903DC750 on ShoppingItem (largeImageId);
+create index IX_D217AB30 on ShoppingItem (mediumImageId);
+create index IX_FF203304 on ShoppingItem (smallImageId);
 
 create index IX_6D5F9B87 on ShoppingItemField (itemId);
 

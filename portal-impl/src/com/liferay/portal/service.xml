@@ -200,6 +200,9 @@
 		<finder name="Mx" return-type="Company">
 			<finder-column name="mx" />
 		</finder>
+		<finder name="LogoId" return-type="Company">
+			<finder-column name="logoId" />
+		</finder>
 
 		<!-- References -->
 
@@ -500,6 +503,9 @@
 		</finder>
 		<finder name="DLFolderId" return-type="Layout">
 			<finder-column name="dlFolderId" />
+		</finder>
+		<finder name="IconImageId" return-type="Layout">
+			<finder-column name="iconImageId" />
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />

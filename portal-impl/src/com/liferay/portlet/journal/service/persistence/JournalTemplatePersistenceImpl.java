@@ -1125,6 +1125,101 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public JournalTemplate findBySmallImageId(long smallImageId)
+		throws NoSuchTemplateException, SystemException {
+		JournalTemplate journalTemplate = fetchBySmallImageId(smallImageId);
+
+		if (journalTemplate == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No JournalTemplate exists with the key {");
+
+			msg.append("smallImageId=" + smallImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchTemplateException(msg.toString());
+		}
+
+		return journalTemplate;
+	}
+
+	public JournalTemplate fetchBySmallImageId(long smallImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalTemplate.class.getName();
+		String finderMethodName = "fetchBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("templateId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (JournalTemplate)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (JournalTemplate)list.get(0);
+			}
+		}
+	}
+
 	public JournalTemplate findByG_T(long groupId, String templateId)
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = fetchByG_T(groupId, templateId);
@@ -1680,6 +1775,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeBySmallImageId(long smallImageId)
+		throws NoSuchTemplateException, SystemException {
+		JournalTemplate journalTemplate = findBySmallImageId(smallImageId);
+
+		remove(journalTemplate);
+	}
+
 	public void removeByG_T(long groupId, String templateId)
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByG_T(groupId, templateId);
@@ -1969,6 +2071,72 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				if (templateId != null) {
 					q.setString(queryPos++, templateId);
 				}
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countBySmallImageId(long smallImageId) throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalTemplate.class.getName();
+		String finderMethodName = "countBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
 
 				Long count = null;
 

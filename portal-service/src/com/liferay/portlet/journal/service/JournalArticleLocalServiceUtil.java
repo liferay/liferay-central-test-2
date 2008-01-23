@@ -901,6 +901,13 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.getArticles(groupId, begin, end, obc);
 	}
 
+	public static java.util.List getArticlesBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getArticlesBySmallImageId(smallImageId);
+	}
+
 	public static int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();

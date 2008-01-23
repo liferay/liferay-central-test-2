@@ -116,6 +116,42 @@ public class ShoppingItemUtil {
 			categoryId, obc);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem findBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		return getPersistence().findBySmallImageId(smallImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchBySmallImageId(smallImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem findByMediumImageId(
+		long mediumImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		return getPersistence().findByMediumImageId(mediumImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
+		long mediumImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByMediumImageId(mediumImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem findByLargeImageId(
+		long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		return getPersistence().findByLargeImageId(largeImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
+		long largeImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByLargeImageId(largeImageId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
@@ -163,6 +199,24 @@ public class ShoppingItemUtil {
 		getPersistence().removeByCategoryId(categoryId);
 	}
 
+	public static void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		getPersistence().removeBySmallImageId(smallImageId);
+	}
+
+	public static void removeByMediumImageId(long mediumImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		getPersistence().removeByMediumImageId(mediumImageId);
+	}
+
+	public static void removeByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException {
+		getPersistence().removeByLargeImageId(largeImageId);
+	}
+
 	public static void removeByC_S(long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException {
@@ -176,6 +230,21 @@ public class ShoppingItemUtil {
 	public static int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCategoryId(categoryId);
+	}
+
+	public static int countBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countBySmallImageId(smallImageId);
+	}
+
+	public static int countByMediumImageId(long mediumImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByMediumImageId(mediumImageId);
+	}
+
+	public static int countByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByLargeImageId(largeImageId);
 	}
 
 	public static int countByC_S(long companyId, java.lang.String sku)

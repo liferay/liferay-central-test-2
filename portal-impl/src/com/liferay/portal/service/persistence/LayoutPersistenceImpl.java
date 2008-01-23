@@ -802,6 +802,101 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public Layout findByIconImageId(long iconImageId)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = fetchByIconImageId(iconImageId);
+
+		if (layout == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No Layout exists with the key {");
+
+			msg.append("iconImageId=" + iconImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+
+		return layout;
+	}
+
+	public Layout fetchByIconImageId(long iconImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
+		String finderClassName = Layout.class.getName();
+		String finderMethodName = "fetchByIconImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(iconImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+				query.append("iconImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("parentLayoutId ASC, ");
+				query.append("priority ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, iconImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (Layout)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Layout)list.get(0);
+			}
+		}
+	}
+
 	public List findByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
@@ -1759,6 +1854,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 		remove(layout);
 	}
 
+	public void removeByIconImageId(long iconImageId)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = findByIconImageId(iconImageId);
+
+		remove(layout);
+	}
+
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, privateLayout).iterator();
@@ -1968,6 +2070,71 @@ public class LayoutPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, dlFolderId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByIconImageId(long iconImageId) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
+		String finderClassName = Layout.class.getName();
+		String finderMethodName = "countByIconImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(iconImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+				query.append("iconImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, iconImageId);
 
 				Long count = null;
 

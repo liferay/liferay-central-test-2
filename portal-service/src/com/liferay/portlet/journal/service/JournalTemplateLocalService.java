@@ -266,6 +266,11 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate getTemplateBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getTemplates()
 		throws com.liferay.portal.SystemException;
 

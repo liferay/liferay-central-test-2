@@ -208,6 +208,18 @@ public class JournalTemplateUtil {
 		return getPersistence().findByTemplateId_PrevAndNext(id, templateId, obc);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate findBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException {
+		return getPersistence().findBySmallImageId(smallImageId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchBySmallImageId(smallImageId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate findByG_T(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
@@ -314,6 +326,12 @@ public class JournalTemplateUtil {
 		getPersistence().removeByTemplateId(templateId);
 	}
 
+	public static void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException {
+		getPersistence().removeBySmallImageId(smallImageId);
+	}
+
 	public static void removeByG_T(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
@@ -347,6 +365,11 @@ public class JournalTemplateUtil {
 	public static int countByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByTemplateId(templateId);
+	}
+
+	public static int countBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countBySmallImageId(smallImageId);
 	}
 
 	public static int countByG_T(long groupId, java.lang.String templateId)

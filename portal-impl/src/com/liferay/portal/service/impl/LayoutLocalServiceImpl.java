@@ -789,6 +789,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutPersistence.findByG_P_L(groupId, privateLayout, layoutId);
 	}
 
+	public Layout getLayoutByIconImageId(long iconImageId)
+		throws PortalException, SystemException {
+
+		return layoutPersistence.findByIconImageId(iconImageId);
+	}
+
 	public List getLayouts(long groupId, boolean privateLayout)
 		throws SystemException {
 

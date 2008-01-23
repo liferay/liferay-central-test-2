@@ -162,6 +162,18 @@ public class LayoutUtil {
 		return getPersistence().fetchByDLFolderId(dlFolderId);
 	}
 
+	public static com.liferay.portal.model.Layout findByIconImageId(
+		long iconImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
+		return getPersistence().findByIconImageId(iconImageId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByIconImageId(
+		long iconImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByIconImageId(iconImageId);
+	}
+
 	public static java.util.List findByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, privateLayout);
@@ -324,6 +336,12 @@ public class LayoutUtil {
 		getPersistence().removeByDLFolderId(dlFolderId);
 	}
 
+	public static void removeByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
+		getPersistence().removeByIconImageId(iconImageId);
+	}
+
 	public static void removeByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_P(groupId, privateLayout);
@@ -365,6 +383,11 @@ public class LayoutUtil {
 	public static int countByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByDLFolderId(dlFolderId);
+	}
+
+	public static int countByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByIconImageId(iconImageId);
 	}
 
 	public static int countByG_P(long groupId, boolean privateLayout)

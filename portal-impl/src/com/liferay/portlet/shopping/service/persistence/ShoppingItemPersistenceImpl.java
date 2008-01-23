@@ -496,6 +496,291 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public ShoppingItem findBySmallImageId(long smallImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = fetchBySmallImageId(smallImageId);
+
+		if (shoppingItem == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("smallImageId=" + smallImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchItemException(msg.toString());
+		}
+
+		return shoppingItem;
+	}
+
+	public ShoppingItem fetchBySmallImageId(long smallImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "fetchBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("itemId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (ShoppingItem)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (ShoppingItem)list.get(0);
+			}
+		}
+	}
+
+	public ShoppingItem findByMediumImageId(long mediumImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = fetchByMediumImageId(mediumImageId);
+
+		if (shoppingItem == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("mediumImageId=" + mediumImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchItemException(msg.toString());
+		}
+
+		return shoppingItem;
+	}
+
+	public ShoppingItem fetchByMediumImageId(long mediumImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "fetchByMediumImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(mediumImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("mediumImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("itemId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, mediumImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (ShoppingItem)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (ShoppingItem)list.get(0);
+			}
+		}
+	}
+
+	public ShoppingItem findByLargeImageId(long largeImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = fetchByLargeImageId(largeImageId);
+
+		if (shoppingItem == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("largeImageId=" + largeImageId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchItemException(msg.toString());
+		}
+
+		return shoppingItem;
+	}
+
+	public ShoppingItem fetchByLargeImageId(long largeImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "fetchByLargeImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("largeImageId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("itemId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, largeImageId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (ShoppingItem)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (ShoppingItem)list.get(0);
+			}
+		}
+	}
+
 	public ShoppingItem findByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
@@ -735,6 +1020,27 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeBySmallImageId(long smallImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = findBySmallImageId(smallImageId);
+
+		remove(shoppingItem);
+	}
+
+	public void removeByMediumImageId(long mediumImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = findByMediumImageId(mediumImageId);
+
+		remove(shoppingItem);
+	}
+
+	public void removeByLargeImageId(long largeImageId)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = findByLargeImageId(largeImageId);
+
+		remove(shoppingItem);
+	}
+
 	public void removeByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByC_S(companyId, sku);
@@ -785,6 +1091,205 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, categoryId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countBySmallImageId(long smallImageId) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "countBySmallImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(smallImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("smallImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, smallImageId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByMediumImageId(long mediumImageId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "countByMediumImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(mediumImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("mediumImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, mediumImageId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByLargeImageId(long largeImageId) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingItemModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingItem.class.getName();
+		String finderMethodName = "countByLargeImageId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(largeImageId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+				query.append("largeImageId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, largeImageId);
 
 				Long count = null;
 

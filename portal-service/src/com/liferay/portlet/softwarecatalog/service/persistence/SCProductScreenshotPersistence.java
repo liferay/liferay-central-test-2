@@ -89,6 +89,22 @@ public interface SCProductScreenshotPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByThumbnailId(
+		long thumbnailId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
+		long thumbnailId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByFullImageId(
+		long fullImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
+		long fullImageId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByP_P(
 		long productEntryId, int priority)
 		throws com.liferay.portal.SystemException, 
@@ -118,6 +134,14 @@ public interface SCProductScreenshotPersistence {
 	public void removeByProductEntryId(long productEntryId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByThumbnailId(long thumbnailId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
+
+	public void removeByFullImageId(long fullImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
+
 	public void removeByP_P(long productEntryId, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
@@ -125,6 +149,12 @@ public interface SCProductScreenshotPersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByProductEntryId(long productEntryId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByThumbnailId(long thumbnailId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByFullImageId(long fullImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByP_P(long productEntryId, int priority)

@@ -148,6 +148,32 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchArticleException;
 
+	public java.util.List findBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findBySmallImageId(long smallImageId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findBySmallImageId(long smallImageId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findBySmallImageId_First(
+		long smallImageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findBySmallImageId_Last(
+		long smallImageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle[] findBySmallImageId_PrevAndNext(
+		long id, long smallImageId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException;
+
 	public java.util.List findByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
@@ -301,6 +327,9 @@ public interface JournalArticlePersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
@@ -330,6 +359,9 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_A(long groupId, java.lang.String articleId)

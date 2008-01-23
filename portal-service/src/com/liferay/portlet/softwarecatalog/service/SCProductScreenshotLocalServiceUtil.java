@@ -186,4 +186,22 @@ public class SCProductScreenshotLocalServiceUtil {
 
 		return scProductScreenshotLocalService.getProductScreenshots(productEntryId);
 	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByFullImageId(
+		long fullImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		return scProductScreenshotLocalService.getProductScreenshotByFullImageId(fullImageId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByThumbnailId(
+		long thumbnailId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		return scProductScreenshotLocalService.getProductScreenshotByThumbnailId(thumbnailId);
+	}
 }

@@ -401,6 +401,12 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
+	public JournalTemplate getTemplateBySmallImageId(long smallImageId)
+		throws PortalException, SystemException {
+
+		return journalTemplatePersistence.findBySmallImageId(smallImageId);
+	}
+
 	public List getTemplates() throws SystemException {
 		return journalTemplatePersistence.findAll();
 	}

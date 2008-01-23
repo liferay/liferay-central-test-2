@@ -526,6 +526,95 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public Company findByLogoId(long logoId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByLogoId(logoId);
+
+		if (company == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No Company exists with the key {");
+
+			msg.append("logoId=" + logoId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCompanyException(msg.toString());
+		}
+
+		return company;
+	}
+
+	public Company fetchByLogoId(long logoId) throws SystemException {
+		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "fetchByLogoId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(logoId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				query.append("logoId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, logoId);
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (Company)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Company)list.get(0);
+			}
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -652,6 +741,13 @@ public class CompanyPersistenceImpl extends BasePersistence
 	public void removeByMx(String mx)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByMx(mx);
+
+		remove(company);
+	}
+
+	public void removeByLogoId(long logoId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByLogoId(logoId);
 
 		remove(company);
 	}
@@ -849,6 +945,71 @@ public class CompanyPersistenceImpl extends BasePersistence
 				if (mx != null) {
 					q.setString(queryPos++, mx);
 				}
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByLogoId(long logoId) throws SystemException {
+		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "countByLogoId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(logoId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				query.append("logoId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, logoId);
 
 				Long count = null;
 

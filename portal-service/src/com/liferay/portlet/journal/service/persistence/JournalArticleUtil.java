@@ -206,6 +206,45 @@ public class JournalArticleUtil {
 		return getPersistence().findByCompanyId_PrevAndNext(id, companyId, obc);
 	}
 
+	public static java.util.List findBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySmallImageId(smallImageId);
+	}
+
+	public static java.util.List findBySmallImageId(long smallImageId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findBySmallImageId(smallImageId, begin, end);
+	}
+
+	public static java.util.List findBySmallImageId(long smallImageId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySmallImageId(smallImageId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findBySmallImageId_First(
+		long smallImageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findBySmallImageId_First(smallImageId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findBySmallImageId_Last(
+		long smallImageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findBySmallImageId_Last(smallImageId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findBySmallImageId_PrevAndNext(
+		long id, long smallImageId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findBySmallImageId_PrevAndNext(id,
+			smallImageId, obc);
+	}
+
 	public static java.util.List findByG_A(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_A(groupId, articleId);
@@ -446,6 +485,11 @@ public class JournalArticleUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeBySmallImageId(smallImageId);
+	}
+
 	public static void removeByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_A(groupId, articleId);
@@ -495,6 +539,11 @@ public class JournalArticleUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countBySmallImageId(smallImageId);
 	}
 
 	public static int countByG_A(long groupId, java.lang.String articleId)

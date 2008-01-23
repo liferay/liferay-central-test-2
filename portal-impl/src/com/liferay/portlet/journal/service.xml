@@ -63,6 +63,9 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="SmallImageId" return-type="Collection">
+			<finder-column name="smallImageId" />
+		</finder>
 		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
@@ -382,6 +385,9 @@
 		</finder>
 		<finder name="TemplateId" return-type="Collection">
 			<finder-column name="templateId" />
+		</finder>
+		<finder name="SmallImageId" return-type="JournalTemplate">
+			<finder-column name="smallImageId" />
 		</finder>
 		<finder name="G_T" return-type="JournalTemplate">
 			<finder-column name="groupId" />

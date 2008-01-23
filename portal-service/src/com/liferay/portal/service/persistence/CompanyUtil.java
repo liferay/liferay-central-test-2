@@ -110,6 +110,17 @@ public class CompanyUtil {
 		return getPersistence().fetchByMx(mx);
 	}
 
+	public static com.liferay.portal.model.Company findByLogoId(long logoId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
+		return getPersistence().findByLogoId(logoId);
+	}
+
+	public static com.liferay.portal.model.Company fetchByLogoId(long logoId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByLogoId(logoId);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -157,6 +168,12 @@ public class CompanyUtil {
 		getPersistence().removeByMx(mx);
 	}
 
+	public static void removeByLogoId(long logoId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
+		getPersistence().removeByLogoId(logoId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -174,6 +191,11 @@ public class CompanyUtil {
 	public static int countByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByMx(mx);
+	}
+
+	public static int countByLogoId(long logoId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByLogoId(logoId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

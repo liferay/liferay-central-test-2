@@ -85,6 +85,30 @@ public interface ShoppingItemPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItem findBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem findByMediumImageId(
+		long mediumImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
+		long mediumImageId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem findByLargeImageId(
+		long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
+		long largeImageId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
@@ -114,6 +138,18 @@ public interface ShoppingItemPersistence {
 	public void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
+	public void removeByMediumImageId(long mediumImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
+	public void removeByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
+
 	public void removeByC_S(long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException;
@@ -121,6 +157,15 @@ public interface ShoppingItemPersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException;
+
+	public int countBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByMediumImageId(long mediumImageId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByLargeImageId(long largeImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_S(long companyId, java.lang.String sku)

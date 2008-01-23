@@ -50,6 +50,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
@@ -68,6 +69,8 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUti
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
+import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
 import com.liferay.util.Time;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -684,19 +687,21 @@ public class ExportAction extends Action {
 		zipWriter.addEntry("portal-data-cms-layout.sql", sm);
 	}
 
-	protected void insertDataImage(
-			long groupId, ZipWriter zipWriter)
+	protected void insertDataImage(long groupId, ZipWriter zipWriter)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringMaker sm1 = new StringMaker();
+		StringMaker sm2 = new StringMaker();
 
 		Iterator itr = ImageLocalServiceUtil.getImagesBySize(70000).iterator();
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
 
+			long imageId = image.getImageId();
+
 			try {
-				UserLocalServiceUtil.getUserByPortraitId(image.getImageId());
+				UserLocalServiceUtil.getUserByPortraitId(imageId);
 
 				continue;
 			}
@@ -704,35 +709,84 @@ public class ExportAction extends Action {
 			}
 
 			try {
-				JournalArticleImage articleImage =
-					JournalArticleImageLocalServiceUtil.getArticleImage(
-						image.getImageId());
+				IGImage igImage =
+					IGImageLocalServiceUtil.getImageBySmallImageId(imageId);
 
-				if (articleImage.getGroupId() != groupId) {
+				IGFolder igFolder = igImage.getFolder();
+
+				if (igFolder.getGroupId() != groupId) {
+					continue;
+				}
+			}
+			catch (NoSuchImageException nsie) {
+			}
+
+			try {
+				IGImage igImage =
+					IGImageLocalServiceUtil.getImageByLargeImageId(imageId);
+
+				IGFolder igFolder = igImage.getFolder();
+
+				if (igFolder.getGroupId() != groupId) {
+					continue;
+				}
+			}
+			catch (NoSuchImageException nsie) {
+			}
+
+			try {
+				JournalArticleImage journalArticleImage =
+					JournalArticleImageLocalServiceUtil.getArticleImage(
+						imageId);
+
+				if (journalArticleImage.getGroupId() != groupId) {
 					continue;
 				}
 			}
 			catch (NoSuchArticleImageException nsaie) {
 			}
 
-			sm.append("insert into Image (");
-			sm.append("imageId, modifiedDate, text_, type_, height, width, ");
-			sm.append("size_");
-			sm.append(") values (");
-			addPKColumn(sm, image.getImageId());
-			addColumn(sm, image.getModifiedDate());
-			addColumn(sm, image.getText(), false);
-			addColumn(sm, image.getType());
-			addColumn(sm, image.getHeight());
-			addColumn(sm, image.getWidth());
-			addColumn(sm, image.getSize());
-			removeTrailingComma(sm);
-			sm.append(");\n");
+			try {
+				SCProductScreenshotLocalServiceUtil.
+					getProductScreenshotByFullImageId(imageId);
+
+				continue;
+			}
+			catch (NoSuchProductScreenshotException nspse) {
+			}
+
+			try {
+				SCProductScreenshotLocalServiceUtil.
+					getProductScreenshotByThumbnailId(imageId);
+
+				continue;
+			}
+			catch (NoSuchProductScreenshotException nspse) {
+			}
+
+			sm1.append("insert into Image (");
+			sm1.append("imageId, modifiedDate, text_, type_, height, width, ");
+			sm1.append("size_");
+			sm1.append(") values (");
+			addPKColumn(sm1, imageId);
+			addColumn(sm1, image.getModifiedDate());
+			addColumn(sm1, image.getText(), false);
+			addColumn(sm1, image.getType());
+			addColumn(sm1, image.getHeight());
+			addColumn(sm1, image.getWidth());
+			addColumn(sm1, image.getSize());
+			removeTrailingComma(sm1);
+			sm1.append(");\n");
+
+			sm2.append("<img src=\"http://localhost:8080/image?img_id=");
+			sm2.append(imageId);
+			sm2.append("\" /><br />\n");
 		}
 
-		removeTrailingNewLine(sm);
+		removeTrailingNewLine(sm1);
 
-		zipWriter.addEntry("portal-data-image.sql", sm);
+		zipWriter.addEntry("portal-data-image.sql", sm1);
+		zipWriter.addEntry("portal-data-image.html", sm2);
 	}
 
 	protected void removeTrailingComma(StringMaker sm) {

@@ -106,4 +106,14 @@ public interface SCProductScreenshotLocalService {
 
 	public java.util.List getProductScreenshots(long productEntryId)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByFullImageId(
+		long fullImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByThumbnailId(
+		long thumbnailId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

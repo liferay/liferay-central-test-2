@@ -44,6 +44,12 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyJournal());
 		verify(new VerifyMessageBoards());
 		verify(new VerifyWiki());
+
+		// VerifyImage is very powerful because it removes all images that it
+		// believes is stale. Do not run this unless you are also not managing
+		// images in Liferay's Image service for your custom models.
+
+		//verify(new VerifyImage());
 	}
 
 	private static Log _log = LogFactory.getLog(VerifyProcessSuite.class);

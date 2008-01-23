@@ -80,6 +80,13 @@ public interface CompanyPersistence {
 	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Company findByLogoId(long logoId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
+	public com.liferay.portal.model.Company fetchByLogoId(long logoId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -109,6 +116,10 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException;
 
+	public void removeByLogoId(long logoId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByWebId(java.lang.String webId)
@@ -118,6 +129,9 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException;
+
+	public int countByLogoId(long logoId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
