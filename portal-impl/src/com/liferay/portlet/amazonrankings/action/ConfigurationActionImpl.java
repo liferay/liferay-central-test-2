@@ -68,7 +68,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+				req, portletResource);
 
 		prefs.setValues("isbns", isbns);
 

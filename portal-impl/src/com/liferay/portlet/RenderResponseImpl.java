@@ -118,7 +118,7 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		try {
 			PortletPreferences portletSetup =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					_req, _portletName, true, true);
+					_req, _portletName);
 
 			plid = GetterUtil.getLong(portletSetup.getValue(
 				"portlet-setup-link-to-plid", String.valueOf(_plid)));

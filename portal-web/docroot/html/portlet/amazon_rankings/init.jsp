@@ -33,7 +33,7 @@ PortletPreferences prefs = renderRequest.getPreferences();
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
 String[] isbns = prefs.getValues("isbns", new String[0]);

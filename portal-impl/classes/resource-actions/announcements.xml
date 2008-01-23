@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>83</portlet-name>
+		<supports>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<layout-manager>
+			<action-key>VIEW</action-key>
+		</layout-manager>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+</resource-action-mapping>

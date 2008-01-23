@@ -57,8 +57,6 @@ public class GetLookAndFeelAction extends JSONAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
@@ -72,7 +70,7 @@ public class GetLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
 
 		return PortletSetupUtil.cssToString(portletSetup);
 	}

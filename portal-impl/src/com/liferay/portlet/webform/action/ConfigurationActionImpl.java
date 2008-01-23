@@ -72,8 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		if (Validator.isNull(title)) {
 			SessionErrors.add(req, "titleRequired");

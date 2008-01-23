@@ -70,7 +70,7 @@ public class ViewAction extends PortletAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId(), true, true);
+				req, portlet.getPortletId());
 
 		String layoutTemplateId = prefs.getValue(
 			"layout-template-id",

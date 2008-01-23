@@ -121,8 +121,7 @@ public class EditSupportedClientsAction extends PortletAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);

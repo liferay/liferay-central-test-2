@@ -70,7 +70,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+				req, portletResource);
 
 		prefs.setValue("group-id", String.valueOf(groupId));
 		prefs.setValue("article-id", articleId);

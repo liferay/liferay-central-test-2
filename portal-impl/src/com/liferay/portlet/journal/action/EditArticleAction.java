@@ -512,7 +512,7 @@ public class EditArticleAction extends PortletAction {
 		if (Validator.isNotNull(portletResource)) {
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					uploadReq, portletResource, true, true);
+					uploadReq, portletResource);
 
 			prefs.setValue("group-id", String.valueOf(article.getGroupId()));
 			prefs.setValue("article-id", article.getArticleId());

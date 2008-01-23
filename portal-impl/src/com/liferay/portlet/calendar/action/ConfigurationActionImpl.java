@@ -60,7 +60,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, false, true);
+				req, portletResource);
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 

@@ -63,8 +63,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		prefs.setValue("movie", movie);
 		prefs.setValue("flash-attributes", flashAttributes);
