@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -29,6 +30,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.util.diff.DiffUtil;
 
 import java.io.InputStream;
@@ -95,6 +97,10 @@ public class CompareVersionsAction extends PortletAction {
 			double targetVersion,  ThemeDisplay themeDisplay,
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
+
+		DLFileEntryPermission.check(
+			themeDisplay.getPermissionChecker(), folderId, name, 
+			ActionKeys.VIEW);
 
 		long companyId = themeDisplay.getCompanyId();
 		long userId = themeDisplay.getUserId();
