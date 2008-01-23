@@ -41,90 +41,85 @@ catch (Exception e) {
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
 
-		<%
-		Date publishedDate = feed.getPublishedDate();
-		String description = feed.getDescription();
-		SyndImage feedImage = feed.getImage();
-		%>
-
-		<c:if test="<%= showFeedTitle %>">
-			<div class="feed-title">
-				<a href="<%= feed.getLink() %>" target="_new"><%= title %></a>
-			</div>
-		</c:if>
-
-		<c:if test="<%= (publishedDate != null) && showFeedPublishedDate %>">
-			<div class="feed-published-date">
-				<a href="<%= feed.getLink() %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
-			</div>
-		</c:if>
-
-		<c:if test="<%= Validator.isNotNull(description) && showFeedDescription %>">
-			<div class="feed-description">
-				<%= Html.escape(description) %>
-			</div>
-		</c:if>
-
-		<c:if test="<%= (feedImage != null) && showFeedImage %>">
-			<div class="feed-image-<%= feedImageAlignment %>">
-				<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img alt="<%= feedImage.getDescription() %>" src="<%= feedImage.getUrl() %>" /></a>
-			</div>
-		</c:if>
-
-		<div class="feed-entry">
-
+		<div class="feed">
 			<%
-			List entries = feed.getEntries();
-
-			for (int j = 0; j < entries.size(); j++) {
-				SyndEntry entry = (SyndEntry)entries.get(j);
-
-				String author = entry.getAuthor();
-
-				SyndContent content = entry.getDescription();
+			Date publishedDate = feed.getPublishedDate();
+			String description = feed.getDescription();
+			SyndImage feedImage = feed.getImage();
 			%>
 
-				<div>
-					<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
-
-					<div>
-						<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
-
-						<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
-							<c:if test="<%= entry.getPublishedDate() != null %>">
-								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
-							</c:if>
-
-							<c:if test="<%= Validator.isNotNull(author) %>">
-								<span class="feed-entry-author"><%= author %></span>
-							</c:if>
-
-							<c:if test="<%= content != null %>">
-								<%= content.getValue() %>
-							</c:if>
-
-							<br />
-						</div>
-					</div>
+			<c:if test="<%= showFeedTitle %>">
+				<div class="feed-title">
+					<a href="<%= feed.getLink() %>" target="_new"><%= title %></a>
 				</div>
+			</c:if>
 
-			<%
-				if ((j + 1) >= entriesPerFeed) {
-					break;
+			<c:if test="<%= (publishedDate != null) && showFeedPublishedDate %>">
+				<div class="feed-published-date feed-date">
+					<a href="<%= feed.getLink() %>" target="_new"><%= dateFormatDateTime.format(publishedDate) %></a>
+				</div>
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(description) && showFeedDescription %>">
+				<div class="feed-description">
+					<%= Html.escape(description) %>
+				</div>
+			</c:if>
+
+			<c:if test="<%= (feedImage != null) && showFeedImage %>">
+				<div class="feed-image-<%= feedImageAlignment %>">
+					<a href="<%= feedImage.getLink() %>" target="_new" title="<%= feedImage.getTitle() %>"><img alt="<%= feedImage.getDescription() %>" src="<%= feedImage.getUrl() %>" /></a>
+				</div>
+			</c:if>
+
+			<div class="feed-entries">
+
+				<%
+				List entries = feed.getEntries();
+
+				for (int j = 0; j < entries.size(); j++) {
+					SyndEntry entry = (SyndEntry)entries.get(j);
+
+					String author = entry.getAuthor();
+
+					SyndContent content = entry.getDescription();
+				%>
+
+					<div class="feed-entry">
+	          <img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
+
+							<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
+
+							<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
+								<c:if test="<%= entry.getPublishedDate() != null %>">
+									<div class="feed-date">
+										<%= dateFormatDateTime.format(entry.getPublishedDate()) %>
+									</div>
+								</c:if>
+
+								<c:if test="<%= Validator.isNotNull(author) %>">
+									<span class="feed-entry-author"><%= author %></span>
+								</c:if>
+
+								<c:if test="<%= content != null %>">
+									<%= content.getValue() %>
+								</c:if>
+							</div>
+					</div>
+
+				<%
+					if ((j + 1) >= entriesPerFeed) {
+						break;
+					}
 				}
-			%>
+				%>
 
-				<br />
+			</div>
 
-			<%
-			}
-			%>
-
+			<c:if test="<%= !last %>">
+				<div class="separator"><!--  --></div>
+			</c:if>
 		</div>
-
-		<c:if test="<%= !last %>">
-			<div class="separator"><!--  --></div>
-		</c:if>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-error">

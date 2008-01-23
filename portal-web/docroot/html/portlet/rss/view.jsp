@@ -68,30 +68,19 @@ for (int i = 0; i < urls.length; i++) {
 <script type="text/javascript">
 	jQuery(
 		function() {
-			var currentPortlet = jQuery('#p_p_id<portlet:namespace />');
-
-			currentPortlet.Accordion({
-				headerSelector: '.header',
-				panelSelector: '.feeds',
-				panelHeight: jQuery("#p_p_id<portlet:namespace /> .feeds:first").height(),
-				speed: 300
-			});
-
-			if (!jQuery.browser.msie) {
-				currentPortlet.css('overflow', 'visible');
-			}
-
+			var minusImage = '01_minus.png';
+			var plusImage = '01_plus.png';
 			jQuery(".<portlet:namespace />entry-expander").click(
 				function() {
-					if (this.src.match(".*minus\.png")) {
+					if (this.src.indexOf('minus.png') > -1) {
 						jQuery(".feed-entry-content", this.parentNode).slideUp();
 
-						this.src = themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
+						this.src = this.src.replace(minusImage, plusImage);// themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
 					}
 					else {
 						jQuery(".feed-entry-content", this.parentNode).slideDown();
 
-						this.src = themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
+						this.src = this.src = this.src.replace(plusImage, minusImage); //themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
 					}
 				}
 			);

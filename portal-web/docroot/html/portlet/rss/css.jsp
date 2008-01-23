@@ -28,8 +28,12 @@
  	margin: 0 0 5px 0;
 }
 
-.portlet-rss .feed-entry {
+.portlet-rss .feed-entries {
 	font-size: 1.1em;
+}
+
+.portlet-rss .feed-entry {
+	margin-bottom: 4px;
 }
 
 .portlet-rss .feed-entry-author {
@@ -38,17 +42,28 @@
 }
 
 .portlet-rss .feed-entry-content {
+	padding-left: 1.8em;
+}
+
+.portlet-rss .feed-entry-content img {
+	margin-right: 0.5em;
+}
+
+.portlet-rss .feed-date {
+	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
+	margin: 0.3em 0;
+	padding-left: 20px;
 }
 
 .portlet-rss .feed-entry-expander {
 	float: left;
 	cursor: pointer;
+	padding-right: 5px;
 }
 
 .portlet-rss .feed-entry-title {
 	font-weight: bold;
 	display: block;
- 	margin: 0 0 4px 0;
 }
 
 .portlet-rss .feed-image-left {
@@ -61,6 +76,10 @@
  	margin: 0 0 4px 4px;
 }
 
+.portlet-rss .feed-published-date.feed-date {
+	background-image: url(<%= themeImagesPath %>/common/date.png)
+}
+
 .portlet-rss .feed-published-date a {
 	font-weight: bold;
 	text-decoration: none;
@@ -69,4 +88,18 @@
 .portlet-rss .feed-title {
 	font-size: 1.2em;
 	font-weight: bold;
+	margin: 0 0 0.5em -20px;
+}
+
+.portlet-rss .feed-title a {
+	background: url(<%= themeImagesPath %>/common/news.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.portlet-rss .feed {
+	padding-left: 20px;
+}
+
+.portlet-rss .feed .separator {
+	margin-left: -20px;
 }

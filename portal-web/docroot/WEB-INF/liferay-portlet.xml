@@ -467,7 +467,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-		<header-portal-css>/html/portlet/rss/css.jsp</header-portal-css>
+		<header-portlet-css>/html/portlet/rss/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>

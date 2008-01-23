@@ -155,10 +155,10 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 			<tr>
 				<td>
-					<input name="<portlet:namespace />title" value="<%= title %>" />
+					<input name="<portlet:namespace />title" type="text" value="<%= title %>" />
 				</td>
 				<td>
-					<input class="lfr-input-text" name="<portlet:namespace />url" value="<%= urls[i] %>" />
+					<input class="lfr-input-text" name="<portlet:namespace />url" type="text" value="<%= urls[i] %>" />
 				</td>
 				<td>
 					<a href="javascript: ;" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
