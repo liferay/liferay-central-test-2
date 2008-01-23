@@ -1923,6 +1923,7 @@ there-are-no-articles=مقاله ای وجود ندارد
 there-are-no-blogs=وب لاگی وجود ندارد
 there-are-no-categories=طبقه بندی وجود ندارد
 there-are-no-coupons=کوپنی وجود ندارد
+there-are-no-differences-between-x-and-x=There are no differences between <i>{0}</i> and <i>{1}</i>.
 there-are-no-entries-for-this-category-on=برای {0} هيچ ورودی روی اين طبقه بندی وجود ندارد.
 there-are-no-entries=هيچ طبقه بندی وجود ندارد
 there-are-no-events-on-this-day=هيچ رويدادی در اين روز وجود ندارد

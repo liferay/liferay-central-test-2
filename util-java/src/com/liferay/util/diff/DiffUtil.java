@@ -60,14 +60,16 @@ public class DiffUtil {
 
 	public static final String CLOSE_DEL = "</del>";
 
-	public static final String CONTEXT_LINE = "<context-line/>";
+	public static final String CONTEXT_LINE = "<context-line />";
 
 	/**
 	 * This is a diff method with default values.
 	 *
 	 * @param		source the <code>Reader</code> of the source text
 	 * @param		target the <code>Reader</code> of the target text
-	 * @return		a list of <code>DiffResults</code>
+	 * @return		an array containing two lists of <code>DiffResults</code>,
+	 * 				the first element contains DiffResults related to changes
+	 * 				in source and the second element to changes in target
 	 */
 	public static List[] diff(Reader source, Reader target) {
 		int margin = 2;
@@ -92,7 +94,7 @@ public class DiffUtil {
 	 * @param		deletedMarkerEnd the end marker for highlighting removals
 	 * @param		margin the number of lines that will be added before the
 	 * 				first changed line
-	 * @return		An array containing two Lists of <code>DiffResults</code>,
+	 * @return		an array containing two lists of <code>DiffResults</code>,
 	 * 				the first element contains DiffResults related to changes
 	 * 				in source and the second element to changes in target
 	 */
@@ -104,7 +106,7 @@ public class DiffUtil {
 		List sourceResults = new ArrayList();
 		List targetResults = new ArrayList();
 
-		List[] results = new List[]{sourceResults, targetResults};
+		List[] results = new List[] {sourceResults, targetResults};
 
 		// Convert the texts to Lists where each element are lines of the texts.
 
@@ -147,8 +149,9 @@ public class DiffUtil {
 					targetResults, targetStringList, difference.getAddedStart(),
 					margin);
 
-				int deletedLines = difference.getDeletedEnd() + 1 -
-					difference.getDeletedStart();
+				int deletedLines =
+					difference.getDeletedEnd() + 1 -
+						difference.getDeletedStart();
 
 				for (int i = 0; i < deletedLines; i++) {
 					changedLines.add(CONTEXT_LINE);
@@ -175,8 +178,8 @@ public class DiffUtil {
 					sourceResults, sourceStringList,
 					difference.getDeletedStart(), margin);
 
-				int addedLines = difference.getAddedEnd() + 1 -
-					difference.getAddedStart();
+				int addedLines =
+					difference.getAddedEnd() + 1 - difference.getAddedStart();
 
 				for (int i = 0; i < addedLines; i++) {
 					changedLines.add(CONTEXT_LINE);

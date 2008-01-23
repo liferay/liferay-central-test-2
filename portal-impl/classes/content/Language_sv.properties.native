@@ -2762,6 +2762,7 @@ there-are-no-articles=Det finns inga artiklar.
 there-are-no-blogs=Det finns inga bloggar.
 there-are-no-categories=Det finns inga kategorier.
 there-are-no-coupons=Det finns inga kuponger.
+there-are-no-differences-between-x-and-x=There are no differences between <i>{0}</i> and <i>{1}</i>.
 there-are-no-documents=Det finns inga dokument.
 there-are-no-entries-for-this-category-on=Det finns ingen data för kategorin den {0}.
 there-are-no-entries=Det finns ingen data.

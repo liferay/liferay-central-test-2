@@ -2291,6 +2291,7 @@ there-are-no-articles=لا توجد مقالات.
 there-are-no-blogs=لا توجد مدوّنات.
 there-are-no-categories=لا توجد تصانيف.
 there-are-no-coupons=لا توجد كوبونات.
+there-are-no-differences-between-x-and-x=There are no differences between <i>{0}</i> and <i>{1}</i>.
 there-are-no-entries-for-this-category-on=لا توجد مدخلات في هذا التصنيف في {0}.
 there-are-no-entries=لا توجد مدخلات.
 there-are-no-events-on-this-day=لا توجد مناسبات لهذا اليوم.

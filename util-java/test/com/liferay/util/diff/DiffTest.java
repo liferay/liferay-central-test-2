@@ -93,8 +93,8 @@ public class DiffTest extends TestCase {
 
 		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
 
-		expectedTarget.add(new DiffResult(
-				0, DiffUtil.OPEN_INS + "bbb" + DiffUtil.CLOSE_INS));
+		expectedTarget.add(
+			new DiffResult(0, DiffUtil.OPEN_INS + "bbb" + DiffUtil.CLOSE_INS));
 
 		expectedSource.add(
 			new DiffResult(0, DiffUtil.OPEN_DEL + "aaa" + DiffUtil.CLOSE_DEL));

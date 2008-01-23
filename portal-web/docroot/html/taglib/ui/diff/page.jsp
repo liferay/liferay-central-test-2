@@ -27,110 +27,118 @@
 <%@ page import="com.liferay.util.diff.DiffResult" %>
 <%@ page import="com.liferay.util.diff.DiffUtil" %>
 
-<style>
-	.diff-table {
-		width: 100%;
-		border-spacing: 5pt;
-		border-collapse: separate;
-	}
-	.diff-context {
-		background: #EEEEEE;
-	}
-	.diff-deletedline, #diff-results del {
-		background: #FFE6E6;
-	}
-	.diff-addedline, #diff-results ins {
-		background: #E6FFE6;
-	}
-</style>
-
 <%
 String sourceName = (String)request.getAttribute("liferay-ui:diff:sourceName");
 String targetName = (String)request.getAttribute("liferay-ui:diff:targetName");
 List[] diffResults = (List[])request.getAttribute("liferay-ui:diff:diffResults");
 
-Iterator sourceItr = diffResults[0].iterator();
-Iterator targetItr = diffResults[1].iterator();
+List sourceResults = diffResults[0];
+List targetResults = diffResults[1];
+%>
 
-while (sourceItr.hasNext()) {
-	DiffResult sourceResult = (DiffResult)sourceItr.next();
-	DiffResult targetResult = (DiffResult)targetItr.next();
+<c:choose>
+	<c:when test="<%= sourceResults.size() > 0 %>">
+		<table class="taglib-search-iterator" id="taglib-diff-results">
+		<tr>
+			<td>
+				<%= sourceName %>
+			</td>
+			<td>
+				<%= targetName %>
+			</td>
+		</tr>
 
-	%>
-	<table id="diff-results" class="taglib-search-iterator">
-		<tbody>
+		<%
+		Iterator sourceItr = sourceResults.iterator();
+		Iterator targetItr = targetResults.iterator();
+
+		while (sourceItr.hasNext()) {
+			DiffResult sourceResult = (DiffResult)sourceItr.next();
+			DiffResult targetResult = (DiffResult)targetItr.next();
+		%>
+
 			<tr class="portlet-section-header">
-				<th class="col-1"> <%= sourceName %> <liferay-ui:message key="at-line" /> <%= sourceResult.getLineNumber() %> </th>
-				<th class="col-1"> <%= targetName %> <liferay-ui:message key="at-line" /> <%= targetResult.getLineNumber() %> </th>
+				<th>
+					<liferay-ui:message key="line" /> <%= sourceResult.getLineNumber() %>
+				</th>
+				<th>
+					<liferay-ui:message key="line" /> <%= targetResult.getLineNumber() %>
+				</th>
 			</tr>
 			<tr>
 				<td width="50%" valign="top">
-					<table class="diff-table">
+					<table class="taglib-diff-table">
+
 					<%
-					Iterator itr2 = sourceResult.getChangedLines().iterator();
+					Iterator itr = sourceResult.getChangedLines().iterator();
 
-					while (itr2.hasNext()) {
-						String changedLine = (String)itr2.next();
+					while (itr.hasNext()) {
+						String changedLine = (String)itr.next();
+					%>
 
-						String td = _processColumn(changedLine);
-						%>
 						<tr valign="top">
-							<%= td %>
+							<%= _processColumn(changedLine) %>
 						</tr>
-						<%
+
+					<%
 					}
 					%>
+
 					</table>
 				</td>
 				<td width="50%" valign="top">
-					<table class="diff-table">
+					<table class="taglib-diff-table">
+
 					<%
-					itr2 = targetResult.getChangedLines().iterator();
+					itr = targetResult.getChangedLines().iterator();
 
-					while (itr2.hasNext()) {
-						String changedLine = (String)itr2.next();
+					while (itr.hasNext()) {
+						String changedLine = (String)itr.next();
+					%>
 
-						String td = _processColumn(changedLine);
-						%>
-						<tr>
-							<%= td %>
+						<tr valign="top">
+							<%= _processColumn(changedLine) %>
 						</tr>
-						<%
+
+					<%
 					}
 					%>
+
 					</table>
 				</td>
 			</tr>
-		</tbody>
-	</table>
-	<%
-}
-%>
+
+		<%
+		}
+		%>
+
+		</table>
+	</c:when>
+	<c:otherwise>
+		<%= LanguageUtil.format(pageContext, "there-are-no-differences-between-x-and-x", new Object[] {sourceName, targetName}) %>
+	</c:otherwise>
+</c:choose>
 
 <%!
-    private String _processColumn(String changedLine) {
+private static String _processColumn(String changedLine) {
+	changedLine = changedLine.replaceAll(" ", "&nbsp;");
+	changedLine = changedLine.replaceAll("\t", "&nbsp;&nbsp;&nbsp;");
 
-    	changedLine = changedLine.replaceAll(" ", "&nbsp;");
-    	changedLine = changedLine.replaceAll("\t", "&nbsp;&nbsp;&nbsp;");
+	String column = "<td>" + changedLine + "</td>";
 
-    	String column = "<td>" + changedLine + "</td>";
+	if (changedLine.equals(StringPool.BLANK)) {
+		return "<td>&nbsp;</td>";
+	}
+	else if (changedLine.equals(DiffUtil.CONTEXT_LINE)) {
+		return "<td class=\"taglib-diff-context\">&nbsp;</td>";
+	}
+	else if (changedLine.equals(DiffUtil.OPEN_INS + DiffUtil.CLOSE_INS)) {
+		return "<td class=\"taglib-diff-addedline\">&nbsp;</td>";
+	}
+	else if (changedLine.equals(DiffUtil.OPEN_DEL + DiffUtil.CLOSE_DEL)) {
+		return "<td class=\"taglib-diff-deletedline\">&nbsp;</td>";
+	}
 
-    	if (changedLine.equals(StringPool.BLANK)) {
-	    	return "<td>&nbsp;</td>";
-    	}
-
-    	if (changedLine.equals(DiffUtil.CONTEXT_LINE)) {
-			return "<td class=\"diff-context\">&nbsp;</td>";
-		}
-
-		if (changedLine.equals(DiffUtil.OPEN_INS + DiffUtil.CLOSE_INS)) {
-			return "<td class=\"diff-addedline\">&nbsp;</td>";
-		}
-
-		if (changedLine.equals(DiffUtil.OPEN_DEL + DiffUtil.CLOSE_DEL)) {
-			return "<td class=\"diff-deletedline\">&nbsp;</td>";
-		}
-
-       return column;
-    }
+	return column;
+}
 %>

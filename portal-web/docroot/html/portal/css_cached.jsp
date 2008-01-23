@@ -1003,6 +1003,26 @@ li.toggle-expand a {
 	vertical-align: middle;
 }
 
+/* ---------- Taglib diff thread ---------- */
+
+.taglib-diff-addedline, #taglib-diff-results ins {
+	background: #E6FFE6;
+}
+
+.taglib-diff-context {
+	background: #EEEEEE;
+}
+
+.taglib-diff-deletedline, #taglib-diff-results del {
+	background: #FFE6E6;
+}
+
+.taglib-diff-table {
+	border-collapse: separate;
+	border-spacing: 5pt;
+	width: 100%;
+}
+
 /* ---------- Taglib search iterator ---------- */
 
 .taglib-search-iterator {

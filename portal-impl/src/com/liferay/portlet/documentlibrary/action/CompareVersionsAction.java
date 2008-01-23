@@ -24,14 +24,16 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.util.diff.DiffUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,9 +45,6 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -64,24 +63,21 @@ public class CompareVersionsAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
+		try {
+			compareVersions(req);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchFileEntryException ||
+				e instanceof PrincipalException) {
 
-		double sourceVersion = ParamUtil.getDouble(req, "sourceVersion");
-		double targetVersion = ParamUtil.getDouble(req, "targetVersion");
+				SessionErrors.add(req, e.getClass().getName());
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
-
-		compareVersions(
-			folderId, name, sourceVersion, targetVersion, themeDisplay, httpReq,
-			httpRes);
-
+				setForward(req, "portlet.document_library.error");
+			}
+			else {
+				throw e;
+			}
+		}
 	}
 
 	public ActionForward render(
@@ -92,18 +88,25 @@ public class CompareVersionsAction extends PortletAction {
 		return mapping.findForward("portlet.document_library.compare_versions");
 	}
 
-	protected void compareVersions(
-			long folderId, String name, double sourceVersion,
-			double targetVersion,  ThemeDisplay themeDisplay,
-			HttpServletRequest req, HttpServletResponse res)
-		throws Exception {
-
-		DLFileEntryPermission.check(
-			themeDisplay.getPermissionChecker(), folderId, name, 
-			ActionKeys.VIEW);
+	protected void compareVersions(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		long companyId = themeDisplay.getCompanyId();
 		long userId = themeDisplay.getUserId();
+
+		long folderId = ParamUtil.getLong(req, "folderId");
+		String name = ParamUtil.getString(req, "name");
+
+		DLFileEntryPermission.check(
+			themeDisplay.getPermissionChecker(), folderId, name,
+			ActionKeys.VIEW);
+
+		String titleWithExtension = ParamUtil.getString(
+			req, "titleWithExtension");
+
+		double sourceVersion = ParamUtil.getDouble(req, "sourceVersion");
+		double targetVersion = ParamUtil.getDouble(req, "targetVersion");
 
 		InputStream sourceIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, sourceVersion);
@@ -113,8 +116,12 @@ public class CompareVersionsAction extends PortletAction {
 		List[] diffResults = DiffUtil.diff(
 			new InputStreamReader(sourceIs), new InputStreamReader(targetIs));
 
-		req.setAttribute(WebKeys.SOURCE_NAME, name + " " + sourceVersion);
-		req.setAttribute(WebKeys.TARGET_NAME, name + " " + targetVersion);
+		req.setAttribute(
+			WebKeys.SOURCE_NAME,
+			titleWithExtension + StringPool.SPACE + sourceVersion);
+		req.setAttribute(
+			WebKeys.TARGET_NAME,
+			titleWithExtension + StringPool.SPACE + targetVersion);
 		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 

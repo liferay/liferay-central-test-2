@@ -80,25 +80,17 @@ portletURL.setParameter("name", name);
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />lock() {
-		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
-	}
-
-	function <portlet:namespace />unlock() {
-		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
-	}
-
 	function <portlet:namespace />compare() {
 		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
 		var sourceVersion = jQuery('input[@name="<portlet:namespace />sourceVersion"]');
 		var targetVersion = jQuery('input[@name="<portlet:namespace />targetVersion"]');
 
-		if (rowIds.length  == 1) {
+		if (rowIds.length == 1) {
 			sourceVersion.val(rowIds[0].value);
 		}
-		else if (rowIds.length  == 2) {
-			targetVersion.val(rowIds[0].value);
+		else if (rowIds.length == 2) {
 			sourceVersion.val(rowIds[1].value);
+			targetVersion.val(rowIds[0].value);
 		}
 
 		submitForm(document.<portlet:namespace />fm);
@@ -111,47 +103,57 @@ portletURL.setParameter("name", name);
   		var totalChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked').length;
 
   		for (i = 0; i < rowIds.length; i++) {
-  			if (rowIds[i].checked && found < 2) {
+  			if (rowIds[i].checked && (found < 2)) {
   				found++;
-  				continue;
   			}
+  			else if (totalChecked == 0) {
 
-  			 if (totalChecked == 0) {
-      			// enable everything
-      			rowIds[i].checked = false;
+				// Enable everything
+
+				rowIds[i].checked = false;
       			rowIds[i].disabled = false;
-      			continue;
-    		 }
-
-    		 if (found == 0 && totalChecked == 1) {
-      			// disable everything up to the first one
-      			rowIds[i].checked = false;
-      			rowIds[i].disabled = true;
-      			continue;
     		}
+    		else if ((found == 0) && (totalChecked == 1)) {
 
-    		if (found == 1 && totalChecked >= 1) {
-      			// un-select everything after the first one
-      			rowIds[i].checked = false;
+				// Disable everything up to the first one
+
+				rowIds[i].checked = false;
+      			rowIds[i].disabled = true;
+    		}
+    		else if ((found == 1) && (totalChecked >= 1)) {
+
+				// Unselect everything after the first one
+
+				rowIds[i].checked = false;
       			rowIds[i].disabled = false;
-      			continue;
     		}
+    		else if ((found == 2) && (totalChecked >= 2)) {
 
-    		if (found == 2 && totalChecked >= 2) {
-      			// disable elements after the second one
-      			rowIds[i].checked = false;
+				// Disable elements after the second one
+
+				rowIds[i].checked = false;
       			rowIds[i].disabled = true;
-      			continue;
     		}
 		}
 	}
 
-	jQuery(document).ready(function(){
-		jQuery('input[@name=<portlet:namespace />rowIds]').click(function () {
-			<portlet:namespace />inactivateRowIds(this);
-		});
-	});
+	function <portlet:namespace />lock() {
+		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
+	}
 
+	function <portlet:namespace />unlock() {
+		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
+	}
+
+	jQuery(document).ready(
+		function() {
+			jQuery('input[@name=<portlet:namespace />rowIds]').click(
+				function() {
+					<portlet:namespace />inactivateRowIds(this);
+				}
+			);
+		}
+	);
 </script>
 
 <c:if test="<%= isLocked.booleanValue() %>">
@@ -418,6 +420,8 @@ portletURL.setParameter("name", name);
 		<c:when test='<%= tabs2.equals("version-history") %>'>
 
 			<%
+			boolean comparableFileEntry = (extension.endsWith("htm") || extension.endsWith("html") || extension.endsWith("txt")  || extension.endsWith("xml"));
+
 			SearchContainer searchContainer = new SearchContainer();
 
 			List headerNames = new ArrayList();
@@ -435,9 +439,11 @@ portletURL.setParameter("name", name);
 				headerNames.add(StringPool.BLANK);
 			}
 
-			RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
-			searchContainer.setRowChecker(rowChecker);
 			searchContainer.setHeaderNames(headerNames);
+
+			if (comparableFileEntry) {
+				searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
+			}
 
 			List results = DLFileVersionLocalServiceUtil.getFileVersions(folderId, name);
 			List resultRows = searchContainer.getResultRows();
@@ -445,7 +451,7 @@ portletURL.setParameter("name", name);
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, fileVersion.getVersion() + "", i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -487,21 +493,25 @@ portletURL.setParameter("name", name);
 
 				resultRows.add(row);
 			}
-			%>
 
-			<%
-			if (results.size() > 0) {
+			if (comparableFileEntry && (results.size() > 0)) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(0);
 			%>
+
 				<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/compare_versions" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
+				<input name="<portlet:namespace />backURL" type="hidden" value="<%= currentURL %>" />
 				<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 				<input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
+				<input name="<portlet:namespace />titleWithExtension" type="hidden" value="<%= titleWithExtension %>" />
 				<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
 				<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
-				<input name="<portlet:namespace />backURL" type="hidden" value="<%= currentURL %>" />
 
-				<input type="submit" value="<liferay-ui:message key="compare-versions" />" /><br />
+				<input type="submit" value="<liferay-ui:message key="compare-versions" />" />
+
 				</form>
+
+				<br />
+
 			<%
 			}
 			%>

@@ -1844,6 +1844,7 @@ there-are-no-articles=Нет статей.
 there-are-no-blogs=Нет blog-ов.
 there-are-no-categories=Нет категорий.
 there-are-no-coupons=Нет купонов.
+there-are-no-differences-between-x-and-x=There are no differences between <i>{0}</i> and <i>{1}</i>.
 there-are-no-entries-for-this-category-on=Нет записей для этой категории на {0}.
 there-are-no-entries=Нет записей.
 there-are-no-events-on-this-day=В этот день событий нет.

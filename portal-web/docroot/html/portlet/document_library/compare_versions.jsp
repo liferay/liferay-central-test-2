@@ -25,14 +25,16 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String backURL = ParamUtil.getString(request, "backURL");
+
 String sourceName = (String)renderRequest.getAttribute(WebKeys.SOURCE_NAME);
 String targetName = (String)renderRequest.getAttribute(WebKeys.TARGET_NAME);
 List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 %>
 
 <liferay-ui:tabs
-	names="diffs"
-	backURL="<%= ParamUtil.getString(renderRequest, "backURL") %>"
+	names="diff"
+	backURL="<%= backURL %>"
 />
 
 <liferay-ui:diff

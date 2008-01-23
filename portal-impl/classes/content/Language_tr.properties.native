@@ -929,6 +929,7 @@ the-user-id-you-requested-is-reserved=Bu kullanıcı ismi sistem tarafından ayr
 the-verse-could-not-be-found=Ayet bulunamadı.
 the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it=The {0} portlet does not have any data that can be exported or does not include support for it.
 there-are-currently-x-users-in-x-rooms=There are currently {0} users in {1} rooms.
+there-are-no-differences-between-x-and-x=There are no differences between <i>{0}</i> and <i>{1}</i>.
 there-are-no-entries-for-this-category-on=There are no entries for this category on {0}.
 there-are-no-events-on-this-day=Bu gün için aktivite yok.
 there-are-no-folders=Klasör yok.
