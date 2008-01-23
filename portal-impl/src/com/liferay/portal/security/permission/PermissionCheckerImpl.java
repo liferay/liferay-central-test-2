@@ -561,7 +561,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		boolean hasLayoutManagerPermission = true;
 
 		if (Validator.isNotNull(name) && Validator.isNotNull(primKey) &&
-			StringUtil.endsWith(primKey, PortletImpl.LAYOUT_SEPARATOR + name)) {
+			primKey.contains(PortletImpl.LAYOUT_SEPARATOR)) {
 
 			hasLayoutManagerPermission =
 				PortletPermissionUtil.hasLayoutManagerPermission(
