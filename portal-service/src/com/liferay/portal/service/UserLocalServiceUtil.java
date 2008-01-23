@@ -1379,22 +1379,6 @@ public class UserLocalServiceUtil {
 			remoteHost, userAgent);
 	}
 
-	public static void setGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.setGroupUsers(groupId, userIds);
-	}
-
-	public static void setOrganizationUsers(long organizationId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.setOrganizationUsers(organizationId, userIds);
-	}
-
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

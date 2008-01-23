@@ -321,7 +321,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
-			groupLocalService.setUserGroups(user.getUserId(), groupIds);
+			groupLocalService.addUserGroups(user.getUserId(), groupIds);
 
 			Role adminRole = roleLocalService.getRole(
 				companyId, RoleImpl.ADMINISTRATOR);

@@ -508,14 +508,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void setUserGroups(long userId, long[] groupIds)
-		throws PortalException, SystemException {
-
-		userPersistence.removeGroups(userId, groupIds);
-
-		addUserGroups(userId, groupIds);
-	}
-
 	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
@@ -527,13 +519,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void unsetUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		long[] userIds = new long[] {userId};
-
-		for (int i = 0; i < groupIds.length; i++) {
-			long groupId = groupIds[i];
-
-			userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
-		}
+		userGroupRoleLocalService.deleteUserGroupRoles(userId, groupIds);
 
 		userPersistence.removeGroups(userId, groupIds);
 

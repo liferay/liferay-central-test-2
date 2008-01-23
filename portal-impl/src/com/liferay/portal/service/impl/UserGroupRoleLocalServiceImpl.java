@@ -92,6 +92,30 @@ public class UserGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void deleteUserGroupRoles(long userId, long[] groupIds)
+		throws SystemException {
+
+		for (int i = 0; i < groupIds.length; i++) {
+			long groupId = groupIds[i];
+
+			userGroupRolePersistence.removeByU_G(userId, groupId);
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteUserGroupRoles(long[] userIds, long groupId)
+		throws SystemException {
+
+		for (int i = 0; i < userIds.length; i++) {
+			long userId = userIds[i];
+
+			userGroupRolePersistence.removeByU_G(userId, groupId);
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void deleteUserGroupRoles(
 			long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
@@ -124,18 +148,6 @@ public class UserGroupRoleLocalServiceImpl
 			}
 			catch (NoSuchUserGroupRoleException nsugre) {
 			}
-		}
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void deleteUserGroupRoles(long[] userIds, long groupId)
-		throws SystemException {
-
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
-			userGroupRolePersistence.removeByU_G(userId, groupId);
 		}
 
 		PermissionCacheUtil.clearCache();

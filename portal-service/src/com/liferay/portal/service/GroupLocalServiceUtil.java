@@ -1370,14 +1370,6 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
-	public static void setUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		groupLocalService.setUserGroups(userId, groupIds);
-	}
-
 	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

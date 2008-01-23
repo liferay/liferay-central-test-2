@@ -810,6 +810,20 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.addUserGroupRoles(userIds, groupId, roleId);
 	}
 
+	public static void deleteUserGroupRoles(long userId, long[] groupIds)
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.deleteUserGroupRoles(userId, groupIds);
+	}
+
+	public static void deleteUserGroupRoles(long[] userIds, long groupId)
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
+	}
+
 	public static void deleteUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException, 
@@ -826,13 +840,6 @@ public class UserGroupRoleLocalServiceUtil {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
 		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId, roleId);
-	}
-
-	public static void deleteUserGroupRoles(long[] userIds, long groupId)
-		throws com.liferay.portal.SystemException {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
 	}
 
 	public static void deleteUserGroupRolesByGroupId(long groupId)

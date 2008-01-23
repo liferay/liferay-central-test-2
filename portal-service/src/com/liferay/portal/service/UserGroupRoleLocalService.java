@@ -345,6 +345,12 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteUserGroupRoles(long userId, long[] groupIds)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteUserGroupRoles(long[] userIds, long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -352,9 +358,6 @@ public interface UserGroupRoleLocalService {
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public void deleteUserGroupRoles(long[] userIds, long groupId)
-		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRolesByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

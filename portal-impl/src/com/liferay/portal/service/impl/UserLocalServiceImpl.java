@@ -1213,22 +1213,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public void setGroupUsers(long groupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		groupPersistence.removeUsers(groupId, userIds);
-
-		addGroupUsers(groupId, userIds);
-	}
-
-	public void setOrganizationUsers(long organizationId, long[] userIds)
-		throws PortalException, SystemException {
-
-		organizationPersistence.setUsers(organizationId, userIds);
-
-		PermissionCacheUtil.clearCache();
-	}
-
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
