@@ -72,7 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					req, portletResource, true, true);
 
 			prefs.setValue("email-message-subject", emailMessageSubject);
 			prefs.setValue("email-message-body", emailMessageBody);

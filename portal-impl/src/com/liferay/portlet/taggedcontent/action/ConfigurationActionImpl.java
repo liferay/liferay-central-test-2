@@ -58,7 +58,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
 		if (cmd.equals("add-selection")) {
 			AssetPublisherUtil.addSelection(req, prefs);

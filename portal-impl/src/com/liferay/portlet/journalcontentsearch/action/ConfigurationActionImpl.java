@@ -62,7 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource);
+				req, portletResource, true, true);
 
 		prefs.setValue("show-listed", String.valueOf(showListed));
 		prefs.setValue("target-portlet-id", targetPortletId);

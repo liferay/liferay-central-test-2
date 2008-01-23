@@ -81,7 +81,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
 		prefs.setValue("src", src);
 		prefs.setValue("relative", String.valueOf(relative));

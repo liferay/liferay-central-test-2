@@ -63,6 +63,14 @@ public class PortletPreferencesFactoryUtil {
 		return getPortletPreferencesFactory().getPortalPreferences(req);
 	}
 
+	public static PortletPreferences getPortletPreferences(
+			HttpServletRequest req, String portletId)
+		throws PortalException, SystemException {
+
+		return getPortletPreferencesFactory().getPortletPreferences(
+			req, portletId);
+	}
+
 	public static PortletPreferencesFactory getPortletPreferencesFactory() {
 		return _getUtil()._portletPreferencesFactory;
 	}
@@ -92,67 +100,50 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferences getPortletSetup(
-			Layout layout, Portlet portlet)
+			HttpServletRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			layout, portlet);
+			req, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId)
+			HttpServletRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId);
+			req, portletId, uniquePerLayout, uniquePerGroup,
+			defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			ActionRequest req, Portlet portlet)
+			Layout layout, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			req, portlet);
+			layout, portletId, uniquePerLayout, uniquePerGroup,
+			defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId)
+			ActionRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId);
+			req, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			RenderRequest req, Portlet portlet)
+			RenderRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			req, portlet);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			HttpServletRequest req, Portlet portlet)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portlet);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, String defaultPreferences)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId, defaultPreferences);
+			req, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {

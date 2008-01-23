@@ -85,7 +85,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
 
 		String css = ParamUtil.getString(req, "css");
 

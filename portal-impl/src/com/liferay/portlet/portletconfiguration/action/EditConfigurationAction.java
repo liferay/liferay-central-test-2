@@ -174,7 +174,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId());
+				req, portlet.getPortletId(), true, true);
 
 		String title = PortletConfigurationUtil.getPortletTitle(
 			portletSetup, themeDisplay.getLanguageId());

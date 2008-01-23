@@ -77,7 +77,8 @@ public class ViewAction extends PortletAction {
 		String portletId = configImpl.getPortletId();
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletId, true, true);
 
 		boolean requireCaptcha = GetterUtil.getBoolean(
 			prefs.getValue("requireCaptcha", StringPool.BLANK));

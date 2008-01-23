@@ -72,7 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					req, portletResource, false, false);
 
 			LocalizationUtil.setPrefsValue(
 				prefs, "content", languageId, content);

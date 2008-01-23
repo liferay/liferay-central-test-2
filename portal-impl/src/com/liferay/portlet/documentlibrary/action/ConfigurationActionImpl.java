@@ -80,7 +80,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource);
+				req, portletResource, true, true);
 
 		if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			try {

@@ -30,7 +30,7 @@ PortletPreferences prefs = renderRequest.getPreferences();
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
 String src = prefs.getValue("src", StringPool.BLANK);

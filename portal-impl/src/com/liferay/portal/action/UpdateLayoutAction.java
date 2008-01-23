@@ -120,7 +120,7 @@ public class UpdateLayoutAction extends Action {
 
 				PortletPreferences prefs =
 					PortletPreferencesFactoryUtil.getPortletSetup(
-						req, portletId);
+						req, portletId, true, true);
 
 				StringMaker sm = new StringMaker();
 

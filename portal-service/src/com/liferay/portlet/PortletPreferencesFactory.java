@@ -52,6 +52,10 @@ public interface PortletPreferencesFactory {
 	public PortalPreferences getPortalPreferences(RenderRequest req)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletPreferences(
+			HttpServletRequest req, String portletId)
+		throws PortalException, SystemException;
+
 	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException;
@@ -65,39 +69,28 @@ public interface PortletPreferencesFactory {
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			Layout layout, Portlet portlet)
+			HttpServletRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			Layout layout, String portletId, String defaultPreferences)
+			HttpServletRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId)
+			Layout layout, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest req, Portlet portlet)
+			ActionRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			RenderRequest req, Portlet portlet)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, String defaultPreferences)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, Portlet portlet)
+			RenderRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest req);

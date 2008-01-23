@@ -74,7 +74,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
 		String oldLayoutTemplateId = prefs.getValue(
 			"layout-template-id",

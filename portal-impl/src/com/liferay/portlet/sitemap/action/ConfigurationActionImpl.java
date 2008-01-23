@@ -59,7 +59,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
 		prefs.setValue("root-plid", String.valueOf(rootPlid));
 		prefs.setValue("display-depth", displayDepth);

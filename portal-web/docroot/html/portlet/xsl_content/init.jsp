@@ -40,7 +40,7 @@ PortletPreferences prefs = renderRequest.getPreferences();
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
 String xmlURL = ParamUtil.getString(request, "xmlURL", prefs.getValue("xml-url", XSLContentUtil.DEFAULT_XML_URL));
