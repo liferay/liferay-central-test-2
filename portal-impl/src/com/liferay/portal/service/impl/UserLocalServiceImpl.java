@@ -331,24 +331,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Default groups
 
-		List groups = new ArrayList();
-
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
 			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
+
+		long[] groupIds = new long[defaultGroupNames.length];
 
 		for (int i = 0; i < defaultGroupNames.length; i++) {
 			try {
 				Group group = groupFinder.findByC_N(
 					companyId, defaultGroupNames[i]);
 
-				groups.add(group);
+				groupIds[i] = group.getGroupId();
 			}
 			catch (NoSuchGroupException nsge) {
 			}
 		}
 
-		userPersistence.setGroups(userId, groups);
+		groupLocalService.addUserGroups(userId, groupIds);
 
 		// Default roles
 

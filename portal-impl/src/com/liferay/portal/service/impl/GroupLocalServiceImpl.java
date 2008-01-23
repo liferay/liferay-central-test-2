@@ -175,6 +175,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		userPersistence.addGroups(userId, groupIds);
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Role role = rolePersistence.findByC_N(
+			user.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+
+		for (int i = 0; i < groupIds.length; i++) {
+			long groupId = groupIds[i];
+
+			userGroupRoleLocalService.addUserGroupRoles(
+				userId, groupId, new long[] {role.getRoleId()});
+		}
+
 		PermissionCacheUtil.clearCache();
 	}
 
