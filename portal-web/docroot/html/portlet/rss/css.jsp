@@ -24,6 +24,12 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-rss .feed-date {
+	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
+	margin: 0.3em 0;
+	padding-left: 20px;
+}
+
 .portlet-rss .feed-description {
  	margin: 0 0 5px 0;
 }
@@ -49,26 +55,20 @@
 	margin-right: 0.5em;
 }
 
-.portlet-rss .feed-date {
-	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
-	margin: 0.3em 0;
-	padding-left: 20px;
-}
-
 .portlet-rss .feed-entry-expander {
-	float: left;
 	cursor: pointer;
+	float: left;
 	padding-right: 5px;
 }
 
 .portlet-rss .feed-entry-title {
-	font-weight: bold;
 	display: block;
+	font-weight: bold;
 }
 
 .portlet-rss .feed-image-left {
- 	text-align: left;
  	margin: 4px 0 4px 20px;
+ 	text-align: left;
 }
 
 .portlet-rss .feed-image-right {

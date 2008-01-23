@@ -40,8 +40,8 @@ catch (Exception e) {
 
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-
 		<div class="feed">
+
 			<%
 			Date publishedDate = feed.getPublishedDate();
 			String description = feed.getDescription();
@@ -86,25 +86,25 @@ catch (Exception e) {
 				%>
 
 					<div class="feed-entry">
-	          <img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
+						<img class="<portlet:namespace />entry-expander feed-entry-expander" src='<%= themeDisplay.getPathThemeImage() %>/arrows/01_<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "minus" : "plus" %>.png' />
 
-							<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
+						<span class="feed-entry-title"><a href="<%= entry.getLink() %>" target="_new"><%= entry.getTitle() %></a></span>
 
-							<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
-								<c:if test="<%= entry.getPublishedDate() != null %>">
-									<div class="feed-date">
-										<%= dateFormatDateTime.format(entry.getPublishedDate()) %>
-									</div>
-								</c:if>
+						<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j == 0)) ? "" : "display: none;" %>'>
+							<c:if test="<%= entry.getPublishedDate() != null %>">
+								<div class="feed-date">
+									<%= dateFormatDateTime.format(entry.getPublishedDate()) %>
+								</div>
+							</c:if>
 
-								<c:if test="<%= Validator.isNotNull(author) %>">
-									<span class="feed-entry-author"><%= author %></span>
-								</c:if>
+							<c:if test="<%= Validator.isNotNull(author) %>">
+								<span class="feed-entry-author"><%= author %></span>
+							</c:if>
 
-								<c:if test="<%= content != null %>">
-									<%= content.getValue() %>
-								</c:if>
-							</div>
+							<c:if test="<%= content != null %>">
+								<%= content.getValue() %>
+							</c:if>
+						</div>
 					</div>
 
 				<%
