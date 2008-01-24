@@ -29,13 +29,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.InitUtil;
-
 import com.liferay.util.FileUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -91,38 +87,33 @@ public class SeleneseToJavaBuilder {
 	}
 
 	protected String fixParam(String param) {
-
-		char [] charArray = param.toCharArray();
-		int length = charArray.length;
-
 		StringMaker sm = new StringMaker();
 
-		for (int i = 0; i < length; ++i) {
+		char[] array = param.toCharArray();
 
-			char ch = charArray[i];
+		for (int i = 0; i < array.length; ++i) {
+			char c = array[i];
 
-			if (ch == CharPool.BACK_SLASH) {
+			if (c == CharPool.BACK_SLASH) {
 				sm.append("\\\\");
 			}
-			else if (ch == CharPool.QUOTE) {
+			else if (c == CharPool.QUOTE) {
 				sm.append("\\\"");
 			}
-			else if (Character.isWhitespace(ch)) {
-				sm.append(ch);
+			else if (Character.isWhitespace(c)) {
+				sm.append(c);
 			}
-			else if (ch < 0x0020 || ch > 0x007e) {
+			else if ((c < 0x0020) || (c > 0x007e)) {
 				sm.append("\\u");
-				sm.append(UnicodeFormatter.charToHex(ch));
+				sm.append(UnicodeFormatter.charToHex(c));
 			}
 			else {
-				sm.append(ch);
+				sm.append(c);
 			}
 		}
 
-		String fixedParam = StringUtil.replace(
+		return StringUtil.replace(
 			sm.toString(), _FIX_PARAM_OLDSUB, _FIX_PARAM_NEWSUB);
-
-		return fixedParam;
 	}
 
 	protected String[] getParams(String step) throws Exception {
@@ -167,7 +158,8 @@ public class SeleneseToJavaBuilder {
 
 		sm.append("public void " + testMethodName + "() throws Exception {");
 
-		String xml = FileUtil.read(new File(basedir + "/" + file), StringPool.UTF8, false);
+		String xml = FileUtil.read(
+			new File(basedir + "/" + file), StringPool.UTF8, false);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {

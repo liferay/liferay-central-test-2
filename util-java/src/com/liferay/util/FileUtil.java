@@ -58,6 +58,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FileUtil {
 
+	public static final String ENCODING = GetterUtil.getString(
+		SystemProperties.get("file.encoding"), "UTF-8");
+
 	public static void append(String fileName, String s) throws IOException {
 		append(new File(fileName), s);
 	}
@@ -396,10 +399,12 @@ public class FileUtil {
 	}
 
 	public static String read(File file, boolean raw) throws IOException {
-		return read(file, SystemProperties.get("file.encoding"), raw);
+		return read(file, ENCODING, raw);
 	}
 
-	public static String read(File file, String encoding, boolean raw) throws IOException {
+	public static String read(File file, String encoding, boolean raw)
+		throws IOException {
+
 		FileInputStream fis = new FileInputStream(file);
 
 		byte[] bytes = new byte[fis.available()];
