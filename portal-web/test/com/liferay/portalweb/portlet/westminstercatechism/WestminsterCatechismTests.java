@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.westminstercatechism;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="WestminsterCatechism.java.html"><b><i>View Source</i></b></a>
+ * <a href="WestminsterCatechismTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.updatemanager;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="UpdateManager.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpdateManagerTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

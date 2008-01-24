@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.words;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="Words.java.html"><b><i>View Source</i></b></a>
+ * <a href="WordsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

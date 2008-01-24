@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.xslcontent;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="XSLContent.java.html"><b><i>View Source</i></b></a>
+ * <a href="XSLContentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

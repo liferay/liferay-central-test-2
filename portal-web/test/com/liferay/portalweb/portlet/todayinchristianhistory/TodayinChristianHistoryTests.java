@@ -25,7 +25,8 @@ package com.liferay.portalweb.portlet.todayinchristianhistory;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="TodayinChristianHistory.java.html"><b><i>View Source</i></b></a>
+ * <a href="TodayinChristianHistoryTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

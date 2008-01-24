@@ -25,7 +25,7 @@ package com.liferay.portalweb.portlet.tagsadmin;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="TagsAdmin.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsAdminTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
