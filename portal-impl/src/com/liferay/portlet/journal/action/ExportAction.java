@@ -520,7 +520,7 @@ public class ExportAction extends Action {
 		List layouts = LayoutLocalServiceUtil.getLayouts(groupId, false);
 
 		sm.append("update LayoutSet ");
-		sm.append("set themeId = 'liferaynoir_WAR_liferaynoirtheme', ");
+		sm.append("set themeId = 'liferayjedi_WAR_liferayjeditheme', ");
 		sm.append("pageCount = ");
 		sm.append(layouts.size());
 		sm.append(" where groupId = ");
