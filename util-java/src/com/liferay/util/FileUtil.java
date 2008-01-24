@@ -396,6 +396,10 @@ public class FileUtil {
 	}
 
 	public static String read(File file, boolean raw) throws IOException {
+		return read(file, SystemProperties.get("file.encoding"), raw);
+	}
+
+	public static String read(File file, String encoding, boolean raw) throws IOException {
 		FileInputStream fis = new FileInputStream(file);
 
 		byte[] bytes = new byte[fis.available()];
@@ -404,7 +408,7 @@ public class FileUtil {
 
 		fis.close();
 
-		String s = new String(bytes);
+		String s = new String(bytes, encoding);
 
 		if (raw) {
 			return s;

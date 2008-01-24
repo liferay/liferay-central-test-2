@@ -80,7 +80,7 @@ public class CharPool {
 
 	public static final char QUESTION = '?';
 
-	public static final char QUOTE = '\'';
+	public static final char QUOTE = '\"';
 
 	public static final char RETURN = '\r';
 
