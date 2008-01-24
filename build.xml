@@ -754,26 +754,74 @@
 	</target>
 
 	<target name="build-dist-glassfish">
+		<antcall target="build-dist-glassfish-configurator" />
+
+		<antcall target="build-dist-glassfish-aix" />
+		<antcall target="build-dist-glassfish-darwin" />
+		<antcall target="build-dist-glassfish-linux" />
+		<antcall target="build-dist-glassfish-sunos" />
+		<antcall target="build-dist-glassfish-sunos_x86" />
+		<antcall target="build-dist-glassfish-windows" />
+
+		<delete file="liferay_configurator.jar" />
+	</target>
+
+	<target name="build-dist-glassfish-aix">
+		<antcall target="build-dist-glassfish-cmd">
+			<param name="glassfish.os" value="aix" />
+		</antcall>
+	</target>
+
+	<target name="build-dist-glassfish-cmd">
+		<delete dir="${app.server.glassfish.dir}" />
+
+		<java
+			dir="${app.server.parent.dir}"
+			fork="true"
+			input="tools/ext_tmpl/servers/glassfish/input.txt"
+			jar="${app.server.parent.dir}/glassfish-installer-v2ur1-b09d-${glassfish.os}.jar"
+			maxmemory="256m"
+		>
+			<arg value="-console" />
+		</java>
+
+		<copy file="liferay_configurator.jar" todir="${app.server.glassfish.dir}/lib/addons" />
+
+		<replace
+			file="${app.server.glassfish.dir}/registry.properties"
+			token="source=Glassfish"
+			value="source=Liferay ${lp.version} on Glassfish"
+		/>
+
+		<ant antfile="setup.xml" target="build-jarinstaller-pe" dir="${app.server.glassfish.dir}" />
+
+		<move
+			file="${app.server.parent.dir}/glassfish-pe-installer.jar"
+			tofile="dist/liferay-portal-glassfish-${glassfish.os}-${lp.version.file.name}.jar"
+		/>
+	</target>
+
+	<target name="build-dist-glassfish-configurator">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
-
-		<mkdir dir="${tstamp.value}/META-INF/services" />
-
-		<echo file="${tstamp.value}/META-INF/services/com.sun.appserv.addons.Configurator" append="false">com.liferay.support.glassfish.LiferayAddonConfigurator</echo>
 
 		<copy
 			file="dist/liferay-portal-${lp.version.file.name}.war"
 			tofile="${tstamp.value}/liferay-portal.war"
 		/>
 
-		<copy
-			file="${lp.plugins.dir}/dist/liferay-jedi-theme-${lp.version.file.name}.1.war"
-			tofile="${tstamp.value}/liferay-jedi-theme.war"
-		/>
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${tstamp.value}" />
+			<param name="deployer.app.server.type" value="glassfish-tomcat" />
+		</antcall>
 
 		<ant dir="support-glassfish" target="clean" inheritAll="false" />
 		<ant dir="support-glassfish" target="compile" inheritAll="false" />
+
+		<mkdir dir="${tstamp.value}/META-INF/services" />
+
+		<echo file="${tstamp.value}/META-INF/services/com.sun.appserv.addons.Configurator" append="false">com.liferay.support.glassfish.LiferayAddonConfigurator</echo>
 
 		<zip destfile="liferay_configurator.jar">
 			<zipfileset
@@ -817,61 +865,36 @@
 		</zip>
 
 		<delete dir="${tstamp.value}" />
+	</target>
 
-		<antcall target="build-dist-glassfish-cmd">
-			<param name="glassfish.os" value="aix" />
-		</antcall>
-
+	<target name="build-dist-glassfish-darwin">
 		<antcall target="build-dist-glassfish-cmd">
 			<param name="glassfish.os" value="darwin" />
 		</antcall>
+	</target>
 
+	<target name="build-dist-glassfish-linux">
 		<antcall target="build-dist-glassfish-cmd">
 			<param name="glassfish.os" value="linux" />
 		</antcall>
+	</target>
 
+	<target name="build-dist-glassfish-sunos">
 		<antcall target="build-dist-glassfish-cmd">
 			<param name="glassfish.os" value="sunos" />
 		</antcall>
+	</target>
 
+	<target name="build-dist-glassfish-sunos_x86">
 		<antcall target="build-dist-glassfish-cmd">
 			<param name="glassfish.os" value="sunos_x86" />
 		</antcall>
+	</target>
 
+	<target name="build-dist-glassfish-windows">
 		<antcall target="build-dist-glassfish-cmd">
 			<param name="glassfish.os" value="windows" />
 		</antcall>
-
-		<delete file="liferay_configurator.jar" />
-	</target>
-
-	<target name="build-dist-glassfish-cmd">
-		<delete dir="${app.server.glassfish.dir}" />
-
-		<java
-			dir="${app.server.parent.dir}"
-			fork="true"
-			input="tools/ext_tmpl/servers/glassfish/input.txt"
-			jar="${app.server.parent.dir}/glassfish-installer-v2ur1-b09d-${glassfish.os}.jar"
-			maxmemory="256m"
-		>
-			<arg value="-console" />
-		</java>
-
-		<copy file="liferay_configurator.jar" todir="${app.server.glassfish.dir}/lib/addons" />
-
-		<replace
-			file="${app.server.glassfish.dir}/registry.properties"
-			token="source=Glassfish"
-			value="source=Liferay ${lp.version} on Glassfish"
-		/>
-
-		<ant antfile="setup.xml" target="build-jarinstaller-pe" dir="${app.server.glassfish.dir}" />
-
-		<move
-			file="${app.server.parent.dir}/glassfish-pe-installer.jar"
-			tofile="dist/liferay-portal-glassfish-${glassfish.os}-${lp.version.file.name}.jar"
-		/>
 	</target>
 
 	<target name="build-dist-jboss-jetty">
@@ -1064,6 +1087,20 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
+	</target>
+
+	<target name="build-dist-sql-oracle-9">
+		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
+		<ant dir="sql" target="export-oracle" inheritAll="false" />
+
+		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-9-${lp.version.file.name}.dmp" />
+	</target>
+
+	<target name="build-dist-sql-oracle-10">
+		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
+		<ant dir="sql" target="export-oracle" inheritAll="false" />
+
+		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-10-${lp.version.file.name}.dmp" />
 	</target>
 
 	<target name="build-dist-tomcat">
@@ -1678,7 +1715,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="dist">
-		<!--<antcall target="clean" />
+		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="deploy" />
 
@@ -1730,16 +1767,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				dir="${app.server.tomcat.deploy.dir}"
 				includes="cms-web/**,jbpm-web/**,mule-web/**,servicemix-web/**"
 			/>
-		</delete>-->
+		</delete>
 
-		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
-		<ant dir="sql" target="export-oracle" inheritAll="false" />
+		<antcall target="build-dist-sql-oracle-10" />
 
-		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-10-${lp.version.file.name}.dmp" />
+		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
-		<!--<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
-
-		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />-->
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
 	</target>
 
 	<target name="dist-jdk5">

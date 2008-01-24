@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -59,14 +60,16 @@ public class DeployUtil {
 	public static String getAutoDeployServerDestDir() throws Exception {
 		String destDir = null;
 
-		if (ServerDetector.isTomcat()) {
+		String serverId = GetterUtil.getString(ServerDetector.getServerId());
+
+		if (serverId.equals(ServerDetector.TOMCAT_ID)) {
 			destDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_TOMCAT_DEST_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_DEST_DIR);
 		}
 		else {
 			destDir = PrefsPropsUtil.getString(
-				"auto.deploy." + ServerDetector.getServerId() + ".dest.dir");
+				"auto.deploy." + serverId + ".dest.dir");
 		}
 
 		if (Validator.isNull(destDir)) {

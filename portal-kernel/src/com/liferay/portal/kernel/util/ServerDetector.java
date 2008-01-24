@@ -36,34 +36,58 @@ public class ServerDetector {
 	public static final String GERONIMO_CLASS =
 		"/org/apache/geronimo/system/main/Daemon.class";
 
+	public static final String GERONIMO_ID = "geronimo";
+
 	public static final String GLASSFISH_CLASS =
 		"/com/sun/appserv/ClassLoaderUtil.class";
 
+	public static final String GLASSFISH_ID = "glassfish";
+
 	public static final String JBOSS_CLASS = "/org/jboss/Main.class";
 
+	public static final String JBOSS_ID = "jboss";
+
 	public static final String JETTY_CLASS = "/org/mortbay/jetty/Server.class";
+
+	public static final String JETTY_ID = "jetty";
 
 	public static final String JONAS_CLASS =
 		"/org/objectweb/jonas/server/Server.class";
 
+	public static final String JONAS_ID = "jonas";
+
 	public static final String OC4J_CLASS =
 		"oracle.oc4j.util.ClassUtils";
+
+	public static final String OC4J_ID = "oc4j";
 
 	public static final String ORION_CLASS =
 		"/com/evermind/server/ApplicationServer.class";
 
+	public static final String ORION_ID = "orion";
+
 	public static final String PRAMATI_CLASS = "/com/pramati/Server.class";
+
+	public static final String PRAMATI_ID = "pramati";
 
 	public static final String RESIN_CLASS =
 		"/com/caucho/server/resin/Resin.class";
 
+	public static final String RESIN_ID = "resin";
+
 	public static final String REXIP_CLASS = "/com/tcc/Main.class";
+
+	public static final String REXIP_ID = "rexip";
 
 	public static final String SUN7_CLASS =
 		"/com/iplanet/ias/tools/cli/IasAdminMain.class";
 
+	public static final String SUN7_ID = "sun7";
+
 	public static final String SUN8_CLASS =
 		"/com/sun/enterprise/cli/framework/CLIMain.class";
+
+	public static final String SUN8_ID = "sun8";
 
 	public static final String TOMCAT_BOOTSTRAP_CLASS =
 		"/org/apache/catalina/startup/Bootstrap.class";
@@ -71,69 +95,75 @@ public class ServerDetector {
 	public static final String TOMCAT_EMBEDDED_CLASS =
 		"/org/apache/catalina/startup/Embedded.class";
 
+	public static final String TOMCAT_ID = "tomcat";
+
 	public static final String WEBLOGIC_CLASS = "/weblogic/Server.class";
+
+	public static final String WEBLOGIC_ID = "weblogic";
 
 	public static final String WEBSPHERE_CLASS =
 		"/com/ibm/websphere/product/VersionInfo.class";
+
+	public static final String WEBSPHERE_ID = "websphere";
 
 	public static String getServerId() {
 		ServerDetector sd = _instance;
 
 		if (sd._serverId == null) {
 			if (ServerDetector.isGeronimo()) {
-				sd._serverId = "geronimo";
+				sd._serverId = GERONIMO_ID;
 			}
 			else if (ServerDetector.isGlassfish()) {
-				sd._serverId = "glassfish";
+				sd._serverId = GLASSFISH_ID;
 			}
 			else if (ServerDetector.isJBoss()) {
-				sd._serverId = "jboss";
+				sd._serverId = JBOSS_ID;
 			}
 			else if (ServerDetector.isJOnAS()) {
-				sd._serverId = "jonas";
+				sd._serverId = JONAS_ID;
 			}
 			else if (ServerDetector.isOC4J()) {
-				sd._serverId = "oc4j";
+				sd._serverId = OC4J_ID;
 			}
 			else if (ServerDetector.isOrion()) {
-				sd._serverId = "orion";
+				sd._serverId = ORION_ID;
 			}
 			else if (ServerDetector.isPramati()) {
-				sd._serverId = "pramati";
+				sd._serverId = PRAMATI_ID;
 			}
 			else if (ServerDetector.isResin()) {
-				sd._serverId = "resin";
+				sd._serverId = RESIN_ID;
 			}
 			else if (ServerDetector.isRexIP()) {
-				sd._serverId = "rexip";
+				sd._serverId = REXIP_ID;
 			}
 			else if (ServerDetector.isSun7()) {
-				sd._serverId = "sun7";
+				sd._serverId = SUN7_ID;
 			}
 			else if (ServerDetector.isSun8()) {
-				sd._serverId = "sun8";
+				sd._serverId = SUN8_ID;
 			}
 			else if (ServerDetector.isWebLogic()) {
-				sd._serverId = "weblogic";
+				sd._serverId = WEBLOGIC_ID;
 			}
 			else if (ServerDetector.isWebSphere()) {
-				sd._serverId = "websphere";
+				sd._serverId = WEBSPHERE_ID;
 			}
 
 			if (ServerDetector.isJetty()) {
 				if (sd._serverId == null) {
-					sd._serverId = "jetty";
+					sd._serverId = JETTY_ID;
 				}
 				else {
-					sd._serverId += "-jetty";
+					sd._serverId += "-" + JETTY_ID;
 				}
 			}
 			else if (ServerDetector.isTomcat()) {
 				if (sd._serverId == null) {
-					sd._serverId = "tomcat";
+					sd._serverId = TOMCAT_ID;
 				}
 				else {
-					sd._serverId += "-tomcat";
+					sd._serverId += "-" + TOMCAT_ID;
 				}
 			}
 

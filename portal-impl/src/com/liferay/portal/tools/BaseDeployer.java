@@ -116,13 +116,6 @@ public class BaseDeployer {
 		this.wars = wars;
 		this.jars = jars;
 
-		if (appServerType.startsWith("glassfish") ||
-			appServerType.equals("pramati") ||
-			appServerType.equals("weblogic")) {
-
-			unpackWar = false;
-		}
-
 		checkArguments();
 
 		try {
@@ -149,21 +142,28 @@ public class BaseDeployer {
 				"The system property deployer.app.server.type is not set");
 		}
 
-		if (!appServerType.startsWith("geronimo") &&
-			!appServerType.startsWith("glassfish") &&
-			!appServerType.startsWith("jboss") &&
-			!appServerType.startsWith("jonas") &&
-			!appServerType.equals("jetty") &&
-			!appServerType.equals("oc4j") &&
-			!appServerType.equals("orion") &&
-			!appServerType.equals("pramati") &&
-			!appServerType.equals("resin") &&
-			!appServerType.equals("tomcat") &&
-			!appServerType.equals("weblogic") &&
-			!appServerType.equals("websphere")) {
+		if (!appServerType.startsWith(ServerDetector.GERONIMO_ID) &&
+			!appServerType.startsWith(ServerDetector.GLASSFISH_ID) &&
+			!appServerType.startsWith(ServerDetector.JBOSS_ID) &&
+			!appServerType.startsWith(ServerDetector.JONAS_ID) &&
+			!appServerType.equals(ServerDetector.JETTY_ID) &&
+			!appServerType.equals(ServerDetector.OC4J_ID) &&
+			!appServerType.equals(ServerDetector.ORION_ID) &&
+			!appServerType.equals(ServerDetector.PRAMATI_ID) &&
+			!appServerType.equals(ServerDetector.RESIN_ID) &&
+			!appServerType.equals(ServerDetector.TOMCAT_ID) &&
+			!appServerType.equals(ServerDetector.WEBLOGIC_ID) &&
+			!appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
 
 			throw new IllegalArgumentException(
 				appServerType + " is not a valid application server type");
+		}
+
+		if (appServerType.startsWith(ServerDetector.GLASSFISH_ID) ||
+			appServerType.equals(ServerDetector.PRAMATI_ID) ||
+			appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
+
+			unpackWar = false;
 		}
 
 		if (Validator.isNotNull(jbossPrefix) &&
@@ -207,8 +207,8 @@ public class BaseDeployer {
 			String jarName = jarFullName.substring(
 				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
 
-			if ((!appServerType.equals("tomcat")) ||
-				(appServerType.equals("tomcat") &&
+			if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
+				(appServerType.equals(ServerDetector.TOMCAT_ID) &&
 					!jarFullName.equals("util-java.jar"))) {
 
 				FileUtil.copyFile(
@@ -408,7 +408,7 @@ public class BaseDeployer {
 			if (appServerType.startsWith("jboss")) {
 				excludes += "**/WEB-INF/lib/log4j.jar,";
 			}
-			else if (appServerType.equals("tomcat")) {
+			else if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
 				String[] libs = FileUtil.listFiles(tomcatLibDir);
 
 				for (int i = 0; i < libs.length; i++) {
@@ -470,7 +470,7 @@ public class BaseDeployer {
 					srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
 					true, false);
 
-				if (appServerType.equals("tomcat")) {
+				if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
 
 					// See org.apache.catalina.startup.HostConfig to see how
 					// Tomcat checks to make sure that web.xml was modified 5
@@ -544,14 +544,14 @@ public class BaseDeployer {
 			displayName = getDisplayName(srcFile);
 		}
 
-		if (appServerType.startsWith("jboss")) {
+		if (appServerType.startsWith(ServerDetector.JBOSS_ID)) {
 			deployDir = jbossPrefix + deployDir;
 		}
-		else if (appServerType.equals("jetty") ||
-				 appServerType.equals("oc4j") ||
-				 appServerType.equals("orion") ||
-				 appServerType.equals("resin") ||
-				 appServerType.equals("tomcat")) {
+		else if (appServerType.equals(ServerDetector.JETTY_ID) ||
+				 appServerType.equals(ServerDetector.OC4J_ID) ||
+				 appServerType.equals(ServerDetector.ORION_ID) ||
+				 appServerType.equals(ServerDetector.RESIN_ID) ||
+				 appServerType.equals(ServerDetector.TOMCAT_ID)) {
 
 			if (unpackWar) {
 				deployDir = deployDir.substring(0, deployDir.length() - 4);
