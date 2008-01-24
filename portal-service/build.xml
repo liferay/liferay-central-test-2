@@ -19,7 +19,7 @@
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="classes"
-			nowarn="on"
+			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
 	</target>

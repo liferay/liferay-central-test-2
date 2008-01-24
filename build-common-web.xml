@@ -33,7 +33,7 @@
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
 					destdir="${compile.file.dest}"
-					nowarn="on"
+					nowarn="${javac.nowarn}"
 					srcdir="docroot/WEB-INF/src"
 				/>
 			</then>
