@@ -24,16 +24,21 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.Html;
+import com.liferay.util.dao.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.util.List;
 
@@ -147,18 +152,7 @@ public class VerifyJournal extends VerifyProcess {
 			JournalArticleLocalServiceUtil.checkStructure(
 				groupId, articleId, version);
 
-			List articleContentSearches =
-				JournalContentSearchLocalServiceUtil.getArticleContentSearches(
-					groupId, articleId);
-
-			if (articleContentSearches.size() == 0) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Article {groupId=" + groupId + ", articleId=" +
-							articleId + ", version=" + version +
-								"} is not used on any layouts");
-				}
-			}
+			//verifyStaleJournalArticle(article);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -166,6 +160,64 @@ public class VerifyJournal extends VerifyProcess {
 				"Permissions and Tags assets verified for Journal articles");
 		}
 	}
+
+	protected void verifyStaleJournalArticle(JournalArticle article)
+		throws Exception {
+
+		long groupId = article.getGroupId();
+		String articleId = article.getArticleId();
+		double version = article.getVersion();
+
+		if (article.getStructureId().equals("BASIC-RSS-ITEM")) {
+			return;
+		}
+
+		long count = getPortletPreferencesCount(articleId);
+
+		if (count == 0) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Article {groupId=" + groupId + ", articleId=" +
+						articleId + ", version=" + version +
+							"} is not used on any layouts");
+			}
+		}
+	}
+
+	protected long getPortletPreferencesCount(String articleId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(_GET_PORTLET_PREFERENCES_COUNT);
+
+			ps.setString(
+				1, "%<name>article-id</name><value>" + articleId + "</value>%");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long count = rs.getLong("count_value");
+
+				return count;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return 0;
+	}
+
+	private static final String _GET_PORTLET_PREFERENCES_COUNT =
+		"select count(*) as count_value from PortletPreferences where " +
+			"ownerId = 0 and ownerType = 3 and portletId like " +
+				"'56_INSTANCE_%' and preferences like ?";
 
 	private static Log _log = LogFactory.getLog(VerifyJournal.class);
 
