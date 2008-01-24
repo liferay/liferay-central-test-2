@@ -150,7 +150,7 @@ public class RSSAction extends PortletAction {
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(article.getTitle());
 			syndEntry.setLink(link);
-			syndEntry.setPublishedDate(article.getCreateDate());
+			syndEntry.setPublishedDate(article.getDisplayDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 
