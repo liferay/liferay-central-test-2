@@ -50,7 +50,7 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_keywords1", "Tést");
+		selenium.typeKeys("_19_keywords1", "T\u00e9st");
 		selenium.click("//input[@value='Search Messages']");
 		selenium.waitForPageToLoad("30000");
 
@@ -60,7 +60,8 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tést Méssagé")) {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9")) {
 					break;
 				}
 			}
@@ -70,8 +71,9 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Tést Méssagé");
+		selenium.click("link=T\u00e9st M\u00e9ssag\u00e9");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a tést réply méssagé!"));
+		verifyTrue(selenium.isTextPresent(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
 	}
 }

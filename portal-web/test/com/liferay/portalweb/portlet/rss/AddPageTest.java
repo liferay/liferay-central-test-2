@@ -32,6 +32,23 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//a[@id=\"my-community-private-pages\"]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//a[@id=\"my-community-private-pages\"]");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");

@@ -34,8 +34,9 @@ public class AddCategoryTest extends BaseTestCase {
 	public void testAddCategory() throws Exception {
 		selenium.click("//input[@value='Add Category']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_name", "Tést Catégory");
-		selenium.typeKeys("_19_description", "This is a tést catégory!");
+		selenium.typeKeys("_19_name", "T\u00e9st Cat\u00e9gory");
+		selenium.typeKeys("_19_description",
+			"This is a t\u00e9st cat\u00e9gory!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

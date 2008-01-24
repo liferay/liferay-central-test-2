@@ -36,8 +36,9 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subcategory']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_name", "Tést Subcatégory");
-		selenium.typeKeys("_19_description", "This is a tést subcatégory!");
+		selenium.typeKeys("_19_name", "T\u00e9st Subcat\u00e9gory");
+		selenium.typeKeys("_19_description",
+			"This is a t\u00e9st subcat\u00e9gory!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
