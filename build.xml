@@ -1326,7 +1326,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<move file="${lp.ext.dir}" tofile="${tstamp.value}" />
+		<move file="${lp.ext.dir}" tofile="${tstamp.value}" failonerror="false" />
 
 		<antcall target="build-ext" />
 
@@ -1339,7 +1339,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<delete dir="${lp.ext.dir}" />
 
-		<move file="${tstamp.value}" tofile="${lp.ext.dir}" />
+		<move file="${tstamp.value}" tofile="${lp.ext.dir}" failonerror="false" />
 	</target>
 
 	<target name="zip-geronimo-tomcat">
