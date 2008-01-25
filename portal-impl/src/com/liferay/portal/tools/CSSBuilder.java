@@ -25,6 +25,8 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
 
+import java.io.File;
+
 /**
  * <a href="CSSBuilder.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,7 +46,17 @@ public class CSSBuilder {
 
 	public CSSBuilder(String cssDir, String mergedFile) {
 		try {
-			String content = FileUtil.read(cssDir + "/main.css");
+			File mainCssFile = new File(cssDir + "/main.css");
+
+			if (!mainCssFile.exists()) {
+				System.out.println(
+					"Do not pack " + cssDir +
+						"/main.css because it does not exist.");
+
+				return;
+			}
+
+			String content = FileUtil.read(mainCssFile);
 
 			content = replaceImports(cssDir, content);
 
