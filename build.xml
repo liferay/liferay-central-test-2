@@ -1726,7 +1726,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<antcall target="zip-portal-war" />
 
-		<antcall target="build-dist-geronimo-tomcat" />
 		<antcall target="build-dist-jboss-jetty" />
 		<antcall target="build-dist-jboss-tomcat" />
 		<antcall target="build-dist-jetty" />
@@ -1739,7 +1738,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<antcall target="zip-api" />
 		<antcall target="zip-ext" />
-		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
@@ -1777,9 +1775,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="dist-jdk5">
+		<antcall target="build-dist-geronimo-tomcat" />
 		<antcall target="build-dist-glassfish" />
 		<antcall target="build-dist-pramati" />
 
+		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-pramati" />
 	</target>
 </project>
