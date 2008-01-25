@@ -26,5 +26,5 @@
 
 	<br />
 
-	<a href="javascript: <%= randomNamespace %>toggleSearch();" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></a>
+	<a href="javascript: <%= id %>toggleSearch();" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></a>
 </div>
