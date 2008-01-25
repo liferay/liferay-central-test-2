@@ -12,6 +12,59 @@ Liferay.Tree = new Class({
 		instance.treeId = params.treeId;
 		instance.selectable = params.selectable || false;
 		instance.selectedNodes = params.selectedNodes || '';
+		
+		instance._dragOptions = {
+			autoSize: true,
+			ghosting: true,
+			handle: 'a',
+			revert: true
+		};
+
+		instance._expandText = Liferay.Language.get('expand-all');
+		instance._collapseText = Liferay.Language.get('collapse-all');
+		
+		var icons = instance.icons;
+		instance._plusImage = instance.generateImage(
+			{
+				src: icons.plus,
+				className: 'expand-image'
+			}
+		);
+		instance._minusImage = instance.generateImage(
+			{
+				src: icons.minus,
+				className: 'expand-image'
+			}
+		);
+		instance._spacerImage = instance.generateImage(
+			{
+				src: icons.spacer,
+				className: 'expand-image'
+			}
+		);
+		instance._spacerImage = instance.generateImage(
+			{
+				src: icons.spacer,
+				className: 'expand-image'
+			}
+		);
+		instance._pageImage = instance.generateImage(
+			{
+				src: icons.page
+			}
+		);
+		instance._checkedPage = instance.generateImage(
+			{
+				src: icons.checked,
+				className: 'select-state'
+			}
+		);
+		instance._checkBoxPage = instance.generateImage(
+			{
+				src: icons.checkbox,
+				className: 'select-state'
+			}
+		);
 
 		Liferay.Publisher.register('tree');
 
@@ -20,42 +73,55 @@ Liferay.Tree = new Class({
 		instance.create();
 	},
 
-	addNode: function(parentNode, recursedNodes) {
+	addNode: function(parentNode) {
 		var instance = this;
 		var icons = instance.icons;
-		var src, leafNode, hidden, li;
+		var src, leafNode, hidden, li, hasChildNode, ls, isNodeOpen, isNodeSelected, plid, image, openClass;
 		var tree = instance.tree;
 
 		for (var i = parentNode; i < instance.nodes.length; i++) {
 			var node = instance.nodes[i];
 
 			if (node.parentId == parentNode) {
-				var ls = (node.ls == 1) ? true : false;
-				var hasChildNode = instance.hasChildNode(node.id);
-				var isNodeOpen = instance.isNodeOpen(node.id);
-				var isNodeSelected = instance.isNodeSelected(node.objId);
+				ls = (node.ls == 1);
+				hasChildNode = instance.hasChildNode(node.id);
+				isNodeOpen = instance.isNodeOpen(node.id);
+				isNodeSelected = instance.isNodeSelected(node.objId);
 
-				var plid = node.objId;
+				plid = node.objId;
+				src = '';
 
-				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" rel="_nodeId_' + node.id + '">';
+				
+				image = '';
+				openClass = '';
+				if (hasChildNode) {
+					openClass = 'has-children';
+					if (!isNodeOpen) {
+						image = instance._plusImage;
+					}
+					else {
+						image = instance._minusImage;
+						openClass += ' node-open';
+					}
+				}
+				else {
+					image = instance._spacerImage;
+				}
+
+				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" nodeId="' + node.id + '">';
+				instance.treeHTML += image;
 
 				if (instance.selectable) {
 					if (isNodeSelected) {
-						instance.treeHTML += instance.generateImage({
-							src: icons.checked,
-							className: 'select-state'
-						});
+						instance.treeHTML += instance._checkedPage;
 					}
 					else {
-						instance.treeHTML += instance.generateImage({
-							src: icons.checkbox,
-							className: 'select-state'
-						});
+						instance.treeHTML += _checkBoxPage;
 					}
 				}
 
 				instance.treeHTML += '<a href="' + node.href + '">';
-				instance.treeHTML += instance.generateImage(icons.page);
+				instance.treeHTML += instance._pageImage;
 				instance.treeHTML += '<span>' + node.name + '</span>';
 				instance.treeHTML += '</a>';
 
@@ -69,9 +135,9 @@ Liferay.Tree = new Class({
 						hidden = '';
 					}
 
-					instance.treeHTML += '<ul ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">';
+					instance.treeHTML += '<ul class="' + openClass + '" ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">';
 
-					instance.addNode(node.id, recursedNodes);
+					instance.addNode(node.id);
 
 					instance.treeHTML += '</ul>';
 				}
@@ -88,8 +154,6 @@ Liferay.Tree = new Class({
 		var selectedNodes = instance.selectedNodes;
 		var outputEl = jQuery(instance.outputId);
 
-		var recursedNodes = [];
-
 		if (instance.nodes.length > 0) {
 			if (openNodes != null) {
 				instance.setOpenNodes();
@@ -102,111 +166,38 @@ Liferay.Tree = new Class({
 			var node = instance.nodes[0];
 
 			var tree = jQuery('<ul class="lfr-component ' + instance.className + '"></ul>');
-			var treeEl = tree.get(0);
+			var treeEl = tree[0];
+			
+			instance.tree = tree;
 
-			var mainLi  = jQuery(
-				'<li class="root-container">' +
-					'<a href="' + node.href + '">' +
-						instance.generateImage(icons.root) +
-						'<span>&nbsp;' + node.name + '</span>' +
-					'</a>' +
-				'</li>'
-			);
+			// Output the tree
 
-			instance.addNode(1, recursedNodes);
+			outputEl.append(instance.tree);
+			
+			instance.addNode(1);
 
-			mainLi.append('<ul>' + instance.treeHTML + '</ul>');
+			var mainLi = '<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>' +
+			'<li class="root-container">' +
+				'<a href="' + node.href + '">' +
+					instance.generateImage(icons.root) +
+					'<span>&nbsp;' + node.name + '</span>' +
+				'</a>' +
+				'<ul class="node-open">' + instance.treeHTML + '</ul>' +
+			'</li>';
 
 			tree.append(mainLi);
 
 			var treeBranches = jQuery('li.tree-item', treeEl);
 
-			tree.prepend('<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + Liferay.Language.get('expand-all') + '</a> | <a href="javascript: ;" id="lfr-collapse">' + Liferay.Language.get('collapse-all') + '</a></li>');
-
-			var branches = tree.find('li[@rel^=_nodeId_]');
 			var nodeIdList = [];
-
-			branches.each(
-				function(i) {
-					nodeIdList[i] = this.getAttribute('rel').replace(/_nodeId_/, '');
+			
+			for (var i = instance.nodes.length - 1; i >= 0; i--){
+				if (i != 0 && instance.nodes[i].id) {
+					nodeIdList[i] = instance.nodes[i].id;
 				}
-			);
+			}
 
 			nodeIdList = nodeIdList.join(',');
-
-			tree.find('#lfr-expand').click(
-				function() {
-					tree.find('.tree-item ul').show();
-					tree.find('.tree-item img').each(
-						function() {
-								this.src = this.src.replace(/plus.png$/, 'minus.png');
-						}
-					);
-
-					jQuery.ajax(
-						{
-							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
-							data: {
-								cmd: 'expand',
-								nodeIds: nodeIdList,
-								treeId: instance.treeId
-							}
-						}
-					);
-				}
-			);
-
-			tree.find('#lfr-collapse').click(
-				function() {
-					tree.find('.tree-item ul').hide();
-					tree.find('.tree-item img').each(
-						function() {
-							this.src = this.src.replace(/minus.png$/, 'plus.png');
-						}
-					);
-
-					jQuery.ajax(
-						{
-							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
-							data: {
-								cmd: 'collapse',
-								treeId: instance.treeId
-							}
-						}
-					);
-				}
-			);
-
-			// Prepend images
-
-			treeBranches.each(
-				function() {
-					var subBranch = jQuery('ul', this);
-					var currentLi = jQuery(this);
-					var src;
-
-					if (subBranch.size() > 0) {
-						if (subBranch.eq(0).css('display') == 'none') {
-							src = icons.plus;
-						}
-						else {
-							src = icons.minus;
-						}
-					}
-					else {
-						src = icons.spacer;
-					}
-
-					var image = instance.generateImage(
-						{
-							src: src,
-							className: 'expand-image'
-						}
-					);
-
-					currentLi.prepend(image);
-				}
-			);
 
 			// Set toggling
 
@@ -259,20 +250,53 @@ Liferay.Tree = new Class({
 
 			// Set draggable items
 
-			jQuery('li.tree-item', treeEl).Draggable(
-				{
-					autoSize: true,
-					ghosting: true,
-					handle: 'a',
-					revert: true
+			instance.setDraggable(treeEl);
+			
+			var allDraggable = false;
+			jQuery('#lfr-expand').click(
+				function() {
+					tree.find('.tree-item ul').show();
+					tree.find('.tree-item img').each(
+						function() {
+								this.src = this.src.replace(/plus.png$/, 'minus.png');
+						}
+					);
+					if (!allDraggable) {
+						instance.setDraggable(treeEl, 'li.tree-item');
+					}
+					jQuery.ajax(
+						{
+							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+							data: {
+								cmd: 'expand',
+								nodeIds: nodeIdList,
+								treeId: instance.treeId
+							}
+						}
+					);
 				}
 			);
 
-			instance.tree = tree;
+			jQuery('#lfr-collapse').click(
+				function() {
+					tree.find('.tree-item ul').hide();
+					tree.find('.tree-item img').each(
+						function() {
+							this.src = this.src.replace(/minus.png$/, 'plus.png');
+						}
+					);
 
-			// Output the tree
-
-			outputEl.append(instance.tree);
+					jQuery.ajax(
+						{
+							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+							data: {
+								cmd: 'collapse',
+								treeId: instance.treeId
+							}
+						}
+					);
+				}
+			);
 		}
 	},
 
@@ -300,24 +324,16 @@ Liferay.Tree = new Class({
 		return '<img' + border + className + height + hspace + id + src + vspace + width + ' />';
 	},
 
-	getHTML: function() {
-		var instance = this;
-
-		return instance.treeHTML;
-	},
-
 	hasChildNode: function(parentNode) {
 		var instance = this;
-		var node = instance.nodes[parentNode];
 
 		return (parentNode < instance.nodes.length &&
-				node.parentId == parentNode);
+				instance.nodes[parentNode].parentId == parentNode);
 	},
 
 	isNodeOpen: function(node) {
 		var instance = this;
-
-		for (i = 0; i < instance.openNodes.length; i++) {
+		for (var i = instance.openNodes.length - 1; i >= 0; i--){
 			if (instance.openNodes[i] == node) {
 				return true;
 			}
@@ -328,8 +344,7 @@ Liferay.Tree = new Class({
 
 	isNodeSelected: function(node) {
 		var instance = this;
-
-		for (i = 0; i < instance.selectedNodes.length; i++) {
+		for (var i = instance.selectedNodes.length - 1; i >= 0; i--){
 			if (instance.selectedNodes[i] == node) {
 				return true;
 			}
@@ -382,6 +397,13 @@ Liferay.Tree = new Class({
 			);
 		}
 	},
+	
+	setDraggable: function(parentEl, selector) {
+		var instance = this;
+
+		jQuery(selector || 'ul.node-open > li.tree-item', parentEl).Draggable(instance._dragOptions);
+	},
+	
 
 	setOpenNodes: function() {
 		var instance = this;
@@ -412,15 +434,22 @@ Liferay.Tree = new Class({
 
 			var currentLi = obj.parentNode;
 
-			var nodeId = currentLi.getAttribute('rel').replace(/_nodeId_/, '');
+			var nodeId = currentLi.getAttribute('nodeId');
 
 			var subBranch = jQuery('ul', currentLi).eq(0);
+			currentLi.childrenDraggable = false;
 
 			if (subBranch.is(':hidden')) {
 				subBranch.show();
 				obj.src = icons.minus;
 				openNode = true;
-			} else {
+				
+				if (!currentLi.childrenDraggable) {
+					instance.setDraggable(currentLi, '> ul > li.tree-item')
+					currentLi.childrenDraggable = true;
+				}
+			}
+			else {
 				subBranch.hide();
 				obj.src = icons.plus;
 			}
@@ -507,7 +536,7 @@ Liferay.Tree = new Class({
 			}
 			else if (type == 'delete') {
 				var tabLayoutId = obj[0]._LFR_layoutId;
-				var treeBranch = tree.find('li[@rel=_nodeId_' + tabLayoutId + ']');
+				var treeBranch = tree.find('li[@nodeId=' + tabLayoutId + ']');
 
 				treeBranch.remove();
 			}
@@ -607,9 +636,13 @@ Liferay.Tree = new Class({
 
 				if (subBranch.is(':hidden')) {
 					var targetBranch = subBranch.get(0);
-
+					targetBranch.childrenDraggable = false;
 					obj.expanderTime = window.setTimeout(
 						function() {
+							if (!targetBranch.childrenDraggable) {
+								instance.setDraggable(targetBranch, '> li.tree-item')
+								targetBranch.childrenDraggable = true;
+							}
 							jQuery(targetBranch).show();
 							jQuery('img.expand-image', targetBranch.parentNode).eq(0).attr('src', icons.minus);
 							jQuery.recallDroppables();

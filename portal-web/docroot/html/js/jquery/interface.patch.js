@@ -580,7 +580,7 @@ jQuery.iDrag.build = function(o)
 		if (!jQuery.iDrag.helper) {
 			jQuery('body',document).append('<div id="dragHelper"></div>');
 			jQuery.iDrag.helper = jQuery('#dragHelper');
-			var el = jQuery.iDrag.helper.get(0);
+			var el = jQuery.iDrag.helper[0];
 			var els = el.style;
 			els.position = 'absolute';
 			els.display = 'none';
@@ -610,18 +610,7 @@ jQuery.iDrag.build = function(o)
 				}
 				var el = this;
 				var dhe = o.handle ? jQuery(o.handle, this) : jQuery(this);
-				if(jQuery.browser.msie) {
-					dhe.each(
-						function()
-						{
-							this.unselectable = "on";
-						}
-					);
-				} else {
-					dhe.css('-moz-user-select', 'none');
-					dhe.css('user-select', 'none');
-					dhe.css('-khtml-user-select', 'none');
-				}
+
 				this.dragCfg = {
 					dhe: dhe,
 					revert : o.revert ? true : false,
@@ -672,6 +661,14 @@ jQuery.iDrag.build = function(o)
 				dhe.each(
 					function(){
 						this.dragElem = el;
+						if (jQuery.browser.msie) {
+							this.unselectable = "on";
+						}
+						else {
+							this.style.MozUserSelect = 'none';
+							this.style.userSelect = 'none';
+							this.style.KhtmlUserSelect = 'none';
+						}
 					}
 				);
 				dhe.bind('mousedown', jQuery.iDrag.draginit);
