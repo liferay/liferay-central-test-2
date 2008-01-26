@@ -60,7 +60,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
 		String templateId = ParamUtil.getString(
 			req, "templateId").toUpperCase();
-		boolean disableCaching = ParamUtil.getBoolean(req, "disableCaching");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
@@ -75,7 +74,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("group-id", String.valueOf(groupId));
 		prefs.setValue("article-id", articleId);
 		prefs.setValue("template-id", templateId);
-		prefs.setValue("disable-caching", String.valueOf(disableCaching));
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
