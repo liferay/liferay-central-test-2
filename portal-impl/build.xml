@@ -163,15 +163,33 @@ ${exception.message}
 				<antelope:endswith string="${app.server.portal.dir}" with="/portal-web/docroot" />
 			</and>
 			<then>
-				<javac
-					classpathref="project.classpath"
-					compiler="${javac.compiler}"
-					debug="${javac.debug}"
-					deprecation="${javac.deprecation}"
-					destdir="${app.server.classes.portal.dir}"
-					nowarn="${javac.nowarn}"
-					srcdir="src"
-				/>
+				<if>
+					<equals arg1="${javac.compiler}" arg2="modern" />
+					<then>
+						<javac
+							classpathref="project.classpath"
+							compiler="${javac.compiler}"
+							debug="${javac.debug}"
+							deprecation="${javac.deprecation}"
+							destdir="${app.server.classes.portal.dir}"
+							fork="${javac.fork}"
+							memoryMaximumSize="${javac.memoryMaximumSize}"
+							nowarn="${javac.nowarn}"
+							srcdir="src"
+						/>
+					</then>
+					<else>
+						<javac
+							classpathref="project.classpath"
+							compiler="${javac.compiler}"
+							debug="${javac.debug}"
+							deprecation="${javac.deprecation}"
+							destdir="${app.server.classes.portal.dir}"
+							nowarn="${javac.nowarn}"
+							srcdir="src"
+						/>
+					</else>
+				</if>
 			</then>
 		</if>
 	</target>
