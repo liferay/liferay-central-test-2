@@ -1059,7 +1059,7 @@ public class BaseDeployer {
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
-		if (!ServerDetector.isGeronimo()) {
+		if (!appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
 			return;
 		}
 
