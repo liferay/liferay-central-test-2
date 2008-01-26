@@ -64,6 +64,8 @@ public class IGImageJSONSerializer {
 		JSONUtil.put(jsonObj, "description", model.getDescription());
 		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
 		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());
+		JSONUtil.put(jsonObj, "custom1ImageId", model.getCustom1ImageId());
+		JSONUtil.put(jsonObj, "custom2ImageId", model.getCustom2ImageId());
 
 		return jsonObj;
 	}

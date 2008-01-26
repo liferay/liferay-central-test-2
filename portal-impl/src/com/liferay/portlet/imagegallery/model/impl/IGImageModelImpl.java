@@ -89,9 +89,15 @@ public class IGImageModelImpl extends BaseModelImpl {
 			{ "smallImageId", new Integer(Types.BIGINT) },
 			
 
-			{ "largeImageId", new Integer(Types.BIGINT) }
+			{ "largeImageId", new Integer(Types.BIGINT) },
+			
+
+			{ "custom1ImageId", new Integer(Types.BIGINT) },
+			
+
+			{ "custom2ImageId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table IGImage";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGImage"),
@@ -223,6 +229,26 @@ public class IGImageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getCustom1ImageId() {
+		return _custom1ImageId;
+	}
+
+	public void setCustom1ImageId(long custom1ImageId) {
+		if (custom1ImageId != _custom1ImageId) {
+			_custom1ImageId = custom1ImageId;
+		}
+	}
+
+	public long getCustom2ImageId() {
+		return _custom2ImageId;
+	}
+
+	public void setCustom2ImageId(long custom2ImageId) {
+		if (custom2ImageId != _custom2ImageId) {
+			_custom2ImageId = custom2ImageId;
+		}
+	}
+
 	public IGImage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (IGImage)this;
@@ -242,6 +268,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 			model.setDescription(Html.escape(getDescription()));
 			model.setSmallImageId(getSmallImageId());
 			model.setLargeImageId(getLargeImageId());
+			model.setCustom1ImageId(getCustom1ImageId());
+			model.setCustom2ImageId(getCustom2ImageId());
 
 			model = (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
 					new Class[] { IGImage.class },
@@ -264,6 +292,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 		clone.setDescription(getDescription());
 		clone.setSmallImageId(getSmallImageId());
 		clone.setLargeImageId(getLargeImageId());
+		clone.setCustom1ImageId(getCustom1ImageId());
+		clone.setCustom2ImageId(getCustom2ImageId());
 
 		return clone;
 	}
@@ -332,4 +362,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 	private String _description;
 	private long _smallImageId;
 	private long _largeImageId;
+	private long _custom1ImageId;
+	private long _custom2ImageId;
 }

@@ -138,13 +138,24 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setSmallImageId(counterLocalService.increment());
 			image.setLargeImageId(counterLocalService.increment());
 
+			if ((PropsValues.IG_IMAGE_CUSTOM_1_MAX_HEIGHT > 0) &&
+				(PropsValues.IG_IMAGE_CUSTOM_1_MAX_WIDTH > 0)) {
+				image.setCustom1ImageId(counterLocalService.increment());
+			}
+
+			if ((PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT > 0) &&
+				(PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH > 0)) {
+				image.setCustom2ImageId(counterLocalService.increment());
+			}
+
 			igImagePersistence.update(image);
 
 			// Images
 
 			saveImages(
 				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
-				file, bytes, contentType);
+				image.getCustom1ImageId(), image.getCustom2ImageId(), file,
+				bytes, contentType);
 
 			// Resources
 
@@ -404,7 +415,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			if (renderedImage != null) {
 				saveImages(
 					image.getLargeImageId(), renderedImage,
-					image.getSmallImageId(), file, bytes, contentType);
+					image.getSmallImageId(), image.getCustom1ImageId(),
+					image.getCustom2ImageId(), file, bytes, contentType);
 			}
 
 			// Tags
@@ -467,8 +479,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void saveImages(
-			long largeImageId, RenderedImage renderedImage, long smallImageId,
-			File file, byte[] bytes, String contentType)
+		long largeImageId, RenderedImage renderedImage, long smallImageId,
+		long custom1ImageId, long custom2ImageId, File file, byte[] bytes,
+		String contentType)
 		throws SystemException {
 
 		try {
@@ -477,43 +490,67 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			ImageLocalUtil.updateImage(largeImageId, bytes);
 
-			// Thumbnail
+			// Thumbnail and custom sizes
 
-			RenderedImage thumbnail = ImageUtil.scale(
-				renderedImage, PropsValues.IG_IMAGE_THUMBNAIL_MAX_HEIGHT,
+			saveScaledImage(
+				renderedImage, smallImageId, contentType,
+				PropsValues.IG_IMAGE_THUMBNAIL_MAX_HEIGHT,
 				PropsValues.IG_IMAGE_THUMBNAIL_MAX_WIDTH);
 
-			ByteArrayMaker bam = new ByteArrayMaker();
-
-			if (contentType.indexOf("bmp") != -1) {
-				ImageEncoder encoder = ImageCodec.createImageEncoder(
-					"BMP", bam, null);
-
-				encoder.encode(thumbnail);
-			}
-			else if (contentType.indexOf("gif") != -1) {
-				ImageUtil.encodeGIF(thumbnail, bam);
-			}
-			else if (contentType.indexOf("jpg") != -1 ||
-					 contentType.indexOf("jpeg") != -1) {
-
-				ImageIO.write(thumbnail, "jpeg", bam);
-			}
-			else if (contentType.indexOf("png") != -1) {
-				ImageIO.write(thumbnail, "png", bam);
-			}
-			else if (contentType.indexOf("tif") != -1) {
-				ImageEncoder encoder = ImageCodec.createImageEncoder(
-					"TIFF", bam, null);
-
-				encoder.encode(thumbnail);
+			if (custom1ImageId > 0) {
+				saveScaledImage(
+					renderedImage, custom1ImageId, contentType,
+					PropsValues.IG_IMAGE_CUSTOM_1_MAX_HEIGHT,
+					PropsValues.IG_IMAGE_CUSTOM_1_MAX_WIDTH);
 			}
 
-			ImageLocalUtil.updateImage(smallImageId, bam.toByteArray());
+			if (custom2ImageId > 0) {
+				saveScaledImage(
+					renderedImage, custom2ImageId, contentType,
+					PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT,
+					PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH);
+			}
+
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	protected void saveScaledImage(
+		RenderedImage renderedImage, long imageId, String contentType,
+		int height, int width)
+		throws IOException, SystemException {
+
+		RenderedImage thumbnail = ImageUtil.scale(renderedImage, height, width);
+
+		ByteArrayMaker bam = new ByteArrayMaker();
+
+		if (contentType.indexOf("bmp") != -1) {
+			ImageEncoder encoder = ImageCodec.createImageEncoder(
+				"BMP", bam, null);
+
+			encoder.encode(thumbnail);
+		}
+		else if (contentType.indexOf("gif") != -1) {
+			ImageUtil.encodeGIF(thumbnail, bam);
+		}
+		else if (contentType.indexOf("jpg") != -1 ||
+				 contentType.indexOf("jpeg") != -1) {
+
+			ImageIO.write(thumbnail, "jpeg", bam);
+		}
+		else if (contentType.indexOf("png") != -1) {
+			ImageIO.write(thumbnail, "png", bam);
+		}
+		else if (contentType.indexOf("tif") != -1) {
+			ImageEncoder encoder = ImageCodec.createImageEncoder(
+				"TIFF", bam, null);
+
+			encoder.encode(thumbnail);
+		}
+
+		ImageLocalUtil.updateImage(imageId, bam.toByteArray());
 	}
 
 	protected void validate(File file, byte[] bytes)

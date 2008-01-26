@@ -95,6 +95,8 @@ create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
 create index IX_F73C0982 on IGFolder (uuid_);
 create index IX_B10EFD68 on IGFolder (uuid_, groupId);
 
+create index IX_E597322D on IGImage (custom1ImageId);
+create index IX_D9E0A34C on IGImage (custom2ImageId);
 create index IX_4438CA80 on IGImage (folderId);
 create index IX_64F0B572 on IGImage (largeImageId);
 create index IX_D3D32126 on IGImage (smallImageId);

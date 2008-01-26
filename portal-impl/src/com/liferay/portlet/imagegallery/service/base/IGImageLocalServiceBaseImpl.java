@@ -95,6 +95,8 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImage.setDescription(model.getDescription());
 		igImage.setSmallImageId(model.getSmallImageId());
 		igImage.setLargeImageId(model.getLargeImageId());
+		igImage.setCustom1ImageId(model.getCustom1ImageId());
+		igImage.setCustom2ImageId(model.getCustom2ImageId());
 
 		return igImagePersistence.update(igImage);
 	}
@@ -125,6 +127,8 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImage.setDescription(model.getDescription());
 		igImage.setSmallImageId(model.getSmallImageId());
 		igImage.setLargeImageId(model.getLargeImageId());
+		igImage.setCustom1ImageId(model.getCustom1ImageId());
+		igImage.setCustom2ImageId(model.getCustom2ImageId());
 
 		return igImagePersistence.update(igImage);
 	}

@@ -72,6 +72,8 @@
 		<column name="description" type="String" />
 		<column name="smallImageId" type="long" />
 		<column name="largeImageId" type="long" />
+		<column name="custom1ImageId" type="long" />
+		<column name="custom2ImageId" type="long" />
 
 		<!-- Order -->
 
@@ -89,6 +91,12 @@
 		</finder>
 		<finder name="LargeImageId" return-type="IGImage">
 			<finder-column name="largeImageId" />
+		</finder>
+		<finder name="Custom1ImageId" return-type="IGImage">
+			<finder-column name="custom1ImageId" />
+		</finder>
+		<finder name="Custom2ImageId" return-type="IGImage">
+			<finder-column name="custom2ImageId" />
 		</finder>
 
 		<!-- References -->

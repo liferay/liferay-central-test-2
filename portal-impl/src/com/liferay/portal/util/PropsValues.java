@@ -256,6 +256,22 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
 
+	public static final int IG_IMAGE_CUSTOM_1_MAX_HEIGHT =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_HEIGHT));
+
+	public static final int IG_IMAGE_CUSTOM_1_MAX_WIDTH =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_WIDTH));
+
+	public static final int IG_IMAGE_CUSTOM_2_MAX_HEIGHT =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_HEIGHT));
+
+	public static final int IG_IMAGE_CUSTOM_2_MAX_WIDTH =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_WIDTH));
+
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));

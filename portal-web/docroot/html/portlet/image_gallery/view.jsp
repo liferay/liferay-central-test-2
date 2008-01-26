@@ -217,7 +217,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<%
 			headerNames.clear();
 
-			headerNames.add("thumbnail");
+			headerNames.add("image");
 			headerNames.add("height");
 			headerNames.add("width");
 			headerNames.add("size");

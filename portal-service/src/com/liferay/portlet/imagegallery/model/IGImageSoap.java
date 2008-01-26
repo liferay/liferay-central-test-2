@@ -60,6 +60,8 @@ public class IGImageSoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setSmallImageId(model.getSmallImageId());
 		soapModel.setLargeImageId(model.getLargeImageId());
+		soapModel.setCustom1ImageId(model.getCustom1ImageId());
+		soapModel.setCustom2ImageId(model.getCustom2ImageId());
 
 		return soapModel;
 	}
@@ -167,6 +169,22 @@ public class IGImageSoap implements Serializable {
 		_largeImageId = largeImageId;
 	}
 
+	public long getCustom1ImageId() {
+		return _custom1ImageId;
+	}
+
+	public void setCustom1ImageId(long custom1ImageId) {
+		_custom1ImageId = custom1ImageId;
+	}
+
+	public long getCustom2ImageId() {
+		return _custom2ImageId;
+	}
+
+	public void setCustom2ImageId(long custom2ImageId) {
+		_custom2ImageId = custom2ImageId;
+	}
+
 	private String _uuid;
 	private long _imageId;
 	private long _companyId;
@@ -177,4 +195,6 @@ public class IGImageSoap implements Serializable {
 	private String _description;
 	private long _smallImageId;
 	private long _largeImageId;
+	private long _custom1ImageId;
+	private long _custom2ImageId;
 }

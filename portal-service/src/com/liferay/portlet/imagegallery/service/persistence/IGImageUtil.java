@@ -180,6 +180,30 @@ public class IGImageUtil {
 		return getPersistence().fetchByLargeImageId(largeImageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
+		long custom1ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence().findByCustom1ImageId(custom1ImageId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
+		long custom1ImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCustom1ImageId(custom1ImageId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
+		long custom2ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence().findByCustom2ImageId(custom2ImageId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
+		long custom2ImageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCustom2ImageId(custom2ImageId);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -231,6 +255,18 @@ public class IGImageUtil {
 		getPersistence().removeByLargeImageId(largeImageId);
 	}
 
+	public static void removeByCustom1ImageId(long custom1ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		getPersistence().removeByCustom1ImageId(custom1ImageId);
+	}
+
+	public static void removeByCustom2ImageId(long custom2ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		getPersistence().removeByCustom2ImageId(custom2ImageId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -253,6 +289,16 @@ public class IGImageUtil {
 	public static int countByLargeImageId(long largeImageId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByLargeImageId(largeImageId);
+	}
+
+	public static int countByCustom1ImageId(long custom1ImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCustom1ImageId(custom1ImageId);
+	}
+
+	public static int countByCustom2ImageId(long custom2ImageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCustom2ImageId(custom2ImageId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

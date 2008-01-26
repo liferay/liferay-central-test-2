@@ -79,6 +79,8 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		newIGImage.setDescription(randomString());
 		newIGImage.setSmallImageId(nextLong());
 		newIGImage.setLargeImageId(nextLong());
+		newIGImage.setCustom1ImageId(nextLong());
+		newIGImage.setCustom2ImageId(nextLong());
 
 		_persistence.update(newIGImage);
 
@@ -98,6 +100,10 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 			newIGImage.getSmallImageId());
 		assertEquals(existingIGImage.getLargeImageId(),
 			newIGImage.getLargeImageId());
+		assertEquals(existingIGImage.getCustom1ImageId(),
+			newIGImage.getCustom1ImageId());
+		assertEquals(existingIGImage.getCustom2ImageId(),
+			newIGImage.getCustom2ImageId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -150,6 +156,8 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		igImage.setDescription(randomString());
 		igImage.setSmallImageId(nextLong());
 		igImage.setLargeImageId(nextLong());
+		igImage.setCustom1ImageId(nextLong());
+		igImage.setCustom2ImageId(nextLong());
 
 		_persistence.update(igImage);
 

@@ -784,6 +784,8 @@
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="largeImageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="custom1ImageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="custom2ImageId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImpl" table="JournalArticle">
 		<cache usage="read-write" />

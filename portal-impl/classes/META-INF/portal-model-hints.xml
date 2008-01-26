@@ -790,6 +790,8 @@
 		</field>
 		<field name="smallImageId" type="long" />
 		<field name="largeImageId" type="long" />
+		<field name="custom1ImageId" type="long" />
+		<field name="custom2ImageId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
 		<field name="uuid" type="String" />

@@ -91,5 +91,13 @@ public interface IGImageModel extends BaseModel {
 
 	public void setLargeImageId(long largeImageId);
 
+	public long getCustom1ImageId();
+
+	public void setCustom1ImageId(long custom1ImageId);
+
+	public long getCustom2ImageId();
+
+	public void setCustom2ImageId(long custom2ImageId);
+
 	public IGImage toEscapedModel();
 }

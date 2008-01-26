@@ -361,7 +361,9 @@ create table IGImage (
 	folderId LONG,
 	description STRING null,
 	smallImageId LONG,
-	largeImageId LONG
+	largeImageId LONG,
+	custom1ImageId LONG,
+	custom2ImageId LONG
 );
 
 create table Image (

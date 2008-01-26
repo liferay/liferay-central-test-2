@@ -129,6 +129,22 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
 		long largeImageId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
+		long custom1ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
+		long custom1ImageId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
+		long custom2ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
+		long custom2ImageId) throws com.liferay.portal.SystemException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -160,6 +176,14 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
+	public void removeByCustom1ImageId(long custom1ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public void removeByCustom2ImageId(long custom2ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -172,6 +196,12 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByLargeImageId(long largeImageId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByCustom1ImageId(long custom1ImageId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByCustom2ImageId(long custom2ImageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
