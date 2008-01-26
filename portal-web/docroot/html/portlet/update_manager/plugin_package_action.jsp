@@ -43,53 +43,14 @@ if (availablePluginPackage != null) {
 %>
 
 <c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored") %>'>
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
-		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
-		<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= uploadProgressId %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="url" value="<%= downloadURL %>" />
-		<portlet:param name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
-	</portlet:actionURL>
-
-	<%
-	String jsUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
-	%>
-
-	<liferay-ui:icon
-		image="download"
-		message="update"
-		url="<%= jsUpdateURL %>"
-	/>
+	<input type="button" value="<liferay-ui:message key="update" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace/>remoteDeploy('<%= downloadURL %>', '<%= pluginPackage.getContext() %>', '<%= uploadProgressId %>');" />
 
 	<c:choose>
 		<c:when test="<%= !PluginPackageUtil.isIgnored(pluginPackage) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreURL">
-				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-				<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="pluginPackagesIgnored" value="<%= pluginPackage.getPackageId() %>" />
-			</portlet:actionURL>
-
-			<liferay-ui:icon
-				image="unsubscribe"
-				message="ignore"
-				url='<%= ignoreURL.toString() %>'
-			/>
+			<input type="button" value="<liferay-ui:message key="ignore" />" onClick="<portlet:namespace/>ignorePackages('<%= pluginPackage.getPackageId() %>');" />
 		</c:when>
 		<c:otherwise>
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unignoreURL">
-				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-				<portlet:param name="<%= Constants.CMD %>" value="unignorePackages" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="pluginPackagesUnignored" value="<%= pluginPackage.getPackageId() %>" />
-			</portlet:actionURL>
-
-			<liferay-ui:icon
-				image="subscribe"
-				message="unignore"
-				url='<%= unignoreURL.toString() %>'
-			/>
+			<input type="button" value="<liferay-ui:message key="unignore" />" onClick="<portlet:namespace/>unignorePackages('<%= pluginPackage.getPackageId() %>');" />
 		</c:otherwise>
 	</c:choose>
 

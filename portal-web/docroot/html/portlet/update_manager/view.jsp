@@ -64,10 +64,45 @@ List updatablePackageIds = new ArrayList();
 						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
 						submitForm(document.<portlet:namespace />fm);
 					}
+
+					function <portlet:namespace />remoteDeploy(url, deploymentContext, progressId) {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "remoteDeploy";
+
+						document.<portlet:namespace />fm.<portlet:namespace />url.value = url;
+						document.<portlet:namespace />fm.<portlet:namespace />deploymentContext.value = deploymentContext;
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.PROGRESS_ID %>.value = progressId;
+						document.<portlet:namespace />fm.<portlet:namespace />redirect.value='<%= currentURL %>';
+
+						submitForm(document.<portlet:namespace />fm);
+					}
+
+					function <portlet:namespace />ignorePackages(pluginPackagesIgnored) {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "ignorePackages";
+
+						document.<portlet:namespace />fm.<portlet:namespace />pluginPackagesIgnored.value = pluginPackagesIgnored;
+						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= currentURL %>';
+
+						submitForm(document.<portlet:namespace />fm);
+					}
+
+					function <portlet:namespace />unignorePackages(pluginPackagesUnignored) {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unignorePackages";
+
+						document.<portlet:namespace />fm.<portlet:namespace />pluginPackagesUnignored.value = pluginPackagesUnignored;
+						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= currentURL %>';
+
+						submitForm(document.<portlet:namespace />fm);
+					}
+
 				</script>
 
 				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/update_manager/install_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+				<input name="<portlet:namespace />pluginPackagesIgnored" type="hidden" value="" />
+				<input name="<portlet:namespace />pluginPackagesUnignored" type="hidden" value="" />
+				<input name="<portlet:namespace />deploymentContext" type="hidden" value="" />
+				<input name="<portlet:namespace />url" type="hidden" value="" />
+				<input name="<portlet:namespace /><%= Constants.PROGRESS_ID %>" type="hidden" value="" />
 				<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/update_manager/view" /></portlet:renderURL>" />
 
 				<%
@@ -210,14 +245,7 @@ List updatablePackageIds = new ArrayList();
 					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="self.location = '<%= pluginInstallerURL.toString() %>';" />
 
 					<c:if test="<%= !updatablePackageIds.isEmpty() %>">
-						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreAllURL">
-							<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-							<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="pluginPackagesIgnored" value='<%= StringUtil.merge(updatablePackageIds, "\n") %>' />
-						</portlet:actionURL>
-
-						<input type="button" value="<liferay-ui:message key="ignore-all-updates" />" onClick="self.location = '<%= ignoreAllURL.toString() %>';" />
+						<input type="button" value="<liferay-ui:message key="ignore-all-updates" />" onClick="<portlet:namespace/>ignorePackages('<%= StringUtil.merge(updatablePackageIds, "\\n") %>');" />
 					</c:if>
 
 					<div class="separator"><!-- --></div>
