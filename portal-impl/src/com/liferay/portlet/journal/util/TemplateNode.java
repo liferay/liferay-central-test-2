@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsValues;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +78,17 @@ public class TemplateNode {
 
 	public List getChildren() {
 		return _children;
+	}
+
+	public String getUrl() {
+		if (getType().equals("link_to_layout")) {
+			return PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING
+				+ StringPool.SLASH + "@group_id@" +
+					StringPool.SLASH + getData();
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	private String _name;

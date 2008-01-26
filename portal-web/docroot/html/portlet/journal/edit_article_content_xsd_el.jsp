@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.portal.util.LayoutLister" %>
+<%@ page import="com.liferay.portal.util.LayoutView" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -230,6 +232,60 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 
 							</select>
 						</c:if>
+
+						<c:if test='<%= elType.equals("link_to_layout") %>'>
+							<select id="<portlet:namespace />structure_el<%= count.getValue() %>_content" onChange="<portlet:namespace />contentChanged();">
+								<option value=""></option>
+
+								<%
+									LayoutLister layoutLister = new LayoutLister();
+
+									LayoutView layoutView = layoutLister.getLayoutView(layout.getGroupId(), layout.isPrivateLayout(), "root", locale);
+
+									List layoutList = layoutView.getList();
+
+								for (int i = 0; i < layoutList.size(); i++) {
+
+									// id | parentId | ls | obj id | name | img | depth
+
+									String layoutDesc = (String)layoutList.get(i);
+
+									String[] nodeValues = StringUtil.split(layoutDesc, "|");
+
+									long objId = GetterUtil.getLong(nodeValues[3]);
+									String name = nodeValues[4];
+
+									int depth2 = 0;
+
+									if (i != 0) {
+										depth2 = GetterUtil.getInteger(nodeValues[6]);
+									}
+
+									for (int j = 0; j < depth2; j++) {
+										name = "-&nbsp;" + name;
+									}
+
+									Layout linkableLayout = null;
+
+									try {
+										linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
+									}
+									catch (Exception e) {
+									}
+
+									if (linkableLayout != null) {
+								%>
+
+										<option <%= (elContent.equals(Long.toString(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+
+								<%
+									}
+								}
+								%>
+
+							</select>
+						</c:if>
+
 					</td>
 				</tr>
 

@@ -315,7 +315,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						var elContentValue = "";
 						var elLanguageValue = elLanguage.value;
 
-						if ((elTypeValue == "text") || (elTypeValue == "text_box") || (elTypeValue == "image_gallery") || (elTypeValue == "document_library")) {
+						if ((elTypeValue == "text") || (elTypeValue == "text_box") || (elTypeValue == "image_gallery") || (elTypeValue == "document_library") || (elTypeValue == "link_to_layout")) {
 							elContentValue = elContent.value;
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}

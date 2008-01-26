@@ -72,6 +72,7 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean"><liferay-ui:message key="boolean-flag" /></option>
 							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><liferay-ui:message key="selection-list" /></option>
 							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
+							<option <%= elType.equals("link_to_layout") ? "selected" : "" %> value="link_to_layout"><liferay-ui:message key="link-to-layout" /></option>
 						</select>
 					</c:otherwise>
 				</c:choose>

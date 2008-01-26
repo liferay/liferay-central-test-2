@@ -32,6 +32,10 @@
 ##                         (chocolate, strawberry, or vanilla) that can be used
 ##                         in the #foreach clause
 ##
+## Another special accessor exists for elements of type "link_to_layout":
+## $linkToPage.getUrl() - The URL that links to the selected page in the current
+##                        community, organization, etc.
+##
 ## Additionally, the variable $journalTemplatesPath can be used to include
 ## another Journal template, e.g. #parse ("$journalTemplatesPath/LAYOUT-PARENT")
 ##
