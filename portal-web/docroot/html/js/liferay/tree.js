@@ -12,7 +12,7 @@ Liferay.Tree = new Class({
 		instance.treeId = params.treeId;
 		instance.selectable = params.selectable || false;
 		instance.selectedNodes = params.selectedNodes || '';
-		
+
 		instance._dragOptions = {
 			autoSize: true,
 			ghosting: true,
@@ -22,43 +22,50 @@ Liferay.Tree = new Class({
 
 		instance._expandText = Liferay.Language.get('expand-all');
 		instance._collapseText = Liferay.Language.get('collapse-all');
-		
+
 		var icons = instance.icons;
+
 		instance._plusImage = instance.generateImage(
 			{
 				src: icons.plus,
 				className: 'expand-image'
 			}
 		);
+
 		instance._minusImage = instance.generateImage(
 			{
 				src: icons.minus,
 				className: 'expand-image'
 			}
 		);
+
 		instance._spacerImage = instance.generateImage(
 			{
 				src: icons.spacer,
 				className: 'expand-image'
 			}
 		);
+
 		instance._spacerImage = instance.generateImage(
 			{
 				src: icons.spacer,
 				className: 'expand-image'
 			}
 		);
+
 		instance._pageImage = instance.generateImage(
 			{
 				src: icons.page
 			}
 		);
+
 		instance._checkedPage = instance.generateImage(
 			{
 				src: icons.checked,
 				className: 'select-state'
 			}
 		);
+
 		instance._checkBoxPage = instance.generateImage(
 			{
 				src: icons.checkbox,
@@ -91,7 +98,7 @@ Liferay.Tree = new Class({
 				plid = node.objId;
 				src = '';
 
-				
+
 				image = '';
 				openClass = '';
 				if (hasChildNode) {
@@ -167,31 +174,32 @@ Liferay.Tree = new Class({
 
 			var tree = jQuery('<ul class="lfr-component ' + instance.className + '"></ul>');
 			var treeEl = tree[0];
-			
+
 			instance.tree = tree;
 
 			// Output the tree
 
 			outputEl.append(instance.tree);
-			
+
 			instance.addNode(1);
 
-			var mainLi = '<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>' +
-			'<li class="root-container">' +
-				'<a href="' + node.href + '">' +
-					instance.generateImage(icons.root) +
-					'<span>&nbsp;' + node.name + '</span>' +
-				'</a>' +
-				'<ul class="node-open">' + instance.treeHTML + '</ul>' +
-			'</li>';
+			var mainLi =
+				'<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>' +
+				'<li class="root-container">' +
+					'<a href="' + node.href + '">' +
+						instance.generateImage(icons.root) +
+						'<span>&nbsp;' + node.name + '</span>' +
+					'</a>' +
+					'<ul class="node-open">' + instance.treeHTML + '</ul>' +
+				'</li>';
 
 			tree.append(mainLi);
 
 			var treeBranches = jQuery('li.tree-item', treeEl);
 
 			var nodeIdList = [];
-			
-			for (var i = instance.nodes.length - 1; i >= 0; i--){
+
+			for (var i = instance.nodes.length - 1; i >= 0; i--) {
 				if (i != 0 && instance.nodes[i].id) {
 					nodeIdList[i] = instance.nodes[i].id;
 				}
@@ -251,8 +259,9 @@ Liferay.Tree = new Class({
 			// Set draggable items
 
 			instance.setDraggable(treeEl);
-			
+
 			var allDraggable = false;
+
 			jQuery('#lfr-expand').click(
 				function() {
 					tree.find('.tree-item ul').show();
@@ -327,13 +336,13 @@ Liferay.Tree = new Class({
 	hasChildNode: function(parentNode) {
 		var instance = this;
 
-		return (parentNode < instance.nodes.length &&
-				instance.nodes[parentNode].parentId == parentNode);
+		return (parentNode < instance.nodes.length) && (instance.nodes[parentNode].parentId == parentNode);
 	},
 
 	isNodeOpen: function(node) {
 		var instance = this;
-		for (var i = instance.openNodes.length - 1; i >= 0; i--){
+
+		for (var i = instance.openNodes.length - 1; i >= 0; i--) {
 			if (instance.openNodes[i] == node) {
 				return true;
 			}
@@ -344,7 +353,8 @@ Liferay.Tree = new Class({
 
 	isNodeSelected: function(node) {
 		var instance = this;
-		for (var i = instance.selectedNodes.length - 1; i >= 0; i--){
+
+		for (var i = instance.selectedNodes.length - 1; i >= 0; i--) {
 			if (instance.selectedNodes[i] == node) {
 				return true;
 			}
@@ -397,13 +407,12 @@ Liferay.Tree = new Class({
 			);
 		}
 	},
-	
+
 	setDraggable: function(parentEl, selector) {
 		var instance = this;
 
 		jQuery(selector || 'ul.node-open > li.tree-item', parentEl).Draggable(instance._dragOptions);
 	},
-	
 
 	setOpenNodes: function() {
 		var instance = this;
@@ -437,13 +446,14 @@ Liferay.Tree = new Class({
 			var nodeId = currentLi.getAttribute('nodeId');
 
 			var subBranch = jQuery('ul', currentLi).eq(0);
+
 			currentLi.childrenDraggable = false;
 
 			if (subBranch.is(':hidden')) {
 				subBranch.show();
 				obj.src = icons.minus;
 				openNode = true;
-				
+
 				if (!currentLi.childrenDraggable) {
 					instance.setDraggable(currentLi, '> ul > li.tree-item')
 					currentLi.childrenDraggable = true;
@@ -643,6 +653,7 @@ Liferay.Tree = new Class({
 								instance.setDraggable(targetBranch, '> li.tree-item')
 								targetBranch.childrenDraggable = true;
 							}
+
 							jQuery(targetBranch).show();
 							jQuery('img.expand-image', targetBranch.parentNode).eq(0).attr('src', icons.minus);
 							jQuery.recallDroppables();

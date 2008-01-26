@@ -11260,7 +11260,7 @@ jQuery.iAuto = {
 	subject: null,
 	selectedItem : null,
 	items: null,
-	
+
 	empty : function()
 	{
 		jQuery.iAuto.content.empty();
@@ -11308,7 +11308,7 @@ jQuery.iAuto = {
 		var dataSource = subject.autoCFG.source;
 		var dataSourceType = subject.autoCFG.dataSourceType;
 		var isXML = subject.autoCFG.isXML;
-		
+
 		if (subject && subjectValue.item != jQuery.iAuto.lastValue && subjectValue.item.length >= subject.autoCFG.minchars) {
 			jQuery.iAuto.lastValue = subjectValue.item;
 			jQuery.iAuto.currentValue = subjectValue.item;
@@ -11324,7 +11324,7 @@ jQuery.iAuto = {
 						data: jQuery.param(data),
 						dataType: (isXML) ? 'xml' : 'json',
 						success: function(response) {
-							jQuery.iAuto.handleData(response, subject, subjectValue, isXML);	
+							jQuery.iAuto.handleData(response, subject, subjectValue, isXML);
 						},
 						url : dataSource
 					}
@@ -11335,7 +11335,7 @@ jQuery.iAuto = {
 			}
 		}
 	},
-	
+
 	writeItems : function(subject, toWrite)
 	{
 		jQuery.iAuto.content.html(toWrite);
@@ -11360,7 +11360,7 @@ jQuery.iAuto = {
 		jQuery.iAuto.selectedItem = 0;
 		jQuery.iAuto.items.get(0).className = subject.autoCFG.selectClass;
 		jQuery.iAuto.applyOn(subject,subject.autoCFG.lastSuggestion[0], 'onHighlight');
-		
+
 		if (jQuery.iAuto.helper.css('display') == 'none') {
 			if (subject.autoCFG.inputWidth) {
 				var borders = jQuery.iUtil.getPadding(subject, true);
@@ -11382,22 +11382,22 @@ jQuery.iAuto = {
 			} else {
 				jQuery.iAuto.helper.show();
 			}
-			
+
 			if (jQuery.iAuto.subject.autoCFG.onShow)
 				jQuery.iAuto.subject.autoCFG.onShow.apply(jQuery.iAuto.subject, [jQuery.iAuto.helper, jQuery.iAuto.iframe]);
 		}
 	},
-	
+
 	checkCache : function()
 	{
 		var subject = this;
 		if (subject.autoCFG.lastSuggestion) {
-			
+
 			jQuery.iAuto.lastValue = subject.value;
 			jQuery.iAuto.currentValue = subject.value;
-			
+
 			var isXML = subject.autoCFG.isXML;
-			
+
 			var iterator = function(nr)
 				{
 					var value, text, testValue;
@@ -11406,27 +11406,27 @@ jQuery.iAuto = {
 						text = jQuery('text', this).text();
 					} else {
 						value = this.value;
-						text = this.text;	
+						text = this.text;
 					}
 					testValue = value.toLowerCase();
 					inputValue = subject.value.toLowerCase();
-					
+
 					if (testValue.indexOf(inputValue) == 0) {
 						toWrite += '<li rel="' + value + '" dir="' + nr + '" style="cursor: default;">' + text + '</li>';
 					}
 				};
-			
+
 			var toWrite = '';
-			
+
 			if (isXML) {
 				subject.autoCFG.lastSuggestion.each(iterator);
 			} else {
 				jQuery.each(subject.autoCFG.lastSuggestion, iterator);
 			}
-			
+
 			if (toWrite != '') {
 				jQuery.iAuto.writeItems(subject, toWrite);
-				
+
 				this.autoCFG.inCache = true;
 				return;
 			}
@@ -11453,7 +11453,7 @@ jQuery.iAuto = {
 		}
 		field.focus();
 	},
-	
+
 	getSelectionStart : function(field)
 	{
 		if (field.selectionStart)
@@ -11471,7 +11471,7 @@ jQuery.iAuto = {
 			return bookmark.charCodeAt(2) - 2;*/
 		}
 	},
-	
+
 	getFieldValues : function(field)
 	{
 		var fieldData = {
@@ -11480,7 +11480,7 @@ jQuery.iAuto = {
 			post: '',
 			item: ''
 		};
-		
+
 		if(field.autoCFG.multiple) {
 			var finishedPre = false;
 			var selectionStart = jQuery.iAuto.getSelectionStart(field)||0;
@@ -11488,14 +11488,14 @@ jQuery.iAuto = {
 			for (var i=0; i<chunks.length; i++) {
 				if(
 					(fieldData.pre.length + chunks[i].length >= selectionStart
-					 || 
+					 ||
 					selectionStart == 0)
-					 && 
-					!finishedPre 
+					 &&
+					!finishedPre
 				) {
 					if (fieldData.pre.length <= selectionStart)
 						fieldData.item = chunks[i];
-					else 
+					else
 						fieldData.post += chunks[i] + (chunks[i] != '' ? field.autoCFG.multipleSeparator : '');
 					finishedPre = true;
 				} else if (finishedPre){
@@ -11510,12 +11510,12 @@ jQuery.iAuto = {
 		}
 		return fieldData;
 	},
-	
+
 	autocomplete : function(e)
 	{
 		window.clearTimeout(jQuery.iAuto.timer);
 		var subject = jQuery.iAuto.getFieldValues(this);
-				
+
 		var pressedKey = e.charCode || e.keyCode || -1;
 		if (/13|27|35|36|38|40|9/.test(pressedKey) && jQuery.iAuto.items) {
 			if (window.event) {
@@ -11525,7 +11525,7 @@ jQuery.iAuto = {
 				e.preventDefault();
 				e.stopPropagation();
 			}
-			if (jQuery.iAuto.selectedItem != null) 
+			if (jQuery.iAuto.selectedItem != null)
 				jQuery.iAuto.items.get(jQuery.iAuto.selectedItem||0).className = '';
 			else
 				jQuery.iAuto.selectedItem = -1;
@@ -11540,8 +11540,8 @@ jQuery.iAuto = {
 					this.value = subject.pre + valueToAdd + this.autoCFG.multipleSeparator + subject.post;
 					jQuery.iAuto.lastValue = subject.item;
 					jQuery.iAuto.selection(
-						this, 
-						subject.pre.length + valueToAdd.length + this.autoCFG.multipleSeparator.length, 
+						this,
+						subject.pre.length + valueToAdd.length + this.autoCFG.multipleSeparator.length,
 						subject.pre.length + valueToAdd.length + this.autoCFG.multipleSeparator.length
 					);
 					jQuery.iAuto.clear();
@@ -11591,15 +11591,15 @@ jQuery.iAuto = {
 				this.value = subject.pre + valToAdd + this.autoCFG.multipleSeparator + subject.post;
 				if(jQuery.iAuto.lastValue.length != valToAdd.length)
 					jQuery.iAuto.selection(
-						this, 
-						subject.pre.length + jQuery.iAuto.lastValue.length, 
+						this,
+						subject.pre.length + jQuery.iAuto.lastValue.length,
 						subject.pre.length + valToAdd.length
 					);
 			}
 			return false;
 		}
 		jQuery.iAuto.checkCache.apply(this);
-		
+
 		if (this.autoCFG.inCache == false) {
 			if (subject.item != jQuery.iAuto.lastValue && subject.item.length >= this.autoCFG.minchars)
 				jQuery.iAuto.timer = window.setTimeout(jQuery.iAuto.update, this.autoCFG.delay);
@@ -11611,9 +11611,9 @@ jQuery.iAuto = {
 	},
 
 	applyOn: function(field, item, type)
-	{	
+	{
 		var dataSource = field.autoCFG.source;
-		
+
 		if (field.autoCFG[type]) {
 			var data = {};
 			if (field.autoCFG.isXML) {
@@ -11627,11 +11627,11 @@ jQuery.iAuto = {
 			field.autoCFG[type].apply(field, [data]);
 		}
 	},
-	
+
 	hoverItem : function(e)
 	{
 		if (jQuery.iAuto.items) {
-			if (jQuery.iAuto.selectedItem != null) 
+			if (jQuery.iAuto.selectedItem != null)
 				jQuery.iAuto.items.get(jQuery.iAuto.selectedItem||0).className = '';
 			jQuery.iAuto.items.get(jQuery.iAuto.selectedItem||0).className = '';
 			jQuery.iAuto.selectedItem = parseInt(this.getAttribute('dir'))||0;
@@ -11640,9 +11640,9 @@ jQuery.iAuto = {
 	},
 
 	clickItem : function(event)
-	{	
+	{
 		window.clearTimeout(jQuery.iAuto.timer);
-		
+
 		event = event || jQuery.event.fix( window.event );
 		event.preventDefault();
 		event.stopPropagation();
@@ -11651,8 +11651,8 @@ jQuery.iAuto = {
 		jQuery.iAuto.subject.value = subject.pre + valueToAdd + jQuery.iAuto.subject.autoCFG.multipleSeparator + subject.post;
 		jQuery.iAuto.lastValue = this.getAttribute('rel');
 		jQuery.iAuto.selection(
-			jQuery.iAuto.subject, 
-			subject.pre.length + valueToAdd.length + jQuery.iAuto.subject.autoCFG.multipleSeparator.length, 
+			jQuery.iAuto.subject,
+			subject.pre.length + valueToAdd.length + jQuery.iAuto.subject.autoCFG.multipleSeparator.length,
 			subject.pre.length + valueToAdd.length + jQuery.iAuto.subject.autoCFG.multipleSeparator.length
 		);
 		jQuery.iAuto.clear();
@@ -11746,7 +11746,7 @@ jQuery.iAuto = {
 					)
 					.keypress(jQuery.iAuto.protect)
 					.keyup(jQuery.iAuto.autocomplete)
-					
+
 					.blur(
 						function()
 						{
@@ -11759,11 +11759,11 @@ jQuery.iAuto = {
 };
 
 jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
-	
+
 	if (response.length == 0) {
 		return;
 	}
-	
+
 	if (isXML) {
 		subject.autoCFG.lastSuggestion = jQuery('item',response);
 	} else {
@@ -11772,7 +11772,7 @@ jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
 	size = subject.autoCFG.lastSuggestion.length;
 	if (size > 0) {
 		var toWrite = '';
-		
+
 		var iterator = function(nr)
 			{
 				var text, value;
@@ -11785,7 +11785,7 @@ jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
 				}
 				toWrite += '<li rel="' + value + '" dir="' + nr + '" style="cursor: default;">' + text + '</li>';
 		};
-		
+
 		if (isXML) {
 			subject.autoCFG.lastSuggestion.each(iterator);
 		} else {
@@ -11794,7 +11794,7 @@ jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
 
 		if (subject.autoCFG.autofill) {
 			var valueToAdd;
-			
+
 			if (isXML) {
 				valueToAdd = jQuery('value', subject.autoCFG.lastSuggestion[0]).text();
 			} else {
@@ -11802,7 +11802,7 @@ jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
 			}
 			subject.value = subjectValue.pre + valueToAdd + subject.autoCFG.multipleSeparator + subjectValue.post;
 			jQuery.iAuto.selection(
-				subject, 
+				subject,
 				subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + subjectValue.item.length) : valueToAdd.length,
 				subjectValue.item.length != valueToAdd.length ? (subjectValue.pre.length + valueToAdd.length) : valueToAdd.length
 			);
@@ -11827,7 +11827,7 @@ jQuery.iDrag.build = function(o)
 		if (!jQuery.iDrag.helper) {
 			jQuery('body',document).append('<div id="dragHelper"></div>');
 			jQuery.iDrag.helper = jQuery('#dragHelper');
-			var el = jQuery.iDrag.helper.get(0);
+			var el = jQuery.iDrag.helper[0];
 			var els = el.style;
 			els.position = 'absolute';
 			els.display = 'none';
@@ -11845,7 +11845,7 @@ jQuery.iDrag.build = function(o)
 		if (!o) {
 			o = {};
 		}
-		
+
 		return this.each(
 			function()
 			{
@@ -11857,18 +11857,7 @@ jQuery.iDrag.build = function(o)
 				}
 				var el = this;
 				var dhe = o.handle ? jQuery(o.handle, this) : jQuery(this);
-				if(jQuery.browser.msie) {
-					dhe.each(
-						function()
-						{
-							this.unselectable = "on";
-						}
-					);
-				} else {
-					dhe.css('-moz-user-select', 'none');
-					dhe.css('user-select', 'none');
-					dhe.css('-khtml-user-select', 'none');
-				}
+
 				this.dragCfg = {
 					dhe: dhe,
 					revert : o.revert ? true : false,
@@ -11890,7 +11879,7 @@ jQuery.iDrag.build = function(o)
 					cursorAt: o.cursorAt ? o.cursorAt : false,
 					autoSize : o.autoSize ? true : false,
 					frameClass : o.frameClass || false
-					
+
 				};
 				if (o.onDragModifier && o.onDragModifier.constructor == Function)
 					this.dragCfg.onDragModifier.user = o.onDragModifier;
@@ -11919,6 +11908,15 @@ jQuery.iDrag.build = function(o)
 				dhe.each(
 					function(){
 						this.dragElem = el;
+
+						if (jQuery.browser.msie) {
+							this.unselectable = "on";
+						}
+						else {
+							this.style.MozUserSelect = 'none';
+							this.style.userSelect = 'none';
+							this.style.KhtmlUserSelect = 'none';
+						}
 					}
 				);
 				dhe.bind('mousedown', jQuery.iDrag.draginit);
@@ -11927,7 +11925,7 @@ jQuery.iDrag.build = function(o)
 	};
 jQuery.fn.Draggable = jQuery.iDrag.build;
 /**
- * jQBrowser² v1.0.1 - Extend jQuery's browser detection capabilities and implement CSS browser selectors
+ * jQBrowser? v1.0.1 - Extend jQuery's browser detection capabilities and implement CSS browser selectors
  *   * http://www.alterform.com/resources/jqbrowser-2
  *
  * Built on the shoulders of (and stolen from :) ) giants:
@@ -11946,7 +11944,7 @@ var jQBrowser2 = function() {
 	var add_selectors = true;
     /**
      * The following functions and attributes form the internal methods and
-     * state of the jQBrowser² plugin.  See the relevant function definition
+     * state of the jQBrowser? plugin.  See the relevant function definition
      * later in the source for further information.
      *
      * Private.browser
@@ -12182,7 +12180,7 @@ var jQBrowser2 = function() {
     };
 	/**
      * The following functions and attributes form the Public interface of the
-     * jQBrowser² plugin, accessed externally through the $.browser object.
+     * jQBrowser? plugin, accessed externally through the $.browser object.
      * See the relevant function definition later in the source for further
      * information.
      *
