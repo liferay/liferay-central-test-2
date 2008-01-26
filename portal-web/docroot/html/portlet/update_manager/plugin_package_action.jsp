@@ -53,7 +53,7 @@ if (availablePluginPackage != null) {
 	</portlet:actionURL>
 
 	<%
-	String jsUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';";
+	String jsUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); submitForm(document.hrefFm, '" + updateURL + "');";
 	%>
 
 	<liferay-ui:icon
