@@ -41,7 +41,12 @@ double version = ParamUtil.getDouble(request, "version");
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
+		if (pageURL.equals("normal")) {
+			portletURL.setWindowState(WindowState.NORMAL);
+		}
+		else {
+			portletURL.setWindowState(WindowState.MAXIMIZED);
+		}
 
 		portletURL.setParameter("struts_action", "/journal_articles/view");
 
@@ -106,7 +111,7 @@ double version = ParamUtil.getDouble(request, "version");
 			String target = null;
 
 			if (pageURL.equals("popUp")) {
-				target = "_blank";;
+				target = "_blank";
 			}
 
 			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, article.getArticleId(), rowHREF, target, null);

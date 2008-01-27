@@ -88,6 +88,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td>
 		<select name="<portlet:namespace />pageURL">
 			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><liferay-ui:message key="maximized" /></option>
+			<option <%= pageURL.equals("normal") ? "selected" : "" %> value="normal"><liferay-ui:message key="normal" /></option>
 			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><liferay-ui:message key="pop-up" /></option>
 		</select>
 	</td>
