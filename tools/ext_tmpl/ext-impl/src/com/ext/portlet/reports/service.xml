@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.ext.portlet.reports">
 	<namespace>Reports</namespace>
-	<entity name="ReportsEntry" local-service="false" remote-service="true" persistence-class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence">
+	<entity name="ReportsEntry" local-service="false" remote-service="true" persistence-class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistenceImpl">
 
 		<!-- PK fields -->
 
