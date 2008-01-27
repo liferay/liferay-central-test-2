@@ -35,6 +35,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -218,6 +219,7 @@ public class PortletPreferencesFactoryImpl
 			ownerId = themeDisplay.getCompanyId();
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 			plid = PortletKeys.PREFS_PLID_SHARED;
+			portletId = PortletImpl.getRootPortletId(portletId);
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
@@ -245,6 +247,7 @@ public class PortletPreferencesFactoryImpl
 				if (portlet.isPreferencesOwnedByGroup()) {
 					ownerId = selLayout.getGroupId();
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+					portletId = PortletImpl.getRootPortletId(portletId);
 				}
 				else {
 					long userId = PortalUtil.getUserId(req);
@@ -301,6 +304,38 @@ public class PortletPreferencesFactoryImpl
 			Layout layout, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), portletId);
+
+		if (portlet.isPreferencesCompanyWide()) {
+			uniquePerLayout = false;
+			uniquePerGroup = false;
+			portletId = PortletImpl.getRootPortletId(portletId);
+		}
+		else {
+			if (portlet.isPreferencesUniquePerLayout()) {
+				uniquePerLayout = true;
+
+				if (portlet.isPreferencesOwnedByGroup()) {
+					uniquePerGroup = true;
+				}
+				else {
+					uniquePerGroup = false;
+				}
+			}
+			else {
+				uniquePerLayout = false;
+
+				if (portlet.isPreferencesOwnedByGroup()) {
+					uniquePerGroup = true;
+					portletId = PortletImpl.getRootPortletId(portletId);
+				}
+				else {
+					uniquePerGroup = false;
+				}
+			}
+		}
 
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
