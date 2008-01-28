@@ -63,8 +63,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("bullet-style", bulletStyle);

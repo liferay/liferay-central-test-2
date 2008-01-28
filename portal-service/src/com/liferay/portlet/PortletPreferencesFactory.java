@@ -64,33 +64,23 @@ public interface PortletPreferencesFactory {
 			HttpServletRequest req, Layout selLayout, String portletId)
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPortletSetup(
-			Layout layout, String portletId)
+	public PortletPreferences getPortletSetup(Layout layout, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
+			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup, String defaultPreferences)
+			HttpServletRequest req, String portletId, String defaultPreferences)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			Layout layout, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup, String defaultPreferences)
+			ActionRequest req, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
+			RenderRequest req, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest req);

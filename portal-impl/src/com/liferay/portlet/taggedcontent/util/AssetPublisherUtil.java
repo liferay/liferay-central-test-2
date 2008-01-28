@@ -77,7 +77,7 @@ public class AssetPublisherUtil {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, referringPortletResource, true, true);
+				req, referringPortletResource);
 
 		addSelection(className, asset.getAssetId(), assetOrder, prefs);
 

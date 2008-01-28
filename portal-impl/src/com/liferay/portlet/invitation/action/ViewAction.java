@@ -112,7 +112,7 @@ public class ViewAction extends PortletAction {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, PortletKeys.INVITATION, true, true);
+				req, PortletKeys.INVITATION);
 
 		String subject = InvitationUtil.getEmailMessageSubject(prefs);
 		String body = InvitationUtil.getEmailMessageBody(prefs);

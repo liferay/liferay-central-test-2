@@ -359,6 +359,11 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
+		<portlet-name>84</portlet-name>
+		<struts-path>announcements</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
 		<portlet-name>85</portlet-name>
 		<struts-path>site_map</struts-path>
 		<include>true</include>

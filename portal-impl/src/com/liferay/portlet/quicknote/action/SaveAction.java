@@ -62,8 +62,7 @@ public class SaveAction extends JSONAction {
 			portletId, ActionKeys.CONFIGURATION);
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletId, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
 
 		String color = ParamUtil.getString(req, "color");
 		String data = ParamUtil.getString(req, "data");

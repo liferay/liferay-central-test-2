@@ -55,8 +55,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource, true, true);
+			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		if (cmd.equals("remove-footer-article")) {
 			removeFooterArticle(req, prefs);

@@ -100,50 +100,32 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
+			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId, uniquePerLayout, uniquePerGroup);
+		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup, String defaultPreferences)
+			HttpServletRequest req, String portletId, String defaultPreferences)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId, uniquePerLayout, uniquePerGroup,
-			defaultPreferences);
+			req, portletId, defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			Layout layout, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup, String defaultPreferences)
+			ActionRequest req, String portletId)
 		throws PortalException, SystemException {
 
-		return getPortletPreferencesFactory().getPortletSetup(
-			layout, portletId, uniquePerLayout, uniquePerGroup,
-			defaultPreferences);
+		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
+			RenderRequest req, String portletId)
 		throws PortalException, SystemException {
 
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId, uniquePerLayout, uniquePerGroup);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId, boolean uniquePerLayout,
-			boolean uniquePerGroup)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			req, portletId, uniquePerLayout, uniquePerGroup);
+		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {

@@ -116,9 +116,11 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		long plid = _plid;
 
 		try {
+			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+
 			PortletPreferences portletSetup =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					_req, _portletName, true, true);
+					layout, _portletName);
 
 			plid = GetterUtil.getLong(portletSetup.getValue(
 				"portlet-setup-link-to-plid", String.valueOf(_plid)));

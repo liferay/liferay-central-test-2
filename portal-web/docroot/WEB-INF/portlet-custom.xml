@@ -1798,7 +1798,7 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>83_varient_1</portlet-name>
+		<portlet-name>84</portlet-name>
 		<display-name>Community Announcements</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>

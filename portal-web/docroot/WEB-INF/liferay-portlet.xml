@@ -820,11 +820,11 @@
 		<render-weight>1</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>83_varient_1</portlet-name>
+		<portlet-name>84</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>announcements</struts-path>
 		<configuration-action-class>com.liferay.portlet.announcements.action.ConfigurationActionImpl</configuration-action-class>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<preferences-company-wide>false</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>false</instanceable>

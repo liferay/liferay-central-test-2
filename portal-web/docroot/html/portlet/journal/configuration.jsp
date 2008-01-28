@@ -27,7 +27,7 @@
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, true);
+PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 
 String emailFromName = ParamUtil.getString(request, "emailFromName", JournalUtil.getEmailFromName(portletSetup));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", JournalUtil.getEmailFromAddress(portletSetup));

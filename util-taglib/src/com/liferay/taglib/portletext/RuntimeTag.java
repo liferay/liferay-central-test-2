@@ -106,7 +106,7 @@ public class RuntimeTag extends TagSupport {
 
 			if (Validator.isNotNull(defaultPreferences)) {
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletId, true, true, defaultPreferences);
+					req, portletId, defaultPreferences);
 			}
 
 			RuntimePortletUtil.processPortlet(

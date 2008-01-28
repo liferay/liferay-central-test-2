@@ -186,6 +186,7 @@
 	<classpathentry kind="lib" path="lib/portal/smackx.jar"/>
 	<classpathentry kind="lib" path="lib/portal/soap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring.jar"/>
+	<classpathentry kind="lib" path="lib/portal/spring-test.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
