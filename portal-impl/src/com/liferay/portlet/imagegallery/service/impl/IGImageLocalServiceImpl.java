@@ -140,11 +140,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			if ((PropsValues.IG_IMAGE_CUSTOM_1_MAX_HEIGHT > 0) &&
 				(PropsValues.IG_IMAGE_CUSTOM_1_MAX_WIDTH > 0)) {
+
 				image.setCustom1ImageId(counterLocalService.increment());
 			}
 
 			if ((PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT > 0) &&
 				(PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH > 0)) {
+
 				image.setCustom2ImageId(counterLocalService.increment());
 			}
 
@@ -336,6 +338,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public IGImage getImageByCustom1ImageId(long custom1ImageId)
+		throws PortalException, SystemException {
+
+		return igImagePersistence.findByCustom1ImageId(custom1ImageId);
+	}
+
+	public IGImage getImageByCustom2ImageId(long custom2ImageId)
+		throws PortalException, SystemException {
+
+		return igImagePersistence.findByCustom2ImageId(custom2ImageId);
+	}
+
 	public IGImage getImageByLargeImageId(long largeImageId)
 		throws PortalException, SystemException {
 
@@ -479,9 +493,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void saveImages(
-		long largeImageId, RenderedImage renderedImage, long smallImageId,
-		long custom1ImageId, long custom2ImageId, File file, byte[] bytes,
-		String contentType)
+			long largeImageId, RenderedImage renderedImage, long smallImageId,
+			long custom1ImageId, long custom2ImageId, File file, byte[] bytes,
+			String contentType)
 		throws SystemException {
 
 		try {
@@ -510,7 +524,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT,
 					PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH);
 			}
-
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -518,8 +531,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void saveScaledImage(
-		RenderedImage renderedImage, long imageId, String contentType,
-		int height, int width)
+			RenderedImage renderedImage, long imageId, String contentType,
+			int height, int width)
 		throws IOException, SystemException {
 
 		RenderedImage thumbnail = ImageUtil.scale(renderedImage, height, width);

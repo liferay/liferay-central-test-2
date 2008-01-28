@@ -206,6 +206,16 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
+		long custom1ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage getImageByCustom2ImageId(
+		long custom2ImageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.SystemException, 

@@ -30,31 +30,35 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 IGImage image = (IGImage)row.getObject();
 %>
 
-<table>
+<table class="lfr-table">
+<tr>
+	<td>
+		<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
+		<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getSmallImageId()) %>" title="<%= image.getDescription() %>" /></a>
+	</td>
+</tr>
+
+<c:if test="<%= (image.getCustom1ImageId() > 0) || (image.getCustom2ImageId() > 0) %>">
 	<tr>
 		<td>
 			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
-			<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getSmallImageId()) %>" title="<%= image.getDescription() %>" />
-			</a>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
-				<liferay-ui:message key="original"/>
-			</a>
-			<c:if test="<%= (image.getCustom1ImageId() > 0) %>">
+			<liferay-ui:message key="original" /></a>
+
+			<c:if test="<%= image.getCustom1ImageId() > 0 %>">
 				|
-				<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getCustom1ImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
-					<liferay-ui:message key="size"/> 1
-				</a>
+
+				<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getCustom1ImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getCustom1ImageId()) %>" target="_blank">
+				<liferay-ui:message key="size" /> 1</a>
 			</c:if>
-			<c:if test="<%= (image.getCustom2ImageId() > 0) %>">
+
+			<c:if test="<%= image.getCustom2ImageId() > 0 %>">
 				|
-				<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getCustom2ImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
-					<liferay-ui:message key="size"/> 2
-				</a>
+
+				<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getCustom2ImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getCustom2ImageId()) %>" target="_blank">
+				<liferay-ui:message key="size" /> 2</a>
 			</c:if>
 		</td>
 	</tr>
+</c:if>
+
 </table>

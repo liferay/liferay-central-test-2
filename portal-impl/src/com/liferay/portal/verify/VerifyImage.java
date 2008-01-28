@@ -115,6 +115,22 @@ public class VerifyImage extends VerifyProcess {
 		catch (NoSuchImageException nsie) {
 		}
 
+		try {
+			IGImageLocalServiceUtil.getImageByCustom1ImageId(imageId);
+
+			return false;
+		}
+		catch (NoSuchImageException nsie) {
+		}
+
+		try {
+			IGImageLocalServiceUtil.getImageByCustom2ImageId(imageId);
+
+			return false;
+		}
+		catch (NoSuchImageException nsie) {
+		}
+
 		List journalArticles =
 			JournalArticleLocalServiceUtil.getArticlesBySmallImageId(imageId);
 

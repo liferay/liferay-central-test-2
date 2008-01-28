@@ -382,6 +382,24 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImage(imageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
+		long custom1ImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getImageByCustom1ImageId(custom1ImageId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByCustom2ImageId(
+		long custom2ImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getImageByCustom2ImageId(custom2ImageId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.PortalException, 
