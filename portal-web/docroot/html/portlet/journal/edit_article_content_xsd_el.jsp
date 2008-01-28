@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.portal.util.LayoutLister" %>
-<%@ page import="com.liferay.portal.util.LayoutView" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -238,11 +236,11 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 								<option value=""></option>
 
 								<%
-									LayoutLister layoutLister = new LayoutLister();
+								LayoutLister layoutLister = new LayoutLister();
 
-									LayoutView layoutView = layoutLister.getLayoutView(layout.getGroupId(), layout.isPrivateLayout(), "root", locale);
+								LayoutView layoutView = layoutLister.getLayoutView(layout.getGroupId(), layout.isPrivateLayout(), "root", locale);
 
-									List layoutList = layoutView.getList();
+								List layoutList = layoutView.getList();
 
 								for (int i = 0; i < layoutList.size(); i++) {
 
@@ -285,7 +283,6 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 
 							</select>
 						</c:if>
-
 					</td>
 				</tr>
 
