@@ -232,6 +232,11 @@ layout.types.portlet=بورتلت
 layout.types.url=رابط تشعبي
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -632,7 +637,6 @@ city-state-or-zip=مدينة، ولاية <b>أو</b> الرمز البريدي
 city-state=مدينة، ولاية
 city=مدينة
 class=نوع
-classic-wiki=ويكي تقليدي
 clear-all=أفرغ الكل
 clear-cache=أفرغ الكاش
 clear-content-cached-across-the-cluster=أفرغ المحتوى المولّد عبر العنقود.
@@ -1596,7 +1600,6 @@ pick-date=إختار تاريخ
 pie=دائرة
 pieces=أجزاء
 pim=Pim
-plain-text=النص البسيط
 play=شغّل
 please-be-patient-as-this-process-can-take-up-to-several-minutes=يرجى الإنتظار. هذه العملية قد تتطلب بعض الوقت.
 please-be-patient-while-uploading-your-file=يرجى الإنتظار. هذه العملية قد تتطلب بعض الوقت.

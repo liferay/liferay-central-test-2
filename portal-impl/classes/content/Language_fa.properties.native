@@ -198,6 +198,11 @@ layout.types.portlet=پرتلت
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -535,7 +540,6 @@ city-state-or-zip=شهر, استان <b>يا</b> کدپستی
 city-state=شهر، استان
 city=شهر
 class=کلاس
-classic-wiki=ويکي کلاسيک
 clear-all=پاک کردن تمام
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 close=بستن
@@ -1336,7 +1340,6 @@ pick-date=تاريخ انتخاب کنيد
 pie=Pie
 pieces=قطعات
 pim=Pim
-plain-text=متن ساده
 play=پخش
 please-be-patient-as-this-process-can-take-up-to-several-minutes=اين عمليات ممکن است چند دقيقه طول بکشد
 please-be-patient-while-uploading-your-file=بارگذاری فايل ممکن است چند دقيقه طول بکشد.

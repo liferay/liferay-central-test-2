@@ -1197,11 +1197,27 @@ public class PropsUtil {
 
 	// Wiki Portlet
 
-	public static final String WIKI_CLASSIC_SYNTAX_HELP_URL = "wiki.classic.syntax.help.url";
-
 	public static final String WIKI_FRONT_PAGE_NAME = "wiki.front.page.name";
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
+	
+	public static final String WIKI_PAGE_TITLES_REGEXP = "wiki.page.titles.regexp";
+
+	public static final String WIKI_FORMATS = "wiki.formats";
+
+	public static final String WIKI_FORMATS_DEFAULT = "wiki.formats.default";
+
+	public static final String WIKI_FORMATS_ENGINE = "wiki.formats.engine";
+
+	public static final String WIKI_FORMATS_CONFIGURATION_MAIN = "wiki.formats.configuration.main";
+
+	public static final String WIKI_FORMATS_CONFIGURATION_INTERWIKI = "wiki.formats.configuration.interwiki";
+
+	public static final String WIKI_FORMATS_EDIT_PAGE = "wiki.formats.edit.page";
+
+	public static final String WIKI_FORMATS_HELP_PAGE = "wiki.formats.help.page";
+
+	public static final String WIKI_FORMATS_HELP_URL = "wiki.formats.help.url";
 
 	public static boolean containsKey(String key) {
 		return _getInstance().containsKey(key);

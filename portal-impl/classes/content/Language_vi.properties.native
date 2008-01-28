@@ -91,6 +91,11 @@ category.wiki=Wiki
 
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -349,7 +354,6 @@ city-state-or-zip=Thành phố, Bang <b> hoặc </b> mã vùng
 city-state=Thành phố, bang
 city=Thành phố
 class=Lớp
-classic-wiki=Classic Wiki
 clear-all=Xóa tất
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 close=Đóng
@@ -938,7 +942,6 @@ pick-date=Chọn ngày
 pie=Pie
 pieces=Mẩu
 pim=Pim
-plain-text=Chữ đơn giản
 play=Chạy
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Xin chờ quá trình xử lý có thể mất vài phút.
 please-be-patient-while-uploading-your-file=Xin chờ upload file . Có thể mất vài phút.

@@ -186,10 +186,12 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLinks(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public java.util.List getOrphans(long nodeId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
@@ -248,4 +250,7 @@ public interface WikiPageLocalService {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void validateTitle(java.lang.String title)
+		throws com.liferay.portal.PortalException;
 }

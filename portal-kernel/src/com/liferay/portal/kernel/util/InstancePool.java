@@ -36,6 +36,10 @@ import java.util.Map;
  */
 public class InstancePool {
 
+	public static boolean contains(String className) {
+		return _instance._contains(className);
+	}
+
 	public static Object get(String className) {
 		return _instance._get(className);
 	}
@@ -46,6 +50,18 @@ public class InstancePool {
 
 	private InstancePool() {
 		_classPool = new HashMap();
+	}
+
+	private boolean _contains(String className) {
+		className = className.trim();
+
+		Object obj = _classPool.get(className);
+
+		if (obj == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private Object _get(String className) {

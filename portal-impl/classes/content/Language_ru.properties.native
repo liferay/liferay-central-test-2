@@ -155,6 +155,11 @@ layout.types.portlet=Портлет
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -481,7 +486,6 @@ city-state-or-zip=Город, Область <b>или</b> индекс
 city-state=Город, Область
 city=Город
 class=Класс
-classic-wiki=Классический Wiki
 clear-all=Очистить все
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 close=Закрытие
@@ -1266,7 +1270,6 @@ pick-date=Выбрать дату
 pie=Пирог
 pieces=Части
 pim=Pim
-plain-text=Простой текст
 play=Играть
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Пожалуста потерпите, так как данный процесс может занять до нескольких минут.
 please-be-patient-while-uploading-your-file=Пожалуста потерпите пока загружается Ваш файл. Это может занять несколько минут.

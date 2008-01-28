@@ -254,6 +254,11 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -742,7 +747,6 @@ city-state-or-zip=Ort, Stat <b>eller</b> Postnummer
 city-state=Ort, Stat
 city=Ort
 class=Klass
-classic-wiki=Klassisk Wiki
 classic=Klassisk
 clear-all=Rensa Allt
 clear-cache=Rensa cache
@@ -1907,7 +1911,6 @@ pie=Cirkeldiagram
 pieces=Delar
 pim=Pim
 place=Platsen
-plain-text=Plan text
 plain=Vanlig
 play=Spela upp
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Var vänlig och vänta. Processen kan ta några minuter.

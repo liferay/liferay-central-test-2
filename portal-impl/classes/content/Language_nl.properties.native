@@ -266,6 +266,15 @@ layout.types.portlet=Portlets
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=Klassieke Wiki
+wiki.formats.html=HTML
+wiki.formats.jspwiki=JSPWiki
+wiki.formats.plain_text=Gewone Tekst
+
+##
 ## Messages
 ##
 
@@ -778,7 +787,6 @@ city-state-or-zip=Stad, Provincie/Staat <b>of</b> Postcode
 city-state=Stad, Provincie/Staat
 city=Stad
 class=Klasse
-classic-wiki=Klassieke Wiki
 classic=Klassiek
 clear-all=Wis alles
 clear-cache=Leeg de cache
@@ -1989,7 +1997,6 @@ pie=Taart
 pieces=Stukken
 pim=Pim
 place=Plaats
-plain-text=Platte tekst
 plain=Plat
 play=Play
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Even geduld a.u.b. dit proces kan enkele minuten duren.

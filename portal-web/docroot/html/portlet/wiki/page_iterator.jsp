@@ -29,6 +29,12 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
+
+String title = null;
+
+if (wikiPage != null) {
+	title = wikiPage.getTitle();
+}
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>

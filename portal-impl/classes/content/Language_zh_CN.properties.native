@@ -266,6 +266,15 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=经典Wiki
+wiki.formats.html=HTML
+wiki.formats.jspwiki=JSPWiki
+wiki.formats.plain_text=纯文本
+
+##
 ## Messages
 ##
 
@@ -778,7 +787,6 @@ city-state-or-zip=城市, 州 <b>或</b> 邮递区号
 city-state=城市, 州
 city=城市
 class=类
-classic-wiki=传统Wiki
 classic=经典
 clear-all=清除所有
 clear-cache=清除缓冲区
@@ -1989,7 +1997,6 @@ pie=饼
 pieces=片断
 pim=Pim
 place=地方
-plain-text=纯文本
 plain=平原
 play=播放
 please-be-patient-as-this-process-can-take-up-to-several-minutes=请耐心稍后, 因为这个过程可能占去几分钟。

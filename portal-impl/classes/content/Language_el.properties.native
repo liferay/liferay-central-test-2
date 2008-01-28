@@ -266,6 +266,14 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=Κλασικό Wiki
+wiki.formats.jspwiki=JSPWiki
+wiki.formats.plain_text=Σαφές κείμενο
+
+##
 ## Messages
 ##
 
@@ -778,7 +786,6 @@ city-state-or-zip=Πόλη, Πολιτεία <b>ή</b> Ταχυδρομικός 
 city-state=Πόλη, Πολιτεία
 city=Πόλη
 class=Μάθημα
-classic-wiki=Κλασσικό Wiki
 classic=Κλασικός
 clear-all=Καθαρισμός Όλων
 clear-cache=Σαφής κρύπτη
@@ -1989,7 +1996,6 @@ pie=Κυκλικό
 pieces=Κομμάτια
 pim=Pim
 place=Θέση
-plain-text=Απλό Κείμενο
 plain=Σαφής
 play=Παιχνίδι
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Παρακαλώ κάντε υπομονή δεδομένου ότι αυτή η διαδικασία μπορεί να πάρει μέχρι αρκετά λεπτά.

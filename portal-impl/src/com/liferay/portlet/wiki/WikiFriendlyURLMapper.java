@@ -34,7 +34,6 @@ import com.liferay.portal.util.PortletKeys;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
-import javax.portlet.WindowState;
 
 /**
  * <a href="WikiFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -94,7 +93,6 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 	public void populateParams(String friendlyURLPath, Map params) {
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_action", "0");
-		params.put("p_p_state", WindowState.MAXIMIZED.toString());
 		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		addParam(params, "struts_action", "/wiki/view");

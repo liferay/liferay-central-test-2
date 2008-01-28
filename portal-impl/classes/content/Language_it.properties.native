@@ -266,6 +266,15 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=Wiki Classico
+wiki.formats.html=HTML
+wiki.formats.jspwiki=JSPWiki
+wiki.formats.plain_text=Testo Normale
+
+##
 ## Messages
 ##
 
@@ -778,7 +787,6 @@ city-state-or-zip=Città, Stato <b>oppure</b> CAP
 city-state=Città, Stato
 city=Città
 class=Classe
-classic-wiki=Wiki Classico
 classic=Classico
 clear-all=Elimina Tutti
 clear-cache=Pulisci Cache
@@ -1989,7 +1997,6 @@ pie=Grafico a Torta
 pieces=Parti
 pim=Pim
 place=Posto
-plain-text=Testo Normale
 plain=Pianura
 play=Riproduci
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Attendere prego. Questo processo potrebbe richiedere parecchi minuti.

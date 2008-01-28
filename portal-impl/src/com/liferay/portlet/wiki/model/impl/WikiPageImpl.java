@@ -45,17 +45,11 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public static final double DEFAULT_VERSION = 1.0;
 
-	public static final String CLASSIC_WIKI_FORMAT = "classic_wiki";
+	public static final String DEFAULT_FORMAT =
+		PropsUtil.get(PropsUtil.WIKI_FORMATS_DEFAULT);
 
-	public static final String HTML_FORMAT = "html";
-
-	public static final String PLAIN_TEXT_FORMAT = "plain_text";
-
-	public static final String DEFAULT_FORMAT = CLASSIC_WIKI_FORMAT;
-
-	public static final String[] FORMATS = new String[] {
-		CLASSIC_WIKI_FORMAT, HTML_FORMAT, PLAIN_TEXT_FORMAT
-	};
+	public static final String[] FORMATS =
+		PropsUtil.getArray(PropsUtil.WIKI_FORMATS);
 
 	public WikiPageImpl() {
 	}

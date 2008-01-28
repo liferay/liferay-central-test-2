@@ -23,33 +23,52 @@
 %>
 
 <%
-String content = null;
+String pageContent = null;
+String error = null;
 
-if (wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT)) {
-	content = wikiPage.getContent();
-}
-else if (wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
+try {
 	PortletURL pageURL = renderResponse.createRenderURL();
 
+	pageURL.setPortletMode(PortletMode.VIEW);
 	pageURL.setParameter("struts_action", "/wiki/view");
 
-	content = WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent());
+	PortletURL editURL = renderResponse.createRenderURL();
+
+	editURL.setWindowState(WindowState.MAXIMIZED);
+	editURL.setPortletMode(PortletMode.VIEW);
+	editURL.setParameter("struts_action", "/wiki/edit_page");
+
+	pageContent = WikiUtil.convert(wikiPage, pageURL, editURL);
 }
-else if (wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT)) {
-	if (Validator.isNotNull(wikiPage.getContent())) {
-	    content = "<pre>" + wikiPage.getContent() + "</pre>";
-	}
+catch (WikiFormatException e) {
+	error = "the-format-of-this-page-is-not-supported-pageContent-will-be-shown-unformatted";
+
+	pageContent = "<pre>" + wikiPage.getContent() + "</pre>";
+}
+catch (Exception e) {
+	_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
+	error = "error-formating-the-wiki-page";
+	pageContent = StringPool.DASH;
 }
 
-if (Validator.isNull(content)) {
-	content = LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text");
+if (Validator.isNull(pageContent)) {
+	pageContent = LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text");
 }
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+<c:if test="<%= Validator.isNotNull(error) %>">
+	<tr>
+		<td class="wiki-body">
+			<span class="portlet-msg-error">
+				<liferay-ui:message key="<%= error %>"/>
+			</span>
+		</td>
+	</tr>
+</c:if>
 <tr>
 	<td class="wiki-body">
-		<%= content %>
+		<%= pageContent %>
 	</td>
 </tr>
 </table>
@@ -62,3 +81,7 @@ if (Validator.isNull(content)) {
 		classPK="<%= wikiPage.getResourcePrimKey() %>"
 	/>
 </div>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.wiki.view_page_content.jsp");
+%>

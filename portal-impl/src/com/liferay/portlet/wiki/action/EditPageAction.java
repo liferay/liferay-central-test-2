@@ -110,13 +110,15 @@ public class EditPageAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
-				e instanceof NoSuchPageException ||
 				e instanceof PageTitleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
+			}
+			else if (e instanceof NoSuchPageException) {
+				// Let the edit_page.jsp handle this case
 			}
 			else {
 				throw e;
@@ -154,5 +156,11 @@ public class EditPageAction extends PortletAction {
 		WikiPageServiceUtil.updatePage(
 			nodeId, title, content, format, tagsEntries);
 	}
+
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }

@@ -1,0 +1,173 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.wiki.engines.friki;
+
+import com.efsol.friki.PageRepository;
+
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.wiki.PageContentException;
+import com.liferay.portlet.wiki.engines.WikiEngine;
+import com.liferay.portlet.wiki.model.WikiPage;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.portlet.PortletURL;
+
+import org.stringtree.factory.memory.MapStringRepository;
+
+/**
+ * <a href="FrikiEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class FrikiEngine implements WikiEngine {
+
+	public FrikiEngine() {
+	}
+
+	public String convert(WikiPage page, PortletURL portletURL)
+		throws PageContentException {
+
+		try {
+			return _convert(
+				_getFilter(portletURL, page.getNodeId()),
+				page.getContent());
+		}
+		catch (IOException ioe) {
+			throw new PageContentException(ioe);
+		}
+	}
+
+	public Map getLinks(WikiPage page) throws PageContentException {
+		NodeFilter filter = _getFilter(page.getNodeId());
+
+		try {
+			_convert(filter, page.getContent());
+
+			return filter.getTitles();
+		}
+		catch (IOException ioe) {
+			throw new PageContentException(ioe);
+		}
+	}
+
+	public boolean isLinkedTo(WikiPage page, String targetTitle)
+		throws PageContentException {
+
+		NodeFilter filter = _getFilter(page.getNodeId());
+
+		try {
+			_convert(filter, page.getContent());
+
+			if (filter.getTitles().get(targetTitle) != null) {
+				return true;
+			}
+		}
+		catch (IOException ioe) {
+			throw new PageContentException(ioe);
+		}
+
+		return false;
+	}
+
+	public void setMainConfiguration(String mainConfiguration) {
+		_mainConfiguration = mainConfiguration;
+	}
+
+	public void setInterWikiConfiguration(String interWikiConfiguration) {
+		_remoteNames = _buildRemoteNamesMap(interWikiConfiguration);
+	}
+
+	public boolean validate(long nodeId, String newContent) {
+		try {
+			NodeFilter filter = _getFilter(nodeId);
+
+			_convert(filter, newContent);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	private Map _buildRemoteNamesMap(String names) {
+		Map remoteNames = new HashMap();
+
+		StringTokenizer st = new StringTokenizer(names, "\n");
+
+		while (st.hasMoreTokens()) {
+			String line = st.nextToken().trim();
+
+			int sep = line.indexOf(StringPool.SPACE);
+
+			if (sep > 0) {
+				String name = line.substring(0, sep);
+				String url = line.substring(sep + 1);
+
+				remoteNames.put(name, url);
+			}
+		}
+
+		return remoteNames;
+	}
+
+	private String _convert(NodeFilter filter, String content)
+		throws IOException {
+
+		if (content == null) {
+			return StringPool.BLANK;
+		}
+
+		StringWriter out = new StringWriter();
+
+		filter.filter(new StringReader(content), out);
+
+		return out.toString();
+	}
+
+	private NodeFilter _getFilter(long nodeId) {
+		return _getFilter(null, nodeId);
+	}
+
+	private NodeFilter _getFilter(PortletURL portletURL, long nodeId) {
+		MapStringRepository context = new MapStringRepository();
+		NodeRepository nodeRepository = new NodeRepository(nodeId);
+		PageRepository pageRepository = new PageRepository(nodeRepository);
+
+		NodeFilter filter = new NodeFilter(
+			context, pageRepository, _remoteNames, _mainConfiguration,
+			nodeRepository, portletURL, nodeId);
+
+		return filter;
+	}
+
+	private String _mainConfiguration;
+	private Map _remoteNames;
+
+}

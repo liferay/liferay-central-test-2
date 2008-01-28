@@ -27,8 +27,6 @@
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
@@ -36,32 +34,83 @@ long nodeId = BeanParamUtil.getLong(wikiPage, request, "nodeId");
 String title = BeanParamUtil.getString(wikiPage, request, "title");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
-String format = BeanParamUtil.getString(wikiPage, request, "format");
+String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+boolean preview = ParamUtil.getBoolean(request, "preview");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
+if (Validator.isNull(redirect)) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+	portletURL.setParameter("title", title);;
+	redirect = portletURL.toString();
+}
+
+boolean edit = false;
+
+if (wikiPage != null) {
+	edit = true;
+}
+else if (Validator.isNotNull(title)) {
+	try {
+		WikiPageLocalServiceUtil.validateTitle(title);
+		edit = true;
+	}
+	catch (PortalException e) {
+	}
+}
+
+PortletURL editPageURL = renderResponse.createRenderURL();
+
+editPageURL.setWindowState(WindowState.MAXIMIZED);
+
+editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", wikiPage.getTitle());
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
 %>
+
+<%@ include file="/html/portlet/wiki/page_name.jspf" %>
+
+<c:if test="<%= preview %>">
+	<liferay-ui:message key="preview" />:
+
+	<div style="background: #ffc; border: 1px dotted gray; padding: 3px" class="preview">
+		<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
+	</div>
+
+	<br/>
+</c:if>
 
 <script type="text/javascript">
 	function <portlet:namespace />changeFormat(formatSel) {
-		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
+		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-		</c:if>
+		}
 
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
-		function initEditor() {
-			return "<%= UnicodeFormatter.toString(content) %>";
-		}
-	</c:if>
+	function <portlet:namespace />doPreview() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true';
+
+		submitForm(document.<portlet:namespace />fm);
+	}
 
 	function <portlet:namespace />savePage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 
-		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
+		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-		</c:if>
+		}
 
 		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />savePageAndContinue() {
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= editPageURL %>";
+
+		<portlet:namespace />savePage();
 	}
 </script>
 
@@ -70,80 +119,109 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 <input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
+<input name="<portlet:namespace />preview" type="hidden" value="" />
 
 <liferay-ui:tags-error />
 
-<%@ include file="/html/portlet/wiki/page_name.jspf" %>
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<b><liferay-ui:message key="format" /></b>
-	</td>
-	<td>
-		<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
-			<option <%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><liferay-ui:message key="classic-wiki" /></option>
-			<option <%= format.equals(WikiPageImpl.HTML_FORMAT) ? "selected" : "" %> value="html">HTML</option>
-			<option <%= format.equals(WikiPageImpl.PLAIN_TEXT_FORMAT) ? "selected" : "" %> value="plain_text"><liferay-ui:message key="plain-text" /></option>
-		</select>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<div>
-	<c:choose>
-		<c:when test="<%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-			<%@ include file="/html/portlet/wiki/edit_page_syntax_help.jspf" %>
-		</c:when>
-		<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
-			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
-
-			<input name="<portlet:namespace />content" type="hidden" value="" />
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
-		</c:otherwise>
-	</c:choose>
-</div>
-
-<br />
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
-
-		<%
-		long classPK = wikiPage.getResourcePrimKey();
-		%>
-
-		<liferay-ui:tags-selector
-			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= classPK %>"
-			hiddenInput="tagsEntries"
-		/>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
-
-</form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !format.equals(WikiPageImpl.HTML_FORMAT) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
-	</script>
+<c:if test="<%= (wikiPage == null) && edit %>">
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it-yourself"/>
+	</div>
 </c:if>
 
-<%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit_page.jsp";
-%>
+<c:if test="<%= (wikiPage == null) && !edit %>">
+	<div class="portlet-msg-error">
+		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid"/>
+	</div>
+
+	<input type="button" onclick="history.go(-1)" value="<%= LanguageUtil.get(pageContext, "back") %>"/>
+</c:if>
+
+
+<c:if test="<%= edit %>">
+	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<b><liferay-ui:message key="format" /></b>
+			</td>
+			<td>
+				<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
+					<%
+					for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+					%>
+
+						<option <%= format.equals(WikiPageImpl.FORMATS[i]) ? "selected" : "" %> value="<%= WikiPageImpl.FORMATS[i] %>"><%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %></option>
+
+					<%
+					}
+					%>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</c:if>
+
+	<br />
+
+	<div>
+		<%
+		request.setAttribute("edit_page.jsp-wikiPage", wikiPage);
+		%>
+
+		<c:choose>
+			<c:when test="<%= (wikiPage != null) %>">
+				<liferay-util:include page="<%= WikiUtil.getEditPage(wikiPage) %>" />
+			</c:when>
+			<c:otherwise>
+				<liferay-util:include page="<%= WikiUtil.getDefaultEditPage() %>" />
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+	<br />
+
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="tags" />
+		</td>
+		<td>
+
+			<%
+			long classPK = 0;
+
+			if (wikiPage != null) {
+				classPK = wikiPage.getResourcePrimKey();
+			}
+			%>
+
+			<liferay-ui:tags-selector
+				className="<%= WikiPage.class.getName() %>"
+				classPK="<%= classPK %>"
+				hiddenInput="tagsEntries"
+			/>
+		</td>
+	</tr>
+	</table>
+
+	<br />
+
+	<input type="submit" value="<liferay-ui:message key="save" />" />
+
+	<input type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />savePageAndContinue();"  />
+
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewPage();" />
+
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="history.go(-1);" />
+
+	</form>
+
+	<c:if test="<%= !preview %>">
+		<script type="text/javascript">
+			if (!window.<portlet:namespace />editor) {
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
+			}
+		</script>
+	</c:if>
+</c:if>

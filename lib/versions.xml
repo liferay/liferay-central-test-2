@@ -1090,6 +1090,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/ecs.jar</file-name>
+		<version>1.4.2</version>
+		<project-name>Element Construction Set</project-name>
+		<project-url>http://jakarta.apache.org/ecs/index.html</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/ehcache.jar</file-name>
 		<version>1.3.0</version>
 		<project-name>Ehcache</project-name>
@@ -1109,6 +1120,17 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/freshcookies-security.jar</file-name>
+		<version>0.54</version>
+		<project-name>Freshcookies</project-name>
+		<project-url>http://freshcookies.org/freshcookies-security/</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1462,6 +1484,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jrcs-diff.jar</file-name>
+		<version>0.3.0</version>
+		<project-name>JRCS diff utilities</project-name>
+		<project-url>http://www.suigeneris.org/kb/display/jrcs/JRCS+Home</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 1.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jsonrpc.jar</file-name>
 		<version>1.0</version>
 		<project-name>JSON-RPC-Java</project-name>
@@ -1470,6 +1503,17 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) Metaparadigm Pte. Ltd. 2004.</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jspwiki.jar</file-name>
+		<version>2.6.0</version>
+		<project-name>JSPWiki</project-name>
+		<project-url>http://www.jspwiki.org</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1544,6 +1588,17 @@
 		<version>2.2.0</version>
 		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org/java/docs</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/lucene-highlighter.jar</file-name>
+		<version>2.0.0</version>
+		<project-name>Lucene Highlighter</project-name>
+		<project-url>http://lucene.apache.org/java/docs/lucene-sandbox/</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>

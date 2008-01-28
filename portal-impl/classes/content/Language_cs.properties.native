@@ -34,6 +34,11 @@ category.development=Vývoj
 
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -298,7 +303,6 @@ city-state-or-zip=Město, země <b>nebo</b> PSČ
 city-state=Město, země
 city=Město
 class=Třída
-classic-wiki=Wiki třída
 clear-all=Vyčisti vše
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 close=Zavři
@@ -912,7 +916,6 @@ pick-date=Datum odběru
 pie=Koláč
 pieces=Kusy
 pim=Pim
-plain-text=Holý text
 play=Hraj
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Prosím buďte trpělivý, proces zabere několik minut.
 please-be-patient-while-uploading-your-file=Prosím buďte trpělivý, upload zabere několik minut.

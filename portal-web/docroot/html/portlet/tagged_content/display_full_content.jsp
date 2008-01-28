@@ -271,31 +271,30 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
 			WikiNode node = wikiPage.getNode();
-			%>
 
-			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
-				<%= wikiPage.getContent() %>
-			</c:if>
-
-			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-
-				<%
+			try {
 				PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
-				pageURL.setWindowState(WindowState.MAXIMIZED);
 				pageURL.setPortletMode(PortletMode.VIEW);
-
 				pageURL.setParameter("struts_action", "/wiki/view");
-				%>
 
-				<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
-			</c:if>
+				PortletURL editURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
-			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
-			</c:if>
+				editURL.setWindowState(WindowState.MAXIMIZED);
+				editURL.setPortletMode(PortletMode.VIEW);
+				editURL.setParameter("struts_action", "/wiki/edit_page");
+
+			%>
+				<%= WikiUtil.convert(wikiPage, editURL, editURL) %>
+			<%
+			}
+			catch (Exception e) {
+				_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
+			%>
+				<%= LanguageUtil.get(pageContext, "error-formatting-the-page") %>
+			<%
+			}
+			%>
 		</div>
 
 		<c:if test="<%= enableComments %>">
@@ -336,3 +335,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		<div class="separator"><!-- --></div>
 	</c:if>
 </c:if>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.display_full_content.jsp");
+%>

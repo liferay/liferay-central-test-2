@@ -356,14 +356,16 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List getLinks(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.getLinks(nodeId, title);
 	}
 
 	public static java.util.List getOrphans(long nodeId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.getOrphans(nodeId);
@@ -487,5 +489,12 @@ public class WikiPageLocalServiceUtil {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		wikiPageLocalService.updateTagsAsset(userId, page, tagsEntries);
+	}
+
+	public static void validateTitle(java.lang.String title)
+		throws com.liferay.portal.PortalException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.validateTitle(title);
 	}
 }

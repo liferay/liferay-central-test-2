@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<pagefilters>
+
+   <filter>
+      <class>com.ecyrd.jspwiki.filters.CreoleFilter</class>
+   </filter>
+   
+</pagefilters>

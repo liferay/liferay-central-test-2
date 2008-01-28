@@ -182,37 +182,54 @@ ECJ was automatically installed. Please rerun your task.
 			<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
 		</path>
 
-		<fileset dir="test-classes" id="test.suite.classes">
-			<include name="**/*TestSuite.class" />
-		</fileset>
-
-		<pathconvert
-			property="test.suite.classes.available"
-			refid="test.suite.classes"
-			setonempty="false"
-		/>
-
 		<if>
-			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
+			<isset property="test-class"/>
 			<then>
 				<junit fork="on" haltonfailure="no" printsummary="on">
 					<classpath refid="test.classpath" />
 					<formatter type="brief" usefile="false" />
 					<formatter type="xml" />
 					<batchtest todir="test-results">
-						<fileset dir="test-classes" includes="**/*Test.class" />
+						<fileset dir="test-classes" includes="**/${test-class}.class" />
 					</batchtest>
 				</junit>
 			</then>
 			<else>
-				<junit fork="on" haltonfailure="no" printsummary="on">
-					<classpath refid="test.classpath" />
-					<formatter type="brief" usefile="false" />
-					<formatter type="xml" />
-					<batchtest todir="test-results">
-						<fileset dir="test-classes" includes="**/*TestSuite.class" />
-					</batchtest>
-				</junit>
+
+				<fileset dir="test-classes" id="test.suite.classes">
+					<include name="**/*TestSuite.class" />
+				</fileset>
+
+				<pathconvert
+					property="test.suite.classes.available"
+					refid="test.suite.classes"
+					setonempty="false"
+				/>
+
+				<if>
+					<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
+					<then>
+						<junit fork="on" haltonfailure="no" printsummary="on">
+							<classpath refid="test.classpath" />
+							<formatter type="brief" usefile="false" />
+							<formatter type="xml" />
+							<batchtest todir="test-results">
+								<fileset dir="test-classes" includes="**/*Test.class" />
+							</batchtest>
+						</junit>
+					</then>
+					<else>
+						<junit fork="on" haltonfailure="no" printsummary="on">
+							<classpath refid="test.classpath" />
+							<formatter type="brief" usefile="false" />
+							<formatter type="xml" />
+							<batchtest todir="test-results">
+								<fileset dir="test-classes" includes="**/*TestSuite.class" />
+							</batchtest>
+						</junit>
+					</else>
+				</if>
+
 			</else>
 		</if>
 	</target>

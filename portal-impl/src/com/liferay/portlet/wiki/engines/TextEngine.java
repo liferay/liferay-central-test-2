@@ -20,79 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki.util;
+package com.liferay.portlet.wiki.engines;
 
-import com.efsol.friki.BasicDriver;
-
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import org.stringtree.util.tract.Tract;
+import javax.portlet.PortletURL;
 
 /**
- * <a href="NodeRepository.java.html"><b><i>View Source</i></b></a>
+ * <a href="TextEngine.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- *
+ * @author Jorge Ferrer
  */
-public class NodeRepository extends BasicDriver {
+public class TextEngine implements WikiEngine {
+	public String convert(WikiPage page, PortletURL portletURL) {
 
-	public NodeRepository(long nodeId) {
-		_nodeId = nodeId;
-		_names = new HashMap();
-	}
-
-	public Tract get(String name) {
-		return null;
-	}
-
-	public void put(String name, Tract page) {
-	}
-
-	public String backup(String name) {
-		return name;
-	}
-
-	public boolean contains(String name) {
-		boolean exists = false;
-
-		try {
-			Boolean existsObj = (Boolean)_names.get(name);
-
-			if (existsObj == null) {
-				if (WikiPageLocalServiceUtil.getPagesCount(
-						_nodeId, name, true) > 0) {
-
-					existsObj = Boolean.TRUE;
-				}
-				else {
-					existsObj = Boolean.FALSE;
-				}
-
-				_names.put(name, existsObj);
-			}
-
-			exists = existsObj.booleanValue();
+		if (page.getContent() == null) {
+			return StringPool.BLANK;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		else {
+			return "<pre>" + page.getContent() + "</pre>";
 		}
-
-		return exists;
 	}
 
-	public Iterator allPageNames() {
-		return _names.keySet().iterator();
+	public Map getLinks(WikiPage page) {
+		return _EMPTY_ARRAY_MAP;
 	}
 
-	public Map getTitles() {
-		return _names;
+	public boolean isLinkedTo(WikiPage page, String targetTitle) {
+		return false;
 	}
 
-	private long _nodeId;
-	private Map _names;
+	public void setMainConfiguration(String mainConfiguration) {
+	}
+
+	public void setInterWikiConfiguration(String interWikiConfiguration) {
+	}
+
+	public boolean validate(long nodeId, String newContent) {
+		return true;
+	}
+
+	private static final Map _EMPTY_ARRAY_MAP = new HashMap();
 
 }

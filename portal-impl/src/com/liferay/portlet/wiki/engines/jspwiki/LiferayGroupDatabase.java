@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,70 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%
-String syntaxHelpURL = PropsUtil.get(PropsUtil.WIKI_CLASSIC_SYNTAX_HELP_URL);
-%>
+package com.liferay.portlet.wiki.engines.jspwiki;
 
-<table class="lfr-table" width="100%">
-<tr>
-	<td width="70%" valign="top">
-		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
-	</td>
-	<td>
-		<br />
-	</td>
-	<td class="wiki-syntax-help" style="border: 1px dotted gray" width="250" valign="top">
-		<h3>
-			<liferay-ui:message key="syntax-help" />
-		</h3>
+import com.ecyrd.jspwiki.NoRequiredPropertyException;
+import com.ecyrd.jspwiki.WikiEngine;
+import com.ecyrd.jspwiki.auth.WikiSecurityException;
+import com.ecyrd.jspwiki.auth.authorize.Group;
+import com.ecyrd.jspwiki.auth.authorize.GroupDatabase;
 
-		<br />
+import java.security.Principal;
 
-		<h4>
-			<liferay-ui:message key="text-styles" />
-		</h4>
+import java.util.Properties;
 
-		<pre>
-'quoted'
-''italics''
-'''bold'''
-monospaced
-		</pre>
+/**
+ * <a href="LiferayGroupDatabase.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class LiferayGroupDatabase  implements GroupDatabase {
 
-		<h4>
-			<liferay-ui:message key="headers" />
-		</h4>
+	public void commit() throws WikiSecurityException {
+	}
 
-		<pre>
-= Header 1 =
-== Header 2 ==
-=== Header 3 ===
-		</pre>
+	public void delete(Group group) throws WikiSecurityException {
+	}
 
-		<h4>
-			<liferay-ui:message key="links" />
-		</h4>
+	public void initialize(WikiEngine engine, Properties props)
+		throws NoRequiredPropertyException, WikiSecurityException {
+	}
 
-		<pre>
-CamelCaseWordsAreLinksToPages
-[http://www.liferay.com Liferay's Website]
-		</pre>
+	public void save(Group group, Principal modifier)
+		throws WikiSecurityException {
+	}
 
-		<h4>
-			<liferay-ui:message key="lists" />
-		</h4>
-
-		<pre>
-* Item
-* Subitem
-
-1 Ordered Item
-1 Ordered Subitem
-		</pre>
-
-		<a href="<%= syntaxHelpURL %>" target="_blank"><liferay-ui:message key="more" />...</a>
-	</td>
-</tr>
-</table>
+	public Group[] groups() throws WikiSecurityException {
+		return new Group[0];
+	}
+	
+}

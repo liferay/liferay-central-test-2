@@ -143,5 +143,6 @@
 		<exception>NoSuchPage</exception>
 		<exception>PageContent</exception>
 		<exception>PageTitle</exception>
+		<exception>WikiFormat</exception>
 	</exceptions>
 </service-builder>

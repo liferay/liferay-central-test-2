@@ -266,6 +266,14 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=古典的なWiki
+wiki.formats.html=HTML
+wiki.formats.plain_text=平文
+
+##
 ## Messages
 ##
 
@@ -778,7 +786,6 @@ city-state-or-zip=City, State <b>or</b> Zip
 city-state=都市, 国家
 city=都市
 class=クラス
-classic-wiki=古典的なWiki
 classic=古典的
 clear-all=すべてを取り除きなさい
 clear-cache=明確な隠し場所
@@ -1989,7 +1996,6 @@ pie=パイ
 pieces=部分
 pim=Pim
 place=場所
-plain-text=明白なテキスト
 plain=平野
 play=演劇
 please-be-patient-as-this-process-can-take-up-to-several-minutes=このプロセスが数分にとることができるので忍耐強いがありなさい。

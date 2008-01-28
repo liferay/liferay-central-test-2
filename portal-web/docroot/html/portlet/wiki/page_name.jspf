@@ -21,12 +21,17 @@
  * SOFTWARE.
  */
 %>
-
-<c:if test="<%= wikiPage != null %>">
+<c:if test="<%= Validator.isNotNull(title) %>">
 	<h2 class="wiki-page-title">
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
-		<%= wikiPage.getTitle() %></a>
+		<c:choose>
+			<c:when test="<%= wikiPage != null %>">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= title %>" /></portlet:renderURL>">
+					<%= title %>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<%= title %>
+			</c:otherwise>
+		</c:choose>
 	</h2>
-
-	<br />
 </c:if>

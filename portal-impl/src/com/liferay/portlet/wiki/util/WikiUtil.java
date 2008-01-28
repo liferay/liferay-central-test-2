@@ -22,138 +22,239 @@
 
 package com.liferay.portlet.wiki.util;
 
-import com.efsol.friki.PageRepository;
-
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.wiki.WikiFormatException;
+import com.liferay.portlet.wiki.PageContentException;
+import com.liferay.portlet.wiki.engines.WikiEngine;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.Http;
 
+import com.germinus.easyconf.Filter;
+
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.portlet.PortletURL;
-
-import org.stringtree.factory.memory.MapStringRepository;
 
 /**
  * <a href="WikiUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class WikiUtil {
 
-	public static String convert(NodeFilter filter, String content)
-		throws IOException {
+	public static String convert(
+		WikiPage page, PortletURL pageURL, PortletURL editURL)
+		throws PageContentException, WikiFormatException {
 
-		return _instance._convert(filter, content);
+		return _instance._convert(page, pageURL, editURL);
 	}
 
-	public static NodeFilter getFilter(long nodeId) {
-		return _instance._getFilter(null, nodeId);
+	public static String getDefaultEditPage() {
+		return _instance._getDefaultEditPage();
 	}
 
-	public static NodeFilter getFilter(PortletURL portletURL, long nodeId) {
-		return _instance._getFilter(portletURL, nodeId);
+	public static String getEditPage(WikiPage page) {
+		return _instance._getEditPage(page);
 	}
 
-	private WikiUtil() {
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-
-			_spec = Http.URLtoString(classLoader.getResource("wiki.transform"));
-			_remoteNames = _buildRemoteNamesMap(Http.URLtoString(
-				classLoader.getResource("intermap.txt")));
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+	public static String getHelpPage(String format) {
+		return _instance._getHelpPage(format);
 	}
 
-	private Map _buildRemoteNamesMap(String names) {
-		Map remoteNames = new HashMap();
-
-		StringTokenizer st = new StringTokenizer(names, "\n");
-
-		while (st.hasMoreTokens()) {
-			String line = st.nextToken().trim();
-
-			int sep = line.indexOf(StringPool.SPACE);
-
-			if (sep > 0) {
-				String name = line.substring(0, sep);
-				String url = line.substring(sep + 1);
-
-				remoteNames.put(name, url);
-			}
-		}
-
-		return remoteNames;
+	public static String getHelpURL(String format) {
+		return _instance._getHelpURL(format);
 	}
 
-	private String _convert(NodeFilter filter, String content)
-		throws IOException {
+	public static Map getLinks(WikiPage page)
+		throws PageContentException, WikiFormatException {
+		return _instance._getLinks(page);
+	}
 
-		if (content == null) {
-			return StringPool.BLANK;
-		}
+	public static boolean isLinkedTo(WikiPage page, String title)
+		throws PageContentException, WikiFormatException {
+		return _instance._isLinkedTo(page, title);
+	}
 
-		StringWriter out = new StringWriter();
+	public static boolean validate(
+		long nodeId, String content, String format) throws WikiFormatException {
+		return _instance._validate(nodeId, content, format);
+	}
 
-		filter.filter(new StringReader(content), out);
+	private String _convert(
+		WikiPage page, PortletURL pageURL, PortletURL editURL)
+		throws PageContentException, WikiFormatException {
+		WikiEngine engine = _getEngine(page.getFormat());
 
-		String newContent = out.toString();
+		String content = engine.convert(page, editURL);
 
-		String portletURLToString = StringPool.BLANK;
+		if ((editURL != null) && (editURL instanceof LiferayPortletURL)) {
+			LiferayPortletURL liferayPageURL = (LiferayPortletURL) pageURL;
 
-		LiferayPortletURL portletURL =
-			(LiferayPortletURL)filter.getPortletURL();
+			liferayPageURL.setParameter(
+				"nodeId", Long.toString(page.getNodeId()));
 
-		if (portletURL != null) {
-			portletURL.setParameter(
-				"nodeId", String.valueOf(filter.getNodeId()));
+			LiferayPortletURL liferayEditURL = (LiferayPortletURL) editURL;
 
-			Iterator itr = filter.getTitles().keySet().iterator();
+			liferayEditURL.setParameter(
+				"nodeId", Long.toString(page.getNodeId()));
+
+			Iterator itr = engine.getLinks(page).keySet().iterator();
 
 			while (itr.hasNext()) {
 				String title = (String)itr.next();
 
-				portletURL.setParameter("title", title, false);
-
-				portletURLToString = portletURL.toString();
-
-				newContent = StringUtil.replace(
-					newContent,
-					"[$BEGIN_PAGE_TITLE$]" + title + "[$END_PAGE_TITLE$]",
-					portletURLToString);
+				content = _replaceLinks(
+					title, content, liferayPageURL, liferayEditURL);
 			}
 		}
 
-		return newContent;
+		return content;
 	}
 
-	private NodeFilter _getFilter(PortletURL portletURL, long nodeId) {
-		MapStringRepository context = new MapStringRepository();
-		NodeRepository nodeRepository = new NodeRepository(nodeId);
-		PageRepository pageRepository = new PageRepository(nodeRepository);
+	private String _getDefaultEditPage() {
+		return PropsUtil.getComponentProperties().getString(
+			PropsUtil.WIKI_FORMATS_EDIT_PAGE,
+			Filter.by(WikiPageImpl.DEFAULT_FORMAT));
+	}
 
-		NodeFilter filter = new NodeFilter(
-			context, pageRepository, _remoteNames, _spec, nodeRepository,
-			portletURL, nodeId);
+	private String _getEditPage(WikiPage page) {
+		return PropsUtil.getComponentProperties().getString(
+			PropsUtil.WIKI_FORMATS_EDIT_PAGE, Filter.by(page.getFormat()));
+	}
 
-		return filter;
+	private String _getHelpPage(String format) {
+		return PropsUtil.getComponentProperties().getString(
+			PropsUtil.WIKI_FORMATS_HELP_PAGE, Filter.by(format));
+	}
+
+	private String _getHelpURL(String format) {
+		return PropsUtil.getComponentProperties().getString(
+			PropsUtil.WIKI_FORMATS_HELP_URL, Filter.by(format));
+	}
+
+	private Map _getLinks(WikiPage page)
+		throws PageContentException, WikiFormatException{
+
+		try {
+			return _getEngine(page.getFormat()).getLinks(page);
+		}
+		catch (WikiFormatException e) {
+			return _EMPTY_MAP;
+		}
+	}
+
+	private boolean _isLinkedTo(WikiPage page, String targetTitle)
+		throws PageContentException, WikiFormatException {
+		try {
+			return _getEngine(page.getFormat()).isLinkedTo(page, targetTitle);
+		}
+		catch (WikiFormatException e) {
+			return false;
+		}
+	}
+
+	private String _replaceLinks(
+		String title, String content, LiferayPortletURL pageURL,
+		LiferayPortletURL editURL) {
+
+		pageURL.setParameter("title", title, false);
+
+		String pageURLToString = pageURL.toString();
+
+		content = StringUtil.replace(
+			content,
+			"[$BEGIN_PAGE_TITLE$]" + title + "[$END_PAGE_TITLE$]",
+			pageURLToString);
+
+		editURL.setParameter("title", title, false);
+
+		String editURLToString = editURL.toString();
+
+		content = StringUtil.replace(
+			content,
+			"[$BEGIN_PAGE_TITLE_EDIT$]" + title + "[$END_PAGE_TITLE_EDIT$]",
+			editURLToString);
+
+		return content;
+	}
+
+	private boolean _validate(long nodeId, String content, String format)
+		throws WikiFormatException {
+		return _getEngine(format).validate(nodeId, content);
+	}
+
+	private WikiEngine _getEngine(String format) throws WikiFormatException {
+		WikiEngine engine = (WikiEngine)_engines.get(format);
+
+		if (engine == null) {
+			try {
+				String engineClass =
+					PropsUtil.getComponentProperties().getString(
+						PropsUtil.WIKI_FORMATS_ENGINE, Filter.by(format));
+
+				if (engineClass != null) {
+					if (!InstancePool.contains(engineClass)) {
+						engine = (WikiEngine)InstancePool.get(engineClass);
+
+						engine.setMainConfiguration(
+							_readConfigurationFile(
+								PropsUtil.WIKI_FORMATS_CONFIGURATION_MAIN,
+								format));
+
+						engine.setInterWikiConfiguration(
+							_readConfigurationFile(
+								PropsUtil.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
+								format));
+
+					}
+					else {
+						engine = (WikiEngine)InstancePool.get(engineClass);
+					}
+					_engines.put(format, engine);
+				}
+			}
+			catch (Exception e) {
+				throw new WikiFormatException(e);
+			}
+
+			if (engine == null) {
+				throw new WikiFormatException(format);
+			}
+		}
+
+		return engine;
+	}
+
+	private String _readConfigurationFile(String propertyName, String format)
+		throws IOException {
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		String configurationFile = PropsUtil.getComponentProperties().getString(
+			propertyName, Filter.by(format));
+
+		if (Validator.isNotNull(configurationFile)) {
+			return Http.URLtoString(classLoader.getResource(configurationFile));
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	private static WikiUtil _instance = new WikiUtil();
+	private static final Map _EMPTY_MAP = new HashMap();
 
-	private String _spec;
-	private Map _remoteNames;
+	private Map _engines = new HashMap();
 
 }

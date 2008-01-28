@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
@@ -37,7 +38,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.util.Indexer;
-import com.liferay.portlet.wiki.util.NodeFilter;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
@@ -261,7 +261,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPageFinder.findByNoAssets();
 	}
 
-	public List getLinks(long nodeId, String title) throws SystemException {
+	public List getLinks(long nodeId, String title)
+		throws PortalException, SystemException {
+
 		List links = new ArrayList();
 
 		List pages = wikiPagePersistence.findByN_H(nodeId, true);
@@ -269,19 +271,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
 
-			if (page.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
-				NodeFilter filter = WikiUtil.getFilter(nodeId);
-
-				try {
-					WikiUtil.convert(filter, page.getContent());
-
-					if (filter.getTitles().get(title) != null) {
-						links.add(page);
-					}
-				}
-				catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
+			if (WikiUtil.isLinkedTo(page, title)) {
+				links.add(page);
 			}
 		}
 
@@ -290,7 +281,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return links;
 	}
 
-	public List getOrphans(long nodeId) throws SystemException {
+	public List getOrphans(long nodeId)
+		throws PortalException, SystemException {
+
 		List pageTitles = new ArrayList();
 
 		List pages = wikiPagePersistence.findByN_H(nodeId, true);
@@ -298,18 +291,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
 
-			if (page.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
-				NodeFilter filter = WikiUtil.getFilter(nodeId);
-
-				try {
-					WikiUtil.convert(filter, page.getContent());
-
-					pageTitles.add(filter.getTitles());
-				}
-				catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
-			}
+			pageTitles.add(WikiUtil.getLinks(page));
 		}
 
 		Set notOrphans = new HashSet();
@@ -465,7 +447,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		validate(nodeId, content, format);
 
-		WikiPage page = getPage(nodeId, title);
+		WikiPage page = null;
+
+		try {
+			page = getPage(nodeId, title);
+		}
+		catch (NoSuchPageException e) {
+			page = addPage(userId, nodeId, title);
+		}
 
 		long resourcePrimKey = page.getResourcePrimKey();
 
@@ -531,18 +520,24 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			null, false);
 	}
 
+	public void validateTitle(String title) throws PortalException {
+		String titleRegexp = PropsUtil.get(PropsUtil.WIKI_PAGE_TITLES_REGEXP);
+
+		if (Validator.isNotNull(titleRegexp)) {
+			Pattern pattern = Pattern.compile(titleRegexp);
+			Matcher matcher = pattern.matcher(title);
+
+			if (!matcher.matches()) {
+				throw new PageTitleException();
+			}
+		}
+	}
+
 	protected void validate(long nodeId, String content, String format)
 		throws PortalException {
 
-		if (format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
-			try {
-				NodeFilter filter = WikiUtil.getFilter(nodeId);
-
-				WikiUtil.convert(filter, content);
-			}
-			catch (Exception e) {
-				throw new PageContentException();
-			}
+		if (!WikiUtil.validate(nodeId, content, format)) {
+			throw new PageContentException();
 		}
 	}
 
@@ -554,12 +549,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			throw new PageTitleException();
 		}
 
-		Pattern pattern = Pattern.compile("(((\\p{Lu}\\p{Ll}+)_?)+)");
-		Matcher matcher = pattern.matcher(title);
-
-		if (!matcher.matches()) {
-			throw new PageTitleException();
-		}
+		validateTitle(title);
 
 		validate(nodeId, content, format);
 	}

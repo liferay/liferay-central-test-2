@@ -68,6 +68,11 @@ javax.portlet.title.9=Yönetim
 
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -233,7 +238,6 @@ city-state-or-zip=Şehir, Semt <b>veya</b> Posta Kodu
 city-state=Şehir, Semt
 city=Şehir
 class=Sınıf
-classic-wiki=Wiki Sınıfı
 clear-all=Hepsini Temizle
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 club-event=Klüp Aktivitesi
@@ -642,7 +646,6 @@ phone-number=Telefon Numarası
 phone=Telefon
 pick-date=Tarih Seçin
 pie=Pay
-plain-text=Düz Yazı
 please-be-patient-while-uploading-your-file=Lütfen karşı sistemden dosya aktarılırken bekleyin.
 please-be-patient=Lütfen birkaç dakika sürecek bu işlemi bekleyin.
 please-complete-your-order=Please {0}complete{1} your order.

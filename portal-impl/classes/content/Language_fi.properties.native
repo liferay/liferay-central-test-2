@@ -263,6 +263,11 @@ layout.types.portlet=Portletti
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -765,7 +770,6 @@ city-state-or-zip=Kaupunki, osavaltio <b>tai</b> postinumero
 city-state=Kaupunki, osavaltio
 city=Kaupunki
 class=Oppitunti
-classic-wiki=Perinteinen Wiki
 classic=Klassinen
 clear-all=Tyhjennä kaikki
 clear-cache=Tyhjennä välimuisti
@@ -1961,7 +1965,6 @@ pie=Piirakka
 pieces=Pieces
 pim=Pim
 place=Paikka
-plain-text=Tekstimuoto
 plain=Tavallinen
 play=Käynnistä
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Olethan kärsivällinen; Prosessi voi kestää useita minuutteja.

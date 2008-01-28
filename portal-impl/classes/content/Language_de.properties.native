@@ -266,6 +266,15 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=Klassisches Wiki
+wiki.formats.html=HTML
+wiki.formats.jspwiki=JSPWiki
+wiki.formats.plain_text=Normaler Text
+
+##
 ## Messages
 ##
 
@@ -778,7 +787,6 @@ city-state-or-zip=Stadt, Staat <b>oder</b> PLZ
 city-state=Stadt, Staat
 city=Stadt
 class=Klasse
-classic-wiki=Klassisches Wiki
 classic=Klassisch
 clear-all=Alle Entfernen
 clear-cache=Freier Cache
@@ -1989,7 +1997,6 @@ pie=Pie
 pieces=Stücke
 pim=PIM
 place=Platz
-plain-text=Nur Text
 plain=rein
 play=Spielen
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Bitte warten. Der Prozess kann ein paar Minuten in Anspruch nehmen.

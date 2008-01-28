@@ -266,6 +266,15 @@ layout.types.portlet=Portlets
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=Wiki Clásico
+wiki.formats.creole=Creole
+wiki.formats.html=HTML
+wiki.formats.plain_text=Texto Llano
+
+##
 ## Messages
 ##
 
@@ -778,7 +787,6 @@ city-state-or-zip=Ciudad, estado <b>o</b> código postal
 city-state=Ciudad, Estado
 city=Ciudad
 class=Clase
-classic-wiki=Wiki clásico
 classic=Clásico
 clear-all=Limpiar todo
 clear-cache=Vaciar caché
@@ -1989,7 +1997,6 @@ pie=Tarta
 pieces=Porciones
 pim=Pim
 place=Lugar
-plain-text=Texto plano
 plain=simple
 play=Reproducir
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Este proceso puede tardar varios minutos, por favor sea paciente.

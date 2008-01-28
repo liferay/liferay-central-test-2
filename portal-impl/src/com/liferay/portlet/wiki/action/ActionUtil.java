@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
@@ -99,16 +98,7 @@ public class ActionUtil {
 			title = WikiPageImpl.FRONT_PAGE;
 		}
 
-		WikiPage page = null;
-
-		try {
-			page = WikiPageServiceUtil.getPage(nodeId, title, version);
-		}
-		catch (NoSuchPageException nspe) {
-			if (version == 0) {
-				page = WikiPageServiceUtil.addPage(nodeId, title);
-			}
-		}
+		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title, version);
 
 		req.setAttribute(WebKeys.WIKI_PAGE, page);
 	}

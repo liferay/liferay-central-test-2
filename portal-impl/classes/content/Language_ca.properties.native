@@ -177,6 +177,11 @@ layout.types.portlet=Portlets
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+
+##
 ## Messages
 ##
 
@@ -513,7 +518,6 @@ city-state-or-zip=Ciutat, estat <b>o</b> codi postal
 city-state=Ciutat, estat
 city=Ciutat
 class=classe
-classic-wiki=Wiki clàsic
 clear-all=Netejar tot
 click-here-to-be-yourself-again=Click {0}here{1} to be yourself again.
 close=Tancar
@@ -1310,7 +1314,6 @@ pick-date=Seleccionar data
 pie=Pastís
 pieces=Elements
 pim=Pim
-plain-text=Texte pla
 play=Reproduir
 please-be-patient-as-this-process-can-take-up-to-several-minutes=Si us plau sigui pacient ja que aquest proces pot trigar alguns minuts.
 please-be-patient-while-uploading-your-file=Si us plau espere mentre se envía el seu arxiu. aixo pot trigar alguns minuts.

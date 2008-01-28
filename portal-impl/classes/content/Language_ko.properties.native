@@ -266,6 +266,14 @@ layout.types.portlet=Portlet
 layout.types.url=URL
 
 ##
+## Wiki formats
+##
+
+wiki.formats.classic_wiki=고전적인Wiki
+wiki.formats.html=HTML
+wiki.formats.plain_text=평문
+
+##
 ## Messages
 ##
 
@@ -778,7 +786,6 @@ city-state-or-zip=City, State <b>or</b> Zip
 city-state=도시, 국가
 city=도시
 class=종류
-classic-wiki=고전적인 Wiki
 classic=고전
 clear-all=모두를 맑게하십시요
 clear-cache=명확한 시렁
@@ -1989,7 +1996,6 @@ pie=파이
 pieces=조각
 pim=Pim
 place=장소
-plain-text=보통 원본
 plain=평야
 play=놀이
 please-be-patient-as-this-process-can-take-up-to-several-minutes=이 과정이 몇 분에 채택하기 수 있기 때문에 참을성이 있으십시요 있으십시요.

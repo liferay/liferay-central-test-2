@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,51 +20,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
+<%@ include file="/html/portlet/wiki/init.jsp" %>
 
-package com.liferay.portlet.wiki.util;
+<%
+WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
+String content = BeanParamUtil.getString(wikiPage, request, "content");
+%>
 
-import com.efsol.friki.ClassicToHTMLFilter;
-
-import java.util.Map;
-
-import javax.portlet.PortletURL;
-
-import org.stringtree.factory.Fetcher;
-import org.stringtree.factory.TractFetcher;
-
-/**
- * <a href="NodeFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class NodeFilter extends ClassicToHTMLFilter {
-
-	public NodeFilter(Fetcher context, TractFetcher pages, Map remoteNames,
-					  String spec, NodeRepository nodeRepository,
-					  PortletURL portletURL, long nodeId) {
-
-		super(context, pages, remoteNames, spec);
-
-		_nodeRepository = nodeRepository;
-		_portletURL = portletURL;
-		_nodeId = nodeId;
+<script type="text/javascript">
+	function initEditor() {
+		return "<%= UnicodeFormatter.toString(content) %>";
 	}
+</script>
 
-	public Map getTitles() {
-		return _nodeRepository.getTitles();
-	}
+<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
-	public PortletURL getPortletURL() {
-		return _portletURL;
-	}
+<input name="<portlet:namespace />content" type="hidden" value="" />
 
-	public long getNodeId() {
-		return _nodeId;
-	}
-
-	private NodeRepository _nodeRepository;
-	private PortletURL _portletURL;
-	private long _nodeId;
-
-}
+<%!
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit_page.jsp";
+%>
