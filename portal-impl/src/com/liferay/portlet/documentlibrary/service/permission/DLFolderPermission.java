@@ -116,6 +116,10 @@ public class DLFolderPermission {
 
 				return true;
 			}
+
+			if (actionId.equals(ActionKeys.VIEW)) {
+				break;
+			}
 		}
 
 		return false;
