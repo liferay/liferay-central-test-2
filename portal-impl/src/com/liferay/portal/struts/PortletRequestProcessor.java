@@ -164,6 +164,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				if (!PortalUtil.isMethodPost(req)) {
 					String currentURL = PortalUtil.getCurrentURL(req);
 
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"This URL can only be invoked using POST: " +
+								currentURL);
+					}
+
 					throw new PrincipalException(currentURL);
 				}
 			}

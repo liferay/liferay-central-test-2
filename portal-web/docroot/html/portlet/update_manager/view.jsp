@@ -207,7 +207,7 @@ List updatablePackageIds = new ArrayList();
 						<br />
 					</c:if>
 
-					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="self.location = '<%= pluginInstallerURL.toString() %>';" />
+					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="submitForm(document.hrefFm, '<%= pluginInstallerURL.toString() %>');" />
 
 					<c:if test="<%= !updatablePackageIds.isEmpty() %>">
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreAllURL">
@@ -217,7 +217,7 @@ List updatablePackageIds = new ArrayList();
 							<portlet:param name="pluginPackagesIgnored" value='<%= StringUtil.merge(updatablePackageIds, "\n") %>' />
 						</portlet:actionURL>
 
-						<input type="button" value="<liferay-ui:message key="ignore-all-updates" />" onClick="self.location = '<%= ignoreAllURL.toString() %>';" />
+						<input type="button" value="<liferay-ui:message key="ignore-all-updates" />" onClick="submitForm(document.hrefFm, '<%= ignoreAllURL.toString() %>');" />
 					</c:if>
 
 					<div class="separator"><!-- --></div>

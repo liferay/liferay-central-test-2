@@ -71,10 +71,14 @@ if (availablePluginPackage != null) {
 				<portlet:param name="pluginPackagesIgnored" value="<%= pluginPackage.getPackageId() %>" />
 			</portlet:actionURL>
 
+			<%
+			String jsIgnoreURL = "javascript: submitForm(document.hrefFm, '" + ignoreURL + "');";
+			%>
+
 			<liferay-ui:icon
 				image="unsubscribe"
 				message="ignore"
-				url='<%= ignoreURL.toString() %>'
+				url="<%= jsIgnoreURL %>"
 			/>
 		</c:when>
 		<c:otherwise>
@@ -85,10 +89,14 @@ if (availablePluginPackage != null) {
 				<portlet:param name="pluginPackagesUnignored" value="<%= pluginPackage.getPackageId() %>" />
 			</portlet:actionURL>
 
+			<%
+			String jsUnignoreURL = "javascript: submitForm(document.hrefFm, '" + unignoreURL + "');";
+			%>
+
 			<liferay-ui:icon
 				image="subscribe"
 				message="unignore"
-				url='<%= unignoreURL.toString() %>'
+				url="<%= jsUnignoreURL %>"
 			/>
 		</c:otherwise>
 	</c:choose>
