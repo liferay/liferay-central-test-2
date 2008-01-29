@@ -276,12 +276,14 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
 				pageURL.setPortletMode(PortletMode.VIEW);
+
 				pageURL.setParameter("struts_action", "/wiki/view");
 
 				PortletURL editURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
 				editURL.setWindowState(WindowState.MAXIMIZED);
 				editURL.setPortletMode(PortletMode.VIEW);
+
 				editURL.setParameter("struts_action", "/wiki/edit_page");
 			%>
 

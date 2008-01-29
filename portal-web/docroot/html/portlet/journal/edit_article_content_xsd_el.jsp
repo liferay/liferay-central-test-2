@@ -274,7 +274,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 									if (linkableLayout != null) {
 								%>
 
-										<option <%= (elContent.equals(Long.toString(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+										<option <%= (elContent.equals(String.valueOf(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
 
 								<%
 									}

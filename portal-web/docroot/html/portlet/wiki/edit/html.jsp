@@ -40,5 +40,5 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 <input name="<portlet:namespace />content" type="hidden" value="" />
 
 <%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit_page.jsp";
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit.html.jsp";
 %>

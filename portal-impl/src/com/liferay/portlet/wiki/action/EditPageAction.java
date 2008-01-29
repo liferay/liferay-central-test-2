@@ -26,10 +26,13 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -37,8 +40,6 @@ import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
-import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -158,14 +159,6 @@ public class EditPageAction extends PortletAction {
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
-	protected void revertPage(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version");
-
-		WikiPageServiceUtil.revertPage(nodeId, title, version);
-	}
-
 	protected String getSaveAndContinueRedirect(
 			PortletConfig config, ActionRequest req, WikiPage page,
 			String redirect)
@@ -173,6 +166,8 @@ public class EditPageAction extends PortletAction {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
 
 		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
 
@@ -187,13 +182,20 @@ public class EditPageAction extends PortletAction {
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter("originalRedirect", originalRedirect, false);
 		portletURL.setParameter(
-			"groupId", String.valueOf(themeDisplay.getLayout().getGroupId()), 
-			false);
+			"groupId", String.valueOf(layout.getGroupId()), false);
 		portletURL.setParameter(
 			"nodeId", String.valueOf(page.getNodeId()), false);
 		portletURL.setParameter("title", page.getTitle(), false);
 
 		return portletURL.toString();
+	}
+
+	protected void revertPage(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+		double version = ParamUtil.getDouble(req, "version");
+
+		WikiPageServiceUtil.revertPage(nodeId, title, version);
 	}
 
 	protected WikiPage updatePage(ActionRequest req) throws Exception {

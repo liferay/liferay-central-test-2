@@ -31,12 +31,14 @@ try {
 	PortletURL pageURL = renderResponse.createRenderURL();
 
 	pageURL.setPortletMode(PortletMode.VIEW);
+
 	pageURL.setParameter("struts_action", "/wiki/view");
 
 	PortletURL editURL = renderResponse.createRenderURL();
 
 	editURL.setWindowState(WindowState.MAXIMIZED);
 	editURL.setPortletMode(PortletMode.VIEW);
+
 	editURL.setParameter("struts_action", "/wiki/edit_page");
 	editURL.setParameter("redirect", currentURL);
 

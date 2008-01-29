@@ -53,7 +53,7 @@ if (Validator.isNull(redirect)) {
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("struts_config", "/wiki/view");
-	portletURL.setParameter("nodeId", Long.toString(nodeId));
+	portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	portletURL.setParameter("title", title);
 
 	redirect = portletURL.toString();
@@ -78,6 +78,7 @@ else if (Validator.isNotNull(title)) {
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <c:if test="<%= (wikiPage != null) && preview %>">
+
 	<%
 	wikiPage.setFormat(format);
 	%>
@@ -102,8 +103,7 @@ else if (Validator.isNotNull(title)) {
 
 	function <portlet:namespace />previewPage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true';
-
+		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -117,9 +117,8 @@ else if (Validator.isNotNull(title)) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />savePageAndContinue() {
-		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
-
+	function <portlet:namespace />saveAndContinuePage() {
+		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "true";
 		<portlet:namespace />savePage();
 	}
 </script>
@@ -216,7 +215,7 @@ else if (Validator.isNotNull(title)) {
 
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />savePageAndContinue();"  />
+	<input type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinuePage();"  />
 
 	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewPage();" />
 
