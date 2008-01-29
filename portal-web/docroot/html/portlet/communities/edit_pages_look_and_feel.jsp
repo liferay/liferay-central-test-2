@@ -137,6 +137,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			<liferay-ui:section>
 
 				<%
+				String selColorSchemeId = StringPool.BLANK;
+
+				if (selTheme.hasColorSchemes()) {
+					selColorSchemeId = selColorScheme.getColorSchemeId();
+				}
+
 				String cssText = null;
 
 				if ((selLayout != null) && !selLayout.isInheritLookAndFeel()) {
@@ -157,7 +163,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 				<br /><br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorSchemeId %>', '<%= sectionParam %>', '<%= sectionName %>');" />
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:when>
