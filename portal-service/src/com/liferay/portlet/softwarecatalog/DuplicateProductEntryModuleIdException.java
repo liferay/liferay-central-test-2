@@ -20,16 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.softwarecatalog;
+
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicateProductEntryModuleIdException.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.util</code>.
- *
  */
-public class ReleaseInfo extends com.liferay.portal.kernel.util.ReleaseInfo {
+public class DuplicateProductEntryModuleIdException extends PortalException {
+
+	public DuplicateProductEntryModuleIdException() {
+		super();
+	}
+
+	public DuplicateProductEntryModuleIdException(String msg) {
+		super(msg);
+	}
+
+	public DuplicateProductEntryModuleIdException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public DuplicateProductEntryModuleIdException(Throwable cause) {
+		super(cause);
+	}
+
 }

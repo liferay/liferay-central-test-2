@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
+import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
@@ -95,10 +97,11 @@ public class SCProductVersionLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		SCProductEntry productEntry =
 			scProductEntryPersistence.findByPrimaryKey(productEntryId);
+		directDownloadURL = directDownloadURL.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(
-			version, changeLog, downloadPageURL, directDownloadURL,
+			0, version, changeLog, downloadPageURL, directDownloadURL,
 			frameworkVersionIds);
 
 		long productVersionId = counterLocalService.increment();
@@ -185,6 +188,14 @@ public class SCProductVersionLocalServiceImpl
 		return scProductVersionPersistence.findByPrimaryKey(productVersionId);
 	}
 
+	public SCProductVersion getProductVersionByDirectDownloadURL(
+			String directDownloadURL)
+		throws PortalException, SystemException {
+
+		return scProductVersionPersistence.findByDirectDownloadURL(
+			directDownloadURL);
+	}
+
 	public List getProductVersions(long productEntryId, int begin, int end)
 		throws SystemException {
 
@@ -207,11 +218,12 @@ public class SCProductVersionLocalServiceImpl
 
 		// Product version
 
+		directDownloadURL = directDownloadURL.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(
-			version, changeLog, downloadPageURL, directDownloadURL,
-			frameworkVersionIds);
+			productVersionId, version, changeLog, downloadPageURL,
+			directDownloadURL, frameworkVersionIds);
 
 		SCProductVersion productVersion =
 			scProductVersionPersistence.findByPrimaryKey(productVersionId);
@@ -260,10 +272,11 @@ public class SCProductVersionLocalServiceImpl
 		return productVersion;
 	}
 
-	private void validate(
-			String version, String changeLog, String downloadPageURL,
-			String directDownloadURL, long[] frameworkVersionIds)
-		throws PortalException {
+	protected void validate(
+			long productVersionId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
+			long[] frameworkVersionIds)
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(version)) {
 			throw new ProductVersionNameException();
@@ -275,6 +288,20 @@ public class SCProductVersionLocalServiceImpl
 				 Validator.isNull(directDownloadURL)) {
 
 			throw new ProductVersionDownloadURLException();
+		}
+		else if (Validator.isNotNull(directDownloadURL)) {
+			try {
+				SCProductVersion productVersion =
+					scProductVersionPersistence.findByDirectDownloadURL(
+						directDownloadURL);
+
+				if (productVersion.getProductVersionId() != productVersionId) {
+					throw new
+						DuplicateProductVersionDirectDownloadURLException();
+				}
+			}
+			catch (NoSuchProductVersionException nspve) {
+			}
 		}
 		else if (frameworkVersionIds.length == 0) {
 			throw new ProductVersionFrameworkVersionException();

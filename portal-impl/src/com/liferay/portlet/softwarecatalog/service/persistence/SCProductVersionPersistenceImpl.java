@@ -515,6 +515,108 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public SCProductVersion findByDirectDownloadURL(String directDownloadURL)
+		throws NoSuchProductVersionException, SystemException {
+		SCProductVersion scProductVersion = fetchByDirectDownloadURL(directDownloadURL);
+
+		if (scProductVersion == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SCProductVersion exists with the key {");
+
+			msg.append("directDownloadURL=" + directDownloadURL);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchProductVersionException(msg.toString());
+		}
+
+		return scProductVersion;
+	}
+
+	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductVersion.class.getName();
+		String finderMethodName = "fetchByDirectDownloadURL";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { directDownloadURL };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
+				if (directDownloadURL == null) {
+					query.append("directDownloadURL IS NULL");
+				}
+				else {
+					query.append("lower(directDownloadURL) = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				if (directDownloadURL != null) {
+					q.setString(queryPos++, directDownloadURL);
+				}
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (SCProductVersion)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (SCProductVersion)list.get(0);
+			}
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -642,6 +744,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByDirectDownloadURL(String directDownloadURL)
+		throws NoSuchProductVersionException, SystemException {
+		SCProductVersion scProductVersion = findByDirectDownloadURL(directDownloadURL);
+
+		remove(scProductVersion);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -686,6 +795,80 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, productEntryId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByDirectDownloadURL(String directDownloadURL)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductVersion.class.getName();
+		String finderMethodName = "countByDirectDownloadURL";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { directDownloadURL };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion WHERE ");
+
+				if (directDownloadURL == null) {
+					query.append("directDownloadURL IS NULL");
+				}
+				else {
+					query.append("lower(directDownloadURL) = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				if (directDownloadURL != null) {
+					q.setString(queryPos++, directDownloadURL);
+				}
 
 				Long count = null;
 

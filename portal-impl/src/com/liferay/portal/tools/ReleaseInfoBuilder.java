@@ -55,7 +55,8 @@ public class ReleaseInfoBuilder {
 			String version = releaseProps.getProperty("lp.version");
 
 			File file = new File(
-				"src/com/liferay/portal/util/ReleaseInfo.java");
+				"../portal-kernel/src/com/liferay/portal/kernel/util/" +
+					"ReleaseInfo.java");
 
 			String content = FileUtil.read(file);
 

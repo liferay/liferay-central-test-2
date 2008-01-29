@@ -266,6 +266,15 @@ public class SCProductVersionLocalServiceUtil {
 		return scProductVersionLocalService.getProductVersion(productVersionId);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersionByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getProductVersionByDirectDownloadURL(directDownloadURL);
+	}
+
 	public static java.util.List getProductVersions(long productEntryId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();

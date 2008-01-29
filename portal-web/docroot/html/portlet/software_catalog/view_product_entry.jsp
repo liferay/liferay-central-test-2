@@ -73,8 +73,6 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <h3><%= productEntry.getName() %> <%= (latestProductVersion == null) ? "" : latestProductVersion.getVersion() %></h3>
 
-<br />
-
 <table class="lfr-table">
 <tr>
 	<td>

@@ -1029,6 +1029,127 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public SCProductEntry findByRG_RA(String repoGroupId, String repoArtifactId)
+		throws NoSuchProductEntryException, SystemException {
+		SCProductEntry scProductEntry = fetchByRG_RA(repoGroupId, repoArtifactId);
+
+		if (scProductEntry == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SCProductEntry exists with the key {");
+
+			msg.append("repoGroupId=" + repoGroupId);
+
+			msg.append(", ");
+			msg.append("repoArtifactId=" + repoArtifactId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchProductEntryException(msg.toString());
+		}
+
+		return scProductEntry;
+	}
+
+	public SCProductEntry fetchByRG_RA(String repoGroupId, String repoArtifactId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductEntry.class.getName();
+		String finderMethodName = "fetchByRG_RA";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
+				if (repoGroupId == null) {
+					query.append("repoGroupId IS NULL");
+				}
+				else {
+					query.append("lower(repoGroupId) = ?");
+				}
+
+				query.append(" AND ");
+
+				if (repoArtifactId == null) {
+					query.append("repoArtifactId IS NULL");
+				}
+				else {
+					query.append("lower(repoArtifactId) = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("modifiedDate DESC, ");
+				query.append("name DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				if (repoGroupId != null) {
+					q.setString(queryPos++, repoGroupId);
+				}
+
+				if (repoArtifactId != null) {
+					q.setString(queryPos++, repoArtifactId);
+				}
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (SCProductEntry)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (SCProductEntry)list.get(0);
+			}
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -1175,6 +1296,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			remove(scProductEntry);
 		}
+	}
+
+	public void removeByRG_RA(String repoGroupId, String repoArtifactId)
+		throws NoSuchProductEntryException, SystemException {
+		SCProductEntry scProductEntry = findByRG_RA(repoGroupId, repoArtifactId);
+
+		remove(scProductEntry);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1360,6 +1488,95 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				q.setLong(queryPos++, userId);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByRG_RA(String repoGroupId, String repoArtifactId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = SCProductEntry.class.getName();
+		String finderMethodName = "countByRG_RA";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
+
+				if (repoGroupId == null) {
+					query.append("repoGroupId IS NULL");
+				}
+				else {
+					query.append("lower(repoGroupId) = ?");
+				}
+
+				query.append(" AND ");
+
+				if (repoArtifactId == null) {
+					query.append("repoArtifactId IS NULL");
+				}
+				else {
+					query.append("lower(repoArtifactId) = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				if (repoGroupId != null) {
+					q.setString(queryPos++, repoGroupId);
+				}
+
+				if (repoArtifactId != null) {
+					q.setString(queryPos++, repoArtifactId);
+				}
 
 				Long count = null;
 

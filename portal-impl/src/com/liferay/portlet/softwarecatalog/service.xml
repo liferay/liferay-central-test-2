@@ -153,6 +153,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
+		<finder name="RG_RA" return-type="SCProductEntry">
+			<finder-column name="repoGroupId" case-sensitive="false" />
+			<finder-column name="repoArtifactId" case-sensitive="false" />
+		</finder>
 
 		<!-- References -->
 
@@ -244,6 +248,9 @@
 		<finder name="ProductEntryId" return-type="Collection">
 			<finder-column name="productEntryId" />
 		</finder>
+		<finder name="DirectDownloadURL" return-type="SCProductVersion">
+			<finder-column name="directDownloadURL" case-sensitive="false" />
+		</finder>
 
 		<!-- References -->
 
@@ -251,6 +258,8 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
+		<exception>DuplicateProductEntryModuleId</exception>
+		<exception>DuplicateProductVersionDirectDownloadURL</exception>
 		<exception>LicenseName</exception>
 		<exception>FrameworkVersionName</exception>
 		<exception>ProductEntryAuthor</exception>

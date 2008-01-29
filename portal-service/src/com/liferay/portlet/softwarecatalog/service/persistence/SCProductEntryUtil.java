@@ -196,6 +196,19 @@ public class SCProductEntryUtil {
 			userId, obc);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry findByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
+		return getPersistence().findByRG_RA(repoGroupId, repoArtifactId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByRG_RA(repoGroupId, repoArtifactId);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -240,6 +253,13 @@ public class SCProductEntryUtil {
 		getPersistence().removeByG_U(groupId, userId);
 	}
 
+	public static void removeByRG_RA(java.lang.String repoGroupId,
+		java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
+		getPersistence().removeByRG_RA(repoGroupId, repoArtifactId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -257,6 +277,12 @@ public class SCProductEntryUtil {
 	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_U(groupId, userId);
+	}
+
+	public static int countByRG_RA(java.lang.String repoGroupId,
+		java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByRG_RA(repoGroupId, repoArtifactId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

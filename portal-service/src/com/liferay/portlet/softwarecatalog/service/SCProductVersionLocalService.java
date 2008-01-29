@@ -149,6 +149,11 @@ public interface SCProductVersionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersionByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getProductVersions(long productEntryId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 

@@ -38,6 +38,8 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
+import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
@@ -133,11 +135,13 @@ public class SCProductEntryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		tags = getTags(tags);
+		repoGroupId = repoGroupId.trim().toLowerCase();
+		repoArtifactId = repoArtifactId.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(
-			name, type, shortDescription, pageURL, author, licenseIds,
-			thumbnails, fullImages);
+			0, name, type, shortDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages);
 
 		long productEntryId = counterLocalService.increment();
 
@@ -567,11 +571,13 @@ public class SCProductEntryLocalServiceImpl
 		// Product entry
 
 		tags = getTags(tags);
+		repoGroupId = repoGroupId.trim().toLowerCase();
+		repoArtifactId = repoArtifactId.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(
-			name, type, shortDescription, pageURL, author, licenseIds,
-			thumbnails, fullImages);
+			productEntryId, name, type, shortDescription, pageURL, author,
+			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages);
 
 		SCProductEntry productEntry =
 			scProductEntryPersistence.findByPrimaryKey(productEntryId);
@@ -840,9 +846,11 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			String name, String type, String shortDescription, String pageURL,
-			String author, long[] licenseIds, List thumbnails, List fullImages)
-		throws PortalException {
+			long productEntryId, String name, String type,
+			String shortDescription, String pageURL, String author,
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			List thumbnails, List fullImages)
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
 			throw new ProductEntryNameException();
@@ -870,6 +878,17 @@ public class SCProductEntryLocalServiceImpl
 
 		if (Validator.isNull(author)) {
 			throw new ProductEntryAuthorException();
+		}
+
+		try {
+			SCProductEntry productEntry = scProductEntryPersistence.findByRG_RA(
+				repoGroupId, repoArtifactId);
+
+			if (productEntry.getProductEntryId() != productEntryId) {
+				throw new DuplicateProductEntryModuleIdException();
+			}
+		}
+		catch (NoSuchProductEntryException nspee) {
 		}
 
 		if (licenseIds.length == 0) {

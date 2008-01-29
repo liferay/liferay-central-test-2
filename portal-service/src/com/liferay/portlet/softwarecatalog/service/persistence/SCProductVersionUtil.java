@@ -119,6 +119,19 @@ public class SCProductVersionUtil {
 			productEntryId, obc);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion findByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
+		return getPersistence().findByDirectDownloadURL(directDownloadURL);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByDirectDownloadURL(directDownloadURL);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -153,6 +166,13 @@ public class SCProductVersionUtil {
 		getPersistence().removeByProductEntryId(productEntryId);
 	}
 
+	public static void removeByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
+		getPersistence().removeByDirectDownloadURL(directDownloadURL);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -160,6 +180,12 @@ public class SCProductVersionUtil {
 	public static int countByProductEntryId(long productEntryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByProductEntryId(productEntryId);
+	}
+
+	public static int countByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByDirectDownloadURL(directDownloadURL);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

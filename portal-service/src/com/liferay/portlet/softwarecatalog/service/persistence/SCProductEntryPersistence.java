@@ -141,6 +141,15 @@ public interface SCProductEntryPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -167,6 +176,11 @@ public interface SCProductEntryPersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByRG_RA(java.lang.String repoGroupId,
+		java.lang.String repoArtifactId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
@@ -176,6 +190,10 @@ public interface SCProductEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByRG_RA(java.lang.String repoGroupId,
+		java.lang.String repoArtifactId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

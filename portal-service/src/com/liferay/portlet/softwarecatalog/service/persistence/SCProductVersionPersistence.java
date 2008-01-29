@@ -89,6 +89,15 @@ public interface SCProductVersionPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
+		java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -109,9 +118,16 @@ public interface SCProductVersionPersistence {
 	public void removeByProductEntryId(long productEntryId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByDirectDownloadURL(java.lang.String directDownloadURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByProductEntryId(long productEntryId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByDirectDownloadURL(java.lang.String directDownloadURL)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

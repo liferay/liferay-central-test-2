@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
@@ -77,7 +78,9 @@ public class EditProductVersionAction extends PortletAction {
 
 				setForward(req, "portlet.software_catalog.error");
 			}
-			else if (e instanceof ProductVersionChangeLogException ||
+			else if (e instanceof
+						DuplicateProductVersionDirectDownloadURLException ||
+					 e instanceof ProductVersionChangeLogException ||
 					 e instanceof ProductVersionDownloadURLException ||
 					 e instanceof ProductVersionFrameworkVersionException ||
 					 e instanceof ProductVersionNameException) {

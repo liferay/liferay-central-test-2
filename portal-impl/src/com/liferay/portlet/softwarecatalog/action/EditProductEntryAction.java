@@ -33,6 +33,7 @@ import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -101,7 +102,8 @@ public class EditProductEntryAction extends PortletAction {
 
 				setForward(req, "portlet.software_catalog.error");
 			}
-			else if (e instanceof ProductEntryAuthorException ||
+			else if (e instanceof DuplicateProductEntryModuleIdException ||
+					 e instanceof ProductEntryAuthorException ||
 					 e instanceof ProductEntryNameException ||
 					 e instanceof ProductEntryLicenseException ||
 					 e instanceof ProductEntryPageURLException ||
