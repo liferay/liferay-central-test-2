@@ -1161,8 +1161,6 @@ public class LayoutTypePortletImpl
 			removeNestedColumns(portletId);
 		}
 
-		deletePortletSetup(portletId);
-
 		if (_enablePortletLayoutListener) {
 			PortletLayoutListener portletLayoutListener =
 				portlet.getPortletLayoutListener();
@@ -1173,29 +1171,26 @@ public class LayoutTypePortletImpl
 				portletLayoutListener.onRemoveFromLayout(portletId, plid);
 			}
 		}
+
+		deletePortletSetup(portletId);
 	}
 
 	protected void deletePortletSetup(String portletId) {
 		try {
-			PortletPreferences portletPreferences =
+			List list =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
-					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
 					getLayout().getPlid(), portletId);
 
-			if (portletPreferences != null) {
+			for (int i = 0; i < list.size(); i++) {
+				PortletPreferences portletPreferences =
+					(PortletPreferences)list.get(i);
+
 				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
-					PortletKeys.PREFS_OWNER_ID_DEFAULT,
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
-					getLayout().getPlid(), portletId);
+					portletPreferences.getPortletPreferencesId());
 			}
-		}
-		catch (NoSuchPortletPreferencesException nsppe) {
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			_log.error(e, e);
 		}
 	}
 

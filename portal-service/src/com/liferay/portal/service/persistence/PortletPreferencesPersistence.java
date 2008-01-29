@@ -87,6 +87,34 @@ public interface PortletPreferencesPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPortletPreferencesException;
 
+	public java.util.List findByP_P(long plid, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByP_P(long plid, java.lang.String portletId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByP_P(long plid, java.lang.String portletId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.PortletPreferences findByP_P_First(
+		long plid, java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
+
+	public com.liferay.portal.model.PortletPreferences findByP_P_Last(
+		long plid, java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
+
+	public com.liferay.portal.model.PortletPreferences[] findByP_P_PrevAndNext(
+		long portletPreferencesId, long plid, java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
+
 	public java.util.List findByO_O_P(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException;
 
@@ -144,6 +172,9 @@ public interface PortletPreferencesPersistence {
 	public void removeByPlid(long plid)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByP_P(long plid, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByO_O_P(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException;
 
@@ -155,6 +186,9 @@ public interface PortletPreferencesPersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByPlid(long plid) throws com.liferay.portal.SystemException;
+
+	public int countByP_P(long plid, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByO_O_P(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException;

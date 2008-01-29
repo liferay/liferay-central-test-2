@@ -337,6 +337,10 @@ public interface PortletPreferencesLocalService {
 
 	public void afterPropertiesSet();
 
+	public void deletePortletPreferences(long portletPreferencesId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -356,6 +360,9 @@ public interface PortletPreferencesLocalService {
 
 	public java.util.List getPortletPreferences(long plid)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List getPortletPreferences(long plid,
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
 	public java.util.List getPortletPreferences(long ownerId, int ownerType,
 		long plid)

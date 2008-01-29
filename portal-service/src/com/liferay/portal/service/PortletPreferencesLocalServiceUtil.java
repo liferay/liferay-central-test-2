@@ -792,6 +792,14 @@ public class PortletPreferencesLocalServiceUtil {
 		portletPreferencesLocalService.afterPropertiesSet();
 	}
 
+	public static void deletePortletPreferences(long portletPreferencesId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		portletPreferencesLocalService.deletePortletPreferences(portletPreferencesId);
+	}
+
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid)
 		throws com.liferay.portal.PortalException, 
@@ -834,6 +842,14 @@ public class PortletPreferencesLocalServiceUtil {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
 		return portletPreferencesLocalService.getPortletPreferences(plid);
+	}
+
+	public static java.util.List getPortletPreferences(long plid,
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferences(plid,
+			portletId);
 	}
 
 	public static java.util.List getPortletPreferences(long ownerId,

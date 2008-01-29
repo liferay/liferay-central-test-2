@@ -249,6 +249,7 @@ create index IX_12B5E51D on Portlet (companyId, portletId);
 create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid);
 create index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId);
 create index IX_F15C1C4F on PortletPreferences (plid);
+create index IX_D340DB76 on PortletPreferences (plid, portletId);
 
 create index IX_16184D57 on RatingsEntry (classNameId, classPK);
 create index IX_B47E3C11 on RatingsEntry (userId, classNameId, classPK);

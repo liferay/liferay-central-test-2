@@ -469,6 +469,282 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByP_P(long plid, String portletId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletPreferences.class.getName();
+		String finderMethodName = "findByP_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(plid), portletId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+				query.append("plid = ?");
+
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, plid);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
+
+				List list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByP_P(long plid, String portletId, int begin, int end)
+		throws SystemException {
+		return findByP_P(plid, portletId, begin, end, null);
+	}
+
+	public List findByP_P(long plid, String portletId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletPreferences.class.getName();
+		String finderMethodName = "findByP_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(plid),
+				
+				portletId,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+				query.append("plid = ?");
+
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, plid);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public PortletPreferences findByP_P_First(long plid, String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		List list = findByP_P(plid, portletId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("plid=" + plid);
+
+			msg.append(", ");
+			msg.append("portletId=" + portletId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPortletPreferencesException(msg.toString());
+		}
+		else {
+			return (PortletPreferences)list.get(0);
+		}
+	}
+
+	public PortletPreferences findByP_P_Last(long plid, String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		int count = countByP_P(plid, portletId);
+
+		List list = findByP_P(plid, portletId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No PortletPreferences exists with the key {");
+
+			msg.append("plid=" + plid);
+
+			msg.append(", ");
+			msg.append("portletId=" + portletId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPortletPreferencesException(msg.toString());
+		}
+		else {
+			return (PortletPreferences)list.get(0);
+		}
+	}
+
+	public PortletPreferences[] findByP_P_PrevAndNext(
+		long portletPreferencesId, long plid, String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+
+		int count = countByP_P(plid, portletId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			query.append("plid = ?");
+
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, plid);
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					portletPreferences);
+
+			PortletPreferences[] array = new PortletPreferencesImpl[3];
+
+			array[0] = (PortletPreferences)objArray[0];
+			array[1] = (PortletPreferences)objArray[1];
+			array[2] = (PortletPreferences)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
@@ -1004,6 +1280,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByP_P(long plid, String portletId)
+		throws SystemException {
+		Iterator itr = findByP_P(plid, portletId).iterator();
+
+		while (itr.hasNext()) {
+			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+
+			remove(portletPreferences);
+		}
+	}
+
 	public void removeByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
 		Iterator itr = findByO_O_P(ownerId, ownerType, plid).iterator();
@@ -1067,6 +1354,88 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, plid);
+
+				Long count = null;
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByP_P(long plid, String portletId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletPreferences.class.getName();
+		String finderMethodName = "countByP_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(plid), portletId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+				query.append("plid = ?");
+
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, plid);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
 
 				Long count = null;
 

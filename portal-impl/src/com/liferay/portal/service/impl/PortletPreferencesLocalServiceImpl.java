@@ -49,6 +49,21 @@ import java.util.Map;
 public class PortletPreferencesLocalServiceImpl
 	extends PortletPreferencesLocalServiceBaseImpl {
 
+	public void deletePortletPreferences(long portletPreferencesId)
+		throws PortalException, SystemException {
+
+		PortletPreferences portletPreferences =
+			portletPreferencesPersistence.findByPrimaryKey(
+				portletPreferencesId);
+
+		long ownerId = portletPreferences.getOwnerId();
+		int ownerType = portletPreferences.getOwnerType();
+
+		portletPreferencesPersistence.remove(portletPreferences);
+
+		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
+	}
+
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws PortalException, SystemException {
 
@@ -84,6 +99,12 @@ public class PortletPreferencesLocalServiceImpl
 
 	public List getPortletPreferences(long plid) throws SystemException {
 		return portletPreferencesPersistence.findByPlid(plid);
+	}
+
+	public List getPortletPreferences(long plid, String portletId)
+		throws SystemException {
+
+		return portletPreferencesPersistence.findByP_P(plid, portletId);
 	}
 
 	public List getPortletPreferences(long ownerId, int ownerType, long plid)
