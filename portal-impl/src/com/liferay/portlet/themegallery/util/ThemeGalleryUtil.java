@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.themegallery.util;
 
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.themegallery.model.ThemeEntry;
 
 import java.util.ArrayList;

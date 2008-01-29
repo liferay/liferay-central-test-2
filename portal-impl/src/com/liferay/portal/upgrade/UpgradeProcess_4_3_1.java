@@ -22,9 +22,9 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v4_3_1.UpgradeOrganization;
 import com.liferay.portal.upgrade.v4_3_1.UpgradeSchema;
-import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

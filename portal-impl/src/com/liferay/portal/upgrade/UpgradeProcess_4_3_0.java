@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeBookmarks;
@@ -59,7 +60,6 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
-import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

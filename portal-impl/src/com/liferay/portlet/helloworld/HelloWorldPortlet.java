@@ -23,7 +23,7 @@
 package com.liferay.portlet.helloworld;
 
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 
 import java.io.IOException;
 import java.io.PrintWriter;

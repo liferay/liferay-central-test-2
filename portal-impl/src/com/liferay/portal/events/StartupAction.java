@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -40,7 +41,6 @@ import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.verify.VerifyProcess;
 
 import org.apache.commons.logging.Log;
