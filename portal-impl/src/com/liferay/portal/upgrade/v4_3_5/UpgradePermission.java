@@ -235,6 +235,8 @@ public class UpgradePermission extends UpgradeProcess {
 
 					deletePermissionIds(permissionIds, guestGroupId);
 				}
+
+				ps.close();
 			}
 		}
 		finally {
