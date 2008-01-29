@@ -1,5 +1,7 @@
 package com.ext.portlet.reports.service;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+
 
 /**
  * <a href="ReportsEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +47,7 @@ public class ReportsEntryServiceFactory {
 
     public static ReportsEntryService getImpl() {
         if (_impl == null) {
-            _impl = (ReportsEntryService) com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+            _impl = (ReportsEntryService) BeanLocatorUtil.locate(_IMPL);
         }
 
         return _impl;
@@ -53,7 +55,7 @@ public class ReportsEntryServiceFactory {
 
     public static ReportsEntryService getTxImpl() {
         if (_txImpl == null) {
-            _txImpl = (ReportsEntryService) com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+            _txImpl = (ReportsEntryService) BeanLocatorUtil.locate(_TX_IMPL);
         }
 
         return _txImpl;
@@ -65,7 +67,7 @@ public class ReportsEntryServiceFactory {
 
     private static ReportsEntryServiceFactory _getFactory() {
         if (_factory == null) {
-            _factory = (ReportsEntryServiceFactory) com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+            _factory = (ReportsEntryServiceFactory) BeanLocatorUtil.locate(_FACTORY);
         }
 
         return _factory;
