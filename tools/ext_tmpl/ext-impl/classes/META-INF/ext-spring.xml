@@ -27,7 +27,7 @@
 			<ref bean="com.ext.portlet.reports.service.ReportsEntryService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" lazy-init="true">
+	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
