@@ -34,7 +34,6 @@ import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.Http;
 
 import java.io.IOException;
@@ -61,12 +60,8 @@ public class WikiUtil {
 		return _instance._convert(page, pageURL, editURL);
 	}
 
-	public static String getDefaultEditPage() {
-		return _instance._getDefaultEditPage();
-	}
-
-	public static String getEditPage(WikiPage page) {
-		return _instance._getEditPage(page);
+	public static String getEditPage(String format) {
+		return _instance._getEditPage(format);
 	}
 
 	public static String getHelpPage(String format) {
@@ -128,15 +123,9 @@ public class WikiUtil {
 		return content;
 	}
 
-	private String _getDefaultEditPage() {
+	private String _getEditPage(String format) {
 		return PropsUtil.getComponentProperties().getString(
-			PropsUtil.WIKI_FORMATS_EDIT_PAGE,
-			Filter.by(WikiPageImpl.DEFAULT_FORMAT));
-	}
-
-	private String _getEditPage(WikiPage page) {
-		return PropsUtil.getComponentProperties().getString(
-			PropsUtil.WIKI_FORMATS_EDIT_PAGE, Filter.by(page.getFormat()));
+			PropsUtil.WIKI_FORMATS_EDIT_PAGE, Filter.by(format));
 	}
 
 	private WikiEngine _getEngine(String format) throws WikiFormatException {

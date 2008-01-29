@@ -38,6 +38,7 @@ try {
 	editURL.setWindowState(WindowState.MAXIMIZED);
 	editURL.setPortletMode(PortletMode.VIEW);
 	editURL.setParameter("struts_action", "/wiki/edit_page");
+	editURL.setParameter("redirect", currentURL);
 
 	pageContent = WikiUtil.convert(wikiPage, pageURL, editURL);
 }

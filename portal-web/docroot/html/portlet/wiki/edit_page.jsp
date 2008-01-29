@@ -43,6 +43,8 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 if (Validator.isNull(redirect)) {
 	PortletURL portletURL = renderResponse.createRenderURL();
 
+	portletURL.setParameter("struts_config", "/wiki/view");
+	portletURL.setParameter("nodeId", Long.toString(nodeId));
 	portletURL.setParameter("title", title);
 
 	redirect = portletURL.toString();
@@ -175,14 +177,7 @@ editPageURL.setParameter("title", title);
 		request.setAttribute("edit_page.jsp-wikiPage", wikiPage);
 		%>
 
-		<c:choose>
-			<c:when test="<%= (wikiPage != null) %>">
-				<liferay-util:include page="<%= WikiUtil.getEditPage(wikiPage) %>" />
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="<%= WikiUtil.getDefaultEditPage() %>" />
-			</c:otherwise>
-		</c:choose>
+		<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
 	</div>
 
 	<br />
@@ -219,7 +214,7 @@ editPageURL.setParameter("title", title);
 
 	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewPage();" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="history.go(-1);" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= redirect %>'" />
 
 	</form>
 

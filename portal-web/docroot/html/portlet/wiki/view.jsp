@@ -57,7 +57,7 @@ printPageURL.setParameter("print", "true");
 	}
 
 	function <portlet:namespace />printPage() {
-		window.open('<%= printPageURL %>', '', "toolbar=0just,location=0,directories=0,status=0,menubar=1,scrollbars=yes,resizable=1,width=640,height=480,left=80,top=180");
+		window.open('<%= printPageURL %>', '', "toolbar=0,location=0,directories=0,status=0,menubar=1,scrollbars=yes,resizable=1,width=640,height=480,left=80,top=180");
 	}
 </script>
 
