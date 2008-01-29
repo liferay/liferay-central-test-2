@@ -33,7 +33,10 @@ String rank = MBUtil.getUserRank(prefs, themeDisplay.getLanguageId(), statsUser)
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>">
-	<liferay-ui:message key="rank" />: <%= rank %><br />
+	<c:if test="<%= Validator.isNotNull(rank) %>">
+		<liferay-ui:message key="rank" />: <%= rank %><br />
+	</c:if>
+
 	<liferay-ui:message key="posts" />: <%= statsUser.getMessageCount() %><br />
 	<liferay-ui:message key="join-date" />: <%= dateFormatDate.format(userDisplay.getCreateDate()) %><br />
 
