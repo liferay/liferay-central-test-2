@@ -933,6 +933,14 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getUserOrganizations(userId);
 	}
 
+	public static int getUserOrganizationsCount(long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getUserOrganizationsCount(userId);
+	}
+
 	public static boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

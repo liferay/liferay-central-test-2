@@ -49,7 +49,7 @@
 			</li>
 		#end
 
-		#if ($is_signed_in)
+		#if ($show_my_places)
 			<li class="my-places">
 				<a>$my_places_text</a>
 

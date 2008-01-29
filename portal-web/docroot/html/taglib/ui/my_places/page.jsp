@@ -24,7 +24,11 @@
 
 <%@ include file="/html/taglib/ui/my_places/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() %>">
+<%
+List myPlaces = user.getMyPlaces();
+%>
+
+<c:if test="<%= myPlaces.size() > 0 %>">
 	<ul>
 
 		<%
@@ -35,39 +39,16 @@
 
 		portletURL.setParameter("struts_action", "/my_places/view");
 
-		LinkedHashMap groupParams = new LinkedHashMap();
+		for (int i = 0; i < myPlaces.size(); i++) {
+			Group myPlace = (Group)myPlaces.get(i);
 
-		groupParams.put("usersGroups", new Long(user.getUserId()));
-		//groupParams.put("pageCount", StringPool.BLANK);
+			myPlace = myPlace.toEscapedModel();
 
-		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		List userOrgs = user.getOrganizations();
-
-		Iterator itr = userOrgs.iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = (Organization)itr.next();
-
-			communities.add(0, organization.getGroup());
-		}
-
-		if (user.isLayoutsRequired()) {
-			Group userGroup = user.getGroup();
-
-			communities.add(0, userGroup);
-		}
-
-		for (int i = 0; i < communities.size(); i++) {
-			Group community = (Group)communities.get(i);
-
-			community = community.toEscapedModel();
-
-			boolean organizationCommunity = community.isOrganization();
-			boolean regularCommunity = community.isCommunity();
-			boolean userCommunity = community.isUser();
-			int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
-			int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
+			boolean organizationCommunity = myPlace.isOrganization();
+			boolean regularCommunity = myPlace.isCommunity();
+			boolean userCommunity = myPlace.isUser();
+			int publicLayoutsPageCount = myPlace.getPublicLayoutsPageCount();
+			int privateLayoutsPageCount = myPlace.getPrivateLayoutsPageCount();
 
 			Organization organization = null;
 
@@ -75,7 +56,7 @@
 			String privateAddPageHREF = null;
 
 			if (organizationCommunity) {
-				organization = OrganizationLocalServiceUtil.getOrganization(community.getClassPK());
+				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
@@ -85,7 +66,7 @@
 
 					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
 					addPageURL.setParameter("redirect", currentURL);
-					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 					publicAddPageHREF = addPageURL.toString();
@@ -96,7 +77,7 @@
 				}
 			}
 			else if (regularCommunity) {
-				if (GroupPermissionUtil.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
@@ -104,7 +85,7 @@
 
 					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
 					addPageURL.setParameter("redirect", currentURL);
-					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 					publicAddPageHREF = addPageURL.toString();
@@ -123,11 +104,11 @@
 				publicAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				publicAddPageURL.setParameter("tabs2", "public");
 				publicAddPageURL.setParameter("redirect", currentURL);
-				publicAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+				publicAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 
 				publicAddPageHREF = publicAddPageURL.toString();
 
-				long privateAddPagePlid = community.getDefaultPrivatePlid();
+				long privateAddPagePlid = myPlace.getDefaultPrivatePlid();
 
 				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), false);
 
@@ -137,7 +118,7 @@
 				privateAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				privateAddPageURL.setParameter("tabs2", "private");
 				privateAddPageURL.setParameter("redirect", currentURL);
-				privateAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+				privateAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 
 				privateAddPageHREF = privateAddPageURL.toString();
 			}
@@ -182,7 +163,7 @@
 								<liferay-ui:message key="my-community" />
 							</c:when>
 							<c:otherwise>
-								<%= community.getName() %>
+								<%= myPlace.getName() %>
 							</c:otherwise>
 						</c:choose>
 					</h3>
@@ -190,13 +171,13 @@
 					<ul>
 
 						<%
-						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 						boolean selectedPlace = false;
 
 						if (layout != null) {
-							selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+							selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
 						}
 						%>
 
@@ -217,13 +198,13 @@
 						</c:if>
 
 						<%
-						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 						portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
 						selectedPlace = false;
 
 						if (layout != null) {
-							selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+							selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
 						}
 						%>
 

@@ -42,11 +42,13 @@ import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -424,6 +426,86 @@ public class UserImpl extends UserModelImpl implements User {
 		catch (Exception e) {
 			return false;
 		}
+	}
+
+	public List getMyPlaces() {
+		List myPlaces = new ArrayList();
+
+		try {
+			if (isDefaultUser()) {
+				return myPlaces;
+			}
+
+			LinkedHashMap groupParams = new LinkedHashMap();
+
+			groupParams.put("usersGroups", new Long(getUserId()));
+			//groupParams.put("pageCount", StringPool.BLANK);
+
+			myPlaces = GroupLocalServiceUtil.search(
+				getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			List userOrgs = getOrganizations();
+
+			Iterator itr = userOrgs.iterator();
+
+			while (itr.hasNext()) {
+				Organization organization = (Organization)itr.next();
+
+				myPlaces.add(0, organization.getGroup());
+			}
+
+			if (isLayoutsRequired()) {
+				Group userGroup = getGroup();
+
+				myPlaces.add(0, userGroup);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return myPlaces;
+	}
+
+	public boolean hasMyPlaces() {
+		try {
+			if (isDefaultUser()) {
+				return false;
+			}
+
+			LinkedHashMap groupParams = new LinkedHashMap();
+
+			groupParams.put("usersGroups", new Long(getUserId()));
+			//groupParams.put("pageCount", StringPool.BLANK);
+
+			int count = GroupLocalServiceUtil.searchCount(
+				getCompanyId(), null, null, groupParams);
+
+			if (count > 0) {
+				return true;
+			}
+
+			count = OrganizationLocalServiceUtil.getUserOrganizationsCount(
+				getUserId());
+
+			if (count > 0) {
+				return true;
+			}
+
+			if (isLayoutsRequired()) {
+				return true;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return false;
 	}
 
 	public String getDisplayURL(String portalURL) {

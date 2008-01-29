@@ -409,6 +409,10 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public int getUserOrganizationsCount(long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

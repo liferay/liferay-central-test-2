@@ -360,6 +360,12 @@ public class OrganizationLocalServiceImpl
 		return userPersistence.getOrganizations(userId);
 	}
 
+	public int getUserOrganizationsCount(long userId)
+		throws PortalException, SystemException {
+
+		return userPersistence.getOrganizationsSize(userId);
+	}
+
 	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws PortalException, SystemException {
 

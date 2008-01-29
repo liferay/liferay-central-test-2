@@ -127,5 +127,9 @@ public interface User extends UserModel {
 
 	public boolean isLayoutsRequired();
 
+	public java.util.List getMyPlaces();
+
+	public boolean hasMyPlaces();
+
 	public java.lang.String getDisplayURL(java.lang.String portalURL);
 }
