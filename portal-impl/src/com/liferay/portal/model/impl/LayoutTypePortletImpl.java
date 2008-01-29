@@ -24,7 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.germinus.easyconf.Filter;
 
-import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
