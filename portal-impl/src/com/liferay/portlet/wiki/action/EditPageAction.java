@@ -28,12 +28,17 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -41,6 +46,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -62,9 +68,11 @@ public class EditPageAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+		WikiPage page = null;
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updatePage(req);
+				page = updatePage(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deletePage(req);
@@ -74,7 +82,19 @@ public class EditPageAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				String redirect = ParamUtil.getString(req, "redirect");
+
+				if (page != null) {
+					boolean saveAndContinue = ParamUtil.getBoolean(
+						req, "saveAndContinue");
+
+					if (saveAndContinue) {
+						redirect = getSaveAndContinueRedirect(
+							config, req, page, redirect);
+					}
+				}
+
+				sendRedirect(req, res, redirect);
 			}
 		}
 		catch (Exception e) {
@@ -146,7 +166,37 @@ public class EditPageAction extends PortletAction {
 		WikiPageServiceUtil.revertPage(nodeId, title, version);
 	}
 
-	protected void updatePage(ActionRequest req) throws Exception {
+	protected String getSaveAndContinueRedirect(
+			PortletConfig config, ActionRequest req, WikiPage page,
+			String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)req, config.getPortletName(),
+			themeDisplay.getPlid(), false);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/wiki/edit_page");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(themeDisplay.getLayout().getGroupId()), 
+			false);
+		portletURL.setParameter(
+			"nodeId", String.valueOf(page.getNodeId()), false);
+		portletURL.setParameter("title", page.getTitle(), false);
+
+		return portletURL.toString();
+	}
+
+	protected WikiPage updatePage(ActionRequest req) throws Exception {
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 
@@ -156,7 +206,7 @@ public class EditPageAction extends PortletAction {
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(req, "tagsEntries"));
 
-		WikiPageServiceUtil.updatePage(
+		return WikiPageServiceUtil.updatePage(
 			nodeId, title, content, format, tagsEntries);
 	}
 

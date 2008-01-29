@@ -29,6 +29,15 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
+
+if (originalRedirect.equals(StringPool.BLANK)) {
+	originalRedirect = redirect;
+}
+else {
+	redirect = originalRedirect;
+}
+
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
@@ -64,20 +73,15 @@ else if (Validator.isNotNull(title)) {
 	catch (PortalException pe) {
 	}
 }
-
-PortletURL editPageURL = renderResponse.createRenderURL();
-
-editPageURL.setWindowState(WindowState.MAXIMIZED);
-
-editPageURL.setParameter("struts_action", "/wiki/edit_page");
-editPageURL.setParameter("redirect", currentURL);
-editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-editPageURL.setParameter("title", title);
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<c:if test="<%= preview %>">
+<c:if test="<%= (wikiPage != null) && preview %>">
+	<%
+	wikiPage.setFormat(format);
+	%>
+
 	<liferay-ui:message key="preview" />:
 
 	<div class="preview">
@@ -114,7 +118,7 @@ editPageURL.setParameter("title", title);
 	}
 
 	function <portlet:namespace />savePageAndContinue() {
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= editPageURL %>";
+		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
 
 		<portlet:namespace />savePage();
 	}
@@ -123,9 +127,11 @@ editPageURL.setParameter("title", title);
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 <input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
-<input name="<portlet:namespace />preview" type="hidden" value="" />
+<input name="<portlet:namespace />preview" type="hidden" value="<%= preview %>" />
+<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 
 <liferay-ui:tags-error />
 
