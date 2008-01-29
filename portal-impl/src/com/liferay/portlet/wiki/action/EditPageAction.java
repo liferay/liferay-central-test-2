@@ -50,6 +50,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditPageAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class EditPageAction extends PortletAction {
@@ -118,7 +119,9 @@ public class EditPageAction extends PortletAction {
 				return mapping.findForward("portlet.wiki.error");
 			}
 			else if (e instanceof NoSuchPageException) {
-				// Let the edit_page.jsp handle this case
+
+				// Let edit_page.jsp handle this case
+
 			}
 			else {
 				throw e;

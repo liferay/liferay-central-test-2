@@ -256,24 +256,6 @@ action.VIEW=전망
 action.VIEW_USER=전망 사용자
 
 ##
-## Layout types
-##
-
-layout.types.article=기사
-layout.types.embedded=끼워넣는
-layout.types.link_to_layout=페이지에 연결
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=고전적인Wiki
-wiki.formats.html=HTML
-wiki.formats.plain_text=평문
-
-##
 ## Messages
 ##
 
@@ -1565,10 +1547,16 @@ layout-template-plugin=플러그 접속식 배치 템플렛
 layout-template-plugins=배치 템플렛Plugins
 layout-template=배치 템플렛
 layout-templates=배치 템플렛
+layout.types.article=기사
+layout.types.embedded=끼워넣는
+layout.types.link_to_layout=페이지에 연결
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=배치
 layouts=배치
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=더를 배우십시요
 leave-a-copy-of-the-forwarded-message=발송한 메시지의 사본을 남겨두십시요?
 leave-edit-preferences=허가는 특혜를 편집한다
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=너의 현재 로그인 정보를 사용하기 위하여 사용자 명과 암호 분야 공백을 남겨두십시요.
@@ -2806,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=뒤에 오는 우편 번호는 준 도시 및 국가에
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=뒤에 오는 우편 번호는 준 거리, 도시, 및 국가에
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=이 전자 우편의 체재는 불완전하 적당하게 보일.
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=이 페이지의 체재는 지원하지 않는다. 페이지 내용은 포맷 전에게 보일 것이다.
 the-framework-version-could-not-be-found=기구 버전은 발견될 수 없었다.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=필수 체계 그룹 이기 때문에 그룹은 삭제될.
@@ -2953,6 +2942,8 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=너가 부유한 원본에 의하여 배열되는 전자 우편을 보낼 경우 이 기능은 단 일할 것이다. 너는 부유한가 원본 포맷으로 만듬을 가능하게 하고는가 싶는가?
 this-is-some-sample-help=이것은 약간 견본 도움 이다.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=이 페이지는 아직 존재하고지 않 제목은 부당하다.
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=이 페이지는 아직 존재하지 않는다. 그것을 창조하기 위하여 모양을 아래에 이용하십시요.
 this-page-is-empty-edit-it-to-add-some-text=이 페이지는 비다. 약간 원본을 추가하기 위하여 그것을 편집하십시요.
 this-page-is-part-of-an-inactive-portlet=이 페이지는 비활동성 portlet의 부품 이다.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=이portlet은 살아있는 페이지에 추가하지 않았다. 페이지 첫번째 간행하십시요.
@@ -3209,6 +3200,10 @@ wide-column=넓은 란
 wide-skyscraper=넓은 마천루
 wide=넓게
 width=폭
+wiki.formats.classic_wiki=고전적인Wiki
+wiki.formats.creole=크리올 사람
+wiki.formats.html=HTML
+wiki.formats.plain_text=평문
 wikis=Wikis
 within=안에
 word-search=낱말 수색

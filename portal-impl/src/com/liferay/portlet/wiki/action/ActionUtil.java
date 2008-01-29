@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
@@ -41,6 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class ActionUtil {
@@ -98,7 +100,19 @@ public class ActionUtil {
 			title = WikiPageImpl.FRONT_PAGE;
 		}
 
-		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title, version);
+		WikiPage page = null;
+
+		try {
+			page = WikiPageServiceUtil.getPage(nodeId, title, version);
+		}
+		catch (NoSuchPageException nspe) {
+			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+				page = WikiPageServiceUtil.addPage(nodeId, title);
+			}
+			else {
+				throw nspe;
+			}
+		}
 
 		req.setAttribute(WebKeys.WIKI_PAGE, page);
 	}

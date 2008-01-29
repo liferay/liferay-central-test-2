@@ -54,7 +54,7 @@ public interface PortletDataHandler {
 	 *
 	 * @return		A modified version of prefs that should be saved. Null if
 	 *				the preferences were unmodified by this data handler.
-	 * @throws PortletDataException
+	 * @throws		PortletDataException
 	 */
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -112,7 +112,7 @@ public interface PortletDataHandler {
 	 * @return		A modified version of prefs that should be
 	 *				saved. Null if the preferences were unmodified by this data
 	 *				handler.
-	 * @throws PortletDataException
+	 * @throws		PortletDataException
 	 */
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,

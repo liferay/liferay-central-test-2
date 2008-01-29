@@ -34,10 +34,11 @@ import javax.portlet.PortletURL;
  * <a href="TextEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class TextEngine implements WikiEngine {
-	public String convert(WikiPage page, PortletURL portletURL) {
 
+	public String convert(WikiPage page, PortletURL portletURL) {
 		if (page.getContent() == null) {
 			return StringPool.BLANK;
 		}
@@ -47,23 +48,23 @@ public class TextEngine implements WikiEngine {
 	}
 
 	public Map getLinks(WikiPage page) {
-		return _EMPTY_ARRAY_MAP;
+		return _EMPTY_MAP;
 	}
 
 	public boolean isLinkedTo(WikiPage page, String targetTitle) {
 		return false;
 	}
 
-	public void setMainConfiguration(String mainConfiguration) {
+	public void setInterWikiConfiguration(String interWikiConfiguration) {
 	}
 
-	public void setInterWikiConfiguration(String interWikiConfiguration) {
+	public void setMainConfiguration(String mainConfiguration) {
 	}
 
 	public boolean validate(long nodeId, String newContent) {
 		return true;
 	}
 
-	private static final Map _EMPTY_ARRAY_MAP = new HashMap();
+	private static final Map _EMPTY_MAP = new HashMap();
 
 }

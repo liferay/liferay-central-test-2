@@ -30,6 +30,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.stringtree.util.tract.Tract;
 
 /**
@@ -45,11 +48,8 @@ public class NodeRepository extends BasicDriver {
 		_names = new HashMap();
 	}
 
-	public Tract get(String name) {
-		return null;
-	}
-
-	public void put(String name, Tract page) {
+	public Iterator allPageNames() {
+		return _names.keySet().iterator();
 	}
 
 	public String backup(String name) {
@@ -78,19 +78,24 @@ public class NodeRepository extends BasicDriver {
 			exists = existsObj.booleanValue();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return exists;
 	}
 
-	public Iterator allPageNames() {
-		return _names.keySet().iterator();
+	public Tract get(String name) {
+		return null;
 	}
 
 	public Map getTitles() {
 		return _names;
 	}
+
+	public void put(String name, Tract page) {
+	}
+
+	private static Log _log = LogFactory.getLog(NodeRepository.class);
 
 	private long _nodeId;
 	private Map _names;

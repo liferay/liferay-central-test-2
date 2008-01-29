@@ -55,13 +55,7 @@ public class InstancePool {
 	private boolean _contains(String className) {
 		className = className.trim();
 
-		Object obj = _classPool.get(className);
-
-		if (obj == null) {
-			return false;
-		}
-
-		return true;
+		return _classPool.containsKey(className);
 	}
 
 	private Object _get(String className) {
@@ -112,6 +106,8 @@ public class InstancePool {
 	}
 
 	private void _put(String className, Object obj) {
+		className = className.trim();
+
 		_classPool.put(className, obj);
 	}
 

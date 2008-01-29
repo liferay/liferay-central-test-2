@@ -25,6 +25,7 @@
 
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
+
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 %>
 
@@ -37,7 +38,3 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 <liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
 <input name="<portlet:namespace />content" type="hidden" value="" />
-
-<%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit_page.jsp";
-%>

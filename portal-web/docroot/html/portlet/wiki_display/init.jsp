@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>
+<%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>

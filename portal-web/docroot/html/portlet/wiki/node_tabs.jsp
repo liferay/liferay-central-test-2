@@ -31,6 +31,7 @@ PortletURL tabs1URL = renderResponse.createRenderURL();
 
 tabs1URL.setParameter("struts_action", "/wiki/view");
 tabs1URL.setParameter("nodeId", nodeId);
+tabs1URL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
 List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 

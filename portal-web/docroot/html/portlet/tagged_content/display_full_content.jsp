@@ -283,18 +283,22 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				editURL.setWindowState(WindowState.MAXIMIZED);
 				editURL.setPortletMode(PortletMode.VIEW);
 				editURL.setParameter("struts_action", "/wiki/edit_page");
-
 			%>
+
 				<%= WikiUtil.convert(wikiPage, editURL, editURL) %>
+
 			<%
 			}
 			catch (Exception e) {
 				_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
 			%>
+
 				<%= LanguageUtil.get(pageContext, "error-formatting-the-page") %>
+
 			<%
 			}
 			%>
+
 		</div>
 
 		<c:if test="<%= enableComments %>">

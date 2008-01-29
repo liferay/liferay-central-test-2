@@ -31,14 +31,12 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <div class="breadcrumbs">
 	<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
-	<%= node.getName() %>
-	</a>
+	<%= node.getName() %></a>
 
 	&raquo;
 
 	<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
-	<%= wikiPage.getTitle() %>
-	</a>
+	<%= wikiPage.getTitle() %></a>
 </div>
 
 <%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
@@ -73,7 +71,6 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
 	<c:choose>
 		<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
 			<br /><br />
 
 			<liferay-ui:tabs names="comments" />

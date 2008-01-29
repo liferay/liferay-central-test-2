@@ -256,24 +256,6 @@ action.VIEW=Vue
 action.VIEW_USER=Vue de l'utilisateur
 
 ##
-## Layout types
-##
-
-layout.types.article=Article
-layout.types.embedded=Incorporé
-layout.types.link_to_layout=Lien vers une page
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=Wiki Classique
-wiki.formats.html=HTML
-wiki.formats.plain_text=Texte Plat
-
-##
 ## Messages
 ##
 
@@ -1565,10 +1547,16 @@ layout-template-plugin=Calibre De Disposition Plugin
 layout-template-plugins=Calibre Plugins De Disposition
 layout-template=Calibre De Disposition
 layout-templates=Calibres De Disposition
+layout.types.article=Article
+layout.types.embedded=Incorporé
+layout.types.link_to_layout=Lien vers une page
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=Affichage
 layouts=Dispositions
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=Apprenez Plus
 leave-a-copy-of-the-forwarded-message=Laissez une copie du message expédié ?
 leave-edit-preferences=Quitter la modification des préférences
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=_ laisser le utilisateur nom et mot de passe champ blanc employer votre courant ouverture information. _
@@ -2806,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=Les codes postaux suivants ont été trouvés associés à la ville et
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=Les codes postaux suivants ont été trouvés associés à la rue, à
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=Le format de cet email est inachevé et ne peut pas être montré correctement.
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=Le format de cette page n'est pas soutenu. Le contenu de page sera montré non formaté.
 the-framework-version-could-not-be-found=La version de cadre n'a pas pu être trouvée.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Le groupe ne peut pas être supprimé parce que c'est un groupe exigé de système.
@@ -2953,6 +2942,8 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Cette fonctionnalité fonctionnera seulement quand vous envoyez l'email composé par texte riche. Voulez-vous permettre le formatage riche des textes ?
 this-is-some-sample-help=C'est de l'aide d'échantillon.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=Cette page n'existe pas encore et le titre est inadmissible.
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=Cette page n'existe pas encore. Employez la forme ci-dessous pour la créer.
 this-page-is-empty-edit-it-to-add-some-text=Cette page est vide. Éditez-la pour ajouter un certain texte.
 this-page-is-part-of-an-inactive-portlet=Cette page fait partie d'une portlet inactive.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Ce portlet n'a pas été ajouté à la page de phase. Éditez la page première.
@@ -3209,6 +3200,10 @@ wide-column=Grande colonne
 wide-skyscraper=Gratte-ciel Large
 wide=large
 width=Taille
+wiki.formats.classic_wiki=Wiki Classique
+wiki.formats.creole=Créole
+wiki.formats.html=HTML
+wiki.formats.plain_text=Texte Plat
 wikis=Wikis
 within=Dans
 word-search=Recherche de mots

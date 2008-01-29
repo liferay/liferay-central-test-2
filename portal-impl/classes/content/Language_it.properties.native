@@ -256,25 +256,6 @@ action.VIEW=Visualizza
 action.VIEW_USER=Visualizza Utente
 
 ##
-## Layout types
-##
-
-layout.types.article=Articolo
-layout.types.embedded=Incorporato
-layout.types.link_to_layout=Collegamento a una Pagina
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=Wiki Classico
-wiki.formats.html=HTML
-wiki.formats.jspwiki=JSPWiki
-wiki.formats.plain_text=Testo Normale
-
-##
 ## Messages
 ##
 
@@ -1566,10 +1547,16 @@ layout-template-plugin=Mascherina Della Disposizione Plugin
 layout-template-plugins=Mascherina Plugins Della Disposizione
 layout-template=Modello di Layout
 layout-templates=Modelli di Layout
+layout.types.article=Articolo
+layout.types.embedded=Incorporato
+layout.types.link_to_layout=Collegamento a una Pagina
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=Layout
 layouts=Layout
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=Impari Più
 leave-a-copy-of-the-forwarded-message=Lasciare una copia del messaggio inoltrato?
 leave-edit-preferences=Esci da Modifica Preferenze
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* Lascia in bianco i campi nome utente e password per usare le informazioni di login correnti.
@@ -2807,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=Trovati i seguenti codici di avviamento postale associati con città e stato dati
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=Trovati i seguenti codici di avviamento postale associati con via, città e stato dati
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=Il formato di questa email è incompleto e non può essere visualizzato correttamente.
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=La disposizione di questa pagina non è sostenuta. Il soddisfare della pagina sarà indicato non formato.
 the-framework-version-could-not-be-found=La versione del framework non è stata trovata.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=La friendly URL è aggiunta a <b>{0}</b> per le pagine pubbliche e a <b>{1}</b> per le pagine private.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Il gruppo non può essere cancellato perchè è richiesto un gruppo del sistema.
@@ -2954,6 +2942,8 @@ this-form-has-already-been-submitted=Questo form è già stata sottomessa.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Questa funzionalità sarà abilitata soltanto quando invierete l'email con formato RTF. Desiderate permettere la formattazione RCF?
 this-is-some-sample-help=Ciò è un certo aiuto del campione.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=Questa pagina visualizza gli ultimi {0} articoli, strutture, e modelli a cui accedesti.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=Questa pagina non esiste ancora ed il titolo è non valido.
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=Questa pagina non esiste ancora. Usi la forma qui sotto per generarlo.
 this-page-is-empty-edit-it-to-add-some-text=Questa pagina è vuota. Pubblichila per aggiungere un certo testo.
 this-page-is-part-of-an-inactive-portlet=Questa pagina fa parte di una portlet inattiva.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Questo portlet non è stato aggiunto alla pagina in tensione. Pubblichi la pagina prima.
@@ -3210,6 +3200,10 @@ wide-column=Colonna Larga
 wide-skyscraper=Grattacielo Largo
 wide=Largo
 width=Larghezza
+wiki.formats.classic_wiki=Wiki Classico
+wiki.formats.creole=Creolo
+wiki.formats.html=HTML
+wiki.formats.plain_text=Testo Normale
 wikis=Wikis
 within=Entro
 word-search=Cerca Parole

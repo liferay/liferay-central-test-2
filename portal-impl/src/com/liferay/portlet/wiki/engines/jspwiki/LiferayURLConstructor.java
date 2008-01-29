@@ -22,8 +22,11 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.ecyrd.jspwiki.*;
+import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.url.URLConstructor;
+
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -35,42 +38,49 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="LiferayURLConstructor.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class LiferayURLConstructor implements URLConstructor {
-	public void initialize(
-		com.ecyrd.jspwiki.WikiEngine engine, Properties properties) {
 
+	public String getForwardPage(HttpServletRequest req) {
+		return "Wiki.jsp";
+	}
+
+	public void initialize(
+		com.ecyrd.jspwiki.WikiEngine engine, Properties props) {
 	}
 
 	public String makeURL(
 		String context, String name, boolean absolute, String parameters) {
 
-		if (parameters != null && parameters.length() > 0) {
-
+		if (Validator.isNotNull(parameters)) {
 			if (context.equals(WikiContext.ATTACH)) {
-		        parameters = "?" + parameters;
+		        parameters = StringPool.QUESTION + parameters;
 		    }
 		    else if (context.equals(WikiContext.NONE)) {
-		        parameters = ((name.indexOf('?') != -1 )? "&amp;":"?") +
-			        parameters;
+				if (name.indexOf(StringPool.QUESTION) != -1) {
+					parameters = "&amp;" + parameters;
+				}
+				else {
+					parameters = StringPool.QUESTION + parameters;
+				}
 		    }
 		    else {
 		        parameters = "&amp;" + parameters;
 		    }
 		}
 		else {
-		    parameters = "";
+		    parameters = StringPool.BLANK;
 		}
 
 		String path;
 
 		if (context.equals(WikiContext.EDIT)) {
-			path = "[$BEGIN_PAGE_TITLE_EDIT$]" + name +
-				"[$END_PAGE_TITLE_EDIT$]";
+			path =
+				"[$BEGIN_PAGE_TITLE_EDIT$]" + name + "[$END_PAGE_TITLE_EDIT$]";
 		}
 		else if (context.equals(WikiContext.VIEW)) {
-			path = "[$BEGIN_PAGE_TITLE$]" + name +
-				"[$END_PAGE_TITLE$]";
+			path = "[$BEGIN_PAGE_TITLE$]" + name + "[$END_PAGE_TITLE$]";
 		}
 		else {
 			path = name;
@@ -80,13 +90,10 @@ public class LiferayURLConstructor implements URLConstructor {
  	}
 
 	public String parsePage(
-		String context, HttpServletRequest request, String encoding)
+			String context, HttpServletRequest req, String encoding)
 		throws IOException {
+
 		return "Wiki.jsp";
 	}
 
-	public String getForwardPage(HttpServletRequest request) {
-		return "Wiki.jsp";
-	}
-	
 }

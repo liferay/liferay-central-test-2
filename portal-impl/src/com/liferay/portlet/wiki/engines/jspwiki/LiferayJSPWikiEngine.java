@@ -24,32 +24,34 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 
 import com.ecyrd.jspwiki.WikiException;
 
-import javax.servlet.ServletContext;
-import java.util.Properties;
 import java.util.Collection;
+import java.util.Properties;
+
+import javax.servlet.ServletContext;
 
 /**
  * <a href="LiferayJSPWikiEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
-class LiferayJSPWikiEngine extends com.ecyrd.jspwiki.WikiEngine {
+public class LiferayJSPWikiEngine extends com.ecyrd.jspwiki.WikiEngine {
 
 	public LiferayJSPWikiEngine(Properties properties) throws WikiException {
 		super(properties);
 	}
 
-	protected LiferayJSPWikiEngine(
-		ServletContext context, String appid, Properties props)
-			throws WikiException {
+	public LiferayJSPWikiEngine(
+			ServletContext context, String appId, Properties props)
+		throws WikiException {
 
-		super(context, appid, props);
+		super(context, appId, props);
 	}
 
 	public Collection scanWikiLinks(
-		com.ecyrd.jspwiki.WikiPage page, String pagedata) {
+		com.ecyrd.jspwiki.WikiPage page, String pageData) {
 
-		return super.scanWikiLinks(page, pagedata);
+		return super.scanWikiLinks(page, pageData);
 	}
-	
+
 }

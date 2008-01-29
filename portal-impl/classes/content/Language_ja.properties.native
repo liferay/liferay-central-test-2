@@ -256,24 +256,6 @@ action.VIEW=眺め
 action.VIEW_USER=眺めのユーザー
 
 ##
-## Layout types
-##
-
-layout.types.article=記事
-layout.types.embedded=埋め込まれる
-layout.types.link_to_layout=ページへのリンク
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=古典的なWiki
-wiki.formats.html=HTML
-wiki.formats.plain_text=平文
-
-##
 ## Messages
 ##
 
@@ -1565,10 +1547,16 @@ layout-template-plugin=差込式レイアウトの型板
 layout-template-plugins=レイアウトの型板Plugins
 layout-template=レイアウトの型板
 layout-templates=レイアウトの型板
+layout.types.article=記事
+layout.types.embedded=埋め込まれる
+layout.types.link_to_layout=ページへのリンク
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=レイアウト
 layouts=レイアウト
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=多くを学びなさい
 leave-a-copy-of-the-forwarded-message=進められたメッセージのコピーを残しなさいか。
 leave-edit-preferences=許可は好みを編集する
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=あなたの現在のログイン情報を使用するためにユーザ名及びパスワード分野のブランクを残しなさい。
@@ -2806,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=次の郵便番号ある特定の都市および州と準見つけられた。
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=次の郵便番号ある特定の通り、都市、および州と準見つけられた。
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=この電子メールのフォーマットは不完全、きちんと表示されることができない。
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=このページのフォーマットは支えられない。ページの内容は不定様式に示される。
 the-framework-version-could-not-be-found=フレームワーク版は見つけることができなかった。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=グループはそれが必須システムグループであるので削除されることができない。
@@ -2953,6 +2942,8 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=この機能性は豊富なテキストによってフォーマットされている電子メールを送る場合しか働かない。豊富なテキスト書式作成を可能にしたいと思うか。
 this-is-some-sample-help=これはサンプル助けである。
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=このページはまだないし、タイトルは無効である。
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=このページはまだあっていない。それを作成するのに形態を次に使用しなさい。
 this-page-is-empty-edit-it-to-add-some-text=このページは空である。テキストを加えるためにそれを編集しなさい。
 this-page-is-part-of-an-inactive-portlet=このページは不活性portlet の部分である。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=このportlet は生きているページに加えられなかった。ページ第1 出版しなさい。
@@ -3209,6 +3200,10 @@ wide-column=広いコラム
 wide-skyscraper=広い高層建築
 wide=広く
 width=幅
+wiki.formats.classic_wiki=古典的なWiki
+wiki.formats.creole=クリオール
+wiki.formats.html=HTML
+wiki.formats.plain_text=平文
 wikis=Wikis
 within=の中では
 word-search=単語の調査

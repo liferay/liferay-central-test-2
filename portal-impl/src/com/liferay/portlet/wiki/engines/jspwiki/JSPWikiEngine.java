@@ -22,51 +22,55 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.liferay.portlet.wiki.engines.WikiEngine;
-import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.PageContentException;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.ecyrd.jspwiki.WikiException;
 import com.ecyrd.jspwiki.WikiContext;
+import com.ecyrd.jspwiki.WikiException;
 import com.ecyrd.jspwiki.providers.LiferayPageProvider;
 
-import javax.portlet.PortletURL;
-import java.util.Map;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.wiki.PageContentException;
+import com.liferay.portlet.wiki.engines.WikiEngine;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
-import java.io.InputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+
+import javax.portlet.PortletURL;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSPWikiEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class JSPWikiEngine implements WikiEngine {
-
-	public JSPWikiEngine() {
-	}
 
 	public String convert(WikiPage page, PortletURL portletURL)
 		throws PageContentException {
 
 		try {
-			return _convert(page);
+			return convert(page);
 		}
-		catch (WikiException e) {
-			throw new PageContentException(e);
+		catch (WikiException we) {
+			throw new PageContentException(we);
 		}
 	}
 
 	public Map getLinks(WikiPage page) throws PageContentException {
 		try {
-			LiferayJSPWikiEngine engine = _getEngine(page.getNodeId());
+			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 
 			com.ecyrd.jspwiki.WikiPage jspWikiPage =
 				LiferayPageProvider.toJSPWikiPage(page, engine);
@@ -76,10 +80,10 @@ public class JSPWikiEngine implements WikiEngine {
 
 			Map links = new HashMap();
 
-			Iterator iterator = titles.iterator();
+			Iterator itr = titles.iterator();
 
-			while (iterator.hasNext()) {
-				String title = (String) iterator.next();
+			while (itr.hasNext()) {
+				String title = (String)itr.next();
 
 				if (title.startsWith("[[")) {
 					title = title.substring(2);
@@ -98,29 +102,26 @@ public class JSPWikiEngine implements WikiEngine {
 				Boolean existsObj = (Boolean)links.get(title);
 
 				if (existsObj == null) {
-					try {
-						if (WikiPageLocalServiceUtil.getPagesCount(
-								page.getNodeId(), title, true) > 0) {
+					if (WikiPageLocalServiceUtil.getPagesCount(
+							page.getNodeId(), title, true) > 0) {
 
-							existsObj = Boolean.TRUE;
-						}
-						else {
-							existsObj = Boolean.FALSE;
-						}
-
+						existsObj = Boolean.TRUE;
 					}
-					catch (SystemException e) {
+					else {
 						existsObj = Boolean.FALSE;
 					}
 
 					links.put(title, existsObj);
 				}
-
 			}
+
 			return links;
 		}
-		catch (WikiException e) {
-			throw new PageContentException(e);
+		catch (SystemException se) {
+			throw new PageContentException(se);
+		}
+		catch (WikiException we) {
+			throw new PageContentException(we);
 		}
 	}
 
@@ -130,38 +131,25 @@ public class JSPWikiEngine implements WikiEngine {
 		return false;
 	}
 
-	public void setMainConfiguration(String mainConfiguration) {
-		setProperties(mainConfiguration);
+	public void setInterWikiConfiguration(String interWikiConfiguration) {
 	}
 
-	public void setInterWikiConfiguration(String interWikiConfiguration) {
+	public void setMainConfiguration(String mainConfiguration) {
+		setProperties(mainConfiguration);
 	}
 
 	public boolean validate(long nodeId, String newContent) {
 		return true;
 	}
 
-	protected synchronized void setProperties(String configuration) {
-		_props = new Properties();
-
-		InputStream is = new ByteArrayInputStream(configuration.getBytes());
-
-		try {
-			_props.load(is);
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-	}
-
-	private String _convert(WikiPage page) throws WikiException {
+	protected String convert(WikiPage page) throws WikiException {
 		String content = page.getContent();
 
 		if (Validator.isNull(content)) {
 			return StringPool.BLANK;
 		}
 
-		com.ecyrd.jspwiki.WikiEngine engine = _getEngine(page.getNodeId());
+		com.ecyrd.jspwiki.WikiEngine engine = getEngine(page.getNodeId());
 
 		com.ecyrd.jspwiki.WikiPage jspWikiPage =
 			LiferayPageProvider.toJSPWikiPage(page, engine);
@@ -171,8 +159,9 @@ public class JSPWikiEngine implements WikiEngine {
 		return engine.textToHTML(wikiContext, content);
 	}
 
-	private LiferayJSPWikiEngine _getEngine(long nodeId)
+	protected LiferayJSPWikiEngine getEngine(long nodeId)
 		throws WikiException {
+
 		Long nodeIdObj = new Long(nodeId);
 
 		LiferayJSPWikiEngine engine =
@@ -184,6 +173,7 @@ public class JSPWikiEngine implements WikiEngine {
 			nodeProps.setProperty("nodeId", nodeIdObj.toString());
 
 			String appName = nodeProps.getProperty("jspwiki.applicationName");
+
 			nodeProps.setProperty(
 				"jspwiki.applicationName", appName + " for node " + nodeId);
 
@@ -195,8 +185,22 @@ public class JSPWikiEngine implements WikiEngine {
 		return engine;
 	}
 
-	protected Properties _props;
+	protected synchronized void setProperties(String configuration) {
+		_props = new Properties();
 
+		InputStream is = new ByteArrayInputStream(configuration.getBytes());
+
+		try {
+			_props.load(is);
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(JSPWikiEngine.class);
+
+	private Properties _props;
 	private Map _engines = new HashMap();
 
 }

@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
@@ -452,7 +452,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		try {
 			page = getPage(nodeId, title);
 		}
-		catch (NoSuchPageException e) {
+		catch (NoSuchPageException nspe) {
 			page = addPage(userId, nodeId, title);
 		}
 
@@ -521,10 +521,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void validateTitle(String title) throws PortalException {
-		String titleRegexp = PropsUtil.get(PropsUtil.WIKI_PAGE_TITLES_REGEXP);
+		if (Validator.isNotNull(PropsValues.WIKI_PAGE_TITLES_REGEXP)) {
+			Pattern pattern = Pattern.compile(
+				PropsValues.WIKI_PAGE_TITLES_REGEXP);
 
-		if (Validator.isNotNull(titleRegexp)) {
-			Pattern pattern = Pattern.compile(titleRegexp);
 			Matcher matcher = pattern.matcher(title);
 
 			if (!matcher.matches()) {

@@ -37,29 +37,32 @@ import java.util.Properties;
  * <a href="LiferaySearchProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class LiferaySearchProvider implements SearchProvider {
+
+	public Collection findPages(String query)
+		throws IOException, ProviderException {
+
+		return _EMPTY_COLLECTION;
+	}
+
+	public String getProviderInfo() {
+		return _PROVIDER_INFO;
+	}
+
+	public void initialize(WikiEngine engine, Properties properties)
+		throws IOException, NoRequiredPropertyException{
+	}
+
 	public void pageRemoved(WikiPage page) {
 	}
 
 	public void reindexPage(WikiPage page) {
 	}
 
-	public Collection findPages(String query)
-		throws IOException, ProviderException {
-		return _EMPTY_COLLECTION;
-	}
-
-	public void initialize(WikiEngine engine, Properties properties)
-		throws IOException, NoRequiredPropertyException{
-
-	}
-
-	public String getProviderInfo() {
-		return _INFO;
-	}
-
-	private static final String _INFO = "Liferay Search Provider";
 	private static final Collection _EMPTY_COLLECTION = new ArrayList();
+
+	private static final String _PROVIDER_INFO = "Liferay Search Provider";
 
 }

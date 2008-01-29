@@ -168,20 +168,6 @@ action.VIEW=Vista
 action.VIEW_USER=Usuari de la Vista
 
 ##
-## Layout types
-##
-
-layout.types.article=Article
-layout.types.embedded=Web inserida
-layout.types.portlet=Portlets
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-
-##
 ## Messages
 ##
 
@@ -1031,6 +1017,10 @@ latin=Llatí
 launch-editor=Obrir editor
 launch=Obrir
 layer-type=Tipus de capa
+layout.types.article=Article
+layout.types.embedded=Web inserida
+layout.types.portlet=Portlets
+layout.types.url=URL
 layout=Disposició
 leave-edit-preferences=Deixar d'editar les preferències
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Deixi aquest espai en blanc si el cupó no coincideix amb l'article SKU.

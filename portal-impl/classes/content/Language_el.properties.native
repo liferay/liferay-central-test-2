@@ -256,24 +256,6 @@ action.VIEW=Αποψη
 action.VIEW_USER=Χρήστης άποψης
 
 ##
-## Layout types
-##
-
-layout.types.article=Αρθρο
-layout.types.embedded=Ενσωματωμένος
-layout.types.link_to_layout=Σύνδεση με τη σελίδα
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=Κλασικό Wiki
-wiki.formats.jspwiki=JSPWiki
-wiki.formats.plain_text=Σαφές κείμενο
-
-##
 ## Messages
 ##
 
@@ -1565,10 +1547,16 @@ layout-template-plugin=Πρότυπο Plugin σχεδιαγράμματος
 layout-template-plugins=Πρότυπο Plugins σχεδιαγράμματος
 layout-template=Πρότυπο σχεδιαγράμματος
 layout-templates=Πρότυπα σχεδιαγράμματος
+layout.types.article=Αρθρο
+layout.types.embedded=Ενσωματωμένος
+layout.types.link_to_layout=Σύνδεση με τη σελίδα
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=Διάταξη
 layouts=Σχεδιαγράμματα
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=Μάθετε περισσότερων
 leave-a-copy-of-the-forwarded-message=Αφήστε ένα αντίγραφο του διαβιβασμένου μηνύματος;
 leave-edit-preferences=Αφήστε την επεξεργασία των προτιμήσεων
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=Αφήστε το κενό τομέων ονόματος και κωδικού πρόσβασης χρηστών για να χρησιμοποιήσετε τις τρέχουσες πληροφορίες σύνδεσής σας.
@@ -2806,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=Οι ακόλουθοι ταχυδρομικοί κώδικες  βρέθηκαν συνδεμένοι με τη δεδομένη πόλη και πολιτεία.
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=Οι ακόλουθοι ταχυδρομικοί κώδικες βρέθηκαν συνδεμένοι με τη δεδομένη οδό, πόλη, και πολιτεία.
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=Το σχήμα αυτού του ηλεκτρονικού ταχυδρομείου είναι ελλιπές και δεν μπορεί να επιδειχθεί κατάλληλα.
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=Το σχήμα αυτής της σελίδας δεν υποστηρίζεται. Το περιεχόμενο σελίδων θα παρουσιαστεί unformatted.
 the-framework-version-could-not-be-found=Η έκδοση πλαισίου δεν θα μπορούσε να βρεθεί.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Η ομάδα δεν μπορεί να διαγραφεί επειδή είναι απαραίτητη ομάδα συστημάτων.
@@ -2953,6 +2942,8 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Αυτή η λειτουργία θα λειτουργήσει μόνο όταν στέλνετε RTF email. Θέλετε να επιτρέψετε την πλούσια μορφοποίηση κειμένων;
 this-is-some-sample-help=Αυτό είναι κάποια βοήθεια δειγμάτων.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=Αυτή η σελίδα δεν υπάρχει ακόμα και ο τίτλος δεν ισχύει.
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=Αυτή η σελίδα δεν υπάρχει ακόμα. Χρησιμοποιήστε τη μορφή για να την δημιουργήσετε κατωτέρω.
 this-page-is-empty-edit-it-to-add-some-text=Αυτή η σελίδα είναι κενή. Τον εκδώστε για να προσθέσετε κάποιο κείμενο.
 this-page-is-part-of-an-inactive-portlet=Αυτή η σελίδα είναι μέρος ενός ανενεργού portlet.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Αυτό το portlet δεν έχει προστεθεί στη ζωντανή σελίδα. Δημοσιεύστε τη σελίδα πρώτος.
@@ -3209,6 +3200,10 @@ wide-column=Φαρδιά Στήλη
 wide-skyscraper=Ευρύς ουρανοξύστης
 wide=Φαρδύ
 width=Πλάτος
+wiki.formats.classic_wiki=Κλασικό Wiki
+wiki.formats.creole=Κρεολικός
+wiki.formats.html=HTML
+wiki.formats.plain_text=Σαφές κείμενο
 wikis=Wikis
 within=Μέσα
 word-search=Αναζήτηση Λέξης

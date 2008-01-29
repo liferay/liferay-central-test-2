@@ -189,20 +189,6 @@ action.VIEW=مشاهده
 action.VIEW_USER=مشاهده کاربر
 
 ##
-## Layout types
-##
-
-layout.types.article=مقاله
-layout.types.embedded=درونی
-layout.types.portlet=پرتلت
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-
-##
 ## Messages
 ##
 
@@ -1054,6 +1040,10 @@ latin=لاتين
 launch-editor=راه اندازی ويرايشگر
 launch=راه اندازی
 layer-type=نوع لايه
+layout.types.article=مقاله
+layout.types.embedded=درونی
+layout.types.portlet=پرتلت
+layout.types.url=URL
 layout=لايه نمايش
 leave-edit-preferences=خروج از ويرايش تنظيمات
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* برای استفاده از اطلاعات فعلی حساب شما، قسمت نام و کلمه عبور را خالی بگذاريد

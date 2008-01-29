@@ -146,20 +146,6 @@ action.UPDATE_DISCUSSION=Сохранить обсуждение
 action.VIEW=Посмотреть
 
 ##
-## Layout types
-##
-
-layout.types.article=Статья
-layout.types.embedded=Втроенный
-layout.types.portlet=Портлет
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-
-##
 ## Messages
 ##
 
@@ -992,6 +978,10 @@ latin=Латинский
 launch-editor=Запустить редактор
 launch=Запустить
 layer-type=Тип слоя
+layout.types.article=Статья
+layout.types.embedded=Втроенный
+layout.types.portlet=Портлет
+layout.types.url=URL
 layout=Макет
 leave-edit-preferences=Покинуть редактирование свойств
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Leave this blank if the coupon does not check for the item SKU.

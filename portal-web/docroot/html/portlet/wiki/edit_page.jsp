@@ -27,6 +27,8 @@
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
@@ -35,13 +37,14 @@ String title = BeanParamUtil.getString(wikiPage, request, "title");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
-boolean preview = ParamUtil.getBoolean(request, "preview");
 
-String redirect = ParamUtil.getString(request, "redirect");
+boolean preview = ParamUtil.getBoolean(request, "preview");
 
 if (Validator.isNull(redirect)) {
 	PortletURL portletURL = renderResponse.createRenderURL();
-	portletURL.setParameter("title", title);;
+
+	portletURL.setParameter("title", title);
+
 	redirect = portletURL.toString();
 }
 
@@ -53,9 +56,10 @@ if (wikiPage != null) {
 else if (Validator.isNotNull(title)) {
 	try {
 		WikiPageLocalServiceUtil.validateTitle(title);
+
 		edit = true;
 	}
-	catch (PortalException e) {
+	catch (PortalException pe) {
 	}
 }
 
@@ -63,10 +67,10 @@ PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setWindowState(WindowState.MAXIMIZED);
 
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
 editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-editPageURL.setParameter("title", wikiPage.getTitle());
-editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("title", title);
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
@@ -74,11 +78,11 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 <c:if test="<%= preview %>">
 	<liferay-ui:message key="preview" />:
 
-	<div style="background: #ffc; border: 1px dotted gray; padding: 3px" class="preview">
+	<div class="preview">
 		<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 	</div>
 
-	<br/>
+	<br />
 </c:if>
 
 <script type="text/javascript">
@@ -90,7 +94,7 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />doPreview() {
+	function <portlet:namespace />previewPage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true';
 
@@ -125,28 +129,28 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 
 <c:if test="<%= (wikiPage == null) && edit %>">
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it-yourself"/>
+		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
 	</div>
 </c:if>
 
 <c:if test="<%= (wikiPage == null) && !edit %>">
 	<div class="portlet-msg-error">
-		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid"/>
+		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
 	</div>
 
-	<input type="button" onclick="history.go(-1)" value="<%= LanguageUtil.get(pageContext, "back") %>"/>
+	<input type="button" onclick="history.go(-1)" value="<%= LanguageUtil.get(pageContext, "back") %>" />
 </c:if>
-
 
 <c:if test="<%= edit %>">
 	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b><liferay-ui:message key="format" /></b>
+				<liferay-ui:message key="format" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
+
 					<%
 					for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
 					%>
@@ -156,6 +160,7 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 					<%
 					}
 					%>
+
 				</select>
 			</td>
 		</tr>
@@ -165,6 +170,7 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 	<br />
 
 	<div>
+
 		<%
 		request.setAttribute("edit_page.jsp-wikiPage", wikiPage);
 		%>

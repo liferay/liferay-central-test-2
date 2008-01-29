@@ -27,6 +27,7 @@ import com.ecyrd.jspwiki.QueryItem;
 import com.ecyrd.jspwiki.WikiEngine;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -48,33 +49,175 @@ import org.apache.commons.logging.LogFactory;
  * <a href="LiferayPageProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class LiferayPageProvider implements WikiPageProvider {
 
 	public static com.ecyrd.jspwiki.WikiPage toJSPWikiPage(
 		WikiPage page, WikiEngine engine) {
 
-		com.ecyrd.jspwiki.WikiPage jspWikiPage;
-		jspWikiPage = new com.ecyrd.jspwiki.WikiPage(
+		com.ecyrd.jspwiki.WikiPage jspWikiPage = new com.ecyrd.jspwiki.WikiPage(
 			engine, page.getTitle());
 
 		jspWikiPage.setAuthor(page.getUserName());
-		jspWikiPage.setVersion((int) page.getVersion());
+		jspWikiPage.setVersion((int)page.getVersion());
 		jspWikiPage.setLastModified(new Date());
 
 		return jspWikiPage;
 	}
 
-	public void putPageText(com.ecyrd.jspwiki.WikiPage page, String text)
-		throws ProviderException {
+	public void deletePage(String name) throws ProviderException {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to putPageText(" + page + ", " + text + ")");
+			_log.debug("Invoking deletePage(" + name + ")");
+		}
+	}
+
+	public void deleteVersion(String title, int version)
+		throws ProviderException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Invoking deleteVersion(" + title + ", " + version + ")");
+		}
+	}
+
+	public Collection findPages(QueryItem[] query) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking findPages(" + query + ")");
+		}
+
+		return _EMPTY_LIST;
+	}
+
+	public Collection getAllChangedSince(Date date) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getAllChangedSince(" + date + ")");
+		}
+
+		try {
+			return getAllPages();
+		}
+		catch (ProviderException e) {
+			_log.error("Could not get changed pages", e);
+
+			return _EMPTY_LIST;
+		}
+	}
+
+	public Collection getAllPages() throws ProviderException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getAllPages()");
+		}
+
+		List jspWikiPages = new ArrayList();
+
+		try {
+			int count = WikiPageLocalServiceUtil.getPagesCount(_nodeId);
+
+			List pages = WikiPageLocalServiceUtil.getPages(_nodeId, 0, count);
+
+			Iterator itr = pages.iterator();
+
+			while (itr.hasNext()) {
+				WikiPage page = (WikiPage)itr.next();
+
+				jspWikiPages.add(toJSPWikiPage(page, _engine));
+			}
+		}
+		catch (SystemException se) {
+			throw new ProviderException(se.toString());
+		}
+
+		return jspWikiPages;
+	}
+
+	public int getPageCount() throws ProviderException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getPageCount()");
+		}
+
+		try {
+			return WikiPageLocalServiceUtil.getPagesCount(_nodeId);
+		}
+		catch (SystemException se) {
+			throw new ProviderException(se.toString());
+		}
+	}
+
+	public com.ecyrd.jspwiki.WikiPage getPageInfo(String title, int version)
+		throws ProviderException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getPageInfo(" + title + ", " + version + ")");
+		}
+
+		try {
+			WikiPage page = WikiPageLocalServiceUtil.getPage(_nodeId, title);
+
+			return toJSPWikiPage(page, _engine);
+		}
+		catch (NoSuchPageException nspe) {
+			return null;
+		}
+		catch (Exception e) {
+			throw new ProviderException(e.toString());
+		}
+	}
+
+	public String getPageText(String title, int version)
+		throws ProviderException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getPageText(" + title + ", " + version + ")");
+		}
+
+		try {
+			WikiPage page = WikiPageLocalServiceUtil.getPage(_nodeId, title);
+
+			return page.getContent();
+		}
+		catch (Exception e) {
+			throw new ProviderException(e.toString());
+		}
+	}
+
+	public String getProviderInfo() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getProviderInfo()");
+		}
+
+		return LiferayPageProvider.class.getName();
+	}
+
+	public List getVersionHistory(String title) throws ProviderException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking getVersionHistory(" + title + ")");
+		}
+
+		return _EMPTY_LIST;
+	}
+
+	public void initialize(WikiEngine engine, Properties properties)
+		throws IOException, NoRequiredPropertyException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Invoking initialize(" + engine + ", " + properties + ")");
+		}
+
+		_engine = engine;
+		_nodeId = GetterUtil.getLong(properties.getProperty("nodeId"));
+	}
+
+	public void movePage(String from, String to) throws ProviderException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking movePage(" + from + ", " + to + ")");
 		}
 	}
 
 	public boolean pageExists(String title) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to pageExists(" + title + ")");
+			_log.debug("Invoking pageExists(" + title + ")");
 		}
 
 		boolean exists = false;
@@ -84,7 +227,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 
 			if (existsObj == null) {
 				if (WikiPageLocalServiceUtil.getPagesCount(
-					_nodeId, title, true) > 0) {
+						_nodeId, title, true) > 0) {
 
 					existsObj = Boolean.TRUE;
 				}
@@ -98,170 +241,26 @@ public class LiferayPageProvider implements WikiPageProvider {
 			exists = existsObj.booleanValue();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return exists;
 	}
 
-	public Collection findPages(QueryItem[] query) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to findPages(" + query + ")");
-		}
-
-		return _EMPTY_LIST;
-	}
-
-	public com.ecyrd.jspwiki.WikiPage getPageInfo(String title, int version)
+	public void putPageText(com.ecyrd.jspwiki.WikiPage page, String text)
 		throws ProviderException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Invocation to getPageInfo(" + title + ", " + version +
-					")");
-		}
-
-		try {
-			WikiPage page = WikiPageLocalServiceUtil.getPage(
-				_nodeId, title);
-
-			return toJSPWikiPage(page, _engine);
-		}
-		catch (NoSuchPageException e) {
-			return null;
-		}
-		catch (Exception e) {
-			throw new ProviderException(e.toString());
+			_log.debug("Invoking putPageText(" + page + ", " + text + ")");
 		}
 	}
-
-	public Collection getAllPages() throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to getAllPages()");
-		}
-
-		List jspWikiPages = new ArrayList();
-
-		try {
-			int count = WikiPageLocalServiceUtil.getPagesCount(_nodeId);
-
-			List pages = WikiPageLocalServiceUtil.getPages(
-				_nodeId, 0, count);
-
-			Iterator iterator = pages.iterator();
-
-			while (iterator.hasNext()) {
-				WikiPage page = (WikiPage)iterator.next();
-
-				jspWikiPages.add(toJSPWikiPage(page, _engine));
-			}
-		}
-		catch (SystemException e) {
-			throw new ProviderException(e.toString());
-		}
-
-		return jspWikiPages;
-	}
-
-	public Collection getAllChangedSince(Date date) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to getAllChangedSince(" + date + ")");
-		}
-
-		try {
-			return getAllPages();
-		}
-		catch (ProviderException e) {
-			_log.error("Could not find changed pages", e);
-
-			return _EMPTY_LIST;
-		}
-	}
-
-	public int getPageCount() throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to getPageCount()");
-		}
-
-		try {
-			return WikiPageLocalServiceUtil.getPagesCount(_nodeId);
-		}
-		catch (SystemException e) {
-			throw new ProviderException(e.toString());
-		}
-	}
-
-	public List getVersionHistory(String title) throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to getVersionHistory(" + title + ")");
-		}
-
-		return _EMPTY_LIST;
-	}
-
-	public String getPageText(String title, int version)
-		throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Invocation to getPageText(" + title + ", " + version + ")");
-		}
-
-		try {
-			WikiPage page = WikiPageLocalServiceUtil.getPage(
-				_nodeId, title);
-
-			return page.getContent();
-		}
-		catch (Exception e) {
-			throw new ProviderException(e.toString());
-		}
-	}
-
-	public void deleteVersion(String title, int version)
-		throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Invocation to deleteVersion(" + title + ", " +
-					version + ")");
-		}
-	}
-
-	public void deletePage(String name) throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to deletePage(" + name + ")");
-		}
-	}
-
-	public void movePage(String from, String to) throws ProviderException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to movePage(" + from + ", " + to + ")");
-		}
-	}
-
-	public void initialize(WikiEngine engine, Properties properties)
-		throws NoRequiredPropertyException, IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Invocation to initialize(" + engine + ", " + properties + ")");
-		}
-
-		_engine = engine;
-		_nodeId = Long.parseLong(properties.getProperty("nodeId"));
-	}
-
-	public String getProviderInfo() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invocation to getProviderInfo()");
-		}
-
-		return LiferayPageProvider.class.getName();
-	}
-
-	private static Log _log = LogFactory.getLog(LiferayPageProvider.class);
 
 	private static final List _EMPTY_LIST = new ArrayList();
 
-	private Map _titles;
-	private long _nodeId;
+	private static Log _log = LogFactory.getLog(LiferayPageProvider.class);
+
 	private WikiEngine _engine;
+	private long _nodeId;
+	private Map _titles;
 
 }

@@ -69,8 +69,7 @@ public class WikiPagePermission {
 
 			return contains(permissionChecker, page, actionId);
 		}
-		catch (NoSuchPageException e) {
-
+		catch (NoSuchPageException nspe) {
 			return WikiNodePermission.contains(
 				permissionChecker, nodeId, ActionKeys.ADD_PAGE);
 		}

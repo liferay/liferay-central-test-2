@@ -36,6 +36,7 @@ import java.util.Properties;
  * <a href="LiferayGroupDatabase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class LiferayGroupDatabase  implements GroupDatabase {
 
@@ -43,6 +44,10 @@ public class LiferayGroupDatabase  implements GroupDatabase {
 	}
 
 	public void delete(Group group) throws WikiSecurityException {
+	}
+
+	public Group[] groups() throws WikiSecurityException {
+		return new Group[0];
 	}
 
 	public void initialize(WikiEngine engine, Properties props)
@@ -53,8 +58,4 @@ public class LiferayGroupDatabase  implements GroupDatabase {
 		throws WikiSecurityException {
 	}
 
-	public Group[] groups() throws WikiSecurityException {
-		return new Group[0];
-	}
-	
 }

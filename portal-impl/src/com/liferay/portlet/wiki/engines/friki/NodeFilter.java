@@ -39,9 +39,9 @@ import org.stringtree.factory.TractFetcher;
  */
 public class NodeFilter extends ClassicToHTMLFilter {
 
-	public NodeFilter(Fetcher context, TractFetcher pages, Map remoteNames,
-					  String spec, NodeRepository nodeRepository,
-					  PortletURL portletURL, long nodeId) {
+	public NodeFilter(
+		Fetcher context, TractFetcher pages, Map remoteNames, String spec,
+		NodeRepository nodeRepository, PortletURL portletURL, long nodeId) {
 
 		super(context, pages, remoteNames, spec);
 

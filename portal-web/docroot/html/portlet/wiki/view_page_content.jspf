@@ -23,8 +23,9 @@
 %>
 
 <%
-String pageContent = null;
 String error = null;
+
+String pageContent = null;
 
 try {
 	PortletURL pageURL = renderResponse.createRenderURL();
@@ -40,14 +41,16 @@ try {
 
 	pageContent = WikiUtil.convert(wikiPage, pageURL, editURL);
 }
-catch (WikiFormatException e) {
-	error = "the-format-of-this-page-is-not-supported-pageContent-will-be-shown-unformatted";
+catch (WikiFormatException wfe) {
+	error = "the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted";
 
 	pageContent = "<pre>" + wikiPage.getContent() + "</pre>";
 }
 catch (Exception e) {
 	_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
+
 	error = "error-formating-the-wiki-page";
+
 	pageContent = StringPool.DASH;
 }
 
@@ -57,15 +60,17 @@ if (Validator.isNull(pageContent)) {
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
 <c:if test="<%= Validator.isNotNull(error) %>">
 	<tr>
 		<td class="wiki-body">
 			<span class="portlet-msg-error">
-				<liferay-ui:message key="<%= error %>"/>
+				<liferay-ui:message key="<%= error %>" />
 			</span>
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td class="wiki-body">
 		<%= pageContent %>

@@ -256,25 +256,6 @@ action.VIEW=看法
 action.VIEW_USER=看法用戶
 
 ##
-## Layout types
-##
-
-layout.types.article=文章
-layout.types.embedded=埋置
-layout.types.link_to_layout=頁的鏈接
-layout.types.portlet=Portlet
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-wiki.formats.classic_wiki=經典Wiki
-wiki.formats.html=HTML
-wiki.formats.jspwiki=JSPWiki
-wiki.formats.plain_text=純文本
-
-##
 ## Messages
 ##
 
@@ -1566,10 +1547,16 @@ layout-template-plugin=佈局模板插入式
 layout-template-plugins=佈局模板Plugins
 layout-template=佈局模板
 layout-templates=佈局模板
+layout.types.article=文章
+layout.types.embedded=埋置
+layout.types.link_to_layout=頁的鏈接
+layout.types.portlet=Portlet
+layout.types.url=URL
 layout=版面
 layouts=佈局
 ldap=LDAP
 leaderboard=Leaderboard
+learn-more=學會更多
 leave-a-copy-of-the-forwarded-message=留下批轉的消息的拷貝?
 leave-edit-preferences=離開編輯偏好
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=留下用戶名和密碼領域空白使用您當前的註冊資訊。
@@ -2807,6 +2794,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=以下郵政編碼被發現了與指定的城市和州相關連。
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=以下郵政編碼被發現與指定的街道、城市, 和州相關連。
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=這電子郵件格式不完整, 無法適當地被顯示。
+the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=這頁格式不支持。頁內容將被顯示未編排。
 the-framework-version-could-not-be-found=框架版本不能被發現。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=小組無法被刪除因為這是一個必需的系統小組。
@@ -2954,6 +2942,8 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=這種功能只將運作當您送多文本格式電子郵件。您想要使能多文本格式嗎?
 this-is-some-sample-help=這是一些樣品幫助。
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-does-not-exist-yet-and-the-title-is-not-valid=這頁不存在並且標題無效。
+this-page-does-not-exist-yet-use-the-form-below-to-create-it=這頁不存在。使用形式如下創造它。
 this-page-is-empty-edit-it-to-add-some-text=這頁是空的。編輯它增加一些文本。
 this-page-is-part-of-an-inactive-portlet=這頁是一不活動中portlet 的一部分。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=這portlet 未增加來活頁。出版頁第一。
@@ -3210,6 +3200,10 @@ wide-column=寬專欄
 wide-skyscraper=寬摩天大樓
 wide=寬
 width=寬度
+wiki.formats.classic_wiki=經典Wiki
+wiki.formats.creole=克里奧爾人
+wiki.formats.html=HTML
+wiki.formats.plain_text=純文本
 wikis=Wikis
 within=在之內
 word-search=詞語搜尋

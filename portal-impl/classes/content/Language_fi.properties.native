@@ -253,21 +253,6 @@ action.VIEW=Näytä
 action.VIEW_USER=Näytä käyttäjä
 
 ##
-## Layout types
-##
-
-layout.types.article=Artikkeli
-layout.types.embedded=Sisällytetty
-layout.types.link_to_layout=Linkki sivuun
-layout.types.portlet=Portletti
-layout.types.url=URL
-
-##
-## Wiki formats
-##
-
-
-##
 ## Messages
 ##
 
@@ -1536,6 +1521,11 @@ layout-template-plugin=Leiska plugini
 layout-template-plugins=Leiska pluginit
 layout-template=Leiska
 layout-templates=Leiskat
+layout.types.article=Artikkeli
+layout.types.embedded=Sisällytetty
+layout.types.link_to_layout=Linkki sivuun
+layout.types.portlet=Portletti
+layout.types.url=URL
 layout=Leiska
 layouts=Leiskat
 ldap=LDAP

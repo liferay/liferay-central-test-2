@@ -34,10 +34,8 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImp
 	<td width="70%" valign="top">
 		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
 	</td>
-	<td>
-		<br />
-	</td>
-	<td class="wiki-syntax-help" style="border: 1px dotted gray" width="250" valign="top">
+	<td></td>
+	<td class="wiki-syntax-help" valign="top">
 		<h3>
 			<liferay-ui:message key="syntax-help" />
 		</h3>

@@ -45,6 +45,7 @@ import org.stringtree.factory.memory.MapStringRepository;
  * <a href="FrikiEngine.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class FrikiEngine implements WikiEngine {
 
@@ -55,9 +56,8 @@ public class FrikiEngine implements WikiEngine {
 		throws PageContentException {
 
 		try {
-			return _convert(
-				_getFilter(portletURL, page.getNodeId()),
-				page.getContent());
+			return convert(
+				getFilter(portletURL, page.getNodeId()), page.getContent());
 		}
 		catch (IOException ioe) {
 			throw new PageContentException(ioe);
@@ -65,10 +65,10 @@ public class FrikiEngine implements WikiEngine {
 	}
 
 	public Map getLinks(WikiPage page) throws PageContentException {
-		NodeFilter filter = _getFilter(page.getNodeId());
+		NodeFilter filter = getFilter(page.getNodeId());
 
 		try {
-			_convert(filter, page.getContent());
+			convert(filter, page.getContent());
 
 			return filter.getTitles();
 		}
@@ -80,10 +80,10 @@ public class FrikiEngine implements WikiEngine {
 	public boolean isLinkedTo(WikiPage page, String targetTitle)
 		throws PageContentException {
 
-		NodeFilter filter = _getFilter(page.getNodeId());
+		NodeFilter filter = getFilter(page.getNodeId());
 
 		try {
-			_convert(filter, page.getContent());
+			convert(filter, page.getContent());
 
 			if (filter.getTitles().get(targetTitle) != null) {
 				return true;
@@ -96,19 +96,20 @@ public class FrikiEngine implements WikiEngine {
 		return false;
 	}
 
+	public void setInterWikiConfiguration(String interWikiConfiguration) {
+		_remoteNames = buildRemoteNamesMap(interWikiConfiguration);
+	}
+
 	public void setMainConfiguration(String mainConfiguration) {
 		_mainConfiguration = mainConfiguration;
 	}
 
-	public void setInterWikiConfiguration(String interWikiConfiguration) {
-		_remoteNames = _buildRemoteNamesMap(interWikiConfiguration);
-	}
-
 	public boolean validate(long nodeId, String newContent) {
 		try {
-			NodeFilter filter = _getFilter(nodeId);
+			NodeFilter filter = getFilter(nodeId);
 
-			_convert(filter, newContent);
+			convert(filter, newContent);
+
 			return true;
 		}
 		catch (Exception e) {
@@ -116,7 +117,7 @@ public class FrikiEngine implements WikiEngine {
 		}
 	}
 
-	private Map _buildRemoteNamesMap(String names) {
+	protected Map buildRemoteNamesMap(String names) {
 		Map remoteNames = new HashMap();
 
 		StringTokenizer st = new StringTokenizer(names, "\n");
@@ -137,25 +138,25 @@ public class FrikiEngine implements WikiEngine {
 		return remoteNames;
 	}
 
-	private String _convert(NodeFilter filter, String content)
+	protected String convert(NodeFilter filter, String content)
 		throws IOException {
 
 		if (content == null) {
 			return StringPool.BLANK;
 		}
 
-		StringWriter out = new StringWriter();
+		StringWriter writer = new StringWriter();
 
-		filter.filter(new StringReader(content), out);
+		filter.filter(new StringReader(content), writer);
 
-		return out.toString();
+		return writer.toString();
 	}
 
-	private NodeFilter _getFilter(long nodeId) {
-		return _getFilter(null, nodeId);
+	protected NodeFilter getFilter(long nodeId) {
+		return getFilter(null, nodeId);
 	}
 
-	private NodeFilter _getFilter(PortletURL portletURL, long nodeId) {
+	protected NodeFilter getFilter(PortletURL portletURL, long nodeId) {
 		MapStringRepository context = new MapStringRepository();
 		NodeRepository nodeRepository = new NodeRepository(nodeId);
 		PageRepository pageRepository = new PageRepository(nodeRepository);

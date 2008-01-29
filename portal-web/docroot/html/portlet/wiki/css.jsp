@@ -24,28 +24,39 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.wiki-body .wiki-code {
+.portlet-wiki .preview {
+	background: #ffc;
+	border: 1px dotted gray;
+	padding: 3px;
+}
+
+.portlet-wiki .wiki-body .wiki-code {
 	background: #fff;
 	border: 1px solid #777;
 	font-family: monospace;
 	white-space: pre;
 }
 
-.wiki-body .wiki-code-lines {
+.portlet-wiki .wiki-body .wiki-code-lines {
 	border-right: 1px solid #ccc;
 	color: #000;
 	margin-right: 5px;
 	padding: 0px 5px 0px 5px;
 }
 
-.wiki-body a.wiki-external-link {
+.portlet-wiki .wiki-body a.wiki-external-link {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: none;
 	padding-right: 11px;
 }
 
-.wiki-body a.wiki-external-link:hover {
+.portlet-wiki .wiki-body a.wiki-external-link:hover {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: underline;
 	padding-right: 11px;
+}
+
+.portlet-wiki .wiki-syntax-help {
+	border: 1px dotted gray;
+	padding-left: 30px;
 }

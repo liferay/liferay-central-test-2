@@ -99,8 +99,10 @@
 	<classpathentry kind="lib" path="lib/portal/dom4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/doubleclick-filter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/easyconf.jar"/>
+	<classpathentry kind="lib" path="lib/portal/ecs.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/freemarker.jar"/>
+	<classpathentry kind="lib" path="lib/portal/freshcookies-security.jar"/>
 	<classpathentry kind="lib" path="lib/portal/friki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/gif89.jar"/>
 	<classpathentry kind="lib" path="lib/portal/google.jar"/>
@@ -132,7 +134,9 @@
 	<classpathentry kind="lib" path="lib/portal/jmx-remote.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jspwiki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jug.jar"/>
@@ -140,6 +144,7 @@
 	<classpathentry kind="lib" path="lib/portal/jurt.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
+	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/mx4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>

@@ -222,21 +222,6 @@ action.VIEW=إعرض
 action.VIEW_USER=إعرض مستخدم
 
 ##
-## Layout types
-##
-
-layout.types.article=مقالة
-layout.types.embedded=مضمّن
-layout.types.link_to_layout=صّل لصفحة
-layout.types.portlet=بورتلت
-layout.types.url=رابط تشعبي
-
-##
-## Wiki formats
-##
-
-
-##
 ## Messages
 ##
 
@@ -1258,6 +1243,11 @@ launch=إقلاع
 layer-type=نوع الطبقة
 layout-template=قالب التصميم
 layout-templates=قوالب التصميم
+layout.types.article=مقالة
+layout.types.embedded=مضمّن
+layout.types.link_to_layout=صّل لصفحة
+layout.types.portlet=بورتلت
+layout.types.url=رابط تشعبي
 layout=التصميم
 layouts=التصاميم
 ldap=LDAP
