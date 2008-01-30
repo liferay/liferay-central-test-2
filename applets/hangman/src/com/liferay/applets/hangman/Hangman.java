@@ -222,8 +222,8 @@ public class Hangman extends Applet implements KeyListener {
 					_wordList.add(token);
 				}
 				else {
-					System.err.println("Token '" + token +
-						"' contains invalid characters");
+					System.err.println(
+						"Token '" + token + "' contains invalid characters");
 				}
 			}
 		}

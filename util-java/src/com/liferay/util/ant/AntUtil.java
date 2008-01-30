@@ -36,6 +36,7 @@ public class AntUtil {
 		Project project = new Project();
 
 		SystemLogger logger = new SystemLogger();
+
 		logger.setMessageOutputLevel(Project.MSG_INFO);
 		logger.setOutputPrintStream(System.out);
 		logger.setErrorPrintStream(System.err);

@@ -48,8 +48,9 @@ public class MulticastServerTool {
 			DatagramHandler handler = new DatagramHandler() {
 
 				public void process(DatagramPacket packet) {
-					String s =
-						new String(packet.getData(), 0, packet.getLength());
+					String s = new String(
+						packet.getData(), 0, packet.getLength());
+
 					System.out.println(s);
 				}
 
