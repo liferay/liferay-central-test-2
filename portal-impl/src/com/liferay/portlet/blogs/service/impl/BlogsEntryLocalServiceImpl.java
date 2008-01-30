@@ -598,7 +598,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), tagsEntries, null, null, null, null,
 			ContentTypes.TEXT_HTML, entry.getTitle(), null, null, null, 0, 0,
-			null);
+			null, false);
 	}
 
 	protected String getUniqueUrlTitle(
