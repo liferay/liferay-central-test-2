@@ -177,6 +177,13 @@ public class PollsChoiceLocalServiceUtil {
 		return pollsChoiceLocalService.getChoices(questionId);
 	}
 
+	public static int getChoicesCount(long questionId)
+		throws com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getChoicesCount(questionId);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice updateChoice(
 		long choiceId, long questionId, java.lang.String name,
 		java.lang.String description)

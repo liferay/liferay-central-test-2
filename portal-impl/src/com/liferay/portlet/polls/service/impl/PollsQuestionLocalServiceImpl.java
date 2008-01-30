@@ -347,7 +347,7 @@ public class PollsQuestionLocalServiceImpl
 			int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
 				questionId);
 
-			if (oldChoicesCount != choices.size()) {
+			if (oldChoicesCount > choices.size()) {
 				throw new QuestionChoiceException();
 			}
 

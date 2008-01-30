@@ -47,8 +47,12 @@ if (question != null) {
 
 List choices = new ArrayList();
 
+int oldChoicesCount = 0;
+
 if (question != null) {
 	choices = PollsChoiceLocalServiceUtil.getChoices(questionId);
+
+	oldChoicesCount = choices.size();
 }
 
 int choicesCount = ParamUtil.getInteger(request, "choicesCount", choices.size());
@@ -194,7 +198,7 @@ if (choiceName > 0) {
 							<liferay-ui:input-field model="<%= PollsChoice.class %>" field="description" fieldParam="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" defaultValue="<%= choiceDesc %>" />
 						</td>
 
-						<c:if test="<%= choicesCount > 2 %>">
+						<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i > oldChoicesCount)) %>">
 							<td>
 								<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
 							</td>

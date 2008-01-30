@@ -79,6 +79,10 @@ public class PollsChoiceLocalServiceImpl
 		return pollsChoicePersistence.findByQuestionId(questionId);
 	}
 
+	public int getChoicesCount(long questionId) throws SystemException {
+		return pollsChoicePersistence.countByQuestionId(questionId);
+	}
+
 	public PollsChoice updateChoice(
 			long choiceId, long questionId, String name, String description)
 		throws PortalException, SystemException {
