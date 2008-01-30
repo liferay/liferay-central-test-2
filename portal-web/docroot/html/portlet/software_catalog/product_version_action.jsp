@@ -27,7 +27,7 @@
 <%
 ResultRow row =	(ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-SCProductVersion productVersion = (SCProductVersion) row.getObject();
+SCProductVersion productVersion = (SCProductVersion)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
@@ -36,7 +36,12 @@ SCProductVersion productVersion = (SCProductVersion) row.getObject();
 	</c:if>
 
 	<c:if test="<%= Validator.isNotNull(productVersion.getDirectDownloadURL()) %>">
-		<liferay-ui:icon image="download" message="direct-download" url="<%= productVersion.getDirectDownloadURL() %>" />
+
+		<%
+		String jsDirectDownloadUrl = "javascript: self.location = '" + productVersion.getDirectDownloadURL() + "';";
+		%>
+
+		<liferay-ui:icon image="download" message="direct-download" url="<%= jsDirectDownloadUrl %>" />
 	</c:if>
 
 	<c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productVersion.getProductEntryId(), ActionKeys.UPDATE) %>">
