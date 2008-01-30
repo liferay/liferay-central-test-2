@@ -46,12 +46,16 @@ public class HotDeployUtil {
 		_instance._fireUndeployEvent(event);
 	}
 
+	public static void flushEvents() {
+		_instance._flushEvents();
+	}
+
 	public static void registerListener(HotDeployListener listener) {
 		_instance._registerListener(listener);
 	}
 
-	public static void flushEvents() {
-		_instance._flushEvents();
+	public static void unregisterListeners() {
+		_instance._unregisterListeners();
 	}
 
 	private HotDeployUtil() {
@@ -105,10 +109,6 @@ public class HotDeployUtil {
 		}
 	}
 
-	private void _registerListener(HotDeployListener listener) {
-		_listeners.add(listener);
-	}
-
 	private synchronized void _flushEvents() {
 		for (int i = 0; i < _events.size(); i++) {
 			HotDeployEvent event = (HotDeployEvent)_events.get(i);
@@ -128,6 +128,14 @@ public class HotDeployUtil {
 		}
 
 		_events = null;
+	}
+
+	private void _registerListener(HotDeployListener listener) {
+		_listeners.add(listener);
+	}
+
+	private void _unregisterListeners() {
+		_listeners.clear();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);

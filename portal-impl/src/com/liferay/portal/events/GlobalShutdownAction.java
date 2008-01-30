@@ -28,6 +28,7 @@ import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
@@ -50,7 +51,11 @@ public class GlobalShutdownAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 
-		// Disconnect AIM
+		// Hot deploy
+
+		HotDeployUtil.unregisterListeners();
+
+		// Instant messenger AIM
 
 		try {
 			_log.debug("Shutting down AIM");
@@ -60,7 +65,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		// Disconnect ICQ
+		// Instant messenger ICQ
 
 		try {
 			_log.debug("Shutting down ICQ");
@@ -70,7 +75,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		// Disconnect MSN
+		// Instant messenger MSN
 
 		try {
 			_log.debug("Shutting down MSN");
@@ -80,7 +85,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		// Disconnect YM
+		// Instant messenger YM
 
 		try {
 			_log.debug("Shutting down YM");
@@ -90,13 +95,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		// POP server
-
-		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
-			POPServerUtil.stop();
-		}
-
-		// Shutdown JCR
+		// JCR
 
 		try {
 			_log.debug("Shutting down JCR");
@@ -104,6 +103,12 @@ public class GlobalShutdownAction extends SimpleAction {
 			JCRFactoryUtil.shutdown();
 		}
 		catch (Exception e) {
+		}
+
+		// POP server
+
+		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
+			POPServerUtil.stop();
 		}
 
 		// Scheduler

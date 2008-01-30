@@ -110,22 +110,11 @@ public class GlobalStartupAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 
-		// JCR
-
-		try {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.JCR_INITIALIZE_ON_STARTUP))) {
-
-				JCRFactoryUtil.initialize();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
 		// Hot deploy
 
-		_log.debug("Registering hot deploy listeners");
+		if (_log.isDebugEnabled()) {
+			_log.debug("Registering hot deploy listeners");
+		}
 
 		Iterator itr = getHotDeployListeners().iterator();
 
@@ -176,15 +165,28 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(e);
 		}
 
-		// POP server
+		// JCR
 
-		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
-			POPServerUtil.start();
+		try {
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.JCR_INITIALIZE_ON_STARTUP))) {
+
+				JCRFactoryUtil.initialize();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
 		}
 
 		// JGroups
 
 		CommLink.getInstance();
+
+		// POP server
+
+		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
+			POPServerUtil.start();
+		}
 
 		// Other required events
 
