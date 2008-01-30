@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -102,20 +101,13 @@ public class DLFileEntryImpl
 	}
 
 	public String getTitleWithExtension() {
-		return getTitleWithExtension(getTitle(), getName());
-	}
+		StringMaker sm = new StringMaker();
 
-	public static String getTitleWithExtension(String title, String name) {
-		String titleWithExtension = title;
+		sm.append(getTitle());
+		sm.append(StringPool.PERIOD);
+		sm.append(FileUtil.getExtension(getName()));
 
-		if (Validator.isNull(FileUtil.getExtension(titleWithExtension)) &&
-			Validator.isNotNull(FileUtil.getExtension(name))) {
-
-			titleWithExtension +=
-				StringPool.PERIOD + FileUtil.getExtension(name);
-		}
-
-		return titleWithExtension;
+		return sm.toString();
 	}
 
 	public String getExtraSettings() {
