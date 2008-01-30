@@ -60,7 +60,7 @@ public class DiffUtil {
 
 	public static final String CLOSE_DEL = "</del>";
 
-	public static final String CONTEXT_LINE = "<context-line />";
+	public static final String CONTEXT_LINE = "#context#line#";
 
 	/**
 	 * This is a diff method with default values.
@@ -572,6 +572,10 @@ public class DiffUtil {
 		}
 
 		return sm.toString();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("#context#line#".equals(DiffUtil.CONTEXT_LINE));
 	}
 
 }
