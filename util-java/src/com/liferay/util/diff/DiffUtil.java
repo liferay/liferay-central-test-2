@@ -573,9 +573,5 @@ public class DiffUtil {
 
 		return sm.toString();
 	}
-	
-	public static void main(String[] args) {
-		System.out.println("#context#line#".equals(DiffUtil.CONTEXT_LINE));
-	}
 
 }
