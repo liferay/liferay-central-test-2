@@ -28,10 +28,15 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -96,6 +101,7 @@ public class CompareVersionsAction extends PortletAction {
 		long userId = themeDisplay.getUserId();
 
 		long folderId = ParamUtil.getLong(req, "folderId");
+		long fileEntryId = ParamUtil.getLong(req, "fileEntryId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntryPermission.check(
@@ -113,6 +119,23 @@ public class CompareVersionsAction extends PortletAction {
 		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, targetVersion);
 
+		if ((PrefsPropsUtil.getBoolean(
+				PropsUtil.OPENOFFICE_SERVER_ENABLED,
+				PropsValues.OPENOFFICE_SERVER_ENABLED)) &&
+			(_convertBeforeCompare(FileUtil.getExtension(name)))
+			) {
+
+			String id = DocumentConversionUtil.getTempFileId(
+				fileEntryId, sourceVersion);
+			sourceIs = DocumentConversionUtil.convert(
+				id, sourceIs, FileUtil.getExtension(name), "txt");
+
+			id = DocumentConversionUtil.getTempFileId(
+				fileEntryId, targetVersion);
+			targetIs = DocumentConversionUtil.convert(
+				id, targetIs, FileUtil.getExtension(name), "txt");
+		}
+
 		List[] diffResults = DiffUtil.diff(
 			new InputStreamReader(sourceIs), new InputStreamReader(targetIs));
 
@@ -123,6 +146,22 @@ public class CompareVersionsAction extends PortletAction {
 			WebKeys.TARGET_NAME,
 			titleWithExtension + StringPool.SPACE + targetVersion);
 		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
+	}
+
+	private boolean _convertBeforeCompare(String extension) {
+		if (extension.equals("txt")) {
+			return false;
+		}
+
+		String[] conversions = DocumentConversionUtil.getConversions(extension);
+
+		for (int i = 0; i < conversions.length; i++) {
+			if (conversions[i].equals("txt")) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

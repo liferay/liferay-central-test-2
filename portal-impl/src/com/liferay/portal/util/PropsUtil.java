@@ -920,7 +920,9 @@ public class PropsUtil {
 	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
 
 	public static final String DL_HOOK_S3_BUCKET_NAME = "dl.hook.s3.bucket.name";
-
+	
+	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions"; 
+		
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";

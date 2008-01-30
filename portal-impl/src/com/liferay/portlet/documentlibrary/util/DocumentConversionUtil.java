@@ -72,6 +72,16 @@ public class DocumentConversionUtil {
 		return _instance._getConversions(extension);
 	}
 
+	public static String getTempFileId(long fileEntryId, double version) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(fileEntryId);
+		sm.append(StringPool.PERIOD);
+		sm.append(version);
+
+		return sm.toString();
+	}
+
 	private DocumentConversionUtil() {
 		_conversionsMap.put("svg", _DRAWING_CONVERSIONS);
 		_conversionsMap.put("swf", _DRAWING_CONVERSIONS);

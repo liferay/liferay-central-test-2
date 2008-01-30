@@ -192,13 +192,8 @@ public class GetFileAction extends PortletAction {
 			String fileName = fileEntry.getTitleWithExtension();
 
 			if (Validator.isNotNull(targetExtension)) {
-				StringMaker sm = new StringMaker();
-
-				sm.append(fileEntry.getFileEntryId());
-				sm.append(StringPool.PERIOD);
-				sm.append(version);
-
-				String id = sm.toString();
+				String id = DocumentConversionUtil.getTempFileId(
+					fileEntry.getFileEntryId(), version);
 
 				String sourceExtension = FileUtil.getExtension(name);
 
@@ -206,7 +201,7 @@ public class GetFileAction extends PortletAction {
 					id, is, sourceExtension, targetExtension);
 
 				if ((convertedIS != null) && (convertedIS != is)) {
-					sm = new StringMaker();
+					StringMaker sm = new StringMaker();
 
 					sm.append(fileEntry.getTitle());
 					sm.append(StringPool.PERIOD);

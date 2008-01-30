@@ -420,7 +420,19 @@ portletURL.setParameter("name", name);
 		<c:when test='<%= tabs2.equals("version-history") %>'>
 
 			<%
-			boolean comparableFileEntry = (extension.endsWith("htm") || extension.endsWith("html") || extension.endsWith("txt")  || extension.endsWith("xml"));
+			boolean comparableFileEntry = false;
+
+			String[] comparableFileExtensions = PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
+
+			for (int i = 0; i < comparableFileExtensions.length; i++) {
+				if (StringPool.STAR.equals(comparableFileExtensions[i]) ||
+					StringUtil.endsWith(name, comparableFileExtensions[i])) {
+
+					comparableFileEntry = true;
+
+					break;
+				}
+			}
 
 			SearchContainer searchContainer = new SearchContainer();
 
@@ -501,6 +513,7 @@ portletURL.setParameter("name", name);
 				<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/compare_versions" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
 				<input name="<portlet:namespace />backURL" type="hidden" value="<%= currentURL %>" />
 				<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+				<input name="<portlet:namespace />fileEntryId" type="hidden" value="<%= fileEntry.getFileEntryId() %>" />
 				<input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
 				<input name="<portlet:namespace />titleWithExtension" type="hidden" value="<%= titleWithExtension %>" />
 				<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />

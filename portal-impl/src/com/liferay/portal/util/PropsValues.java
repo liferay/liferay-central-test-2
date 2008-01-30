@@ -212,6 +212,9 @@ public class PropsValues {
 	public static final String DEFAULT_WAP_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_THEME_ID);
 
+	public static final String[] DL_COMPARABLE_FILE_EXTENSIONS =
+		PropsUtil.getArray(PropsUtil.DL_COMPARABLE_FILE_EXTENSIONS);
+
 	public static final String[] DL_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
 
