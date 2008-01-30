@@ -141,12 +141,13 @@ public class LangBuilder {
 				String translatedText = props.getProperty(key);
 
 				if ((translatedText != null) &&
-					(translatedText.indexOf("Babel Fish") != -1)) {
+					((translatedText.indexOf("Babel Fish") != -1) ||
+					 (translatedText.indexOf("Yahoo! - 999") != -1))) {
 
 					translatedText = "";
 				}
 
-				if (translatedText == null || translatedText.equals("")) {
+				if ((translatedText == null) || translatedText.equals("")) {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
 						translatedText = value;
 					}
