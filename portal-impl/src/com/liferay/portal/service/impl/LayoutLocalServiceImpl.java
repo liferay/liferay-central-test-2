@@ -1480,7 +1480,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				dlFolderLocalService.updateFolder(
 					folder.getFolderId(), folder.getParentFolderId(),
-					layout.getName(), folder.getDescription());
+					layout.getName(LocaleUtil.getDefault()),
+					folder.getDescription());
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -1559,7 +1560,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					layout.getDlFolderId());
 
 				dlFolderLocalService.updateFolder(
-					folder.getFolderId(), folder.getParentFolderId(), name,
+					folder.getFolderId(), folder.getParentFolderId(),
+					layout.getName(LocaleUtil.getDefault()),
 					folder.getDescription());
 			}
 		}
