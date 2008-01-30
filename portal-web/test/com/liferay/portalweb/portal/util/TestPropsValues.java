@@ -36,10 +36,10 @@ public class TestPropsValues {
 
 	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
 
-	public static final String SELINIUM_HOST =
-		TestPropsUtil.get("selinium.host");
+	public static final String SELENIUM_HOST =
+		TestPropsUtil.get("selenium.host");
 
-	public static final int SELINIUM_PORT = GetterUtil.getInteger(
-		TestPropsUtil.get("selinium.port"));
+	public static final int SELENIUM_PORT = GetterUtil.getInteger(
+		TestPropsUtil.get("selenium.port"));
 
 }

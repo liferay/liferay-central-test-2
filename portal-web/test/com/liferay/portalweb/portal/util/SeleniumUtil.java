@@ -59,8 +59,8 @@ public class SeleniumUtil {
 	}
 
 	public void _startSelenium() {
-		String seleniumHost = TestPropsValues.SELINIUM_HOST;
-		int seleniumPort = TestPropsValues.SELINIUM_PORT;
+		String seleniumHost = TestPropsValues.SELENIUM_HOST;
+		int seleniumPort = TestPropsValues.SELENIUM_PORT;
 		String browserType = TestPropsValues.BROWSER_TYPE;
 		String portalURL = TestPropsValues.PORTAL_URL;
 
