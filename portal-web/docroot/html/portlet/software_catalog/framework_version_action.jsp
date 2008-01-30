@@ -27,7 +27,7 @@
 <%
 ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) row.getObject();
+SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)row.getObject();
 
 String frameworkVersionId =	String.valueOf(frameworkVersion.getFrameworkVersionId());
 %>

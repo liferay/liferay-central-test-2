@@ -27,7 +27,7 @@
 <%
 ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-SCProductEntry productEntry = (SCProductEntry) row.getObject();
+SCProductEntry productEntry = (SCProductEntry)row.getObject();
 
 long productEntryId = productEntry.getProductEntryId();
 %>

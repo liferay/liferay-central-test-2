@@ -63,7 +63,7 @@ public class EditPropertyAction extends JSONAction {
 	}
 
 	protected void addProperty(HttpServletRequest req) throws Exception {
-		long entryId  = ParamUtil.getLong(req, "entryId");
+		long entryId = ParamUtil.getLong(req, "entryId");
 		String key = ParamUtil.getString(req, "key");
 		String value = ParamUtil.getString(req, "value");
 

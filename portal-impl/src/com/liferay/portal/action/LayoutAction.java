@@ -106,7 +106,7 @@ public class LayoutAction extends Action {
 
 		Layout layout = themeDisplay.getLayout();
 
-		Boolean layoutDefault  = (Boolean)req.getAttribute(
+		Boolean layoutDefault = (Boolean)req.getAttribute(
 			WebKeys.LAYOUT_DEFAULT);
 
 		if ((layoutDefault != null) && (layoutDefault.booleanValue())) {

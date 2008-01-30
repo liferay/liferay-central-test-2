@@ -471,7 +471,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// URL
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(frameworkVersion.getUrl());
 
@@ -479,7 +479,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Active
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(LanguageUtil.get(pageContext,frameworkVersion.isActive() ? "yes" : "no"));
 
@@ -546,7 +546,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// URL
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(license.getUrl());
 
@@ -554,7 +554,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Open source
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isOpenSource() ? "yes" : "no"));
 
@@ -562,7 +562,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Active
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isActive() ? "yes" : "no"));
 
@@ -570,7 +570,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Recommended
 
-			rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isRecommended() ? "yes" : "no"));
 

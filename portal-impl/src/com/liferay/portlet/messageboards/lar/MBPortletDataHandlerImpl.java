@@ -190,7 +190,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 								message.getAttachmentsDir());
 
 							for (int i = 0; i < fileNames.length; i++) {
-								byte[] byteArray  = DLServiceUtil.getFile(
+								byte[] byteArray = DLServiceUtil.getFile(
 									context.getCompanyId(), CompanyImpl.SYSTEM,
 									fileNames[i]);
 

@@ -212,7 +212,7 @@ public class Calculator extends Applet {
 		char c = _operator.charAt(0);
 
 		if (c == '=') {
-			_value  = value;
+			_value = value;
 		}
 		else if (c == '+') {
 			_value += value;

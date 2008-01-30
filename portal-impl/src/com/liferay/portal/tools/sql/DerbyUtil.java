@@ -47,7 +47,7 @@ public class DerbyUtil extends DBUtil {
 		template = convertTimestamp(template);
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
-		template  = reword(template );
+		template = reword(template );
 		//template = _removeLongInserts(derby);
 		template = removeNull(template);
 		template = StringUtil.replace(template , "\\'", "''");

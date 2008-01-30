@@ -70,7 +70,7 @@ public class QueryUtil {
 
 				if (sr.first() && sr.scroll(begin)) {
 					for (int i = begin; i < end; i++) {
-						Object obj  = sr.get(0);
+						Object obj = sr.get(0);
 
 						list.add(obj);
 

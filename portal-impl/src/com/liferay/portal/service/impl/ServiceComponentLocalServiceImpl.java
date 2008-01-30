@@ -165,7 +165,7 @@ public class ServiceComponentLocalServiceImpl
 
 		Document doc = reader.read(new StringReader(xml));
 
-		Element root  = doc.getRootElement();
+		Element root = doc.getRootElement();
 
 		Iterator itr = root.elements("model").iterator();
 

@@ -27,7 +27,7 @@
 <%
 ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-SCLicense license = (SCLicense) row.getObject();
+SCLicense license = (SCLicense)row.getObject();
 
 String licenseId = String.valueOf(license.getLicenseId());
 %>
