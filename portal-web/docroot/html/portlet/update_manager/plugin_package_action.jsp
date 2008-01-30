@@ -49,7 +49,6 @@ if (availablePluginPackage != null) {
 		<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= uploadProgressId %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="url" value="<%= downloadURL %>" />
-		<portlet:param name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
 	</portlet:actionURL>
 
 	<%

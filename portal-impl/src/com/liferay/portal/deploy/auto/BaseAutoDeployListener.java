@@ -107,7 +107,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
 		if ((isMatchingFile(
 				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-theme-") != -1)) {
+			(file.getName().indexOf("-theme") != -1)) {
 
 			return true;
 		}

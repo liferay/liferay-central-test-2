@@ -998,7 +998,7 @@ public class BaseDeployer {
 			}
 		}
 		catch (Exception e) {
-			System.err.println(file.getPath() + ": " + e.toString());
+			_log.error(file.getPath() + ": " + e.toString());
 		}
 		finally {
 			if (is != null) {

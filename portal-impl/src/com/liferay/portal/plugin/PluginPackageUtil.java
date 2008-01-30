@@ -849,12 +849,12 @@ public class PluginPackageUtil {
 	private PluginPackage _readPluginPackageProps(
 		String displayName, Properties props) {
 
-		int pos = displayName.indexOf("-portlet-");
+		int pos = displayName.indexOf("-portlet");
 
 		String pluginType = "portlet";
 
 		if (pos == -1) {
-			pos = displayName.indexOf("-theme-");
+			pos = displayName.indexOf("-theme");
 
 			pluginType = "theme";
 		}
