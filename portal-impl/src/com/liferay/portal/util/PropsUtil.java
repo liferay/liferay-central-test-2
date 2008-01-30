@@ -920,12 +920,12 @@ public class PropsUtil {
 	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
 
 	public static final String DL_HOOK_S3_BUCKET_NAME = "dl.hook.s3.bucket.name";
-	
-	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions"; 
-		
+
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
+
+	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions";
 
 	public static final String DL_LAYOUTS_SYNC_ENABLED = "dl.layouts.sync.enabled";
 
@@ -1202,7 +1202,7 @@ public class PropsUtil {
 	public static final String WIKI_FRONT_PAGE_NAME = "wiki.front.page.name";
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
-	
+
 	public static final String WIKI_PAGE_TITLES_REGEXP = "wiki.page.titles.regexp";
 
 	public static final String WIKI_FORMATS = "wiki.formats";

@@ -100,13 +100,16 @@ public class CompareVersionsAction extends PortletAction {
 		long companyId = themeDisplay.getCompanyId();
 		long userId = themeDisplay.getUserId();
 
-		long folderId = ParamUtil.getLong(req, "folderId");
 		long fileEntryId = ParamUtil.getLong(req, "fileEntryId");
+
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntryPermission.check(
 			themeDisplay.getPermissionChecker(), folderId, name,
 			ActionKeys.VIEW);
+
+		String extension = FileUtil.getExtension(name);
 
 		String titleWithExtension = ParamUtil.getString(
 			req, "titleWithExtension");
@@ -119,21 +122,20 @@ public class CompareVersionsAction extends PortletAction {
 		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, targetVersion);
 
-		if ((PrefsPropsUtil.getBoolean(
+		if (PrefsPropsUtil.getBoolean(
 				PropsUtil.OPENOFFICE_SERVER_ENABLED,
-				PropsValues.OPENOFFICE_SERVER_ENABLED)) &&
-			(_convertBeforeCompare(FileUtil.getExtension(name)))
-			) {
+				PropsValues.OPENOFFICE_SERVER_ENABLED) &&
+			isConvertBeforeCompare(extension)) {
 
-			String id = DocumentConversionUtil.getTempFileId(
+			String sourceTempFileId = DocumentConversionUtil.getTempFileId(
 				fileEntryId, sourceVersion);
-			sourceIs = DocumentConversionUtil.convert(
-				id, sourceIs, FileUtil.getExtension(name), "txt");
-
-			id = DocumentConversionUtil.getTempFileId(
+			String targetTempFileId = DocumentConversionUtil.getTempFileId(
 				fileEntryId, targetVersion);
+
+			sourceIs = DocumentConversionUtil.convert(
+				sourceTempFileId, sourceIs, extension, "txt");
 			targetIs = DocumentConversionUtil.convert(
-				id, targetIs, FileUtil.getExtension(name), "txt");
+				targetTempFileId, targetIs, extension, "txt");
 		}
 
 		List[] diffResults = DiffUtil.diff(
@@ -148,7 +150,7 @@ public class CompareVersionsAction extends PortletAction {
 		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 
-	private boolean _convertBeforeCompare(String extension) {
+	protected boolean isConvertBeforeCompare(String extension) {
 		if (extension.equals("txt")) {
 			return false;
 		}
