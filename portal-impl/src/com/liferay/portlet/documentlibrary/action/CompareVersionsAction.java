@@ -125,7 +125,7 @@ public class CompareVersionsAction extends PortletAction {
 		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, targetVersion);
 
-		if (extension.equals("html") || extension.equals("htm") ||
+		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {
 
 			String escapedSource = Html.escape(StringUtil.read(sourceIs));
