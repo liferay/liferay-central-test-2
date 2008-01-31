@@ -84,16 +84,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>13</portlet-name>
-		<struts-path>calculator</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>14</portlet-name>
-		<struts-path>games</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>15</portlet-name>
 		<struts-path>journal</struts-path>
 		<include>true</include>

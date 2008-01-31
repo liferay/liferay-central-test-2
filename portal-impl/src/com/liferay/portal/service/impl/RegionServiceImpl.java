@@ -27,7 +27,6 @@ import com.liferay.portal.RegionCodeException;
 import com.liferay.portal.RegionNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.RegionServiceBaseImpl;
@@ -50,7 +49,7 @@ public class RegionServiceImpl extends RegionServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		Country country = countryPersistence.findByPrimaryKey(countryId);
+		countryPersistence.findByPrimaryKey(countryId);
 
 		if (Validator.isNull(regionCode)) {
 			throw new RegionCodeException();

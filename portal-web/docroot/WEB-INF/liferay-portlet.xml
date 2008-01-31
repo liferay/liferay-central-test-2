@@ -157,26 +157,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>13</portlet-name>
-		<icon>/html/portlet/calculator/icon.png</icon>
-		<struts-path>calculator</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
-		<portlet-name>14</portlet-name>
-		<icon>/html/portlet/games/icon.png</icon>
-		<struts-path>games</struts-path>
-		<configuration-action-class>com.liferay.portlet.games.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>15</portlet-name>
 		<icon>/html/portlet/journal/icon.png</icon>
 		<struts-path>journal</struts-path>

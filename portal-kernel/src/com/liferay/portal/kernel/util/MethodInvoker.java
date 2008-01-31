@@ -79,7 +79,7 @@ public class MethodInvoker {
 
 				Method method = MethodCache.get(methodKey);
 
-				args[i] = method.invoke(args[i], null);
+				args[i] = method.invoke(args[i], (Object[])null);
 			}
 			else if (args[i] instanceof NullWrapper) {
 				NullWrapper nullWrapper = (NullWrapper)args[i];

@@ -465,14 +465,6 @@
 		<put name="portlet_content" value="/portlet/flash/view.jsp" />
 	</definition>
 
-	<!-- Games -->
-
-	<definition name="portlet.games" extends="portlet" />
-
-	<definition name="portlet.games.view" extends="portlet.games">
-		<put name="portlet_content" value="/portlet/games/view.jsp" />
-	</definition>
-
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

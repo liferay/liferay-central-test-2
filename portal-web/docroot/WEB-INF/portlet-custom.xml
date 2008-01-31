@@ -370,52 +370,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>13</portlet-name>
-		<display-name>Calculator</display-name>
-		<portlet-class>com.liferay.portlet.JSPPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/portlet/calculator/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>14</portlet-name>
-		<display-name>Games</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/games/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>hangman-word-list</name>
-				<value>almighty, awesome, believe, blessing, calling, canon, charity, chosen, confession, desire, election, enterprise, eternal, faith, for life, forever, grace, heaven, hope, innocent, justified, king, lamb, lord, love, magnificent, liferay, mortal, open source, perfect love, redeemed, righteous, saved, shepherd, solidarity, steward, testament, testimony, tulip</value>
-			</preference>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>15</portlet-name>
 		<display-name>Journal</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

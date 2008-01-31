@@ -39,7 +39,7 @@ import java.util.Map;
 public class MakerStats {
 
 	public MakerStats(String name) {
-		_name = name;
+		//_name = name;
 	}
 
 	public void add(String caller, int initSize, int finalSize) {
@@ -75,7 +75,7 @@ public class MakerStats {
 		int sampleSize = 0;
 		int totalSize = 0;
 
-		for (int i = 0; i<list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			SizeSample stat = (SizeSample)list.get(i);
 
 			printer.print(stat.getCaller());
@@ -114,7 +114,7 @@ public class MakerStats {
 		printer.println(maxSize);
 	}
 
-	private String _name;
+	//private String _name;
 	private Map _map = new HashMap();
 	private int _count;
 

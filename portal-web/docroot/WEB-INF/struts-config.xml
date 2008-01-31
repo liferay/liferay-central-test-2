@@ -538,10 +538,6 @@
 			<forward name="portlet.flash.view" path="portlet.flash.view" />
 		</action>
 
-		<!-- Games -->
-
-		<action path="/games/view" forward="portlet.games.view" />
-
 		<!-- Global Prayer Digest -->
 
 		<action path="/global_prayer_digest/view" type="com.liferay.portlet.globalprayerdigest.action.ViewAction">
