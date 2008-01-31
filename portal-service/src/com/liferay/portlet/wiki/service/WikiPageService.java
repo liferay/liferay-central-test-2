@@ -68,6 +68,11 @@ public interface WikiPageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void movePage(long nodeId, java.lang.String title,
+		java.lang.String newTitle)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long nodeId,
 		java.lang.String title, double version)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

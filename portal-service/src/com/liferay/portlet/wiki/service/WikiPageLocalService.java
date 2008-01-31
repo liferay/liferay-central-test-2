@@ -182,6 +182,10 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List getIncomingLinks(long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List getNoAssetPages()
 		throws com.liferay.portal.SystemException;
 
@@ -233,6 +237,11 @@ public interface WikiPageLocalService {
 
 	public int getRecentChangesCount(long nodeId)
 		throws com.liferay.portal.SystemException;
+
+	public void movePage(long userId, long nodeId, java.lang.String title,
+		java.lang.String newTitle)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version)

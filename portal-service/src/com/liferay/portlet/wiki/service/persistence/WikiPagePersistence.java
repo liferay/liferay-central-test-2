@@ -112,6 +112,34 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
+	public java.util.List findByN_R(long nodeId, java.lang.String redirectTo)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByN_R(long nodeId, java.lang.String redirectTo,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByN_R(long nodeId, java.lang.String redirectTo,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByN_R_First(
+		long nodeId, java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByN_R_Last(long nodeId,
+		java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage[] findByN_R_PrevAndNext(
+		long pageId, long nodeId, java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
 	public java.util.List findByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException;
 
@@ -229,6 +257,9 @@ public interface WikiPagePersistence {
 	public void removeByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByN_R(long nodeId, java.lang.String redirectTo)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException;
 
@@ -249,6 +280,9 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByNodeId(long nodeId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByN_R(long nodeId, java.lang.String redirectTo)
 		throws com.liferay.portal.SystemException;
 
 	public int countByN_T(long nodeId, java.lang.String title)
