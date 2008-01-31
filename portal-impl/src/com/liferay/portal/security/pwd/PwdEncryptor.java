@@ -23,13 +23,14 @@
 package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import java.security.MessageDigest;
@@ -39,9 +40,6 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 import org.vps.crypt.Crypt;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * <a href="PwdEncryptor.java.html"><b><i>View Source</i></b></a>
@@ -158,12 +156,10 @@ public class PwdEncryptor {
 
 				// Base64 encode and format string
 
-				BASE64Encoder encoder = new BASE64Encoder();
-
-				return encoder.encode(digestPlusSalt);
+				return Base64.encode(digestPlusSalt);
 			}
 			else {
-				return Digester.digest(algorithm, clearTextPwd);
+				return DigesterUtil.digest(algorithm, clearTextPwd);
 			}
 		}
 		catch (NoSuchAlgorithmException nsae) {
@@ -235,10 +231,8 @@ public class PwdEncryptor {
 
 			// Extract salt from encrypted password
 
-			BASE64Decoder decoder = new BASE64Decoder();
-
 			try {
-				byte[] digestPlusSalt = decoder.decodeBuffer(sshaString);
+				byte[] digestPlusSalt = Base64.decode(sshaString);
 				byte[] digestBytes = new byte[digestPlusSalt.length - 8];
 
 				System.arraycopy(
@@ -248,10 +242,10 @@ public class PwdEncryptor {
 					digestPlusSalt, digestBytes.length, saltBytes, 0,
 					saltBytes.length);
 			}
-			catch (IOException ioe) {
+			catch (Exception e) {
 				throw new PwdEncryptorException(
 					"Unable to extract salt from encrypted password: " +
-						ioe.getMessage());
+						e.getMessage());
 			}
 		}
 

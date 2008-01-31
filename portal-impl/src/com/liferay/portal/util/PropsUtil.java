@@ -459,6 +459,8 @@ public class PropsUtil {
 
 	public static final String PASSWORDS_ENCRYPTION_ALGORITHM = "passwords.encryption.algorithm";
 
+	public static final String PASSWORDS_DIGEST_ENCODING = "passwords.digest.encoding";
+
 	public static final String PASSWORDS_TOOLKIT = "passwords.toolkit";
 
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR = "passwords.passwordpolicytoolkit.generator";

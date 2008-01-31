@@ -505,6 +505,9 @@ public class PropsValues {
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME =
 		PropsUtil.get(PropsUtil.PASSWORDS_DEFAULT_POLICY_NAME);
 
+	public static final String PASSWORDS_DIGEST_ENCODING =
+		PropsUtil.get(PropsUtil.PASSWORDS_DIGEST_ENCODING);
+
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER);
 

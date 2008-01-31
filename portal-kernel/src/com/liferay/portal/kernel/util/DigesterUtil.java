@@ -22,20 +22,44 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+
 /**
- * <a href="Digester.java.html"><b><i>View Source</i></b></a>
+ * <a href="DigesterUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Digester {
+public class DigesterUtil {
 
-	public static final String ENCODING = "UTF-8";
+	public static String digest(String text) {
+		return getDigester().digest(text);
+	}
 
-	public static final String DIGEST_ALGORITHM = "SHA";
+	public static String digest(String algorithm, String text) {
+		return getDigester().digest(algorithm, text);
+	}
 
-	public String digest(String text);
+	public static Digester getDigester() {
+		return _getUtil()._digester;
+	}
 
-	public String digest(String algorithm, String text);
+	public void setDigester(Digester digester) {
+		_digester = digester;
+	}
+
+	private static DigesterUtil _getUtil() {
+		if (_util == null) {
+			_util = (DigesterUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = DigesterUtil.class.getName();
+
+	private static DigesterUtil _util;
+
+	private Digester _digester;
 
 }

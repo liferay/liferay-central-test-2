@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 
@@ -150,11 +151,11 @@ public class Encryptor {
 	}
 
 	public static String digest(String text) {
-		return Digester.digest(text);
+		return DigesterUtil.digest(text);
 	}
 
 	public static String digest(String algorithm, String text) {
-		return Digester.digest(algorithm, text);
+		return DigesterUtil.digest(algorithm, text);
 	}
 
 	public static String encrypt(Key key, String plainText)
