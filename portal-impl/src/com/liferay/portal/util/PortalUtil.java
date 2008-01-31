@@ -858,7 +858,7 @@ public class PortalUtil {
 
 		try {
 
-			// Start by trying to parse the url part as a groupId because it's
+			// Start by trying to parse the url part as a group id because it is
 			// faster to eliminate this possibility first
 
 			long groupId = GetterUtil.getLong(urlParts[2]);
@@ -882,8 +882,8 @@ public class PortalUtil {
 
 			try {
 
-				// Again, start by trying to parse the url part as a layoutId
-				// because it's faster to eliminate this possibility first
+				// Start by trying to parse the url part as a layout id because
+				// it is faster to eliminate this possibility first
 
 				long layoutId = GetterUtil.getLong(urlParts[3]);
 
@@ -895,7 +895,7 @@ public class PortalUtil {
 			catch (Exception e1) {
 				try {
 
-					// Now try the last part as a friendly url
+					// Now try as a friendly url
 
 					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 						group.getGroupId(), privateLayout,
