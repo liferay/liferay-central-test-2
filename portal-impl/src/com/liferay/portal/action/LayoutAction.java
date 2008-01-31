@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -489,7 +490,8 @@ public class LayoutAction extends Action {
 				renderResponseImpl.getContentType());
 		}
 		else {
-			byte[] content = stringServletResponse.getString().getBytes("UTF-8");
+			byte[] content = stringServletResponse.getString().getBytes(
+				StringPool.UTF8);
 
 			ServletResponseUtil.sendFile(
 				res, renderResponseImpl.getResourceName(), content,
