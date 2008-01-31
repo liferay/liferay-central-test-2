@@ -943,7 +943,7 @@ create table SCProductVersion (
 	version VARCHAR(75) null,
 	changeLog STRING null,
 	downloadPageURL STRING null,
-	directDownloadURL STRING null,
+	directDownloadURL VARCHAR(2000) null,
 	repoStoreArtifact BOOLEAN
 );
 

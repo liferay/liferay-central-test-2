@@ -1369,7 +1369,7 @@
 			<hint-collection name="URL" />
 		</field>
 		<field name="directDownloadURL" type="String">
-			<hint-collection name="URL" />
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="repoStoreArtifact" type="boolean" />
 	</model>

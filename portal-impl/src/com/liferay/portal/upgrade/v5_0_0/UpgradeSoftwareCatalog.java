@@ -20,34 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_0_0;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_0_0.UpgradeSoftwareCatalog;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_5_0_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_0_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_0_0_BUILD_NUMBER;
-	}
+public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeSoftwareCatalog.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_0_0.class);
+	protected void doUpgrade() throws Exception {
+
+		// SCProductVersion
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			SCProductVersionImpl.TABLE_NAME,
+			SCProductVersionImpl.TABLE_COLUMNS);
+
+		upgradeTable.setCreateSQL(SCProductVersionImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeSoftwareCatalog.class);
 
 }
