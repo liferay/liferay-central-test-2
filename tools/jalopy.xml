@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jalopy>
-    <internal>
-        <version>6</version>
-    </internal>
-    <printer>
-        <blanklines>
-            <after>
-                <header>1</header>
-                <lastImport>1</lastImport>
-            </after>
-        </blanklines>
-        <comments>
-            <javadoc>
-                <generate>
-                    <class>1</class>
-                </generate>
-                <templates>
-                    <class>/**
+<internal>
+<version>6</version>
+</internal>
+<printer>
+<blanklines>
+<after>
+<header>1</header>
+<lastImport>1</lastImport>
+</after>
+</blanklines>
+<comments>
+<javadoc>
+<generate>
+<class>1</class>
+</generate>
+<templates>
+<class>/**
  * &lt;a href="$fileName$.html"&gt;&lt;b&gt;&lt;i&gt;View Source&lt;/i&gt;&lt;/b&gt;&lt;/a&gt;
  *
  * @author $author$
  *
- */</class>
-                    <interface>/**
+*/</class>
+<interface>/**
  * &lt;a href="$fileName$.html"&gt;&lt;b&gt;&lt;i&gt;View Source&lt;/i&gt;&lt;/b&gt;&lt;/a&gt;
  *
  * @author $author$
  *
- */</interface>
-                </templates>
-            </javadoc>
-            <remove>
-                <javadoc>true</javadoc>
-                <multiline>true</multiline>
-                <singleline>true</singleline>
-            </remove>
-        </comments>
-        <header>
-            <text>/**
+*/</interface>
+</templates>
+</javadoc>
+<remove>
+<multiline>true</multiline>
+<singleline>true</singleline>
+</remove>
+</comments>
+<header>
+<text>/**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -58,37 +57,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */</text>
-            <use>true</use>
-        </header>
-        <indentation>
-            <sizes>
-                <braceRightAfter>0</braceRightAfter>
-                <tabs>4</tabs>
-            </sizes>
-            <tabs>
-                <enable>true</enable>
-            </tabs>
-        </indentation>
-        <misc>
-            <insertTrailingNewline>false</insertTrailingNewline>
-        </misc>
-        <sorting>
-            <declaration>
-                <enable>false</enable>
-            </declaration>
-        </sorting>
-        <whitespace>
-            <after>
-                <typeCast>false</typeCast>
-            </after>
-        </whitespace>
-        <wrapping>
-            <always>
-                <after>
-                    <braceRight>true</braceRight>
-                </after>
-            </always>
-        </wrapping>
-    </printer>
+<use>true</use>
+</header>
+<indentation>
+<sizes>
+<braceRightAfter>0</braceRightAfter>
+<tabs>4</tabs>
+</sizes>
+<tabs>
+<enable>true</enable>
+</tabs>
+</indentation>
+<misc>
+<insertTrailingNewline>false</insertTrailingNewline>
+</misc>
+<sorting>
+<declaration>
+<enable>false</enable>
+</declaration>
+</sorting>
+<whitespace>
+<after>
+<typeCast>false</typeCast>
+</after>
+</whitespace>
+<wrapping>
+<always>
+<after>
+<braceRight>true</braceRight>
+</after>
+</always>
+</wrapping>
+</printer>
 </jalopy>
-

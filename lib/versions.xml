@@ -206,7 +206,7 @@
 	</library>
 	<library>
 		<file-name>development/jalopy.jar</file-name>
-		<version>1.0b11</version>
+		<version>1.5rc3</version>
 		<project-name>Jalopy</project-name>
 		<project-url>http://jalopy.sourceforge.net</project-url>
 		<licenses>

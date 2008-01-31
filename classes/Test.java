@@ -100,10 +100,10 @@ public class Test {
 				" *\n" +
 				" * @author $author$\n" +
 				" *\n" +
-				" */";
+				"*/";
 
 			convention.putInt(ConventionKeys.COMMENT_JAVADOC_CLASS_MASK, 1);
-			convention.putBoolean(ConventionKeys.COMMENT_JAVADOC_REMOVE, true);
+			//convention.putBoolean(ConventionKeys.COMMENT_JAVADOC_REMOVE, true);
 			convention.putBoolean(ConventionKeys.COMMENT_REMOVE_MULTI_LINE, true);
 			convention.putBoolean(ConventionKeys.COMMENT_REMOVE_SINGLE_LINE, true);
 			convention.put(ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS, classMask);

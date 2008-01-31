@@ -352,43 +352,10 @@ public class ServiceBuilder {
 		String classMask =
 			"/**\n" +
 			" * <a href=\"$fileName$.html\"><b><i>View Source</i></b></a>\n" +
-			" *\n";
-
-		String[] classCommentsArray = (String[])jalopySettings.get("classComments");
-
-		if ((classCommentsArray != null) && (classCommentsArray.length > 0)) {
-			for (int i = 0; i < classCommentsArray.length; i++) {
-				String classComments = classCommentsArray[i];
-
-				//classComments = "The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.";
-				classComments = StringUtil.wrap(classComments, 76, "\n * ");
-
-				if (classComments.startsWith("\n")) {
-					classComments = classComments.substring(
-						1, classComments.length());
-				}
-
-				classMask += " * <p>\n" + classComments + "\n * </p>\n *\n";
-			}
-		}
-
-		classMask +=
+			" *\n" +
 			" * @author $author$\n" +
-			" *\n";
-
-		String[] seeArray = (String[])jalopySettings.get("see");
-
-		if ((classCommentsArray != null) && (classCommentsArray.length > 0)) {
-			for (int i = 0; i < seeArray.length; i++) {
-				String see = seeArray[i];
-
-				classMask += " * @see " + see + "\n";
-			}
-
-			classMask += " *\n";
-		}
-
-		classMask += " */";
+			" *\n" +
+			"*/";
 
 		convention.put(
 			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS,
@@ -397,12 +364,6 @@ public class ServiceBuilder {
 		convention.put(
 			ConventionKeys.COMMENT_JAVADOC_TEMPLATE_INTERFACE,
 			env.interpolate(classMask));
-
-		if (jalopySettings.get("keepJavadoc") != null) {
-			convention.put(
-				ConventionKeys.COMMENT_JAVADOC_REMOVE,
-				Boolean.FALSE.toString());
-		}
 
 		jalopy.format();
 
@@ -2992,6 +2953,9 @@ public class ServiceBuilder {
 			context.put(
 				"modelHintsUtil",
 				staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
+			context.put(
+				"system",
+				staticModels.get("java.lang.System"));
 			context.put(
 				"validator",
 				staticModels.get("com.liferay.portal.kernel.util.Validator"));
