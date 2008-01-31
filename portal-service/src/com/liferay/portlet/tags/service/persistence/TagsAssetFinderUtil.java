@@ -33,7 +33,8 @@ public class TagsAssetFinderUtil {
 		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByAndEntryIds(groupId, classNameIds, entryIds,
+		return getFinder()
+				   .countByAndEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
 	}
 
@@ -41,7 +42,8 @@ public class TagsAssetFinderUtil {
 		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrEntryIds(groupId, classNameIds, entryIds,
+		return getFinder()
+				   .countByOrEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
 	}
 
@@ -52,7 +54,8 @@ public class TagsAssetFinderUtil {
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByAndEntryIds(groupId, classNameIds, entryIds,
+		return getFinder()
+				   .findByAndEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}
@@ -61,7 +64,8 @@ public class TagsAssetFinderUtil {
 		long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrEntryIds(groupId, classNameIds, entryIds,
+		return getFinder()
+				   .findByOrEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, publishDate, expirationDate);
 	}
 
@@ -72,7 +76,8 @@ public class TagsAssetFinderUtil {
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrEntryIds(groupId, classNameIds, entryIds,
+		return getFinder()
+				   .findByOrEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}

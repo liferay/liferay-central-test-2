@@ -52,26 +52,26 @@ public interface EmailAddressService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEmailAddress(long emailAddressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEmailAddresses(java.lang.String className,
 		long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
 		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

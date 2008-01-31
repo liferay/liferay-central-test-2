@@ -807,7 +807,7 @@ public class PluginSettingLocalServiceUtil {
 
 	public static com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
@@ -826,7 +826,7 @@ public class PluginSettingLocalServiceUtil {
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 

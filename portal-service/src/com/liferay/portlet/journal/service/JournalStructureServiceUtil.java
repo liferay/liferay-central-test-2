@@ -56,7 +56,7 @@ public class JournalStructureServiceUtil {
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
@@ -70,7 +70,7 @@ public class JournalStructureServiceUtil {
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
@@ -81,7 +81,7 @@ public class JournalStructureServiceUtil {
 
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
@@ -90,7 +90,7 @@ public class JournalStructureServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
@@ -100,7 +100,7 @@ public class JournalStructureServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 

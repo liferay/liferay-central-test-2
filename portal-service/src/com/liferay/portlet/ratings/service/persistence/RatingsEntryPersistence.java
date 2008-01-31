@@ -32,7 +32,7 @@ public interface RatingsEntryPersistence {
 	public com.liferay.portlet.ratings.model.RatingsEntry create(long entryId);
 
 	public com.liferay.portlet.ratings.model.RatingsEntry remove(long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry remove(
@@ -53,7 +53,7 @@ public interface RatingsEntryPersistence {
 
 	public com.liferay.portlet.ratings.model.RatingsEntry findByPrimaryKey(
 		long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry fetchByPrimaryKey(
@@ -72,24 +72,24 @@ public interface RatingsEntryPersistence {
 	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_Last(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry[] findByC_C_PrevAndNext(
 		long entryId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
 		long userId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry fetchByU_C_C(
@@ -117,7 +117,7 @@ public interface RatingsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByU_C_C(long userId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

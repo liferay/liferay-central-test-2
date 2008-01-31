@@ -55,7 +55,7 @@ public class IGFolderServiceUtil {
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 
@@ -67,7 +67,7 @@ public class IGFolderServiceUtil {
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 
@@ -76,7 +76,7 @@ public class IGFolderServiceUtil {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 
@@ -85,7 +85,7 @@ public class IGFolderServiceUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 
@@ -95,7 +95,7 @@ public class IGFolderServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 

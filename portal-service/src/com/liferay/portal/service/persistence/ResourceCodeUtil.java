@@ -34,7 +34,7 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode remove(long codeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().remove(codeId);
 	}
@@ -65,7 +65,7 @@ public class ResourceCodeUtil {
 
 	public static com.liferay.portal.model.ResourceCode findByPrimaryKey(
 		long codeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByPrimaryKey(codeId);
 	}
@@ -93,14 +93,14 @@ public class ResourceCodeUtil {
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -108,10 +108,10 @@ public class ResourceCodeUtil {
 	public static com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
 		long codeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
-		return getPersistence().findByCompanyId_PrevAndNext(codeId, companyId,
-			obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(codeId, companyId, obc);
 	}
 
 	public static java.util.List findByName(java.lang.String name)
@@ -133,7 +133,7 @@ public class ResourceCodeUtil {
 	public static com.liferay.portal.model.ResourceCode findByName_First(
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByName_First(name, obc);
 	}
@@ -141,7 +141,7 @@ public class ResourceCodeUtil {
 	public static com.liferay.portal.model.ResourceCode findByName_Last(
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByName_Last(name, obc);
 	}
@@ -149,14 +149,14 @@ public class ResourceCodeUtil {
 	public static com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
 		long codeId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByName_PrevAndNext(codeId, name, obc);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByC_N_S(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		return getPersistence().findByC_N_S(companyId, name, scope);
 	}
@@ -176,8 +176,8 @@ public class ResourceCodeUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -208,7 +208,7 @@ public class ResourceCodeUtil {
 
 	public static void removeByC_N_S(long companyId, java.lang.String name,
 		int scope)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException {
 		getPersistence().removeByC_N_S(companyId, name, scope);
 	}

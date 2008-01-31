@@ -50,23 +50,23 @@ package com.liferay.portal.service;
  */
 public interface UserService {
 	public void addGroupUsers(long groupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User addUser(long companyId,
@@ -78,116 +78,116 @@ public interface UserService {
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] organizationIds,
 		boolean sendEmail)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteUser(long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getDefaultUserId(long companyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getGroupUsers(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getRoleUsers(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User getUserByEmailAddress(long companyId,
 		java.lang.String emailAddress)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User getUserById(long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User getUserByScreenName(long companyId,
 		java.lang.String screenName)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getUserIdByScreenName(long companyId,
 		java.lang.String screenName)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasGroupUser(long groupId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasRoleUser(long roleId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
 		boolean agreedToTermsOfUse)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updateLockout(long userId,
 		boolean lockout)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateOrganizations(long userId, long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updatePortrait(long userId, byte[] bytes)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updateUser(long userId,
@@ -202,7 +202,7 @@ public interface UserService {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updateUser(long userId,
@@ -218,6 +218,6 @@ public interface UserService {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

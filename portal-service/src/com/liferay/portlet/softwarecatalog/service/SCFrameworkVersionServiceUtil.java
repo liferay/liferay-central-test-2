@@ -55,7 +55,7 @@ public class SCFrameworkVersionServiceUtil {
 		long plid, java.lang.String name, java.lang.String url, boolean active,
 		int priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 
@@ -67,7 +67,7 @@ public class SCFrameworkVersionServiceUtil {
 		long plid, java.lang.String name, java.lang.String url, boolean active,
 		int priority, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 
@@ -76,7 +76,7 @@ public class SCFrameworkVersionServiceUtil {
 	}
 
 	public static void deleteFrameworkVersion(long frameworkVersionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 
@@ -85,7 +85,7 @@ public class SCFrameworkVersionServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
 		long frameworkVersionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class SCFrameworkVersionServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(
 		long frameworkVersionId, java.lang.String name, java.lang.String url,
 		boolean active, int priority)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 

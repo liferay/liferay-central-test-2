@@ -73,7 +73,7 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 public class ListTypeServiceHttp {
 	public static com.liferay.portal.model.ListType getListType(
 		HttpPrincipal httpPrincipal, int listTypeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new IntegerWrapper(listTypeId);
@@ -143,7 +143,7 @@ public class ListTypeServiceHttp {
 
 	public static void validate(HttpPrincipal httpPrincipal, int listTypeId,
 		java.lang.String type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new IntegerWrapper(listTypeId);
@@ -181,7 +181,7 @@ public class ListTypeServiceHttp {
 
 	public static void validate(HttpPrincipal httpPrincipal, int listTypeId,
 		long classNameId, java.lang.String type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new IntegerWrapper(listTypeId);

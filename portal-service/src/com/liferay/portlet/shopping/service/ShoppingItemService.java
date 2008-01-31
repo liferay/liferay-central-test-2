@@ -50,7 +50,7 @@ package com.liferay.portlet.shopping.service;
  */
 public interface ShoppingItemService {
 	public void addBookItems(long categoryId, java.lang.String[] isbns)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -65,7 +65,7 @@ public interface ShoppingItemService {
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -80,15 +80,15 @@ public interface ShoppingItemService {
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteItem(long itemId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(long itemId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -102,6 +102,6 @@ public interface ShoppingItemService {
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List itemFields, java.util.List itemPrices)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

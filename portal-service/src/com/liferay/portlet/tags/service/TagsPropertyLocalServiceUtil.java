@@ -222,7 +222,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -232,7 +232,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, java.lang.String entryName, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -241,7 +241,7 @@ public class TagsPropertyLocalServiceUtil {
 	}
 
 	public static void deleteProperties(long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -249,7 +249,7 @@ public class TagsPropertyLocalServiceUtil {
 	}
 
 	public static void deleteProperty(long propertyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -258,7 +258,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -281,7 +281,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -290,7 +290,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
@@ -313,7 +313,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 

@@ -34,7 +34,7 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker remove(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException;
 
 	public com.liferay.portal.model.PasswordTracker remove(
@@ -55,7 +55,7 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker findByPrimaryKey(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException;
 
 	public com.liferay.portal.model.PasswordTracker fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException;
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException;
 
 	public com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		long passwordTrackerId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException;
 
 	public java.util.List findWithDynamicQuery(

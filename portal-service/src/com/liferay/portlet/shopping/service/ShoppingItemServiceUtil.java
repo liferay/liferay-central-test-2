@@ -52,7 +52,7 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingItemServiceUtil {
 	public static void addBookItems(long categoryId, java.lang.String[] isbns)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
@@ -71,7 +71,7 @@ public class ShoppingItemServiceUtil {
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
@@ -94,7 +94,7 @@ public class ShoppingItemServiceUtil {
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
@@ -106,7 +106,7 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static void deleteItem(long itemId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
@@ -115,7 +115,7 @@ public class ShoppingItemServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long itemId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
@@ -133,7 +133,7 @@ public class ShoppingItemServiceUtil {
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List itemFields, java.util.List itemPrices)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 

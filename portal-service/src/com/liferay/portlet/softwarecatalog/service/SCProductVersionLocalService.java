@@ -108,7 +108,7 @@ public interface SCProductVersionLocalService {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -117,7 +117,7 @@ public interface SCProductVersionLocalService {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -128,30 +128,30 @@ public interface SCProductVersionLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProductVersion(long productVersionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProductVersions(long productEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersionByDirectDownloadURL(
 		java.lang.String directDownloadURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getProductVersions(long productEntryId, int begin,
@@ -165,6 +165,6 @@ public interface SCProductVersionLocalService {
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -119,56 +119,56 @@ public interface TagsEntryLocalService {
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkEntries(long userId, java.lang.String[] names)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEntry(long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEntry(com.liferay.portlet.tags.model.TagsEntry entry)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasEntry(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getAssetEntries(long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEntries()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getEntries(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEntries(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long[] getEntryIds(long companyId, java.lang.String[] names)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String[] getEntryNames()
@@ -176,11 +176,11 @@ public interface TagsEntryLocalService {
 
 	public java.lang.String[] getEntryNames(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String[] getEntryNames(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, java.lang.String name,
@@ -201,11 +201,11 @@ public interface TagsEntryLocalService {
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
 		long entryId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

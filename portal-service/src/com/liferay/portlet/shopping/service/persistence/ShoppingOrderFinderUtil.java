@@ -37,8 +37,9 @@ public class ShoppingOrderFinderUtil {
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_C_U_N_PPPS(groupId, companyId, userId,
-			number, billingFirstName, billingLastName, billingEmailAddress,
+		return getFinder()
+				   .countByG_C_U_N_PPPS(groupId, companyId, userId, number,
+			billingFirstName, billingLastName, billingEmailAddress,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
 			ppPaymentStatus, andOperator);
 	}
@@ -52,8 +53,9 @@ public class ShoppingOrderFinderUtil {
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_C_U_N_PPPS(groupId, companyId, userId,
-			number, billingFirstName, billingLastName, billingEmailAddress,
+		return getFinder()
+				   .findByG_C_U_N_PPPS(groupId, companyId, userId, number,
+			billingFirstName, billingLastName, billingEmailAddress,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
 			ppPaymentStatus, andOperator, begin, end, obc);
 	}

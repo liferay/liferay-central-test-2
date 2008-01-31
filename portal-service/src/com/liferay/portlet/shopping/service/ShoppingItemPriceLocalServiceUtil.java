@@ -234,7 +234,7 @@ public class ShoppingItemPriceLocalServiceUtil {
 	}
 
 	public static java.util.List getItemPrices(long itemId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
 

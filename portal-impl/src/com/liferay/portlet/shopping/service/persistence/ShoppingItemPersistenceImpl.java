@@ -1468,7 +1468,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	public List getShoppingItemPrices(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
+
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
+
 		String finderMethodName = "getShoppingItemPrices";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1541,7 +1543,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 	public int getShoppingItemPricesSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
+
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
+
 		String finderMethodName = "getShoppingItemPricesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1600,7 +1604,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
+
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
+
 		String finderMethodName = "containsShoppingItemPrices";
 		String[] finderParams = new String[] {
 				Long.class.getName(),

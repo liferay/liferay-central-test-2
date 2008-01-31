@@ -121,7 +121,7 @@ public interface CalEventLocalService {
 		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
@@ -134,7 +134,7 @@ public interface CalEventLocalService {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
@@ -147,7 +147,7 @@ public interface CalEventLocalService {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
@@ -163,60 +163,60 @@ public interface CalEventLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addEventResources(long eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addEventResources(long eventId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkEvents()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEvent(long eventId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEvent(com.liferay.portlet.calendar.model.CalEvent event)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEvents(long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.io.File exportEvent(long userId, long eventId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.io.File exportGroupEvents(long userId, long plid,
 		java.lang.String fileName)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEvents(long groupId, java.lang.String type,
@@ -241,7 +241,7 @@ public interface CalEventLocalService {
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public void importICal4j(long userId, long plid, java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -253,6 +253,6 @@ public interface CalEventLocalService {
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

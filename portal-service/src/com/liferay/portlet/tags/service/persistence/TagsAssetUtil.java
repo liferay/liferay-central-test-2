@@ -34,7 +34,7 @@ public class TagsAssetUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset remove(long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().remove(assetId);
 	}
@@ -65,7 +65,7 @@ public class TagsAssetUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAsset findByPrimaryKey(
 		long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().findByPrimaryKey(assetId);
 	}
@@ -93,14 +93,14 @@ public class TagsAssetUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAsset findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -108,15 +108,15 @@ public class TagsAssetUtil {
 	public static com.liferay.portlet.tags.model.TagsAsset[] findByCompanyId_PrevAndNext(
 		long assetId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
-		return getPersistence().findByCompanyId_PrevAndNext(assetId, companyId,
-			obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(assetId, companyId, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
@@ -136,8 +136,8 @@ public class TagsAssetUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -162,7 +162,7 @@ public class TagsAssetUtil {
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
@@ -186,20 +186,20 @@ public class TagsAssetUtil {
 	}
 
 	public static java.util.List getTagsEntries(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().getTagsEntries(pk);
 	}
 
 	public static java.util.List getTagsEntries(long pk, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().getTagsEntries(pk, begin, end);
 	}
 
 	public static java.util.List getTagsEntries(long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		return getPersistence().getTagsEntries(pk, begin, end, obc);
 	}
@@ -220,79 +220,79 @@ public class TagsAssetUtil {
 	}
 
 	public static void addTagsEntry(long pk, long tagsEntryPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().addTagsEntry(pk, tagsEntryPK);
 	}
 
 	public static void addTagsEntry(long pk,
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().addTagsEntry(pk, tagsEntry);
 	}
 
 	public static void addTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().addTagsEntries(pk, tagsEntryPKs);
 	}
 
 	public static void addTagsEntries(long pk, java.util.List tagsEntries)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().addTagsEntries(pk, tagsEntries);
 	}
 
 	public static void clearTagsEntries(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchAssetException {
 		getPersistence().clearTagsEntries(pk);
 	}
 
 	public static void removeTagsEntry(long pk, long tagsEntryPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().removeTagsEntry(pk, tagsEntryPK);
 	}
 
 	public static void removeTagsEntry(long pk,
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().removeTagsEntry(pk, tagsEntry);
 	}
 
 	public static void removeTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().removeTagsEntries(pk, tagsEntryPKs);
 	}
 
 	public static void removeTagsEntries(long pk, java.util.List tagsEntries)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().removeTagsEntries(pk, tagsEntries);
 	}
 
 	public static void setTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().setTagsEntries(pk, tagsEntryPKs);
 	}
 
 	public static void setTagsEntries(long pk, java.util.List tagsEntries)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.tags.NoSuchAssetException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		getPersistence().setTagsEntries(pk, tagsEntries);
 	}

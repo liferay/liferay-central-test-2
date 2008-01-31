@@ -36,7 +36,7 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats remove(
 		long statsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().remove(statsId);
 	}
@@ -67,7 +67,7 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByPrimaryKey(statsId);
 	}
@@ -79,7 +79,7 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
@@ -99,8 +99,8 @@ public class RatingsStatsUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -120,7 +120,7 @@ public class RatingsStatsUtil {
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}

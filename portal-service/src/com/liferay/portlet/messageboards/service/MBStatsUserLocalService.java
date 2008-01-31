@@ -130,7 +130,7 @@ public interface MBStatsUserLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getStatsUsers(long groupId, int begin, int end)
@@ -140,6 +140,6 @@ public interface MBStatsUserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void updateStatsUser(long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

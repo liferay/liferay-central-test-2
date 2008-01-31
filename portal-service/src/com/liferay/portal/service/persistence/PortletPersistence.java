@@ -32,7 +32,7 @@ public interface PortletPersistence {
 	public com.liferay.portal.model.Portlet create(long id);
 
 	public com.liferay.portal.model.Portlet remove(long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet remove(
@@ -52,7 +52,7 @@ public interface PortletPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Portlet findByPrimaryKey(long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet fetchByPrimaryKey(long id)
@@ -70,23 +70,23 @@ public interface PortletPersistence {
 
 	public com.liferay.portal.model.Portlet findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
 		long id, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet findByC_P(long companyId,
 		java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public com.liferay.portal.model.Portlet fetchByC_P(long companyId,
@@ -113,7 +113,7 @@ public interface PortletPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_P(long companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

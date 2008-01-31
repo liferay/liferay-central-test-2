@@ -88,15 +88,15 @@ public interface WikiPageResourceLocalService {
 	public void afterPropertiesSet();
 
 	public void deletePageResource(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
 		long pageResourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getPageResourcePrimKey(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

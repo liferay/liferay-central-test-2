@@ -53,7 +53,7 @@ package com.liferay.portlet.workflow.service;
 public class WorkflowTaskServiceUtil {
 	public static java.util.Map updateTask(long taskId,
 		java.lang.String transition, java.util.Map parameterMap)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowTaskService workflowTaskService = WorkflowTaskServiceFactory.getService();
 

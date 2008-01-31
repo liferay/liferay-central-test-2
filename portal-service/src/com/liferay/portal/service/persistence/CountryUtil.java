@@ -34,7 +34,7 @@ public class CountryUtil {
 	}
 
 	public static com.liferay.portal.model.Country remove(long countryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().remove(countryId);
 	}
@@ -65,7 +65,7 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country findByPrimaryKey(
 		long countryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByPrimaryKey(countryId);
 	}
@@ -93,14 +93,14 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country findByActive_First(
 		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_First(active, obc);
 	}
 
 	public static com.liferay.portal.model.Country findByActive_Last(
 		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_Last(active, obc);
 	}
@@ -108,7 +108,7 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		long countryId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_PrevAndNext(countryId, active, obc);
 	}
@@ -122,8 +122,8 @@ public class CountryUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

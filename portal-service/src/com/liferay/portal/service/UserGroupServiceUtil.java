@@ -52,7 +52,7 @@ package com.liferay.portal.service;
  */
 public class UserGroupServiceUtil {
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -61,7 +61,7 @@ public class UserGroupServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup addUserGroup(
 		java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -69,7 +69,7 @@ public class UserGroupServiceUtil {
 	}
 
 	public static void deleteUserGroup(long userGroupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -78,7 +78,7 @@ public class UserGroupServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long userGroupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -87,7 +87,7 @@ public class UserGroupServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -95,7 +95,7 @@ public class UserGroupServiceUtil {
 	}
 
 	public static java.util.List getUserUserGroups(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -103,7 +103,7 @@ public class UserGroupServiceUtil {
 	}
 
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class UserGroupServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		long userGroupId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 

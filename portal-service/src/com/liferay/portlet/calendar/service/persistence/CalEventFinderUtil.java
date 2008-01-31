@@ -32,7 +32,8 @@ public class CalEventFinderUtil {
 	public static java.util.List findByG_SD(long groupId,
 		java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive) throws com.liferay.portal.SystemException {
-		return getFinder().findByG_SD(groupId, startDateGT, startDateLT,
+		return getFinder()
+				   .findByG_SD(groupId, startDateGT, startDateLT,
 			timeZoneSensitive);
 	}
 

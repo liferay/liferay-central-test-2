@@ -34,7 +34,7 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole remove(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole remove(
@@ -55,7 +55,7 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole findByPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole fetchByPrimaryKey(
@@ -74,18 +74,18 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole[] findByUserId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public java.util.List findByGroupId(long groupId)
@@ -100,18 +100,18 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole[] findByGroupId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public java.util.List findByRoleId(long roleId)
@@ -126,18 +126,18 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole findByRoleId_First(
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole findByRoleId_Last(
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole[] findByRoleId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public java.util.List findByU_G(long userId, long groupId)
@@ -152,19 +152,19 @@ public interface UserGroupRolePersistence {
 
 	public com.liferay.portal.model.UserGroupRole findByU_G_First(long userId,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole findByU_G_Last(long userId,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long userId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public java.util.List findByG_R(long groupId, long roleId)
@@ -180,19 +180,19 @@ public interface UserGroupRolePersistence {
 	public com.liferay.portal.model.UserGroupRole findByG_R_First(
 		long groupId, long roleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole findByG_R_Last(long groupId,
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public com.liferay.portal.model.UserGroupRole[] findByG_R_PrevAndNext(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
 		long groupId, long roleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
 	public java.util.List findWithDynamicQuery(

@@ -32,15 +32,15 @@ public class PermissionFinderUtil {
 	public static boolean containsPermissions_2(java.util.List permissions,
 		long userId, java.util.List groups, long groupId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().containsPermissions_2(permissions, userId, groups,
-			groupId);
+		return getFinder()
+				   .containsPermissions_2(permissions, userId, groups, groupId);
 	}
 
 	public static boolean containsPermissions_4(java.util.List permissions,
 		long userId, java.util.List groups, java.util.List roles)
 		throws com.liferay.portal.SystemException {
-		return getFinder().containsPermissions_4(permissions, userId, groups,
-			roles);
+		return getFinder()
+				   .containsPermissions_4(permissions, userId, groups, roles);
 	}
 
 	public static int countByGroupsPermissions(java.util.List permissions,
@@ -107,15 +107,15 @@ public class PermissionFinderUtil {
 	public static java.util.List findByG_C_N_S_P(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_C_N_S_P(groupId, companyId, name, scope,
-			primKey);
+		return getFinder()
+				   .findByG_C_N_S_P(groupId, companyId, name, scope, primKey);
 	}
 
 	public static java.util.List findByU_C_N_S_P(long userId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByU_C_N_S_P(userId, companyId, name, scope,
-			primKey);
+		return getFinder()
+				   .findByU_C_N_S_P(userId, companyId, name, scope, primKey);
 	}
 
 	public static PermissionFinder getFinder() {

@@ -72,13 +72,13 @@ import org.json.JSONObject;
  */
 public class IGImageServiceJSON {
 	public static void deleteImage(long imageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
 	public static JSONObject getImage(long imageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
@@ -86,7 +86,7 @@ public class IGImageServiceJSON {
 	}
 
 	public static JSONObject getImageByLargeImageId(long largeImageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByLargeImageId(largeImageId);
 
@@ -94,7 +94,7 @@ public class IGImageServiceJSON {
 	}
 
 	public static JSONObject getImageBySmallImageId(long smallImageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageBySmallImageId(smallImageId);
 

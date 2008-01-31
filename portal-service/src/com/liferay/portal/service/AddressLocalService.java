@@ -342,18 +342,18 @@ public interface AddressLocalService {
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, long regionId,
 		long countryId, int typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteAddress(long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteAddresses(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getAddresses()
@@ -368,6 +368,6 @@ public interface AddressLocalService {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

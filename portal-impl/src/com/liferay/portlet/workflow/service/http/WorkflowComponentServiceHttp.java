@@ -76,7 +76,7 @@ import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 public class WorkflowComponentServiceHttp {
 	public static java.util.List getCurrentTasks(HttpPrincipal httpPrincipal,
 		long instanceId, long tokenId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -110,7 +110,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getCurrentTasksXml(
 		HttpPrincipal httpPrincipal, long instanceId, long tokenId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -144,7 +144,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String deploy(HttpPrincipal httpPrincipal,
 		java.lang.String xml)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = xml;
@@ -180,7 +180,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.Object getDefinition(HttpPrincipal httpPrincipal,
 		long definitionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -212,7 +212,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.List getDefinitions(HttpPrincipal httpPrincipal,
 		long definitionId, java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -256,7 +256,7 @@ public class WorkflowComponentServiceHttp {
 	public static java.lang.String getDefinitionsXml(
 		HttpPrincipal httpPrincipal, long definitionId, java.lang.String name,
 		int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -299,7 +299,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static int getDefinitionsCount(HttpPrincipal httpPrincipal,
 		long definitionId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -337,7 +337,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getDefinitionsCountXml(
 		HttpPrincipal httpPrincipal, long definitionId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -376,7 +376,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getDefinitionXml(
 		HttpPrincipal httpPrincipal, long definitionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -412,7 +412,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -501,7 +501,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean retrieveUserInstances, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -587,7 +587,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean retrieveUserInstances,
 		boolean andOperator)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -673,7 +673,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean retrieveUserInstances,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -758,7 +758,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static com.liferay.portlet.workflow.model.WorkflowTask getTask(
 		HttpPrincipal httpPrincipal, long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -790,7 +790,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getTaskXml(HttpPrincipal httpPrincipal,
 		long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -822,7 +822,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.List getTaskFormElements(
 		HttpPrincipal httpPrincipal, long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -854,7 +854,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getTaskFormElementsXml(
 		HttpPrincipal httpPrincipal, long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -886,7 +886,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.List getTaskTransitions(
 		HttpPrincipal httpPrincipal, long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -918,7 +918,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getTaskTransitionsXml(
 		HttpPrincipal httpPrincipal, long taskId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -955,7 +955,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1059,7 +1059,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1159,7 +1159,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1260,7 +1260,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1359,7 +1359,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static void signalInstance(HttpPrincipal httpPrincipal,
 		long instanceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1387,7 +1387,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static void signalToken(HttpPrincipal httpPrincipal,
 		long instanceId, long tokenId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -1417,7 +1417,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String startWorkflow(HttpPrincipal httpPrincipal,
 		long definitionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -1449,7 +1449,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.Map updateTask(HttpPrincipal httpPrincipal,
 		long taskId, java.lang.String transition, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
@@ -1494,7 +1494,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String updateTaskXml(HttpPrincipal httpPrincipal,
 		long taskId, java.lang.String transition, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);

@@ -52,24 +52,24 @@ public interface PhoneService {
 	public com.liferay.portal.model.Phone addPhone(java.lang.String className,
 		long classPK, java.lang.String number, java.lang.String extension,
 		int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePhone(long phoneId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Phone getPhone(long phoneId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getPhones(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Phone updatePhone(long phoneId,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -36,7 +36,7 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences remove(
 		long portletPreferencesId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().remove(portletPreferencesId);
 	}
@@ -67,7 +67,7 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences findByPrimaryKey(
 		long portletPreferencesId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByPrimaryKey(portletPreferencesId);
 	}
@@ -95,14 +95,14 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences findByPlid_First(
 		long plid, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByPlid_First(plid, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByPlid_Last(
 		long plid, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByPlid_Last(plid, obc);
 	}
@@ -110,10 +110,10 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences[] findByPlid_PrevAndNext(
 		long portletPreferencesId, long plid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
-		return getPersistence().findByPlid_PrevAndNext(portletPreferencesId,
-			plid, obc);
+		return getPersistence()
+				   .findByPlid_PrevAndNext(portletPreferencesId, plid, obc);
 	}
 
 	public static java.util.List findByP_P(long plid, java.lang.String portletId)
@@ -137,7 +137,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences findByP_P_First(
 		long plid, java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByP_P_First(plid, portletId, obc);
 	}
@@ -145,7 +145,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences findByP_P_Last(
 		long plid, java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByP_P_Last(plid, portletId, obc);
 	}
@@ -153,10 +153,11 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences[] findByP_P_PrevAndNext(
 		long portletPreferencesId, long plid, java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
-		return getPersistence().findByP_P_PrevAndNext(portletPreferencesId,
-			plid, portletId, obc);
+		return getPersistence()
+				   .findByP_P_PrevAndNext(portletPreferencesId, plid,
+			portletId, obc);
 	}
 
 	public static java.util.List findByO_O_P(long ownerId, int ownerType,
@@ -174,14 +175,14 @@ public class PortletPreferencesUtil {
 		long plid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByO_O_P(ownerId, ownerType, plid, begin,
-			end, obc);
+		return getPersistence()
+				   .findByO_O_P(ownerId, ownerType, plid, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByO_O_P_First(
 		long ownerId, int ownerType, long plid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByO_O_P_First(ownerId, ownerType, plid, obc);
 	}
@@ -189,7 +190,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences findByO_O_P_Last(
 		long ownerId, int ownerType, long plid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByO_O_P_Last(ownerId, ownerType, plid, obc);
 	}
@@ -197,25 +198,26 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences[] findByO_O_P_PrevAndNext(
 		long portletPreferencesId, long ownerId, int ownerType, long plid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
-		return getPersistence().findByO_O_P_PrevAndNext(portletPreferencesId,
-			ownerId, ownerType, plid, obc);
+		return getPersistence()
+				   .findByO_O_P_PrevAndNext(portletPreferencesId, ownerId,
+			ownerType, plid, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByO_O_P_P(
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
-		return getPersistence().findByO_O_P_P(ownerId, ownerType, plid,
-			portletId);
+		return getPersistence()
+				   .findByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences fetchByO_O_P_P(
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByO_O_P_P(ownerId, ownerType, plid,
-			portletId);
+		return getPersistence()
+				   .fetchByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -227,8 +229,8 @@ public class PortletPreferencesUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -264,7 +266,7 @@ public class PortletPreferencesUtil {
 
 	public static void removeByO_O_P_P(long ownerId, int ownerType, long plid,
 		java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletPreferencesException {
 		getPersistence().removeByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
@@ -290,8 +292,8 @@ public class PortletPreferencesUtil {
 
 	public static int countByO_O_P_P(long ownerId, int ownerType, long plid,
 		java.lang.String portletId) throws com.liferay.portal.SystemException {
-		return getPersistence().countByO_O_P_P(ownerId, ownerType, plid,
-			portletId);
+		return getPersistence()
+				   .countByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

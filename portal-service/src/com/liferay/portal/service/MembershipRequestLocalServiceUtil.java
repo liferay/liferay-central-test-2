@@ -794,7 +794,7 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
@@ -804,7 +804,7 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
@@ -841,7 +841,7 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static void updateStatus(long replierUserId,
 		long membershipRequestId, java.lang.String replyComments, int statusId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 

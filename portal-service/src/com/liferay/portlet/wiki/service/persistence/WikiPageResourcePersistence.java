@@ -34,7 +34,7 @@ public interface WikiPageResourcePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiPageResource remove(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource remove(
@@ -55,7 +55,7 @@ public interface WikiPageResourcePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource fetchByPrimaryKey(
@@ -63,7 +63,7 @@ public interface WikiPageResourcePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
@@ -88,7 +88,7 @@ public interface WikiPageResourcePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByN_T(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

@@ -32,7 +32,7 @@ public interface RatingsStatsPersistence {
 	public com.liferay.portlet.ratings.model.RatingsStats create(long statsId);
 
 	public com.liferay.portlet.ratings.model.RatingsStats remove(long statsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats remove(
@@ -53,7 +53,7 @@ public interface RatingsStatsPersistence {
 
 	public com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats fetchByPrimaryKey(
@@ -61,7 +61,7 @@ public interface RatingsStatsPersistence {
 
 	public com.liferay.portlet.ratings.model.RatingsStats findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
@@ -86,7 +86,7 @@ public interface RatingsStatsPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

@@ -36,7 +36,7 @@ public class DLFolderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder remove(
 		long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().remove(folderId);
 	}
@@ -67,7 +67,7 @@ public class DLFolderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
 		long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
@@ -96,7 +96,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -104,7 +104,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -112,14 +112,14 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByUuid_PrevAndNext(
 		long folderId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByUuid_PrevAndNext(folderId, uuid, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
@@ -148,14 +148,14 @@ public class DLFolderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -163,7 +163,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByGroupId_PrevAndNext(
 		long folderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByGroupId_PrevAndNext(folderId, groupId, obc);
 	}
@@ -186,14 +186,14 @@ public class DLFolderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -201,10 +201,10 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByCompanyId_PrevAndNext(
 		long folderId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
-		return getPersistence().findByCompanyId_PrevAndNext(folderId,
-			companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(folderId, companyId, obc);
 	}
 
 	public static java.util.List findByG_P(long groupId, long parentFolderId)
@@ -220,14 +220,14 @@ public class DLFolderUtil {
 	public static java.util.List findByG_P(long groupId, long parentFolderId,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_P(groupId, parentFolderId, begin, end,
-			obc);
+		return getPersistence()
+				   .findByG_P(groupId, parentFolderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_First(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByG_P_First(groupId, parentFolderId, obc);
 	}
@@ -235,7 +235,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_Last(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByG_P_Last(groupId, parentFolderId, obc);
 	}
@@ -243,10 +243,10 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByG_P_PrevAndNext(
 		long folderId, long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
-		return getPersistence().findByG_P_PrevAndNext(folderId, groupId,
-			parentFolderId, obc);
+		return getPersistence()
+				   .findByG_P_PrevAndNext(folderId, groupId, parentFolderId, obc);
 	}
 
 	public static java.util.List findByP_N(long parentFolderId,
@@ -270,7 +270,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByP_N_First(
 		long parentFolderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByP_N_First(parentFolderId, name, obc);
 	}
@@ -278,7 +278,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByP_N_Last(
 		long parentFolderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByP_N_Last(parentFolderId, name, obc);
 	}
@@ -286,15 +286,15 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByP_N_PrevAndNext(
 		long folderId, long parentFolderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
-		return getPersistence().findByP_N_PrevAndNext(folderId, parentFolderId,
-			name, obc);
+		return getPersistence()
+				   .findByP_N_PrevAndNext(folderId, parentFolderId, name, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByG_P_N(groupId, parentFolderId, name);
 	}
@@ -314,8 +314,8 @@ public class DLFolderUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -340,7 +340,7 @@ public class DLFolderUtil {
 	}
 
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
@@ -367,7 +367,7 @@ public class DLFolderUtil {
 
 	public static void removeByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		getPersistence().removeByG_P_N(groupId, parentFolderId, name);
 	}

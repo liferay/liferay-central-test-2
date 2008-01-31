@@ -79,7 +79,7 @@ public class ShoppingOrderServiceHttp {
 		java.lang.String number, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -147,7 +147,7 @@ public class ShoppingOrderServiceHttp {
 
 	public static void deleteOrder(HttpPrincipal httpPrincipal, long plid,
 		long orderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -181,7 +181,7 @@ public class ShoppingOrderServiceHttp {
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		HttpPrincipal httpPrincipal, long plid, long orderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -219,7 +219,7 @@ public class ShoppingOrderServiceHttp {
 
 	public static void sendEmail(HttpPrincipal httpPrincipal, long plid,
 		long orderId, java.lang.String emailType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -274,7 +274,7 @@ public class ShoppingOrderServiceHttp {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -480,7 +480,7 @@ public class ShoppingOrderServiceHttp {
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);

@@ -32,8 +32,8 @@ public class LayoutFinderUtil {
 	public static java.util.List findByC_P_P(long companyId,
 		java.lang.String portletId, java.lang.String prefsKey,
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
-		return getFinder().findByC_P_P(companyId, portletId, prefsKey,
-			prefsValue);
+		return getFinder()
+				   .findByC_P_P(companyId, portletId, prefsKey, prefsValue);
 	}
 
 	public static LayoutFinder getFinder() {

@@ -51,20 +51,20 @@ package com.liferay.portal.service;
 public interface MembershipRequestService {
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long groupId, java.lang.String comments)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteMembershipRequests(long groupId, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

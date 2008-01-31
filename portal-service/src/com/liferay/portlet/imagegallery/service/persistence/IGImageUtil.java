@@ -36,7 +36,7 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage remove(
 		long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().remove(imageId);
 	}
@@ -67,7 +67,7 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
@@ -96,7 +96,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -104,7 +104,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -112,7 +112,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByUuid_PrevAndNext(
 		long imageId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByUuid_PrevAndNext(imageId, uuid, obc);
 	}
@@ -135,14 +135,14 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByFolderId_First(folderId, obc);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByFolderId_Last(folderId, obc);
 	}
@@ -150,15 +150,15 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
 		long imageId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByFolderId_PrevAndNext(imageId, folderId,
-			obc);
+		return getPersistence()
+				   .findByFolderId_PrevAndNext(imageId, folderId, obc);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findBySmallImageId(smallImageId);
 	}
@@ -170,7 +170,7 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByLargeImageId(largeImageId);
 	}
@@ -182,7 +182,7 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
 		long custom1ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByCustom1ImageId(custom1ImageId);
 	}
@@ -194,7 +194,7 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
 		long custom2ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByCustom2ImageId(custom2ImageId);
 	}
@@ -213,8 +213,8 @@ public class IGImageUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -244,25 +244,25 @@ public class IGImageUtil {
 	}
 
 	public static void removeBySmallImageId(long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		getPersistence().removeBySmallImageId(smallImageId);
 	}
 
 	public static void removeByLargeImageId(long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		getPersistence().removeByLargeImageId(largeImageId);
 	}
 
 	public static void removeByCustom1ImageId(long custom1ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		getPersistence().removeByCustom1ImageId(custom1ImageId);
 	}
 
 	public static void removeByCustom2ImageId(long custom2ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		getPersistence().removeByCustom2ImageId(custom2ImageId);
 	}

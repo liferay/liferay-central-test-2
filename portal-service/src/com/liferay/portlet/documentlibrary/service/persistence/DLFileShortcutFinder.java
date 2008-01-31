@@ -31,6 +31,6 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 public interface DLFileShortcutFinder {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 }

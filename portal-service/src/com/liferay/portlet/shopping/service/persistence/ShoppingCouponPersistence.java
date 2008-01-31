@@ -34,7 +34,7 @@ public interface ShoppingCouponPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon remove(
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon remove(
@@ -55,7 +55,7 @@ public interface ShoppingCouponPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon fetchByPrimaryKey(
@@ -73,23 +73,23 @@ public interface ShoppingCouponPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon[] findByGroupId_PrevAndNext(
 		long couponId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon findByCode(
 		java.lang.String code)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon fetchByCode(
@@ -116,7 +116,7 @@ public interface ShoppingCouponPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCode(java.lang.String code)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

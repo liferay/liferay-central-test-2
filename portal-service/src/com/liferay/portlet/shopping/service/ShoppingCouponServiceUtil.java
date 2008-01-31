@@ -60,7 +60,7 @@ public class ShoppingCouponServiceUtil {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
@@ -72,7 +72,7 @@ public class ShoppingCouponServiceUtil {
 	}
 
 	public static void deleteCoupon(long plid, long couponId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
@@ -81,7 +81,7 @@ public class ShoppingCouponServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long plid, long couponId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
@@ -91,7 +91,7 @@ public class ShoppingCouponServiceUtil {
 	public static java.util.List search(long plid, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int begin, int end)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
@@ -107,7 +107,7 @@ public class ShoppingCouponServiceUtil {
 		int endDateMinute, boolean neverExpire, boolean active,
 		java.lang.String limitCategories, java.lang.String limitSkus,
 		double minOrder, double discount, java.lang.String discountType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 

@@ -301,7 +301,7 @@ public class DLFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -313,7 +313,7 @@ public class DLFolderLocalServiceUtil {
 		java.lang.String uuid, long userId, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -326,7 +326,7 @@ public class DLFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -341,7 +341,7 @@ public class DLFolderLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -357,7 +357,7 @@ public class DLFolderLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -368,7 +368,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -379,7 +379,7 @@ public class DLFolderLocalServiceUtil {
 	public static void addFolderResources(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -390,7 +390,7 @@ public class DLFolderLocalServiceUtil {
 	public static void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -402,7 +402,7 @@ public class DLFolderLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -411,7 +411,7 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -420,7 +420,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static void deleteFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -428,7 +428,7 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolders(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -437,7 +437,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -446,7 +446,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -498,7 +498,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] folderIds, java.lang.String keywords)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -509,7 +509,7 @@ public class DLFolderLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 

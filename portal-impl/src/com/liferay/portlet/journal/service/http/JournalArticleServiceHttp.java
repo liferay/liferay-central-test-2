@@ -91,7 +91,7 @@ public class JournalArticleServiceHttp {
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = articleId;
@@ -275,7 +275,7 @@ public class JournalArticleServiceHttp {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = articleId;
@@ -454,7 +454,7 @@ public class JournalArticleServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version, long plid, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -517,7 +517,7 @@ public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -564,7 +564,7 @@ public class JournalArticleServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -622,7 +622,7 @@ public class JournalArticleServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -683,7 +683,7 @@ public class JournalArticleServiceHttp {
 	public static void deleteArticle(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -739,7 +739,7 @@ public class JournalArticleServiceHttp {
 	public static void expireArticle(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -794,7 +794,7 @@ public class JournalArticleServiceHttp {
 
 	public static void removeArticleLocale(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -833,7 +833,7 @@ public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -897,7 +897,7 @@ public class JournalArticleServiceHttp {
 		java.io.File smallFile, java.util.Map images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1065,7 +1065,7 @@ public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version, java.lang.String content)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);

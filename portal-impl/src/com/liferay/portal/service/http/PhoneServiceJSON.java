@@ -75,7 +75,7 @@ public class PhoneServiceJSON {
 	public static JSONObject addPhone(java.lang.String className, long classPK,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.addPhone(className,
 				classPK, number, extension, typeId, primary);
@@ -84,13 +84,13 @@ public class PhoneServiceJSON {
 	}
 
 	public static void deletePhone(long phoneId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		PhoneServiceUtil.deletePhone(phoneId);
 	}
 
 	public static JSONObject getPhone(long phoneId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.getPhone(phoneId);
 
@@ -98,7 +98,7 @@ public class PhoneServiceJSON {
 	}
 
 	public static JSONArray getPhones(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = PhoneServiceUtil.getPhones(className,
 				classPK);
@@ -108,7 +108,7 @@ public class PhoneServiceJSON {
 
 	public static JSONObject updatePhone(long phoneId, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.updatePhone(phoneId,
 				number, extension, typeId, primary);

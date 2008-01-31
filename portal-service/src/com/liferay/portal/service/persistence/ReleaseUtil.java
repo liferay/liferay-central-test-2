@@ -34,7 +34,7 @@ public class ReleaseUtil {
 	}
 
 	public static com.liferay.portal.model.Release remove(long releaseId)
-		throws com.liferay.portal.NoSuchReleaseException, 
+		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(releaseId);
 	}
@@ -65,7 +65,7 @@ public class ReleaseUtil {
 
 	public static com.liferay.portal.model.Release findByPrimaryKey(
 		long releaseId)
-		throws com.liferay.portal.NoSuchReleaseException, 
+		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(releaseId);
 	}
@@ -84,8 +84,8 @@ public class ReleaseUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

@@ -34,7 +34,7 @@ public interface DLFileVersionPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
 		long fileVersionId)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
@@ -55,7 +55,7 @@ public interface DLFileVersionPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
 		long fileVersionId)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByPrimaryKey(
@@ -74,24 +74,24 @@ public interface DLFileVersionPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
 		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_Last(
 		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByF_N_PrevAndNext(
 		long fileVersionId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_V(
 		long folderId, java.lang.String name, double version)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
@@ -120,7 +120,7 @@ public interface DLFileVersionPersistence {
 
 	public void removeByF_N_V(long folderId, java.lang.String name,
 		double version)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException,
 			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

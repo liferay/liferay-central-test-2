@@ -49,8 +49,8 @@ public class BlogsStatsUserFinderUtil {
 		java.util.List organizationIds, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrganizationIds(organizationIds, begin, end,
-			obc);
+		return getFinder()
+				   .findByOrganizationIds(organizationIds, begin, end, obc);
 	}
 
 	public static BlogsStatsUserFinder getFinder() {

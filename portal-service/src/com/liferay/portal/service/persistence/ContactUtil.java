@@ -34,7 +34,7 @@ public class ContactUtil {
 	}
 
 	public static com.liferay.portal.model.Contact remove(long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException {
 		return getPersistence().remove(contactId);
 	}
@@ -65,7 +65,7 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
 		long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
@@ -93,14 +93,14 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -108,10 +108,10 @@ public class ContactUtil {
 	public static com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
 		long contactId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException {
-		return getPersistence().findByCompanyId_PrevAndNext(contactId,
-			companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(contactId, companyId, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -123,8 +123,8 @@ public class ContactUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

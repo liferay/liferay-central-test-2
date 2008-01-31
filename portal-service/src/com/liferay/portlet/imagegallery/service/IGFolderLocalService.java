@@ -116,21 +116,21 @@ public interface IGFolderLocalService {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		java.lang.String uuid, long userId, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
@@ -140,7 +140,7 @@ public interface IGFolderLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolderToGroup(
@@ -150,49 +150,49 @@ public interface IGFolderLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFolder(long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder folder)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFolders(long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getFolders(long groupId)
@@ -220,6 +220,6 @@ public interface IGFolderLocalService {
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -75,7 +75,7 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
@@ -117,7 +117,7 @@ public class WikiPageServiceHttp {
 
 	public static void deletePage(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
@@ -155,7 +155,7 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
@@ -198,7 +198,7 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
@@ -243,7 +243,7 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
@@ -290,7 +290,7 @@ public class WikiPageServiceHttp {
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);

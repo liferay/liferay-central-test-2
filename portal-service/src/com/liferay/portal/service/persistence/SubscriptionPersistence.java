@@ -32,7 +32,7 @@ public interface SubscriptionPersistence {
 	public com.liferay.portal.model.Subscription create(long subscriptionId);
 
 	public com.liferay.portal.model.Subscription remove(long subscriptionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription remove(
@@ -53,7 +53,7 @@ public interface SubscriptionPersistence {
 
 	public com.liferay.portal.model.Subscription findByPrimaryKey(
 		long subscriptionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription fetchByPrimaryKey(
@@ -71,18 +71,18 @@ public interface SubscriptionPersistence {
 
 	public com.liferay.portal.model.Subscription findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription[] findByUserId_PrevAndNext(
 		long subscriptionId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public java.util.List findByC_C_C(long companyId, long classNameId,
@@ -100,24 +100,24 @@ public interface SubscriptionPersistence {
 	public com.liferay.portal.model.Subscription findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription[] findByC_C_C_PrevAndNext(
 		long subscriptionId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription findByC_U_C_C(long companyId,
 		long userId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public com.liferay.portal.model.Subscription fetchByC_U_C_C(
@@ -149,7 +149,7 @@ public interface SubscriptionPersistence {
 
 	public void removeByC_U_C_C(long companyId, long userId, long classNameId,
 		long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

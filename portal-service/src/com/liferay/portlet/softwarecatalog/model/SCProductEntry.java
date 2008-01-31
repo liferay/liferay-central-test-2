@@ -53,10 +53,10 @@ public interface SCProductEntry extends SCProductEntryModel {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLicenses()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getScreenshots()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

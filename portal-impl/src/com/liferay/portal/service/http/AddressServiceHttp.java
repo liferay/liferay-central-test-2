@@ -78,7 +78,7 @@ public class AddressServiceHttp {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -164,7 +164,7 @@ public class AddressServiceHttp {
 	}
 
 	public static void deleteAddress(HttpPrincipal httpPrincipal, long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);
@@ -196,7 +196,7 @@ public class AddressServiceHttp {
 
 	public static com.liferay.portal.model.Address getAddress(
 		HttpPrincipal httpPrincipal, long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);
@@ -232,7 +232,7 @@ public class AddressServiceHttp {
 
 	public static java.util.List getAddresses(HttpPrincipal httpPrincipal,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -277,7 +277,7 @@ public class AddressServiceHttp {
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, long regionId,
 		long countryId, int typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(addressId);

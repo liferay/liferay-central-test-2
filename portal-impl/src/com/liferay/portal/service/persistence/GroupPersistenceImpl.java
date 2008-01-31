@@ -1262,7 +1262,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public List getOrganizations(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
+
 		String finderClassName = "Groups_Orgs";
+
 		String finderMethodName = "getOrganizations";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1334,7 +1336,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int getOrganizationsSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
+
 		String finderClassName = "Groups_Orgs";
+
 		String finderMethodName = "getOrganizationsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1393,7 +1397,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
+
 		String finderClassName = "Groups_Orgs";
+
 		String finderMethodName = "containsOrganizations";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -1443,7 +1449,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addOrganization(long pk, long organizationPK)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			addOrganization.add(pk, organizationPK);
@@ -1458,7 +1464,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void addOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			addOrganization.add(pk, organization.getPrimaryKey());
@@ -1472,7 +1478,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addOrganizations(long pk, long[] organizationPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizationPKs.length; i++) {
@@ -1488,7 +1494,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addOrganizations(long pk, List organizations)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizations.size(); i++) {
@@ -1519,7 +1525,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeOrganization(long pk, long organizationPK)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			removeOrganization.remove(pk, organizationPK);
@@ -1534,7 +1540,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void removeOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			removeOrganization.remove(pk, organization.getPrimaryKey());
@@ -1548,7 +1554,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeOrganizations(long pk, long[] organizationPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizationPKs.length; i++) {
@@ -1564,7 +1570,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeOrganizations(long pk, List organizations)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizations.size(); i++) {
@@ -1582,7 +1588,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setOrganizations(long pk, long[] organizationPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			clearOrganizations.clear(pk);
@@ -1600,7 +1606,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setOrganizations(long pk, List organizations)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			clearOrganizations.clear(pk);
@@ -1632,7 +1638,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public List getPermissions(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "getPermissions";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1698,7 +1706,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int getPermissionsSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "getPermissionsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1757,7 +1767,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "containsPermissions";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -1803,7 +1815,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addPermission(long pk, long permissionPK)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			addPermission.add(pk, permissionPK);
@@ -1818,7 +1830,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void addPermission(long pk,
 		com.liferay.portal.model.Permission permission)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			addPermission.add(pk, permission.getPrimaryKey());
@@ -1832,7 +1844,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addPermissions(long pk, long[] permissionPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissionPKs.length; i++) {
@@ -1848,7 +1860,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addPermissions(long pk, List permissions)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissions.size(); i++) {
@@ -1879,7 +1891,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removePermission(long pk, long permissionPK)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			removePermission.remove(pk, permissionPK);
@@ -1894,7 +1906,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void removePermission(long pk,
 		com.liferay.portal.model.Permission permission)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			removePermission.remove(pk, permission.getPrimaryKey());
@@ -1908,7 +1920,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removePermissions(long pk, long[] permissionPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissionPKs.length; i++) {
@@ -1924,7 +1936,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removePermissions(long pk, List permissions)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissions.size(); i++) {
@@ -1942,7 +1954,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setPermissions(long pk, long[] permissionPKs)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			clearPermissions.clear(pk);
@@ -1960,7 +1972,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setPermissions(long pk, List permissions)
-		throws NoSuchGroupException, 
+		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			clearPermissions.clear(pk);
@@ -1991,7 +2003,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
+
 		String finderClassName = "Groups_Roles";
+
 		String finderMethodName = "getRoles";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -2063,7 +2077,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int getRolesSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
+
 		String finderClassName = "Groups_Roles";
+
 		String finderMethodName = "getRolesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2121,7 +2137,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
+
 		String finderClassName = "Groups_Roles";
+
 		String finderMethodName = "containsRoles";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -2166,7 +2184,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addRole(long pk, long rolePK)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			addRole.add(pk, rolePK);
@@ -2180,7 +2198,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addRole(long pk, com.liferay.portal.model.Role role)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			addRole.add(pk, role.getPrimaryKey());
@@ -2194,7 +2212,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addRoles(long pk, long[] rolePKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < rolePKs.length; i++) {
@@ -2210,7 +2228,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addRoles(long pk, List roles)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
@@ -2241,7 +2259,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRole(long pk, long rolePK)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			removeRole.remove(pk, rolePK);
@@ -2255,7 +2273,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			removeRole.remove(pk, role.getPrimaryKey());
@@ -2269,7 +2287,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRoles(long pk, long[] rolePKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < rolePKs.length; i++) {
@@ -2285,7 +2303,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRoles(long pk, List roles)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
@@ -2303,7 +2321,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setRoles(long pk, long[] rolePKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			clearRoles.clear(pk);
@@ -2321,7 +2339,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setRoles(long pk, List roles)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			clearRoles.clear(pk);
@@ -2353,7 +2371,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public List getUserGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
+
 		String finderClassName = "Groups_UserGroups";
+
 		String finderMethodName = "getUserGroups";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -2425,7 +2445,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int getUserGroupsSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
+
 		String finderClassName = "Groups_UserGroups";
+
 		String finderMethodName = "getUserGroupsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2484,7 +2506,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
+
 		String finderClassName = "Groups_UserGroups";
+
 		String finderMethodName = "containsUserGroups";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -2530,8 +2554,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUserGroup(long pk, long userGroupPK)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			addUserGroup.add(pk, userGroupPK);
 		}
@@ -2545,8 +2569,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void addUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			addUserGroup.add(pk, userGroup.getPrimaryKey());
 		}
@@ -2559,8 +2583,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUserGroups(long pk, long[] userGroupPKs)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			for (int i = 0; i < userGroupPKs.length; i++) {
 				addUserGroup.add(pk, userGroupPKs[i]);
@@ -2575,8 +2599,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUserGroups(long pk, List userGroups)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			for (int i = 0; i < userGroups.size(); i++) {
 				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
@@ -2606,8 +2630,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUserGroup(long pk, long userGroupPK)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			removeUserGroup.remove(pk, userGroupPK);
 		}
@@ -2621,8 +2645,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public void removeUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			removeUserGroup.remove(pk, userGroup.getPrimaryKey());
 		}
@@ -2635,8 +2659,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUserGroups(long pk, long[] userGroupPKs)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			for (int i = 0; i < userGroupPKs.length; i++) {
 				removeUserGroup.remove(pk, userGroupPKs[i]);
@@ -2651,8 +2675,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUserGroups(long pk, List userGroups)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			for (int i = 0; i < userGroups.size(); i++) {
 				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
@@ -2669,8 +2693,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setUserGroups(long pk, long[] userGroupPKs)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			clearUserGroups.clear(pk);
 
@@ -2687,8 +2711,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setUserGroups(long pk, List userGroups)
-		throws NoSuchGroupException, 
-			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
+			SystemException {
 		try {
 			clearUserGroups.clear(pk);
 
@@ -2718,7 +2742,9 @@ public class GroupPersistenceImpl extends BasePersistence
 	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
+
 		String finderClassName = "Users_Groups";
+
 		String finderMethodName = "getUsers";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -2784,7 +2810,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public int getUsersSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
+
 		String finderClassName = "Users_Groups";
+
 		String finderMethodName = "getUsersSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2842,7 +2870,9 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
+
 		String finderClassName = "Users_Groups";
+
 		String finderMethodName = "containsUsers";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -2887,7 +2917,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, long userPK)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -2901,7 +2931,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			addUser.add(pk, user.getPrimaryKey());
@@ -2915,7 +2945,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, long[] userPKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < userPKs.length; i++) {
@@ -2931,7 +2961,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, List users)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
@@ -2962,7 +2992,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, long userPK)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -2976,7 +3006,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			removeUser.remove(pk, user.getPrimaryKey());
@@ -2990,7 +3020,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, long[] userPKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < userPKs.length; i++) {
@@ -3006,7 +3036,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, List users)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
@@ -3024,7 +3054,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, long[] userPKs)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -3042,7 +3072,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, List users)
-		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException, 
+		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			clearUsers.clear(pk);

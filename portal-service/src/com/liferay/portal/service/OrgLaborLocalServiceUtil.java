@@ -796,7 +796,7 @@ public class OrgLaborLocalServiceUtil {
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 		int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 		int satOpen, int satClose)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
@@ -806,7 +806,7 @@ public class OrgLaborLocalServiceUtil {
 	}
 
 	public static void deleteOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
@@ -814,7 +814,7 @@ public class OrgLaborLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
@@ -832,7 +832,7 @@ public class OrgLaborLocalServiceUtil {
 		long orgLaborId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
 		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 

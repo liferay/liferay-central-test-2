@@ -338,21 +338,21 @@ public interface PortletPreferencesLocalService {
 	public void afterPropertiesSet();
 
 	public void deletePortletPreferences(long portletPreferencesId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePortletPreferences(long ownerId, int ownerType,
 		long plid, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 		long companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getPortletPreferences()
@@ -366,33 +366,33 @@ public interface PortletPreferencesLocalService {
 
 	public java.util.List getPortletPreferences(long ownerId, int ownerType,
 		long plid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public javax.portlet.PortletPreferences getPreferences(
 		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		java.lang.String defaultPreferences)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

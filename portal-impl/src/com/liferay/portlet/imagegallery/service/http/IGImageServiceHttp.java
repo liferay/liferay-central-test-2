@@ -78,7 +78,7 @@ public class IGImageServiceHttp {
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -150,7 +150,7 @@ public class IGImageServiceHttp {
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -225,7 +225,7 @@ public class IGImageServiceHttp {
 	}
 
 	public static void deleteImage(HttpPrincipal httpPrincipal, long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
@@ -257,7 +257,7 @@ public class IGImageServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		HttpPrincipal httpPrincipal, long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
@@ -293,7 +293,7 @@ public class IGImageServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		HttpPrincipal httpPrincipal, long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(largeImageId);
@@ -329,7 +329,7 @@ public class IGImageServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		HttpPrincipal httpPrincipal, long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(smallImageId);
@@ -367,7 +367,7 @@ public class IGImageServiceHttp {
 		HttpPrincipal httpPrincipal, long imageId, long folderId,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);

@@ -52,13 +52,13 @@ public interface WorkflowDefinitionService {
 	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
 		java.lang.String xml, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
 		java.lang.String xml, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
@@ -66,23 +66,23 @@ public interface WorkflowDefinitionService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addDefinitionResources(com.liferay.portal.model.User user,
 		long definitionId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addDefinitionResources(com.liferay.portal.model.User user,
 		long definitionId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.workflow.model.WorkflowDefinition getDefinition(
 		long definitionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

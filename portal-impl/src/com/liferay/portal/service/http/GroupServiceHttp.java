@@ -76,7 +76,7 @@ public class GroupServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -137,7 +137,7 @@ public class GroupServiceHttp {
 		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(liveGroupId);
@@ -199,7 +199,7 @@ public class GroupServiceHttp {
 
 	public static void addRoleGroups(HttpPrincipal httpPrincipal, long roleId,
 		long[] groupIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
@@ -236,7 +236,7 @@ public class GroupServiceHttp {
 	}
 
 	public static void deleteGroup(HttpPrincipal httpPrincipal, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -268,7 +268,7 @@ public class GroupServiceHttp {
 
 	public static com.liferay.portal.model.Group getGroup(
 		HttpPrincipal httpPrincipal, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -304,7 +304,7 @@ public class GroupServiceHttp {
 
 	public static com.liferay.portal.model.Group getGroup(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -346,7 +346,7 @@ public class GroupServiceHttp {
 
 	public static java.util.List getOrganizationsGroups(
 		HttpPrincipal httpPrincipal, java.util.List organizations)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = organizations;
@@ -386,7 +386,7 @@ public class GroupServiceHttp {
 
 	public static java.util.List getUserGroupsGroups(
 		HttpPrincipal httpPrincipal, java.util.List userGroups)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userGroups;
@@ -566,7 +566,7 @@ public class GroupServiceHttp {
 
 	public static void setRoleGroups(HttpPrincipal httpPrincipal, long roleId,
 		long[] groupIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
@@ -604,7 +604,7 @@ public class GroupServiceHttp {
 
 	public static void unsetRoleGroups(HttpPrincipal httpPrincipal,
 		long roleId, long[] groupIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
@@ -644,7 +644,7 @@ public class GroupServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -706,7 +706,7 @@ public class GroupServiceHttp {
 
 	public static com.liferay.portal.model.Group updateGroup(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String typeSettings)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);

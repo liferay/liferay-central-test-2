@@ -59,7 +59,7 @@ public interface JournalFeedService {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(long plid,
@@ -73,25 +73,25 @@ public interface JournalFeedService {
 		java.lang.String feedType, double feedVersion,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFeed(long groupId, long feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFeed(long groupId, java.lang.String feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalFeed getFeed(long groupId,
 		long feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalFeed getFeed(long groupId,
 		java.lang.String feedId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalFeed updateFeed(
@@ -103,6 +103,6 @@ public interface JournalFeedService {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

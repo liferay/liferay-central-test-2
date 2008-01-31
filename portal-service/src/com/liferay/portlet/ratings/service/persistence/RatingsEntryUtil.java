@@ -36,7 +36,7 @@ public class RatingsEntryUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry remove(
 		long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().remove(entryId);
 	}
@@ -67,7 +67,7 @@ public class RatingsEntryUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByPrimaryKey(
 		long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
@@ -96,7 +96,7 @@ public class RatingsEntryUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByC_C_First(classNameId, classPK, obc);
 	}
@@ -104,7 +104,7 @@ public class RatingsEntryUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByC_C_Last(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByC_C_Last(classNameId, classPK, obc);
 	}
@@ -112,15 +112,15 @@ public class RatingsEntryUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry[] findByC_C_PrevAndNext(
 		long entryId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
-		return getPersistence().findByC_C_PrevAndNext(entryId, classNameId,
-			classPK, obc);
+		return getPersistence()
+				   .findByC_C_PrevAndNext(entryId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
 		long userId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByU_C_C(userId, classNameId, classPK);
 	}
@@ -140,8 +140,8 @@ public class RatingsEntryUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -166,7 +166,7 @@ public class RatingsEntryUtil {
 	}
 
 	public static void removeByU_C_C(long userId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		getPersistence().removeByU_C_C(userId, classNameId, classPK);
 	}

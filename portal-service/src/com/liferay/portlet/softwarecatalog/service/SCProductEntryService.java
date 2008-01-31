@@ -57,7 +57,7 @@ public interface SCProductEntryService {
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -69,16 +69,16 @@ public interface SCProductEntryService {
 		java.util.List thumbnails, java.util.List fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProductEntry(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
@@ -88,6 +88,6 @@ public interface SCProductEntryService {
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

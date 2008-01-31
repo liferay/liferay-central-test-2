@@ -53,7 +53,7 @@ package com.liferay.portal.service;
 public class RegionServiceUtil {
 	public static com.liferay.portal.model.Region addRegion(long countryId,
 		java.lang.String regionCode, java.lang.String name, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
@@ -89,7 +89,7 @@ public class RegionServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Region getRegion(long regionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 

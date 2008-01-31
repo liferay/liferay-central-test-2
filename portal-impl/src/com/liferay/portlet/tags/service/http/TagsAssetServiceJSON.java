@@ -73,13 +73,13 @@ import org.json.JSONObject;
  */
 public class TagsAssetServiceJSON {
 	public static void deleteAsset(long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		TagsAssetServiceUtil.deleteAsset(assetId);
 	}
 
 	public static JSONObject getAsset(long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.getAsset(assetId);
 
@@ -94,7 +94,7 @@ public class TagsAssetServiceJSON {
 		java.util.Date publishDate, java.util.Date expirationDate, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = TagsAssetServiceUtil.getAssetsRSS(groupId,
 				classNameIds, entryIds, notEntryIds, andOperator, orderByCol1,
@@ -114,7 +114,7 @@ public class TagsAssetServiceJSON {
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int begin, int end, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
 				begin, end, languageId);
@@ -140,7 +140,7 @@ public class TagsAssetServiceJSON {
 	public static java.lang.String getCompanyAssetsRSS(long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = TagsAssetServiceUtil.getCompanyAssetsRSS(companyId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -150,7 +150,7 @@ public class TagsAssetServiceJSON {
 
 	public static JSONObject incrementViewCounter(java.lang.String className,
 		long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.incrementViewCounter(className,
 				classPK);
@@ -161,7 +161,7 @@ public class TagsAssetServiceJSON {
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.searchAssetDisplays(companyId,
 				portletId, keywords, languageId, begin, end);
@@ -187,7 +187,7 @@ public class TagsAssetServiceJSON {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(groupId,
 				className, classPK, entryNames, startDate, endDate,

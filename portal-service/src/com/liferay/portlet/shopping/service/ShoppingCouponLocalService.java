@@ -141,11 +141,11 @@ public interface ShoppingCouponLocalService {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteCoupon(long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteCoupons(long groupId)
@@ -153,12 +153,12 @@ public interface ShoppingCouponLocalService {
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		java.lang.String code)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long plid, long companyId,
@@ -178,6 +178,6 @@ public interface ShoppingCouponLocalService {
 		int endDateMinute, boolean neverExpire, boolean active,
 		java.lang.String limitCategories, java.lang.String limitSkus,
 		double minOrder, double discount, java.lang.String discountType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

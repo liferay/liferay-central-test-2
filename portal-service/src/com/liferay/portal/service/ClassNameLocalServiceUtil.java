@@ -792,7 +792,7 @@ public class ClassNameLocalServiceUtil {
 	}
 
 	public static void checkClassNames()
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
@@ -801,7 +801,7 @@ public class ClassNameLocalServiceUtil {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
@@ -810,7 +810,7 @@ public class ClassNameLocalServiceUtil {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 

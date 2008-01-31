@@ -55,7 +55,7 @@ public class BookmarksEntryServiceUtil {
 		long folderId, java.lang.String name, java.lang.String url,
 		java.lang.String comments, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
@@ -68,7 +68,7 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String comments, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
@@ -77,7 +77,7 @@ public class BookmarksEntryServiceUtil {
 	}
 
 	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
@@ -86,7 +86,7 @@ public class BookmarksEntryServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
@@ -95,7 +95,7 @@ public class BookmarksEntryServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
@@ -106,7 +106,7 @@ public class BookmarksEntryServiceUtil {
 		long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 

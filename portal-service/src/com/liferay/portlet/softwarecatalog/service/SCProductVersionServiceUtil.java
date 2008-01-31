@@ -57,7 +57,7 @@ public class SCProductVersionServiceUtil {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -73,7 +73,7 @@ public class SCProductVersionServiceUtil {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class SCProductVersionServiceUtil {
 	}
 
 	public static void deleteProductVersion(long productVersionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -93,7 +93,7 @@ public class SCProductVersionServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -102,7 +102,7 @@ public class SCProductVersionServiceUtil {
 
 	public static java.util.List getProductVersions(long productEntryId,
 		int begin, int end)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -111,7 +111,7 @@ public class SCProductVersionServiceUtil {
 	}
 
 	public static int getProductVersionsCount(long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
@@ -123,7 +123,7 @@ public class SCProductVersionServiceUtil {
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 

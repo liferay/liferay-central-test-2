@@ -338,16 +338,16 @@ public interface WebDAVPropsLocalService {
 	public void afterPropertiesSet();
 
 	public void deleteWebDAVProps(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.WebDAVProps getWebDAVProps(long companyId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void storeWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDavProps)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

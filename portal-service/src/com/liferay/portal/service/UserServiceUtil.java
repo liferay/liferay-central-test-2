@@ -52,7 +52,7 @@ package com.liferay.portal.service;
  */
 public class UserServiceUtil {
 	public static void addGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -60,7 +60,7 @@ public class UserServiceUtil {
 	}
 
 	public static void addOrganizationUsers(long organizationId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -69,7 +69,7 @@ public class UserServiceUtil {
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -77,7 +77,7 @@ public class UserServiceUtil {
 	}
 
 	public static void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -85,7 +85,7 @@ public class UserServiceUtil {
 	}
 
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -101,7 +101,7 @@ public class UserServiceUtil {
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String jobTitle, long[] organizationIds,
 		boolean sendEmail)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -113,7 +113,7 @@ public class UserServiceUtil {
 	}
 
 	public static void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -121,7 +121,7 @@ public class UserServiceUtil {
 	}
 
 	public static void deleteUser(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -129,7 +129,7 @@ public class UserServiceUtil {
 	}
 
 	public static long getDefaultUserId(long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -137,7 +137,7 @@ public class UserServiceUtil {
 	}
 
 	public static java.util.List getGroupUsers(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -145,7 +145,7 @@ public class UserServiceUtil {
 	}
 
 	public static java.util.List getRoleUsers(long roleId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -154,7 +154,7 @@ public class UserServiceUtil {
 
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		long companyId, java.lang.String emailAddress)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -162,7 +162,7 @@ public class UserServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User getUserById(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -171,7 +171,7 @@ public class UserServiceUtil {
 
 	public static com.liferay.portal.model.User getUserByScreenName(
 		long companyId, java.lang.String screenName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -180,7 +180,7 @@ public class UserServiceUtil {
 
 	public static long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -189,7 +189,7 @@ public class UserServiceUtil {
 
 	public static long getUserIdByScreenName(long companyId,
 		java.lang.String screenName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -197,7 +197,7 @@ public class UserServiceUtil {
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -205,7 +205,7 @@ public class UserServiceUtil {
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -213,7 +213,7 @@ public class UserServiceUtil {
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -221,7 +221,7 @@ public class UserServiceUtil {
 	}
 
 	public static void setUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -229,7 +229,7 @@ public class UserServiceUtil {
 	}
 
 	public static void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -238,7 +238,7 @@ public class UserServiceUtil {
 
 	public static void unsetOrganizationUsers(long organizationId,
 		long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -247,7 +247,7 @@ public class UserServiceUtil {
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -255,7 +255,7 @@ public class UserServiceUtil {
 	}
 
 	public static void unsetRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -263,7 +263,7 @@ public class UserServiceUtil {
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -272,7 +272,7 @@ public class UserServiceUtil {
 
 	public static com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -281,7 +281,7 @@ public class UserServiceUtil {
 
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(
 		long userId, boolean agreedToTermsOfUse)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -290,7 +290,7 @@ public class UserServiceUtil {
 
 	public static com.liferay.portal.model.User updateLockout(long userId,
 		boolean lockout)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -298,7 +298,7 @@ public class UserServiceUtil {
 	}
 
 	public static void updateOrganizations(long userId, long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -308,7 +308,7 @@ public class UserServiceUtil {
 	public static com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -317,7 +317,7 @@ public class UserServiceUtil {
 	}
 
 	public static void updatePortrait(long userId, byte[] bytes)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -336,7 +336,7 @@ public class UserServiceUtil {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
@@ -360,7 +360,7 @@ public class UserServiceUtil {
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 

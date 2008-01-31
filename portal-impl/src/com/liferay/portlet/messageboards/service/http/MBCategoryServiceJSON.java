@@ -76,7 +76,7 @@ public class MBCategoryServiceJSON {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
 				parentCategoryId, name, description, communityPermissions,
@@ -86,13 +86,13 @@ public class MBCategoryServiceJSON {
 	}
 
 	public static void deleteCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
 	public static JSONObject getCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
 
@@ -101,7 +101,7 @@ public class MBCategoryServiceJSON {
 
 	public static JSONArray getCategories(long groupId, long parentCategoryId,
 		int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = MBCategoryServiceUtil.getCategories(groupId,
 				parentCategoryId, begin, end);
@@ -118,13 +118,13 @@ public class MBCategoryServiceJSON {
 	}
 
 	public static void subscribeCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBCategoryServiceUtil.subscribeCategory(categoryId);
 	}
 
 	public static void unsubscribeCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 	}
@@ -132,7 +132,7 @@ public class MBCategoryServiceJSON {
 	public static JSONObject updateCategory(long categoryId,
 		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
 				parentCategoryId, name, description, mergeWithParentCategory);

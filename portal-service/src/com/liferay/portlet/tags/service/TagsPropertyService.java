@@ -51,16 +51,16 @@ package com.liferay.portlet.tags.service;
 public interface TagsPropertyService {
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long entryId, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		java.lang.String entryName, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProperty(long propertyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getProperties(long entryId)
@@ -71,6 +71,6 @@ public interface TagsPropertyService {
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

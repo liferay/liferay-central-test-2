@@ -341,6 +341,6 @@ public interface ServiceComponentLocalService {
 		javax.servlet.ServletContext ctx,
 		java.lang.ClassLoader portletClassLoader,
 		java.lang.String buildNamespace, long buildNumber, long buildDate)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

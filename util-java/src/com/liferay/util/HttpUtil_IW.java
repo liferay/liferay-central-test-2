@@ -41,6 +41,10 @@ public class HttpUtil_IW {
 		return HttpUtil.encodeURL(url);
 	}
 
+	public java.lang.String getQueryString(java.lang.String url) {
+		return HttpUtil.getQueryString(url);
+	}
+
 	public java.util.Map parameterMapFromString(java.lang.String queryString) {
 		return HttpUtil.parameterMapFromString(queryString);
 	}

@@ -63,7 +63,7 @@ public interface MBMessage extends MBMessageModel {
 	public boolean isDiscussion();
 
 	public double getPriority()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void setPriority(double priority);
@@ -77,6 +77,6 @@ public interface MBMessage extends MBMessageModel {
 	public java.lang.String getBody(boolean translated);
 
 	public java.lang.String[] getTagsEntries()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

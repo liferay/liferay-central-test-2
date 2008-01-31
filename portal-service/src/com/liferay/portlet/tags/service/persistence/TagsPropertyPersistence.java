@@ -32,7 +32,7 @@ public interface TagsPropertyPersistence {
 	public com.liferay.portlet.tags.model.TagsProperty create(long propertyId);
 
 	public com.liferay.portlet.tags.model.TagsProperty remove(long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty remove(
@@ -53,7 +53,7 @@ public interface TagsPropertyPersistence {
 
 	public com.liferay.portlet.tags.model.TagsProperty findByPrimaryKey(
 		long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty fetchByPrimaryKey(
@@ -71,18 +71,18 @@ public interface TagsPropertyPersistence {
 
 	public com.liferay.portlet.tags.model.TagsProperty findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty[] findByCompanyId_PrevAndNext(
 		long propertyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public java.util.List findByEntryId(long entryId)
@@ -97,18 +97,18 @@ public interface TagsPropertyPersistence {
 
 	public com.liferay.portlet.tags.model.TagsProperty findByEntryId_First(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByEntryId_Last(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty[] findByEntryId_PrevAndNext(
 		long propertyId, long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public java.util.List findByC_K(long companyId, java.lang.String key)
@@ -124,24 +124,24 @@ public interface TagsPropertyPersistence {
 	public com.liferay.portlet.tags.model.TagsProperty findByC_K_First(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByC_K_Last(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty[] findByC_K_PrevAndNext(
 		long propertyId, long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByE_K(long entryId,
 		java.lang.String key)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public com.liferay.portlet.tags.model.TagsProperty fetchByE_K(
@@ -175,7 +175,7 @@ public interface TagsPropertyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByE_K(long entryId, java.lang.String key)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

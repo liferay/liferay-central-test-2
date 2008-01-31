@@ -275,7 +275,7 @@ public class ShoppingCartLocalServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
@@ -292,7 +292,7 @@ public class ShoppingCartLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
 		long userId, long groupId, java.lang.String itemIds,
 		java.lang.String couponCodes, int altShipping, boolean insure)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 

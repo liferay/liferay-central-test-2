@@ -338,15 +338,15 @@ public interface ClassNameLocalService {
 	public void afterPropertiesSet();
 
 	public void checkClassNames()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -77,7 +77,7 @@ public class ShoppingCategoryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -138,7 +138,7 @@ public class ShoppingCategoryServiceHttp {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -204,7 +204,7 @@ public class ShoppingCategoryServiceHttp {
 
 	public static void deleteCategory(HttpPrincipal httpPrincipal,
 		long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -236,7 +236,7 @@ public class ShoppingCategoryServiceHttp {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		HttpPrincipal httpPrincipal, long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -274,7 +274,7 @@ public class ShoppingCategoryServiceHttp {
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentCategory)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);

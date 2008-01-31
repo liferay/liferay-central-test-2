@@ -799,7 +799,7 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Image getImage(long imageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 

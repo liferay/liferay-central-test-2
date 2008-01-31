@@ -57,7 +57,7 @@ public interface IGImage extends IGImageModel {
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder();
 
 	public java.lang.String getImageType()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void setImageType(java.lang.String imageType);

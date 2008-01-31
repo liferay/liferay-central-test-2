@@ -32,7 +32,7 @@ public interface UserIdMapperPersistence {
 	public com.liferay.portal.model.UserIdMapper create(long userIdMapperId);
 
 	public com.liferay.portal.model.UserIdMapper remove(long userIdMapperId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper remove(
@@ -53,7 +53,7 @@ public interface UserIdMapperPersistence {
 
 	public com.liferay.portal.model.UserIdMapper findByPrimaryKey(
 		long userIdMapperId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper fetchByPrimaryKey(
@@ -71,23 +71,23 @@ public interface UserIdMapperPersistence {
 
 	public com.liferay.portal.model.UserIdMapper findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
 		long userIdMapperId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper findByU_T(long userId,
 		java.lang.String type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper fetchByU_T(long userId,
@@ -95,7 +95,7 @@ public interface UserIdMapperPersistence {
 
 	public com.liferay.portal.model.UserIdMapper findByT_E(
 		java.lang.String type, java.lang.String externalUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public com.liferay.portal.model.UserIdMapper fetchByT_E(
@@ -123,12 +123,12 @@ public interface UserIdMapperPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByU_T(long userId, java.lang.String type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public void removeByT_E(java.lang.String type,
 		java.lang.String externalUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserIdMapperException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

@@ -36,7 +36,7 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker remove(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().remove(passwordTrackerId);
 	}
@@ -67,7 +67,7 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByPrimaryKey(passwordTrackerId);
 	}
@@ -95,14 +95,14 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -110,10 +110,10 @@ public class PasswordTrackerUtil {
 	public static com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		long passwordTrackerId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordTrackerException {
-		return getPersistence().findByUserId_PrevAndNext(passwordTrackerId,
-			userId, obc);
+		return getPersistence()
+				   .findByUserId_PrevAndNext(passwordTrackerId, userId, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -125,8 +125,8 @@ public class PasswordTrackerUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

@@ -32,7 +32,7 @@ public interface PluginSettingPersistence {
 	public com.liferay.portal.model.PluginSetting create(long pluginSettingId);
 
 	public com.liferay.portal.model.PluginSetting remove(long pluginSettingId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting remove(
@@ -53,7 +53,7 @@ public interface PluginSettingPersistence {
 
 	public com.liferay.portal.model.PluginSetting findByPrimaryKey(
 		long pluginSettingId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting fetchByPrimaryKey(
@@ -71,23 +71,23 @@ public interface PluginSettingPersistence {
 
 	public com.liferay.portal.model.PluginSetting findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
 		long pluginSettingId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting findByC_I_T(long companyId,
 		java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public com.liferay.portal.model.PluginSetting fetchByC_I_T(long companyId,
@@ -116,7 +116,7 @@ public interface PluginSettingPersistence {
 
 	public void removeByC_I_T(long companyId, java.lang.String pluginId,
 		java.lang.String pluginType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPluginSettingException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

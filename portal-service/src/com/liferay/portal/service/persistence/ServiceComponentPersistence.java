@@ -34,7 +34,7 @@ public interface ServiceComponentPersistence {
 
 	public com.liferay.portal.model.ServiceComponent remove(
 		long serviceComponentId)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent remove(
@@ -55,7 +55,7 @@ public interface ServiceComponentPersistence {
 
 	public com.liferay.portal.model.ServiceComponent findByPrimaryKey(
 		long serviceComponentId)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent fetchByPrimaryKey(
@@ -76,24 +76,24 @@ public interface ServiceComponentPersistence {
 	public com.liferay.portal.model.ServiceComponent findByBuildNamespace_First(
 		java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent findByBuildNamespace_Last(
 		java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent[] findByBuildNamespace_PrevAndNext(
 		long serviceComponentId, java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent findByBNS_BNU(
 		java.lang.String buildNamespace, long buildNumber)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
@@ -122,7 +122,7 @@ public interface ServiceComponentPersistence {
 
 	public void removeByBNS_BNU(java.lang.String buildNamespace,
 		long buildNumber)
-		throws com.liferay.portal.NoSuchServiceComponentException, 
+		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

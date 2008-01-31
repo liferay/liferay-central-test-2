@@ -36,9 +36,10 @@ public class JournalArticleFinderUtil {
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByKeywords(companyId, groupId, keywords,
-			version, type, structureId, templateId, displayDateGT,
-			displayDateLT, approved, expired, reviewDate);
+		return getFinder()
+				   .countByKeywords(companyId, groupId, keywords, version,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate);
 	}
 
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(long companyId,
@@ -50,10 +51,11 @@ public class JournalArticleFinderUtil {
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleId, version, title, description, content, type,
-			structureId, templateId, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator);
+		return getFinder()
+				   .countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleId, version, title, description, content, type, structureId,
+			templateId, displayDateGT, displayDateLT, approved, expired,
+			reviewDate, andOperator);
 	}
 
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(long companyId,
@@ -65,8 +67,9 @@ public class JournalArticleFinderUtil {
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleId, version, title, description, content, type,
+		return getFinder()
+				   .countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleId, version, title, description, content, type,
 			structureIds, templateIds, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator);
 	}
@@ -80,8 +83,9 @@ public class JournalArticleFinderUtil {
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleIds, version, titles, descriptions, contents, type,
+		return getFinder()
+				   .countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleIds, version, titles, descriptions, contents, type,
 			structureIds, templateIds, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator);
 	}
@@ -90,7 +94,8 @@ public class JournalArticleFinderUtil {
 		java.lang.Boolean expired, java.util.Date expirationDateLT,
 		java.util.Date expirationDateGT)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByExpirationDate(expired, expirationDateLT,
+		return getFinder()
+				   .findByExpirationDate(expired, expirationDateLT,
 			expirationDateGT);
 	}
 
@@ -102,9 +107,10 @@ public class JournalArticleFinderUtil {
 		java.lang.Boolean expired, java.util.Date reviewDate, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByKeywords(companyId, groupId, keywords,
-			version, type, structureId, templateId, displayDateGT,
-			displayDateLT, approved, expired, reviewDate, begin, end, obc);
+		return getFinder()
+				   .findByKeywords(companyId, groupId, keywords, version, type,
+			structureId, templateId, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, begin, end, obc);
 	}
 
 	public static java.util.List findByReviewDate(java.util.Date reviewDateLT,
@@ -123,10 +129,11 @@ public class JournalArticleFinderUtil {
 		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleId, version, title, description, content, type,
-			structureId, templateId, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, begin, end, obc);
+		return getFinder()
+				   .findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleId, version, title, description, content, type, structureId,
+			templateId, displayDateGT, displayDateLT, approved, expired,
+			reviewDate, andOperator, begin, end, obc);
 	}
 
 	public static java.util.List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
@@ -140,8 +147,9 @@ public class JournalArticleFinderUtil {
 		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleId, version, title, description, content, type,
+		return getFinder()
+				   .findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleId, version, title, description, content, type,
 			structureIds, templateIds, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
@@ -157,8 +165,9 @@ public class JournalArticleFinderUtil {
 		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId,
-			groupId, articleIds, version, titles, descriptions, contents, type,
+		return getFinder()
+				   .findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(companyId, groupId,
+			articleIds, version, titles, descriptions, contents, type,
 			structureIds, templateIds, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator, begin, end, obc);
 	}

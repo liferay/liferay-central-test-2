@@ -72,7 +72,7 @@ import org.json.JSONObject;
  */
 public class WikiPageServiceJSON {
 	public static JSONObject addPage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
 				title);
@@ -81,13 +81,13 @@ public class WikiPageServiceJSON {
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
 	public static JSONObject getPage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 				title);
@@ -97,7 +97,7 @@ public class WikiPageServiceJSON {
 
 	public static JSONObject getPage(long nodeId, java.lang.String title,
 		double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 				title, version);
@@ -107,7 +107,7 @@ public class WikiPageServiceJSON {
 
 	public static JSONObject revertPage(long nodeId, java.lang.String title,
 		double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
 				title, version);
@@ -118,7 +118,7 @@ public class WikiPageServiceJSON {
 	public static JSONObject updatePage(long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format,
 		java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
 				title, content, format, tagsEntries);

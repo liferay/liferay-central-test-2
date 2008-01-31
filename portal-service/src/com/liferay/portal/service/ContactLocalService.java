@@ -338,14 +338,14 @@ public interface ContactLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.Contact getContact(long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteContact(long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteContact(com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

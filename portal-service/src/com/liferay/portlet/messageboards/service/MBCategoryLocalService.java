@@ -161,21 +161,21 @@ public interface MBCategoryLocalService {
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		java.lang.String uuid, long userId, long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
@@ -185,44 +185,44 @@ public interface MBCategoryLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteCategories(long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteCategory(long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteCategory(
 		com.liferay.portlet.messageboards.model.MBCategory category)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getCategories(long groupId, long parentCategoryId,
@@ -236,7 +236,7 @@ public interface MBCategoryLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
 		long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
@@ -249,7 +249,7 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void reIndex(java.lang.String[] ids)
@@ -262,14 +262,14 @@ public interface MBCategoryLocalService {
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void subscribeCategory(long userId, long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void unsubscribeCategory(long userId, long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

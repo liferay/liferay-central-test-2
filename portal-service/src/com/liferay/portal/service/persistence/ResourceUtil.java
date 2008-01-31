@@ -34,7 +34,7 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource remove(long resourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().remove(resourceId);
 	}
@@ -65,7 +65,7 @@ public class ResourceUtil {
 
 	public static com.liferay.portal.model.Resource findByPrimaryKey(
 		long resourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByPrimaryKey(resourceId);
 	}
@@ -93,14 +93,14 @@ public class ResourceUtil {
 
 	public static com.liferay.portal.model.Resource findByCodeId_First(
 		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByCodeId_First(codeId, obc);
 	}
 
 	public static com.liferay.portal.model.Resource findByCodeId_Last(
 		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByCodeId_Last(codeId, obc);
 	}
@@ -108,14 +108,14 @@ public class ResourceUtil {
 	public static com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
 		long resourceId, long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByCodeId_PrevAndNext(resourceId, codeId, obc);
 	}
 
 	public static com.liferay.portal.model.Resource findByC_P(long codeId,
 		java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByC_P(codeId, primKey);
 	}
@@ -134,8 +134,8 @@ public class ResourceUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -160,7 +160,7 @@ public class ResourceUtil {
 	}
 
 	public static void removeByC_P(long codeId, java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException {
 		getPersistence().removeByC_P(codeId, primKey);
 	}

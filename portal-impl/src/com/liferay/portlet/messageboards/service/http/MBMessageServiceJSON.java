@@ -76,7 +76,7 @@ public class MBMessageServiceJSON {
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				subject, body, files, anonymous, priority, tagsEntries,
@@ -90,7 +90,7 @@ public class MBMessageServiceJSON {
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				subject, body, files, anonymous, priority, tagsEntries,
@@ -104,7 +104,7 @@ public class MBMessageServiceJSON {
 		java.util.List files, boolean anonymous, double priority,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
@@ -120,7 +120,7 @@ public class MBMessageServiceJSON {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 				threadId, parentMessageId, subject, body, files, anonymous,
@@ -131,21 +131,21 @@ public class MBMessageServiceJSON {
 
 	public static void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK, long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBMessageServiceUtil.deleteDiscussionMessage(groupId, className,
 			classPK, messageId);
 	}
 
 	public static void deleteMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
 	public static JSONArray getCategoryMessages(long categoryId, int begin,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = MBMessageServiceUtil.getCategoryMessages(categoryId,
 				begin, end);
@@ -154,7 +154,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		int returnValue = MBMessageServiceUtil.getCategoryMessagesCount(categoryId);
 
@@ -165,7 +165,7 @@ public class MBMessageServiceJSON {
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = MBMessageServiceUtil.getCategoryMessagesRSS(categoryId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -177,7 +177,7 @@ public class MBMessageServiceJSON {
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = MBMessageServiceUtil.getCompanyMessagesRSS(companyId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -188,7 +188,7 @@ public class MBMessageServiceJSON {
 	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -200,7 +200,7 @@ public class MBMessageServiceJSON {
 		long userId, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
 				userId, max, type, version, displayStyle, feedURL, entryURL);
@@ -209,7 +209,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static JSONObject getMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.getMessage(messageId);
 
@@ -218,7 +218,7 @@ public class MBMessageServiceJSON {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue = MBMessageServiceUtil.getMessageDisplay(messageId);
 
@@ -228,7 +228,7 @@ public class MBMessageServiceJSON {
 	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
 				max, type, version, displayStyle, feedURL, entryURL);
@@ -237,13 +237,13 @@ public class MBMessageServiceJSON {
 	}
 
 	public static void subscribeMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
 	public static void unsubscribeMessage(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
@@ -251,7 +251,7 @@ public class MBMessageServiceJSON {
 	public static JSONObject updateDiscussionMessage(long groupId,
 		java.lang.String className, long classPK, long messageId,
 		java.lang.String subject, java.lang.String body)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 				className, classPK, messageId, subject, body);
@@ -262,7 +262,7 @@ public class MBMessageServiceJSON {
 	public static JSONObject updateMessage(long messageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		double priority, java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
 				subject, body, files, priority, tagsEntries);

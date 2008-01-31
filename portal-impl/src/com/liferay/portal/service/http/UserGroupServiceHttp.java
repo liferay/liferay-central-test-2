@@ -72,7 +72,7 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 public class UserGroupServiceHttp {
 	public static void addGroupUserGroups(HttpPrincipal httpPrincipal,
 		long groupId, long[] userGroupIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -111,7 +111,7 @@ public class UserGroupServiceHttp {
 	public static com.liferay.portal.model.UserGroup addUserGroup(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -157,7 +157,7 @@ public class UserGroupServiceHttp {
 
 	public static void deleteUserGroup(HttpPrincipal httpPrincipal,
 		long userGroupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userGroupId);
@@ -189,7 +189,7 @@ public class UserGroupServiceHttp {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		HttpPrincipal httpPrincipal, long userGroupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userGroupId);
@@ -225,7 +225,7 @@ public class UserGroupServiceHttp {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		HttpPrincipal httpPrincipal, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -265,7 +265,7 @@ public class UserGroupServiceHttp {
 
 	public static java.util.List getUserUserGroups(
 		HttpPrincipal httpPrincipal, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -301,7 +301,7 @@ public class UserGroupServiceHttp {
 
 	public static void unsetGroupUserGroups(HttpPrincipal httpPrincipal,
 		long groupId, long[] userGroupIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -341,7 +341,7 @@ public class UserGroupServiceHttp {
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		HttpPrincipal httpPrincipal, long userGroupId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userGroupId);

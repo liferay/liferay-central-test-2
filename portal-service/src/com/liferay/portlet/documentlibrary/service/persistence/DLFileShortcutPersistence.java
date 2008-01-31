@@ -34,7 +34,7 @@ public interface DLFileShortcutPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
 		long fileShortcutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
@@ -55,7 +55,7 @@ public interface DLFileShortcutPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByPrimaryKey(
 		long fileShortcutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByPrimaryKey(
@@ -74,19 +74,19 @@ public interface DLFileShortcutPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByUuid_PrevAndNext(
 		long fileShortcutId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public java.util.List findByFolderId(long folderId)
@@ -101,18 +101,18 @@ public interface DLFileShortcutPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByFolderId_PrevAndNext(
 		long fileShortcutId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public java.util.List findByTF_TN(long toFolderId, java.lang.String toName)
@@ -128,19 +128,19 @@ public interface DLFileShortcutPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTF_TN_First(
 		long toFolderId, java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTF_TN_Last(
 		long toFolderId, java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByTF_TN_PrevAndNext(
 		long fileShortcutId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	public java.util.List findWithDynamicQuery(

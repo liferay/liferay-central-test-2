@@ -32,7 +32,7 @@ public interface CountryPersistence {
 	public com.liferay.portal.model.Country create(long countryId);
 
 	public com.liferay.portal.model.Country remove(long countryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException;
 
 	public com.liferay.portal.model.Country remove(
@@ -52,7 +52,7 @@ public interface CountryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country findByPrimaryKey(long countryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException;
 
 	public com.liferay.portal.model.Country fetchByPrimaryKey(long countryId)
@@ -70,18 +70,18 @@ public interface CountryPersistence {
 
 	public com.liferay.portal.model.Country findByActive_First(boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException;
 
 	public com.liferay.portal.model.Country findByActive_Last(boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException;
 
 	public com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		long countryId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCountryException;
 
 	public java.util.List findWithDynamicQuery(

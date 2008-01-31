@@ -73,7 +73,7 @@ import org.json.JSONObject;
 public class WorkflowDefinitionServiceJSON {
 	public static JSONObject addDefinition(java.lang.String xml,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
 				addCommunityPermissions, addGuestPermissions);
@@ -84,7 +84,7 @@ public class WorkflowDefinitionServiceJSON {
 	public static JSONObject addDefinition(java.lang.String xml,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
 				communityPermissions, guestPermissions);
@@ -97,7 +97,7 @@ public class WorkflowDefinitionServiceJSON {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
 				addCommunityPermissions, addGuestPermissions,
@@ -107,7 +107,7 @@ public class WorkflowDefinitionServiceJSON {
 	}
 
 	public static JSONObject getDefinition(long definitionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.getDefinition(definitionId);
 

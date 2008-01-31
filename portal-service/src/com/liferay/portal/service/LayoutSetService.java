@@ -51,17 +51,17 @@ package com.liferay.portal.service;
 public interface LayoutSetService {
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
 		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
 		boolean privateLayout, java.lang.String virtualHost)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -53,7 +53,7 @@ package com.liferay.portlet.messageboards.service;
 public class MBThreadServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBThreadService mbThreadService = MBThreadServiceFactory.getService();
 
@@ -63,7 +63,7 @@ public class MBThreadServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBThreadService mbThreadService = MBThreadServiceFactory.getService();
 

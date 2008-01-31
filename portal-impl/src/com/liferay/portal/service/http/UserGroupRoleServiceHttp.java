@@ -72,7 +72,7 @@ import com.liferay.portal.service.UserGroupRoleServiceUtil;
 public class UserGroupRoleServiceHttp {
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
 		long userId, long groupId, long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -113,7 +113,7 @@ public class UserGroupRoleServiceHttp {
 
 	public static void addUserGroupRoles(HttpPrincipal httpPrincipal,
 		long[] userIds, long groupId, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userIds;
@@ -154,7 +154,7 @@ public class UserGroupRoleServiceHttp {
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
 		long userId, long groupId, long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -195,7 +195,7 @@ public class UserGroupRoleServiceHttp {
 
 	public static void deleteUserGroupRoles(HttpPrincipal httpPrincipal,
 		long[] userIds, long groupId, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userIds;

@@ -75,7 +75,7 @@ public class WebsiteServiceHttp {
 	public static com.liferay.portal.model.Website addWebsite(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String url, int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -129,7 +129,7 @@ public class WebsiteServiceHttp {
 	}
 
 	public static void deleteWebsite(HttpPrincipal httpPrincipal, long websiteId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(websiteId);
@@ -161,7 +161,7 @@ public class WebsiteServiceHttp {
 
 	public static com.liferay.portal.model.Website getWebsite(
 		HttpPrincipal httpPrincipal, long websiteId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(websiteId);
@@ -197,7 +197,7 @@ public class WebsiteServiceHttp {
 
 	public static java.util.List getWebsites(HttpPrincipal httpPrincipal,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -240,7 +240,7 @@ public class WebsiteServiceHttp {
 	public static com.liferay.portal.model.Website updateWebsite(
 		HttpPrincipal httpPrincipal, long websiteId, java.lang.String url,
 		int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(websiteId);

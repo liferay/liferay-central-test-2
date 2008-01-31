@@ -59,7 +59,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
@@ -78,7 +78,7 @@ public class SCProductEntryServiceUtil {
 		java.util.List thumbnails, java.util.List fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
@@ -89,7 +89,7 @@ public class SCProductEntryServiceUtil {
 	}
 
 	public static void deleteProductEntry(long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
@@ -98,7 +98,7 @@ public class SCProductEntryServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 

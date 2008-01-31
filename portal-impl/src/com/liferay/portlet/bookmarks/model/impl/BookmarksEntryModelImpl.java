@@ -325,8 +325,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getName().toLowerCase().compareTo(bookmarksEntry.getName()
-																.toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(bookmarksEntry.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

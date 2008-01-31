@@ -237,7 +237,7 @@ public class DLFileRankLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
 		long groupId, long companyId, long userId, long folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 

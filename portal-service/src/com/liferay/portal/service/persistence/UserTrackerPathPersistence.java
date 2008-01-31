@@ -34,7 +34,7 @@ public interface UserTrackerPathPersistence {
 
 	public com.liferay.portal.model.UserTrackerPath remove(
 		long userTrackerPathId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserTrackerPathException;
 
 	public com.liferay.portal.model.UserTrackerPath remove(
@@ -55,7 +55,7 @@ public interface UserTrackerPathPersistence {
 
 	public com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
 		long userTrackerPathId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserTrackerPathException;
 
 	public com.liferay.portal.model.UserTrackerPath fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface UserTrackerPathPersistence {
 
 	public com.liferay.portal.model.UserTrackerPath findByUserTrackerId_First(
 		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserTrackerPathException;
 
 	public com.liferay.portal.model.UserTrackerPath findByUserTrackerId_Last(
 		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserTrackerPathException;
 
 	public com.liferay.portal.model.UserTrackerPath[] findByUserTrackerId_PrevAndNext(
 		long userTrackerPathId, long userTrackerId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserTrackerPathException;
 
 	public java.util.List findWithDynamicQuery(

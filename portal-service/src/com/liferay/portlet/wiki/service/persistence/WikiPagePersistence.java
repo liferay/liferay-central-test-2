@@ -32,7 +32,7 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage create(long pageId);
 
 	public com.liferay.portlet.wiki.model.WikiPage remove(long pageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage remove(
@@ -52,7 +52,7 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(long pageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage fetchByPrimaryKey(
@@ -71,19 +71,19 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage[] findByUuid_PrevAndNext(
 		long pageId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public java.util.List findByNodeId(long nodeId)
@@ -98,18 +98,18 @@ public interface WikiPagePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiPage findByNodeId_First(
 		long nodeId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByNodeId_Last(
 		long nodeId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage[] findByNodeId_PrevAndNext(
 		long pageId, long nodeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public java.util.List findByN_T(long nodeId, java.lang.String title)
@@ -125,19 +125,19 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage findByN_T_First(
 		long nodeId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByN_T_Last(long nodeId,
 		java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage[] findByN_T_PrevAndNext(
 		long pageId, long nodeId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public java.util.List findByN_H(long nodeId, boolean head)
@@ -153,23 +153,23 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage findByN_H_First(
 		long nodeId, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByN_H_Last(long nodeId,
 		boolean head, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage[] findByN_H_PrevAndNext(
 		long pageId, long nodeId, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByN_T_V(long nodeId,
 		java.lang.String title, double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage fetchByN_T_V(long nodeId,
@@ -191,19 +191,19 @@ public interface WikiPagePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage findByN_T_H_First(
 		long nodeId, java.lang.String title, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByN_T_H_Last(
 		long nodeId, java.lang.String title, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public com.liferay.portlet.wiki.model.WikiPage[] findByN_T_H_PrevAndNext(
 		long pageId, long nodeId, java.lang.String title, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public java.util.List findWithDynamicQuery(
@@ -237,7 +237,7 @@ public interface WikiPagePersistence {
 
 	public void removeByN_T_V(long nodeId, java.lang.String title,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
 	public void removeByN_T_H(long nodeId, java.lang.String title, boolean head)

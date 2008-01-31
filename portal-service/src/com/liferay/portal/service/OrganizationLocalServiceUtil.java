@@ -794,7 +794,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -805,7 +805,7 @@ public class OrganizationLocalServiceUtil {
 		long userId, long parentOrganizationId, java.lang.String name,
 		int type, boolean recursable, long regionId, long countryId,
 		int statusId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -816,7 +816,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -825,7 +825,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -834,7 +834,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static void deleteOrganization(long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -843,7 +843,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -851,7 +851,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List getGroupOrganizations(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -859,7 +859,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List getManageableOrganizations(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -868,7 +868,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -877,7 +877,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -885,7 +885,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -893,7 +893,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List getOrganizations(long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -901,7 +901,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List getParentOrganizations(long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -917,7 +917,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static java.util.List getSubsetOrganizations(
 		java.util.List allOrganizations, java.util.List availableOrganizations)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -926,7 +926,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List getUserOrganizations(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -934,7 +934,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static int getUserOrganizationsCount(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -942,7 +942,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static boolean hasGroupOrganization(long groupId, long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -951,7 +951,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static boolean hasUserOrganization(long userId, long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -961,7 +961,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -973,7 +973,7 @@ public class OrganizationLocalServiceUtil {
 		long parentOrganizationId, java.lang.String keywords, int type,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, int begin, int end)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -986,7 +986,7 @@ public class OrganizationLocalServiceUtil {
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -999,7 +999,7 @@ public class OrganizationLocalServiceUtil {
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, boolean andOperator, int begin, int end)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1014,7 +1014,7 @@ public class OrganizationLocalServiceUtil {
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, boolean andOperator, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1026,7 +1026,7 @@ public class OrganizationLocalServiceUtil {
 	public static int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, int type, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1039,7 +1039,7 @@ public class OrganizationLocalServiceUtil {
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1050,7 +1050,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1059,7 +1059,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1069,7 +1069,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
@@ -1081,7 +1081,7 @@ public class OrganizationLocalServiceUtil {
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, int type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 

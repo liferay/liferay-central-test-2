@@ -74,7 +74,7 @@ public class ShoppingCategoryServiceJSON {
 	public static JSONObject addCategory(long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
 				parentCategoryId, name, description, addCommunityPermissions,
@@ -87,7 +87,7 @@ public class ShoppingCategoryServiceJSON {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
 				parentCategoryId, name, description, communityPermissions,
@@ -97,13 +97,13 @@ public class ShoppingCategoryServiceJSON {
 	}
 
 	public static void deleteCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
 	public static JSONObject getCategory(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
 
@@ -113,7 +113,7 @@ public class ShoppingCategoryServiceJSON {
 	public static JSONObject updateCategory(long categoryId,
 		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
 				parentCategoryId, name, description, mergeWithParentCategory);

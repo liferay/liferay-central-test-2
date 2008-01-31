@@ -303,7 +303,7 @@ public class JournalStructureLocalServiceUtil {
 		long plid, java.lang.String name, java.lang.String description,
 		java.lang.String xsd, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -317,7 +317,7 @@ public class JournalStructureLocalServiceUtil {
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -331,7 +331,7 @@ public class JournalStructureLocalServiceUtil {
 		long plid, java.lang.String name, java.lang.String description,
 		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -348,7 +348,7 @@ public class JournalStructureLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -366,7 +366,7 @@ public class JournalStructureLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -379,7 +379,7 @@ public class JournalStructureLocalServiceUtil {
 	public static void addStructureResources(long groupId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -390,7 +390,7 @@ public class JournalStructureLocalServiceUtil {
 	public static void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -401,7 +401,7 @@ public class JournalStructureLocalServiceUtil {
 	public static void addStructureResources(long groupId,
 		java.lang.String structureId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -413,7 +413,7 @@ public class JournalStructureLocalServiceUtil {
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -422,7 +422,7 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static void checkNewLine(long groupId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -431,7 +431,7 @@ public class JournalStructureLocalServiceUtil {
 
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -440,7 +440,7 @@ public class JournalStructureLocalServiceUtil {
 
 	public static void deleteStructure(
 		com.liferay.portlet.journal.model.JournalStructure structure)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -448,7 +448,7 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static void deleteStructures(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -457,7 +457,7 @@ public class JournalStructureLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long id)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -466,7 +466,7 @@ public class JournalStructureLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -543,7 +543,7 @@ public class JournalStructureLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 

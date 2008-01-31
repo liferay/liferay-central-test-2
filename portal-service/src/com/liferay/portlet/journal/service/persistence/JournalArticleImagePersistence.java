@@ -34,7 +34,7 @@ public interface JournalArticleImagePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleImage remove(
 		long articleImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage remove(
@@ -55,7 +55,7 @@ public interface JournalArticleImagePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByPrimaryKey(
 		long articleImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface JournalArticleImagePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByGroupId_PrevAndNext(
 		long articleImageId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public java.util.List findByTempImage(boolean tempImage)
@@ -99,18 +99,18 @@ public interface JournalArticleImagePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByTempImage_First(
 		boolean tempImage, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByTempImage_Last(
 		boolean tempImage, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByTempImage_PrevAndNext(
 		long articleImageId, boolean tempImage,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public java.util.List findByG_A_V(long groupId, java.lang.String articleId,
@@ -128,25 +128,25 @@ public interface JournalArticleImagePersistence {
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_First(
 		long groupId, java.lang.String articleId, double version,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_Last(
 		long groupId, java.lang.String articleId, double version,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByG_A_V_PrevAndNext(
 		long articleImageId, long groupId, java.lang.String articleId,
 		double version, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_L(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_L(
@@ -182,7 +182,7 @@ public interface JournalArticleImagePersistence {
 
 	public void removeByG_A_V_E_L(long groupId, java.lang.String articleId,
 		double version, java.lang.String elName, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

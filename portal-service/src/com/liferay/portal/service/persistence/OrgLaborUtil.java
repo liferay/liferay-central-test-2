@@ -34,7 +34,7 @@ public class OrgLaborUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor remove(long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException {
 		return getPersistence().remove(orgLaborId);
 	}
@@ -65,7 +65,7 @@ public class OrgLaborUtil {
 
 	public static com.liferay.portal.model.OrgLabor findByPrimaryKey(
 		long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException {
 		return getPersistence().findByPrimaryKey(orgLaborId);
 	}
@@ -88,14 +88,14 @@ public class OrgLaborUtil {
 	public static java.util.List findByOrganizationId(long organizationId,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByOrganizationId(organizationId, begin,
-			end, obc);
+		return getPersistence()
+				   .findByOrganizationId(organizationId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgLabor findByOrganizationId_First(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException {
 		return getPersistence().findByOrganizationId_First(organizationId, obc);
 	}
@@ -103,7 +103,7 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor findByOrganizationId_Last(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException {
 		return getPersistence().findByOrganizationId_Last(organizationId, obc);
 	}
@@ -111,9 +111,10 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
 		long orgLaborId, long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException {
-		return getPersistence().findByOrganizationId_PrevAndNext(orgLaborId,
+		return getPersistence()
+				   .findByOrganizationId_PrevAndNext(orgLaborId,
 			organizationId, obc);
 	}
 
@@ -126,8 +127,8 @@ public class OrgLaborUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

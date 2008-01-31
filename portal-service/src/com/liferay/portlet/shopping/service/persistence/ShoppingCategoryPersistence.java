@@ -34,7 +34,7 @@ public interface ShoppingCategoryPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory remove(
 		long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory remove(
@@ -55,7 +55,7 @@ public interface ShoppingCategoryPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByPrimaryKey(
 		long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface ShoppingCategoryPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory[] findByGroupId_PrevAndNext(
 		long categoryId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public java.util.List findByG_P(long groupId, long parentCategoryId)
@@ -100,19 +100,19 @@ public interface ShoppingCategoryPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_First(
 		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_Last(
 		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory[] findByG_P_PrevAndNext(
 		long categoryId, long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public java.util.List findWithDynamicQuery(

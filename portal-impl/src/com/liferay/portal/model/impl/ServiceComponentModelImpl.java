@@ -194,7 +194,8 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 
 		int value = 0;
 
-		value = getBuildNamespace().compareTo(serviceComponent.getBuildNamespace());
+		value = getBuildNamespace()
+					.compareTo(serviceComponent.getBuildNamespace());
 
 		value = value * -1;
 

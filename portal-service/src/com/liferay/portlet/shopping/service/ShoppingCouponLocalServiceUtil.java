@@ -268,7 +268,7 @@ public class ShoppingCouponLocalServiceUtil {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
@@ -280,7 +280,7 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static void deleteCoupon(long couponId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
@@ -296,7 +296,7 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long couponId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
@@ -305,7 +305,7 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		java.lang.String code)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
@@ -339,7 +339,7 @@ public class ShoppingCouponLocalServiceUtil {
 		int endDateMinute, boolean neverExpire, boolean active,
 		java.lang.String limitCategories, java.lang.String limitSkus,
 		double minOrder, double discount, java.lang.String discountType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 

@@ -34,7 +34,7 @@ public class JournalFeedUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed remove(long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().remove(id);
 	}
@@ -65,7 +65,7 @@ public class JournalFeedUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed findByPrimaryKey(
 		long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByPrimaryKey(id);
 	}
@@ -94,7 +94,7 @@ public class JournalFeedUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -102,7 +102,7 @@ public class JournalFeedUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -110,14 +110,14 @@ public class JournalFeedUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed[] findByUuid_PrevAndNext(
 		long id, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByUuid_PrevAndNext(id, uuid, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
@@ -146,14 +146,14 @@ public class JournalFeedUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -161,14 +161,14 @@ public class JournalFeedUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed[] findByGroupId_PrevAndNext(
 		long id, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByGroupId_PrevAndNext(id, groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed findByG_F(
 		long groupId, java.lang.String feedId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().findByG_F(groupId, feedId);
 	}
@@ -188,8 +188,8 @@ public class JournalFeedUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -214,7 +214,7 @@ public class JournalFeedUtil {
 	}
 
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
@@ -225,7 +225,7 @@ public class JournalFeedUtil {
 	}
 
 	public static void removeByG_F(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		getPersistence().removeByG_F(groupId, feedId);
 	}

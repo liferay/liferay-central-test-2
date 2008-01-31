@@ -56,7 +56,7 @@ public class AddressServiceUtil {
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, long regionId,
 		long countryId, int typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();
 
@@ -65,7 +65,7 @@ public class AddressServiceUtil {
 	}
 
 	public static void deleteAddress(long addressId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();
 
@@ -73,7 +73,7 @@ public class AddressServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();
 
@@ -82,7 +82,7 @@ public class AddressServiceUtil {
 
 	public static java.util.List getAddresses(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();
 
@@ -94,7 +94,7 @@ public class AddressServiceUtil {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();
 

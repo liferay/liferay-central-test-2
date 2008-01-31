@@ -38,7 +38,8 @@ public class JournalFeedFinderUtil {
 		java.lang.String feedId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_F_N_D(companyId, groupId, feedId, name,
+		return getFinder()
+				   .countByC_G_F_N_D(companyId, groupId, feedId, name,
 			description, andOperator);
 	}
 
@@ -46,7 +47,8 @@ public class JournalFeedFinderUtil {
 		java.lang.String[] feedIds, java.lang.String[] names,
 		java.lang.String[] descriptions, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_F_N_D(companyId, groupId, feedIds, names,
+		return getFinder()
+				   .countByC_G_F_N_D(companyId, groupId, feedIds, names,
 			descriptions, andOperator);
 	}
 
@@ -54,8 +56,8 @@ public class JournalFeedFinderUtil {
 		java.lang.String keywords, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByKeywords(companyId, groupId, keywords, begin,
-			end, obc);
+		return getFinder()
+				   .findByKeywords(companyId, groupId, keywords, begin, end, obc);
 	}
 
 	public static java.util.List findByC_G_F_N_D(long companyId, long groupId,
@@ -63,7 +65,8 @@ public class JournalFeedFinderUtil {
 		java.lang.String description, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_F_N_D(companyId, groupId, feedId, name,
+		return getFinder()
+				   .findByC_G_F_N_D(companyId, groupId, feedId, name,
 			description, andOperator, begin, end, obc);
 	}
 
@@ -72,7 +75,8 @@ public class JournalFeedFinderUtil {
 		java.lang.String[] descriptions, boolean andOperator, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_F_N_D(companyId, groupId, feedIds, names,
+		return getFinder()
+				   .findByC_G_F_N_D(companyId, groupId, feedIds, names,
 			descriptions, andOperator, begin, end, obc);
 	}
 

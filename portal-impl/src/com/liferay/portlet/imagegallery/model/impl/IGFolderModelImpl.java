@@ -293,8 +293,8 @@ public class IGFolderModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getName().toLowerCase().compareTo(igFolder.getName()
-														  .toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(igFolder.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

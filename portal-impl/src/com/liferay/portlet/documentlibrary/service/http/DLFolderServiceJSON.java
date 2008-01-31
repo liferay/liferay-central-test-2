@@ -74,7 +74,7 @@ public class DLFolderServiceJSON {
 	public static JSONObject addFolder(long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
 				parentFolderId, name, description, addCommunityPermissions,
@@ -87,7 +87,7 @@ public class DLFolderServiceJSON {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
 				parentFolderId, name, description, communityPermissions,
@@ -100,7 +100,7 @@ public class DLFolderServiceJSON {
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(plid,
 				sourceFolderId, parentFolderId, name, description,
@@ -110,20 +110,20 @@ public class DLFolderServiceJSON {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		DLFolderServiceUtil.deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		DLFolderServiceUtil.deleteFolder(groupId, parentFolderId, name);
 	}
 
 	public static JSONObject getFolder(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
 
@@ -132,7 +132,7 @@ public class DLFolderServiceJSON {
 
 	public static JSONObject getFolder(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(groupId,
 				parentFolderId, name);
@@ -142,7 +142,7 @@ public class DLFolderServiceJSON {
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		long returnValue = DLFolderServiceUtil.getFolderId(groupId,
 				parentFolderId, name);
@@ -151,14 +151,14 @@ public class DLFolderServiceJSON {
 	}
 
 	public static void reIndexSearch(long companyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		DLFolderServiceUtil.reIndexSearch(companyId);
 	}
 
 	public static JSONObject updateFolder(long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,
 				parentFolderId, name, description);

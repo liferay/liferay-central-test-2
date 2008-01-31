@@ -339,45 +339,45 @@ public interface CompanyLocalService {
 
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company checkCompany(java.lang.String webId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkCompanyKey(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getCompanies()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company getCompanyById(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company getCompanyByLogoId(long logoId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company getCompanyByVirtualHost(
 		java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company getCompanyByWebId(
 		java.lang.String webId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
@@ -389,7 +389,7 @@ public interface CompanyLocalService {
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
@@ -398,21 +398,21 @@ public interface CompanyLocalService {
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateDisplay(long companyId, java.lang.String languageId,
 		java.lang.String timeZoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateLogo(long companyId, java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateSecurity(long companyId, java.lang.String authType,
 		boolean autoLogin, boolean sendPassword, boolean strangers,
 		boolean strangersWithMx, boolean strangersVerify, boolean communityLogo)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

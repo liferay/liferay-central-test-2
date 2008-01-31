@@ -881,7 +881,7 @@ public class PortletLocalServiceUtil {
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		long companyId, java.lang.String portletId, java.lang.String roles,
 		boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 

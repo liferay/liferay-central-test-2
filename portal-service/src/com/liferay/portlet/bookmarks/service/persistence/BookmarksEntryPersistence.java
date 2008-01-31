@@ -34,7 +34,7 @@ public interface BookmarksEntryPersistence {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
 		long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
@@ -55,7 +55,7 @@ public interface BookmarksEntryPersistence {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByPrimaryKey(
 		long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry fetchByPrimaryKey(
@@ -74,19 +74,19 @@ public interface BookmarksEntryPersistence {
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByUuid_PrevAndNext(
 		long entryId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public java.util.List findByFolderId(long folderId)
@@ -101,18 +101,18 @@ public interface BookmarksEntryPersistence {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByFolderId_PrevAndNext(
 		long entryId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public java.util.List findWithDynamicQuery(

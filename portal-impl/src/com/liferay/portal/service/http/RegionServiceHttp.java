@@ -74,7 +74,7 @@ public class RegionServiceHttp {
 	public static com.liferay.portal.model.Region addRegion(
 		HttpPrincipal httpPrincipal, long countryId,
 		java.lang.String regionCode, java.lang.String name, boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(countryId);
@@ -246,7 +246,7 @@ public class RegionServiceHttp {
 
 	public static com.liferay.portal.model.Region getRegion(
 		HttpPrincipal httpPrincipal, long regionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(regionId);

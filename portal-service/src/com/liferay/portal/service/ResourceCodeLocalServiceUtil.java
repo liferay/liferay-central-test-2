@@ -794,7 +794,7 @@ public class ResourceCodeLocalServiceUtil {
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
@@ -803,7 +803,7 @@ public class ResourceCodeLocalServiceUtil {
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 

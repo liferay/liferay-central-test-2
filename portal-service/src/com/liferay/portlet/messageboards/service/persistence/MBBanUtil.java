@@ -36,7 +36,7 @@ public class MBBanUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBBan remove(
 		long banId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().remove(banId);
 	}
@@ -67,7 +67,7 @@ public class MBBanUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByPrimaryKey(
 		long banId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByPrimaryKey(banId);
 	}
@@ -95,14 +95,14 @@ public class MBBanUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -110,7 +110,7 @@ public class MBBanUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan[] findByGroupId_PrevAndNext(
 		long banId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByGroupId_PrevAndNext(banId, groupId, obc);
 	}
@@ -133,14 +133,14 @@ public class MBBanUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -148,7 +148,7 @@ public class MBBanUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan[] findByUserId_PrevAndNext(
 		long banId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByUserId_PrevAndNext(banId, userId, obc);
 	}
@@ -171,14 +171,14 @@ public class MBBanUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByBanUserId_First(
 		long banUserId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByBanUserId_First(banUserId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByBanUserId_Last(
 		long banUserId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByBanUserId_Last(banUserId, obc);
 	}
@@ -186,15 +186,15 @@ public class MBBanUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan[] findByBanUserId_PrevAndNext(
 		long banId, long banUserId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
-		return getPersistence().findByBanUserId_PrevAndNext(banId, banUserId,
-			obc);
+		return getPersistence()
+				   .findByBanUserId_PrevAndNext(banId, banUserId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByG_B(
 		long groupId, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		return getPersistence().findByG_B(groupId, banUserId);
 	}
@@ -213,8 +213,8 @@ public class MBBanUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -249,7 +249,7 @@ public class MBBanUtil {
 	}
 
 	public static void removeByG_B(long groupId, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException {
 		getPersistence().removeByG_B(groupId, banUserId);
 	}

@@ -342,14 +342,14 @@ public interface PasswordTrackerLocalService {
 
 	public boolean isSameAsCurrentPassword(long userId,
 		java.lang.String newClearTextPwd)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean isValidPassword(long userId, java.lang.String newClearTextPwd)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void trackPassword(long userId, java.lang.String encPwd)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

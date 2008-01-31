@@ -117,7 +117,7 @@ public interface IGImageLocalService {
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -125,7 +125,7 @@ public interface IGImageLocalService {
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -134,7 +134,7 @@ public interface IGImageLocalService {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -145,25 +145,25 @@ public interface IGImageLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addImageResources(long folderId, long imageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addImageResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addImageResources(long folderId, long imageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addImageResources(
@@ -171,20 +171,20 @@ public interface IGImageLocalService {
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteImage(long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteImage(
 		com.liferay.portlet.imagegallery.model.IGImage image)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteImages(long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int getFoldersImagesCount(java.util.List folderIds)
@@ -203,32 +203,32 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
 		long custom1ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByCustom2ImageId(
 		long custom2ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getImages(long folderId)
@@ -251,12 +251,12 @@ public interface IGImageLocalService {
 		long userId, long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

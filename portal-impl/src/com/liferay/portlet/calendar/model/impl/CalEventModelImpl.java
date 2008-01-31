@@ -495,8 +495,8 @@ public class CalEventModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getTitle().toLowerCase().compareTo(calEvent.getTitle()
-														   .toLowerCase());
+		value = getTitle().toLowerCase()
+					.compareTo(calEvent.getTitle().toLowerCase());
 
 		if (value != 0) {
 			return value;

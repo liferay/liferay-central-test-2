@@ -32,7 +32,7 @@ public interface CompanyPersistence {
 	public com.liferay.portal.model.Company create(long companyId);
 
 	public com.liferay.portal.model.Company remove(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company remove(
@@ -52,14 +52,14 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company findByPrimaryKey(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company fetchByPrimaryKey(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company findByWebId(java.lang.String webId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company fetchByWebId(java.lang.String webId)
@@ -67,21 +67,21 @@ public interface CompanyPersistence {
 
 	public com.liferay.portal.model.Company findByVirtualHost(
 		java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company findByMx(java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company findByLogoId(long logoId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public com.liferay.portal.model.Company fetchByLogoId(long logoId)
@@ -105,19 +105,19 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByWebId(java.lang.String webId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public void removeByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public void removeByMx(java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public void removeByLogoId(long logoId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchCompanyException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

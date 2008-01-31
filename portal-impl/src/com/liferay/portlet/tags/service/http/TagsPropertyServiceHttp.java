@@ -75,7 +75,7 @@ public class TagsPropertyServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
@@ -125,7 +125,7 @@ public class TagsPropertyServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		HttpPrincipal httpPrincipal, java.lang.String entryName,
 		java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = entryName;
@@ -178,7 +178,7 @@ public class TagsPropertyServiceHttp {
 
 	public static void deleteProperty(HttpPrincipal httpPrincipal,
 		long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(propertyId);
@@ -278,7 +278,7 @@ public class TagsPropertyServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		HttpPrincipal httpPrincipal, long propertyId, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(propertyId);

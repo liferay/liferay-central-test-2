@@ -792,7 +792,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -801,7 +801,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup addUserGroup(long userId,
 		long companyId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -810,7 +810,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void clearUserUserGroups(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -818,7 +818,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void deleteUserGroup(long userGroupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -827,7 +827,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long userGroupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -836,7 +836,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -844,7 +844,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static java.util.List getUserGroups(long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -852,7 +852,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static java.util.List getUserUserGroups(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -860,7 +860,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static boolean hasGroupUserGroup(long groupId, long userGroupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -887,7 +887,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -897,7 +897,7 @@ public class UserGroupLocalServiceUtil {
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		long companyId, long userGroupId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 

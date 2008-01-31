@@ -213,8 +213,8 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getName().toLowerCase().compareTo(shoppingItemField.getName()
-																   .toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(shoppingItemField.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

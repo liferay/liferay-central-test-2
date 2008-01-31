@@ -54,7 +54,7 @@ public class CountryServiceUtil {
 	public static com.liferay.portal.model.Country addCountry(
 		java.lang.String name, java.lang.String a2, java.lang.String a3,
 		java.lang.String number, java.lang.String idd, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CountryService countryService = CountryServiceFactory.getService();
 
@@ -76,7 +76,7 @@ public class CountryServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Country getCountry(long countryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CountryService countryService = CountryServiceFactory.getService();
 

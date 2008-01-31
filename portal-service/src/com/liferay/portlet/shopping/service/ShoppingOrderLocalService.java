@@ -151,40 +151,40 @@ public interface ShoppingOrderLocalService {
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail, boolean updateInventory)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteOrder(long orderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteOrder(
 		com.liferay.portlet.shopping.model.ShoppingOrder order)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteOrders(long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
 		long userId, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long orderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		java.lang.String number)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(
 		com.liferay.portlet.shopping.model.ShoppingCart cart)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long groupId, long companyId, long userId,
@@ -194,7 +194,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
 		int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int searchCount(long groupId, long companyId, long userId,
@@ -203,17 +203,17 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void sendEmail(long orderId, java.lang.String emailType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void sendEmail(
 		com.liferay.portlet.shopping.model.ShoppingOrder order,
 		java.lang.String emailType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
@@ -231,7 +231,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -249,13 +249,13 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
 		long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

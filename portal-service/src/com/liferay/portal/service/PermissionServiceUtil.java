@@ -53,7 +53,7 @@ package com.liferay.portal.service;
 public class PermissionServiceUtil {
 	public static void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -62,7 +62,7 @@ public class PermissionServiceUtil {
 
 	public static boolean hasGroupPermission(long groupId,
 		java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -72,7 +72,7 @@ public class PermissionServiceUtil {
 
 	public static boolean hasUserPermission(long userId,
 		java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -82,7 +82,7 @@ public class PermissionServiceUtil {
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -92,7 +92,7 @@ public class PermissionServiceUtil {
 
 	public static void setGroupPermissions(long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -102,7 +102,7 @@ public class PermissionServiceUtil {
 	public static void setGroupPermissions(java.lang.String className,
 		java.lang.String classPK, long groupId, java.lang.String[] actionIds,
 		long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class PermissionServiceUtil {
 
 	public static void setOrgGroupPermissions(long organizationId,
 		long groupId, java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -123,7 +123,7 @@ public class PermissionServiceUtil {
 	public static void setRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -133,7 +133,7 @@ public class PermissionServiceUtil {
 
 	public static void setRolePermissions(long roleId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -143,7 +143,7 @@ public class PermissionServiceUtil {
 
 	public static void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -153,7 +153,7 @@ public class PermissionServiceUtil {
 
 	public static void unsetRolePermission(long roleId, long groupId,
 		long permissionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -163,7 +163,7 @@ public class PermissionServiceUtil {
 	public static void unsetRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -173,7 +173,7 @@ public class PermissionServiceUtil {
 
 	public static void unsetRolePermissions(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 
@@ -183,7 +183,7 @@ public class PermissionServiceUtil {
 
 	public static void unsetUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PermissionService permissionService = PermissionServiceFactory.getService();
 

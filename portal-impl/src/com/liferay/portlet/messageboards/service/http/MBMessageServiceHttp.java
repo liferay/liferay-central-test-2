@@ -80,7 +80,7 @@ public class MBMessageServiceHttp {
 		long classPK, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -154,7 +154,7 @@ public class MBMessageServiceHttp {
 		java.lang.String body, java.util.List files, boolean anonymous,
 		double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -230,7 +230,7 @@ public class MBMessageServiceHttp {
 		double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -315,7 +315,7 @@ public class MBMessageServiceHttp {
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -407,7 +407,7 @@ public class MBMessageServiceHttp {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -505,7 +505,7 @@ public class MBMessageServiceHttp {
 		java.util.List files, boolean anonymous, double priority,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -587,7 +587,7 @@ public class MBMessageServiceHttp {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -677,7 +677,7 @@ public class MBMessageServiceHttp {
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -773,7 +773,7 @@ public class MBMessageServiceHttp {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -871,7 +871,7 @@ public class MBMessageServiceHttp {
 
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String className, long classPK, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -913,7 +913,7 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void deleteMessage(HttpPrincipal httpPrincipal, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -945,7 +945,7 @@ public class MBMessageServiceHttp {
 
 	public static java.util.List getCategoryMessages(
 		HttpPrincipal httpPrincipal, long categoryId, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -986,7 +986,7 @@ public class MBMessageServiceHttp {
 
 	public static int getCategoryMessagesCount(HttpPrincipal httpPrincipal,
 		long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -1024,7 +1024,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long categoryId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -1094,7 +1094,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -1164,7 +1164,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1234,7 +1234,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long userId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1304,7 +1304,7 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		HttpPrincipal httpPrincipal, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -1340,7 +1340,7 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		HttpPrincipal httpPrincipal, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -1378,7 +1378,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long threadId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(threadId);
@@ -1446,7 +1446,7 @@ public class MBMessageServiceHttp {
 
 	public static void subscribeMessage(HttpPrincipal httpPrincipal,
 		long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -1478,7 +1478,7 @@ public class MBMessageServiceHttp {
 
 	public static void unsubscribeMessage(HttpPrincipal httpPrincipal,
 		long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -1512,7 +1512,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
 		long classPK, long messageId, java.lang.String subject,
 		java.lang.String body)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1576,7 +1576,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
@@ -1645,7 +1645,7 @@ public class MBMessageServiceHttp {
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);

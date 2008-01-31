@@ -51,31 +51,31 @@ package com.liferay.portlet.wiki.service;
 public interface WikiPageService {
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
 		java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long nodeId,
 		java.lang.String title, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long nodeId,
 		java.lang.String title, java.lang.String content,
 		java.lang.String format, java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

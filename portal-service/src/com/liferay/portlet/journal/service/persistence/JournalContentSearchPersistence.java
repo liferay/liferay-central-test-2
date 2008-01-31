@@ -34,7 +34,7 @@ public interface JournalContentSearchPersistence {
 
 	public com.liferay.portlet.journal.model.JournalContentSearch remove(
 		long contentSearchId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch remove(
@@ -55,7 +55,7 @@ public interface JournalContentSearchPersistence {
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
 		long contentSearchId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch fetchByPrimaryKey(
@@ -74,19 +74,19 @@ public interface JournalContentSearchPersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_First(
 		long groupId, boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_Last(
 		long groupId, boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch[] findByG_P_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public java.util.List findByG_A(long groupId, java.lang.String articleId)
@@ -102,19 +102,19 @@ public interface JournalContentSearchPersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_A_First(
 		long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_A_Last(
 		long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch[] findByG_A_PrevAndNext(
 		long contentSearchId, long groupId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public java.util.List findByG_P_L(long groupId, boolean privateLayout,
@@ -132,19 +132,19 @@ public interface JournalContentSearchPersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_First(
 		long groupId, boolean privateLayout, long layoutId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_Last(
 		long groupId, boolean privateLayout, long layoutId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch[] findByG_P_L_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
 		long layoutId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public java.util.List findByG_P_A(long groupId, boolean privateLayout,
@@ -162,20 +162,20 @@ public interface JournalContentSearchPersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_A_First(
 		long groupId, boolean privateLayout, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_A_Last(
 		long groupId, boolean privateLayout, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch[] findByG_P_A_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
 		java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public java.util.List findByG_P_L_P(long groupId, boolean privateLayout,
@@ -195,27 +195,27 @@ public interface JournalContentSearchPersistence {
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_P_Last(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch[] findByG_P_L_P_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
 		long layoutId, java.lang.String portletId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_P_A(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch fetchByG_P_L_P_A(
@@ -258,7 +258,7 @@ public interface JournalContentSearchPersistence {
 
 	public void removeByG_P_L_P_A(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String portletId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

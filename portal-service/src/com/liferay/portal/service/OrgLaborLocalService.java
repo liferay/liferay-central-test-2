@@ -341,15 +341,15 @@ public interface OrgLaborLocalService {
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
 		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteOrgLabor(long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getOrgLabors(long organizationId)
@@ -359,6 +359,6 @@ public interface OrgLaborLocalService {
 		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
 		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
 		int friOpen, int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

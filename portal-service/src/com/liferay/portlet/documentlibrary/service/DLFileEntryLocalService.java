@@ -168,7 +168,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -177,7 +177,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] byteArray, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -186,7 +186,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -195,7 +195,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -204,7 +204,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] byteArray, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -215,7 +215,7 @@ public interface DLFileEntryLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -227,7 +227,7 @@ public interface DLFileEntryLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -239,25 +239,25 @@ public interface DLFileEntryLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFileEntryResources(long folderId, java.lang.String name,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFileEntryResources(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFileEntryResources(long folderId, java.lang.String name,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addFileEntryResources(
@@ -265,7 +265,7 @@ public interface DLFileEntryLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
@@ -274,25 +274,25 @@ public interface DLFileEntryLocalService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, java.io.File file,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFileEntries(long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getCompanyFileEntries(long companyId, int begin,
@@ -307,12 +307,12 @@ public interface DLFileEntryLocalService {
 
 	public java.io.InputStream getFileAsStream(long companyId, long userId,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.io.InputStream getFileAsStream(long companyId, long userId,
 		long folderId, java.lang.String name, double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getFileEntries(long folderId)
@@ -342,22 +342,22 @@ public interface DLFileEntryLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long fileEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long folderId, java.lang.String titleWithExtension)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int getFoldersFileEntriesCount(java.util.List folderIds)
@@ -391,7 +391,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -399,7 +399,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -407,12 +407,12 @@ public interface DLFileEntryLocalService {
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, java.io.InputStream is, long size)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

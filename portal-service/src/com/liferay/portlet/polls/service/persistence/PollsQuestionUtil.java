@@ -36,7 +36,7 @@ public class PollsQuestionUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion remove(
 		long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().remove(questionId);
 	}
@@ -67,7 +67,7 @@ public class PollsQuestionUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
 		long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByPrimaryKey(questionId);
 	}
@@ -96,7 +96,7 @@ public class PollsQuestionUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -104,7 +104,7 @@ public class PollsQuestionUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -112,14 +112,14 @@ public class PollsQuestionUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion[] findByUuid_PrevAndNext(
 		long questionId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByUuid_PrevAndNext(questionId, uuid, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
@@ -148,14 +148,14 @@ public class PollsQuestionUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -163,10 +163,10 @@ public class PollsQuestionUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
 		long questionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
-		return getPersistence().findByGroupId_PrevAndNext(questionId, groupId,
-			obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(questionId, groupId, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -178,8 +178,8 @@ public class PollsQuestionUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -204,7 +204,7 @@ public class PollsQuestionUtil {
 	}
 
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}

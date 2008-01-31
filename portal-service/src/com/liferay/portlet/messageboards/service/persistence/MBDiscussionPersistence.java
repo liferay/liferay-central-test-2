@@ -34,7 +34,7 @@ public interface MBDiscussionPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion remove(
 		long discussionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion remove(
@@ -55,7 +55,7 @@ public interface MBDiscussionPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
 		long discussionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByPrimaryKey(
@@ -63,7 +63,7 @@ public interface MBDiscussionPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
@@ -88,7 +88,7 @@ public interface MBDiscussionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

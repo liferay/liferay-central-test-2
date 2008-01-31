@@ -327,7 +327,7 @@ public class MBCategoryLocalServiceUtil {
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -340,7 +340,7 @@ public class MBCategoryLocalServiceUtil {
 		java.lang.String uuid, long userId, long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -353,7 +353,7 @@ public class MBCategoryLocalServiceUtil {
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -369,7 +369,7 @@ public class MBCategoryLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -380,7 +380,7 @@ public class MBCategoryLocalServiceUtil {
 
 	public static void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -391,7 +391,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -402,7 +402,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -414,7 +414,7 @@ public class MBCategoryLocalServiceUtil {
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -423,7 +423,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void deleteCategories(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -431,7 +431,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void deleteCategory(long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -440,7 +440,7 @@ public class MBCategoryLocalServiceUtil {
 
 	public static void deleteCategory(
 		com.liferay.portlet.messageboards.model.MBCategory category)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -473,7 +473,7 @@ public class MBCategoryLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
 		long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -507,7 +507,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -533,7 +533,7 @@ public class MBCategoryLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -542,7 +542,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void subscribeCategory(long userId, long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -550,7 +550,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void unsubscribeCategory(long userId, long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 

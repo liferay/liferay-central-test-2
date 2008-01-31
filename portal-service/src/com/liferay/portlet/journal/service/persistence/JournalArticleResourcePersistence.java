@@ -34,7 +34,7 @@ public interface JournalArticleResourcePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleResource remove(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource remove(
@@ -55,7 +55,7 @@ public interface JournalArticleResourcePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleResource findByPrimaryKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource fetchByPrimaryKey(
@@ -73,23 +73,23 @@ public interface JournalArticleResourcePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource[] findByGroupId_PrevAndNext(
 		long resourcePrimKey, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource findByG_A(
 		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource fetchByG_A(
@@ -117,7 +117,7 @@ public interface JournalArticleResourcePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_A(long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

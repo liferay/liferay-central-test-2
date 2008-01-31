@@ -34,7 +34,7 @@ public interface BlogsStatsUserPersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser remove(
 		long statsUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser remove(
@@ -55,7 +55,7 @@ public interface BlogsStatsUserPersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByPrimaryKey(
 		long statsUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface BlogsStatsUserPersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByGroupId_PrevAndNext(
 		long statsUserId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public java.util.List findByUserId(long userId)
@@ -99,23 +99,23 @@ public interface BlogsStatsUserPersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByUserId_PrevAndNext(
 		long statsUserId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_U(
 		long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByG_U(
@@ -134,19 +134,19 @@ public interface BlogsStatsUserPersistence {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_E_First(
 		long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_E_Last(
 		long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByG_E_PrevAndNext(
 		long statsUserId, long groupId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public java.util.List findByC_E(long companyId, int entryCount)
@@ -162,19 +162,19 @@ public interface BlogsStatsUserPersistence {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_E_First(
 		long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_E_Last(
 		long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser[] findByC_E_PrevAndNext(
 		long statsUserId, long companyId, int entryCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public java.util.List findWithDynamicQuery(
@@ -201,7 +201,7 @@ public interface BlogsStatsUserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
 	public void removeByG_E(long groupId, int entryCount)

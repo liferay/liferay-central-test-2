@@ -54,7 +54,7 @@ public class WikiNodeServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
@@ -66,7 +66,7 @@ public class WikiNodeServiceUtil {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
@@ -75,7 +75,7 @@ public class WikiNodeServiceUtil {
 	}
 
 	public static void deleteNode(long nodeId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
@@ -83,7 +83,7 @@ public class WikiNodeServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
@@ -92,7 +92,7 @@ public class WikiNodeServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 

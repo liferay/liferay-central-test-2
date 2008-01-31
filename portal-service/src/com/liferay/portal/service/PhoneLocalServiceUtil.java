@@ -794,7 +794,7 @@ public class PhoneLocalServiceUtil {
 	public static com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, long classPK, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
@@ -803,7 +803,7 @@ public class PhoneLocalServiceUtil {
 	}
 
 	public static void deletePhone(long phoneId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
@@ -818,7 +818,7 @@ public class PhoneLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(long phoneId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
@@ -843,7 +843,7 @@ public class PhoneLocalServiceUtil {
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

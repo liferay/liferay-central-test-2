@@ -163,16 +163,16 @@ public interface MBThreadLocalService {
 	public void afterPropertiesSet();
 
 	public void deleteThread(long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteThread(
 		com.liferay.portlet.messageboards.model.MBThread thread)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteThreads(long categoryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int getCategoriesThreadsCount(java.util.List categoryIds)
@@ -199,7 +199,7 @@ public interface MBThreadLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread(
 		long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getThreads(long categoryId, int begin, int end)
@@ -209,22 +209,22 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadThread(long userId, long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

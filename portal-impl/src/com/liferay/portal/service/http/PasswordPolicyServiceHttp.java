@@ -80,7 +80,7 @@ public class PasswordPolicyServiceHttp {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -164,7 +164,7 @@ public class PasswordPolicyServiceHttp {
 
 	public static void deletePasswordPolicy(HttpPrincipal httpPrincipal,
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
@@ -202,7 +202,7 @@ public class PasswordPolicyServiceHttp {
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);

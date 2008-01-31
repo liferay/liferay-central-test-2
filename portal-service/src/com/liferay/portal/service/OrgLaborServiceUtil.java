@@ -56,7 +56,7 @@ public class OrgLaborServiceUtil {
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 		int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 		int satOpen, int satClose)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
@@ -66,7 +66,7 @@ public class OrgLaborServiceUtil {
 	}
 
 	public static void deleteOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
@@ -74,7 +74,7 @@ public class OrgLaborServiceUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
@@ -82,7 +82,7 @@ public class OrgLaborServiceUtil {
 	}
 
 	public static java.util.List getOrgLabors(long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
@@ -93,7 +93,7 @@ public class OrgLaborServiceUtil {
 		long orgLaborId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
 		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 

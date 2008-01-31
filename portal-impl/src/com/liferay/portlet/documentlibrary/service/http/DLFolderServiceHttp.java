@@ -77,7 +77,7 @@ public class DLFolderServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -138,7 +138,7 @@ public class DLFolderServiceHttp {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -207,7 +207,7 @@ public class DLFolderServiceHttp {
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -266,7 +266,7 @@ public class DLFolderServiceHttp {
 	}
 
 	public static void deleteFolder(HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -298,7 +298,7 @@ public class DLFolderServiceHttp {
 
 	public static void deleteFolder(HttpPrincipal httpPrincipal, long groupId,
 		long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -339,7 +339,7 @@ public class DLFolderServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -376,7 +376,7 @@ public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -421,7 +421,7 @@ public class DLFolderServiceHttp {
 
 	public static long getFolderId(HttpPrincipal httpPrincipal, long groupId,
 		long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -465,7 +465,7 @@ public class DLFolderServiceHttp {
 	}
 
 	public static void reIndexSearch(HttpPrincipal httpPrincipal, long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -498,7 +498,7 @@ public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);

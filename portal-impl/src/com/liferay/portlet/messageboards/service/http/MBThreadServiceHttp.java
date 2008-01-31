@@ -74,7 +74,7 @@ import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
 public class MBThreadServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -114,7 +114,7 @@ public class MBThreadServiceHttp {
 		HttpPrincipal httpPrincipal, long messageId,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);

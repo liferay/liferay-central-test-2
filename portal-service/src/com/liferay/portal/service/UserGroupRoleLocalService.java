@@ -338,11 +338,11 @@ public interface UserGroupRoleLocalService {
 	public void afterPropertiesSet();
 
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteUserGroupRoles(long userId, long[] groupIds)
@@ -352,11 +352,11 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteUserGroupRolesByGroupId(long groupId)
@@ -369,12 +369,12 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getUserGroupRoles(long userId, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getUserGroupRolesByGroupAndRole(long groupId,
 		long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
@@ -382,6 +382,6 @@ public interface UserGroupRoleLocalService {
 
 	public boolean hasUserGroupRole(long userId, long groupId,
 		java.lang.String roleName)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

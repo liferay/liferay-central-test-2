@@ -54,7 +54,7 @@ public class EmailAddressServiceUtil {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
@@ -63,7 +63,7 @@ public class EmailAddressServiceUtil {
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
@@ -72,7 +72,7 @@ public class EmailAddressServiceUtil {
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
@@ -81,7 +81,7 @@ public class EmailAddressServiceUtil {
 
 	public static java.util.List getEmailAddresses(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
@@ -91,7 +91,7 @@ public class EmailAddressServiceUtil {
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 

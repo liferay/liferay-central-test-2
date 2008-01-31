@@ -254,7 +254,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -273,7 +273,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.util.List thumbnails, java.util.List fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -294,7 +294,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -307,7 +307,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static void addProductEntryResources(long productEntryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -318,7 +318,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -329,7 +329,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void addProductEntryResources(long productEntryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -341,7 +341,7 @@ public class SCProductEntryLocalServiceUtil {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -350,7 +350,7 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static void deleteProductEntries(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -358,7 +358,7 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static void deleteProductEntry(long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -367,7 +367,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static void deleteProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -376,7 +376,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -433,7 +433,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static java.lang.String getRepositoryXML(long groupId,
 		java.lang.String baseImageURL, java.util.Date oldestDate,
 		int maxNumOfVersions, java.util.Properties repoSettings)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -445,7 +445,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String version, java.lang.String baseImageURL,
 		java.util.Date oldestDate, int maxNumOfVersions,
 		java.util.Properties repoSettings)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
@@ -476,7 +476,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List thumbnails, java.util.List fullImages)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 

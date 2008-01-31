@@ -32,7 +32,7 @@ public interface ResourcePersistence {
 	public com.liferay.portal.model.Resource create(long resourceId);
 
 	public com.liferay.portal.model.Resource remove(long resourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource remove(
@@ -52,7 +52,7 @@ public interface ResourcePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource findByPrimaryKey(long resourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource fetchByPrimaryKey(long resourceId)
@@ -70,23 +70,23 @@ public interface ResourcePersistence {
 
 	public com.liferay.portal.model.Resource findByCodeId_First(long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource findByCodeId_Last(long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
 		long resourceId, long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource findByC_P(long codeId,
 		java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public com.liferay.portal.model.Resource fetchByC_P(long codeId,
@@ -113,7 +113,7 @@ public interface ResourcePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_P(long codeId, java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

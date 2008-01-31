@@ -58,11 +58,11 @@ public interface Layout extends LayoutModel {
 	public long getAncestorLayoutId();
 
 	public java.util.List getAncestors()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasAncestor(long layoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean isFirstParent();
@@ -72,16 +72,16 @@ public interface Layout extends LayoutModel {
 	public boolean isRootLayout();
 
 	public java.util.List getChildren()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getAllChildren()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getChildren(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getName(java.util.Locale locale);
@@ -128,40 +128,40 @@ public interface Layout extends LayoutModel {
 	public boolean isInheritLookAndFeel();
 
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean isInheritWapLookAndFeel();
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getCssText()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getTarget();

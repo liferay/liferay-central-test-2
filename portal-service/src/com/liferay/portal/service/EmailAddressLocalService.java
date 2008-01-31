@@ -340,11 +340,11 @@ public interface EmailAddressLocalService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEmailAddress(long emailAddressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteEmailAddresses(long companyId,
@@ -353,7 +353,7 @@ public interface EmailAddressLocalService {
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEmailAddresses()
@@ -366,6 +366,6 @@ public interface EmailAddressLocalService {
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
 		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

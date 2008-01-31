@@ -52,6 +52,6 @@ public interface SCProductVersion extends SCProductVersionModel {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry();
 
 	public java.util.List getFrameworkVersions()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

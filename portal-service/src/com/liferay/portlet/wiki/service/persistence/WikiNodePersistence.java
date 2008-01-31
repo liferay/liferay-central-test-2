@@ -32,7 +32,7 @@ public interface WikiNodePersistence {
 	public com.liferay.portlet.wiki.model.WikiNode create(long nodeId);
 
 	public com.liferay.portlet.wiki.model.WikiNode remove(long nodeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode remove(
@@ -52,7 +52,7 @@ public interface WikiNodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(long nodeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode fetchByPrimaryKey(
@@ -71,24 +71,24 @@ public interface WikiNodePersistence {
 	public com.liferay.portlet.wiki.model.WikiNode findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode[] findByUuid_PrevAndNext(
 		long nodeId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode fetchByUUID_G(
@@ -107,18 +107,18 @@ public interface WikiNodePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode[] findByGroupId_PrevAndNext(
 		long nodeId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public java.util.List findByCompanyId(long companyId)
@@ -133,18 +133,18 @@ public interface WikiNodePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
 		long nodeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public java.util.List findWithDynamicQuery(
@@ -168,7 +168,7 @@ public interface WikiNodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
 	public void removeByGroupId(long groupId)

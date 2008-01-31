@@ -77,7 +77,7 @@ public class LayoutServiceHttp {
 		long parentLayoutId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -156,7 +156,7 @@ public class LayoutServiceHttp {
 		long parentLayoutId, java.util.Map localeNamesMap,
 		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -231,7 +231,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static void deleteLayout(HttpPrincipal httpPrincipal, long plid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -263,7 +263,7 @@ public class LayoutServiceHttp {
 
 	public static void deleteLayout(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, long layoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -301,7 +301,7 @@ public class LayoutServiceHttp {
 	public static java.lang.String getLayoutName(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -399,7 +399,7 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -445,7 +445,7 @@ public class LayoutServiceHttp {
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout, long[] layoutIds,
 		java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -496,7 +496,7 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -545,7 +545,7 @@ public class LayoutServiceHttp {
 
 	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, java.util.Map parameterMap, java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -593,7 +593,7 @@ public class LayoutServiceHttp {
 	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, java.util.Map parameterMap,
 		java.io.InputStream is)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -641,7 +641,7 @@ public class LayoutServiceHttp {
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId, java.util.Map parameterMap,
 		java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -693,7 +693,7 @@ public class LayoutServiceHttp {
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId, java.util.Map parameterMap,
 		java.io.InputStream is)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -744,7 +744,7 @@ public class LayoutServiceHttp {
 
 	public static void setLayouts(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, long parentLayoutId, long[] layoutIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -790,7 +790,7 @@ public class LayoutServiceHttp {
 		long layoutId, long parentLayoutId, java.util.Map localeNamesMap,
 		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -872,7 +872,7 @@ public class LayoutServiceHttp {
 		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
 		java.lang.Boolean iconImage, byte[] iconBytes)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -964,7 +964,7 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long layoutId, java.lang.String typeSettings)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1013,7 +1013,7 @@ public class LayoutServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long layoutId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1078,7 +1078,7 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updateName(
 		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -1128,7 +1128,7 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updateName(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long layoutId, java.lang.String name, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1183,7 +1183,7 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
 		HttpPrincipal httpPrincipal, long plid, long parentPlid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -1223,7 +1223,7 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long layoutId, long parentLayoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -1266,7 +1266,7 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updatePriority(
 		HttpPrincipal httpPrincipal, long plid, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -1305,7 +1305,7 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updatePriority(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long layoutId, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);

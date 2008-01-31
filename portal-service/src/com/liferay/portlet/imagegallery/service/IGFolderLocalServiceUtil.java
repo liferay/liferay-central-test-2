@@ -210,7 +210,7 @@ public class IGFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -222,7 +222,7 @@ public class IGFolderLocalServiceUtil {
 		java.lang.String uuid, long userId, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -235,7 +235,7 @@ public class IGFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -250,7 +250,7 @@ public class IGFolderLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -266,7 +266,7 @@ public class IGFolderLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -277,7 +277,7 @@ public class IGFolderLocalServiceUtil {
 
 	public static void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -288,7 +288,7 @@ public class IGFolderLocalServiceUtil {
 	public static void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -299,7 +299,7 @@ public class IGFolderLocalServiceUtil {
 	public static void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -311,7 +311,7 @@ public class IGFolderLocalServiceUtil {
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -320,7 +320,7 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -329,7 +329,7 @@ public class IGFolderLocalServiceUtil {
 
 	public static void deleteFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder folder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -337,7 +337,7 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolders(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -346,7 +346,7 @@ public class IGFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
@@ -408,7 +408,7 @@ public class IGFolderLocalServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 

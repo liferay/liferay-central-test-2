@@ -32,7 +32,7 @@ public interface JournalFeedPersistence {
 	public com.liferay.portlet.journal.model.JournalFeed create(long id);
 
 	public com.liferay.portlet.journal.model.JournalFeed remove(long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed remove(
@@ -53,7 +53,7 @@ public interface JournalFeedPersistence {
 
 	public com.liferay.portlet.journal.model.JournalFeed findByPrimaryKey(
 		long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed fetchByPrimaryKey(
@@ -72,24 +72,24 @@ public interface JournalFeedPersistence {
 	public com.liferay.portlet.journal.model.JournalFeed findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed[] findByUuid_PrevAndNext(
 		long id, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed fetchByUUID_G(
@@ -108,23 +108,23 @@ public interface JournalFeedPersistence {
 
 	public com.liferay.portlet.journal.model.JournalFeed findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed[] findByGroupId_PrevAndNext(
 		long id, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed findByG_F(
 		long groupId, java.lang.String feedId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public com.liferay.portlet.journal.model.JournalFeed fetchByG_F(
@@ -152,14 +152,14 @@ public interface JournalFeedPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_F(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

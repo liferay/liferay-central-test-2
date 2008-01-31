@@ -796,7 +796,7 @@ public class ServiceComponentLocalServiceUtil {
 		javax.servlet.ServletContext ctx,
 		java.lang.ClassLoader portletClassLoader,
 		java.lang.String buildNamespace, long buildNumber, long buildDate)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 

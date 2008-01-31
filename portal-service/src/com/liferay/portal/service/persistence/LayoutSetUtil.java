@@ -34,7 +34,7 @@ public class LayoutSetUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet remove(long layoutSetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().remove(layoutSetId);
 	}
@@ -65,7 +65,7 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet findByPrimaryKey(
 		long layoutSetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByPrimaryKey(layoutSetId);
 	}
@@ -93,14 +93,14 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -108,15 +108,15 @@ public class LayoutSetUtil {
 	public static com.liferay.portal.model.LayoutSet[] findByGroupId_PrevAndNext(
 		long layoutSetId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
-		return getPersistence().findByGroupId_PrevAndNext(layoutSetId, groupId,
-			obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(layoutSetId, groupId, obc);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByVirtualHost(
 		java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByVirtualHost(virtualHost);
 	}
@@ -128,7 +128,7 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet findByG_P(long groupId,
 		boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByG_P(groupId, privateLayout);
 	}
@@ -147,8 +147,8 @@ public class LayoutSetUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -173,13 +173,13 @@ public class LayoutSetUtil {
 	}
 
 	public static void removeByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		getPersistence().removeByVirtualHost(virtualHost);
 	}
 
 	public static void removeByG_P(long groupId, boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutSetException {
 		getPersistence().removeByG_P(groupId, privateLayout);
 	}

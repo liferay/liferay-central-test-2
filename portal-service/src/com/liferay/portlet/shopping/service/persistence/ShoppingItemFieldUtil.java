@@ -36,7 +36,7 @@ public class ShoppingItemFieldUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField remove(
 		long itemFieldId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
 		return getPersistence().remove(itemFieldId);
 	}
@@ -67,7 +67,7 @@ public class ShoppingItemFieldUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField findByPrimaryKey(
 		long itemFieldId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
 		return getPersistence().findByPrimaryKey(itemFieldId);
 	}
@@ -95,14 +95,14 @@ public class ShoppingItemFieldUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField findByItemId_First(
 		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
 		return getPersistence().findByItemId_First(itemId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField findByItemId_Last(
 		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
 		return getPersistence().findByItemId_Last(itemId, obc);
 	}
@@ -110,10 +110,10 @@ public class ShoppingItemFieldUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemField[] findByItemId_PrevAndNext(
 		long itemFieldId, long itemId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
-		return getPersistence().findByItemId_PrevAndNext(itemFieldId, itemId,
-			obc);
+		return getPersistence()
+				   .findByItemId_PrevAndNext(itemFieldId, itemId, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -125,8 +125,8 @@ public class ShoppingItemFieldUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

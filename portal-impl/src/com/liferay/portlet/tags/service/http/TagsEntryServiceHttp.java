@@ -75,7 +75,7 @@ import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
 public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		HttpPrincipal httpPrincipal, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -116,7 +116,7 @@ public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -161,7 +161,7 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
@@ -193,7 +193,7 @@ public class TagsEntryServiceHttp {
 
 	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -423,7 +423,7 @@ public class TagsEntryServiceHttp {
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
@@ -466,7 +466,7 @@ public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String name,
 		java.lang.String[] properties)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);

@@ -52,6 +52,6 @@ public interface PluginSettingService {
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

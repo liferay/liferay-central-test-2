@@ -793,7 +793,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		long groupId, boolean privateLayout)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -801,7 +801,7 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static void deleteLayoutSet(long groupId, boolean privateLayout)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -810,7 +810,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
 		long groupId, boolean privateLayout)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -819,7 +819,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String virtualHost)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -828,7 +828,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static void updateLogo(long groupId, boolean privateLayout,
 		boolean logo, java.io.File file)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -838,7 +838,7 @@ public class LayoutSetLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		long groupId, boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -848,7 +848,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet updatePageCount(
 		long groupId, boolean privateLayout)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
@@ -857,7 +857,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 

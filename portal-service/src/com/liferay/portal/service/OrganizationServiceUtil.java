@@ -53,7 +53,7 @@ package com.liferay.portal.service;
 public class OrganizationServiceUtil {
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -62,7 +62,7 @@ public class OrganizationServiceUtil {
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -74,7 +74,7 @@ public class OrganizationServiceUtil {
 		long parentOrganizationId, java.lang.String name, int type,
 		boolean recursable, long regionId, long countryId, int statusId,
 		java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -83,7 +83,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static void deleteOrganization(long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -92,7 +92,7 @@ public class OrganizationServiceUtil {
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -100,7 +100,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -108,7 +108,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static java.util.List getUserOrganizations(long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -117,7 +117,7 @@ public class OrganizationServiceUtil {
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -126,7 +126,7 @@ public class OrganizationServiceUtil {
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -135,7 +135,7 @@ public class OrganizationServiceUtil {
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
@@ -147,7 +147,7 @@ public class OrganizationServiceUtil {
 		long organizationId, long parentOrganizationId, java.lang.String name,
 		int type, boolean recursable, long regionId, long countryId,
 		int statusId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 

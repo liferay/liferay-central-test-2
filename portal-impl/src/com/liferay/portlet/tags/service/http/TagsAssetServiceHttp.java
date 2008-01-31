@@ -76,7 +76,7 @@ import com.liferay.portlet.tags.service.TagsAssetServiceUtil;
  */
 public class TagsAssetServiceHttp {
 	public static void deleteAsset(HttpPrincipal httpPrincipal, long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(assetId);
@@ -108,7 +108,7 @@ public class TagsAssetServiceHttp {
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		HttpPrincipal httpPrincipal, long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(assetId);
@@ -150,7 +150,7 @@ public class TagsAssetServiceHttp {
 		java.util.Date publishDate, java.util.Date expirationDate, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -310,7 +310,7 @@ public class TagsAssetServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		HttpPrincipal httpPrincipal, long companyId, int begin, int end,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -425,7 +425,7 @@ public class TagsAssetServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -493,7 +493,7 @@ public class TagsAssetServiceHttp {
 
 	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -538,7 +538,7 @@ public class TagsAssetServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -656,7 +656,7 @@ public class TagsAssetServiceHttp {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);

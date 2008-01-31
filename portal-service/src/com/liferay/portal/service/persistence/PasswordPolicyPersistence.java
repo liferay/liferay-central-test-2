@@ -32,7 +32,7 @@ public interface PasswordPolicyPersistence {
 	public com.liferay.portal.model.PasswordPolicy create(long passwordPolicyId);
 
 	public com.liferay.portal.model.PasswordPolicy remove(long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public com.liferay.portal.model.PasswordPolicy remove(
@@ -53,7 +53,7 @@ public interface PasswordPolicyPersistence {
 
 	public com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByPrimaryKey(
@@ -61,7 +61,7 @@ public interface PasswordPolicyPersistence {
 
 	public com.liferay.portal.model.PasswordPolicy findByC_DP(long companyId,
 		boolean defaultPolicy)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
@@ -69,7 +69,7 @@ public interface PasswordPolicyPersistence {
 
 	public com.liferay.portal.model.PasswordPolicy findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
@@ -93,11 +93,11 @@ public interface PasswordPolicyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_DP(long companyId, boolean defaultPolicy)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public void removeByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPasswordPolicyException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

@@ -233,7 +233,7 @@ public class BlogsStatsUserLocalServiceUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser getStatsUser(
 		long groupId, long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
@@ -242,7 +242,7 @@ public class BlogsStatsUserLocalServiceUtil {
 
 	public static void updateStatsUser(long groupId, long userId,
 		java.util.Date lastPostDate)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 

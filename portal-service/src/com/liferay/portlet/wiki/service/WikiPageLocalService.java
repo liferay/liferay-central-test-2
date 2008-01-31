@@ -129,78 +129,78 @@ public interface WikiPageLocalService {
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String format, boolean head,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String format, boolean head, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPageResources(long nodeId, java.lang.String title,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPageResources(long nodeId, java.lang.String title,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePage(com.liferay.portlet.wiki.model.WikiPage page)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePages(long nodeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getNoAssetPages()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLinks(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getOrphans(long nodeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getPages(long nodeId, int begin, int end)
@@ -236,19 +236,19 @@ public interface WikiPageLocalService {
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String format, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void validateTitle(java.lang.String title)

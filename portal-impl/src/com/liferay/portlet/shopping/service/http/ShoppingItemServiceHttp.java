@@ -76,7 +76,7 @@ import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 public class ShoppingItemServiceHttp {
 	public static void addBookItems(HttpPrincipal httpPrincipal,
 		long categoryId, java.lang.String[] isbns)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -124,7 +124,7 @@ public class ShoppingItemServiceHttp {
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List itemFields, java.util.List itemPrices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -279,7 +279,7 @@ public class ShoppingItemServiceHttp {
 		java.util.List itemFields, java.util.List itemPrices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
@@ -430,7 +430,7 @@ public class ShoppingItemServiceHttp {
 	}
 
 	public static void deleteItem(HttpPrincipal httpPrincipal, long itemId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(itemId);
@@ -462,7 +462,7 @@ public class ShoppingItemServiceHttp {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		HttpPrincipal httpPrincipal, long itemId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(itemId);
@@ -508,7 +508,7 @@ public class ShoppingItemServiceHttp {
 		boolean largeImage, java.lang.String largeImageURL,
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(itemId);

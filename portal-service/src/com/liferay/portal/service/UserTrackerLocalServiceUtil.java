@@ -805,7 +805,7 @@ public class UserTrackerLocalServiceUtil {
 	}
 
 	public static void deleteUserTracker(long userTrackerId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 

@@ -61,7 +61,7 @@ public class JournalFeedServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -83,7 +83,7 @@ public class JournalFeedServiceUtil {
 		java.lang.String feedType, double feedVersion,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -95,7 +95,7 @@ public class JournalFeedServiceUtil {
 	}
 
 	public static void deleteFeed(long groupId, long feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -103,7 +103,7 @@ public class JournalFeedServiceUtil {
 	}
 
 	public static void deleteFeed(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class JournalFeedServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, long feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -121,7 +121,7 @@ public class JournalFeedServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 
@@ -137,7 +137,7 @@ public class JournalFeedServiceUtil {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
 

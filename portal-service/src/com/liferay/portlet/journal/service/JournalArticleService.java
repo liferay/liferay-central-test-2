@@ -65,7 +65,7 @@ public interface JournalArticleService {
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -85,53 +85,53 @@ public interface JournalArticleService {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		long groupId, java.lang.String articleId, double version, long plid,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void expireArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void removeArticleLocale(long companyId, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -149,12 +149,12 @@ public interface JournalArticleService {
 		java.io.File smallFile, java.util.Map images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

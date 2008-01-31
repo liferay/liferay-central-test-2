@@ -143,7 +143,7 @@ public class PollsChoiceLocalServiceUtil {
 
 	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
 		long questionId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
@@ -153,7 +153,7 @@ public class PollsChoiceLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
 		java.lang.String uuid, long questionId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
@@ -163,7 +163,7 @@ public class PollsChoiceLocalServiceUtil {
 
 	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
 		long choiceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
@@ -187,7 +187,7 @@ public class PollsChoiceLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice updateChoice(
 		long choiceId, long questionId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 

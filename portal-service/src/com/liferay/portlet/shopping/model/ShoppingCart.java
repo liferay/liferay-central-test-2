@@ -56,6 +56,6 @@ public interface ShoppingCart extends ShoppingCartModel {
 	public int getItemsSize();
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

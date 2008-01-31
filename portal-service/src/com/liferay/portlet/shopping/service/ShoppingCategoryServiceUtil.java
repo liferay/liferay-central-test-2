@@ -55,7 +55,7 @@ public class ShoppingCategoryServiceUtil {
 		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
@@ -67,7 +67,7 @@ public class ShoppingCategoryServiceUtil {
 		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
@@ -76,7 +76,7 @@ public class ShoppingCategoryServiceUtil {
 	}
 
 	public static void deleteCategory(long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
@@ -85,7 +85,7 @@ public class ShoppingCategoryServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		long categoryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
@@ -95,7 +95,7 @@ public class ShoppingCategoryServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 

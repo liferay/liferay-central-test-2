@@ -34,7 +34,7 @@ public interface SCProductVersionPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion remove(
 		long productVersionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion remove(
@@ -55,7 +55,7 @@ public interface SCProductVersionPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByPrimaryKey(
 		long productVersionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByPrimaryKey(
@@ -74,24 +74,24 @@ public interface SCProductVersionPersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByProductEntryId_First(
 		long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByProductEntryId_Last(
 		long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion[] findByProductEntryId_PrevAndNext(
 		long productVersionId, long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByDirectDownloadURL(
 		java.lang.String directDownloadURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
@@ -119,7 +119,7 @@ public interface SCProductVersionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByDirectDownloadURL(java.lang.String directDownloadURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -133,16 +133,16 @@ public interface SCProductVersionPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List getSCFrameworkVersions(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public java.util.List getSCFrameworkVersions(long pk, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public java.util.List getSCFrameworkVersions(long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public int getSCFrameworkVersionsSize(long pk)
@@ -155,61 +155,61 @@ public interface SCProductVersionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void addSCFrameworkVersion(long pk, long scFrameworkVersionPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void addSCFrameworkVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void addSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void addSCFrameworkVersions(long pk,
 		java.util.List scFrameworkVersions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void clearSCFrameworkVersions(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 
 	public void removeSCFrameworkVersion(long pk, long scFrameworkVersionPK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void removeSCFrameworkVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void removeSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void removeSCFrameworkVersions(long pk,
 		java.util.List scFrameworkVersions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void setSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
 	public void setSCFrameworkVersions(long pk,
 		java.util.List scFrameworkVersions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 }

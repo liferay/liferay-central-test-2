@@ -36,7 +36,7 @@ public class WebDAVPropsUtil {
 
 	public static com.liferay.portal.model.WebDAVProps remove(
 		long webDavPropsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchWebDAVPropsException {
 		return getPersistence().remove(webDavPropsId);
 	}
@@ -67,7 +67,7 @@ public class WebDAVPropsUtil {
 
 	public static com.liferay.portal.model.WebDAVProps findByPrimaryKey(
 		long webDavPropsId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchWebDAVPropsException {
 		return getPersistence().findByPrimaryKey(webDavPropsId);
 	}
@@ -79,7 +79,7 @@ public class WebDAVPropsUtil {
 
 	public static com.liferay.portal.model.WebDAVProps findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchWebDAVPropsException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
@@ -99,8 +99,8 @@ public class WebDAVPropsUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -120,7 +120,7 @@ public class WebDAVPropsUtil {
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchWebDAVPropsException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}

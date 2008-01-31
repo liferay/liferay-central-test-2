@@ -36,7 +36,7 @@ public class ShoppingCouponUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon remove(
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().remove(couponId);
 	}
@@ -67,7 +67,7 @@ public class ShoppingCouponUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().findByPrimaryKey(couponId);
 	}
@@ -95,14 +95,14 @@ public class ShoppingCouponUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -110,14 +110,14 @@ public class ShoppingCouponUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon[] findByGroupId_PrevAndNext(
 		long couponId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().findByGroupId_PrevAndNext(couponId, groupId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByCode(
 		java.lang.String code)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().findByCode(code);
 	}
@@ -136,8 +136,8 @@ public class ShoppingCouponUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -162,7 +162,7 @@ public class ShoppingCouponUtil {
 	}
 
 	public static void removeByCode(java.lang.String code)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		getPersistence().removeByCode(code);
 	}

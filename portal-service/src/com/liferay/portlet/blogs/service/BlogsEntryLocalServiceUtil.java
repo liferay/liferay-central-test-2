@@ -356,7 +356,7 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -373,7 +373,7 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -391,7 +391,7 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -411,7 +411,7 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -424,7 +424,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void addEntryResources(long entryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -435,7 +435,7 @@ public class BlogsEntryLocalServiceUtil {
 	public static void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -446,7 +446,7 @@ public class BlogsEntryLocalServiceUtil {
 	public static void addEntryResources(long entryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -458,7 +458,7 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -467,7 +467,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntries(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -475,7 +475,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -484,7 +484,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void deleteEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry entry)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -516,7 +516,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -525,7 +525,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -620,7 +620,7 @@ public class BlogsEntryLocalServiceUtil {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -632,7 +632,7 @@ public class BlogsEntryLocalServiceUtil {
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 

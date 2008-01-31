@@ -801,7 +801,7 @@ public class UserIdMapperLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userId, java.lang.String type)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
@@ -810,7 +810,7 @@ public class UserIdMapperLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
@@ -828,7 +828,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		long userId, java.lang.String type, java.lang.String description,
 		java.lang.String externalUserId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 

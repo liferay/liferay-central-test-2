@@ -42,7 +42,7 @@ public interface RoleFinder {
 
 	public com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException;
 
 	public java.util.List findByU_G(long userId, long groupId)

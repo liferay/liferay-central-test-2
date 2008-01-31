@@ -296,8 +296,8 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getName().toLowerCase().compareTo(shoppingCategory.getName()
-																  .toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(shoppingCategory.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

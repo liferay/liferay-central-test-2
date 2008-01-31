@@ -75,7 +75,7 @@ public class EmailAddressServiceHttp {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String address, int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -130,7 +130,7 @@ public class EmailAddressServiceHttp {
 
 	public static void deleteEmailAddress(HttpPrincipal httpPrincipal,
 		long emailAddressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(emailAddressId);
@@ -162,7 +162,7 @@ public class EmailAddressServiceHttp {
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		HttpPrincipal httpPrincipal, long emailAddressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(emailAddressId);
@@ -198,7 +198,7 @@ public class EmailAddressServiceHttp {
 
 	public static java.util.List getEmailAddresses(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -241,7 +241,7 @@ public class EmailAddressServiceHttp {
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		HttpPrincipal httpPrincipal, long emailAddressId,
 		java.lang.String address, int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(emailAddressId);

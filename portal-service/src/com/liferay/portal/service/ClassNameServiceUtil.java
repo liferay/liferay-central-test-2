@@ -53,7 +53,7 @@ package com.liferay.portal.service;
 public class ClassNameServiceUtil {
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ClassNameService classNameService = ClassNameServiceFactory.getService();
 
@@ -62,7 +62,7 @@ public class ClassNameServiceUtil {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ClassNameService classNameService = ClassNameServiceFactory.getService();
 

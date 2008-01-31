@@ -36,7 +36,7 @@ public class TagsSourceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsSource remove(
 		long sourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchSourceException {
 		return getPersistence().remove(sourceId);
 	}
@@ -67,7 +67,7 @@ public class TagsSourceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsSource findByPrimaryKey(
 		long sourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchSourceException {
 		return getPersistence().findByPrimaryKey(sourceId);
 	}
@@ -86,8 +86,8 @@ public class TagsSourceUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

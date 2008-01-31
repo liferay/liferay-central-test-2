@@ -34,7 +34,7 @@ public interface ShoppingOrderItemPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
 		long orderItemId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
@@ -55,7 +55,7 @@ public interface ShoppingOrderItemPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		long orderItemId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface ShoppingOrderItemPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
 		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
 		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
 		long orderItemId, long orderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public java.util.List findWithDynamicQuery(

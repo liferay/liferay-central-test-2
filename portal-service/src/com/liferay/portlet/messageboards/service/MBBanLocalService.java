@@ -134,15 +134,15 @@ public interface MBBanLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
 		long plid, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkBan(long groupId, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteBan(long plid, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteBansByBanUserId(long banUserId)

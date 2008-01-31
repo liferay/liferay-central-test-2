@@ -32,7 +32,7 @@ public interface ReleasePersistence {
 	public com.liferay.portal.model.Release create(long releaseId);
 
 	public com.liferay.portal.model.Release remove(long releaseId)
-		throws com.liferay.portal.NoSuchReleaseException, 
+		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release remove(
@@ -52,7 +52,7 @@ public interface ReleasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release findByPrimaryKey(long releaseId)
-		throws com.liferay.portal.NoSuchReleaseException, 
+		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release fetchByPrimaryKey(long releaseId)

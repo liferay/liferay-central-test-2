@@ -203,24 +203,24 @@ public interface TagsAssetLocalService {
 	public void afterPropertiesSet();
 
 	public void deleteAsset(long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteAsset(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteAsset(com.liferay.portlet.tags.model.TagsAsset asset)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(long assetId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
@@ -282,7 +282,7 @@ public interface TagsAssetLocalService {
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int begin, int end, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getCompanyAssets(long companyId, int begin, int end)
@@ -301,7 +301,7 @@ public interface TagsAssetLocalService {
 
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
@@ -311,7 +311,7 @@ public interface TagsAssetLocalService {
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int searchAssetDisplaysCount(long companyId,
@@ -321,7 +321,7 @@ public interface TagsAssetLocalService {
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
@@ -332,7 +332,7 @@ public interface TagsAssetLocalService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
@@ -343,7 +343,7 @@ public interface TagsAssetLocalService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void validate(java.lang.String className,

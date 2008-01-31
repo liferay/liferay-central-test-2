@@ -82,7 +82,7 @@ public class BlogsEntryServiceHttp {
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -168,7 +168,7 @@ public class BlogsEntryServiceHttp {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -255,7 +255,7 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
@@ -287,7 +287,7 @@ public class BlogsEntryServiceHttp {
 
 	public static java.util.List getCompanyEntries(
 		HttpPrincipal httpPrincipal, long companyId, int max)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -327,7 +327,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -395,7 +395,7 @@ public class BlogsEntryServiceHttp {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
@@ -431,7 +431,7 @@ public class BlogsEntryServiceHttp {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -473,7 +473,7 @@ public class BlogsEntryServiceHttp {
 
 	public static java.util.List getGroupEntries(HttpPrincipal httpPrincipal,
 		long groupId, int max)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -513,7 +513,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -581,7 +581,7 @@ public class BlogsEntryServiceHttp {
 
 	public static java.util.List getOrganizationEntries(
 		HttpPrincipal httpPrincipal, long organizationId, int max)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -622,7 +622,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long organizationId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -694,7 +694,7 @@ public class BlogsEntryServiceHttp {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);

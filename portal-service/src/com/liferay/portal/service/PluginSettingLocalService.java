@@ -344,7 +344,7 @@ public interface PluginSettingLocalService {
 
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasPermission(long userId, java.lang.String pluginId,
@@ -353,6 +353,6 @@ public interface PluginSettingLocalService {
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

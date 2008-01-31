@@ -75,7 +75,7 @@ public class CountryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String a2, java.lang.String a3, java.lang.String number,
 		java.lang.String idd, boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -203,7 +203,7 @@ public class CountryServiceHttp {
 
 	public static com.liferay.portal.model.Country getCountry(
 		HttpPrincipal httpPrincipal, long countryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(countryId);

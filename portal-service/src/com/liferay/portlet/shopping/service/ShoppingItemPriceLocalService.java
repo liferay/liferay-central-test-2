@@ -123,6 +123,6 @@ public interface ShoppingItemPriceLocalService {
 	public void afterPropertiesSet();
 
 	public java.util.List getItemPrices(long itemId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

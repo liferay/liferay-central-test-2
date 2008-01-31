@@ -73,7 +73,7 @@ import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
 public class MBBanServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		HttpPrincipal httpPrincipal, long plid, long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -111,7 +111,7 @@ public class MBBanServiceHttp {
 
 	public static void deleteBan(HttpPrincipal httpPrincipal, long plid,
 		long banUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);

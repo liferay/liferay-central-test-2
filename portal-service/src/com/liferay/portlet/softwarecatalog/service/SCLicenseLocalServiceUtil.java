@@ -157,7 +157,7 @@ public class SCLicenseLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
@@ -166,7 +166,7 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static void deleteLicense(long licenseId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
@@ -175,7 +175,7 @@ public class SCLicenseLocalServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
@@ -226,7 +226,7 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static java.util.List getProductEntryLicenses(long productEntryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
@@ -236,7 +236,7 @@ public class SCLicenseLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
 		long licenseId, java.lang.String name, java.lang.String url,
 		boolean openSource, boolean active, boolean recommended)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 

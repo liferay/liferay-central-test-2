@@ -84,7 +84,7 @@ public class ShoppingCouponServiceHttp {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -193,7 +193,7 @@ public class ShoppingCouponServiceHttp {
 
 	public static void deleteCoupon(HttpPrincipal httpPrincipal, long plid,
 		long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -227,7 +227,7 @@ public class ShoppingCouponServiceHttp {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		HttpPrincipal httpPrincipal, long plid, long couponId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -266,7 +266,7 @@ public class ShoppingCouponServiceHttp {
 	public static java.util.List search(HttpPrincipal httpPrincipal, long plid,
 		long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -335,7 +335,7 @@ public class ShoppingCouponServiceHttp {
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);

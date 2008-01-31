@@ -74,7 +74,7 @@ public class PluginSettingServiceHttp {
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String pluginId,
 		java.lang.String pluginType, java.lang.String roles, boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);

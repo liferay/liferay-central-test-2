@@ -32,7 +32,7 @@ public interface ResourceCodePersistence {
 	public com.liferay.portal.model.ResourceCode create(long codeId);
 
 	public com.liferay.portal.model.ResourceCode remove(long codeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode remove(
@@ -52,7 +52,7 @@ public interface ResourceCodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByPrimaryKey(long codeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode fetchByPrimaryKey(long codeId)
@@ -70,18 +70,18 @@ public interface ResourceCodePersistence {
 
 	public com.liferay.portal.model.ResourceCode findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
 		long codeId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public java.util.List findByName(java.lang.String name)
@@ -97,24 +97,24 @@ public interface ResourceCodePersistence {
 	public com.liferay.portal.model.ResourceCode findByName_First(
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode findByName_Last(
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
 		long codeId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode findByC_N_S(long companyId,
 		java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public com.liferay.portal.model.ResourceCode fetchByC_N_S(long companyId,
@@ -145,7 +145,7 @@ public interface ResourceCodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_N_S(long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

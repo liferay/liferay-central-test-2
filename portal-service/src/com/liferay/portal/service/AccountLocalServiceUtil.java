@@ -792,7 +792,7 @@ public class AccountLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Account getAccount(long accountId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 

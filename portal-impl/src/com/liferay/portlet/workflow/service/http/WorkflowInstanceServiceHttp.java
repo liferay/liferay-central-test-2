@@ -73,7 +73,7 @@ import com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil;
 public class WorkflowInstanceServiceHttp {
 	public static com.liferay.portlet.workflow.model.WorkflowInstance addInstance(
 		HttpPrincipal httpPrincipal, long definitionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
@@ -109,7 +109,7 @@ public class WorkflowInstanceServiceHttp {
 
 	public static void signalInstance(HttpPrincipal httpPrincipal,
 		long instanceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);
@@ -141,7 +141,7 @@ public class WorkflowInstanceServiceHttp {
 
 	public static void signalToken(HttpPrincipal httpPrincipal,
 		long instanceId, long tokenId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(instanceId);

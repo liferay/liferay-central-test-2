@@ -133,13 +133,13 @@ public interface MBMessageFlagLocalService {
 	public void afterPropertiesSet();
 
 	public void addReadFlags(long userId, java.util.List messages)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadFlag(long userId, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

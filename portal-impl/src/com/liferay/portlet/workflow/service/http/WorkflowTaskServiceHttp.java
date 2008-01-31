@@ -74,7 +74,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil;
 public class WorkflowTaskServiceHttp {
 	public static java.util.Map updateTask(HttpPrincipal httpPrincipal,
 		long taskId, java.lang.String transition, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);

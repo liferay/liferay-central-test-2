@@ -32,7 +32,7 @@ public interface ContactPersistence {
 	public com.liferay.portal.model.Contact create(long contactId);
 
 	public com.liferay.portal.model.Contact remove(long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException;
 
 	public com.liferay.portal.model.Contact remove(
@@ -52,7 +52,7 @@ public interface ContactPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Contact findByPrimaryKey(long contactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException;
 
 	public com.liferay.portal.model.Contact fetchByPrimaryKey(long contactId)
@@ -70,18 +70,18 @@ public interface ContactPersistence {
 
 	public com.liferay.portal.model.Contact findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException;
 
 	public com.liferay.portal.model.Contact findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException;
 
 	public com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
 		long contactId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchContactException;
 
 	public java.util.List findWithDynamicQuery(

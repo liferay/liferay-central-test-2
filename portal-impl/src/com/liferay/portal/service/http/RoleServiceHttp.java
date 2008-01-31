@@ -75,7 +75,7 @@ public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, int type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = name;
@@ -123,7 +123,7 @@ public class RoleServiceHttp {
 
 	public static void addUserRoles(HttpPrincipal httpPrincipal, long userId,
 		long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -160,7 +160,7 @@ public class RoleServiceHttp {
 	}
 
 	public static void deleteRole(HttpPrincipal httpPrincipal, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
@@ -192,7 +192,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role getGroupRole(
 		HttpPrincipal httpPrincipal, long companyId, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -230,7 +230,7 @@ public class RoleServiceHttp {
 
 	public static java.util.List getGroupRoles(HttpPrincipal httpPrincipal,
 		long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -266,7 +266,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role getRole(
 		HttpPrincipal httpPrincipal, long roleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
@@ -302,7 +302,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role getRole(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -344,7 +344,7 @@ public class RoleServiceHttp {
 
 	public static java.util.List getUserGroupRoles(
 		HttpPrincipal httpPrincipal, long userId, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -382,7 +382,7 @@ public class RoleServiceHttp {
 
 	public static java.util.List getUserRelatedRoles(
 		HttpPrincipal httpPrincipal, long userId, java.util.List groups)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -424,7 +424,7 @@ public class RoleServiceHttp {
 
 	public static java.util.List getUserRoles(HttpPrincipal httpPrincipal,
 		long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -460,7 +460,7 @@ public class RoleServiceHttp {
 
 	public static boolean hasUserRole(HttpPrincipal httpPrincipal, long userId,
 		long companyId, java.lang.String name, boolean inherited)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -507,7 +507,7 @@ public class RoleServiceHttp {
 
 	public static boolean hasUserRoles(HttpPrincipal httpPrincipal,
 		long userId, long companyId, java.lang.String[] names, boolean inherited)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -554,7 +554,7 @@ public class RoleServiceHttp {
 
 	public static void unsetUserRoles(HttpPrincipal httpPrincipal, long userId,
 		long[] roleIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -593,7 +593,7 @@ public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);

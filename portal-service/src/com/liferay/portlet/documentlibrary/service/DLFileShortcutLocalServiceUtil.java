@@ -262,7 +262,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -274,7 +274,7 @@ public class DLFileShortcutLocalServiceUtil {
 		java.lang.String uuid, long userId, long folderId, long toFolderId,
 		java.lang.String toName, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -287,7 +287,7 @@ public class DLFileShortcutLocalServiceUtil {
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -301,7 +301,7 @@ public class DLFileShortcutLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -312,7 +312,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void addFileShortcutResources(long fileShortcutId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -324,7 +324,7 @@ public class DLFileShortcutLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -335,7 +335,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void addFileShortcutResources(long fileShortcutId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -348,7 +348,7 @@ public class DLFileShortcutLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -357,7 +357,7 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -366,7 +366,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void deleteFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -375,7 +375,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void deleteFileShortcuts(long toFolderId,
 		java.lang.String toName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -384,7 +384,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -394,7 +394,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
 		long userId, long fileShortcutId, long folderId, long toFolderId,
 		java.lang.String toName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -405,7 +405,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void updateFileShortcuts(long oldToFolderId,
 		java.lang.String oldToName, long newToFolderId,
 		java.lang.String newToName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 

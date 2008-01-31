@@ -53,7 +53,7 @@ package com.liferay.portlet.workflow.service;
 public class WorkflowInstanceServiceUtil {
 	public static com.liferay.portlet.workflow.model.WorkflowInstance addInstance(
 		long definitionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
 
@@ -61,7 +61,7 @@ public class WorkflowInstanceServiceUtil {
 	}
 
 	public static void signalInstance(long instanceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
 
@@ -69,7 +69,7 @@ public class WorkflowInstanceServiceUtil {
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
 

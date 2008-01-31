@@ -36,7 +36,7 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure remove(
 		long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().remove(id);
 	}
@@ -67,7 +67,7 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
 		long id)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByPrimaryKey(id);
 	}
@@ -96,7 +96,7 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -104,7 +104,7 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -112,14 +112,14 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure[] findByUuid_PrevAndNext(
 		long id, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByUuid_PrevAndNext(id, uuid, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
@@ -148,14 +148,14 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -163,7 +163,7 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure[] findByGroupId_PrevAndNext(
 		long id, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_PrevAndNext(id, groupId, obc);
 	}
@@ -189,7 +189,7 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure findByStructureId_First(
 		java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByStructureId_First(structureId, obc);
 	}
@@ -197,7 +197,7 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure findByStructureId_Last(
 		java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByStructureId_Last(structureId, obc);
 	}
@@ -205,15 +205,15 @@ public class JournalStructureUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure[] findByStructureId_PrevAndNext(
 		long id, java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
-		return getPersistence().findByStructureId_PrevAndNext(id, structureId,
-			obc);
+		return getPersistence()
+				   .findByStructureId_PrevAndNext(id, structureId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByG_S(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByG_S(groupId, structureId);
 	}
@@ -233,8 +233,8 @@ public class JournalStructureUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -259,7 +259,7 @@ public class JournalStructureUtil {
 	}
 
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
@@ -275,7 +275,7 @@ public class JournalStructureUtil {
 	}
 
 	public static void removeByG_S(long groupId, java.lang.String structureId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		getPersistence().removeByG_S(groupId, structureId);
 	}

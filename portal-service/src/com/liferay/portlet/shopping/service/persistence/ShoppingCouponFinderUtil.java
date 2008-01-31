@@ -32,7 +32,8 @@ public class ShoppingCouponFinderUtil {
 	public static int countByG_C_C_A_DT(long groupId, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator) throws com.liferay.portal.SystemException {
-		return getFinder().countByG_C_C_A_DT(groupId, companyId, code, active,
+		return getFinder()
+				   .countByG_C_C_A_DT(groupId, companyId, code, active,
 			discountType, andOperator);
 	}
 
@@ -40,7 +41,8 @@ public class ShoppingCouponFinderUtil {
 		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_C_C_A_DT(groupId, companyId, code, active,
+		return getFinder()
+				   .findByG_C_C_A_DT(groupId, companyId, code, active,
 			discountType, andOperator, begin, end);
 	}
 

@@ -74,7 +74,7 @@ public class LayoutSetServiceJSON {
 	public static JSONObject updateLookAndFeel(long groupId,
 		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(groupId,
 				privateLayout, themeId, colorSchemeId, css, wapTheme);
@@ -84,7 +84,7 @@ public class LayoutSetServiceJSON {
 
 	public static JSONObject updateVirtualHost(long groupId,
 		boolean privateLayout, java.lang.String virtualHost)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(groupId,
 				privateLayout, virtualHost);

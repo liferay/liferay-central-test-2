@@ -212,7 +212,7 @@ public class BookmarksEntryLocalServiceUtil {
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -225,7 +225,7 @@ public class BookmarksEntryLocalServiceUtil {
 		java.lang.String name, java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -240,7 +240,7 @@ public class BookmarksEntryLocalServiceUtil {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -256,7 +256,7 @@ public class BookmarksEntryLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -267,7 +267,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static void addEntryResources(long folderId, long entryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -279,7 +279,7 @@ public class BookmarksEntryLocalServiceUtil {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -290,7 +290,7 @@ public class BookmarksEntryLocalServiceUtil {
 	public static void addEntryResources(long folderId, long entryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -303,7 +303,7 @@ public class BookmarksEntryLocalServiceUtil {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -312,7 +312,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntries(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -320,7 +320,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -329,7 +329,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static void deleteEntry(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -361,7 +361,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -413,7 +413,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -424,7 +424,7 @@ public class BookmarksEntryLocalServiceUtil {
 		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -435,7 +435,7 @@ public class BookmarksEntryLocalServiceUtil {
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 

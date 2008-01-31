@@ -36,7 +36,7 @@ public class ActivityTrackerUtil {
 
 	public static com.liferay.portal.model.ActivityTracker remove(
 		long activityTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().remove(activityTrackerId);
 	}
@@ -67,7 +67,7 @@ public class ActivityTrackerUtil {
 
 	public static com.liferay.portal.model.ActivityTracker findByPrimaryKey(
 		long activityTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByPrimaryKey(activityTrackerId);
 	}
@@ -95,14 +95,14 @@ public class ActivityTrackerUtil {
 
 	public static com.liferay.portal.model.ActivityTracker findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.ActivityTracker findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -110,10 +110,10 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker[] findByGroupId_PrevAndNext(
 		long activityTrackerId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
-		return getPersistence().findByGroupId_PrevAndNext(activityTrackerId,
-			groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(activityTrackerId, groupId, obc);
 	}
 
 	public static java.util.List findByCompanyId(long companyId)
@@ -134,14 +134,14 @@ public class ActivityTrackerUtil {
 
 	public static com.liferay.portal.model.ActivityTracker findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.ActivityTracker findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -149,10 +149,11 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker[] findByCompanyId_PrevAndNext(
 		long activityTrackerId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
-		return getPersistence().findByCompanyId_PrevAndNext(activityTrackerId,
-			companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(activityTrackerId, companyId,
+			obc);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -173,14 +174,14 @@ public class ActivityTrackerUtil {
 
 	public static com.liferay.portal.model.ActivityTracker findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.ActivityTracker findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -188,10 +189,10 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker[] findByUserId_PrevAndNext(
 		long activityTrackerId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
-		return getPersistence().findByUserId_PrevAndNext(activityTrackerId,
-			userId, obc);
+		return getPersistence()
+				   .findByUserId_PrevAndNext(activityTrackerId, userId, obc);
 	}
 
 	public static java.util.List findByReceiverUserId(long receiverUserId)
@@ -207,14 +208,14 @@ public class ActivityTrackerUtil {
 	public static java.util.List findByReceiverUserId(long receiverUserId,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByReceiverUserId(receiverUserId, begin,
-			end, obc);
+		return getPersistence()
+				   .findByReceiverUserId(receiverUserId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.ActivityTracker findByReceiverUserId_First(
 		long receiverUserId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByReceiverUserId_First(receiverUserId, obc);
 	}
@@ -222,7 +223,7 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker findByReceiverUserId_Last(
 		long receiverUserId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByReceiverUserId_Last(receiverUserId, obc);
 	}
@@ -230,9 +231,10 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker[] findByReceiverUserId_PrevAndNext(
 		long activityTrackerId, long receiverUserId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
-		return getPersistence().findByReceiverUserId_PrevAndNext(activityTrackerId,
+		return getPersistence()
+				   .findByReceiverUserId_PrevAndNext(activityTrackerId,
 			receiverUserId, obc);
 	}
 
@@ -255,7 +257,7 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker findByC_C_First(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByC_C_First(classNameId, classPK, obc);
 	}
@@ -263,7 +265,7 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker findByC_C_Last(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
 		return getPersistence().findByC_C_Last(classNameId, classPK, obc);
 	}
@@ -271,10 +273,11 @@ public class ActivityTrackerUtil {
 	public static com.liferay.portal.model.ActivityTracker[] findByC_C_PrevAndNext(
 		long activityTrackerId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException {
-		return getPersistence().findByC_C_PrevAndNext(activityTrackerId,
-			classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_PrevAndNext(activityTrackerId, classNameId,
+			classPK, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -286,8 +289,8 @@ public class ActivityTrackerUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

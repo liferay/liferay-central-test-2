@@ -342,12 +342,12 @@ public interface UserIdMapperLocalService {
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(long userId,
 		java.lang.String type)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getUserIdMappers(long userId)
@@ -356,6 +356,6 @@ public interface UserIdMapperLocalService {
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		long userId, java.lang.String type, java.lang.String description,
 		java.lang.String externalUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

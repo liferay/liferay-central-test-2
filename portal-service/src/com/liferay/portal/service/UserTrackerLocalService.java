@@ -344,7 +344,7 @@ public interface UserTrackerLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserTracker(long userTrackerId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getUserTrackers(long companyId, int begin, int end)

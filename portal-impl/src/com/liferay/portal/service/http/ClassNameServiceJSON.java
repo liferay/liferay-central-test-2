@@ -72,7 +72,7 @@ import org.json.JSONObject;
  */
 public class ClassNameServiceJSON {
 	public static JSONObject getClassName(long classNameId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.ClassName returnValue = ClassNameServiceUtil.getClassName(classNameId);
 
@@ -80,7 +80,7 @@ public class ClassNameServiceJSON {
 	}
 
 	public static JSONObject getClassName(java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.ClassName returnValue = ClassNameServiceUtil.getClassName(value);
 

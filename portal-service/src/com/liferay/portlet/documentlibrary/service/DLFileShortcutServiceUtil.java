@@ -54,7 +54,7 @@ public class DLFileShortcutServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
 
@@ -66,7 +66,7 @@ public class DLFileShortcutServiceUtil {
 		long folderId, long toFolderId, java.lang.String toName,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
 
@@ -75,7 +75,7 @@ public class DLFileShortcutServiceUtil {
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class DLFileShortcutServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
 
@@ -94,7 +94,7 @@ public class DLFileShortcutServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
 		long fileShortcutId, long folderId, long toFolderId,
 		java.lang.String toName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
 

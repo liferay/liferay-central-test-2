@@ -338,11 +338,11 @@ public interface ResourceCodeLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

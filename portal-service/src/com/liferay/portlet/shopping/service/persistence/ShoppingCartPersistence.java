@@ -32,7 +32,7 @@ public interface ShoppingCartPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCart create(long cartId);
 
 	public com.liferay.portlet.shopping.model.ShoppingCart remove(long cartId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart remove(
@@ -53,7 +53,7 @@ public interface ShoppingCartPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
 		long cartId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart fetchByPrimaryKey(
@@ -71,18 +71,18 @@ public interface ShoppingCartPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart[] findByGroupId_PrevAndNext(
 		long cartId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public java.util.List findByUserId(long userId)
@@ -97,23 +97,23 @@ public interface ShoppingCartPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart[] findByUserId_PrevAndNext(
 		long cartId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart findByG_U(
 		long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
@@ -143,7 +143,7 @@ public interface ShoppingCartPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

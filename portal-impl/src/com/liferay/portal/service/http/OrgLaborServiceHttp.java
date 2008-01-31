@@ -75,7 +75,7 @@ public class OrgLaborServiceHttp {
 		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
 		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
 		int friOpen, int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -147,7 +147,7 @@ public class OrgLaborServiceHttp {
 
 	public static void deleteOrgLabor(HttpPrincipal httpPrincipal,
 		long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(orgLaborId);
@@ -179,7 +179,7 @@ public class OrgLaborServiceHttp {
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(
 		HttpPrincipal httpPrincipal, long orgLaborId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(orgLaborId);
@@ -215,7 +215,7 @@ public class OrgLaborServiceHttp {
 
 	public static java.util.List getOrgLabors(HttpPrincipal httpPrincipal,
 		long organizationId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -254,7 +254,7 @@ public class OrgLaborServiceHttp {
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
 		int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(orgLaborId);

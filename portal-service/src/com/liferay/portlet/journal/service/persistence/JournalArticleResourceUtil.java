@@ -36,7 +36,7 @@ public class JournalArticleResourceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource remove(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		return getPersistence().remove(resourcePrimKey);
 	}
@@ -67,7 +67,7 @@ public class JournalArticleResourceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByPrimaryKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		return getPersistence().findByPrimaryKey(resourcePrimKey);
 	}
@@ -95,14 +95,14 @@ public class JournalArticleResourceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -110,15 +110,15 @@ public class JournalArticleResourceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticleResource[] findByGroupId_PrevAndNext(
 		long resourcePrimKey, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
-		return getPersistence().findByGroupId_PrevAndNext(resourcePrimKey,
-			groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(resourcePrimKey, groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByG_A(
 		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		return getPersistence().findByG_A(groupId, articleId);
 	}
@@ -138,8 +138,8 @@ public class JournalArticleResourceUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -164,7 +164,7 @@ public class JournalArticleResourceUtil {
 	}
 
 	public static void removeByG_A(long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
 		getPersistence().removeByG_A(groupId, articleId);
 	}

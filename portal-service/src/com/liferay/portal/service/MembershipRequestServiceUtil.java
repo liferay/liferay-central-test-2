@@ -53,7 +53,7 @@ package com.liferay.portal.service;
 public class MembershipRequestServiceUtil {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long groupId, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
 
@@ -61,7 +61,7 @@ public class MembershipRequestServiceUtil {
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
 
@@ -70,7 +70,7 @@ public class MembershipRequestServiceUtil {
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
 
@@ -79,7 +79,7 @@ public class MembershipRequestServiceUtil {
 
 	public static void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
 

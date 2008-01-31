@@ -163,8 +163,8 @@ public class ListTypeModelImpl extends BaseModelImpl {
 
 		int value = 0;
 
-		value = getName().toLowerCase().compareTo(listType.getName()
-														  .toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(listType.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

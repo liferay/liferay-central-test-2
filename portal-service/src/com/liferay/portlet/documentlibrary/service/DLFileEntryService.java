@@ -54,7 +54,7 @@ public interface DLFileEntryService {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -63,39 +63,39 @@ public interface DLFileEntryService {
 		java.lang.String extraSettings, byte[] byteArray,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long folderId, java.lang.String titleWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void lockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void unlockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -103,6 +103,6 @@ public interface DLFileEntryService {
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

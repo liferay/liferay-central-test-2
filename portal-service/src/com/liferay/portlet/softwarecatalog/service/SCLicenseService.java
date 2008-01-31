@@ -52,21 +52,21 @@ public interface SCLicenseService {
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLicense(long licenseId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
 		long licenseId, java.lang.String name, java.lang.String url,
 		boolean openSource, boolean active, boolean recommended)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -74,7 +74,7 @@ import org.json.JSONObject;
 public class RoleServiceJSON {
 	public static JSONObject addRole(java.lang.String name,
 		java.lang.String description, int type)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
 				description, type);
@@ -83,19 +83,19 @@ public class RoleServiceJSON {
 	}
 
 	public static void addUserRoles(long userId, long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		RoleServiceUtil.addUserRoles(userId, roleIds);
 	}
 
 	public static void deleteRole(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		RoleServiceUtil.deleteRole(roleId);
 	}
 
 	public static JSONObject getGroupRole(long companyId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.getGroupRole(companyId,
 				groupId);
@@ -104,7 +104,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONArray getGroupRoles(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = RoleServiceUtil.getGroupRoles(groupId);
 
@@ -112,7 +112,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONObject getRole(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(roleId);
 
@@ -120,7 +120,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONObject getRole(long companyId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(companyId,
 				name);
@@ -129,7 +129,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONArray getUserGroupRoles(long userId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = RoleServiceUtil.getUserGroupRoles(userId,
 				groupId);
@@ -139,7 +139,7 @@ public class RoleServiceJSON {
 
 	public static JSONArray getUserRelatedRoles(long userId,
 		java.util.List groups)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
 				groups);
@@ -148,7 +148,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONArray getUserRoles(long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = RoleServiceUtil.getUserRoles(userId);
 
@@ -157,7 +157,7 @@ public class RoleServiceJSON {
 
 	public static boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		boolean returnValue = RoleServiceUtil.hasUserRole(userId, companyId,
 				name, inherited);
@@ -167,7 +167,7 @@ public class RoleServiceJSON {
 
 	public static boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		boolean returnValue = RoleServiceUtil.hasUserRoles(userId, companyId,
 				names, inherited);
@@ -176,14 +176,14 @@ public class RoleServiceJSON {
 	}
 
 	public static void unsetUserRoles(long userId, long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		RoleServiceUtil.unsetUserRoles(userId, roleIds);
 	}
 
 	public static JSONObject updateRole(long roleId, java.lang.String name,
 		java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
 				name, description);

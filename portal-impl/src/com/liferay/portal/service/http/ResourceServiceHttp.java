@@ -74,7 +74,7 @@ public class ResourceServiceHttp {
 	public static com.liferay.portal.model.Resource getResource(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);

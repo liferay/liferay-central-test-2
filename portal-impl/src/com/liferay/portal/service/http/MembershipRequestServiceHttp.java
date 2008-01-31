@@ -73,7 +73,7 @@ import com.liferay.portal.service.MembershipRequestServiceUtil;
 public class MembershipRequestServiceHttp {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -116,7 +116,7 @@ public class MembershipRequestServiceHttp {
 
 	public static void deleteMembershipRequests(HttpPrincipal httpPrincipal,
 		long groupId, int statusId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -151,7 +151,7 @@ public class MembershipRequestServiceHttp {
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		HttpPrincipal httpPrincipal, long membershipRequestId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(membershipRequestId);
@@ -187,7 +187,7 @@ public class MembershipRequestServiceHttp {
 
 	public static void updateStatus(HttpPrincipal httpPrincipal,
 		long membershipRequestId, java.lang.String reviewComments, int statusId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(membershipRequestId);

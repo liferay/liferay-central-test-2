@@ -31,7 +31,7 @@ package com.liferay.portlet.polls.service.persistence;
 public class PollsChoiceFinderUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+		throws com.liferay.portlet.polls.NoSuchChoiceException,
 			com.liferay.portal.SystemException {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}

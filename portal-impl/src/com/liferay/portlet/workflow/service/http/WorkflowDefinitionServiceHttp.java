@@ -76,7 +76,7 @@ public class WorkflowDefinitionServiceHttp {
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
 		HttpPrincipal httpPrincipal, java.lang.String xml,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = xml;
@@ -123,7 +123,7 @@ public class WorkflowDefinitionServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String xml,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = xml;
@@ -180,7 +180,7 @@ public class WorkflowDefinitionServiceHttp {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = xml;
@@ -248,7 +248,7 @@ public class WorkflowDefinitionServiceHttp {
 	public static void addDefinitionResources(HttpPrincipal httpPrincipal,
 		com.liferay.portal.model.User user, long definitionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = user;
@@ -293,7 +293,7 @@ public class WorkflowDefinitionServiceHttp {
 		com.liferay.portal.model.User user, long definitionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = user;
@@ -344,7 +344,7 @@ public class WorkflowDefinitionServiceHttp {
 
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition getDefinition(
 		HttpPrincipal httpPrincipal, long definitionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);

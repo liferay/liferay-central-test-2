@@ -74,7 +74,7 @@ public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company addCompany(
 		HttpPrincipal httpPrincipal, java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = webId;
@@ -128,7 +128,7 @@ public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company updateCompany(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -182,7 +182,7 @@ public class CompanyServiceHttp {
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -289,7 +289,7 @@ public class CompanyServiceHttp {
 
 	public static void updateDisplay(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String languageId, java.lang.String timeZoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -334,7 +334,7 @@ public class CompanyServiceHttp {
 
 	public static void updateLogo(HttpPrincipal httpPrincipal, long companyId,
 		java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -374,7 +374,7 @@ public class CompanyServiceHttp {
 		long companyId, java.lang.String authType, boolean autoLogin,
 		boolean sendPassword, boolean strangers, boolean strangersWithMx,
 		boolean strangersVerify, boolean communityLogo)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);

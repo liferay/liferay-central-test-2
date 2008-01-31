@@ -34,7 +34,7 @@ public interface SCProductScreenshotPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot remove(
 		long productScreenshotId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot remove(
@@ -55,7 +55,7 @@ public interface SCProductScreenshotPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByPrimaryKey(
 		long productScreenshotId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByPrimaryKey(
@@ -74,24 +74,24 @@ public interface SCProductScreenshotPersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByProductEntryId_First(
 		long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByProductEntryId_Last(
 		long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot[] findByProductEntryId_PrevAndNext(
 		long productScreenshotId, long productEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByThumbnailId(
 		long thumbnailId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
@@ -99,7 +99,7 @@ public interface SCProductScreenshotPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByFullImageId(
 		long fullImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
@@ -107,7 +107,7 @@ public interface SCProductScreenshotPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByP_P(
 		long productEntryId, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByP_P(
@@ -135,15 +135,15 @@ public interface SCProductScreenshotPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByThumbnailId(long thumbnailId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public void removeByFullImageId(long fullImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public void removeByP_P(long productEntryId, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

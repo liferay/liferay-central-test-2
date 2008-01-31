@@ -300,8 +300,8 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 		int value = 0;
 
-		value = getName().toLowerCase().compareTo(wikiNode.getName()
-														  .toLowerCase());
+		value = getName().toLowerCase()
+					.compareTo(wikiNode.getName().toLowerCase());
 
 		if (value != 0) {
 			return value;

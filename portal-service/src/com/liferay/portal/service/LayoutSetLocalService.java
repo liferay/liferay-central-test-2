@@ -339,41 +339,41 @@ public interface LayoutSetLocalService {
 
 	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
 		boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLayoutSet(long groupId, boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(long groupId,
 		boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
 		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet updatePageCount(long groupId,
 		boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
 		boolean privateLayout, java.lang.String virtualHost)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

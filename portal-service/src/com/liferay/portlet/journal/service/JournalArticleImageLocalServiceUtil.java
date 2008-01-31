@@ -236,7 +236,7 @@ public class JournalArticleImageLocalServiceUtil {
 	public static void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 
@@ -269,7 +269,7 @@ public class JournalArticleImageLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage getArticleImage(
 		long articleImageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 

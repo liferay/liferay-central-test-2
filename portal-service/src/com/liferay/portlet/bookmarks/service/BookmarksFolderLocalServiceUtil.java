@@ -211,7 +211,7 @@ public class BookmarksFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -224,7 +224,7 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String uuid, long userId, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -237,7 +237,7 @@ public class BookmarksFolderLocalServiceUtil {
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -253,7 +253,7 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -264,7 +264,7 @@ public class BookmarksFolderLocalServiceUtil {
 
 	public static void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -275,7 +275,7 @@ public class BookmarksFolderLocalServiceUtil {
 	public static void addFolderResources(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -286,7 +286,7 @@ public class BookmarksFolderLocalServiceUtil {
 	public static void addFolderResources(long folderId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -298,7 +298,7 @@ public class BookmarksFolderLocalServiceUtil {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -307,7 +307,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -316,7 +316,7 @@ public class BookmarksFolderLocalServiceUtil {
 
 	public static void deleteFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -324,7 +324,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static void deleteFolders(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -333,7 +333,7 @@ public class BookmarksFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -382,7 +382,7 @@ public class BookmarksFolderLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 

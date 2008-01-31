@@ -73,7 +73,7 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		HttpPrincipal httpPrincipal, long questionId, long choiceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);

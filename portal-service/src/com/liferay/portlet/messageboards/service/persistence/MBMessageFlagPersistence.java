@@ -34,7 +34,7 @@ public interface MBMessageFlagPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
 		long messageFlagId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
@@ -55,7 +55,7 @@ public interface MBMessageFlagPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
 		long messageFlagId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface MBMessageFlagPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
 		long messageFlagId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public java.util.List findByMessageId(long messageId)
@@ -99,23 +99,23 @@ public interface MBMessageFlagPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_First(
 		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_Last(
 		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByMessageId_PrevAndNext(
 		long messageFlagId, long messageId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M(
 		long userId, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M(
@@ -145,7 +145,7 @@ public interface MBMessageFlagPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByU_M(long userId, long messageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

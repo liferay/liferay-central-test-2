@@ -56,7 +56,7 @@ public class DLFileEntryServiceUtil {
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -71,7 +71,7 @@ public class DLFileEntryServiceUtil {
 		java.lang.String extraSettings, byte[] byteArray,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -81,7 +81,7 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -90,7 +90,7 @@ public class DLFileEntryServiceUtil {
 
 	public static void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -99,7 +99,7 @@ public class DLFileEntryServiceUtil {
 
 	public static void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -108,7 +108,7 @@ public class DLFileEntryServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -117,7 +117,7 @@ public class DLFileEntryServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long folderId, java.lang.String titleWithExtension)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -126,7 +126,7 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static void lockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -134,7 +134,7 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
@@ -146,7 +146,7 @@ public class DLFileEntryServiceUtil {
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 

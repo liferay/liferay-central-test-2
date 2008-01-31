@@ -41,6 +41,10 @@ public class Html_IW {
 		return Html.fromInputSafe(text);
 	}
 
+	public java.lang.String replaceMsWordCharacters(java.lang.String text) {
+		return Html.replaceMsWordCharacters(text);
+	}
+
 	public java.lang.String stripBetween(java.lang.String text,
 		java.lang.String tag) {
 		return Html.stripBetween(text, tag);

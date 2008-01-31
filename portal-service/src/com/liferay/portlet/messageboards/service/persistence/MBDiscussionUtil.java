@@ -36,7 +36,7 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion remove(
 		long discussionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().remove(discussionId);
 	}
@@ -67,7 +67,7 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
 		long discussionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().findByPrimaryKey(discussionId);
 	}
@@ -79,7 +79,7 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
@@ -99,8 +99,8 @@ public class MBDiscussionUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -120,7 +120,7 @@ public class MBDiscussionUtil {
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}

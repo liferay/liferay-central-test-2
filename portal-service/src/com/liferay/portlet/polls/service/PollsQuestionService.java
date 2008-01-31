@@ -55,7 +55,7 @@ public interface PollsQuestionService {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -64,16 +64,16 @@ public interface PollsQuestionService {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteQuestion(long questionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -81,6 +81,6 @@ public interface PollsQuestionService {
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

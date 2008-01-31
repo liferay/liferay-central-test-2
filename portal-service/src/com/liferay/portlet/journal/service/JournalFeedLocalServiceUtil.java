@@ -294,7 +294,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -316,7 +316,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String feedType, double feedVersion,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -338,7 +338,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -361,7 +361,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String feedType, double feedVersion,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -386,7 +386,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -412,7 +412,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -426,7 +426,7 @@ public class JournalFeedLocalServiceUtil {
 
 	public static void addFeedResources(long feedId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -437,7 +437,7 @@ public class JournalFeedLocalServiceUtil {
 	public static void addFeedResources(
 		com.liferay.portlet.journal.model.JournalFeed feed,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -448,7 +448,7 @@ public class JournalFeedLocalServiceUtil {
 	public static void addFeedResources(long feedId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -460,7 +460,7 @@ public class JournalFeedLocalServiceUtil {
 		com.liferay.portlet.journal.model.JournalFeed feed,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -469,7 +469,7 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static void deleteFeed(long feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -477,7 +477,7 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static void deleteFeed(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -486,7 +486,7 @@ public class JournalFeedLocalServiceUtil {
 
 	public static void deleteFeed(
 		com.liferay.portlet.journal.model.JournalFeed feed)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -495,7 +495,7 @@ public class JournalFeedLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -504,7 +504,7 @@ public class JournalFeedLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
@@ -586,7 +586,7 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 

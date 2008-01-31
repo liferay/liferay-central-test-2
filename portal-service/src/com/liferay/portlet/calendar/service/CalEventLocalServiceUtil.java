@@ -216,7 +216,7 @@ public class CalEventLocalServiceUtil {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -238,7 +238,7 @@ public class CalEventLocalServiceUtil {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -262,7 +262,7 @@ public class CalEventLocalServiceUtil {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -287,7 +287,7 @@ public class CalEventLocalServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -302,7 +302,7 @@ public class CalEventLocalServiceUtil {
 
 	public static void addEventResources(long eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -313,7 +313,7 @@ public class CalEventLocalServiceUtil {
 	public static void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -324,7 +324,7 @@ public class CalEventLocalServiceUtil {
 	public static void addEventResources(long eventId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -336,7 +336,7 @@ public class CalEventLocalServiceUtil {
 		com.liferay.portlet.calendar.model.CalEvent event,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -345,7 +345,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void checkEvents()
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -353,7 +353,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void deleteEvent(long eventId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -362,7 +362,7 @@ public class CalEventLocalServiceUtil {
 
 	public static void deleteEvent(
 		com.liferay.portlet.calendar.model.CalEvent event)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -370,7 +370,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void deleteEvents(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -378,7 +378,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static java.io.File exportEvent(long userId, long eventId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -387,7 +387,7 @@ public class CalEventLocalServiceUtil {
 
 	public static java.io.File exportGroupEvents(long userId, long plid,
 		java.lang.String fileName)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -396,7 +396,7 @@ public class CalEventLocalServiceUtil {
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -454,7 +454,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static void importICal4j(long userId, long plid, java.io.File file)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -470,7 +470,7 @@ public class CalEventLocalServiceUtil {
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 

@@ -247,7 +247,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -258,7 +258,7 @@ public class WikiPageLocalServiceUtil {
 		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String format, boolean head,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -270,7 +270,7 @@ public class WikiPageLocalServiceUtil {
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String format, boolean head, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -280,7 +280,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static void addPageResources(long nodeId, java.lang.String title,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -292,7 +292,7 @@ public class WikiPageLocalServiceUtil {
 		com.liferay.portlet.wiki.model.WikiNode node,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -303,7 +303,7 @@ public class WikiPageLocalServiceUtil {
 	public static void addPageResources(long nodeId, java.lang.String title,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -316,7 +316,7 @@ public class WikiPageLocalServiceUtil {
 		com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -325,7 +325,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -333,7 +333,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void deletePage(com.liferay.portlet.wiki.model.WikiPage page)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -341,7 +341,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void deletePages(long nodeId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -356,7 +356,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List getLinks(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -364,7 +364,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List getOrphans(long nodeId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -373,7 +373,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -382,7 +382,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -462,7 +462,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long userId, long nodeId, java.lang.String title, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -473,7 +473,7 @@ public class WikiPageLocalServiceUtil {
 		long userId, long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -484,7 +484,7 @@ public class WikiPageLocalServiceUtil {
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.wiki.model.WikiPage page,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 

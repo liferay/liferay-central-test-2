@@ -34,7 +34,7 @@ public interface DLFileEntryPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
 		long fileEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
@@ -55,7 +55,7 @@ public interface DLFileEntryPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
 		long fileEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByPrimaryKey(
@@ -74,19 +74,19 @@ public interface DLFileEntryPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByUuid_PrevAndNext(
 		long fileEntryId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public java.util.List findByCompanyId(long companyId)
@@ -101,18 +101,18 @@ public interface DLFileEntryPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByCompanyId_PrevAndNext(
 		long fileEntryId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public java.util.List findByFolderId(long folderId)
@@ -127,23 +127,23 @@ public interface DLFileEntryPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByFolderId_PrevAndNext(
 		long fileEntryId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_N(
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByF_N(
@@ -163,19 +163,19 @@ public interface DLFileEntryPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_First(
 		long folderId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_T_Last(
 		long folderId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByF_T_PrevAndNext(
 		long fileEntryId, long folderId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public java.util.List findWithDynamicQuery(
@@ -205,7 +205,7 @@ public interface DLFileEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByF_N(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public void removeByF_T(long folderId, java.lang.String title)

@@ -67,7 +67,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -99,7 +99,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -117,7 +117,7 @@ public class JournalArticleServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		long groupId, java.lang.String articleId, double version, long plid,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -127,7 +127,7 @@ public class JournalArticleServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -137,7 +137,7 @@ public class JournalArticleServiceUtil {
 	public static java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -149,7 +149,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -160,7 +160,7 @@ public class JournalArticleServiceUtil {
 	public static void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -171,7 +171,7 @@ public class JournalArticleServiceUtil {
 	public static void expireArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -181,7 +181,7 @@ public class JournalArticleServiceUtil {
 
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -191,7 +191,7 @@ public class JournalArticleServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -214,7 +214,7 @@ public class JournalArticleServiceUtil {
 		java.io.File smallFile, java.util.Map images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
@@ -232,7 +232,7 @@ public class JournalArticleServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 

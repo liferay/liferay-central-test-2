@@ -55,7 +55,7 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
@@ -64,7 +64,7 @@ public class ShoppingOrderServiceUtil {
 	}
 
 	public static void deleteOrder(long plid, long orderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
@@ -73,7 +73,7 @@ public class ShoppingOrderServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long plid, long orderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
@@ -82,7 +82,7 @@ public class ShoppingOrderServiceUtil {
 
 	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
@@ -104,7 +104,7 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
@@ -122,7 +122,7 @@ public class ShoppingOrderServiceUtil {
 		long plid, long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 

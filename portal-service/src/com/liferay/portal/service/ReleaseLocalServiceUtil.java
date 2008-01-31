@@ -792,7 +792,7 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	public static int getBuildNumberOrCreate()
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
@@ -800,7 +800,7 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
@@ -809,7 +809,7 @@ public class ReleaseLocalServiceUtil {
 
 	public static com.liferay.portal.model.Release updateRelease(
 		boolean verified)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 

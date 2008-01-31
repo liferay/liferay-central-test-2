@@ -32,7 +32,7 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage create(long imageId);
 
 	public com.liferay.portlet.imagegallery.model.IGImage remove(long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage remove(
@@ -53,7 +53,7 @@ public interface IGImagePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		long imageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByPrimaryKey(
@@ -72,19 +72,19 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage[] findByUuid_PrevAndNext(
 		long imageId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public java.util.List findByFolderId(long folderId)
@@ -99,23 +99,23 @@ public interface IGImagePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
 		long imageId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
@@ -123,7 +123,7 @@ public interface IGImagePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
@@ -131,7 +131,7 @@ public interface IGImagePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
 		long custom1ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
@@ -139,7 +139,7 @@ public interface IGImagePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
 		long custom2ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
@@ -169,19 +169,19 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeBySmallImageId(long smallImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public void removeByLargeImageId(long largeImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public void removeByCustom1ImageId(long custom1ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public void removeByCustom2ImageId(long custom2ImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

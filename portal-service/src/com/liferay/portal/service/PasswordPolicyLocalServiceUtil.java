@@ -800,7 +800,7 @@ public class PasswordPolicyLocalServiceUtil {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -812,7 +812,7 @@ public class PasswordPolicyLocalServiceUtil {
 	}
 
 	public static void checkDefaultPasswordPolicy(long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -820,7 +820,7 @@ public class PasswordPolicyLocalServiceUtil {
 	}
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -829,7 +829,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(
 		long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -838,7 +838,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long passwordPolicyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -847,7 +847,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long companyId, long organizationId, long locationId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -857,7 +857,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long companyId, long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -867,7 +867,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
 		long userId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
@@ -898,7 +898,7 @@ public class PasswordPolicyLocalServiceUtil {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 

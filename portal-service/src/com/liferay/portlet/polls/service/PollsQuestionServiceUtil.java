@@ -57,7 +57,7 @@ public class PollsQuestionServiceUtil {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
@@ -73,7 +73,7 @@ public class PollsQuestionServiceUtil {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class PollsQuestionServiceUtil {
 	}
 
 	public static void deleteQuestion(long questionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
@@ -93,7 +93,7 @@ public class PollsQuestionServiceUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
@@ -105,7 +105,7 @@ public class PollsQuestionServiceUtil {
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		java.util.List choices)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 

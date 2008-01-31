@@ -54,7 +54,7 @@ public class WorkflowDefinitionServiceUtil {
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
 		java.lang.String xml, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 
@@ -65,7 +65,7 @@ public class WorkflowDefinitionServiceUtil {
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
 		java.lang.String xml, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 
@@ -78,7 +78,7 @@ public class WorkflowDefinitionServiceUtil {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 
@@ -90,7 +90,7 @@ public class WorkflowDefinitionServiceUtil {
 	public static void addDefinitionResources(
 		com.liferay.portal.model.User user, long definitionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 
@@ -102,7 +102,7 @@ public class WorkflowDefinitionServiceUtil {
 		com.liferay.portal.model.User user, long definitionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 
@@ -112,7 +112,7 @@ public class WorkflowDefinitionServiceUtil {
 
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition getDefinition(
 		long definitionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
 

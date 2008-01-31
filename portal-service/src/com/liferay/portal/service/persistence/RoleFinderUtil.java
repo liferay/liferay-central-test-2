@@ -38,8 +38,8 @@ public class RoleFinderUtil {
 		java.lang.String description, java.lang.Integer type,
 		java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_N_D_T(companyId, name, description, type,
-			params);
+		return getFinder()
+				   .countByC_N_D_T(companyId, name, description, type, params);
 	}
 
 	public static java.util.List findByUserGroupRole(long userId, long groupId)
@@ -49,7 +49,7 @@ public class RoleFinderUtil {
 
 	public static com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getFinder().findByC_N(companyId, name);
 	}
@@ -74,8 +74,9 @@ public class RoleFinderUtil {
 		java.lang.Integer type, java.util.LinkedHashMap params, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N_D_T(companyId, name, description, type,
-			params, begin, end, obc);
+		return getFinder()
+				   .findByC_N_D_T(companyId, name, description, type, params,
+			begin, end, obc);
 	}
 
 	public static java.util.Map findByC_N_S_P(long companyId,

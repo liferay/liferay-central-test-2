@@ -345,40 +345,40 @@ public interface PasswordPolicyLocalService {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkDefaultPasswordPolicy(long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicy(long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(
 		long companyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long companyId, long organizationId, long locationId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long companyId, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
 		long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, java.lang.String name,
@@ -396,6 +396,6 @@ public interface PasswordPolicyLocalService {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

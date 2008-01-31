@@ -32,7 +32,7 @@ public interface ClassNamePersistence {
 	public com.liferay.portal.model.ClassName create(long classNameId);
 
 	public com.liferay.portal.model.ClassName remove(long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException;
 
 	public com.liferay.portal.model.ClassName remove(
@@ -52,7 +52,7 @@ public interface ClassNamePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName findByPrimaryKey(long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException;
 
 	public com.liferay.portal.model.ClassName fetchByPrimaryKey(
@@ -60,7 +60,7 @@ public interface ClassNamePersistence {
 
 	public com.liferay.portal.model.ClassName findByValue(
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException;
 
 	public com.liferay.portal.model.ClassName fetchByValue(
@@ -84,7 +84,7 @@ public interface ClassNamePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByValue(java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

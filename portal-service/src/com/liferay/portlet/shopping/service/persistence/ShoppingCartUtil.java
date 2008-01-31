@@ -36,7 +36,7 @@ public class ShoppingCartUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart remove(
 		long cartId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().remove(cartId);
 	}
@@ -67,7 +67,7 @@ public class ShoppingCartUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
 		long cartId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByPrimaryKey(cartId);
 	}
@@ -95,14 +95,14 @@ public class ShoppingCartUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -110,7 +110,7 @@ public class ShoppingCartUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByGroupId_PrevAndNext(
 		long cartId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByGroupId_PrevAndNext(cartId, groupId, obc);
 	}
@@ -133,14 +133,14 @@ public class ShoppingCartUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -148,14 +148,14 @@ public class ShoppingCartUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByUserId_PrevAndNext(
 		long cartId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByUserId_PrevAndNext(cartId, userId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByG_U(
 		long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().findByG_U(groupId, userId);
 	}
@@ -174,8 +174,8 @@ public class ShoppingCartUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -205,7 +205,7 @@ public class ShoppingCartUtil {
 	}
 
 	public static void removeByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		getPersistence().removeByG_U(groupId, userId);
 	}

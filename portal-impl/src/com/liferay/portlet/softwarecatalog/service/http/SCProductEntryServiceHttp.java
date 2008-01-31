@@ -82,7 +82,7 @@ public class SCProductEntryServiceHttp {
 		long[] licenseIds, java.util.List thumbnails,
 		java.util.List fullImages, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -207,7 +207,7 @@ public class SCProductEntryServiceHttp {
 		long[] licenseIds, java.util.List thumbnails,
 		java.util.List fullImages, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -333,7 +333,7 @@ public class SCProductEntryServiceHttp {
 
 	public static void deleteProductEntry(HttpPrincipal httpPrincipal,
 		long productEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
@@ -365,7 +365,7 @@ public class SCProductEntryServiceHttp {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		HttpPrincipal httpPrincipal, long productEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
@@ -406,7 +406,7 @@ public class SCProductEntryServiceHttp {
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List thumbnails, java.util.List fullImages)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);

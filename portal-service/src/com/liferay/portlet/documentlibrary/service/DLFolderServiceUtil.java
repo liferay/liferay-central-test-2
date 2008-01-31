@@ -55,7 +55,7 @@ public class DLFolderServiceUtil {
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -67,7 +67,7 @@ public class DLFolderServiceUtil {
 		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -79,7 +79,7 @@ public class DLFolderServiceUtil {
 		long plid, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -88,7 +88,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static void deleteFolder(long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -97,7 +97,7 @@ public class DLFolderServiceUtil {
 
 	public static void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -106,7 +106,7 @@ public class DLFolderServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -115,7 +115,7 @@ public class DLFolderServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -124,7 +124,7 @@ public class DLFolderServiceUtil {
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -132,7 +132,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static void reIndexSearch(long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
@@ -142,7 +142,7 @@ public class DLFolderServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 

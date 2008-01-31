@@ -126,11 +126,11 @@ public interface BlogsStatsUserLocalService {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser getStatsUser(
 		long groupId, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void updateStatsUser(long groupId, long userId,
 		java.util.Date lastPostDate)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

@@ -312,7 +312,7 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	public static void checkContentSearches(long companyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
@@ -322,7 +322,7 @@ public class JournalContentSearchLocalServiceUtil {
 	public static void deleteArticleContentSearch(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String portletId,
 		java.lang.String articleId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
@@ -390,7 +390,7 @@ public class JournalContentSearchLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
@@ -401,7 +401,7 @@ public class JournalContentSearchLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId, boolean purge)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
@@ -412,7 +412,7 @@ public class JournalContentSearchLocalServiceUtil {
 	public static java.util.List updateContentSearch(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String portletId,
 		java.lang.String[] articleIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 

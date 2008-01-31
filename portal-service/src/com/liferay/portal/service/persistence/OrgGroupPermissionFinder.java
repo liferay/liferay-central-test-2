@@ -30,6 +30,6 @@ package com.liferay.portal.service.persistence;
  */
 public interface OrgGroupPermissionFinder {
 	public void removeByO_G_R(long organizationId, long groupId, long resourceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException;
 }

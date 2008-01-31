@@ -119,26 +119,26 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, java.lang.String entryName, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProperties(long entryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProperty(long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getProperties()
@@ -149,12 +149,12 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String[] getPropertyKeys(long companyId)
@@ -165,6 +165,6 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

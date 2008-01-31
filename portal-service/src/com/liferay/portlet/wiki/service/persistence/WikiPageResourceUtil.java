@@ -36,7 +36,7 @@ public class WikiPageResourceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource remove(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().remove(resourcePrimKey);
 	}
@@ -67,7 +67,7 @@ public class WikiPageResourceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().findByPrimaryKey(resourcePrimKey);
 	}
@@ -79,7 +79,7 @@ public class WikiPageResourceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().findByN_T(nodeId, title);
 	}
@@ -99,8 +99,8 @@ public class WikiPageResourceUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -120,7 +120,7 @@ public class WikiPageResourceUtil {
 	}
 
 	public static void removeByN_T(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		getPersistence().removeByN_T(nodeId, title);
 	}

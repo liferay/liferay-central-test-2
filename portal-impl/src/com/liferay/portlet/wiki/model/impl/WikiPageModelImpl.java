@@ -345,8 +345,8 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getTitle().toLowerCase().compareTo(wikiPage.getTitle()
-														   .toLowerCase());
+		value = getTitle().toLowerCase()
+					.compareTo(wikiPage.getTitle().toLowerCase());
 
 		if (value != 0) {
 			return value;

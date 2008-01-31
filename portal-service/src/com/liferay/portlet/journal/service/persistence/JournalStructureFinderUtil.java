@@ -38,24 +38,26 @@ public class JournalStructureFinderUtil {
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_S_N_D(companyId, groupId, structureId,
-			name, description, andOperator);
+		return getFinder()
+				   .countByC_G_S_N_D(companyId, groupId, structureId, name,
+			description, andOperator);
 	}
 
 	public static int countByC_G_S_N_D(long companyId, long groupId,
 		java.lang.String[] structureIds, java.lang.String[] names,
 		java.lang.String[] descriptions, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_G_S_N_D(companyId, groupId, structureIds,
-			names, descriptions, andOperator);
+		return getFinder()
+				   .countByC_G_S_N_D(companyId, groupId, structureIds, names,
+			descriptions, andOperator);
 	}
 
 	public static java.util.List findByKeywords(long companyId, long groupId,
 		java.lang.String keywords, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByKeywords(companyId, groupId, keywords, begin,
-			end, obc);
+		return getFinder()
+				   .findByKeywords(companyId, groupId, keywords, begin, end, obc);
 	}
 
 	public static java.util.List findByC_G_S_N_D(long companyId, long groupId,
@@ -63,8 +65,9 @@ public class JournalStructureFinderUtil {
 		java.lang.String description, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_S_N_D(companyId, groupId, structureId,
-			name, description, andOperator, begin, end, obc);
+		return getFinder()
+				   .findByC_G_S_N_D(companyId, groupId, structureId, name,
+			description, andOperator, begin, end, obc);
 	}
 
 	public static java.util.List findByC_G_S_N_D(long companyId, long groupId,
@@ -72,8 +75,9 @@ public class JournalStructureFinderUtil {
 		java.lang.String[] descriptions, boolean andOperator, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_G_S_N_D(companyId, groupId, structureIds,
-			names, descriptions, andOperator, begin, end, obc);
+		return getFinder()
+				   .findByC_G_S_N_D(companyId, groupId, structureIds, names,
+			descriptions, andOperator, begin, end, obc);
 	}
 
 	public static JournalStructureFinder getFinder() {

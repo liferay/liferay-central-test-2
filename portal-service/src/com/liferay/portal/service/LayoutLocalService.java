@@ -366,7 +366,7 @@ public interface LayoutLocalService {
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
@@ -374,7 +374,7 @@ public interface LayoutLocalService {
 		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
@@ -382,7 +382,7 @@ public interface LayoutLocalService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
 		long dlFolderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
@@ -390,39 +390,39 @@ public interface LayoutLocalService {
 		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, long dlFolderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLayout(long plid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLayout(com.liferay.portal.model.Layout layout,
 		boolean updateLayoutSet)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteLayouts(long groupId, boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
 		long[] layoutIds, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
 		java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getDefaultPlid(long groupId)
@@ -432,26 +432,26 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout getDLFolderLayout(long dlFolderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout getLayout(long plid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout getLayout(long groupId,
 		boolean privateLayout, long layoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout getLayoutByIconImageId(
 		long iconImageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getLayouts(long groupId, boolean privateLayout)
@@ -466,7 +466,7 @@ public interface LayoutLocalService {
 
 	public java.util.List getLayouts(long groupId, boolean privateLayout,
 		long[] layoutIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.LayoutReference[] getLayouts(
@@ -475,29 +475,29 @@ public interface LayoutLocalService {
 
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.InputStream is)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void importPortletInfo(long userId, long plid,
 		java.lang.String portletId, java.util.Map parameterMap,
 		java.io.File file)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void importPortletInfo(long userId, long plid,
 		java.lang.String portletId, java.util.Map parameterMap,
 		java.io.InputStream is)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
@@ -505,7 +505,7 @@ public interface LayoutLocalService {
 		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
@@ -514,59 +514,59 @@ public interface LayoutLocalService {
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, java.lang.Boolean iconImage,
 		byte[] iconBytes)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String typeSettings)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateLookAndFeel(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateName(long plid,
 		java.lang.String name, java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateName(
 		com.liferay.portal.model.Layout layout, java.lang.String name,
 		java.lang.String languageId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateParentLayoutId(long plid,
 		long parentPlid)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updateParentLayoutId(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updatePriority(long plid,
 		int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updatePriority(long groupId,
 		boolean privateLayout, long layoutId, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout updatePriority(
 		com.liferay.portal.model.Layout layout, int priority)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

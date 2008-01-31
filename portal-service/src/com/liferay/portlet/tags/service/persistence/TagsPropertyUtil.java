@@ -36,7 +36,7 @@ public class TagsPropertyUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty remove(
 		long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().remove(propertyId);
 	}
@@ -67,7 +67,7 @@ public class TagsPropertyUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByPrimaryKey(
 		long propertyId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByPrimaryKey(propertyId);
 	}
@@ -95,14 +95,14 @@ public class TagsPropertyUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -110,10 +110,10 @@ public class TagsPropertyUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty[] findByCompanyId_PrevAndNext(
 		long propertyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
-		return getPersistence().findByCompanyId_PrevAndNext(propertyId,
-			companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(propertyId, companyId, obc);
 	}
 
 	public static java.util.List findByEntryId(long entryId)
@@ -134,14 +134,14 @@ public class TagsPropertyUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByEntryId_First(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByEntryId_First(entryId, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByEntryId_Last(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByEntryId_Last(entryId, obc);
 	}
@@ -149,10 +149,10 @@ public class TagsPropertyUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty[] findByEntryId_PrevAndNext(
 		long propertyId, long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
-		return getPersistence().findByEntryId_PrevAndNext(propertyId, entryId,
-			obc);
+		return getPersistence()
+				   .findByEntryId_PrevAndNext(propertyId, entryId, obc);
 	}
 
 	public static java.util.List findByC_K(long companyId, java.lang.String key)
@@ -176,7 +176,7 @@ public class TagsPropertyUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty findByC_K_First(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByC_K_First(companyId, key, obc);
 	}
@@ -184,7 +184,7 @@ public class TagsPropertyUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty findByC_K_Last(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByC_K_Last(companyId, key, obc);
 	}
@@ -192,15 +192,15 @@ public class TagsPropertyUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty[] findByC_K_PrevAndNext(
 		long propertyId, long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
-		return getPersistence().findByC_K_PrevAndNext(propertyId, companyId,
-			key, obc);
+		return getPersistence()
+				   .findByC_K_PrevAndNext(propertyId, companyId, key, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByE_K(
 		long entryId, java.lang.String key)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		return getPersistence().findByE_K(entryId, key);
 	}
@@ -220,8 +220,8 @@ public class TagsPropertyUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -256,7 +256,7 @@ public class TagsPropertyUtil {
 	}
 
 	public static void removeByE_K(long entryId, java.lang.String key)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException {
 		getPersistence().removeByE_K(entryId, key);
 	}

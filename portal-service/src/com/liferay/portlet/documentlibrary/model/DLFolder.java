@@ -57,10 +57,10 @@ public interface DLFolder extends DLFolderModel {
 	public boolean isRoot();
 
 	public java.lang.String getPath()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.lang.String[] getPathArray()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

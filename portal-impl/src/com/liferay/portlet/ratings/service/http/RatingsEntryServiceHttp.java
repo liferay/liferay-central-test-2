@@ -76,7 +76,7 @@ public class RatingsEntryServiceHttp {
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		double score)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;

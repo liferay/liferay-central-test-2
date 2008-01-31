@@ -54,7 +54,7 @@ public class GroupServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -65,7 +65,7 @@ public class GroupServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -74,7 +74,7 @@ public class GroupServiceUtil {
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -82,7 +82,7 @@ public class GroupServiceUtil {
 	}
 
 	public static void deleteGroup(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -90,7 +90,7 @@ public class GroupServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group getGroup(long groupId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -99,7 +99,7 @@ public class GroupServiceUtil {
 
 	public static com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -108,7 +108,7 @@ public class GroupServiceUtil {
 
 	public static java.util.List getOrganizationsGroups(
 		java.util.List organizations)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -116,7 +116,7 @@ public class GroupServiceUtil {
 	}
 
 	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -149,7 +149,7 @@ public class GroupServiceUtil {
 	}
 
 	public static void setRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -157,7 +157,7 @@ public class GroupServiceUtil {
 	}
 
 	public static void unsetRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -167,7 +167,7 @@ public class GroupServiceUtil {
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
@@ -177,7 +177,7 @@ public class GroupServiceUtil {
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 

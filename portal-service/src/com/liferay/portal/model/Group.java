@@ -80,7 +80,7 @@ public interface Group extends GroupModel {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
 	public java.lang.String getDefaultFriendlyURL(boolean privateLayout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public long getDefaultPrivatePlid();

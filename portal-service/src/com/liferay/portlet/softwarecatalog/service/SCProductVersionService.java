@@ -55,7 +55,7 @@ public interface SCProductVersionService {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -64,25 +64,25 @@ public interface SCProductVersionService {
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteProductVersion(long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getProductVersions(long productEntryId, int begin,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int getProductVersionsCount(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
@@ -90,6 +90,6 @@ public interface SCProductVersionService {
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean repoStoreArtifact,
 		long[] frameworkVersionIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

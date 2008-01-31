@@ -36,7 +36,7 @@ public class MBThreadUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBThread remove(
 		long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().remove(threadId);
 	}
@@ -67,7 +67,7 @@ public class MBThreadUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
 		long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByPrimaryKey(threadId);
 	}
@@ -95,14 +95,14 @@ public class MBThreadUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByCategoryId_First(
 		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByCategoryId_First(categoryId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByCategoryId_Last(
 		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByCategoryId_Last(categoryId, obc);
 	}
@@ -110,10 +110,10 @@ public class MBThreadUtil {
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByCategoryId_PrevAndNext(
 		long threadId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByCategoryId_PrevAndNext(threadId,
-			categoryId, obc);
+		return getPersistence()
+				   .findByCategoryId_PrevAndNext(threadId, categoryId, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -125,8 +125,8 @@ public class MBThreadUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

@@ -58,7 +58,7 @@ public class PasswordPolicyServiceUtil {
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
@@ -70,7 +70,7 @@ public class PasswordPolicyServiceUtil {
 	}
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
@@ -85,7 +85,7 @@ public class PasswordPolicyServiceUtil {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 

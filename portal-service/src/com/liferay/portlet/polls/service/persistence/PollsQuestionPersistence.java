@@ -32,7 +32,7 @@ public interface PollsQuestionPersistence {
 	public com.liferay.portlet.polls.model.PollsQuestion create(long questionId);
 
 	public com.liferay.portlet.polls.model.PollsQuestion remove(long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion remove(
@@ -53,7 +53,7 @@ public interface PollsQuestionPersistence {
 
 	public com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
 		long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion fetchByPrimaryKey(
@@ -72,24 +72,24 @@ public interface PollsQuestionPersistence {
 	public com.liferay.portlet.polls.model.PollsQuestion findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion[] findByUuid_PrevAndNext(
 		long questionId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion fetchByUUID_G(
@@ -108,18 +108,18 @@ public interface PollsQuestionPersistence {
 
 	public com.liferay.portlet.polls.model.PollsQuestion findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
 		long questionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public java.util.List findWithDynamicQuery(
@@ -143,7 +143,7 @@ public interface PollsQuestionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
 	public void removeByGroupId(long groupId)

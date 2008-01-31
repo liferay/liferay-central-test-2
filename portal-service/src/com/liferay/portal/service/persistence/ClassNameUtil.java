@@ -34,7 +34,7 @@ public class ClassNameUtil {
 	}
 
 	public static com.liferay.portal.model.ClassName remove(long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException {
 		return getPersistence().remove(classNameId);
 	}
@@ -65,7 +65,7 @@ public class ClassNameUtil {
 
 	public static com.liferay.portal.model.ClassName findByPrimaryKey(
 		long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException {
 		return getPersistence().findByPrimaryKey(classNameId);
 	}
@@ -77,7 +77,7 @@ public class ClassNameUtil {
 
 	public static com.liferay.portal.model.ClassName findByValue(
 		java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException {
 		return getPersistence().findByValue(value);
 	}
@@ -96,8 +96,8 @@ public class ClassNameUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -117,7 +117,7 @@ public class ClassNameUtil {
 	}
 
 	public static void removeByValue(java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchClassNameException {
 		getPersistence().removeByValue(value);
 	}

@@ -76,7 +76,7 @@ public class PhoneServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String number, java.lang.String extension, int typeId,
 		boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -137,7 +137,7 @@ public class PhoneServiceHttp {
 	}
 
 	public static void deletePhone(HttpPrincipal httpPrincipal, long phoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(phoneId);
@@ -169,7 +169,7 @@ public class PhoneServiceHttp {
 
 	public static com.liferay.portal.model.Phone getPhone(
 		HttpPrincipal httpPrincipal, long phoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(phoneId);
@@ -205,7 +205,7 @@ public class PhoneServiceHttp {
 
 	public static java.util.List getPhones(HttpPrincipal httpPrincipal,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
@@ -248,7 +248,7 @@ public class PhoneServiceHttp {
 	public static com.liferay.portal.model.Phone updatePhone(
 		HttpPrincipal httpPrincipal, long phoneId, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(phoneId);

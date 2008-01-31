@@ -339,40 +339,40 @@ public interface PasswordPolicyRelLocalService {
 
 	public com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void addPasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicyRel(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasPasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

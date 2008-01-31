@@ -79,7 +79,7 @@ public class SCProductEntryServiceJSON {
 		long[] licenseIds, java.util.List thumbnails,
 		java.util.List fullImages, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
 				name, type, tags, shortDescription, longDescription, pageURL,
@@ -97,7 +97,7 @@ public class SCProductEntryServiceJSON {
 		long[] licenseIds, java.util.List thumbnails,
 		java.util.List fullImages, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.addProductEntry(plid,
 				name, type, tags, shortDescription, longDescription, pageURL,
@@ -108,13 +108,13 @@ public class SCProductEntryServiceJSON {
 	}
 
 	public static void deleteProductEntry(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		SCProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
 	public static JSONObject getProductEntry(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.getProductEntry(productEntryId);
 
@@ -127,7 +127,7 @@ public class SCProductEntryServiceJSON {
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List thumbnails, java.util.List fullImages)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.updateProductEntry(productEntryId,
 				name, type, tags, shortDescription, longDescription, pageURL,

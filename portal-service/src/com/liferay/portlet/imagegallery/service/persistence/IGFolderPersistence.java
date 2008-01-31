@@ -32,7 +32,7 @@ public interface IGFolderPersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder create(long folderId);
 
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(
@@ -53,7 +53,7 @@ public interface IGFolderPersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
 		long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByPrimaryKey(
@@ -72,24 +72,24 @@ public interface IGFolderPersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByUuid_PrevAndNext(
 		long folderId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByUUID_G(
@@ -108,18 +108,18 @@ public interface IGFolderPersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByGroupId_PrevAndNext(
 		long folderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public java.util.List findByCompanyId(long companyId)
@@ -134,18 +134,18 @@ public interface IGFolderPersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByCompanyId_PrevAndNext(
 		long folderId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public java.util.List findByG_P(long groupId, long parentFolderId)
@@ -161,19 +161,19 @@ public interface IGFolderPersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_First(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_Last(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByG_P_PrevAndNext(
 		long folderId, long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public java.util.List findWithDynamicQuery(
@@ -197,7 +197,7 @@ public interface IGFolderPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
 	public void removeByGroupId(long groupId)

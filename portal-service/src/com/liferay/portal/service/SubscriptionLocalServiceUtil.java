@@ -794,7 +794,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -805,7 +805,7 @@ public class SubscriptionLocalServiceUtil {
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String frequency)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -814,7 +814,7 @@ public class SubscriptionLocalServiceUtil {
 	}
 
 	public static void deleteSubscription(long subscriptionId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -823,7 +823,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static void deleteSubscription(long userId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -848,7 +848,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static com.liferay.portal.model.Subscription getSubscription(
 		long companyId, long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -858,7 +858,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static java.util.List getSubscriptions(long companyId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -868,7 +868,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 

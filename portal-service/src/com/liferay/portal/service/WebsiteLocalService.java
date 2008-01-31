@@ -340,18 +340,18 @@ public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteWebsite(long websiteId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteWebsites(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website getWebsite(long websiteId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getWebsites()
@@ -363,6 +363,6 @@ public interface WebsiteLocalService {
 
 	public com.liferay.portal.model.Website updateWebsite(long websiteId,
 		java.lang.String url, int typeId, boolean primary)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

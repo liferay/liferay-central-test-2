@@ -796,7 +796,7 @@ public class ActivityTrackerLocalServiceUtil {
 		long userId, long groupId, java.lang.String className, long classPK,
 		java.lang.String activity, java.lang.String extraData,
 		long receiverUserId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
 

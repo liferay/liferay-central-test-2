@@ -80,7 +80,7 @@ public class CalEventServiceJSON {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(plid,
 				title, description, startDateMonth, startDateDay,
@@ -103,7 +103,7 @@ public class CalEventServiceJSON {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(plid,
 				title, description, startDateMonth, startDateDay,
@@ -117,13 +117,13 @@ public class CalEventServiceJSON {
 	}
 
 	public static void deleteEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		CalEventServiceUtil.deleteEvent(eventId);
 	}
 
 	public static JSONObject getEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId);
 
@@ -138,7 +138,7 @@ public class CalEventServiceJSON {
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.updateEvent(eventId,
 				title, description, startDateMonth, startDateDay,

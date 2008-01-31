@@ -34,7 +34,7 @@ public interface SCProductEntryPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry remove(
 		long productEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry remove(
@@ -55,7 +55,7 @@ public interface SCProductEntryPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByPrimaryKey(
 		long productEntryId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface SCProductEntryPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry[] findByGroupId_PrevAndNext(
 		long productEntryId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public java.util.List findByCompanyId(long companyId)
@@ -99,18 +99,18 @@ public interface SCProductEntryPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry[] findByCompanyId_PrevAndNext(
 		long productEntryId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public java.util.List findByG_U(long groupId, long userId)
@@ -126,24 +126,24 @@ public interface SCProductEntryPersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByG_U_First(
 		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByG_U_Last(
 		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry[] findByG_U_PrevAndNext(
 		long productEntryId, long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByRG_RA(
 		java.lang.String repoGroupId, java.lang.String repoArtifactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByRG_RA(
@@ -178,7 +178,7 @@ public interface SCProductEntryPersistence {
 
 	public void removeByRG_RA(java.lang.String repoGroupId,
 		java.lang.String repoArtifactId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -199,16 +199,16 @@ public interface SCProductEntryPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List getSCLicenses(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public java.util.List getSCLicenses(long pk, int begin, int end)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public java.util.List getSCLicenses(long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public int getSCLicensesSize(long pk)
@@ -221,58 +221,58 @@ public interface SCProductEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void addSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void addSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void addSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void addSCLicenses(long pk, java.util.List scLicenses)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void clearSCLicenses(long pk)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
 	public void removeSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void removeSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void removeSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void removeSCLicenses(long pk, java.util.List scLicenses)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void setSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	public void setSCLicenses(long pk, java.util.List scLicenses)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException, 
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 }

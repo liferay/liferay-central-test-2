@@ -339,12 +339,12 @@ public interface MembershipRequestLocalService {
 
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteMembershipRequests(long groupId)
@@ -361,6 +361,6 @@ public interface MembershipRequestLocalService {
 
 	public void updateStatus(long replierUserId, long membershipRequestId,
 		java.lang.String replyComments, int statusId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

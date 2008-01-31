@@ -341,7 +341,7 @@ public interface ActivityTrackerLocalService {
 		long userId, long groupId, java.lang.String className, long classPK,
 		java.lang.String activity, java.lang.String extraData,
 		long receiverUserId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteActivityTrackers(java.lang.String className, long classPK)

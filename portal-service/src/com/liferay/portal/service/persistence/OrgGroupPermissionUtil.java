@@ -36,7 +36,7 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission remove(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().remove(orgGroupPermissionPK);
 	}
@@ -67,7 +67,7 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPrimaryKey(orgGroupPermissionPK);
 	}
@@ -96,14 +96,14 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
@@ -111,10 +111,10 @@ public class OrgGroupPermissionUtil {
 	public static com.liferay.portal.model.OrgGroupPermission[] findByGroupId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
-		return getPersistence().findByGroupId_PrevAndNext(orgGroupPermissionPK,
-			groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(orgGroupPermissionPK, groupId, obc);
 	}
 
 	public static java.util.List findByPermissionId(long permissionId)
@@ -135,14 +135,14 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_First(
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPermissionId_First(permissionId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_Last(
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPermissionId_Last(permissionId, obc);
 	}
@@ -150,9 +150,10 @@ public class OrgGroupPermissionUtil {
 	public static com.liferay.portal.model.OrgGroupPermission[] findByPermissionId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
-		return getPersistence().findByPermissionId_PrevAndNext(orgGroupPermissionPK,
+		return getPersistence()
+				   .findByPermissionId_PrevAndNext(orgGroupPermissionPK,
 			permissionId, obc);
 	}
 
@@ -165,8 +166,8 @@ public class OrgGroupPermissionUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()

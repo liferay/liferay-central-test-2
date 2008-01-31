@@ -89,17 +89,17 @@ public interface PollsChoiceLocalService {
 
 	public com.liferay.portlet.polls.model.PollsChoice addChoice(
 		long questionId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsChoice addChoice(
 		java.lang.String uuid, long questionId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsChoice getChoice(long choiceId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List getChoices(long questionId)
@@ -111,6 +111,6 @@ public interface PollsChoiceLocalService {
 	public com.liferay.portlet.polls.model.PollsChoice updateChoice(
 		long choiceId, long questionId, java.lang.String name,
 		java.lang.String description)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

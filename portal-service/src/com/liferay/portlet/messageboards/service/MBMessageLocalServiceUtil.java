@@ -468,7 +468,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String subject, java.lang.String body)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -479,7 +479,7 @@ public class MBMessageLocalServiceUtil {
 		long userId, long groupId, java.lang.String className, long classPK,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -492,7 +492,7 @@ public class MBMessageLocalServiceUtil {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -508,7 +508,7 @@ public class MBMessageLocalServiceUtil {
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -525,7 +525,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -544,7 +544,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -561,7 +561,7 @@ public class MBMessageLocalServiceUtil {
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -579,7 +579,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -596,7 +596,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -616,7 +616,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -629,7 +629,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static void addMessageResources(long categoryId, long messageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -640,7 +640,7 @@ public class MBMessageLocalServiceUtil {
 	public static void addMessageResources(long categoryId,
 		java.lang.String topicId, long messageId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -652,7 +652,7 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		com.liferay.portlet.messageboards.model.MBMessage message,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -663,7 +663,7 @@ public class MBMessageLocalServiceUtil {
 	public static void addMessageResources(long categoryId, long messageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -675,7 +675,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String topicId, long messageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -688,7 +688,7 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portlet.messageboards.model.MBMessage message,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -697,7 +697,7 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void deleteDiscussionMessage(long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -706,7 +706,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static void deleteDiscussionMessages(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -714,7 +714,7 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void deleteMessage(long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -723,7 +723,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static void deleteMessage(
 		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -785,7 +785,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -849,7 +849,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -858,7 +858,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List getMessages(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -867,7 +867,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -876,7 +876,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -913,7 +913,7 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void subscribeMessage(long userId, long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -921,7 +921,7 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void unsubscribeMessage(long userId, long messageId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -931,7 +931,7 @@ public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		long userId, long messageId, java.lang.String subject,
 		java.lang.String body)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -944,7 +944,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -954,7 +954,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -964,7 +964,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String body)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -974,7 +974,7 @@ public class MBMessageLocalServiceUtil {
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.messageboards.model.MBMessage message,
 		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 

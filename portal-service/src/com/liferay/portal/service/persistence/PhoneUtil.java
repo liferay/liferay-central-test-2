@@ -34,7 +34,7 @@ public class PhoneUtil {
 	}
 
 	public static com.liferay.portal.model.Phone remove(long phoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().remove(phoneId);
 	}
@@ -64,7 +64,7 @@ public class PhoneUtil {
 	}
 
 	public static com.liferay.portal.model.Phone findByPrimaryKey(long phoneId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByPrimaryKey(phoneId);
 	}
@@ -92,14 +92,14 @@ public class PhoneUtil {
 
 	public static com.liferay.portal.model.Phone findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -107,10 +107,10 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone[] findByCompanyId_PrevAndNext(
 		long phoneId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByCompanyId_PrevAndNext(phoneId, companyId,
-			obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(phoneId, companyId, obc);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -131,14 +131,14 @@ public class PhoneUtil {
 
 	public static com.liferay.portal.model.Phone findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -146,7 +146,7 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone[] findByUserId_PrevAndNext(
 		long phoneId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByUserId_PrevAndNext(phoneId, userId, obc);
 	}
@@ -164,14 +164,14 @@ public class PhoneUtil {
 	public static java.util.List findByC_C(long companyId, long classNameId,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(companyId, classNameId, begin, end,
-			obc);
+		return getPersistence()
+				   .findByC_C(companyId, classNameId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByC_C_First(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByC_C_First(companyId, classNameId, obc);
 	}
@@ -179,7 +179,7 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone findByC_C_Last(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
 		return getPersistence().findByC_C_Last(companyId, classNameId, obc);
 	}
@@ -187,10 +187,10 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone[] findByC_C_PrevAndNext(
 		long phoneId, long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_PrevAndNext(phoneId, companyId,
-			classNameId, obc);
+		return getPersistence()
+				   .findByC_C_PrevAndNext(phoneId, companyId, classNameId, obc);
 	}
 
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
@@ -201,92 +201,98 @@ public class PhoneUtil {
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
 		long classPK, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
-			begin, end);
+		return getPersistence()
+				   .findByC_C_C(companyId, classNameId, classPK, begin, end);
 	}
 
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
 		long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
-			begin, end, obc);
+		return getPersistence()
+				   .findByC_C_C(companyId, classNameId, classPK, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_First(companyId, classNameId,
-			classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_First(companyId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_Last(companyId, classNameId,
-			classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_Last(companyId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Phone[] findByC_C_C_PrevAndNext(
 		long phoneId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_PrevAndNext(phoneId, companyId,
-			classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_PrevAndNext(phoneId, companyId, classNameId,
+			classPK, obc);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary, begin, end);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
+			begin, end);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary, begin, end, obc);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
+			begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByC_C_C_P_First(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_P_First(companyId, classNameId,
-			classPK, primary, obc);
+		return getPersistence()
+				   .findByC_C_C_P_First(companyId, classNameId, classPK,
+			primary, obc);
 	}
 
 	public static com.liferay.portal.model.Phone findByC_C_C_P_Last(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_P_Last(companyId, classNameId,
-			classPK, primary, obc);
+		return getPersistence()
+				   .findByC_C_C_P_Last(companyId, classNameId, classPK,
+			primary, obc);
 	}
 
 	public static com.liferay.portal.model.Phone[] findByC_C_C_P_PrevAndNext(
 		long phoneId, long companyId, long classNameId, long classPK,
 		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPhoneException {
-		return getPersistence().findByC_C_C_P_PrevAndNext(phoneId, companyId,
-			classNameId, classPK, primary, obc);
+		return getPersistence()
+				   .findByC_C_C_P_PrevAndNext(phoneId, companyId, classNameId,
+			classPK, primary, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -298,8 +304,8 @@ public class PhoneUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -341,8 +347,8 @@ public class PhoneUtil {
 	public static void removeByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		getPersistence()
+			.removeByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -372,8 +378,8 @@ public class PhoneUtil {
 	public static int countByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		return getPersistence()
+				   .countByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

@@ -69,21 +69,21 @@ public class PortalUtil_IW {
 
 	public com.liferay.portal.model.Company getCompany(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getCompany(req);
 	}
 
 	public com.liferay.portal.model.Company getCompany(
 		javax.portlet.ActionRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getCompany(req);
 	}
 
 	public com.liferay.portal.model.Company getCompany(
 		javax.portlet.RenderRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getCompany(req);
 	}
@@ -184,7 +184,7 @@ public class PortalUtil_IW {
 
 	public java.lang.String getLayoutURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutURL(themeDisplay);
 	}
@@ -192,7 +192,7 @@ public class PortalUtil_IW {
 	public java.lang.String getLayoutURL(
 		com.liferay.portal.model.Layout layout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutURL(layout, themeDisplay);
 	}
@@ -200,21 +200,21 @@ public class PortalUtil_IW {
 	public java.lang.String getLayoutURL(
 		com.liferay.portal.model.Layout layout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay, boolean doAsUser)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutURL(layout, themeDisplay, doAsUser);
 	}
 
 	public java.lang.String getLayoutActualURL(
 		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutActualURL(layout);
 	}
 
 	public java.lang.String getLayoutActualURL(
 		com.liferay.portal.model.Layout layout, java.lang.String mainPath)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutActualURL(layout, mainPath);
 	}
@@ -222,7 +222,7 @@ public class PortalUtil_IW {
 	public java.lang.String getLayoutActualURL(long groupId,
 		boolean privateLayout, java.lang.String mainPath,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutActualURL(groupId, privateLayout, mainPath,
 			friendlyURL);
@@ -231,7 +231,7 @@ public class PortalUtil_IW {
 	public java.lang.String getLayoutActualURL(long groupId,
 		boolean privateLayout, java.lang.String mainPath,
 		java.lang.String friendlyURL, java.util.Map params)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutActualURL(groupId, privateLayout, mainPath,
 			friendlyURL, params);
@@ -240,7 +240,7 @@ public class PortalUtil_IW {
 	public java.lang.String getLayoutFriendlyURL(
 		com.liferay.portal.model.Layout layout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
 	}
@@ -335,7 +335,7 @@ public class PortalUtil_IW {
 
 	public java.lang.Object[] getPortletFriendlyURLMapper(long groupId,
 		boolean privateLayout, java.lang.String url)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getPortletFriendlyURLMapper(groupId, privateLayout,
 			url);
@@ -343,7 +343,7 @@ public class PortalUtil_IW {
 
 	public java.lang.Object[] getPortletFriendlyURLMapper(long groupId,
 		boolean privateLayout, java.lang.String url, java.util.Map params)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getPortletFriendlyURLMapper(groupId, privateLayout,
 			url, params);
@@ -374,7 +374,7 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String getPortletXmlFileName()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getPortletXmlFileName();
 	}
@@ -412,42 +412,42 @@ public class PortalUtil_IW {
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.servlet.http.HttpServletRequest req, boolean checkPermission)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req, checkPermission);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.ActionRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.ActionRequest req, boolean checkPermission)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req, checkPermission);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.RenderRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.RenderRequest req, boolean checkPermission)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req, checkPermission);
 	}
@@ -494,21 +494,21 @@ public class PortalUtil_IW {
 
 	public com.liferay.portal.model.User getUser(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getUser(req);
 	}
 
 	public com.liferay.portal.model.User getUser(
 		javax.portlet.ActionRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getUser(req);
 	}
 
 	public com.liferay.portal.model.User getUser(
 		javax.portlet.RenderRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getUser(req);
 	}
@@ -608,7 +608,7 @@ public class PortalUtil_IW {
 	}
 
 	public boolean isUpdateAvailable()
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.isUpdateAvailable();
 	}
@@ -722,7 +722,7 @@ public class PortalUtil_IW {
 		com.liferay.portal.model.Layout layout,
 		javax.portlet.PortletMode portletMode,
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.updatePortletMode(portletId, user, layout,
 			portletMode, req);
@@ -733,7 +733,7 @@ public class PortalUtil_IW {
 		com.liferay.portal.model.Layout layout,
 		javax.portlet.WindowState windowState,
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.updateWindowState(portletId, user, layout,
 			windowState, req);

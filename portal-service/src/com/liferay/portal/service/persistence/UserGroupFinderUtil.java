@@ -37,7 +37,7 @@ public class UserGroupFinderUtil {
 
 	public static com.liferay.portal.model.UserGroup findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException {
 		return getFinder().findByC_N(companyId, name);
 	}
@@ -47,8 +47,9 @@ public class UserGroupFinderUtil {
 		java.util.LinkedHashMap params, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N_D(companyId, name, description, params,
-			begin, end, obc);
+		return getFinder()
+				   .findByC_N_D(companyId, name, description, params, begin,
+			end, obc);
 	}
 
 	public static UserGroupFinder getFinder() {

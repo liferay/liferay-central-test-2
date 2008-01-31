@@ -32,7 +32,8 @@ public class PermissionUserFinderUtil {
 	public static int countByOrgGroupPermissions(long companyId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String actionId) throws com.liferay.portal.SystemException {
-		return getFinder().countByOrgGroupPermissions(companyId, name, primKey,
+		return getFinder()
+				   .countByOrgGroupPermissions(companyId, name, primKey,
 			actionId);
 	}
 
@@ -42,9 +43,9 @@ public class PermissionUserFinderUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByPermissionAndRole(companyId, groupId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
-			andOperator);
+		return getFinder()
+				   .countByPermissionAndRole(companyId, groupId, name, primKey,
+			actionId, firstName, middleName, lastName, emailAddress, andOperator);
 	}
 
 	public static int countByUserAndOrgGroupPermission(long companyId,
@@ -53,9 +54,9 @@ public class PermissionUserFinderUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByUserAndOrgGroupPermission(companyId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
-			andOperator);
+		return getFinder()
+				   .countByUserAndOrgGroupPermission(companyId, name, primKey,
+			actionId, firstName, middleName, lastName, emailAddress, andOperator);
 	}
 
 	public static java.util.List findByPermissionAndRole(long companyId,
@@ -64,8 +65,9 @@ public class PermissionUserFinderUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByPermissionAndRole(companyId, groupId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
+		return getFinder()
+				   .findByPermissionAndRole(companyId, groupId, name, primKey,
+			actionId, firstName, middleName, lastName, emailAddress,
 			andOperator, begin, end);
 	}
 
@@ -75,8 +77,9 @@ public class PermissionUserFinderUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByUserAndOrgGroupPermission(companyId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
+		return getFinder()
+				   .findByUserAndOrgGroupPermission(companyId, name, primKey,
+			actionId, firstName, middleName, lastName, emailAddress,
 			andOperator, begin, end);
 	}
 

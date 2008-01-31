@@ -74,7 +74,7 @@ public class SCLicenseServiceJSON {
 	public static JSONObject addLicense(java.lang.String name,
 		java.lang.String url, boolean openSource, boolean active,
 		boolean recommended)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCLicense returnValue = SCLicenseServiceUtil.addLicense(name,
 				url, openSource, active, recommended);
@@ -83,13 +83,13 @@ public class SCLicenseServiceJSON {
 	}
 
 	public static void deleteLicense(long licenseId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		SCLicenseServiceUtil.deleteLicense(licenseId);
 	}
 
 	public static JSONObject getLicense(long licenseId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCLicense returnValue = SCLicenseServiceUtil.getLicense(licenseId);
 
@@ -99,7 +99,7 @@ public class SCLicenseServiceJSON {
 	public static JSONObject updateLicense(long licenseId,
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCLicense returnValue = SCLicenseServiceUtil.updateLicense(licenseId,
 				name, url, openSource, active, recommended);

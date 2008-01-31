@@ -56,11 +56,11 @@ public interface PasswordPolicyService {
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicy(long passwordPolicyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
@@ -71,6 +71,6 @@ public interface PasswordPolicyService {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

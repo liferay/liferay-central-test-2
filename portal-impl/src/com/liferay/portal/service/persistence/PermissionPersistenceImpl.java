@@ -965,7 +965,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public List getGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "getGroups";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1037,7 +1039,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public int getGroupsSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "getGroupsSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1096,7 +1100,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
+
 		String finderClassName = "Groups_Permissions";
+
 		String finderMethodName = "containsGroups";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -1142,7 +1148,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroup(long pk, long groupPK)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			addGroup.add(pk, groupPK);
@@ -1156,7 +1162,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			addGroup.add(pk, group.getPrimaryKey());
@@ -1170,7 +1176,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroups(long pk, long[] groupPKs)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			for (int i = 0; i < groupPKs.length; i++) {
@@ -1186,7 +1192,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroups(long pk, List groups)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			for (int i = 0; i < groups.size(); i++) {
@@ -1217,7 +1223,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroup(long pk, long groupPK)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
@@ -1231,7 +1237,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			removeGroup.remove(pk, group.getPrimaryKey());
@@ -1245,7 +1251,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk, long[] groupPKs)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			for (int i = 0; i < groupPKs.length; i++) {
@@ -1261,7 +1267,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk, List groups)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			for (int i = 0; i < groups.size(); i++) {
@@ -1279,7 +1285,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setGroups(long pk, long[] groupPKs)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -1297,7 +1303,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setGroups(long pk, List groups)
-		throws NoSuchPermissionException, 
+		throws NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -1329,7 +1335,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
+
 		String finderClassName = "Roles_Permissions";
+
 		String finderMethodName = "getRoles";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1401,7 +1409,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public int getRolesSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
+
 		String finderClassName = "Roles_Permissions";
+
 		String finderMethodName = "getRolesSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1459,7 +1469,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
+
 		String finderClassName = "Roles_Permissions";
+
 		String finderMethodName = "containsRoles";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -1504,8 +1516,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addRole(long pk, long rolePK)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			addRole.add(pk, rolePK);
 		}
@@ -1518,8 +1530,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addRole(long pk, com.liferay.portal.model.Role role)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			addRole.add(pk, role.getPrimaryKey());
 		}
@@ -1532,8 +1544,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addRoles(long pk, long[] rolePKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			for (int i = 0; i < rolePKs.length; i++) {
 				addRole.add(pk, rolePKs[i]);
@@ -1548,8 +1560,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addRoles(long pk, List roles)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
 				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
@@ -1579,8 +1591,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRole(long pk, long rolePK)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			removeRole.remove(pk, rolePK);
 		}
@@ -1593,8 +1605,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			removeRole.remove(pk, role.getPrimaryKey());
 		}
@@ -1607,8 +1619,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRoles(long pk, long[] rolePKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			for (int i = 0; i < rolePKs.length; i++) {
 				removeRole.remove(pk, rolePKs[i]);
@@ -1623,8 +1635,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeRoles(long pk, List roles)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
 				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
@@ -1641,8 +1653,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setRoles(long pk, long[] rolePKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			clearRoles.clear(pk);
 
@@ -1659,8 +1671,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setRoles(long pk, List roles)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchRoleException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchRoleException,
+			SystemException {
 		try {
 			clearRoles.clear(pk);
 
@@ -1691,7 +1703,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
+
 		String finderClassName = "Users_Permissions";
+
 		String finderMethodName = "getUsers";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1757,7 +1771,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public int getUsersSize(long pk) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
+
 		String finderClassName = "Users_Permissions";
+
 		String finderMethodName = "getUsersSize";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1815,7 +1831,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
+
 		String finderClassName = "Users_Permissions";
+
 		String finderMethodName = "containsUsers";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
@@ -1860,8 +1878,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, long userPK)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			addUser.add(pk, userPK);
 		}
@@ -1874,8 +1892,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			addUser.add(pk, user.getPrimaryKey());
 		}
@@ -1888,8 +1906,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, long[] userPKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			for (int i = 0; i < userPKs.length; i++) {
 				addUser.add(pk, userPKs[i]);
@@ -1904,8 +1922,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, List users)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
@@ -1935,8 +1953,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, long userPK)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			removeUser.remove(pk, userPK);
 		}
@@ -1949,8 +1967,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			removeUser.remove(pk, user.getPrimaryKey());
 		}
@@ -1963,8 +1981,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, long[] userPKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			for (int i = 0; i < userPKs.length; i++) {
 				removeUser.remove(pk, userPKs[i]);
@@ -1979,8 +1997,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, List users)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
 				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
@@ -1997,8 +2015,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, long[] userPKs)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			clearUsers.clear(pk);
 
@@ -2015,8 +2033,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, List users)
-		throws NoSuchPermissionException, 
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws NoSuchPermissionException, com.liferay.portal.NoSuchUserException,
+			SystemException {
 		try {
 			clearUsers.clear(pk);
 

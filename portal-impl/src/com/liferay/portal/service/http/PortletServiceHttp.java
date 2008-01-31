@@ -74,7 +74,7 @@ public class PortletServiceHttp {
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);

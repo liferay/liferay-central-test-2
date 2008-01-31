@@ -77,7 +77,7 @@ public class IGFolderServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -138,7 +138,7 @@ public class IGFolderServiceHttp {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -203,7 +203,7 @@ public class IGFolderServiceHttp {
 	}
 
 	public static void deleteFolder(HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -235,7 +235,7 @@ public class IGFolderServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
@@ -273,7 +273,7 @@ public class IGFolderServiceHttp {
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentFolder)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);

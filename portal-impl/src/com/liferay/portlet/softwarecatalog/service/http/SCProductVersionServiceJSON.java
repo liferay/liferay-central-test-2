@@ -77,7 +77,7 @@ public class SCProductVersionServiceJSON {
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean repoStoreArtifact, long[] frameworkVersionIds,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
@@ -93,7 +93,7 @@ public class SCProductVersionServiceJSON {
 		boolean repoStoreArtifact, long[] frameworkVersionIds,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
@@ -104,13 +104,13 @@ public class SCProductVersionServiceJSON {
 	}
 
 	public static void deleteProductVersion(long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		SCProductVersionServiceUtil.deleteProductVersion(productVersionId);
 	}
 
 	public static JSONObject getProductVersion(long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.getProductVersion(productVersionId);
 
@@ -119,7 +119,7 @@ public class SCProductVersionServiceJSON {
 
 	public static JSONArray getProductVersions(long productEntryId, int begin,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List returnValue = SCProductVersionServiceUtil.getProductVersions(productEntryId,
 				begin, end);
@@ -128,7 +128,7 @@ public class SCProductVersionServiceJSON {
 	}
 
 	public static int getProductVersionsCount(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		int returnValue = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
 
@@ -139,7 +139,7 @@ public class SCProductVersionServiceJSON {
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean repoStoreArtifact, long[] frameworkVersionIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.updateProductVersion(productVersionId,
 				version, changeLog, downloadPageURL, directDownloadURL,

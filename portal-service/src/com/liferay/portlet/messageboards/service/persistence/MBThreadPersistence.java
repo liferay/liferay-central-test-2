@@ -34,7 +34,7 @@ public interface MBThreadPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBThread remove(
 		long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
 	public com.liferay.portlet.messageboards.model.MBThread remove(
@@ -55,7 +55,7 @@ public interface MBThreadPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
 		long threadId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
 	public com.liferay.portlet.messageboards.model.MBThread fetchByPrimaryKey(
@@ -73,18 +73,18 @@ public interface MBThreadPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBThread findByCategoryId_First(
 		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
 	public com.liferay.portlet.messageboards.model.MBThread findByCategoryId_Last(
 		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
 	public com.liferay.portlet.messageboards.model.MBThread[] findByCategoryId_PrevAndNext(
 		long threadId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
 	public java.util.List findWithDynamicQuery(

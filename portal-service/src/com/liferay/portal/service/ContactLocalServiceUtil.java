@@ -792,7 +792,7 @@ public class ContactLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Contact getContact(long contactId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
@@ -800,7 +800,7 @@ public class ContactLocalServiceUtil {
 	}
 
 	public static void deleteContact(long contactId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
@@ -808,7 +808,7 @@ public class ContactLocalServiceUtil {
 	}
 
 	public static void deleteContact(com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 

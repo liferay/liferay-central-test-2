@@ -34,7 +34,7 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address remove(long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().remove(addressId);
 	}
@@ -65,7 +65,7 @@ public class AddressUtil {
 
 	public static com.liferay.portal.model.Address findByPrimaryKey(
 		long addressId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByPrimaryKey(addressId);
 	}
@@ -93,14 +93,14 @@ public class AddressUtil {
 
 	public static com.liferay.portal.model.Address findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -108,10 +108,10 @@ public class AddressUtil {
 	public static com.liferay.portal.model.Address[] findByCompanyId_PrevAndNext(
 		long addressId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByCompanyId_PrevAndNext(addressId,
-			companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(addressId, companyId, obc);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -132,14 +132,14 @@ public class AddressUtil {
 
 	public static com.liferay.portal.model.Address findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
@@ -147,7 +147,7 @@ public class AddressUtil {
 	public static com.liferay.portal.model.Address[] findByUserId_PrevAndNext(
 		long addressId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByUserId_PrevAndNext(addressId, userId, obc);
 	}
@@ -165,14 +165,14 @@ public class AddressUtil {
 	public static java.util.List findByC_C(long companyId, long classNameId,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(companyId, classNameId, begin, end,
-			obc);
+		return getPersistence()
+				   .findByC_C(companyId, classNameId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_First(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByC_C_First(companyId, classNameId, obc);
 	}
@@ -180,7 +180,7 @@ public class AddressUtil {
 	public static com.liferay.portal.model.Address findByC_C_Last(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByC_C_Last(companyId, classNameId, obc);
 	}
@@ -188,10 +188,10 @@ public class AddressUtil {
 	public static com.liferay.portal.model.Address[] findByC_C_PrevAndNext(
 		long addressId, long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_PrevAndNext(addressId, companyId,
-			classNameId, obc);
+		return getPersistence()
+				   .findByC_C_PrevAndNext(addressId, companyId, classNameId, obc);
 	}
 
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
@@ -202,140 +202,151 @@ public class AddressUtil {
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
 		long classPK, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
-			begin, end);
+		return getPersistence()
+				   .findByC_C_C(companyId, classNameId, classPK, begin, end);
 	}
 
 	public static java.util.List findByC_C_C(long companyId, long classNameId,
 		long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, classNameId, classPK,
-			begin, end, obc);
+		return getPersistence()
+				   .findByC_C_C(companyId, classNameId, classPK, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_First(companyId, classNameId,
-			classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_First(companyId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_Last(companyId, classNameId,
-			classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_Last(companyId, classNameId, classPK, obc);
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_PrevAndNext(
 		long addressId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_PrevAndNext(addressId, companyId,
-			classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_C_PrevAndNext(addressId, companyId, classNameId,
+			classPK, obc);
 	}
 
 	public static java.util.List findByC_C_C_M(long companyId,
 		long classNameId, long classPK, boolean mailing)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_M(companyId, classNameId, classPK,
-			mailing);
+		return getPersistence()
+				   .findByC_C_C_M(companyId, classNameId, classPK, mailing);
 	}
 
 	public static java.util.List findByC_C_C_M(long companyId,
 		long classNameId, long classPK, boolean mailing, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_M(companyId, classNameId, classPK,
-			mailing, begin, end);
+		return getPersistence()
+				   .findByC_C_C_M(companyId, classNameId, classPK, mailing,
+			begin, end);
 	}
 
 	public static java.util.List findByC_C_C_M(long companyId,
 		long classNameId, long classPK, boolean mailing, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_M(companyId, classNameId, classPK,
-			mailing, begin, end, obc);
+		return getPersistence()
+				   .findByC_C_C_M(companyId, classNameId, classPK, mailing,
+			begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_M_First(
 		long companyId, long classNameId, long classPK, boolean mailing,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_M_First(companyId, classNameId,
-			classPK, mailing, obc);
+		return getPersistence()
+				   .findByC_C_C_M_First(companyId, classNameId, classPK,
+			mailing, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_M_Last(
 		long companyId, long classNameId, long classPK, boolean mailing,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_M_Last(companyId, classNameId,
-			classPK, mailing, obc);
+		return getPersistence()
+				   .findByC_C_C_M_Last(companyId, classNameId, classPK,
+			mailing, obc);
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_M_PrevAndNext(
 		long addressId, long companyId, long classNameId, long classPK,
 		boolean mailing, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_M_PrevAndNext(addressId, companyId,
+		return getPersistence()
+				   .findByC_C_C_M_PrevAndNext(addressId, companyId,
 			classNameId, classPK, mailing, obc);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary, begin, end);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
+			begin, end);
 	}
 
 	public static java.util.List findByC_C_C_P(long companyId,
 		long classNameId, long classPK, boolean primary, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C_P(companyId, classNameId, classPK,
-			primary, begin, end, obc);
+		return getPersistence()
+				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
+			begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_P_First(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_P_First(companyId, classNameId,
-			classPK, primary, obc);
+		return getPersistence()
+				   .findByC_C_C_P_First(companyId, classNameId, classPK,
+			primary, obc);
 	}
 
 	public static com.liferay.portal.model.Address findByC_C_C_P_Last(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_P_Last(companyId, classNameId,
-			classPK, primary, obc);
+		return getPersistence()
+				   .findByC_C_C_P_Last(companyId, classNameId, classPK,
+			primary, obc);
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_P_PrevAndNext(
 		long addressId, long companyId, long classNameId, long classPK,
 		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException {
-		return getPersistence().findByC_C_C_P_PrevAndNext(addressId, companyId,
+		return getPersistence()
+				   .findByC_C_C_P_PrevAndNext(addressId, companyId,
 			classNameId, classPK, primary, obc);
 	}
 
@@ -348,8 +359,8 @@ public class AddressUtil {
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
 	public static java.util.List findAll()
@@ -391,15 +402,15 @@ public class AddressUtil {
 	public static void removeByC_C_C_M(long companyId, long classNameId,
 		long classPK, boolean mailing)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_C_C_M(companyId, classNameId, classPK,
-			mailing);
+		getPersistence()
+			.removeByC_C_C_M(companyId, classNameId, classPK, mailing);
 	}
 
 	public static void removeByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		getPersistence()
+			.removeByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -429,15 +440,15 @@ public class AddressUtil {
 	public static int countByC_C_C_M(long companyId, long classNameId,
 		long classPK, boolean mailing)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C_M(companyId, classNameId, classPK,
-			mailing);
+		return getPersistence()
+				   .countByC_C_C_M(companyId, classNameId, classPK, mailing);
 	}
 
 	public static int countByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C_C_P(companyId, classNameId, classPK,
-			primary);
+		return getPersistence()
+				   .countByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

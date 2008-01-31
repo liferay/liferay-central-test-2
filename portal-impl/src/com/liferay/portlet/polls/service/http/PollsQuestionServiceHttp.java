@@ -80,7 +80,7 @@ public class PollsQuestionServiceHttp {
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -160,7 +160,7 @@ public class PollsQuestionServiceHttp {
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
@@ -243,7 +243,7 @@ public class PollsQuestionServiceHttp {
 
 	public static void deleteQuestion(HttpPrincipal httpPrincipal,
 		long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);
@@ -275,7 +275,7 @@ public class PollsQuestionServiceHttp {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		HttpPrincipal httpPrincipal, long questionId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);
@@ -314,7 +314,7 @@ public class PollsQuestionServiceHttp {
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);

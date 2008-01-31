@@ -72,7 +72,7 @@ import com.liferay.portal.service.ClassNameServiceUtil;
 public class ClassNameServiceHttp {
 	public static com.liferay.portal.model.ClassName getClassName(
 		HttpPrincipal httpPrincipal, long classNameId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(classNameId);
@@ -108,7 +108,7 @@ public class ClassNameServiceHttp {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		HttpPrincipal httpPrincipal, java.lang.String value)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = value;

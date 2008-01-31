@@ -143,7 +143,7 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	public static void deletePageResource(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
@@ -152,7 +152,7 @@ public class WikiPageResourceLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
 		long pageResourceId)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
@@ -161,7 +161,7 @@ public class WikiPageResourceLocalServiceUtil {
 
 	public static long getPageResourcePrimKey(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 

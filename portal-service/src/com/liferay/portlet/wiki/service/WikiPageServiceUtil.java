@@ -53,7 +53,7 @@ package com.liferay.portlet.wiki.service;
 public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
@@ -61,7 +61,7 @@ public class WikiPageServiceUtil {
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
@@ -70,7 +70,7 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
@@ -79,7 +79,7 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
@@ -88,7 +88,7 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long nodeId, java.lang.String title, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
@@ -98,7 +98,7 @@ public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String format, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 

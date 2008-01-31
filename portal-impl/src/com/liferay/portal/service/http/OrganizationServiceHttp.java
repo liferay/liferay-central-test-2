@@ -74,7 +74,7 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 public class OrganizationServiceHttp {
 	public static void addGroupOrganizations(HttpPrincipal httpPrincipal,
 		long groupId, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -114,7 +114,7 @@ public class OrganizationServiceHttp {
 	public static void addPasswordPolicyOrganizations(
 		HttpPrincipal httpPrincipal, long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
@@ -155,7 +155,7 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, int type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(parentOrganizationId);
@@ -217,7 +217,7 @@ public class OrganizationServiceHttp {
 
 	public static void deleteOrganization(HttpPrincipal httpPrincipal,
 		long organizationId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -249,7 +249,7 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		HttpPrincipal httpPrincipal, long organizationId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
@@ -285,7 +285,7 @@ public class OrganizationServiceHttp {
 
 	public static long getOrganizationId(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -327,7 +327,7 @@ public class OrganizationServiceHttp {
 
 	public static java.util.List getUserOrganizations(
 		HttpPrincipal httpPrincipal, long userId)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
@@ -363,7 +363,7 @@ public class OrganizationServiceHttp {
 
 	public static void setGroupOrganizations(HttpPrincipal httpPrincipal,
 		long groupId, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -402,7 +402,7 @@ public class OrganizationServiceHttp {
 
 	public static void unsetGroupOrganizations(HttpPrincipal httpPrincipal,
 		long groupId, long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
@@ -442,7 +442,7 @@ public class OrganizationServiceHttp {
 	public static void unsetPasswordPolicyOrganizations(
 		HttpPrincipal httpPrincipal, long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
@@ -484,7 +484,7 @@ public class OrganizationServiceHttp {
 		long parentOrganizationId, java.lang.String name, int type,
 		boolean recursable, long regionId, long countryId, int statusId,
 		java.lang.String comments)
-		throws com.liferay.portal.SystemException, 
+		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(organizationId);
