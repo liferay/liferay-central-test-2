@@ -857,10 +857,24 @@ public class PortalUtil {
 		Group group = null;
 
 		try {
-			group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				companyId, StringPool.SLASH + urlParts[2]);
+
+			// Start by trying to parse the url part as a groupId because it's
+			// faster to eliminate this possibility first
+
+			long groupId = GetterUtil.getLong(urlParts[2]);
+
+			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
-		catch (Exception e) {
+		catch (Exception e1) {
+			try {
+
+				// Now try as a friendly url
+
+				group = GroupLocalServiceUtil.getFriendlyURLGroup(
+					companyId, StringPool.SLASH + urlParts[2]);
+			}
+			catch (Exception e2) {
+			}
 		}
 
 		if (group != null) {
@@ -868,7 +882,7 @@ public class PortalUtil {
 
 			try {
 
-				// Try parsing the last of the url parts as a layoutId
+				// Again, start by trying to parse the url part as a layoutId
 				// because it's faster to eliminate this possibility first
 
 				long layoutId = GetterUtil.getLong(urlParts[3]);
@@ -881,18 +895,16 @@ public class PortalUtil {
 			catch (Exception e1) {
 				try {
 
-					// Try the last part as a friendly url
+					// Now try the last part as a friendly url
 
 					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 						group.getGroupId(), privateLayout,
 						StringPool.SLASH + urlParts[3]);
+
+					return layout.getPlid();
 				}
 				catch (Exception e2) {
 				}
-			}
-
-			if (layout != null) {
-				return layout.getPlid();
 			}
 		}
 
