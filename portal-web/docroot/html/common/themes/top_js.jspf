@@ -354,6 +354,7 @@
 				);
 
 				Liferay.Dock.init();
+				Liferay.Notice.prototype.setClosing();
 			}
 		);
 	//]]>
