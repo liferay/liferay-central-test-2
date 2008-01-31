@@ -270,8 +270,6 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-			WikiNode node = wikiPage.getNode();
-
 			try {
 				PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
