@@ -489,7 +489,7 @@ public class LayoutAction extends Action {
 				renderResponseImpl.getContentType());
 		}
 		else {
-			byte[] content = stringServletResponse.getString().getBytes();
+			byte[] content = stringServletResponse.getString().getBytes("UTF-8");
 
 			ServletResponseUtil.sendFile(
 				res, renderResponseImpl.getResourceName(), content,
