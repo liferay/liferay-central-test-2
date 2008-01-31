@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -37,9 +38,11 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.Html;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -121,6 +124,18 @@ public class CompareVersionsAction extends PortletAction {
 			companyId, userId, folderId, name, sourceVersion);
 		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, targetVersion);
+
+		if (extension.equals("html") || extension.equals("htm") ||
+			extension.equals("xml")) {
+
+			String escapedSource = Html.escape(StringUtil.read(sourceIs));
+			String escapedTarget = Html.escape(StringUtil.read(targetIs));
+
+			sourceIs = new ByteArrayInputStream(
+				escapedSource.getBytes(StringPool.UTF8));
+			targetIs = new ByteArrayInputStream(
+				escapedTarget.getBytes(StringPool.UTF8));
+		}
 
 		if (PrefsPropsUtil.getBoolean(
 				PropsUtil.OPENOFFICE_SERVER_ENABLED,
