@@ -22,22 +22,21 @@
 
 package com.liferay.portalweb.portlet.wiki;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiTests extends BaseTests {
-
-	public WikiTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(SearchTest.class);
+public class SearchTest extends BaseTestCase {
+	public void testSearch() throws Exception {
+		selenium.type("_36_keywords", "test");
+		selenium.click("//input[@value='Search']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Main");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("This is a test Wiki article."));
 	}
-
 }

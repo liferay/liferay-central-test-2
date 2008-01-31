@@ -22,22 +22,20 @@
 
 package com.liferay.portalweb.portlet.wiki;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiTests extends BaseTests {
-
-	public WikiTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(SearchTest.class);
+public class AddCommentTest extends BaseTestCase {
+	public void testAddComment() throws Exception {
+		selenium.click("link=Post Reply");
+		selenium.typeKeys("_36_postReplyBody0", "This is a test Post Reply.");
+		selenium.click("_36_postReplyButton0");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("This is a test Post Reply."));
 	}
-
 }
