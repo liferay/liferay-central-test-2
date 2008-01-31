@@ -1467,6 +1467,7 @@
 		</field>
 		<field name="format" type="String" />
 		<field name="head" type="boolean" />
+		<field name="redirectTo" type="String" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiPageResource">
 		<field name="resourcePrimKey" type="long" />

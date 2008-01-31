@@ -110,6 +110,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 		wikiPage.setContent(model.getContent());
 		wikiPage.setFormat(model.getFormat());
 		wikiPage.setHead(model.getHead());
+		wikiPage.setRedirectTo(model.getRedirectTo());
 
 		return wikiPagePersistence.update(wikiPage);
 	}
@@ -143,6 +144,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 		wikiPage.setContent(model.getContent());
 		wikiPage.setFormat(model.getFormat());
 		wikiPage.setHead(model.getHead());
+		wikiPage.setRedirectTo(model.getRedirectTo());
 
 		return wikiPagePersistence.update(wikiPage);
 	}

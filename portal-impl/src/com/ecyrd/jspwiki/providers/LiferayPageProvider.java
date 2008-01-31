@@ -39,7 +39,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -220,31 +219,21 @@ public class LiferayPageProvider implements WikiPageProvider {
 			_log.debug("Invoking pageExists(" + title + ")");
 		}
 
-		boolean exists = false;
-
 		try {
-			Boolean existsObj = (Boolean) _titles.get(title);
+			if (WikiPageLocalServiceUtil.getPagesCount(
+				_nodeId, title, true) > 0) {
 
-			if (existsObj == null) {
-				if (WikiPageLocalServiceUtil.getPagesCount(
-						_nodeId, title, true) > 0) {
-
-					existsObj = Boolean.TRUE;
-				}
-				else {
-					existsObj = Boolean.FALSE;
-				}
-
-				_titles.put(title, existsObj);
+				return true;
 			}
-
-			exists = existsObj.booleanValue();
+			else {
+				return false;
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return exists;
+		return false;
 	}
 
 	public void putPageText(com.ecyrd.jspwiki.WikiPage page, String text)
@@ -261,6 +250,5 @@ public class LiferayPageProvider implements WikiPageProvider {
 
 	private WikiEngine _engine;
 	private long _nodeId;
-	private Map _titles;
 
 }

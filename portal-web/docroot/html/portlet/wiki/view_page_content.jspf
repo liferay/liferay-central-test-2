@@ -27,22 +27,22 @@ String error = null;
 
 String pageContent = null;
 
+PortletURL viewPageURL = renderResponse.createRenderURL();
+
+viewPageURL.setPortletMode(PortletMode.VIEW);
+
+viewPageURL.setParameter("struts_action", "/wiki/view");
+
+PortletURL editURL = renderResponse.createRenderURL();
+
+editURL.setWindowState(WindowState.MAXIMIZED);
+editURL.setPortletMode(PortletMode.VIEW);
+
+editURL.setParameter("struts_action", "/wiki/edit_page");
+editURL.setParameter("redirect", currentURL);
+
 try {
-	PortletURL pageURL = renderResponse.createRenderURL();
-
-	pageURL.setPortletMode(PortletMode.VIEW);
-
-	pageURL.setParameter("struts_action", "/wiki/view");
-
-	PortletURL editURL = renderResponse.createRenderURL();
-
-	editURL.setWindowState(WindowState.MAXIMIZED);
-	editURL.setPortletMode(PortletMode.VIEW);
-
-	editURL.setParameter("struts_action", "/wiki/edit_page");
-	editURL.setParameter("redirect", currentURL);
-
-	pageContent = WikiUtil.convert(wikiPage, pageURL, editURL);
+	pageContent = WikiUtil.convert(wikiPage, viewPageURL, editURL);
 }
 catch (WikiFormatException wfe) {
 	error = "the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted";
@@ -58,28 +58,25 @@ catch (Exception e) {
 }
 
 if (Validator.isNull(pageContent)) {
-	pageContent = LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text");
+	if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
+		editURL.setParameter("title", wikiPage.getTitle());
+
+		pageContent = "<div class=\"portlet-msg-info\"><a href=\"" + editURL +  "\">" + LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text") + "</a></div>";
+	}
 }
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-
 <c:if test="<%= Validator.isNotNull(error) %>">
-	<tr>
-		<td class="wiki-body">
-			<span class="portlet-msg-error">
-				<liferay-ui:message key="<%= error %>" />
-			</span>
-		</td>
-	</tr>
+	<div class="wiki-body">
+		<span class="portlet-msg-error">
+			<liferay-ui:message key="<%= error %>" />
+		</span>
+	</div>
 </c:if>
 
-<tr>
-	<td class="wiki-body">
-		<%= pageContent %>
-	</td>
-</tr>
-</table>
+<div class="wiki-body">
+	<%= pageContent %>
+</div>
 
 <div class="separator"><!-- --></div>
 

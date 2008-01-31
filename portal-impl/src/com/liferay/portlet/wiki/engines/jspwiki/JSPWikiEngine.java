@@ -68,7 +68,7 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	public Map getLinks(WikiPage page) throws PageContentException {
+	public Map getOutgoingLinks(WikiPage page) throws PageContentException {
 		try {
 			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 
@@ -128,7 +128,16 @@ public class JSPWikiEngine implements WikiEngine {
 	public boolean isLinkedTo(WikiPage page, String targetTitle)
 		throws PageContentException {
 
-		return false;
+		Map links = getOutgoingLinks(page);
+
+		Object link = links.get(targetTitle);
+
+		if (link != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void setInterWikiConfiguration(String interWikiConfiguration) {

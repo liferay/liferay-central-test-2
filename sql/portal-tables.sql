@@ -1353,7 +1353,8 @@ create table WikiPage (
 	version DOUBLE,
 	content TEXT null,
 	format VARCHAR(75) null,
-	head BOOLEAN
+	head BOOLEAN,
+	redirectTo VARCHAR(75) null
 );
 
 create table WikiPageResource (

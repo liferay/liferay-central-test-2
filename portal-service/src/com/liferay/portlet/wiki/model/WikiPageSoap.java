@@ -63,6 +63,7 @@ public class WikiPageSoap implements Serializable {
 		soapModel.setContent(model.getContent());
 		soapModel.setFormat(model.getFormat());
 		soapModel.setHead(model.getHead());
+		soapModel.setRedirectTo(model.getRedirectTo());
 
 		return soapModel;
 	}
@@ -198,6 +199,14 @@ public class WikiPageSoap implements Serializable {
 		_head = head;
 	}
 
+	public String getRedirectTo() {
+		return _redirectTo;
+	}
+
+	public void setRedirectTo(String redirectTo) {
+		_redirectTo = redirectTo;
+	}
+
 	private String _uuid;
 	private long _pageId;
 	private long _resourcePrimKey;
@@ -211,4 +220,5 @@ public class WikiPageSoap implements Serializable {
 	private String _content;
 	private String _format;
 	private boolean _head;
+	private String _redirectTo;
 }

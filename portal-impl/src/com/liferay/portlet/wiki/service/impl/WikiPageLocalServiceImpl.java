@@ -31,16 +31,19 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.wiki.NoSuchPageException;
+import com.liferay.portlet.wiki.PageAlreadyExistsException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
+import com.liferay.util.UniqueList;
 
 import java.io.IOException;
 
@@ -243,6 +246,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// All versions
 
 		wikiPagePersistence.removeByN_T(page.getNodeId(), page.getTitle());
+
+		// All referrals
+
+		wikiPagePersistence.removeByN_R(page.getNodeId(), page.getTitle());
+
 	}
 
 	public void deletePages(long nodeId)
@@ -257,14 +265,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public List getNoAssetPages() throws SystemException {
-		return wikiPageFinder.findByNoAssets();
-	}
-
-	public List getLinks(long nodeId, String title)
+	public List getIncomingLinks(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List links = new ArrayList();
+		List links = new UniqueList();
 
 		List pages = wikiPagePersistence.findByN_H(nodeId, true);
 
@@ -276,9 +280,33 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
+		List referrals = wikiPagePersistence.findByN_R(nodeId, title);
+
+		for (int i = 0; i < referrals.size(); i++) {
+			WikiPage referral = (WikiPage)referrals.get(i);
+
+			for (int j = 0; j < pages.size(); j++) {
+				WikiPage page = (WikiPage)pages.get(j);
+
+				if (WikiUtil.isLinkedTo(page, referral.getTitle())) {
+					links.add(page);
+				}
+			}
+		}
+
 		Collections.sort(links);
 
 		return links;
+	}
+
+	public List getNoAssetPages() throws SystemException {
+		return wikiPageFinder.findByNoAssets();
+	}
+
+	/** @deprecated in version 4.4. Use getIncomingLinks instead */
+	public List getLinks(long nodeId, String title)
+		throws PortalException, SystemException {
+		return getIncomingLinks(nodeId, title);
 	}
 
 	public List getOrphans(long nodeId)
@@ -424,6 +452,106 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPageFinder.countByCreateDate(nodeId, cal.getTime(), false);
 	}
 
+	public void movePage(
+			long userId, long nodeId, String title, String newTitle)
+		throws PortalException, SystemException {
+
+		validateTitle(newTitle);
+
+		// Check if the new title already exists
+
+		if (isUsedTitle(nodeId, newTitle)) {
+
+			WikiPage page = getPage(nodeId, newTitle);
+
+			// Support moving back to a previously moved title
+
+			if ((page.getVersion() == WikiPageImpl.DEFAULT_VERSION) &&
+					page.getContent().equals(WikiPageImpl.MOVED)) {
+
+				deletePage(nodeId, newTitle);
+			}
+			else {
+				throw new PageAlreadyExistsException(newTitle);
+			}
+		}
+
+		// Move all versions
+
+		List pageVersions = wikiPagePersistence.findByN_T(nodeId, title);
+
+		if (pageVersions.size() == 0) {
+			return;
+		}
+
+		Iterator itr = pageVersions.iterator();
+
+		while (itr.hasNext()) {
+			WikiPage page = (WikiPage) itr.next();
+
+			page.setTitle(newTitle);
+
+			wikiPagePersistence.update(page);
+		}
+
+		WikiPage page = (WikiPage) pageVersions.get(pageVersions.size() - 1);
+
+		// Rename Wiki Page Resource
+
+		WikiPageResource wikiPageResource =
+			wikiPageResourcePersistence.findByPrimaryKey(
+				page.getResourcePrimKey());
+
+		wikiPageResource.setTitle(newTitle);
+
+		wikiPageResourcePersistence.update(wikiPageResource);
+
+		// Create stub page at the old location
+
+		double version = WikiPageImpl.DEFAULT_VERSION;
+		String content = "Moved";
+		String format = page.getFormat();
+		boolean head = true;
+		String[] tagsEntries = null;
+
+		WikiPage stubPage = addPage(
+			userId, nodeId, title, version, content, format, head, tagsEntries);
+
+		stubPage.setRedirectTo(page.getTitle());
+
+		wikiPagePersistence.update(stubPage);
+
+		// Move redirects to point to the page with the new title
+
+		List redirectedPages = wikiPagePersistence.findByN_R(nodeId, title);
+
+		itr = redirectedPages.iterator();
+
+		while (itr.hasNext()) {
+			WikiPage p = (WikiPage) itr.next();
+
+			p.setRedirectTo(newTitle);
+
+			wikiPagePersistence.update(p);
+		}
+
+		// Tags
+
+		updateTagsAsset(userId, page, tagsEntries);
+
+		// Lucene
+
+		try {
+			Indexer.updatePage(
+				page.getCompanyId(), page.getNode().getGroupId(), nodeId,
+				newTitle, content, tagsEntries);
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + newTitle, ioe);
+		}
+
+	}
+
 	public WikiPage revertPage(
 			long userId, long nodeId, String title, double version)
 		throws PortalException, SystemException {
@@ -530,6 +658,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (!matcher.matches()) {
 				throw new PageTitleException();
 			}
+		}
+	}
+
+	protected boolean isUsedTitle(long nodeId, String title)
+			throws SystemException {
+		if (getPagesCount(nodeId, title, true) > 0) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

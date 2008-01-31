@@ -74,6 +74,7 @@
 		<column name="content" type="String" />
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
+		<column name="redirectTo" type="String" />
 
 		<!-- Order -->
 
@@ -87,6 +88,10 @@
 
 		<finder name="NodeId" return-type="Collection">
 			<finder-column name="nodeId" />
+		</finder>
+		<finder name="N_R" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="redirectTo" />
 		</finder>
 		<finder name="N_T" return-type="Collection">
 			<finder-column name="nodeId" />
@@ -141,6 +146,7 @@
 		<exception>NodeName</exception>
 		<exception>NoSuchNode</exception>
 		<exception>NoSuchPage</exception>
+		<exception>PageAlreadyExists</exception>
 		<exception>PageContent</exception>
 		<exception>PageTitle</exception>
 		<exception>WikiFormat</exception>

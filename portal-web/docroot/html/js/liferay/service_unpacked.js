@@ -2462,6 +2462,13 @@ Liferay.Service.Wiki.WikiPage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	movePage: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "movePage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	revertPage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "revertPage";

@@ -22,12 +22,15 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +53,8 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public static final String[] FORMATS =
 		PropsUtil.getArray(PropsUtil.WIKI_FORMATS);
+
+	public static final String MOVED = "Moved";
 
 	public WikiPageImpl() {
 	}
@@ -75,6 +80,15 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		}
 
 		return node;
+	}
+
+	public WikiPage getRedirectToPage()
+		throws PortalException, SystemException {
+		if (Validator.isNull(getRedirectTo())) {
+			return null;
+		}
+
+		return WikiPageLocalServiceUtil.getPage(getNodeId(), getRedirectTo());
 	}
 
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);

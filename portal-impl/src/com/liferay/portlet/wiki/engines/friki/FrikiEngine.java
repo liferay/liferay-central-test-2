@@ -64,7 +64,7 @@ public class FrikiEngine implements WikiEngine {
 		}
 	}
 
-	public Map getLinks(WikiPage page) throws PageContentException {
+	public Map getOutgoingLinks(WikiPage page) throws PageContentException {
 		NodeFilter filter = getFilter(page.getNodeId());
 
 		try {

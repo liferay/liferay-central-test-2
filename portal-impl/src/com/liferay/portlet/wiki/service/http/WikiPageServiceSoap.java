@@ -139,6 +139,18 @@ public class WikiPageServiceSoap {
 		}
 	}
 
+	public static void movePage(long nodeId, java.lang.String title,
+		java.lang.String newTitle) throws RemoteException {
+		try {
+			WikiPageServiceUtil.movePage(nodeId, title, newTitle);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageSoap revertPage(
 		long nodeId, java.lang.String title, double version)
 		throws RemoteException {

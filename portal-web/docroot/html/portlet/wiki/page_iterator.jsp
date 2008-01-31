@@ -127,7 +127,7 @@ else if (type.equals("page_history")) {
 	results = WikiPageLocalServiceUtil.getPages(wikiPage.getNodeId(), wikiPage.getTitle(), searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("page_links")) {
-	List links = WikiPageLocalServiceUtil.getLinks(wikiPage.getNodeId(), wikiPage.getTitle());
+	List links = WikiPageLocalServiceUtil.getIncomingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
 
 	total = links.size();
 

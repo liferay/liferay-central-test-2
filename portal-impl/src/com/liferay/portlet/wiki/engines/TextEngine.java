@@ -47,7 +47,7 @@ public class TextEngine implements WikiEngine {
 		}
 	}
 
-	public Map getLinks(WikiPage page) {
+	public Map getOutgoingLinks(WikiPage page) {
 		return _EMPTY_MAP;
 	}
 

@@ -383,9 +383,11 @@ create index IX_7609B2AE on WikiNode (uuid_, groupId);
 
 create index IX_C8A9C476 on WikiPage (nodeId);
 create index IX_E7F635CA on WikiPage (nodeId, head);
+create index IX_AFDEFA1 on WikiPage (nodeId, redirectTo);
 create index IX_997EEDD2 on WikiPage (nodeId, title);
 create index IX_E745EA26 on WikiPage (nodeId, title, head);
 create index IX_3D4AF476 on WikiPage (nodeId, title, version);
+create index IX_F9CA7F30 on WikiPage (redirectTo);
 create index IX_9C0E478F on WikiPage (uuid_);
 
 create index IX_21277664 on WikiPageResource (nodeId, title);

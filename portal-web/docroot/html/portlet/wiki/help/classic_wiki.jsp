@@ -59,9 +59,9 @@ CamelCaseWordsAreLinksToPages
 </h4>
 
 <pre>
-<span style="color: grey;">&#10236;</span>* Item
-<span style="color: grey;">&#10236;</span>&nbsp;<span style="color: grey;">&#10236;</span>* Subitem
+<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>* Item
+<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>&nbsp;<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>* Subitem
 
-<span style="color: grey;">&#10236;</span>1 Ordered Item
-<span style="color: grey;">&#10236;</span>&nbsp;<span style="color: grey;">&#10236;</span>1 Ordered Subitem
+<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>1 Ordered Item
+<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>&nbsp;<img src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab-char.png"/>1 Ordered Subitem
 </pre>

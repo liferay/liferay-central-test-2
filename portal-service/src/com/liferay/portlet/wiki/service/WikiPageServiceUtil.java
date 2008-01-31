@@ -86,6 +86,15 @@ public class WikiPageServiceUtil {
 		return wikiPageService.getPage(nodeId, title, version);
 	}
 
+	public static void movePage(long nodeId, java.lang.String title,
+		java.lang.String newTitle)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.movePage(nodeId, title, newTitle);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.PortalException,

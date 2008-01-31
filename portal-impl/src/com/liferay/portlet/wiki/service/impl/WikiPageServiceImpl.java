@@ -74,6 +74,19 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		return wikiPageLocalService.getPage(nodeId, title, version);
 	}
 
+	public void movePage(long nodeId, String title, String newTitle)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
+
+		wikiPageLocalService.movePage(
+			getUserId(), nodeId, title, newTitle);
+	}
+
 	public WikiPage revertPage(long nodeId, String title, double version)
 		throws PortalException, SystemException {
 

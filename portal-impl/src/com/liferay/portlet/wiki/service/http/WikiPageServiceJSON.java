@@ -105,6 +105,13 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void movePage(long nodeId, java.lang.String title,
+		java.lang.String newTitle)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiPageServiceUtil.movePage(nodeId, title, newTitle);
+	}
+
 	public static JSONObject revertPage(long nodeId, java.lang.String title,
 		double version)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

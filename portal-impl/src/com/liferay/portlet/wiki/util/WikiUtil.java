@@ -110,7 +110,7 @@ public class WikiUtil {
 			liferayEditURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
 
-			Iterator itr = engine.getLinks(page).keySet().iterator();
+			Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
 
 			while (itr.hasNext()) {
 				String title = (String)itr.next();
@@ -184,7 +184,7 @@ public class WikiUtil {
 		throws PageContentException, WikiFormatException{
 
 		try {
-			return _getEngine(page.getFormat()).getLinks(page);
+			return _getEngine(page.getFormat()).getOutgoingLinks(page);
 		}
 		catch (WikiFormatException wfe) {
 			return _EMPTY_MAP;
