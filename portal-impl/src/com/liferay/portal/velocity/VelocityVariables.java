@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.StaticFieldGetter;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.Validator_IW;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermissionUtil;
@@ -223,6 +224,10 @@ public class VelocityVariables {
 		// Unicode formatter
 
 		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
+
+		// Validator
+
+		vc.put("validator", Validator_IW.getInstance());
 
 		// Permissions
 
