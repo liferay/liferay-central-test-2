@@ -111,10 +111,10 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(AmazonRankingsTests.class);
 		addTestSuite(AnalogClockTests.class);
 		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(AssetPublisherTests.class);
 		addTestSuite(BibleGatewayTests.class);
 		addTestSuite(BlogsTests.class);
 		addTestSuite(BlogsAggregatorTests.class);
+		addTestSuite(AssetPublisherTests.class);
 		addTestSuite(BookmarksTests.class);
 		addTestSuite(BreadcrumbTests.class);
 		addTestSuite(CalendarTests.class);

@@ -33,9 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class DeleteCommentTest extends BaseTestCase {
 	public void testDeleteComment() throws Exception {
 		selenium.click("link=Delete");
-		assertTrue(selenium.getConfirmation().matches("^Are you sure you want to delete this[\\s\\S]$"));
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		verifyFalse(selenium.isTextPresent("This is a test page comment!"));
 
 		for (int second = 0;; second++) {

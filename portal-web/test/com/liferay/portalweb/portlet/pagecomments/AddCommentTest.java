@@ -56,5 +56,21 @@ public class AddCommentTest extends BaseTestCase {
 		verifyTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		verifyTrue(selenium.isTextPresent("This is a test page comment!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
