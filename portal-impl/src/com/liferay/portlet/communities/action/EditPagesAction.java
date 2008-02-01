@@ -740,12 +740,16 @@ public class EditPagesAction extends PortletAction {
 					LayoutTypePortlet layoutTypePortlet =
 						(LayoutTypePortlet)layout.getLayoutType();
 
-					layoutTypePortlet.setLayoutTemplateId(
-						0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
+					if (Validator.isNull(
+							layoutTypePortlet.getLayoutTemplateId())) {
 
-					LayoutServiceUtil.updateLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(), layout.getTypeSettings());
+						layoutTypePortlet.setLayoutTemplateId(
+							0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
+
+						LayoutServiceUtil.updateLayout(
+							layout.getGroupId(), layout.isPrivateLayout(),
+							layout.getLayoutId(), layout.getTypeSettings());
+					}
 				}
 			}
 		}
