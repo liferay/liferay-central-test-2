@@ -44,8 +44,8 @@ public interface WikiEngine {
 	 * @param		page a wiki page
 	 * @param		portletURL a portlet URL
 	 * @return		HTML string
-	 * @throws		PageContentException when there is an error parsing the
-	 *				page content
+	 * @throws		PageContentException when there is an error parsing the page
+	 *				content
 	 */
 	public String convert(WikiPage page, PortletURL portletURL)
 		throws PageContentException;

@@ -103,12 +103,12 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
 
 			if (Validator.isNull(curURL)) {
-//				if (values.length == 1) {
-//					if (Validator.isNotNull(backURL)) {
-//						curURL = backURL;
-//					}
-//				}
-//				else {
+				/*if (values.length == 1) {
+					if (Validator.isNotNull(backURL)) {
+						curURL = backURL;
+					}
+				}
+				else {*/
 					if (refresh) {
 						if (portletURL != null) {
 							portletURL.setParameter(param, values[i]);
@@ -133,7 +133,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 						curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
 					}
-//				}
+				//}
 			}
 
 			String curOnClick = StringPool.BLANK;
@@ -143,7 +143,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			}
 		%>
 
-		<!-- <%= curURL %> -->
 			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(curURL) %>">

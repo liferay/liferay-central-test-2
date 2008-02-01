@@ -67,10 +67,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
+portletURL.setParameter("struts_action", "/wiki/edit_page");
 portletURL.setParameter("redirect", currentURL);
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 portletURL.setParameter("title", wikiPage.getTitle());
-portletURL.setParameter("struts_action", "/wiki/edit_page");
 %>
 
 <script type="text/javascript">
@@ -99,16 +99,18 @@ portletURL.setParameter("struts_action", "/wiki/edit_page");
 
 <c:if test="<%= !print %>">
 	<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
-	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-		<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
-		<span class="wiki-search">
+	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+
+	<span class="wiki-search">
 		<input name="<portlet:namespace />keywords" size="30" type="text" />
 
 		<input type="submit" value="<liferay-ui:message key="search" />" />
-		</span>
+	</span>
+
 	</form>
 </c:if>
 
@@ -116,8 +118,9 @@ portletURL.setParameter("struts_action", "/wiki/edit_page");
 
 <h1 class="wiki-page-title">
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-		<span class="wiki-edit-inline"><a href="<%= portletURL.toString() %>">[<liferay-ui:message key="edit"/>]</a></span>
+		<span class="wiki-edit-inline"><a href="<%= portletURL.toString() %>">[<liferay-ui:message key="edit" />]</a></span>
 	</c:if>
+
 	<%= title %>
 </h1>
 
@@ -129,8 +132,7 @@ portletURL.setParameter("struts_action", "/wiki/edit_page");
 
 <c:if test="<%= (!wikiPage.isHead()) %>">
 	<div class="wiki-page-old-version">
-		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>),
-		<a href="<%= pageURL %>"><liferay-ui:message key="go-to-latest-version"/></a>)
+		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <a href="<%= pageURL %>"><liferay-ui:message key="go-to-latest-version" /></a>)
 	</div>
 </c:if>
 
@@ -140,7 +142,6 @@ portletURL.setParameter("struts_action", "/wiki/edit_page");
 
 <c:if test="<%= !print %>">
 	<liferay-ui:icon-menu align="left">
-
 		<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 
 			<%
@@ -221,18 +222,15 @@ portletURL.setParameter("struts_action", "/wiki/edit_page");
 			PortletURL frontPageURL = renderResponse.createRenderURL();
 
 			frontPageURL.setParameter("struts_action", "/wiki/view");
-
 			frontPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 			PortletURL deleteURL = renderResponse.createActionURL();
 
 			deleteURL.setParameter("struts_action", "/wiki/edit_page");
-
 			deleteURL.setParameter(Constants.CMD, Constants.DELETE);
-			deleteURL.setParameter("redirect", currentURL);
+			deleteURL.setParameter("redirect", frontPageURL.toString());
 			deleteURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			deleteURL.setParameter("title", wikiPage.getTitle());
-			deleteURL.setParameter("redirect", frontPageURL.toString());
 			%>
 
 			<liferay-ui:icon-delete label="<%= true %>" url="<%= deleteURL.toString() %>" />

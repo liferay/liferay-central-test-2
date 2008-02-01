@@ -83,8 +83,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
-		wikiPageLocalService.movePage(
-			getUserId(), nodeId, title, newTitle);
+		wikiPageLocalService.movePage(getUserId(), nodeId, title, newTitle);
 	}
 
 	public WikiPage revertPage(long nodeId, String title, double version)

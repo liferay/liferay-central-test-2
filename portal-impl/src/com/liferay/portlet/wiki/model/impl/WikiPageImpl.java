@@ -84,6 +84,7 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public WikiPage getRedirectToPage()
 		throws PortalException, SystemException {
+
 		if (Validator.isNull(getRedirectTo())) {
 			return null;
 		}

@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.PageAlreadyExistsException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -303,12 +303,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPageFinder.findByNoAssets();
 	}
 
-	/** @deprecated in version 4.4. Use getIncomingLinks instead */
-	public List getLinks(long nodeId, String title)
-		throws PortalException, SystemException {
-		return getIncomingLinks(nodeId, title);
-	}
-
 	public List getOrphans(long nodeId)
 		throws PortalException, SystemException {
 
@@ -467,12 +461,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Support moving back to a previously moved title
 
 			if ((page.getVersion() == WikiPageImpl.DEFAULT_VERSION) &&
-					page.getContent().equals(WikiPageImpl.MOVED)) {
+				(page.getContent().equals(WikiPageImpl.MOVED))) {
 
 				deletePage(nodeId, newTitle);
 			}
 			else {
-				throw new PageAlreadyExistsException(newTitle);
+				throw new DuplicatePageException(newTitle);
 			}
 		}
 
@@ -487,16 +481,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		Iterator itr = pageVersions.iterator();
 
 		while (itr.hasNext()) {
-			WikiPage page = (WikiPage) itr.next();
+			WikiPage page = (WikiPage)itr.next();
 
 			page.setTitle(newTitle);
 
 			wikiPagePersistence.update(page);
 		}
 
-		WikiPage page = (WikiPage) pageVersions.get(pageVersions.size() - 1);
+		WikiPage page = (WikiPage)pageVersions.get(pageVersions.size() - 1);
 
-		// Rename Wiki Page Resource
+		// Rename page resource
 
 		WikiPageResource wikiPageResource =
 			wikiPageResourcePersistence.findByPrimaryKey(
@@ -509,7 +503,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Create stub page at the old location
 
 		double version = WikiPageImpl.DEFAULT_VERSION;
-		String content = "Moved";
+		String content = WikiPageImpl.MOVED;
 		String format = page.getFormat();
 		boolean head = true;
 		String[] tagsEntries = null;
@@ -528,11 +522,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		itr = redirectedPages.iterator();
 
 		while (itr.hasNext()) {
-			WikiPage p = (WikiPage) itr.next();
+			WikiPage redirectedPage = (WikiPage)itr.next();
 
-			p.setRedirectTo(newTitle);
+			redirectedPage.setRedirectTo(newTitle);
 
-			wikiPagePersistence.update(p);
+			wikiPagePersistence.update(redirectedPage);
 		}
 
 		// Tags
@@ -662,7 +656,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected boolean isUsedTitle(long nodeId, String title)
-			throws SystemException {
+		throws SystemException {
+
 		if (getPagesCount(nodeId, title, true) > 0) {
 			return true;
 		}

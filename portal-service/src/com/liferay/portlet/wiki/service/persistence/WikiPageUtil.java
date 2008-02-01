@@ -153,49 +153,6 @@ public class WikiPageUtil {
 		return getPersistence().findByNodeId_PrevAndNext(pageId, nodeId, obc);
 	}
 
-	public static java.util.List findByN_R(long nodeId,
-		java.lang.String redirectTo) throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_R(nodeId, redirectTo);
-	}
-
-	public static java.util.List findByN_R(long nodeId,
-		java.lang.String redirectTo, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_R(nodeId, redirectTo, begin, end);
-	}
-
-	public static java.util.List findByN_R(long nodeId,
-		java.lang.String redirectTo, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByN_R(nodeId, redirectTo, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_First(
-		long nodeId, java.lang.String redirectTo,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_R_First(nodeId, redirectTo, obc);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_Last(
-		long nodeId, java.lang.String redirectTo,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_R_Last(nodeId, redirectTo, obc);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_R_PrevAndNext(
-		long pageId, long nodeId, java.lang.String redirectTo,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence()
-				   .findByN_R_PrevAndNext(pageId, nodeId, redirectTo, obc);
-	}
-
 	public static java.util.List findByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByN_T(nodeId, title);
@@ -274,6 +231,49 @@ public class WikiPageUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getPersistence().findByN_H_PrevAndNext(pageId, nodeId, head, obc);
+	}
+
+	public static java.util.List findByN_R(long nodeId,
+		java.lang.String redirectTo) throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_R(nodeId, redirectTo);
+	}
+
+	public static java.util.List findByN_R(long nodeId,
+		java.lang.String redirectTo, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_R(nodeId, redirectTo, begin, end);
+	}
+
+	public static java.util.List findByN_R(long nodeId,
+		java.lang.String redirectTo, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByN_R(nodeId, redirectTo, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_First(
+		long nodeId, java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByN_R_First(nodeId, redirectTo, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_Last(
+		long nodeId, java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByN_R_Last(nodeId, redirectTo, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_R_PrevAndNext(
+		long pageId, long nodeId, java.lang.String redirectTo,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence()
+				   .findByN_R_PrevAndNext(pageId, nodeId, redirectTo, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_V(
@@ -372,11 +372,6 @@ public class WikiPageUtil {
 		getPersistence().removeByNodeId(nodeId);
 	}
 
-	public static void removeByN_R(long nodeId, java.lang.String redirectTo)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByN_R(nodeId, redirectTo);
-	}
-
 	public static void removeByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByN_T(nodeId, title);
@@ -385,6 +380,11 @@ public class WikiPageUtil {
 	public static void removeByN_H(long nodeId, boolean head)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByN_H(nodeId, head);
+	}
+
+	public static void removeByN_R(long nodeId, java.lang.String redirectTo)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByN_R(nodeId, redirectTo);
 	}
 
 	public static void removeByN_T_V(long nodeId, java.lang.String title,
@@ -413,11 +413,6 @@ public class WikiPageUtil {
 		return getPersistence().countByNodeId(nodeId);
 	}
 
-	public static int countByN_R(long nodeId, java.lang.String redirectTo)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByN_R(nodeId, redirectTo);
-	}
-
 	public static int countByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByN_T(nodeId, title);
@@ -426,6 +421,11 @@ public class WikiPageUtil {
 	public static int countByN_H(long nodeId, boolean head)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByN_H(nodeId, head);
+	}
+
+	public static int countByN_R(long nodeId, java.lang.String redirectTo)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByN_R(nodeId, redirectTo);
 	}
 
 	public static int countByN_T_V(long nodeId, java.lang.String title,

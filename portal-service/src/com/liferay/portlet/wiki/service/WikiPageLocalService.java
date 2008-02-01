@@ -189,10 +189,6 @@ public interface WikiPageLocalService {
 	public java.util.List getNoAssetPages()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getLinks(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
 	public java.util.List getOrphans(long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -59,12 +59,6 @@ if (Validator.isNull(redirect)) {
 	redirect = portletURL.toString();
 }
 
-boolean newPage = false;
-
-if (wikiPage == null) {
-	newPage = true;
-}
-
 boolean edit = false;
 
 if (wikiPage != null) {
@@ -145,13 +139,13 @@ else if (Validator.isNotNull(title)) {
 
 <liferay-ui:tags-error />
 
-<c:if test="<%= newPage && edit %>">
+<c:if test="<%= (wikiPage == null) && edit %>">
 	<div class="portlet-msg-info">
 		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
 	</div>
 </c:if>
 
-<c:if test="<%= newPage && !edit %>">
+<c:if test="<%= (wikiPage == null) && !edit %>">
 	<div class="portlet-msg-error">
 		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
 	</div>
@@ -208,7 +202,7 @@ else if (Validator.isNotNull(title)) {
 			<%
 			long classPK = 0;
 
-			if (!newPage) {
+			if (wikiPage != null) {
 				classPK = wikiPage.getResourcePrimKey();
 			}
 			%>

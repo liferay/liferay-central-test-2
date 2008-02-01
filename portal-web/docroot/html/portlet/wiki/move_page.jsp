@@ -40,39 +40,43 @@ pageURL.setParameter("title", title);
 
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
+<liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
 <liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-valid-title" />
-<liferay-ui:error exception="<%= PageAlreadyExistsException.class %>" message="there-is-already-a-page-with-the-specified-title" />
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="using-the-form-below-will-rename-a-page,-moving-all-of-its-history-to-the-new-name.-The-old-title-will-become-a-redirect-page-to-the-new-title.-Links-to-the-old-page-title-will-not-be-changed" />
+	<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
 </div>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input type='hidden' name="<portlet:namespace />nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
-<input type='hidden' name="<portlet:namespace />title" value="<%= title %>" />
-<input type='hidden' name="<portlet:namespace />redirect" value="<%= pageURL.toString() %>" />
+<input type="hidden" name="<portlet:namespace />redirect" value="<%= pageURL.toString() %>" />
+<input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
+<input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
 
 <table class="lfr-table">
-	<tr>
-		<td><liferay-ui:message key="current-title" /></td>
-		<td>
-			<%= wikiPage.getTitle() %>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="<portlet:namespace />newTitle"><liferay-ui:message key="new-title" /></label></td>
-
-		<td>
-			<input type='text' name="<portlet:namespace />newTitle" value="<%= newTitle %>" />
-		</td>
-	</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="current-title" />
+	</td>
+	<td>
+		<%= wikiPage.getTitle() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<label for="<portlet:namespace />newTitle"><liferay-ui:message key="new-title" /></label>
+	</td>
+	<td>
+		<input type="text" name="<portlet:namespace />newTitle" value="<%= newTitle %>" />
+	</td>
+</tr>
 </table>
 
 <br />
 
-<input type='submit' value="<liferay-ui:message key="move-page" />" />
-<input type='button' value="<liferay-ui:message key="cancel" />" onClick="history.go(-1);"/>
+<input type="submit" value="<liferay-ui:message key="move-page" />" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="history.go(-1);" />
 
 </form>

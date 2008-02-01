@@ -25,10 +25,9 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.PageAlreadyExistsException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -71,14 +70,11 @@ public class MovePageAction extends PortletAction {
 
 				setForward(req, "portlet.wiki.error");
 			}
-			else if (e instanceof PageContentException ||
-					 e instanceof PageAlreadyExistsException ||
+			else if (e instanceof DuplicatePageException ||
+					 e instanceof PageContentException ||
 					 e instanceof PageTitleException) {
 
 				SessionErrors.add(req, e.getClass().getName());
-			}
-			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

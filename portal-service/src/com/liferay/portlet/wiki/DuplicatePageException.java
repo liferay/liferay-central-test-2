@@ -25,26 +25,26 @@ package com.liferay.portlet.wiki;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="PageAlreadyExistsException.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicatePageException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PageAlreadyExistsException extends PortalException {
+public class DuplicatePageException extends PortalException {
 
-	public PageAlreadyExistsException() {
+	public DuplicatePageException() {
 		super();
 	}
 
-	public PageAlreadyExistsException(String msg) {
+	public DuplicatePageException(String msg) {
 		super(msg);
 	}
 
-	public PageAlreadyExistsException(String msg, Throwable cause) {
+	public DuplicatePageException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public PageAlreadyExistsException(Throwable cause) {
+	public DuplicatePageException(Throwable cause) {
 		super(cause);
 	}
 

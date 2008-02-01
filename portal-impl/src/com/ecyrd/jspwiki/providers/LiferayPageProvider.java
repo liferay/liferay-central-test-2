@@ -221,7 +221,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 
 		try {
 			if (WikiPageLocalServiceUtil.getPagesCount(
-				_nodeId, title, true) > 0) {
+					_nodeId, title, true) > 0) {
 
 				return true;
 			}

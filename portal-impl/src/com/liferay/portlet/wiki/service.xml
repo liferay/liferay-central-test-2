@@ -89,10 +89,6 @@
 		<finder name="NodeId" return-type="Collection">
 			<finder-column name="nodeId" />
 		</finder>
-		<finder name="N_R" return-type="Collection">
-			<finder-column name="nodeId" />
-			<finder-column name="redirectTo" />
-		</finder>
 		<finder name="N_T" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
@@ -100,6 +96,10 @@
 		<finder name="N_H" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
+		</finder>
+		<finder name="N_R" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="redirectTo" />
 		</finder>
 		<finder name="N_T_V" return-type="WikiPage">
 			<finder-column name="nodeId" />
@@ -143,10 +143,10 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
+		<exception>DuplicatePage</exception>
 		<exception>NodeName</exception>
 		<exception>NoSuchNode</exception>
 		<exception>NoSuchPage</exception>
-		<exception>PageAlreadyExists</exception>
 		<exception>PageContent</exception>
 		<exception>PageTitle</exception>
 		<exception>WikiFormat</exception>

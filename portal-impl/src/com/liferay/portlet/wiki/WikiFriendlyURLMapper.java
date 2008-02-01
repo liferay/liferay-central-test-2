@@ -129,7 +129,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 	}
 
-	private static final String _MAPPING = "wikipage";
+	private static final String _MAPPING = "wiki";
 
 	private static final String _PORTLET_ID = PortletKeys.WIKI;
 

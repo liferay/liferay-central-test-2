@@ -1306,8 +1306,8 @@
 		</action>
 
 		<action path="/wiki/move_page" type="com.liferay.portlet.wiki.action.MovePageAction">
-			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 		</action>
 
 		<action path="/wiki/search" type="com.liferay.portlet.wiki.action.EditNodeAction">

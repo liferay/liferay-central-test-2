@@ -26,10 +26,10 @@
 
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portlet.wiki.DuplicatePageException" %>
 <%@ page import="com.liferay.portlet.wiki.NodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchPageException" %>
-<%@ page import="com.liferay.portlet.wiki.PageAlreadyExistsException" %>
 <%@ page import="com.liferay.portlet.wiki.PageContentException" %>
 <%@ page import="com.liferay.portlet.wiki.PageTitleException" %>
 <%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>

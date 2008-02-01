@@ -29,9 +29,9 @@
 }
 
 .portlet-wiki h1.wiki-page-title {
+	border-bottom: 1px solid #AAAAAA;
 	font-size: 2em;
 	padding-bottom: 3px;
-	border-bottom:1px solid #AAAAAA;
 }
 
 .portlet-wiki .preview {
@@ -67,10 +67,10 @@
 }
 
 .portlet-wiki .wiki-edit-inline {
+	float: right;
 	font-size: 0.5em;
 	font-weight: normal;
 	margin-left: 5px;
-	float: right;
 }
 
 .portlet-wiki .wiki-edit-inline a {
@@ -81,18 +81,19 @@
 	text-decoration: underline;
 }
 
-.portlet-wiki .wiki-page-redirect {
-	color: #7d7d7d;
+.portlet-wiki .wiki-page-old-version a {
+	color: #ff9933;
+}
+
+.portlet-wiki .wiki-page-old-version {
+	color: #ff9933;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;
 }
 
-.portlet-wiki .wiki-page-old-version a {
-	color: #ff9933;
-}
-.portlet-wiki .wiki-page-old-version {
-	color: #ff9933;
+.portlet-wiki .wiki-page-redirect {
+	color: #7d7d7d;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;
