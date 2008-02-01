@@ -150,6 +150,7 @@ Liferay.Session = {
 		if (instance._sessionWarning) {
 			clearTimeout(instance._sessionWarning);
 		}
+
 		instance._sessionWarning = setTimeout(
 			function() {
 				if (!instance.autoExtend) {
@@ -159,7 +160,8 @@ Liferay.Session = {
 					instance.extend();
 				}
 			},
-		instance.sessionTimeout);
+			instance.sessionTimeout
+		);
 
 		instance.setCookie();
 	},
