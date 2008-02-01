@@ -32,11 +32,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddArticleTest extends BaseTestCase {
 	public void testAddArticle() throws Exception {
-		selenium.click("link=Edit");
+		selenium.click("link=[Edit]");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_content", "=This is a test Wiki article.=");
+		selenium.typeKeys("_36_content", "=This is a test Wiki article=");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test Wiki article."));
+		verifyTrue(selenium.isTextPresent("This is a test Wiki article"));
 	}
 }

@@ -37,6 +37,6 @@ public class SearchTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Main");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test Wiki article."));
+		verifyTrue(selenium.isTextPresent("This is a test Wiki article"));
 	}
 }

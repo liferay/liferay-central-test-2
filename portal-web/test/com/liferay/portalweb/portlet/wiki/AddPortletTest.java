@@ -52,6 +52,21 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.mouseDown("//div[@id=\"Wiki-Wiki\"]/p/a");
 		selenium.mouseUp("//div[@id=\"Wiki-Wiki\"]/p/a");
-		verifyTrue(selenium.isTextPresent("Main"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=[Edit]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
