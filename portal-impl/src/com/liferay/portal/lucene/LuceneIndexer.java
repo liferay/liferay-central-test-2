@@ -151,7 +151,7 @@ public class LuceneIndexer implements Runnable {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error encountered while re-indexing", e);
+			_log.error("Error encountered while reindexing", e);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Reindexing Lucene failed");
