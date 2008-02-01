@@ -36,6 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
@@ -57,7 +58,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class PortletDataContextImpl implements PortletDataContext {
@@ -289,8 +290,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addTagsEntries(Class classObj, Object classPK)
 		throws PortalException, SystemException {
 
-		TagsAsset tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-			classObj.getName(), ((Long)classPK).longValue());
+		TagsAsset tagsAsset = null;
+
+		try {
+            tagsAsset = TagsAssetLocalServiceUtil.getAsset(
+            	classObj.getName(), ((Long)classPK).longValue());
+        }
+        catch (NoSuchAssetException nsae) {
+
+			// LEP-4979
+
+			return;
+		}
 
 		List tagsEntriesList = tagsAsset.getEntries();
 
