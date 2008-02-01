@@ -155,6 +155,8 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
 		}
 
+		pluginPackage.setContext(servletContextName);
+
 		return pluginPackage;
 	}
 

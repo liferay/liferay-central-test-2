@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.plugininstaller.action;
 
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -125,6 +127,9 @@ public class InstallPluginAction extends PortletAction {
 		}
 		else if (cmd.equals("unignorePackages")) {
 			unignorePackages(req);
+		}
+		else if (cmd.equals("uninstall")) {
+			uninstall(req);
 		}
 
 		sendRedirect(req, res);
@@ -509,6 +514,22 @@ public class InstallPluginAction extends PortletAction {
 		prefs.store();
 
 		PluginPackageUtil.refreshUpdatesAvailableCache();
+	}
+
+	protected void uninstall(ActionRequest req) throws Exception {
+		String appServerType = ServerDetector.getServerId();
+
+		String deploymentContext = ParamUtil.getString(
+			req, "deploymentContext");
+
+		if (appServerType.startsWith(ServerDetector.JBOSS_ID)) {
+			deploymentContext += ".war";
+		}
+
+		File deployDir = new File(
+			DeployUtil.getAutoDeployDestDir() + "/" + deploymentContext);
+
+		DeployUtil.undeploy(appServerType, deployDir);
 	}
 
 	private static final String _DOWNLOAD_DIR = "download";

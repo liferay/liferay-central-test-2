@@ -71,128 +71,138 @@ List updatablePackageIds = new ArrayList();
 				<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/update_manager/view" /></portlet:renderURL>" />
 
 				<%
-					try {
-						List headerNames = new ArrayList();
+				try {
+					List headerNames = new ArrayList();
 
-						headerNames.add("plugin");
-						headerNames.add("status");
-						headerNames.add("installed-version");
-						headerNames.add("available-version");
-						headerNames.add(StringPool.BLANK);
+					headerNames.add("plugin");
+					headerNames.add("trusted");
+					headerNames.add("status");
+					headerNames.add("installed-version");
+					headerNames.add("available-version");
+					headerNames.add(StringPool.BLANK);
 
-						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, pluginInstallerURL, headerNames, null);
+					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, pluginInstallerURL, headerNames, null);
 
-						List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
+					List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
 
-						int total = pluginPackages.size();
+					int total = pluginPackages.size();
 
-						searchContainer.setTotal(total);
+					searchContainer.setTotal(total);
 
-						pluginPackages = pluginPackages.subList(searchContainer.getStart(), Math.min(total, searchContainer.getEnd()));
+					pluginPackages = pluginPackages.subList(searchContainer.getStart(), Math.min(total, searchContainer.getEnd()));
 
-						List resultRows = searchContainer.getResultRows();
+					List resultRows = searchContainer.getResultRows();
 
-						for (int i = 0; i < pluginPackages.size(); i++) {
-							PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
+					for (int i = 0; i < pluginPackages.size(); i++) {
+						PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
 
-							PluginPackage availablePluginPackage = null;
+						PluginPackage availablePluginPackage = null;
 
-							try {
-								availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
-							}
-							catch (Exception e) {
-							}
+						try {
+							availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+						}
+						catch (Exception e) {
+						}
 
-							String pluginPackageModuleId = pluginPackage.getModuleId();
-							String pluginPackageName = pluginPackage.getName();
-							String pluginPackageVersion = pluginPackage.getVersion();
-							String pluginPackageContext = pluginPackage.getContext();
+						String pluginPackageModuleId = pluginPackage.getModuleId();
+						String pluginPackageName = pluginPackage.getName();
+						String pluginPackageVersion = pluginPackage.getVersion();
+						String pluginPackageContext = pluginPackage.getContext();
 
-							String pluginPackageStatus = "up-to-date";
+						String pluginPackageStatus = "up-to-date";
 
-							if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
-								pluginPackageStatus = "installation-in-process";
-							}
-							else
-							if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
-								if (PluginPackageUtil.isIgnored(pluginPackage)) {
-									pluginPackageStatus = "update-ignored";
-								}
-								else {
-									pluginPackageStatus = "update-available";
-								}
-
-								updatablePackageIds.add(pluginPackage.getPackageId());
-							}
-							else
-							if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
-								pluginPackageStatus = "unknown";
-							}
-
-							ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
-
-							row.setClassName("status-" + pluginPackageStatus);
-
-							// Name
-
-							StringMaker sm = new StringMaker();
-
-							sm.append("<b>");
-							sm.append(pluginPackageName);
-							sm.append("</b>");
-							sm.append("<br />/");
-							sm.append(pluginPackageContext);
-
-							row.addText(sm.toString());
-
-							// Status
-
-							row.addText(LanguageUtil.get(pageContext, pluginPackageStatus));
-
-							// Installed version
-
-							row.addText(pluginPackageVersion);
-
-							// Available version
-
-							if (availablePluginPackage != null) {
-								PortletURL rowURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-
-								rowURL.setWindowState(WindowState.MAXIMIZED);
-
-								rowURL.setParameter("struts_action", "/plugin_installer/view");
-								rowURL.setParameter("referer", currentURL);
-								rowURL.setParameter("tabs1", "browse-repository");
-								rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
-								rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
-
-								sm = new StringMaker();
-
-								sm.append("<a href=\"");
-								sm.append(rowURL.toString());
-								sm.append("\">");
-								sm.append(availablePluginPackage.getVersion());
-								sm.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-								sm.append(themeDisplay.getPathThemeImages());
-								sm.append("/document_library/page.png");
-								sm.append("' onmousemove=\"ToolTip.show(event, this, '");
-								sm.append(availablePluginPackage.getChangeLog());
-								sm.append("')\" />");
-
-								row.addText(sm.toString());
+						if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
+							pluginPackageStatus = "installation-in-process";
+						}
+						else
+						if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
+							if (PluginPackageUtil.isIgnored(pluginPackage)) {
+								pluginPackageStatus = "update-ignored";
 							}
 							else {
-								row.addText(StringPool.DASH);
+								pluginPackageStatus = "update-available";
 							}
 
-							// Actions
-
-							row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
-
-							// Add result row
-
-							resultRows.add(row);
+							updatablePackageIds.add(pluginPackage.getPackageId());
 						}
+						else
+						if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
+							pluginPackageStatus = "unknown";
+						}
+
+						ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
+
+						row.setClassName("status-" + pluginPackageStatus);
+
+						// Name
+
+						StringMaker sm = new StringMaker();
+
+						sm.append("<b>");
+						sm.append(pluginPackageName);
+						sm.append("</b>");
+						sm.append("<br />/");
+						sm.append(pluginPackageContext);
+
+						row.addText(sm.toString());
+
+						// Trusted
+
+						if ((availablePluginPackage != null) && PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL())) {
+							row.addText(LanguageUtil.get(pageContext, "yes"));
+						}
+						else {
+							row.addText(LanguageUtil.get(pageContext, "no"));
+						}
+
+						// Status
+
+						row.addText(LanguageUtil.get(pageContext, pluginPackageStatus));
+
+						// Installed version
+
+						row.addText(pluginPackageVersion);
+
+						// Available version
+
+						if (availablePluginPackage != null) {
+							PortletURL rowURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+
+							rowURL.setWindowState(WindowState.MAXIMIZED);
+
+							rowURL.setParameter("struts_action", "/plugin_installer/view");
+							rowURL.setParameter("referer", currentURL);
+							rowURL.setParameter("tabs1", "browse-repository");
+							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
+							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
+
+							sm = new StringMaker();
+
+							sm.append("<a href=\"");
+							sm.append(rowURL.toString());
+							sm.append("\">");
+							sm.append(availablePluginPackage.getVersion());
+							sm.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+							sm.append(themeDisplay.getPathThemeImages());
+							sm.append("/document_library/page.png");
+							sm.append("' onmousemove=\"ToolTip.show(event, this, '");
+							sm.append(availablePluginPackage.getChangeLog());
+							sm.append("')\" />");
+
+							row.addText(sm.toString());
+						}
+						else {
+							row.addText(StringPool.DASH);
+						}
+
+						// Actions
+
+						row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
+
+						// Add result row
+
+						resultRows.add(row);
+					}
 				%>
 
 					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

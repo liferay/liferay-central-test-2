@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Version;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,7 +85,7 @@ public class LocalPluginPackageRepository {
 
 			if (pluginPackage.getGroupId().equals(groupId) &&
 				pluginPackage.getArtifactId().equals(artifactId) &&
-				(result == null ||
+				((result == null) ||
 					pluginPackage.isLaterVersionThan(result))) {
 
 				result = pluginPackage;
@@ -91,7 +93,6 @@ public class LocalPluginPackageRepository {
 		}
 
 		return result;
-
 	}
 
 	public PluginPackage getPluginPackage(String context) {
@@ -132,6 +133,14 @@ public class LocalPluginPackageRepository {
 
 	public void removePluginPackage(PluginPackage pluginPackage) {
 		_pluginPackages.remove(pluginPackage.getContext());
+
+		try {
+			PluginPackageIndexer.removePluginPackage(
+				pluginPackage.getModuleId());
+		}
+		catch (IOException ioe) {
+			_log.error("Deleting index " + pluginPackage.getModuleId(), ioe);
+		}
 	}
 
 	public void removePluginPackage(String context) {

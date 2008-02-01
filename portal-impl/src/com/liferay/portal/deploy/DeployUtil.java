@@ -32,11 +32,15 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
+import com.liferay.util.ant.DeleteTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -90,6 +94,51 @@ public class DeployUtil {
 		return _instance._getResourcePath(resource);
 	}
 
+	public static void undeploy(String appServerType, File deployDir)
+		throws Exception {
+
+		boolean undeployEnabled = PrefsPropsUtil.getBoolean(
+			PropsUtil.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED);
+
+		if (!undeployEnabled) {
+			return;
+		}
+
+		if (!appServerType.startsWith(ServerDetector.JBOSS_ID) &&
+			!appServerType.equals(ServerDetector.TOMCAT_ID)) {
+
+			return;
+		}
+
+		File webXml = new File(deployDir + "/WEB-INF/web.xml");
+
+		if (!webXml.exists()) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Undeploy " + deployDir);
+		}
+
+		FileUtil.delete(deployDir + "/WEB-INF/web.xml");
+
+		DeleteTask.deleteDirectory(deployDir);
+
+		int undeployInterval = PrefsPropsUtil.getInteger(
+			PropsUtil.HOT_UNDEPLOY_INTERVAL,
+			PropsValues.HOT_UNDEPLOY_INTERVAL);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Wait " + undeployInterval +
+					" ms to allow the plugin time to fully undeploy");
+		}
+
+		if (undeployInterval > 0) {
+			Thread.sleep(undeployInterval);
+		}
+	}
+
 	private DeployUtil() {
 	}
 
@@ -115,6 +164,8 @@ public class DeployUtil {
 
 		return FileUtil.getAbsolutePath(file);
 	}
+
+	private static Log _log = LogFactory.getLog(DeployUtil.class);
 
 	private static DeployUtil _instance = new DeployUtil();
 

@@ -34,7 +34,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.License;
@@ -325,6 +327,10 @@ public class BaseDeployer {
 	protected void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
+
+		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
+			copyDependencyXml("context.xml", srcFile + "/META-INF");
+		}
 
 		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
@@ -623,6 +629,14 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
+		boolean undeployOnRedeploy = PrefsPropsUtil.getBoolean(
+			PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
+			PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
+
+		if (undeployOnRedeploy) {
+			DeployUtil.undeploy(appServerType, deployDir);
+		}
+
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
 			if (_log.isInfoEnabled()) {
 				_log.info(deployDir + " is already up to date");
@@ -630,11 +644,6 @@ public class BaseDeployer {
 
 			return false;
 		}
-
-		// Don't delete the deploy directory because it can cause problems in
-		// certain application servers
-
-		//DeleteTask.deleteDirectory(deployDir);
 
 		File tempDir = new File(
 			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +

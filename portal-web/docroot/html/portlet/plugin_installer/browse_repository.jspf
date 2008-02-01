@@ -198,15 +198,14 @@ try {
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
 		String pluginPackageTags = doc.get("tags");
 
-		PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(pluginPackageModuleId, pluginPackageRepositoryURL);
+		// The value for pluginPackage should never be null except when Lucene
+		// is out of sync as in LEP-4783 or when the plugin was not installed
+		// from a repository.
 
-		if (pluginPackage == null) {
+		PluginPackage pluginPackage = null;
 
-			// This null check should not be needed now but is left in place
-			// in case Lucene is out of sync so that the user does not see a
-			// nasty error. See LEP-4783.
-
-			continue;
+		if (!pluginPackageRepositoryURL.startsWith(RemotePluginPackageRepository.LOCAL_URL)) {
+			pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(pluginPackageModuleId, pluginPackageRepositoryURL);
 		}
 
 		PluginPackage installedPluginPackage = PluginPackageUtil.getLatestInstalledPluginPackage(pluginPackageGroupId, pluginPackageArtifactId);
@@ -228,19 +227,21 @@ try {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("<a href='");
-		sm.append(rowURL.toString());
-		sm.append("'>");
+		if (pluginPackage != null) {
+			sm.append("<a href='");
+			sm.append(rowURL.toString());
+			sm.append("'>");
 
-		if (tabs2.equals("layout-templates") || tabs2.equals("themes")) {
-			List screenshots = pluginPackage.getScreenshots();
+			if (tabs2.equals("layout-templates") || tabs2.equals("themes")) {
+				List screenshots = pluginPackage.getScreenshots();
 
-			if (screenshots.size() > 0) {
-				Screenshot screenshot = (Screenshot)screenshots.get(0);
+				if (screenshots.size() > 0) {
+					Screenshot screenshot = (Screenshot)screenshots.get(0);
 
-				sm.append("<img align=\"left\" src=\"");
-				sm.append(screenshot.getThumbnailURL());
-				sm.append("\" style=\"margin-right: 10px\"/>");
+					sm.append("<img align=\"left\" src=\"");
+					sm.append(screenshot.getThumbnailURL());
+					sm.append("\" style=\"margin-right: 10px\"/>");
+				}
 			}
 		}
 
@@ -248,7 +249,10 @@ try {
 		sm.append(pluginPackageName);
 		sm.append("</b> ");
 		sm.append(pluginPackageAvailableVersion);
-		sm.append("</a>");
+
+		if (pluginPackage != null) {
+			sm.append("</a>");
+		}
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
 			sm.append("<br />");

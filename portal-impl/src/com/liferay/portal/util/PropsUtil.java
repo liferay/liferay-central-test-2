@@ -99,6 +99,14 @@ public class PropsUtil {
 
 	public static final String HOT_DEPLOY_LISTENERS = "hot.deploy.listeners";
 
+	// Hot Undeploy
+
+	public static final String HOT_UNDEPLOY_ENABLED = "hot.undeploy.enabled";
+
+	public static final String HOT_UNDEPLOY_INTERVAL = "hot.undeploy.interval";
+
+	public static final String HOT_UNDEPLOY_ON_REDEPLOY = "hot.undeploy.on.redeploy";
+
 	// Plugin
 
 	public static final String PLUGIN_TYPES = "plugin.types";

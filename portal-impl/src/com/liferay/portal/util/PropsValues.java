@@ -245,6 +245,16 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
+	public static final boolean HOT_UNDEPLOY_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.HOT_UNDEPLOY_ENABLED));
+
+	public static final int HOT_UNDEPLOY_INTERVAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.HOT_UNDEPLOY_INTERVAL));
+
+	public static final boolean HOT_UNDEPLOY_ON_REDEPLOY =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY));
+
 	public static final int IG_IMAGE_CUSTOM_1_MAX_HEIGHT =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_HEIGHT));
