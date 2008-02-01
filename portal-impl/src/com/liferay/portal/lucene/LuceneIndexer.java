@@ -101,7 +101,7 @@ public class LuceneIndexer implements Runnable {
 			LuceneUtil.write(writer);
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error(ioe.getMessage(), ioe);
 		}
 
 		String[] indexIds = new String[] {String.valueOf(_companyId)};
@@ -151,7 +151,7 @@ public class LuceneIndexer implements Runnable {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Error encountered while re-indexing", e);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Reindexing Lucene failed");
