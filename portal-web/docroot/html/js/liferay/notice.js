@@ -15,34 +15,34 @@ Liferay.Notice = new Class({
 		instance._useCloseButton = true;
 		instance._onClose = params.onClose;
 		instance._closeText = params.closeText;
-		
+
 		instance._useToggleButton = false;
 		instance._hideText = '';
 		instance._showText = '';
-		
+
 		if (params.toggleText !== false) {
 			instance.toggleText = jQuery.extend(
 				{
-					hide: null, 
+					hide: null,
 					show: null
-				}, 
+				},
 			params.toggleText);
 
 			instance._useToggleButton = true;
-		} 
-		
+		}
+
 		if (instance._noticeType == 'warning') {
 			instance._noticeClass = 'popup-alert-warning';
 		}
-		
+
 		if (params.noticeClass) {
 			instance._noticeClass += ' ' + params.noticeClass;
 		}
-		
+
 		instance._content = params.content || '';
-		
+
 		instance._createHTML();
-		
+
 		return instance._notice;
 	},
 
@@ -83,18 +83,18 @@ Liferay.Notice = new Class({
 
 		if (instance._useCloseButton) {
 			var html = '<input class="submit popup-alert-close" type="submit" value="' + instance._closeText + '" />';
-			
+
 			notice.append(html);
-			
+
 			var closeButton = notice.find('.popup-alert-close');
 			closeButton.click(
 				function() {
-					notice.slideUp('normal', 
+					notice.slideUp('normal',
 						function() {
 							notice.remove();
 						}
 					);
-					
+
 					if (instance._onClose) {
 						instance._onClose();
 					}
