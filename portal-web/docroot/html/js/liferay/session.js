@@ -149,7 +149,12 @@ Liferay.Session = {
 
 		instance._sessionWarning = setTimeout(
 			function() {
-				instance.warn();
+				if (!instance.autoExtend) {
+					instance.warn();
+				}
+				else {
+					instance.extend();
+				}
 			},
 		instance.sessionTimeout);
 
