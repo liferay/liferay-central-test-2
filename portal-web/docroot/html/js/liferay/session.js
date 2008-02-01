@@ -147,6 +147,9 @@ Liferay.Session = {
 		);
 		document.title = instance._originalTitle;
 
+		if (instance._sessionWarning) {
+			clearTimeout(instance._sessionWarning);
+		}
 		instance._sessionWarning = setTimeout(
 			function() {
 				if (!instance.autoExtend) {
