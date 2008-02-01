@@ -160,7 +160,7 @@ Liferay.Session = {
 					instance.extend();
 				}
 			},
-			instance.sessionTimeout
+			instance.sessionTimeoutWarning
 		);
 
 		instance.setCookie();
