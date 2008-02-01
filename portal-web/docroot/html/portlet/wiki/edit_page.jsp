@@ -65,16 +65,16 @@ if (Validator.isNull(redirect)) {
 	 newPage = true;
  }
 
-boolean edit = false;
+boolean editable = false;
 
 if (wikiPage != null) {
-	edit = true;
+	editable = true;
 }
 else if (Validator.isNotNull(title)) {
 	try {
 		WikiPageLocalServiceUtil.validateTitle(title);
 
-		edit = true;
+		editable = true;
 	}
 	catch (PortalException pe) {
 	}
@@ -145,13 +145,13 @@ else if (Validator.isNotNull(title)) {
 
 <liferay-ui:tags-error />
 
-<c:if test="<%= newPage && edit %>">
+<c:if test="<%= newPage && editable %>">
 	<div class="portlet-msg-info">
 		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
 	</div>
 </c:if>
 
-<c:if test="<%= newPage && !edit %>">
+<c:if test="<%= newPage && !editable %>">
 	<div class="portlet-msg-error">
 		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
 	</div>
@@ -159,7 +159,7 @@ else if (Validator.isNotNull(title)) {
 	<input type="button" onclick="history.go(-1)" value="<%= LanguageUtil.get(pageContext, "back") %>" />
 </c:if>
 
-<c:if test="<%= edit %>">
+<c:if test="<%= editable %>">
 	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
 		<table class="lfr-table">
 		<tr>
