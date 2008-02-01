@@ -815,6 +815,10 @@ li.toggle-expand a {
 	font-weight: bold;
 }
 
+.popup-alert-notice input, .popup-alert-warning input {
+	vertical-align: middle;
+}
+
 /* ---------- Portlets ---------- */
 
 /* ---------- Generic styling ---------- */
