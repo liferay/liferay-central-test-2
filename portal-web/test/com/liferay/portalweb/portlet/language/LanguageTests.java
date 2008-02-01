@@ -35,6 +35,7 @@ public class LanguageTests extends BaseTests {
 	public LanguageTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(LanguageTest.class);
 	}
 
 }
