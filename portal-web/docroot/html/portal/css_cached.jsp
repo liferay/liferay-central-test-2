@@ -1003,14 +1003,14 @@ li.toggle-expand a {
 
 /* ---------- Taglib calendar ---------- */
 
-.taglib-calendar tr th {
-	text-align: center;
+.taglib-calendar tr th, .taglib-calendar tr td {
 	border: 1px solid #999;
 	border-bottom: none;
 	border-top: none;
 	height: 25px;
-	width: 26px;
 	padding: 0;
+	width: 26px;
+	text-align: center;
 }
 
 .taglib-calendar tr td a {
@@ -1019,12 +1019,8 @@ li.toggle-expand a {
 	padding: 5px 0;
 }
 
-.taglib-calendar tr td a:hover, .taglib-calendar .calendar-panel tr td a:focus {
+.taglib-calendar tr td a:hover, .taglib-calendar tr td a:focus {
 	background-color: #ccc;
-}
-
-.taglib-calendar th:last-child, .taglib-calendar td:last-child {
-	border-right: none;
 }
 
 .taglib-calendar .calendar-inactive {
@@ -1036,9 +1032,9 @@ li.toggle-expand a {
 }
 
 .taglib-calendar .calendar-current-day a {
-	text-decoration: none;
 	color: #fff;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .taglib-calendar tr td.calendar-current-day a:hover, .taglib-calendar tr td.calendar-current-day a:focus {

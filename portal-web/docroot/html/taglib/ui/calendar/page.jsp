@@ -53,6 +53,12 @@ Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 int curMonth = curCal.get(Calendar.MONTH);
 int curDay = curCal.get(Calendar.DATE);
 int curYear = curCal.get(Calendar.YEAR);
+
+Calendar prevCal = (Calendar)selCal.clone();
+
+prevCal.add(Calendar.DATE, -1);
+
+int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 %>
 
 <div class="taglib-calendar">
@@ -103,10 +109,12 @@ int curYear = curCal.get(Calendar.YEAR);
 			}
 		}
 
+		maxDayOfPrevMonth = (maxDayOfPrevMonth - dayOfWeek) + 1;
+
 		for (int i = 1; i < dayOfWeek; i++) {
 		%>
 
-			<td class="calendar-inactive calendar-previous-month">+</td>
+			<td class="calendar-inactive calendar-previous-month"><%= maxDayOfPrevMonth + i %></td>
 
 		<%
 		}
@@ -144,16 +152,6 @@ int curYear = curCal.get(Calendar.YEAR);
 			if (hasData) {
 				className += " has-events";
 			}
-
-			/*DateFormat dateFormat = null;
-
-			if (Validator.isNotNull(headerPattern) || (headerFormat != null)) {
-				dateFormat = headerFormat;
-
-				if (Validator.isNotNull(headerPattern)) {
-					dateFormat = new SimpleDateFormat(headerPattern, locale);
-				}
-			}*/
 		%>
 
 			<td class="<%= className %>">
@@ -163,10 +161,12 @@ int curYear = curCal.get(Calendar.YEAR);
 		<%
 		}
 
+		int dayOfNextMonth = 1;
+
 		for (int i = 7; i >= dayOfWeek; i--) {
 		%>
 
-			<td class="calendar-inactive calendar-next-month">-</td>
+			<td class="calendar-inactive calendar-next-month"><%= dayOfNextMonth++ %></td>
 
 		<%
 		}
