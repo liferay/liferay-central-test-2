@@ -55,146 +55,123 @@ int curDay = curCal.get(Calendar.DATE);
 int curYear = curCal.get(Calendar.YEAR);
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="190">
-<tr>
-	<td>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<div class="taglib-calendar">
+	<table class="lfr-table calendar-panel">
 
-		<c:if test="<%= Validator.isNotNull(headerPattern) || (headerFormat != null) %>">
+	<c:if test="<%= Validator.isNotNull(headerPattern) || (headerFormat != null) %>">
 
-			<%
-			DateFormat dateFormat = headerFormat;
+		<%
+		DateFormat dateFormat = headerFormat;
 
-			if (Validator.isNotNull(headerPattern)) {
-				dateFormat = new SimpleDateFormat(headerPattern, locale);
-			}
-			%>
+		if (Validator.isNotNull(headerPattern)) {
+			dateFormat = new SimpleDateFormat(headerPattern, locale);
+		}
+		%>
 
-			<tr class="portlet-section-header">
-				<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>
-			</tr>
-			<tr>
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-				<td align="center" colspan="13" height="20">
-					<%= dateFormat.format(selCal.getTime()) %>
-				</td>
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-			</tr>
-		</c:if>
-
-		<tr class="portlet-section-header">
-
-			<%
-			for (int i = 0; i < 7;  i++) {
-				int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
-			%>
-
-				<td><img border="0" height="22" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-				<td align="center" width="26">
-					<span class="font-small" style="font-weight: bold;">
-					<%= LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]) %>
-					</span>
-				</td>
-
-			<%
-			}
-			%>
-
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-		</tr>
 		<tr>
-
-			<%
-			if (((selCal.getFirstDayOfWeek()) == Calendar.MONDAY)) {
-				if (dayOfWeek == 1) {
-					dayOfWeek += 6;
-				}
-				else {
-					dayOfWeek --;
-				}
-			}
-
-			for (int i = 1; i < dayOfWeek; i++) {
-			%>
-
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-				<td height="25" width="26">&nbsp;</td>
-
-			<%
-			}
-
-			for (int i = 1; i <= maxDayOfMonth; i++) {
-				if (dayOfWeek > 7) {
-			%>
-
-						<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-					</tr>
-					<tr>
-						<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>
-					</tr>
-					<tr>
-
-			<%
-					dayOfWeek = 1;
-				}
-
-				dayOfWeek++;
-
-				Calendar tempCal = (Calendar)selCal.clone();
-
-				tempCal.set(Calendar.MONTH, selMonth);
-				tempCal.set(Calendar.DATE, i);
-				tempCal.set(Calendar.YEAR, selYear);
-
-				boolean hasData = (data != null) && data.contains(new Integer(i));
-
-				String className = "";
-
-				if ((selMonth == curMonth) &&
-					(i == curDay) &&
-					(selYear == curYear)) {
-
-					className = "portlet-section-header";
-				}
-			%>
-
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-				<td align="center" class="<%= className %> font-small" height="25" valign="top" width="26">
-					<table border="0" cellpadding="0" cellspacing="0" width="24">
-					<tr>
-						<td align="center" height="20" valign="top">
-							<a href="javascript: <%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><%= i %></a>
-						</td>
-					</tr>
-
-					<c:if test="<%= hasData %>">
-						<tr>
-							<td class="portlet-section-alternate"><img border="0" height="3" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-						</tr>
-					</c:if>
-
-					</table>
-				</td>
-
-			<%
-			}
-
-			for (int i = 7; i >= dayOfWeek; i--) {
-			%>
-
-				<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
-				<td height="25" width="26">&nbsp;</td>
-
-			<%
-			}
-			%>
-
-			<td class="portlet-section-header"><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="1" /></td>
+			<th colspan="7">
+				<%= dateFormat.format(selCal.getTime()) %>
+			</th>
 		</tr>
-		<tr>
-			<td class="portlet-section-header" colspan="15" style="height: 1px;"></td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+	</c:if>
+
+	<tr class="portlet-section-header">
+
+		<%
+		for (int i = 0; i < 7;  i++) {
+			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
+		%>
+
+			<th>
+				<%= LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]) %>
+			</th>
+
+		<%
+		}
+		%>
+
+	</tr>
+	<tr>
+
+		<%
+		if (((selCal.getFirstDayOfWeek()) == Calendar.MONDAY)) {
+			if (dayOfWeek == 1) {
+				dayOfWeek += 6;
+			}
+			else {
+				dayOfWeek --;
+			}
+		}
+
+		for (int i = 1; i < dayOfWeek; i++) {
+		%>
+
+			<td class="calendar-inactive calendar-previous-month">+</td>
+
+		<%
+		}
+
+		for (int i = 1; i <= maxDayOfMonth; i++) {
+			if (dayOfWeek > 7) {
+		%>
+
+				</tr>
+				<tr>
+
+		<%
+				dayOfWeek = 1;
+			}
+
+			dayOfWeek++;
+
+			Calendar tempCal = (Calendar)selCal.clone();
+
+			tempCal.set(Calendar.MONTH, selMonth);
+			tempCal.set(Calendar.DATE, i);
+			tempCal.set(Calendar.YEAR, selYear);
+
+			boolean hasData = (data != null) && data.contains(new Integer(i));
+
+			String className = "";
+
+			if ((selMonth == curMonth) &&
+				(i == curDay) &&
+				(selYear == curYear)) {
+
+				className = "calendar-current-day";
+			}
+
+			if (hasData) {
+				className += " has-events";
+			}
+
+			/*DateFormat dateFormat = null;
+
+			if (Validator.isNotNull(headerPattern) || (headerFormat != null)) {
+				dateFormat = headerFormat;
+
+				if (Validator.isNotNull(headerPattern)) {
+					dateFormat = new SimpleDateFormat(headerPattern, locale);
+				}
+			}*/
+		%>
+
+			<td class="<%= className %>">
+				<a href="javascript: <%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><%= i %></a>
+			</td>
+
+		<%
+		}
+
+		for (int i = 7; i >= dayOfWeek; i--) {
+		%>
+
+			<td class="calendar-inactive calendar-next-month">-</td>
+
+		<%
+		}
+		%>
+
+	</tr>
+	</table>
+</div>
