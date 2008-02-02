@@ -24,6 +24,7 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -190,7 +191,9 @@ public class PortletAction extends Action {
 			redirect = ParamUtil.getString(req, "redirect");
 		}
 
-		res.sendRedirect(redirect);
+		if (Validator.isNotNull(redirect)) {
+			res.sendRedirect(redirect);
+		}
 	}
 
 	protected boolean redirectToLogin(ActionRequest req, ActionResponse res)
