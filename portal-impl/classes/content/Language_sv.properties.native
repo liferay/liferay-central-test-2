@@ -2188,6 +2188,7 @@ recommended=Rekommenderad
 recur-every=Återupprepa var
 recursable-permissions=Hierakiska rättigheter
 redirect-url-on-success=URL efter avslut
+redirected-from-x=Redirected from {0}
 references-only=Enbart referenser
 refresh-rate=Uppdateringsintervall
 refresh=Uppdatera

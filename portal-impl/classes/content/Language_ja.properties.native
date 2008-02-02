@@ -2284,6 +2284,7 @@ recommended=推薦される
 recur-every=あらゆる繰り返しなさい
 recursable-permissions=Recursable の許可
 redirect-url-on-success=成功のURL の方向を変えなさい
+redirected-from-x=Redirected from {0}
 references-only=唯一の参照
 refresh-rate=率を新たになりなさい
 refresh=新たにしなさい

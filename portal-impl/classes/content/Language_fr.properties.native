@@ -2284,6 +2284,7 @@ recommended=Recommandé
 recur-every=Reproduire chaque
 recursable-permissions=Permissions De Recursable
 redirect-url-on-success=Réorientez le URL sur le succès
+redirected-from-x=Redirected from {0}
 references-only=Références seules
 refresh-rate=Vitesse de rafraîchissement
 refresh=Régénérez

@@ -2284,6 +2284,7 @@ recommended=推荐
 recur-every=重复每
 recursable-permissions=Recursable 允许
 redirect-url-on-success=改URL 方向在成功
+redirected-from-x=Redirected from {0}
 references-only=参考唯一
 refresh-rate=更新率
 refresh=刷新

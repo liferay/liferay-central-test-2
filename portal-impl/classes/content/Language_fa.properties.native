@@ -1519,6 +1519,7 @@ receiver-email-address=آدرس ايميل دريافت کننده
 recent-changes=تغييرات اخير
 recent=اخير
 recur-every=تکرار در هر
+redirected-from-x=Redirected from {0}
 references-only=فقط منابع
 refresh-rate=نرخ به روزرسانی
 refunded=بازگشت داده شده

@@ -2284,6 +2284,7 @@ recommended=Συστημένος
 recur-every=Επανάληψη κάθε
 recursable-permissions=Αδειες Recursable
 redirect-url-on-success=Επαναπροσανατολίστε URL στην επιτυχία
+redirected-from-x=Redirected from {0}
 references-only=Μόνον Αναφορές
 refresh-rate=Ρύθμος Ανανέωσης
 refresh=Αναζωογονήστε

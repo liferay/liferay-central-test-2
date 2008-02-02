@@ -1820,6 +1820,7 @@ recipient=المستقبل
 recommended-licenses=التراخيص المقترحة
 recommended=مقترح
 recur-every=إرجع كل
+redirected-from-x=Redirected from {0}
 references-only=التفضيلات فقط
 refresh-rate=نسبة الإنعاش
 refresh=جدّد

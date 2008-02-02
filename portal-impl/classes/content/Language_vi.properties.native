@@ -1080,6 +1080,7 @@ read-roles=Quyền đọc
 receiver-email-address=Điạ chỉ nhận mail
 recent-changes=Thay đổi mới
 recur-every=Nhắc lại mỗi
+redirected-from-x=Redirected from {0}
 references-only=Chỉ tham chiếu
 refresh-rate=Tốc độ làm tươi
 refunded=Trả lại

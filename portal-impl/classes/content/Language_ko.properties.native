@@ -2284,6 +2284,7 @@ recommended=추천하는
 recur-every=각 재발하십시요
 recursable-permissions=Recursable허가
 redirect-url-on-success=성공에URL을 방향을 고치십시요
+redirected-from-x=Redirected from {0}
 references-only=다만의 참조
 refresh-rate=비율을 상쾌하게 하십시요
 refresh=상쾌하게 하십시요

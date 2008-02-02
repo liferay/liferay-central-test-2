@@ -2284,6 +2284,7 @@ recommended=Recomendado
 recur-every=Repetir cada
 recursable-permissions=Los permisos son heredados
 redirect-url-on-success=Redirigir al usuario a esta URL tras el envio del formulario
+redirected-from-x=Redirected from {0}
 references-only=Sólo referencias
 refresh-rate=Frecuencia de actualización
 refresh=Actualizar

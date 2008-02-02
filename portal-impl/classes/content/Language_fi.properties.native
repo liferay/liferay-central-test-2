@@ -2244,6 +2244,7 @@ recommended=Suositeltu
 recur-every=Toista joka
 recursable-permissions=Rekursiiviset oikeudet
 redirect-url-on-success=Uudelleenohjaus URL onnistuessa
+redirected-from-x=Redirected from {0}
 references-only=Vain viittaukset
 refresh-rate=Virkistystiheys
 refresh=Päivitä

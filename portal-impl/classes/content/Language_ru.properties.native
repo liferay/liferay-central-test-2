@@ -1445,6 +1445,7 @@ receiver-email-address=Email адрес получателя
 recent-changes=Недавние изменения
 recent=Недавние
 recur-every=Повторять каждый
+redirected-from-x=Redirected from {0}
 references-only=References Only
 refresh-rate=Частота обновления
 refunded=Возмещено

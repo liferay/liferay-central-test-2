@@ -1062,6 +1062,7 @@ receiver-email-address=E-mail adresáta
 recent-changes=Aktuální kanály
 recent=Aktuální
 recur-every=Vraťte vše
+redirected-from-x=Redirected from {0}
 references-only=Referencujte jen
 refresh-rate=Obnov cenu
 refunded=Slatnost

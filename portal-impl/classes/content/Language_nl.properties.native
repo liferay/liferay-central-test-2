@@ -2284,6 +2284,7 @@ recommended=Geadviseerd
 recur-every=Terugkerend elke
 recursable-permissions=Recursive rechten
 redirect-url-on-success=Redirect url na succes
+redirected-from-x=Redirected from {0}
 references-only=Slechts verwijzingen
 refresh-rate=Ververs tarief
 refresh=Vernieuwen
