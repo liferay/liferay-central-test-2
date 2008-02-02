@@ -1001,6 +1001,59 @@ li.toggle-expand a {
 	left: -20px;
 }
 
+/* ---------- Taglib calendar ---------- */
+
+.taglib-calendar tr th {
+	text-align: center;
+	border: 1px solid #999;
+	border-bottom: none;
+	border-top: none;
+	height: 25px;
+	width: 26px;
+	padding: 0;
+}
+
+.taglib-calendar tr td a {
+	display: block;
+	height: 15px;
+	padding: 5px 0;
+}
+
+.taglib-calendar tr td a:hover, .taglib-calendar .calendar-panel tr td a:focus {
+	background-color: #ccc;
+}
+
+.taglib-calendar th:last-child, .taglib-calendar td:last-child {
+	border-right: none;
+}
+
+.taglib-calendar .calendar-inactive {
+	color: #999;
+}
+
+.taglib-calendar .calendar-current-day {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/calendar/current_day.png) no-repeat 50%;
+}
+
+.taglib-calendar .calendar-current-day a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+}
+
+.taglib-calendar tr td.calendar-current-day a:hover, .taglib-calendar tr td.calendar-current-day a:focus {
+	background-color: #5881B5;
+}
+
+.taglib-calendar .has-events a span {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/calendar/event_indicator.png) no-repeat 50% 95%;
+	padding-bottom: 5px;
+}
+
+.taglib-calendar .calendar-current-day.has-events a span {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/calendar/event_indicator_current.png);
+}
+
 /* ---------- Taglib discussion thread ---------- */
 
 .taglib-discussion td img {
