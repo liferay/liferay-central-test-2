@@ -43,6 +43,18 @@
 			</li>
 		#end
 
+		#if ($show_view_staging)
+			<li class="page-settings page-staging">
+				<a href="$view_staging_url">$view_staging_text</a>
+			</li>
+		#end
+
+		#if ($show_view_live)
+			<li class="page-settings page-live">
+				<a href="$view_live_url">$view_live_text</a>
+			</li>
+		#end
+
 		#if ($show_publish_to_live)
 			<li class="page-settings">
 				<a href="$publish_to_live_url">$publish_to_live_text</a>
