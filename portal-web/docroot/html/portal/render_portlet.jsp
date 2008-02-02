@@ -232,12 +232,8 @@ if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == 
 	showRefreshIcon = false;
 }
 
-Group group = layout.getGroup();
-
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) &&
-		(!group.hasStagingGroup() || group.isStagingGroup())) {
-
+	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
 
 		if (PropsValues.PORTLET_CSS_ENABLED) {
@@ -271,12 +267,10 @@ if (responseContentType.equals(ContentTypes.XHTML_MP) && portlet.hasMultipleMime
 }
 
 // Unauthenticated users and users without UPDATE permission for the layout
-// cannot modify the layout, or if the layout is being managed through the
-// staging environment.
+// cannot modify the layout
 
 if (!themeDisplay.isSignedIn() ||
-	!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-	(group.hasStagingGroup() && !group.isStagingGroup())) {
+	!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 	showCloseIcon = false;
 	showMaxIcon = PropsValues.LAYOUT_GUEST_SHOW_MAX_ICON;

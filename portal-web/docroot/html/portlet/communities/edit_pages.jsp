@@ -59,7 +59,7 @@ else {
 }
 
 if (Validator.isNull(tabs1)) {
-	if (stagingGroup != null) {
+	if ((portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && stagingGroup != null) {
 		tabs1 = "staging";
 	}
 	else {
@@ -399,14 +399,11 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 
 		<%
-		String tabs1Names = "live";
+		String tabs1Names = "staging";
 
-		if (stagingGroup == null && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
+		//if (stagingGroup == null) {
 			tabs1Names = "live,staging";
-		}
-		else if (stagingGroup != null ) {
-			tabs1Names = "staging";
-		}
+		//}
 		%>
 
 		<liferay-ui:tabs
@@ -419,7 +416,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	</c:if>
 </c:if>
 
-<c:if test='<%= tabs1.equals("staging") && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>'>
+<c:if test='<%= tabs1.equals("staging") %>'>
 	<c:choose>
 		<c:when test="<%= layout.getGroup().isStagingGroup() && layout.getGroup().getLiveGroupId() == liveGroupId %>">
 		</c:when>

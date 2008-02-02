@@ -47,17 +47,8 @@ List myPlaces = user.getMyPlaces();
 			boolean organizationCommunity = myPlace.isOrganization();
 			boolean regularCommunity = myPlace.isCommunity();
 			boolean userCommunity = myPlace.isUser();
-			boolean stagingActive = myPlace.hasStagingGroup() && !myPlace.isStagingGroup();
 			int publicLayoutsPageCount = myPlace.getPublicLayoutsPageCount();
 			int privateLayoutsPageCount = myPlace.getPrivateLayoutsPageCount();
-
-			int publicLayoutsPageCountStage = 0;
-			int privateLayoutsPageCountStage = 0;
-
-			if (stagingActive) {
-				publicLayoutsPageCountStage = myPlace.getStagingGroup().getPublicLayoutsPageCount();
-				privateLayoutsPageCountStage = myPlace.getStagingGroup().getPrivateLayoutsPageCount();
-			}
 
 			Organization organization = null;
 
@@ -94,14 +85,7 @@ List myPlaces = user.getMyPlaces();
 
 					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
 					addPageURL.setParameter("redirect", currentURL);
-
-					if (stagingActive) {
-						addPageURL.setParameter("groupId", String.valueOf(myPlace.getStagingGroup().getGroupId()));
-					}
-					else {
-						addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
-					}
-
+					addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 					publicAddPageHREF = addPageURL.toString();
@@ -207,30 +191,10 @@ List myPlaces = user.getMyPlaces();
 
 								><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
-								<c:if test="<%= publicAddPageHREF != null && !stagingActive %>">
+								<c:if test="<%= publicAddPageHREF != null %>">
 									<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= publicAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
 								</c:if>
 							</li>
-
-							<c:if test="<%= regularCommunity && stagingActive %>">
-								<%
-								portletURL.setParameter("groupId", String.valueOf(myPlace.getStagingGroup().getGroupId()));
-
-								if (layout != null) {
-									selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getStagingGroup().getGroupId());
-								}
-								%>
-
-								<li class="public staging <%= selectedPlace ? "current" : "" %>">
-									<a href="<%= publicLayoutsPageCountStage > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
-
-									><liferay-ui:message key="staging-public-pages" /> <span class="page-count">(<%= publicLayoutsPageCountStage %>)</span></a>
-
-									<c:if test="<%= publicAddPageHREF != null %>">
-										<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= publicAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
-									</c:if>
-								</li>
-							</c:if>
 						</c:if>
 
 						<%
@@ -254,30 +218,10 @@ List myPlaces = user.getMyPlaces();
 
 								><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
-								<c:if test="<%= privateAddPageHREF != null && !stagingActive %>">
+								<c:if test="<%= privateAddPageHREF != null %>">
 									<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= privateAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
 								</c:if>
 							</li>
-
-							<c:if test="<%= regularCommunity && stagingActive %>">
-								<%
-								portletURL.setParameter("groupId", String.valueOf(myPlace.getStagingGroup().getGroupId()));
-
-								if (layout != null) {
-									selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getStagingGroup().getGroupId());
-								}
-								%>
-
-								<li class="private staging <%= selectedPlace ? "current" : "" %>">
-									<a href="<%= privateLayoutsPageCountStage > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
-
-									><liferay-ui:message key="staging-private-pages" /> <span class="page-count">(<%= privateLayoutsPageCountStage %>)</span></a>
-
-									<c:if test="<%= privateAddPageHREF != null %>">
-										<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= privateAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
-									</c:if>
-								</li>
-							</c:if>
 						</c:if>
 					</ul>
 				</li>

@@ -936,18 +936,6 @@ public class EditPagesAction extends PortletAction {
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 		boolean activateStaging = ParamUtil.getBoolean(req, "activateStaging");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		if (!GroupPermissionUtil.contains(
-			permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
-
-			throw new PrincipalException();
-		}
-
 		if ((stagingGroupId > 0) && !activateStaging) {
 			GroupServiceUtil.deleteGroup(stagingGroupId);
 		}
