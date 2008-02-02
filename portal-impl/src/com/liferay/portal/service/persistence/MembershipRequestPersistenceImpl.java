@@ -246,7 +246,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<MembershipRequest> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -285,7 +286,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<MembershipRequest> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -301,17 +302,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
+	public List<MembershipRequest> findByGroupId(long groupId, int begin,
+		int end) throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MembershipRequest> findByGroupId(long groupId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -366,7 +367,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -382,14 +384,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
 	public MembershipRequest findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -403,7 +405,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -412,7 +414,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<MembershipRequest> list = findByGroupId(groupId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -426,7 +429,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -487,7 +490,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<MembershipRequest> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByUserId";
@@ -526,7 +530,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<MembershipRequest> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -542,17 +546,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<MembershipRequest> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MembershipRequest> findByUserId(long userId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByUserId";
@@ -607,7 +611,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -623,14 +628,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
 	public MembershipRequest findByUserId_First(long userId,
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -644,7 +649,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -653,7 +658,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<MembershipRequest> list = findByUserId(userId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -667,7 +673,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -728,7 +734,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_S(long groupId, int statusId) throws SystemException {
+	public List<MembershipRequest> findByG_S(long groupId, int statusId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByG_S";
@@ -777,7 +784,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, statusId);
 
-				List list = q.list();
+				List<MembershipRequest> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -793,17 +800,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
-	public List findByG_S(long groupId, int statusId, int begin, int end)
-		throws SystemException {
+	public List<MembershipRequest> findByG_S(long groupId, int statusId,
+		int begin, int end) throws SystemException {
 		return findByG_S(groupId, statusId, begin, end, null);
 	}
 
-	public List findByG_S(long groupId, int statusId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MembershipRequest> findByG_S(long groupId, int statusId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByG_S";
@@ -864,7 +871,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, statusId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -880,14 +888,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
 	public MembershipRequest findByG_S_First(long groupId, int statusId,
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
-		List list = findByG_S(groupId, statusId, 0, 1, obc);
+		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -904,7 +912,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -913,7 +921,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByG_S(groupId, statusId);
 
-		List list = findByG_S(groupId, statusId, count - 1, count, obc);
+		List<MembershipRequest> list = findByG_S(groupId, statusId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -930,7 +939,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
-			return (MembershipRequest)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -997,8 +1006,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MembershipRequest> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1016,8 +1025,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MembershipRequest> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1037,16 +1047,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MembershipRequest> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MembershipRequest> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<MembershipRequest> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findAll";
@@ -1088,7 +1099,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1108,25 +1120,25 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MembershipRequest>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<MembershipRequest> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+			MembershipRequest membershipRequest = itr.next();
 
 			remove(membershipRequest);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<MembershipRequest> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+			MembershipRequest membershipRequest = itr.next();
 
 			remove(membershipRequest);
 		}
@@ -1134,20 +1146,20 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 	public void removeByG_S(long groupId, int statusId)
 		throws SystemException {
-		Iterator itr = findByG_S(groupId, statusId).iterator();
+		Iterator<MembershipRequest> itr = findByG_S(groupId, statusId).iterator();
 
 		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+			MembershipRequest membershipRequest = itr.next();
 
 			remove(membershipRequest);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MembershipRequest> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MembershipRequest)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1189,10 +1201,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1255,10 +1267,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1331,10 +1343,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1384,10 +1396,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

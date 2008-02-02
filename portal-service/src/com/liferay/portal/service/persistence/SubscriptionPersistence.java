@@ -59,13 +59,15 @@ public interface SubscriptionPersistence {
 	public com.liferay.portal.model.Subscription fetchByPrimaryKey(
 		long subscriptionId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -85,15 +87,16 @@ public interface SubscriptionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchSubscriptionException;
 
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -124,21 +127,22 @@ public interface SubscriptionPersistence {
 		long companyId, long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Subscription> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Subscription> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Subscription> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Subscription> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Subscription> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUserId(long userId)

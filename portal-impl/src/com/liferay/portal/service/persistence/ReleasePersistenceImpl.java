@@ -236,8 +236,8 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Release> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -255,8 +255,9 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Release> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -276,15 +277,15 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Release> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Release> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Release> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ReleaseModelImpl.CACHE_ENABLED;
 		String finderClassName = Release.class.getName();
@@ -321,7 +322,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Release> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -341,15 +342,15 @@ public class ReleasePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Release>)result;
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Release> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Release)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -378,10 +379,10 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

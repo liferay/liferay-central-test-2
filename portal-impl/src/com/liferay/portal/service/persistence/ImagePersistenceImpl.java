@@ -234,7 +234,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findBySize(int size) throws SystemException {
+	public List<Image> findBySize(int size) throws SystemException {
 		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
 		String finderClassName = Image.class.getName();
 		String finderMethodName = "findBySize";
@@ -272,7 +272,7 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, size);
 
-				List list = q.list();
+				List<Image> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -288,17 +288,17 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Image>)result;
 		}
 	}
 
-	public List findBySize(int size, int begin, int end)
+	public List<Image> findBySize(int size, int begin, int end)
 		throws SystemException {
 		return findBySize(size, begin, end, null);
 	}
 
-	public List findBySize(int size, int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Image> findBySize(int size, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
 		String finderClassName = Image.class.getName();
 		String finderMethodName = "findBySize";
@@ -352,7 +352,7 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, size);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Image> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -368,13 +368,13 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Image>)result;
 		}
 	}
 
 	public Image findBySize_First(int size, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
-		List list = findBySize(size, 0, 1, obc);
+		List<Image> list = findBySize(size, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -388,7 +388,7 @@ public class ImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (Image)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -396,7 +396,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		throws NoSuchImageException, SystemException {
 		int count = countBySize(size);
 
-		List list = findBySize(size, count - 1, count, obc);
+		List<Image> list = findBySize(size, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -410,7 +410,7 @@ public class ImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (Image)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -468,8 +468,8 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Image> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -487,8 +487,9 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Image> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -508,15 +509,15 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Image> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Image> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Image> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
 		String finderClassName = Image.class.getName();
@@ -559,7 +560,7 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Image> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -579,25 +580,25 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Image>)result;
 		}
 	}
 
 	public void removeBySize(int size) throws SystemException {
-		Iterator itr = findBySize(size).iterator();
+		Iterator<Image> itr = findBySize(size).iterator();
 
 		while (itr.hasNext()) {
-			Image image = (Image)itr.next();
+			Image image = itr.next();
 
 			remove(image);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Image> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Image)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -638,10 +639,10 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -691,10 +692,10 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

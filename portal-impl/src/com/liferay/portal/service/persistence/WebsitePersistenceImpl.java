@@ -237,7 +237,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<Website> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -275,7 +276,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<Website> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -291,16 +292,16 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<Website> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<Website> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
@@ -355,7 +356,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +372,13 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public Website findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<Website> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +392,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +400,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Website> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +414,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -472,7 +473,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<Website> findByUserId(long userId) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByUserId";
@@ -510,7 +511,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<Website> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -526,16 +527,16 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<Website> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<Website> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
@@ -590,7 +591,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -606,13 +607,13 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public Website findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<Website> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -626,7 +627,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -634,7 +635,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<Website> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -648,7 +649,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -706,7 +707,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C(long companyId, long classNameId)
+	public List<Website> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
@@ -755,7 +756,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List list = q.list();
+				List<Website> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -771,17 +772,17 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
-	public List findByC_C(long companyId, long classNameId, int begin, int end)
-		throws SystemException {
+	public List<Website> findByC_C(long companyId, long classNameId, int begin,
+		int end) throws SystemException {
 		return findByC_C(companyId, classNameId, begin, end, null);
 	}
 
-	public List findByC_C(long companyId, long classNameId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<Website> findByC_C(long companyId, long classNameId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByC_C";
@@ -841,7 +842,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -857,13 +858,13 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public Website findByC_C_First(long companyId, long classNameId,
 		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
-		List list = findByC_C(companyId, classNameId, 0, 1, obc);
+		List<Website> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -880,7 +881,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -888,7 +889,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
-		List list = findByC_C(companyId, classNameId, count - 1, count, obc);
+		List<Website> list = findByC_C(companyId, classNameId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -905,7 +907,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -970,8 +972,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
+	public List<Website> findByC_C_C(long companyId, long classNameId,
+		long classPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -1025,7 +1027,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<Website> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1041,17 +1043,18 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end) throws SystemException {
+	public List<Website> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<Website> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -1117,7 +1120,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1133,14 +1136,15 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public Website findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
-		List list = findByC_C_C(companyId, classNameId, classPK, 0, 1, obc);
+		List<Website> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1160,7 +1164,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1169,8 +1173,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
-		List list = findByC_C_C(companyId, classNameId, classPK, count - 1,
-				count, obc);
+		List<Website> list = findByC_C_C(companyId, classNameId, classPK,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1190,7 +1194,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1261,8 +1265,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary) throws SystemException {
+	public List<Website> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary) throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
 		String finderMethodName = "findByC_C_C_P";
@@ -1324,7 +1328,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List list = q.list();
+				List<Website> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1340,18 +1344,19 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary, int begin, int end) throws SystemException {
+	public List<Website> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary, int begin, int end)
+		throws SystemException {
 		return findByC_C_C_P(companyId, classNameId, classPK, primary, begin,
 			end, null);
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary, int begin, int end, OrderByComparator obc)
+	public List<Website> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
@@ -1426,7 +1431,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1442,15 +1447,15 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public Website findByC_C_C_P_First(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
-		List list = findByC_C_C_P(companyId, classNameId, classPK, primary, 0,
-				1, obc);
+		List<Website> list = findByC_C_C_P(companyId, classNameId, classPK,
+				primary, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1473,7 +1478,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1482,8 +1487,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
-		List list = findByC_C_C_P(companyId, classNameId, classPK, primary,
-				count - 1, count, obc);
+		List<Website> list = findByC_C_C_P(companyId, classNameId, classPK,
+				primary, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1506,7 +1511,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
-			return (Website)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1583,8 +1588,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Website> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1602,8 +1607,9 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Website> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1623,15 +1629,15 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Website> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Website> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Website> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebsiteModelImpl.CACHE_ENABLED;
 		String finderClassName = Website.class.getName();
@@ -1674,7 +1680,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1694,25 +1700,25 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Website>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<Website> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			Website website = (Website)itr.next();
+			Website website = itr.next();
 
 			remove(website);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<Website> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			Website website = (Website)itr.next();
+			Website website = itr.next();
 
 			remove(website);
 		}
@@ -1720,10 +1726,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator itr = findByC_C(companyId, classNameId).iterator();
+		Iterator<Website> itr = findByC_C(companyId, classNameId).iterator();
 
 		while (itr.hasNext()) {
-			Website website = (Website)itr.next();
+			Website website = itr.next();
 
 			remove(website);
 		}
@@ -1731,10 +1737,11 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C_C(companyId, classNameId, classPK).iterator();
+		Iterator<Website> itr = findByC_C_C(companyId, classNameId, classPK)
+									.iterator();
 
 		while (itr.hasNext()) {
-			Website website = (Website)itr.next();
+			Website website = itr.next();
 
 			remove(website);
 		}
@@ -1742,21 +1749,21 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator itr = findByC_C_C_P(companyId, classNameId, classPK, primary)
-						   .iterator();
+		Iterator<Website> itr = findByC_C_C_P(companyId, classNameId, classPK,
+				primary).iterator();
 
 		while (itr.hasNext()) {
-			Website website = (Website)itr.next();
+			Website website = itr.next();
 
 			remove(website);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Website> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Website)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1797,10 +1804,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1862,10 +1869,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1938,10 +1945,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2020,10 +2027,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2110,10 +2117,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2163,10 +2170,10 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -59,13 +59,15 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByPrimaryKey(
 		long imageId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
+		java.lang.String uuid, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
+		java.lang.String uuid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,13 +89,15 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	public java.util.List findByFolderId(long folderId)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
+		long folderId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
+		long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByFolderId(long folderId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByFolderId(long folderId, int begin, int end,
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
+		long folderId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -145,21 +149,22 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
 		long custom2ImageId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

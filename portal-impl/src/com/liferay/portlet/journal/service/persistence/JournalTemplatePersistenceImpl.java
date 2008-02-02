@@ -255,7 +255,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<JournalTemplate> findByUuid(String uuid)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByUuid";
@@ -301,7 +302,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -317,16 +318,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<JournalTemplate> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<JournalTemplate> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -389,7 +390,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -405,13 +407,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
 	public JournalTemplate findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchTemplateException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<JournalTemplate> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -425,7 +427,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -433,7 +435,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		throws NoSuchTemplateException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<JournalTemplate> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -447,7 +449,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -595,7 +597,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -605,7 +607,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (JournalTemplate)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -616,18 +618,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<JournalTemplate> list = (List<JournalTemplate>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (JournalTemplate)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<JournalTemplate> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -666,7 +669,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -682,17 +685,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<JournalTemplate> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<JournalTemplate> findByGroupId(long groupId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -747,7 +750,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -763,13 +767,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
 	public JournalTemplate findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<JournalTemplate> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -783,7 +787,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -791,7 +795,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<JournalTemplate> list = findByGroupId(groupId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -805,7 +810,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -865,7 +870,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByTemplateId(String templateId) throws SystemException {
+	public List<JournalTemplate> findByTemplateId(String templateId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByTemplateId";
@@ -911,7 +917,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, templateId);
 				}
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -927,17 +933,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
-	public List findByTemplateId(String templateId, int begin, int end)
-		throws SystemException {
+	public List<JournalTemplate> findByTemplateId(String templateId, int begin,
+		int end) throws SystemException {
 		return findByTemplateId(templateId, begin, end, null);
 	}
 
-	public List findByTemplateId(String templateId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<JournalTemplate> findByTemplateId(String templateId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByTemplateId";
@@ -999,7 +1005,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, templateId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1015,13 +1022,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
 	public JournalTemplate findByTemplateId_First(String templateId,
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List list = findByTemplateId(templateId, 0, 1, obc);
+		List<JournalTemplate> list = findByTemplateId(templateId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1035,7 +1042,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1043,7 +1050,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		int count = countByTemplateId(templateId);
 
-		List list = findByTemplateId(templateId, count - 1, count, obc);
+		List<JournalTemplate> list = findByTemplateId(templateId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1057,7 +1065,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1188,7 +1196,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, smallImageId);
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1198,7 +1206,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (JournalTemplate)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1209,13 +1217,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<JournalTemplate> list = (List<JournalTemplate>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (JournalTemplate)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -1301,7 +1309,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, templateId);
 				}
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1311,7 +1319,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (JournalTemplate)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1322,18 +1330,18 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<JournalTemplate> list = (List<JournalTemplate>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (JournalTemplate)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_S(long groupId, String structureId)
+	public List<JournalTemplate> findByG_S(long groupId, String structureId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -1388,7 +1396,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, structureId);
 				}
 
-				List list = q.list();
+				List<JournalTemplate> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1404,17 +1412,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
-	public List findByG_S(long groupId, String structureId, int begin, int end)
-		throws SystemException {
+	public List<JournalTemplate> findByG_S(long groupId, String structureId,
+		int begin, int end) throws SystemException {
 		return findByG_S(groupId, structureId, begin, end, null);
 	}
 
-	public List findByG_S(long groupId, String structureId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<JournalTemplate> findByG_S(long groupId, String structureId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByG_S";
@@ -1484,7 +1492,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, structureId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1500,13 +1509,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
 	public JournalTemplate findByG_S_First(long groupId, String structureId,
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List list = findByG_S(groupId, structureId, 0, 1, obc);
+		List<JournalTemplate> list = findByG_S(groupId, structureId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1523,7 +1532,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1531,7 +1540,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
 		int count = countByG_S(groupId, structureId);
 
-		List list = findByG_S(groupId, structureId, count - 1, count, obc);
+		List<JournalTemplate> list = findByG_S(groupId, structureId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1548,7 +1558,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			throw new NoSuchTemplateException(msg.toString());
 		}
 		else {
-			return (JournalTemplate)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1622,8 +1632,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<JournalTemplate> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1641,8 +1651,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<JournalTemplate> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1662,16 +1673,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<JournalTemplate> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<JournalTemplate> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<JournalTemplate> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findAll";
@@ -1714,7 +1726,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1734,15 +1747,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalTemplate>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<JournalTemplate> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			JournalTemplate journalTemplate = itr.next();
 
 			remove(journalTemplate);
 		}
@@ -1756,20 +1769,20 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<JournalTemplate> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			JournalTemplate journalTemplate = itr.next();
 
 			remove(journalTemplate);
 		}
 	}
 
 	public void removeByTemplateId(String templateId) throws SystemException {
-		Iterator itr = findByTemplateId(templateId).iterator();
+		Iterator<JournalTemplate> itr = findByTemplateId(templateId).iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			JournalTemplate journalTemplate = itr.next();
 
 			remove(journalTemplate);
 		}
@@ -1791,20 +1804,21 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 	public void removeByG_S(long groupId, String structureId)
 		throws SystemException {
-		Iterator itr = findByG_S(groupId, structureId).iterator();
+		Iterator<JournalTemplate> itr = findByG_S(groupId, structureId)
+											.iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			JournalTemplate journalTemplate = itr.next();
 
 			remove(journalTemplate);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<JournalTemplate> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((JournalTemplate)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1853,10 +1867,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1935,10 +1949,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2001,10 +2015,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2074,10 +2088,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2140,10 +2154,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2222,10 +2236,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2304,10 +2318,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2357,10 +2371,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -245,7 +245,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<Subscription> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
 		String finderMethodName = "findByUserId";
@@ -280,7 +281,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<Subscription> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Subscription>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<Subscription> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<Subscription> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
@@ -355,7 +356,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Subscription> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +373,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Subscription>)result;
 		}
 	}
 
 	public Subscription findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<Subscription> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +393,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
-			return (Subscription)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<Subscription> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +415,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
-			return (Subscription)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -467,8 +469,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
+	public List<Subscription> findByC_C_C(long companyId, long classNameId,
+		long classPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -519,7 +521,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<Subscription> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -535,17 +537,18 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Subscription>)result;
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end) throws SystemException {
+	public List<Subscription> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<Subscription> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -606,7 +609,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Subscription> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -622,14 +626,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Subscription>)result;
 		}
 	}
 
 	public Subscription findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
-		List list = findByC_C_C(companyId, classNameId, classPK, 0, 1, obc);
+		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
+				0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -649,7 +654,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
-			return (Subscription)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -658,8 +663,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
-		List list = findByC_C_C(companyId, classNameId, classPK, count - 1,
-				count, obc);
+		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -679,7 +684,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
-			return (Subscription)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -839,7 +844,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<Subscription> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -849,7 +854,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Subscription)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -860,19 +865,19 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Subscription> list = (List<Subscription>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Subscription)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Subscription> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -890,8 +895,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Subscription> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -911,15 +917,16 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Subscription> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Subscription> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Subscription> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
@@ -956,7 +963,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Subscription> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -976,15 +984,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Subscription>)result;
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<Subscription> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			Subscription subscription = (Subscription)itr.next();
+			Subscription subscription = itr.next();
 
 			remove(subscription);
 		}
@@ -992,10 +1000,11 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C_C(companyId, classNameId, classPK).iterator();
+		Iterator<Subscription> itr = findByC_C_C(companyId, classNameId, classPK)
+										 .iterator();
 
 		while (itr.hasNext()) {
-			Subscription subscription = (Subscription)itr.next();
+			Subscription subscription = itr.next();
 
 			remove(subscription);
 		}
@@ -1010,10 +1019,10 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Subscription> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Subscription)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1055,10 +1064,10 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1138,10 +1147,10 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1229,10 +1238,10 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1282,10 +1291,10 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

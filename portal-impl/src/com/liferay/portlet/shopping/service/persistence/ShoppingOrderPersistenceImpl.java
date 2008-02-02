@@ -245,7 +245,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<ShoppingOrder> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingOrder.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -284,7 +285,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<ShoppingOrder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -300,16 +301,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingOrder>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingOrder> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<ShoppingOrder> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingOrder.class.getName();
@@ -365,7 +366,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -381,13 +383,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingOrder>)result;
 		}
 	}
 
 	public ShoppingOrder findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchOrderException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<ShoppingOrder> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -401,7 +403,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
-			return (ShoppingOrder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -409,7 +411,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		throws NoSuchOrderException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<ShoppingOrder> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -423,7 +425,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
-			return (ShoppingOrder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -553,7 +555,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, number);
 				}
 
-				List list = q.list();
+				List<ShoppingOrder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -563,7 +565,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ShoppingOrder)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -574,19 +576,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ShoppingOrder> list = (List<ShoppingOrder>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ShoppingOrder)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_U_PPPS(long groupId, long userId, String ppPaymentStatus)
-		throws SystemException {
+	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
+		String ppPaymentStatus) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingOrder.class.getName();
 		String finderMethodName = "findByG_U_PPPS";
@@ -651,7 +653,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, ppPaymentStatus);
 				}
 
-				List list = q.list();
+				List<ShoppingOrder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -667,16 +669,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingOrder>)result;
 		}
 	}
 
-	public List findByG_U_PPPS(long groupId, long userId,
+	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int begin, int end) throws SystemException {
 		return findByG_U_PPPS(groupId, userId, ppPaymentStatus, begin, end, null);
 	}
 
-	public List findByG_U_PPPS(long groupId, long userId,
+	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
@@ -755,7 +757,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, ppPaymentStatus);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -771,14 +774,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingOrder>)result;
 		}
 	}
 
 	public ShoppingOrder findByG_U_PPPS_First(long groupId, long userId,
 		String ppPaymentStatus, OrderByComparator obc)
 		throws NoSuchOrderException, SystemException {
-		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, 0, 1, obc);
+		List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
+				ppPaymentStatus, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -798,7 +802,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
-			return (ShoppingOrder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -807,8 +811,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		throws NoSuchOrderException, SystemException {
 		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 
-		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, count - 1,
-				count, obc);
+		List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
+				ppPaymentStatus, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -828,7 +832,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
-			return (ShoppingOrder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -908,8 +912,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ShoppingOrder> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -927,8 +931,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ShoppingOrder> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -948,15 +953,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ShoppingOrder> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ShoppingOrder> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<ShoppingOrder> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingOrder.class.getName();
@@ -1000,7 +1006,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1020,15 +1027,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingOrder>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<ShoppingOrder> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
+			ShoppingOrder shoppingOrder = itr.next();
 
 			remove(shoppingOrder);
 		}
@@ -1043,21 +1050,21 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 	public void removeByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
-		Iterator itr = findByG_U_PPPS(groupId, userId, ppPaymentStatus)
-						   .iterator();
+		Iterator<ShoppingOrder> itr = findByG_U_PPPS(groupId, userId,
+				ppPaymentStatus).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
+			ShoppingOrder shoppingOrder = itr.next();
 
 			remove(shoppingOrder);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ShoppingOrder> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ShoppingOrder)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1099,10 +1106,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1172,10 +1179,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1265,10 +1272,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1318,10 +1325,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

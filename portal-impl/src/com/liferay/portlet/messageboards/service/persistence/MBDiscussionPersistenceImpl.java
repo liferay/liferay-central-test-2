@@ -318,7 +318,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<MBDiscussion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -328,7 +328,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (MBDiscussion)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -339,19 +339,19 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<MBDiscussion> list = (List<MBDiscussion>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (MBDiscussion)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBDiscussion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -369,8 +369,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBDiscussion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -390,15 +391,16 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBDiscussion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBDiscussion> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBDiscussion> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
 		String finderClassName = MBDiscussion.class.getName();
@@ -436,7 +438,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBDiscussion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -456,7 +459,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBDiscussion>)result;
 		}
 	}
 
@@ -468,10 +471,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBDiscussion> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBDiscussion)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -524,10 +527,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -577,10 +580,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

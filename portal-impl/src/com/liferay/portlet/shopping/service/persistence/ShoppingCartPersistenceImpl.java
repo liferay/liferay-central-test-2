@@ -245,7 +245,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<ShoppingCart> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -280,7 +281,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<ShoppingCart> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCart>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingCart> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<ShoppingCart> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -355,7 +356,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingCart> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +373,13 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCart>)result;
 		}
 	}
 
 	public ShoppingCart findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchCartException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<ShoppingCart> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +393,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			throw new NoSuchCartException(msg.toString());
 		}
 		else {
-			return (ShoppingCart)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		throws NoSuchCartException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<ShoppingCart> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +415,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			throw new NoSuchCartException(msg.toString());
 		}
 		else {
-			return (ShoppingCart)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -467,7 +469,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<ShoppingCart> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
 		String finderMethodName = "findByUserId";
@@ -502,7 +505,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<ShoppingCart> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -518,16 +521,16 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCart>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<ShoppingCart> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<ShoppingCart> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -577,7 +580,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingCart> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -593,13 +597,13 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCart>)result;
 		}
 	}
 
 	public ShoppingCart findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchCartException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<ShoppingCart> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -613,7 +617,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			throw new NoSuchCartException(msg.toString());
 		}
 		else {
-			return (ShoppingCart)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -621,7 +625,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		throws NoSuchCartException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<ShoppingCart> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -635,7 +639,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			throw new NoSuchCartException(msg.toString());
 		}
 		else {
-			return (ShoppingCart)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -759,7 +763,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<ShoppingCart> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -769,7 +773,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ShoppingCart)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -780,19 +784,19 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ShoppingCart> list = (List<ShoppingCart>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ShoppingCart)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ShoppingCart> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -810,8 +814,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ShoppingCart> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -831,15 +836,16 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ShoppingCart> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ShoppingCart> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<ShoppingCart> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -877,7 +883,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingCart> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -897,25 +904,25 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCart>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<ShoppingCart> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingCart shoppingCart = (ShoppingCart)itr.next();
+			ShoppingCart shoppingCart = itr.next();
 
 			remove(shoppingCart);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<ShoppingCart> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingCart shoppingCart = (ShoppingCart)itr.next();
+			ShoppingCart shoppingCart = itr.next();
 
 			remove(shoppingCart);
 		}
@@ -929,10 +936,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ShoppingCart> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ShoppingCart)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -974,10 +981,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1040,10 +1047,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1114,10 +1121,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1167,10 +1174,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

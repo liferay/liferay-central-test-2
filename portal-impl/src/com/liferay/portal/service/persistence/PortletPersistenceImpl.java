@@ -235,7 +235,8 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<Portlet> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
 		String finderClassName = Portlet.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -269,7 +270,7 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<Portlet> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -285,16 +286,16 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Portlet>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<Portlet> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<Portlet> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
 		String finderClassName = Portlet.class.getName();
@@ -343,7 +344,7 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Portlet> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -359,13 +360,13 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Portlet>)result;
 		}
 	}
 
 	public Portlet findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<Portlet> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -379,7 +380,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
-			return (Portlet)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -387,7 +388,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		throws NoSuchPortletException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Portlet> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -401,7 +402,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
-			return (Portlet)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -529,7 +530,7 @@ public class PortletPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = q.list();
+				List<Portlet> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -539,7 +540,7 @@ public class PortletPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Portlet)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -550,19 +551,19 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Portlet> list = (List<Portlet>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Portlet)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Portlet> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -580,8 +581,9 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Portlet> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -601,15 +603,15 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Portlet> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Portlet> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Portlet> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
 		String finderClassName = Portlet.class.getName();
@@ -646,7 +648,7 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Portlet> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -666,15 +668,15 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Portlet>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<Portlet> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			Portlet portlet = (Portlet)itr.next();
+			Portlet portlet = itr.next();
 
 			remove(portlet);
 		}
@@ -688,10 +690,10 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Portlet> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Portlet)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -732,10 +734,10 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -813,10 +815,10 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -866,10 +868,10 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

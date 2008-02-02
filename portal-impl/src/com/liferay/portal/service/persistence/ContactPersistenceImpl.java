@@ -237,7 +237,8 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<Contact> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
 		String finderClassName = Contact.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -271,7 +272,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<Contact> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -287,16 +288,16 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Contact>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<Contact> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<Contact> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
 		String finderClassName = Contact.class.getName();
@@ -345,7 +346,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Contact> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -361,13 +362,13 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Contact>)result;
 		}
 	}
 
 	public Contact findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<Contact> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -381,7 +382,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			throw new NoSuchContactException(msg.toString());
 		}
 		else {
-			return (Contact)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -389,7 +390,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		throws NoSuchContactException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Contact> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -403,7 +404,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			throw new NoSuchContactException(msg.toString());
 		}
 		else {
-			return (Contact)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -456,8 +457,8 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Contact> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -475,8 +476,9 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Contact> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -496,15 +498,15 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Contact> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Contact> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Contact> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
 		String finderClassName = Contact.class.getName();
@@ -541,7 +543,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Contact> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -561,25 +563,25 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Contact>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<Contact> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			Contact contact = (Contact)itr.next();
+			Contact contact = itr.next();
 
 			remove(contact);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Contact> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Contact)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -620,10 +622,10 @@ public class ContactPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -673,10 +675,10 @@ public class ContactPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

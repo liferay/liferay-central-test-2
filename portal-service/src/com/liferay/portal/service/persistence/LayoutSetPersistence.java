@@ -58,13 +58,15 @@ public interface LayoutSetPersistence {
 	public com.liferay.portal.model.LayoutSet fetchByPrimaryKey(
 		long layoutSetId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portal.model.LayoutSet> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.LayoutSet> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.LayoutSet> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -100,21 +102,22 @@ public interface LayoutSetPersistence {
 	public com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
 		boolean privateLayout) throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.LayoutSet> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.LayoutSet> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.LayoutSet> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.LayoutSet> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.LayoutSet> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

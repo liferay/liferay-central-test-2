@@ -237,7 +237,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByActive(boolean active) throws SystemException {
+	public List<Country> findByActive(boolean active) throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
 		String finderMethodName = "findByActive";
@@ -275,7 +275,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = q.list();
+				List<Country> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -291,16 +291,16 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Country>)result;
 		}
 	}
 
-	public List findByActive(boolean active, int begin, int end)
+	public List<Country> findByActive(boolean active, int begin, int end)
 		throws SystemException {
 		return findByActive(active, begin, end, null);
 	}
 
-	public List findByActive(boolean active, int begin, int end,
+	public List<Country> findByActive(boolean active, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
@@ -355,7 +355,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Country> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +371,13 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Country>)result;
 		}
 	}
 
 	public Country findByActive_First(boolean active, OrderByComparator obc)
 		throws NoSuchCountryException, SystemException {
-		List list = findByActive(active, 0, 1, obc);
+		List<Country> list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +391,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
-			return (Country)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +399,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		throws NoSuchCountryException, SystemException {
 		int count = countByActive(active);
 
-		List list = findByActive(active, count - 1, count, obc);
+		List<Country> list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +413,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
-			return (Country)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -471,8 +471,8 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Country> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -490,8 +490,9 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Country> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -511,15 +512,15 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Country> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Country> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Country> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
@@ -562,7 +563,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Country> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -582,25 +583,25 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Country>)result;
 		}
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator itr = findByActive(active).iterator();
+		Iterator<Country> itr = findByActive(active).iterator();
 
 		while (itr.hasNext()) {
-			Country country = (Country)itr.next();
+			Country country = itr.next();
 
 			remove(country);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Country> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Country)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -641,10 +642,10 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -694,10 +695,10 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

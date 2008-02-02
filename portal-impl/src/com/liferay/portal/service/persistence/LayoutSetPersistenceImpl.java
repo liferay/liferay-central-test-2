@@ -240,7 +240,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<LayoutSet> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -274,7 +275,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<LayoutSet> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -290,16 +291,16 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<LayoutSet>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<LayoutSet> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<LayoutSet> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
@@ -348,7 +349,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<LayoutSet> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -364,13 +366,13 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<LayoutSet>)result;
 		}
 	}
 
 	public LayoutSet findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchLayoutSetException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<LayoutSet> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -384,7 +386,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutSetException(msg.toString());
 		}
 		else {
-			return (LayoutSet)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -392,7 +394,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		throws NoSuchLayoutSetException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<LayoutSet> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -406,7 +408,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutSetException(msg.toString());
 		}
 		else {
-			return (LayoutSet)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -525,7 +527,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, virtualHost);
 				}
 
-				List list = q.list();
+				List<LayoutSet> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -535,7 +537,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (LayoutSet)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -546,13 +548,13 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<LayoutSet> list = (List<LayoutSet>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (LayoutSet)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -628,7 +630,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List list = q.list();
+				List<LayoutSet> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -638,7 +640,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (LayoutSet)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -649,19 +651,19 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<LayoutSet> list = (List<LayoutSet>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (LayoutSet)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<LayoutSet> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -679,8 +681,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<LayoutSet> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -700,15 +703,16 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<LayoutSet> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<LayoutSet> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<LayoutSet> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
@@ -745,7 +749,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<LayoutSet> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -765,15 +770,15 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<LayoutSet>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<LayoutSet> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			LayoutSet layoutSet = (LayoutSet)itr.next();
+			LayoutSet layoutSet = itr.next();
 
 			remove(layoutSet);
 		}
@@ -794,10 +799,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<LayoutSet> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((LayoutSet)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -838,10 +843,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -910,10 +915,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -986,10 +991,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1039,10 +1044,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

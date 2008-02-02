@@ -250,8 +250,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout)
-		throws SystemException {
+	public List<JournalContentSearch> findByG_P(long groupId,
+		boolean privateLayout) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P";
@@ -296,7 +296,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -312,17 +312,18 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout, int begin,
-		int end) throws SystemException {
+	public List<JournalContentSearch> findByG_P(long groupId,
+		boolean privateLayout, int begin, int end) throws SystemException {
 		return findByG_P(groupId, privateLayout, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<JournalContentSearch> findByG_P(long groupId,
+		boolean privateLayout, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P";
@@ -377,7 +378,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -393,14 +395,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
 	public JournalContentSearch findByG_P_First(long groupId,
 		boolean privateLayout, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByG_P(groupId, privateLayout, 0, 1, obc);
+		List<JournalContentSearch> list = findByG_P(groupId, privateLayout, 0,
+				1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -417,7 +420,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -426,7 +429,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P(groupId, privateLayout);
 
-		List list = findByG_P(groupId, privateLayout, count - 1, count, obc);
+		List<JournalContentSearch> list = findByG_P(groupId, privateLayout,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -443,7 +447,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -504,7 +508,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_A(long groupId, String articleId)
+	public List<JournalContentSearch> findByG_A(long groupId, String articleId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
@@ -555,7 +559,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -571,17 +575,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
-	public List findByG_A(long groupId, String articleId, int begin, int end)
-		throws SystemException {
+	public List<JournalContentSearch> findByG_A(long groupId, String articleId,
+		int begin, int end) throws SystemException {
 		return findByG_A(groupId, articleId, begin, end, null);
 	}
 
-	public List findByG_A(long groupId, String articleId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<JournalContentSearch> findByG_A(long groupId, String articleId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_A";
@@ -645,7 +649,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -661,14 +666,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
 	public JournalContentSearch findByG_A_First(long groupId, String articleId,
 		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByG_A(groupId, articleId, 0, 1, obc);
+		List<JournalContentSearch> list = findByG_A(groupId, articleId, 0, 1,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -685,7 +691,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -694,7 +700,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_A(groupId, articleId);
 
-		List list = findByG_A(groupId, articleId, count - 1, count, obc);
+		List<JournalContentSearch> list = findByG_A(groupId, articleId,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -711,7 +718,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -779,8 +786,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId)
-		throws SystemException {
+	public List<JournalContentSearch> findByG_P_L(long groupId,
+		boolean privateLayout, long layoutId) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_L";
@@ -833,7 +840,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, layoutId);
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -849,17 +856,19 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
-	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId,
-		int begin, int end) throws SystemException {
+	public List<JournalContentSearch> findByG_P_L(long groupId,
+		boolean privateLayout, long layoutId, int begin, int end)
+		throws SystemException {
 		return findByG_P_L(groupId, privateLayout, layoutId, begin, end, null);
 	}
 
-	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<JournalContentSearch> findByG_P_L(long groupId,
+		boolean privateLayout, long layoutId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_L";
@@ -922,7 +931,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, layoutId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -938,14 +948,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
 	public JournalContentSearch findByG_P_L_First(long groupId,
 		boolean privateLayout, long layoutId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByG_P_L(groupId, privateLayout, layoutId, 0, 1, obc);
+		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
+				layoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -965,7 +976,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -974,8 +985,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_L(groupId, privateLayout, layoutId);
 
-		List list = findByG_P_L(groupId, privateLayout, layoutId, count - 1,
-				count, obc);
+		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
+				layoutId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -995,7 +1006,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1063,8 +1074,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P_A(long groupId, boolean privateLayout,
-		String articleId) throws SystemException {
+	public List<JournalContentSearch> findByG_P_A(long groupId,
+		boolean privateLayout, String articleId) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_A";
@@ -1125,7 +1136,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1141,18 +1152,19 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
-	public List findByG_P_A(long groupId, boolean privateLayout,
-		String articleId, int begin, int end) throws SystemException {
+	public List<JournalContentSearch> findByG_P_A(long groupId,
+		boolean privateLayout, String articleId, int begin, int end)
+		throws SystemException {
 		return findByG_P_A(groupId, privateLayout, articleId, begin, end, null);
 	}
 
-	public List findByG_P_A(long groupId, boolean privateLayout,
-		String articleId, int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<JournalContentSearch> findByG_P_A(long groupId,
+		boolean privateLayout, String articleId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_A";
@@ -1223,7 +1235,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1239,14 +1252,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
 	public JournalContentSearch findByG_P_A_First(long groupId,
 		boolean privateLayout, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByG_P_A(groupId, privateLayout, articleId, 0, 1, obc);
+		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
+				articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1266,7 +1280,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1275,8 +1289,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_A(groupId, privateLayout, articleId);
 
-		List list = findByG_P_A(groupId, privateLayout, articleId, count - 1,
-				count, obc);
+		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
+				articleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1296,7 +1310,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1371,8 +1385,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, String portletId) throws SystemException {
+	public List<JournalContentSearch> findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, String portletId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_L_P";
@@ -1440,7 +1455,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1456,20 +1471,20 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
-	public List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, String portletId, int begin, int end)
-		throws SystemException {
+	public List<JournalContentSearch> findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, String portletId, int begin,
+		int end) throws SystemException {
 		return findByG_P_L_P(groupId, privateLayout, layoutId, portletId,
 			begin, end, null);
 	}
 
-	public List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, String portletId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<JournalContentSearch> findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, String portletId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findByG_P_L_P";
@@ -1547,7 +1562,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1563,7 +1579,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
@@ -1571,8 +1587,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		boolean privateLayout, long layoutId, String portletId,
 		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByG_P_L_P(groupId, privateLayout, layoutId, portletId,
-				0, 1, obc);
+		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
+				layoutId, portletId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1595,7 +1611,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1605,8 +1621,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_L_P(groupId, privateLayout, layoutId, portletId);
 
-		List list = findByG_P_L_P(groupId, privateLayout, layoutId, portletId,
-				count - 1, count, obc);
+		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
+				layoutId, portletId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1629,7 +1645,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
-			return (JournalContentSearch)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1833,7 +1849,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List list = q.list();
+				List<JournalContentSearch> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1843,7 +1859,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (JournalContentSearch)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1854,19 +1870,19 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<JournalContentSearch> list = (List<JournalContentSearch>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (JournalContentSearch)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<JournalContentSearch> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1884,8 +1900,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<JournalContentSearch> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1905,16 +1922,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<JournalContentSearch> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<JournalContentSearch> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<JournalContentSearch> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalContentSearchModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalContentSearch.class.getName();
 		String finderMethodName = "findAll";
@@ -1951,7 +1969,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<JournalContentSearch> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1971,16 +1990,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<JournalContentSearch>)result;
 		}
 	}
 
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Iterator itr = findByG_P(groupId, privateLayout).iterator();
+		Iterator<JournalContentSearch> itr = findByG_P(groupId, privateLayout)
+												 .iterator();
 
 		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			JournalContentSearch journalContentSearch = itr.next();
 
 			remove(journalContentSearch);
 		}
@@ -1988,10 +2008,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
-		Iterator itr = findByG_A(groupId, articleId).iterator();
+		Iterator<JournalContentSearch> itr = findByG_A(groupId, articleId)
+												 .iterator();
 
 		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			JournalContentSearch journalContentSearch = itr.next();
 
 			remove(journalContentSearch);
 		}
@@ -1999,10 +2020,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
-		Iterator itr = findByG_P_L(groupId, privateLayout, layoutId).iterator();
+		Iterator<JournalContentSearch> itr = findByG_P_L(groupId,
+				privateLayout, layoutId).iterator();
 
 		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			JournalContentSearch journalContentSearch = itr.next();
 
 			remove(journalContentSearch);
 		}
@@ -2010,10 +2032,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public void removeByG_P_A(long groupId, boolean privateLayout,
 		String articleId) throws SystemException {
-		Iterator itr = findByG_P_A(groupId, privateLayout, articleId).iterator();
+		Iterator<JournalContentSearch> itr = findByG_P_A(groupId,
+				privateLayout, articleId).iterator();
 
 		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			JournalContentSearch journalContentSearch = itr.next();
 
 			remove(journalContentSearch);
 		}
@@ -2021,11 +2044,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public void removeByG_P_L_P(long groupId, boolean privateLayout,
 		long layoutId, String portletId) throws SystemException {
-		Iterator itr = findByG_P_L_P(groupId, privateLayout, layoutId, portletId)
-						   .iterator();
+		Iterator<JournalContentSearch> itr = findByG_P_L_P(groupId,
+				privateLayout, layoutId, portletId).iterator();
 
 		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			JournalContentSearch journalContentSearch = itr.next();
 
 			remove(journalContentSearch);
 		}
@@ -2041,10 +2064,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<JournalContentSearch> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((JournalContentSearch)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -2097,10 +2120,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2179,10 +2202,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2264,10 +2287,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2357,10 +2380,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2457,10 +2480,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2574,10 +2597,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2627,10 +2650,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

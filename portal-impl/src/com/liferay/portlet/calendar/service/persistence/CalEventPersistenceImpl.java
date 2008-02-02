@@ -250,7 +250,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<CalEvent> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByUuid";
@@ -297,7 +297,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<CalEvent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -313,16 +313,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<CalEvent> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<CalEvent> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -386,7 +386,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -402,13 +402,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
 	public CalEvent findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<CalEvent> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -422,7 +422,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -430,7 +430,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		throws NoSuchEventException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<CalEvent> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -444,7 +444,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -593,7 +593,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<CalEvent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -603,7 +603,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (CalEvent)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -614,18 +614,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<CalEvent> list = (List<CalEvent>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (CalEvent)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<CalEvent> findByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -665,7 +665,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<CalEvent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -681,16 +681,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<CalEvent> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<CalEvent> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -747,7 +747,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -763,13 +763,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
 	public CalEvent findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<CalEvent> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -783,7 +783,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -791,7 +791,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		throws NoSuchEventException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<CalEvent> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -805,7 +805,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -865,7 +865,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_T(long groupId, String type) throws SystemException {
+	public List<CalEvent> findByG_T(long groupId, String type)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByG_T";
@@ -920,7 +921,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List list = q.list();
+				List<CalEvent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -936,17 +937,17 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
-	public List findByG_T(long groupId, String type, int begin, int end)
-		throws SystemException {
+	public List<CalEvent> findByG_T(long groupId, String type, int begin,
+		int end) throws SystemException {
 		return findByG_T(groupId, type, begin, end, null);
 	}
 
-	public List findByG_T(long groupId, String type, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<CalEvent> findByG_T(long groupId, String type, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByG_T";
@@ -1017,7 +1018,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1033,13 +1034,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
 	public CalEvent findByG_T_First(long groupId, String type,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
-		List list = findByG_T(groupId, type, 0, 1, obc);
+		List<CalEvent> list = findByG_T(groupId, type, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1056,7 +1057,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1064,7 +1065,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_T(groupId, type);
 
-		List list = findByG_T(groupId, type, count - 1, count, obc);
+		List<CalEvent> list = findByG_T(groupId, type, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1081,7 +1082,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1155,7 +1156,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_R(long groupId, boolean repeating)
+	public List<CalEvent> findByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -1206,7 +1207,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, repeating);
 
-				List list = q.list();
+				List<CalEvent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1222,17 +1223,17 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
-	public List findByG_R(long groupId, boolean repeating, int begin, int end)
-		throws SystemException {
+	public List<CalEvent> findByG_R(long groupId, boolean repeating, int begin,
+		int end) throws SystemException {
 		return findByG_R(groupId, repeating, begin, end, null);
 	}
 
-	public List findByG_R(long groupId, boolean repeating, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<CalEvent> findByG_R(long groupId, boolean repeating, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
 		String finderMethodName = "findByG_R";
@@ -1294,7 +1295,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, repeating);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1310,13 +1311,13 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
 	public CalEvent findByG_R_First(long groupId, boolean repeating,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
-		List list = findByG_R(groupId, repeating, 0, 1, obc);
+		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1333,7 +1334,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1341,7 +1342,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_R(groupId, repeating);
 
-		List list = findByG_R(groupId, repeating, count - 1, count, obc);
+		List<CalEvent> list = findByG_R(groupId, repeating, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1358,7 +1360,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			throw new NoSuchEventException(msg.toString());
 		}
 		else {
-			return (CalEvent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1425,8 +1427,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<CalEvent> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1444,8 +1446,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<CalEvent> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1465,15 +1468,15 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<CalEvent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<CalEvent> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<CalEvent> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -1518,7 +1521,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1538,15 +1541,15 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<CalEvent>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<CalEvent> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			CalEvent calEvent = (CalEvent)itr.next();
+			CalEvent calEvent = itr.next();
 
 			remove(calEvent);
 		}
@@ -1560,10 +1563,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<CalEvent> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			CalEvent calEvent = (CalEvent)itr.next();
+			CalEvent calEvent = itr.next();
 
 			remove(calEvent);
 		}
@@ -1571,10 +1574,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 	public void removeByG_T(long groupId, String type)
 		throws SystemException {
-		Iterator itr = findByG_T(groupId, type).iterator();
+		Iterator<CalEvent> itr = findByG_T(groupId, type).iterator();
 
 		while (itr.hasNext()) {
-			CalEvent calEvent = (CalEvent)itr.next();
+			CalEvent calEvent = itr.next();
 
 			remove(calEvent);
 		}
@@ -1582,20 +1585,20 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 	public void removeByG_R(long groupId, boolean repeating)
 		throws SystemException {
-		Iterator itr = findByG_R(groupId, repeating).iterator();
+		Iterator<CalEvent> itr = findByG_R(groupId, repeating).iterator();
 
 		while (itr.hasNext()) {
-			CalEvent calEvent = (CalEvent)itr.next();
+			CalEvent calEvent = itr.next();
 
 			remove(calEvent);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<CalEvent> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((CalEvent)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1644,10 +1647,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1726,10 +1729,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1792,10 +1795,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1873,10 +1876,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1950,10 +1953,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2003,10 +2006,10 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

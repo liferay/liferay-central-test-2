@@ -304,7 +304,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, value);
 				}
 
-				List list = q.list();
+				List<ClassName> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -314,7 +314,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ClassName)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -325,19 +325,19 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ClassName> list = (List<ClassName>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ClassName)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ClassName> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -355,8 +355,9 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ClassName> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -376,15 +377,16 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ClassName> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ClassName> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<ClassName> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ClassNameModelImpl.CACHE_ENABLED;
 		String finderClassName = ClassName.class.getName();
@@ -421,7 +423,8 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ClassName> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -441,7 +444,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ClassName>)result;
 		}
 	}
 
@@ -453,10 +456,10 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ClassName> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ClassName)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -504,10 +507,10 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -557,10 +560,10 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

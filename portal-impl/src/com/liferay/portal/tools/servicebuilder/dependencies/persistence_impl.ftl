@@ -63,7 +63,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		try {
 			session = openSession();
 
-			${entity.name} ${entity.varName} = (${entity.name}) session.get(${entity.name}Impl.class,
+			${entity.name} ${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
 
 			<#if entity.hasPrimitivePK()>
 				new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
@@ -249,7 +249,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		try {
 			session = openSession();
 
-			return (${entity.name}) session.get(${entity.name}Impl.class,
+			return (${entity.name})session.get(${entity.name}Impl.class,
 
 			<#if entity.hasPrimitivePK()>
 				new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
@@ -275,7 +275,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		<#assign finderColsList = finder.getColumns()>
 
 		<#if finder.isCollection()>
-			public List findBy${finder.name}(
+			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
 				${finderCol.type} ${finderCol.name}
@@ -395,7 +395,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							</#if>
 						</#list>
 
-						List list = q.list();
+						List<${entity.name}> list = q.list();
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -409,11 +409,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 				else {
-					return (List)result;
+					return (List<${entity.name}>)result;
 				}
 			}
 
-			public List findBy${finder.name}(
+			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
 				${finderCol.type} ${finderCol.name},
@@ -429,7 +429,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				begin, end, null);
 			}
 
-			public List findBy${finder.name}(
+			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
 				${finderCol.type} ${finderCol.name},
@@ -550,7 +550,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							</#if>
 						</#list>
 
-						List list = QueryUtil.list(q, getDialect(), begin, end);
+						List<${entity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -564,7 +564,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 				else {
-					return (List)result;
+					return (List<${entity.name}>)result;
 				}
 			}
 
@@ -575,7 +575,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
-				List list = findBy${finder.name}(
+				List<${entity.name}> list = findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name},
@@ -601,7 +601,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					throw new ${noSuchEntity}Exception(msg.toString());
 				}
 				else {
-					return (${entity.name})list.get(0);
+					return list.get(0);
 				}
 			}
 
@@ -624,7 +624,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				);
 
-				List list = findBy${finder.name}(
+				List<${entity.name}> list = findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name},
@@ -650,7 +650,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					throw new ${noSuchEntity}Exception(msg.toString());
 				}
 				else {
-					return (${entity.name})list.get(0);
+					return list.get(0);
 				}
 			}
 
@@ -755,9 +755,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 					${entity.name}[] array = new ${entity.name}Impl[3];
 
-					array[0] = (${entity.name}) objArray[0];
-					array[1] = (${entity.name}) objArray[1];
-					array[2] = (${entity.name}) objArray[2];
+					array[0] = (${entity.name})objArray[0];
+					array[1] = (${entity.name})objArray[1];
+					array[2] = (${entity.name})objArray[2];
 
 					return array;
 				}
@@ -937,7 +937,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							</#if>
 						</#list>
 
-						List list = q.list();
+						List<${entity.name}> list = q.list();
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -945,7 +945,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							return null;
 						}
 						else {
-							return (${entity.name})list.get(0);
+							return list.get(0);
 						}
 					}
 					catch (Exception e) {
@@ -956,20 +956,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 				else {
-					List list = (List)result;
+					List<${entity.name}> list = (List<${entity.name}>)result;
 
 					if (list.size() == 0) {
 						return null;
 					}
 					else {
-						return (${entity.name})list.get(0);
+						return list.get(0);
 					}
 				}
 			}
 		</#if>
 	</#list>
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
+	public List<${entity.name}> findWithDynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -987,7 +987,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
+	public List<${entity.name}> findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1007,15 +1007,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<${entity.name}> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<${entity.name}> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<${entity.name}> findAll(int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 		String finderClassName = ${entity.name}.class.getName();
 		String finderMethodName = "findAll";
@@ -1057,7 +1057,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<${entity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1075,7 +1075,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 		}
 		else {
-			return (List)result;
+			return (List<${entity.name}>)result;
 		}
 	}
 
@@ -1090,7 +1090,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			) throws SystemException {
-				Iterator itr = findBy${finder.name}(
+				Iterator<${entity.name}> itr = findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name}
@@ -1103,7 +1103,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				).iterator();
 
 				while (itr.hasNext()) {
-					${entity.name} ${entity.varName} = (${entity.name})itr.next();
+					${entity.name} ${entity.varName} = itr.next();
 
 					remove(${entity.varName});
 				}
@@ -1138,10 +1138,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	</#list>
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<${entity.name}> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((${entity.name})itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1261,10 +1261,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 					Long count = null;
 
-					Iterator itr = q.list().iterator();
+					Iterator<Long> itr = q.list().iterator();
 
 					if (itr.hasNext()) {
-						count = (Long)itr.next();
+						count = itr.next();
 					}
 
 					if (count == null) {
@@ -1311,10 +1311,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1341,15 +1341,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
-			public List get${tempEntity.names}(${entity.PKClassName} pk) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk) throws ${noSuchEntity}Exception, SystemException {
 				return get${tempEntity.names}(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			}
 
-			public List get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end) throws ${noSuchEntity}Exception, SystemException {
 				return get${tempEntity.names}(pk, begin, end, null);
 			}
 
-			public List get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
 				boolean finderClassNameCacheEnabled =
 					<#if column.mappingTable??>
 						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
@@ -1437,7 +1437,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						qPos.add(pk);
 
-						List list = QueryUtil.list(q, getDialect(), begin, end);
+						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -1451,7 +1451,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 				else {
-					return (List)result;
+					return (List<${tempEntity.packagePath}.model.${tempEntity.name}>)result;
 				}
 			}
 
@@ -1520,10 +1520,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						Long count = null;
 
-						Iterator itr = q.list().iterator();
+						Iterator<Long> itr = q.list().iterator();
 
 						if (itr.hasNext()) {
-							count = (Long)itr.next();
+							count = itr.next();
 						}
 
 						if (count == null) {
@@ -1684,10 +1684,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void add${tempEntity.names}(${entity.PKClassName} pk, List ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void add${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
 						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = (${tempEntity.packagePath}.model.${tempEntity.name})${tempEntity.varNames}.get(i);
+							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
 
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
@@ -1750,10 +1750,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void remove${tempEntity.names}(${entity.PKClassName} pk, List ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void remove${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
 						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = (${tempEntity.packagePath}.model.${tempEntity.name})${tempEntity.varNames}.get(i);
+							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
 
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
@@ -1782,12 +1782,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void set${tempEntity.names}(${entity.PKClassName} pk, List ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void set${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
 						clear${tempEntity.names}.clear(pk);
 
 						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = (${tempEntity.packagePath}.model.${tempEntity.name})${tempEntity.varNames}.get(i);
+							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
 
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
@@ -1867,10 +1867,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				}
 
 				protected boolean contains(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
-					List results = execute(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+					List<Integer> results = execute(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 
 					if (results.size()> 0) {
-						Integer count = (Integer)results.get(0);
+						Integer count = results.get(0);
 
 						if (count.intValue()> 0) {
 							return true;

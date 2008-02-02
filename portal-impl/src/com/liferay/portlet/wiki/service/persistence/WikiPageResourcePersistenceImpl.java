@@ -325,7 +325,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, title);
 				}
 
-				List list = q.list();
+				List<WikiPageResource> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -335,7 +335,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (WikiPageResource)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -346,19 +346,19 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<WikiPageResource> list = (List<WikiPageResource>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (WikiPageResource)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<WikiPageResource> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -376,8 +376,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<WikiPageResource> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -397,16 +398,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<WikiPageResource> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<WikiPageResource> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<WikiPageResource> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageResourceModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPageResource.class.getName();
 		String finderMethodName = "findAll";
@@ -443,7 +445,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPageResource> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -463,7 +466,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPageResource>)result;
 		}
 	}
 
@@ -475,10 +478,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<WikiPageResource> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((WikiPageResource)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -535,10 +538,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -588,10 +591,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

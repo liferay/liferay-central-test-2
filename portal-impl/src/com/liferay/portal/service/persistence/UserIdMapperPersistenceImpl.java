@@ -245,7 +245,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<UserIdMapper> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
 		String finderClassName = UserIdMapper.class.getName();
 		String finderMethodName = "findByUserId";
@@ -280,7 +281,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<UserIdMapper> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserIdMapper>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<UserIdMapper> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<UserIdMapper> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
 		String finderClassName = UserIdMapper.class.getName();
@@ -355,7 +356,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserIdMapper> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +373,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserIdMapper>)result;
 		}
 	}
 
 	public UserIdMapper findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchUserIdMapperException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<UserIdMapper> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +393,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			throw new NoSuchUserIdMapperException(msg.toString());
 		}
 		else {
-			return (UserIdMapper)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		throws NoSuchUserIdMapperException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<UserIdMapper> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +415,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			throw new NoSuchUserIdMapperException(msg.toString());
 		}
 		else {
-			return (UserIdMapper)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -544,7 +546,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List list = q.list();
+				List<UserIdMapper> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -554,7 +556,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (UserIdMapper)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -565,13 +567,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<UserIdMapper> list = (List<UserIdMapper>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (UserIdMapper)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -660,7 +662,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, externalUserId);
 				}
 
-				List list = q.list();
+				List<UserIdMapper> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -670,7 +672,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (UserIdMapper)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -681,19 +683,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<UserIdMapper> list = (List<UserIdMapper>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (UserIdMapper)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserIdMapper> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -711,8 +713,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserIdMapper> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -732,15 +735,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<UserIdMapper> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<UserIdMapper> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<UserIdMapper> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
 		String finderClassName = UserIdMapper.class.getName();
@@ -777,7 +781,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserIdMapper> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -797,15 +802,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserIdMapper>)result;
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<UserIdMapper> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			UserIdMapper userIdMapper = (UserIdMapper)itr.next();
+			UserIdMapper userIdMapper = itr.next();
 
 			remove(userIdMapper);
 		}
@@ -826,10 +831,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<UserIdMapper> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((UserIdMapper)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -871,10 +876,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -952,10 +957,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1041,10 +1046,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1094,10 +1099,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

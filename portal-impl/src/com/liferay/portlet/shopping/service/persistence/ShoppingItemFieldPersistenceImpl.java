@@ -248,7 +248,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByItemId(long itemId) throws SystemException {
+	public List<ShoppingItemField> findByItemId(long itemId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingItemField.class.getName();
 		String finderMethodName = "findByItemId";
@@ -288,7 +289,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, itemId);
 
-				List list = q.list();
+				List<ShoppingItemField> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -304,17 +305,17 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingItemField>)result;
 		}
 	}
 
-	public List findByItemId(long itemId, int begin, int end)
+	public List<ShoppingItemField> findByItemId(long itemId, int begin, int end)
 		throws SystemException {
 		return findByItemId(itemId, begin, end, null);
 	}
 
-	public List findByItemId(long itemId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<ShoppingItemField> findByItemId(long itemId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingItemField.class.getName();
 		String finderMethodName = "findByItemId";
@@ -370,7 +371,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, itemId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingItemField> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -386,13 +388,13 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingItemField>)result;
 		}
 	}
 
 	public ShoppingItemField findByItemId_First(long itemId,
 		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
-		List list = findByItemId(itemId, 0, 1, obc);
+		List<ShoppingItemField> list = findByItemId(itemId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -406,7 +408,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			throw new NoSuchItemFieldException(msg.toString());
 		}
 		else {
-			return (ShoppingItemField)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -414,7 +416,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
 		int count = countByItemId(itemId);
 
-		List list = findByItemId(itemId, count - 1, count, obc);
+		List<ShoppingItemField> list = findByItemId(itemId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -428,7 +431,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			throw new NoSuchItemFieldException(msg.toString());
 		}
 		else {
-			return (ShoppingItemField)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -490,8 +493,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ShoppingItemField> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -509,8 +512,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ShoppingItemField> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -530,16 +534,17 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ShoppingItemField> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ShoppingItemField> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ShoppingItemField> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingItemField.class.getName();
 		String finderMethodName = "findAll";
@@ -583,7 +588,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingItemField> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -603,25 +609,25 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingItemField>)result;
 		}
 	}
 
 	public void removeByItemId(long itemId) throws SystemException {
-		Iterator itr = findByItemId(itemId).iterator();
+		Iterator<ShoppingItemField> itr = findByItemId(itemId).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingItemField shoppingItemField = (ShoppingItemField)itr.next();
+			ShoppingItemField shoppingItemField = itr.next();
 
 			remove(shoppingItemField);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ShoppingItemField> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ShoppingItemField)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -663,10 +669,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -716,10 +722,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

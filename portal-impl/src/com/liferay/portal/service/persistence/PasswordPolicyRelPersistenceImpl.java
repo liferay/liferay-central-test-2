@@ -318,7 +318,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<PasswordPolicyRel> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -328,7 +328,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PasswordPolicyRel)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -339,13 +339,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PasswordPolicyRel)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -434,7 +434,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<PasswordPolicyRel> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -444,7 +444,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PasswordPolicyRel)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -455,19 +455,19 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PasswordPolicyRel)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PasswordPolicyRel> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -485,8 +485,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PasswordPolicyRel> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -506,16 +507,17 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PasswordPolicyRel> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PasswordPolicyRel> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PasswordPolicyRel> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordPolicyRelModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicyRel.class.getName();
 		String finderMethodName = "findAll";
@@ -551,7 +553,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PasswordPolicyRel> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -571,7 +574,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PasswordPolicyRel>)result;
 		}
 	}
 
@@ -591,10 +594,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PasswordPolicyRel> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PasswordPolicyRel)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -647,10 +650,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -731,10 +734,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -784,10 +787,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -58,13 +58,15 @@ public interface AddressPersistence {
 	public com.liferay.portal.model.Address fetchByPrimaryKey(long addressId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portal.model.Address> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Address> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Address> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -84,13 +86,15 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portal.model.Address> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Address> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Address> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -110,14 +114,17 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findByC_C(long companyId, long classNameId)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C(
+		long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long companyId, long classNameId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Address> findByC_C(
+		long companyId, long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long companyId, long classNameId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C(
+		long companyId, long classNameId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address findByC_C_First(long companyId,
@@ -136,15 +143,16 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C(
+		long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -166,17 +174,17 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_M(
+		long companyId, long classNameId, long classPK, boolean mailing)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_M(
+		long companyId, long classNameId, long classPK, boolean mailing,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_M(
+		long companyId, long classNameId, long classPK, boolean mailing,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address findByC_C_C_M_First(
@@ -197,17 +205,17 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Address> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address findByC_C_C_P_First(
@@ -228,21 +236,22 @@ public interface AddressPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchAddressException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Address> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Address> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Address> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Address> findAll(int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Address> findAll(int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)

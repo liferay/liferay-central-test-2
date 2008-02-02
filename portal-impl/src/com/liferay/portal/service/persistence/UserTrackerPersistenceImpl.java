@@ -244,7 +244,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<UserTracker> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -278,7 +279,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<UserTracker> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -294,17 +295,17 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<UserTracker> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<UserTracker> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -352,7 +353,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTracker> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -368,14 +370,14 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
 	public UserTracker findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<UserTracker> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -389,7 +391,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -398,7 +400,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<UserTracker> list = findByCompanyId(companyId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -412,7 +415,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -466,7 +469,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<UserTracker> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findByUserId";
@@ -500,7 +504,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<UserTracker> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -516,16 +520,16 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<UserTracker> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<UserTracker> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -574,7 +578,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTracker> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -590,13 +595,13 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
 	public UserTracker findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<UserTracker> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -610,7 +615,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -618,7 +623,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<UserTracker> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -632,7 +637,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -686,7 +691,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findBySessionId(String sessionId) throws SystemException {
+	public List<UserTracker> findBySessionId(String sessionId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findBySessionId";
@@ -727,7 +733,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, sessionId);
 				}
 
-				List list = q.list();
+				List<UserTracker> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -743,17 +749,17 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
-	public List findBySessionId(String sessionId, int begin, int end)
-		throws SystemException {
+	public List<UserTracker> findBySessionId(String sessionId, int begin,
+		int end) throws SystemException {
 		return findBySessionId(sessionId, begin, end, null);
 	}
 
-	public List findBySessionId(String sessionId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<UserTracker> findBySessionId(String sessionId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
 		String finderMethodName = "findBySessionId";
@@ -808,7 +814,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, sessionId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTracker> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -824,14 +831,14 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
 	public UserTracker findBySessionId_First(String sessionId,
 		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
-		List list = findBySessionId(sessionId, 0, 1, obc);
+		List<UserTracker> list = findBySessionId(sessionId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -845,7 +852,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -854,7 +861,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countBySessionId(sessionId);
 
-		List list = findBySessionId(sessionId, count - 1, count, obc);
+		List<UserTracker> list = findBySessionId(sessionId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -868,7 +876,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
-			return (UserTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -929,8 +937,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserTracker> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -948,8 +956,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserTracker> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -969,15 +978,16 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<UserTracker> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<UserTracker> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<UserTracker> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -1014,7 +1024,8 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTracker> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1034,45 +1045,45 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTracker>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<UserTracker> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			UserTracker userTracker = (UserTracker)itr.next();
+			UserTracker userTracker = itr.next();
 
 			remove(userTracker);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<UserTracker> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			UserTracker userTracker = (UserTracker)itr.next();
+			UserTracker userTracker = itr.next();
 
 			remove(userTracker);
 		}
 	}
 
 	public void removeBySessionId(String sessionId) throws SystemException {
-		Iterator itr = findBySessionId(sessionId).iterator();
+		Iterator<UserTracker> itr = findBySessionId(sessionId).iterator();
 
 		while (itr.hasNext()) {
-			UserTracker userTracker = (UserTracker)itr.next();
+			UserTracker userTracker = itr.next();
 
 			remove(userTracker);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<UserTracker> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((UserTracker)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1113,10 +1124,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1178,10 +1189,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1250,10 +1261,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1303,10 +1314,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -243,7 +243,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<ResourceCode> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -278,7 +279,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<ResourceCode> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -294,17 +295,17 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ResourceCode>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<ResourceCode> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<ResourceCode> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -353,7 +354,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -369,14 +371,14 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ResourceCode>)result;
 		}
 	}
 
 	public ResourceCode findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<ResourceCode> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -390,7 +392,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
-			return (ResourceCode)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<ResourceCode> list = findByCompanyId(companyId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +416,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
-			return (ResourceCode)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -467,7 +470,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByName(String name) throws SystemException {
+	public List<ResourceCode> findByName(String name) throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
 		String finderMethodName = "findByName";
@@ -509,7 +512,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<ResourceCode> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -525,16 +528,16 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ResourceCode>)result;
 		}
 	}
 
-	public List findByName(String name, int begin, int end)
+	public List<ResourceCode> findByName(String name, int begin, int end)
 		throws SystemException {
 		return findByName(name, begin, end, null);
 	}
 
-	public List findByName(String name, int begin, int end,
+	public List<ResourceCode> findByName(String name, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
@@ -591,7 +594,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -607,13 +611,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ResourceCode>)result;
 		}
 	}
 
 	public ResourceCode findByName_First(String name, OrderByComparator obc)
 		throws NoSuchResourceCodeException, SystemException {
-		List list = findByName(name, 0, 1, obc);
+		List<ResourceCode> list = findByName(name, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -627,7 +631,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
-			return (ResourceCode)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -635,7 +639,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByName(name);
 
-		List list = findByName(name, count - 1, count, obc);
+		List<ResourceCode> list = findByName(name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -649,7 +653,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			throw new NoSuchResourceCodeException(msg.toString());
 		}
 		else {
-			return (ResourceCode)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -801,7 +805,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, scope);
 
-				List list = q.list();
+				List<ResourceCode> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -811,7 +815,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ResourceCode)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -822,19 +826,19 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ResourceCode> list = (List<ResourceCode>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ResourceCode)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ResourceCode> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -852,8 +856,9 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ResourceCode> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -873,15 +878,16 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ResourceCode> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ResourceCode> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<ResourceCode> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
@@ -918,7 +924,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -938,25 +945,25 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ResourceCode>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<ResourceCode> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			ResourceCode resourceCode = (ResourceCode)itr.next();
+			ResourceCode resourceCode = itr.next();
 
 			remove(resourceCode);
 		}
 	}
 
 	public void removeByName(String name) throws SystemException {
-		Iterator itr = findByName(name).iterator();
+		Iterator<ResourceCode> itr = findByName(name).iterator();
 
 		while (itr.hasNext()) {
-			ResourceCode resourceCode = (ResourceCode)itr.next();
+			ResourceCode resourceCode = itr.next();
 
 			remove(resourceCode);
 		}
@@ -970,10 +977,10 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ResourceCode> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ResourceCode)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1015,10 +1022,10 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1088,10 +1095,10 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1181,10 +1188,10 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1234,10 +1241,10 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

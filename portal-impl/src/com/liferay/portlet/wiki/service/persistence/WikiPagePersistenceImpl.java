@@ -250,7 +250,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<WikiPage> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByUuid";
@@ -298,7 +298,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -314,16 +314,16 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<WikiPage> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<WikiPage> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -388,7 +388,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -404,13 +404,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<WikiPage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -424,7 +424,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -432,7 +432,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		throws NoSuchPageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<WikiPage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -446,7 +446,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -513,7 +513,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByNodeId(long nodeId) throws SystemException {
+	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByNodeId";
@@ -554,7 +554,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, nodeId);
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -570,16 +570,16 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByNodeId(long nodeId, int begin, int end)
+	public List<WikiPage> findByNodeId(long nodeId, int begin, int end)
 		throws SystemException {
 		return findByNodeId(nodeId, begin, end, null);
 	}
 
-	public List findByNodeId(long nodeId, int begin, int end,
+	public List<WikiPage> findByNodeId(long nodeId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -637,7 +637,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, nodeId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -653,13 +653,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByNodeId_First(long nodeId, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		List list = findByNodeId(nodeId, 0, 1, obc);
+		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -673,7 +673,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -681,7 +681,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		throws NoSuchPageException, SystemException {
 		int count = countByNodeId(nodeId);
 
-		List list = findByNodeId(nodeId, count - 1, count, obc);
+		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -695,7 +695,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -755,7 +755,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByN_T(long nodeId, String title) throws SystemException {
+	public List<WikiPage> findByN_T(long nodeId, String title)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_T";
@@ -811,7 +812,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, title);
 				}
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -827,17 +828,17 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByN_T(long nodeId, String title, int begin, int end)
-		throws SystemException {
+	public List<WikiPage> findByN_T(long nodeId, String title, int begin,
+		int end) throws SystemException {
 		return findByN_T(nodeId, title, begin, end, null);
 	}
 
-	public List findByN_T(long nodeId, String title, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<WikiPage> findByN_T(long nodeId, String title, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_T";
@@ -909,7 +910,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, title);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -925,13 +926,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByN_T_First(long nodeId, String title,
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List list = findByN_T(nodeId, title, 0, 1, obc);
+		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -948,7 +949,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -956,7 +957,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_T(nodeId, title);
 
-		List list = findByN_T(nodeId, title, count - 1, count, obc);
+		List<WikiPage> list = findByN_T(nodeId, title, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -973,7 +974,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1047,7 +1048,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByN_H(long nodeId, boolean head) throws SystemException {
+	public List<WikiPage> findByN_H(long nodeId, boolean head)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_H";
@@ -1098,7 +1100,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1114,17 +1116,17 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByN_H(long nodeId, boolean head, int begin, int end)
-		throws SystemException {
+	public List<WikiPage> findByN_H(long nodeId, boolean head, int begin,
+		int end) throws SystemException {
 		return findByN_H(nodeId, head, begin, end, null);
 	}
 
-	public List findByN_H(long nodeId, boolean head, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<WikiPage> findByN_H(long nodeId, boolean head, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_H";
@@ -1187,7 +1189,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1203,13 +1205,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByN_H_First(long nodeId, boolean head,
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List list = findByN_H(nodeId, head, 0, 1, obc);
+		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1226,7 +1228,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1234,7 +1236,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_H(nodeId, head);
 
-		List list = findByN_H(nodeId, head, count - 1, count, obc);
+		List<WikiPage> list = findByN_H(nodeId, head, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1251,7 +1253,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1318,7 +1320,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByN_R(long nodeId, String redirectTo)
+	public List<WikiPage> findByN_R(long nodeId, String redirectTo)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -1375,7 +1377,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, redirectTo);
 				}
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1391,17 +1393,17 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByN_R(long nodeId, String redirectTo, int begin, int end)
-		throws SystemException {
+	public List<WikiPage> findByN_R(long nodeId, String redirectTo, int begin,
+		int end) throws SystemException {
 		return findByN_R(nodeId, redirectTo, begin, end, null);
 	}
 
-	public List findByN_R(long nodeId, String redirectTo, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<WikiPage> findByN_R(long nodeId, String redirectTo, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_R";
@@ -1473,7 +1475,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, redirectTo);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1489,13 +1491,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByN_R_First(long nodeId, String redirectTo,
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List list = findByN_R(nodeId, redirectTo, 0, 1, obc);
+		List<WikiPage> list = findByN_R(nodeId, redirectTo, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1512,7 +1514,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1520,7 +1522,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_R(nodeId, redirectTo);
 
-		List list = findByN_R(nodeId, redirectTo, count - 1, count, obc);
+		List<WikiPage> list = findByN_R(nodeId, redirectTo, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1537,7 +1540,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1708,7 +1711,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setDouble(queryPos++, version);
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1718,7 +1721,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (WikiPage)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1729,18 +1732,18 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<WikiPage> list = (List<WikiPage>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (WikiPage)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByN_T_H(long nodeId, String title, boolean head)
+	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -1808,7 +1811,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List list = q.list();
+				List<WikiPage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1824,17 +1827,17 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
-	public List findByN_T_H(long nodeId, String title, boolean head, int begin,
-		int end) throws SystemException {
+	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
+		int begin, int end) throws SystemException {
 		return findByN_T_H(nodeId, title, head, begin, end, null);
 	}
 
-	public List findByN_T_H(long nodeId, String title, boolean head, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
 		String finderMethodName = "findByN_T_H";
@@ -1913,7 +1916,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1929,13 +1932,13 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public WikiPage findByN_T_H_First(long nodeId, String title, boolean head,
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List list = findByN_T_H(nodeId, title, head, 0, 1, obc);
+		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1955,7 +1958,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1963,7 +1966,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_T_H(nodeId, title, head);
 
-		List list = findByN_T_H(nodeId, title, head, count - 1, count, obc);
+		List<WikiPage> list = findByN_T_H(nodeId, title, head, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1983,7 +1987,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			throw new NoSuchPageException(msg.toString());
 		}
 		else {
-			return (WikiPage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -2063,8 +2067,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<WikiPage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -2082,8 +2086,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<WikiPage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -2103,15 +2108,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<WikiPage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<WikiPage> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<WikiPage> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -2156,7 +2161,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -2176,25 +2181,25 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WikiPage>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<WikiPage> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
 	}
 
 	public void removeByNodeId(long nodeId) throws SystemException {
-		Iterator itr = findByNodeId(nodeId).iterator();
+		Iterator<WikiPage> itr = findByNodeId(nodeId).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
@@ -2202,10 +2207,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public void removeByN_T(long nodeId, String title)
 		throws SystemException {
-		Iterator itr = findByN_T(nodeId, title).iterator();
+		Iterator<WikiPage> itr = findByN_T(nodeId, title).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
@@ -2213,10 +2218,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public void removeByN_H(long nodeId, boolean head)
 		throws SystemException {
-		Iterator itr = findByN_H(nodeId, head).iterator();
+		Iterator<WikiPage> itr = findByN_H(nodeId, head).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
@@ -2224,10 +2229,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public void removeByN_R(long nodeId, String redirectTo)
 		throws SystemException {
-		Iterator itr = findByN_R(nodeId, redirectTo).iterator();
+		Iterator<WikiPage> itr = findByN_R(nodeId, redirectTo).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
@@ -2242,20 +2247,20 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
-		Iterator itr = findByN_T_H(nodeId, title, head).iterator();
+		Iterator<WikiPage> itr = findByN_T_H(nodeId, title, head).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage wikiPage = (WikiPage)itr.next();
+			WikiPage wikiPage = itr.next();
 
 			remove(wikiPage);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<WikiPage> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((WikiPage)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -2304,10 +2309,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2370,10 +2375,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2451,10 +2456,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2527,10 +2532,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2609,10 +2614,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2702,10 +2707,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2795,10 +2800,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2848,10 +2853,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -246,7 +246,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByPlid(long plid) throws SystemException {
+	public List<PortletPreferences> findByPlid(long plid)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByPlid";
@@ -281,7 +282,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List list = q.list();
+				List<PortletPreferences> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -297,17 +298,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
-	public List findByPlid(long plid, int begin, int end)
+	public List<PortletPreferences> findByPlid(long plid, int begin, int end)
 		throws SystemException {
 		return findByPlid(plid, begin, end, null);
 	}
 
-	public List findByPlid(long plid, int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PortletPreferences> findByPlid(long plid, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByPlid";
@@ -356,7 +357,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -372,13 +374,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
 	public PortletPreferences findByPlid_First(long plid, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByPlid(plid, 0, 1, obc);
+		List<PortletPreferences> list = findByPlid(plid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -392,7 +394,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -400,7 +402,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByPlid(plid);
 
-		List list = findByPlid(plid, count - 1, count, obc);
+		List<PortletPreferences> list = findByPlid(plid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -414,7 +416,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -469,7 +471,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByP_P(long plid, String portletId)
+	public List<PortletPreferences> findByP_P(long plid, String portletId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
@@ -520,7 +522,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = q.list();
+				List<PortletPreferences> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -536,17 +538,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
-	public List findByP_P(long plid, String portletId, int begin, int end)
-		throws SystemException {
+	public List<PortletPreferences> findByP_P(long plid, String portletId,
+		int begin, int end) throws SystemException {
 		return findByP_P(plid, portletId, begin, end, null);
 	}
 
-	public List findByP_P(long plid, String portletId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<PortletPreferences> findByP_P(long plid, String portletId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByP_P";
@@ -610,7 +612,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -626,14 +629,14 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
 	public PortletPreferences findByP_P_First(long plid, String portletId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByP_P(plid, portletId, 0, 1, obc);
+		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -650,7 +653,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -659,7 +662,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByP_P(plid, portletId);
 
-		List list = findByP_P(plid, portletId, count - 1, count, obc);
+		List<PortletPreferences> list = findByP_P(plid, portletId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -676,7 +680,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -745,8 +749,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByO_O_P(long ownerId, int ownerType, long plid)
-		throws SystemException {
+	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
+		long plid) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByO_O_P";
@@ -798,7 +802,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List list = q.list();
+				List<PortletPreferences> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -814,17 +818,18 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
-	public List findByO_O_P(long ownerId, int ownerType, long plid, int begin,
-		int end) throws SystemException {
+	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
+		long plid, int begin, int end) throws SystemException {
 		return findByO_O_P(ownerId, ownerType, plid, begin, end, null);
 	}
 
-	public List findByO_O_P(long ownerId, int ownerType, long plid, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
+		long plid, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByO_O_P";
@@ -886,7 +891,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -902,14 +908,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
 	public PortletPreferences findByO_O_P_First(long ownerId, int ownerType,
 		long plid, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByO_O_P(ownerId, ownerType, plid, 0, 1, obc);
+		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
+				0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -929,7 +936,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -938,7 +945,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByO_O_P(ownerId, ownerType, plid);
 
-		List list = findByO_O_P(ownerId, ownerType, plid, count - 1, count, obc);
+		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -958,7 +966,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
-			return (PortletPreferences)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1128,7 +1136,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List list = q.list();
+				List<PortletPreferences> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1138,7 +1146,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PortletPreferences)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1149,19 +1157,19 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PortletPreferences> list = (List<PortletPreferences>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PortletPreferences)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PortletPreferences> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1179,8 +1187,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PortletPreferences> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1200,16 +1209,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PortletPreferences> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PortletPreferences> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PortletPreferences> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findAll";
@@ -1246,7 +1256,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1266,15 +1277,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PortletPreferences>)result;
 		}
 	}
 
 	public void removeByPlid(long plid) throws SystemException {
-		Iterator itr = findByPlid(plid).iterator();
+		Iterator<PortletPreferences> itr = findByPlid(plid).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			PortletPreferences portletPreferences = itr.next();
 
 			remove(portletPreferences);
 		}
@@ -1282,10 +1293,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public void removeByP_P(long plid, String portletId)
 		throws SystemException {
-		Iterator itr = findByP_P(plid, portletId).iterator();
+		Iterator<PortletPreferences> itr = findByP_P(plid, portletId).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			PortletPreferences portletPreferences = itr.next();
 
 			remove(portletPreferences);
 		}
@@ -1293,10 +1304,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public void removeByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
-		Iterator itr = findByO_O_P(ownerId, ownerType, plid).iterator();
+		Iterator<PortletPreferences> itr = findByO_O_P(ownerId, ownerType, plid)
+											   .iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			PortletPreferences portletPreferences = itr.next();
 
 			remove(portletPreferences);
 		}
@@ -1312,10 +1324,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PortletPreferences> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PortletPreferences)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1357,10 +1369,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1439,10 +1451,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1523,10 +1535,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1622,10 +1634,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1675,10 +1687,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

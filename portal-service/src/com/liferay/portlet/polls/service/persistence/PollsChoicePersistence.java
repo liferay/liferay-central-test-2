@@ -59,13 +59,15 @@ public interface PollsChoicePersistence {
 	public com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
 		long choiceId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByUuid(
+		java.lang.String uuid, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByUuid(
+		java.lang.String uuid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,13 +89,15 @@ public interface PollsChoicePersistence {
 		throws com.liferay.portlet.polls.NoSuchChoiceException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List findByQuestionId(long questionId)
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByQuestionId(
+		long questionId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByQuestionId(
+		long questionId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByQuestionId(long questionId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByQuestionId(long questionId, int begin, int end,
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByQuestionId(
+		long questionId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -122,21 +126,22 @@ public interface PollsChoicePersistence {
 		long questionId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

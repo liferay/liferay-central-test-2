@@ -245,7 +245,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<OrgGroupRole> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -280,7 +281,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<OrgGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupRole>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<OrgGroupRole> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<OrgGroupRole> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -355,7 +356,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +373,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupRole>)result;
 		}
 	}
 
 	public OrgGroupRole findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchOrgGroupRoleException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<OrgGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +393,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
-			return (OrgGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchOrgGroupRoleException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<OrgGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +415,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
-			return (OrgGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -467,7 +469,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByRoleId(long roleId) throws SystemException {
+	public List<OrgGroupRole> findByRoleId(long roleId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
 		String finderMethodName = "findByRoleId";
@@ -502,7 +505,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = q.list();
+				List<OrgGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -518,16 +521,16 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupRole>)result;
 		}
 	}
 
-	public List findByRoleId(long roleId, int begin, int end)
+	public List<OrgGroupRole> findByRoleId(long roleId, int begin, int end)
 		throws SystemException {
 		return findByRoleId(roleId, begin, end, null);
 	}
 
-	public List findByRoleId(long roleId, int begin, int end,
+	public List<OrgGroupRole> findByRoleId(long roleId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -577,7 +580,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -593,13 +597,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupRole>)result;
 		}
 	}
 
 	public OrgGroupRole findByRoleId_First(long roleId, OrderByComparator obc)
 		throws NoSuchOrgGroupRoleException, SystemException {
-		List list = findByRoleId(roleId, 0, 1, obc);
+		List<OrgGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -613,7 +617,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
-			return (OrgGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -621,7 +625,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchOrgGroupRoleException, SystemException {
 		int count = countByRoleId(roleId);
 
-		List list = findByRoleId(roleId, count - 1, count, obc);
+		List<OrgGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -635,7 +639,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
-			return (OrgGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -689,8 +693,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<OrgGroupRole> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -708,8 +712,9 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<OrgGroupRole> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -729,15 +734,16 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<OrgGroupRole> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<OrgGroupRole> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<OrgGroupRole> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -774,7 +780,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -794,35 +801,35 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupRole>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<OrgGroupRole> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			OrgGroupRole orgGroupRole = (OrgGroupRole)itr.next();
+			OrgGroupRole orgGroupRole = itr.next();
 
 			remove(orgGroupRole);
 		}
 	}
 
 	public void removeByRoleId(long roleId) throws SystemException {
-		Iterator itr = findByRoleId(roleId).iterator();
+		Iterator<OrgGroupRole> itr = findByRoleId(roleId).iterator();
 
 		while (itr.hasNext()) {
-			OrgGroupRole orgGroupRole = (OrgGroupRole)itr.next();
+			OrgGroupRole orgGroupRole = itr.next();
 
 			remove(orgGroupRole);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<OrgGroupRole> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((OrgGroupRole)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -864,10 +871,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -930,10 +937,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -983,10 +990,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

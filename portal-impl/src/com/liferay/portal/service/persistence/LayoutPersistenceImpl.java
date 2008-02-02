@@ -234,7 +234,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<Layout> findByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -273,7 +273,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -289,16 +289,16 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<Layout> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<Layout> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
@@ -354,7 +354,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -370,13 +370,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
 	public Layout findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchLayoutException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<Layout> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -390,7 +390,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -398,7 +398,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		throws NoSuchLayoutException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<Layout> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -412,7 +412,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -471,7 +471,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<Layout> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -510,7 +511,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -526,16 +527,16 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<Layout> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<Layout> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
@@ -591,7 +592,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -607,13 +608,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
 	public Layout findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchLayoutException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<Layout> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -627,7 +628,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -635,7 +636,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		throws NoSuchLayoutException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Layout> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -649,7 +650,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -770,7 +771,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, dlFolderId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -780,7 +781,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Layout)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -791,13 +792,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Layout> list = (List<Layout>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Layout)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -865,7 +866,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, iconImageId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -875,7 +876,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Layout)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -886,18 +887,18 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Layout> list = (List<Layout>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Layout)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout)
+	public List<Layout> findByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
@@ -947,7 +948,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -963,17 +964,17 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout, int begin,
-		int end) throws SystemException {
+	public List<Layout> findByG_P(long groupId, boolean privateLayout,
+		int begin, int end) throws SystemException {
 		return findByG_P(groupId, privateLayout, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, boolean privateLayout, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<Layout> findByG_P(long groupId, boolean privateLayout,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
 		String finderMethodName = "findByG_P";
@@ -1034,7 +1035,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1050,13 +1051,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
 	public Layout findByG_P_First(long groupId, boolean privateLayout,
 		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
-		List list = findByG_P(groupId, privateLayout, 0, 1, obc);
+		List<Layout> list = findByG_P(groupId, privateLayout, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1073,7 +1074,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1081,7 +1082,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
 		int count = countByG_P(groupId, privateLayout);
 
-		List list = findByG_P(groupId, privateLayout, count - 1, count, obc);
+		List<Layout> list = findByG_P(groupId, privateLayout, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1098,7 +1100,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1251,7 +1253,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, layoutId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1261,7 +1263,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Layout)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1272,18 +1274,18 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Layout> list = (List<Layout>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Layout)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_P_P(long groupId, boolean privateLayout,
+	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
@@ -1341,7 +1343,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentLayoutId);
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1357,17 +1359,17 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
-	public List findByG_P_P(long groupId, boolean privateLayout,
+	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId, int begin, int end) throws SystemException {
 		return findByG_P_P(groupId, privateLayout, parentLayoutId, begin, end,
 			null);
 	}
 
-	public List findByG_P_P(long groupId, boolean privateLayout,
+	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
@@ -1438,7 +1440,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentLayoutId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1454,15 +1456,15 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
 	public Layout findByG_P_P_First(long groupId, boolean privateLayout,
 		long parentLayoutId, OrderByComparator obc)
 		throws NoSuchLayoutException, SystemException {
-		List list = findByG_P_P(groupId, privateLayout, parentLayoutId, 0, 1,
-				obc);
+		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
+				0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1482,7 +1484,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1491,7 +1493,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		throws NoSuchLayoutException, SystemException {
 		int count = countByG_P_P(groupId, privateLayout, parentLayoutId);
 
-		List list = findByG_P_P(groupId, privateLayout, parentLayoutId,
+		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
@@ -1512,7 +1514,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
-			return (Layout)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1679,7 +1681,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, friendlyURL);
 				}
 
-				List list = q.list();
+				List<Layout> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1689,7 +1691,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Layout)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1700,19 +1702,19 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Layout> list = (List<Layout>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Layout)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Layout> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1730,8 +1732,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Layout> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1751,15 +1754,15 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Layout> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Layout> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Layout> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
 		String finderClassName = Layout.class.getName();
@@ -1803,7 +1806,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1823,25 +1826,25 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Layout>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<Layout> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			remove(layout);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<Layout> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			remove(layout);
 		}
@@ -1863,10 +1866,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Iterator itr = findByG_P(groupId, privateLayout).iterator();
+		Iterator<Layout> itr = findByG_P(groupId, privateLayout).iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			remove(layout);
 		}
@@ -1881,11 +1884,11 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	public void removeByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
-		Iterator itr = findByG_P_P(groupId, privateLayout, parentLayoutId)
-						   .iterator();
+		Iterator<Layout> itr = findByG_P_P(groupId, privateLayout,
+				parentLayoutId).iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			remove(layout);
 		}
@@ -1899,10 +1902,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Layout> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Layout)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1943,10 +1946,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2008,10 +2011,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2073,10 +2076,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2138,10 +2141,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2214,10 +2217,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2298,10 +2301,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2382,10 +2385,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2474,10 +2477,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2527,10 +2530,10 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -273,7 +273,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<SCFrameworkVersion> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -313,7 +314,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<SCFrameworkVersion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -329,17 +330,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
+	public List<SCFrameworkVersion> findByGroupId(long groupId, int begin,
+		int end) throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCFrameworkVersion> findByGroupId(long groupId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -395,7 +396,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -411,14 +413,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
 	public SCFrameworkVersion findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<SCFrameworkVersion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -432,7 +434,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -441,7 +443,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<SCFrameworkVersion> list = findByGroupId(groupId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -455,7 +458,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -517,7 +520,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<SCFrameworkVersion> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -557,7 +561,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<SCFrameworkVersion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -573,17 +577,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
+	public List<SCFrameworkVersion> findByCompanyId(long companyId, int begin,
+		int end) throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCFrameworkVersion> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -639,7 +643,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -655,14 +660,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
 	public SCFrameworkVersion findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<SCFrameworkVersion> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -676,7 +681,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -685,7 +690,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<SCFrameworkVersion> list = findByCompanyId(companyId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -699,7 +705,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -761,7 +767,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_A(long groupId, boolean active)
+	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
@@ -812,7 +818,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = q.list();
+				List<SCFrameworkVersion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -828,17 +834,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
-	public List findByG_A(long groupId, boolean active, int begin, int end)
-		throws SystemException {
+	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active,
+		int begin, int end) throws SystemException {
 		return findByG_A(groupId, active, begin, end, null);
 	}
 
-	public List findByG_A(long groupId, boolean active, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findByG_A";
@@ -900,7 +906,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -916,14 +923,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
 	public SCFrameworkVersion findByG_A_First(long groupId, boolean active,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
-		List list = findByG_A(groupId, active, 0, 1, obc);
+		List<SCFrameworkVersion> list = findByG_A(groupId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -940,7 +947,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -949,7 +956,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByG_A(groupId, active);
 
-		List list = findByG_A(groupId, active, count - 1, count, obc);
+		List<SCFrameworkVersion> list = findByG_A(groupId, active, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -966,7 +974,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
-			return (SCFrameworkVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1034,8 +1042,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCFrameworkVersion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1053,8 +1061,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCFrameworkVersion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1074,16 +1083,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<SCFrameworkVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<SCFrameworkVersion> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<SCFrameworkVersion> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCFrameworkVersion.class.getName();
 		String finderMethodName = "findAll";
@@ -1127,7 +1137,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1147,25 +1158,25 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCFrameworkVersion>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<SCFrameworkVersion> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+			SCFrameworkVersion scFrameworkVersion = itr.next();
 
 			remove(scFrameworkVersion);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<SCFrameworkVersion> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+			SCFrameworkVersion scFrameworkVersion = itr.next();
 
 			remove(scFrameworkVersion);
 		}
@@ -1173,20 +1184,20 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void removeByG_A(long groupId, boolean active)
 		throws SystemException {
-		Iterator itr = findByG_A(groupId, active).iterator();
+		Iterator<SCFrameworkVersion> itr = findByG_A(groupId, active).iterator();
 
 		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)itr.next();
+			SCFrameworkVersion scFrameworkVersion = itr.next();
 
 			remove(scFrameworkVersion);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<SCFrameworkVersion> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((SCFrameworkVersion)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1228,10 +1239,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1294,10 +1305,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1371,10 +1382,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1424,10 +1435,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1452,18 +1463,19 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getSCProductVersions(long pk)
-		throws NoSuchFrameworkVersionException, SystemException {
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
+		long pk) throws NoSuchFrameworkVersionException, SystemException {
 		return getSCProductVersions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getSCProductVersions(long pk, int begin, int end)
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
+		long pk, int begin, int end)
 		throws NoSuchFrameworkVersionException, SystemException {
 		return getSCProductVersions(pk, begin, end, null);
 	}
 
-	public List getSCProductVersions(long pk, int begin, int end,
-		OrderByComparator obc)
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
+		long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 
@@ -1518,7 +1530,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> list =
+					QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1534,7 +1547,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portlet.softwarecatalog.model.SCProductVersion>)result;
 		}
 	}
 
@@ -1570,10 +1583,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1700,14 +1713,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addSCProductVersions(long pk, List scProductVersions)
+	public void addSCProductVersions(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws NoSuchFrameworkVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
 			for (int i = 0; i < scProductVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					(com.liferay.portlet.softwarecatalog.model.SCProductVersion)scProductVersions.get(i);
+					scProductVersions.get(i);
 
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
@@ -1781,14 +1795,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeSCProductVersions(long pk, List scProductVersions)
+	public void removeSCProductVersions(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws NoSuchFrameworkVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
 			for (int i = 0; i < scProductVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					(com.liferay.portlet.softwarecatalog.model.SCProductVersion)scProductVersions.get(i);
+					scProductVersions.get(i);
 
 				removeSCProductVersion.remove(pk,
 					scProductVersion.getPrimaryKey());
@@ -1821,7 +1836,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setSCProductVersions(long pk, List scProductVersions)
+	public void setSCProductVersions(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws NoSuchFrameworkVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
@@ -1830,7 +1846,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < scProductVersions.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					(com.liferay.portlet.softwarecatalog.model.SCProductVersion)scProductVersions.get(i);
+					scProductVersions.get(i);
 
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
@@ -1874,12 +1890,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		protected boolean contains(long frameworkVersionId,
 			long productVersionId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(frameworkVersionId), new Long(productVersionId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;

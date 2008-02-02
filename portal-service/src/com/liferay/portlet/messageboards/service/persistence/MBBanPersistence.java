@@ -59,13 +59,15 @@ public interface MBBanPersistence {
 	public com.liferay.portlet.messageboards.model.MBBan fetchByPrimaryKey(
 		long banId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -85,13 +87,15 @@ public interface MBBanPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -111,13 +115,15 @@ public interface MBBanPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchBanException;
 
-	public java.util.List findByBanUserId(long banUserId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByBanUserId(
+		long banUserId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByBanUserId(
+		long banUserId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByBanUserId(long banUserId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByBanUserId(long banUserId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByBanUserId(
+		long banUserId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -145,21 +151,22 @@ public interface MBBanPersistence {
 	public com.liferay.portlet.messageboards.model.MBBan fetchByG_B(
 		long groupId, long banUserId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

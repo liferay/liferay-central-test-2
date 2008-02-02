@@ -61,13 +61,15 @@ public interface MBThreadPersistence {
 	public com.liferay.portlet.messageboards.model.MBThread fetchByPrimaryKey(
 		long threadId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCategoryId(long categoryId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByCategoryId(
+		long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCategoryId(long categoryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCategoryId(long categoryId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByCategoryId(
+		long categoryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,21 +89,22 @@ public interface MBThreadPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCategoryId(long categoryId)

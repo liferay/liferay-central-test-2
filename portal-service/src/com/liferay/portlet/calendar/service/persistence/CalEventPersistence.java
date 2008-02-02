@@ -59,13 +59,15 @@ public interface CalEventPersistence {
 	public com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
 		long eventId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
+		java.lang.String uuid, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
+		java.lang.String uuid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -96,13 +98,15 @@ public interface CalEventPersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -122,14 +126,17 @@ public interface CalEventPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String type)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
+		long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String type,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
+		long groupId, java.lang.String type, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String type,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
+		long groupId, java.lang.String type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent findByG_T_First(
@@ -150,14 +157,17 @@ public interface CalEventPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public java.util.List findByG_R(long groupId, boolean repeating)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
+		long groupId, boolean repeating)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_R(long groupId, boolean repeating, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
+		long groupId, boolean repeating, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_R(long groupId, boolean repeating, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
+		long groupId, boolean repeating, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent findByG_R_First(
@@ -178,21 +188,22 @@ public interface CalEventPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

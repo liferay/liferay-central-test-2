@@ -248,7 +248,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByProductEntryId(long productEntryId)
+	public List<SCProductScreenshot> findByProductEntryId(long productEntryId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductScreenshot.class.getName();
@@ -289,7 +289,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, productEntryId);
 
-				List list = q.list();
+				List<SCProductScreenshot> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -305,17 +305,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductScreenshot>)result;
 		}
 	}
 
-	public List findByProductEntryId(long productEntryId, int begin, int end)
-		throws SystemException {
+	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
+		int begin, int end) throws SystemException {
 		return findByProductEntryId(productEntryId, begin, end, null);
 	}
 
-	public List findByProductEntryId(long productEntryId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductScreenshot.class.getName();
 		String finderMethodName = "findByProductEntryId";
@@ -371,7 +371,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, productEntryId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductScreenshot> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -387,14 +388,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductScreenshot>)result;
 		}
 	}
 
 	public SCProductScreenshot findByProductEntryId_First(long productEntryId,
 		OrderByComparator obc)
 		throws NoSuchProductScreenshotException, SystemException {
-		List list = findByProductEntryId(productEntryId, 0, 1, obc);
+		List<SCProductScreenshot> list = findByProductEntryId(productEntryId,
+				0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -408,7 +410,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
-			return (SCProductScreenshot)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -417,7 +419,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		throws NoSuchProductScreenshotException, SystemException {
 		int count = countByProductEntryId(productEntryId);
 
-		List list = findByProductEntryId(productEntryId, count - 1, count, obc);
+		List<SCProductScreenshot> list = findByProductEntryId(productEntryId,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -431,7 +434,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
-			return (SCProductScreenshot)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -557,7 +560,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, thumbnailId);
 
-				List list = q.list();
+				List<SCProductScreenshot> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -567,7 +570,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (SCProductScreenshot)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -578,13 +581,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (SCProductScreenshot)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -653,7 +656,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, fullImageId);
 
-				List list = q.list();
+				List<SCProductScreenshot> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -663,7 +666,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (SCProductScreenshot)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -674,13 +677,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (SCProductScreenshot)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -763,7 +766,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, priority);
 
-				List list = q.list();
+				List<SCProductScreenshot> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -773,7 +776,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (SCProductScreenshot)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -784,19 +787,19 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (SCProductScreenshot)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCProductScreenshot> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -814,8 +817,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCProductScreenshot> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -835,16 +839,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<SCProductScreenshot> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<SCProductScreenshot> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<SCProductScreenshot> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductScreenshotModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductScreenshot.class.getName();
 		String finderMethodName = "findAll";
@@ -888,7 +893,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductScreenshot> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -908,16 +914,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductScreenshot>)result;
 		}
 	}
 
 	public void removeByProductEntryId(long productEntryId)
 		throws SystemException {
-		Iterator itr = findByProductEntryId(productEntryId).iterator();
+		Iterator<SCProductScreenshot> itr = findByProductEntryId(productEntryId)
+												.iterator();
 
 		while (itr.hasNext()) {
-			SCProductScreenshot scProductScreenshot = (SCProductScreenshot)itr.next();
+			SCProductScreenshot scProductScreenshot = itr.next();
 
 			remove(scProductScreenshot);
 		}
@@ -946,10 +953,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<SCProductScreenshot> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((SCProductScreenshot)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -992,10 +999,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1058,10 +1065,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1124,10 +1131,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1201,10 +1208,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1254,10 +1261,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -61,13 +61,15 @@ public interface MBStatsUserPersistence {
 	public com.liferay.portlet.messageboards.model.MBStatsUser fetchByPrimaryKey(
 		long statsUserId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,13 +89,15 @@ public interface MBStatsUserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -121,14 +125,17 @@ public interface MBStatsUserPersistence {
 	public com.liferay.portlet.messageboards.model.MBStatsUser fetchByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_M(long groupId, int messageCount)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+		long groupId, int messageCount)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_M(long groupId, int messageCount, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+		long groupId, int messageCount, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_M(long groupId, int messageCount, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
+		long groupId, int messageCount, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_First(
@@ -149,21 +156,22 @@ public interface MBStatsUserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

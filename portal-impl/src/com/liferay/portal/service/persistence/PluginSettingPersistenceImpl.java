@@ -245,7 +245,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<PluginSetting> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
 		String finderClassName = PluginSetting.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -280,7 +281,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<PluginSetting> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,17 +297,17 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PluginSetting>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
+	public List<PluginSetting> findByCompanyId(long companyId, int begin,
+		int end) throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<PluginSetting> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
 		String finderClassName = PluginSetting.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -355,7 +356,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PluginSetting> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,14 +373,14 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PluginSetting>)result;
 		}
 	}
 
 	public PluginSetting findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchPluginSettingException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<PluginSetting> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -392,7 +394,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
-			return (PluginSetting)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -401,7 +403,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		throws NoSuchPluginSettingException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<PluginSetting> list = findByCompanyId(companyId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -415,7 +418,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
-			return (PluginSetting)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -570,7 +573,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, pluginType);
 				}
 
-				List list = q.list();
+				List<PluginSetting> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -580,7 +583,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PluginSetting)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -591,19 +594,19 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PluginSetting> list = (List<PluginSetting>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PluginSetting)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PluginSetting> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -621,8 +624,9 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PluginSetting> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -642,15 +646,16 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PluginSetting> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PluginSetting> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<PluginSetting> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
 		String finderClassName = PluginSetting.class.getName();
@@ -687,7 +692,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PluginSetting> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -707,15 +713,15 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PluginSetting>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<PluginSetting> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			PluginSetting pluginSetting = (PluginSetting)itr.next();
+			PluginSetting pluginSetting = itr.next();
 
 			remove(pluginSetting);
 		}
@@ -730,10 +736,10 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PluginSetting> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PluginSetting)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -775,10 +781,10 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -877,10 +883,10 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -930,10 +936,10 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

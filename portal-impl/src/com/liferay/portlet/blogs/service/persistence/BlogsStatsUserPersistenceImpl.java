@@ -246,7 +246,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<BlogsStatsUser> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -285,7 +286,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<BlogsStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -301,16 +302,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<BlogsStatsUser> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<BlogsStatsUser> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
@@ -366,7 +367,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -382,13 +384,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
 	public BlogsStatsUser findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -402,7 +404,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -410,7 +412,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -424,7 +426,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -485,7 +487,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<BlogsStatsUser> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByUserId";
@@ -524,7 +527,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<BlogsStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -540,16 +543,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<BlogsStatsUser> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<BlogsStatsUser> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
@@ -605,7 +608,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -621,13 +625,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
 	public BlogsStatsUser findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -641,7 +645,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -649,7 +653,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -663,7 +667,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -798,7 +802,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<BlogsStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -808,7 +812,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (BlogsStatsUser)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -819,18 +823,18 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<BlogsStatsUser> list = (List<BlogsStatsUser>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (BlogsStatsUser)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_E(long groupId, int entryCount)
+	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
@@ -880,7 +884,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List list = q.list();
+				List<BlogsStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -896,17 +900,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
-	public List findByG_E(long groupId, int entryCount, int begin, int end)
-		throws SystemException {
+	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
+		int begin, int end) throws SystemException {
 		return findByG_E(groupId, entryCount, begin, end, null);
 	}
 
-	public List findByG_E(long groupId, int entryCount, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByG_E";
@@ -967,7 +971,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -983,13 +988,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
 	public BlogsStatsUser findByG_E_First(long groupId, int entryCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
-		List list = findByG_E(groupId, entryCount, 0, 1, obc);
+		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1006,7 +1011,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1014,7 +1019,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByG_E(groupId, entryCount);
 
-		List list = findByG_E(groupId, entryCount, count - 1, count, obc);
+		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1031,7 +1037,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1098,7 +1104,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_E(long companyId, int entryCount)
+	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
@@ -1148,7 +1154,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List list = q.list();
+				List<BlogsStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1164,17 +1170,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
-	public List findByC_E(long companyId, int entryCount, int begin, int end)
-		throws SystemException {
+	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
+		int begin, int end) throws SystemException {
 		return findByC_E(companyId, entryCount, begin, end, null);
 	}
 
-	public List findByC_E(long companyId, int entryCount, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findByC_E";
@@ -1235,7 +1241,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1251,13 +1258,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
 	public BlogsStatsUser findByC_E_First(long companyId, int entryCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
-		List list = findByC_E(companyId, entryCount, 0, 1, obc);
+		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1274,7 +1281,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1282,7 +1289,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByC_E(companyId, entryCount);
 
-		List list = findByC_E(companyId, entryCount, count - 1, count, obc);
+		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1299,7 +1307,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (BlogsStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1366,8 +1374,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<BlogsStatsUser> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1385,8 +1393,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<BlogsStatsUser> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1406,16 +1415,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<BlogsStatsUser> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<BlogsStatsUser> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<BlogsStatsUser> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsStatsUser.class.getName();
 		String finderMethodName = "findAll";
@@ -1458,7 +1468,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1478,25 +1489,25 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BlogsStatsUser>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<BlogsStatsUser> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+			BlogsStatsUser blogsStatsUser = itr.next();
 
 			remove(blogsStatsUser);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<BlogsStatsUser> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+			BlogsStatsUser blogsStatsUser = itr.next();
 
 			remove(blogsStatsUser);
 		}
@@ -1511,10 +1522,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 	public void removeByG_E(long groupId, int entryCount)
 		throws SystemException {
-		Iterator itr = findByG_E(groupId, entryCount).iterator();
+		Iterator<BlogsStatsUser> itr = findByG_E(groupId, entryCount).iterator();
 
 		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+			BlogsStatsUser blogsStatsUser = itr.next();
 
 			remove(blogsStatsUser);
 		}
@@ -1522,20 +1533,21 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 	public void removeByC_E(long companyId, int entryCount)
 		throws SystemException {
-		Iterator itr = findByC_E(companyId, entryCount).iterator();
+		Iterator<BlogsStatsUser> itr = findByC_E(companyId, entryCount)
+										   .iterator();
 
 		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)itr.next();
+			BlogsStatsUser blogsStatsUser = itr.next();
 
 			remove(blogsStatsUser);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<BlogsStatsUser> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((BlogsStatsUser)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1577,10 +1589,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1643,10 +1655,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1717,10 +1729,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1794,10 +1806,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1871,10 +1883,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1924,10 +1936,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

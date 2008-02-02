@@ -243,7 +243,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<DLFileRank> findByUserId(long userId) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByUserId";
@@ -282,7 +282,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<DLFileRank> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -298,16 +298,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileRank>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<DLFileRank> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<DLFileRank> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
@@ -363,7 +363,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -379,13 +380,13 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileRank>)result;
 		}
 	}
 
 	public DLFileRank findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchFileRankException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<DLFileRank> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -399,7 +400,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
-			return (DLFileRank)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -407,7 +408,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		throws NoSuchFileRankException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<DLFileRank> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -421,7 +422,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
-			return (DLFileRank)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -481,7 +482,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(long folderId, String name) throws SystemException {
+	public List<DLFileRank> findByF_N(long folderId, String name)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByF_N";
@@ -535,7 +537,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<DLFileRank> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -551,17 +553,17 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileRank>)result;
 		}
 	}
 
-	public List findByF_N(long folderId, String name, int begin, int end)
-		throws SystemException {
+	public List<DLFileRank> findByF_N(long folderId, String name, int begin,
+		int end) throws SystemException {
 		return findByF_N(folderId, name, begin, end, null);
 	}
 
-	public List findByF_N(long folderId, String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<DLFileRank> findByF_N(long folderId, String name, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
 		String finderMethodName = "findByF_N";
@@ -631,7 +633,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -647,13 +650,13 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileRank>)result;
 		}
 	}
 
 	public DLFileRank findByF_N_First(long folderId, String name,
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
-		List list = findByF_N(folderId, name, 0, 1, obc);
+		List<DLFileRank> list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -670,7 +673,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
-			return (DLFileRank)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -678,7 +681,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		int count = countByF_N(folderId, name);
 
-		List list = findByF_N(folderId, name, count - 1, count, obc);
+		List<DLFileRank> list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -695,7 +698,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			throw new NoSuchFileRankException(msg.toString());
 		}
 		else {
-			return (DLFileRank)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -873,7 +876,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<DLFileRank> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -883,7 +886,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (DLFileRank)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -894,19 +897,19 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<DLFileRank> list = (List<DLFileRank>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (DLFileRank)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<DLFileRank> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -924,8 +927,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<DLFileRank> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -945,15 +949,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<DLFileRank> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<DLFileRank> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<DLFileRank> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileRankModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileRank.class.getName();
@@ -997,7 +1002,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1017,15 +1023,15 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileRank>)result;
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<DLFileRank> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			DLFileRank dlFileRank = (DLFileRank)itr.next();
+			DLFileRank dlFileRank = itr.next();
 
 			remove(dlFileRank);
 		}
@@ -1033,10 +1039,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public void removeByF_N(long folderId, String name)
 		throws SystemException {
-		Iterator itr = findByF_N(folderId, name).iterator();
+		Iterator<DLFileRank> itr = findByF_N(folderId, name).iterator();
 
 		while (itr.hasNext()) {
-			DLFileRank dlFileRank = (DLFileRank)itr.next();
+			DLFileRank dlFileRank = itr.next();
 
 			remove(dlFileRank);
 		}
@@ -1050,10 +1056,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<DLFileRank> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((DLFileRank)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1095,10 +1101,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1176,10 +1182,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1275,10 +1281,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1328,10 +1334,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

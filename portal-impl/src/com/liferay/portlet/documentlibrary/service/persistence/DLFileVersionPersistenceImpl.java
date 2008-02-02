@@ -247,7 +247,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(long folderId, String name) throws SystemException {
+	public List<DLFileVersion> findByF_N(long folderId, String name)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileVersion.class.getName();
 		String finderMethodName = "findByF_N";
@@ -303,7 +304,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<DLFileVersion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -319,17 +320,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileVersion>)result;
 		}
 	}
 
-	public List findByF_N(long folderId, String name, int begin, int end)
-		throws SystemException {
+	public List<DLFileVersion> findByF_N(long folderId, String name, int begin,
+		int end) throws SystemException {
 		return findByF_N(folderId, name, begin, end, null);
 	}
 
-	public List findByF_N(long folderId, String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<DLFileVersion> findByF_N(long folderId, String name, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileVersion.class.getName();
 		String finderMethodName = "findByF_N";
@@ -401,7 +402,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -417,14 +419,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileVersion>)result;
 		}
 	}
 
 	public DLFileVersion findByF_N_First(long folderId, String name,
 		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
-		List list = findByF_N(folderId, name, 0, 1, obc);
+		List<DLFileVersion> list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -441,7 +443,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
-			return (DLFileVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -450,7 +452,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		throws NoSuchFileVersionException, SystemException {
 		int count = countByF_N(folderId, name);
 
-		List list = findByF_N(folderId, name, count - 1, count, obc);
+		List<DLFileVersion> list = findByF_N(folderId, name, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -467,7 +470,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
-			return (DLFileVersion)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -640,7 +643,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				q.setDouble(queryPos++, version);
 
-				List list = q.list();
+				List<DLFileVersion> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -650,7 +653,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (DLFileVersion)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -661,19 +664,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<DLFileVersion> list = (List<DLFileVersion>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (DLFileVersion)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<DLFileVersion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -691,8 +694,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<DLFileVersion> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -712,15 +716,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<DLFileVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<DLFileVersion> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<DLFileVersion> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileVersion.class.getName();
@@ -766,7 +771,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileVersion> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -786,16 +792,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileVersion>)result;
 		}
 	}
 
 	public void removeByF_N(long folderId, String name)
 		throws SystemException {
-		Iterator itr = findByF_N(folderId, name).iterator();
+		Iterator<DLFileVersion> itr = findByF_N(folderId, name).iterator();
 
 		while (itr.hasNext()) {
-			DLFileVersion dlFileVersion = (DLFileVersion)itr.next();
+			DLFileVersion dlFileVersion = itr.next();
 
 			remove(dlFileVersion);
 		}
@@ -809,10 +815,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<DLFileVersion> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((DLFileVersion)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -869,10 +875,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -962,10 +968,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1015,10 +1021,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

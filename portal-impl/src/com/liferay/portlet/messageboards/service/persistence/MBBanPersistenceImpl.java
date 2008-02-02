@@ -235,7 +235,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<MBBan> findByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -270,7 +270,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<MBBan> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -286,16 +286,16 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<MBBan> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<MBBan> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -345,7 +345,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -361,13 +361,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
 	public MBBan findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<MBBan> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -381,7 +381,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -389,7 +389,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		throws NoSuchBanException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<MBBan> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -403,7 +403,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -456,7 +456,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<MBBan> findByUserId(long userId) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByUserId";
@@ -491,7 +491,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<MBBan> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -507,16 +507,16 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<MBBan> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<MBBan> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -566,7 +566,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -582,13 +582,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
 	public MBBan findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<MBBan> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -602,7 +602,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -610,7 +610,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		throws NoSuchBanException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<MBBan> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -624,7 +624,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -677,7 +677,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByBanUserId(long banUserId) throws SystemException {
+	public List<MBBan> findByBanUserId(long banUserId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
 		String finderMethodName = "findByBanUserId";
@@ -712,7 +713,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, banUserId);
 
-				List list = q.list();
+				List<MBBan> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -728,16 +729,16 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
-	public List findByBanUserId(long banUserId, int begin, int end)
+	public List<MBBan> findByBanUserId(long banUserId, int begin, int end)
 		throws SystemException {
 		return findByBanUserId(banUserId, begin, end, null);
 	}
 
-	public List findByBanUserId(long banUserId, int begin, int end,
+	public List<MBBan> findByBanUserId(long banUserId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -787,7 +788,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, banUserId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -803,13 +804,13 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
 	public MBBan findByBanUserId_First(long banUserId, OrderByComparator obc)
 		throws NoSuchBanException, SystemException {
-		List list = findByBanUserId(banUserId, 0, 1, obc);
+		List<MBBan> list = findByBanUserId(banUserId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -823,7 +824,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -831,7 +832,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		throws NoSuchBanException, SystemException {
 		int count = countByBanUserId(banUserId);
 
-		List list = findByBanUserId(banUserId, count - 1, count, obc);
+		List<MBBan> list = findByBanUserId(banUserId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -845,7 +846,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			throw new NoSuchBanException(msg.toString());
 		}
 		else {
-			return (MBBan)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -970,7 +971,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, banUserId);
 
-				List list = q.list();
+				List<MBBan> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -980,7 +981,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (MBBan)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -991,19 +992,19 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<MBBan> list = (List<MBBan>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (MBBan)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBBan> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1021,8 +1022,9 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBBan> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1042,15 +1044,15 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBBan> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBBan> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBBan> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -1088,7 +1090,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1108,35 +1110,35 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBBan>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<MBBan> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
+			MBBan mbBan = itr.next();
 
 			remove(mbBan);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<MBBan> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
+			MBBan mbBan = itr.next();
 
 			remove(mbBan);
 		}
 	}
 
 	public void removeByBanUserId(long banUserId) throws SystemException {
-		Iterator itr = findByBanUserId(banUserId).iterator();
+		Iterator<MBBan> itr = findByBanUserId(banUserId).iterator();
 
 		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
+			MBBan mbBan = itr.next();
 
 			remove(mbBan);
 		}
@@ -1150,10 +1152,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBBan> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBBan)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1195,10 +1197,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1261,10 +1263,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1327,10 +1329,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1404,10 +1406,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1457,10 +1459,10 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

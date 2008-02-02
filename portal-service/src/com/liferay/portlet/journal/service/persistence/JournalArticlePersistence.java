@@ -59,13 +59,15 @@ public interface JournalArticlePersistence {
 	public com.liferay.portlet.journal.model.JournalArticle fetchByPrimaryKey(
 		long id) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByUuid(
+		java.lang.String uuid, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByUuid(
+		java.lang.String uuid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -96,13 +98,15 @@ public interface JournalArticlePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -122,13 +126,15 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -148,14 +154,16 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findBySmallImageId(long smallImageId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findBySmallImageId(
+		long smallImageId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findBySmallImageId(long smallImageId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findBySmallImageId(long smallImageId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findBySmallImageId(
+		long smallImageId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findBySmallImageId_First(
@@ -174,14 +182,17 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A(
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A(
+		long groupId, java.lang.String articleId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A(
+		long groupId, java.lang.String articleId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findByG_A_First(
@@ -202,14 +213,17 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findByG_S(long groupId, java.lang.String structureId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_S(
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_S(long groupId, java.lang.String structureId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_S(
+		long groupId, java.lang.String structureId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_S(long groupId, java.lang.String structureId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_S(
+		long groupId, java.lang.String structureId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findByG_S_First(
@@ -230,14 +244,17 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String templateId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_T(
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String templateId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_T(
+		long groupId, java.lang.String templateId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_T(long groupId, java.lang.String templateId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_T(
+		long groupId, java.lang.String templateId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findByG_T_First(
@@ -267,16 +284,17 @@ public interface JournalArticlePersistence {
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A_A(long groupId, java.lang.String articleId,
-		boolean approved) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_A_A(long groupId, java.lang.String articleId,
-		boolean approved, int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
+		long groupId, java.lang.String articleId, boolean approved)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A_A(long groupId, java.lang.String articleId,
-		boolean approved, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
+		long groupId, java.lang.String articleId, boolean approved, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
+		long groupId, java.lang.String articleId, boolean approved, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findByG_A_A_First(
@@ -297,21 +315,22 @@ public interface JournalArticlePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

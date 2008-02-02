@@ -254,7 +254,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<MBCategory> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
 		String finderMethodName = "findByUuid";
@@ -301,7 +301,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<MBCategory> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -317,16 +317,16 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<MBCategory> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<MBCategory> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
@@ -390,7 +390,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -406,13 +407,13 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
 	public MBCategory findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<MBCategory> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -426,7 +427,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -434,7 +435,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		throws NoSuchCategoryException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<MBCategory> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -448,7 +449,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -598,7 +599,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<MBCategory> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -608,7 +609,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (MBCategory)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -619,18 +620,19 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<MBCategory> list = (List<MBCategory>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (MBCategory)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<MBCategory> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -670,7 +672,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<MBCategory> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -686,16 +688,16 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<MBCategory> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<MBCategory> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
@@ -752,7 +754,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -768,13 +771,13 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
 	public MBCategory findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<MBCategory> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -788,7 +791,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -796,7 +799,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		throws NoSuchCategoryException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<MBCategory> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -810,7 +813,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -872,7 +875,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<MBCategory> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -912,7 +916,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<MBCategory> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -928,16 +932,16 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<MBCategory> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<MBCategory> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
@@ -994,7 +998,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1010,13 +1015,13 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
 	public MBCategory findByCompanyId_First(long companyId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<MBCategory> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1030,7 +1035,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1038,7 +1043,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		throws NoSuchCategoryException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<MBCategory> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1052,7 +1057,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1114,7 +1119,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, long parentCategoryId)
+	public List<MBCategory> findByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
@@ -1165,7 +1170,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentCategoryId);
 
-				List list = q.list();
+				List<MBCategory> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1181,17 +1186,17 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
-	public List findByG_P(long groupId, long parentCategoryId, int begin,
-		int end) throws SystemException {
+	public List<MBCategory> findByG_P(long groupId, long parentCategoryId,
+		int begin, int end) throws SystemException {
 		return findByG_P(groupId, parentCategoryId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, long parentCategoryId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<MBCategory> findByG_P(long groupId, long parentCategoryId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
 		String finderMethodName = "findByG_P";
@@ -1253,7 +1258,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentCategoryId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1269,13 +1275,13 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
 	public MBCategory findByG_P_First(long groupId, long parentCategoryId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
+		List<MBCategory> list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1292,7 +1298,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1300,7 +1306,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
 
-		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
+		List<MBCategory> list = findByG_P(groupId, parentCategoryId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1317,7 +1324,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
-			return (MBCategory)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1385,8 +1392,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBCategory> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1404,8 +1411,9 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBCategory> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1425,15 +1433,16 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBCategory> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBCategory> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBCategory> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = MBCategory.class.getName();
@@ -1478,7 +1487,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1498,15 +1508,15 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBCategory>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<MBCategory> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			MBCategory mbCategory = (MBCategory)itr.next();
+			MBCategory mbCategory = itr.next();
 
 			remove(mbCategory);
 		}
@@ -1520,20 +1530,20 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<MBCategory> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			MBCategory mbCategory = (MBCategory)itr.next();
+			MBCategory mbCategory = itr.next();
 
 			remove(mbCategory);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<MBCategory> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			MBCategory mbCategory = (MBCategory)itr.next();
+			MBCategory mbCategory = itr.next();
 
 			remove(mbCategory);
 		}
@@ -1541,20 +1551,21 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
-		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
+		Iterator<MBCategory> itr = findByG_P(groupId, parentCategoryId)
+									   .iterator();
 
 		while (itr.hasNext()) {
-			MBCategory mbCategory = (MBCategory)itr.next();
+			MBCategory mbCategory = itr.next();
 
 			remove(mbCategory);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBCategory> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBCategory)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1603,10 +1614,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1685,10 +1696,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1751,10 +1762,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1817,10 +1828,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1894,10 +1905,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1947,10 +1958,10 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

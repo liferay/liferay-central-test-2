@@ -236,7 +236,8 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCountryId(long countryId) throws SystemException {
+	public List<Region> findByCountryId(long countryId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
 		String finderMethodName = "findByCountryId";
@@ -274,7 +275,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, countryId);
 
-				List list = q.list();
+				List<Region> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -290,16 +291,16 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
-	public List findByCountryId(long countryId, int begin, int end)
+	public List<Region> findByCountryId(long countryId, int begin, int end)
 		throws SystemException {
 		return findByCountryId(countryId, begin, end, null);
 	}
 
-	public List findByCountryId(long countryId, int begin, int end,
+	public List<Region> findByCountryId(long countryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
@@ -354,7 +355,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, countryId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -370,13 +371,13 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
 	public Region findByCountryId_First(long countryId, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
-		List list = findByCountryId(countryId, 0, 1, obc);
+		List<Region> list = findByCountryId(countryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -390,7 +391,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -398,7 +399,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		throws NoSuchRegionException, SystemException {
 		int count = countByCountryId(countryId);
 
-		List list = findByCountryId(countryId, count - 1, count, obc);
+		List<Region> list = findByCountryId(countryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -412,7 +413,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -470,7 +471,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByActive(boolean active) throws SystemException {
+	public List<Region> findByActive(boolean active) throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
 		String finderMethodName = "findByActive";
@@ -508,7 +509,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = q.list();
+				List<Region> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -524,16 +525,16 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
-	public List findByActive(boolean active, int begin, int end)
+	public List<Region> findByActive(boolean active, int begin, int end)
 		throws SystemException {
 		return findByActive(active, begin, end, null);
 	}
 
-	public List findByActive(boolean active, int begin, int end,
+	public List<Region> findByActive(boolean active, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
@@ -588,7 +589,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -604,13 +605,13 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
 	public Region findByActive_First(boolean active, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
-		List list = findByActive(active, 0, 1, obc);
+		List<Region> list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -624,7 +625,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -632,7 +633,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		throws NoSuchRegionException, SystemException {
 		int count = countByActive(active);
 
-		List list = findByActive(active, count - 1, count, obc);
+		List<Region> list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -646,7 +647,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -704,7 +705,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_A(long countryId, boolean active)
+	public List<Region> findByC_A(long countryId, boolean active)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
@@ -753,7 +754,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = q.list();
+				List<Region> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -769,17 +770,17 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
-	public List findByC_A(long countryId, boolean active, int begin, int end)
-		throws SystemException {
+	public List<Region> findByC_A(long countryId, boolean active, int begin,
+		int end) throws SystemException {
 		return findByC_A(countryId, active, begin, end, null);
 	}
 
-	public List findByC_A(long countryId, boolean active, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<Region> findByC_A(long countryId, boolean active, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
 		String finderMethodName = "findByC_A";
@@ -839,7 +840,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -855,13 +856,13 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
 	public Region findByC_A_First(long countryId, boolean active,
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
-		List list = findByC_A(countryId, active, 0, 1, obc);
+		List<Region> list = findByC_A(countryId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -878,7 +879,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -886,7 +887,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		int count = countByC_A(countryId, active);
 
-		List list = findByC_A(countryId, active, count - 1, count, obc);
+		List<Region> list = findByC_A(countryId, active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -903,7 +904,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			throw new NoSuchRegionException(msg.toString());
 		}
 		else {
-			return (Region)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -968,8 +969,8 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Region> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -987,8 +988,9 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Region> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1008,15 +1010,15 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Region> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Region> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Region> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RegionModelImpl.CACHE_ENABLED;
 		String finderClassName = Region.class.getName();
@@ -1059,7 +1061,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1079,25 +1081,25 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Region>)result;
 		}
 	}
 
 	public void removeByCountryId(long countryId) throws SystemException {
-		Iterator itr = findByCountryId(countryId).iterator();
+		Iterator<Region> itr = findByCountryId(countryId).iterator();
 
 		while (itr.hasNext()) {
-			Region region = (Region)itr.next();
+			Region region = itr.next();
 
 			remove(region);
 		}
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator itr = findByActive(active).iterator();
+		Iterator<Region> itr = findByActive(active).iterator();
 
 		while (itr.hasNext()) {
-			Region region = (Region)itr.next();
+			Region region = itr.next();
 
 			remove(region);
 		}
@@ -1105,20 +1107,20 @@ public class RegionPersistenceImpl extends BasePersistence
 
 	public void removeByC_A(long countryId, boolean active)
 		throws SystemException {
-		Iterator itr = findByC_A(countryId, active).iterator();
+		Iterator<Region> itr = findByC_A(countryId, active).iterator();
 
 		while (itr.hasNext()) {
-			Region region = (Region)itr.next();
+			Region region = itr.next();
 
 			remove(region);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Region> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Region)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1159,10 +1161,10 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1224,10 +1226,10 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1300,10 +1302,10 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1353,10 +1355,10 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

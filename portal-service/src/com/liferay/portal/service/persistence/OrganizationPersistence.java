@@ -59,13 +59,15 @@ public interface OrganizationPersistence {
 	public com.liferay.portal.model.Organization fetchByPrimaryKey(
 		long organizationId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -85,13 +87,15 @@ public interface OrganizationPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List findByLocations(long companyId)
+	public java.util.List<com.liferay.portal.model.Organization> findByLocations(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Organization> findByLocations(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByLocations(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByLocations(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Organization> findByLocations(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -111,14 +115,17 @@ public interface OrganizationPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List findByC_P(long companyId, long parentOrganizationId)
+	public java.util.List<com.liferay.portal.model.Organization> findByC_P(
+		long companyId, long parentOrganizationId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_P(long companyId, long parentOrganizationId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Organization> findByC_P(
+		long companyId, long parentOrganizationId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_P(long companyId, long parentOrganizationId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Organization> findByC_P(
+		long companyId, long parentOrganizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization findByC_P_First(
@@ -147,21 +154,22 @@ public interface OrganizationPersistence {
 	public com.liferay.portal.model.Organization fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Organization> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Organization> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Organization> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)
@@ -193,16 +201,17 @@ public interface OrganizationPersistence {
 
 	public int countAll() throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroups(long pk)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List getGroups(long pk, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List getGroups(long pk, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
@@ -229,7 +238,8 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public void addGroups(long pk, java.util.List groups)
+	public void addGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
@@ -253,7 +263,8 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public void removeGroups(long pk, java.util.List groups)
+	public void removeGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
@@ -263,21 +274,23 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public void setGroups(long pk, java.util.List groups)
+	public void setGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List getUsers(long pk)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List getUsers(long pk, int begin, int end)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
-	public java.util.List getUsers(long pk, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException;
 
@@ -304,7 +317,8 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void addUsers(long pk, java.util.List users)
+	public void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;
@@ -328,7 +342,8 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void removeUsers(long pk, java.util.List users)
+	public void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;
@@ -338,7 +353,8 @@ public interface OrganizationPersistence {
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void setUsers(long pk, java.util.List users)
+	public void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException;

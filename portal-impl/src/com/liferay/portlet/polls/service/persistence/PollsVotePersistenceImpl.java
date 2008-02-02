@@ -240,7 +240,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByQuestionId(long questionId) throws SystemException {
+	public List<PollsVote> findByQuestionId(long questionId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsVoteModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "findByQuestionId";
@@ -275,7 +276,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, questionId);
 
-				List list = q.list();
+				List<PollsVote> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -291,17 +292,17 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PollsVote>)result;
 		}
 	}
 
-	public List findByQuestionId(long questionId, int begin, int end)
+	public List<PollsVote> findByQuestionId(long questionId, int begin, int end)
 		throws SystemException {
 		return findByQuestionId(questionId, begin, end, null);
 	}
 
-	public List findByQuestionId(long questionId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<PollsVote> findByQuestionId(long questionId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsVoteModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "findByQuestionId";
@@ -350,7 +351,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, questionId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -366,13 +368,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PollsVote>)result;
 		}
 	}
 
 	public PollsVote findByQuestionId_First(long questionId,
 		OrderByComparator obc) throws NoSuchVoteException, SystemException {
-		List list = findByQuestionId(questionId, 0, 1, obc);
+		List<PollsVote> list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -386,7 +388,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
-			return (PollsVote)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -394,7 +396,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchVoteException, SystemException {
 		int count = countByQuestionId(questionId);
 
-		List list = findByQuestionId(questionId, count - 1, count, obc);
+		List<PollsVote> list = findByQuestionId(questionId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -408,7 +411,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
-			return (PollsVote)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -463,7 +466,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByChoiceId(long choiceId) throws SystemException {
+	public List<PollsVote> findByChoiceId(long choiceId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsVoteModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "findByChoiceId";
@@ -498,7 +502,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, choiceId);
 
-				List list = q.list();
+				List<PollsVote> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -514,16 +518,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PollsVote>)result;
 		}
 	}
 
-	public List findByChoiceId(long choiceId, int begin, int end)
+	public List<PollsVote> findByChoiceId(long choiceId, int begin, int end)
 		throws SystemException {
 		return findByChoiceId(choiceId, begin, end, null);
 	}
 
-	public List findByChoiceId(long choiceId, int begin, int end,
+	public List<PollsVote> findByChoiceId(long choiceId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsVoteModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsVote.class.getName();
@@ -573,7 +577,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, choiceId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -589,13 +594,13 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PollsVote>)result;
 		}
 	}
 
 	public PollsVote findByChoiceId_First(long choiceId, OrderByComparator obc)
 		throws NoSuchVoteException, SystemException {
-		List list = findByChoiceId(choiceId, 0, 1, obc);
+		List<PollsVote> list = findByChoiceId(choiceId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -609,7 +614,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
-			return (PollsVote)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -617,7 +622,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		throws NoSuchVoteException, SystemException {
 		int count = countByChoiceId(choiceId);
 
-		List list = findByChoiceId(choiceId, count - 1, count, obc);
+		List<PollsVote> list = findByChoiceId(choiceId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -631,7 +636,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
-			return (PollsVote)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -757,7 +762,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<PollsVote> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -767,7 +772,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PollsVote)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -778,19 +783,19 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PollsVote> list = (List<PollsVote>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PollsVote)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PollsVote> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -808,8 +813,9 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PollsVote> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -829,15 +835,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PollsVote> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PollsVote> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<PollsVote> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsVoteModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsVote.class.getName();
@@ -874,7 +881,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -894,25 +902,25 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PollsVote>)result;
 		}
 	}
 
 	public void removeByQuestionId(long questionId) throws SystemException {
-		Iterator itr = findByQuestionId(questionId).iterator();
+		Iterator<PollsVote> itr = findByQuestionId(questionId).iterator();
 
 		while (itr.hasNext()) {
-			PollsVote pollsVote = (PollsVote)itr.next();
+			PollsVote pollsVote = itr.next();
 
 			remove(pollsVote);
 		}
 	}
 
 	public void removeByChoiceId(long choiceId) throws SystemException {
-		Iterator itr = findByChoiceId(choiceId).iterator();
+		Iterator<PollsVote> itr = findByChoiceId(choiceId).iterator();
 
 		while (itr.hasNext()) {
-			PollsVote pollsVote = (PollsVote)itr.next();
+			PollsVote pollsVote = itr.next();
 
 			remove(pollsVote);
 		}
@@ -926,10 +934,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PollsVote> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PollsVote)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -971,10 +979,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1037,10 +1045,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1114,10 +1122,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1167,10 +1175,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

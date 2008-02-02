@@ -59,13 +59,15 @@ public interface ShoppingItemPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingItem fetchByPrimaryKey(
 		long itemId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCategoryId(long categoryId)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCategoryId(long categoryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCategoryId(long categoryId, int begin, int end,
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -118,21 +120,22 @@ public interface ShoppingItemPersistence {
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCategoryId(long categoryId)
@@ -173,15 +176,18 @@ public interface ShoppingItemPersistence {
 
 	public int countAll() throws com.liferay.portal.SystemException;
 
-	public java.util.List getShoppingItemPrices(long pk)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException;
 
-	public java.util.List getShoppingItemPrices(long pk, int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException;
 
-	public java.util.List getShoppingItemPrices(long pk, int begin, int end,
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException;

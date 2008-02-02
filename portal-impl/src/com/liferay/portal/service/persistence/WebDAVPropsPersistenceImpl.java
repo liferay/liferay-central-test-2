@@ -315,7 +315,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<WebDAVProps> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -325,7 +325,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (WebDAVProps)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -336,19 +336,19 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<WebDAVProps> list = (List<WebDAVProps>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (WebDAVProps)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<WebDAVProps> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -366,8 +366,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<WebDAVProps> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -387,15 +388,16 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<WebDAVProps> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<WebDAVProps> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<WebDAVProps> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebDAVPropsModelImpl.CACHE_ENABLED;
 		String finderClassName = WebDAVProps.class.getName();
@@ -432,7 +434,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WebDAVProps> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -452,7 +455,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<WebDAVProps>)result;
 		}
 	}
 
@@ -464,10 +467,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<WebDAVProps> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((WebDAVProps)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -519,10 +522,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -572,10 +575,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

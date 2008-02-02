@@ -61,14 +61,17 @@ public interface JournalContentSearchPersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch fetchByPrimaryKey(
 		long contentSearchId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_First(
@@ -89,14 +92,17 @@ public interface JournalContentSearchPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_A(
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_A(
+		long groupId, java.lang.String articleId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_A(long groupId, java.lang.String articleId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_A(
+		long groupId, java.lang.String articleId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_A_First(
@@ -117,15 +123,16 @@ public interface JournalContentSearchPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public java.util.List findByG_P_L(long groupId, boolean privateLayout,
-		long layoutId) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_P_L(long groupId, boolean privateLayout,
-		long layoutId, int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L(
+		long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P_L(long groupId, boolean privateLayout,
-		long layoutId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L(
+		long groupId, boolean privateLayout, long layoutId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L(
+		long groupId, boolean privateLayout, long layoutId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -147,16 +154,17 @@ public interface JournalContentSearchPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public java.util.List findByG_P_A(long groupId, boolean privateLayout,
-		java.lang.String articleId) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_P_A(long groupId, boolean privateLayout,
-		java.lang.String articleId, int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_A(
+		long groupId, boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P_A(long groupId, boolean privateLayout,
-		java.lang.String articleId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_A(
+		long groupId, boolean privateLayout, java.lang.String articleId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_A(
+		long groupId, boolean privateLayout, java.lang.String articleId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch findByG_P_A_First(
@@ -178,16 +186,18 @@ public interface JournalContentSearchPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public java.util.List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, java.lang.String portletId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L_P(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L_P(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, java.lang.String portletId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_P_L_P(long groupId, boolean privateLayout,
-		long layoutId, java.lang.String portletId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByG_P_L_P(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -223,21 +233,22 @@ public interface JournalContentSearchPersistence {
 		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_P(long groupId, boolean privateLayout)

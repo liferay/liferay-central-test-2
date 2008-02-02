@@ -246,7 +246,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<ShoppingCoupon> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCouponModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCoupon.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -285,7 +286,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<ShoppingCoupon> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -301,16 +302,16 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCoupon>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingCoupon> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<ShoppingCoupon> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCouponModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCoupon.class.getName();
@@ -366,7 +367,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingCoupon> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -382,13 +384,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCoupon>)result;
 		}
 	}
 
 	public ShoppingCoupon findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchCouponException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<ShoppingCoupon> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -402,7 +404,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
-			return (ShoppingCoupon)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -410,7 +412,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		throws NoSuchCouponException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<ShoppingCoupon> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -424,7 +426,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
-			return (ShoppingCoupon)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -554,7 +556,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, code);
 				}
 
-				List list = q.list();
+				List<ShoppingCoupon> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -564,7 +566,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ShoppingCoupon)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -575,19 +577,19 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ShoppingCoupon> list = (List<ShoppingCoupon>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ShoppingCoupon)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ShoppingCoupon> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -605,8 +607,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ShoppingCoupon> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -626,16 +629,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ShoppingCoupon> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ShoppingCoupon> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ShoppingCoupon> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCouponModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCoupon.class.getName();
 		String finderMethodName = "findAll";
@@ -678,7 +682,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ShoppingCoupon> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -698,15 +703,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ShoppingCoupon>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<ShoppingCoupon> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)itr.next();
+			ShoppingCoupon shoppingCoupon = itr.next();
 
 			remove(shoppingCoupon);
 		}
@@ -720,10 +725,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ShoppingCoupon> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ShoppingCoupon)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -765,10 +770,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -838,10 +843,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -891,10 +896,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -256,7 +256,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<BookmarksEntry> findByUuid(String uuid)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
 		String finderMethodName = "findByUuid";
@@ -303,7 +304,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<BookmarksEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -319,16 +320,16 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BookmarksEntry>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<BookmarksEntry> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<BookmarksEntry> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
@@ -392,7 +393,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -408,13 +410,13 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BookmarksEntry>)result;
 		}
 	}
 
 	public BookmarksEntry findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<BookmarksEntry> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -428,7 +430,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (BookmarksEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -436,7 +438,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		throws NoSuchEntryException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<BookmarksEntry> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -450,7 +452,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (BookmarksEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -518,7 +520,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(long folderId) throws SystemException {
+	public List<BookmarksEntry> findByFolderId(long folderId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
 		String finderMethodName = "findByFolderId";
@@ -558,7 +561,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = q.list();
+				List<BookmarksEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -574,17 +577,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BookmarksEntry>)result;
 		}
 	}
 
-	public List findByFolderId(long folderId, int begin, int end)
+	public List<BookmarksEntry> findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(long folderId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<BookmarksEntry> findByFolderId(long folderId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
 		String finderMethodName = "findByFolderId";
@@ -640,7 +643,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -656,13 +660,13 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BookmarksEntry>)result;
 		}
 	}
 
 	public BookmarksEntry findByFolderId_First(long folderId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List list = findByFolderId(folderId, 0, 1, obc);
+		List<BookmarksEntry> list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -676,7 +680,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (BookmarksEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -684,7 +688,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		int count = countByFolderId(folderId);
 
-		List list = findByFolderId(folderId, count - 1, count, obc);
+		List<BookmarksEntry> list = findByFolderId(folderId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -698,7 +703,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (BookmarksEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -760,8 +765,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<BookmarksEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -779,8 +784,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<BookmarksEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -800,16 +806,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<BookmarksEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<BookmarksEntry> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<BookmarksEntry> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
 		String finderMethodName = "findAll";
@@ -853,7 +860,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -873,35 +881,35 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<BookmarksEntry>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<BookmarksEntry> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksEntry bookmarksEntry = (BookmarksEntry)itr.next();
+			BookmarksEntry bookmarksEntry = itr.next();
 
 			remove(bookmarksEntry);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator itr = findByFolderId(folderId).iterator();
+		Iterator<BookmarksEntry> itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksEntry bookmarksEntry = (BookmarksEntry)itr.next();
+			BookmarksEntry bookmarksEntry = itr.next();
 
 			remove(bookmarksEntry);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<BookmarksEntry> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((BookmarksEntry)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -950,10 +958,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1016,10 +1024,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1069,10 +1077,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

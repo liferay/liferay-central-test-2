@@ -58,13 +58,15 @@ public interface ResourcePersistence {
 	public com.liferay.portal.model.Resource fetchByPrimaryKey(long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCodeId(long codeId)
+	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
+		long codeId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
+		long codeId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCodeId(long codeId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCodeId(long codeId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
+		long codeId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -92,21 +94,22 @@ public interface ResourcePersistence {
 	public com.liferay.portal.model.Resource fetchByC_P(long codeId,
 		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Resource> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Resource> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Resource> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Resource> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Resource> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCodeId(long codeId)

@@ -240,7 +240,8 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCategoryId(long categoryId) throws SystemException {
+	public List<MBThread> findByCategoryId(long categoryId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
 		String finderClassName = MBThread.class.getName();
 		String finderMethodName = "findByCategoryId";
@@ -280,7 +281,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List list = q.list();
+				List<MBThread> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBThread>)result;
 		}
 	}
 
-	public List findByCategoryId(long categoryId, int begin, int end)
+	public List<MBThread> findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(long categoryId, int begin, int end,
+	public List<MBThread> findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
 		String finderClassName = MBThread.class.getName();
@@ -362,7 +363,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBThread> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -378,13 +379,13 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBThread>)result;
 		}
 	}
 
 	public MBThread findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		List list = findByCategoryId(categoryId, 0, 1, obc);
+		List<MBThread> list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -398,7 +399,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
-			return (MBThread)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -406,7 +407,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		throws NoSuchThreadException, SystemException {
 		int count = countByCategoryId(categoryId);
 
-		List list = findByCategoryId(categoryId, count - 1, count, obc);
+		List<MBThread> list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -420,7 +421,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
-			return (MBThread)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -481,8 +482,8 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBThread> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -500,8 +501,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBThread> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -521,15 +523,15 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBThread> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBThread> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBThread> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
 		String finderClassName = MBThread.class.getName();
@@ -574,7 +576,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBThread> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -594,25 +596,25 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBThread>)result;
 		}
 	}
 
 	public void removeByCategoryId(long categoryId) throws SystemException {
-		Iterator itr = findByCategoryId(categoryId).iterator();
+		Iterator<MBThread> itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
-			MBThread mbThread = (MBThread)itr.next();
+			MBThread mbThread = itr.next();
 
 			remove(mbThread);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBThread> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBThread)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -654,10 +656,10 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -707,10 +709,10 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

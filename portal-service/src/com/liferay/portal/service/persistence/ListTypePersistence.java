@@ -58,13 +58,15 @@ public interface ListTypePersistence {
 	public com.liferay.portal.model.ListType fetchByPrimaryKey(int listTypeId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByType(java.lang.String type)
+	public java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByType(java.lang.String type, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByType(java.lang.String type, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -86,21 +88,22 @@ public interface ListTypePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchListTypeException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ListType> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ListType> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.ListType> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.ListType> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ListType> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByType(java.lang.String type)

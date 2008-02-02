@@ -59,13 +59,15 @@ public interface TagsPropertyPersistence {
 	public com.liferay.portlet.tags.model.TagsProperty fetchByPrimaryKey(
 		long propertyId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -85,13 +87,15 @@ public interface TagsPropertyPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
-	public java.util.List findByEntryId(long entryId)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByEntryId(long entryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByEntryId(long entryId, int begin, int end,
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -111,14 +115,17 @@ public interface TagsPropertyPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchPropertyException;
 
-	public java.util.List findByC_K(long companyId, java.lang.String key)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_K(long companyId, java.lang.String key,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_K(long companyId, java.lang.String key,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByC_K_First(
@@ -148,21 +155,22 @@ public interface TagsPropertyPersistence {
 		long entryId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)

@@ -58,14 +58,16 @@ public interface OrgLaborPersistence {
 	public com.liferay.portal.model.OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrganizationId(long organizationId)
+	public java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrganizationId(long organizationId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByOrganizationId(long organizationId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor findByOrganizationId_First(
@@ -86,21 +88,22 @@ public interface OrgLaborPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrgLaborException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.OrgLabor> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.OrgLabor> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.OrgLabor> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.OrgLabor> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.OrgLabor> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByOrganizationId(long organizationId)

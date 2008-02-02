@@ -61,14 +61,17 @@ public interface DLFileVersionPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByPrimaryKey(
 		long fileVersionId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
@@ -98,21 +101,22 @@ public interface DLFileVersionPersistence {
 		long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByF_N(long folderId, java.lang.String name)

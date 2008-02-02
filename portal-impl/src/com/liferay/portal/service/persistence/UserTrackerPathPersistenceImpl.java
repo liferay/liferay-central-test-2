@@ -245,7 +245,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserTrackerId(long userTrackerId)
+	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTrackerPath.class.getName();
@@ -281,7 +281,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userTrackerId);
 
-				List list = q.list();
+				List<UserTrackerPath> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -297,17 +297,17 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTrackerPath>)result;
 		}
 	}
 
-	public List findByUserTrackerId(long userTrackerId, int begin, int end)
-		throws SystemException {
+	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
+		int begin, int end) throws SystemException {
 		return findByUserTrackerId(userTrackerId, begin, end, null);
 	}
 
-	public List findByUserTrackerId(long userTrackerId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTrackerPath.class.getName();
 		String finderMethodName = "findByUserTrackerId";
@@ -356,7 +356,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userTrackerId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTrackerPath> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -372,14 +373,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTrackerPath>)result;
 		}
 	}
 
 	public UserTrackerPath findByUserTrackerId_First(long userTrackerId,
 		OrderByComparator obc)
 		throws NoSuchUserTrackerPathException, SystemException {
-		List list = findByUserTrackerId(userTrackerId, 0, 1, obc);
+		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId, 0, 1,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -393,7 +395,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerPathException(msg.toString());
 		}
 		else {
-			return (UserTrackerPath)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -402,7 +404,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		throws NoSuchUserTrackerPathException, SystemException {
 		int count = countByUserTrackerId(userTrackerId);
 
-		List list = findByUserTrackerId(userTrackerId, count - 1, count, obc);
+		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -416,7 +419,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			throw new NoSuchUserTrackerPathException(msg.toString());
 		}
 		else {
-			return (UserTrackerPath)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -470,8 +473,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserTrackerPath> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -489,8 +492,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserTrackerPath> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -510,16 +514,17 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<UserTrackerPath> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<UserTrackerPath> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<UserTrackerPath> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTrackerPath.class.getName();
 		String finderMethodName = "findAll";
@@ -555,7 +560,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserTrackerPath> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -575,26 +581,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserTrackerPath>)result;
 		}
 	}
 
 	public void removeByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		Iterator itr = findByUserTrackerId(userTrackerId).iterator();
+		Iterator<UserTrackerPath> itr = findByUserTrackerId(userTrackerId)
+											.iterator();
 
 		while (itr.hasNext()) {
-			UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
+			UserTrackerPath userTrackerPath = itr.next();
 
 			remove(userTrackerPath);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<UserTrackerPath> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((UserTrackerPath)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -637,10 +644,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -690,10 +697,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

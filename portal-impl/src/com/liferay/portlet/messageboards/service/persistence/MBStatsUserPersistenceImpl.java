@@ -246,7 +246,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<MBStatsUser> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -285,7 +286,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<MBStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -301,16 +302,16 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<MBStatsUser> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<MBStatsUser> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
@@ -366,7 +367,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -382,13 +384,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
 	public MBStatsUser findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<MBStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -402,7 +404,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -410,7 +412,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<MBStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -424,7 +426,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -485,7 +487,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<MBStatsUser> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
 		String finderMethodName = "findByUserId";
@@ -524,7 +527,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<MBStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -540,16 +543,16 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<MBStatsUser> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<MBStatsUser> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
@@ -605,7 +608,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -621,13 +625,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
 	public MBStatsUser findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<MBStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -641,7 +645,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -649,7 +653,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<MBStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -663,7 +667,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -798,7 +802,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<MBStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -808,7 +812,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (MBStatsUser)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -819,18 +823,18 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<MBStatsUser> list = (List<MBStatsUser>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (MBStatsUser)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByG_M(long groupId, int messageCount)
+	public List<MBStatsUser> findByG_M(long groupId, int messageCount)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
@@ -880,7 +884,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, messageCount);
 
-				List list = q.list();
+				List<MBStatsUser> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -896,17 +900,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
-	public List findByG_M(long groupId, int messageCount, int begin, int end)
-		throws SystemException {
+	public List<MBStatsUser> findByG_M(long groupId, int messageCount,
+		int begin, int end) throws SystemException {
 		return findByG_M(groupId, messageCount, begin, end, null);
 	}
 
-	public List findByG_M(long groupId, int messageCount, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MBStatsUser> findByG_M(long groupId, int messageCount,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
 		String finderMethodName = "findByG_M";
@@ -967,7 +971,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, messageCount);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -983,13 +988,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
 	public MBStatsUser findByG_M_First(long groupId, int messageCount,
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
-		List list = findByG_M(groupId, messageCount, 0, 1, obc);
+		List<MBStatsUser> list = findByG_M(groupId, messageCount, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1006,7 +1011,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1014,7 +1019,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByG_M(groupId, messageCount);
 
-		List list = findByG_M(groupId, messageCount, count - 1, count, obc);
+		List<MBStatsUser> list = findByG_M(groupId, messageCount, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1031,7 +1037,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
-			return (MBStatsUser)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1098,8 +1104,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBStatsUser> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1117,8 +1123,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBStatsUser> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1138,15 +1145,16 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBStatsUser> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBStatsUser> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBStatsUser> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBStatsUserModelImpl.CACHE_ENABLED;
 		String finderClassName = MBStatsUser.class.getName();
@@ -1190,7 +1198,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1210,25 +1219,25 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBStatsUser>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<MBStatsUser> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			MBStatsUser mbStatsUser = itr.next();
 
 			remove(mbStatsUser);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<MBStatsUser> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			MBStatsUser mbStatsUser = itr.next();
 
 			remove(mbStatsUser);
 		}
@@ -1243,20 +1252,20 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public void removeByG_M(long groupId, int messageCount)
 		throws SystemException {
-		Iterator itr = findByG_M(groupId, messageCount).iterator();
+		Iterator<MBStatsUser> itr = findByG_M(groupId, messageCount).iterator();
 
 		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			MBStatsUser mbStatsUser = itr.next();
 
 			remove(mbStatsUser);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBStatsUser> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBStatsUser)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1298,10 +1307,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1364,10 +1373,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1438,10 +1447,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1515,10 +1524,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1568,10 +1577,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

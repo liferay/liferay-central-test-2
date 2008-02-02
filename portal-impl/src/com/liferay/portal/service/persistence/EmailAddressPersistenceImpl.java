@@ -245,7 +245,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<EmailAddress> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -284,7 +285,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<EmailAddress> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -300,17 +301,17 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<EmailAddress> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<EmailAddress> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -365,7 +366,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -381,14 +383,14 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public EmailAddress findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<EmailAddress> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -402,7 +404,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -411,7 +413,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<EmailAddress> list = findByCompanyId(companyId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -425,7 +428,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -485,7 +488,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<EmailAddress> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByUserId";
@@ -524,7 +528,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<EmailAddress> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -540,16 +544,16 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<EmailAddress> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<EmailAddress> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
@@ -605,7 +609,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -621,13 +626,13 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public EmailAddress findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<EmailAddress> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -641,7 +646,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -649,7 +654,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<EmailAddress> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -663,7 +668,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -723,7 +728,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C(long companyId, long classNameId)
+	public List<EmailAddress> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
@@ -773,7 +778,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List list = q.list();
+				List<EmailAddress> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -789,17 +794,17 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
-	public List findByC_C(long companyId, long classNameId, int begin, int end)
-		throws SystemException {
+	public List<EmailAddress> findByC_C(long companyId, long classNameId,
+		int begin, int end) throws SystemException {
 		return findByC_C(companyId, classNameId, begin, end, null);
 	}
 
-	public List findByC_C(long companyId, long classNameId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<EmailAddress> findByC_C(long companyId, long classNameId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByC_C";
@@ -860,7 +865,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -876,14 +882,14 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public EmailAddress findByC_C_First(long companyId, long classNameId,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C(companyId, classNameId, 0, 1, obc);
+		List<EmailAddress> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -900,7 +906,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -909,7 +915,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
-		List list = findByC_C(companyId, classNameId, count - 1, count, obc);
+		List<EmailAddress> list = findByC_C(companyId, classNameId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -926,7 +933,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -992,8 +999,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
+	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
+		long classPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -1048,7 +1055,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<EmailAddress> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1064,17 +1071,18 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end) throws SystemException {
+	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C_C(long companyId, long classNameId, long classPK,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
+		long classPK, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByC_C_C";
@@ -1141,7 +1149,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1157,14 +1166,15 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public EmailAddress findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C_C(companyId, classNameId, classPK, 0, 1, obc);
+		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
+				0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1184,7 +1194,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1193,8 +1203,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
-		List list = findByC_C_C(companyId, classNameId, classPK, count - 1,
-				count, obc);
+		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1214,7 +1224,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1286,8 +1296,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary) throws SystemException {
+	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary) throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
 		String finderMethodName = "findByC_C_C_P";
@@ -1350,7 +1360,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List list = q.list();
+				List<EmailAddress> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1366,18 +1376,19 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary, int begin, int end) throws SystemException {
+	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary, int begin, int end)
+		throws SystemException {
 		return findByC_C_C_P(companyId, classNameId, classPK, primary, begin,
 			end, null);
 	}
 
-	public List findByC_C_C_P(long companyId, long classNameId, long classPK,
-		boolean primary, int begin, int end, OrderByComparator obc)
+	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
+		long classPK, boolean primary, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
@@ -1453,7 +1464,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1469,15 +1481,15 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public EmailAddress findByC_C_C_P_First(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		List list = findByC_C_C_P(companyId, classNameId, classPK, primary, 0,
-				1, obc);
+		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
+				classPK, primary, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1500,7 +1512,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1509,8 +1521,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
-		List list = findByC_C_C_P(companyId, classNameId, classPK, primary,
-				count - 1, count, obc);
+		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
+				classPK, primary, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1533,7 +1545,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
-			return (EmailAddress)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1612,8 +1624,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<EmailAddress> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1631,8 +1643,9 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<EmailAddress> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1652,15 +1665,16 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<EmailAddress> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<EmailAddress> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<EmailAddress> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
 		String finderClassName = EmailAddress.class.getName();
@@ -1703,7 +1717,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1723,25 +1738,25 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<EmailAddress>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<EmailAddress> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			EmailAddress emailAddress = (EmailAddress)itr.next();
+			EmailAddress emailAddress = itr.next();
 
 			remove(emailAddress);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<EmailAddress> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			EmailAddress emailAddress = (EmailAddress)itr.next();
+			EmailAddress emailAddress = itr.next();
 
 			remove(emailAddress);
 		}
@@ -1749,10 +1764,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator itr = findByC_C(companyId, classNameId).iterator();
+		Iterator<EmailAddress> itr = findByC_C(companyId, classNameId).iterator();
 
 		while (itr.hasNext()) {
-			EmailAddress emailAddress = (EmailAddress)itr.next();
+			EmailAddress emailAddress = itr.next();
 
 			remove(emailAddress);
 		}
@@ -1760,10 +1775,11 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C_C(companyId, classNameId, classPK).iterator();
+		Iterator<EmailAddress> itr = findByC_C_C(companyId, classNameId, classPK)
+										 .iterator();
 
 		while (itr.hasNext()) {
-			EmailAddress emailAddress = (EmailAddress)itr.next();
+			EmailAddress emailAddress = itr.next();
 
 			remove(emailAddress);
 		}
@@ -1771,21 +1787,21 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator itr = findByC_C_C_P(companyId, classNameId, classPK, primary)
-						   .iterator();
+		Iterator<EmailAddress> itr = findByC_C_C_P(companyId, classNameId,
+				classPK, primary).iterator();
 
 		while (itr.hasNext()) {
-			EmailAddress emailAddress = (EmailAddress)itr.next();
+			EmailAddress emailAddress = itr.next();
 
 			remove(emailAddress);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<EmailAddress> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((EmailAddress)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1827,10 +1843,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1893,10 +1909,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1970,10 +1986,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2053,10 +2069,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2144,10 +2160,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2197,10 +2213,10 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

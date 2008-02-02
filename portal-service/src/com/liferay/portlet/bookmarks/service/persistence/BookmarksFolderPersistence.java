@@ -61,13 +61,15 @@ public interface BookmarksFolderPersistence {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByPrimaryKey(
 		long folderId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByUuid(
+		java.lang.String uuid, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByUuid(
+		java.lang.String uuid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -98,13 +100,15 @@ public interface BookmarksFolderPersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -124,13 +128,15 @@ public interface BookmarksFolderPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -150,14 +156,17 @@ public interface BookmarksFolderPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
-	public java.util.List findByG_P(long groupId, long parentFolderId)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByG_P(
+		long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, long parentFolderId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByG_P(
+		long groupId, long parentFolderId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, long parentFolderId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByG_P(
+		long groupId, long parentFolderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByG_P_First(
@@ -178,21 +187,22 @@ public interface BookmarksFolderPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

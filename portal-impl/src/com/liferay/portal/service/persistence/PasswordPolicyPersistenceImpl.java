@@ -317,7 +317,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, defaultPolicy);
 
-				List list = q.list();
+				List<PasswordPolicy> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -327,7 +327,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PasswordPolicy)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -338,13 +338,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PasswordPolicy> list = (List<PasswordPolicy>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PasswordPolicy)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -426,7 +426,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<PasswordPolicy> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -436,7 +436,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (PasswordPolicy)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -447,19 +447,19 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<PasswordPolicy> list = (List<PasswordPolicy>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (PasswordPolicy)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PasswordPolicy> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -477,8 +477,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PasswordPolicy> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -498,16 +499,17 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PasswordPolicy> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PasswordPolicy> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PasswordPolicy> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordPolicyModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicy.class.getName();
 		String finderMethodName = "findAll";
@@ -543,7 +545,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PasswordPolicy> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -563,7 +566,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PasswordPolicy>)result;
 		}
 	}
 
@@ -582,10 +585,10 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PasswordPolicy> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PasswordPolicy)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -638,10 +641,10 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -720,10 +723,10 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -773,10 +776,10 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

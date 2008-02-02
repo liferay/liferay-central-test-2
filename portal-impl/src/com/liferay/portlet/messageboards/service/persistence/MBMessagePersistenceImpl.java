@@ -254,7 +254,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<MBMessage> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByUuid";
@@ -301,7 +301,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -317,16 +317,16 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<MBMessage> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<MBMessage> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -390,7 +390,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -406,13 +407,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -426,7 +427,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -434,7 +435,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		throws NoSuchMessageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -448,7 +449,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -516,7 +517,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<MBMessage> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -556,7 +558,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -572,16 +574,16 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<MBMessage> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<MBMessage> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -638,7 +640,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -654,13 +657,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -674,7 +677,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -682,7 +685,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		throws NoSuchMessageException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -696,7 +699,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -758,7 +761,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCategoryId(long categoryId) throws SystemException {
+	public List<MBMessage> findByCategoryId(long categoryId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByCategoryId";
@@ -798,7 +802,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -814,17 +818,17 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByCategoryId(long categoryId, int begin, int end)
+	public List<MBMessage> findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(long categoryId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MBMessage> findByCategoryId(long categoryId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByCategoryId";
@@ -880,7 +884,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -896,13 +901,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List list = findByCategoryId(categoryId, 0, 1, obc);
+		List<MBMessage> list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -916,7 +921,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -924,7 +929,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByCategoryId(categoryId);
 
-		List list = findByCategoryId(categoryId, count - 1, count, obc);
+		List<MBMessage> list = findByCategoryId(categoryId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -938,7 +944,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1000,7 +1006,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByThreadId(long threadId) throws SystemException {
+	public List<MBMessage> findByThreadId(long threadId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByThreadId";
@@ -1040,7 +1047,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1056,16 +1063,16 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByThreadId(long threadId, int begin, int end)
+	public List<MBMessage> findByThreadId(long threadId, int begin, int end)
 		throws SystemException {
 		return findByThreadId(threadId, begin, end, null);
 	}
 
-	public List findByThreadId(long threadId, int begin, int end,
+	public List<MBMessage> findByThreadId(long threadId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1122,7 +1129,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1138,13 +1146,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByThreadId_First(long threadId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		List list = findByThreadId(threadId, 0, 1, obc);
+		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1158,7 +1166,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1166,7 +1174,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		throws NoSuchMessageException, SystemException {
 		int count = countByThreadId(threadId);
 
-		List list = findByThreadId(threadId, count - 1, count, obc);
+		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1180,7 +1188,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1242,7 +1250,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_T(long categoryId, long threadId)
+	public List<MBMessage> findByC_T(long categoryId, long threadId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1293,7 +1301,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1309,17 +1317,17 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByC_T(long categoryId, long threadId, int begin, int end)
-		throws SystemException {
+	public List<MBMessage> findByC_T(long categoryId, long threadId, int begin,
+		int end) throws SystemException {
 		return findByC_T(categoryId, threadId, begin, end, null);
 	}
 
-	public List findByC_T(long categoryId, long threadId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<MBMessage> findByC_T(long categoryId, long threadId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByC_T";
@@ -1381,7 +1389,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1397,13 +1406,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByC_T_First(long categoryId, long threadId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List list = findByC_T(categoryId, threadId, 0, 1, obc);
+		List<MBMessage> list = findByC_T(categoryId, threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1420,7 +1429,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1428,7 +1437,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByC_T(categoryId, threadId);
 
-		List list = findByC_T(categoryId, threadId, count - 1, count, obc);
+		List<MBMessage> list = findByC_T(categoryId, threadId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1445,7 +1455,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1513,7 +1523,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByT_P(long threadId, long parentMessageId)
+	public List<MBMessage> findByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1564,7 +1574,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentMessageId);
 
-				List list = q.list();
+				List<MBMessage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1580,17 +1590,17 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
-	public List findByT_P(long threadId, long parentMessageId, int begin,
-		int end) throws SystemException {
+	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
+		int begin, int end) throws SystemException {
 		return findByT_P(threadId, parentMessageId, begin, end, null);
 	}
 
-	public List findByT_P(long threadId, long parentMessageId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByT_P";
@@ -1652,7 +1662,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentMessageId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1668,13 +1679,13 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public MBMessage findByT_P_First(long threadId, long parentMessageId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List list = findByT_P(threadId, parentMessageId, 0, 1, obc);
+		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1691,7 +1702,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1699,7 +1710,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByT_P(threadId, parentMessageId);
 
-		List list = findByT_P(threadId, parentMessageId, count - 1, count, obc);
+		List<MBMessage> list = findByT_P(threadId, parentMessageId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1716,7 +1728,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
-			return (MBMessage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1784,8 +1796,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBMessage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1803,8 +1815,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBMessage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1824,15 +1837,16 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<MBMessage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<MBMessage> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<MBMessage> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1877,7 +1891,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1897,45 +1912,45 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<MBMessage>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<MBMessage> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<MBMessage> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByCategoryId(long categoryId) throws SystemException {
-		Iterator itr = findByCategoryId(categoryId).iterator();
+		Iterator<MBMessage> itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByThreadId(long threadId) throws SystemException {
-		Iterator itr = findByThreadId(threadId).iterator();
+		Iterator<MBMessage> itr = findByThreadId(threadId).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
@@ -1943,10 +1958,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public void removeByC_T(long categoryId, long threadId)
 		throws SystemException {
-		Iterator itr = findByC_T(categoryId, threadId).iterator();
+		Iterator<MBMessage> itr = findByC_T(categoryId, threadId).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
@@ -1954,20 +1969,20 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public void removeByT_P(long threadId, long parentMessageId)
 		throws SystemException {
-		Iterator itr = findByT_P(threadId, parentMessageId).iterator();
+		Iterator<MBMessage> itr = findByT_P(threadId, parentMessageId).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage mbMessage = (MBMessage)itr.next();
+			MBMessage mbMessage = itr.next();
 
 			remove(mbMessage);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<MBMessage> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((MBMessage)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -2016,10 +2031,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2082,10 +2097,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2148,10 +2163,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2214,10 +2229,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2291,10 +2306,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2368,10 +2383,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2421,10 +2436,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

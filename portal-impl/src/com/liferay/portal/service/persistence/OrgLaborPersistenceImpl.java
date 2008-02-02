@@ -239,7 +239,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByOrganizationId(long organizationId)
+	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgLabor.class.getName();
@@ -279,7 +279,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, organizationId);
 
-				List list = q.list();
+				List<OrgLabor> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -295,17 +295,17 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgLabor>)result;
 		}
 	}
 
-	public List findByOrganizationId(long organizationId, int begin, int end)
-		throws SystemException {
+	public List<OrgLabor> findByOrganizationId(long organizationId, int begin,
+		int end) throws SystemException {
 		return findByOrganizationId(organizationId, begin, end, null);
 	}
 
-	public List findByOrganizationId(long organizationId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<OrgLabor> findByOrganizationId(long organizationId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgLabor.class.getName();
 		String finderMethodName = "findByOrganizationId";
@@ -360,7 +360,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, organizationId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgLabor> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -376,13 +376,13 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgLabor>)result;
 		}
 	}
 
 	public OrgLabor findByOrganizationId_First(long organizationId,
 		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
-		List list = findByOrganizationId(organizationId, 0, 1, obc);
+		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -396,7 +396,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgLaborException(msg.toString());
 		}
 		else {
-			return (OrgLabor)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -404,7 +404,8 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		int count = countByOrganizationId(organizationId);
 
-		List list = findByOrganizationId(organizationId, count - 1, count, obc);
+		List<OrgLabor> list = findByOrganizationId(organizationId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -418,7 +419,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgLaborException(msg.toString());
 		}
 		else {
-			return (OrgLabor)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -478,8 +479,8 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<OrgLabor> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -497,8 +498,9 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<OrgLabor> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -518,15 +520,15 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<OrgLabor> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<OrgLabor> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<OrgLabor> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgLabor.class.getName();
@@ -570,7 +572,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgLabor> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -590,26 +592,26 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgLabor>)result;
 		}
 	}
 
 	public void removeByOrganizationId(long organizationId)
 		throws SystemException {
-		Iterator itr = findByOrganizationId(organizationId).iterator();
+		Iterator<OrgLabor> itr = findByOrganizationId(organizationId).iterator();
 
 		while (itr.hasNext()) {
-			OrgLabor orgLabor = (OrgLabor)itr.next();
+			OrgLabor orgLabor = itr.next();
 
 			remove(orgLabor);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<OrgLabor> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((OrgLabor)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -651,10 +653,10 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -704,10 +706,10 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

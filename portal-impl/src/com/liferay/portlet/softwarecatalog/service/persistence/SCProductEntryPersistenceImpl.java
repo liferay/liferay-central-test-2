@@ -272,7 +272,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<SCProductEntry> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -312,7 +313,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<SCProductEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -328,16 +329,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<SCProductEntry> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<SCProductEntry> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
@@ -394,7 +395,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -410,14 +412,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
 	public SCProductEntry findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<SCProductEntry> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -431,7 +433,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -439,7 +441,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<SCProductEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -453,7 +455,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -515,7 +517,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<SCProductEntry> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -555,7 +558,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<SCProductEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -571,17 +574,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
+	public List<SCProductEntry> findByCompanyId(long companyId, int begin,
+		int end) throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCProductEntry> findByCompanyId(long companyId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -637,7 +640,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -653,14 +657,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
 	public SCProductEntry findByCompanyId_First(long companyId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<SCProductEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -674,7 +678,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -683,7 +687,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<SCProductEntry> list = findByCompanyId(companyId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -697,7 +702,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -759,7 +764,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_U(long groupId, long userId) throws SystemException {
+	public List<SCProductEntry> findByG_U(long groupId, long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByG_U";
@@ -807,7 +813,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<SCProductEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -823,17 +829,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
-		throws SystemException {
+	public List<SCProductEntry> findByG_U(long groupId, long userId, int begin,
+		int end) throws SystemException {
 		return findByG_U(groupId, userId, begin, end, null);
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<SCProductEntry> findByG_U(long groupId, long userId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findByG_U";
@@ -895,7 +901,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -911,14 +918,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
 	public SCProductEntry findByG_U_First(long groupId, long userId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
-		List list = findByG_U(groupId, userId, 0, 1, obc);
+		List<SCProductEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -935,7 +942,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -944,7 +951,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByG_U(groupId, userId);
 
-		List list = findByG_U(groupId, userId, count - 1, count, obc);
+		List<SCProductEntry> list = findByG_U(groupId, userId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -961,7 +969,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
-			return (SCProductEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1118,7 +1126,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, repoArtifactId);
 				}
 
-				List list = q.list();
+				List<SCProductEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1128,7 +1136,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (SCProductEntry)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1139,19 +1147,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<SCProductEntry> list = (List<SCProductEntry>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (SCProductEntry)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCProductEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1169,8 +1177,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCProductEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1190,16 +1199,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<SCProductEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<SCProductEntry> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<SCProductEntry> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
 		String finderMethodName = "findAll";
@@ -1243,7 +1253,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1263,25 +1274,25 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCProductEntry>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<SCProductEntry> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+			SCProductEntry scProductEntry = itr.next();
 
 			remove(scProductEntry);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<SCProductEntry> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+			SCProductEntry scProductEntry = itr.next();
 
 			remove(scProductEntry);
 		}
@@ -1289,10 +1300,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
-		Iterator itr = findByG_U(groupId, userId).iterator();
+		Iterator<SCProductEntry> itr = findByG_U(groupId, userId).iterator();
 
 		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = (SCProductEntry)itr.next();
+			SCProductEntry scProductEntry = itr.next();
 
 			remove(scProductEntry);
 		}
@@ -1306,10 +1317,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<SCProductEntry> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((SCProductEntry)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1351,10 +1362,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1417,10 +1428,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1491,10 +1502,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1580,10 +1591,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1633,10 +1644,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1661,17 +1672,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getSCLicenses(long pk)
-		throws NoSuchProductEntryException, SystemException {
+	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk) throws NoSuchProductEntryException, SystemException {
 		return getSCLicenses(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getSCLicenses(long pk, int begin, int end)
+	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk, int begin, int end)
 		throws NoSuchProductEntryException, SystemException {
 		return getSCLicenses(pk, begin, end, null);
 	}
 
-	public List getSCLicenses(long pk, int begin, int end, OrderByComparator obc)
+	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
@@ -1726,7 +1739,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1742,7 +1756,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)result;
 		}
 	}
 
@@ -1778,10 +1792,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1904,13 +1918,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addSCLicenses(long pk, List scLicenses)
+	public void addSCLicenses(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
 			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
 
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
@@ -1984,13 +1999,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeSCLicenses(long pk, List scLicenses)
+	public void removeSCLicenses(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
 			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
 
 				removeSCLicense.remove(pk, scLicense.getPrimaryKey());
 			}
@@ -2022,7 +2038,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setSCLicenses(long pk, List scLicenses)
+	public void setSCLicenses(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
@@ -2030,7 +2047,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			clearSCLicenses.clear(pk);
 
 			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = (com.liferay.portlet.softwarecatalog.model.SCLicense)scLicenses.get(i);
+				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
 
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
@@ -2073,12 +2090,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long productEntryId, long licenseId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(productEntryId), new Long(licenseId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;

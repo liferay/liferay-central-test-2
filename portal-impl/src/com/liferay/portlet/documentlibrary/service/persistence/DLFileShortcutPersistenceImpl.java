@@ -258,7 +258,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<DLFileShortcut> findByUuid(String uuid)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByUuid";
@@ -300,7 +301,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<DLFileShortcut> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -316,16 +317,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<DLFileShortcut> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<DLFileShortcut> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
@@ -382,7 +383,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -398,13 +400,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
 	public DLFileShortcut findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<DLFileShortcut> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -418,7 +420,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -426,7 +428,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<DLFileShortcut> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -440,7 +442,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -502,7 +504,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(long folderId) throws SystemException {
+	public List<DLFileShortcut> findByFolderId(long folderId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByFolderId";
@@ -537,7 +540,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = q.list();
+				List<DLFileShortcut> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -553,17 +556,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
-	public List findByFolderId(long folderId, int begin, int end)
+	public List<DLFileShortcut> findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(long folderId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<DLFileShortcut> findByFolderId(long folderId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByFolderId";
@@ -612,7 +615,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -628,14 +632,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
 	public DLFileShortcut findByFolderId_First(long folderId,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
-		List list = findByFolderId(folderId, 0, 1, obc);
+		List<DLFileShortcut> list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -649,7 +653,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -658,7 +662,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByFolderId(folderId);
 
-		List list = findByFolderId(folderId, count - 1, count, obc);
+		List<DLFileShortcut> list = findByFolderId(folderId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -672,7 +677,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -727,7 +732,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByTF_TN(long toFolderId, String toName)
+	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
@@ -778,7 +783,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, toName);
 				}
 
-				List list = q.list();
+				List<DLFileShortcut> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -794,17 +799,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
-	public List findByTF_TN(long toFolderId, String toName, int begin, int end)
-		throws SystemException {
+	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
+		int begin, int end) throws SystemException {
 		return findByTF_TN(toFolderId, toName, begin, end, null);
 	}
 
-	public List findByTF_TN(long toFolderId, String toName, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByTF_TN";
@@ -868,7 +873,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, toName);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -884,14 +890,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
 	public DLFileShortcut findByTF_TN_First(long toFolderId, String toName,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
-		List list = findByTF_TN(toFolderId, toName, 0, 1, obc);
+		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -908,7 +914,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -917,7 +923,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByTF_TN(toFolderId, toName);
 
-		List list = findByTF_TN(toFolderId, toName, count - 1, count, obc);
+		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -934,7 +941,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
-			return (DLFileShortcut)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1002,8 +1009,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<DLFileShortcut> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1021,8 +1028,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<DLFileShortcut> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1042,16 +1050,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<DLFileShortcut> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<DLFileShortcut> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<DLFileShortcut> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findAll";
@@ -1088,7 +1097,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1108,25 +1118,25 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<DLFileShortcut>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<DLFileShortcut> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+			DLFileShortcut dlFileShortcut = itr.next();
 
 			remove(dlFileShortcut);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator itr = findByFolderId(folderId).iterator();
+		Iterator<DLFileShortcut> itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+			DLFileShortcut dlFileShortcut = itr.next();
 
 			remove(dlFileShortcut);
 		}
@@ -1134,20 +1144,20 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 	public void removeByTF_TN(long toFolderId, String toName)
 		throws SystemException {
-		Iterator itr = findByTF_TN(toFolderId, toName).iterator();
+		Iterator<DLFileShortcut> itr = findByTF_TN(toFolderId, toName).iterator();
 
 		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+			DLFileShortcut dlFileShortcut = itr.next();
 
 			remove(dlFileShortcut);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<DLFileShortcut> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((DLFileShortcut)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1196,10 +1206,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1262,10 +1272,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1344,10 +1354,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1397,10 +1407,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

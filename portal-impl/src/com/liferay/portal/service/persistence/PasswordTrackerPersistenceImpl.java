@@ -245,7 +245,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<PasswordTracker> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordTracker.class.getName();
 		String finderMethodName = "findByUserId";
@@ -285,7 +286,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<PasswordTracker> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -301,16 +302,16 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PasswordTracker>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<PasswordTracker> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<PasswordTracker> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordTracker.class.getName();
@@ -367,7 +368,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PasswordTracker> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -383,13 +385,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PasswordTracker>)result;
 		}
 	}
 
 	public PasswordTracker findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<PasswordTracker> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -403,7 +405,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
-			return (PasswordTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -411,7 +413,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		throws NoSuchPasswordTrackerException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<PasswordTracker> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -425,7 +427,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
-			return (PasswordTracker)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -486,8 +488,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PasswordTracker> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -505,8 +507,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PasswordTracker> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -526,16 +529,17 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<PasswordTracker> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<PasswordTracker> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PasswordTracker> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordTracker.class.getName();
 		String finderMethodName = "findAll";
@@ -578,7 +582,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<PasswordTracker> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -598,25 +603,25 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<PasswordTracker>)result;
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<PasswordTracker> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
+			PasswordTracker passwordTracker = itr.next();
 
 			remove(passwordTracker);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<PasswordTracker> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((PasswordTracker)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -658,10 +663,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -711,10 +716,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

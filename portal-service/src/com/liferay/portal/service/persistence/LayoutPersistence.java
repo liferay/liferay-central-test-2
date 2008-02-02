@@ -58,13 +58,15 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByPrimaryKey(long plid)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -84,13 +86,15 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchLayoutException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -124,14 +128,17 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByIconImageId(long iconImageId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout)
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout findByG_P_First(long groupId,
@@ -161,16 +168,17 @@ public interface LayoutPersistence {
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout findByG_P_P_First(long groupId,
@@ -200,21 +208,22 @@ public interface LayoutPersistence {
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Layout> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Layout> findAll(int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> findAll(int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

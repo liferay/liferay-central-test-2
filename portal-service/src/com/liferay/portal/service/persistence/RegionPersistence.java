@@ -58,13 +58,15 @@ public interface RegionPersistence {
 	public com.liferay.portal.model.Region fetchByPrimaryKey(long regionId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCountryId(long countryId)
+	public java.util.List<com.liferay.portal.model.Region> findByCountryId(
+		long countryId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Region> findByCountryId(
+		long countryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCountryId(long countryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCountryId(long countryId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Region> findByCountryId(
+		long countryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -84,13 +86,15 @@ public interface RegionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRegionException;
 
-	public java.util.List findByActive(boolean active)
+	public java.util.List<com.liferay.portal.model.Region> findByActive(
+		boolean active) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Region> findByActive(
+		boolean active, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByActive(boolean active, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByActive(boolean active, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Region> findByActive(
+		boolean active, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -110,14 +114,17 @@ public interface RegionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRegionException;
 
-	public java.util.List findByC_A(long countryId, boolean active)
+	public java.util.List<com.liferay.portal.model.Region> findByC_A(
+		long countryId, boolean active)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_A(long countryId, boolean active, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Region> findByC_A(
+		long countryId, boolean active, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_A(long countryId, boolean active, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Region> findByC_A(
+		long countryId, boolean active, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Region findByC_A_First(long countryId,
@@ -136,21 +143,22 @@ public interface RegionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRegionException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Region> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Region> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Region> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Region> findAll(int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Region> findAll(int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCountryId(long countryId)

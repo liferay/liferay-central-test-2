@@ -247,7 +247,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<OrgGroupPermission> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupPermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupPermission.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -282,7 +283,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<OrgGroupPermission> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -298,17 +299,17 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupPermission>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
+	public List<OrgGroupPermission> findByGroupId(long groupId, int begin,
+		int end) throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<OrgGroupPermission> findByGroupId(long groupId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupPermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupPermission.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -357,7 +358,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -373,14 +375,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupPermission>)result;
 		}
 	}
 
 	public OrgGroupPermission findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -394,7 +396,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
-			return (OrgGroupPermission)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -403,7 +405,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<OrgGroupPermission> list = findByGroupId(groupId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -417,7 +420,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
-			return (OrgGroupPermission)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -473,7 +476,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByPermissionId(long permissionId) throws SystemException {
+	public List<OrgGroupPermission> findByPermissionId(long permissionId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupPermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupPermission.class.getName();
 		String finderMethodName = "findByPermissionId";
@@ -508,7 +512,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, permissionId);
 
-				List list = q.list();
+				List<OrgGroupPermission> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -524,17 +528,17 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupPermission>)result;
 		}
 	}
 
-	public List findByPermissionId(long permissionId, int begin, int end)
-		throws SystemException {
+	public List<OrgGroupPermission> findByPermissionId(long permissionId,
+		int begin, int end) throws SystemException {
 		return findByPermissionId(permissionId, begin, end, null);
 	}
 
-	public List findByPermissionId(long permissionId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<OrgGroupPermission> findByPermissionId(long permissionId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupPermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupPermission.class.getName();
 		String finderMethodName = "findByPermissionId";
@@ -583,7 +587,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, permissionId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -599,14 +604,15 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupPermission>)result;
 		}
 	}
 
 	public OrgGroupPermission findByPermissionId_First(long permissionId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		List list = findByPermissionId(permissionId, 0, 1, obc);
+		List<OrgGroupPermission> list = findByPermissionId(permissionId, 0, 1,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -620,7 +626,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
-			return (OrgGroupPermission)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -629,7 +635,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByPermissionId(permissionId);
 
-		List list = findByPermissionId(permissionId, count - 1, count, obc);
+		List<OrgGroupPermission> list = findByPermissionId(permissionId,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -643,7 +650,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
-			return (OrgGroupPermission)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -699,8 +706,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<OrgGroupPermission> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -718,8 +725,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<OrgGroupPermission> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -739,16 +747,17 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<OrgGroupPermission> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<OrgGroupPermission> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<OrgGroupPermission> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupPermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupPermission.class.getName();
 		String finderMethodName = "findAll";
@@ -785,7 +794,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -805,15 +815,15 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<OrgGroupPermission>)result;
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<OrgGroupPermission> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
+			OrgGroupPermission orgGroupPermission = itr.next();
 
 			remove(orgGroupPermission);
 		}
@@ -821,20 +831,21 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 	public void removeByPermissionId(long permissionId)
 		throws SystemException {
-		Iterator itr = findByPermissionId(permissionId).iterator();
+		Iterator<OrgGroupPermission> itr = findByPermissionId(permissionId)
+											   .iterator();
 
 		while (itr.hasNext()) {
-			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
+			OrgGroupPermission orgGroupPermission = itr.next();
 
 			remove(orgGroupPermission);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<OrgGroupPermission> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((OrgGroupPermission)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -876,10 +887,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -942,10 +953,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -995,10 +1006,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

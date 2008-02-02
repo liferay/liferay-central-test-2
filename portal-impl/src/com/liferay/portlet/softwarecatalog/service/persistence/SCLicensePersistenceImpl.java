@@ -268,7 +268,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByActive(boolean active) throws SystemException {
+	public List<SCLicense> findByActive(boolean active)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByActive";
@@ -307,7 +308,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = q.list();
+				List<SCLicense> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -323,16 +324,16 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCLicense>)result;
 		}
 	}
 
-	public List findByActive(boolean active, int begin, int end)
+	public List<SCLicense> findByActive(boolean active, int begin, int end)
 		throws SystemException {
 		return findByActive(active, begin, end, null);
 	}
 
-	public List findByActive(boolean active, int begin, int end,
+	public List<SCLicense> findByActive(boolean active, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
@@ -388,7 +389,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -404,13 +406,13 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCLicense>)result;
 		}
 	}
 
 	public SCLicense findByActive_First(boolean active, OrderByComparator obc)
 		throws NoSuchLicenseException, SystemException {
-		List list = findByActive(active, 0, 1, obc);
+		List<SCLicense> list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -424,7 +426,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
-			return (SCLicense)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -432,7 +434,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		throws NoSuchLicenseException, SystemException {
 		int count = countByActive(active);
 
-		List list = findByActive(active, count - 1, count, obc);
+		List<SCLicense> list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -446,7 +448,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
-			return (SCLicense)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -506,7 +508,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByA_R(boolean active, boolean recommended)
+	public List<SCLicense> findByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
@@ -556,7 +558,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, recommended);
 
-				List list = q.list();
+				List<SCLicense> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -572,17 +574,17 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCLicense>)result;
 		}
 	}
 
-	public List findByA_R(boolean active, boolean recommended, int begin,
-		int end) throws SystemException {
+	public List<SCLicense> findByA_R(boolean active, boolean recommended,
+		int begin, int end) throws SystemException {
 		return findByA_R(active, recommended, begin, end, null);
 	}
 
-	public List findByA_R(boolean active, boolean recommended, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<SCLicense> findByA_R(boolean active, boolean recommended,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByA_R";
@@ -643,7 +645,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, recommended);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -659,13 +662,13 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCLicense>)result;
 		}
 	}
 
 	public SCLicense findByA_R_First(boolean active, boolean recommended,
 		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
-		List list = findByA_R(active, recommended, 0, 1, obc);
+		List<SCLicense> list = findByA_R(active, recommended, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -682,7 +685,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
-			return (SCLicense)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -690,7 +693,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
 		int count = countByA_R(active, recommended);
 
-		List list = findByA_R(active, recommended, count - 1, count, obc);
+		List<SCLicense> list = findByA_R(active, recommended, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -707,7 +711,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
-			return (SCLicense)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -774,8 +778,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCLicense> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -793,8 +797,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCLicense> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -814,15 +819,16 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<SCLicense> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<SCLicense> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<SCLicense> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
@@ -866,7 +872,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -886,15 +893,15 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<SCLicense>)result;
 		}
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator itr = findByActive(active).iterator();
+		Iterator<SCLicense> itr = findByActive(active).iterator();
 
 		while (itr.hasNext()) {
-			SCLicense scLicense = (SCLicense)itr.next();
+			SCLicense scLicense = itr.next();
 
 			remove(scLicense);
 		}
@@ -902,20 +909,20 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void removeByA_R(boolean active, boolean recommended)
 		throws SystemException {
-		Iterator itr = findByA_R(active, recommended).iterator();
+		Iterator<SCLicense> itr = findByA_R(active, recommended).iterator();
 
 		while (itr.hasNext()) {
-			SCLicense scLicense = (SCLicense)itr.next();
+			SCLicense scLicense = itr.next();
 
 			remove(scLicense);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<SCLicense> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((SCLicense)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -957,10 +964,10 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1034,10 +1041,10 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1087,10 +1094,10 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1115,18 +1122,20 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getSCProductEntries(long pk)
-		throws NoSuchLicenseException, SystemException {
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk) throws NoSuchLicenseException, SystemException {
 		return getSCProductEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getSCProductEntries(long pk, int begin, int end)
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk, int begin, int end)
 		throws NoSuchLicenseException, SystemException {
 		return getSCProductEntries(pk, begin, end, null);
 	}
 
-	public List getSCProductEntries(long pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
+	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchLicenseException, SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
 		String finderClassName = "SCLicenses_SCProductEntries";
@@ -1181,7 +1190,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list =
+					QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1197,7 +1207,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)result;
 		}
 	}
 
@@ -1233,10 +1243,10 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1363,14 +1373,15 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addSCProductEntries(long pk, List scProductEntries)
+	public void addSCProductEntries(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws NoSuchLicenseException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
 			for (int i = 0; i < scProductEntries.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					(com.liferay.portlet.softwarecatalog.model.SCProductEntry)scProductEntries.get(i);
+					scProductEntries.get(i);
 
 				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
 			}
@@ -1444,14 +1455,15 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeSCProductEntries(long pk, List scProductEntries)
+	public void removeSCProductEntries(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws NoSuchLicenseException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
 			for (int i = 0; i < scProductEntries.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					(com.liferay.portlet.softwarecatalog.model.SCProductEntry)scProductEntries.get(i);
+					scProductEntries.get(i);
 
 				removeSCProductEntry.remove(pk, scProductEntry.getPrimaryKey());
 			}
@@ -1483,7 +1495,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setSCProductEntries(long pk, List scProductEntries)
+	public void setSCProductEntries(long pk,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws NoSuchLicenseException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
@@ -1492,7 +1505,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 			for (int i = 0; i < scProductEntries.size(); i++) {
 				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					(com.liferay.portlet.softwarecatalog.model.SCProductEntry)scProductEntries.get(i);
+					scProductEntries.get(i);
 
 				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
 			}
@@ -1535,12 +1548,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long licenseId, long productEntryId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(licenseId), new Long(productEntryId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;

@@ -246,7 +246,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByBuildNamespace(String buildNamespace)
+	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
@@ -294,7 +294,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, buildNamespace);
 				}
 
-				List list = q.list();
+				List<ServiceComponent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -310,17 +310,17 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ServiceComponent>)result;
 		}
 	}
 
-	public List findByBuildNamespace(String buildNamespace, int begin, int end)
-		throws SystemException {
+	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
+		int begin, int end) throws SystemException {
 		return findByBuildNamespace(buildNamespace, begin, end, null);
 	}
 
-	public List findByBuildNamespace(String buildNamespace, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findByBuildNamespace";
@@ -383,7 +383,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, buildNamespace);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ServiceComponent> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -399,14 +400,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ServiceComponent>)result;
 		}
 	}
 
 	public ServiceComponent findByBuildNamespace_First(String buildNamespace,
 		OrderByComparator obc)
 		throws NoSuchServiceComponentException, SystemException {
-		List list = findByBuildNamespace(buildNamespace, 0, 1, obc);
+		List<ServiceComponent> list = findByBuildNamespace(buildNamespace, 0,
+				1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -420,7 +422,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
-			return (ServiceComponent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -429,7 +431,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		throws NoSuchServiceComponentException, SystemException {
 		int count = countByBuildNamespace(buildNamespace);
 
-		List list = findByBuildNamespace(buildNamespace, count - 1, count, obc);
+		List<ServiceComponent> list = findByBuildNamespace(buildNamespace,
+				count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -443,7 +446,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
-			return (ServiceComponent)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -596,7 +599,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, buildNumber);
 
-				List list = q.list();
+				List<ServiceComponent> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -606,7 +609,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (ServiceComponent)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -617,19 +620,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<ServiceComponent> list = (List<ServiceComponent>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (ServiceComponent)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ServiceComponent> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -647,8 +650,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ServiceComponent> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -668,16 +672,17 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ServiceComponent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ServiceComponent> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ServiceComponent> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findAll";
@@ -720,7 +725,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ServiceComponent> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -740,16 +746,17 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ServiceComponent>)result;
 		}
 	}
 
 	public void removeByBuildNamespace(String buildNamespace)
 		throws SystemException {
-		Iterator itr = findByBuildNamespace(buildNamespace).iterator();
+		Iterator<ServiceComponent> itr = findByBuildNamespace(buildNamespace)
+											 .iterator();
 
 		while (itr.hasNext()) {
-			ServiceComponent serviceComponent = (ServiceComponent)itr.next();
+			ServiceComponent serviceComponent = itr.next();
 
 			remove(serviceComponent);
 		}
@@ -764,10 +771,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ServiceComponent> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ServiceComponent)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -817,10 +824,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -899,10 +906,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -952,10 +959,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -250,7 +250,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<IGImage> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
 		String finderMethodName = "findByUuid";
@@ -296,7 +296,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -312,16 +312,16 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGImage>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<IGImage> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<IGImage> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -384,7 +384,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -400,13 +400,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGImage>)result;
 		}
 	}
 
 	public IGImage findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<IGImage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -420,7 +420,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (IGImage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -428,7 +428,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		throws NoSuchImageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<IGImage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -442,7 +442,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (IGImage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -508,7 +508,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(long folderId) throws SystemException {
+	public List<IGImage> findByFolderId(long folderId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
 		String finderMethodName = "findByFolderId";
@@ -547,7 +548,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -563,16 +564,16 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGImage>)result;
 		}
 	}
 
-	public List findByFolderId(long folderId, int begin, int end)
+	public List<IGImage> findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(long folderId, int begin, int end,
+	public List<IGImage> findByFolderId(long folderId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -628,7 +629,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -644,13 +645,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGImage>)result;
 		}
 	}
 
 	public IGImage findByFolderId_First(long folderId, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
-		List list = findByFolderId(folderId, 0, 1, obc);
+		List<IGImage> list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -664,7 +665,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (IGImage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -672,7 +673,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		throws NoSuchImageException, SystemException {
 		int count = countByFolderId(folderId);
 
-		List list = findByFolderId(folderId, count - 1, count, obc);
+		List<IGImage> list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -686,7 +687,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			throw new NoSuchImageException(msg.toString());
 		}
 		else {
-			return (IGImage)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -808,7 +809,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, smallImageId);
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -818,7 +819,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (IGImage)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -829,13 +830,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<IGImage> list = (List<IGImage>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (IGImage)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -903,7 +904,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, largeImageId);
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -913,7 +914,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (IGImage)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -924,13 +925,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<IGImage> list = (List<IGImage>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (IGImage)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -998,7 +999,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, custom1ImageId);
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1008,7 +1009,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (IGImage)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1019,13 +1020,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<IGImage> list = (List<IGImage>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (IGImage)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -1093,7 +1094,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, custom2ImageId);
 
-				List list = q.list();
+				List<IGImage> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1103,7 +1104,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (IGImage)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -1114,19 +1115,19 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<IGImage> list = (List<IGImage>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (IGImage)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<IGImage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1144,8 +1145,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<IGImage> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1165,15 +1167,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<IGImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<IGImage> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<IGImage> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -1217,7 +1219,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1237,25 +1239,25 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGImage>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<IGImage> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			IGImage igImage = (IGImage)itr.next();
+			IGImage igImage = itr.next();
 
 			remove(igImage);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator itr = findByFolderId(folderId).iterator();
+		Iterator<IGImage> itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
-			IGImage igImage = (IGImage)itr.next();
+			IGImage igImage = itr.next();
 
 			remove(igImage);
 		}
@@ -1290,10 +1292,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<IGImage> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((IGImage)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1342,10 +1344,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1408,10 +1410,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1474,10 +1476,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1540,10 +1542,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1607,10 +1609,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1674,10 +1676,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1727,10 +1729,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

@@ -6,12 +6,24 @@ public interface ${entity.name}Persistence {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic()>
-			public ${method.returns.value}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
+			public ${method.returns.value}
+
+			<#if method.getReturnsGenericName() != "">
+				<${method.getReturnsGenericName()}>
+			</#if>
+
+			${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#assign parameters = method.parameters>
 
 			<#list parameters as parameter>
-				${parameter.type.value}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
+				${parameter.type.value}
+
+				<#if parameter.getGenericName() != "">
+					<${parameter.getGenericName()}>
+				</#if>
+
+				${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

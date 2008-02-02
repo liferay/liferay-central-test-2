@@ -266,7 +266,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<TagsAsset> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsAsset.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -301,7 +302,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<TagsAsset> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -317,16 +318,16 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<TagsAsset>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<TagsAsset> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<TagsAsset> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsAsset.class.getName();
@@ -376,7 +377,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<TagsAsset> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -392,13 +394,13 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<TagsAsset>)result;
 		}
 	}
 
 	public TagsAsset findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchAssetException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<TagsAsset> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -412,7 +414,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			throw new NoSuchAssetException(msg.toString());
 		}
 		else {
-			return (TagsAsset)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -420,7 +422,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		throws NoSuchAssetException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<TagsAsset> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -434,7 +436,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			throw new NoSuchAssetException(msg.toString());
 		}
 		else {
-			return (TagsAsset)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -560,7 +562,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<TagsAsset> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -570,7 +572,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (TagsAsset)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -581,19 +583,19 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<TagsAsset> list = (List<TagsAsset>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (TagsAsset)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<TagsAsset> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -611,8 +613,9 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<TagsAsset> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -632,15 +635,16 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<TagsAsset> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<TagsAsset> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<TagsAsset> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsAsset.class.getName();
@@ -677,7 +681,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<TagsAsset> list = QueryUtil.list(q, getDialect(), begin,
+						end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -697,15 +702,15 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<TagsAsset>)result;
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<TagsAsset> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			TagsAsset tagsAsset = (TagsAsset)itr.next();
+			TagsAsset tagsAsset = itr.next();
 
 			remove(tagsAsset);
 		}
@@ -719,10 +724,10 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<TagsAsset> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((TagsAsset)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -764,10 +769,10 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -841,10 +846,10 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -894,10 +899,10 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -922,18 +927,20 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getTagsEntries(long pk)
-		throws NoSuchAssetException, SystemException {
+	public List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
+		long pk) throws NoSuchAssetException, SystemException {
 		return getTagsEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getTagsEntries(long pk, int begin, int end)
+	public List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
+		long pk, int begin, int end)
 		throws NoSuchAssetException, SystemException {
 		return getTagsEntries(pk, begin, end, null);
 	}
 
-	public List getTagsEntries(long pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchAssetException, SystemException {
+	public List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
+		long pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchAssetException, SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 
 		String finderClassName = "TagsAssets_TagsEntries";
@@ -987,7 +994,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portlet.tags.model.TagsEntry> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1003,7 +1011,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portlet.tags.model.TagsEntry>)result;
 		}
 	}
 
@@ -1039,10 +1047,10 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1162,12 +1170,13 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addTagsEntries(long pk, List tagsEntries)
+	public void addTagsEntries(long pk,
+		List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
 		throws NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException, SystemException {
 		try {
 			for (int i = 0; i < tagsEntries.size(); i++) {
-				com.liferay.portlet.tags.model.TagsEntry tagsEntry = (com.liferay.portlet.tags.model.TagsEntry)tagsEntries.get(i);
+				com.liferay.portlet.tags.model.TagsEntry tagsEntry = tagsEntries.get(i);
 
 				addTagsEntry.add(pk, tagsEntry.getPrimaryKey());
 			}
@@ -1238,12 +1247,13 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeTagsEntries(long pk, List tagsEntries)
+	public void removeTagsEntries(long pk,
+		List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
 		throws NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException, SystemException {
 		try {
 			for (int i = 0; i < tagsEntries.size(); i++) {
-				com.liferay.portlet.tags.model.TagsEntry tagsEntry = (com.liferay.portlet.tags.model.TagsEntry)tagsEntries.get(i);
+				com.liferay.portlet.tags.model.TagsEntry tagsEntry = tagsEntries.get(i);
 
 				removeTagsEntry.remove(pk, tagsEntry.getPrimaryKey());
 			}
@@ -1274,14 +1284,15 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setTagsEntries(long pk, List tagsEntries)
+	public void setTagsEntries(long pk,
+		List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
 		throws NoSuchAssetException,
 			com.liferay.portlet.tags.NoSuchEntryException, SystemException {
 		try {
 			clearTagsEntries.clear(pk);
 
 			for (int i = 0; i < tagsEntries.size(); i++) {
-				com.liferay.portlet.tags.model.TagsEntry tagsEntry = (com.liferay.portlet.tags.model.TagsEntry)tagsEntries.get(i);
+				com.liferay.portlet.tags.model.TagsEntry tagsEntry = tagsEntries.get(i);
 
 				addTagsEntry.add(pk, tagsEntry.getPrimaryKey());
 			}
@@ -1323,12 +1334,12 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long assetId, long entryId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(assetId), new Long(entryId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;

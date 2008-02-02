@@ -245,7 +245,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C(long classNameId, long classPK)
+	public List<RatingsEntry> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RatingsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = RatingsEntry.class.getName();
@@ -291,7 +291,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<RatingsEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -307,17 +307,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<RatingsEntry>)result;
 		}
 	}
 
-	public List findByC_C(long classNameId, long classPK, int begin, int end)
-		throws SystemException {
+	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
+		int begin, int end) throws SystemException {
 		return findByC_C(classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C(long classNameId, long classPK, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RatingsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = RatingsEntry.class.getName();
 		String finderMethodName = "findByC_C";
@@ -372,7 +372,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<RatingsEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -388,13 +389,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<RatingsEntry>)result;
 		}
 	}
 
 	public RatingsEntry findByC_C_First(long classNameId, long classPK,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List list = findByC_C(classNameId, classPK, 0, 1, obc);
+		List<RatingsEntry> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -411,7 +412,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (RatingsEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -419,7 +420,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		int count = countByC_C(classNameId, classPK);
 
-		List list = findByC_C(classNameId, classPK, count - 1, count, obc);
+		List<RatingsEntry> list = findByC_C(classNameId, classPK, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -436,7 +438,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
-			return (RatingsEntry)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -578,7 +580,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<RatingsEntry> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -588,7 +590,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (RatingsEntry)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -599,19 +601,19 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<RatingsEntry> list = (List<RatingsEntry>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (RatingsEntry)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<RatingsEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -629,8 +631,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<RatingsEntry> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -650,15 +653,16 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<RatingsEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<RatingsEntry> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<RatingsEntry> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RatingsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = RatingsEntry.class.getName();
@@ -696,7 +700,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<RatingsEntry> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -716,16 +721,16 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<RatingsEntry>)result;
 		}
 	}
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C(classNameId, classPK).iterator();
+		Iterator<RatingsEntry> itr = findByC_C(classNameId, classPK).iterator();
 
 		while (itr.hasNext()) {
-			RatingsEntry ratingsEntry = (RatingsEntry)itr.next();
+			RatingsEntry ratingsEntry = itr.next();
 
 			remove(ratingsEntry);
 		}
@@ -739,10 +744,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<RatingsEntry> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((RatingsEntry)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -795,10 +800,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -878,10 +883,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -931,10 +936,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

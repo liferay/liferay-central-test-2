@@ -61,13 +61,15 @@ public interface DLFileRankPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchByPrimaryKey(
 		long fileRankId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,14 +89,17 @@ public interface DLFileRankPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByF_N(long folderId, java.lang.String name,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank findByF_N_First(
@@ -124,21 +129,22 @@ public interface DLFileRankPersistence {
 		long companyId, long userId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUserId(long userId)

@@ -61,13 +61,15 @@ public interface BlogsStatsUserPersistence {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByPrimaryKey(
 		long statsUserId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,13 +89,15 @@ public interface BlogsStatsUserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -121,14 +125,16 @@ public interface BlogsStatsUserPersistence {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_E(long groupId, int entryCount)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+		long groupId, int entryCount) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+		long groupId, int entryCount, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_E(long groupId, int entryCount, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_E(long groupId, int entryCount, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
+		long groupId, int entryCount, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByG_E_First(
@@ -149,14 +155,17 @@ public interface BlogsStatsUserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public java.util.List findByC_E(long companyId, int entryCount)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+		long companyId, int entryCount)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_E(long companyId, int entryCount, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+		long companyId, int entryCount, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_E(long companyId, int entryCount, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByC_E(
+		long companyId, int entryCount, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByC_E_First(
@@ -177,21 +186,22 @@ public interface BlogsStatsUserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

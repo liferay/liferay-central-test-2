@@ -59,13 +59,15 @@ public interface ShoppingOrderPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
 		long orderId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -93,17 +95,17 @@ public interface ShoppingOrderPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
 		java.lang.String number) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_First(
@@ -125,21 +127,22 @@ public interface ShoppingOrderPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

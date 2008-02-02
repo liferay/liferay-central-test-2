@@ -59,13 +59,15 @@ public interface PermissionPersistence {
 	public com.liferay.portal.model.Permission fetchByPrimaryKey(
 		long permissionId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByResourceId(long resourceId)
+	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByResourceId(long resourceId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByResourceId(long resourceId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -94,21 +96,22 @@ public interface PermissionPersistence {
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Permission> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Permission> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Permission> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByResourceId(long resourceId)
@@ -128,16 +131,17 @@ public interface PermissionPersistence {
 
 	public int countAll() throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroups(long pk)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getGroups(long pk, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getGroups(long pk, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
@@ -164,7 +168,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void addGroups(long pk, java.util.List groups)
+	public void addGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
@@ -188,7 +193,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void removeGroups(long pk, java.util.List groups)
+	public void removeGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
@@ -198,21 +204,23 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void setGroups(long pk, java.util.List groups)
+	public void setGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getRoles(long pk)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getRoles(long pk, int begin, int end)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getRoles(long pk, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
@@ -239,7 +247,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void addRoles(long pk, java.util.List roles)
+	public void addRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
@@ -263,7 +272,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void removeRoles(long pk, java.util.List roles)
+	public void removeRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
@@ -273,21 +283,23 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public void setRoles(long pk, java.util.List roles)
+	public void setRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getUsers(long pk)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getUsers(long pk, int begin, int end)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
-	public java.util.List getUsers(long pk, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException;
 
@@ -314,7 +326,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void addUsers(long pk, java.util.List users)
+	public void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;
@@ -338,7 +351,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void removeUsers(long pk, java.util.List users)
+	public void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;
@@ -348,7 +362,8 @@ public interface PermissionPersistence {
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;
 
-	public void setUsers(long pk, java.util.List users)
+	public void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchUserException;

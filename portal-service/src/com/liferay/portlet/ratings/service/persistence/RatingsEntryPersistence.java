@@ -59,14 +59,17 @@ public interface RatingsEntryPersistence {
 	public com.liferay.portlet.ratings.model.RatingsEntry fetchByPrimaryKey(
 		long entryId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
+		long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
+		long classNameId, long classPK, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
@@ -96,21 +99,22 @@ public interface RatingsEntryPersistence {
 		long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)

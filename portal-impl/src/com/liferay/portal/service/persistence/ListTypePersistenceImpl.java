@@ -238,7 +238,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByType(String type) throws SystemException {
+	public List<ListType> findByType(String type) throws SystemException {
 		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
 		String finderClassName = ListType.class.getName();
 		String finderMethodName = "findByType";
@@ -283,7 +283,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List list = q.list();
+				List<ListType> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -299,16 +299,16 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ListType>)result;
 		}
 	}
 
-	public List findByType(String type, int begin, int end)
+	public List<ListType> findByType(String type, int begin, int end)
 		throws SystemException {
 		return findByType(type, begin, end, null);
 	}
 
-	public List findByType(String type, int begin, int end,
+	public List<ListType> findByType(String type, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
 		String finderClassName = ListType.class.getName();
@@ -370,7 +370,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ListType> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -386,13 +386,13 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ListType>)result;
 		}
 	}
 
 	public ListType findByType_First(String type, OrderByComparator obc)
 		throws NoSuchListTypeException, SystemException {
-		List list = findByType(type, 0, 1, obc);
+		List<ListType> list = findByType(type, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -406,7 +406,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
-			return (ListType)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -414,7 +414,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		throws NoSuchListTypeException, SystemException {
 		int count = countByType(type);
 
-		List list = findByType(type, count - 1, count, obc);
+		List<ListType> list = findByType(type, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -428,7 +428,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
-			return (ListType)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -493,8 +493,8 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ListType> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -512,8 +512,9 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ListType> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -533,15 +534,15 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<ListType> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<ListType> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<ListType> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
 		String finderClassName = ListType.class.getName();
@@ -584,7 +585,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ListType> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -604,25 +605,25 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<ListType>)result;
 		}
 	}
 
 	public void removeByType(String type) throws SystemException {
-		Iterator itr = findByType(type).iterator();
+		Iterator<ListType> itr = findByType(type).iterator();
 
 		while (itr.hasNext()) {
-			ListType listType = (ListType)itr.next();
+			ListType listType = itr.next();
 
 			remove(listType);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<ListType> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((ListType)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -670,10 +671,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -723,10 +724,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

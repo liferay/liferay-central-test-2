@@ -58,13 +58,15 @@ public interface ResourceCodePersistence {
 	public com.liferay.portal.model.ResourceCode fetchByPrimaryKey(long codeId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -84,13 +86,15 @@ public interface ResourceCodePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchResourceCodeException;
 
-	public java.util.List findByName(java.lang.String name)
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByName(
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByName(
+		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByName(java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByName(java.lang.String name, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ResourceCode> findByName(
+		java.lang.String name, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -121,21 +125,22 @@ public interface ResourceCodePersistence {
 		java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ResourceCode> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ResourceCode> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.ResourceCode> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.ResourceCode> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ResourceCode> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)

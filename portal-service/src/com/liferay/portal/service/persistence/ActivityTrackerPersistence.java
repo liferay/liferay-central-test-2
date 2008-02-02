@@ -61,13 +61,15 @@ public interface ActivityTrackerPersistence {
 	public com.liferay.portal.model.ActivityTracker fetchByPrimaryKey(
 		long activityTrackerId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -87,13 +89,15 @@ public interface ActivityTrackerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException;
 
-	public java.util.List findByCompanyId(long companyId)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByCompanyId(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCompanyId(long companyId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByCompanyId(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByCompanyId(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -113,13 +117,15 @@ public interface ActivityTrackerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException;
 
-	public java.util.List findByUserId(long userId)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserId(long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByUserId(long userId, int begin, int end,
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -139,14 +145,16 @@ public interface ActivityTrackerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException;
 
-	public java.util.List findByReceiverUserId(long receiverUserId)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByReceiverUserId(
+		long receiverUserId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByReceiverUserId(
+		long receiverUserId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByReceiverUserId(long receiverUserId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByReceiverUserId(long receiverUserId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByReceiverUserId(
+		long receiverUserId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ActivityTracker findByReceiverUserId_First(
@@ -167,14 +175,17 @@ public interface ActivityTrackerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException;
 
-	public java.util.List findByC_C(long classNameId, long classPK)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByC_C(
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByC_C(
+		long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByC_C(
+		long classNameId, long classPK, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ActivityTracker findByC_C_First(
@@ -195,21 +206,22 @@ public interface ActivityTrackerPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchActivityTrackerException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findWithDynamicQuery(
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll() throws com.liferay.portal.SystemException;
-
-	public java.util.List findAll(int begin, int end)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByGroupId(long groupId)

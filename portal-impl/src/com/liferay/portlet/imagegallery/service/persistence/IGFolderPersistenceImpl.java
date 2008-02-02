@@ -251,7 +251,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUuid(String uuid) throws SystemException {
+	public List<IGFolder> findByUuid(String uuid) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
 		String finderMethodName = "findByUuid";
@@ -298,7 +298,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = q.list();
+				List<IGFolder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -314,16 +314,16 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
-	public List findByUuid(String uuid, int begin, int end)
+	public List<IGFolder> findByUuid(String uuid, int begin, int end)
 		throws SystemException {
 		return findByUuid(uuid, begin, end, null);
 	}
 
-	public List findByUuid(String uuid, int begin, int end,
+	public List<IGFolder> findByUuid(String uuid, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
@@ -387,7 +387,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -403,13 +403,13 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
 	public IGFolder findByUuid_First(String uuid, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
-		List list = findByUuid(uuid, 0, 1, obc);
+		List<IGFolder> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -423,7 +423,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -431,7 +431,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		throws NoSuchFolderException, SystemException {
 		int count = countByUuid(uuid);
 
-		List list = findByUuid(uuid, count - 1, count, obc);
+		List<IGFolder> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -445,7 +445,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -594,7 +594,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<IGFolder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -604,7 +604,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (IGFolder)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -615,18 +615,18 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<IGFolder> list = (List<IGFolder>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (IGFolder)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<IGFolder> findByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -666,7 +666,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<IGFolder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -682,16 +682,16 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<IGFolder> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<IGFolder> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
@@ -748,7 +748,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -764,13 +764,13 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
 	public IGFolder findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<IGFolder> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -784,7 +784,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -792,7 +792,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		throws NoSuchFolderException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<IGFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -806,7 +806,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -866,7 +866,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCompanyId(long companyId) throws SystemException {
+	public List<IGFolder> findByCompanyId(long companyId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
 		String finderMethodName = "findByCompanyId";
@@ -906,7 +907,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = q.list();
+				List<IGFolder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -922,16 +923,16 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end)
+	public List<IGFolder> findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, begin, end, null);
 	}
 
-	public List findByCompanyId(long companyId, int begin, int end,
+	public List<IGFolder> findByCompanyId(long companyId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
@@ -988,7 +989,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1004,13 +1005,13 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
 	public IGFolder findByCompanyId_First(long companyId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+		List<IGFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1024,7 +1025,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1032,7 +1033,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		throws NoSuchFolderException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+		List<IGFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1046,7 +1047,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1107,7 +1108,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, long parentFolderId)
+	public List<IGFolder> findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
@@ -1158,7 +1159,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentFolderId);
 
-				List list = q.list();
+				List<IGFolder> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1174,17 +1175,17 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
-	public List findByG_P(long groupId, long parentFolderId, int begin, int end)
-		throws SystemException {
+	public List<IGFolder> findByG_P(long groupId, long parentFolderId,
+		int begin, int end) throws SystemException {
 		return findByG_P(groupId, parentFolderId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, long parentFolderId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<IGFolder> findByG_P(long groupId, long parentFolderId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
 		String finderMethodName = "findByG_P";
@@ -1246,7 +1247,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentFolderId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1262,13 +1263,13 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
 	public IGFolder findByG_P_First(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
+		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1285,7 +1286,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1293,7 +1294,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 
-		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
+		List<IGFolder> list = findByG_P(groupId, parentFolderId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1310,7 +1312,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
-			return (IGFolder)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1377,8 +1379,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<IGFolder> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1396,8 +1398,9 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<IGFolder> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1417,15 +1420,15 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<IGFolder> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<IGFolder> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<IGFolder> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = IGFolder.class.getName();
@@ -1470,7 +1473,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1490,15 +1493,15 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<IGFolder>)result;
 		}
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator itr = findByUuid(uuid).iterator();
+		Iterator<IGFolder> itr = findByUuid(uuid).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder igFolder = (IGFolder)itr.next();
+			IGFolder igFolder = itr.next();
 
 			remove(igFolder);
 		}
@@ -1512,20 +1515,20 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<IGFolder> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder igFolder = (IGFolder)itr.next();
+			IGFolder igFolder = itr.next();
 
 			remove(igFolder);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
+		Iterator<IGFolder> itr = findByCompanyId(companyId).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder igFolder = (IGFolder)itr.next();
+			IGFolder igFolder = itr.next();
 
 			remove(igFolder);
 		}
@@ -1533,20 +1536,20 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
+		Iterator<IGFolder> itr = findByG_P(groupId, parentFolderId).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder igFolder = (IGFolder)itr.next();
+			IGFolder igFolder = itr.next();
 
 			remove(igFolder);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<IGFolder> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((IGFolder)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1595,10 +1598,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1677,10 +1680,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1743,10 +1746,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1809,10 +1812,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1886,10 +1889,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1939,10 +1942,10 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {

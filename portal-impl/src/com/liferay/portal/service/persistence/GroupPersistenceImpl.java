@@ -364,7 +364,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, liveGroupId);
 
-				List list = q.list();
+				List<Group> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -374,7 +374,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Group)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -385,13 +385,13 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Group> list = (List<Group>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Group)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -476,7 +476,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List list = q.list();
+				List<Group> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -486,7 +486,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Group)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -497,13 +497,13 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Group> list = (List<Group>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Group)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -588,7 +588,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, friendlyURL);
 				}
 
-				List list = q.list();
+				List<Group> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -598,7 +598,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Group)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -609,13 +609,13 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Group> list = (List<Group>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Group)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
@@ -704,7 +704,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List list = q.list();
+				List<Group> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -714,7 +714,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					return null;
 				}
 				else {
-					return (Group)list.get(0);
+					return list.get(0);
 				}
 			}
 			catch (Exception e) {
@@ -725,19 +725,19 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			List<Group> list = (List<Group>)result;
 
 			if (list.size() == 0) {
 				return null;
 			}
 			else {
-				return (Group)list.get(0);
+				return list.get(0);
 			}
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Group> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -755,8 +755,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Group> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -776,15 +777,15 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<Group> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<Group> findAll(int begin, int end) throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<Group> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
@@ -827,7 +828,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Group> list = QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -847,7 +848,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Group>)result;
 		}
 	}
 
@@ -880,10 +881,10 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<Group> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((Group)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -924,10 +925,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1005,10 +1006,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1086,10 +1087,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1168,10 +1169,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1221,10 +1222,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1249,18 +1250,20 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getOrganizations(long pk)
+	public List<com.liferay.portal.model.Organization> getOrganizations(long pk)
 		throws NoSuchGroupException, SystemException {
 		return getOrganizations(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getOrganizations(long pk, int begin, int end)
+	public List<com.liferay.portal.model.Organization> getOrganizations(
+		long pk, int begin, int end)
 		throws NoSuchGroupException, SystemException {
 		return getOrganizations(pk, begin, end, null);
 	}
 
-	public List getOrganizations(long pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.Organization> getOrganizations(
+		long pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 
 		String finderClassName = "Groups_Orgs";
@@ -1314,7 +1317,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portal.model.Organization> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1330,7 +1334,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portal.model.Organization>)result;
 		}
 	}
 
@@ -1366,10 +1370,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1493,12 +1497,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addOrganizations(long pk, List organizations)
+	public void addOrganizations(long pk,
+		List<com.liferay.portal.model.Organization> organizations)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizations.size(); i++) {
-				com.liferay.portal.model.Organization organization = (com.liferay.portal.model.Organization)organizations.get(i);
+				com.liferay.portal.model.Organization organization = organizations.get(i);
 
 				addOrganization.add(pk, organization.getPrimaryKey());
 			}
@@ -1569,12 +1574,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeOrganizations(long pk, List organizations)
+	public void removeOrganizations(long pk,
+		List<com.liferay.portal.model.Organization> organizations)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			for (int i = 0; i < organizations.size(); i++) {
-				com.liferay.portal.model.Organization organization = (com.liferay.portal.model.Organization)organizations.get(i);
+				com.liferay.portal.model.Organization organization = organizations.get(i);
 
 				removeOrganization.remove(pk, organization.getPrimaryKey());
 			}
@@ -1605,14 +1611,15 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setOrganizations(long pk, List organizations)
+	public void setOrganizations(long pk,
+		List<com.liferay.portal.model.Organization> organizations)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException, SystemException {
 		try {
 			clearOrganizations.clear(pk);
 
 			for (int i = 0; i < organizations.size(); i++) {
-				com.liferay.portal.model.Organization organization = (com.liferay.portal.model.Organization)organizations.get(i);
+				com.liferay.portal.model.Organization organization = organizations.get(i);
 
 				addOrganization.add(pk, organization.getPrimaryKey());
 			}
@@ -1625,18 +1632,19 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getPermissions(long pk)
+	public List<com.liferay.portal.model.Permission> getPermissions(long pk)
 		throws NoSuchGroupException, SystemException {
 		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getPermissions(long pk, int begin, int end)
-		throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
+		int begin, int end) throws NoSuchGroupException, SystemException {
 		return getPermissions(pk, begin, end, null);
 	}
 
-	public List getPermissions(long pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
+		int begin, int end, OrderByComparator obc)
+		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 
 		String finderClassName = "Groups_Permissions";
@@ -1684,7 +1692,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portal.model.Permission> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1700,7 +1709,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portal.model.Permission>)result;
 		}
 	}
 
@@ -1736,10 +1745,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1859,12 +1868,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addPermissions(long pk, List permissions)
+	public void addPermissions(long pk,
+		List<com.liferay.portal.model.Permission> permissions)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				com.liferay.portal.model.Permission permission = permissions.get(i);
 
 				addPermission.add(pk, permission.getPrimaryKey());
 			}
@@ -1935,12 +1945,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removePermissions(long pk, List permissions)
+	public void removePermissions(long pk,
+		List<com.liferay.portal.model.Permission> permissions)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				com.liferay.portal.model.Permission permission = permissions.get(i);
 
 				removePermission.remove(pk, permission.getPrimaryKey());
 			}
@@ -1971,14 +1982,15 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setPermissions(long pk, List permissions)
+	public void setPermissions(long pk,
+		List<com.liferay.portal.model.Permission> permissions)
 		throws NoSuchGroupException,
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
 			clearPermissions.clear(pk);
 
 			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				com.liferay.portal.model.Permission permission = permissions.get(i);
 
 				addPermission.add(pk, permission.getPrimaryKey());
 			}
@@ -1991,16 +2003,18 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getRoles(long pk) throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.Role> getRoles(long pk)
+		throws NoSuchGroupException, SystemException {
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getRoles(long pk, int begin, int end)
-		throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+		int end) throws NoSuchGroupException, SystemException {
 		return getRoles(pk, begin, end, null);
 	}
 
-	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+		int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 
@@ -2055,7 +2069,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portal.model.Role> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2071,7 +2086,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portal.model.Role>)result;
 		}
 	}
 
@@ -2107,10 +2122,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2227,12 +2242,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addRoles(long pk, List roles)
+	public void addRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
-				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+				com.liferay.portal.model.Role role = roles.get(i);
 
 				addRole.add(pk, role.getPrimaryKey());
 			}
@@ -2302,12 +2317,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeRoles(long pk, List roles)
+	public void removeRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			for (int i = 0; i < roles.size(); i++) {
-				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+				com.liferay.portal.model.Role role = roles.get(i);
 
 				removeRole.remove(pk, role.getPrimaryKey());
 			}
@@ -2338,14 +2353,14 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setRoles(long pk, List roles)
+	public void setRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchRoleException,
 			SystemException {
 		try {
 			clearRoles.clear(pk);
 
 			for (int i = 0; i < roles.size(); i++) {
-				com.liferay.portal.model.Role role = (com.liferay.portal.model.Role)roles.get(i);
+				com.liferay.portal.model.Role role = roles.get(i);
 
 				addRole.add(pk, role.getPrimaryKey());
 			}
@@ -2358,17 +2373,18 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getUserGroups(long pk)
+	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
 		throws NoSuchGroupException, SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getUserGroups(long pk, int begin, int end)
-		throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
+		int begin, int end) throws NoSuchGroupException, SystemException {
 		return getUserGroups(pk, begin, end, null);
 	}
 
-	public List getUserGroups(long pk, int begin, int end, OrderByComparator obc)
+	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
+		int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
 
@@ -2423,7 +2439,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portal.model.UserGroup> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2439,7 +2456,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portal.model.UserGroup>)result;
 		}
 	}
 
@@ -2475,10 +2492,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2598,12 +2615,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUserGroups(long pk, List userGroups)
+	public void addUserGroups(long pk,
+		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
 			SystemException {
 		try {
 			for (int i = 0; i < userGroups.size(); i++) {
-				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
+				com.liferay.portal.model.UserGroup userGroup = userGroups.get(i);
 
 				addUserGroup.add(pk, userGroup.getPrimaryKey());
 			}
@@ -2674,12 +2692,13 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUserGroups(long pk, List userGroups)
+	public void removeUserGroups(long pk,
+		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
 			SystemException {
 		try {
 			for (int i = 0; i < userGroups.size(); i++) {
-				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
+				com.liferay.portal.model.UserGroup userGroup = userGroups.get(i);
 
 				removeUserGroup.remove(pk, userGroup.getPrimaryKey());
 			}
@@ -2710,14 +2729,15 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setUserGroups(long pk, List userGroups)
+	public void setUserGroups(long pk,
+		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserGroupException,
 			SystemException {
 		try {
 			clearUserGroups.clear(pk);
 
 			for (int i = 0; i < userGroups.size(); i++) {
-				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
+				com.liferay.portal.model.UserGroup userGroup = userGroups.get(i);
 
 				addUserGroup.add(pk, userGroup.getPrimaryKey());
 			}
@@ -2730,16 +2750,18 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getUsers(long pk) throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.User> getUsers(long pk)
+		throws NoSuchGroupException, SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getUsers(long pk, int begin, int end)
-		throws NoSuchGroupException, SystemException {
+	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+		int end) throws NoSuchGroupException, SystemException {
 		return getUsers(pk, begin, end, null);
 	}
 
-	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
+	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+		int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
 
@@ -2788,7 +2810,8 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<com.liferay.portal.model.User> list = QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2804,7 +2827,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<com.liferay.portal.model.User>)result;
 		}
 	}
 
@@ -2840,10 +2863,10 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -2960,12 +2983,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUsers(long pk, List users)
+	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				com.liferay.portal.model.User user = users.get(i);
 
 				addUser.add(pk, user.getPrimaryKey());
 			}
@@ -3035,12 +3058,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUsers(long pk, List users)
+	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				com.liferay.portal.model.User user = users.get(i);
 
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
@@ -3071,14 +3094,14 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setUsers(long pk, List users)
+	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws NoSuchGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
 			clearUsers.clear(pk);
 
 			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				com.liferay.portal.model.User user = users.get(i);
 
 				addUser.add(pk, user.getPrimaryKey());
 			}
@@ -3160,12 +3183,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long groupId, long organizationId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(groupId), new Long(organizationId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;
@@ -3247,12 +3270,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long groupId, long permissionId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(groupId), new Long(permissionId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;
@@ -3333,12 +3356,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long groupId, long roleId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(groupId), new Long(roleId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;
@@ -3418,12 +3441,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long groupId, long userGroupId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(groupId), new Long(userGroupId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;
@@ -3504,12 +3527,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 
 		protected boolean contains(long groupId, long userId) {
-			List results = execute(new Object[] {
+			List<Integer> results = execute(new Object[] {
 						new Long(groupId), new Long(userId)
 					});
 
 			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
+				Integer count = results.get(0);
 
 				if (count.intValue() > 0) {
 					return true;

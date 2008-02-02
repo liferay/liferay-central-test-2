@@ -245,7 +245,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<UserGroupRole> findByUserId(long userId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByUserId";
@@ -280,7 +281,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = q.list();
+				List<UserGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -296,16 +297,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
-	public List findByUserId(long userId, int begin, int end)
+	public List<UserGroupRole> findByUserId(long userId, int begin, int end)
 		throws SystemException {
 		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByUserId(long userId, int begin, int end,
+	public List<UserGroupRole> findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -355,7 +356,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -371,13 +373,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public UserGroupRole findByUserId_First(long userId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
+		List<UserGroupRole> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -391,7 +393,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -399,7 +401,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByUserId(userId);
 
-		List list = findByUserId(userId, count - 1, count, obc);
+		List<UserGroupRole> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -413,7 +415,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -467,7 +469,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List<UserGroupRole> findByGroupId(long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -502,7 +505,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<UserGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -518,16 +521,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<UserGroupRole> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
+	public List<UserGroupRole> findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -577,7 +580,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -593,13 +597,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public UserGroupRole findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List<UserGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -613,7 +617,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -621,7 +625,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		List<UserGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -635,7 +639,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -689,7 +693,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByRoleId(long roleId) throws SystemException {
+	public List<UserGroupRole> findByRoleId(long roleId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByRoleId";
@@ -724,7 +729,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = q.list();
+				List<UserGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -740,16 +745,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
-	public List findByRoleId(long roleId, int begin, int end)
+	public List<UserGroupRole> findByRoleId(long roleId, int begin, int end)
 		throws SystemException {
 		return findByRoleId(roleId, begin, end, null);
 	}
 
-	public List findByRoleId(long roleId, int begin, int end,
+	public List<UserGroupRole> findByRoleId(long roleId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -799,7 +804,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -815,13 +821,13 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public UserGroupRole findByRoleId_First(long roleId, OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByRoleId(roleId, 0, 1, obc);
+		List<UserGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -835,7 +841,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -843,7 +849,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByRoleId(roleId);
 
-		List list = findByRoleId(roleId, count - 1, count, obc);
+		List<UserGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -857,7 +863,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -911,7 +917,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByU_G(long userId, long groupId) throws SystemException {
+	public List<UserGroupRole> findByU_G(long userId, long groupId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByU_G";
@@ -954,7 +961,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = q.list();
+				List<UserGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -970,17 +977,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
-	public List findByU_G(long userId, long groupId, int begin, int end)
-		throws SystemException {
+	public List<UserGroupRole> findByU_G(long userId, long groupId, int begin,
+		int end) throws SystemException {
 		return findByU_G(userId, groupId, begin, end, null);
 	}
 
-	public List findByU_G(long userId, long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<UserGroupRole> findByU_G(long userId, long groupId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByU_G";
@@ -1035,7 +1042,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1051,14 +1059,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public UserGroupRole findByU_G_First(long userId, long groupId,
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByU_G(userId, groupId, 0, 1, obc);
+		List<UserGroupRole> list = findByU_G(userId, groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1075,7 +1083,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1084,7 +1092,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByU_G(userId, groupId);
 
-		List list = findByU_G(userId, groupId, count - 1, count, obc);
+		List<UserGroupRole> list = findByU_G(userId, groupId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1101,7 +1110,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1162,7 +1171,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_R(long groupId, long roleId) throws SystemException {
+	public List<UserGroupRole> findByG_R(long groupId, long roleId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByG_R";
@@ -1205,7 +1215,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = q.list();
+				List<UserGroupRole> list = q.list();
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1221,17 +1231,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
-	public List findByG_R(long groupId, long roleId, int begin, int end)
-		throws SystemException {
+	public List<UserGroupRole> findByG_R(long groupId, long roleId, int begin,
+		int end) throws SystemException {
 		return findByG_R(groupId, roleId, begin, end, null);
 	}
 
-	public List findByG_R(long groupId, long roleId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List<UserGroupRole> findByG_R(long groupId, long roleId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByG_R";
@@ -1286,7 +1296,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1302,14 +1313,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public UserGroupRole findByG_R_First(long groupId, long roleId,
 		OrderByComparator obc)
 		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByG_R(groupId, roleId, 0, 1, obc);
+		List<UserGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1326,7 +1337,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1335,7 +1346,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupRoleException, SystemException {
 		int count = countByG_R(groupId, roleId);
 
-		List list = findByG_R(groupId, roleId, count - 1, count, obc);
+		List<UserGroupRole> list = findByG_R(groupId, roleId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -1352,7 +1364,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
-			return (UserGroupRole)list.get(0);
+			return list.get(0);
 		}
 	}
 
@@ -1413,8 +1425,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserGroupRole> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1432,8 +1444,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserGroupRole> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1453,15 +1466,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findAll() throws SystemException {
+	public List<UserGroupRole> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List findAll(int begin, int end) throws SystemException {
+	public List<UserGroupRole> findAll(int begin, int end)
+		throws SystemException {
 		return findAll(begin, end, null);
 	}
 
-	public List findAll(int begin, int end, OrderByComparator obc)
+	public List<UserGroupRole> findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -1498,7 +1512,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List list = QueryUtil.list(q, getDialect(), begin, end);
+				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1518,35 +1533,35 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List)result;
+			return (List<UserGroupRole>)result;
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
+		Iterator<UserGroupRole> itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			UserGroupRole userGroupRole = itr.next();
 
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
+		Iterator<UserGroupRole> itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			UserGroupRole userGroupRole = itr.next();
 
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByRoleId(long roleId) throws SystemException {
-		Iterator itr = findByRoleId(roleId).iterator();
+		Iterator<UserGroupRole> itr = findByRoleId(roleId).iterator();
 
 		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			UserGroupRole userGroupRole = itr.next();
 
 			remove(userGroupRole);
 		}
@@ -1554,10 +1569,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 	public void removeByU_G(long userId, long groupId)
 		throws SystemException {
-		Iterator itr = findByU_G(userId, groupId).iterator();
+		Iterator<UserGroupRole> itr = findByU_G(userId, groupId).iterator();
 
 		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			UserGroupRole userGroupRole = itr.next();
 
 			remove(userGroupRole);
 		}
@@ -1565,20 +1580,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 	public void removeByG_R(long groupId, long roleId)
 		throws SystemException {
-		Iterator itr = findByG_R(groupId, roleId).iterator();
+		Iterator<UserGroupRole> itr = findByG_R(groupId, roleId).iterator();
 
 		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			UserGroupRole userGroupRole = itr.next();
 
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+		Iterator<UserGroupRole> itr = findAll().iterator();
 
 		while (itr.hasNext()) {
-			remove((UserGroupRole)itr.next());
+			remove(itr.next());
 		}
 	}
 
@@ -1620,10 +1635,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1686,10 +1701,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1752,10 +1767,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1826,10 +1841,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1900,10 +1915,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
@@ -1953,10 +1968,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Long count = null;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					count = (Long)itr.next();
+					count = itr.next();
 				}
 
 				if (count == null) {
