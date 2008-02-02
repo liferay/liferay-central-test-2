@@ -162,7 +162,7 @@ public class JournalContentPortletDataHandlerImpl
 					article.getGroupId(), structureId);
 
 				if (!context.addPrimaryKey(
-						JournalStructure.class, article.getPrimaryKeyObj())) {
+						JournalStructure.class, structure.getPrimaryKeyObj())) {
 
 					JournalPortletDataHandlerImpl.exportStructure(structure);
 
