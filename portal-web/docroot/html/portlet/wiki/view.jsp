@@ -117,7 +117,7 @@ portletURL.setParameter("title", wikiPage.getTitle());
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
 <h1 class="wiki-page-title">
-	<c:if test="<%= (!print) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+	<c:if test="<%= !print && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 		<span class="wiki-edit-inline"><a href="<%= portletURL.toString() %>">[<liferay-ui:message key="edit" />]</a></span>
 	</c:if>
 
