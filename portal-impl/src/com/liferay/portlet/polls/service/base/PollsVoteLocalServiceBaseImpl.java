@@ -74,13 +74,14 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		return pollsVotePersistence.update(pollsVote);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PollsVote> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return pollsVotePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PollsVote> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return pollsVotePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

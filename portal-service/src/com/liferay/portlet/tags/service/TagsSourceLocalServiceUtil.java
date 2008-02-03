@@ -59,7 +59,7 @@ public class TagsSourceLocalServiceUtil {
 		return tagsSourceLocalService.addTagsSource(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class TagsSourceLocalServiceUtil {
 		return tagsSourceLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();

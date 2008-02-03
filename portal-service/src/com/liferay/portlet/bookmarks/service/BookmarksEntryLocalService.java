@@ -53,11 +53,11 @@ public interface BookmarksEntryLocalService {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
@@ -187,10 +187,12 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEntries(long folderId, int begin, int end)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
+		long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEntries(long folderId, int begin, int end,
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
+		long folderId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.SystemException;
 
@@ -202,14 +204,16 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public int getFoldersEntriesCount(java.util.List folderIds)
+	public int getFoldersEntriesCount(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupEntries(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getGroupEntries(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupEntries(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getGroupEntries(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -217,7 +221,7 @@ public interface BookmarksEntryLocalService {
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getNoAssetEntries()
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getNoAssetEntries()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(

@@ -295,13 +295,14 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		return userTrackerPersistence.update(userTracker);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserTracker> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return userTrackerPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserTracker> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return userTrackerPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

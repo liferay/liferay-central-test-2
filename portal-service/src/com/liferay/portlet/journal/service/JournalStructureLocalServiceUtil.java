@@ -59,7 +59,7 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.addJournalStructure(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();

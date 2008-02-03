@@ -69,11 +69,12 @@ public class MembershipRequestJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.MembershipRequest> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			MembershipRequest model = (MembershipRequest)models.get(i);
+			MembershipRequest model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

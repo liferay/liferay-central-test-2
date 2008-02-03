@@ -115,13 +115,14 @@ public abstract class WikiPageLocalServiceBaseImpl
 		return wikiPagePersistence.update(wikiPage);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<WikiPage> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return wikiPagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<WikiPage> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return wikiPagePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

@@ -62,11 +62,12 @@ public class PermissionJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.Permission> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			Permission model = (Permission)models.get(i);
+			Permission model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

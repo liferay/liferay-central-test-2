@@ -63,11 +63,11 @@ import org.springframework.beans.factory.InitializingBean;
 		return ${entity.varName}Persistence.update(${entity.varName});
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
+	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
+	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, begin, end);
 	}
 

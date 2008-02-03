@@ -59,7 +59,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.addOrganization(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();

@@ -92,11 +92,12 @@ public class ShoppingItemJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.shopping.model.ShoppingItem> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			ShoppingItem model = (ShoppingItem)models.get(i);
+			ShoppingItem model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

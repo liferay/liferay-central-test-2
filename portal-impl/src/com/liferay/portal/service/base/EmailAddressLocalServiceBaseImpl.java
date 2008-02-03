@@ -296,13 +296,14 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		return emailAddressPersistence.update(emailAddress);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<EmailAddress> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<EmailAddress> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

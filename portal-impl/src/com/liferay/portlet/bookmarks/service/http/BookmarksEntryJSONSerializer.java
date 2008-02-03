@@ -70,11 +70,12 @@ public class BookmarksEntryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.bookmarks.model.BookmarksEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			BookmarksEntry model = (BookmarksEntry)models.get(i);
+			BookmarksEntry model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

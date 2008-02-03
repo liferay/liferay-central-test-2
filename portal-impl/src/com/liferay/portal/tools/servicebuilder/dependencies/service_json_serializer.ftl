@@ -38,11 +38,11 @@ public class ${entity.name}JSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(List<${packagePath}.model.${entity.name}> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			${entity.name} model = (${entity.name})models.get(i);
+			${entity.name} model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

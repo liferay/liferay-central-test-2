@@ -59,7 +59,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.addGroup(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Group> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Group> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();

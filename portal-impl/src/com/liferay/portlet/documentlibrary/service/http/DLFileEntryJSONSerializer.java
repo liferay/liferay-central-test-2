@@ -75,11 +75,12 @@ public class DLFileEntryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.documentlibrary.model.DLFileEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileEntry model = (DLFileEntry)models.get(i);
+			DLFileEntry model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

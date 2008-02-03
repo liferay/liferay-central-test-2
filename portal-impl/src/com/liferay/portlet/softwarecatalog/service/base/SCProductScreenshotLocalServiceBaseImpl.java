@@ -84,13 +84,14 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		return scProductScreenshotPersistence.update(scProductScreenshot);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCProductScreenshot> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCProductScreenshot> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

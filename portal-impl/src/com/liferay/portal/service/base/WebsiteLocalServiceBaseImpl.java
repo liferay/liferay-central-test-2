@@ -295,13 +295,14 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		return websitePersistence.update(website);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Website> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Website> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}

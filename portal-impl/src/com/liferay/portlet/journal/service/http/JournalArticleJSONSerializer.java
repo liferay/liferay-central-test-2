@@ -88,11 +88,12 @@ public class JournalArticleJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.journal.model.JournalArticle> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			JournalArticle model = (JournalArticle)models.get(i);
+			JournalArticle model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

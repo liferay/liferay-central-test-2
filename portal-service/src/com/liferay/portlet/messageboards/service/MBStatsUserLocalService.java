@@ -53,11 +53,11 @@ public interface MBStatsUserLocalService {
 		com.liferay.portlet.messageboards.model.MBStatsUser model)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 

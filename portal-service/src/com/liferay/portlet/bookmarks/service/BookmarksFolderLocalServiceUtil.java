@@ -59,7 +59,7 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.addBookmarksFolder(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
@@ -340,8 +340,9 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.getFolder(folderId);
 	}
 
-	public static java.util.List getFolders(long groupId, long parentFolderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId, long parentFolderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		return bookmarksFolderLocalService.getFolders(groupId, parentFolderId,
@@ -356,8 +357,8 @@ public class BookmarksFolderLocalServiceUtil {
 			parentFolderId);
 	}
 
-	public static void getSubfolderIds(java.util.List folderIds, long groupId,
-		long folderId) throws com.liferay.portal.SystemException {
+	public static void getSubfolderIds(java.util.List<Long> folderIds,
+		long groupId, long folderId) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		bookmarksFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);

@@ -291,13 +291,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		return resourceCodePersistence.update(resourceCode);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ResourceCode> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ResourceCode> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

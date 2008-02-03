@@ -289,13 +289,14 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 		return portletPersistence.update(portlet);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Portlet> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return portletPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Portlet> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return portletPersistence.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}

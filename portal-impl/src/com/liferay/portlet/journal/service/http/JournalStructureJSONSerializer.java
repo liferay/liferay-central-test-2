@@ -70,11 +70,12 @@ public class JournalStructureJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.journal.model.JournalStructure> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			JournalStructure model = (JournalStructure)models.get(i);
+			JournalStructure model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

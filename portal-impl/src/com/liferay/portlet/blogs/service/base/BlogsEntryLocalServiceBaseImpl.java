@@ -143,13 +143,14 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		return blogsEntryPersistence.update(blogsEntry);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<BlogsEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return blogsEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<BlogsEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return blogsEntryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

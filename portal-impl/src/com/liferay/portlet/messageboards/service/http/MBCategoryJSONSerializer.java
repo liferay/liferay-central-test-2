@@ -70,11 +70,12 @@ public class MBCategoryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.messageboards.model.MBCategory> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			MBCategory model = (MBCategory)models.get(i);
+			MBCategory model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

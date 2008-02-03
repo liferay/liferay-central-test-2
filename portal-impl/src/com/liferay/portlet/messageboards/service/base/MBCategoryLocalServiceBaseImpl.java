@@ -133,13 +133,14 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.update(mbCategory);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBCategory> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBCategory> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

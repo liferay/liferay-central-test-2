@@ -29,14 +29,28 @@ public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
-			public ${method.returns.value}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
-				<#list method.parameters as parameter>
-					${parameter.type.value}${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
+			public ${method.returns.value}
 
-					<#if parameter_has_next>
-						,
-					</#if>
-				</#list>
+			<#if method.returnsGenericName != "">
+				<${method.returnsGenericName}>
+			</#if>
+
+			${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
+
+			<#list method.parameters as parameter>
+				${parameter.type.value}
+
+				<#if parameter.genericName != "">
+					<${parameter.genericName}>
+				</#if>
+
+				${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
+
+				<#if parameter_has_next>
+					,
+				</#if>
+			</#list>
+
 			)
 
 			<#if sessionTypeName == "Local">

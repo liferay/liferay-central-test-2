@@ -93,13 +93,14 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return ratingsEntryPersistence.update(ratingsEntry);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<RatingsEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return ratingsEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<RatingsEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return ratingsEntryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

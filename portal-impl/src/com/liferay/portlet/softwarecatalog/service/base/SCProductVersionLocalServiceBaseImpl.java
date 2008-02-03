@@ -100,13 +100,14 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		return scProductVersionPersistence.update(scProductVersion);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCProductVersion> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return scProductVersionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCProductVersion> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return scProductVersionPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

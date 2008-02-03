@@ -67,11 +67,12 @@ public class TagsPropertyJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.tags.model.TagsProperty> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			TagsProperty model = (TagsProperty)models.get(i);
+			TagsProperty model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

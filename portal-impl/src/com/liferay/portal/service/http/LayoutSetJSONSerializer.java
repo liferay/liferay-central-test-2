@@ -71,11 +71,12 @@ public class LayoutSetJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.LayoutSet> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			LayoutSet model = (LayoutSet)models.get(i);
+			LayoutSet model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

@@ -185,13 +185,14 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.update(mbMessage);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<MBMessage> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBMessage> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

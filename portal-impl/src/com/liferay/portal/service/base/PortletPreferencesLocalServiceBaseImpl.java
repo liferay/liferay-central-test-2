@@ -293,13 +293,14 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.update(portletPreferences);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PortletPreferences> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PortletPreferences> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

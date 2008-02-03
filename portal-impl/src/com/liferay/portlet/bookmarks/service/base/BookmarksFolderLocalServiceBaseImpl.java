@@ -100,13 +100,14 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		return bookmarksFolderPersistence.update(bookmarksFolder);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<BookmarksFolder> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<BookmarksFolder> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

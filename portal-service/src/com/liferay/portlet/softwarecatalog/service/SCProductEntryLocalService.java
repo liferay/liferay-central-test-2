@@ -53,11 +53,11 @@ public interface SCProductEntryLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry model)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 

@@ -183,13 +183,14 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		return tagsAssetPersistence.update(tagsAsset);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<TagsAsset> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return tagsAssetPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<TagsAsset> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return tagsAssetPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

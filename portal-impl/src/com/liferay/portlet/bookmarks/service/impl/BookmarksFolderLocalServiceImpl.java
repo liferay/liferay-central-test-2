@@ -207,11 +207,11 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Folders
 
-		Iterator itr = bookmarksFolderPersistence.findByG_P(
+		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
 			folder.getGroupId(), folder.getFolderId()).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksFolder curFolder = (BookmarksFolder)itr.next();
+			BookmarksFolder curFolder = itr.next();
 
 			deleteFolder(curFolder);
 		}
@@ -234,11 +234,11 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = bookmarksFolderPersistence.findByG_P(
+		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
 			groupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksFolder folder = (BookmarksFolder)itr.next();
+			BookmarksFolder folder = itr.next();
 
 			deleteFolder(folder);
 		}
@@ -250,7 +250,7 @@ public class BookmarksFolderLocalServiceImpl
 		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
 	}
 
-	public List getFolders(
+	public List<BookmarksFolder> getFolders(
 			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
@@ -265,14 +265,14 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void getSubfolderIds(
-			List folderIds, long groupId, long folderId)
+			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		Iterator itr = bookmarksFolderPersistence.findByG_P(
+		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
 			groupId, folderId).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksFolder folder = (BookmarksFolder)itr.next();
+			BookmarksFolder folder = itr.next();
 
 			folderIds.add(new Long(folder.getFolderId()));
 
@@ -293,19 +293,21 @@ public class BookmarksFolderLocalServiceImpl
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = bookmarksFolderPersistence.findByCompanyId(
-				companyId).iterator();
+			Iterator<BookmarksFolder> itr1 =
+				bookmarksFolderPersistence.findByCompanyId(
+						companyId).iterator();
 
 			while (itr1.hasNext()) {
-				BookmarksFolder folder = (BookmarksFolder)itr1.next();
+				BookmarksFolder folder = itr1.next();
 
 				long folderId = folder.getFolderId();
 
-				Iterator itr2 = bookmarksEntryPersistence.findByFolderId(
-					folderId).iterator();
+				Iterator<BookmarksEntry> itr2 =
+					bookmarksEntryPersistence.findByFolderId(
+							folderId).iterator();
 
 				while (itr2.hasNext()) {
-					BookmarksEntry entry = (BookmarksEntry)itr2.next();
+					BookmarksEntry entry = itr2.next();
 
 					long groupId = folder.getGroupId();
 					long entryId = entry.getEntryId();
@@ -480,7 +482,7 @@ public class BookmarksFolderLocalServiceImpl
 				return folder.getParentFolderId();
 			}
 
-			List subfolderIds = new ArrayList();
+			List<Long> subfolderIds = new ArrayList<Long>();
 
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
@@ -496,23 +498,25 @@ public class BookmarksFolderLocalServiceImpl
 	protected void mergeFolders(BookmarksFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = bookmarksFolderPersistence.findByG_P(
-			fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
+		Iterator<BookmarksFolder> foldersItr =
+			bookmarksFolderPersistence.findByG_P(
+				fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
 
-		while (itr.hasNext()) {
-			BookmarksFolder folder = (BookmarksFolder)itr.next();
+		while (foldersItr.hasNext()) {
+			BookmarksFolder folder = foldersItr.next();
 
 			mergeFolders(folder, toFolderId);
 		}
 
-		itr = bookmarksEntryPersistence.findByFolderId(
-			fromFolder.getFolderId()).iterator();
+		Iterator<BookmarksEntry> entriesItr =
+			bookmarksEntryPersistence.findByFolderId(
+					fromFolder.getFolderId()).iterator();
 
-		while (itr.hasNext()) {
+		while (entriesItr.hasNext()) {
 
 			// Entry
 
-			BookmarksEntry entry = (BookmarksEntry)itr.next();
+			BookmarksEntry entry = entriesItr.next();
 
 			entry.setFolderId(toFolderId);
 

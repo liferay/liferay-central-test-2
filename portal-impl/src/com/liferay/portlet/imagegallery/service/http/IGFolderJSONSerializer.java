@@ -68,11 +68,12 @@ public class IGFolderJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.imagegallery.model.IGFolder> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			IGFolder model = (IGFolder)models.get(i);
+			IGFolder model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

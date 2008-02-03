@@ -292,13 +292,14 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		return userIdMapperPersistence.update(userIdMapper);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserIdMapper> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserIdMapper> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

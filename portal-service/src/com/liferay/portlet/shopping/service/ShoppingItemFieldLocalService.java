@@ -53,11 +53,11 @@ public interface ShoppingItemFieldLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemField model)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List dynamicQuery(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 

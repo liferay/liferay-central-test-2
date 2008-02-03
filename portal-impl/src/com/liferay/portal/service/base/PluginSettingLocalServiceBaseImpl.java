@@ -291,13 +291,14 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		return pluginSettingPersistence.update(pluginSetting);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<PluginSetting> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<PluginSetting> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

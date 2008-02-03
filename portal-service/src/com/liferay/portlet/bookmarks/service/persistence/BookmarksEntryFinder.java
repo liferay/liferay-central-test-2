@@ -29,7 +29,7 @@ package com.liferay.portlet.bookmarks.service.persistence;
  *
  */
 public interface BookmarksEntryFinder {
-	public int countByFolderIds(java.util.List folderIds)
+	public int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
@@ -38,10 +38,11 @@ public interface BookmarksEntryFinder {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByNoAssets()
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_G(
@@ -49,6 +50,7 @@ public interface BookmarksEntryFinder {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

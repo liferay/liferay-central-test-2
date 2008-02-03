@@ -63,11 +63,12 @@ public class PortletJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.Portlet> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			Portlet model = (Portlet)models.get(i);
+			Portlet model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

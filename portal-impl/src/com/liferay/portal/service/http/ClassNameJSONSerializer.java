@@ -60,11 +60,12 @@ public class ClassNameJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.ClassName> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			ClassName model = (ClassName)models.get(i);
+			ClassName model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

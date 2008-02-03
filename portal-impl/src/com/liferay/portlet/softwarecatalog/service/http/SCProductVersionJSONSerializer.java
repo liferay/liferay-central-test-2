@@ -70,11 +70,12 @@ public class SCProductVersionJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			SCProductVersion model = (SCProductVersion)models.get(i);
+			SCProductVersion model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

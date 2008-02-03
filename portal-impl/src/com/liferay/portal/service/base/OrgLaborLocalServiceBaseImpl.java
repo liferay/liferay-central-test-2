@@ -301,13 +301,14 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		return orgLaborPersistence.update(orgLabor);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<OrgLabor> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<OrgLabor> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

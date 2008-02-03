@@ -295,13 +295,14 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		return accountPersistence.update(account);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Account> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return accountPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Account> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return accountPersistence.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}

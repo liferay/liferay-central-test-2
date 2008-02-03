@@ -102,13 +102,14 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.update(bookmarksEntry);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<BookmarksEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<BookmarksEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

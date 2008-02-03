@@ -85,11 +85,12 @@ public class PasswordPolicyJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.PasswordPolicy> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			PasswordPolicy model = (PasswordPolicy)models.get(i);
+			PasswordPolicy model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

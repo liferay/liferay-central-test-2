@@ -302,13 +302,14 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.update(address);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Address> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return addressPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Address> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return addressPersistence.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}

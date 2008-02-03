@@ -297,13 +297,14 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		return layoutSetPersistence.update(layoutSet);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<LayoutSet> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<LayoutSet> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

@@ -112,13 +112,14 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.update(calEvent);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<CalEvent> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return calEventPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<CalEvent> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return calEventPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

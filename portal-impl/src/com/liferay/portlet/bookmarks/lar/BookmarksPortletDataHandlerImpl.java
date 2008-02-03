@@ -107,26 +107,27 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Folders
 
-			List folders = BookmarksFolderUtil.findByGroupId(
+			List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
 				context.getGroupId());
 
-			List entries = new ArrayList();
+			List<BookmarksEntry> entries = new ArrayList<BookmarksEntry>();
 
-			Iterator itr = folders.iterator();
+			Iterator<BookmarksFolder> foldersItr = folders.iterator();
 
-			while (itr.hasNext()) {
-				BookmarksFolder folder = (BookmarksFolder)itr.next();
+			while (foldersItr.hasNext()) {
+				BookmarksFolder folder = foldersItr.next();
 
 				if (context.addPrimaryKey(
 						BookmarksFolder.class, folder.getPrimaryKeyObj())) {
 
-					itr.remove();
+					foldersItr.remove();
 				}
 				else {
 					folder.setUserUuid(folder.getUserUuid());
 
-					List folderEntries = BookmarksEntryUtil.findByFolderId(
-						folder.getFolderId());
+					List<BookmarksEntry> folderEntries =
+						BookmarksEntryUtil.findByFolderId(
+								folder.getFolderId());
 
 					entries.addAll(folderEntries);
 				}
@@ -142,15 +143,15 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Entries
 
-			itr = entries.iterator();
+			Iterator<BookmarksEntry> entriesItr = entries.iterator();
 
-			while (itr.hasNext()) {
-				BookmarksEntry entry = (BookmarksEntry)itr.next();
+			while (entriesItr.hasNext()) {
+				BookmarksEntry entry = entriesItr.next();
 
 				if (context.addPrimaryKey(
 						BookmarksEntry.class, entry.getPrimaryKeyObj())) {
 
-					itr.remove();
+					entriesItr.remove();
 				}
 				else {
 					entry.setUserUuid(entry.getUserUuid());
@@ -211,12 +212,13 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map folderPKs = CollectionFactory.getHashMap();
 
-			List folders = (List)xStream.fromXML(tempDoc.asXML());
+			List<BookmarksFolder> folders =
+				(List<BookmarksFolder>)xStream.fromXML(tempDoc.asXML());
 
-			Iterator itr = folders.iterator();
+			Iterator<BookmarksFolder> foldersItr = folders.iterator();
 
-			while (itr.hasNext()) {
-				BookmarksFolder folder = (BookmarksFolder)itr.next();
+			while (foldersItr.hasNext()) {
+				BookmarksFolder folder = foldersItr.next();
 
 				importFolder(context, folderPKs, folder);
 			}
@@ -229,12 +231,13 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List entries = (List)xStream.fromXML(tempDoc.asXML());
+			List<BookmarksEntry> entries =
+				(List<BookmarksEntry>)xStream.fromXML(tempDoc.asXML());
 
-			itr = entries.iterator();
+			Iterator<BookmarksEntry> entriesItr = entries.iterator();
 
-			while (itr.hasNext()) {
-				BookmarksEntry entry = (BookmarksEntry)itr.next();
+			while (entriesItr.hasNext()) {
+				BookmarksEntry entry = entriesItr.next();
 
 				importEntry(context, folderPKs, entry);
 			}

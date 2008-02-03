@@ -65,11 +65,12 @@ public class TagsEntryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.tags.model.TagsEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			TagsEntry model = (TagsEntry)models.get(i);
+			TagsEntry model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

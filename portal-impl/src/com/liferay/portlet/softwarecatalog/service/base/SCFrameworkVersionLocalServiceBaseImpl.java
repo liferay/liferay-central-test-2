@@ -107,13 +107,14 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		return scFrameworkVersionPersistence.update(scFrameworkVersion);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCFrameworkVersion> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCFrameworkVersion> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

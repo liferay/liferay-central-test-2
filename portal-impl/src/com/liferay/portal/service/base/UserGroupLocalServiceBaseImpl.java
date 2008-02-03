@@ -289,13 +289,14 @@ public abstract class UserGroupLocalServiceBaseImpl
 		return userGroupPersistence.update(userGroup);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<UserGroup> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<UserGroup> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

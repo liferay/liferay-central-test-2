@@ -296,13 +296,14 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		return subscriptionPersistence.update(subscription);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Subscription> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Subscription> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

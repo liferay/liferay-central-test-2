@@ -127,13 +127,14 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		return journalContentSearchPersistence.update(journalContentSearch);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<JournalContentSearch> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<JournalContentSearch> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

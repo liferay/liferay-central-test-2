@@ -124,13 +124,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		return scProductEntryPersistence.update(scProductEntry);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<SCProductEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<SCProductEntry> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

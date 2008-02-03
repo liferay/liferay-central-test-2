@@ -292,13 +292,14 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		return serviceComponentPersistence.update(serviceComponent);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<ServiceComponent> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<ServiceComponent> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

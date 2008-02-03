@@ -295,13 +295,14 @@ public abstract class OrganizationLocalServiceBaseImpl
 		return organizationPersistence.update(organization);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<Organization> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return organizationPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<Organization> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return organizationPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

@@ -69,7 +69,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 	public static String FIND_BY_G_U =
 		BookmarksEntryFinder.class.getName() + ".findByG_U";
 
-	public int countByFolderIds(List folderIds) throws SystemException {
+	public int countByFolderIds(List<Long> folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -87,15 +87,15 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -128,10 +128,10 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -165,10 +165,10 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -185,7 +185,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<BookmarksEntry> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -213,7 +213,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<BookmarksEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -254,7 +254,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<BookmarksEntry> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -268,7 +268,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 				throw new NoSuchEntryException(sm.toString());
 			}
 			else {
-				return (BookmarksEntry)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchEntryException nsee) {
@@ -282,7 +282,8 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<BookmarksEntry> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -311,7 +312,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	protected String getFolderIds(List folderIds) {
+	protected String getFolderIds(List<Long> folderIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

@@ -70,11 +70,12 @@ public class IGImageJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.imagegallery.model.IGImage> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			IGImage model = (IGImage)models.get(i);
+			IGImage model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

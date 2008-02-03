@@ -59,7 +59,7 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.addOrgLabor(model);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.OrgLabor> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
@@ -67,7 +67,7 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.dynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List dynamicQuery(
+	public static java.util.List<com.liferay.portal.model.OrgLabor> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();

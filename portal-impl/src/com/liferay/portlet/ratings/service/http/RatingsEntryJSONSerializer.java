@@ -67,11 +67,12 @@ public class RatingsEntryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.ratings.model.RatingsEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			RatingsEntry model = (RatingsEntry)models.get(i);
+			RatingsEntry model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

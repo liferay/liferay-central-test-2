@@ -82,13 +82,14 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		return tagsSourcePersistence.update(tagsSource);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
+	public List<TagsSource> dynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
 		return tagsSourcePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<TagsSource> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return tagsSourcePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

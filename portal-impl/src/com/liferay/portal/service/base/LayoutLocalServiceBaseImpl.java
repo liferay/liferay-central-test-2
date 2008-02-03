@@ -329,12 +329,12 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		return layoutPersistence.update(layout);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Layout> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return layoutPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
+	public List<Layout> dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
 		return layoutPersistence.findWithDynamicQuery(queryInitializer, begin,
 			end);

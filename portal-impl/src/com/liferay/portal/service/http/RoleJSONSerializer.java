@@ -65,11 +65,12 @@ public class RoleJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.Role> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			Role model = (Role)models.get(i);
+			Role model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

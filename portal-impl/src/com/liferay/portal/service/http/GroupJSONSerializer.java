@@ -71,11 +71,12 @@ public class GroupJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.Group> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			Group model = (Group)models.get(i);
+			Group model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

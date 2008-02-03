@@ -214,11 +214,11 @@ public class BookmarksEntryLocalServiceImpl
 	public void deleteEntries(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = bookmarksEntryPersistence.findByFolderId(
+		Iterator<BookmarksEntry> itr = bookmarksEntryPersistence.findByFolderId(
 			folderId).iterator();
 
 		while (itr.hasNext()) {
-			BookmarksEntry entry = (BookmarksEntry)itr.next();
+			BookmarksEntry entry = itr.next();
 
 			deleteEntry(entry);
 		}
@@ -261,13 +261,13 @@ public class BookmarksEntryLocalServiceImpl
 		bookmarksEntryPersistence.remove(entry.getEntryId());
 	}
 
-	public List getEntries(long folderId, int begin, int end)
+	public List<BookmarksEntry> getEntries(long folderId, int begin, int end)
 		throws SystemException {
 
 		return bookmarksEntryPersistence.findByFolderId(folderId, begin, end);
 	}
 
-	public List getEntries(
+	public List<BookmarksEntry> getEntries(
 			long folderId, int begin, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
@@ -286,19 +286,21 @@ public class BookmarksEntryLocalServiceImpl
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
-	public int getFoldersEntriesCount(List folderIds)
+	public int getFoldersEntriesCount(List<Long> folderIds)
 		throws SystemException {
 
 		return bookmarksEntryFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupEntries(long groupId, int begin, int end)
+	public List<BookmarksEntry> getGroupEntries(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return bookmarksEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupEntries(long groupId, long userId, int begin, int end)
+	public List<BookmarksEntry> getGroupEntries(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
@@ -324,7 +326,7 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
-	public List getNoAssetEntries() throws SystemException {
+	public List<BookmarksEntry> getNoAssetEntries() throws SystemException {
 		return bookmarksEntryFinder.findByNoAssets();
 	}
 

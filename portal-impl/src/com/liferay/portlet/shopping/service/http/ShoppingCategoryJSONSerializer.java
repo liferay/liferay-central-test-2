@@ -68,11 +68,12 @@ public class ShoppingCategoryJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.shopping.model.ShoppingCategory> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			ShoppingCategory model = (ShoppingCategory)models.get(i);
+			ShoppingCategory model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

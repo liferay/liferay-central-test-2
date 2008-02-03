@@ -136,13 +136,14 @@ public abstract class MBThreadLocalServiceBaseImpl
 		return mbThreadPersistence.update(mbThread);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<MBThread> dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
+	public List<MBThread> dynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}

@@ -63,11 +63,12 @@ public class PollsVoteJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.polls.model.PollsVote> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			PollsVote model = (PollsVote)models.get(i);
+			PollsVote model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

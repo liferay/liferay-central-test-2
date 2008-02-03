@@ -68,11 +68,12 @@ public class DLFileShortcutJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileShortcut model = (DLFileShortcut)models.get(i);
+			DLFileShortcut model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}

@@ -8,8 +8,8 @@ public interface ${entity.name}Persistence {
 		<#if !method.isConstructor() && method.isPublic()>
 			public ${method.returns.value}
 
-			<#if method.getReturnsGenericName() != "">
-				<${method.getReturnsGenericName()}>
+			<#if method.returnsGenericName != "">
+				<${method.returnsGenericName}>
 			</#if>
 
 			${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
@@ -19,8 +19,8 @@ public interface ${entity.name}Persistence {
 			<#list parameters as parameter>
 				${parameter.type.value}
 
-				<#if parameter.getGenericName() != "">
-					<${parameter.getGenericName()}>
+				<#if parameter.genericName != "">
+					<${parameter.genericName}>
 				</#if>
 
 				${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}

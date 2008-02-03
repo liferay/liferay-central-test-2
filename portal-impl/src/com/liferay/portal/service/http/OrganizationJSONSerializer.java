@@ -69,11 +69,12 @@ public class OrganizationJSONSerializer {
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(
+		List<com.liferay.portal.model.Organization> models) {
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < models.size(); i++) {
-			Organization model = (Organization)models.get(i);
+			Organization model = models.get(i);
 
 			jsonArray.put(toJSONObject(model));
 		}
