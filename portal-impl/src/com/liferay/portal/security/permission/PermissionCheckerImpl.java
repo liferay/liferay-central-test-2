@@ -171,18 +171,18 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		Group group = null;
 
-		// If the current group is staging, the live group should be
-		// checked for permissions instead
+		// If the current group is staging, the live group should be checked for
+		// permissions instead
 
 		try {
 			if (groupId > 0) {
 				group = GroupLocalServiceUtil.getGroup(groupId);
 
 				if (group.isStagingGroup()) {
-					if (primKey.equals(Long.toString(groupId))) {
-						primKey = Long.toString(group.getLiveGroupId());
+					if (primKey.equals(String.valueOf(groupId))) {
+						primKey = String.valueOf(group.getLiveGroupId());
 					}
-					
+
 					groupId = group.getLiveGroupId();
 					group = group.getLiveGroup();
 				}
