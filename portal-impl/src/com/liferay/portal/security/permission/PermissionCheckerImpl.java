@@ -169,24 +169,33 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			stopWatch.start();
 		}
 
+		Group group = null;
+
+		// If the current group is staging, the live group should be
+		// checked for permissions instead
+
+		try {
+			if (groupId > 0) {
+				group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isStagingGroup()) {
+					if (primKey.equals(Long.toString(groupId))) {
+						primKey = Long.toString(group.getLiveGroupId());
+					}
+					
+					groupId = group.getLiveGroupId();
+					group = group.getLiveGroup();
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		PermissionCheckerBag bag = getBag(groupId);
 
 		if (signedIn && (bag == null)) {
 			try {
-
-				Group group = null;
-
-				// If the current group is staging, the live group should be
-				// checked for permissions instead
-
-				if (groupId > 0) {
-					group = GroupLocalServiceUtil.getGroup(groupId);
-
-					if (group.isStagingGroup()) {
-						groupId = group.getLiveGroupId();
-						group = group.getLiveGroup();
-					}
-				}
 
 				// If we are checking permissions on an object that belongs to a
 				// community, then it's only necessary to check the group that
