@@ -65,6 +65,13 @@ import java.util.List;
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 
+	/**
+	 * Adds the provided organizations to the given group to make every member
+	 * of those organizations become implicitly part of the group.
+	 *
+	 * @param		groupId the id of the group
+	 * @param		organizationIds an array of organization ids
+	 */
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -73,6 +80,25 @@ public class OrganizationLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	/**
+	 * Creates a new organization
+	 *
+	 * @param		userId the user id of the user
+	 * @param		parentOrganizationId the organization id of an existing
+	 *                 organization that will become the parent of the new one
+	 * @param		name the name of the new organization
+	 * @param		type the type of the organization
+	 * @param       recursable boolean flag that determines whether the
+	 *                 permissions assigned to this organization will be
+	 *                 inherited by members of the suborganization
+	 * @param       regionId the id of the Region entry to which the new
+	 *                 organization will belong
+	 * @param       countryId the id of the Country entry to which the new
+	 *                 organization will belong
+	 * @param       statusId the status of the new Organization
+	 * @param       comments comments describing the organization
+	 * @return		the new organization
+	 */
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
 			int type, boolean recursable, long regionId, long countryId,
@@ -139,6 +165,16 @@ public class OrganizationLocalServiceImpl
 		return organization;
 	}
 
+	/**
+	 * Creates the resources associatied to the given organization to allow
+	 * assigning permissions to it.
+	 *
+	 * The provided user is considered the creator of the organization and will
+	 * be automatically assigned all the permissions to administrate it
+	 *
+	 * @param		userId the user id of the user
+	 * @param       organization the Organization instance
+	 */
 	public void addOrganizationResources(long userId, Organization organization)
 		throws PortalException, SystemException {
 
@@ -153,6 +189,12 @@ public class OrganizationLocalServiceImpl
 			organization.getOrganizationId(), false, false, false);
 	}
 
+	/**
+	 * Assigns a password policy to the given organizations
+	 *
+	 * @param		passwordPolicyId the id of the PasswordPolicy
+	 * @param		organizationIds an array of organization ids
+	 */
 	public void addPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
@@ -161,6 +203,14 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
+	/**
+	 * Remove an Organization entry
+	 *
+	 * If the organization has any suborganization or user members a
+	 * RequiredOrganizationException will be thrown
+	 *
+	 * @param organizationId the id of the Organization
+	 */
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
@@ -170,6 +220,14 @@ public class OrganizationLocalServiceImpl
 		deleteOrganization(organization);
 	}
 
+	/**
+	 * Remove an Organization entry
+	 *
+	 * If the organization has any suborganization or user members a
+	 * RequiredOrganizationException will be thrown
+	 *
+	 * @param organization the Organization instance
+	 */
 	public void deleteOrganization(Organization organization)
 		throws PortalException, SystemException {
 
@@ -238,6 +296,12 @@ public class OrganizationLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	/**
+	 * Gets a list of organization that belong to the group.
+	 *
+	 * @param groupId the group id of the group
+	 * @return a list of organization
+	 */
 	public List getGroupOrganizations(long groupId)
 		throws PortalException, SystemException {
 
@@ -265,18 +329,38 @@ public class OrganizationLocalServiceImpl
 		return manageableOrganizations;
 	}
 
+	/**
+	 * Gets an organization
+	 *
+	 * @param organizationId the id of the organization
+	 * @return an Organization instance
+	 */
 	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
 		return organizationPersistence.findByPrimaryKey(organizationId);
 	}
 
+	/**
+	 * Gets an organization
+	 *
+	 * @param companyId the id of the company to which the organization belongs
+	 * @param name the name of the organization
+	 * @return an Organization instance
+	 */
 	public Organization getOrganization(long companyId, String name)
 		throws PortalException, SystemException {
 
 		return organizationPersistence.findByC_N(companyId, name);
 	}
 
+	/**
+	 * Gets the id of an organization
+	 *
+	 * @param companyId the id of the company
+	 * @param name the name of the company
+	 * @return the organizationId
+	 */
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
