@@ -59,7 +59,7 @@ else {
 }
 
 if (Validator.isNull(tabs1)) {
-	if ((portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && stagingGroup != null) {
+	if (stagingGroup != null) {
 		tabs1 = "staging";
 	}
 	else {
@@ -257,7 +257,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>", false);
+		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>&amp;<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />exportGroupId.value, false);
 	}
 
 	function <portlet:namespace />importPages() {
@@ -399,14 +399,17 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 
 		<%
-		String tabs1Names = "staging";
+		String tabs1Names = "live";
 
-		//if (stagingGroup == null) {
+		if (stagingGroup == null && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
 			tabs1Names = "live,staging";
-		//}
+		}
+		else if (stagingGroup != null) {
+			tabs1Names = "staging";
+		}
 		%>
 
-		<liferay-ui:tabs
+			<liferay-ui:tabs
 			names="<%= tabs1Names %>"
 			param="tabs1"
 			value="<%= tabs1 %>"
@@ -416,7 +419,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	</c:if>
 </c:if>
 
-<c:if test='<%= tabs1.equals("staging") %>'>
+<c:if test='<%= tabs1.equals("staging") && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>'>
 	<c:choose>
 		<c:when test="<%= layout.getGroup().isStagingGroup() && layout.getGroup().getLiveGroupId() == liveGroupId %>">
 		</c:when>
@@ -460,7 +463,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0) %>">
+			<c:if test="<%= (group.isStagingGroup()) && (pagesCount > 0) %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 
 				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
@@ -548,7 +551,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			if (selLayout == null) {
 				tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
 
-				if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
+				if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
 					if (!tabs1.equals("staging") && company.isCommunityLogo()) {
 						tabs3Names += ",logo";
 					}

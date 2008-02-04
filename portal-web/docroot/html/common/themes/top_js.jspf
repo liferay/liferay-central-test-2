@@ -272,7 +272,21 @@
 			</c:choose>
 		</c:if>
 
-		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+		<%
+		Group group = null; 
+		boolean stagingActive = false;
+		
+		if (layout != null) {
+			group = layout.getGroup();
+
+			if (group.hasStagingGroup() && !group.isStagingGroup()) {
+				stagingActive = true;
+			}
+		}
+
+		%>
+
+		<c:if test="<%= (!stagingActive) && (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			jQuery(document).ready(
 				function() {
 					if (themeDisplay.isFreeformLayout()) {

@@ -248,7 +248,7 @@
 <br />
 
 <c:choose>
-	<c:when test='<%= tabs4.equals("export") %>'>
+	<c:when test='<%= tabs4.equals("export") || tabs4.equals("export-live") %>'>
 		<div id="<portlet:namespace />exportMoreDiv">
 			<a href="javascript: <portlet:namespace />exportMore();"><liferay-ui:message key="more-options" /> &raquo;</a>
 		</div>
