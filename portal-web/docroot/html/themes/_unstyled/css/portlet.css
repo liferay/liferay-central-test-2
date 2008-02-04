@@ -124,7 +124,10 @@
 
 /* ---------- Text in a selected cell range ---------- */
 
-.portlet-section-selected {
+.portlet-section-selected, .portlet-section-selected a {
+}
+
+.portlet-section-selected a:hover, .portlet-section-selected a:focus {
 }
 
 /* ---------- Text of a subheading ---------- */

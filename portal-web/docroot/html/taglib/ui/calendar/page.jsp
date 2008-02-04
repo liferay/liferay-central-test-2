@@ -146,7 +146,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 				(i == curDay) &&
 				(selYear == curYear)) {
 
-				className = "calendar-current-day";
+				className = "calendar-current-day portlet-section-selected";
 			}
 
 			if (hasData) {

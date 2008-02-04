@@ -214,8 +214,15 @@
 
 /* ---------- Text in a selected cell range ---------- */
 
-.portlet-section-selected {
-	background: #EEE;
+.portlet-section-selected, .portlet-section-selected a {
+	background: #5881B5;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.portlet-section-selected a:hover, .portlet-section-selected a:focus {
+	background-color: #5881B5;
 }
 
 /* ---------- Text of a subheading ---------- */
