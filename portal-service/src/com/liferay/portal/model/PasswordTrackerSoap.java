@@ -58,16 +58,17 @@ public class PasswordTrackerSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PasswordTrackerSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PasswordTrackerSoap[] toSoapModels(
+		List<PasswordTracker> models) {
+		List<PasswordTrackerSoap> soapModels = new ArrayList<PasswordTrackerSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			PasswordTracker model = (PasswordTracker)models.get(i);
+			PasswordTracker model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PasswordTrackerSoap[])soapModels.toArray(new PasswordTrackerSoap[0]);
+		return soapModels.toArray(new PasswordTrackerSoap[soapModels.size()]);
 	}
 
 	public PasswordTrackerSoap() {

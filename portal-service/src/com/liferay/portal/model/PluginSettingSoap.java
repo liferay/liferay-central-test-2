@@ -59,16 +59,16 @@ public class PluginSettingSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PluginSettingSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PluginSettingSoap[] toSoapModels(List<PluginSetting> models) {
+		List<PluginSettingSoap> soapModels = new ArrayList<PluginSettingSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			PluginSetting model = (PluginSetting)models.get(i);
+			PluginSetting model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PluginSettingSoap[])soapModels.toArray(new PluginSettingSoap[0]);
+		return soapModels.toArray(new PluginSettingSoap[soapModels.size()]);
 	}
 
 	public PluginSettingSoap() {

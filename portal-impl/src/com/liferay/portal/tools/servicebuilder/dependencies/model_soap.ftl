@@ -39,16 +39,16 @@ public class ${entity.name}Soap implements Serializable {
 		return soapModel;
 	}
 
-	public static ${entity.name}Soap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ${entity.name}Soap[] toSoapModels(List<${entity.name}> models) {
+		List<${entity.name}Soap> soapModels = new ArrayList<${entity.name}Soap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			${entity.name} model = (${entity.name})models.get(i);
+			${entity.name} model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (${entity.name}Soap[])soapModels.toArray(new ${entity.name}Soap[0]);
+		return soapModels.toArray(new ${entity.name}Soap[soapModels.size()]);
 	}
 
 	public ${entity.name}Soap() {

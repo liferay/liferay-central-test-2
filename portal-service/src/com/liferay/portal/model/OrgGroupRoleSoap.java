@@ -58,16 +58,16 @@ public class OrgGroupRoleSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static OrgGroupRoleSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static OrgGroupRoleSoap[] toSoapModels(List<OrgGroupRole> models) {
+		List<OrgGroupRoleSoap> soapModels = new ArrayList<OrgGroupRoleSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			OrgGroupRole model = (OrgGroupRole)models.get(i);
+			OrgGroupRole model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (OrgGroupRoleSoap[])soapModels.toArray(new OrgGroupRoleSoap[0]);
+		return soapModels.toArray(new OrgGroupRoleSoap[soapModels.size()]);
 	}
 
 	public OrgGroupRoleSoap() {

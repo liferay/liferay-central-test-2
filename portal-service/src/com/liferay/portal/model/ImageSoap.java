@@ -61,16 +61,16 @@ public class ImageSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ImageSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ImageSoap[] toSoapModels(List<Image> models) {
+		List<ImageSoap> soapModels = new ArrayList<ImageSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Image model = (Image)models.get(i);
+			Image model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ImageSoap[])soapModels.toArray(new ImageSoap[0]);
+		return soapModels.toArray(new ImageSoap[soapModels.size()]);
 	}
 
 	public ImageSoap() {

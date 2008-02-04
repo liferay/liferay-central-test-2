@@ -60,16 +60,16 @@ public class ReleaseSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ReleaseSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ReleaseSoap[] toSoapModels(List<Release> models) {
+		List<ReleaseSoap> soapModels = new ArrayList<ReleaseSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Release model = (Release)models.get(i);
+			Release model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ReleaseSoap[])soapModels.toArray(new ReleaseSoap[0]);
+		return soapModels.toArray(new ReleaseSoap[soapModels.size()]);
 	}
 
 	public ReleaseSoap() {

@@ -66,16 +66,17 @@ public class JournalStructureSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static JournalStructureSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static JournalStructureSoap[] toSoapModels(
+		List<JournalStructure> models) {
+		List<JournalStructureSoap> soapModels = new ArrayList<JournalStructureSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			JournalStructure model = (JournalStructure)models.get(i);
+			JournalStructure model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (JournalStructureSoap[])soapModels.toArray(new JournalStructureSoap[0]);
+		return soapModels.toArray(new JournalStructureSoap[soapModels.size()]);
 	}
 
 	public JournalStructureSoap() {

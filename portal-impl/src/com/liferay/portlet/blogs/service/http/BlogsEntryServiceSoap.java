@@ -95,8 +95,8 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getCompanyEntries(
 		long companyId, int max) throws RemoteException {
 		try {
-			java.util.List returnValue = BlogsEntryServiceUtil.getCompanyEntries(companyId,
-					max);
+			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
+				BlogsEntryServiceUtil.getCompanyEntries(companyId, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}
@@ -156,8 +156,8 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getGroupEntries(
 		long groupId, int max) throws RemoteException {
 		try {
-			java.util.List returnValue = BlogsEntryServiceUtil.getGroupEntries(groupId,
-					max);
+			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
+				BlogsEntryServiceUtil.getGroupEntries(groupId, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}
@@ -188,8 +188,8 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getOrganizationEntries(
 		long organizationId, int max) throws RemoteException {
 		try {
-			java.util.List returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
-					max);
+			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
+				BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}

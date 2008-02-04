@@ -64,16 +64,17 @@ public class MembershipRequestSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static MembershipRequestSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static MembershipRequestSoap[] toSoapModels(
+		List<MembershipRequest> models) {
+		List<MembershipRequestSoap> soapModels = new ArrayList<MembershipRequestSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			MembershipRequest model = (MembershipRequest)models.get(i);
+			MembershipRequest model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (MembershipRequestSoap[])soapModels.toArray(new MembershipRequestSoap[0]);
+		return soapModels.toArray(new MembershipRequestSoap[soapModels.size()]);
 	}
 
 	public MembershipRequestSoap() {

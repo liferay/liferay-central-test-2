@@ -70,16 +70,16 @@ public class AccountSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static AccountSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static AccountSoap[] toSoapModels(List<Account> models) {
+		List<AccountSoap> soapModels = new ArrayList<AccountSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Account model = (Account)models.get(i);
+			Account model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (AccountSoap[])soapModels.toArray(new AccountSoap[0]);
+		return soapModels.toArray(new AccountSoap[soapModels.size()]);
 	}
 
 	public AccountSoap() {

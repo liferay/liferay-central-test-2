@@ -56,16 +56,16 @@ public class ListTypeSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ListTypeSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ListTypeSoap[] toSoapModels(List<ListType> models) {
+		List<ListTypeSoap> soapModels = new ArrayList<ListTypeSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			ListType model = (ListType)models.get(i);
+			ListType model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ListTypeSoap[])soapModels.toArray(new ListTypeSoap[0]);
+		return soapModels.toArray(new ListTypeSoap[soapModels.size()]);
 	}
 
 	public ListTypeSoap() {

@@ -58,16 +58,17 @@ public class UserTrackerPathSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static UserTrackerPathSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static UserTrackerPathSoap[] toSoapModels(
+		List<UserTrackerPath> models) {
+		List<UserTrackerPathSoap> soapModels = new ArrayList<UserTrackerPathSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			UserTrackerPath model = (UserTrackerPath)models.get(i);
+			UserTrackerPath model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (UserTrackerPathSoap[])soapModels.toArray(new UserTrackerPathSoap[0]);
+		return soapModels.toArray(new UserTrackerPathSoap[soapModels.size()]);
 	}
 
 	public UserTrackerPathSoap() {

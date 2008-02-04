@@ -65,16 +65,16 @@ public class EmailAddressSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static EmailAddressSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static EmailAddressSoap[] toSoapModels(List<EmailAddress> models) {
+		List<EmailAddressSoap> soapModels = new ArrayList<EmailAddressSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			EmailAddress model = (EmailAddress)models.get(i);
+			EmailAddress model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (EmailAddressSoap[])soapModels.toArray(new EmailAddressSoap[0]);
+		return soapModels.toArray(new EmailAddressSoap[soapModels.size()]);
 	}
 
 	public EmailAddressSoap() {

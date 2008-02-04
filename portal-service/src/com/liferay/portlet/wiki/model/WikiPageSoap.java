@@ -68,16 +68,16 @@ public class WikiPageSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static WikiPageSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static WikiPageSoap[] toSoapModels(List<WikiPage> models) {
+		List<WikiPageSoap> soapModels = new ArrayList<WikiPageSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			WikiPage model = (WikiPage)models.get(i);
+			WikiPage model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (WikiPageSoap[])soapModels.toArray(new WikiPageSoap[0]);
+		return soapModels.toArray(new WikiPageSoap[soapModels.size()]);
 	}
 
 	public WikiPageSoap() {

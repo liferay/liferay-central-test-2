@@ -59,16 +59,16 @@ public class MBStatsUserSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static MBStatsUserSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static MBStatsUserSoap[] toSoapModels(List<MBStatsUser> models) {
+		List<MBStatsUserSoap> soapModels = new ArrayList<MBStatsUserSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			MBStatsUser model = (MBStatsUser)models.get(i);
+			MBStatsUser model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (MBStatsUserSoap[])soapModels.toArray(new MBStatsUserSoap[0]);
+		return soapModels.toArray(new MBStatsUserSoap[soapModels.size()]);
 	}
 
 	public MBStatsUserSoap() {

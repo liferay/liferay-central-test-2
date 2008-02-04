@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -59,14 +60,14 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 
-		List organizationIds = new ArrayList();
+		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(new Long(organizationId));
 
 		return countByOrganizationIds(organizationIds);
 	}
 
-	public int countByOrganizationIds(List organizationIds)
+	public int countByOrganizationIds(List<Long> organizationIds)
 		throws SystemException {
 
 		Session session = null;
@@ -87,15 +88,15 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < organizationIds.size(); i++) {
-				Long organizationId = (Long)organizationIds.get(i);
+				Long organizationId = organizationIds.get(i);
 
 				qPos.add(organizationId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -112,17 +113,19 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		}
 	}
 
-	public List findByOrganizationId(long organizationId, int begin, int end)
+	public List<BlogsEntry> findByOrganizationId(
+			long organizationId, int begin, int end)
 		throws SystemException {
 
-		List organizationIds = new ArrayList();
+		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(new Long(organizationId));
 
 		return findByOrganizationIds(organizationIds, begin, end);
 	}
 
-	public List findByOrganizationIds(List organizationIds, int begin, int end)
+	public List<BlogsEntry> findByOrganizationIds(
+			List<Long> organizationIds, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -143,7 +146,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < organizationIds.size(); i++) {
-				Long organizationId = (Long)organizationIds.get(i);
+				Long organizationId = organizationIds.get(i);
 
 				qPos.add(organizationId);
 			}
@@ -158,7 +161,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<BlogsEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -180,7 +183,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		}
 	}
 
-	protected String getOrganizationIds(List organizationIds) {
+	protected String getOrganizationIds(List<Long> organizationIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < organizationIds.size(); i++) {

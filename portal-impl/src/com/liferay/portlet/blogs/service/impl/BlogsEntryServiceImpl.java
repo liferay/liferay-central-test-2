@@ -109,16 +109,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
-	public List getCompanyEntries(long companyId, int max)
+	public List<BlogsEntry> getCompanyEntries(long companyId, int max)
 		throws PortalException, SystemException {
 
-		List entries = new ArrayList();
+		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
-		Iterator itr = blogsEntryLocalService.getCompanyEntries(
+		Iterator<BlogsEntry> itr = blogsEntryLocalService.getCompanyEntries(
 			companyId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
+			BlogsEntry entry = itr.next();
 
 			if (BlogsEntryPermission.contains(
 					getPermissionChecker(), entry, ActionKeys.VIEW)) {
@@ -139,7 +139,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		String name = company.getName();
 
-		List blogsEntries = getCompanyEntries(companyId, max);
+		List<BlogsEntry> blogsEntries = getCompanyEntries(companyId, max);
 
 		return exportToRSS(
 			name, null, type, version, displayStyle, feedURL, entryURL,
@@ -166,16 +166,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entry;
 	}
 
-	public List getGroupEntries(long groupId, int max)
+	public List<BlogsEntry> getGroupEntries(long groupId, int max)
 		throws PortalException, SystemException {
 
-		List entries = new ArrayList();
+		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
-		Iterator itr = blogsEntryLocalService.getGroupEntries(
+		Iterator<BlogsEntry> itr = blogsEntryLocalService.getGroupEntries(
 			groupId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
+			BlogsEntry entry = itr.next();
 
 			if (BlogsEntryPermission.contains(
 					getPermissionChecker(), entry, ActionKeys.VIEW)) {
@@ -196,23 +196,23 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		String name = group.getDescriptiveName();
 
-		List blogsEntries = getGroupEntries(groupId, max);
+		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, max);
 
 		return exportToRSS(
 			name, null, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries);
 	}
 
-	public List getOrganizationEntries(long organizationId, int max)
+	public List<BlogsEntry> getOrganizationEntries(long organizationId, int max)
 		throws PortalException, SystemException {
 
-		List entries = new ArrayList();
+		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
-		Iterator itr = blogsEntryFinder.findByOrganizationId(
+		Iterator<BlogsEntry> itr = blogsEntryFinder.findByOrganizationId(
 			organizationId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
+			BlogsEntry entry = itr.next();
 
 			if (BlogsEntryPermission.contains(
 					getPermissionChecker(), entry, ActionKeys.VIEW)) {
@@ -234,7 +234,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		String name = organization.getName();
 
-		List blogsEntries = getOrganizationEntries(organizationId, max);
+		List<BlogsEntry> blogsEntries = getOrganizationEntries(
+			organizationId, max);
 
 		return exportToRSS(
 			name, null, type, version, displayStyle, feedURL, entryURL,
@@ -260,7 +261,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	protected String exportToRSS(
 			String name, String description, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
-			List blogsEntries)
+			List<BlogsEntry> blogsEntries)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -270,14 +271,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(GetterUtil.getString(description, name));
 
-		List entries = new ArrayList();
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(entries);
 
-		Iterator itr = blogsEntries.iterator();
+		Iterator<BlogsEntry> itr = blogsEntries.iterator();
 
 		while (itr.hasNext()) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
+			BlogsEntry entry = itr.next();
 
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());

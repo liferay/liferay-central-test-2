@@ -32,15 +32,16 @@ public interface BlogsStatsUserFinder {
 	public int countByOrganizationId(long organizationId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByOrganizationIds(java.util.List organizationIds)
+	public int countByOrganizationIds(java.util.List<Long> organizationIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrganizationId(long organizationId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrganizationIds(
-		java.util.List organizationIds, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationIds(
+		java.util.List<Long> organizationIds, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

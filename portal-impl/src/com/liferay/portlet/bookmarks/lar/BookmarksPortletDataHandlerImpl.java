@@ -39,12 +39,12 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -210,7 +210,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map folderPKs = CollectionFactory.getHashMap();
+			Map<Long, Long> folderPKs = new HashMap<Long, Long>();
 
 			List<BookmarksFolder> folders =
 				(List<BookmarksFolder>)xStream.fromXML(tempDoc.asXML());
@@ -250,7 +250,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, Map folderPKs, BookmarksEntry entry)
+			PortletDataContext context, Map<Long, Long> folderPKs,
+			BookmarksEntry entry)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
@@ -306,7 +307,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map folderPKs, BookmarksFolder folder)
+			PortletDataContext context, Map<Long, Long> folderPKs,
+			BookmarksFolder folder)
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
@@ -352,7 +354,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			folderPKs.put(
-				folder.getPrimaryKeyObj(), existingFolder.getPrimaryKeyObj());
+				new Long(folder.getFolderId()),
+				new Long(existingFolder.getFolderId()));
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

@@ -102,7 +102,13 @@ public class ${entity.name}ServiceSoap {
 			) throws RemoteException {
 				try {
 					<#if returnValueName != "void">
-						${returnValueName}${returnValueDimension} returnValue =
+						${returnValueName}
+
+						<#if method.returnsGenericName != "">
+							<${method.returnsGenericName}>
+						</#if>
+
+						${returnValueDimension} returnValue =
 					</#if>
 
 					${entity.name}ServiceUtil.${method.name}(

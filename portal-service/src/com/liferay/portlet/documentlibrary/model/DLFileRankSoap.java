@@ -60,16 +60,16 @@ public class DLFileRankSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static DLFileRankSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static DLFileRankSoap[] toSoapModels(List<DLFileRank> models) {
+		List<DLFileRankSoap> soapModels = new ArrayList<DLFileRankSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileRank model = (DLFileRank)models.get(i);
+			DLFileRank model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (DLFileRankSoap[])soapModels.toArray(new DLFileRankSoap[0]);
+		return soapModels.toArray(new DLFileRankSoap[soapModels.size()]);
 	}
 
 	public DLFileRankSoap() {

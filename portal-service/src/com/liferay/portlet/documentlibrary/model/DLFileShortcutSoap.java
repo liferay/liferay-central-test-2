@@ -64,16 +64,16 @@ public class DLFileShortcutSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static DLFileShortcutSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static DLFileShortcutSoap[] toSoapModels(List<DLFileShortcut> models) {
+		List<DLFileShortcutSoap> soapModels = new ArrayList<DLFileShortcutSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileShortcut model = (DLFileShortcut)models.get(i);
+			DLFileShortcut model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (DLFileShortcutSoap[])soapModels.toArray(new DLFileShortcutSoap[0]);
+		return soapModels.toArray(new DLFileShortcutSoap[soapModels.size()]);
 	}
 
 	public DLFileShortcutSoap() {

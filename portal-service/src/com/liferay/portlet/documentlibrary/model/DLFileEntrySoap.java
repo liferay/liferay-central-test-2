@@ -71,16 +71,16 @@ public class DLFileEntrySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static DLFileEntrySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static DLFileEntrySoap[] toSoapModels(List<DLFileEntry> models) {
+		List<DLFileEntrySoap> soapModels = new ArrayList<DLFileEntrySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileEntry model = (DLFileEntry)models.get(i);
+			DLFileEntry model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (DLFileEntrySoap[])soapModels.toArray(new DLFileEntrySoap[0]);
+		return soapModels.toArray(new DLFileEntrySoap[soapModels.size()]);
 	}
 
 	public DLFileEntrySoap() {

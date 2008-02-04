@@ -57,16 +57,16 @@ public class MBMessageFlagSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static MBMessageFlagSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static MBMessageFlagSoap[] toSoapModels(List<MBMessageFlag> models) {
+		List<MBMessageFlagSoap> soapModels = new ArrayList<MBMessageFlagSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			MBMessageFlag model = (MBMessageFlag)models.get(i);
+			MBMessageFlag model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (MBMessageFlagSoap[])soapModels.toArray(new MBMessageFlagSoap[0]);
+		return soapModels.toArray(new MBMessageFlagSoap[soapModels.size()]);
 	}
 
 	public MBMessageFlagSoap() {

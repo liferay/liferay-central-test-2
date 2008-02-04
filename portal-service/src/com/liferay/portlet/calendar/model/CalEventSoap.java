@@ -76,16 +76,16 @@ public class CalEventSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CalEventSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static CalEventSoap[] toSoapModels(List<CalEvent> models) {
+		List<CalEventSoap> soapModels = new ArrayList<CalEventSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			CalEvent model = (CalEvent)models.get(i);
+			CalEvent model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (CalEventSoap[])soapModels.toArray(new CalEventSoap[0]);
+		return soapModels.toArray(new CalEventSoap[soapModels.size()]);
 	}
 
 	public CalEventSoap() {

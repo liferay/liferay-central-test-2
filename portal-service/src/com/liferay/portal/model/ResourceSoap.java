@@ -56,16 +56,16 @@ public class ResourceSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ResourceSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ResourceSoap[] toSoapModels(List<Resource> models) {
+		List<ResourceSoap> soapModels = new ArrayList<ResourceSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Resource model = (Resource)models.get(i);
+			Resource model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ResourceSoap[])soapModels.toArray(new ResourceSoap[0]);
+		return soapModels.toArray(new ResourceSoap[soapModels.size()]);
 	}
 
 	public ResourceSoap() {

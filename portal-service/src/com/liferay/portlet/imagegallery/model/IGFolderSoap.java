@@ -64,16 +64,16 @@ public class IGFolderSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static IGFolderSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static IGFolderSoap[] toSoapModels(List<IGFolder> models) {
+		List<IGFolderSoap> soapModels = new ArrayList<IGFolderSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			IGFolder model = (IGFolder)models.get(i);
+			IGFolder model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (IGFolderSoap[])soapModels.toArray(new IGFolderSoap[0]);
+		return soapModels.toArray(new IGFolderSoap[soapModels.size()]);
 	}
 
 	public IGFolderSoap() {

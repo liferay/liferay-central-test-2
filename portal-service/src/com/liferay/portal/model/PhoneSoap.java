@@ -66,16 +66,16 @@ public class PhoneSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PhoneSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PhoneSoap[] toSoapModels(List<Phone> models) {
+		List<PhoneSoap> soapModels = new ArrayList<PhoneSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Phone model = (Phone)models.get(i);
+			Phone model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PhoneSoap[])soapModels.toArray(new PhoneSoap[0]);
+		return soapModels.toArray(new PhoneSoap[soapModels.size()]);
 	}
 
 	public PhoneSoap() {

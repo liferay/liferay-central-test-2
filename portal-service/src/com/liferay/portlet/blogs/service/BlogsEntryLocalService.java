@@ -247,10 +247,12 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCompanyEntries(long companyId, int begin, int end)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getCompanyEntries(long companyId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
+		long companyId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -266,27 +268,31 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupEntries(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupEntries(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupUserEntries(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getGroupUserEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getNoAssetEntries()
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getNoAssetEntries()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getOrganizationEntries(long organizationId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getOrganizationEntriesCount(long organizationId)
 		throws com.liferay.portal.SystemException;

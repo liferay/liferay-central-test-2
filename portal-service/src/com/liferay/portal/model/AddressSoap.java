@@ -72,16 +72,16 @@ public class AddressSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static AddressSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static AddressSoap[] toSoapModels(List<Address> models) {
+		List<AddressSoap> soapModels = new ArrayList<AddressSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Address model = (Address)models.get(i);
+			Address model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (AddressSoap[])soapModels.toArray(new AddressSoap[0]);
+		return soapModels.toArray(new AddressSoap[soapModels.size()]);
 	}
 
 	public AddressSoap() {

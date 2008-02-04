@@ -58,16 +58,16 @@ public class PollsChoiceSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PollsChoiceSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PollsChoiceSoap[] toSoapModels(List<PollsChoice> models) {
+		List<PollsChoiceSoap> soapModels = new ArrayList<PollsChoiceSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			PollsChoice model = (PollsChoice)models.get(i);
+			PollsChoice model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PollsChoiceSoap[])soapModels.toArray(new PollsChoiceSoap[0]);
+		return soapModels.toArray(new PollsChoiceSoap[soapModels.size()]);
 	}
 
 	public PollsChoiceSoap() {

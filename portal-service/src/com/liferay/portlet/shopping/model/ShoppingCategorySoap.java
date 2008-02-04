@@ -64,16 +64,17 @@ public class ShoppingCategorySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ShoppingCategorySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ShoppingCategorySoap[] toSoapModels(
+		List<ShoppingCategory> models) {
+		List<ShoppingCategorySoap> soapModels = new ArrayList<ShoppingCategorySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			ShoppingCategory model = (ShoppingCategory)models.get(i);
+			ShoppingCategory model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ShoppingCategorySoap[])soapModels.toArray(new ShoppingCategorySoap[0]);
+		return soapModels.toArray(new ShoppingCategorySoap[soapModels.size()]);
 	}
 
 	public ShoppingCategorySoap() {

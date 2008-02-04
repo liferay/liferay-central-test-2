@@ -66,16 +66,16 @@ public class BookmarksEntrySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static BookmarksEntrySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static BookmarksEntrySoap[] toSoapModels(List<BookmarksEntry> models) {
+		List<BookmarksEntrySoap> soapModels = new ArrayList<BookmarksEntrySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			BookmarksEntry model = (BookmarksEntry)models.get(i);
+			BookmarksEntry model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (BookmarksEntrySoap[])soapModels.toArray(new BookmarksEntrySoap[0]);
+		return soapModels.toArray(new BookmarksEntrySoap[soapModels.size()]);
 	}
 
 	public BookmarksEntrySoap() {

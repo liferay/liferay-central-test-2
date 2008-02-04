@@ -103,22 +103,25 @@ public interface BlogsStatsUserLocalService {
 	public void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getCompanyStatsUsers(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getCompanyStatsUsers(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getCompanyStatsUsersCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupStatsUsers(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getGroupStatsUsers(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getOrganizationStatsUsers(long organizationId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getOrganizationStatsUsers(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getOrganizationStatsUsersCount(long organizationId)

@@ -70,16 +70,16 @@ public class SCProductEntrySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static SCProductEntrySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static SCProductEntrySoap[] toSoapModels(List<SCProductEntry> models) {
+		List<SCProductEntrySoap> soapModels = new ArrayList<SCProductEntrySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			SCProductEntry model = (SCProductEntry)models.get(i);
+			SCProductEntry model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (SCProductEntrySoap[])soapModels.toArray(new SCProductEntrySoap[0]);
+		return soapModels.toArray(new SCProductEntrySoap[soapModels.size()]);
 	}
 
 	public SCProductEntrySoap() {

@@ -66,16 +66,16 @@ public class GroupSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static GroupSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static GroupSoap[] toSoapModels(List<Group> models) {
+		List<GroupSoap> soapModels = new ArrayList<GroupSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Group model = (Group)models.get(i);
+			Group model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (GroupSoap[])soapModels.toArray(new GroupSoap[0]);
+		return soapModels.toArray(new GroupSoap[soapModels.size()]);
 	}
 
 	public GroupSoap() {

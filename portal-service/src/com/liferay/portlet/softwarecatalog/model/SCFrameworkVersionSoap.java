@@ -65,16 +65,17 @@ public class SCFrameworkVersionSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static SCFrameworkVersionSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static SCFrameworkVersionSoap[] toSoapModels(
+		List<SCFrameworkVersion> models) {
+		List<SCFrameworkVersionSoap> soapModels = new ArrayList<SCFrameworkVersionSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			SCFrameworkVersion model = (SCFrameworkVersion)models.get(i);
+			SCFrameworkVersion model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (SCFrameworkVersionSoap[])soapModels.toArray(new SCFrameworkVersionSoap[0]);
+		return soapModels.toArray(new SCFrameworkVersionSoap[soapModels.size()]);
 	}
 
 	public SCFrameworkVersionSoap() {

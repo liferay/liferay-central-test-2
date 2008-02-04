@@ -58,16 +58,16 @@ public class RegionSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static RegionSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static RegionSoap[] toSoapModels(List<Region> models) {
+		List<RegionSoap> soapModels = new ArrayList<RegionSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Region model = (Region)models.get(i);
+			Region model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (RegionSoap[])soapModels.toArray(new RegionSoap[0]);
+		return soapModels.toArray(new RegionSoap[soapModels.size()]);
 	}
 
 	public RegionSoap() {

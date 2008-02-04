@@ -285,7 +285,7 @@ public class BlogsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List getCompanyEntries(
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		HttpPrincipal httpPrincipal, long companyId, int max)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -314,7 +314,7 @@ public class BlogsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.blogs.model.BlogsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -471,8 +471,8 @@ public class BlogsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List getGroupEntries(HttpPrincipal httpPrincipal,
-		long groupId, int max)
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		HttpPrincipal httpPrincipal, long groupId, int max)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -500,7 +500,7 @@ public class BlogsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.blogs.model.BlogsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -579,7 +579,7 @@ public class BlogsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List getOrganizationEntries(
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
 		HttpPrincipal httpPrincipal, long organizationId, int max)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -609,7 +609,7 @@ public class BlogsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.blogs.model.BlogsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

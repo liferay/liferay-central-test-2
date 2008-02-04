@@ -57,16 +57,16 @@ public class PermissionSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PermissionSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PermissionSoap[] toSoapModels(List<Permission> models) {
+		List<PermissionSoap> soapModels = new ArrayList<PermissionSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Permission model = (Permission)models.get(i);
+			Permission model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PermissionSoap[])soapModels.toArray(new PermissionSoap[0]);
+		return soapModels.toArray(new PermissionSoap[soapModels.size()]);
 	}
 
 	public PermissionSoap() {

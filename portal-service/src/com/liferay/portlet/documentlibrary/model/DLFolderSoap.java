@@ -66,16 +66,16 @@ public class DLFolderSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static DLFolderSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static DLFolderSoap[] toSoapModels(List<DLFolder> models) {
+		List<DLFolderSoap> soapModels = new ArrayList<DLFolderSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFolder model = (DLFolder)models.get(i);
+			DLFolder model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (DLFolderSoap[])soapModels.toArray(new DLFolderSoap[0]);
+		return soapModels.toArray(new DLFolderSoap[soapModels.size()]);
 	}
 
 	public DLFolderSoap() {

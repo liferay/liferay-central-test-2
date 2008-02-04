@@ -63,16 +63,16 @@ public class OrganizationSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static OrganizationSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static OrganizationSoap[] toSoapModels(List<Organization> models) {
+		List<OrganizationSoap> soapModels = new ArrayList<OrganizationSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Organization model = (Organization)models.get(i);
+			Organization model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (OrganizationSoap[])soapModels.toArray(new OrganizationSoap[0]);
+		return soapModels.toArray(new OrganizationSoap[soapModels.size()]);
 	}
 
 	public OrganizationSoap() {

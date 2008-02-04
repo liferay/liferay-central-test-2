@@ -60,16 +60,17 @@ public class SCProductScreenshotSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static SCProductScreenshotSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static SCProductScreenshotSoap[] toSoapModels(
+		List<SCProductScreenshot> models) {
+		List<SCProductScreenshotSoap> soapModels = new ArrayList<SCProductScreenshotSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			SCProductScreenshot model = (SCProductScreenshot)models.get(i);
+			SCProductScreenshot model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (SCProductScreenshotSoap[])soapModels.toArray(new SCProductScreenshotSoap[0]);
+		return soapModels.toArray(new SCProductScreenshotSoap[soapModels.size()]);
 	}
 
 	public SCProductScreenshotSoap() {

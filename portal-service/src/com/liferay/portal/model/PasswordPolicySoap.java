@@ -80,16 +80,16 @@ public class PasswordPolicySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static PasswordPolicySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static PasswordPolicySoap[] toSoapModels(List<PasswordPolicy> models) {
+		List<PasswordPolicySoap> soapModels = new ArrayList<PasswordPolicySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			PasswordPolicy model = (PasswordPolicy)models.get(i);
+			PasswordPolicy model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (PasswordPolicySoap[])soapModels.toArray(new PasswordPolicySoap[0]);
+		return soapModels.toArray(new PasswordPolicySoap[soapModels.size()]);
 	}
 
 	public PasswordPolicySoap() {

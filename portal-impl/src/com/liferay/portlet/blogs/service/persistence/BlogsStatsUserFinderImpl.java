@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -57,14 +58,14 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 
-		List organizationIds = new ArrayList();
+		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(new Long(organizationId));
 
 		return countByOrganizationIds(organizationIds);
 	}
 
-	public int countByOrganizationIds(List organizationIds)
+	public int countByOrganizationIds(List<Long> organizationIds)
 		throws SystemException {
 
 		Session session = null;
@@ -85,15 +86,15 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < organizationIds.size(); i++) {
-				Long organizationId = (Long)organizationIds.get(i);
+				Long organizationId = organizationIds.get(i);
 
 				qPos.add(organizationId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -110,19 +111,20 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 		}
 	}
 
-	public List findByOrganizationId(
+	public List<BlogsStatsUser> findByOrganizationId(
 			long organizationId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		List organizationIds = new ArrayList();
+		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(new Long(organizationId));
 
 		return findByOrganizationIds(organizationIds, begin, end, obc);
 	}
 
-	public List findByOrganizationIds(
-			List organizationIds, int begin, int end, OrderByComparator obc)
+	public List<BlogsStatsUser> findByOrganizationIds(
+			List<Long> organizationIds, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		Session session = null;
@@ -144,7 +146,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < organizationIds.size(); i++) {
-				Long organizationId = (Long)organizationIds.get(i);
+				Long organizationId = organizationIds.get(i);
 
 				qPos.add(organizationId);
 			}
@@ -159,7 +161,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 		}
 	}
 
-	protected String getOrganizationIds(List organizationIds) {
+	protected String getOrganizationIds(List<Long> organizationIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < organizationIds.size(); i++) {

@@ -244,10 +244,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void deleteEntries(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = blogsEntryPersistence.findByGroupId(groupId).iterator();
+		Iterator<BlogsEntry> itr = blogsEntryPersistence.findByGroupId(
+			groupId).iterator();
 
 		while (itr.hasNext()) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
+			BlogsEntry entry = itr.next();
 
 			deleteEntry(entry);
 		}
@@ -299,13 +300,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		blogsEntryPersistence.remove(entry.getEntryId());
 	}
 
-	public List getCompanyEntries(long companyId, int begin, int end)
+	public List<BlogsEntry> getCompanyEntries(
+			long companyId, int begin, int end)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByCompanyId(companyId, begin, end);
 	}
 
-	public List getCompanyEntries(
+	public List<BlogsEntry> getCompanyEntries(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -329,13 +331,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByG_UT(groupId, urlTitle);
 	}
 
-	public List getGroupEntries(long groupId, int begin, int end)
+	public List<BlogsEntry> getGroupEntries(long groupId, int begin, int end)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupEntries(
+	public List<BlogsEntry> getGroupEntries(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -346,7 +348,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.countByGroupId(groupId);
 	}
 
-	public List getGroupUserEntries(
+	public List<BlogsEntry> getGroupUserEntries(
 			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
@@ -359,11 +361,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.countByG_U(groupId, userId);
 	}
 
-	public List getNoAssetEntries() throws SystemException {
+	public List<BlogsEntry> getNoAssetEntries() throws SystemException {
 		return blogsEntryFinder.findByNoAssets();
 	}
 
-	public List getOrganizationEntries(long organizationId, int begin, int end)
+	public List<BlogsEntry> getOrganizationEntries(long organizationId, int begin, int end)
 		throws SystemException {
 
 		return blogsEntryFinder.findByOrganizationId(
@@ -430,11 +432,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr = blogsEntryPersistence.findByCompanyId(
+			Iterator<BlogsEntry> itr = blogsEntryPersistence.findByCompanyId(
 				companyId).iterator();
 
 			while (itr.hasNext()) {
-				BlogsEntry entry = (BlogsEntry)itr.next();
+				BlogsEntry entry = itr.next();
 
 				long groupId = entry.getGroupId();
 				long userId = entry.getUserId();

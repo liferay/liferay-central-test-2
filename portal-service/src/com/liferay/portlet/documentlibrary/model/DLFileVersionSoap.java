@@ -63,16 +63,16 @@ public class DLFileVersionSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static DLFileVersionSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static DLFileVersionSoap[] toSoapModels(List<DLFileVersion> models) {
+		List<DLFileVersionSoap> soapModels = new ArrayList<DLFileVersionSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			DLFileVersion model = (DLFileVersion)models.get(i);
+			DLFileVersion model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (DLFileVersionSoap[])soapModels.toArray(new DLFileVersionSoap[0]);
+		return soapModels.toArray(new DLFileVersionSoap[soapModels.size()]);
 	}
 
 	public DLFileVersionSoap() {

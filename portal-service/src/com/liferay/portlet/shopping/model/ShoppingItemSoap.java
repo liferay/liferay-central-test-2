@@ -87,16 +87,16 @@ public class ShoppingItemSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ShoppingItemSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ShoppingItemSoap[] toSoapModels(List<ShoppingItem> models) {
+		List<ShoppingItemSoap> soapModels = new ArrayList<ShoppingItemSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			ShoppingItem model = (ShoppingItem)models.get(i);
+			ShoppingItem model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ShoppingItemSoap[])soapModels.toArray(new ShoppingItemSoap[0]);
+		return soapModels.toArray(new ShoppingItemSoap[soapModels.size()]);
 	}
 
 	public ShoppingItemSoap() {

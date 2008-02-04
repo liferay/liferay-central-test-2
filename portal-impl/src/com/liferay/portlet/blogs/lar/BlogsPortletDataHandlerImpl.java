@@ -93,12 +93,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Entries
 
-			List entries = BlogsEntryUtil.findByGroupId(context.getGroupId());
+			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
+				context.getGroupId());
 
-			Iterator itr = entries.iterator();
+			Iterator<BlogsEntry> itr = entries.iterator();
 
 			while (itr.hasNext()) {
-				BlogsEntry entry = (BlogsEntry)itr.next();
+				BlogsEntry entry = itr.next();
 
 				if (context.addPrimaryKey(
 						BlogsEntry.class, entry.getPrimaryKeyObj())) {
@@ -176,12 +177,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List entries = (List)xStream.fromXML(tempDoc.asXML());
+			List<BlogsEntry> entries = (List<BlogsEntry>)xStream.fromXML(
+				tempDoc.asXML());
 
-			Iterator itr = entries.iterator();
+			Iterator<BlogsEntry> itr = entries.iterator();
 
 			while (itr.hasNext()) {
-				BlogsEntry entry = (BlogsEntry)itr.next();
+				BlogsEntry entry = itr.next();
 
 				importEntry(context, entry);
 			}

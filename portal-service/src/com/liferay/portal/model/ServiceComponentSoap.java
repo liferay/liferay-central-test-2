@@ -58,16 +58,17 @@ public class ServiceComponentSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ServiceComponentSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ServiceComponentSoap[] toSoapModels(
+		List<ServiceComponent> models) {
+		List<ServiceComponentSoap> soapModels = new ArrayList<ServiceComponentSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			ServiceComponent model = (ServiceComponent)models.get(i);
+			ServiceComponent model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ServiceComponentSoap[])soapModels.toArray(new ServiceComponentSoap[0]);
+		return soapModels.toArray(new ServiceComponentSoap[soapModels.size()]);
 	}
 
 	public ServiceComponentSoap() {

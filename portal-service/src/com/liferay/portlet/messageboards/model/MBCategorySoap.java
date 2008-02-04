@@ -66,16 +66,16 @@ public class MBCategorySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static MBCategorySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static MBCategorySoap[] toSoapModels(List<MBCategory> models) {
+		List<MBCategorySoap> soapModels = new ArrayList<MBCategorySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			MBCategory model = (MBCategory)models.get(i);
+			MBCategory model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (MBCategorySoap[])soapModels.toArray(new MBCategorySoap[0]);
+		return soapModels.toArray(new MBCategorySoap[soapModels.size()]);
 	}
 
 	public MBCategorySoap() {

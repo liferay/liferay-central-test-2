@@ -52,7 +52,7 @@ public class BlogsStatsUserLocalServiceImpl
 		blogsStatsUserPersistence.removeByUserId(userId);
 	}
 
-	public List getCompanyStatsUsers(
+	public List<BlogsStatsUser> getCompanyStatsUsers(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -66,7 +66,7 @@ public class BlogsStatsUserLocalServiceImpl
 		return blogsStatsUserPersistence.countByC_E(companyId, 0);
 	}
 
-	public List getGroupStatsUsers(
+	public List<BlogsStatsUser> getGroupStatsUsers(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -77,7 +77,7 @@ public class BlogsStatsUserLocalServiceImpl
 		return blogsStatsUserPersistence.countByG_E(groupId, 0);
 	}
 
-	public List getOrganizationStatsUsers(
+	public List<BlogsStatsUser> getOrganizationStatsUsers(
 			long organizationId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 

@@ -63,16 +63,16 @@ public class TagsPropertySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static TagsPropertySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static TagsPropertySoap[] toSoapModels(List<TagsProperty> models) {
+		List<TagsPropertySoap> soapModels = new ArrayList<TagsPropertySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			TagsProperty model = (TagsProperty)models.get(i);
+			TagsProperty model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (TagsPropertySoap[])soapModels.toArray(new TagsPropertySoap[0]);
+		return soapModels.toArray(new TagsPropertySoap[soapModels.size()]);
 	}
 
 	public TagsPropertySoap() {

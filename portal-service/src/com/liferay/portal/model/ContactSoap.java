@@ -81,16 +81,16 @@ public class ContactSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static ContactSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static ContactSoap[] toSoapModels(List<Contact> models) {
+		List<ContactSoap> soapModels = new ArrayList<ContactSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Contact model = (Contact)models.get(i);
+			Contact model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (ContactSoap[])soapModels.toArray(new ContactSoap[0]);
+		return soapModels.toArray(new ContactSoap[soapModels.size()]);
 	}
 
 	public ContactSoap() {

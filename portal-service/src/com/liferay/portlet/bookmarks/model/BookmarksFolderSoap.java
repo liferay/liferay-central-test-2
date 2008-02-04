@@ -64,16 +64,17 @@ public class BookmarksFolderSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static BookmarksFolderSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static BookmarksFolderSoap[] toSoapModels(
+		List<BookmarksFolder> models) {
+		List<BookmarksFolderSoap> soapModels = new ArrayList<BookmarksFolderSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			BookmarksFolder model = (BookmarksFolder)models.get(i);
+			BookmarksFolder model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (BookmarksFolderSoap[])soapModels.toArray(new BookmarksFolderSoap[0]);
+		return soapModels.toArray(new BookmarksFolderSoap[soapModels.size()]);
 	}
 
 	public BookmarksFolderSoap() {

@@ -57,16 +57,16 @@ public class MBDiscussionSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static MBDiscussionSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static MBDiscussionSoap[] toSoapModels(List<MBDiscussion> models) {
+		List<MBDiscussionSoap> soapModels = new ArrayList<MBDiscussionSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			MBDiscussion model = (MBDiscussion)models.get(i);
+			MBDiscussion model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (MBDiscussionSoap[])soapModels.toArray(new MBDiscussionSoap[0]);
+		return soapModels.toArray(new MBDiscussionSoap[soapModels.size()]);
 	}
 
 	public MBDiscussionSoap() {

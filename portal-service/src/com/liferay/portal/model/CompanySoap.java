@@ -60,16 +60,16 @@ public class CompanySoap implements Serializable {
 		return soapModel;
 	}
 
-	public static CompanySoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static CompanySoap[] toSoapModels(List<Company> models) {
+		List<CompanySoap> soapModels = new ArrayList<CompanySoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			Company model = (Company)models.get(i);
+			Company model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (CompanySoap[])soapModels.toArray(new CompanySoap[0]);
+		return soapModels.toArray(new CompanySoap[soapModels.size()]);
 	}
 
 	public CompanySoap() {

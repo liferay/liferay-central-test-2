@@ -58,16 +58,16 @@ public class UserIdMapperSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static UserIdMapperSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static UserIdMapperSoap[] toSoapModels(List<UserIdMapper> models) {
+		List<UserIdMapperSoap> soapModels = new ArrayList<UserIdMapperSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			UserIdMapper model = (UserIdMapper)models.get(i);
+			UserIdMapper model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (UserIdMapperSoap[])soapModels.toArray(new UserIdMapperSoap[0]);
+		return soapModels.toArray(new UserIdMapperSoap[soapModels.size()]);
 	}
 
 	public UserIdMapperSoap() {

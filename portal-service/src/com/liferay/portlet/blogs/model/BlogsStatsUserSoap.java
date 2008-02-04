@@ -63,16 +63,16 @@ public class BlogsStatsUserSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static BlogsStatsUserSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
+	public static BlogsStatsUserSoap[] toSoapModels(List<BlogsStatsUser> models) {
+		List<BlogsStatsUserSoap> soapModels = new ArrayList<BlogsStatsUserSoap>(models.size());
 
 		for (int i = 0; i < models.size(); i++) {
-			BlogsStatsUser model = (BlogsStatsUser)models.get(i);
+			BlogsStatsUser model = models.get(i);
 
 			soapModels.add(toSoapModel(model));
 		}
 
-		return (BlogsStatsUserSoap[])soapModels.toArray(new BlogsStatsUserSoap[0]);
+		return soapModels.toArray(new BlogsStatsUserSoap[soapModels.size()]);
 	}
 
 	public BlogsStatsUserSoap() {
