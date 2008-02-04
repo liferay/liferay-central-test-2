@@ -260,7 +260,7 @@ public class EditEventAction extends PortletAction {
 
 				recurrence.setInterval(weeklyInterval);
 
-				List dayPos = new ArrayList();
+				List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
 				_addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
 				_addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
@@ -401,7 +401,9 @@ public class EditEventAction extends PortletAction {
 		}
 	}
 
-	private void _addWeeklyDayPos(ActionRequest req, List list, int day) {
+	private void _addWeeklyDayPos(
+		ActionRequest req, List<DayAndPosition> list, int day) {
+
 		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
 			list.add(new DayAndPosition(day, 0));
 		}

@@ -93,12 +93,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Events
 
-			List events = CalEventUtil.findByGroupId(context.getGroupId());
+			List<CalEvent> events = CalEventUtil.findByGroupId(
+				context.getGroupId());
 
-			Iterator itr = events.iterator();
+			Iterator<CalEvent> itr = events.iterator();
 
 			while (itr.hasNext()) {
-				CalEvent event = (CalEvent) itr.next();
+				CalEvent event = itr.next();
 
 				if (context.addPrimaryKey(
 						CalEvent.class, event.getPrimaryKeyObj())) {
@@ -157,12 +158,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List events = (List) xStream.fromXML(tempDoc.asXML());
+			List<CalEvent> events = (List<CalEvent>)xStream.fromXML(
+				tempDoc.asXML());
 
-			Iterator itr = events.iterator();
+			Iterator<CalEvent> itr = events.iterator();
 
 			while (itr.hasNext()) {
-				CalEvent event = (CalEvent) itr.next();
+				CalEvent event = itr.next();
 
 				importEvent(context, event);
 			}
