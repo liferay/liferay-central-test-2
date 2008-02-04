@@ -33,6 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class AddEntryTest extends BaseTestCase {
 	public void testAddEntry() throws Exception {
 		selenium.click("//input[@value='Add Blog Entry']");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
