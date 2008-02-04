@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -51,7 +52,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 	public static String FIND_BY_REMINDBY =
 		CalEventFinder.class.getName() + ".findByRemindBy";
 
-	public List findByG_SD(
+	public List<CalEvent> findByG_SD(
 			long groupId, Date startDateGT, Date startDateLT,
 			boolean timeZoneSensitive)
 		throws SystemException {
@@ -88,7 +89,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 		}
 	}
 
-	public List findByRemindBy() throws SystemException {
+	public List<CalEvent> findByRemindBy() throws SystemException {
 		Session session = null;
 
 		try {

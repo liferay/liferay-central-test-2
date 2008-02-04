@@ -219,20 +219,23 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEvents(long groupId, java.lang.String type,
-		int begin, int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List getEvents(long groupId, java.util.Calendar cal)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEvents(long groupId, java.util.Calendar cal,
-		java.lang.String type) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String type)
+		throws com.liferay.portal.SystemException;
 
 	public int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getRepeatingEvents(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
+		long groupId) throws com.liferay.portal.SystemException;
 
 	public boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException;

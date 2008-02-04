@@ -26,9 +26,11 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portlet.calendar.model.CalEvent;
 
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="CalEventLocalUtil.java.html"><b><i>View Source</i></b></a>
@@ -47,13 +49,14 @@ public class CalEventLocalUtil {
 		_cache.remove(key);
 	}
 
-	protected static Map getEventsPool(long groupId) {
+	protected static Map<String, List<CalEvent>> getEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
-		Map eventsPool = (Map)MultiVMPoolUtil.get(_cache, key);
+		Map <String, List<CalEvent>> eventsPool =
+			(Map<String, List<CalEvent>>)MultiVMPoolUtil.get(_cache, key);
 
 		if (eventsPool == null) {
-			eventsPool = CollectionFactory.getSyncHashMap();
+			eventsPool = new ConcurrentHashMap<String, List<CalEvent>>();
 
 			MultiVMPoolUtil.put(_cache, key, eventsPool);
 		}

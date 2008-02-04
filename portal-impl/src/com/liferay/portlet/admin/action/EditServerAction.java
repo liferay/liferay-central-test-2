@@ -29,23 +29,19 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Time;
-import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.lang.reflect.Method;
@@ -53,18 +49,11 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,9 +61,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="EditServerAction.java.html"><b><i>View Source</i></b></a>
@@ -121,9 +107,6 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("gc")) {
 			gc();
-		}
-		else if (cmd.equals("precompile")) {
-			precompile(req, res);
 		}
 		else if (cmd.equals("reIndex")) {
 			reIndex();
@@ -203,128 +186,6 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void precompile(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		Set jsps = new TreeSet();
-
-		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
-
-		// Struts
-
-		Document doc = PortalUtil.readDocumentFromStream(
-			ctx.getResourceAsStream("/WEB-INF/struts-config.xml"));
-
-		Element root = doc.getRootElement();
-
-		Iterator itr1 = root.element("global-forwards").elements(
-			"forward").iterator();
-
-		while (itr1.hasNext()) {
-			Element action = (Element)itr1.next();
-
-			String fileName = action.attributeValue("path");
-
-			if ((Validator.isNotNull(fileName)) &&
-				(fileName.endsWith(".jsp"))) {
-
-				jsps.add(fileName);
-			}
-		}
-
-		itr1 = root.element("action-mappings").elements("action").iterator();
-
-		while (itr1.hasNext()) {
-			Element action = (Element)itr1.next();
-
-			String fileName = action.attributeValue("forward");
-
-			if ((Validator.isNotNull(fileName)) &&
-				(fileName.endsWith(".jsp"))) {
-
-				jsps.add(fileName);
-			}
-			else {
-				Iterator itr2 = action.elements("forward").iterator();
-
-				while (itr2.hasNext()) {
-					Element forward = (Element)itr2.next();
-
-					fileName = forward.attributeValue("path");
-
-					if ((Validator.isNotNull(fileName)) &&
-						(fileName.endsWith(".jsp"))) {
-
-						jsps.add(fileName);
-					}
-				}
-			}
-		}
-
-		// Tiles
-
-		doc = PortalUtil.readDocumentFromStream(
-			ctx.getResourceAsStream("/WEB-INF/tiles-defs.xml"));
-
-		root = doc.getRootElement();
-
-		itr1 = root.elements("definition").iterator();
-
-		while (itr1.hasNext()) {
-			Element definition = (Element)itr1.next();
-
-			String fileName = definition.attributeValue("path");
-
-			if ((Validator.isNotNull(fileName)) &&
-				(fileName.endsWith(".jsp"))) {
-
-				jsps.add(fileName);
-			}
-			else {
-				Iterator itr2 = definition.elements("put").iterator();
-
-				while (itr2.hasNext()) {
-					Element put = (Element)itr2.next();
-
-					fileName = put.attributeValue("value");
-
-					if ((Validator.isNotNull(fileName)) &&
-						(fileName.endsWith(".jsp"))) {
-
-						jsps.add(fileName);
-					}
-				}
-			}
-		}
-
-		// Precompile JSPs
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = new NullServletResponse(
-			PortalUtil.getHttpServletResponse(res));
-
-		itr1 = jsps.iterator();
-
-		while (itr1.hasNext()) {
-			try {
-				String jsp = StrutsUtil.TEXT_HTML_DIR + itr1.next();
-
-				RequestDispatcher rd = ctx.getRequestDispatcher(jsp);
-
-				if (rd != null) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Precompiling " + jsp);
-					}
-
-					rd.include(httpReq, httpRes);
-				}
-			}
-			catch (Exception e) {
-				_log.debug(e, e);
-			}
-		}
-	}
-
 	protected void reIndex() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
@@ -364,22 +225,21 @@ public class EditServerAction extends PortletAction {
 		try {
 			sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
 
-			Map stackTraces = (Map)PortalClassInvoker.invoke(
-				Thread.class.getName(), "getAllStackTraces", false);
+			Map<Thread, StackTraceElement[]> stackTraces =
+				(Map<Thread, StackTraceElement[]>)PortalClassInvoker.invoke(
+					Thread.class.getName(), "getAllStackTraces", false);
 
-			Class[] nullParams = new Class[] {};
 			Object[] nullArgs = new Object[] {};
 
-			Method getId = Thread.class.getMethod("getId", nullParams);
-			Method getState = Thread.class.getMethod("getState", nullParams);
+			Method getId = Thread.class.getMethod("getId");
+			Method getState = Thread.class.getMethod("getState");
 
-			Iterator itr = stackTraces.keySet().iterator();
+			Iterator<Thread> itr = stackTraces.keySet().iterator();
 
 			while (itr.hasNext()) {
-				Thread thread = (Thread)itr.next();
+				Thread thread = itr.next();
 
-				StackTraceElement[] elements =
-					(StackTraceElement[])stackTraces.get(thread);
+				StackTraceElement[] elements = stackTraces.get(thread);
 
 				sb.append(StringPool.QUOTE);
 				sb.append(thread.getName());
@@ -420,10 +280,10 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void updateLogLevels(ActionRequest req) throws Exception {
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith("logLevel")) {
 				String loggerName = name.substring(8, name.length());

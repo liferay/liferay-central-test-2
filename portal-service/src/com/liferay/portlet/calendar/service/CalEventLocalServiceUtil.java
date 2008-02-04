@@ -403,22 +403,24 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.getEvent(eventId);
 	}
 
-	public static java.util.List getEvents(long groupId, java.lang.String type,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String type, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		return calEventLocalService.getEvents(groupId, type, begin, end);
 	}
 
-	public static java.util.List getEvents(long groupId, java.util.Calendar cal)
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		return calEventLocalService.getEvents(groupId, cal);
 	}
 
-	public static java.util.List getEvents(long groupId,
-		java.util.Calendar cal, java.lang.String type)
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
@@ -432,8 +434,8 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.getEventsCount(groupId, type);
 	}
 
-	public static java.util.List getRepeatingEvents(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
+		long groupId) throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		return calEventLocalService.getRepeatingEvents(groupId);
