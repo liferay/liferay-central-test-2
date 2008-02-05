@@ -33,7 +33,7 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 %>
 
 <c:if test="<%= (group.hasStagingGroup() || group.isStagingGroup()) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) %>">
-	<ul>
+	<ul style="display: block;">
 		<c:choose>
 			<c:when test="<%= group.isStagingGroup() %>">
 				<%
@@ -61,12 +61,7 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 
 				<c:if test="<%= themeDisplay.getURLPublishToLive() != null %>">
 					<li class="page-settings">
-						<a href="javascript: Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', messageId: 'publish-to-live'});">
-							<liferay-ui:message key="publish-to-live" />
-							<c:if test="<%= layoutPlid <= 0 %>">
-								(<liferay-ui:message key="new" />)
-							</c:if>
-						</a>
+						<a href="javascript: Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', messageId: 'publish-to-live'});"><liferay-ui:message key="publish-to-live" /></a>
 					</li>
 				</c:if>
 			</c:when>
