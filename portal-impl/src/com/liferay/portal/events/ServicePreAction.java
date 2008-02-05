@@ -1262,7 +1262,9 @@ public class ServicePreAction extends Action {
 			//		CANNOT break the staging environment setup by the
 			//		Community Admin.
 
-			themeDisplay.setShowStagingIcon(hasManageLayoutsPermission);
+			if (group.hasStagingGroup() || group.isStagingGroup()) {
+				themeDisplay.setShowStagingIcon(hasManageLayoutsPermission);
+			}
 
 			String myAccountNamespace = PortalUtil.getPortletNamespace(
 				PortletKeys.MY_ACCOUNT);
