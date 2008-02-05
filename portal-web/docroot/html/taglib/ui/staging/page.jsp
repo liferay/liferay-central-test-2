@@ -33,7 +33,7 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 %>
 
 <c:if test="<%= (group.hasStagingGroup() || group.isStagingGroup()) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) %>">
-	<ul style="display: block;">
+	<ul>
 		<c:choose>
 			<c:when test="<%= group.isStagingGroup() %>">
 				<%
