@@ -1248,14 +1248,20 @@ public class ServicePreAction extends Action {
 				themeDisplay.setShowPageSettingsIcon(false);
 				themeDisplay.setURLPublishToLive(null);
 			}
-			else if (group.hasStagingGroup()) {
-				boolean hasManageStagingPermission =
-					GroupPermissionUtil.contains(
-						permissionChecker, portletGroupId,
-						ActionKeys.MANAGE_STAGING);
 
-				themeDisplay.setShowStagingIcon(true);
-			}
+			// The reason we don't check MANAGE_STAGING here is so that content
+			// content creators still have access to navigate to/from Live and
+			// Staging. MANAGE_STAGING is a permission to control who can
+			// ACTIVATE/BREAK the staging environment.
+			// Use Case :
+			//	- Community Admin sets up Staging Env. by "Activating Staging"
+			//		(has MANAGE_STAGING automatically)
+			//	- A Community Member is granted MANAGE_LAYOUTS.
+			//		This Community Member can now create content/layouts, BUT
+			//		CANNOT break the staging environment setup by the
+			//		Community Admin.
+
+			themeDisplay.setShowStagingIcon(hasManageLayoutsPermission);
 
 			String myAccountNamespace = PortalUtil.getPortletNamespace(
 				PortletKeys.MY_ACCOUNT);
