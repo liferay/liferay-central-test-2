@@ -339,10 +339,9 @@ public class PluginPackageUtil {
 		return _installedPluginPackages.getSortedPluginPackages();
 	}
 
-	private PluginPackage _getLatestAvailablePluginPackage(
-			String groupId, String artifactId)
-		throws SystemException {
-
+	private List _getAvailablePluginPackages(String groupId, String artifactId)
+		throws PluginPackageException {
+		
 		List pluginPackages = new ArrayList();
 
 		String[] repositoryURLs = _getRepositoryURLs();
@@ -359,6 +358,15 @@ public class PluginPackageUtil {
 				pluginPackages.addAll(curPluginPackages);
 			}
 		}
+
+		return pluginPackages;
+	}
+
+	private PluginPackage _getLatestAvailablePluginPackage(
+			String groupId, String artifactId)
+		throws SystemException {
+
+		List pluginPackages = _getAvailablePluginPackages(groupId, artifactId);
 
 		return _findLatestVersion(pluginPackages);
 	}
@@ -1270,6 +1278,25 @@ public class PluginPackageUtil {
 		PluginPackage pluginPackage) {
 
 		_installedPluginPackages.removePluginPackage(pluginPackage);
+
+		try {
+			List pluginPackages = _getAvailablePluginPackages(
+				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+
+			Iterator itr = pluginPackages.iterator();
+
+			while (itr.hasNext()) {
+				PluginPackage availablePackage = (PluginPackage) itr.next();
+
+				_indexPluginPackage(availablePackage);
+			}
+		}
+		catch (PluginPackageException e) {
+			_log.warn(
+				"Unable to reindex unistalled package " +
+					pluginPackage.getContext(), e);
+		}
+
 	}
 
 	private void _updateInstallingPluginPackage(
