@@ -24,14 +24,15 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%
-Group group = layout.getGroup();
-
-String friendlyURL = null;
-%>
-
 <c:if test="<%= themeDisplay.isShowStagingIcon() %>">
-	<ul style="display: block;">
+
+	<%
+	Group group = layout.getGroup();
+
+	String friendlyURL = null;
+	%>
+
+	<ul>
 		<c:choose>
 			<c:when test="<%= group.isStagingGroup() %>">
 
@@ -40,6 +41,7 @@ String friendlyURL = null;
 
 				try {
 					Layout liveLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
 				}
 				catch (Exception e) {
@@ -65,6 +67,7 @@ String friendlyURL = null;
 
 				try {
 					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
 				}
 				catch (Exception e) {
