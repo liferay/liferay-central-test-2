@@ -76,13 +76,6 @@ public class ExtPropertiesLoader {
 	}
 
 	public String get(String key) {
-		if (_keys.contains(key)) {
-			System.out.println("### duplicate key " + key);
-		}
-		else {
-			_keys.add(key);
-		}
-
 		return getComponentProperties().getString(key);
 	}
 
@@ -195,6 +188,5 @@ public class ExtPropertiesLoader {
 	private static final String _COMPANY_ID_SEPARATOR = "_COMPANY_ID_";
 
 	private ComponentConfiguration _conf;
-	private java.util.Set _keys = new java.util.HashSet();
 
 }
