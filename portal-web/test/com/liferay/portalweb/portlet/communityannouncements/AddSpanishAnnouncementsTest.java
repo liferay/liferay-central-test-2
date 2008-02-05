@@ -51,7 +51,7 @@ public class AddSpanishAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.select("_86_languageId", "label=espa\u00f1ol (Espa\u00f1a)");
 		selenium.type("_86_content",
 			"This is a test community announcement in Espa\u00f1ol!");
@@ -72,7 +72,7 @@ public class AddSpanishAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=My Account");
@@ -101,6 +101,7 @@ public class AddSpanishAnnouncementsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Community Announcements Test Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(""));
+		verifyTrue(selenium.isTextPresent(
+				"This is a test community announcement in Espa\u00f1ol!"));
 	}
 }

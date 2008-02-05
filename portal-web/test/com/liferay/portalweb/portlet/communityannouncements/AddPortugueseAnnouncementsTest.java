@@ -51,7 +51,7 @@ public class AddPortugueseAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.select("_86_languageId", "label=portugu\u00eas (Brasil)");
 		selenium.type("_86_content",
 			"This is a test community announcement in Portugu\u011bse!");
@@ -73,7 +73,7 @@ public class AddPortugueseAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.click("//input[@value='\u3092\u9664\u3051\u3070']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=\u79c1\u306e\u8a18\u8ff0");
@@ -102,7 +102,8 @@ public class AddPortugueseAnnouncementsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Community Announcements Test Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(""));
+		verifyTrue(selenium.isTextPresent(
+				"This is a test community announcement in Portugu\u011bse!"));
 		selenium.click("link=Meu Cliente");
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(3000);
@@ -111,6 +112,7 @@ public class AddPortugueseAnnouncementsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Community Announcements Test Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(""));
+		verifyTrue(selenium.isTextPresent(
+				"This is a test community announcement in English!"));
 	}
 }

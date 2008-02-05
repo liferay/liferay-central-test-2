@@ -51,7 +51,7 @@ public class AddChineseAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.select("_86_languageId",
 			"label=\u65e5\u672c\u8a9e (\u65e5\u672c)");
 		selenium.type("_86_content",
@@ -78,7 +78,7 @@ public class AddChineseAnnouncementsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=\u6211\u7684\u5e33\u6236");
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(3000);
+		Thread.sleep();
 		selenium.select("_2_languageId",
 			"label=\u65e5\u672c\u8a9e (\u65e5\u672c)");
 
@@ -102,6 +102,7 @@ public class AddChineseAnnouncementsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Community Announcements Test Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(""));
+		verifyTrue(selenium.isTextPresent(
+				"This is a test community announcement in \u6c49\u8bed !"));
 	}
 }
