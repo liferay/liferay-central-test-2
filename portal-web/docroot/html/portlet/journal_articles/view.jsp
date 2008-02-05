@@ -163,12 +163,10 @@ double version = ParamUtil.getDouble(request, "version");
 	<c:otherwise>
 
 		<%
-		String languageId = LanguageUtil.getLanguageId(request);
-
-		String content = StringPool.BLANK;
-		
 		try {
-			content = JournalArticleServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
+			String languageId = LanguageUtil.getLanguageId(request);
+
+			String content = JournalArticleServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
 
 			RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 			RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
@@ -177,13 +175,22 @@ double version = ParamUtil.getDouble(request, "version");
 			content = RuntimePortletUtil.processXML(request, content, portletLogic);
 			content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
 			content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
+		%>
+
+			<%= content %>
+
+		<%
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(renderRequest, pe.getClass().getName());
+		%>
+
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="you-do-not-have-the-required-permissions" />
+			</span>
+
+		<%
 		}
 		%>
 
-		<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
-		<%= content %>
 	</c:otherwise>
 </c:choose>
