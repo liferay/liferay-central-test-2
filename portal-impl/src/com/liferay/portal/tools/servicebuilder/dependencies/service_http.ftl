@@ -64,24 +64,13 @@ public class ${entity.name}ServiceHttp {
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			<#assign hasMethods = true>
 
-			<#if method.returnsGenericName != "">
-				<#assign returnTypeName = method.returns.value + "<" + method.returnsGenericName + ">" + serviceBuilder.getDimensions(method.returns.dimensions)>
-			<#else>
-				<#assign returnTypeName = method.returns.value + serviceBuilder.getDimensions(method.returns.dimensions)>
-			</#if>
-
+			<#assign returnTypeName = method.returns.value + method.returnsGenericsName + serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign parameters = method.parameters>
 
 			public static ${returnTypeName} ${method.name} (HttpPrincipal httpPrincipal
 
 			<#list parameters as parameter>
-				, ${parameter.type.value}
-
-				<#if parameter.genericName != "">
-					<${parameter.genericName}>
-				</#if>
-
-				${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
+				, ${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
 			</#list>
 
 			)

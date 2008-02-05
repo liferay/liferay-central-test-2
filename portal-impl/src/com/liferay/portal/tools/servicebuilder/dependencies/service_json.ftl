@@ -109,13 +109,7 @@ public class ${entity.name}ServiceJSON {
 				</#list>{
 
 				<#if returnValueName != "void">
-					${returnValueName}
-
-					<#if method.returnsGenericName != "">
-						<${method.returnsGenericName}>
-					</#if>
-
-					${returnValueDimension} returnValue =
+					${returnValueName}${method.returnsGenericsName}${returnValueDimension} returnValue =
 				</#if>
 
 				${entity.name}ServiceUtil.${method.name}(

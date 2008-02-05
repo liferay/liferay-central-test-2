@@ -351,7 +351,8 @@ public interface Portlet extends PortletModel {
 
 	public java.util.Map<String, java.util.Set<String>> getPortletModes();
 
-	public void setPortletModes(java.util.Map<String, java.util.Set<String>> portletModes);
+	public void setPortletModes(
+		java.util.Map<String, java.util.Set<String>> portletModes);
 
 	public boolean hasPortletMode(java.lang.String mimeType,
 		javax.portlet.PortletMode portletMode);
