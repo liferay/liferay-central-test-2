@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -76,8 +76,9 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 					"Registering layout templates for " + servletContextName);
 			}
 
-			List layoutTemplateIds = LayoutTemplateLocalUtil.init(
-				servletContextName, ctx, xmls, event.getPluginPackage());
+			List<ObjectValuePair> layoutTemplateIds =
+				LayoutTemplateLocalUtil.init(
+					servletContextName, ctx, xmls, event.getPluginPackage());
 
 			_vars.put(servletContextName, layoutTemplateIds);
 
@@ -106,7 +107,8 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			List layoutTemplateIds = (List)_vars.get(servletContextName);
+			List<ObjectValuePair> layoutTemplateIds =
+				_vars.get(servletContextName);
 
 			if (layoutTemplateIds != null) {
 				if (_log.isInfoEnabled()) {
@@ -115,10 +117,10 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 							servletContextName);
 				}
 
-				Iterator itr = layoutTemplateIds.iterator();
+				Iterator<ObjectValuePair> itr = layoutTemplateIds.iterator();
 
 				while (itr.hasNext()) {
-					ObjectValuePair ovp = (ObjectValuePair)itr.next();
+					ObjectValuePair ovp = itr.next();
 
 					String layoutTemplateId = (String)ovp.getKey();
 					Boolean standard = (Boolean)ovp.getValue();
@@ -152,6 +154,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 	private static Log _log =
 		LogFactory.getLog(LayoutTemplateHotDeployListener.class);
 
-	private static Map _vars = CollectionFactory.getHashMap();
+	private static Map<String, List<ObjectValuePair>> _vars =
+		new HashMap<String, List<ObjectValuePair>>();
 
 }

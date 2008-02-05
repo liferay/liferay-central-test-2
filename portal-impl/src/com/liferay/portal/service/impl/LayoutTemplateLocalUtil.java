@@ -160,9 +160,10 @@ public class LayoutTemplateLocalUtil {
 		return layoutTemplate;
 	}
 
-	public static List getLayoutTemplates() {
-		List customLayoutTemplates = new ArrayList(
-			_portalCustom.size() + _warCustom.size());
+	public static List<LayoutTemplate> getLayoutTemplates() {
+		List<LayoutTemplate> customLayoutTemplates =
+			new ArrayList<LayoutTemplate>(
+							_portalCustom.size() + _warCustom.size());
 
 		customLayoutTemplates.addAll(
 			ListUtil.fromCollection(_portalCustom.values()));
@@ -173,19 +174,22 @@ public class LayoutTemplateLocalUtil {
 		return customLayoutTemplates;
 	}
 
-	public static List getLayoutTemplates(String themeId) {
-		Map _themesCustom = _getThemesCustom(themeId);
+	public static List<LayoutTemplate> getLayoutTemplates(String themeId) {
+		Map<String, LayoutTemplate> _themesCustom = _getThemesCustom(themeId);
 
-		List customLayoutTemplates = new ArrayList(
-			_portalCustom.size() + _warCustom.size() + _themesCustom.size());
+		List<LayoutTemplate> customLayoutTemplates =
+			new ArrayList<LayoutTemplate>(
+				_portalCustom.size() + _warCustom.size() +
+					_themesCustom.size());
 
-		Iterator itr = _portalCustom.entrySet().iterator();
+		Iterator<Map.Entry<String, LayoutTemplate>> itr =
+			_portalCustom.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, LayoutTemplate> entry = itr.next();
 
-			String layoutTemplateId = (String)entry.getKey();
-			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
+			String layoutTemplateId = entry.getKey();
+			LayoutTemplate layoutTemplate = entry.getValue();
 
 			if (_themesCustom.containsKey(layoutTemplateId)) {
 				customLayoutTemplates.add(_themesCustom.get(layoutTemplateId));
@@ -201,9 +205,9 @@ public class LayoutTemplateLocalUtil {
 		itr = _warCustom.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, LayoutTemplate> entry = itr.next();
 
-			String layoutTemplateId = (String)entry.getKey();
+			String layoutTemplateId = entry.getKey();
 
 			if (!_portalCustom.containsKey(layoutTemplateId) &&
 				!_themesCustom.containsKey(layoutTemplateId)) {
@@ -215,9 +219,9 @@ public class LayoutTemplateLocalUtil {
 		itr = _themesCustom.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, LayoutTemplate> entry = itr.next();
 
-			String layoutTemplateId = (String)entry.getKey();
+			String layoutTemplateId = entry.getKey();
 
 			if (!_portalCustom.containsKey(layoutTemplateId) &&
 				!_warCustom.containsKey(layoutTemplateId)) {
@@ -273,21 +277,22 @@ public class LayoutTemplateLocalUtil {
 		}
 	}
 
-	public static List init(
+	public static List<ObjectValuePair> init(
 		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
 
 		return init(null, ctx, xmls, pluginPackage);
 	}
 
-	public static List init(
+	public static List<ObjectValuePair> init(
 		String servletContextName, ServletContext ctx, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List layoutTemplateIds = new ArrayList();
+		List<ObjectValuePair> layoutTemplateIds =
+			new ArrayList<ObjectValuePair>();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
-				Iterator itr = _readLayoutTemplates(
+				Iterator<ObjectValuePair> itr = _readLayoutTemplates(
 					servletContextName, ctx, xmls[i], pluginPackage).iterator();
 
 				while (itr.hasNext()) {
@@ -308,11 +313,11 @@ public class LayoutTemplateLocalUtil {
 
 	public static void readLayoutTemplate(
 			String servletContextName, ServletContext ctx,
-			Set layoutTemplateIds, Element el, boolean standard, String themeId,
-			PluginPackage pluginPackage)
+			Set<ObjectValuePair> layoutTemplateIds, Element el,
+			boolean standard, String themeId, PluginPackage pluginPackage)
 		throws IOException {
 
-		Map layoutTemplates = null;
+		Map<String, LayoutTemplate> layoutTemplates = null;
 
 		if (themeId != null) {
 			if (standard) {
@@ -339,10 +344,10 @@ public class LayoutTemplateLocalUtil {
 			}
 		}
 
-		Iterator itr = el.elements("layout-template").iterator();
+		Iterator<Element> itr = el.elements("layout-template").iterator();
 
 		while (itr.hasNext()) {
-			Element layoutTemplate = (Element)itr.next();
+			Element layoutTemplate = itr.next();
 
 			String layoutTemplateId = layoutTemplate.attributeValue("id");
 
@@ -441,10 +446,11 @@ public class LayoutTemplateLocalUtil {
 			Element rolesEl = layoutTemplate.element("roles");
 
 			if (rolesEl != null) {
-				Iterator itr2 = rolesEl.elements("role-name").iterator();
+				Iterator<Element> itr2 = rolesEl.elements(
+					"role-name").iterator();
 
 				while (itr2.hasNext()) {
-					Element roleNameEl = (Element)itr2.next();
+					Element roleNameEl = itr2.next();
 
 					pluginSetting.addRole(roleNameEl.getText());
 				}
@@ -470,7 +476,7 @@ public class LayoutTemplateLocalUtil {
 		_getThemesCustom(themeId).clear();
 	}
 
-	private static List _getColumns(String content) {
+	private static List<String> _getColumns(String content) {
 		try {
 			InitColumnProcessor processor = new InitColumnProcessor();
 
@@ -482,7 +488,7 @@ public class LayoutTemplateLocalUtil {
 				context, new PrintWriter(new StringWriter()),
 				LayoutTemplateLocalUtil.class.getName(), content);
 
-			List columns = processor.getColumns();
+			List<String> columns = processor.getColumns();
 
 			Collections.sort(columns);
 
@@ -491,16 +497,16 @@ public class LayoutTemplateLocalUtil {
 		catch (Exception e) {
 			_log.error(e);
 
-			return new ArrayList();
+			return new ArrayList<String>();
 		}
 	}
 
-	private static Set _readLayoutTemplates(
+	private static Set<ObjectValuePair> _readLayoutTemplates(
 			String servletContextName, ServletContext ctx, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
-		Set layoutTemplateIds = new HashSet();
+		Set<ObjectValuePair> layoutTemplateIds = new HashSet<ObjectValuePair>();
 
 		if (xml == null) {
 			return layoutTemplateIds;
@@ -529,13 +535,15 @@ public class LayoutTemplateLocalUtil {
 		return layoutTemplateIds;
 	}
 
-	private static Map _getThemesCustom(String themeId) {
+	private static Map<String, LayoutTemplate> _getThemesCustom(
+		String themeId) {
+
 		String key = themeId + _CUSTOM_SEPARATOR;
 
-		Map layoutTemplates = (Map)_themes.get(key);
+		Map<String, LayoutTemplate> layoutTemplates = _themes.get(key);
 
 		if (layoutTemplates == null) {
-			layoutTemplates = new LinkedHashMap();
+			layoutTemplates = new LinkedHashMap<String, LayoutTemplate>();
 
 			_themes.put(key, layoutTemplates);
 		}
@@ -543,13 +551,15 @@ public class LayoutTemplateLocalUtil {
 		return layoutTemplates;
 	}
 
-	private static Map _getThemesStandard(String themeId) {
+	private static Map<String, LayoutTemplate> _getThemesStandard(
+		String themeId) {
+
 		String key = themeId + _STANDARD_SEPARATOR;
 
-		Map layoutTemplates = (Map)_themes.get(key);
+		Map<String, LayoutTemplate> layoutTemplates = _themes.get(key);
 
 		if (layoutTemplates == null) {
-			layoutTemplates = new LinkedHashMap();
+			layoutTemplates = new LinkedHashMap<String, LayoutTemplate>();
 
 			_themes.put(key, layoutTemplates);
 		}
@@ -563,12 +573,17 @@ public class LayoutTemplateLocalUtil {
 
 	private static Log _log = LogFactory.getLog(LayoutTemplateLocalUtil.class);
 
-	private static Map _portalStandard = new LinkedHashMap();
-	private static Map _portalCustom = new LinkedHashMap();
+	private static Map<String, LayoutTemplate> _portalStandard =
+		new LinkedHashMap<String, LayoutTemplate>();
+	private static Map<String, LayoutTemplate> _portalCustom =
+		new LinkedHashMap<String, LayoutTemplate>();
 
-	private static Map _warStandard = new LinkedHashMap();
-	private static Map _warCustom = new LinkedHashMap();
+	private static Map<String, LayoutTemplate> _warStandard =
+		new LinkedHashMap<String, LayoutTemplate>();
+	private static Map<String, LayoutTemplate> _warCustom =
+		new LinkedHashMap<String, LayoutTemplate>();
 
-	private static Map _themes = new LinkedHashMap();
+	private static Map<String, Map<String, LayoutTemplate>> _themes =
+		new LinkedHashMap<String, Map<String, LayoutTemplate>>();
 
 }

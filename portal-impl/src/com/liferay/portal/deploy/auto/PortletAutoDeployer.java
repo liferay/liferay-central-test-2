@@ -65,7 +65,7 @@ public class PortletAutoDeployer
 				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
-			List jars = new ArrayList();
+			List<String> jars = new ArrayList<String>();
 
 			jars.add(DeployUtil.getResourcePath("util-bridges.jar"));
 			jars.add(DeployUtil.getResourcePath("util-java.jar"));
@@ -81,7 +81,7 @@ public class PortletAutoDeployer
 	}
 
 	public void autoDeploy(String file) throws AutoDeployException {
-		List wars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
 
 		wars.add(file);
 

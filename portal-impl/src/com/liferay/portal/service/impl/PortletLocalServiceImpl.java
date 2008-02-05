@@ -40,7 +40,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesSerializer;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 
 import java.io.IOException;
@@ -53,6 +52,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
@@ -70,13 +70,13 @@ import org.dom4j.io.XMLWriter;
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug?
  *
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public void destroyPortlet(Portlet portlet) {
-		Map portletsPool = _getPortletsPool();
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.remove(portlet.getRootPortletId());
 
@@ -109,7 +109,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public List getFriendlyURLMappers() {
+	public List<FriendlyURLMapper> getFriendlyURLMappers() {
 		return _getFriendlyURLMappers();
 	}
 
@@ -120,15 +120,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Portlet portlet = null;
 
-		Map companyPortletsPool = _getPortletsPool(companyId);
+		Map<String, Portlet> companyPortletsPool = _getPortletsPool(companyId);
 
 		String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
-			portlet = (Portlet)companyPortletsPool.get(portletId);
+			portlet = companyPortletsPool.get(portletId);
 		}
 		else {
-			portlet = (Portlet)companyPortletsPool.get(rootPortletId);
+			portlet = companyPortletsPool.get(rootPortletId);
 
 			if (portlet != null) {
 				portlet = portlet.getClonedInstance(portletId);
@@ -153,29 +153,29 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return getPortletById(companyId, _getPortletId(strutsPath));
 	}
 
-	public List getPortlets() {
-		Map portletsPool = _getPortletsPool();
+	public List<Portlet> getPortlets() {
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		return ListUtil.fromCollection(portletsPool.values());
 	}
 
-	public List getPortlets(long companyId) throws SystemException {
+	public List<Portlet> getPortlets(long companyId) throws SystemException {
 		return getPortlets(companyId, true, true);
 	}
 
-	public List getPortlets(
+	public List<Portlet> getPortlets(
 			long companyId, boolean showSystem, boolean showPortal)
 		throws SystemException {
 
-		Map portletsPool = _getPortletsPool(companyId);
+		Map<String, Portlet> portletsPool = _getPortletsPool(companyId);
 
-		List portlets = ListUtil.fromCollection(portletsPool.values());
+		List<Portlet> portlets = ListUtil.fromCollection(portletsPool.values());
 
 		if (!showSystem || !showPortal) {
-			Iterator itr = portlets.iterator();
+			Iterator<Portlet> itr = portlets.iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
 				if (showPortal &&
 					portlet.getPortletId().equals(PortletKeys.PORTAL)) {
@@ -202,15 +202,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Portlet portlet = null;
 
-		Map companyPortletsPool = _getPortletsPool(companyId);
+		Map<String, Portlet> companyPortletsPool = _getPortletsPool(companyId);
 
 		String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
-			portlet = (Portlet)companyPortletsPool.get(portletId);
+			portlet = companyPortletsPool.get(portletId);
 		}
 		else {
-			portlet = (Portlet)companyPortletsPool.get(rootPortletId);
+			portlet = companyPortletsPool.get(rootPortletId);
 		}
 
 		if (portlet == null) {
@@ -222,18 +222,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
-		Map portletsPool = _getPortletsPool();
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		try {
-			List servletURLPatterns = _readWebXML(xmls[4]);
+			List<String> servletURLPatterns = _readWebXML(xmls[4]);
 
-			Set portletIds = _readPortletXML(
+			Set<String> portletIds = _readPortletXML(
 				xmls[0], portletsPool, servletURLPatterns, pluginPackage);
 
 			portletIds.addAll(_readPortletXML(
 				xmls[1], portletsPool, servletURLPatterns, pluginPackage));
 
-			Set liferayPortletIds =
+			Set<String> liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
 
 			liferayPortletIds.addAll(
@@ -241,10 +241,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in liferay-portlet.xml
 
-			Iterator itr = portletIds.iterator();
+			Iterator<String> portletIdsItr = portletIds.iterator();
 
-			while (itr.hasNext()) {
-				String portletId = (String)itr.next();
+			while (portletIdsItr.hasNext()) {
+				String portletId = portletIdsItr.next();
 
 				if (_log.isWarnEnabled() &&
 					!liferayPortletIds.contains(portletId)) {
@@ -258,10 +258,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Check for missing entries in portlet.xml
 
-			itr = liferayPortletIds.iterator();
+			Iterator<String> liferayPortletIdsItr =
+				liferayPortletIds.iterator();
 
-			while (itr.hasNext()) {
-				String portletId = (String)itr.next();
+			while (liferayPortletIdsItr.hasNext()) {
+				String portletId = liferayPortletIdsItr.next();
 
 				if (_log.isWarnEnabled() && !portletIds.contains(portletId)) {
 					_log.warn(
@@ -273,19 +274,20 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Remove portlets that should not be included
 
-			itr = portletsPool.entrySet().iterator();
+			Iterator<Map.Entry<String, Portlet>> portletPoolsItr =
+				portletsPool.entrySet().iterator();
 
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+			while (portletPoolsItr.hasNext()) {
+				Map.Entry<String, Portlet> entry = portletPoolsItr.next();
 
-				Portlet portletModel = (Portlet)entry.getValue();
+				Portlet portletModel = entry.getValue();
 
 				if (!portletModel.getPortletId().equals(PortletKeys.ADMIN) &&
 					!portletModel.getPortletId().equals(
 						PortletKeys.MY_ACCOUNT) &&
 					!portletModel.isInclude()) {
 
-					itr.remove();
+					portletPoolsItr.remove();
 				}
 			}
 		}
@@ -294,17 +296,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public List initWAR(
+	public List<Portlet> initWAR(
 		String servletContextName, String[] xmls, PluginPackage pluginPackage) {
 
-		List portlets = new ArrayList();
+		List<Portlet> portlets = new ArrayList<Portlet>();
 
-		Map portletsPool = _getPortletsPool();
+		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		try {
-			List servletURLPatterns = _readWebXML(xmls[3]);
+			List<String> servletURLPatterns = _readWebXML(xmls[3]);
 
-			Set portletIds = _readPortletXML(
+			Set<String> portletIds = _readPortletXML(
 				servletContextName, xmls[0], portletsPool, servletURLPatterns,
 				pluginPackage);
 
@@ -312,15 +314,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				servletContextName, xmls[1], portletsPool, servletURLPatterns,
 				pluginPackage));
 
-			Set liferayPortletIds = _readLiferayPortletXML(
+			Set<String> liferayPortletIds = _readLiferayPortletXML(
 				servletContextName, xmls[2], portletsPool);
 
 			// Check for missing entries in liferay-portlet.xml
 
-			Iterator itr = portletIds.iterator();
+			Iterator<String> itr = portletIds.iterator();
 
 			while (itr.hasNext()) {
-				String portletId = (String)itr.next();
+				String portletId = itr.next();
 
 				if (_log.isWarnEnabled() &&
 					!liferayPortletIds.contains(portletId)) {
@@ -337,7 +339,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			itr = liferayPortletIds.iterator();
 
 			while (itr.hasNext()) {
-				String portletId = (String)itr.next();
+				String portletId = itr.next();
 
 				if (_log.isWarnEnabled() && !portletIds.contains(portletId)) {
 					_log.warn(
@@ -352,9 +354,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			itr = portletIds.iterator();
 
 			while (itr.hasNext()) {
-				String portletId = (String)itr.next();
+				String portletId = itr.next();
 
-				Portlet portlet = (Portlet)_getPortletsPool().get(portletId);
+				Portlet portlet = _getPortletsPool().get(portletId);
 
 				portlets.add(portlet);
 			}
@@ -409,16 +411,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_companyPortletsPool.clear();
 	}
 
-	private List _getFriendlyURLMappers() {
-		List friendlyURLMappers = new ArrayList(
-			_friendlyURLMapperPortlets.size());
+	private List<FriendlyURLMapper> _getFriendlyURLMappers() {
+		List<FriendlyURLMapper> friendlyURLMappers =
+			new ArrayList<FriendlyURLMapper>(
+							_friendlyURLMapperPortlets.size());
 
-		Iterator itr = _friendlyURLMapperPortlets.entrySet().iterator();
+		Iterator<Map.Entry<String, Portlet>> itr =
+			_friendlyURLMapperPortlets.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Portlet> entry = itr.next();
 
-			Portlet portlet = (Portlet)entry.getValue();
+			Portlet portlet = entry.getValue();
 
 			FriendlyURLMapper friendlyURLMapper =
 				portlet.getFriendlyURLMapperInstance();
@@ -433,17 +437,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private String _getPortletId(String securityPath) throws SystemException {
 		if (_portletIdsByStrutsPath.size() == 0) {
-			Iterator itr = _getPortletsPool().values().iterator();
+			Iterator<Portlet> itr = _getPortletsPool().values().iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
 				_portletIdsByStrutsPath.put(
 					portlet.getStrutsPath(), portlet.getPortletId());
 			}
 		}
 
-		String portletId = (String)_portletIdsByStrutsPath.get(securityPath);
+		String portletId = _portletIdsByStrutsPath.get(securityPath);
 
 		if (Validator.isNull(portletId)) {
 			_log.error(
@@ -454,19 +458,19 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletId;
 	}
 
-	private Map _getPortletsPool() {
+	private Map<String, Portlet> _getPortletsPool() {
 		return _portletsPool;
 	}
 
-	private Map _getPortletsPool(long companyId) throws SystemException {
-		Long companyIdObj = new Long(companyId);
+	private Map<String, Portlet> _getPortletsPool(long companyId)
+		throws SystemException {
 
-		Map portletsPool = (Map)_companyPortletsPool.get(companyIdObj);
+		Map<String, Portlet> portletsPool = _companyPortletsPool.get(companyId);
 
 		if (portletsPool == null) {
-			portletsPool = CollectionFactory.getSyncHashMap();
+			portletsPool = new ConcurrentHashMap<String, Portlet>();
 
-			Map parentPortletsPool = _getPortletsPool();
+			Map<String, Portlet> parentPortletsPool = _getPortletsPool();
 
 			if (parentPortletsPool == null) {
 
@@ -477,10 +481,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				return portletsPool;
 			}
 
-			Iterator itr = parentPortletsPool.values().iterator();
+			Iterator<Portlet> itr = parentPortletsPool.values().iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)((Portlet)itr.next()).clone();
+				Portlet portlet = itr.next();
+
+				portlet = (Portlet)portlet.clone();
 
 				portlet.setCompanyId(companyId);
 
@@ -490,10 +496,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			itr = portletPersistence.findByCompanyId(companyId).iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
-				Portlet portletModel =
-					(Portlet)portletsPool.get(portlet.getPortletId());
+				Portlet portletModel = portletsPool.get(portlet.getPortletId());
 
 				// Portlet may be null if it exists in the database but its
 				// portlet WAR is not yet loaded
@@ -507,27 +512,28 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 
-			_companyPortletsPool.put(companyIdObj, portletsPool);
+			_companyPortletsPool.put(companyId, portletsPool);
 		}
 
 		return portletsPool;
 	}
 
-	private Set _readPortletXML(
-			String xml, Map portletsPool, List servletURLPatterns,
-			PluginPackage pluginPackage)
+	private Set<String> _readPortletXML(
+			String xml, Map<String, Portlet> portletsPool,
+			List<String> servletURLPatterns, PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
 		return _readPortletXML(
 			null, xml, portletsPool, servletURLPatterns, pluginPackage);
 	}
 
-	private Set _readPortletXML(
-			String servletContextName, String xml, Map portletsPool,
-			List servletURLPatterns, PluginPackage pluginPackage)
+	private Set<String> _readPortletXML(
+			String servletContextName, String xml,
+			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
+			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
-		Set portletIds = new HashSet();
+		Set<String> portletIds = new HashSet<String>();
 
 		if (xml == null) {
 			return portletIds;
@@ -537,12 +543,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Element root = doc.getRootElement();
 
-		Set userAttributes = new HashSet();
+		Set<String> userAttributes = new HashSet<String>();
 
-		Iterator itr1 = root.elements("user-attribute").iterator();
+		Iterator<Element> itr1 = root.elements("user-attribute").iterator();
 
 		while (itr1.hasNext()) {
-			Element userAttribute = (Element)itr1.next();
+			Element userAttribute = itr1.next();
 
 			String name = userAttribute.elementText("name");
 
@@ -552,7 +558,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
-			Element portlet = (Element)itr1.next();
+			Element portlet = itr1.next();
 
 			String portletId = portlet.elementText("portlet-name");
 
@@ -569,7 +575,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletIds.add(portletId);
 
-			Portlet portletModel = (Portlet)portletsPool.get(portletId);
+			Portlet portletModel = portletsPool.get(portletId);
 
 			if (portletModel == null) {
 				portletModel = new PortletImpl(CompanyImpl.SYSTEM, portletId);
@@ -593,10 +599,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.setPortletClass(GetterUtil.getString(
 				portlet.elementText("portlet-class")));
 
-			Iterator itr2 = portlet.elements("init-param").iterator();
+			Iterator<Element> itr2 = portlet.elements("init-param").iterator();
 
 			while (itr2.hasNext()) {
-				Element initParam = (Element)itr2.next();
+				Element initParam = itr2.next();
 
 				portletModel.getInitParams().put(
 					initParam.elementText("name"),
@@ -613,31 +619,32 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			itr2 = portlet.elements("supports").iterator();
 
 			while (itr2.hasNext()) {
-				Element supports = (Element)itr2.next();
+				Element supports = itr2.next();
 
 				String mimeType = supports.elementText("mime-type");
 
-				Set mimeTypeModes =
-					(Set)portletModel.getPortletModes().get(mimeType);
+				Set<String> mimeTypeModes =
+					portletModel.getPortletModes().get(mimeType);
 
 				if (mimeTypeModes == null) {
-					mimeTypeModes = new HashSet();
+					mimeTypeModes = new HashSet<String>();
 
 					portletModel.getPortletModes().put(mimeType, mimeTypeModes);
 				}
 
 				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
 
-				Iterator itr3 = supports.elements("portlet-mode").iterator();
+				Iterator<Element> itr3 = supports.elements(
+					"portlet-mode").iterator();
 
 				while (itr3.hasNext()) {
-					Element portletMode = (Element)itr3.next();
+					Element portletMode = itr3.next();
 
 					mimeTypeModes.add(portletMode.getTextTrim().toLowerCase());
 				}
 			}
 
-			Set supportedLocales = portletModel.getSupportedLocales();
+			Set<String> supportedLocales = portletModel.getSupportedLocales();
 
 			supportedLocales.add(
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
@@ -645,7 +652,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			itr2 = portlet.elements("supported-locale").iterator();
 
 			while (itr2.hasNext()) {
-				Element supportedLocaleEl = (Element)itr2.next();
+				Element supportedLocaleEl = itr2.next();
 
 				String supportedLocale = supportedLocaleEl.getText();
 
@@ -719,12 +726,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 
-			Set unlikedRoles = portletModel.getUnlinkedRoles();
+			Set<String> unlikedRoles = portletModel.getUnlinkedRoles();
 
 			itr2 = portlet.elements("security-role-ref").iterator();
 
 			while (itr2.hasNext()) {
-				Element role = (Element)itr2.next();
+				Element role = itr2.next();
 
 				unlikedRoles.add(role.elementText("role-name"));
 			}
@@ -737,12 +744,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private void _readLiferayDisplay(
 		String servletContextName, Element el, PortletCategory portletCategory,
-		Set portletIds) {
+		Set<String> portletIds) {
 
-		Iterator itr1 = el.elements("category").iterator();
+		Iterator<Element> itr1 = el.elements("category").iterator();
 
 		while (itr1.hasNext()) {
-			Element category = (Element)itr1.next();
+			Element category = itr1.next();
 
 			String name = category.attributeValue("name");
 
@@ -750,12 +757,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletCategory.addCategory(curPortletCategory);
 
-			Set curPortletIds = curPortletCategory.getPortlets();
+			Set<String> curPortletIds = curPortletCategory.getPortletIds();
 
-			Iterator itr2 = category.elements("portlet").iterator();
+			Iterator<Element> itr2 = category.elements("portlet").iterator();
 
 			while (itr2.hasNext()) {
-				Element portlet = (Element)itr2.next();
+				Element portlet = itr2.next();
 
 				String portletId = portlet.attributeValue("id");
 
@@ -797,7 +804,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Element root = doc.getRootElement();
 
-		Set portletIds = new HashSet();
+		Set<String> portletIds = new HashSet<String>();
 
 		_readLiferayDisplay(
 			servletContextName, root, portletCategory, portletIds);
@@ -805,12 +812,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		// Portlets that do not belong to any categories should default to the
 		// Undefined category
 
-		Set undefinedPortletIds = new HashSet();
+		Set<String> undefinedPortletIds = new HashSet<String>();
 
-		Iterator itr = _getPortletsPool().values().iterator();
+		Iterator<Portlet> itr = _getPortletsPool().values().iterator();
 
 		while (itr.hasNext()) {
-			Portlet portlet = (Portlet)itr.next();
+			Portlet portlet = itr.next();
 
 			String portletId = portlet.getPortletId();
 
@@ -836,23 +843,25 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletCategory.addCategory(undefinedCategory);
 
-			undefinedCategory.getPortlets().addAll(undefinedPortletIds);
+			undefinedCategory.getPortletIds().addAll(undefinedPortletIds);
 		}
 
 		return portletCategory;
 	}
 
-	private Set _readLiferayPortletXML(String xml, Map portletsPool)
+	private Set<String> _readLiferayPortletXML(
+			String xml, Map<String, Portlet> portletsPool)
 		throws DocumentException, IOException {
 
 		return _readLiferayPortletXML(null, xml, portletsPool);
 	}
 
-	private Set _readLiferayPortletXML(
-			String servletContextName, String xml, Map portletsPool)
+	private Set<String> _readLiferayPortletXML(
+			String servletContextName, String xml,
+			Map<String, Portlet> portletsPool)
 		throws DocumentException, IOException {
 
-		Set liferayPortletIds = new HashSet();
+		Set<String> liferayPortletIds = new HashSet<String>();
 
 		if (xml == null) {
 			return liferayPortletIds;
@@ -862,12 +871,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Element root = doc.getRootElement();
 
-		Map roleMappers = new HashMap();
+		Map<String, String> roleMappers = new HashMap<String, String>();
 
-		Iterator itr1 = root.elements("role-mapper").iterator();
+		Iterator<Element> itr1 = root.elements("role-mapper").iterator();
 
 		while (itr1.hasNext()) {
-			Element roleMapper = (Element)itr1.next();
+			Element roleMapper = itr1.next();
 
 			String roleName = roleMapper.elementText("role-name");
 			String roleLink = roleMapper.elementText("role-link");
@@ -875,20 +884,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			roleMappers.put(roleName, roleLink);
 		}
 
-		Map customUserAttributes = new HashMap();
+		Map<String, String> customUserAttributes =
+			new HashMap<String, String>();
 
 		itr1 = root.elements("custom-user-attribute").iterator();
 
 		while (itr1.hasNext()) {
-			Element customUserAttribute = (Element)itr1.next();
+			Element customUserAttribute = itr1.next();
 
 			String customClass = customUserAttribute.elementText(
 				"custom-class");
 
-			Iterator itr2 = customUserAttribute.elements("name").iterator();
+			Iterator<Element> itr2 = customUserAttribute.elements(
+				"name").iterator();
 
 			while (itr2.hasNext()) {
-				Element nameEl = (Element)itr2.next();
+				Element nameEl = itr2.next();
 
 				String name = nameEl.getText();
 
@@ -899,7 +910,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
-			Element portlet = (Element)itr1.next();
+			Element portlet = itr1.next();
 
 			String portletId = portlet.elementText("portlet-name");
 
@@ -916,7 +927,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			liferayPortletIds.add(portletId);
 
-			Portlet portletModel = (Portlet)portletsPool.get(portletId);
+			Portlet portletModel = portletsPool.get(portletId);
 
 			if (portletModel != null) {
 				portletModel.setIcon(GetterUtil.getString(
@@ -1039,20 +1050,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portlet.elementText("ajaxable"),
 					portletModel.isAjaxable()));
 
-				List headerPortalCssList = portletModel.getHeaderPortalCss();
+				List<String> headerPortalCssList =
+					portletModel.getHeaderPortalCss();
 
-				Iterator itr2 = portlet.elements(
+				Iterator<Element> itr2 = portlet.elements(
 					"header-portal-css").iterator();
 
 				while (itr2.hasNext()) {
-					Element headerPortalCssEl = (Element)itr2.next();
+					Element headerPortalCssEl = itr2.next();
 
 					headerPortalCssList.add(headerPortalCssEl.getText());
 				}
 
-				List headerPortletCssList = portletModel.getHeaderPortletCss();
+				List<String> headerPortletCssList =
+					portletModel.getHeaderPortletCss();
 
-				List list = new ArrayList();
+				List<Element> list = new ArrayList<Element>();
 
 				list.addAll(portlet.elements("header-css"));
 				list.addAll(portlet.elements("header-portlet-css"));
@@ -1060,24 +1073,24 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				itr2 = list.iterator();
 
 				while (itr2.hasNext()) {
-					Element headerPortletCssEl = (Element)itr2.next();
+					Element headerPortletCssEl = itr2.next();
 
 					headerPortletCssList.add(headerPortletCssEl.getText());
 				}
 
-				List headerPortalJavaScriptList =
+				List<String> headerPortalJavaScriptList =
 					portletModel.getHeaderPortalJavaScript();
 
 				itr2 = portlet.elements("header-portal-javascript").iterator();
 
 				while (itr2.hasNext()) {
-					Element headerPortalJavaScriptEl = (Element)itr2.next();
+					Element headerPortalJavaScriptEl = itr2.next();
 
 					headerPortalJavaScriptList.add(
 						headerPortalJavaScriptEl.getText());
 				}
 
-				List headerPortletJavaScriptList =
+				List<String> headerPortletJavaScriptList =
 					portletModel.getHeaderPortletJavaScript();
 
 				list.clear();
@@ -1088,51 +1101,53 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				itr2 = list.iterator();
 
 				while (itr2.hasNext()) {
-					Element headerPortletJavaScriptEl = (Element)itr2.next();
+					Element headerPortletJavaScriptEl = itr2.next();
 
 					headerPortletJavaScriptList.add(
 						headerPortletJavaScriptEl.getText());
 				}
 
-				List footerPortalCssList = portletModel.getFooterPortalCss();
+				List<String> footerPortalCssList =
+					portletModel.getFooterPortalCss();
 
 				itr2 = portlet.elements("footer-portal-css").iterator();
 
 				while (itr2.hasNext()) {
-					Element footerPortalCssEl = (Element)itr2.next();
+					Element footerPortalCssEl = itr2.next();
 
 					footerPortalCssList.add(footerPortalCssEl.getText());
 				}
 
-				List footerPortletCssList = portletModel.getFooterPortletCss();
+				List<String> footerPortletCssList =
+					portletModel.getFooterPortletCss();
 
 				itr2 = portlet.elements("footer-portlet-css").iterator();
 
 				while (itr2.hasNext()) {
-					Element footerPortletCssEl = (Element)itr2.next();
+					Element footerPortletCssEl = itr2.next();
 
 					footerPortletCssList.add(footerPortletCssEl.getText());
 				}
 
-				List footerPortalJavaScriptList =
+				List<String> footerPortalJavaScriptList =
 					portletModel.getFooterPortalJavaScript();
 
 				itr2 = portlet.elements("footer-portal-javascript").iterator();
 
 				while (itr2.hasNext()) {
-					Element footerPortalJavaScriptEl = (Element)itr2.next();
+					Element footerPortalJavaScriptEl = itr2.next();
 
 					footerPortalJavaScriptList.add(
 						footerPortalJavaScriptEl.getText());
 				}
 
-				List footerPortletJavaScriptList =
+				List<String> footerPortletJavaScriptList =
 					portletModel.getFooterPortletJavaScript();
 
 				itr2 = portlet.elements("footer-portlet-javascript").iterator();
 
 				while (itr2.hasNext()) {
-					Element footerPortletJavaScriptEl = (Element)itr2.next();
+					Element footerPortletJavaScriptEl = itr2.next();
 
 					footerPortletJavaScriptList.add(
 						footerPortletJavaScriptEl.getText());
@@ -1171,8 +1186,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return liferayPortletIds;
 	}
 
-	private List _readWebXML(String xml) throws DocumentException, IOException {
-		List servletURLPatterns = new ArrayList();
+	private List<String> _readWebXML(String xml)
+		throws DocumentException, IOException {
+
+		List<String> servletURLPatterns = new ArrayList<String>();
 
 		if (xml == null) {
 			return servletURLPatterns;
@@ -1182,10 +1199,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.elements("servlet-mapping").iterator();
+		Iterator<Element> itr = root.elements("servlet-mapping").iterator();
 
 		while (itr.hasNext()) {
-			Element servletMapping = (Element)itr.next();
+			Element servletMapping = itr.next();
 
 			String urlPattern = servletMapping.elementText("url-pattern");
 
@@ -1198,12 +1215,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
 
-	private static Map _portletsPool = CollectionFactory.getSyncHashMap();
-	private static Map _companyPortletsPool =
-		CollectionFactory.getSyncHashMap();
-	private static Map _portletIdsByStrutsPath =
-		CollectionFactory.getSyncHashMap();
-	private static Map _friendlyURLMapperPortlets =
-		CollectionFactory.getSyncHashMap();
+	private static Map<String, Portlet> _portletsPool =
+		new ConcurrentHashMap<String, Portlet>();
+	private static Map<Long, Map<String, Portlet>> _companyPortletsPool =
+		new ConcurrentHashMap<Long, Map<String, Portlet>>();
+	private static Map<String, String> _portletIdsByStrutsPath =
+		new ConcurrentHashMap<String, String>();
+	private static Map<String, Portlet> _friendlyURLMapperPortlets =
+		new ConcurrentHashMap<String, Portlet>();
 
 }

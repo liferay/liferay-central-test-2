@@ -65,7 +65,7 @@ public class CommLink implements MessageListener {
 
 	public void setState(byte[] state) {
 		try {
-			_history = (List)Util.objectFromByteBuffer(state);
+			_history = (List<Object>)Util.objectFromByteBuffer(state);
 		}
 		catch(Exception e) {
 			_log.error("Error setting state", e);
@@ -130,6 +130,6 @@ public class CommLink implements MessageListener {
 	private static CommLink _instance = new CommLink();
 
 	private Channel _channel;
-	private List _history = new LinkedList();
+	private List<Object> _history = new LinkedList<Object>();
 
 }

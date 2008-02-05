@@ -64,7 +64,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
 		super.copyXmls(srcFile, displayName, pluginPackage);
 
-		Map filterMap = new HashMap();
+		Map<String, String> filterMap = new HashMap<String, String>();
 
 		String pluginName = displayName;
 

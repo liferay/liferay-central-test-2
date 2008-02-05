@@ -812,7 +812,7 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
-	public static java.util.List getFriendlyURLMappers() {
+	public static java.util.List<com.liferay.portal.kernel.portlet.FriendlyURLMapper> getFriendlyURLMappers() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getFriendlyURLMappers();
@@ -834,21 +834,21 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getPortletByStrutsPath(companyId, strutsPath);
 	}
 
-	public static java.util.List getPortlets() {
+	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getPortlets();
 	}
 
-	public static java.util.List getPortlets(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
+		long companyId) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.getPortlets(companyId);
 	}
 
-	public static java.util.List getPortlets(long companyId,
-		boolean showSystem, boolean showPortal)
+	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
+		long companyId, boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
@@ -869,8 +869,8 @@ public class PortletLocalServiceUtil {
 		portletLocalService.initEAR(xmls, pluginPackage);
 	}
 
-	public static java.util.List initWAR(java.lang.String servletContextName,
-		java.lang.String[] xmls,
+	public static java.util.List<com.liferay.portal.model.Portlet> initWAR(
+		java.lang.String servletContextName, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 

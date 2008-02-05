@@ -46,15 +46,15 @@ public class PortletCategory implements Serializable {
 
 	public PortletCategory(String name) {
 		_name = name;
-		_categories = new HashMap();
-		_portlets = new HashSet();
+		_categories = new HashMap<String, PortletCategory>();
+		_portletIds = new HashSet<String>();
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	public Collection getCategories() {
+	public Collection<PortletCategory> getCategories() {
 		return Collections.unmodifiableCollection(_categories.values());
 	}
 
@@ -66,30 +66,31 @@ public class PortletCategory implements Serializable {
 		return (PortletCategory)_categories.get(name);
 	}
 
-	public Set getPortlets() {
-		return _portlets;
+	public Set<String> getPortletIds() {
+		return _portletIds;
 	}
 
 	public void merge(PortletCategory newPortletCategory) {
 		_merge(this, newPortletCategory);
 	}
 
-	public void separate(Set portletIds) {
-		Iterator itr = _categories.values().iterator();
+	public void separate(Set<String> portletIds) {
+		Iterator<PortletCategory> categoriesItr =
+			_categories.values().iterator();
 
-		while (itr.hasNext()) {
-			PortletCategory category = (PortletCategory)itr.next();
+		while (categoriesItr.hasNext()) {
+			PortletCategory category = categoriesItr.next();
 
 			category.separate(portletIds);
 		}
 
-		itr = _portlets.iterator();
+		Iterator<String>portletIdsItr = _portletIds.iterator();
 
-		while (itr.hasNext()) {
-			String portletId = (String)itr.next();
+		while (portletIdsItr.hasNext()) {
+			String portletId = portletIdsItr.next();
 
 			if (portletIds.contains(portletId)) {
-				itr.remove();
+				portletIdsItr.remove();
 			}
 		}
 	}
@@ -97,10 +98,11 @@ public class PortletCategory implements Serializable {
 	private void _merge(
 		PortletCategory portletCategory1, PortletCategory portletCategory2) {
 
-		Iterator itr = portletCategory2.getCategories().iterator();
+		Iterator<PortletCategory> itr =
+			portletCategory2.getCategories().iterator();
 
 		while (itr.hasNext()) {
-			PortletCategory curCategory2 = (PortletCategory)itr.next();
+			PortletCategory curCategory2 = itr.next();
 
 			PortletCategory curCategory1 =
 				portletCategory1.getCategory(curCategory2.getName());
@@ -113,14 +115,14 @@ public class PortletCategory implements Serializable {
 			}
 		}
 
-		Set portlets1 = portletCategory1.getPortlets();
-		Set portlets2 = portletCategory2.getPortlets();
+		Set<String> portletIds1 = portletCategory1.getPortletIds();
+		Set<String> portletIds2 = portletCategory2.getPortletIds();
 
-		portlets1.addAll(portlets2);
+		portletIds1.addAll(portletIds2);
 	}
 
 	private String _name;
-	private Map _categories;
-	private Set _portlets;
+	private Map<String, PortletCategory> _categories;
+	private Set<String> _portletIds;
 
 }

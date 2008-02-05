@@ -98,7 +98,7 @@ public class CopyTask {
 	}
 
 	public static void copyFile(
-		File sourceFile, File destinationDir, Map filterMap,
+		File sourceFile, File destinationDir, Map<String, String> filterMap,
 		boolean overwrite, boolean preserveLastModified) {
 
 		Copy copy = new Copy();
@@ -117,12 +117,12 @@ public class CopyTask {
 		if (filterMap != null) {
 			FilterSet filterSet = copy.createFilterSet();
 
-			Iterator itr = filterMap.keySet().iterator();
+			Iterator<String> itr = filterMap.keySet().iterator();
 
 			while (itr.hasNext()) {
-				String token = (String)itr.next();
+				String token = itr.next();
 
-				String replacement = (String)filterMap.get(token);
+				String replacement = filterMap.get(token);
 
 				filterSet.addFilter(token, replacement);
 			}

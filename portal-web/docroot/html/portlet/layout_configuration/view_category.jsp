@@ -53,7 +53,7 @@ Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(
 
 List portlets = new ArrayList();
 
-Iterator itr = portletCategory.getPortlets().iterator();
+Iterator itr = portletCategory.getPortletIds().iterator();
 
 String externalPortletCategory = null;
 

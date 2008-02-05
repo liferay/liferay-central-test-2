@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal.util;
 import java.io.InputStream;
 
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,7 +61,8 @@ public class TestPropsUtil {
 				_props.load(is);
 			}
 
-			List keys = Collections.list(_props.propertyNames());
+			List<String> keys = Collections.list(
+				(Enumeration<String>)_props.propertyNames());
 
 			Collections.sort(keys);
 

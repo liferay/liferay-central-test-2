@@ -64,7 +64,7 @@ public class ThemeAutoDeployer extends ThemeDeployer implements AutoDeployer {
 				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
-			List jars = new ArrayList();
+			List<String> jars = new ArrayList<String>();
 
 			jars.add(DeployUtil.getResourcePath("util-java.jar"));
 			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
@@ -79,7 +79,7 @@ public class ThemeAutoDeployer extends ThemeDeployer implements AutoDeployer {
 	}
 
 	public void autoDeploy(String file) throws AutoDeployException {
-		List wars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
 
 		wars.add(file);
 

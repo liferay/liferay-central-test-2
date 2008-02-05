@@ -79,8 +79,8 @@ public class BaseDeployer {
 	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
 	public static void main(String[] args) {
-		List wars = new ArrayList();
-		List jars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
+		List<String> jars = new ArrayList<String>();
 
 		for (int i = 0; i < args.length; i++) {
 			String fileName = args[i].toLowerCase();
@@ -99,7 +99,7 @@ public class BaseDeployer {
 	protected BaseDeployer() {
 	}
 
-	protected BaseDeployer(List wars, List jars) {
+	protected BaseDeployer(List<String> wars, List<String> jars) {
 		baseDir = System.getProperty("deployer.base.dir");
 		destDir = System.getProperty("deployer.dest.dir");
 		appServerType = System.getProperty("deployer.app.server.type");
@@ -182,14 +182,15 @@ public class BaseDeployer {
 	}
 
 	protected void copyDependencyXml(
-			String fileName, String targetDir, Map filterMap)
+			String fileName, String targetDir, Map<String, String> filterMap)
 		throws Exception {
 
 		copyDependencyXml(fileName, targetDir, filterMap, false);
 	}
 
 	protected void copyDependencyXml(
-			String fileName, String targetDir, Map filterMap, boolean overwrite)
+			String fileName, String targetDir, Map<String, String> filterMap,
+			boolean overwrite)
 		throws Exception {
 
 		File file = new File(DeployUtil.getResourcePath(fileName));
@@ -791,11 +792,11 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
-	protected String getPluginPackageLicensesXml(List licenses) {
+	protected String getPluginPackageLicensesXml(List<License> licenses) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < licenses.size(); i++) {
-			License license = (License)licenses.get(i);
+			License license = licenses.get(i);
 
 			if (i == 0) {
 				sm.append("\r\n");
@@ -815,11 +816,13 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
-	protected String getPluginPackageLiferayVersionsXml(List liferayVersions) {
+	protected String getPluginPackageLiferayVersionsXml(
+		List<String> liferayVersions) {
+
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < liferayVersions.size(); i++) {
-			String liferayVersion = (String)liferayVersions.get(i);
+			String liferayVersion = liferayVersions.get(i);
 
 			if (i == 0) {
 				sm.append("\r\n");
@@ -852,11 +855,11 @@ public class BaseDeployer {
 		return PropertiesUtil.load(propsString);
 	}
 
-	protected String getPluginPackageTagsXml(List tags) {
+	protected String getPluginPackageTagsXml(List<String> tags) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < tags.size(); i++) {
-			String tag = (String)tags.get(i);
+			String tag = tags.get(i);
 
 			if (i == 0) {
 				sm.append("\r\n");
@@ -1154,8 +1157,8 @@ public class BaseDeployer {
 	protected boolean unpackWar;
 	protected String jbossPrefix;
 	protected String tomcatLibDir;
-	protected List wars;
-	protected List jars;
+	protected List<String> wars;
+	protected List<String> jars;
 
 	private static final String _PORTAL_CLASS_LOADER =
 		"com.liferay.support.tomcat.loader.PortalClassLoader";

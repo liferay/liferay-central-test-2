@@ -38,8 +38,8 @@ import java.util.List;
 public class LayoutTemplateDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
-		List wars = new ArrayList();
-		List jars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
+		List<String> jars = new ArrayList<String>();
 
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].endsWith(".war")) {
@@ -56,7 +56,7 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 	protected LayoutTemplateDeployer() {
 	}
 
-	protected LayoutTemplateDeployer(List wars, List jars) {
+	protected LayoutTemplateDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 

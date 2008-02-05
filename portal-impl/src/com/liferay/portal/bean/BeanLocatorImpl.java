@@ -78,6 +78,6 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
 
-	private Set _beans = CollectionFactory.getHashSet();
+	private Set<Object> _beans = CollectionFactory.getHashSet();
 
 }

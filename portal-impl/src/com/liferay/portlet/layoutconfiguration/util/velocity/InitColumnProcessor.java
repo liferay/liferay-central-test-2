@@ -35,17 +35,17 @@ import java.util.List;
 public class InitColumnProcessor {
 
 	public InitColumnProcessor(){
-		_columns = new ArrayList();
+		_columns = new ArrayList<String>();
 	}
 
 	public void processColumn(String columnId) {
 		_columns.add(columnId);
 	}
 
-	public List getColumns() {
+	public List<String> getColumns() {
 		return _columns;
 	}
 
-	private List _columns;
+	private List<String> _columns;
 
 }

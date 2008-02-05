@@ -158,21 +158,21 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
-		_headerPortalCss = new ArrayList();
-		_headerPortletCss = new ArrayList();
-		_headerPortalJavaScript = new ArrayList();
-		_headerPortletJavaScript = new ArrayList();
-		_footerPortalCss = new ArrayList();
-		_footerPortletCss = new ArrayList();
-		_footerPortalJavaScript = new ArrayList();
-		_footerPortletJavaScript = new ArrayList();
-		_unlinkedRoles = new HashSet();
-		_roleMappers = new LinkedHashMap();
-		_initParams = new HashMap();
-		_portletModes = new HashMap();
-		_supportedLocales = new HashSet();
-		_userAttributes = new LinkedHashSet();
-		_customUserAttributes = new LinkedHashMap();
+		_headerPortalCss = new ArrayList<String>();
+		_headerPortletCss = new ArrayList<String>();
+		_headerPortalJavaScript = new ArrayList<String>();
+		_headerPortletJavaScript = new ArrayList<String>();
+		_footerPortalCss = new ArrayList<String>();
+		_footerPortletCss = new ArrayList<String>();
+		_footerPortalJavaScript = new ArrayList<String>();
+		_footerPortletJavaScript = new ArrayList<String>();
+		_unlinkedRoles = new HashSet<String>();
+		_roleMappers = new LinkedHashMap<String, String>();
+		_initParams = new HashMap<String, String>();
+		_portletModes = new HashMap<String, Set<String>>();
+		_supportedLocales = new HashSet<String>();
+		_userAttributes = new LinkedHashSet<String>();
+		_customUserAttributes = new LinkedHashMap<String, String>();
 	}
 
 	/**
@@ -197,16 +197,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean layoutCacheable, boolean instanceable,
 		String userPrincipalStrategy, boolean privateRequestAttributes,
 		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
-		List headerPortalCss, List headerPortletCss,
-		List headerPortalJavaScript, List headerPortletJavaScript,
-		List footerPortalCss, List footerPortletCss,
-		List footerPortalJavaScript, List footerPortletJavaScript,
+		List<String> headerPortalCss, List<String> headerPortletCss,
+		List<String> headerPortalJavaScript,
+		List<String> headerPortletJavaScript, List<String> footerPortalCss,
+		List<String> footerPortletCss, List<String> footerPortalJavaScript,
+		List<String> footerPortletJavaScript,
 		String cssClassWrapper, boolean addDefaultResource, String roles,
-		Set unlinkedRoles, Map roleMappers, boolean system, boolean active,
-		boolean include, Map initParams, Integer expCache, Map portletModes,
-		Set supportedLocales, String resourceBundle, PortletInfo portletInfo,
-		Set userAttributes, Map customUserAttributes, String servletContextName,
-		List servletURLPatterns) {
+		Set<String> unlinkedRoles, Map<String, String> roleMappers,
+		boolean system, boolean active, boolean include,
+		Map<String, String> initParams, Integer expCache,
+		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
+		String resourceBundle, PortletInfo portletInfo,
+		Set<String> userAttributes, Map<String, String> customUserAttributes,
+		String servletContextName, List<String> servletURLPatterns) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -276,7 +279,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_servletURLPatterns = servletURLPatterns;
 
 		if (_instanceable) {
-			_clonedInstances = new Hashtable();
+			_clonedInstances = new Hashtable<String, Portlet>();
 		}
 	}
 
@@ -1403,7 +1406,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of CSS files that will be referenced from the page's
 	 *				header relative to the portal's context path
 	 */
-	public List getHeaderPortalCss() {
+	public List<String> getHeaderPortalCss() {
 		return _headerPortalCss;
 	}
 
@@ -1414,7 +1417,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		headerPortalCss a list of CSS files that will be referenced
 	 *				from the page's header relative to the portal's context path
 	 */
-	public void setHeaderPortalCss(List headerPortalCss) {
+	public void setHeaderPortalCss(List<String> headerPortalCss) {
 		_headerPortalCss = headerPortalCss;
 	}
 
@@ -1425,7 +1428,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of CSS files that will be referenced from the page's
 	 *				header relative to the portlet's context path
 	 */
-	public List getHeaderPortletCss() {
+	public List<String> getHeaderPortletCss() {
 		return _headerPortletCss;
 	}
 
@@ -1437,7 +1440,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				from the page's header relative to the portlet's context
 	 *				path
 	 */
-	public void setHeaderPortletCss(List headerPortletCss) {
+	public void setHeaderPortletCss(List<String> headerPortletCss) {
 		_headerPortletCss = headerPortletCss;
 	}
 
@@ -1448,7 +1451,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of JavaScript files that will be referenced from the
 	 *				page's header relative to the portal's context path
 	 */
-	public List getHeaderPortalJavaScript() {
+	public List<String> getHeaderPortalJavaScript() {
 		return _headerPortalJavaScript;
 	}
 
@@ -1460,7 +1463,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				be referenced from the page's header relative to the
 	 *				portal's context path
 	 */
-	public void setHeaderPortalJavaScript(List headerPortalJavaScript) {
+	public void setHeaderPortalJavaScript(List<String> headerPortalJavaScript) {
 		_headerPortalJavaScript = headerPortalJavaScript;
 	}
 
@@ -1471,7 +1474,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of JavaScript files that will be referenced from the
 	 *				page's header relative to the portlet's context path
 	 */
-	public List getHeaderPortletJavaScript() {
+	public List<String> getHeaderPortletJavaScript() {
 		return _headerPortletJavaScript;
 	}
 
@@ -1483,7 +1486,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				be referenced from the page's header relative to the
 	 *				portlet's context path
 	 */
-	public void setHeaderPortletJavaScript(List headerPortletJavaScript) {
+	public void setHeaderPortletJavaScript(
+		List<String> headerPortletJavaScript) {
+
 		_headerPortletJavaScript = headerPortletJavaScript;
 	}
 
@@ -1494,7 +1499,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of CSS files that will be referenced from the page's
 	 *				footer relative to the portal's context path
 	 */
-	public List getFooterPortalCss() {
+	public List<String> getFooterPortalCss() {
 		return _footerPortalCss;
 	}
 
@@ -1505,7 +1510,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		footerPortalCss a list of CSS files that will be referenced
 	 *				from the page's footer relative to the portal's context path
 	 */
-	public void setFooterPortalCss(List footerPortalCss) {
+	public void setFooterPortalCss(List<String> footerPortalCss) {
 		_footerPortalCss = footerPortalCss;
 	}
 
@@ -1516,7 +1521,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of CSS files that will be referenced from the page's
 	 *				footer relative to the portlet's context path
 	 */
-	public List getFooterPortletCss() {
+	public List<String> getFooterPortletCss() {
 		return _footerPortletCss;
 	}
 
@@ -1528,7 +1533,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				from the page's footer relative to the portlet's context
 	 *				path
 	 */
-	public void setFooterPortletCss(List footerPortletCss) {
+	public void setFooterPortletCss(List<String> footerPortletCss) {
 		_footerPortletCss = footerPortletCss;
 	}
 
@@ -1539,7 +1544,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of JavaScript files that will be referenced from the
 	 *				page's footer relative to the portal's context path
 	 */
-	public List getFooterPortalJavaScript() {
+	public List<String> getFooterPortalJavaScript() {
 		return _footerPortalJavaScript;
 	}
 
@@ -1551,7 +1556,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				be referenced from the page's footer relative to the
 	 *				portal's context path
 	 */
-	public void setFooterPortalJavaScript(List footerPortalJavaScript) {
+	public void setFooterPortalJavaScript(List<String> footerPortalJavaScript) {
 		_footerPortalJavaScript = footerPortalJavaScript;
 	}
 
@@ -1562,7 +1567,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a list of JavaScript files that will be referenced from the
 	 *				page's footer relative to the portlet's context path
 	 */
-	public List getFooterPortletJavaScript() {
+	public List<String> getFooterPortletJavaScript() {
 		return _footerPortletJavaScript;
 	}
 
@@ -1574,7 +1579,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				be referenced from the page's footer relative to the
 	 *				portlet's context path
 	 */
-	public void setFooterPortletJavaScript(List footerPortletJavaScript) {
+	public void setFooterPortletJavaScript(
+		List<String> footerPortletJavaScript) {
+
 		_footerPortletJavaScript = footerPortletJavaScript;
 	}
 
@@ -1666,7 +1673,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		unlinked roles of the portlet
 	 */
-	public Set getUnlinkedRoles() {
+	public Set<String> getUnlinkedRoles() {
 		return _unlinkedRoles;
 	}
 
@@ -1675,7 +1682,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		unlinkedRoles the unlinked roles of the portlet
 	 */
-	public void setUnlinkedRoles(Set unlinkedRoles) {
+	public void setUnlinkedRoles(Set<String> unlinkedRoles) {
 		_unlinkedRoles = unlinkedRoles;
 	}
 
@@ -1684,7 +1691,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		role mappers of the portlet
 	 */
-	public Map getRoleMappers() {
+	public Map<String, String> getRoleMappers() {
 		return _roleMappers;
 	}
 
@@ -1693,7 +1700,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		roleMappers the role mappers of the portlet
 	 */
-	public void setRoleMappers(Map roleMappers) {
+	public void setRoleMappers(Map<String, String> roleMappers) {
 		_roleMappers = roleMappers;
 	}
 
@@ -1702,14 +1709,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * liferay-portlet.xml.
 	 */
 	public void linkRoles() {
-		List linkedRoles = new ArrayList();
+		List<String> linkedRoles = new ArrayList<String>();
 
-		Iterator itr = _unlinkedRoles.iterator();
+		Iterator<String> itr = _unlinkedRoles.iterator();
 
 		while (itr.hasNext()) {
-			String unlinkedRole = (String)itr.next();
+			String unlinkedRole = itr.next();
 
-			String roleLink = (String)_roleMappers.get(unlinkedRole);
+			String roleLink = _roleMappers.get(unlinkedRole);
 
 			if (Validator.isNotNull(roleLink)) {
 				if (_log.isDebugEnabled()) {
@@ -1731,7 +1738,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		Collections.sort(linkedRoles);
 
-		setRolesArray((String[])linkedRoles.toArray(new String[0]));
+		setRolesArray(linkedRoles.toArray(new String[linkedRoles.size()]));
 	}
 
 	/**
@@ -1857,7 +1864,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		init parameters of the portlet
 	 */
-	public Map getInitParams() {
+	public Map<String, String> getInitParams() {
 		return _initParams;
 	}
 
@@ -1866,7 +1873,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		initParams the init parameters of the portlet
 	 */
-	public void setInitParams(Map initParams) {
+	public void setInitParams(Map<String, String> initParams) {
 		_initParams = initParams;
 	}
 
@@ -1893,7 +1900,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		portlet modes of the portlet
 	 */
-	public Map getPortletModes() {
+	public Map<String, Set<String>> getPortletModes() {
 		return _portletModes;
 	}
 
@@ -1902,7 +1909,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		portletModes the portlet modes of the portlet
 	 */
-	public void setPortletModes(Map portletModes) {
+	public void setPortletModes(Map<String, Set<String>> portletModes) {
 		_portletModes = portletModes;
 	}
 
@@ -1918,7 +1925,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			mimeType = ContentTypes.TEXT_HTML;
 		}
 
-		Set mimeTypeModes = (Set)_portletModes.get(mimeType);
+		Set<String> mimeTypeModes = _portletModes.get(mimeType);
 
 		if (mimeTypeModes == null) {
 			return false;
@@ -1937,20 +1944,21 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		a list of all portlet modes supported by the portlet
 	 */
-	public Set getAllPortletModes() {
-		Set allPortletModes = new TreeSet();
+	public Set<String> getAllPortletModes() {
+		Set<String> allPortletModes = new TreeSet<String>();
 
-		Iterator itr1 = _portletModes.entrySet().iterator();
+		Iterator<Map.Entry <String, Set<String>>> itr1 =
+			_portletModes.entrySet().iterator();
 
 		while (itr1.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr1.next();
+			Map.Entry<String, Set<String>> entry = itr1.next();
 
-			Set mimeTypeModes = (Set)entry.getValue();
+			Set<String> mimeTypeModes = entry.getValue();
 
-			Iterator itr2 = mimeTypeModes.iterator();
+			Iterator<String> itr2 = mimeTypeModes.iterator();
 
 			while (itr2.hasNext()) {
-				String portletMode = (String)itr2.next();
+				String portletMode = itr2.next();
 
 				allPortletModes.add(portletMode);
 			}
@@ -1978,7 +1986,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		supported locales of the portlet
 	 */
-	public Set getSupportedLocales() {
+	public Set<String> getSupportedLocales() {
 		return _supportedLocales;
 	}
 
@@ -1987,7 +1995,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		supportedLocales the supported locales of the portlet
 	 */
-	public void setSupportedLocales(Set supportedLocales) {
+	public void setSupportedLocales(Set<String> supportedLocales) {
 		_supportedLocales = supportedLocales;
 	}
 
@@ -2032,7 +2040,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		user attributes of the portlet
 	 */
-	public Set getUserAttributes() {
+	public Set<String> getUserAttributes() {
 		return _userAttributes;
 	}
 
@@ -2041,7 +2049,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		userAttributes the user attributes of the portlet
 	 */
-	public void setUserAttributes(Set userAttributes) {
+	public void setUserAttributes(Set<String> userAttributes) {
 		_userAttributes = userAttributes;
 	}
 
@@ -2050,7 +2058,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		custom user attributes of the portlet
 	 */
-	public Map getCustomUserAttributes() {
+	public Map<String, String> getCustomUserAttributes() {
 		return _customUserAttributes;
 	}
 
@@ -2060,7 +2068,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		customUserAttributes the custom user attributes of the
 	 *				portlet
 	 */
-	public void setCustomUserAttributes(Map customUserAttributes) {
+	public void setCustomUserAttributes(
+		Map<String, String> customUserAttributes) {
+
 		_customUserAttributes = customUserAttributes;
 	}
 
@@ -2156,7 +2166,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return null;
 		}
 
-		Portlet clonedInstance = (Portlet)_clonedInstances.get(portletId);
+		Portlet clonedInstance = _clonedInstances.get(portletId);
 
 		if (clonedInstance == null) {
 			clonedInstance = (Portlet)clone();
@@ -2266,7 +2276,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @return		The servlet url patterns that are part of this application
 	 */
-	public List getServletURLPatterns() {
+	public List<String> getServletURLPatterns() {
 		return _servletURLPatterns;
 	}
 
@@ -2276,7 +2286,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		servletURLPatterns servlet url patterns that are part of
 	 *				this application
 	 */
-	public void setServletURLPatterns(List servletURLPatterns) {
+	public void setServletURLPatterns(List<String> servletURLPatterns) {
 		_servletURLPatterns = servletURLPatterns;
 	}
 
@@ -2551,49 +2561,49 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * A list of CSS files that will be referenced from the page's header
 	 * relative to the portal's context path.
 	 */
-	private List _headerPortalCss;
+	private List<String> _headerPortalCss;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's header
 	 * relative to the portlet's context path.
 	 */
-	private List _headerPortletCss;
+	private List<String> _headerPortletCss;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's header
 	 * relative to the portal's context path.
 	 */
-	private List _headerPortalJavaScript;
+	private List<String> _headerPortalJavaScript;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's header
 	 * relative to the portlet's context path.
 	 */
-	private List _headerPortletJavaScript;
+	private List<String> _headerPortletJavaScript;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's footer
 	 * relative to the portal's context path.
 	 */
-	private List _footerPortalCss;
+	private List<String> _footerPortalCss;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's footer
 	 * relative to the portlet's context path.
 	 */
-	private List _footerPortletCss;
+	private List<String> _footerPortletCss;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's footer
 	 * relative to the portal's context path.
 	 */
-	private List _footerPortalJavaScript;
+	private List<String> _footerPortalJavaScript;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's footer
 	 * relative to the portlet's context path.
 	 */
-	private List _footerPortletJavaScript;
+	private List<String> _footerPortletJavaScript;
 
 	/**
 	 * The name of the CSS class that will be injected in the DIV that wraps
@@ -2614,12 +2624,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The unlinked roles of the portlet.
 	 */
-	private Set _unlinkedRoles;
+	private Set<String> _unlinkedRoles;
 
 	/**
 	 * The role mappers of the portlet.
 	 */
-	private Map _roleMappers;
+	private Map<String, String> _roleMappers;
 
 	/**
 	 * True if the portlet is a system portlet that a user cannot manually add
@@ -2635,7 +2645,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The init parameters of the portlet.
 	 */
-	private Map _initParams;
+	private Map<String, String> _initParams;
 
 	/**
 	 * The expiration cache of the portlet.
@@ -2645,12 +2655,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The portlet modes of the portlet.
 	 */
-	private Map _portletModes;
+	private Map<String, Set<String>> _portletModes;
 
 	/**
 	 * The supported locales of the portlet.
 	 */
-	private Set _supportedLocales;
+	private Set<String> _supportedLocales;
 
 	/**
 	 * The resource bundle of the portlet.
@@ -2665,12 +2675,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The user attributes of the portlet.
 	 */
-	private Set _userAttributes;
+	private Set<String> _userAttributes;
 
 	/**
 	 * The custom user attributes of the portlet.
 	 */
-	private Map _customUserAttributes;
+	private Map<String, String> _customUserAttributes;
 
 	/**
 	 * The servlet context name of the portlet.
@@ -2685,7 +2695,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The cloned instances of the portlet.
 	 */
-	private Map _clonedInstances;
+	private Map<String, Portlet> _clonedInstances;
 
 	/**
 	 * True if the portlet is a static portlet that is cannot be moved.
@@ -2701,6 +2711,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The servlet url patterns that are part of this application.
 	 */
-	private List _servletURLPatterns;
+	private List<String> _servletURLPatterns;
 
 }

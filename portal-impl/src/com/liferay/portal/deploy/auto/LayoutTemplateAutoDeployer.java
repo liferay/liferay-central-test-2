@@ -60,7 +60,7 @@ public class LayoutTemplateAutoDeployer
 				PropsUtil.AUTO_DEPLOY_UNPACK_WAR,
 				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
 
-			List jars = new ArrayList();
+			List<String> jars = new ArrayList<String>();
 
 			this.jars = jars;
 
@@ -72,7 +72,7 @@ public class LayoutTemplateAutoDeployer
 	}
 
 	public void autoDeploy(String file) throws AutoDeployException {
-		List wars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
 
 		wars.add(file);
 
