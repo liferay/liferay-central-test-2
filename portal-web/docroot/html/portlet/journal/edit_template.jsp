@@ -278,20 +278,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="script" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />xsl" type="file" />
-
-		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
-
-		<c:if test="<%= template != null %>">
-			<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
-		</c:if>
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="language-type" />
 	</td>
 	<td>
@@ -308,6 +294,20 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			%>
 
 		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="script" />
+	</td>
+	<td>
+		<input class="lfr-input-text" name="<portlet:namespace />xsl" type="file" />
+
+		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
+
+		<c:if test="<%= template != null %>">
+			<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
+		</c:if>
 	</td>
 </tr>
 <tr>
