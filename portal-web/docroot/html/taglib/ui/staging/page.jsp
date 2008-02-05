@@ -47,14 +47,13 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 
 				String friendlyURL = pathFriendlyURL + groupFriendlyURL + layoutIdURL;
 				long layoutPlid = PortalUtil.getPlidIdFromFriendlyURL(layout.getCompanyId(), friendlyURL);
-
-				if (layoutPlid > 0) {
-					Layout liveLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
-				}
 				%>
 
 				<c:if test="<%= layoutPlid > 0 %>">
+					<%
+					Layout liveLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
+					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
+					%>
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-live-page" /></a>
 					</li>
@@ -83,14 +82,13 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 
 				String friendlyURL = pathFriendlyURL + groupFriendlyURL + layoutIdURL;
 				long layoutPlid = PortalUtil.getPlidIdFromFriendlyURL(layout.getCompanyId(), friendlyURL);
-
-				if (layoutPlid > 0) {
-					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
-				}
 				%>
 
 				<c:if test="<%= layoutPlid > 0 %>">
+					<%
+					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
+					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
+					%>
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
 					</li>
