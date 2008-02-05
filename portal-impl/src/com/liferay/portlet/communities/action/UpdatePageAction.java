@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.germinus.easyconf.Filter;
+
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
