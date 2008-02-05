@@ -326,7 +326,7 @@ public abstract class BasePropMethodImpl implements Method {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				resource = new BaseResourceImpl(
-						storage.getRootPath() + StringPool.SLASH + companyId +
+					storage.getRootPath() + StringPool.SLASH + companyId +
 						StringPool.SLASH + groupId,
 					group.getName());
 

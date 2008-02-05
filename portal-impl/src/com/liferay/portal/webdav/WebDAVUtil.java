@@ -74,7 +74,6 @@ public class WebDAVUtil {
 	}
 
 	public static long getDepth(HttpServletRequest req) {
-
 		String value = GetterUtil.getString(req.getHeader("Depth"));
 
 		if (value.equals("0")) {
