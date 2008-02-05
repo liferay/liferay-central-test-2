@@ -200,7 +200,7 @@ public class S3Hook extends BaseHook {
 		throws PortalException, SystemException {
 
 		try {
-			List list = new ArrayList();
+			List<String> list = new ArrayList<String>();
 
 			S3Object[] s3Objects = _s3Service.listObjects(
 				_s3Bucket, getKey(companyId, repositoryId, dirName), null);
@@ -287,20 +287,20 @@ public class S3Hook extends BaseHook {
 			S3Object[] searchObjects = _s3Service.listObjects(
 				_s3Bucket, getKey(companyId, repositoryId), null);
 
-			Set fileNameSet = new HashSet();
+			Set<String> fileNameSet = new HashSet<String>();
 
 			for (int i = 0; i < searchObjects.length; i++) {
 				S3Object currentObject = searchObjects[i];
 
-				String fileName = (String)getFileName(currentObject.getKey());
+				String fileName = getFileName(currentObject.getKey());
 
 				fileNameSet.add(fileName);
 			}
 
-			Iterator itr = fileNameSet.iterator();
+			Iterator<String> itr = fileNameSet.iterator();
 
 			while (itr.hasNext()) {
-				String fileName = (String)itr.next();
+				String fileName = itr.next();
 
 				try {
 					Document doc = Indexer.getAddFileDocument(
@@ -437,7 +437,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
-	protected Object getFileName(String key) {
+	protected String getFileName(String key) {
 		int x = key.indexOf(StringPool.SLASH);
 
 		x = key.indexOf(StringPool.SLASH, x + 1);

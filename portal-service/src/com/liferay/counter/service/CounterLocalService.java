@@ -34,7 +34,7 @@ import java.util.List;
  */
 public interface CounterLocalService {
 
-	public List getNames() throws SystemException;
+	public List<String> getNames() throws SystemException;
 
 	public long increment() throws SystemException;
 

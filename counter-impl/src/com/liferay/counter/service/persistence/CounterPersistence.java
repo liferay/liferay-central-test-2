@@ -54,20 +54,20 @@ public class CounterPersistence extends BasePersistence {
 	public CounterPersistence() {
 	}
 
-	public List getNames() throws SystemException {
+	public List<String> getNames() throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			List list = new ArrayList();
+			List<String> list = new ArrayList<String>();
 
 			Query q = session.createQuery("FROM " + Counter.class.getName());
 
-			Iterator itr = q.iterate();
+			Iterator<Counter> itr = q.iterate();
 
 			while (itr.hasNext()) {
-				Counter counter = (Counter)itr.next();
+				Counter counter = itr.next();
 
 				list.add(counter.getName());
 			}
@@ -147,7 +147,7 @@ public class CounterPersistence extends BasePersistence {
 		CounterRegister register = getCounterRegister(oldName);
 
 		synchronized (register) {
-			if (registerLookup.containsKey(newName)) {
+			if (_registerLookup.containsKey(newName)) {
 				throw new SystemException(
 					"Cannot rename " + oldName + " to " + newName);
 			}
@@ -183,8 +183,8 @@ public class CounterPersistence extends BasePersistence {
 
 			register.setName(newName);
 
-			registerLookup.put(newName, register);
-			registerLookup.remove(oldName);
+			_registerLookup.put(newName, register);
+			_registerLookup.remove(oldName);
 		}
 	}
 
@@ -212,7 +212,7 @@ public class CounterPersistence extends BasePersistence {
 				closeSession(session);
 			}
 
-			registerLookup.remove(name);
+			_registerLookup.remove(name);
 		}
 	}
 
@@ -220,19 +220,19 @@ public class CounterPersistence extends BasePersistence {
 		CounterRegister register = createCounterRegister(name, size);
 
 		synchronized (register) {
-			registerLookup.put(name, register);
+			_registerLookup.put(name, register);
 		}
 	}
 
 	protected synchronized CounterRegister getCounterRegister(String name)
 		throws SystemException {
 
-		CounterRegister register = (CounterRegister)registerLookup.get(name);
+		CounterRegister register = (CounterRegister)_registerLookup.get(name);
 
 		if (register == null) {
 			register = createCounterRegister(name);
 
-			registerLookup.put(name, register);
+			_registerLookup.put(name, register);
 		}
 
 		return register;
@@ -300,6 +300,7 @@ public class CounterPersistence extends BasePersistence {
 
 	private static final String _NAME = Counter.class.getName();
 
-	private static Map registerLookup = new HashMap();
+	private static Map<String, CounterRegister> _registerLookup =
+		new HashMap<String, CounterRegister>();
 
 }

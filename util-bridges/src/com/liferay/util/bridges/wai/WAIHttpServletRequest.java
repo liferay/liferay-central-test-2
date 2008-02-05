@@ -40,9 +40,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 
-	public WAIHttpServletRequest(HttpServletRequest req, String contextPath,
-								 String pathInfo, String queryString,
-								 Map params) {
+	public WAIHttpServletRequest(
+		HttpServletRequest req, String contextPath, String pathInfo,
+		String queryString, Map<String, String[]> params) {
 
 		super(req);
 
@@ -82,16 +82,16 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 		return new StringBuffer(getRequestURI());
 	}
 
-	public Map getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 		return _params;
 	}
 
-	public Enumeration getParameterNames() {
+	public Enumeration<String> getParameterNames() {
 		return Collections.enumeration(_params.keySet());
 	}
 
 	public String getParameter(String key) {
-		String[] values = (String[]) _params.get(key);
+		String[] values = _params.get(key);
 
 		if (values == null) {
 			return null;
@@ -101,12 +101,12 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String[] getParameterValues(String key) {
-		return (String[])_params.get(key);
+		return _params.get(key);
 	}
 
 	private String _contextPath;
 	private String _pathInfo;
 	private String _queryString;
-	private Map _params;
+	private Map<String, String[]> _params;
 
 }

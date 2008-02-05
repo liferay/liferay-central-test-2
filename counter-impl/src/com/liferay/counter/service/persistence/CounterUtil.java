@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class CounterUtil {
 
-	public static List getNames() throws SystemException {
+	public static List<String> getNames() throws SystemException {
 		return getPersistence().getNames();
 	}
 

@@ -36,7 +36,7 @@ import java.util.List;
  */
 public class CounterServiceImpl implements CounterService {
 
-	public List getNames() throws SystemException {
+	public List<String> getNames() throws SystemException {
 		return CounterUtil.getNames();
 	}
 

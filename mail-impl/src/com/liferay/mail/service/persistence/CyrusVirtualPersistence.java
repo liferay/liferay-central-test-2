@@ -124,7 +124,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(long userId) throws SystemException {
+	public List<CyrusVirtual> findByUserId(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -154,10 +154,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			q.setString(0, String.valueOf(userId));
 
-			Iterator itr = q.iterate();
+			Iterator<CyrusVirtual> itr = q.iterate();
 
 			while (itr.hasNext()) {
-				CyrusVirtual virtual = (CyrusVirtual)itr.next();
+				CyrusVirtual virtual = itr.next();
 
 				session.delete(virtual);
 			}

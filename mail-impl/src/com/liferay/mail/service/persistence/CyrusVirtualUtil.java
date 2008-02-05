@@ -53,7 +53,9 @@ public class CyrusVirtualUtil {
 		return getPersistence().findByPrimaryKey(emailAddress);
 	}
 
-	public static List findByUserId(long userId) throws SystemException {
+	public static List<CyrusVirtual> findByUserId(long userId)
+		throws SystemException {
+
 		return getPersistence().findByUserId(userId);
 	}
 

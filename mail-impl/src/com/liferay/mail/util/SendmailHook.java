@@ -22,6 +22,7 @@
 
 package com.liferay.mail.util;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -46,7 +47,8 @@ import org.apache.commons.logging.LogFactory;
 public class SendmailHook implements Hook {
 
 	public void addForward(
-		long userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -58,7 +60,7 @@ public class SendmailHook implements Hook {
 					StringMaker sm = new StringMaker();
 
 					for (int i = 0; i < emailAddresses.size(); i++) {
-						String emailAddress = (String)emailAddresses.get(i);
+						String emailAddress = emailAddresses.get(i);
 
 						sm.append(emailAddress);
 						sm.append("\n");
@@ -138,7 +140,7 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List blocked) {
+	public void updateBlocked(long userId, List<String> blocked) {
 		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_HOME);
 
 		File file = new File(home + "/" + userId + "/.procmailrc");
@@ -156,7 +158,7 @@ public class SendmailHook implements Hook {
 		sm.append("SENDMAIL /usr/smin/sendmail\n");
 
 		for (int i = 0; i < blocked.size(); i++) {
-			String emailAddress = (String)blocked.get(i);
+			String emailAddress = blocked.get(i);
 
 			sm.append("\n");
 			sm.append(":0\n");

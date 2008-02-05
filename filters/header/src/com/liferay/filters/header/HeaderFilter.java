@@ -66,10 +66,10 @@ public class HeaderFilter extends BaseFilter {
 
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		Enumeration enu = _config.getInitParameterNames();
+		Enumeration<String> enu = _config.getInitParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			String value = _config.getInitParameter(name);
 

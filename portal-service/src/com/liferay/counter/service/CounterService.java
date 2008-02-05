@@ -36,7 +36,7 @@ import java.util.List;
  */
 public interface CounterService {
 
-	public List getNames() throws RemoteException, SystemException;
+	public List<String> getNames() throws RemoteException, SystemException;
 
 	public long increment() throws RemoteException, SystemException;
 

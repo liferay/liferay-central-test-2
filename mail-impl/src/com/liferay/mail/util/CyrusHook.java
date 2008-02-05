@@ -51,7 +51,8 @@ import org.apache.commons.logging.LogFactory;
 public class CyrusHook implements Hook {
 
 	public void addForward(
-		long userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -65,7 +66,7 @@ public class CyrusHook implements Hook {
 					StringMaker sm = new StringMaker();
 
 					for (int i = 0; i < filters.size(); i++) {
-						Filter filter = (Filter)filters.get(i);
+						Filter filter = filters.get(i);
 
 						sm.append(":0\n");
 						sm.append("* ^(From|Cc|To).*");
@@ -243,7 +244,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List blocked) {
+	public void updateBlocked(long userId, List<String> blocked) {
 		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
 
 		File file = new File(home + "/" + userId + ".procmail.blocked");
@@ -257,7 +258,7 @@ public class CyrusHook implements Hook {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < blocked.size(); i++) {
-			String emailAddress = (String)blocked.get(i);
+			String emailAddress = blocked.get(i);
 
 			sm.append("\n");
 			sm.append(":0\n");

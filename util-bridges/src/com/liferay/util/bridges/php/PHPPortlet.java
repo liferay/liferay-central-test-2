@@ -126,12 +126,12 @@ public class PHPPortlet extends GenericPortlet {
 				quercusServlet = (HttpServlet)Class.forName(
 					_QUERCUS_SERVLET).newInstance();
 
-				Map params = new HashMap();
+				Map<String, String> params = new HashMap<String, String>();
 
-				Enumeration enu = config.getInitParameterNames();
+				Enumeration<String> enu = config.getInitParameterNames();
 
 				while (enu.hasMoreElements()) {
-					String name = (String)enu.nextElement();
+					String name = enu.nextElement();
 
 					if (!name.equals("portlet-class")) {
 						params.put(name, config.getInitParameter(name));

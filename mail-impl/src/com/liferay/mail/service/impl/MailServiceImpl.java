@@ -22,6 +22,7 @@
 
 package com.liferay.mail.service.impl;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.jms.MailProducer;
 import com.liferay.portal.SystemException;
@@ -45,7 +46,8 @@ import org.apache.commons.logging.LogFactory;
 public class MailServiceImpl implements MailService {
 
 	public void addForward(
-			long userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List<Filter> filters, List<String> emailAddresses,
+			boolean leaveCopy)
 		throws SystemException {
 
 		if (_log.isDebugEnabled()) {
@@ -130,7 +132,7 @@ public class MailServiceImpl implements MailService {
 		MailProducer.produce(mailMessage);
 	}
 
-	public void updateBlocked(long userId, List blocked)
+	public void updateBlocked(long userId, List<String> blocked)
 		throws SystemException {
 
 		if (_log.isDebugEnabled()) {

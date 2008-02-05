@@ -127,7 +127,8 @@ public class WAIPortlet extends GenericPortlet {
 
 		String pathInfo = friendlyURL.substring(pos + portletName.length());
 
-		Map params = new HashMap(httpReq.getParameterMap());
+		Map<String, String[]> params = new HashMap<String, String[]>(
+			httpReq.getParameterMap());
 
 		params.remove(_APP_URL);
 

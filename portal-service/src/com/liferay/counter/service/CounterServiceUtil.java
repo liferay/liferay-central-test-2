@@ -36,7 +36,9 @@ import java.util.List;
  */
 public class CounterServiceUtil {
 
-	public static List getNames() throws RemoteException, SystemException {
+	public static List<String> getNames()
+		throws RemoteException, SystemException {
+
 		CounterService counterService = CounterServiceFactory.getService();
 
 		return counterService.getNames();

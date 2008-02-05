@@ -31,11 +31,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
 import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.FilterChain;
@@ -175,7 +175,7 @@ public class SecureFilter extends BaseFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
-	private Set _hostsAllowed = CollectionFactory.getHashSet();
+	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.mail.util;
 
+import com.liferay.mail.model.Filter;
+
 import java.util.List;
 
 /**
@@ -33,7 +35,8 @@ import java.util.List;
 public class DummyHook implements Hook {
 
 	public void addForward(
-		long userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 	}
 
 	public void addUser(
@@ -51,7 +54,7 @@ public class DummyHook implements Hook {
 	public void deleteUser(long userId) {
 	}
 
-	public void updateBlocked(long userId, List blocked) {
+	public void updateBlocked(long userId, List<String> blocked) {
 	}
 
 	public void updateEmailAddress(long userId, String emailAddress) {

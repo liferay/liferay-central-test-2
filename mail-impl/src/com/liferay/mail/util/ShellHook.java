@@ -22,6 +22,7 @@
 
 package com.liferay.mail.util;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,13 +45,14 @@ public class ShellHook implements Hook {
 	public static String SHELL_SCRIPT =
 		PropsUtil.get(PropsUtil.MAIL_HOOK_SHELL_SCRIPT);
 
-	public void addFilters(long userId, List filters) {
+	public void addFilters(long userId, List<String> filters) {
 	}
 
 	public void addForward(
-		long userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "addForward", String.valueOf(userId),
 				StringUtil.merge(emailAddresses)
@@ -62,7 +64,7 @@ public class ShellHook implements Hook {
 		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
 
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "addUser", String.valueOf(userId), password,
 				firstName, middleName, lastName, emailAddress
@@ -73,7 +75,7 @@ public class ShellHook implements Hook {
 	public void addVacationMessage(
 		long userId, String emailAddress, String vacationMessage) {
 
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "addVacationMessage", String.valueOf(userId),
 				emailAddress, vacationMessage
@@ -82,7 +84,7 @@ public class ShellHook implements Hook {
 	}
 
 	public void deleteEmailAddress(long userId) {
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "deleteEmailAddress", String.valueOf(userId)
 			}
@@ -90,15 +92,15 @@ public class ShellHook implements Hook {
 	}
 
 	public void deleteUser(long userId) {
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "deleteUser", String.valueOf(userId)
 			}
 		);
 	}
 
-	public void updateBlocked(long userId, List blocked) {
-		_execute(
+	public void updateBlocked(long userId, List<String> blocked) {
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "updateBlocked", String.valueOf(userId),
 				StringUtil.merge(blocked)
@@ -107,7 +109,7 @@ public class ShellHook implements Hook {
 	}
 
 	public void updateEmailAddress(long userId, String emailAddress) {
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "updateEmailAddress", String.valueOf(userId),
 				emailAddress
@@ -116,13 +118,13 @@ public class ShellHook implements Hook {
 	}
 
 	public void updatePassword(long userId, String password) {
-		_execute(
+		execute(
 			new String[] {
 				SHELL_SCRIPT, "updatePassword", String.valueOf(userId), password
 		});
 	}
 
-	private void _execute(String cmdLine[]) {
+	protected void execute(String cmdLine[]) {
 		for (int i = 0; i < cmdLine.length; i++) {
 			if (cmdLine[i].trim().length() == 0) {
 				cmdLine[i] = StringPool.UNDERLINE;

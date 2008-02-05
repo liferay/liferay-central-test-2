@@ -22,6 +22,7 @@
 
 package com.liferay.mail.service;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 
@@ -38,7 +39,8 @@ import java.util.List;
 public interface MailService {
 
 	public void addForward(
-			long userId, List filters, List emailAddresses, boolean leaveCopy)
+			long userId, List<Filter> filters, List<String> emailAddresses,
+			boolean leaveCopy)
 		throws RemoteException, SystemException;
 
 	public void addUser(
@@ -59,7 +61,7 @@ public interface MailService {
 	public void sendEmail(MailMessage mailMessage)
 		throws RemoteException, SystemException;
 
-	public void updateBlocked(long userId, List blocked)
+	public void updateBlocked(long userId, List<String> blocked)
 		throws RemoteException, SystemException;
 
 	public void updateEmailAddress(long userId, String emailAddress)

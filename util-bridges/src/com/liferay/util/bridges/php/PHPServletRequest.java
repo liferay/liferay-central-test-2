@@ -25,10 +25,8 @@ package com.liferay.util.bridges.php;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
@@ -43,12 +41,13 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * <a href="PHPServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class PHPServletRequest extends HttpServletRequestWrapper {
 
-	public PHPServletRequest(HttpServletRequest req, ServletConfig config,
-							 RenderRequest renderReq, RenderResponse renderRes,
-							 PortletConfig portletConfig, String phpURI) {
+	public PHPServletRequest(
+		HttpServletRequest req, ServletConfig config, RenderRequest renderReq,
+		RenderResponse renderRes, PortletConfig portletConfig, String phpURI) {
 
 		super(req);
 
@@ -103,11 +102,11 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		return _renderReq.getParameter(name);
 	}
 
-	public Map getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 		return _renderReq.getParameterMap();
 	}
 
-	public Enumeration getParameterNames() {
+	public Enumeration<String> getParameterNames() {
 		return _renderReq.getParameterNames();
 	}
 
@@ -151,46 +150,6 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 
 	public String getServletPath() {
 		return _path;
-	}
-
-	protected Map parseQueryString(String queryString) {
-		Map params = new HashMap();
-
-		if (Validator.isNull(queryString)) {
-			return params;
-		}
-
-		int ampersandIndex;
-
-		do {
-			ampersandIndex = queryString.indexOf(StringPool.AMPERSAND);
-
-			String nameValuePair;
-
-			if (ampersandIndex == -1) {
-				nameValuePair = queryString;
-			}
-			else {
-				nameValuePair = queryString.substring(0, ampersandIndex);
-				queryString = queryString.substring(ampersandIndex + 1);
-			}
-
-			int equalIndex = nameValuePair.indexOf(StringPool.EQUAL);
-
-			String key = nameValuePair;
-			String value = StringPool.BLANK;
-
-			if (equalIndex != -1) {
-				key = nameValuePair.substring(0, equalIndex);
-				value = nameValuePair.substring(equalIndex + 1);
-			}
-
-			params.put(key, value);
-
-		}
-		while (ampersandIndex != -1);
-
-		return params;
 	}
 
 	private ServletConfig _config;

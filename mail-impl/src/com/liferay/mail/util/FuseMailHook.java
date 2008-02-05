@@ -22,6 +22,7 @@
 
 package com.liferay.mail.util;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -49,7 +50,8 @@ public class FuseMailHook implements Hook {
 	}
 
 	public void addForward(
-		long userId, List filters, List emailAddresses, boolean leaveCopy) {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 	}
 
 	public void addUser(
@@ -116,7 +118,7 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List blocked) {
+	public void updateBlocked(long userId, List<String> blocked) {
 	}
 
 	public void updateEmailAddress(long userId, String emailAddress) {

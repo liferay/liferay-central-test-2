@@ -152,14 +152,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			Properties extraSettingsProps =
 				fileEntry.getExtraSettingsProperties();
 
-			Iterator itr =
-				(Iterator)extraSettingsProps.entrySet().iterator();
+			Iterator<Map.Entry<Object, Object>> itr =
+				extraSettingsProps.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<Object, Object> entry = itr.next();
 
-				String value = GetterUtil.getString(
-					(String)entry.getValue());
+				String value = GetterUtil.getString((String)entry.getValue());
 
 				sm.append(value);
 			}

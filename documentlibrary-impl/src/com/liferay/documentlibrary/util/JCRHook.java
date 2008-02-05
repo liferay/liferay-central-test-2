@@ -418,7 +418,7 @@ public class JCRHook extends BaseHook {
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		List fileNames = new ArrayList();
+		List<String> fileNames = new ArrayList<String>();
 
 		Session session = null;
 
@@ -453,7 +453,7 @@ public class JCRHook extends BaseHook {
 			}
 		}
 
-		return (String[])fileNames.toArray(new String[0]);
+		return fileNames.toArray(new String[fileNames.size()]);
 	}
 
 	public long getFileSize(

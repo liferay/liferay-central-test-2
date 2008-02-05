@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class CounterLocalServiceUtil {
 
-	public static List getNames() throws SystemException {
+	public static List<String> getNames() throws SystemException {
 		CounterLocalService counterService =
 			CounterLocalServiceFactory.getService();
 
