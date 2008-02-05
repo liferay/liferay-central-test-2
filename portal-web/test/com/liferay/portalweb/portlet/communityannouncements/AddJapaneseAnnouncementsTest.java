@@ -51,7 +51,7 @@ public class AddJapaneseAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep();
+		Thread.sleep(3000);
 		selenium.select("_86_languageId", "label=\u4e2d\u6587 (\u53f0\u7063)");
 		selenium.type("_86_content",
 			"This is a test announcement in \u65e5\u672c\u8a9e !");
@@ -95,7 +95,7 @@ public class AddJapaneseAnnouncementsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep();
+		Thread.sleep(3000);
 		selenium.click("//input[@value='Guardar']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Community Announcements Test Page");
