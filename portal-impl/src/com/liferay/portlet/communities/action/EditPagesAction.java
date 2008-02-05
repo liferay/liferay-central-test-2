@@ -76,7 +76,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.form.PageForm;
-import com.liferay.portlet.communities.util.LayoutUtil;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadException;
@@ -141,7 +141,7 @@ public class EditPagesAction extends PortletAction {
 				updateLayout(pageForm, req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				LayoutUtil.deleteLayout(req, res);
+				CommunitiesUtil.deleteLayout(req, res);
 			}
 			else if (cmd.equals("copy_from_live")) {
 				copyFromLive(req);

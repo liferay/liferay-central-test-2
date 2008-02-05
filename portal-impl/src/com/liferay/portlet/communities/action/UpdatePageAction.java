@@ -43,7 +43,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.util.LayoutUtil;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.util.Http;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,7 +93,7 @@ public class UpdatePageAction extends JSONAction {
 			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
-			LayoutUtil.deleteLayout(req, res);
+			CommunitiesUtil.deleteLayout(req, res);
 		}
 		else if (cmd.equals("display_order")) {
 			updateDisplayOrder(req);
