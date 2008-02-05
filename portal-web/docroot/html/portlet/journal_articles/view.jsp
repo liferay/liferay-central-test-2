@@ -165,17 +165,25 @@ double version = ParamUtil.getDouble(request, "version");
 		<%
 		String languageId = LanguageUtil.getLanguageId(request);
 
-		String content = JournalArticleLocalServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
+		String content = StringPool.BLANK;
+		
+		try {
+			content = JournalArticleServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
 
-		RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
-		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
-		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
+			RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
+			RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
+			RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
 
-		content = RuntimePortletUtil.processXML(request, content, portletLogic);
-		content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
-		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
+			content = RuntimePortletUtil.processXML(request, content, portletLogic);
+			content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
+			content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(renderRequest, pe.getClass().getName());
+		}
 		%>
 
+		<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
 		<%= content %>
 	</c:otherwise>
 </c:choose>
