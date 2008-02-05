@@ -78,6 +78,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.form.PageForm;
+import com.liferay.portlet.communities.util.LayoutUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadException;
@@ -142,7 +143,7 @@ public class EditPagesAction extends PortletAction {
 				updateLayout(pageForm, req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteLayout(req, res);
+				LayoutUtil.deleteLayout(req, res);
 			}
 			else if (cmd.equals("copy_from_live")) {
 				copyFromLive(req);
@@ -401,42 +402,6 @@ public class EditPagesAction extends PortletAction {
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 				copyPortletId, copyPrefs);
 		}
-	}
-
-	protected void deleteLayout(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long layoutId = ParamUtil.getLong(req, "layoutId");
-
-		if (LayoutPermissionUtil.contains(
-				permissionChecker, groupId, privateLayout, layoutId,
-				ActionKeys.DELETE)) {
-
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				groupId, privateLayout, layoutId);
-
-			String[] eventClasses = StringUtil.split(
-				PropsUtil.getComponentProperties().getString(
-					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
-					Filter.by(layout.getType())));
-
-			HttpServletRequest httpReq = (HttpServletRequest)
-				((ActionRequestImpl)req).getHttpServletRequest();
-			HttpServletResponse httpRes = (HttpServletResponse)
-				((ActionResponseImpl)res).getHttpServletResponse();
-
-			EventsProcessor.process(eventClasses, httpReq, httpRes);
-		}
-
-		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
 	protected List getMissingParents(Layout layout, long liveGroupId)

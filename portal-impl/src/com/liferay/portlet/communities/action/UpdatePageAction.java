@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.germinus.easyconf.Filter;
+import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
@@ -37,8 +39,10 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.util.LayoutUtil;
 import com.liferay.util.Http;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,13 +86,13 @@ public class UpdatePageAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 
 		if (cmd.equals("add")) {
-			String[] array = addPage(themeDisplay, req);
+			String[] array = addPage(themeDisplay, req, res);
 
 			jsonObj.put("layoutId", array[0]);
 			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
-			deletePage(req);
+			LayoutUtil.deleteLayout(req, res);
 		}
 		else if (cmd.equals("display_order")) {
 			updateDisplayOrder(req);
@@ -107,7 +111,8 @@ public class UpdatePageAction extends JSONAction {
 	}
 
 	protected String[] addPage(
-			ThemeDisplay themeDisplay, HttpServletRequest req)
+			ThemeDisplay themeDisplay, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
@@ -136,6 +141,13 @@ public class UpdatePageAction extends JSONAction {
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 
+		String[] eventClasses = StringUtil.split(
+			PropsUtil.getComponentProperties().getString(
+				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
+				Filter.by(layout.getType())));
+
+		EventsProcessor.process(eventClasses, req, res);
+
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(doAsUserId)) {
@@ -144,21 +156,6 @@ public class UpdatePageAction extends JSONAction {
 		}
 
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};
-	}
-
-	protected void deletePage(HttpServletRequest req) throws Exception {
-		long plid = ParamUtil.getLong(req, "plid");
-
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long layoutId = ParamUtil.getLong(req, "layoutId");
-
-		if (plid <= 0) {
-			LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
-		}
-		else {
-			LayoutServiceUtil.deleteLayout(plid);
-		}
 	}
 
 	protected void updateDisplayOrder(HttpServletRequest req) throws Exception {
