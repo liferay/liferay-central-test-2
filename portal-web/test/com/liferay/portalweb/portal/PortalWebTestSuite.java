@@ -35,7 +35,6 @@ import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.chat.ChatTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
 import com.liferay.portalweb.portlet.communityannouncements.CommunityAnnouncementsTests;
-import com.liferay.portalweb.portlet.cszsearch.CSZSearchTests;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
 import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
@@ -57,7 +56,6 @@ import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTe
 import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.mail.MailTests;
-import com.liferay.portalweb.portlet.maps.MapsTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portlet.navigation.NavigationTests;
 import com.liferay.portalweb.portlet.nestedportlets.NestedPortletsTests;
@@ -120,7 +118,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(ChatTests.class);
 		addTestSuite(CommunitiesTests.class);
 		addTestSuite(CommunityAnnouncementsTests.class);
-		addTestSuite(CSZSearchTests.class);
 		addTestSuite(CurrencyConverterTests.class);
 		addTestSuite(DictionaryTests.class);
 		addTestSuite(DirectoryTests.class);
@@ -142,7 +139,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LanguageTests.class);
 		addTestSuite(LoanCalculatorTests.class);
 		addTestSuite(MailTests.class);
-		addTestSuite(MapsTests.class);
 		addTestSuite(MessageBoardsTests.class);
 		addTestSuite(NavigationTests.class);
 		addTestSuite(NestedPortletsTests.class);
