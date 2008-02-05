@@ -27,38 +27,26 @@
 <%
 Group group = layout.getGroup();
 
-String pathFriendlyURL = group.getPathFriendlyURL(layout.isPrivateLayout(), themeDisplay);
-
-String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
+String friendlyURL = null;
 %>
 
-<c:if test="<%= (group.hasStagingGroup() || group.isStagingGroup()) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) %>">
-	<ul>
+<c:if test="<%= themeDisplay.isShowStagingIcon() %>">
+	<ul style="display: block;">
 		<c:choose>
 			<c:when test="<%= group.isStagingGroup() %>">
 
 				<%
 				Group liveGroup = group.getLiveGroup();
 
-				String groupFriendlyURL = liveGroup.getFriendlyURL();
-
-				if (Validator.isNull(groupFriendlyURL)) {
-					groupFriendlyURL = StringPool.SLASH + liveGroup.getGroupId();
+				try {
+					Layout liveLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
 				}
-
-				String friendlyURL = pathFriendlyURL + groupFriendlyURL + layoutIdURL;
-
-				long layoutPlid = PortalUtil.getPlidIdFromFriendlyURL(layout.getCompanyId(), friendlyURL);
+				catch (Exception e) {
+				}
 				%>
 
-				<c:if test="<%= layoutPlid > 0 %>">
-
-					<%
-					Layout liveLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
-
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
-					%>
-
+				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-live-page" /></a>
 					</li>
@@ -75,25 +63,15 @@ String layoutIdURL = StringPool.SLASH + layout.getLayoutId();
 				<%
 				Group stagingGroup = group.getStagingGroup();
 
-				String groupFriendlyURL = stagingGroup.getFriendlyURL();
-
-				if (Validator.isNull(groupFriendlyURL)) {
-					groupFriendlyURL = StringPool.SLASH + stagingGroup.getGroupId();
+				try {
+					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
 				}
-
-				String friendlyURL = pathFriendlyURL + groupFriendlyURL + layoutIdURL;
-
-				long layoutPlid = PortalUtil.getPlidIdFromFriendlyURL(layout.getCompanyId(), friendlyURL);
+				catch (Exception e) {
+				}
 				%>
 
-				<c:if test="<%= layoutPlid > 0 %>">
-
-					<%
-					Layout stagingLayout = LayoutLocalServiceUtil.getLayout(layoutPlid);
-
-					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagingLayout, themeDisplay);
-					%>
-
+				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
 					</li>
