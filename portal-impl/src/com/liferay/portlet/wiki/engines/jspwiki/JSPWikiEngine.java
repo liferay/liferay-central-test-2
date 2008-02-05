@@ -24,7 +24,6 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 
 import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.WikiException;
-import com.ecyrd.jspwiki.providers.LiferayPageProvider;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
