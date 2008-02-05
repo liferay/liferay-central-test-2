@@ -188,26 +188,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>17</portlet-name>
-		<icon>/html/portlet/csz_search/icon.png</icon>
-		<struts-path>csz_search</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
-		<portlet-name>18</portlet-name>
-		<icon>/html/portlet/maps/icon.png</icon>
-		<struts-path>maps</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>19</portlet-name>
 		<icon>/html/portlet/message_boards/icon.png</icon>
 		<struts-path>message_boards</struts-path>

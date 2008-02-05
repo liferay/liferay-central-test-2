@@ -91,8 +91,6 @@
 	<category name="category.tools">
 		<portlet id="2" />
 		<portlet id="3" />
-		<portlet id="17" />
-		<portlet id="18" />
 		<portlet id="23" />
 		<portlet id="26" />
 		<portlet id="27" />

@@ -43,7 +43,7 @@ public class AmazonRankingsPreferencesValidator
 	implements PreferencesValidator {
 
 	public void validate(PortletPreferences prefs) throws ValidatorException {
-		List badIsbns = new ArrayList();
+		List<String> badIsbns = new ArrayList<String>();
 
 		String[] isbns = prefs.getValues("isbns", new String[0]);
 

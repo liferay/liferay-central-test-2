@@ -32,7 +32,8 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public class AmazonRankings implements Comparable, Serializable {
+public class AmazonRankings
+	implements Comparable<AmazonRankings>, Serializable {
 
 	public AmazonRankings(String isbn, String productName, String catalog,
 							   String[] authors, Date releaseDate,
@@ -208,12 +209,10 @@ public class AmazonRankings implements Comparable, Serializable {
 		_availability = availability;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(AmazonRankings amazonRankings) {
+		if (amazonRankings == null) {
 			return -1;
 		}
-
-		AmazonRankings amazonRankings = (AmazonRankings)obj;
 
 		if (getSalesRank() > amazonRankings.getSalesRank()) {
 			return 1;

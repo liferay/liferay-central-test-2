@@ -133,7 +133,7 @@ public class FindEntryAction extends Action {
 		long groupId = entry.getGroupId();
 		boolean privateLayout = false;
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout);
 
 		for (int i = 0; i < layouts.size(); i++) {

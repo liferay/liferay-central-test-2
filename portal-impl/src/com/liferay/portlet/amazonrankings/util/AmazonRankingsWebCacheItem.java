@@ -68,10 +68,13 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 			Document doc = reader.read(url);
 
-			Iterator itr = doc.getRootElement().elements("ErrorMsg").iterator();
+			Iterator<Element> itr = doc.getRootElement().elements(
+				"ErrorMsg").iterator();
 
 			if (itr.hasNext()) {
-				String errorMsg = ((Element)itr.next()).getText();
+				Element el = itr.next();
+
+				String errorMsg = el.getText();
 
 				throw new WebCacheException(isbn + " " + errorMsg);
 			}
@@ -82,12 +85,13 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 			String productName = details.elementText("ProductName");
 			String catalog = details.elementText("Catalog");
 
-			List authorsList = details.element("Authors").elements("Author");
+			List<Element> authorsList = details.element(
+				"Authors").elements("Author");
 
 			String[] authors = new String[authorsList.size()];
 
 			for (int i = 0; i < authorsList.size(); i++) {
-				Element author = (Element)authorsList.get(i);
+				Element author = authorsList.get(i);
 
 				authors[i] = author.getTextTrim();
 			}

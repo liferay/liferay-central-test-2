@@ -51,7 +51,7 @@ public class AmazonRankingsUtil {
 	}
 
 	private AmazonRankingsUtil() {
-		_amazonLicenseKeys = new Vector();
+		_amazonLicenseKeys = new Vector<String>();
 
 		for (int i = 0; i < 1000; i++) {
 			String key = PropsUtil.get(PropsUtil.AMAZON_LICENSE + i);
@@ -82,7 +82,7 @@ public class AmazonRankingsUtil {
 
 	private static AmazonRankingsUtil _instance = new AmazonRankingsUtil();
 
-	private List _amazonLicenseKeys;
+	private List<String> _amazonLicenseKeys;
 	private int _amazonLicenseCount;
 
 }

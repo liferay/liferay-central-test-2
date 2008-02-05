@@ -84,7 +84,9 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
+	public void populateParams(
+		String friendlyURLPath, Map<String, String> params) {
+
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_action", "0");
 		params.put("p_p_state", WindowState.NORMAL.toString());

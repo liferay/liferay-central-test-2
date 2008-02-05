@@ -27,13 +27,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.currencyconverter.model.Currency;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
@@ -46,25 +47,25 @@ import javax.servlet.jsp.PageContext;
  */
 public class CurrencyUtil {
 
-	public static Map getAllSymbols(PageContext pageContext) {
+	public static Map<String, String> getAllSymbols(PageContext pageContext) {
 		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 
 		Locale locale = req.getLocale();
 
 		String key = locale.toString();
 
-		Map symbols = (Map)_symbolsPool.get(key);
+		Map<String, String> symbols = _symbolsPool.get(key);
 
 		if (symbols != null) {
 			return symbols;
 		}
 
-		symbols = new TreeMap();
+		symbols = new TreeMap<String, String>();
 
-		Iterator itr = _instance._currencyIds.iterator();
+		Iterator<String> itr = _instance._currencyIds.iterator();
 
 		while (itr.hasNext()) {
-			String symbol = (String)itr.next();
+			String symbol = itr.next();
 
 			symbols.put(LanguageUtil.get(pageContext, symbol), symbol);
 		}
@@ -86,7 +87,7 @@ public class CurrencyUtil {
 	}
 
 	private CurrencyUtil() {
-		_currencyIds = CollectionFactory.getHashSet();
+		_currencyIds = new HashSet<String>();
 
 		_currencyIds.add("ALL");
 		_currencyIds.add("DZD");
@@ -241,8 +242,9 @@ public class CurrencyUtil {
 
 	private static CurrencyUtil _instance = new CurrencyUtil();
 
-	private static Map _symbolsPool = CollectionFactory.getSyncHashMap();
+	private static Map<String, Map<String, String>> _symbolsPool =
+		new ConcurrentHashMap<String, Map<String, String>>();
 
-	private Set _currencyIds;
+	private Set<String> _currencyIds;
 
 }

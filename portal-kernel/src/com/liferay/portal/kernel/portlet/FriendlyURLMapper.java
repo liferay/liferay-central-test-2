@@ -38,6 +38,7 @@ public interface FriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL);
 
-	public void populateParams(String friendlyURLPath, Map params);
+	public void populateParams(
+		String friendlyURLPath, Map<String, String> params);
 
 }

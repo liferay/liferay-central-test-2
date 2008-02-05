@@ -50,11 +50,15 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		}
 	}
 
-	protected void addParam(Map params, String name, long value) {
+	protected void addParam(
+		Map<String, String> params, String name, long value) {
+
 		params.put(getNamespace() + name, String.valueOf(value));
 	}
 
-	protected void addParam(Map params, String name, String value) {
+	protected void addParam(
+		Map<String, String> params, String name, String value) {
+
 		params.put(getNamespace() + name, value);
 	}
 

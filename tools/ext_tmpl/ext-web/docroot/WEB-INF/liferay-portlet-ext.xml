@@ -94,16 +94,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>17</portlet-name>
-		<struts-path>csz_search</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>18</portlet-name>
-		<struts-path>maps</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>19</portlet-name>
 		<struts-path>message_boards</struts-path>
 		<include>true</include>
