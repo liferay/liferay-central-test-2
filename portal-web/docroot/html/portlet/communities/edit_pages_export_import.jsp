@@ -27,14 +27,7 @@
 <%
 String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
 
-Group group = (Group)request.getAttribute("edit_pages.jsp-group");
-
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
-
-if (group.isStagingGroup() && tabs4.equals("export-live")) {
-	groupId = group.getLiveGroupId();
-}
-
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
@@ -77,13 +70,7 @@ while (itr1.hasNext()) {
 Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 String tabs4Names = "export,import";
-
-if (group.isStagingGroup()) {
-	tabs4Names += ",export-live";
-}
 %>
-
-<input name="<portlet:namespace />exportGroupId" type="hidden" value="<%= groupId %>">
 
 <liferay-ui:tabs
 	names="<%= tabs4Names %>"
@@ -92,7 +79,7 @@ if (group.isStagingGroup()) {
 />
 
 <c:choose>
-	<c:when test='<%= tabs4.equals("export") || tabs4.equals("export-live") %>'>
+	<c:when test='<%= tabs4.equals("export") %>'>
 		<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
 
 		<br /><br />
@@ -111,7 +98,7 @@ if (group.isStagingGroup()) {
 
 		<br />
 
-		<input type="button" value='<liferay-ui:message key="export" />' onClick='<portlet:namespace />exportPages();' />
+		<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportPages();" />
 	</c:when>
 	<c:when test='<%= tabs4.equals("import") %>'>
 		<c:choose>

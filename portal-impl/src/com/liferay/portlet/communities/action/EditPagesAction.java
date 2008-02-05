@@ -943,7 +943,7 @@ public class EditPagesAction extends PortletAction {
 			themeDisplay.getPermissionChecker();
 
 		if (!GroupPermissionUtil.contains(
-			permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
+				permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
 
 			throw new PrincipalException();
 		}

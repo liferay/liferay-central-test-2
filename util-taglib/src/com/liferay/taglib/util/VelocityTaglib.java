@@ -50,6 +50,7 @@ import com.liferay.taglib.ui.LanguageTag;
 import com.liferay.taglib.ui.MyPlacesTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
+import com.liferay.taglib.ui.StagingTag;
 import com.liferay.taglib.ui.ToggleTag;
 import com.liferay.util.HttpUtil;
 
@@ -532,6 +533,14 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		SearchTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String staging() throws Exception {
+		_res.recycle();
+
+		StagingTag.doTag(_ctx, _req, _res);
 
 		return _res.getString();
 	}

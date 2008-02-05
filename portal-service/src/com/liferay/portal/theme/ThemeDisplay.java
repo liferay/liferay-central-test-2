@@ -605,6 +605,14 @@ public class ThemeDisplay implements Serializable {
 		_showSignOutIcon = showSignOutIcon;
 	}
 
+	public boolean isShowStagingIcon() {
+		return _showStagingIcon;
+	}
+
+	public void setShowStagingIcon(boolean showStagingIcon) {
+		_showStagingIcon = showStagingIcon;
+	}
+
 	public String getURLAddContent() {
 		return _urlAddContent;
 	}
@@ -843,6 +851,7 @@ public class ThemeDisplay implements Serializable {
 		_showPortalIcon = false;
 		_showSignInIcon = false;
 		_showSignOutIcon = false;
+		_showStagingIcon = false;
 		_urlAddContent = StringPool.BLANK;
 		_urlCreateAccount = null;
 		_urlCurrent = StringPool.BLANK;
@@ -925,6 +934,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showPortalIcon;
 	private boolean _showSignInIcon;
 	private boolean _showSignOutIcon;
+	private boolean _showStagingIcon;
 	private String _urlAddContent = StringPool.BLANK;
 	private transient PortletURL _urlCreateAccount = null;
 	private String _urlCurrent = StringPool.BLANK;

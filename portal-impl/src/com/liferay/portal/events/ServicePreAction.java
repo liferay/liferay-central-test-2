@@ -212,7 +212,7 @@ public class ServicePreAction extends Action {
 
 		String stateMaxPrevious = layoutTypePortlet.getStateMaxPrevious();
 
-		if (stateMaxPrevious != null && !themeDisplay.isStatePopUp()) {
+		if ((stateMaxPrevious != null) && !themeDisplay.isStatePopUp()) {
 			layoutTypePortlet.removeStateMaxPrevious();
 
 			if (stateMaxPrevious.equals(StringPool.BLANK)) {
@@ -938,6 +938,8 @@ public class ServicePreAction extends Action {
 		layout = (Layout)viewableLayouts[0];
 		layouts = (List)viewableLayouts[1];
 
+		LayoutTypePortlet layoutTypePortlet = null;
+
 		long portletGroupId = PortalUtil.getPortletGroupId(layout);
 
 		rememberVisitedGroupIds(portletGroupId, req);
@@ -965,19 +967,18 @@ public class ServicePreAction extends Action {
 			}
 
 			plid = layout.getPlid();
-		}
-
-		if (layout != null) {
 
 			// Updates to shared layouts are not reflected until the next time
 			// the user logs in because group layouts are cached in the session
 
 			layout = (Layout)((LayoutImpl)layout).clone();
 
+			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+
 			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
 			if (layoutClone != null) {
-				String typeSettings = layoutClone.get(req, layout.getPlid());
+				String typeSettings = layoutClone.get(req, plid);
 
 				if (typeSettings != null) {
 					Properties props = new NullSafeProperties();
@@ -1007,9 +1008,6 @@ public class ServicePreAction extends Action {
 					String modePrint = props.getProperty(
 						LayoutTypePortletImpl.MODE_PRINT);
 
-					LayoutTypePortlet layoutTypePortlet =
-						(LayoutTypePortlet)layout.getLayoutType();
-
 					layoutTypePortlet.setStateMax(stateMax);
 					layoutTypePortlet.setStateMaxPrevious(stateMaxPrevious);
 					layoutTypePortlet.setStateMin(stateMin);
@@ -1023,15 +1021,9 @@ public class ServicePreAction extends Action {
 					layoutTypePortlet.setModePrint(modePrint);
 				}
 			}
-		}
 
-		LayoutTypePortlet layoutTypePortlet = null;
-
-		if (layout != null) {
 			req.setAttribute(WebKeys.LAYOUT, layout);
 			req.setAttribute(WebKeys.LAYOUTS, layouts);
-
-			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
 			if (layout.isPrivateLayout()) {
 				permissionChecker.setCheckGuest(false);
@@ -1137,6 +1129,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowPortalIcon(true);
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
+		themeDisplay.setShowStagingIcon(false);
 
 		PortletURL createAccountURL = new PortletURLImpl(
 			req, PortletKeys.MY_ACCOUNT, plid, true);
@@ -1162,6 +1155,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLHome(urlHome);
 
 		if (layout != null) {
+			Group group = layout.getGroup();
+
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				boolean freeformLayout =
 					layoutTypePortlet.getLayoutTemplateId().equals(
@@ -1221,8 +1216,6 @@ public class ServicePreAction extends Action {
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
-				// Publish To Live
-
 				PortletURL publishToLiveURL = new PortletURLImpl(
 					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
 
@@ -1247,6 +1240,21 @@ public class ServicePreAction extends Action {
 				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPublishToLive(publishToLiveURL);
+			}
+
+			if (group.hasStagingGroup() && !group.isStagingGroup()) {
+				themeDisplay.setShowAddContentIcon(false);
+				themeDisplay.setShowLayoutTemplatesIcon(false);
+				themeDisplay.setShowPageSettingsIcon(false);
+				themeDisplay.setURLPublishToLive(null);
+			}
+			else if (group.hasStagingGroup()) {
+				boolean hasManageStagingPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, portletGroupId,
+						ActionKeys.MANAGE_STAGING);
+
+				themeDisplay.setShowStagingIcon(true);
 			}
 
 			String myAccountNamespace = PortalUtil.getPortletNamespace(

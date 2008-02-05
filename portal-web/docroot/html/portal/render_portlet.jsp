@@ -235,8 +235,8 @@ if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == 
 Group group = layout.getGroup();
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) &&
-		(!group.hasStagingGroup() || group.isStagingGroup())) {
+	if ((!group.hasStagingGroup() || group.isStagingGroup()) &&
+		(PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION))) {
 
 		showConfigurationIcon = true;
 
@@ -270,13 +270,12 @@ if (responseContentType.equals(ContentTypes.XHTML_MP) && portlet.hasMultipleMime
 	supportsMimeType = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-supported-clients-mobile-devices-" + portletMode, String.valueOf(supportsMimeType)));
 }
 
-// Unauthenticated users and users without UPDATE permission for the layout
-// cannot modify the layout, or if the layout is being managed through the
-// staging environment.
+// Only authenticated with the correct permissions can update a layout. If
+// staging is activated, only staging layouts can be updated.
 
-if (!themeDisplay.isSignedIn() ||
-	!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-	(LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) && group.hasStagingGroup() && !group.isStagingGroup())) {
+if ((!themeDisplay.isSignedIn()) ||
+	(group.hasStagingGroup() && !group.isStagingGroup()) ||
+	(!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE))) {
 
 	showCloseIcon = false;
 	showMaxIcon = PropsValues.LAYOUT_GUEST_SHOW_MAX_ICON;
@@ -814,7 +813,7 @@ else {
 			}
 		</c:if>
 
-		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) %>">
+		<c:if test="<%= showConfigurationIcon %>">
 			jQuery(
 				function() {
 					Liferay.Util.portletTitleEdit(

@@ -188,7 +188,7 @@
 
 			url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates?p_l_id=<%= plid %>&doAsUserId=<%= themeDisplay.getDoAsUserId() %>&redirect=<%= HttpUtil.encodeURL(currentURL) %>";
 
-			AjaxUtil.update(url, message, {onComplete: function(){Liferay.Popup.center()}});
+			AjaxUtil.update(url, message, {onComplete: function() {Liferay.Popup.center()}});
 		}
 
 		jQuery(document).ready(
@@ -273,20 +273,14 @@
 		</c:if>
 
 		<%
-		Group group = null; 
-		boolean stagingActive = false;
-		
+		Group group = null;
+
 		if (layout != null) {
 			group = layout.getGroup();
-
-			if (group.hasStagingGroup() && !group.isStagingGroup()) {
-				stagingActive = true;
-			}
 		}
-
 		%>
 
-		<c:if test="<%= (!stagingActive) && (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			jQuery(document).ready(
 				function() {
 					if (themeDisplay.isFreeformLayout()) {

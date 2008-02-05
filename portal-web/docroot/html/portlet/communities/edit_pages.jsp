@@ -257,7 +257,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>&amp;<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />exportGroupId.value, false);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>", false);
 	}
 
 	function <portlet:namespace />importPages() {
@@ -401,7 +401,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<%
 		String tabs1Names = "live";
 
-		if (stagingGroup == null && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
+		if ((stagingGroup == null) && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
 			tabs1Names = "live,staging";
 		}
 		else if (stagingGroup != null) {
@@ -409,7 +409,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		}
 		%>
 
-			<liferay-ui:tabs
+		<liferay-ui:tabs
 			names="<%= tabs1Names %>"
 			param="tabs1"
 			value="<%= tabs1 %>"
@@ -463,7 +463,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
-			<c:if test="<%= (group.isStagingGroup()) && (pagesCount > 0) %>">
+			<c:if test="<%= group.isStagingGroup() && (pagesCount > 0) %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 
 				<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">

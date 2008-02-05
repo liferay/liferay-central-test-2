@@ -24,5 +24,29 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
-<%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
+<%
+Group group = layout.getGroup();
+%>
+
+<c:if test="<%= (group.hasStagingGroup() || group.isStagingGroup()) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) %>">
+	<ul>
+		<c:choose>
+			<c:when test="<%= group.isStagingGroup() %>">
+				<li class="page-settings">
+					<a href=""><liferay-ui:message key="view-live-page" /></a>
+				</li>
+
+				<c:if test="<%= themeDisplay.getURLPublishToLive() != null %>">
+					<li class="page-settings">
+						<a href="javascript: Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', messageId: 'publish-to-live'});"><liferay-ui:message key="publish-to-live" /></a>
+					</li>
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<li class="page-settings">
+					<a href=""><liferay-ui:message key="view-staged-page" /></a>
+				</li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+</c:if>
