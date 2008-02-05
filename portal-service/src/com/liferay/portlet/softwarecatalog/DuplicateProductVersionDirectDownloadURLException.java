@@ -31,7 +31,8 @@ import com.liferay.portal.PortalException;
  * @author Brian Wing Shun Chan
  *
  */
-public class DuplicateProductVersionDirectDownloadURLException extends PortalException {
+public class DuplicateProductVersionDirectDownloadURLException
+	extends PortalException {
 
 	public DuplicateProductVersionDirectDownloadURLException() {
 		super();
@@ -41,7 +42,9 @@ public class DuplicateProductVersionDirectDownloadURLException extends PortalExc
 		super(msg);
 	}
 
-	public DuplicateProductVersionDirectDownloadURLException(String msg, Throwable cause) {
+	public DuplicateProductVersionDirectDownloadURLException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 
