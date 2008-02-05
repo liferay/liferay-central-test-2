@@ -24,12 +24,11 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
-import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
-
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ConcurrentHashSet.java.html"><b><i>View Source</i></b></a>

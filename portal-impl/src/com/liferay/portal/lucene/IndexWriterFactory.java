@@ -31,14 +31,13 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.SystemProperties;
 
-import edu.emory.mathcs.backport.java.util.concurrent.Semaphore;
-
 import java.io.File;
 import java.io.IOException;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

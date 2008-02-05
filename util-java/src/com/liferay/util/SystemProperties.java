@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemEnv;
 import com.liferay.portal.kernel.util.Validator;
 
-import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
-
 import java.io.InputStream;
 
 import java.net.URL;
@@ -37,6 +35,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="SystemProperties.java.html"><b><i>View Source</i></b></a>
