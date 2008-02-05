@@ -23,7 +23,6 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -69,23 +68,18 @@ public class CopyMethodImpl implements Method {
 				status = HttpServletResponse.SC_NOT_FOUND;
 			}
 			else if (resource.isCollection()) {
-				try {
-					boolean overwrite = WebDAVUtil.isOverwrite(req);
-					long depth = WebDAVUtil.getDepth(req);
+				boolean overwrite = WebDAVUtil.isOverwrite(req);
+				long depth = WebDAVUtil.getDepth(req);
 
-					if (_log.isInfoEnabled()) {
-						sm.append(", overwrite is " + overwrite);
-						sm.append(", depth is " + depth);
+				if (_log.isInfoEnabled()) {
+					sm.append(", overwrite is " + overwrite);
+					sm.append(", depth is " + depth);
 
-						_log.info(sm.toString());
-					}
-
-					status = storage.copyCollectionResource(
-						webDavReq, resource, destination, overwrite, depth);
+					_log.info(sm.toString());
 				}
-				catch (InvalidRequestException ire) {
-					status = HttpServletResponse.SC_BAD_REQUEST;
-				}
+
+				status = storage.copyCollectionResource(
+					webDavReq, resource, destination, overwrite, depth);
 			}
 			else {
 				boolean overwrite = WebDAVUtil.isOverwrite(req);

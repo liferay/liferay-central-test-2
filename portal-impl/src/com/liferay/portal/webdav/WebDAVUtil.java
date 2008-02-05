@@ -25,7 +25,6 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,21 +73,15 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static long getDepth(HttpServletRequest req)
-		throws InvalidRequestException {
+	public static long getDepth(HttpServletRequest req) {
 
 		String value = GetterUtil.getString(req.getHeader("Depth"));
 
 		if (value.equals("0")) {
 			return 0;
 		}
-		else if (value.equalsIgnoreCase("infinity") ||
-				 Validator.isNull(value)) {
-
-			return -1;
-		}
 		else {
-			throw new InvalidRequestException(value);
+			return -1;
 		}
 	}
 
