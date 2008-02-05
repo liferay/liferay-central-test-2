@@ -1250,9 +1250,10 @@ public class ServicePreAction extends Action {
 			}
 
 			// The reason we don't check MANAGE_STAGING here is so that content
-			// content creators still have access to navigate to/from Live and
-			// Staging. MANAGE_STAGING is a permission to control who can
-			// ACTIVATE/BREAK the staging environment.
+			// creators still have access to navigate to/from Live and Staging.
+			// MANAGE_STAGING is a permission to control who can ACTIVATE/BREAK
+			// the staging environment.
+			//
 			// Use Case :
 			//	- Community Admin sets up Staging Env. by "Activating Staging"
 			//		(has MANAGE_STAGING automatically)
