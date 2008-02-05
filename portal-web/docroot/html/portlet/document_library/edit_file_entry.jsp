@@ -529,7 +529,7 @@ portletURL.setParameter("name", name);
 			}
 			%>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("comments") %>'>
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
