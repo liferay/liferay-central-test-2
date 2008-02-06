@@ -22,26 +22,31 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSettingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(AddRoleTest.class);
-		//addTestSuite(AddRolePermissionsTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
+public class EditSettingsTest extends BaseTestCase {
+	public void testEditSettings() throws Exception {
+		selenium.click("link=\u00bb");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Settings");
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_79_tickerSymbol", "LRP");
+		selenium.typeKeys("_79_type", "Open Source");
+		selenium.click("//input[@value='Add']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_79_address", "admin@liferay.com");
+		selenium.select("_79_typeId", "label=E-mail");
+		selenium.click("_79_primaryCheckbox");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("admin@liferay.com"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

@@ -22,26 +22,38 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddUserGroupTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(AddRoleTest.class);
-		//addTestSuite(AddRolePermissionsTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
+public class AddUserGroupTest extends BaseTestCase {
+	public void testAddUserGroup() throws Exception {
+		selenium.click("link=User Groups");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add User Group']");
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_79_name", "Selenium");
+		selenium.type("_79_description", "This is a selenium user group.");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Assign Members");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Available");
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
+			"selenium");
+		selenium.click("//input[@value='Search Users']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_79_rowIds");
+		selenium.click("//input[@value='Update Associations']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
