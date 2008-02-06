@@ -355,7 +355,7 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCompanies()
+	public java.util.List<com.liferay.portal.model.Company> getCompanies()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company getCompanyById(long companyId)

@@ -344,13 +344,14 @@ public interface ImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getImages() throws com.liferay.portal.SystemException;
-
-	public java.util.List getImages(int begin, int end)
+	public java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getImagesBySize(int size)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Image> getImages(int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Image> getImagesBySize(
+		int size) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)

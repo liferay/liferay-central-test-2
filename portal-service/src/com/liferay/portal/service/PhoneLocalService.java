@@ -354,10 +354,12 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPhones() throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Phone> getPhones()
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPhones(long companyId, java.lang.String className,
-		long classPK) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Phone> getPhones(
+		long companyId, java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Phone updatePhone(long phoneId,
 		java.lang.String number, java.lang.String extension, int typeId,

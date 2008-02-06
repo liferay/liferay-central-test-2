@@ -102,7 +102,8 @@ public class ActivityTrackerLocalServiceImpl
 		activityTrackerPersistence.removeByC_C(classNameId, classPK);
 	}
 
-	public List getCompanyActivityTrackers(long companyId, int begin, int end)
+	public List<ActivityTracker> getCompanyActivityTrackers(
+			long companyId, int begin, int end)
 		throws SystemException {
 
 		return activityTrackerPersistence.findByCompanyId(
@@ -115,7 +116,8 @@ public class ActivityTrackerLocalServiceImpl
 		return activityTrackerPersistence.countByCompanyId(companyId);
 	}
 
-	public List getGroupActivityTrackers(long groupId, int begin, int end)
+	public List<ActivityTracker> getGroupActivityTrackers(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return activityTrackerPersistence.findByGroupId(groupId, begin, end);
@@ -127,7 +129,8 @@ public class ActivityTrackerLocalServiceImpl
 		return activityTrackerPersistence.countByGroupId(groupId);
 	}
 
-	public List getUserActivityTrackers(long userId, int begin, int end)
+	public List<ActivityTracker> getUserActivityTrackers(
+			long userId, int begin, int end)
 		throws SystemException {
 
 		return activityTrackerFinder.findByU_R(userId, userId, begin, end);

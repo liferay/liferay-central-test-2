@@ -143,8 +143,8 @@ public class CountryServiceHttp {
 		}
 	}
 
-	public static java.util.List getCountries(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Country> getCountries(
+		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(CountryServiceUtil.class.getName(),
 					"getCountries", new Object[0]);
@@ -162,7 +162,7 @@ public class CountryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Country>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -171,8 +171,9 @@ public class CountryServiceHttp {
 		}
 	}
 
-	public static java.util.List getCountries(HttpPrincipal httpPrincipal,
-		boolean active) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Country> getCountries(
+		HttpPrincipal httpPrincipal, boolean active)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new BooleanWrapper(active);
 
@@ -192,7 +193,7 @@ public class CountryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Country>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

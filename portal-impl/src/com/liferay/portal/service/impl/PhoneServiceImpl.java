@@ -76,7 +76,7 @@ public class PhoneServiceImpl extends PhoneServiceBaseImpl {
 		return phone;
 	}
 
-	public List getPhones(String className, long classPK)
+	public List<Phone> getPhones(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermissionUtil.check(

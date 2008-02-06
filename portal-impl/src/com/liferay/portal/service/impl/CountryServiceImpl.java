@@ -89,11 +89,11 @@ public class CountryServiceImpl extends CountryServiceBaseImpl {
 		return country;
 	}
 
-	public List getCountries() throws SystemException {
+	public List<Country> getCountries() throws SystemException {
 		return countryPersistence.findAll();
 	}
 
-	public List getCountries(boolean active) throws SystemException {
+	public List<Country> getCountries(boolean active) throws SystemException {
 		return countryPersistence.findByActive(active);
 	}
 

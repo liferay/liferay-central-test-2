@@ -133,9 +133,7 @@ public class GroupFinderImpl implements GroupFinder {
 		String finderParams[] = new String[] {
 			Long.class.getName(), Long.class.getName()
 		};
-		Object finderArgs[] = new Object[] {
-			new Long(groupId), new Long(userId)
-		};
+		Object finderArgs[] = new Object[] {groupId, userId};
 
 		Object result = null;
 
@@ -146,19 +144,20 @@ public class GroupFinderImpl implements GroupFinder {
 		}
 
 		if (result == null) {
-			Long userIdObj = new Long(userId);
+			LinkedHashMap<String, Object> params1 =
+				new LinkedHashMap<String, Object>();
 
-			LinkedHashMap params1 = new LinkedHashMap();
+			params1.put("usersGroups", userId);
 
-			params1.put("usersGroups", userIdObj);
+			LinkedHashMap<String, Object> params2 =
+				new LinkedHashMap<String, Object>();
 
-			LinkedHashMap params2 = new LinkedHashMap();
+			params2.put("groupsOrgs", userId);
 
-			params2.put("groupsOrgs", userIdObj);
+			LinkedHashMap<String, Object> params3 =
+				new LinkedHashMap<String, Object>();
 
-			LinkedHashMap params3 = new LinkedHashMap();
-
-			params3.put("groupsUserGroups", userIdObj);
+			params3.put("groupsUserGroups", userId);
 
 			Session session = null;
 
@@ -190,21 +189,22 @@ public class GroupFinderImpl implements GroupFinder {
 
 	public int countByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
 		if (params == null) {
-			params = new LinkedHashMap();
+			params = new LinkedHashMap<String, Object>();
 		}
 
 		Long userId = (Long)params.get("usersGroups");
 
-		LinkedHashMap params1 = params;
+		LinkedHashMap<String, Object> params1 = params;
 
-		LinkedHashMap params2 = new LinkedHashMap();
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
 
 		params2.putAll(params1);
 
@@ -213,7 +213,8 @@ public class GroupFinderImpl implements GroupFinder {
 			params2.put("groupsOrgs", userId);
 		}
 
-		LinkedHashMap params3 = new LinkedHashMap();
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>();
 
 		params3.putAll(params1);
 
@@ -259,7 +260,7 @@ public class GroupFinderImpl implements GroupFinder {
 		String finderParams[] = new String[] {
 			Long.class.getName(), String.class.getName()
 		};
-		Object finderArgs[] = new Object[] {new Long(companyId), name};
+		Object finderArgs[] = new Object[] {companyId, name};
 
 		Object result = FinderCache.getResult(
 			finderClassName, finderMethodName, finderParams, finderArgs);
@@ -281,10 +282,10 @@ public class GroupFinderImpl implements GroupFinder {
 				qPos.add(companyId);
 				qPos.add(name);
 
-				Iterator itr = q.list().iterator();
+				Iterator<Group> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Group group = (Group)itr.next();
+					Group group = itr.next();
 
 					FinderCache.putResult(
 						finderClassNameCacheEnabled, finderClassName,
@@ -315,23 +316,25 @@ public class GroupFinderImpl implements GroupFinder {
 		}
 	}
 
-	public List findByC_N_D(
+	public List<Group> findByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
 		if (params == null) {
-			params = new LinkedHashMap();
+			params = new LinkedHashMap<String, Object>();
 		}
 
 		Long userId = (Long)params.get("usersGroups");
 
-		LinkedHashMap params1 = params;
+		LinkedHashMap<String, Object> params1 = params;
 
-		LinkedHashMap params2 = new LinkedHashMap();
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
 
 		params2.putAll(params1);
 
@@ -340,7 +343,8 @@ public class GroupFinderImpl implements GroupFinder {
 			params2.put("groupsOrgs", userId);
 		}
 
-		LinkedHashMap params3 = new LinkedHashMap();
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>();
 
 		params3.putAll(params1);
 
@@ -428,7 +432,7 @@ public class GroupFinderImpl implements GroupFinder {
 			String.class.getName(), String.class.getName()
 		};
 		Object finderArgs[] = new Object[] {
-			new Long(companyId), name, description, params.toString(),
+			companyId, name, description, params.toString(),
 			String.valueOf(begin), String.valueOf(end)
 		};
 
@@ -475,13 +479,13 @@ public class GroupFinderImpl implements GroupFinder {
 					qPos.add(description);
 				}
 
-				List list = new ArrayList();
+				List<Group> list = new ArrayList<Group>();
 
-				Iterator itr = QueryUtil.iterate(
+				Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
 					q, HibernateUtil.getDialect(), begin, end);
 
 				while (itr.hasNext()) {
-					long groupId = GetterUtil.getLong((String)itr.next());
+					long groupId = GetterUtil.getLong(itr.next());
 
 					Group group = GroupUtil.findByPrimaryKey(groupId);
 
@@ -502,12 +506,12 @@ public class GroupFinderImpl implements GroupFinder {
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Group>)result;
 		}
 	}
 
 	protected int countByGroupId(
-			Session session, long groupId, LinkedHashMap params)
+			Session session, long groupId, LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
@@ -524,10 +528,10 @@ public class GroupFinderImpl implements GroupFinder {
 		setJoin(qPos, params);
 		qPos.add(groupId);
 
-		Iterator itr = q.list().iterator();
+		Iterator<Long> itr = q.list().iterator();
 
 		if (itr.hasNext()) {
-			Long count = (Long)itr.next();
+			Long count = itr.next();
 
 			if (count != null) {
 				return count.intValue();
@@ -539,7 +543,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 	protected int countByC_N_D(
 			Session session, long companyId, String name, String description,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
@@ -560,10 +564,10 @@ public class GroupFinderImpl implements GroupFinder {
 		qPos.add(description);
 		qPos.add(description);
 
-		Iterator itr = q.list().iterator();
+		Iterator<Long> itr = q.list().iterator();
 
 		if (itr.hasNext()) {
-			Long count = (Long)itr.next();
+			Long count = itr.next();
 
 			if (count != null) {
 				return count.intValue();
@@ -573,19 +577,19 @@ public class GroupFinderImpl implements GroupFinder {
 		return 0;
 	}
 
-	protected String getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -635,19 +639,19 @@ public class GroupFinderImpl implements GroupFinder {
 		return join;
 	}
 
-	protected String getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -689,7 +693,7 @@ public class GroupFinderImpl implements GroupFinder {
 			join = CustomSQLUtil.get(JOIN_BY_TYPE);
 		}
 		else if (key.equals("types")) {
-			List types = (List)value;
+			List<Integer> types = (List<Integer>)value;
 
 			StringMaker sm = new StringMaker();
 
@@ -730,14 +734,17 @@ public class GroupFinderImpl implements GroupFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(
+		QueryPos qPos, LinkedHashMap<String, Object> params) {
+
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
-				String key = (String)entry.getKey();
+				String key = entry.getKey();
 
 				if (key.equals("active") || key.equals("layoutSet")) {
 					Boolean value = (Boolean)entry.getValue();
@@ -747,7 +754,7 @@ public class GroupFinderImpl implements GroupFinder {
 				else if (key.equals("pageCount")) {
 				}
 				else if (key.equals("rolePermissions")) {
-					List values = (List)entry.getValue();
+					List<Object> values = (List<Object>)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {
 						Object value = values.get(i);
@@ -770,19 +777,19 @@ public class GroupFinderImpl implements GroupFinder {
 					}
 				}
 				else if (key.equals("types")) {
-					List values = (List)entry.getValue();
+					List<Integer> values = (List<Integer>)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {
-						Integer value = (Integer)values.get(i);
+						Integer value = values.get(i);
 
 						qPos.add(value);
 					}
 				}
 				else if (key.equals("userGroupRole")) {
-					List values = (List)entry.getValue();
+					List<Long> values = (List<Long>)entry.getValue();
 
-					Long userId = (Long)values.get(0);
-					Long roleId = (Long)values.get(1);
+					Long userId = values.get(0);
+					Long roleId = values.get(1);
 
 					qPos.add(userId);
 					qPos.add(roleId);

@@ -203,8 +203,8 @@ public class PhoneServiceHttp {
 		}
 	}
 
-	public static java.util.List getPhones(HttpPrincipal httpPrincipal,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -236,7 +236,7 @@ public class PhoneServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Phone>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -104,7 +104,7 @@ public class AddressServiceJSON {
 		long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = AddressServiceUtil.getAddresses(className,
+		java.util.List<com.liferay.portal.model.Address> returnValue = AddressServiceUtil.getAddresses(className,
 				classPK);
 
 		return AddressJSONSerializer.toJSONArray(returnValue);

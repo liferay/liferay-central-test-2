@@ -531,11 +531,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrganizationsGroups(java.util.List organizations)
+	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRoleGroups(long roleId)
+	public java.util.List<com.liferay.portal.model.Group> getRoleGroups(
+		long roleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -553,11 +555,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroups(long userId)
+	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -568,17 +572,20 @@ public interface GroupLocalService {
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params)
+		java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public void setRoleGroups(long roleId, long[] groupIds)

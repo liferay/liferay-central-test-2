@@ -29,10 +29,10 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.base.ClassNameLocalServiceBaseImpl;
-import com.liferay.util.CollectionFactory;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ClassNameLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +43,7 @@ import java.util.Map;
 public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
 	public void checkClassNames() throws PortalException, SystemException {
-		List models = ModelHintsUtil.getModels();
+		List<String> models = ModelHintsUtil.getModels();
 
 		for (int i = 0; i < models.size(); i++) {
 			String value = (String)models.get(i);
@@ -68,7 +68,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		// Always cache the class name. This table exists to improve
 		// performance. Create the class name if one does not exist.
 
-		ClassName classNameModel = (ClassName)_classNames.get(value);
+		ClassName classNameModel = _classNames.get(value);
 
 		if (classNameModel == null) {
 			classNameModel = classNamePersistence.fetchByValue(value);
@@ -90,6 +90,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 	}
 
 	private static ClassName _nullClassName = new ClassNameImpl();
-	private static Map _classNames = CollectionFactory.getSyncHashMap();
+	private static Map<String, ClassName> _classNames =
+		new ConcurrentHashMap<String, ClassName>();
 
 }

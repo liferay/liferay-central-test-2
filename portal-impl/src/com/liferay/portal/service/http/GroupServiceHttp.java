@@ -344,8 +344,9 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static java.util.List getOrganizationsGroups(
-		HttpPrincipal httpPrincipal, java.util.List organizations)
+	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
+		HttpPrincipal httpPrincipal,
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -375,7 +376,7 @@ public class GroupServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Group>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -384,8 +385,9 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserGroupsGroups(
-		HttpPrincipal httpPrincipal, java.util.List userGroups)
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
+		HttpPrincipal httpPrincipal,
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -415,7 +417,7 @@ public class GroupServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Group>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -456,10 +458,10 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static java.util.List search(HttpPrincipal httpPrincipal,
-		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Group> search(
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
+		java.lang.String description, java.lang.String[] params, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -505,7 +507,7 @@ public class GroupServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Group>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

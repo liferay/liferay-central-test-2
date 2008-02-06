@@ -104,11 +104,11 @@ public class EmailAddressLocalServiceImpl
 		return emailAddressPersistence.findByPrimaryKey(emailAddressId);
 	}
 
-	public List getEmailAddresses() throws SystemException {
+	public List<EmailAddress> getEmailAddresses() throws SystemException {
 		return emailAddressPersistence.findAll();
 	}
 
-	public List getEmailAddresses(
+	public List<EmailAddress> getEmailAddresses(
 			long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -177,11 +177,11 @@ public class EmailAddressLocalServiceImpl
 		// true
 
 		if (primary) {
-			Iterator itr = emailAddressPersistence.findByC_C_C_P(
+			Iterator<EmailAddress> itr = emailAddressPersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
+				EmailAddress emailAddress = itr.next();
 
 				if ((emailAddressId <= 0) ||
 					(emailAddress.getEmailAddressId() != emailAddressId)) {

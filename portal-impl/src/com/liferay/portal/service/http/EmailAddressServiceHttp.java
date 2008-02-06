@@ -196,7 +196,7 @@ public class EmailAddressServiceHttp {
 		}
 	}
 
-	public static java.util.List getEmailAddresses(
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -229,7 +229,7 @@ public class EmailAddressServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.EmailAddress>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

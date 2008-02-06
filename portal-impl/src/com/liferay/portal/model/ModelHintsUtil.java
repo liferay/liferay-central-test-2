@@ -26,11 +26,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 
 import java.io.StringReader;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +56,7 @@ public class ModelHintsUtil {
 		InitUtil.init();
 	}
 
-	public static Map getDefaultHints(String model) {
+	public static Map<String, String> getDefaultHints(String model) {
 		return _instance._getDefaultHints(model);
 	}
 
@@ -64,7 +64,7 @@ public class ModelHintsUtil {
 		return _instance._getFieldsEl(model, field);
 	}
 
-	public static List getModels() {
+	public static List<String> getModels() {
 		return _instance._getModels();
 	}
 
@@ -72,7 +72,7 @@ public class ModelHintsUtil {
 		return _instance._getType(model, field);
 	}
 
-	public static Map getHints(String model, String field) {
+	public static Map<String, String> getHints(String model, String field) {
 		return _instance._getHints(model, field);
 	}
 
@@ -81,7 +81,7 @@ public class ModelHintsUtil {
 			return value;
 		}
 
-		Map hints = getHints(model, field);
+		Map<String, String> hints = getHints(model, field);
 
 		if (hints == null) {
 			return value;
@@ -90,8 +90,7 @@ public class ModelHintsUtil {
 		int maxLength = GetterUtil.getInteger(
 			ModelHintsDefaults.TEXT_MAX_LENGTH);
 
-		maxLength = GetterUtil.getInteger(
-			(String)hints.get("max-length"), maxLength);
+		maxLength = GetterUtil.getInteger(hints.get("max-length"), maxLength);
 
 		if (value.length() > maxLength) {
 			return value.substring(0, maxLength);
@@ -102,10 +101,10 @@ public class ModelHintsUtil {
 	}
 
 	private ModelHintsUtil() {
-		_hintCollections = CollectionFactory.getHashMap();
-		_defaultHints = CollectionFactory.getHashMap();
-		_modelFields = CollectionFactory.getHashMap();
-		_models = new TreeSet();
+		_hintCollections = new HashMap<String, Map<String, String>>();
+		_defaultHints = new HashMap<String, Map<String, String>>();
+		_modelFields = new HashMap();
+		_models = new TreeSet<String>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -122,8 +121,8 @@ public class ModelHintsUtil {
 		}
 	}
 
-	private Map _getDefaultHints(String model) {
-		return (Map)_defaultHints.get(model);
+	private Map<String, String> _getDefaultHints(String model) {
+		return _defaultHints.get(model);
 	}
 
 	private Element _getFieldsEl(String model, String field) {
@@ -137,7 +136,7 @@ public class ModelHintsUtil {
 		}
 	}
 
-	private List _getModels() {
+	private List<String> _getModels() {
 		return ListUtil.fromCollection(_models);
 	}
 
@@ -189,25 +188,25 @@ public class ModelHintsUtil {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr1 = root.elements("hint-collection").iterator();
+		Iterator<Element> itr1 = root.elements("hint-collection").iterator();
 
 		while (itr1.hasNext()) {
-			Element hintCollection = (Element)itr1.next();
+			Element hintCollection = itr1.next();
 
 			String name = hintCollection.attributeValue("name");
 
-			Map hints = (Map)_hintCollections.get(name);
+			Map<String, String> hints = _hintCollections.get(name);
 
 			if (hints == null) {
-				hints = CollectionFactory.getHashMap();
+				hints = new HashMap<String, String>();
 
 				_hintCollections.put(name, hints);
 			}
 
-			Iterator itr2 = hintCollection.elements("hint").iterator();
+			Iterator<Element> itr2 = hintCollection.elements("hint").iterator();
 
 			while (itr2.hasNext()) {
-				Element hint = (Element)itr2.next();
+				Element hint = itr2.next();
 
 				String hintName = hint.attributeValue("name");
 				String hintValue = hint.getText();
@@ -223,17 +222,18 @@ public class ModelHintsUtil {
 
 			String name = model.attributeValue("name");
 
-			Map defaultHints = CollectionFactory.getHashMap();
+			Map<String, String> defaultHints = new HashMap<String, String>();
 
 			_defaultHints.put(name, defaultHints);
 
 			Element defaultHintsEl = model.element("default-hints");
 
 			if (defaultHintsEl != null) {
-				Iterator itr2 = defaultHintsEl.elements("hint").iterator();
+				Iterator<Element> itr2 = defaultHintsEl.elements(
+					"hint").iterator();
 
 				while (itr2.hasNext()) {
-					Element hint = (Element)itr2.next();
+					Element hint = itr2.next();
 
 					String hintName = hint.attributeValue("name");
 					String hintValue = hint.getText();
@@ -245,31 +245,32 @@ public class ModelHintsUtil {
 			Map fields = (Map)_modelFields.get(name);
 
 			if (fields == null) {
-				fields = CollectionFactory.getHashMap();
+				fields = new HashMap();
 
 				_modelFields.put(name, fields);
 			}
 
 			_models.add(name);
 
-			Iterator itr2 = model.elements("field").iterator();
+			Iterator<Element> itr2 = model.elements("field").iterator();
 
 			while (itr2.hasNext()) {
-				Element field = (Element)itr2.next();
+				Element field = itr2.next();
 
 				String fieldName = field.attributeValue("name");
 				String fieldType = field.attributeValue("type");
 
-				Map fieldHints = CollectionFactory.getHashMap();
+				Map<String, String> fieldHints = new HashMap<String, String>();
 
 				fieldHints.putAll(defaultHints);
 
-				Iterator itr3 = field.elements("hint-collection").iterator();
+				Iterator<Element> itr3 = field.elements(
+					"hint-collection").iterator();
 
 				while (itr3.hasNext()) {
-					Element hintCollection = (Element)itr3.next();
+					Element hintCollection = itr3.next();
 
-					Map hints = (Map)_hintCollections.get(
+					Map<String, String> hints = _hintCollections.get(
 						hintCollection.attributeValue("name"));
 
 					fieldHints.putAll(hints);
@@ -278,7 +279,7 @@ public class ModelHintsUtil {
 				itr3 = field.elements("hint").iterator();
 
 				while (itr3.hasNext()) {
-					Element hint = (Element)itr3.next();
+					Element hint = itr3.next();
 
 					String hintName = hint.attributeValue("name");
 					String hintValue = hint.getText();
@@ -303,9 +304,9 @@ public class ModelHintsUtil {
 
 	private static ModelHintsUtil _instance = new ModelHintsUtil();
 
-	private Map _hintCollections;
-	private Map _defaultHints;
+	private Map<String, Map<String, String>> _hintCollections;
+	private Map<String, Map<String, String>> _defaultHints;
 	private Map _modelFields;
-	private Set _models;
+	private Set<String> _models;
 
 }

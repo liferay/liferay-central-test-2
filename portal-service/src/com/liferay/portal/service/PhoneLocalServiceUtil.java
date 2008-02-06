@@ -825,15 +825,15 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.getPhone(phoneId);
 	}
 
-	public static java.util.List getPhones()
+	public static java.util.List<com.liferay.portal.model.Phone> getPhones()
 		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
 		return phoneLocalService.getPhones();
 	}
 
-	public static java.util.List getPhones(long companyId,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

@@ -61,14 +61,15 @@ public class CountryServiceUtil {
 		return countryService.addCountry(name, a2, a3, number, idd, active);
 	}
 
-	public static java.util.List getCountries()
+	public static java.util.List<com.liferay.portal.model.Country> getCountries()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CountryService countryService = CountryServiceFactory.getService();
 
 		return countryService.getCountries();
 	}
 
-	public static java.util.List getCountries(boolean active)
+	public static java.util.List<com.liferay.portal.model.Country> getCountries(
+		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CountryService countryService = CountryServiceFactory.getService();
 

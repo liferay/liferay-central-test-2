@@ -1259,8 +1259,8 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getOrganizationGroup(companyId, organizationId);
 	}
 
-	public static java.util.List getOrganizationsGroups(
-		java.util.List organizations)
+	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1268,7 +1268,8 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
-	public static java.util.List getRoleGroups(long roleId)
+	public static java.util.List<com.liferay.portal.model.Group> getRoleGroups(
+		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1303,7 +1304,8 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupGroup(companyId, userGroupId);
 	}
 
-	public static java.util.List getUserGroups(long userId)
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1311,7 +1313,8 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroups(userId);
 	}
 
-	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -1334,18 +1337,20 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.hasUserGroup(userId, groupId);
 	}
 
-	public static java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.search(companyId, name, description, params,
 			begin, end);
 	}
 
-	public static java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
@@ -1354,7 +1359,8 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params)
+		java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 

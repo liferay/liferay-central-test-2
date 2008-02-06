@@ -829,15 +829,15 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.getAddress(addressId);
 	}
 
-	public static java.util.List getAddresses()
+	public static java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
 		return addressLocalService.getAddresses();
 	}
 
-	public static java.util.List getAddresses(long companyId,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 

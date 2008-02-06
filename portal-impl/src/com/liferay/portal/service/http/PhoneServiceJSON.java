@@ -100,7 +100,7 @@ public class PhoneServiceJSON {
 	public static JSONArray getPhones(java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = PhoneServiceUtil.getPhones(className,
+		java.util.List<com.liferay.portal.model.Phone> returnValue = PhoneServiceUtil.getPhones(className,
 				classPK);
 
 		return PhoneJSONSerializer.toJSONArray(returnValue);

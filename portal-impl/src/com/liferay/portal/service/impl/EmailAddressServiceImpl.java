@@ -78,7 +78,7 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 		return emailAddress;
 	}
 
-	public List getEmailAddresses(String className, long classPK)
+	public List<EmailAddress> getEmailAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermissionUtil.check(

@@ -78,20 +78,22 @@ public interface GroupService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrganizationsGroups(java.util.List organizations)
+	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasUserGroup(long userId, long groupId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params, int begin,
-		int end)
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,

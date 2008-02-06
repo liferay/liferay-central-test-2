@@ -100,7 +100,7 @@ public class EmailAddressServiceJSON {
 		long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
+		java.util.List<com.liferay.portal.model.EmailAddress> returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
 				classPK);
 
 		return EmailAddressJSONSerializer.toJSONArray(returnValue);

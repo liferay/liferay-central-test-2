@@ -128,7 +128,7 @@ public class AddressServiceSoap {
 	public static com.liferay.portal.model.AddressSoap[] getAddresses(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
-			java.util.List returnValue = AddressServiceUtil.getAddresses(className,
+			java.util.List<com.liferay.portal.model.Address> returnValue = AddressServiceUtil.getAddresses(className,
 					classPK);
 
 			return com.liferay.portal.model.AddressSoap.toSoapModels(returnValue);

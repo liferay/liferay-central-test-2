@@ -104,11 +104,11 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return phonePersistence.findByPrimaryKey(phoneId);
 	}
 
-	public List getPhones() throws SystemException {
+	public List<Phone> getPhones() throws SystemException {
 		return phonePersistence.findAll();
 	}
 
-	public List getPhones(long companyId, String className, long classPK)
+	public List<Phone> getPhones(long companyId, String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -175,11 +175,11 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = phonePersistence.findByC_C_C_P(
+			Iterator<Phone> itr = phonePersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
+				Phone phone = itr.next();
 
 				if ((phoneId <= 0) ||
 					(phone.getPhoneId() != phoneId)) {

@@ -111,11 +111,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return addressPersistence.findByPrimaryKey(addressId);
 	}
 
-	public List getAddresses() throws SystemException {
+	public List<Address> getAddresses() throws SystemException {
 		return addressPersistence.findAll();
 	}
 
-	public List getAddresses(long companyId, String className, long classPK)
+	public List<Address> getAddresses(
+			long companyId, String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -206,11 +207,11 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		// id, class name, and class pk that also has mailing set to true
 
 		if (mailing) {
-			Iterator itr = addressPersistence.findByC_C_C_M(
+			Iterator<Address> itr = addressPersistence.findByC_C_C_M(
 				companyId, classNameId, classPK, mailing).iterator();
 
 			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
+				Address address = itr.next();
 
 				if ((addressId <= 0) ||
 					(address.getAddressId() != addressId)) {
@@ -226,11 +227,11 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = addressPersistence.findByC_C_C_P(
+			Iterator<Address> itr = addressPersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
+				Address address = itr.next();
 
 				if ((addressId <= 0) ||
 					(address.getAddressId() != addressId)) {

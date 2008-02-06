@@ -85,14 +85,14 @@ public class CountryServiceJSON {
 
 	public static JSONArray getCountries()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = CountryServiceUtil.getCountries();
+		java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries();
 
 		return CountryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getCountries(boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = CountryServiceUtil.getCountries(active);
+		java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries(active);
 
 		return CountryJSONSerializer.toJSONArray(returnValue);
 	}

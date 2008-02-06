@@ -125,7 +125,7 @@ public class PhoneServiceSoap {
 	public static com.liferay.portal.model.PhoneSoap[] getPhones(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
-			java.util.List returnValue = PhoneServiceUtil.getPhones(className,
+			java.util.List<com.liferay.portal.model.Phone> returnValue = PhoneServiceUtil.getPhones(className,
 					classPK);
 
 			return com.liferay.portal.model.PhoneSoap.toSoapModels(returnValue);

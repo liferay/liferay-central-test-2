@@ -829,15 +829,15 @@ public class EmailAddressLocalServiceUtil {
 		return emailAddressLocalService.getEmailAddress(emailAddressId);
 	}
 
-	public static java.util.List getEmailAddresses()
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
 		return emailAddressLocalService.getEmailAddresses();
 	}
 
-	public static java.util.List getEmailAddresses(long companyId,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 

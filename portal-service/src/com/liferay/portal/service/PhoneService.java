@@ -63,7 +63,8 @@ public interface PhoneService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPhones(java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Phone> getPhones(
+		java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

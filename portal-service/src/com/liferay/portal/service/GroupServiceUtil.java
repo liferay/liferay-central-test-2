@@ -106,8 +106,8 @@ public class GroupServiceUtil {
 		return groupService.getGroup(companyId, name);
 	}
 
-	public static java.util.List getOrganizationsGroups(
-		java.util.List organizations)
+	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
@@ -115,7 +115,8 @@ public class GroupServiceUtil {
 		return groupService.getOrganizationsGroups(organizations);
 	}
 
-	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
@@ -130,9 +131,9 @@ public class GroupServiceUtil {
 		return groupService.hasUserGroup(userId, groupId);
 	}
 
-	public static java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params, int begin,
-		int end)
+	public static java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.String[] params, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 

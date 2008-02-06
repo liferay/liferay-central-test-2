@@ -811,8 +811,9 @@ public class ActivityTrackerLocalServiceUtil {
 		activityTrackerLocalService.deleteActivityTrackers(className, classPK);
 	}
 
-	public static java.util.List getCompanyActivityTrackers(long companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> getCompanyActivityTrackers(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
 
 		return activityTrackerLocalService.getCompanyActivityTrackers(companyId,
@@ -826,8 +827,9 @@ public class ActivityTrackerLocalServiceUtil {
 		return activityTrackerLocalService.getCompanyActivityTrackersCount(companyId);
 	}
 
-	public static java.util.List getGroupActivityTrackers(long groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> getGroupActivityTrackers(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
 
 		return activityTrackerLocalService.getGroupActivityTrackers(groupId,
@@ -841,8 +843,9 @@ public class ActivityTrackerLocalServiceUtil {
 		return activityTrackerLocalService.getGroupActivityTrackersCount(groupId);
 	}
 
-	public static java.util.List getUserActivityTrackers(long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> getUserActivityTrackers(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
 
 		return activityTrackerLocalService.getUserActivityTrackers(userId,

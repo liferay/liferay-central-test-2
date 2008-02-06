@@ -827,7 +827,7 @@ public class CompanyLocalServiceUtil {
 		companyLocalService.checkCompanyKey(companyId);
 	}
 
-	public static java.util.List getCompanies()
+	public static java.util.List<com.liferay.portal.model.Company> getCompanies()
 		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 

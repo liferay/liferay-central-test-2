@@ -324,11 +324,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Resources
 
-		Iterator itr = resourceFinder.findByC_P(
+		Iterator<Resource> itr = resourceFinder.findByC_P(
 			group.getCompanyId(), String.valueOf(groupId)).iterator();
 
 		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
+			Resource resource = itr.next();
 
 			resourceLocalService.deleteResource(resource);
 		}
@@ -386,13 +386,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, organizationId);
 	}
 
-	public List getOrganizationsGroups(List organizations)
+	public List<Group> getOrganizationsGroups(List<Organization> organizations)
 		throws PortalException, SystemException {
 
-		List organizationGroups = new ArrayList();
+		List<Group> organizationGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < organizations.size(); i++) {
-			Organization organization = (Organization)organizations.get(i);
+			Organization organization = organizations.get(i);
 
 			Group group = organization.getGroup();
 
@@ -402,7 +402,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return organizationGroups;
 	}
 
-	public List getRoleGroups(long roleId)
+	public List<Group> getRoleGroups(long roleId)
 		throws PortalException, SystemException {
 
 		return rolePersistence.getGroups(roleId);
@@ -431,19 +431,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, userGroupId);
 	}
 
-	public List getUserGroups(long userId)
+	public List<Group> getUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return userPersistence.getGroups(userId);
 	}
 
-	public List getUserGroupsGroups(List userGroups)
+	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
 		throws PortalException, SystemException {
 
-		List userGroupGroups = new ArrayList();
+		List<Group> userGroupGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < userGroups.size(); i++) {
-			UserGroup userGroup = (UserGroup)userGroups.get(i);
+			UserGroup userGroup = userGroups.get(i);
 
 			Group group = userGroup.getGroup();
 
@@ -470,18 +470,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	public List search(
+	public List<Group> search(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end)
+			LinkedHashMap<String, Object> params, int begin, int end)
 		throws SystemException {
 
 		return groupFinder.findByC_N_D(
 			companyId, name, description, params, begin, end, null);
 	}
 
-	public List search(
+	public List<Group> search(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		if (obc == null) {
@@ -494,7 +495,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public int searchCount(
 			long companyId, String name, String description,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		return groupFinder.countByC_N_D(companyId, name, description, params);

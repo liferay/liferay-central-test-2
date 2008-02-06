@@ -356,11 +356,11 @@ public interface AddressLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAddresses()
+	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getAddresses(long companyId,
-		java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Address> getAddresses(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address updateAddress(long addressId,

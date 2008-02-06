@@ -80,8 +80,8 @@ public class AddressServiceUtil {
 		return addressService.getAddress(addressId);
 	}
 
-	public static java.util.List getAddresses(java.lang.String className,
-		long classPK)
+	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		AddressService addressService = AddressServiceFactory.getService();

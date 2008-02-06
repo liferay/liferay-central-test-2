@@ -371,7 +371,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		companyPersistence.update(company);
 	}
 
-	public List getCompanies() throws SystemException {
+	public List<Company> getCompanies() throws SystemException {
 		return companyPersistence.findAll();
 	}
 

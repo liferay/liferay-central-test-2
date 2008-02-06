@@ -356,11 +356,11 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEmailAddresses()
+	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEmailAddresses(long companyId,
-		java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(

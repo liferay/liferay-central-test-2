@@ -65,7 +65,8 @@ public interface AddressService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAddresses(java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Address> getAddresses(
+		java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

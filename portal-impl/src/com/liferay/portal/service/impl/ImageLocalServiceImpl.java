@@ -55,15 +55,15 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return imagePersistence.findByPrimaryKey(imageId);
 	}
 
-	public List getImages() throws SystemException {
+	public List<Image> getImages() throws SystemException {
 		return imagePersistence.findAll();
 	}
 
-	public List getImages(int begin, int end) throws SystemException {
+	public List<Image> getImages(int begin, int end) throws SystemException {
 		return imagePersistence.findAll(begin, end);
 	}
 
-	public List getImagesBySize(int size) throws SystemException {
+	public List<Image> getImagesBySize(int size) throws SystemException {
 		return imagePersistence.findBySize(size);
 	}
 

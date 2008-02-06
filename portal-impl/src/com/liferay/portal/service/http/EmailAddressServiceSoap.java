@@ -125,7 +125,7 @@ public class EmailAddressServiceSoap {
 	public static com.liferay.portal.model.EmailAddressSoap[] getEmailAddresses(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
-			java.util.List returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
+			java.util.List<com.liferay.portal.model.EmailAddress> returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
 					classPK);
 
 			return com.liferay.portal.model.EmailAddressSoap.toSoapModels(returnValue);

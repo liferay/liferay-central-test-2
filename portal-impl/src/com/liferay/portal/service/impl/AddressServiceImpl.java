@@ -78,7 +78,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 		return address;
 	}
 
-	public List getAddresses(String className, long classPK)
+	public List<Address> getAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermissionUtil.check(

@@ -100,7 +100,7 @@ public class CountryServiceSoap {
 	public static com.liferay.portal.model.CountrySoap[] getCountries()
 		throws RemoteException {
 		try {
-			java.util.List returnValue = CountryServiceUtil.getCountries();
+			java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries();
 
 			return com.liferay.portal.model.CountrySoap.toSoapModels(returnValue);
 		}
@@ -114,7 +114,7 @@ public class CountryServiceSoap {
 	public static com.liferay.portal.model.CountrySoap[] getCountries(
 		boolean active) throws RemoteException {
 		try {
-			java.util.List returnValue = CountryServiceUtil.getCountries(active);
+			java.util.List<com.liferay.portal.model.Country> returnValue = CountryServiceUtil.getCountries(active);
 
 			return com.liferay.portal.model.CountrySoap.toSoapModels(returnValue);
 		}

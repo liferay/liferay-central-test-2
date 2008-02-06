@@ -806,22 +806,22 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.getImage(imageId);
 	}
 
-	public static java.util.List getImages()
+	public static java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.getImages();
 	}
 
-	public static java.util.List getImages(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Image> getImages(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.getImages(begin, end);
 	}
 
-	public static java.util.List getImagesBySize(int size)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Image> getImagesBySize(
+		int size) throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.getImagesBySize(size);

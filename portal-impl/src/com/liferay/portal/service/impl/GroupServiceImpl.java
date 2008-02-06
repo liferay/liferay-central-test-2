@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -98,13 +100,13 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public List getOrganizationsGroups(List organizations)
+	public List<Group> getOrganizationsGroups(List<Organization> organizations)
 		throws PortalException, SystemException {
 
 		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
-	public List getUserGroupsGroups(List userGroups)
+	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
 		throws PortalException, SystemException {
 
 		return groupLocalService.getUserGroupsGroups(userGroups);
@@ -116,12 +118,13 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.hasUserGroup(userId, groupId);
 	}
 
-	public List search(
+	public List<Group> search(
 			long companyId, String name, String description, String[] params,
 			int begin, int end)
 		throws SystemException {
 
-		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
+		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
+			params);
 
 		return groupLocalService.search(
 			companyId, name, description, paramsObj, begin, end);
@@ -131,7 +134,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			long companyId, String name, String description, String[] params)
 		throws SystemException {
 
-		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
+		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
+			params);
 
 		return groupLocalService.searchCount(
 			companyId, name, description, paramsObj);

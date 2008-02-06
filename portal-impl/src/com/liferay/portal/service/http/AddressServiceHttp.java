@@ -230,8 +230,8 @@ public class AddressServiceHttp {
 		}
 	}
 
-	public static java.util.List getAddresses(HttpPrincipal httpPrincipal,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -263,7 +263,7 @@ public class AddressServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Address>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

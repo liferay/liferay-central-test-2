@@ -79,8 +79,8 @@ public class EmailAddressServiceUtil {
 		return emailAddressService.getEmailAddress(emailAddressId);
 	}
 
-	public static java.util.List getEmailAddresses(java.lang.String className,
-		long classPK)
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
