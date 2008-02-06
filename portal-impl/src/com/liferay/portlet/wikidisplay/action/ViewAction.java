@@ -25,6 +25,7 @@ package com.liferay.portlet.wikidisplay.action;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -34,6 +35,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -83,6 +85,11 @@ public class ViewAction extends PortletAction {
 		}
 		catch (NoSuchNodeException nsne) {
 			return mapping.findForward("/portal/portlet_not_setup");
+		}
+		catch (PrincipalException e) {
+			SessionErrors.add(req, e.getClass().getName());
+
+			return mapping.findForward("portlet.wiki_display.error");
 		}
 	}
 

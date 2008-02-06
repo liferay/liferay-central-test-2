@@ -559,7 +559,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-wiki-display</css-class-wrapper>
+		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>56</portlet-name>

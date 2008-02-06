@@ -26,6 +26,8 @@
 
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
+<h1 class="wiki-page-title"><liferay-ui:message key="recent-changes"/></h1>
+
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="recent_changes" />
 </liferay-util:include>

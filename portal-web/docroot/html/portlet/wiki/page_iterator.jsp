@@ -30,40 +30,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
 
-String title = null;
-
-if (wikiPage != null) {
-	title = wikiPage.getTitle();
-}
-%>
-
-<%@ include file="/html/portlet/wiki/page_name.jspf" %>
-
-<%
 String strutsAction = "";
-String tabsNames = "";
-
-if (type.equals("all_pages")) {
-	strutsAction = "/wiki/view_all_pages";
-	tabsNames = "all-pages";
-}
-else if (type.equals("orphan_pages")) {
-	strutsAction = "/wiki/view_orphan_pages";
-	tabsNames = "orphan-pages";
-}
-else if (type.equals("page_history")) {
-	strutsAction = "/wiki/view_page_history";
-	tabsNames = "page-history";
-}
-else if (type.equals("page_links")) {
-	strutsAction = "/wiki/view_page_links";
-	tabsNames = "page-links";
-}
-else if (type.equals("recent_changes")) {
-	strutsAction = "/wiki/view_recent_changes";
-	tabsNames = "recent-changes";
-}
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -74,11 +41,7 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 if (wikiPage != null) {
 	portletURL.setParameter("title", wikiPage.getTitle());
 }
-%>
 
-<liferay-ui:tabs names="<%= tabsNames %>" />
-
-<%
 List headerNames = new ArrayList();
 
 headerNames.add("page");

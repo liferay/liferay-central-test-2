@@ -24,6 +24,8 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -34,6 +36,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;
@@ -89,12 +92,12 @@ public class ViewPageAction extends PortletAction {
 
 		WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
 
-		if (node == null) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		if (node == null) {
 			List nodes = WikiNodeLocalServiceUtil.getNodes(
-				themeDisplay.getLayout().getGroupId(), 0, 1);
+				themeDisplay.getLayout().getGroupId());
 
 			if (nodes.size() == 0) {
 				String nodeName = PropsUtil.get(
@@ -105,7 +108,24 @@ public class ViewPageAction extends PortletAction {
 					StringPool.BLANK, true, true);
 			}
 			else {
-				node = (WikiNode)nodes.get(0);
+				PermissionChecker permissionChecker =
+					themeDisplay.getPermissionChecker(); 
+
+				for (int i = 0; i < nodes.size(); i++) {
+					WikiNode node2 = (WikiNode)nodes.get(i);
+
+					if (WikiNodePermission.contains(
+							permissionChecker, node2.getNodeId(),
+							ActionKeys.VIEW)) {
+
+						node = node2;
+						break;
+					}
+				}
+
+				if (node == null) {
+					throw new PrincipalException();
+				}
 			}
 
 			req.setAttribute(WebKeys.WIKI_NODE, node);

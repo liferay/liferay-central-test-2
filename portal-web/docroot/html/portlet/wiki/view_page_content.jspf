@@ -78,15 +78,6 @@ if (Validator.isNull(pageContent)) {
 	<%= pageContent %>
 </div>
 
-<div class="separator"><!-- --></div>
-
-<div>
-	<liferay-ui:tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-	/>
-</div>
-
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.wiki.view_page_content.jsp");
 %>

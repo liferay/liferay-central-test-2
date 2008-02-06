@@ -115,6 +115,11 @@ else if (Validator.isNotNull(title)) {
 	function <portlet:namespace />previewPage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
+
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 

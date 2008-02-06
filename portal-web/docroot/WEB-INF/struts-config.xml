@@ -1360,6 +1360,7 @@
 
 		<action path="/wiki_display/view" type="com.liferay.portlet.wikidisplay.action.ViewAction">
 			<forward name="portlet.wiki_display.view" path="portlet.wiki_display.view" />
+			<forward name="portlet.wiki_display.error" path="portlet.wiki.error" />
 		</action>
 
 		<action path="/wiki_display/view_page" type="com.liferay.portlet.wiki.action.ViewPageAction">

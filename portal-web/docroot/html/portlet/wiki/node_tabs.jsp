@@ -25,19 +25,49 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-String nodeId = ParamUtil.getString(request, "nodeId", "");
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+
+boolean print = ParamUtil.get(request, Constants.PRINT, false);
 
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
 tabs1URL.setParameter("struts_action", "/wiki/view");
-tabs1URL.setParameter("nodeId", nodeId);
+tabs1URL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 tabs1URL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
 List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
-String tabs1Names = ListUtil.toString(nodes, "name");
-String tabs1Values = ListUtil.toString(nodes, "nodeId");
+List allowedNodes = new ArrayList();
+
+for (int i = 0; i < nodes.size(); i++) {
+	WikiNode node2 = (WikiNode)nodes.get(i);
+
+	if (WikiNodePermission.contains(permissionChecker, node2.getNodeId(), ActionKeys.VIEW)) {
+
+		allowedNodes.add(node2);
+	}
+}
+
+String tabs1Names = ListUtil.toString(allowedNodes, "name");
+String tabs1Values = ListUtil.toString(allowedNodes, "nodeId");
 %>
+
+<c:if test="<%= !print %>">
+	<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+
+	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+
+	<span class="wiki-search">
+		<input name="<portlet:namespace />keywords" size="30" type="text" />
+
+		<input type="submit" value="<liferay-ui:message key="search" />" />
+	</span>
+
+	</form>
+</c:if>
 
 <liferay-ui:tabs
 	param="nodeId"
@@ -45,3 +75,7 @@ String tabs1Values = ListUtil.toString(nodes, "nodeId");
 	tabsValues="<%= tabs1Values %>"
 	portletURL="<%= tabs1URL %>"
 />
+
+<c:if test="<%= !print %>">
+	<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+</c:if>

@@ -22,12 +22,6 @@
  */
 %>
 
-<%@ include file="/html/portlet/wiki/init.jsp" %>
+<%@ include file="/html/portlet/wiki_display/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
-
-<h1 class="wiki-page-title"><liferay-ui:message key="orphan-pages"/></h1>
-
-<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="orphan_pages" />
-</liferay-util:include>
+<liferay-util:include page="/html/portlet/wiki/css.jsp"/>
