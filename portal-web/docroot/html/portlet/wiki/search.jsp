@@ -46,15 +46,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
-
+<h1 class="wiki-page-title"><liferay-ui:message key="search-results"/></h1>
+	
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -122,12 +118,6 @@ try {
 		resultRows.add(row);
 	}
 %>
-
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search-pages" />" />
-
-	<br /><br />
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
