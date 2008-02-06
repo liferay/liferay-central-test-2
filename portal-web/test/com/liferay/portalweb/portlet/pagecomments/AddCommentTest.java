@@ -32,6 +32,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
+		Thread.sleep(5000);
 		selenium.click("link=Post Reply");
 
 		for (int second = 0;; second++) {

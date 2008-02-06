@@ -242,9 +242,9 @@ public class SeleneseToJavaBuilder {
 			}
 			else if (param1.equals("selectAndWait")) {
 				sm.append("selenium.select(\"");
-				sm.append(param1);
-				sm.append("\", \"");
 				sm.append(param2);
+				sm.append("\", \"");
+				sm.append(param3);
 				sm.append("\");");
 				sm.append("selenium.waitForPageToLoad(\"30000\");");
 			}
