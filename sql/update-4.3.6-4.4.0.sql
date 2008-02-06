@@ -32,6 +32,7 @@ update Group_ set type_ = '0' where type_ = '';
 update Group_ set type_ = '1' where type_ = 'COMMUNITY_OPEN';
 update Group_ set type_ = '2' where type_ = 'COMMUNITY_RESTRICTED';
 update Group_ set type_ = '3' where type_ = 'COMMUNITY_CLOSED';
+update Group_ set type_ = '3' where type_ = '0';
 
 alter table IGFolder add uuid_ VARCHAR(75) null;
 
