@@ -74,18 +74,18 @@ public class WebDAVUtil {
 	}
 
 	public static long getDepth(HttpServletRequest req) {
-		long depth = -1;
 		String value = GetterUtil.getString(req.getHeader("Depth"));
-
-		if (value.equals("0")) {
-			depth = 0;
-		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("\"Depth\" header is " + value);
 		}
 
-		return depth;
+		if (value.equals("0")) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	public static String getDestination(
