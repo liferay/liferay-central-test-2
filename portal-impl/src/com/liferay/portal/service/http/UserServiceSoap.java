@@ -206,7 +206,7 @@ public class UserServiceSoap {
 	public static com.liferay.portal.model.UserSoap[] getGroupUsers(
 		long groupId) throws RemoteException {
 		try {
-			java.util.List returnValue = UserServiceUtil.getGroupUsers(groupId);
+			java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getGroupUsers(groupId);
 
 			return com.liferay.portal.model.UserSoap.toSoapModels(returnValue);
 		}
@@ -220,7 +220,7 @@ public class UserServiceSoap {
 	public static com.liferay.portal.model.UserSoap[] getRoleUsers(long roleId)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
+			java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getRoleUsers(roleId);
 
 			return com.liferay.portal.model.UserSoap.toSoapModels(returnValue);
 		}

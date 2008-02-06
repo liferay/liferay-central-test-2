@@ -263,7 +263,7 @@ public class UserGroupServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserUserGroups(
+	public static java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -290,7 +290,7 @@ public class UserGroupServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.UserGroup>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

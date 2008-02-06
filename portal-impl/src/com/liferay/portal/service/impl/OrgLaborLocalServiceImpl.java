@@ -87,7 +87,9 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		return orgLaborPersistence.findByPrimaryKey(orgLaborId);
 	}
 
-	public List getOrgLabors(long organizationId) throws SystemException {
+	public List<OrgLabor> getOrgLabors(long organizationId)
+		throws SystemException {
+
 		return orgLaborPersistence.findByOrganizationId(organizationId);
 	}
 

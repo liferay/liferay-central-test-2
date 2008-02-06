@@ -44,7 +44,7 @@ public class VelocityUtil {
 		return evaluate(input, null);
 	}
 
-	public static String evaluate(String input, Map variables)
+	public static String evaluate(String input, Map<String, Object> variables)
 		throws Exception {
 
 		Velocity.init();
@@ -52,12 +52,13 @@ public class VelocityUtil {
 		VelocityContext vc = new VelocityContext();
 
 		if (variables != null) {
-			Iterator itr = variables.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				variables.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
-				String key = (String)entry.getKey();
+				String key = entry.getKey();
 				Object value = entry.getValue();
 
 				if (Validator.isNotNull(key)) {

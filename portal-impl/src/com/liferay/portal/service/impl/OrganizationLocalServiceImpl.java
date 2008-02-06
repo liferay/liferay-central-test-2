@@ -238,7 +238,7 @@ public class OrganizationLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	public List getGroupOrganizations(long groupId)
+	public List<Organization> getGroupOrganizations(long groupId)
 		throws PortalException, SystemException {
 
 		return groupPersistence.getOrganizations(groupId);
@@ -252,12 +252,13 @@ public class OrganizationLocalServiceImpl
 	 * @param		userId the user id of the user
 	 * @return		a list of organizations
 	 */
-	public List getManageableOrganizations(long userId)
+	public List<Organization> getManageableOrganizations(long userId)
 		throws PortalException, SystemException {
 
-		List manageableOrganizations = new UniqueList();
+		List<Organization> manageableOrganizations = new UniqueList();
 
-		List userOrganizations = userPersistence.getOrganizations(userId);
+		List<Organization> userOrganizations = userPersistence.getOrganizations(
+			userId);
 
 		manageableOrganizations.addAll(userOrganizations);
 		manageableOrganizations.addAll(getSuborganizations(userOrganizations));
@@ -291,10 +292,10 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
-	public List getOrganizations(long[] organizationIds)
+	public List<Organization> getOrganizations(long[] organizationIds)
 		throws PortalException, SystemException {
 
-		List organizations = new ArrayList();
+		List<Organization> organizations = new ArrayList<Organization>();
 
 		for (int i = 0; i < organizationIds.length; i++) {
 			Organization organization = getOrganization(organizationIds[i]);
@@ -305,11 +306,11 @@ public class OrganizationLocalServiceImpl
 		return organizations;
 	}
 
-	public List getParentOrganizations(long organizationId)
+	public List<Organization> getParentOrganizations(long organizationId)
 		throws PortalException, SystemException {
 
 		if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-			return new ArrayList();
+			return new ArrayList<Organization>();
 		}
 
 		Organization organization =
@@ -318,16 +319,19 @@ public class OrganizationLocalServiceImpl
 		return getParentOrganizations(organization, true);
 	}
 
-	public List getSuborganizations(List organizations)
+	public List<Organization> getSuborganizations(
+			List<Organization> organizations)
 		throws SystemException {
 
-		List allSuborganizations = new ArrayList();
+		List<Organization> allSuborganizations = new ArrayList<Organization>();
 
 		for (int i = 0; i < organizations.size(); i++) {
-			Organization organization = (Organization)organizations.get(i);
+			Organization organization = organizations.get(i);
 
-			List suborganizations = organizationPersistence.findByC_P(
-				organization.getCompanyId(), organization.getOrganizationId());
+			List<Organization> suborganizations =
+				organizationPersistence.findByC_P(
+					organization.getCompanyId(),
+					organization.getOrganizationId());
 
 			addSuborganizations(allSuborganizations, suborganizations);
 		}
@@ -335,16 +339,17 @@ public class OrganizationLocalServiceImpl
 		return allSuborganizations;
 	}
 
-	public List getSubsetOrganizations(
-			List allOrganizations, List availableOrganizations)
+	public List<Organization> getSubsetOrganizations(
+			List<Organization> allOrganizations,
+			List<Organization> availableOrganizations)
 		throws PortalException, SystemException {
 
-		List subsetOrganizations = new ArrayList();
+		List<Organization> subsetOrganizations = new ArrayList<Organization>();
 
-		Iterator itr = allOrganizations.iterator();
+		Iterator<Organization> itr = allOrganizations.iterator();
 
 		while (itr.hasNext()) {
-			Organization organization = (Organization)itr.next();
+			Organization organization = itr.next();
 
 			if (availableOrganizations.contains(organization)) {
 				subsetOrganizations.add(organization);
@@ -354,7 +359,7 @@ public class OrganizationLocalServiceImpl
 		return subsetOrganizations;
 	}
 
-	public List getUserOrganizations(long userId)
+	public List<Organization> getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
 		return userPersistence.getOrganizations(userId);
@@ -386,9 +391,10 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationId);
 	}
 
-	public List search(
+	public List<Organization> search(
 			long companyId, long parentOrganizationId, String keywords,
-			int type, Long regionId, Long countryId, LinkedHashMap params,
+			int type, Long regionId, Long countryId,
+			LinkedHashMap<String, Object> params,
 			int begin, int end)
 		throws PortalException, SystemException {
 
@@ -398,9 +404,10 @@ public class OrganizationLocalServiceImpl
 			new OrganizationNameComparator(true));
 	}
 
-	public List search(
+	public List<Organization> search(
 			long companyId, long parentOrganizationId, String keywords,
-			int type, Long regionId, Long countryId, LinkedHashMap params,
+			int type, Long regionId, Long countryId,
+			LinkedHashMap<String, Object> params,
 			int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
@@ -418,11 +425,12 @@ public class OrganizationLocalServiceImpl
 			obc);
 	}
 
-	public List search(
+	public List<Organization> search(
 			long companyId, long parentOrganizationId, String name, int type,
 			String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
-			boolean andOperator, int begin, int end)
+			Long regionId, Long countryId,
+			LinkedHashMap<String, Object> params, boolean andOperator,
+			int begin, int end)
 		throws PortalException, SystemException {
 
 		return search(
@@ -431,10 +439,10 @@ public class OrganizationLocalServiceImpl
 			new OrganizationNameComparator(true));
 	}
 
-	public List search(
+	public List<Organization> search(
 			long companyId, long parentOrganizationId, String name, int type,
 			String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
+			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
@@ -455,7 +463,7 @@ public class OrganizationLocalServiceImpl
 	public int searchCount(
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws PortalException, SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
@@ -474,7 +482,7 @@ public class OrganizationLocalServiceImpl
 	public int searchCount(
 			long companyId, long parentOrganizationId, String name, int type,
 			String street, String city, String zip,
-			Long regionId, Long countryId, LinkedHashMap params,
+			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws PortalException, SystemException {
 
@@ -555,7 +563,8 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void addSuborganizations(
-			List allSuborganizations, List organizations)
+			List<Organization> allSuborganizations,
+			List<Organization> organizations)
 		throws SystemException {
 
 		for (int i = 0; i < organizations.size(); i++) {
@@ -564,9 +573,10 @@ public class OrganizationLocalServiceImpl
 			if (!allSuborganizations.contains(organization)) {
 				allSuborganizations.add(organization);
 
-				List suborganizations = organizationPersistence.findByC_P(
-					organization.getCompanyId(),
-					organization.getOrganizationId());
+				List<Organization> suborganizations =
+					organizationPersistence.findByC_P(
+						organization.getCompanyId(),
+						organization.getOrganizationId());
 
 				addSuborganizations(allSuborganizations, suborganizations);
 			}
@@ -602,11 +612,11 @@ public class OrganizationLocalServiceImpl
 		return parentOrganizationId;
 	}
 
-	protected List getParentOrganizations(
+	protected List<Organization> getParentOrganizations(
 			Organization organization, boolean lastOrganization)
 		throws PortalException, SystemException {
 
-		List organizations = new ArrayList();
+		List<Organization> organizations = new ArrayList<Organization>();
 
 		if (!lastOrganization) {
 			organizations.add(organization);
@@ -623,7 +633,7 @@ public class OrganizationLocalServiceImpl
 		Organization parentOrganization =
 			organizationPersistence.findByPrimaryKey(parentOrganizationId);
 
-		List parentOrganizatons = getParentOrganizations(
+		List<Organization> parentOrganizatons = getParentOrganizations(
 			parentOrganization, false);
 
 		organizations.addAll(parentOrganizatons);
@@ -642,7 +652,8 @@ public class OrganizationLocalServiceImpl
 			organizationPersistence.findByPrimaryKey(
 				parentOrganizationId);
 
-		List parentOrganizations = getParentOrganizations(organizationId);
+		List<Organization> parentOrganizations = getParentOrganizations(
+			organizationId);
 
 		if (parentOrganizations.contains(parentOrganization)) {
 			return true;

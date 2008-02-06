@@ -89,7 +89,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
 			int type, Long regionId, Long countryId,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		String[] names = null;
@@ -118,7 +118,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
-			Long countryId, LinkedHashMap params, boolean andOperator)
+			Long countryId, LinkedHashMap<String, Object> params,
+			boolean andOperator)
 		throws SystemException {
 
 		return countByC_PO_N_T_S_C_Z_R_C(
@@ -132,7 +133,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
-			Long regionId, Long countryId, LinkedHashMap params,
+			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
 
@@ -239,10 +240,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			qPos.add(cities, 2);
 			qPos.add(zips, 2);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -259,11 +260,12 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<Organization> findByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
 			int type, Long regionId, Long countryId,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		String[] names = null;
@@ -288,12 +290,12 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			andOperator, begin, end, obc);
 	}
 
-	public List findByC_PO_N_T_S_C_Z_R_C(
+	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
-			Long countryId, LinkedHashMap params, boolean andOperator,
-			int begin, int end, OrderByComparator obc)
+			Long countryId, LinkedHashMap<String, Object> params,
+			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_PO_N_T_S_C_Z_R_C(
@@ -303,11 +305,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			params, andOperator, begin, end, obc);
 	}
 
-	public List findByC_PO_N_T_S_C_Z_R_C(
+	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
-			Long regionId, Long countryId, LinkedHashMap params,
+			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -415,13 +417,13 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			qPos.add(cities, 2);
 			qPos.add(zips, 2);
 
-			List list = new ArrayList();
+			List<Organization> list = new ArrayList<Organization>();
 
-			Iterator itr = QueryUtil.iterate(
+			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				Long organizationId = (Long)itr.next();
+				Long organizationId = itr.next();
 
 				Organization organization = OrganizationUtil.findByPrimaryKey(
 					organizationId.longValue());
@@ -591,10 +593,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			int count = 0;
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long l = (Long)itr.next();
+				Long l = itr.next();
 
 				if (l != null) {
 					count += l.intValue();
@@ -611,7 +613,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	protected List findByPermissions(
+	protected List<Organization> findByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -763,13 +765,13 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				qPos.add(zips, 2);
 			}
 
-			List list = new ArrayList();
+			List<Organization> list = new ArrayList<Organization>();
 
-			Iterator itr = QueryUtil.iterate(
+			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				Long organizationId = (Long)itr.next();
+				Long organizationId = itr.next();
 
 				Organization organization = OrganizationUtil.findByPrimaryKey(
 					organizationId.longValue());
@@ -787,19 +789,19 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	protected String getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -843,19 +845,19 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return join;
 	}
 
-	protected String getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -927,12 +929,13 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap<String, Object> params) {
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
 				Object value = entry.getValue();
 

@@ -826,15 +826,15 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.getWebsite(websiteId);
 	}
 
-	public static java.util.List getWebsites()
+	public static java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
 		return websiteLocalService.getWebsites();
 	}
 
-	public static java.util.List getWebsites(long companyId,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 

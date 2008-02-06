@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ResourceCodeLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -55,7 +55,7 @@ public class ResourceCodeLocalServiceImpl
 
 		String key = encodeKey(companyId, name, scope);
 
-		ResourceCode resourceCode = (ResourceCode)_resourceCodes.get(key);
+		ResourceCode resourceCode = _resourceCodes.get(key);
 
 		if (resourceCode == null) {
 			resourceCode = resourceCodePersistence.fetchByC_N_S(
@@ -90,6 +90,7 @@ public class ResourceCodeLocalServiceImpl
 		return sm.toString();
 	}
 
-	private static Map _resourceCodes = CollectionFactory.getSyncHashMap();
+	private static Map<String, ResourceCode> _resourceCodes =
+		new ConcurrentHashMap<String, ResourceCode>();
 
 }

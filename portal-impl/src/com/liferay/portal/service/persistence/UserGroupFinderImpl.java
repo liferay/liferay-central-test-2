@@ -75,7 +75,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 	public int countByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -104,10 +104,10 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -157,10 +157,10 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 				qPos.add(companyId);
 				qPos.add(name);
 
-				Iterator itr = q.list().iterator();
+				Iterator<UserGroup> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					UserGroup userGroup = (UserGroup)itr.next();
+					UserGroup userGroup = itr.next();
 
 					FinderCache.putResult(
 						finderClassNameCacheEnabled, finderClassName,
@@ -185,9 +185,10 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		}
 	}
 
-	public List findByC_N_D(
+	public List<UserGroup> findByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -217,7 +218,8 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<UserGroup>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -227,19 +229,19 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		}
 	}
 
-	protected String getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -274,19 +276,19 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		return join;
 	}
 
-	protected String getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -321,12 +323,15 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(
+		QueryPos qPos, LinkedHashMap<String, Object> params) {
+
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
 				Object value = entry.getValue();
 

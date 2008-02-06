@@ -63,7 +63,8 @@ public interface WebsiteService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getWebsites(java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Website> getWebsites(
+		java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

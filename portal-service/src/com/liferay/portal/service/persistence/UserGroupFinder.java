@@ -30,7 +30,8 @@ package com.liferay.portal.service.persistence;
  */
 public interface UserGroupFinder {
 	public int countByC_N_D(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params)
+		java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup findByC_N(long companyId,
@@ -38,8 +39,9 @@ public interface UserGroupFinder {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException;
 
-	public java.util.List findByC_N_D(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.UserGroup> findByC_N_D(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

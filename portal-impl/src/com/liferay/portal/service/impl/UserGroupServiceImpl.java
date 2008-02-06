@@ -95,7 +95,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		return userGroup;
 	}
 
-	public List getUserUserGroups(long userId)
+	public List<UserGroup> getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return userGroupLocalService.getUserUserGroups(userId);

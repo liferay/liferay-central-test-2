@@ -78,8 +78,8 @@ public class WebsiteServiceUtil {
 		return websiteService.getWebsite(websiteId);
 	}
 
-	public static java.util.List getWebsites(java.lang.String className,
-		long classPK)
+	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WebsiteService websiteService = WebsiteServiceFactory.getService();

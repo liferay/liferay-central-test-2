@@ -47,12 +47,14 @@ public class NavItem implements Serializable {
 		return new NavItem(vars, layout);
 	}
 
-	public static List fromLayouts(RequestVars vars, List layouts) {
+	public static List<NavItem> fromLayouts(
+		RequestVars vars, List<Layout> layouts) {
+
 		if (layouts == null) {
 			return null;
 		}
 
-		List navItems = new ArrayList(layouts.size());
+		List<NavItem> navItems = new ArrayList<NavItem>(layouts.size());
 
 		for (int i = 0; i < layouts.size(); i++) {
 			Layout layout = (Layout)layouts.get(i);
@@ -108,11 +110,11 @@ public class NavItem implements Serializable {
 		return _layout.getResetLayoutURL(_vars.getRequest());
 	}
 
-	public List getChildren() throws Exception {
+	public List<NavItem> getChildren() throws Exception {
 		if (_children == null) {
 			ThemeDisplay themeDisplay = _vars.getThemeDisplay();
 
-			List layouts = _layout.getChildren(
+			List<Layout> layouts = _layout.getChildren(
 				themeDisplay.getPermissionChecker());
 
 			_children = fromLayouts(_vars, layouts);
@@ -139,7 +141,7 @@ public class NavItem implements Serializable {
 			_VELOCITY_TAGLIB_CLASS, _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD,
 			_VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS);
 
-		return (String)method.invoke(velocityTaglib, new Layout[] {_layout});
+		return (String)method.invoke(velocityTaglib, new Object[] {_layout});
 	}
 
 	private static final String _VELOCITY_TAGLIB_CLASS =
@@ -153,6 +155,6 @@ public class NavItem implements Serializable {
 
 	private RequestVars _vars;
 	private Layout _layout;
-	private List _children;
+	private List<NavItem> _children;
 
 }

@@ -305,7 +305,7 @@ public class VelocityVariables {
 			Theme theme = themeDisplay.getTheme();
 
 			Layout layout = themeDisplay.getLayout();
-			List layouts = themeDisplay.getLayouts();
+			List<Layout> layouts = themeDisplay.getLayouts();
 
 			vc.put("themeDisplay", themeDisplay);
 			vc.put("company", themeDisplay.getCompany());
@@ -331,7 +331,8 @@ public class VelocityVariables {
 					req, themeDisplay, layout.getAncestorPlid(),
 					layout.getAncestorLayoutId());
 
-				List navItems = NavItem.fromLayouts(requestVars, layouts);
+				List<NavItem> navItems = NavItem.fromLayouts(
+					requestVars, layouts);
 
 				vc.put("navItems", navItems);
 			}

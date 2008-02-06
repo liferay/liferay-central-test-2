@@ -177,13 +177,14 @@ public class UserGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	public List getUserGroupRoles(long userId, long groupId)
+	public List<UserGroupRole> getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
 		return userGroupRolePersistence.findByU_G(userId, groupId);
 	}
 
-	public List getUserGroupRolesByGroupAndRole(long groupId, long roleId)
+	public List<UserGroupRole> getUserGroupRolesByGroupAndRole(
+			long groupId, long roleId)
 		throws PortalException, SystemException {
 
 		return userGroupRolePersistence.findByG_R(groupId, roleId);

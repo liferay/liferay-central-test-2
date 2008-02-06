@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.RoleServiceBaseImpl;
@@ -75,7 +76,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		return roleLocalService.getGroupRole(companyId, groupId);
 	}
 
-	public List getGroupRoles(long groupId)
+	public List<Role> getGroupRoles(long groupId)
 		throws PortalException, SystemException {
 
 		return roleLocalService.getGroupRoles(groupId);
@@ -93,19 +94,19 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		return roleLocalService.getRole(companyId, name);
 	}
 
-	public List getUserGroupRoles(long userId, long groupId)
+	public List<Role> getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
 		return roleLocalService.getUserGroupRoles(userId, groupId);
 	}
 
-	public List getUserRelatedRoles(long userId, List groups)
+	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
 		throws PortalException, SystemException {
 
 		return roleLocalService.getUserRelatedRoles(userId, groups);
 	}
 
-	public List getUserRoles(long userId)
+	public List<Role> getUserRoles(long userId)
 		throws PortalException, SystemException {
 
 		return roleLocalService.getUserRoles(userId);

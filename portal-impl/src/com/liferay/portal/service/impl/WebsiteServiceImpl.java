@@ -75,7 +75,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 		return website;
 	}
 
-	public List getWebsites(String className, long classPK)
+	public List<Website> getWebsites(String className, long classPK)
 		throws PortalException, SystemException {
 
 		CommonPermissionUtil.check(

@@ -795,7 +795,7 @@ public class UserTrackerLocalServiceUtil {
 		long companyId, long userId, java.util.Date modifiedDate,
 		java.lang.String sessionId, java.lang.String remoteAddr,
 		java.lang.String remoteHost, java.lang.String userAgent,
-		java.util.List userTrackerPaths)
+		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths)
 		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
@@ -812,8 +812,9 @@ public class UserTrackerLocalServiceUtil {
 		userTrackerLocalService.deleteUserTracker(userTrackerId);
 	}
 
-	public static java.util.List getUserTrackers(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
 		return userTrackerLocalService.getUserTrackers(companyId, begin, end);

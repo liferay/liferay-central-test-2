@@ -50,7 +50,8 @@ public class VerifyMessageBoards extends VerifyProcess {
 	}
 
 	protected void verifyMessageBoards() throws Exception {
-		List messages = MBMessageLocalServiceUtil.getNoAssetMessages();
+		List<MBMessage> messages =
+			MBMessageLocalServiceUtil.getNoAssetMessages();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

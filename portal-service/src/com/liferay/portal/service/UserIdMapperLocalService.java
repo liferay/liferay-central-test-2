@@ -350,8 +350,8 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserIdMappers(long userId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
+		long userId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		long userId, java.lang.String type, java.lang.String description,

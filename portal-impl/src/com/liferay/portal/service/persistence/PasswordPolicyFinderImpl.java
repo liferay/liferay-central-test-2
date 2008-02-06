@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -72,10 +73,10 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 			qPos.add(name);
 			qPos.add(name);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -92,7 +93,7 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 		}
 	}
 
-	public List findByC_N(
+	public List<PasswordPolicy> findByC_N(
 			long companyId, String name, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -118,7 +119,8 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 			qPos.add(name);
 			qPos.add(name);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<PasswordPolicy>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

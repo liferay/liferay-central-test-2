@@ -54,16 +54,19 @@ public interface RegionService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRegions()
+	public java.util.List<com.liferay.portal.model.Region> getRegions()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List getRegions(long countryId)
+	public java.util.List<com.liferay.portal.model.Region> getRegions(
+		long countryId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List getRegions(boolean active)
+	public java.util.List<com.liferay.portal.model.Region> getRegions(
+		boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List getRegions(long countryId, boolean active)
+	public java.util.List<com.liferay.portal.model.Region> getRegions(
+		long countryId, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Region getRegion(long regionId)

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -38,38 +40,39 @@ import java.util.regex.Pattern;
 public class ThemeCompanyLimit implements Serializable {
 
 	public ThemeCompanyLimit() {
-		_includes = new ArrayList();
-		_excludes = new ArrayList();
+		_includes = new ArrayList<ThemeCompanyId>();
+		_excludes = new ArrayList<ThemeCompanyId>();
 	}
 
-	public List getIncludes() {
+	public List<ThemeCompanyId> getIncludes() {
 		return _includes;
 	}
 
-	public void setIncludes(List includes) {
-		_includes = includes;
+	public void setIncludes(List<? extends ThemeCompanyId> includes) {
+		_includes = (List<ThemeCompanyId>)includes;
 	}
 
 	public boolean isIncluded(long companyId) {
 		return _matches(_includes, companyId);
 	}
 
-	public List getExcludes() {
+	public List<ThemeCompanyId> getExcludes() {
 		return _excludes;
 	}
 
-	public void setExcludes(List excludes) {
-		_excludes = excludes;
+	public void setExcludes(List<? extends ThemeCompanyId> excludes) {
+		_excludes = (List<ThemeCompanyId>)excludes;
 	}
 
 	public boolean isExcluded(long companyId) {
 		return _matches(_excludes, companyId);
 	}
 
-	private boolean _matches(List themeCompanyIds, long companyId) {
+	private boolean _matches(
+		List<ThemeCompanyId> themeCompanyIds, long companyId) {
+
 		for (int i = 0; i < themeCompanyIds.size(); i++) {
-			ThemeCompanyId themeCompanyId =
-				(ThemeCompanyId)themeCompanyIds.get(i);
+			ThemeCompanyId themeCompanyId = themeCompanyIds.get(i);
 
 			String themeCompanyIdValue = themeCompanyId.getValue();
 
@@ -82,15 +85,10 @@ public class ThemeCompanyLimit implements Serializable {
 				}
 			}
 			else {
-				Long themeCompanyIdValueLong = new Long(0);
+				long themeCompanyIdValueLong = GetterUtil.getLong(
+					themeCompanyIdValue);
 
-				try {
-					themeCompanyIdValueLong = new Long(themeCompanyIdValue);
-				}
-				catch (Exception e) {
-				}
-
-				if (themeCompanyIdValueLong.longValue() == companyId) {
+				if (themeCompanyIdValueLong == companyId) {
 					return true;
 				}
 			}
@@ -99,7 +97,7 @@ public class ThemeCompanyLimit implements Serializable {
 		return false;
 	}
 
-	private List _includes;
-	private List _excludes;
+	private List<ThemeCompanyId> _includes;
+	private List<ThemeCompanyId> _excludes;
 
 }

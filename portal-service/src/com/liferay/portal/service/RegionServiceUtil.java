@@ -60,28 +60,31 @@ public class RegionServiceUtil {
 		return regionService.addRegion(countryId, regionCode, name, active);
 	}
 
-	public static java.util.List getRegions()
+	public static java.util.List<com.liferay.portal.model.Region> getRegions()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
 		return regionService.getRegions();
 	}
 
-	public static java.util.List getRegions(long countryId)
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
 		return regionService.getRegions(countryId);
 	}
 
-	public static java.util.List getRegions(boolean active)
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 
 		return regionService.getRegions(active);
 	}
 
-	public static java.util.List getRegions(long countryId, boolean active)
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RegionService regionService = RegionServiceFactory.getService();
 

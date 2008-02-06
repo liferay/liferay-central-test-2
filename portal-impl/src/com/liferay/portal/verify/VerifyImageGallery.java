@@ -50,7 +50,7 @@ public class VerifyImageGallery extends VerifyProcess {
 	}
 
 	protected void verifyImageGallery() throws Exception {
-		List images = IGImageLocalServiceUtil.getNoAssetImages();
+		List<IGImage> images = IGImageLocalServiceUtil.getNoAssetImages();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

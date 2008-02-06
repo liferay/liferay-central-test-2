@@ -856,8 +856,8 @@ public class SubscriptionLocalServiceUtil {
 			className, classPK);
 	}
 
-	public static java.util.List getSubscriptions(long companyId,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();

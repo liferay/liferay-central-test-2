@@ -50,7 +50,8 @@ public class VerifyBlogs extends VerifyProcess {
 	}
 
 	protected void verifyBlogs() throws Exception {
-		List entries = BlogsEntryLocalServiceUtil.getNoAssetEntries();
+		List<BlogsEntry> entries =
+			BlogsEntryLocalServiceUtil.getNoAssetEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

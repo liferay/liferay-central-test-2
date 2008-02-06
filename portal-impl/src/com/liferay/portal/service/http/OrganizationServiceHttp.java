@@ -325,7 +325,7 @@ public class OrganizationServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserOrganizations(
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -352,7 +352,7 @@ public class OrganizationServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Organization>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

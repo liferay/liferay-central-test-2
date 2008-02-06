@@ -50,7 +50,7 @@ public class VerifyWiki extends VerifyProcess {
 	}
 
 	protected void verifyWiki() throws Exception {
-		List pages = WikiPageLocalServiceUtil.getNoAssetPages();
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getNoAssetPages();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

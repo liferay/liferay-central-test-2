@@ -102,11 +102,12 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return websitePersistence.findByPrimaryKey(websiteId);
 	}
 
-	public List getWebsites() throws SystemException {
+	public List<Website> getWebsites() throws SystemException {
 		return websitePersistence.findAll();
 	}
 
-	public List getWebsites(long companyId, String className, long classPK)
+	public List<Website> getWebsites(
+			long companyId, String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -176,11 +177,11 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = websitePersistence.findByC_C_C_P(
+			Iterator<Website> itr = websitePersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
+				Website website = itr.next();
 
 				if ((websiteId <= 0) ||
 					(website.getWebsiteId() != websiteId)) {

@@ -363,11 +363,13 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroups(long companyId)
+	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
+		long companyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserUserGroups(long userId)
+	public java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
+		long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -375,13 +377,15 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.UserGroup> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,
-		java.lang.String description, java.util.LinkedHashMap params)
+		java.lang.String description,
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)

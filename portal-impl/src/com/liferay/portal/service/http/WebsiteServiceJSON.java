@@ -99,7 +99,7 @@ public class WebsiteServiceJSON {
 	public static JSONArray getWebsites(java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = WebsiteServiceUtil.getWebsites(className,
+		java.util.List<com.liferay.portal.model.Website> returnValue = WebsiteServiceUtil.getWebsites(className,
 				classPK);
 
 		return WebsiteJSONSerializer.toJSONArray(returnValue);

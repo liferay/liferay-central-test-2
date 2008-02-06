@@ -64,7 +64,8 @@ public interface OrgLaborService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrgLabors(long organizationId)
+	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		long organizationId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

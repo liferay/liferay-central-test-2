@@ -107,7 +107,8 @@ public class OrganizationServiceUtil {
 		return organizationService.getOrganizationId(companyId, name);
 	}
 
-	public static java.util.List getUserOrganizations(long userId)
+	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();

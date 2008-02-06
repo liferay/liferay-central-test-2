@@ -89,7 +89,7 @@ public class PasswordTrackerLocalServiceImpl
 
 		int historyCount = 1;
 
-		Iterator itr = passwordTrackerPersistence.findByUserId(
+		Iterator<PasswordTracker> itr = passwordTrackerPersistence.findByUserId(
 			userId).iterator();
 
 		while (itr.hasNext()) {
@@ -97,7 +97,7 @@ public class PasswordTrackerLocalServiceImpl
 				break;
 			}
 
-			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
+			PasswordTracker passwordTracker = itr.next();
 
 			String oldEncPwd = passwordTracker.getPassword();
 			String newEncPwd = PwdEncryptor.encrypt(newClearTextPwd, oldEncPwd);

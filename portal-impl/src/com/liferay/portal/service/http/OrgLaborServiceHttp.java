@@ -213,8 +213,8 @@ public class OrgLaborServiceHttp {
 		}
 	}
 
-	public static java.util.List getOrgLabors(HttpPrincipal httpPrincipal,
-		long organizationId)
+	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		HttpPrincipal httpPrincipal, long organizationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -240,7 +240,7 @@ public class OrgLaborServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.OrgLabor>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -56,7 +56,9 @@ public class UserIdMapperLocalServiceImpl
 		return userIdMapperPersistence.findByT_E(type, externalUserId);
 	}
 
-	public List getUserIdMappers(long userId) throws SystemException {
+	public List<UserIdMapper> getUserIdMappers(long userId)
+		throws SystemException {
+
 		return userIdMapperPersistence.findByUserId(userId);
 	}
 

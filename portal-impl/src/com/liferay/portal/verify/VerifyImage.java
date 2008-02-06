@@ -34,6 +34,7 @@ import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -131,7 +132,7 @@ public class VerifyImage extends VerifyProcess {
 		catch (NoSuchImageException nsie) {
 		}
 
-		List journalArticles =
+		List<JournalArticle> journalArticles =
 			JournalArticleLocalServiceUtil.getArticlesBySmallImageId(imageId);
 
 		if (journalArticles.size() > 0) {
@@ -200,7 +201,7 @@ public class VerifyImage extends VerifyProcess {
 	}
 
 	protected void verifyImage() throws Exception {
-		List images = ImageLocalServiceUtil.getImages();
+		List<Image> images = ImageLocalServiceUtil.getImages();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Processing " + images.size() + " stale images");

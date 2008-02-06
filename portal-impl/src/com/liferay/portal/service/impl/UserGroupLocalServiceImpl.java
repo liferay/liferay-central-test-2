@@ -143,13 +143,13 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroupFinder.findByC_N(companyId, name);
 	}
 
-	public List getUserGroups(long companyId)
+	public List<UserGroup> getUserGroups(long companyId)
 		throws PortalException, SystemException {
 
 		return userGroupPersistence.findByCompanyId(companyId);
 	}
 
-	public List getUserUserGroups(long userId)
+	public List<UserGroup> getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return userPersistence.getUserGroups(userId);
@@ -161,9 +161,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return groupPersistence.containsUserGroup(groupId, userGroupId);
 	}
 
-	public List search(
+	public List<UserGroup> search(
 			long companyId, String name, String description,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return userGroupFinder.findByC_N_D(
@@ -172,7 +173,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public int searchCount(
 			long companyId, String name, String description,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		return userGroupFinder.countByC_N_D(

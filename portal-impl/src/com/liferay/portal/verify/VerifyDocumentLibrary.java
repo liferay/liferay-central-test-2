@@ -50,7 +50,8 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	}
 
 	protected void verifyDocumentLibrary() throws Exception {
-		List fileEntries = DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
+		List<DLFileEntry> fileEntries =
+			DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

@@ -113,7 +113,7 @@ public class UserGroupServiceJSON {
 	public static JSONArray getUserUserGroups(long userId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = UserGroupServiceUtil.getUserUserGroups(userId);
+		java.util.List<com.liferay.portal.model.UserGroup> returnValue = UserGroupServiceUtil.getUserUserGroups(userId);
 
 		return UserGroupJSONSerializer.toJSONArray(returnValue);
 	}

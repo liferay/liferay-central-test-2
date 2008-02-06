@@ -818,8 +818,8 @@ public class UserIdMapperLocalServiceUtil {
 			externalUserId);
 	}
 
-	public static java.util.List getUserIdMappers(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
+		long userId) throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
 		return userIdMapperLocalService.getUserIdMappers(userId);

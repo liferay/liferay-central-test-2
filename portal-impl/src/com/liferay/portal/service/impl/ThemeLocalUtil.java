@@ -56,6 +56,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
 
@@ -84,17 +85,16 @@ public class ThemeLocalUtil {
 
 		Theme theme = getTheme(companyId, themeId, wapTheme);
 
-		Map colorSchemesMap = theme.getColorSchemesMap();
+		Map<String, ColorScheme> colorSchemesMap = theme.getColorSchemesMap();
 
-		ColorScheme colorScheme = (ColorScheme)colorSchemesMap.get(
-			colorSchemeId);
+		ColorScheme colorScheme = colorSchemesMap.get(colorSchemeId);
 
 		if (colorScheme == null) {
-			List colorSchemes = theme.getColorSchemes();
+			List<ColorScheme> colorSchemes = theme.getColorSchemes();
 
 			if (colorSchemes.size() > 0) {
 				for (int i = (colorSchemes.size() - 1); i >= 0; i--) {
-					colorScheme = (ColorScheme)colorSchemes.get(i);
+					colorScheme = colorSchemes.get(i);
 
 					if (colorScheme.isDefaultCs()) {
 						break;
@@ -126,7 +126,7 @@ public class ThemeLocalUtil {
 
 		themeId = GetterUtil.getString(themeId);
 
-		Theme theme = (Theme)_getThemes(companyId).get(themeId);
+		Theme theme = _getThemes(companyId).get(themeId);
 
 		if (theme == null) {
 			if (_log.isWarnEnabled()) {
@@ -142,7 +142,7 @@ public class ThemeLocalUtil {
 				themeId = ThemeImpl.getDefaultRegularThemeId();
 			}
 
-			theme = (Theme)_themes.get(themeId);
+			theme = _themes.get(themeId);
 		}
 
 		if (theme == null) {
@@ -150,38 +150,40 @@ public class ThemeLocalUtil {
 				"No theme found for default theme id " + themeId +
 					". Returning a random theme.");
 
-			Iterator itr = _themes.entrySet().iterator();
+			Iterator<Map.Entry<String, Theme>> itr =
+				_themes.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Theme> entry = itr.next();
 
-				theme = (Theme)entry.getValue();
+				theme = entry.getValue();
 			}
 		}
 
 		return theme;
 	}
 
-	public static List getThemes(long companyId) {
-		List themes = ListUtil.fromCollection(_getThemes(companyId).values());
+	public static List<Theme> getThemes(long companyId) {
+		List<Theme> themes = ListUtil.fromCollection(
+			_getThemes(companyId).values());
 
 		Collections.sort(themes);
 
 		return themes;
 	}
 
-	public static List getThemes(
+	public static List<Theme> getThemes(
 			long companyId, long groupId, long userId, boolean wapTheme)
 		throws PortalException, SystemException {
 
-		List themes = getThemes(companyId);
+		List<Theme> themes = getThemes(companyId);
 
 		themes = PluginUtil.restrictPlugins(themes, companyId, userId);
 
-		Iterator itr = themes.iterator();
+		Iterator<Theme> itr = themes.iterator();
 
 		while (itr.hasNext()) {
-			Theme theme = (Theme)itr.next();
+			Theme theme = itr.next();
 
 			if ((!theme.isGroupAvailable(groupId)) ||
 				(theme.isWapTheme() != wapTheme)) {
@@ -193,7 +195,7 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	public static List init(
+	public static List<String> init(
 		ServletContext ctx, String themesPath, boolean loadFromServletContext,
 		String[] xmls, PluginPackage pluginPackage) {
 
@@ -201,23 +203,23 @@ public class ThemeLocalUtil {
 			null, ctx, themesPath, loadFromServletContext, xmls, pluginPackage);
 	}
 
-	public static List init(
+	public static List<String> init(
 		String servletContextName, ServletContext ctx, String themesPath,
 		boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List themeIds = new ArrayList();
+		List<String> themeIds = new ArrayList<String>();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
-				Set themes = _readThemes(
+				Set<String> themes = _readThemes(
 					servletContextName, ctx, themesPath, loadFromServletContext,
 					xmls[i], pluginPackage);
 
-				Iterator itr = themes.iterator();
+				Iterator<String> itr = themes.iterator();
 
 				while (itr.hasNext()) {
-					String themeId = (String)itr.next();
+					String themeId = itr.next();
 
 					if (!themeIds.contains(themeId)) {
 						themeIds.add(themeId);
@@ -234,9 +236,9 @@ public class ThemeLocalUtil {
 		return themeIds;
 	}
 
-	public static void uninstallThemes(List themeIds) {
+	public static void uninstallThemes(List<String> themeIds) {
 		for (int i = 0; i < themeIds.size(); i++) {
-			String themeId = (String)themeIds.get(i);
+			String themeId = themeIds.get(i);
 
 			_themes.remove(themeId);
 
@@ -246,14 +248,14 @@ public class ThemeLocalUtil {
 		_themesPool.clear();
 	}
 
-	private static List _getCompanyLimitExcludes(Element el) {
-		List includes = new ArrayList();
+	private static List<ThemeCompanyId> _getCompanyLimitExcludes(Element el) {
+		List<ThemeCompanyId> includes = new ArrayList<ThemeCompanyId>();
 
 		if (el != null) {
-			List companyIds = el.elements("company-id");
+			List<Element> companyIds = el.elements("company-id");
 
 			for (int i = 0; i < companyIds.size(); i++) {
-				Element companyIdEl = (Element)companyIds.get(i);
+				Element companyIdEl = companyIds.get(i);
 
 				String name = companyIdEl.attributeValue("name");
 				String pattern = companyIdEl.attributeValue("pattern");
@@ -276,18 +278,18 @@ public class ThemeLocalUtil {
 		return includes;
 	}
 
-	private static List _getCompanyLimitIncludes(Element el) {
+	private static List<ThemeCompanyId> _getCompanyLimitIncludes(Element el) {
 		return _getCompanyLimitExcludes(el);
 	}
 
-	private static List _getGroupLimitExcludes(Element el) {
-		List includes = new ArrayList();
+	private static List<ThemeGroupId> _getGroupLimitExcludes(Element el) {
+		List<ThemeGroupId> includes = new ArrayList<ThemeGroupId>();
 
 		if (el != null) {
-			List groupIds = el.elements("group-id");
+			List<Element> groupIds = el.elements("group-id");
 
 			for (int i = 0; i < groupIds.size(); i++) {
-				Element groupIdEl = (Element)groupIds.get(i);
+				Element groupIdEl = groupIds.get(i);
 
 				String name = groupIdEl.attributeValue("name");
 				String pattern = groupIdEl.attributeValue("pattern");
@@ -310,32 +312,31 @@ public class ThemeLocalUtil {
 		return includes;
 	}
 
-	private static List _getGroupLimitIncludes(Element el) {
+	private static List<ThemeGroupId> _getGroupLimitIncludes(Element el) {
 		return _getGroupLimitExcludes(el);
 	}
 
-	private static Map _getThemes(long companyId) {
-		Long companyIdObj = new Long(companyId);
-
-		Map themes = (Map)_themesPool.get(companyIdObj);
+	private static Map<String, Theme> _getThemes(long companyId) {
+		Map<String, Theme> themes = _themesPool.get(companyId);
 
 		if (themes == null) {
 			themes = CollectionFactory.getSyncHashMap();
 
-			Iterator itr = _themes.entrySet().iterator();
+			Iterator<Map.Entry<String, Theme>> itr =
+				_themes.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Theme> entry = itr.next();
 
-				String themeId = (String)entry.getKey();
-				Theme theme = (Theme)entry.getValue();
+				String themeId = entry.getKey();
+				Theme theme = entry.getValue();
 
 				if (theme.isCompanyAvailable(companyId)) {
 					themes.put(themeId, theme);
 				}
 			}
 
-			_themesPool.put(companyIdObj, themes);
+			_themesPool.put(companyId, themes);
 		}
 
 		return themes;
@@ -350,13 +351,14 @@ public class ThemeLocalUtil {
 	}
 
 	private static void _readColorSchemes(
-			Element theme, Map colorSchemes, ContextReplace themeContextReplace)
+			Element theme, Map<String, ColorScheme> colorSchemes,
+			ContextReplace themeContextReplace)
 		throws IOException {
 
-		Iterator itr = theme.elements("color-scheme").iterator();
+		Iterator<Element> itr = theme.elements("color-scheme").iterator();
 
 		while (itr.hasNext()) {
-			Element colorScheme = (Element)itr.next();
+			Element colorScheme = itr.next();
 
 			ContextReplace colorSchemeContextReplace =
 				(ContextReplace)themeContextReplace.clone();
@@ -408,13 +410,13 @@ public class ThemeLocalUtil {
 		}
 	}
 
-	private static Set _readThemes(
+	private static Set<String> _readThemes(
 			String servletContextName, ServletContext ctx, String themesPath,
 			boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
-		Set themeIds = new HashSet();
+		Set<String> themeIds = new HashSet<String>();
 
 		if (xml == null) {
 			return themeIds;
@@ -431,10 +433,11 @@ public class ThemeLocalUtil {
 		Element compatibilityEl = root.element("compatibility");
 
 		if (compatibilityEl != null) {
-			Iterator itr = compatibilityEl.elements("version").iterator();
+			Iterator<Element> itr = compatibilityEl.elements(
+				"version").iterator();
 
 			while (itr.hasNext()) {
-				Element versionEl = (Element)itr.next();
+				Element versionEl = itr.next();
 
 				Version version = _getVersion(versionEl.getTextTrim());
 
@@ -499,10 +502,10 @@ public class ThemeLocalUtil {
 			}
 		}
 
-		Iterator itr1 = root.elements("theme").iterator();
+		Iterator<Element> itr1 = root.elements("theme").iterator();
 
 		while (itr1.hasNext()) {
-			Element theme = (Element)itr1.next();
+			Element theme = itr1.next();
 
 			ContextReplace themeContextReplace = new ContextReplace();
 
@@ -521,7 +524,7 @@ public class ThemeLocalUtil {
 
 			themeIds.add(themeId);
 
-			Theme themeModel = (Theme)_themes.get(themeId);
+			Theme themeModel = _themes.get(themeId);
 
 			if (themeModel == null) {
 				themeModel = new ThemeImpl(themeId);
@@ -610,10 +613,10 @@ public class ThemeLocalUtil {
 			Element settingsEl = theme.element("settings");
 
 			if (settingsEl != null) {
-				Iterator itr2 = settingsEl.elements("setting").iterator();
+				Iterator<Element> itr2 = settingsEl.elements("setting").iterator();
 
 				while (itr2.hasNext()) {
-					Element settingEl = (Element)itr2.next();
+					Element settingEl = itr2.next();
 
 					String key = settingEl.attributeValue("key");
 					String value = settingEl.attributeValue("value");
@@ -628,10 +631,11 @@ public class ThemeLocalUtil {
 			Element rolesEl = theme.element("roles");
 
 			if (rolesEl != null) {
-				Iterator itr2 = rolesEl.elements("role-name").iterator();
+				Iterator<Element> itr2 = rolesEl.elements(
+					"role-name").iterator();
 
 				while (itr2.hasNext()) {
-					Element roleNameEl = (Element)itr2.next();
+					Element roleNameEl = itr2.next();
 
 					pluginSetting.addRole(roleNameEl.getText());
 				}
@@ -668,7 +672,9 @@ public class ThemeLocalUtil {
 
 	private static Log _log = LogFactory.getLog(ThemeLocalUtil.class);
 
-	private static Map _themes = CollectionFactory.getSyncHashMap();
-	private static Map _themesPool = CollectionFactory.getSyncHashMap();
+	private static Map<String, Theme> _themes =
+		new ConcurrentHashMap<String, Theme>();
+	private static Map<Long, Map<String, Theme>> _themesPool =
+		new ConcurrentHashMap<Long, Map<String, Theme>>();
 
 }

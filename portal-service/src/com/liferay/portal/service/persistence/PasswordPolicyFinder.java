@@ -32,7 +32,8 @@ public interface PasswordPolicyFinder {
 	public int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_N(long companyId, java.lang.String name,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.PasswordPolicy> findByC_N(
+		long companyId, java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

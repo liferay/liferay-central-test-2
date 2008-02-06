@@ -72,7 +72,7 @@ public class ServiceComponentLocalServiceImpl
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;
 
-		List serviceComponents =
+		List<ServiceComponent> serviceComponents =
 			serviceComponentPersistence.findByBuildNamespace(
 				buildNamespace, 0, 1);
 
@@ -87,7 +87,7 @@ public class ServiceComponentLocalServiceImpl
 			serviceComponent.setBuildDate(buildDate);
 		}
 		else {
-			serviceComponent = (ServiceComponent)serviceComponents.get(0);
+			serviceComponent = serviceComponents.get(0);
 
 			if (serviceComponent.getBuildNumber() < buildNumber) {
 				previousServiceComponent = serviceComponent;
@@ -153,10 +153,10 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected List getModels(ClassLoader portletClassLoader)
+	protected String[] getModels(ClassLoader portletClassLoader)
 		throws DocumentException, IOException {
 
-		List models = new ArrayList();
+		List<String> models = new ArrayList<String>();
 
 		String xml = StringUtil.read(
 			portletClassLoader, "META-INF/portlet-model-hints.xml");
@@ -167,17 +167,17 @@ public class ServiceComponentLocalServiceImpl
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.elements("model").iterator();
+		Iterator<Element> itr = root.elements("model").iterator();
 
 		while (itr.hasNext()) {
-			Element modelEl = (Element)itr.next();
+			Element modelEl = itr.next();
 
 			String name = modelEl.attributeValue("name");
 
 			models.add(name);
 		}
 
-		return models;
+		return models.toArray(new String[models.size()]);
 	}
 
 	protected void upgradeDB(
@@ -243,10 +243,10 @@ public class ServiceComponentLocalServiceImpl
 	protected void upgradeModels(ClassLoader portletClassLoader)
 		throws Exception {
 
-		List models = getModels(portletClassLoader);
+		String[] models = getModels(portletClassLoader);
 
-		for (int i = 0; i < models.size(); i++) {
-			String name = (String)models.get(i);
+		for (int i = 0; i < models.length; i++) {
+			String name = models[i];
 
 			int pos = name.lastIndexOf(".model.");
 
@@ -254,7 +254,7 @@ public class ServiceComponentLocalServiceImpl
 				name.substring(0, pos) + ".model.impl." +
 					name.substring(pos + 7) + "ModelImpl";
 
-			Class modelClass = Class.forName(name, true, portletClassLoader);
+			Class<?> modelClass = Class.forName(name, true, portletClassLoader);
 
 			Field tableNameField = modelClass.getField("TABLE_NAME");
 			Field tableColumnsField = modelClass.getField("TABLE_COLUMNS");
@@ -283,14 +283,13 @@ public class ServiceComponentLocalServiceImpl
 			return;
 		}
 
-		List serviceComponents =
+		List<ServiceComponent> serviceComponents =
 			serviceComponentPersistence.findByBuildNamespace(
 				buildNamespace, _MAX_SERVICE_COMPONENTS,
 				serviceComponentsCount);
 
 		for (int i = 0; i < serviceComponents.size(); i++) {
-			ServiceComponent serviceComponent =
-				(ServiceComponent)serviceComponents.get(i);
+			ServiceComponent serviceComponent = serviceComponents.get(i);
 
 			serviceComponentPersistence.remove(serviceComponent);
 		}

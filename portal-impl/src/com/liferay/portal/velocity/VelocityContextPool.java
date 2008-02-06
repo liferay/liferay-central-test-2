@@ -22,9 +22,8 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.util.CollectionFactory;
-
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
 
@@ -56,7 +55,7 @@ public class VelocityContextPool {
 	}
 
 	private VelocityContextPool() {
-		_pool = CollectionFactory.getSyncHashMap();
+		_pool = new ConcurrentHashMap<String, ServletContext>();
 	}
 
 	private boolean _containsKey(String name) {
@@ -101,6 +100,6 @@ public class VelocityContextPool {
 
 	private static VelocityContextPool _instance = new VelocityContextPool();
 
-	private Map _pool;
+	private Map<String, ServletContext> _pool;
 
 }

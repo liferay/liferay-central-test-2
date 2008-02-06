@@ -25,7 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
@@ -208,15 +210,16 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_wapTheme = wapTheme;
 	}
 
-	public List getColorSchemes() {
-		List colorSchemes = ListUtil.fromCollection(_colorSchemesMap.values());
+	public List<ColorScheme> getColorSchemes() {
+		List<ColorScheme> colorSchemes = ListUtil.fromCollection(
+			_colorSchemesMap.values());
 
 		Collections.sort(colorSchemes);
 
 		return colorSchemes;
 	}
 
-	public Map getColorSchemesMap() {
+	public Map<String, ColorScheme> getColorSchemesMap() {
 		return _colorSchemesMap;
 	}
 
@@ -336,8 +339,8 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 
 		if (limit != null) {
-			List includes = limit.getIncludes();
-			List excludes = limit.getExcludes();
+			List<ThemeCompanyId> includes = limit.getIncludes();
+			List<ThemeCompanyId> excludes = limit.getExcludes();
 
 			if ((includes.size() != 0) && (excludes.size() != 0)) {
 
@@ -421,7 +424,8 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _templateExtension = "vm";
 	private Properties _settings = new Properties();
 	private boolean _wapTheme;
-	private Map _colorSchemesMap = new HashMap();
+	private Map<String, ColorScheme> _colorSchemesMap =
+		new HashMap<String, ColorScheme>();
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 	private boolean _loadFromServletContext;

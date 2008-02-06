@@ -124,7 +124,7 @@ public class OrganizationServiceJSON {
 	public static JSONArray getUserOrganizations(long userId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
+		java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
 
 		return OrganizationJSONSerializer.toJSONArray(returnValue);
 	}

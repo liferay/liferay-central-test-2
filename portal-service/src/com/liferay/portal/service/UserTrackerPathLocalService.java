@@ -337,6 +337,7 @@ public interface UserTrackerPathLocalService {
 
 	public void afterPropertiesSet();
 
-	public java.util.List getUserTrackerPaths(long userTrackerId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
+		long userTrackerId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

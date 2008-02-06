@@ -352,8 +352,8 @@ public interface OrgLaborLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrgLabors(long organizationId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		long organizationId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
 		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,

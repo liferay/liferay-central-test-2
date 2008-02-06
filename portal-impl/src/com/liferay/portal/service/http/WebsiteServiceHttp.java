@@ -195,8 +195,8 @@ public class WebsiteServiceHttp {
 		}
 	}
 
-	public static java.util.List getWebsites(HttpPrincipal httpPrincipal,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -228,7 +228,7 @@ public class WebsiteServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Website>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

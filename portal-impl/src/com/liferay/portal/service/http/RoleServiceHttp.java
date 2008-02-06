@@ -228,8 +228,8 @@ public class RoleServiceHttp {
 		}
 	}
 
-	public static java.util.List getGroupRoles(HttpPrincipal httpPrincipal,
-		long groupId)
+	public static java.util.List<com.liferay.portal.model.Role> getGroupRoles(
+		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -255,7 +255,7 @@ public class RoleServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Role>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -342,7 +342,7 @@ public class RoleServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserGroupRoles(
+	public static java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		HttpPrincipal httpPrincipal, long userId, long groupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -371,7 +371,7 @@ public class RoleServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Role>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -380,8 +380,9 @@ public class RoleServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserRelatedRoles(
-		HttpPrincipal httpPrincipal, long userId, java.util.List groups)
+	public static java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		HttpPrincipal httpPrincipal, long userId,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -413,7 +414,7 @@ public class RoleServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Role>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -422,8 +423,8 @@ public class RoleServiceHttp {
 		}
 	}
 
-	public static java.util.List getUserRoles(HttpPrincipal httpPrincipal,
-		long userId)
+	public static java.util.List<com.liferay.portal.model.Role> getUserRoles(
+		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -449,7 +450,7 @@ public class RoleServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Role>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

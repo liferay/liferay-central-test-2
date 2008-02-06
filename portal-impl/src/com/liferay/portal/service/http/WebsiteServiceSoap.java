@@ -124,7 +124,7 @@ public class WebsiteServiceSoap {
 	public static com.liferay.portal.model.WebsiteSoap[] getWebsites(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
-			java.util.List returnValue = WebsiteServiceUtil.getWebsites(className,
+			java.util.List<com.liferay.portal.model.Website> returnValue = WebsiteServiceUtil.getWebsites(className,
 					classPK);
 
 			return com.liferay.portal.model.WebsiteSoap.toSoapModels(returnValue);

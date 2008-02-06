@@ -874,8 +874,9 @@ public class PasswordPolicyLocalServiceUtil {
 		return passwordPolicyLocalService.getPasswordPolicyByUserId(userId);
 	}
 
-	public static java.util.List search(long companyId, java.lang.String name,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.PasswordPolicy> search(
+		long companyId, java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 

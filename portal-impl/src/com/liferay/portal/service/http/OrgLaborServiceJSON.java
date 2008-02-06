@@ -103,7 +103,7 @@ public class OrgLaborServiceJSON {
 	public static JSONArray getOrgLabors(long organizationId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = OrgLaborServiceUtil.getOrgLabors(organizationId);
+		java.util.List<com.liferay.portal.model.OrgLabor> returnValue = OrgLaborServiceUtil.getOrgLabors(organizationId);
 
 		return OrgLaborJSONSerializer.toJSONArray(returnValue);
 	}

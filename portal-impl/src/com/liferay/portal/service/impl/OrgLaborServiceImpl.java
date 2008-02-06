@@ -74,7 +74,7 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 		return orgLabor;
 	}
 
-	public List getOrgLabors(long organizationId)
+	public List<OrgLabor> getOrgLabors(long organizationId)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.VIEW);

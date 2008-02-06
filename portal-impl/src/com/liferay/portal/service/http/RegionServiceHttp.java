@@ -123,8 +123,8 @@ public class RegionServiceHttp {
 		}
 	}
 
-	public static java.util.List getRegions(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
 					"getRegions", new Object[0]);
@@ -142,7 +142,7 @@ public class RegionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Region>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -151,8 +151,9 @@ public class RegionServiceHttp {
 		}
 	}
 
-	public static java.util.List getRegions(HttpPrincipal httpPrincipal,
-		long countryId) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		HttpPrincipal httpPrincipal, long countryId)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(countryId);
 
@@ -172,7 +173,7 @@ public class RegionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Region>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -181,8 +182,9 @@ public class RegionServiceHttp {
 		}
 	}
 
-	public static java.util.List getRegions(HttpPrincipal httpPrincipal,
-		boolean active) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		HttpPrincipal httpPrincipal, boolean active)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new BooleanWrapper(active);
 
@@ -202,7 +204,7 @@ public class RegionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Region>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -211,8 +213,8 @@ public class RegionServiceHttp {
 		}
 	}
 
-	public static java.util.List getRegions(HttpPrincipal httpPrincipal,
-		long countryId, boolean active)
+	public static java.util.List<com.liferay.portal.model.Region> getRegions(
+		HttpPrincipal httpPrincipal, long countryId, boolean active)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(countryId);
@@ -235,7 +237,7 @@ public class RegionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.Region>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

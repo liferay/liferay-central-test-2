@@ -81,7 +81,8 @@ public class OrgLaborServiceUtil {
 		return orgLaborService.getOrgLabor(orgLaborId);
 	}
 
-	public static java.util.List getOrgLabors(long organizationId)
+	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();

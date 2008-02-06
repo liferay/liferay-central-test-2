@@ -244,7 +244,7 @@ public class PasswordPolicyLocalServiceImpl
 		return getPasswordPolicy(user.getCompanyId(), organizationIds);
 	}
 
-	public List search(
+	public List<PasswordPolicy> search(
 			long companyId, String name, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {

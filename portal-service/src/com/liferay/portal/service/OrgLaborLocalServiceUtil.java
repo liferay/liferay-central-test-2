@@ -821,8 +821,8 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.getOrgLabor(orgLaborId);
 	}
 
-	public static java.util.List getOrgLabors(long organizationId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		long organizationId) throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
 		return orgLaborLocalService.getOrgLabors(organizationId);

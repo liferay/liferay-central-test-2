@@ -73,19 +73,19 @@ public class RegionServiceImpl extends RegionServiceBaseImpl {
 		return region;
 	}
 
-	public List getRegions() throws SystemException {
+	public List<Region> getRegions() throws SystemException {
 		return regionPersistence.findAll();
 	}
 
-	public List getRegions(long countryId) throws SystemException {
+	public List<Region> getRegions(long countryId) throws SystemException {
 		return regionPersistence.findByCountryId(countryId);
 	}
 
-	public List getRegions(boolean active) throws SystemException {
+	public List<Region> getRegions(boolean active) throws SystemException {
 		return regionPersistence.findByActive(active);
 	}
 
-	public List getRegions(long countryId, boolean active)
+	public List<Region> getRegions(long countryId, boolean active)
 		throws SystemException {
 
 		return regionPersistence.findByC_A(countryId, active);

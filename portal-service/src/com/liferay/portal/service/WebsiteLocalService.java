@@ -354,11 +354,11 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getWebsites()
+	public java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getWebsites(long companyId,
-		java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Website> getWebsites(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateWebsite(long websiteId,

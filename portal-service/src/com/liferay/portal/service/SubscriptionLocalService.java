@@ -367,8 +367,8 @@ public interface SubscriptionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getSubscriptions(long companyId,
-		java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
+		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

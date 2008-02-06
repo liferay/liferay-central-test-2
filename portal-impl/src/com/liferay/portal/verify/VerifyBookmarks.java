@@ -50,7 +50,8 @@ public class VerifyBookmarks extends VerifyProcess {
 	}
 
 	protected void verifyBookmarks() throws Exception {
-		List entries = BookmarksEntryLocalServiceUtil.getNoAssetEntries();
+		List<BookmarksEntry> entries =
+			BookmarksEntryLocalServiceUtil.getNoAssetEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

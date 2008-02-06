@@ -136,7 +136,8 @@ public class UserServiceUtil {
 		return userService.getDefaultUserId(companyId);
 	}
 
-	public static java.util.List getGroupUsers(long groupId)
+	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
+		long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
@@ -144,7 +145,8 @@ public class UserServiceUtil {
 		return userService.getGroupUsers(groupId);
 	}
 
-	public static java.util.List getRoleUsers(long roleId)
+	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
+		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
