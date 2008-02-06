@@ -52,9 +52,6 @@ public class CaptchaUtil {
 
 			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
 
-			// Captcha should never be null, but on the rare occasion it is,
-			// just let people register.
-
 			if (captchaText != null) {
 				if (!captchaText.equals(
 						ParamUtil.getString(req, "captchaText"))) {
@@ -65,6 +62,8 @@ public class CaptchaUtil {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Captcha text is valid");
 					}
+
+					ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
 
 					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 						(Validator.isNotNull(req.getRemoteUser()))) {
@@ -85,8 +84,12 @@ public class CaptchaUtil {
 			}
 			else {
 				if (_log.isErrorEnabled()) {
-					_log.error("Captcha text is null");
+					_log.error(
+						"Captcha text is null.  User " + req.getRemoteUser() +
+						" may be trying to circumvent the captcha.");
 				}
+
+				throw new CaptchaTextException();
 			}
 		}
 	}
@@ -97,9 +100,6 @@ public class CaptchaUtil {
 
 			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
 
-			// Captcha should never be null, but on the rare occasion it is,
-			// just let people register.
-
 			if (captchaText != null) {
 				if (!captchaText.equals(
 						ParamUtil.getString(req, "captchaText"))) {
@@ -110,6 +110,8 @@ public class CaptchaUtil {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Captcha text is valid");
 					}
+
+					ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
 
 					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 						(Validator.isNotNull(req.getRemoteUser()))) {
@@ -130,8 +132,12 @@ public class CaptchaUtil {
 			}
 			else {
 				if (_log.isErrorEnabled()) {
-					_log.error("Captcha text is null");
+					_log.error(
+						"Captcha text is null.  User " + req.getRemoteUser() +
+						" may be trying to circumvent the captcha.");
 				}
+
+				throw new CaptchaTextException();
 			}
 		}
 	}
