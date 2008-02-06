@@ -22,22 +22,52 @@
 
 package com.liferay.portalweb.portlet.admin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowseInstanceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AdminTests extends BaseTests {
+public class BrowseInstanceTest extends BaseTestCase {
+	public void testBrowseInstance() throws Exception {
+		selenium.click("link=Instances");
+		selenium.waitForPageToLoad("30000");
 
-	public AdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(BrowseServerTest.class);
-		addTestSuite(BrowseInstanceTest.class);
-		addTestSuite(BrowsePluginsTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//a[contains(text(),'Plugins')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

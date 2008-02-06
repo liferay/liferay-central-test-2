@@ -20,94 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.admin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowsePluginsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEntryTest extends BaseTestCase {
-	public void testAddEntry() throws Exception {
-		selenium.click("//input[@value='Add Blog Entry']");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_title", "Test Entry");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_editor")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a test entry!");
-		selenium.selectFrame("relative=top");
-		selenium.click("//input[@value='Save']");
+public class BrowsePluginsTest extends BaseTestCase {
+	public void testBrowsePlugins() throws Exception {
+		selenium.click("//a[contains(text(),'Plugins')]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -116,7 +41,70 @@ public class AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Install More Portlets']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("document._9_fm.elements[9]", "label=4");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Workflow"));
+		selenium.click("link=Themes");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Install More Themes']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Layout Templates");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Install More Layout Templates']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@title='Configuration']")) {
 					break;
 				}
 			}

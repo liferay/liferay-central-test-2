@@ -34,9 +34,9 @@ public class EditConfigurationTest extends BaseTestCase {
 	public void testEditConfiguration() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("selectAndWait", "_86_selectionStyle");
+		selenium.select("_86_selectionStyle", "label=Manual");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("selectAndWait", "_86_assetType");
+		selenium.select("_86_assetType", "label=Blogs Entry");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

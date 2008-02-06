@@ -20,94 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.admin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowseServerTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEntryTest extends BaseTestCase {
-	public void testAddEntry() throws Exception {
-		selenium.click("//input[@value='Add Blog Entry']");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_title", "Test Entry");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_editor")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a test entry!");
-		selenium.selectFrame("relative=top");
-		selenium.click("//input[@value='Save']");
+public class BrowseServerTest extends BaseTestCase {
+	public void testBrowseServer() throws Exception {
+		selenium.click("link=More");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -116,7 +41,112 @@ public class AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
+				if (selenium.isElementPresent("link=Actions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@value='Execute']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Log Levels");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Update Categories")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=System Properties");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("document._9_fm.elements[8]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("document._9_fm.elements[8]", "label=8");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("user.timezone"));
+		selenium.click("link=Portal Properties");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("document._9_fm.elements[7]", "label=26");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("social.bookmark.types"));
+		selenium.click("link=Shutdown");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Shutdown']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=OpenOffice");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_9_enabledCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Instances")) {
 					break;
 				}
 			}
