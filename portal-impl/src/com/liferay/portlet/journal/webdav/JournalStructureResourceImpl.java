@@ -40,11 +40,12 @@ import java.io.InputStream;
 public class JournalStructureResourceImpl extends BaseResourceImpl {
 
 	public JournalStructureResourceImpl(
-		JournalStructure structure, String href) {
+		JournalStructure structure, String parentPath, String name) {
 
 		super(
-			href, structure.getStructureId(), structure.getCreateDate(),
-			structure.getModifiedDate(), structure.getXsd().length());
+			parentPath, name, structure.getStructureId(),
+			structure.getCreateDate(), structure.getModifiedDate(),
+			structure.getXsd().length());
 
 		setModel(structure);
 		setClassName(JournalStructure.class.getName());

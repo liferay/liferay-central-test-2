@@ -40,11 +40,13 @@ import java.io.InputStream;
 public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public DLFileEntryResourceImpl(
-		WebDAVRequest webDavReq, DLFileEntry fileEntry, String href) {
+		WebDAVRequest webDavReq, DLFileEntry fileEntry, String parentPath,
+		String name) {
 
 		super(
-			href, fileEntry.getTitleWithExtension(), fileEntry.getCreateDate(),
-			fileEntry.getModifiedDate(), fileEntry.getSize());
+			parentPath, name, fileEntry.getTitleWithExtension(),
+			fileEntry.getCreateDate(), fileEntry.getModifiedDate(),
+			fileEntry.getSize());
 
 		setModel(fileEntry);
 		setClassName(DLFileEntry.class.getName());

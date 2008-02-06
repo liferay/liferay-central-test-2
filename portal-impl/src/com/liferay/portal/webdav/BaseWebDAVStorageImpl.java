@@ -99,9 +99,8 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	protected Resource getResource(Group group) throws WebDAVException {
 		try {
-			String href =
-				getRootPath() + StringPool.SLASH + group.getCompanyId() +
-					StringPool.SLASH + group.getGroupId();
+			String parentPath =
+				getRootPath() + StringPool.SLASH + group.getCompanyId();
 
 			String name = group.getName();
 
@@ -113,7 +112,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 				name = user.getFullName();
 			}
 
-			return new BaseResourceImpl(href, name);
+			return new BaseResourceImpl(parentPath, group.getGroupId(), name);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

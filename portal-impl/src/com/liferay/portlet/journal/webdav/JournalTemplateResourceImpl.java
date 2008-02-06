@@ -38,10 +38,13 @@ import java.io.InputStream;
  */
 public class JournalTemplateResourceImpl extends BaseResourceImpl {
 
-	public JournalTemplateResourceImpl(JournalTemplate template, String href) {
+	public JournalTemplateResourceImpl(
+		JournalTemplate template, String parentPath, String name) {
+
 		super(
-			href, template.getTemplateId(), template.getCreateDate(),
-			template.getModifiedDate(), template.getXsl().length());
+			parentPath, name, template.getTemplateId(),
+			template.getCreateDate(), template.getModifiedDate(),
+			template.getXsl().length());
 
 		setModel(template);
 		setClassName(JournalTemplate.class.getName());

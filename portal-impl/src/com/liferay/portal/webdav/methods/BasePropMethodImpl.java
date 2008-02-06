@@ -286,8 +286,7 @@ public abstract class BasePropMethodImpl implements Method {
 			addResponse(
 				webDavReq,
 				new BaseResourceImpl(
-					storage.getRootPath() + StringPool.SLASH + companyId,
-					String.valueOf(companyId)),
+					storage.getRootPath(), companyId, companyId),
 				props, multistatus);
 
 			if (props.size() > 0) {
@@ -326,9 +325,8 @@ public abstract class BasePropMethodImpl implements Method {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				resource = new BaseResourceImpl(
-					storage.getRootPath() + StringPool.SLASH + companyId +
-						StringPool.SLASH + groupId,
-					group.getName());
+					storage.getRootPath() + StringPool.SLASH + companyId,
+					groupId, group.getName());
 
 				addResponse(
 					storage, webDavReq, resource, props, multistatus, depth);

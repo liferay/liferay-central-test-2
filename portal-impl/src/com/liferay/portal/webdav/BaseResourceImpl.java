@@ -23,6 +23,10 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.HttpUtil;
 
 import java.io.InputStream;
 
@@ -41,21 +45,44 @@ import java.util.Locale;
  */
 public class BaseResourceImpl implements Resource {
 
-	public BaseResourceImpl(String href, String displayName) {
-		this(href, displayName, null, null);
+	public BaseResourceImpl(
+		String parentPath, long name, long displayName) {
+
+		this(parentPath, String.valueOf(name), String.valueOf(displayName));
 	}
 
 	public BaseResourceImpl(
-		String href, String displayName, Date createDate, Date modifiedDate) {
+		String parentPath, long name, String displayName) {
 
-		this(href, displayName, createDate, modifiedDate, 0);
+		this(parentPath, String.valueOf(name), displayName);
 	}
 
 	public BaseResourceImpl(
-		String href, String displayName, Date createDate, Date modifiedDate,
-		int size) {
+		String parentPath, String name, String displayName) {
 
-		_href = href;
+		this(parentPath, name, displayName, null, null);
+	}
+
+	public BaseResourceImpl(
+		String parentPath, String name, String displayName, Date createDate,
+		Date modifiedDate) {
+
+		this(parentPath, name, displayName, createDate, modifiedDate, 0);
+	}
+
+	public BaseResourceImpl(
+		String parentPath, String name, String displayName, Date createDate,
+		Date modifiedDate, int size) {
+
+		_href = parentPath;
+
+		if (Validator.isNotNull(name)) {
+			name = HttpUtil.encodeURL(name);
+			name = StringUtil.replace(name, StringPool.PLUS, "%20");
+
+			_href += StringPool.SLASH + name;
+		}
+
 		_displayName = displayName;
 
 		if (createDate == null) {

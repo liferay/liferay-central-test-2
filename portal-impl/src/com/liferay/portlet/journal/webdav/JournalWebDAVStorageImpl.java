@@ -313,13 +313,14 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected Resource toResource(
 		WebDAVRequest webDavReq, String type, boolean appendPath) {
 
-		String href = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavReq.getPath();
+		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			href += StringPool.SLASH + type;
+			name = type;
 		}
 
-		Resource resource = new BaseResourceImpl(href, type);
+		Resource resource = new BaseResourceImpl(parentPath, name, type);
 
 		resource.setModel(type);
 
@@ -330,25 +331,27 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		WebDAVRequest webDavReq, JournalStructure structure,
 		boolean appendPath) {
 
-		String href = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavReq.getPath();
+		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			href += StringPool.SLASH + structure.getStructureId();
+			name = structure.getStructureId();
 		}
 
-		return new JournalStructureResourceImpl(structure, href);
+		return new JournalStructureResourceImpl(structure, parentPath, name);
 	}
 
 	protected Resource toResource(
 		WebDAVRequest webDavReq, JournalTemplate template, boolean appendPath) {
 
-		String href = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavReq.getPath();
+		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			href += StringPool.SLASH + template.getTemplateId();
+			name = template.getTemplateId();
 		}
 
-		return new JournalTemplateResourceImpl(template, href);
+		return new JournalTemplateResourceImpl(template, parentPath, name);
 	}
 
 	//private static final String _TYPE_ARTICLES = "Articles";

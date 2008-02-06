@@ -722,26 +722,29 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected Resource toResource(
 		WebDAVRequest webDavReq, DLFileEntry fileEntry, boolean appendPath) {
 
-		String href = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavReq.getPath();
+		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			href += StringPool.SLASH + fileEntry.getTitleWithExtension();
+			name = fileEntry.getTitleWithExtension();
 		}
 
-		return new DLFileEntryResourceImpl(webDavReq, fileEntry, href);
+		return new DLFileEntryResourceImpl(
+			webDavReq, fileEntry, parentPath, name);
 	}
 
 	protected Resource toResource(
 		WebDAVRequest webDavReq, DLFolder folder, boolean appendPath) {
 
-		String href = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavReq.getPath();
+		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			href += StringPool.SLASH + folder.getName();
+			name = folder.getName();
 		}
 
 		Resource resource = new BaseResourceImpl(
-			href, folder.getName(), folder.getCreateDate(),
+			parentPath, name, folder.getName(), folder.getCreateDate(),
 			folder.getModifiedDate());
 
 		resource.setModel(folder);
