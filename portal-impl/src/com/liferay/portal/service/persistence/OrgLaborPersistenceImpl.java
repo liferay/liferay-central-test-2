@@ -360,7 +360,8 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, organizationId);
 
-				List<OrgLabor> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgLabor> list = (List<OrgLabor>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -572,7 +573,8 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgLabor> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<OrgLabor> list = (List<OrgLabor>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

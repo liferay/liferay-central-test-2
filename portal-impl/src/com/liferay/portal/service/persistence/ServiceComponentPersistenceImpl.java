@@ -383,8 +383,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, buildNamespace);
 				}
 
-				List<ServiceComponent> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -725,8 +725,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ServiceComponent> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -49,22 +49,22 @@ public class DiffResult {
 
 	public static final String TARGET = "TARGET";
 
-	public DiffResult(int linePos, List changedLines) {
+	public DiffResult(int linePos, List<String> changedLines) {
 		_lineNumber = linePos + 1;
 		_changedLines = changedLines;
 	}
 
 	public DiffResult(int linePos, String changedLine) {
 		_lineNumber = linePos + 1;
-		_changedLines = new ArrayList();
+		_changedLines = new ArrayList<String>();
 		_changedLines.add(changedLine);
 	}
 
-	public List getChangedLines() {
+	public List<String> getChangedLines() {
 		return _changedLines;
 	}
 
-	public void setChangedLines(List changedLines) {
+	public void setChangedLines(List<String> changedLines) {
 		_changedLines = changedLines;
 	}
 
@@ -95,7 +95,7 @@ public class DiffResult {
 		sm.append(_lineNumber);
 		sm.append("\n");
 
-		Iterator itr = _changedLines.iterator();
+		Iterator<String> itr = _changedLines.iterator();
 
 		while (itr.hasNext()) {
 			sm.append(itr.next());
@@ -109,6 +109,6 @@ public class DiffResult {
 	}
 
 	private int _lineNumber;
-	private List _changedLines;
+	private List<String> _changedLines;
 
 }

@@ -437,8 +437,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<RatingsStats> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<RatingsStats> list = (List<RatingsStats>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -386,7 +386,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -747,7 +748,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1018,7 +1020,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1295,7 +1298,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, repeating);
 
-				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1521,7 +1525,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<CalEvent> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

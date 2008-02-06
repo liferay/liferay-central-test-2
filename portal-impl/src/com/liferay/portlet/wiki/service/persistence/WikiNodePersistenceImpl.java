@@ -384,7 +384,8 @@ public class WikiNodePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<WikiNode> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -740,7 +741,8 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<WikiNode> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -977,7 +979,8 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<WikiNode> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1185,7 +1188,8 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<WikiNode> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

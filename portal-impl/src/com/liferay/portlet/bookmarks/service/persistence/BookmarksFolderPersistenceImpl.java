@@ -394,8 +394,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<BookmarksFolder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -758,8 +758,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<BookmarksFolder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1003,8 +1003,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<BookmarksFolder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1264,8 +1264,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentFolderId);
 
-				List<BookmarksFolder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1494,8 +1494,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<BookmarksFolder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksFolder> list = (List<BookmarksFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

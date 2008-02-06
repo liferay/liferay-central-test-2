@@ -363,8 +363,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -633,8 +633,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1002,8 +1002,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileRank> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

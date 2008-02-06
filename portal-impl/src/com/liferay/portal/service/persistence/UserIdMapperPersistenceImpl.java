@@ -356,8 +356,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<UserIdMapper> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -781,8 +781,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserIdMapper> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

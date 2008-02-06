@@ -367,8 +367,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<ShoppingCoupon> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -682,8 +682,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingCoupon> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

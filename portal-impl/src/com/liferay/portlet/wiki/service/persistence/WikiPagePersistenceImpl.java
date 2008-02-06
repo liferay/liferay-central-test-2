@@ -388,7 +388,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -637,7 +638,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, nodeId);
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -910,7 +912,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, title);
 				}
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1189,7 +1192,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1475,7 +1479,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, redirectTo);
 				}
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1916,7 +1921,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, head);
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2161,7 +2167,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<WikiPage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

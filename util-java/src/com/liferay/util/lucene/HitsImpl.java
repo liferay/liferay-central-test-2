@@ -169,8 +169,8 @@ public class HitsImpl implements Hits {
 		return subset;
 	}
 
-	public List toList() {
-		List subset = new ArrayList(_length);
+	public List<Document> toList() {
+		List<Document> subset = new ArrayList<Document>(_length);
 
 		for (int i = 0; i < _length; i++) {
 			subset.add(doc(i));

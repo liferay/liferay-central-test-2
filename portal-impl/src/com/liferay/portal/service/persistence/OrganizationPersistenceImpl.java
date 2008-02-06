@@ -402,8 +402,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Organization> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<Organization> list = (List<Organization>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -645,8 +645,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Organization> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<Organization> list = (List<Organization>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -906,8 +906,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentOrganizationId);
 
-				List<Organization> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<Organization> list = (List<Organization>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1247,8 +1247,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Organization> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<Organization> list = (List<Organization>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1729,7 +1729,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.Group> list = QueryUtil.list(q,
+				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -2096,7 +2096,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.User> list = QueryUtil.list(q,
+				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

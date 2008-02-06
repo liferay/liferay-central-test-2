@@ -71,7 +71,7 @@ public class DiffUtil {
 	 * 				the first element contains DiffResults related to changes
 	 * 				in source and the second element to changes in target
 	 */
-	public static List[] diff(Reader source, Reader target) {
+	public static List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
 
 		return diff(
@@ -98,31 +98,31 @@ public class DiffUtil {
 	 * 				the first element contains DiffResults related to changes
 	 * 				in source and the second element to changes in target
 	 */
-	public static List[] diff(
+	public static List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,
 		String deletedMarkerEnd, int margin) {
 
-		List sourceResults = new ArrayList();
-		List targetResults = new ArrayList();
+		List<DiffResult> sourceResults = new ArrayList<DiffResult>();
+		List<DiffResult> targetResults = new ArrayList<DiffResult>();
 
-		List[] results = new List[] {sourceResults, targetResults};
+		List<DiffResult>[] results = new List[] {sourceResults, targetResults};
 
 		// Convert the texts to Lists where each element are lines of the texts.
 
-		List sourceStringList = FileUtil.toList(source);
-		List targetStringList = FileUtil.toList(target);
+		List<String> sourceStringList = FileUtil.toList(source);
+		List<String> targetStringList = FileUtil.toList(target);
 
 		// Make a a Diff of these lines and iterate over their Differences.
 
 		Diff diff = new Diff(sourceStringList, targetStringList);
 
-		List differences = diff.diff();
+		List<Difference> differences = diff.diff();
 
-		Iterator itr = differences.iterator();
+		Iterator<Difference> itr = differences.iterator();
 
 		while (itr.hasNext()) {
-			Difference difference = (Difference)itr.next();
+			Difference difference = itr.next();
 
 			if (difference.getAddedEnd() == Difference.NONE) {
 
@@ -137,7 +137,7 @@ public class DiffUtil {
 					sourceResults, targetResults, difference.getDeletedStart(),
 					difference.getAddedStart(), margin);
 
-				List changedLines = _addMargins(
+				List<String> changedLines = _addMargins(
 					sourceResults, sourceStringList,
 					difference.getDeletedStart(), margin);
 
@@ -174,7 +174,7 @@ public class DiffUtil {
 					sourceResults, targetResults, difference.getDeletedStart(),
 					difference.getAddedStart(), margin);
 
-				List changedLines = _addMargins(
+				List<String> changedLines = _addMargins(
 					sourceResults, sourceStringList,
 					difference.getDeletedStart(), margin);
 
@@ -213,10 +213,11 @@ public class DiffUtil {
 		return results;
 	}
 
-	private static List _addMargins(
-		List results, List stringList, int beginPos, int margin) {
+	private static List<String> _addMargins(
+		List<DiffResult> results, List<String> stringList, int beginPos,
+		int margin) {
 
-		List changedLines = new ArrayList();
+		List<String> changedLines = new ArrayList<String>();
 
 		if (margin == 0 || beginPos == 0) {
 			return changedLines;
@@ -238,7 +239,8 @@ public class DiffUtil {
 	}
 
 	private static void _addResults(
-		List results, List stringList, List changedLines, int start, int end) {
+		List<DiffResult> results, List<String> stringList,
+		List<String> changedLines, int start, int end) {
 
 		changedLines.addAll(stringList.subList(start, end + 1));
 
@@ -249,8 +251,8 @@ public class DiffUtil {
 	}
 
 	private static int _calculateMargin(
-		List sourceResults, List targetResults, int sourceBeginPos,
-		int targetBeginPos, int margin) {
+		List<DiffResult> sourceResults, List<DiffResult> targetResults,
+		int sourceBeginPos, int targetBeginPos, int margin) {
 
 		int sourceMargin = _checkOverlapping(
 			sourceResults, sourceBeginPos, margin);
@@ -265,8 +267,9 @@ public class DiffUtil {
 	}
 
 	private static void _checkCharDiffs(
-		List sourceResults, List targetResults, List sourceStringList,
-		List targetStringList, String addedMarkerStart, String addedMarkerEnd,
+		List<DiffResult> sourceResults, List<DiffResult> targetResults,
+		List<String> sourceStringList, List<String> targetStringList,
+		String addedMarkerStart, String addedMarkerEnd,
 		String deletedMarkerStart, String deletedMarkerEnd,
 		Difference difference, int margin) {
 
@@ -365,13 +368,13 @@ public class DiffUtil {
 	}
 
 	private static int _checkOverlapping(
-		List results, int beginPos, int margin) {
+		List<DiffResult> results, int beginPos, int margin) {
 
 		if (results.size() == 0 || (beginPos - margin) < 0) {
 			return margin;
 		}
 
-		DiffResult lastDiff = (DiffResult)results.get(results.size() - 1);
+		DiffResult lastDiff = results.get(results.size() - 1);
 
 		if (lastDiff.getChangedLines().size() == 0) {
 			return margin;
@@ -396,8 +399,8 @@ public class DiffUtil {
 	}
 
 	private static void _highlightChars(
-		List stringList, String markerStart, String markerEnd, int beginPos,
-		int endPos) {
+		List<String> stringList, String markerStart, String markerEnd,
+		int beginPos, int endPos) {
 
 		String start = markerStart + stringList.get(beginPos);
 
@@ -409,8 +412,8 @@ public class DiffUtil {
 	}
 
 	private static void _highlightLines(
-		List stringList, String markerStart, String markerEnd, int beginPos,
-		int endPos) {
+		List<String> stringList, String markerStart, String markerEnd,
+		int beginPos, int endPos) {
 
 		for (int i = beginPos; i <= endPos; i++) {
 			stringList.set(i, markerStart + stringList.get(i) + markerEnd);
@@ -418,24 +421,25 @@ public class DiffUtil {
 	}
 
 	private static boolean _lineDiff(
-		List sourceResults, List targetResults, List sourceStringList,
-		List targetStringList, String addedMarkerStart, String addedMarkerEnd,
+		List<DiffResult> sourceResults, List<DiffResult> targetResults,
+		List<String> sourceStringList, List<String> targetStringList,
+		String addedMarkerStart, String addedMarkerEnd,
 		String deletedMarkerStart, String deletedMarkerEnd,
 		int sourceChangedLine, int targetChangedLine, boolean aligned) {
 
-		String source = (String)sourceStringList.get(sourceChangedLine);
-		String target = (String)targetStringList.get(targetChangedLine);
+		String source = sourceStringList.get(sourceChangedLine);
+		String target = targetStringList.get(targetChangedLine);
 
 		// Convert the lines to lists where each element are chars of the lines.
 
-		List sourceList = _toList(source);
-		List targetList = _toList(target);
+		List<String> sourceList = _toList(source);
+		List<String> targetList = _toList(target);
 
 		Diff diff = new Diff(sourceList, targetList);
 
-		List differences = diff.diff();
+		List<Difference> differences = diff.diff();
 
-		Iterator itr = differences.iterator();
+		Iterator<Difference> itr = differences.iterator();
 
 		int deletedChars = 0;
 		int addedChars = 0;
@@ -444,7 +448,7 @@ public class DiffUtil {
 		// the source line need to be changed to be equals to the target line.
 
 		while (itr.hasNext() && !aligned) {
-			Difference difference = (Difference)itr.next();
+			Difference difference = itr.next();
 
 			if (difference.getDeletedEnd() != Difference.NONE) {
 				deletedChars =
@@ -477,7 +481,7 @@ public class DiffUtil {
 		// Iterate over Differences between chars of these lines.
 
 		while (itr.hasNext()) {
-			Difference difference = (Difference)itr.next();
+			Difference difference = itr.next();
 
 			if (difference.getAddedEnd() == Difference.NONE) {
 
@@ -550,10 +554,10 @@ public class DiffUtil {
 		return true;
 	}
 
-	private static List _toList(String line) {
+	private static List<String> _toList(String line) {
 		String[] stringArray = line.split(StringPool.BLANK);
 
-		List result = new ArrayList();
+		List<String> result = new ArrayList<String>();
 
 		for (int i = 1; i < stringArray.length; i++) {
 			result.add(stringArray[i]);
@@ -562,13 +566,13 @@ public class DiffUtil {
 		return result;
 	}
 
-	private static String _toString(List line) {
+	private static String _toString(List<String> line) {
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = line.iterator();
+		Iterator<String> itr = line.iterator();
 
 		while (itr.hasNext()) {
-			sm.append((String)itr.next());
+			sm.append(itr.next());
 		}
 
 		return sm.toString();

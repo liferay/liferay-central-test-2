@@ -353,7 +353,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -587,7 +588,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -838,7 +840,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1116,7 +1119,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1427,7 +1431,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1676,7 +1681,8 @@ public class PhonePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Phone> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -553,8 +553,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<PasswordPolicyRel> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -104,7 +104,7 @@ public class ShortType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Short> returnedClass() {
 		return Short.class;
 	}
 

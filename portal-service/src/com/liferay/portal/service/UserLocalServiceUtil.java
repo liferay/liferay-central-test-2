@@ -971,7 +971,8 @@ public class UserLocalServiceUtil {
 
 	public static int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+		java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -982,7 +983,8 @@ public class UserLocalServiceUtil {
 
 	public static int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+		java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -992,8 +994,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int authenticateByUserId(long companyId, long userId,
-		java.lang.String password, java.util.Map headerMap,
-		java.util.Map parameterMap)
+		java.lang.String password, java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1135,7 +1137,8 @@ public class UserLocalServiceUtil {
 		return userLocalService.getDefaultUserId(companyId);
 	}
 
-	public static java.util.List getGroupUsers(long groupId)
+	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
+		long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1143,7 +1146,8 @@ public class UserLocalServiceUtil {
 		return userLocalService.getGroupUsers(groupId);
 	}
 
-	public static java.util.List getOrganizationUsers(long organizationId)
+	public static java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
+		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1151,11 +1155,12 @@ public class UserLocalServiceUtil {
 		return userLocalService.getOrganizationUsers(organizationId);
 	}
 
-	public static java.util.List getPermissionUsers(long companyId,
-		long groupId, java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.User> getPermissionUsers(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String primKey, java.lang.String actionId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1179,7 +1184,8 @@ public class UserLocalServiceUtil {
 			emailAddress, andOperator);
 	}
 
-	public static java.util.List getRoleUsers(long roleId)
+	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
+		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1187,7 +1193,8 @@ public class UserLocalServiceUtil {
 		return userLocalService.getRoleUsers(roleId);
 	}
 
-	public static java.util.List getUserGroupUsers(long userGroupId)
+	public static java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
+		long userGroupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1324,9 +1331,9 @@ public class UserLocalServiceUtil {
 		return userLocalService.isPasswordExpiringSoon(user);
 	}
 
-	public static java.util.List search(long companyId,
-		java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap params, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.User> search(
+		long companyId, java.lang.String keywords, java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -1335,12 +1342,13 @@ public class UserLocalServiceUtil {
 			begin, end, obc);
 	}
 
-	public static java.util.List search(long companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.Boolean active,
-		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.User> search(
+		long companyId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
@@ -1350,7 +1358,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int searchCount(long companyId, java.lang.String keywords,
-		java.lang.Boolean active, java.util.LinkedHashMap params)
+		java.lang.Boolean active, java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
@@ -1360,8 +1368,9 @@ public class UserLocalServiceUtil {
 	public static int searchCount(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active, java.util.LinkedHashMap params,
-		boolean andSearch) throws com.liferay.portal.SystemException {
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andSearch)
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.searchCount(companyId, firstName, middleName,

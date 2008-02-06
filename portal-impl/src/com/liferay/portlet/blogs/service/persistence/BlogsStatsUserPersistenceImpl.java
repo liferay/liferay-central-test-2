@@ -367,8 +367,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -608,8 +608,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -971,8 +971,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1241,8 +1241,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, entryCount);
 
-				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1468,8 +1468,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<BlogsStatsUser> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

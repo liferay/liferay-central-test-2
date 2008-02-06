@@ -151,7 +151,8 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 				qPos.add(organizationId);
 			}
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<BlogsStatsUser>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

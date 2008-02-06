@@ -366,8 +366,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -609,8 +609,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -865,8 +865,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1149,8 +1149,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1464,8 +1464,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1717,8 +1717,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<EmailAddress> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

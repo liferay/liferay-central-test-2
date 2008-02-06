@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
@@ -38,6 +37,7 @@ import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -180,7 +180,7 @@ public abstract class CustomSQLUtil {
 			DataAccess.cleanUp(con);
 		}
 
-		_sqlPool = CollectionFactory.getHashMap();
+		_sqlPool = new HashMap<String, String>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -197,7 +197,7 @@ public abstract class CustomSQLUtil {
 	}
 
 	public String get(String id) {
-		return (String)_sqlPool.get(id);
+		return _sqlPool.get(id);
 	}
 
 	/**
@@ -452,10 +452,10 @@ public abstract class CustomSQLUtil {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.elements("sql").iterator();
+		Iterator<Element> itr = root.elements("sql").iterator();
 
 		while (itr.hasNext()) {
-			Element sql = (Element)itr.next();
+			Element sql = itr.next();
 
 			String file = sql.attributeValue("file");
 
@@ -505,6 +505,6 @@ public abstract class CustomSQLUtil {
 	private boolean _vendorSybase;
 	private String _functionIsNull;
 	private String _functionIsNotNull;
-	private Map _sqlPool;
+	private Map<String, String> _sqlPool;
 
 }

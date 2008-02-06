@@ -40,7 +40,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 		_criteria = criteria;
 	}
 
-	public List list() {
+	public List<?> list() {
 		return _criteria.list();
 	}
 

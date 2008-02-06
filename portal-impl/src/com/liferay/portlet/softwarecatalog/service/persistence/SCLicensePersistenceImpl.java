@@ -389,8 +389,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -645,8 +645,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, recommended);
 
-				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -872,8 +872,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCLicense> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1191,7 +1191,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list =
-					QueryUtil.list(q, getDialect(), begin, end);
+					(List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

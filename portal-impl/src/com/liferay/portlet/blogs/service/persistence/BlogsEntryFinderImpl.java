@@ -151,7 +151,8 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 				qPos.add(organizationId);
 			}
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<BlogsEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

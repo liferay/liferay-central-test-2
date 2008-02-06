@@ -371,7 +371,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, productEntryId);
 
-				List<SCProductScreenshot> list = QueryUtil.list(q,
+				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -893,7 +893,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductScreenshot> list = QueryUtil.list(q,
+				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				if (obc == null) {

@@ -390,8 +390,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -750,8 +750,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1005,8 +1005,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, templateId);
 				}
 
-				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1492,8 +1492,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, structureId);
 				}
 
-				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1726,8 +1726,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalTemplate> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

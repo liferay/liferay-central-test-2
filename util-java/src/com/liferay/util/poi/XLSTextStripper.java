@@ -54,15 +54,15 @@ public class XLSTextStripper {
 			for(int i = 0; i < numOfSheets; i++) {
 				HSSFSheet sheet = workbook.getSheetAt(i);
 
-				Iterator rowIterator = sheet.rowIterator();
+				Iterator<HSSFRow> rowIterator = sheet.rowIterator();
 
 				while (rowIterator.hasNext()) {
-					HSSFRow row = (HSSFRow)rowIterator.next();
+					HSSFRow row = rowIterator.next();
 
-					Iterator cellIterator = row.cellIterator();
+					Iterator<HSSFCell> cellIterator = row.cellIterator();
 
 					while (cellIterator.hasNext()) {
-						HSSFCell cell = (HSSFCell)cellIterator.next();
+						HSSFCell cell = cellIterator.next();
 
 						String cellStringValue = null;
 

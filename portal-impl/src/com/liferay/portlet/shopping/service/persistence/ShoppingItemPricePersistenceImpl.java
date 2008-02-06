@@ -371,8 +371,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, itemId);
 
-				List<ShoppingItemPrice> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -588,8 +588,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingItemPrice> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

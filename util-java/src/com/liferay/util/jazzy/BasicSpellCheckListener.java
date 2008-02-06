@@ -41,16 +41,16 @@ public class BasicSpellCheckListener implements SpellCheckListener {
 	public BasicSpellCheckListener(String text) {
 		_text = text;
 		_textCharArray = text.toCharArray();
-		_invalidWords = new ArrayList();
+		_invalidWords = new ArrayList<InvalidWord>();
 	}
 
 	public void spellingError(SpellCheckEvent event) {
-		List suggestions = new ArrayList();
+		List<String> suggestions = new ArrayList<String>();
 
-		Iterator itr = event.getSuggestions().iterator();
+		Iterator<Word> itr = event.getSuggestions().iterator();
 
 		while (itr.hasNext()) {
-			Word word = (Word)itr.next();
+			Word word = itr.next();
 
 			suggestions.add(word.getWord());
 		}
@@ -73,7 +73,7 @@ public class BasicSpellCheckListener implements SpellCheckListener {
 		}
 	}
 
-	public List getInvalidWords() {
+	public List<InvalidWord> getInvalidWords() {
 		return _invalidWords;
 	}
 
@@ -109,6 +109,6 @@ public class BasicSpellCheckListener implements SpellCheckListener {
 
 	private String _text;
 	private char[] _textCharArray;
-	private List _invalidWords;
+	private List<InvalidWord> _invalidWords;
 
 }

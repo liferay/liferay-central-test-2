@@ -367,8 +367,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<TagsProperty> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -609,8 +609,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, entryId);
 
-				List<TagsProperty> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -880,8 +880,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, key);
 				}
 
-				List<TagsProperty> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1227,8 +1227,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsProperty> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

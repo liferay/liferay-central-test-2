@@ -550,7 +550,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							</#if>
 						</#list>
 
-						List<${entity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
+						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), begin, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -1057,7 +1057,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				Query q = session.createQuery(query.toString());
 
-				List<${entity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1437,7 +1437,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						qPos.add(pk);
 
-						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = QueryUtil.list(q, getDialect(), begin, end);
+						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), begin, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 

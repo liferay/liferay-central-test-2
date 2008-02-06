@@ -352,7 +352,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Default roles
 
-		List roles = new ArrayList();
+		List<Role> roles = new ArrayList<Role>();
 
 		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
@@ -373,7 +373,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Default user groups
 
-		List userGroups = new ArrayList();
+		List<UserGroup> userGroups = new ArrayList<UserGroup>();
 
 		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES,
@@ -403,7 +403,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
@@ -412,8 +412,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int authenticateByScreenName(
-			long companyId, String screenName, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, String screenName, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
@@ -422,8 +422,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int authenticateByUserId(
-			long companyId, long userId, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, long userId, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
@@ -816,19 +816,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user.getUserId();
 	}
 
-	public List getGroupUsers(long groupId)
+	public List<User> getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
 		return groupPersistence.getUsers(groupId);
 	}
 
-	public List getOrganizationUsers(long organizationId)
+	public List<User> getOrganizationUsers(long organizationId)
 		throws PortalException, SystemException {
 
 		return organizationPersistence.getUsers(organizationId);
 	}
 
-	public List getPermissionUsers(
+	public List<User> getPermissionUsers(
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
@@ -873,13 +873,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public List getRoleUsers(long roleId)
+	public List<User> getRoleUsers(long roleId)
 		throws PortalException, SystemException {
 
 		return rolePersistence.getUsers(roleId);
 	}
 
-	public List getUserGroupUsers(long userGroupId)
+	public List<User> getUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 
 		return userGroupPersistence.getUsers(userGroupId);
@@ -1036,20 +1036,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
-	public List search(
+	public List<User> search(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByKeywords(
 			companyId, keywords, active, params, begin, end, obc);
 	}
 
-	public List search(
+	public List<User> search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap params, boolean andSearch, int begin,
-			int end, OrderByComparator obc)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andSearch, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByC_FN_MN_LN_SN_EA_A(
@@ -1059,7 +1060,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public int searchCount(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		return userFinder.countByKeywords(companyId, keywords, active, params);
@@ -1068,7 +1069,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public int searchCount(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap params, boolean andSearch)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andSearch)
 		throws SystemException {
 
 		return userFinder.countByC_FN_MN_LN_SN_EA_A(
@@ -1410,17 +1412,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId, long[] newOrganizationIds)
 		throws PortalException, SystemException {
 
-		List oldOrganizations = userPersistence.getOrganizations(userId);
+		List<Organization> oldOrganizations = userPersistence.getOrganizations(
+			userId);
 
-		List oldOrganizationIds = new ArrayList(oldOrganizations.size());
+		List<Long> oldOrganizationIds = new ArrayList<Long>(
+			oldOrganizations.size());
 
 		for (int i = 0; i < oldOrganizations.size(); i++) {
-			Organization oldOrganization =
-				(Organization)oldOrganizations.get(i);
+			Organization oldOrganization = oldOrganizations.get(i);
 
 			long oldOrganizationId = oldOrganization.getOrganizationId();
 
-			oldOrganizationIds.add(new Long(oldOrganizationId));
+			oldOrganizationIds.add(oldOrganizationId);
 
 			if (!ArrayUtil.contains(newOrganizationIds, oldOrganizationId)) {
 				unsetOrganizationUsers(oldOrganizationId, new long[] {userId});
@@ -1430,7 +1433,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		for (int i = 0; i < newOrganizationIds.length; i++) {
 			long newOrganizationId = newOrganizationIds[i];
 
-			if (!oldOrganizationIds.contains(new Long(newOrganizationId))) {
+			if (!oldOrganizationIds.contains(newOrganizationId)) {
 				addOrganizationUsers(newOrganizationId, new long[] {userId});
 			}
 		}
@@ -1732,7 +1735,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected int authenticate(
 			long companyId, String login, String password, String authType,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		login = login.trim().toLowerCase();

@@ -393,8 +393,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<DLFileEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -643,8 +643,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<DLFileEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -888,8 +888,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List<DLFileEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1276,8 +1276,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, title);
 				}
 
-				List<DLFileEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1512,8 +1512,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

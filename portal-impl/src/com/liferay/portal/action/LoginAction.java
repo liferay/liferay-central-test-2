@@ -124,27 +124,27 @@ public class LoginAction extends Action {
 
 		Company company = PortalUtil.getCompany(req);
 
-		Map headerMap = new HashMap();
+		Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
-		Enumeration enu1 = req.getHeaderNames();
+		Enumeration<String> enu1 = req.getHeaderNames();
 
 		while (enu1.hasMoreElements()) {
-			String name = (String)enu1.nextElement();
+			String name = enu1.nextElement();
 
-			Enumeration enu2 = req.getHeaders(name);
+			Enumeration<String> enu2 = req.getHeaders(name);
 
-			List headers = new ArrayList();
+			List<String> headers = new ArrayList<String>();
 
 			while (enu2.hasMoreElements()) {
-				String value = (String)enu2.nextElement();
+				String value = enu2.nextElement();
 
 				headers.add(value);
 			}
 
-			headerMap.put(name, (String[])headers.toArray(new String[0]));
+			headerMap.put(name, headers.toArray(new String[headers.size()]));
 		}
 
-		Map parameterMap = req.getParameterMap();
+		Map<String, String[]> parameterMap = req.getParameterMap();
 
 		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(

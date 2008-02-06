@@ -356,7 +356,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -591,7 +592,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -842,7 +844,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1120,7 +1123,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1431,7 +1435,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, mailing);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1754,7 +1759,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2003,7 +2009,8 @@ public class AddressPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Address> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Address> list = (List<Address>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -367,8 +367,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -611,8 +611,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -871,8 +871,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, statusId);
 
-				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1099,8 +1099,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MembershipRequest> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

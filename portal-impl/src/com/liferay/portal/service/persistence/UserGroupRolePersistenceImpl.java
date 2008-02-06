@@ -356,8 +356,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -580,8 +580,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -804,8 +804,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1042,8 +1042,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1296,8 +1296,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1512,8 +1512,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

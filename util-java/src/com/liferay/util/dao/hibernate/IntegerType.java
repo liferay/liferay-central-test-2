@@ -111,7 +111,7 @@ public class IntegerType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Integer> returnedClass() {
 		return Integer.class;
 	}
 

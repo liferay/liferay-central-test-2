@@ -396,8 +396,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -643,8 +643,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -906,8 +906,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1137,8 +1137,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCFrameworkVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1531,7 +1531,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> list =
-					QueryUtil.list(q, getDialect(), begin, end);
+					(List<com.liferay.portlet.softwarecatalog.model.SCProductVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

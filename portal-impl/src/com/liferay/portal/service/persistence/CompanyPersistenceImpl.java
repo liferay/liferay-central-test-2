@@ -701,7 +701,8 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Company> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Company> list = (List<Company>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

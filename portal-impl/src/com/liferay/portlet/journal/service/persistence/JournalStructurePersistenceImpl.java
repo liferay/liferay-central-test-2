@@ -392,8 +392,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<JournalStructure> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -752,8 +752,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalStructure> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1007,8 +1007,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, structureId);
 				}
 
-				List<JournalStructure> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1342,8 +1342,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalStructure> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -387,8 +387,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -747,8 +747,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -987,8 +987,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1242,8 +1242,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1622,8 +1622,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1848,8 +1848,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<BlogsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

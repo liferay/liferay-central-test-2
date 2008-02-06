@@ -46,13 +46,13 @@ public class QueryUtil {
 
 	public static final int ALL_POS = -1;
 
-	public static Iterator iterate(
+	public static Iterator<?> iterate(
 		Query query, Dialect dialect, int begin, int end) {
 
 		return list(query, dialect, begin, end).iterator();
 	}
 
-	public static List list(Query query, Dialect dialect, int begin, int end) {
+	public static List<?> list(Query query, Dialect dialect, int begin, int end) {
 		if ((begin == ALL_POS) && (end == ALL_POS)) {
 			return query.list();
 		}
@@ -64,7 +64,7 @@ public class QueryUtil {
 				return query.list();
 			}
 			else {
-				List list = new ArrayList();
+				List<Object> list = new ArrayList<Object>();
 
 				ScrollableResults sr = query.scroll();
 
@@ -85,11 +85,11 @@ public class QueryUtil {
 		}
 	}
 
-	public static List randomList(
+	public static List<?> randomList(
 		Query query, Dialect dialect, int total, int num) {
 
 		if ((total == 0) || (num == 0)) {
-			return new ArrayList();
+			return new ArrayList<Object>();
 		}
 
 		if (num >= total) {
@@ -98,7 +98,7 @@ public class QueryUtil {
 
 		int[] scrollIds = Randomizer.getInstance().nextInt(total, num);
 
-		List list = new ArrayList();
+		List<Object> list = new ArrayList<Object>();
 
 		ScrollableResults sr = query.scroll();
 
@@ -115,13 +115,14 @@ public class QueryUtil {
 		return list;
 	}
 
-	public static Comparable[] getPrevAndNext(
-		Query query, int count, OrderByComparator obc, Comparable comparable) {
+	public static Comparable<?>[] getPrevAndNext(
+		Query query, int count, OrderByComparator obc,
+		Comparable<?> comparable) {
 
 		int pos = count;
 		int boundary = 0;
 
-		Comparable[] array = new Comparable[3];
+		Comparable<?>[] array = new Comparable[3];
 
 		ScrollableResults sr = query.scroll();
 
@@ -137,7 +138,7 @@ public class QueryUtil {
 					break;
 				}
 
-				Comparable curComparable = (Comparable)obj;
+				Comparable<?> curComparable = (Comparable<?>)obj;
 
 				int value = obc.compare(comparable, curComparable);
 
@@ -153,13 +154,13 @@ public class QueryUtil {
 					array[1] = curComparable;
 
 					if (sr.previous()) {
-						array[0] = (Comparable)sr.get(0);
+						array[0] = (Comparable<?>)sr.get(0);
 					}
 
 					sr.next();
 
 					if (sr.next()) {
-						array[2] = (Comparable)sr.get(0);
+						array[2] = (Comparable<?>)sr.get(0);
 					}
 
 					break;

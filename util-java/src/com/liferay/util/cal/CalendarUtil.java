@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.CollectionFactory;
 
 import java.sql.Timestamp;
 
@@ -39,6 +38,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="CalendarUtil.java.html"><b><i>View Source</i></b></a>
@@ -140,7 +140,7 @@ public class CalendarUtil {
 
 		String key = sm.toString();
 
-		String[] days = (String[])_calendarPool.get(key);
+		String[] days = _calendarPool.get(key);
 
 		if (days == null) {
 			days = new String[7];
@@ -281,7 +281,7 @@ public class CalendarUtil {
 
 		String key = sm.toString();
 
-		String[] months = (String[])_calendarPool.get(key);
+		String[] months = _calendarPool.get(key);
 
 		if (months == null) {
 			months = new String[12];
@@ -468,6 +468,7 @@ public class CalendarUtil {
 		return cal;
 	}
 
-	private static Map _calendarPool = CollectionFactory.getSyncHashMap();
+	private static Map<String, String[]> _calendarPool =
+		new ConcurrentHashMap<String, String[]>();
 
 }

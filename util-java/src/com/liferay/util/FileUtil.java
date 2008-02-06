@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -333,7 +334,7 @@ public class FileUtil {
 	}
 
 	public static String[] listDirs(File file) throws IOException {
-		List dirs = new ArrayList();
+		List<String> dirs = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();
 
@@ -343,7 +344,7 @@ public class FileUtil {
 			}
 		}
 
-		return (String[])dirs.toArray(new String[0]);
+		return dirs.toArray(new String[dirs.size()]);
 	}
 
 	public static String[] listFiles(String fileName) throws IOException {
@@ -355,7 +356,7 @@ public class FileUtil {
 	}
 
 	public static String[] listFiles(File file) throws IOException {
-		List files = new ArrayList();
+		List<String> files = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();
 
@@ -365,7 +366,7 @@ public class FileUtil {
 			}
 		}
 
-		return (String[])files.toArray(new String[0]);
+		return files.toArray(new String[files.size()]);
 	}
 
 	public static void mkdirs(String pathName) {
@@ -431,8 +432,8 @@ public class FileUtil {
 
 		Arrays.sort(files, new FileComparator());
 
-		List directoryList = new ArrayList();
-		List fileList = new ArrayList();
+		List<File> directoryList = new ArrayList<File>();
+		List<File> fileList = new ArrayList<File>();
 
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isDirectory()) {
@@ -445,7 +446,7 @@ public class FileUtil {
 
 		directoryList.addAll(fileList);
 
-		return (File[])directoryList.toArray(new File[0]);
+		return directoryList.toArray(new File[directoryList.size()]);
 	}
 
 	public static String replaceSeparator(String fileName) {
@@ -453,8 +454,8 @@ public class FileUtil {
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 	}
 
-	public static List toList(Reader reader) {
-		List list = new ArrayList();
+	public static List<String> toList(Reader reader) {
+		List<String> list = new ArrayList<String>();
 
 		try {
 			BufferedReader br = new BufferedReader(reader);
@@ -473,12 +474,12 @@ public class FileUtil {
 		return list;
 	}
 
-	public static List toList(String fileName) {
+	public static List<String> toList(String fileName) {
 		try {
 			return toList(new FileReader(fileName));
 		}
 		catch (IOException ioe) {
-			return new ArrayList();
+			return new ArrayList<String>();
 		}
 	}
 

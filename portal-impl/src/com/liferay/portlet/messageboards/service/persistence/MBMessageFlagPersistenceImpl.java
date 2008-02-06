@@ -358,8 +358,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<MBMessageFlag> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -583,8 +583,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, messageId);
 
-				List<MBMessageFlag> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -890,8 +890,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMessageFlag> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

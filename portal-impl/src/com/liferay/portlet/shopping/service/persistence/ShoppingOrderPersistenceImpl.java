@@ -366,8 +366,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -757,8 +757,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, ppPaymentStatus);
 				}
 
-				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1006,8 +1006,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingOrder> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -394,8 +394,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, productEntryId);
 
-				List<SCProductVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -714,8 +714,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1029,7 +1029,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> list =
-					QueryUtil.list(q, getDialect(), begin, end);
+					(List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

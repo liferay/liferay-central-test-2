@@ -42,7 +42,7 @@ public class ContextReplace implements Cloneable {
 		this(null);
 	}
 
-	public ContextReplace(Map context) {
+	public ContextReplace(Map<String, String> context) {
 		if (context != null) {
 			_context.putAll(context);
 
@@ -75,26 +75,27 @@ public class ContextReplace implements Cloneable {
 	}
 
 	private void _updateArrays() {
-		List keys = new ArrayList();
-		List values = new ArrayList();
+		List<String> keys = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 
-		Iterator itr = _context.entrySet().iterator();
+		Iterator<Map.Entry<String, String>> itr =
+			_context.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, String> entry = itr.next();
 
-			String entryKey = (String)entry.getKey();
-			String entryValue = (String)entry.getValue();
+			String entryKey = entry.getKey();
+			String entryValue = entry.getValue();
 
 			keys.add("${" + entryKey + "}");
 			values.add(entryValue);
 		}
 
-		_keys = (String[])keys.toArray(new String[0]);
-		_values = (String[])values.toArray(new String[0]);
+		_keys = keys.toArray(new String[keys.size()]);
+		_values = values.toArray(new String[values.size()]);
 	}
 
-	private Map _context = new LinkedHashMap();
+	private Map<String, String> _context = new LinkedHashMap<String, String>();
 	private String[] _keys = new String[0];
 	private String[] _values = new String[0];
 

@@ -367,8 +367,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -608,8 +608,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -971,8 +971,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, messageCount);
 
-				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1198,8 +1198,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBStatsUser> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

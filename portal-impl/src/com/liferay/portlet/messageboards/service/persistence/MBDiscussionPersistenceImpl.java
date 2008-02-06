@@ -438,8 +438,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBDiscussion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<MBDiscussion> list = (List<MBDiscussion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

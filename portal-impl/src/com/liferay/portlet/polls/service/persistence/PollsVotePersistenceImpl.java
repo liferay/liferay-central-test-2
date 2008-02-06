@@ -351,8 +351,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, questionId);
 
-				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<PollsVote> list = (List<PollsVote>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -577,8 +577,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, choiceId);
 
-				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<PollsVote> list = (List<PollsVote>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -881,8 +881,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<PollsVote> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<PollsVote> list = (List<PollsVote>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -99,7 +99,7 @@ public class Autocomplete {
 	}
 
 	public static String[][] listToArray(
-		List list, String textParam, String valueParam) {
+		List<Object> list, String textParam, String valueParam) {
 
 		String[][] array = new String[list.size()][2];
 
@@ -126,13 +126,13 @@ public class Autocomplete {
 	}
 
 	public static JSONArray listToJson(
-		List list, String textParam, String valueParam) {
+		List<Object> list, String textParam, String valueParam) {
 
 		return arrayToJson(listToArray(list, textParam, valueParam), -1);
 	}
 
 	public static String listToXml(
-		List list, String textParam, String valueParam) {
+		List<Object> list, String textParam, String valueParam) {
 
 		return arrayToXml(listToArray(list, textParam, valueParam), -1);
 	}

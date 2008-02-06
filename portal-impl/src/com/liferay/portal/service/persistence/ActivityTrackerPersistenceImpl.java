@@ -366,8 +366,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -609,8 +609,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -852,8 +852,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1092,8 +1092,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, receiverUserId);
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1352,8 +1352,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1579,8 +1579,8 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ActivityTracker> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ActivityTracker> list = (List<ActivityTracker>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

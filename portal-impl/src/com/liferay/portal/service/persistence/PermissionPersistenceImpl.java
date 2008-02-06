@@ -398,8 +398,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, resourceId);
 
-				List<Permission> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<Permission> list = (List<Permission>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -709,8 +709,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Permission> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<Permission> list = (List<Permission>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1024,7 +1024,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.Group> list = QueryUtil.list(q,
+				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1397,7 +1397,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.Role> list = QueryUtil.list(q,
+				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1761,7 +1761,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.User> list = QueryUtil.list(q,
+				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

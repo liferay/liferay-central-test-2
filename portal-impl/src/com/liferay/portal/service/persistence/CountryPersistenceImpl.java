@@ -355,7 +355,8 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List<Country> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Country> list = (List<Country>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -563,7 +564,8 @@ public class CountryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Country> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Country> list = (List<Country>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

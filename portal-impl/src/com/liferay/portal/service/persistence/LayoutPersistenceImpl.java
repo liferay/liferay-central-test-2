@@ -354,7 +354,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -592,7 +593,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1035,7 +1037,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1440,7 +1443,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentLayoutId);
 
-				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1806,7 +1810,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Layout> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

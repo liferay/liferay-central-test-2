@@ -77,7 +77,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		int begin = (startPage * itemsPerPage) - itemsPerPage;
 		int end = startPage * itemsPerPage;
 
-		List results = UserLocalServiceUtil.search(
+		List<User> results = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, begin,
 			end, new ContactLastNameComparator(true));
 

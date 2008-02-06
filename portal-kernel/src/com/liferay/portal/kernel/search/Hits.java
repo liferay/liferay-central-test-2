@@ -64,6 +64,6 @@ public interface Hits extends Serializable {
 
 	public Hits subset(int begin, int end);
 
-	public List toList();
+	public List<Document> toList();
 
 }

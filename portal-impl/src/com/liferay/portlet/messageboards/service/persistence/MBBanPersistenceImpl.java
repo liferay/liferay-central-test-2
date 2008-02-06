@@ -345,7 +345,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -566,7 +567,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -788,7 +790,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, banUserId);
 
-				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1090,7 +1093,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBBan> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

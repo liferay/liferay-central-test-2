@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -81,7 +82,7 @@ public class UserFinderImpl implements UserFinder {
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		String[] firstNames = null;
@@ -110,7 +111,8 @@ public class UserFinderImpl implements UserFinder {
 	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap params, boolean andOperator)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andOperator)
 		throws SystemException {
 
 		return countByC_FN_MN_LN_SN_EA_A(
@@ -122,7 +124,8 @@ public class UserFinderImpl implements UserFinder {
 	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
-			Boolean active, LinkedHashMap params, boolean andOperator)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andOperator)
 		throws SystemException {
 
 		firstNames = CustomSQLUtil.keywords(firstNames);
@@ -181,10 +184,10 @@ public class UserFinderImpl implements UserFinder {
 				qPos.add(active);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -201,9 +204,10 @@ public class UserFinderImpl implements UserFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<User> findByKeywords(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		String[] firstNames = null;
@@ -229,11 +233,11 @@ public class UserFinderImpl implements UserFinder {
 			emailAddresses, active, params, andOperator, begin, end, obc);
 	}
 
-	public List findByC_FN_MN_LN_SN_EA_A(
+	public List<User> findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap params, boolean andOperator,
-			int begin, int end, OrderByComparator obc)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_FN_MN_LN_SN_EA_A(
@@ -243,11 +247,11 @@ public class UserFinderImpl implements UserFinder {
 			end, obc);
 	}
 
-	public List findByC_FN_MN_LN_SN_EA_A(
+	public List<User> findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
-			Boolean active, LinkedHashMap params, boolean andOperator,
-			int begin, int end, OrderByComparator obc)
+			Boolean active, LinkedHashMap<String, Object> params,
+			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		firstNames = CustomSQLUtil.keywords(firstNames);
@@ -307,7 +311,8 @@ public class UserFinderImpl implements UserFinder {
 				qPos.add(active);
 			}
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<User>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -317,19 +322,19 @@ public class UserFinderImpl implements UserFinder {
 		}
 	}
 
-	protected String getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -376,19 +381,19 @@ public class UserFinderImpl implements UserFinder {
 		return join;
 	}
 
-	protected String getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -455,12 +460,15 @@ public class UserFinderImpl implements UserFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(
+		QueryPos qPos, LinkedHashMap<String, Object> params) {
+
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
 				Object value = entry.getValue();
 

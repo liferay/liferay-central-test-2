@@ -104,7 +104,7 @@ public class BooleanType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Boolean> returnedClass() {
 		return Boolean.class;
 	}
 

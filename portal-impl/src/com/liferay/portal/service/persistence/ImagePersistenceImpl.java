@@ -352,7 +352,8 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				q.setInteger(queryPos++, size);
 
-				List<Image> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -560,7 +561,8 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Image> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
+						begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

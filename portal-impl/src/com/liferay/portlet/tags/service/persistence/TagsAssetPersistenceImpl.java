@@ -377,8 +377,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<TagsAsset> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<TagsAsset> list = (List<TagsAsset>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -681,8 +681,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsAsset> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<TagsAsset> list = (List<TagsAsset>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -994,7 +994,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.tags.model.TagsEntry> list = QueryUtil.list(q,
+				List<com.liferay.portlet.tags.model.TagsEntry> list = (List<com.liferay.portlet.tags.model.TagsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

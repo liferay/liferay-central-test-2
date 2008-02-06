@@ -123,7 +123,7 @@ public class LongType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Long> returnedClass() {
 		return Long.class;
 	}
 

@@ -383,8 +383,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -615,8 +615,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -873,8 +873,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, toName);
 				}
 
-				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1097,8 +1097,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileShortcut> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

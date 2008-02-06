@@ -30,42 +30,44 @@ package com.liferay.portal.service.persistence;
  */
 public interface UserFinder {
 	public int countByKeywords(long companyId, java.lang.String keywords,
-		java.lang.Boolean active, java.util.LinkedHashMap params)
+		java.lang.Boolean active, java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_FN_MN_LN_SN_EA_A(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.Boolean active,
-		java.util.LinkedHashMap params, boolean andOperator)
+		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_FN_MN_LN_SN_EA_A(long companyId,
 		java.lang.String[] firstNames, java.lang.String[] middleNames,
 		java.lang.String[] lastNames, java.lang.String[] screenNames,
 		java.lang.String[] emailAddresses, java.lang.Boolean active,
-		java.util.LinkedHashMap params, boolean andOperator)
+		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByKeywords(long companyId,
-		java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap params, int begin, int end,
+	public java.util.List<com.liferay.portal.model.User> findByKeywords(
+		long companyId, java.lang.String keywords, java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_FN_MN_LN_SN_EA_A(long companyId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.Boolean active,
-		java.util.LinkedHashMap params, boolean andOperator, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+		long companyId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_FN_MN_LN_SN_EA_A(long companyId,
-		java.lang.String[] firstNames, java.lang.String[] middleNames,
-		java.lang.String[] lastNames, java.lang.String[] screenNames,
-		java.lang.String[] emailAddresses, java.lang.Boolean active,
-		java.util.LinkedHashMap params, boolean andOperator, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+		long companyId, java.lang.String[] firstNames,
+		java.lang.String[] middleNames, java.lang.String[] lastNames,
+		java.lang.String[] screenNames, java.lang.String[] emailAddresses,
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

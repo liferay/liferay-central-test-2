@@ -344,7 +344,8 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Portlet> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Portlet> list = (List<Portlet>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -648,7 +649,8 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Portlet> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Portlet> list = (List<Portlet>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -203,7 +203,8 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 
 			qPos.add(groupId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<BookmarksEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -302,7 +303,8 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<BookmarksEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

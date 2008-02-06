@@ -322,7 +322,8 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Release> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Release> list = (List<Release>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

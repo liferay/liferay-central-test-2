@@ -392,8 +392,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -756,8 +756,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -999,8 +999,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1244,8 +1244,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, smallImageId);
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1519,8 +1519,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1813,8 +1813,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, structureId);
 				}
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2107,8 +2107,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, templateId);
 				}
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2548,8 +2548,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, approved);
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2799,8 +2799,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalArticle> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

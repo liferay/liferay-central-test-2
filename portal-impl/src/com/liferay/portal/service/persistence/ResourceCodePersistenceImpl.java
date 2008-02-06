@@ -354,8 +354,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -594,8 +594,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -924,8 +924,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ResourceCode> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

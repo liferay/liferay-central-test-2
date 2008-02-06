@@ -363,7 +363,8 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List<MBThread> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -576,7 +577,8 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBThread> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -395,8 +395,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -640,8 +640,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -901,8 +901,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1253,8 +1253,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1739,7 +1739,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = QueryUtil.list(q,
+				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

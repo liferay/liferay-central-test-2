@@ -387,8 +387,8 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<JournalFeed> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -747,8 +747,8 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalFeed> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1073,8 +1073,8 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalFeed> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

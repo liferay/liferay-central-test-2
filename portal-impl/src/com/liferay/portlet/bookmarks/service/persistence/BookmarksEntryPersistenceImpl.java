@@ -393,8 +393,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -643,8 +643,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -860,8 +860,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<BookmarksEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

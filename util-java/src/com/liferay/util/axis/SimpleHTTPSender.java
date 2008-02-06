@@ -169,8 +169,10 @@ public class SimpleHTTPSender extends HTTPSender {
 		out.flush();
 	}
 
-	private static ThreadLocal _currentCookie = new ThreadLocal() {
-		protected Object initialValue() {
+	private static ThreadLocal<String> _currentCookie =
+		new ThreadLocal<String>() {
+
+		protected String initialValue() {
 			return StringPool.BLANK;
 		}
 	};

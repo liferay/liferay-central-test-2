@@ -370,7 +370,8 @@ public class ListTypePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, type);
 				}
 
-				List<ListType> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ListType> list = (List<ListType>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -585,7 +586,8 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ListType> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<ListType> list = (List<ListType>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

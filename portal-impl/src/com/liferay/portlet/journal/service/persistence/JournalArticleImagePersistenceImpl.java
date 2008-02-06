@@ -359,7 +359,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalArticleImage> list = QueryUtil.list(q,
+				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -587,7 +587,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, tempImage);
 
-				List<JournalArticleImage> list = QueryUtil.list(q,
+				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -865,7 +865,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 				q.setDouble(queryPos++, version);
 
-				List<JournalArticleImage> list = QueryUtil.list(q,
+				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1265,7 +1265,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalArticleImage> list = QueryUtil.list(q,
+				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				if (obc == null) {

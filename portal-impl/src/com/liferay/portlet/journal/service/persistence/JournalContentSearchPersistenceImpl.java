@@ -378,7 +378,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, privateLayout);
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -649,7 +649,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -931,7 +931,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, layoutId);
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1235,7 +1235,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, articleId);
 				}
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1562,7 +1562,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -1969,7 +1969,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalContentSearch> list = QueryUtil.list(q,
+				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				if (obc == null) {

@@ -356,8 +356,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -580,8 +580,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, roleId);
 
-				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -780,8 +780,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgGroupRole> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

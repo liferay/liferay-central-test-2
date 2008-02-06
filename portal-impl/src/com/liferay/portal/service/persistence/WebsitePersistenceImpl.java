@@ -356,7 +356,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -591,7 +592,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -842,7 +844,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1120,7 +1123,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1431,7 +1435,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, primary);
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1680,7 +1685,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Website> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Website> list = (List<Website>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

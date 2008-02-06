@@ -434,8 +434,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<WebDAVProps> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<WebDAVProps> list = (List<WebDAVProps>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

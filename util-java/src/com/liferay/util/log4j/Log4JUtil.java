@@ -58,12 +58,12 @@ public class Log4JUtil {
 			DOMConfigurator.configure(url);
 		}
 		else {
-			Set currentLoggerNames = new HashSet();
+			Set<String> currentLoggerNames = new HashSet<String>();
 
-			Enumeration enu = LogManager.getCurrentLoggers();
+			Enumeration<Logger> enu = LogManager.getCurrentLoggers();
 
 			while (enu.hasMoreElements()) {
-				Logger logger = (Logger)enu.nextElement();
+				Logger logger = enu.nextElement();
 
 				currentLoggerNames.add(logger.getName());
 			}
@@ -75,10 +75,10 @@ public class Log4JUtil {
 
 				Element root = doc.getRootElement();
 
-				Iterator itr = root.elements("category").iterator();
+				Iterator<Element> itr = root.elements("category").iterator();
 
 				while (itr.hasNext()) {
-					Element category = (Element)itr.next();
+					Element category = itr.next();
 
 					String name = category.attributeValue("name");
 					String priority =

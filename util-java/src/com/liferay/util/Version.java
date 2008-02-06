@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="Version.java.html"><b><i>View Source</i></b></a>
@@ -35,12 +36,12 @@ import java.util.StringTokenizer;
  * @author Jorge Ferrer
  *
  */
-public class Version implements Comparable {
+public class Version implements Comparable<Version> {
 
 	public static final String UNKNOWN = "unknown";
 
 	public static Version getInstance(String version) {
-		Version versionObj = (Version)_versions.get(version);
+		Version versionObj = _versions.get(version);
 
 		if (versionObj == null) {
 			versionObj =  new Version(version);
@@ -147,12 +148,10 @@ public class Version implements Comparable {
 		return false;
 	}
 
-	public int compareTo(Object obj) {
-		if ((obj == null) || (!(obj instanceof Version))) {
+	public int compareTo(Version version) {
+		if (version == null) {
 			return 1;
 		}
-
-		Version version = (Version)obj;
 
 		// Unknown is always considered a lower version
 
@@ -274,7 +273,8 @@ public class Version implements Comparable {
 
 	private static final String _SEPARATOR = StringPool.PERIOD;
 
-	private static Map _versions = CollectionFactory.getSyncHashMap();
+	private static Map<String, Version> _versions =
+		new ConcurrentHashMap<String, Version>();
 
 	private String _major;
 	private String _minor;

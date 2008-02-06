@@ -402,8 +402,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List<DLFileVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -771,8 +771,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileVersion> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

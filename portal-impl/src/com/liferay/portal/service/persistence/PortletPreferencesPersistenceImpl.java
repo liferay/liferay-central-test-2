@@ -357,8 +357,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -612,8 +612,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, portletId);
 				}
 
-				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -891,8 +891,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, plid);
 
-				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1256,8 +1256,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<PortletPreferences> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

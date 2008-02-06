@@ -390,8 +390,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -640,8 +640,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -884,8 +884,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1129,8 +1129,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1389,8 +1389,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, threadId);
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1662,8 +1662,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentMessageId);
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1891,8 +1891,8 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMessage> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

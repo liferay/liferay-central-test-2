@@ -387,7 +387,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -748,7 +749,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -989,7 +991,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1247,7 +1250,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentFolderId);
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1532,7 +1536,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1893,7 +1898,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

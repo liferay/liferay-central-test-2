@@ -34,8 +34,9 @@ import java.util.List;
  */
 public class InvalidWord implements Serializable {
 
-	public InvalidWord(String invalidWord, List suggestions, String wordContext,
-					   int wordContextPosition) {
+	public InvalidWord(
+		String invalidWord, List<String> suggestions, String wordContext,
+		int wordContextPosition) {
 
 		_invalidWord = invalidWord;
 		_suggestions = suggestions;
@@ -47,7 +48,7 @@ public class InvalidWord implements Serializable {
 		return _invalidWord;
 	}
 
-	public List getSuggestions() {
+	public List<String> getSuggestions() {
 		return _suggestions;
 	}
 
@@ -60,7 +61,7 @@ public class InvalidWord implements Serializable {
 	}
 
 	private String _invalidWord;
-	private List _suggestions;
+	private List<String> _suggestions;
 	private String _wordContext;
 	private int _wordContextPosition;
 

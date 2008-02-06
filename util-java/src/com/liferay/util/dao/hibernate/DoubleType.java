@@ -104,7 +104,7 @@ public class DoubleType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Double> returnedClass() {
 		return Double.class;
 	}
 

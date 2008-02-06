@@ -322,7 +322,8 @@ public class AccountPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Account> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Account> list = (List<Account>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

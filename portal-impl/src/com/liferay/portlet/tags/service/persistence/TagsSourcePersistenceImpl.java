@@ -329,8 +329,8 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsSource> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<TagsSource> list = (List<TagsSource>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

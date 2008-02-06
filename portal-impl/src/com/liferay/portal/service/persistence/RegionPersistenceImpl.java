@@ -355,7 +355,8 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, countryId);
 
-				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = (List<Region>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -589,7 +590,8 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = (List<Region>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -840,7 +842,8 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				q.setBoolean(queryPos++, active);
 
-				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = (List<Region>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1061,7 +1064,8 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Region> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Region> list = (List<Region>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

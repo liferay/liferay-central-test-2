@@ -364,7 +364,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<JournalArticleResource> list = QueryUtil.list(q,
+				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
@@ -679,7 +679,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalArticleResource> list = QueryUtil.list(q,
+				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				if (obc == null) {

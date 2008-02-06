@@ -65,7 +65,7 @@ public class InternetAddressUtil {
 
 		InternetAddress[] internetAddresses = (InternetAddress[])addresses;
 
-		List list = new ArrayList();
+		List<InternetAddress> list = new ArrayList<InternetAddress>();
 
 		if ((internetAddresses == null) || Validator.isNull(emailAddress)) {
 			return internetAddresses;
@@ -77,7 +77,7 @@ public class InternetAddressUtil {
 			}
 		}
 
-		return (InternetAddress[])list.toArray(new InternetAddress[0]);
+		return list.toArray(new InternetAddress[list.size()]);
 	}
 
 	public static String toString(Address address) {

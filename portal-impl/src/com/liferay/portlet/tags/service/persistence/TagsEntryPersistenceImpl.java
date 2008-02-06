@@ -472,8 +472,8 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsEntry> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -708,7 +708,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.tags.model.TagsAsset> list = QueryUtil.list(q,
+				List<com.liferay.portlet.tags.model.TagsAsset> list = (List<com.liferay.portlet.tags.model.TagsAsset>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

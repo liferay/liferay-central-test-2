@@ -387,7 +387,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -748,7 +749,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -989,7 +991,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1247,7 +1250,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentFolderId);
 
-				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1473,7 +1477,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<IGFolder> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

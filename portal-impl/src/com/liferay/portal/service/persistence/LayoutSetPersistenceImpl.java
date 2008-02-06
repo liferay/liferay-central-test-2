@@ -349,8 +349,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<LayoutSet> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -749,8 +749,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<LayoutSet> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -372,8 +372,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classPK);
 
-				List<RatingsEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -700,8 +700,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<RatingsEntry> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

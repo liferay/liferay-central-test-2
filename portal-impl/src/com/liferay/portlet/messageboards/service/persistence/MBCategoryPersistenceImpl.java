@@ -390,8 +390,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -754,8 +754,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -998,8 +998,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1258,8 +1258,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, parentCategoryId);
 
-				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1487,8 +1487,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBCategory> list = QueryUtil.list(q, getDialect(), begin,
-						end);
+				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -358,8 +358,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
-				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -587,8 +587,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, permissionId);
 
-				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -794,8 +794,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgGroupPermission> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -356,8 +356,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, companyId);
 
-				List<PluginSetting> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -692,8 +692,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<PluginSetting> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

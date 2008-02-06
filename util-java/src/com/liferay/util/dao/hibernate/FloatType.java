@@ -104,7 +104,7 @@ public class FloatType implements UserType {
 		return original;
 	}
 
-	public Class returnedClass() {
+	public Class<Float> returnedClass() {
 		return Float.class;
 	}
 

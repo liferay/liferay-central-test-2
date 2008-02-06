@@ -384,7 +384,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 					q.setString(queryPos++, uuid);
 				}
 
-				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -629,7 +630,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, folderId);
 
-				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1219,7 +1221,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<IGImage> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

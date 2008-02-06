@@ -416,19 +416,21 @@ public interface UserLocalService {
 
 	public int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+		java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
-		java.util.Map headerMap, java.util.Map parameterMap)
+		java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public int authenticateByUserId(long companyId, long userId,
-		java.lang.String password, java.util.Map headerMap,
-		java.util.Map parameterMap)
+		java.lang.String password, java.util.Map<String, String[]> headerMap,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -499,19 +501,22 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupUsers(long groupId)
+	public java.util.List<com.liferay.portal.model.User> getGroupUsers(
+		long groupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrganizationUsers(long organizationId)
+	public java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
+		long organizationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPermissionUsers(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+	public java.util.List<com.liferay.portal.model.User> getPermissionUsers(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String primKey, java.lang.String actionId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -523,11 +528,13 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRoleUsers(long roleId)
+	public java.util.List<com.liferay.portal.model.User> getRoleUsers(
+		long roleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroupUsers(long userGroupId)
+	public java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
+		long userGroupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -595,28 +602,31 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long companyId, java.lang.String keywords,
-		java.lang.Boolean active, java.util.LinkedHashMap params, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List search(long companyId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active, java.util.LinkedHashMap params,
-		boolean andSearch, int begin, int end,
+	public java.util.List<com.liferay.portal.model.User> search(
+		long companyId, java.lang.String keywords, java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.User> search(
+		long companyId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int searchCount(long companyId, java.lang.String keywords,
-		java.lang.Boolean active, java.util.LinkedHashMap params)
+		java.lang.Boolean active, java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active, java.util.LinkedHashMap params,
-		boolean andSearch) throws com.liferay.portal.SystemException;
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<String, Object> params, boolean andSearch)
+		throws com.liferay.portal.SystemException;
 
 	public void sendPassword(long companyId, java.lang.String emailAddress,
 		java.lang.String remoteAddr, java.lang.String remoteHost,

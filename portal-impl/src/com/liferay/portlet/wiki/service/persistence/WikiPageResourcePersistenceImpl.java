@@ -445,8 +445,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<WikiPageResource> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<WikiPageResource> list = (List<WikiPageResource>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -378,8 +378,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, categoryId);
 
-				List<ShoppingItem> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingItem> list = (List<ShoppingItem>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -991,8 +991,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingItem> list = QueryUtil.list(q, getDialect(),
-						begin, end);
+				List<ShoppingItem> list = (List<ShoppingItem>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1529,7 +1529,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.shopping.model.ShoppingItemPrice> list = QueryUtil.list(q,
+				List<com.liferay.portlet.shopping.model.ShoppingItemPrice> list = (List<com.liferay.portlet.shopping.model.ShoppingItemPrice>)QueryUtil.list(q,
 						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,

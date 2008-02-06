@@ -347,7 +347,8 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, codeId);
 
-				List<Resource> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Resource> list = (List<Resource>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -651,7 +652,8 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				List<Resource> list = QueryUtil.list(q, getDialect(), begin, end);
+				List<Resource> list = (List<Resource>)QueryUtil.list(q,
+						getDialect(), begin, end);
 
 				if (obc == null) {
 					Collections.sort(list);
