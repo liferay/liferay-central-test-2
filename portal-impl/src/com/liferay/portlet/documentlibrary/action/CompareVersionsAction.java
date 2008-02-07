@@ -48,8 +48,6 @@ import java.io.InputStreamReader;
 
 import java.util.List;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -66,9 +64,9 @@ import org.apache.struts.action.ActionMapping;
  */
 public class CompareVersionsAction extends PortletAction {
 
-	public void processAction(
+	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		try {
@@ -86,17 +84,11 @@ public class CompareVersionsAction extends PortletAction {
 				throw e;
 			}
 		}
-	}
-
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
 
 		return mapping.findForward("portlet.document_library.compare_versions");
 	}
 
-	protected void compareVersions(ActionRequest req) throws Exception {
+	protected void compareVersions(RenderRequest req) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
