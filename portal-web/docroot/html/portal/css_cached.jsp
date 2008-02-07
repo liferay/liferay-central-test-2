@@ -110,6 +110,44 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	height: 1%;
 }
 
+/* ---------- Flyout ---------- */
+
+.lfr-flyout ul {
+	display: none;
+}
+.js li.lfr-flyout {
+	display: block;
+	position: relative;
+}
+
+.js .lfr-flyout li ul {
+	display: none;
+}
+
+.js .lfr-flyout.has-children {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/04_left.png) no-repeat 5px 50%;
+	padding-left: 12px;
+}
+
+.js .lfr-flyout.has-children.send-right {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/04_right.png);
+}
+
+.js .lfr-flyout.has-children ul {
+	display: none;
+	min-width: 150px;
+	position: absolute;
+	right: 100%;
+	top: 0;
+}
+
+.js .lfr-flyout.has-children.send-right ul {
+	left: 100%;
+	right: auto;
+}
+
+/* ---------- Portlet item ---------- */
+
 .lfr-portlet-item {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_item.png) no-repeat 0 50%;
 	border: 1px solid #fff;
@@ -254,7 +292,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Interactive Dock ---------- */
 
-.js .lfr-dock.interactive-mode {
+.js .interactive-mode {
 	float: right;
 	min-width: 150px;
 	position: relative;
@@ -262,7 +300,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	top: 10px;
 }
 
-.js .lfr-dock.interactive-mode h2 {
+.js .interactive-mode h2 {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bar.png) no-repeat 100% -30px;
 	font-size: 1.2em;
 	margin-bottom: 0;
@@ -271,7 +309,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	z-index: 82;
 }
 
-.js .lfr-dock.interactive-mode h2 span {
+.js .interactive-mode h2 span {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bar.png) no-repeat 0 0;
 	display: block;
 	font-size: 1.2em;
@@ -281,7 +319,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	padding: 0.5em 0.5em 0.5em 2em;
 }
 
-.js.ie6 .lfr-dock.interactive-mode h2 span {
+.js.ie6 .interactive-mode h2 span {
 	height: 16px;
 }
 
@@ -290,121 +328,52 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	top: -2px;
 }
 
-.js .lfr-dock.interactive-mode ul {
+.js .interactive-mode ul {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bg.png) no-repeat 0 0;
 	display: none;
 	float: none;
 }
 
-.js .lfr-dock.interactive-mode li {
+.js .interactive-mode li {
 	display: block;
 	float: none;
 	margin-bottom: 0pt;
 	margin-left: 0.2em;
 }
 
-.js .lfr-dock.interactive-mode li a {
+.js .interactive-mode li a {
 	background-position: 0.5em 50%;
 	background-repeat: no-repeat;
-	border-top: 1px solid #ccc;
 	display: block;
 	margin-left: 0.3em;
 	padding: 0.5em 0pt 0.5em 2.5em;
 	text-decoration: none;
 }
 
-.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child ul.show-my-places li:first-child a {
-	border-top: none;
-}
-
-.js .lfr-dock.interactive-mode li a:hover {
+.js .interactive-mode li a:hover {
 	background-position: 1.5em 50%;
 	padding-left: 3.5em;
 }
 
-.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a:hover, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover {
-	border-top: none;
-}
-
-.js .my-places {
-	display: none;
-}
-
-.js .lfr-dock.interactive-mode li.my-places li a {
-	background-image: none;
-}
-
-.js .lfr-dock.interactive-mode li.my-places li ul li.current a, .js .lfr-dock.interactive-mode li.my-places li ul li.current a:hover {
+.js .interactive-mode .my-places li.current a {
 	background: transparent url(<%= themeDisplay.getPathThemeImages() %>/dock/my_place_current.png) no-repeat 1em 50%;
 	margin: 0.1em 0 0 0.2em;
 	padding-left: 3.5em;
 }
 
-.js .interactive-mode .my-places .show-my-places {
-	display: block;
-	min-width: 200px;
-	padding: 0.2em;
-	position: absolute;
-	right: 85%;
-	top: 87%;
-}
-
-.js .interactive-mode .my-places.send-right .show-my-places {
-	left: 100%;
-	top: -10px;
-}
-
-.js .interactive-mode .my-places.send-down .show-my-places {
-	left: 0;
-	top: 100%;
-}
-
-.js .interactive-mode .my-places .show-my-places li {
-	background: url() no-repeat 5px 50%;
-	margin: 0;
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_place.png) no-repeat 3px 50%;
-	font-size: 1.1em;
-	font-weight: bold;
-	padding: 0.5em 0.2em 0.5em 2em;
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle h3 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/expand_community.png) no-repeat 100% 50%;
-	font-size: 1em;
-	margin: 0;
-	padding-right: 1.8em;
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle.hide h3 {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/collapse_community.png);
-}
-
-.js .interactive-mode .my-places .show-my-places li ul {
-	background: none no-repeat 3px 50%;
-	border: none;
-	display: none;
-}
-
-.js .interactive-mode .my-places .show-my-places li ul {
-	margin-left: 0.5em;
-}
-
-.js .interactive-mode .my-places .show-my-places li ul li {
+.js .interactive-mode .lfr-flyout.has-children li {
 	position: relative;
 }
 
-.js .interactive-mode .my-places .show-my-places ul li.public a, .js .my-places .show-my-places ul li.public a:hover {
+.js .interactive-mode .my-places li.public a {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_public.png);
 }
 
-.js .interactive-mode .my-places .show-my-places li.private a, .js .my-places .show-my-places li.private a:hover {
+.js .interactive-mode .my-places li.private a {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_private.png);
 }
 
-.js .interactive-mode .my-places .show-my-places ul li.public a.add-page, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page {
+.js .interactive-mode .my-places ul li a.add-page {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
 	border: none;
 	display: block;
@@ -418,26 +387,9 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	width: 16px;
 }
 
-.js .interactive-mode .my-places .show-my-places ul li.public a.add-page:hover, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page:hover {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
-	padding: 0;
-}
-
 .ie6.js .lfr-dock.interactive-mode {
 	white-space: nowrap;
 	width: 150px;
-}
-
-.ie.js .lfr-dock .my-places .show-my-places h3 {
-	font-size: 1.1em;
-}
-
-.ie6.js .lfr-dock.expanded.interactive-mode .lfr-dock-list-container {
-	height: 1%;
-}
-
-.ie6.js .interactive-mode .my-places .show-my-places {
-	width: 200px;
 }
 
 .ie6.js .lfr-dock.interactive-mode li {

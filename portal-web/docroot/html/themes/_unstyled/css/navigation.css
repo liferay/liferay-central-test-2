@@ -76,6 +76,9 @@
 .lfr-dock li.page-settings a {
 }
 
+.lfr-dock li.staging a {
+}
+
 .lfr-dock li.my-places a {
 }
 
@@ -84,94 +87,70 @@
 
 /* ---------- Dock with JavaScript ---------- */
 
-.js .lfr-dock.interactive-mode {
+.js .interactive-mode {
 }
 
-.js .lfr-dock.interactive-mode h2 {
+.js .interactive-mode h2 {
 }
 
-.js .lfr-dock.interactive-mode h2 span {
+.js .interactive-mode h2 span {
 }
 
 .js .lfr-dock.expanded .lfr-dock-list-container {
 }
 
-.js .lfr-dock.interactive-mode ul {
+.js .interactive-mode ul {
 }
 
-.js .lfr-dock.interactive-mode li {
+.js .interactive-mode li {
 }
 
-.js .lfr-dock.interactive-mode li a {
+.js .interactive-mode li a {
 }
 
-.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child ul.show-my-places li:first-child a {
+.js .interactive-mode li a:hover {
 }
 
-.js .lfr-dock.interactive-mode li a:hover {
+.js .interactive-mode .lfr-dock-list li.first {
 }
 
-.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a:hover, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover {
+.js .lfr-dock.interactive-mode .my-places li a {
 }
 
-.js .my-places {
+.js .interactive-mode .my-places li {
 }
 
-.js .lfr-dock.interactive-mode li.my-places li a {
+.js .interactive-mode .my-places li.current-community {
 }
 
-.js .lfr-dock.interactive-mode li.my-places li ul li.current a, .js .lfr-dock.interactive-mode li.my-places li ul li.current a:hover {
+.js .interactive-mode .my-places li h3 {
 }
 
-.js .interactive-mode .my-places .show-my-places {
+.js .interactive-mode .lfr-flyout.has-children ul {
 }
 
-.js .interactive-mode .my-places.send-right .show-my-places {
+.js .interactive-mode .my-places li.public a {
 }
 
-.js .interactive-mode .my-places.send-down .show-my-places {
+.js .interactive-mode .my-places li.private a {
 }
 
-.js .interactive-mode .my-places .show-my-places li {
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle {
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle h3 {
-}
-
-.js .interactive-mode .my-places .show-my-places li .my-places-toggle.hide h3 {
-}
-
-.js .interactive-mode .my-places .show-my-places li ul {
-}
-
-.js .interactive-mode .my-places .show-my-places li ul {
-}
-
-.js .interactive-mode .my-places .show-my-places ul li.public a, .js .my-places .show-my-places ul li.public a:hover {
-}
-
-.js .interactive-mode .my-places .show-my-places li.private a, .js .my-places .show-my-places li.private a:hover {
+.js .interactive-mode .my-places li.current a {
 }
 
 .ie6.js .lfr-dock.interactive-mode {
 }
 
-.ie.js .lfr-dock .my-places .show-my-places h3 {
-}
-
-.ie6.js .lfr-dock.expanded.interactive-mode .lfr-dock-list-container {
-}
-
-.ie6.js .interactive-mode .my-places .show-my-places {
+.ie.js .lfr-dock .my-places h3 {
 }
 
 .ie6.js .lfr-dock.interactive-mode li {
 }
 
 .ie6.js .lfr-dock.interactive-mode li a {
+}
+
+.ie6.js .lfr-flyout.has-children ul {
 }
 
 /* ---------- Add/sort/remove page ---------- */
@@ -207,13 +186,10 @@
 
 /*------ Navigation portlet ------*/
 
-.nav-menu li a.open {
+.nav-menu li a.ancestor {
 }
 
 .nav-menu li a.selected {
-}
-
-.nav-menu li a.open {
 }
 
 .nav-menu ul {

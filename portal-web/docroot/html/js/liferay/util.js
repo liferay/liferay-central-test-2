@@ -194,6 +194,45 @@ Liferay.Util = {
 		}
 	},
 
+	createFlyouts: function(options) {
+		var instance = this;
+
+		options = options || {};
+		var flyout, containers;
+		var containerFilter = function() {
+			return (jQuery('ul', this).length != 0);
+		};
+		if (!options.container) {
+			flyout = jQuery('.lfr-flyout');
+			containers = flyout.find('li').filter(containerFilter);
+		}
+		else {
+			flyout = jQuery('li', options.container);
+			containers = flyout.filter(containerFilter);
+		}
+		
+		containers.addClass('lfr-flyout');
+		containers.addClass('has-children');
+		containers = containers.add(flyout);
+
+		var over = function(event) {
+			jQuery('> ul', this).show();
+		};
+
+		var out = function(event) {
+			jQuery('> ul',this).hide();
+		};
+
+		containers.hoverIntent(
+			{
+				interval: 0,
+				out: out,
+				over: over,
+				timeout: 250
+			}
+		);
+	},
+	
 	disableEsc: function() {
 		if ((document.all) && (event.keyCode == 27)) {
 			event.returnValue = false;
