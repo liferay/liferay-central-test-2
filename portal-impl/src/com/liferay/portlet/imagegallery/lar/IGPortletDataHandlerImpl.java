@@ -44,7 +44,6 @@ import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 
@@ -53,6 +52,7 @@ import com.thoughtworks.xstream.XStream;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -112,24 +112,25 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Folders
 
-			List folders = IGFolderUtil.findByGroupId(context.getGroupId());
+			List<IGFolder> folders = IGFolderUtil.findByGroupId(
+				context.getGroupId());
 
-			List igImages = new ArrayList();
+			List<IGImage> igImages = new ArrayList<IGImage>();
 
-			Iterator itr = folders.iterator();
+			Iterator<IGFolder> foldersItr = folders.iterator();
 
-			while (itr.hasNext()) {
-				IGFolder folder = (IGFolder)itr.next();
+			while (foldersItr.hasNext()) {
+				IGFolder folder = foldersItr.next();
 
 				if (context.addPrimaryKey(
 						IGFolder.class, folder.getPrimaryKeyObj())) {
 
-					itr.remove();
+					foldersItr.remove();
 				}
 				else {
 					folder.setUserUuid(folder.getUserUuid());
 
-					List folderIGImages = IGImageUtil.findByFolderId(
+					List<IGImage> folderIGImages = IGImageUtil.findByFolderId(
 						folder.getFolderId());
 
 					igImages.addAll(folderIGImages);
@@ -146,15 +147,15 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			// IGImages
 
-			itr = igImages.iterator();
+			Iterator<IGImage> imagesItr = igImages.iterator();
 
-			while (itr.hasNext()) {
-				IGImage igImage = (IGImage)itr.next();
+			while (imagesItr.hasNext()) {
+				IGImage igImage = imagesItr.next();
 
 				if (context.addPrimaryKey(
 						IGImage.class, igImage.getPrimaryKeyObj())) {
 
-					itr.remove();
+					imagesItr.remove();
 				}
 				else {
 					igImage.setUserUuid(igImage.getUserUuid());
@@ -225,14 +226,15 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map folderPKs = CollectionFactory.getHashMap();
+			Map<Long, Long> folderPKs = new HashMap<Long, Long>();
 
-			List folders = (List)xStream.fromXML(tempDoc.asXML());
+			List<IGFolder> folders = (List<IGFolder>)xStream.fromXML(
+				tempDoc.asXML());
 
-			Iterator itr = folders.iterator();
+			Iterator<IGFolder> foldersItr = folders.iterator();
 
-			while (itr.hasNext()) {
-				IGFolder folder = (IGFolder)itr.next();
+			while (foldersItr.hasNext()) {
+				IGFolder folder = foldersItr.next();
 
 				importFolder(context, folderPKs, folder);
 			}
@@ -245,12 +247,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List igImages = (List)xStream.fromXML(tempDoc.asXML());
+			List<IGImage> igImages = (List<IGImage>)xStream.fromXML(
+				tempDoc.asXML());
 
-			itr = igImages.iterator();
+			Iterator<IGImage> imagesItr = igImages.iterator();
 
-			while (itr.hasNext()) {
-				IGImage igImage = (IGImage)itr.next();
+			while (imagesItr.hasNext()) {
+				IGImage igImage = imagesItr.next();
 
 				importIGImage(context, folderPKs, igImage);
 			}
@@ -270,7 +273,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map folderPKs, IGFolder folder)
+			PortletDataContext context, Map<Long, Long> folderPKs,
+			IGFolder folder)
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
@@ -313,8 +317,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					addGuestPermissions);
 			}
 
-			folderPKs.put(
-				folder.getPrimaryKeyObj(), existingFolder.getPrimaryKeyObj());
+			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -324,7 +327,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importIGImage(
-			PortletDataContext context, Map folderPKs, IGImage igImage)
+			PortletDataContext context, Map<Long, Long> folderPKs,
+			IGImage igImage)
 		throws Exception {
 
 		long userId = context.getUserId(igImage.getUserUuid());

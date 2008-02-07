@@ -31,9 +31,9 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,8 +52,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserSearch extends SearchContainer {
 
-	static List headerNames = new ArrayList();
-	static Map orderableHeaders = CollectionFactory.getHashMap();
+	static List<String> headerNames = new ArrayList<String>();
+	static Map<String, String> orderableHeaders = new HashMap<String, String>();
 
 	static {
 		headerNames.add("first-name");

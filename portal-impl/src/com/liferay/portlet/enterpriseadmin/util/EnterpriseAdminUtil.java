@@ -75,7 +75,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static Long[] getOrganizationIds(List organizations) {
+	public static Long[] getOrganizationIds(List<Organization> organizations) {
 		Long[] organizationIds = new Long[organizations.size()];
 
 		for (int i = 0; i < organizations.size(); i++) {

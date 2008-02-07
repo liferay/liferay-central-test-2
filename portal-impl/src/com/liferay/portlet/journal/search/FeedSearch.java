@@ -38,7 +38,7 @@ import javax.portlet.RenderRequest;
  */
 public class FeedSearch extends SearchContainer {
 
-	static List headerNames = new ArrayList();
+	static List<String> headerNames = new ArrayList<String>();
 
 	static {
 		headerNames.add("id");

@@ -158,10 +158,10 @@ public class DLFileEntryImpl
 
 		Properties extraSettingsProps = getExtraSettingsProperties();
 
-		Iterator itr = (Iterator)extraSettingsProps.entrySet().iterator();
+		Iterator<Map.Entry<Object, Object>> itr = extraSettingsProps.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<Object, Object> entry = itr.next();
 
 			String value = GetterUtil.getString((String)entry.getValue());
 
