@@ -333,7 +333,10 @@ public class BaseDeployer {
 			copyDependencyXml("context.xml", srcFile + "/META-INF");
 		}
 
-		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
+		if (appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
+			copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
+		}
+
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
 
