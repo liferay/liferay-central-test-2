@@ -24,8 +24,14 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -43,6 +49,24 @@ public class PortletContextListener
 
 	public void portalInit() {
 		HotDeployUtil.fireDeployEvent(new HotDeployEvent(_ctx, _classLoader));
+
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Dynamically binding the Liferay data source");
+			}
+
+			Context ctx = new InitialContext();
+
+			ctx.bind(_JNDI_JDBC, new InitialContext());
+			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, PortalJNDIUtil.getDataSource());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to dynamically bind the Liferay data source: "
+						+ e.getMessage());
+			}
+		}
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
@@ -57,7 +81,32 @@ public class PortletContextListener
 			new HotDeployEvent(
 				event.getServletContext(),
 				Thread.currentThread().getContextClassLoader()));
+
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Dynamically unbinding the Liferay data source");
+			}
+
+			Context ctx = new InitialContext();
+
+			ctx.unbind(_JNDI_JDBC);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to dynamically unbind the Liferay data source: "
+						+ e.getMessage());
+			}
+		}
 	}
+
+	private static final String _JNDI_JDBC = "java_liferay:jdbc";
+
+	private static final String _JNDI_JDBC_LIFERAY_POOL =
+		_JNDI_JDBC + "/LiferayPool";
+
+	private static Log _log =
+		LogFactoryUtil.getLog(PortletContextListener.class);
 
 	private ClassLoader _classLoader;
 	private ServletContext _ctx;
