@@ -85,8 +85,8 @@ public class CaptchaUtil {
 			else {
 				if (_log.isErrorEnabled()) {
 					_log.error(
-						"Captcha text is null.  User " + req.getRemoteUser() +
-						" may be trying to circumvent the captcha.");
+						"Captcha text is null. User " + req.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
 				}
 
 				throw new CaptchaTextException();
@@ -133,8 +133,8 @@ public class CaptchaUtil {
 			else {
 				if (_log.isErrorEnabled()) {
 					_log.error(
-						"Captcha text is null.  User " + req.getRemoteUser() +
-						" may be trying to circumvent the captcha.");
+						"Captcha text is null. User " + req.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
 				}
 
 				throw new CaptchaTextException();
