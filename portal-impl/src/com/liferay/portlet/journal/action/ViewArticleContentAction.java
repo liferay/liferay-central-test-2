@@ -212,6 +212,7 @@ public class ViewArticleContentAction extends Action {
 
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
+			String elContent = StringPool.BLANK;
 			String elLanguage = "";
 
 			if (dynamicContent != null) {
@@ -221,9 +222,11 @@ public class ViewArticleContentAction extends Action {
 				if (!elLanguage.equals(StringPool.BLANK)) {
 					elLanguage = "_" + elLanguage;
 				}
+
+				elContent = dynamicContent.getTextTrim();
 			}
 
-			if (elType.equals("image")) {
+			if (elType.equals("image") && Validator.isNull(elContent)) {
 				File file = req.getFile(
 					"structure_image_" + elName + elLanguage);
 				byte[] bytes = FileUtil.getBytes(file);

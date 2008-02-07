@@ -327,6 +327,15 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						else if (elTypeValue == "image") {
 							var elContentName = elContent.getAttribute("name");
 
+							var elContentNameCurrent = elContentName  + "_current";
+							var elContentValueCurrent = null;
+
+							try {
+								elContentValueCurrent = document.getElementById(elContentNameCurrent).value;
+							}
+							catch(e){
+							}
+
 							if (stillLocalized && (elLanguageValue != null) && (elLanguageValue != "false") && (elLanguageValue != "") && (!elContentName.match(new RegExp(elLanguageValue + "$")))) {
 								elContent.setAttribute("name", elContentName + "_" + elLanguageValue);
 							}
@@ -335,6 +344,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 							if ((elDeleteState != null) && (elDeleteState.value == "yes")) {
 								elContentValue = "delete";
+							}
+							else if (elContentValueCurrent != null) {
+								elContentValue = elContentValueCurrent;
 							}
 
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
