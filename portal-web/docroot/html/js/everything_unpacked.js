@@ -14450,6 +14450,48 @@ Liferay.Util = {
 		}
 	},
 
+	createFlyouts: function(options) {
+		var instance = this;
+
+		options = options || {};
+
+		var flyout, containers;
+
+		var containerFilter = function() {
+			return (jQuery('ul', this).length != 0);
+		};
+
+		if (!options.container) {
+			flyout = jQuery('.lfr-flyout');
+			containers = flyout.find('li').filter(containerFilter);
+		}
+		else {
+			flyout = jQuery('li', options.container);
+			containers = flyout.filter(containerFilter);
+		}
+
+		containers.addClass('lfr-flyout');
+		containers.addClass('has-children');
+		containers = containers.add(flyout);
+
+		var over = function(event) {
+			jQuery('> ul', this).show();
+		};
+
+		var out = function(event) {
+			jQuery('> ul',this).hide();
+		};
+
+		containers.hoverIntent(
+			{
+				interval: 0,
+				out: out,
+				over: over,
+				timeout: 250
+			}
+		);
+	},
+
 	disableEsc: function() {
 		if ((document.all) && (event.keyCode == 27)) {
 			event.returnValue = false;
@@ -18394,11 +18436,14 @@ Liferay.Dock = {
 		if (dockList.length > 0){
 			var myPlaces = jQuery('.my-places', dock);
 
+			Liferay.Util.createFlyouts({container: dockList[0]});
+
+			dockList.find('li:first-child, a:first-child').addClass('first');
+			dockList.find('li:last-child, a:last-child').addClass('last');
+
 			instance._dock = dock;
 			instance._dockList = dockList;
 			instance._myPlaces = myPlaces;
-
-			instance._hideCommunities(myPlaces);
 
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
@@ -18440,12 +18485,6 @@ Liferay.Dock = {
 				instance._toggle(event, 'hide');
 			};
 
-			var myPlacesToggle = function(event) {
-				event.data = myPlaces;
-
-				instance._togglePlaces(event);
-			};
-
 			dock.hoverIntent(
 				{
 					interval: 0,
@@ -18455,23 +18494,8 @@ Liferay.Dock = {
 				}
 			);
 
-			myPlaces.hoverIntent(
-				{
-					interval: 0,
-					out: myPlacesToggle,
-					over: myPlacesToggle,
-					timeout: 250
-				}
-			);
-
-			myPlaces.find('.my-places-toggle, a[@href=javascript: ;]').click(
-				function() {
-					return false;
-				}
-			);
-
 			if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
-				myPlaces.find('>ul').css('zoom', 1);
+				myPlaces.find('> ul').css('zoom', 1);
 			}
 
 			var dockParent = dock.parent();
@@ -18498,37 +18522,7 @@ Liferay.Dock = {
 			dock.show();
 			dockList.show();
 			dockList.addClass('expanded');
-			myPlacesList.addClass('show-my-places');
 		}
-	},
-
-	_hideCommunities: function(jQueryObj) {
-		var myPlaces = jQueryObj;
-
-		var communities = myPlaces.find('> ul > li');
-		var communityList = communities.find('ul');
-		var currentCommunity = communityList.find('li.current');
-		var heading = communities.find('h3');
-
-		heading.wrap('<div class="my-places-toggle"></div>');
-
-		heading = heading.parent();
-
-		communityList.hide();
-		currentCommunity.parent().show();
-
-		var currentCommunityHeading = currentCommunity.parent().prev();
-
-		currentCommunityHeading.addClass('hide');
-
-		heading.click(
-			function() {
-				var heading = jQuery(this);
-
-				heading.next("ul").BlindToggleVertically("fast");
-				heading.toggleClass('hide');
-			}
-		);
 	},
 
 	_toggle: function(event, state) {
@@ -18548,18 +18542,6 @@ Liferay.Dock = {
 		else {
 			dockList.toggle();
 			dock.toggleClass('expanded');
-		}
-	},
-
-	_togglePlaces: function(event) {
-		var myPlaces = event.data;
-
-		var myPlacesList = myPlaces.find('> ul');
-
-		myPlacesList.toggleClass('show-my-places');
-
-		if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
-			myPlacesList.find('li ul li').css('position', 'relative');
 		}
 	}
 };

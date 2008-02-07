@@ -216,12 +216,12 @@
 }
 
 .js .interactive-mode .my-places li {
-	background-repeat: no-repeat;
 	background-position: 5px 50%;
+	background-repeat: no-repeat;
 }
 
 .js .interactive-mode .my-places li.current-community {
-	background-color: #e5fdec;
+	background-color: #E5FDEC;
 }
 
 .js .interactive-mode .my-places li h3 {

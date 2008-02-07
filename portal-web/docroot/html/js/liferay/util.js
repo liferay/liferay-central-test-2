@@ -198,10 +198,13 @@ Liferay.Util = {
 		var instance = this;
 
 		options = options || {};
+
 		var flyout, containers;
+
 		var containerFilter = function() {
 			return (jQuery('ul', this).length != 0);
 		};
+
 		if (!options.container) {
 			flyout = jQuery('.lfr-flyout');
 			containers = flyout.find('li').filter(containerFilter);
@@ -210,7 +213,7 @@ Liferay.Util = {
 			flyout = jQuery('li', options.container);
 			containers = flyout.filter(containerFilter);
 		}
-		
+
 		containers.addClass('lfr-flyout');
 		containers.addClass('has-children');
 		containers = containers.add(flyout);
@@ -232,7 +235,7 @@ Liferay.Util = {
 			}
 		);
 	},
-	
+
 	disableEsc: function() {
 		if ((document.all) && (event.keyCode == 27)) {
 			event.returnValue = false;

@@ -16,9 +16,10 @@ Liferay.Dock = {
 			var myPlaces = jQuery('.my-places', dock);
 
 			Liferay.Util.createFlyouts({container: dockList[0]});
+
 			dockList.find('li:first-child, a:first-child').addClass('first');
 			dockList.find('li:last-child, a:last-child').addClass('last');
-			
+
 			instance._dock = dock;
 			instance._dockList = dockList;
 			instance._myPlaces = myPlaces;
