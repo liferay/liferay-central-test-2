@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -46,7 +46,7 @@ public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		_entryIdColumn = entryIdColumn;
 		_titleColumn = titleColumn;
-		_urlTitles = CollectionFactory.getHashSet();
+		_urlTitles = new HashSet<String>();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -86,6 +86,6 @@ public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	private UpgradeColumn _entryIdColumn;
 	private UpgradeColumn _titleColumn;
-	private Set _urlTitles;
+	private Set<String> _urlTitles;
 
 }

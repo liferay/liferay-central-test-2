@@ -66,6 +66,7 @@ import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -133,7 +134,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 				_log.info("Registering portlets for " + servletContextName);
 			}
 
-			List portlets = PortletLocalServiceUtil.initWAR(
+			List<Portlet> portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls, event.getPluginPackage());
 
 			// Class loader
@@ -147,12 +148,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			boolean strutsBridges = false;
 
-			Iterator itr1 = portlets.iterator();
+			Iterator<Portlet> itr1 = portlets.iterator();
 
 			while (itr1.hasNext()) {
-				Portlet portlet = (Portlet)itr1.next();
+				Portlet portlet = itr1.next();
 
-				Class portletClass = portletClassLoader.loadClass(
+				Class<?> portletClass = portletClassLoader.loadClass(
 					portlet.getPortletClass());
 
 				javax.portlet.Portlet portletInstance =
@@ -279,15 +280,16 @@ public class PortletHotDeployListener implements HotDeployListener {
 					}
 				}
 
-				Map resourceBundles = null;
+				Map<String, ResourceBundle> resourceBundles = null;
 
 				if (Validator.isNotNull(portlet.getResourceBundle())) {
 					resourceBundles = CollectionFactory.getHashMap();
 
-					Iterator itr2 = portlet.getSupportedLocales().iterator();
+					Iterator<String> itr2 =
+						portlet.getSupportedLocales().iterator();
 
 					while (itr2.hasNext()) {
-						String supportedLocale = (String)itr2.next();
+						String supportedLocale = itr2.next();
 
 						Locale locale = LocaleUtil.fromLanguageId(
 							supportedLocale);
@@ -308,15 +310,15 @@ public class PortletHotDeployListener implements HotDeployListener {
 					}
 				}
 
-				Map customUserAttributes = CollectionFactory.getHashMap();
+				Map<String, Object> customUserAttributes = new HashMap<String, Object>();
 
-				Iterator itr2 =
+				Iterator<Map.Entry<String, String>> itr2 =
 					portlet.getCustomUserAttributes().entrySet().iterator();
 
 				while (itr2.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr2.next();
+					Map.Entry<String, String> entry = itr2.next();
 
-					String attrCustomClass = (String)entry.getValue();
+					String attrCustomClass = entry.getValue();
 
 					customUserAttributes.put(
 						attrCustomClass,
@@ -419,7 +421,9 @@ public class PortletHotDeployListener implements HotDeployListener {
 			// Variables
 
 			_vars.put(
-				servletContextName, new ObjectValuePair(companyIds, portlets));
+				servletContextName,
+				new ObjectValuePair<long[], List<Portlet>>(
+					companyIds, portlets));
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -445,17 +449,17 @@ public class PortletHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			ObjectValuePair ovp = (ObjectValuePair)_vars.remove(
-				servletContextName);
+			ObjectValuePair<long[], List<Portlet>> ovp =
+				_vars.remove(servletContextName);
 
 			if (ovp == null) {
 				return;
 			}
 
-			long[] companyIds = (long[])ovp.getKey();
-			List portlets = (List)ovp.getValue();
+			long[] companyIds = ovp.getKey();
+			List<Portlet> portlets = ovp.getValue();
 
-			Set portletIds = new HashSet();
+			Set<String> portletIds = new HashSet<String>();
 
 			if (portlets != null) {
 				if (_log.isInfoEnabled()) {
@@ -463,10 +467,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 						"Unregistering portlets for " + servletContextName);
 				}
 
-				Iterator itr = portlets.iterator();
+				Iterator<Portlet> itr = portlets.iterator();
 
 				while (itr.hasNext()) {
-					Portlet portlet = (Portlet)itr.next();
+					Portlet portlet = itr.next();
 
 					ActivityTrackerInterpreterUtil.
 						deleteActivityTrackerInterpreter(
@@ -573,6 +577,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 	private static Log _log = LogFactory.getLog(PortletHotDeployListener.class);
 
-	private static Map _vars = CollectionFactory.getHashMap();
+	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
+		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
 
 }

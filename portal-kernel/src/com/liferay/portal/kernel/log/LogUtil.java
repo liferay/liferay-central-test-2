@@ -112,8 +112,7 @@ public class LogUtil {
 	}
 
 	private static void _log(Log log, Throwable cause) {
-		StackTraceElement[] steArray =
-			(StackTraceElement[])cause.getStackTrace();
+		StackTraceElement[] steArray = cause.getStackTrace();
 
 		// Make the stack trace more readable by limiting the number of
 		// elements.
@@ -121,10 +120,11 @@ public class LogUtil {
 		if (steArray.length > STACK_TRACE_LENGTH) {
 			int count = 0;
 
-			List steList = new ArrayList();
+			List<StackTraceElement> steList =
+				new ArrayList<StackTraceElement>();
 
 			for (int i = 0; i < steArray.length; i++) {
-				StackTraceElement ste = (StackTraceElement)steArray[i];
+				StackTraceElement ste = steArray[i];
 
 				// Make the stack trace more readable by removing elements that
 				// refer to classes with no packages, or starts with a $, or are
@@ -157,8 +157,7 @@ public class LogUtil {
 				}
 			}
 
-			steArray = (StackTraceElement[])steList.toArray(
-				new StackTraceElement[0]);
+			steArray = steList.toArray(new StackTraceElement[steList.size()]);
 
 			cause.setStackTrace(steArray);
 		}

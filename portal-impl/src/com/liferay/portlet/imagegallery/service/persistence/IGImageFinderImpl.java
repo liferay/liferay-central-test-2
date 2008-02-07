@@ -69,7 +69,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 	public static String FIND_BY_G_U =
 		IGImageFinder.class.getName() + ".findByG_U";
 
-	public int countByFolderIds(List folderIds) throws SystemException {
+	public int countByFolderIds(List<Long> folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -92,10 +92,10 @@ public class IGImageFinderImpl implements IGImageFinder {
 				qPos.add(folderId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -128,10 +128,10 @@ public class IGImageFinderImpl implements IGImageFinder {
 
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -167,10 +167,10 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -187,7 +187,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<IGImage> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -205,7 +205,8 @@ public class IGImageFinderImpl implements IGImageFinder {
 
 			qPos.add(groupId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<IGImage>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -215,7 +216,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<IGImage> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -256,7 +257,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<IGImage> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -270,7 +271,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 				throw new NoSuchImageException(sm.toString());
 			}
 			else {
-				return (IGImage)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchImageException nsie) {
@@ -284,7 +285,8 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<IGImage> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -303,7 +305,8 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<IGImage>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -313,7 +316,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	protected String getFolderIds(List folderIds) {
+	protected String getFolderIds(List<Long> folderIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

@@ -39,25 +39,26 @@ public interface LockService {
 
 	public void clear() throws RemoteException;
 
-	public Lock getLock(String className, Comparable pk)
+	public Lock getLock(String className, Comparable<?> pk)
 		throws PortalException, RemoteException;
 
-	public Set getLocksByCompanyId(long companyId)
+	public Set<Lock> getLocksByCompanyId(long companyId)
 		throws RemoteException;
 
-	public Set getLocksByUserId(long userId) throws RemoteException;
+	public Set<Lock> getLocksByUserId(long userId) throws RemoteException;
 
-	public boolean hasLock(String className, Comparable pk, long userId)
+	public boolean hasLock(String className, Comparable<?> pk, long userId)
 		throws RemoteException;
 
-	public boolean isLocked(String className, Comparable pk)
+	public boolean isLocked(String className, Comparable<?> pk)
 		throws RemoteException;
 
 	public void lock(
-			String className, Comparable pk, long companyId, long userId,
-			long expirationTime)
+			String className, Comparable<?> pk, long companyId,
+			long userId, long expirationTime)
 		throws PortalException, RemoteException;
 
-	public void unlock(String className, Comparable pk) throws RemoteException;
+	public void unlock(String className, Comparable<?> pk)
+		throws RemoteException;
 
 }

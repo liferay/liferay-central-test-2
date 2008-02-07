@@ -31,9 +31,9 @@ import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +77,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 				_log.info("Registering themes for " + servletContextName);
 			}
 
-			List themeIds = ThemeLocalUtil.init(
+			List<String> themeIds = ThemeLocalUtil.init(
 				servletContextName, ctx, null, true, xmls,
 				event.getPluginPackage());
 
@@ -109,7 +109,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			List themeIds = (List)_vars.remove(servletContextName);
+			List<String> themeIds = _vars.remove(servletContextName);
 
 			if (themeIds != null) {
 				if (_log.isInfoEnabled()) {
@@ -162,6 +162,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 
 	private static Log _log = LogFactory.getLog(ThemeHotDeployListener.class);
 
-	private static Map _vars = CollectionFactory.getHashMap();
+	private static Map<String, List<String>> _vars =
+		new HashMap<String, List<String>>();
 
 }

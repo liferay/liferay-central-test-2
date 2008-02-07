@@ -216,11 +216,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Folders
 
-		Iterator itr = igFolderPersistence.findByG_P(
+		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
 			folder.getGroupId(), folder.getFolderId()).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder curFolder = (IGFolder)itr.next();
+			IGFolder curFolder = itr.next();
 
 			deleteFolder(curFolder);
 		}
@@ -243,11 +243,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = igFolderPersistence.findByG_P(
+		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
 			groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
 
 		while (itr.hasNext()) {
-			IGFolder folder = (IGFolder)itr.next();
+			IGFolder folder = itr.next();
 
 			deleteFolder(folder);
 		}
@@ -259,17 +259,17 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		return igFolderPersistence.findByPrimaryKey(folderId);
 	}
 
-	public List getFolders(long groupId) throws SystemException {
+	public List<IGFolder> getFolders(long groupId) throws SystemException {
 		return igFolderPersistence.findByGroupId(groupId);
 	}
 
-	public List getFolders(long groupId, long parentFolderId)
+	public List<IGFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return igFolderPersistence.findByG_P(groupId, parentFolderId);
 	}
 
-	public List getFolders(
+	public List<IGFolder> getFolders(
 			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
@@ -284,16 +284,16 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public void getSubfolderIds(
-			List folderIds, long groupId, long folderId)
+			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		Iterator itr = igFolderPersistence.findByG_P(
+		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
 			groupId, folderId).iterator();
 
 		while (itr.hasNext()) {
 			IGFolder folder = (IGFolder)itr.next();
 
-			folderIds.add(new Long(folder.getFolderId()));
+			folderIds.add(folder.getFolderId());
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -312,19 +312,19 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = igFolderPersistence.findByCompanyId(
+			Iterator<IGFolder> itr1 = igFolderPersistence.findByCompanyId(
 				companyId).iterator();
 
 			while (itr1.hasNext()) {
-				IGFolder folder = (IGFolder)itr1.next();
+				IGFolder folder = itr1.next();
 
 				long folderId = folder.getFolderId();
 
-				Iterator itr2 = igImagePersistence.findByFolderId(
+				Iterator<IGImage> itr2 = igImagePersistence.findByFolderId(
 					folderId).iterator();
 
 				while (itr2.hasNext()) {
-					IGImage image = (IGImage)itr2.next();
+					IGImage image = itr2.next();
 
 					long groupId = folder.getGroupId();
 					long imageId = image.getImageId();
@@ -493,7 +493,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				return folder.getParentFolderId();
 			}
 
-			List subfolderIds = new ArrayList();
+			List<Long> subfolderIds = new ArrayList<Long>();
 
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
@@ -509,23 +509,23 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	protected void mergeFolders(IGFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = igFolderPersistence.findByG_P(
+		Iterator<IGFolder> foldersItr = igFolderPersistence.findByG_P(
 			fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
 
-		while (itr.hasNext()) {
-			IGFolder folder = (IGFolder)itr.next();
+		while (foldersItr.hasNext()) {
+			IGFolder folder = foldersItr.next();
 
 			mergeFolders(folder, toFolderId);
 		}
 
-		itr = igImagePersistence.findByFolderId(
+		Iterator<IGImage> imagesItr = igImagePersistence.findByFolderId(
 			fromFolder.getFolderId()).iterator();
 
-		while (itr.hasNext()) {
+		while (imagesItr.hasNext()) {
 
 			// Image
 
-			IGImage image = (IGImage)itr.next();
+			IGImage image = imagesItr.next();
 
 			image.setFolderId(toFolderId);
 

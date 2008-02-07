@@ -396,16 +396,17 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public List getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
 		try {
 			long folderId = getFolderId(webDavReq.getPathArray());
 
-			List folders = getFolders(webDavReq, folderId);
-			List fileEntries = getFileEntries(webDavReq, folderId);
+			List<Resource> folders = getFolders(webDavReq, folderId);
+			List<Resource> fileEntries = getFileEntries(webDavReq, folderId);
 
-			List resources = new ArrayList(folders.size() + fileEntries.size());
+			List<Resource> resources = new ArrayList<Resource>(
+				folders.size() + fileEntries.size());
 
 			resources.addAll(folders);
 			resources.addAll(fileEntries);
@@ -614,10 +615,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	protected List getFileEntries(WebDAVRequest webDavReq, long parentFolderId)
+	protected List<Resource> getFileEntries(
+			WebDAVRequest webDavReq, long parentFolderId)
 		throws Exception {
 
-		List fileEntries = new ArrayList();
+		List<Resource> fileEntries = new ArrayList<Resource>();
 
 		long plid = getPlid(webDavReq.getGroupId());
 
@@ -625,11 +627,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			webDavReq.getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.VIEW);
 
-		Iterator itr = DLFileEntryLocalServiceUtil.getFileEntries(
+		Iterator<DLFileEntry> itr = DLFileEntryLocalServiceUtil.getFileEntries(
 			parentFolderId).iterator();
 
 		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
+			DLFileEntry fileEntry = itr.next();
 
 			if (DLFileEntryPermission.contains(
 					webDavReq.getPermissionChecker(), fileEntry,
@@ -680,10 +682,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return folderId;
 	}
 
-	protected List getFolders(WebDAVRequest webDavReq, long parentFolderId)
+	protected List<Resource> getFolders(
+			WebDAVRequest webDavReq, long parentFolderId)
 		throws Exception {
 
-		List folders = new ArrayList();
+		List<Resource> folders = new ArrayList<Resource>();
 
 		long plid = getPlid(webDavReq.getGroupId());
 		long groupId = webDavReq.getGroupId();
@@ -692,11 +695,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			webDavReq.getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.VIEW);
 
-		Iterator itr = DLFolderLocalServiceUtil.getFolders(
+		Iterator<DLFolder> itr = DLFolderLocalServiceUtil.getFolders(
 			groupId, parentFolderId).iterator();
 
 		while (itr.hasNext()) {
-			DLFolder folder = (DLFolder)itr.next();
+			DLFolder folder = itr.next();
 
 			if (DLFolderPermission.contains(
 					webDavReq.getPermissionChecker(), folder,

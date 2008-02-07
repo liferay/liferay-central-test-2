@@ -36,11 +36,11 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.invitation.util.InvitationUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -70,8 +70,8 @@ public class ViewAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		List validEmailAddresses = new ArrayList();
-		Set invalidEmailAddresses = CollectionFactory.getHashSet();
+		List<String> validEmailAddresses = new ArrayList<String>();
+		Set<String> invalidEmailAddresses = new HashSet<String>();
 
 		int emailMessageMaxRecipients =
 			InvitationUtil.getEmailMessageMaxRecipients();

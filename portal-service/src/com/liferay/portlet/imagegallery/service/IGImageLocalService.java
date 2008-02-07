@@ -187,14 +187,16 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public int getFoldersImagesCount(java.util.List folderIds)
+	public int getFoldersImagesCount(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupImages(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupImages(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getGroupImagesCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -231,20 +233,22 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getImages(long folderId)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getImages(long folderId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getImages(long folderId, int begin, int end,
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getNoAssetImages()
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getNoAssetImages()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(

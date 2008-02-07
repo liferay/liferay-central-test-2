@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.log;
  */
 public interface LogFactory {
 
-	public Log getLog(Class c);
+	public Log getLog(Class<?> c);
 
 	public Log getLog(String name);
 

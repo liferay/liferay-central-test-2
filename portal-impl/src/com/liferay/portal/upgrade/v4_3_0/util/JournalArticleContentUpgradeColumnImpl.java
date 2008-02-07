@@ -135,10 +135,10 @@ public class JournalArticleContentUpgradeColumnImpl
 			String articleId, double version, Element root)
 		throws Exception {
 
-		Iterator itr = root.elements().iterator();
+		Iterator<Element> itr = root.elements().iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			Element dynamicContent = el.element("dynamic-content");
 
@@ -229,10 +229,10 @@ public class JournalArticleContentUpgradeColumnImpl
 
 		ValueMapper igImageIdMapper = AvailableMappersUtil.getIGImageIdMapper();
 
-		Iterator itr = igImageIdMapper.iterator();
+		Iterator<String> itr = igImageIdMapper.iterator();
 
 		while (itr.hasNext()) {
-			String oldValue = (String)itr.next();
+			String oldValue = itr.next();
 
 			PKParser oldValuePKParser = new PKParser(oldValue);
 

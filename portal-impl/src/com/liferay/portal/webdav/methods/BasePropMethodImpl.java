@@ -62,16 +62,17 @@ public abstract class BasePropMethodImpl implements Method {
 
 	protected void addResponse(
 			WebDAVStorage storage, WebDAVRequest webDavReq,
-			Resource resource, Set props, Element multistatus, long depth)
+			Resource resource, Set<Tuple> props, Element multistatus,
+			long depth)
 		throws Exception {
 
 		addResponse(webDavReq, resource, props, multistatus);
 
 		if (resource.isCollection() && (depth != 0)) {
-			Iterator itr = storage.getResources(webDavReq).iterator();
+			Iterator<Resource> itr = storage.getResources(webDavReq).iterator();
 
 			while (itr.hasNext()) {
-				resource = (Resource)itr.next();
+				resource = itr.next();
 
 				addResponse(webDavReq, resource, props, multistatus);
 			}
@@ -79,13 +80,13 @@ public abstract class BasePropMethodImpl implements Method {
 	}
 
 	protected void addResponse(
-			WebDAVRequest webDavReq, Resource resource, Set props,
+			WebDAVRequest webDavReq, Resource resource, Set<Tuple> props,
 			Element multistatus)
 		throws Exception {
 
 		// Make a deep copy of the props
 
-		props = new HashSet(props);
+		props = new HashSet<Tuple>(props);
 
 		// Start building multistatus response
 
@@ -198,12 +199,12 @@ public abstract class BasePropMethodImpl implements Method {
 			webDavReq.getCompanyId(), resource.getClassName(),
 			resource.getPrimaryKey());
 
-		Set customProps = webDavProps.getPropsSet();
+		Set<Tuple> customProps = webDavProps.getPropsSet();
 
-		Iterator itr = props.iterator();
+		Iterator<Tuple> itr = props.iterator();
 
 		while (itr.hasNext()) {
-			Tuple tuple = (Tuple)itr.next();
+			Tuple tuple = itr.next();
 
 			String name = (String)tuple.getObject(0);
 			Namespace namespace = (Namespace)tuple.getObject(1);
@@ -260,7 +261,7 @@ public abstract class BasePropMethodImpl implements Method {
 			propstat, "status", WebDAVUtil.DAV_URI, "HTTP/1.1 404 Not Found");
 	}
 
-	protected String getResponseXML(WebDAVRequest webDavReq, Set props)
+	protected String getResponseXML(WebDAVRequest webDavReq, Set<Tuple> props)
 		throws Exception {
 
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
@@ -290,10 +291,11 @@ public abstract class BasePropMethodImpl implements Method {
 				props, multistatus);
 
 			if (props.size() > 0) {
-				Iterator itr = storage.getCommunities(webDavReq).iterator();
+				Iterator<Resource> itr = storage.getCommunities(
+					webDavReq).iterator();
 
 				while (itr.hasNext()) {
-					Resource resource = (Resource)itr.next();
+					Resource resource = itr.next();
 
 					addResponse(webDavReq, resource, props, multistatus);
 				}
@@ -390,14 +392,14 @@ public abstract class BasePropMethodImpl implements Method {
 	private static final Tuple _RESOURCETYPE_PAIR =
 		new Tuple(_RESOURCETYPE, WebDAVUtil.DAV_URI);
 
-	private final List _ALL_COLLECTION_PROPS = Arrays.asList(
-		new Object[] {
+	private final List<Tuple> _ALL_COLLECTION_PROPS = Arrays.asList(
+		new Tuple[] {
 			_CREATIONDATE_PAIR, _DISPLAYNAME_PAIR, _GETLASTMODIFIED_PAIR,
 			_GETCONTENTTYPE_PAIR, _RESOURCETYPE_PAIR
 		});
 
-	private final List _ALL_SIMPLE_PROPS = Arrays.asList(
-		new Object[] {
+	private final List<Tuple> _ALL_SIMPLE_PROPS = Arrays.asList(
+		new Tuple[] {
 			_CREATIONDATE_PAIR, _DISPLAYNAME_PAIR, _GETLASTMODIFIED_PAIR,
 			_GETCONTENTTYPE_PAIR, _GETCONTENTLENGTH_PAIR, _RESOURCETYPE_PAIR
 		});

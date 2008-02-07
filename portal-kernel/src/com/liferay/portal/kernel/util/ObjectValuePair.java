@@ -30,26 +30,26 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public class ObjectValuePair implements Serializable {
+public class ObjectValuePair<K, V> implements Serializable {
 
-	public ObjectValuePair(Object key, Object value) {
+	public ObjectValuePair(K key, V value) {
 		_key = key;
 		_value = value;
 	}
 
-	public Object getKey() {
+	public K getKey() {
 		return _key;
 	}
 
-	public void setKey(Object key) {
+	public void setKey(K key) {
 		_key = key;
 	}
 
-	public Object getValue() {
+	public V getValue() {
 		return _value;
 	}
 
-	public void setValue(Object value) {
+	public void setValue(V value) {
 		_value = value;
 	}
 
@@ -58,9 +58,9 @@ public class ObjectValuePair implements Serializable {
 			return false;
 		}
 
-		ObjectValuePair ovp = (ObjectValuePair)obj;
+		ObjectValuePair<K, V> ovp = (ObjectValuePair<K, V>)obj;
 
-		Object key = ovp.getKey();
+		K key = ovp.getKey();
 
 		if (_key.equals(key)) {
 			return true;
@@ -70,7 +70,7 @@ public class ObjectValuePair implements Serializable {
 		}
 	}
 
-	private Object _key;
-	private Object _value;
+	private K _key;
+	private V _value;
 
 }

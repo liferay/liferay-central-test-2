@@ -169,7 +169,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public List getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
 		try {
@@ -189,7 +189,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 			}
 
-			return new ArrayList();
+			return new ArrayList<Resource>();
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
@@ -266,8 +266,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	protected List getFolders(WebDAVRequest webDavReq) throws Exception {
-		List folders = new ArrayList();
+	protected List<Resource> getFolders(WebDAVRequest webDavReq)
+		throws Exception {
+
+		List<Resource> folders = new ArrayList<Resource>();
 
 		//folders.add(toResource(webDavReq, _TYPE_ARTICLES, true));
 		folders.add(toResource(webDavReq, _TYPE_STRUCTURES, true));
@@ -276,14 +278,17 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return folders;
 	}
 
-	protected List getStructures(WebDAVRequest webDavReq) throws Exception {
-		List templates = new ArrayList();
+	protected List<Resource> getStructures(WebDAVRequest webDavReq)
+		throws Exception {
 
-		Iterator itr = JournalStructureLocalServiceUtil.getStructures(
-			webDavReq.getGroupId()).iterator();
+		List<Resource> templates = new ArrayList<Resource>();
+
+		Iterator<JournalStructure> itr =
+			JournalStructureLocalServiceUtil.getStructures(
+				webDavReq.getGroupId()).iterator();
 
 		while (itr.hasNext()) {
-			JournalStructure structure = (JournalStructure)itr.next();
+			JournalStructure structure = itr.next();
 
 			Resource resource = toResource(webDavReq, structure, true);
 
@@ -293,14 +298,17 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return templates;
 	}
 
-	protected List getTemplates(WebDAVRequest webDavReq) throws Exception {
-		List templates = new ArrayList();
+	protected List<Resource> getTemplates(WebDAVRequest webDavReq)
+		throws Exception {
 
-		Iterator itr = JournalTemplateLocalServiceUtil.getTemplates(
-			webDavReq.getGroupId()).iterator();
+		List<Resource> templates = new ArrayList<Resource>();
+
+		Iterator<JournalTemplate> itr =
+			JournalTemplateLocalServiceUtil.getTemplates(
+				webDavReq.getGroupId()).iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate template = (JournalTemplate)itr.next();
+			JournalTemplate template = itr.next();
 
 			Resource resource = toResource(webDavReq, template, true);
 

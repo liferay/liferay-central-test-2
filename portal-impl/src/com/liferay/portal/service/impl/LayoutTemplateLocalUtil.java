@@ -277,26 +277,30 @@ public class LayoutTemplateLocalUtil {
 		}
 	}
 
-	public static List<ObjectValuePair> init(
+	public static List<ObjectValuePair<String, Boolean>> init(
 		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
 
 		return init(null, ctx, xmls, pluginPackage);
 	}
 
-	public static List<ObjectValuePair> init(
+	public static List<ObjectValuePair<String, Boolean>> init(
 		String servletContextName, ServletContext ctx, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List<ObjectValuePair> layoutTemplateIds =
-			new ArrayList<ObjectValuePair>();
+		List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
+			new ArrayList<ObjectValuePair<String, Boolean>>();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
-				Iterator<ObjectValuePair> itr = _readLayoutTemplates(
-					servletContextName, ctx, xmls[i], pluginPackage).iterator();
+				Set<ObjectValuePair<String, Boolean>> curLayoutTemplateIds =
+					_readLayoutTemplates(
+						servletContextName, ctx, xmls[i], pluginPackage);
+
+				Iterator<ObjectValuePair<String, Boolean>> itr =
+					curLayoutTemplateIds.iterator();
 
 				while (itr.hasNext()) {
-					ObjectValuePair ovp = (ObjectValuePair)itr.next();
+					ObjectValuePair<String, Boolean> ovp = itr.next();
 
 					if (!layoutTemplateIds.contains(ovp)) {
 						layoutTemplateIds.add(ovp);
@@ -313,7 +317,7 @@ public class LayoutTemplateLocalUtil {
 
 	public static void readLayoutTemplate(
 			String servletContextName, ServletContext ctx,
-			Set<ObjectValuePair> layoutTemplateIds, Element el,
+			Set<ObjectValuePair<String, Boolean>> layoutTemplateIds, Element el,
 			boolean standard, String themeId, PluginPackage pluginPackage)
 		throws IOException {
 
@@ -352,8 +356,9 @@ public class LayoutTemplateLocalUtil {
 			String layoutTemplateId = layoutTemplate.attributeValue("id");
 
 			if (layoutTemplateIds != null) {
-				ObjectValuePair ovp = new ObjectValuePair(
-					layoutTemplateId, Boolean.valueOf(standard));
+				ObjectValuePair<String, Boolean> ovp =
+					new ObjectValuePair<String, Boolean>(
+						layoutTemplateId, standard);
 
 				layoutTemplateIds.add(ovp);
 			}
@@ -501,12 +506,13 @@ public class LayoutTemplateLocalUtil {
 		}
 	}
 
-	private static Set<ObjectValuePair> _readLayoutTemplates(
+	private static Set<ObjectValuePair<String, Boolean>> _readLayoutTemplates(
 			String servletContextName, ServletContext ctx, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
-		Set<ObjectValuePair> layoutTemplateIds = new HashSet<ObjectValuePair>();
+		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds =
+			new HashSet<ObjectValuePair<String, Boolean>>();
 
 		if (xml == null) {
 			return layoutTemplateIds;

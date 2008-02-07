@@ -34,7 +34,7 @@ import java.util.Date;
  */
 public class LockImpl implements Lock {
 
-	public LockImpl(String className, Comparable pk, long companyId,
+	public LockImpl(String className, Comparable<?> pk, long companyId,
 					long userId, long expirationTime) {
 
 		_className = className;
@@ -49,7 +49,7 @@ public class LockImpl implements Lock {
 		return _className;
 	}
 
-	public Comparable getPrimaryKey() {
+	public Comparable<?> getPrimaryKey() {
 		return _pk;
 	}
 
@@ -99,7 +99,8 @@ public class LockImpl implements Lock {
 			return value;
 		}
 
-		value = getPrimaryKey().compareTo(lock.getPrimaryKey());
+		value = ((Comparable<Object>)getPrimaryKey()).compareTo(
+			lock.getPrimaryKey());
 
 		if (value != 0) {
 			return value;
@@ -136,7 +137,7 @@ public class LockImpl implements Lock {
 	}
 
 	private String _className;
-	private Comparable _pk;
+	private Comparable<?> _pk;
 	private long _companyId;
 	private long _userId;
 	private long _expirationTime;

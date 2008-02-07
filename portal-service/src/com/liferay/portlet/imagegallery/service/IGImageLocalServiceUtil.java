@@ -338,22 +338,24 @@ public class IGImageLocalServiceUtil {
 		igImageLocalService.deleteImages(folderId);
 	}
 
-	public static int getFoldersImagesCount(java.util.List folderIds)
+	public static int getFoldersImagesCount(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getFoldersImagesCount(folderIds);
 	}
 
-	public static java.util.List getGroupImages(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getGroupImages(groupId, begin, end);
 	}
 
-	public static java.util.List getGroupImages(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getGroupImages(groupId, userId, begin, end);
@@ -427,21 +429,23 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImageByUuidAndGroupId(uuid, groupId);
 	}
 
-	public static java.util.List getImages(long folderId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId) throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getImages(folderId);
 	}
 
-	public static java.util.List getImages(long folderId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getImages(folderId, begin, end);
 	}
 
-	public static java.util.List getImages(long folderId, int begin, int end,
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
@@ -456,7 +460,7 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImagesCount(folderId);
 	}
 
-	public static java.util.List getNoAssetImages()
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getNoAssetImages()
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 

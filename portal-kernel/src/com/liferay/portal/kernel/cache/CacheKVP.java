@@ -32,12 +32,12 @@ import java.io.Serializable;
  */
 public class CacheKVP implements Serializable {
 
-	public CacheKVP(Class modelClass, Serializable primaryKeyObj) {
+	public CacheKVP(Class<?> modelClass, Serializable primaryKeyObj) {
 		_modelClass = modelClass;
 		_primaryKeyObj = primaryKeyObj;
 	}
 
-	public Class getModelClass() {
+	public Class<?> getModelClass() {
 		return _modelClass;
 	}
 
@@ -45,7 +45,7 @@ public class CacheKVP implements Serializable {
 		return _primaryKeyObj;
 	}
 
-	private Class _modelClass;
+	private Class<?> _modelClass;
 	private Serializable _primaryKeyObj;
 
 }

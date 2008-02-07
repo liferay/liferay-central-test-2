@@ -64,7 +64,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		try {
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-			Set props = getProps(webDavReq);
+			Set<Tuple> props = getProps(webDavReq);
 
 			String xml = getResponseXML(webDavReq, props);
 
@@ -90,11 +90,11 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		}
 	}
 
-	protected Set getProps(WebDAVRequest webDavReq)
+	protected Set<Tuple> getProps(WebDAVRequest webDavReq)
 		throws InvalidRequestException {
 
 		try {
-			Set props = new HashSet();
+			Set<Tuple> props = new HashSet<Tuple>();
 
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
 
@@ -118,10 +118,10 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			Element prop = root.element("prop");
 
-			Iterator itr = prop.elements().iterator();
+			Iterator<Element> itr = prop.elements().iterator();
 
 			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
+				Element el = itr.next();
 
 				String prefix = el.getNamespacePrefix();
 				String uri = el.getNamespaceURI();

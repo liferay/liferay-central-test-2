@@ -44,7 +44,7 @@ public class LockServiceUtil {
 		lockService.clear();
 	}
 
-	public static Lock getLock(String className, Comparable pk)
+	public static Lock getLock(String className, Comparable<?> pk)
 		throws PortalException, RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -52,7 +52,7 @@ public class LockServiceUtil {
 		return lockService.getLock(className, pk);
 	}
 
-	public static Set getLocksByCompanyId(long companyId)
+	public static Set<Lock> getLocksByCompanyId(long companyId)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -60,7 +60,7 @@ public class LockServiceUtil {
 		return lockService.getLocksByCompanyId(companyId);
 	}
 
-	public static Set getLocksByUserId(long userId)
+	public static Set<Lock> getLocksByUserId(long userId)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -69,7 +69,7 @@ public class LockServiceUtil {
 	}
 
 	public static boolean hasLock(
-			String className, Comparable pk, long userId)
+			String className, Comparable<?> pk, long userId)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -77,7 +77,7 @@ public class LockServiceUtil {
 		return lockService.hasLock(className, pk, userId);
 	}
 
-	public static boolean isLocked(String className, Comparable pk)
+	public static boolean isLocked(String className, Comparable<?> pk)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
@@ -86,7 +86,7 @@ public class LockServiceUtil {
 	}
 
 	public static void lock(
-			String className, Comparable pk, long companyId, long userId,
+			String className, Comparable<?> pk, long companyId, long userId,
 			long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 
@@ -95,7 +95,7 @@ public class LockServiceUtil {
 		lockService.lock(className, pk, companyId, userId, expirationTime);
 	}
 
-	public static void unlock(String className, Comparable pk)
+	public static void unlock(String className, Comparable<?> pk)
 		throws RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();

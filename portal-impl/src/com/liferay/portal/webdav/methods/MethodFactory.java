@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +50,7 @@ public class MethodFactory {
 	}
 
 	private MethodFactory() {
-		_methods = CollectionFactory.getHashMap();
+		_methods = new HashMap<String, Object>();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete method implementation " + _DELETE_METHOD_IMPL);
@@ -136,6 +136,6 @@ public class MethodFactory {
 
 	private static MethodFactory _instance = new MethodFactory();
 
-	private Map _methods;
+	private Map<String, Object> _methods;
 
 }

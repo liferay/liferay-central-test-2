@@ -285,7 +285,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImages(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = igImagePersistence.findByFolderId(folderId).iterator();
+		Iterator<IGImage> itr = igImagePersistence.findByFolderId(
+			folderId).iterator();
 
 		while (itr.hasNext()) {
 			IGImage image = (IGImage)itr.next();
@@ -294,19 +295,20 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	public int getFoldersImagesCount(List folderIds)
+	public int getFoldersImagesCount(List<Long> folderIds)
 		throws SystemException {
 
 		return igImageFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupImages(long groupId, int begin, int end)
+	public List<IGImage> getGroupImages(long groupId, int begin, int end)
 		throws SystemException {
 
 		return igImageFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupImages(long groupId, long userId, int begin, int end)
+	public List<IGImage> getGroupImages(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
@@ -368,17 +370,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.findByUuid_G(uuid, groupId);
 	}
 
-	public List getImages(long folderId) throws SystemException {
+	public List<IGImage> getImages(long folderId) throws SystemException {
 		return igImagePersistence.findByFolderId(folderId);
 	}
 
-	public List getImages(long folderId, int begin, int end)
+	public List<IGImage> getImages(long folderId, int begin, int end)
 		throws SystemException {
 
 		return igImagePersistence.findByFolderId(folderId, begin, end);
 	}
 
-	public List getImages(
+	public List<IGImage> getImages(
 			long folderId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -389,7 +391,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.countByFolderId(folderId);
 	}
 
-	public List getNoAssetImages() throws SystemException {
+	public List<IGImage> getNoAssetImages() throws SystemException {
 		return igImageFinder.findByNoAssets();
 	}
 

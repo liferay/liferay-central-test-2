@@ -25,7 +25,7 @@ package com.liferay.portal.cache;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
-import com.liferay.util.CollectionFactory;
+import com.liferay.util.ConcurrentHashSet;
 
 import java.io.Serializable;
 
@@ -52,15 +52,16 @@ public class MultiVMPoolImpl implements MultiVMPool {
 	}
 
 	public void clearGroup(
-		Map groups, String groupKey, PortalCache portalCache) {
+		Map<String, Set<String>> groups, String groupKey,
+		PortalCache portalCache) {
 
 		if (!groups.containsKey(groupKey)) {
 			return;
 		}
 
-		Set groupKeys = (Set)groups.get(groupKey);
+		Set<String> groupKeys = groups.get(groupKey);
 
-		String[] keys = (String[])groupKeys.toArray(new String[0]);
+		String[] keys = groupKeys.toArray(new String[groupKeys.size()]);
 
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
@@ -101,8 +102,8 @@ public class MultiVMPoolImpl implements MultiVMPool {
 	}
 
 	public void put(
-		PortalCache portalCache, String key, Map groups, String groupKey,
-		Object obj) {
+		PortalCache portalCache, String key, Map<String, Set<String>> groups,
+		String groupKey, Object obj) {
 
 		put(portalCache, key, obj);
 
@@ -120,8 +121,8 @@ public class MultiVMPoolImpl implements MultiVMPool {
 	}
 
 	public void put(
-		PortalCache portalCache, String key, Map groups, String groupKey,
-		Serializable obj) {
+		PortalCache portalCache, String key, Map<String, Set<String>> groups,
+		String groupKey, Serializable obj) {
 
 		put(portalCache, key, obj);
 
@@ -142,14 +143,16 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		_portalCacheManager = portalCacheManager;
 	}
 
-	public void updateGroup(Map groups, String groupKey, String key) {
-		Set groupKeys = null;
+	public void updateGroup(
+		Map<String, Set<String>> groups, String groupKey, String key) {
+
+		Set<String> groupKeys = null;
 
 		if (groups.containsKey(groupKey)) {
-			groupKeys = (Set)groups.get(groupKey);
+			groupKeys = groups.get(groupKey);
 		}
 		else {
-			groupKeys = CollectionFactory.getSyncHashSet();
+			groupKeys = new ConcurrentHashSet<String>();
 
 			groups.put(groupKey, groupKeys);
 		}

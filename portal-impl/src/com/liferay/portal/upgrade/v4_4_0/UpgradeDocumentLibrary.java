@@ -76,7 +76,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		Set distinctNames = dlFolderNameColumn.getDistintNames();
+		Set<String> distinctNames = dlFolderNameColumn.getDistintNames();
 
 		// DLFileEntry
 

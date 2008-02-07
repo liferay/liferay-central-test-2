@@ -50,22 +50,23 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		_rootPath = rootPath;
 	}
 
-	public List getCommunities(WebDAVRequest webDavReq)
+	public List<Resource> getCommunities(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
 		try {
-			LinkedHashMap groupParams = new LinkedHashMap();
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
 			groupParams.put("usersGroups", new Long(webDavReq.getUserId()));
 
-			List communities = new ArrayList();
+			List<Resource> communities = new ArrayList<Resource>();
 
-			Iterator itr = GroupLocalServiceUtil.search(
+			Iterator<Group> itr = GroupLocalServiceUtil.search(
 				webDavReq.getCompanyId(), null, null, groupParams,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS).iterator();
 
 			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
+				Group group = itr.next();
 
 				Resource resource = getResource(group);
 

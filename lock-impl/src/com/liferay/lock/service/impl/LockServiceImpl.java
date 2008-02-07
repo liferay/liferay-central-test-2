@@ -41,37 +41,37 @@ public class LockServiceImpl implements LockService {
 		LockPool.clear();
 	}
 
-	public Lock getLock(String className, Comparable pk)
+	public Lock getLock(String className, Comparable<?> pk)
 		throws PortalException {
 
 		return LockPool.getLock(className, pk);
 	}
 
-	public Set getLocksByCompanyId(long companyId) {
+	public Set<Lock> getLocksByCompanyId(long companyId) {
 		return LockPool.getLocksByCompanyId(companyId);
 	}
 
-	public Set getLocksByUserId(long userId) {
+	public Set<Lock> getLocksByUserId(long userId) {
 		return LockPool.getLocksByUserId(userId);
 	}
 
-	public boolean hasLock(String className, Comparable pk, long userId) {
+	public boolean hasLock(String className, Comparable<?> pk, long userId) {
 		return LockPool.hasLock(className, pk, userId);
 	}
 
-	public boolean isLocked(String className, Comparable pk) {
+	public boolean isLocked(String className, Comparable<?> pk) {
 		return LockPool.isLocked(className, pk);
 	}
 
 	public void lock(
-			String className, Comparable pk, long companyId, long userId,
+			String className, Comparable<?> pk, long companyId, long userId,
 			long expirationTime)
 		throws PortalException {
 
 		LockPool.lock(className, pk, companyId, userId, expirationTime);
 	}
 
-	public void unlock(String className, Comparable pk) {
+	public void unlock(String className, Comparable<?> pk) {
 		LockPool.unlock(className, pk);
 	}
 

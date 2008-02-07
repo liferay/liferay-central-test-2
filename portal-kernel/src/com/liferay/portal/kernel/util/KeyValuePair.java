@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public class KeyValuePair implements Comparable, Serializable {
+public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 
 	public KeyValuePair() {
 		this(null, null);
@@ -57,9 +57,7 @@ public class KeyValuePair implements Comparable, Serializable {
 		_value = value;
 	}
 
-	public int compareTo(Object obj) {
-		KeyValuePair kvp = (KeyValuePair)obj;
-
+	public int compareTo(KeyValuePair kvp) {
 		return _key.compareTo(kvp.getKey());
 	}
 

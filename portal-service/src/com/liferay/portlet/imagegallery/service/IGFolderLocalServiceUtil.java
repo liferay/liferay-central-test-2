@@ -353,22 +353,24 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.getFolder(folderId);
 	}
 
-	public static java.util.List getFolders(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
+		long groupId) throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		return igFolderLocalService.getFolders(groupId);
 	}
 
-	public static java.util.List getFolders(long groupId, long parentFolderId)
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
+		long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		return igFolderLocalService.getFolders(groupId, parentFolderId);
 	}
 
-	public static java.util.List getFolders(long groupId, long parentFolderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
+		long groupId, long parentFolderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		return igFolderLocalService.getFolders(groupId, parentFolderId, begin,
@@ -382,8 +384,8 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.getFoldersCount(groupId, parentFolderId);
 	}
 
-	public static void getSubfolderIds(java.util.List folderIds, long groupId,
-		long folderId) throws com.liferay.portal.SystemException {
+	public static void getSubfolderIds(java.util.List<Long> folderIds,
+		long groupId, long folderId) throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		igFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);

@@ -48,12 +48,12 @@ public class CurrentUserIdStrategy implements UserIdStrategy {
 			return _user.getUserId();
 		}
 
-		List users = UserUtil.findByUuid(userUuid);
+		List<User> users = UserUtil.findByUuid(userUuid);
 
-		Iterator itr = users.iterator();
+		Iterator<User> itr = users.iterator();
 
 		if (itr.hasNext()) {
-			User user = (User)itr.next();
+			User user = itr.next();
 
 			return user.getUserId();
 		}

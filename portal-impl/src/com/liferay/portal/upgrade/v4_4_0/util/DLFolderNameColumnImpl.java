@@ -47,7 +47,7 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 		_parentFolderIdColumn = parentFolderIdColumn;
 	}
 
-	public Set getDistintNames() {
+	public Set<String> getDistintNames() {
 		return _distinctNames;
 	}
 
@@ -80,6 +80,6 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 	private UpgradeColumn _groupIdColumn;
 	private UpgradeColumn _parentFolderIdColumn;
 	private int _counter = 0;
-	private Set _distinctNames = new HashSet();
+	private Set<String> _distinctNames = new HashSet<String>();
 
 }

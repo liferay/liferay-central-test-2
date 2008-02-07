@@ -36,28 +36,28 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Brian Wing Shun Chan
  *
  */
-public class ConcurrentHashSet extends AbstractSet {
+public class ConcurrentHashSet<E> extends AbstractSet<E> {
 
 	public ConcurrentHashSet() {
-		_map = new ConcurrentHashMap();
+		_map = new ConcurrentHashMap<E, String>();
 	}
 
 	public ConcurrentHashSet(int capacity) {
-		_map = new ConcurrentHashMap(capacity);
+		_map = new ConcurrentHashMap<E, String>(capacity);
 	}
 
-	public ConcurrentHashSet(Set set) {
-		Iterator itr = set.iterator();
+	public ConcurrentHashSet(Set<E> set) {
+		Iterator<E> itr = set.iterator();
 
 		while (itr.hasNext()) {
-			Object obj = (Object)itr.next();
+			E e = itr.next();
 
-			_map.put(obj, StringPool.BLANK);
+			_map.put(e, StringPool.BLANK);
 		}
 	}
 
-	public boolean add(Object obj) {
-		if (_map.put(obj, StringPool.BLANK) == null) {
+	public boolean add(E e) {
+		if (_map.put(e, StringPool.BLANK) == null) {
 			return true;
 		}
 		else {
@@ -78,7 +78,7 @@ public class ConcurrentHashSet extends AbstractSet {
 		}
 	}
 
-	public Iterator iterator() {
+	public Iterator<E> iterator() {
 		return _map.keySet().iterator();
 	}
 
@@ -95,6 +95,6 @@ public class ConcurrentHashSet extends AbstractSet {
 		return _map.size();
 	}
 
-	private Map _map;
+	private Map<E, String> _map;
 
 }

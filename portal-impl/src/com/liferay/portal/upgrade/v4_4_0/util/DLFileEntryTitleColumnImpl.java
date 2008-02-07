@@ -42,7 +42,7 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFileEntryTitleColumnImpl(
 		UpgradeColumn groupIdColumn, UpgradeColumn folderIdColumn,
-		UpgradeColumn nameColumn, Set distinctTitles) {
+		UpgradeColumn nameColumn, Set<String> distinctTitles) {
 
 		super("title", null);
 
@@ -98,6 +98,6 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 	private UpgradeColumn _folderIdColumn;
 	private UpgradeColumn _nameColumn;
 	private int _counter = 0;
-	private Set _distinctTitles;
+	private Set<String> _distinctTitles;
 
 }

@@ -61,26 +61,26 @@ public interface PortletDataContext extends Serializable {
 
 	public Set getPrimaryKeys();
 
-	public boolean addPrimaryKey(Class classObj, Object primaryKey);
+	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey);
 
-	public boolean hasPrimaryKey(Class classObj, Object primaryKey);
+	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey);
 
 	public Map getComments();
 
-	public void addComments(Class classObj, Object primaryKey)
+	public void addComments(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException;
 
 	public void addComments(String className, Object primaryKey, List messages)
 		throws PortalException, SystemException;
 
 	public void importComments(
-			Class classObj, Object primaryKey, Object newPrimaryKey,
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
 			long groupId)
 		throws PortalException, SystemException;
 
 	public Map getRatingsEntries();
 
-	public void addRatingsEntries(Class classObj, Object primaryKey)
+	public void addRatingsEntries(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException;
 
 	public void addRatingsEntries(
@@ -88,16 +88,16 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public void importRatingsEntries(
-			Class classObj, Object primaryKey, Object newPrimaryKey)
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException;
 
-	public String[] getTagsEntries(Class classObj, Object primaryKey);
+	public String[] getTagsEntries(Class<?> classObj, Object primaryKey);
 
 	public String[] getTagsEntries(String className, Object primaryKey);
 
 	public Map getTagsEntries();
 
-	public void addTagsEntries(Class classObj, Object classPK)
+	public void addTagsEntries(Class<?> classObj, Object classPK)
 		throws PortalException, SystemException;
 
 	public void addTagsEntries(

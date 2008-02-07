@@ -58,6 +58,7 @@ public class CacheRegistry {
 	}
 
 	private static boolean _active = true;
-	private static List _registry = new Vector();
+	private static List<CacheRegistryItem> _registry =
+		new Vector<CacheRegistryItem>();
 
 }

@@ -38,7 +38,7 @@ public class LogFactoryUtil {
 		_logFactory.setLogFactory(logFactory);
 	}
 
-	public static Log getLog(Class c) {
+	public static Log getLog(Class<?> c) {
 		return getLogFactory().getLog(c);
 	}
 

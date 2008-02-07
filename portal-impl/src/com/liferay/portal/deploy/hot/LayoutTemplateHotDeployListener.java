@@ -76,7 +76,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 					"Registering layout templates for " + servletContextName);
 			}
 
-			List<ObjectValuePair> layoutTemplateIds =
+			List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
 				LayoutTemplateLocalUtil.init(
 					servletContextName, ctx, xmls, event.getPluginPackage());
 
@@ -107,7 +107,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 				_log.debug("Invoking undeploy for " + servletContextName);
 			}
 
-			List<ObjectValuePair> layoutTemplateIds =
+			List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
 				_vars.get(servletContextName);
 
 			if (layoutTemplateIds != null) {
@@ -117,10 +117,11 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 							servletContextName);
 				}
 
-				Iterator<ObjectValuePair> itr = layoutTemplateIds.iterator();
+				Iterator<ObjectValuePair<String, Boolean>> itr =
+					layoutTemplateIds.iterator();
 
 				while (itr.hasNext()) {
-					ObjectValuePair ovp = itr.next();
+					ObjectValuePair<String, Boolean> ovp = itr.next();
 
 					String layoutTemplateId = (String)ovp.getKey();
 					Boolean standard = (Boolean)ovp.getValue();
@@ -154,7 +155,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 	private static Log _log =
 		LogFactory.getLog(LayoutTemplateHotDeployListener.class);
 
-	private static Map<String, List<ObjectValuePair>> _vars =
-		new HashMap<String, List<ObjectValuePair>>();
+	private static Map<String, List<ObjectValuePair<String, Boolean>>> _vars =
+		new HashMap<String, List<ObjectValuePair<String, Boolean>>>();
 
 }

@@ -70,7 +70,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		try {
 			HttpServletResponse res = webDavReq.getHttpServletResponse();
 
-			Set props = processInstructions(webDavReq);
+			Set<Tuple> props = processInstructions(webDavReq);
 
 			String xml = getResponseXML(webDavReq, props);
 
@@ -126,11 +126,11 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		return webDavProps;
 	}
 
-	protected Set processInstructions(WebDAVRequest webDavReq)
+	protected Set<Tuple> processInstructions(WebDAVRequest webDavReq)
 		throws InvalidRequestException {
 
 		try {
-			Set newProps = new HashSet();
+			Set<Tuple> newProps = new HashSet<Tuple>();
 
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
 
@@ -154,12 +154,12 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			Element root = doc.getRootElement();
 
-			Iterator itr = root.elements().iterator();
+			Iterator<Element> itr = root.elements().iterator();
 
 			while (itr.hasNext()) {
-				Element instruction = (Element)itr.next();
+				Element instruction = itr.next();
 
-				List list = instruction.elements();
+				List<Element> list = instruction.elements();
 
 				if (list.size() != 1) {
 					throw new InvalidRequestException(
@@ -167,7 +167,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 							"instruction.");
 				}
 
-				Element prop = (Element)list.get(0);
+				Element prop = list.get(0);
 
 				if (!prop.getName().equals("prop") ||
 					!prop.getNamespaceURI().equals(
@@ -184,7 +184,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 						"<prop /> should only have one subelement.");
 				}
 
-				Element customProp = (Element)list.get(0);
+				Element customProp = list.get(0);
 
 				String name = customProp.getName();
 				String prefix = customProp.getNamespacePrefix();

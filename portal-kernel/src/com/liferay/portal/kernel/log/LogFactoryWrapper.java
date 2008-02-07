@@ -43,38 +43,39 @@ public class LogFactoryWrapper implements LogFactory {
 	public void setLogFactory(LogFactory logFactory) {
 		_logFactory = logFactory;
 
-		Iterator itr1 = _logs.entrySet().iterator();
+		Iterator<Map.Entry<String, List<LogWrapper>>> itr1 =
+			_logs.entrySet().iterator();
 
 		while (itr1.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr1.next();
+			Map.Entry<String, List<LogWrapper>> entry = itr1.next();
 
-			String name = (String)entry.getKey();
-			List list = (List)entry.getValue();
+			String name = entry.getKey();
+			List<LogWrapper> list = entry.getValue();
 
-			Iterator itr2 = list.iterator();
+			Iterator<LogWrapper> itr2 = list.iterator();
 
 			while (itr2.hasNext()) {
-				LogWrapper logWrapper = (LogWrapper)itr2.next();
+				LogWrapper logWrapper = itr2.next();
 
 				logWrapper.setLog(_logFactory.getLog(name));
 			}
 		}
 	}
 
-	public Log getLog(Class c) {
+	public Log getLog(Class<?> c) {
 		return getLog(c.getName());
 	}
 
 	public Log getLog(String name) {
-		List list = (List)_logs.get(name);
+		List<LogWrapper> list = _logs.get(name);
 
 		if (list == null) {
-			list = new Vector();
+			list = new Vector<LogWrapper>();
 
 			_logs.put(name, list);
 		}
 
-		Log log = new LogWrapper(_logFactory.getLog(name));
+		LogWrapper log = new LogWrapper(_logFactory.getLog(name));
 
 		list.add(log);
 
@@ -82,6 +83,7 @@ public class LogFactoryWrapper implements LogFactory {
 	}
 
 	private LogFactory _logFactory;
-	private Map _logs = new Hashtable();
+	private Map<String, List<LogWrapper>> _logs =
+		new Hashtable<String, List<LogWrapper>>();
 
 }

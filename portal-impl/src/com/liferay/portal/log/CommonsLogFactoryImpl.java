@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.log.LogFactory;
  */
 public class CommonsLogFactoryImpl implements LogFactory {
 
-	public Log getLog(Class c) {
+	public Log getLog(Class<?> c) {
 		return getLog(c.getName());
 	}
 
