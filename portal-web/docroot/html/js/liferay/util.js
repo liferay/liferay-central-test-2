@@ -729,6 +729,7 @@ Liferay.Util = {
 
 		jQuery.ajax(
 			{
+				type: 'POST',
 				url: settings.url,
 				data: {
 					p_l_id: settings.plid,
