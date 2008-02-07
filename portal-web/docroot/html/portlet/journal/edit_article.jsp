@@ -333,7 +333,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							try {
 								elContentValueCurrent = document.getElementById(elContentNameCurrent).value;
 							}
-							catch(e){
+							catch (e) {
 							}
 
 							if (stillLocalized && (elLanguageValue != null) && (elLanguageValue != "false") && (elLanguageValue != "") && (!elContentName.match(new RegExp(elLanguageValue + "$")))) {

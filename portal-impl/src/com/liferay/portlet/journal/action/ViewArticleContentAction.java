@@ -213,17 +213,17 @@ public class ViewArticleContentAction extends Action {
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 			String elContent = StringPool.BLANK;
-			String elLanguage = "";
+			String elLanguage = StringPool.BLANK;
 
 			if (dynamicContent != null) {
+				elContent = dynamicContent.getTextTrim();
+
 				elLanguage = dynamicContent.attributeValue(
 					"language-id", StringPool.BLANK);
 
 				if (!elLanguage.equals(StringPool.BLANK)) {
 					elLanguage = "_" + elLanguage;
 				}
-
-				elContent = dynamicContent.getTextTrim();
 			}
 
 			if (elType.equals("image") && Validator.isNull(elContent)) {

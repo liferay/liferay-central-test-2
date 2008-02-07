@@ -150,7 +150,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						</c:if>
 
 						<c:if test='<%= elType.equals("image") %>'>
-							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name='structure_image_<%= elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>' size="75" type="file" onChange="<portlet:namespace />contentChanged();" />
+							<input id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="structure_image_<%= elName + (!elLanguageId.equals(StringPool.BLANK) ? "_" + languageId : "") %>" size="75" type="file" onChange="<portlet:namespace />contentChanged();" />
 
 							<c:if test="<%= Validator.isNotNull(elContent) %>">
 								<span style="font-size: xx-small; margin-left: 15px;">
