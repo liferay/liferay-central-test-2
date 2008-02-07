@@ -29,8 +29,6 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 PortletURL addPageURL = renderResponse.createRenderURL();
 
-addPageURL.setWindowState(WindowState.MAXIMIZED);
-
 addPageURL.setParameter("struts_action", "/wiki/edit_page");
 addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 %>

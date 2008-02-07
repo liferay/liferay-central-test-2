@@ -37,6 +37,21 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 %>
 
 <div class="wiki-top-links">
+	<%
+	if (themeDisplay.isSignedIn()) {
+		if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE)) {
+
+			portletURL.setParameter("struts_action", "/wiki/view_nodes");
+	%>
+
+		<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="administer-nodes"/></nobr></a>
+		&nbsp;&nbsp;&nbsp;
+
+	<%
+		}
+	}
+	%>
+
 	<a href="<%= pageURL.toString() %>"><%= WikiPageImpl.FRONT_PAGE %></a>
 
 	|
@@ -57,18 +72,4 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	%>
 	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="orphan-pages"/></nobr></a>
 
-	<%
-	if (themeDisplay.isSignedIn()) {
-		if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE)) {
-
-			portletURL.setParameter("struts_action", "/wiki/view_nodes");
-	%>
-
-		|
-		<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="administer-nodes"/></nobr></a>
-
-	<%
-		}
-	}
-	%>
 </div>

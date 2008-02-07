@@ -98,6 +98,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String uuid, long userId, long nodeId, String title, double version,
 			String content, String format, boolean head, String[] tagsEntries)
 		throws PortalException, SystemException {
+		return addPage(
+			null, userId, nodeId, title, version, content, format, head, null,
+			tagsEntries);
+	}
+
+	public WikiPage addPage(
+			String uuid, long userId, long nodeId, String title, double version,
+			String content, String format, boolean head, String redirectTo,
+			String[] tagsEntries)
+		throws PortalException, SystemException {
 
 		// Page
 
@@ -127,6 +137,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setContent(content);
 		page.setFormat(format);
 		page.setHead(head);
+		page.setRedirectTo(redirectTo);
 
 		wikiPagePersistence.update(page);
 
@@ -561,6 +572,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long userId, long nodeId, String title, String content,
 			String format, String[] tagsEntries)
 		throws PortalException, SystemException {
+		return updatePage(
+			userId, nodeId, title, content, format, null, tagsEntries);
+	}
+
+	public WikiPage updatePage(
+			long userId, long nodeId, String title, String content,
+			String format, String redirectTo, String[] tagsEntries)
+		throws PortalException, SystemException {
 
 		// Page
 
@@ -603,6 +622,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setFormat(format);
 		page.setHead(true);
 
+		if (redirectTo != null) {
+			page.setRedirectTo(redirectTo);
+		}
+		
 		wikiPagePersistence.update(page);
 
 		// Node

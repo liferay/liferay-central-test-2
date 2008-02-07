@@ -33,8 +33,6 @@ String type = ParamUtil.getString(request, "type");
 String strutsAction = "";
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
@@ -116,8 +114,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(curWikiPage, curWikiPage.getPageId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/wiki/view");
 	rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));

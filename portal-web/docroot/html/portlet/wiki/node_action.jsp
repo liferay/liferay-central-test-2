@@ -32,7 +32,7 @@ WikiNode node = (WikiNode)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/wiki/edit_node" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
@@ -53,7 +53,7 @@ WikiNode node = (WikiNode)row.getObject();
 	</c:if>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_node" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

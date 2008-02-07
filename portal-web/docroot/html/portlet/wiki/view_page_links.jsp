@@ -36,15 +36,11 @@ String tabsNames = "page-history,page-links";
 
 PortletURL viewPageLinksURL = renderResponse.createRenderURL();
 
-viewPageLinksURL.setWindowState(WindowState.MAXIMIZED);
-
 viewPageLinksURL.setParameter("struts_action", "/wiki/view_page_links");
 viewPageLinksURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 viewPageLinksURL.setParameter("title", wikiPage.getTitle());
 
 PortletURL viewPageHistoryURL = renderResponse.createRenderURL();
-
-viewPageHistoryURL.setWindowState(WindowState.MAXIMIZED);
 
 viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
 viewPageHistoryURL.setParameter("nodeId", String.valueOf(node.getNodeId()));

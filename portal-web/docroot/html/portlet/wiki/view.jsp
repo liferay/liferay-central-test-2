@@ -41,8 +41,6 @@ boolean print = ParamUtil.get(request, Constants.PRINT, false);
 
 PortletURL pageURL= renderResponse.createRenderURL();
 
-pageURL.setWindowState(WindowState.MAXIMIZED);
-
 pageURL.setParameter("struts_action", "/wiki/view");
 pageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 pageURL.setParameter("title", title);
@@ -57,8 +55,6 @@ printPageURL.setParameter("title", title);
 printPageURL.setParameter("print", "true");
 
 PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/wiki/edit_page");
 portletURL.setParameter("redirect", currentURL);

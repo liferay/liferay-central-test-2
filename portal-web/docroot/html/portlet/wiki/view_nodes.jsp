@@ -27,8 +27,6 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/wiki/view");
 
 List headerNames = new ArrayList();
@@ -49,12 +47,9 @@ List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), sea
 searchContainer.setResults(results);
 %>
 
-<liferay-ui:tabs
-	names="administer-nodes"
-	backURL="<%= portletURL.toString() %>"
-/>
+<h1><liferay-ui:message key="administer-nodes"/></h1>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
@@ -68,8 +63,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(node, node.getNodeId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/wiki/view");
 	rowURL.setParameter("redirect", currentURL);
@@ -105,21 +98,28 @@ for (int i = 0; i < results.size(); i++) {
 }
 
 boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE);
+
+PortletURL backURL = renderResponse.createRenderURL();
+
+backURL.setParameter("struts_action", "/wiki/view");
 %>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<br/>
 
 <c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
 	<div>
 		<c:if test="<%= showAddNodeButton %>">
-			<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
+		<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<%= backURL %>';" />
 	</div>
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />
 	</c:if>
 </c:if>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>
 

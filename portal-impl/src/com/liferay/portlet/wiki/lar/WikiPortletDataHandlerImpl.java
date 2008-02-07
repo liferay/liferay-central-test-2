@@ -319,20 +319,21 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(),
-						page.getContent(), page.getFormat(), tagsEntries);
+						page.getContent(), page.getFormat(),
+						page.getRedirectTo(), tagsEntries);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
 						page.getVersion(), page.getContent(), page.getFormat(),
-						page.getHead(), tagsEntries);
+						page.getHead(), page.getRedirectTo(), tagsEntries);
 				}
 			}
 			else {
 				existingPage = WikiPageLocalServiceUtil.addPage(
-					userId, nodeId, page.getTitle(), page.getVersion(),
+					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getFormat(), page.getHead(),
-					tagsEntries);
+					page.getRedirectTo(), tagsEntries);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {

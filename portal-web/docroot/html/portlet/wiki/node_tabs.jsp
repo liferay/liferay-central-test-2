@@ -56,7 +56,7 @@ String tabs1Values = ListUtil.toString(allowedNodes, "nodeId");
 <c:if test="<%= !print %>">
 	<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
-	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fmSearch" onSubmit="submitForm(this); return false;">
 	<liferay-portlet:renderURLParams varImpl="searchURL" />
 	<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />

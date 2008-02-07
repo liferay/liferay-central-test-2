@@ -49,7 +49,7 @@ pageURL.setParameter("title", title);
 	<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
 </div>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input type="hidden" name="<portlet:namespace />redirect" value="<%= pageURL.toString() %>" />
 <input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
 <input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
