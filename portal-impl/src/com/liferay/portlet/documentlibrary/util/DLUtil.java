@@ -33,8 +33,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
@@ -202,7 +202,7 @@ public class DLUtil {
 	}
 
 	private DLUtil() {
-		_fileExtensions = CollectionFactory.getHashSet();
+		_fileExtensions = new HashSet<String>();
 
 		String[] fileExtensions = PropsValues.DL_FILE_EXTENSIONS;
 
@@ -242,6 +242,6 @@ public class DLUtil {
 
 	private static DLUtil _instance = new DLUtil();
 
-	private Set _fileExtensions;
+	private Set<String> _fileExtensions;
 
 }

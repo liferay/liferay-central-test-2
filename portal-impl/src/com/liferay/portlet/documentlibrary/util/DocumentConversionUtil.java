@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 
@@ -49,6 +48,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -158,7 +158,7 @@ public class DocumentConversionUtil {
 		}
 		else {
 			if (ArrayUtil.contains(conversions, extension)) {
-				List list = new ArrayList();
+				List<String> list = new ArrayList<String>();
 
 				for (int i = 0; i < conversions.length; i++) {
 					String conversion = conversions[i];
@@ -168,7 +168,7 @@ public class DocumentConversionUtil {
 					}
 				}
 
-				conversions = (String[])list.toArray(new String[0]);
+				conversions = list.toArray(new String[list.size()]);
 			}
 		}
 
@@ -212,7 +212,8 @@ public class DocumentConversionUtil {
 	private static DocumentConversionUtil _instance =
 		new DocumentConversionUtil();
 
-	private Map _conversionsMap = CollectionFactory.getHashMap();
+	private Map<String, String[]> _conversionsMap =
+		new HashMap<String, String[]>();
 	private OpenOfficeConnection _connection;
 	private DocumentConverter _converter;
 

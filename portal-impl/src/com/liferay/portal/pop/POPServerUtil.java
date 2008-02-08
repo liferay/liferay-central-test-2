@@ -53,7 +53,7 @@ public class POPServerUtil {
 		_instance._deleteListener(listener);
 	}
 
-	public static List getListeners() throws Exception {
+	public static List<MessageListener> getListeners() throws Exception {
 		return _instance._getListeners();
 	}
 
@@ -94,7 +94,7 @@ public class POPServerUtil {
 	}
 
 	private void _deleteListener(MessageListenerWrapper listener) {
-		Iterator itr = _listeners.iterator();
+		Iterator<MessageListener> itr = _listeners.iterator();
 
 		while (itr.hasNext()) {
 			MessageListenerWrapper curListener =
@@ -129,7 +129,7 @@ public class POPServerUtil {
 		}
 	}
 
-	private List _getListeners() {
+	private List<MessageListener> _getListeners() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Listeners size " + _listeners.size());
 		}
@@ -171,6 +171,6 @@ public class POPServerUtil {
 
 	private static POPServerUtil _instance = new POPServerUtil();
 
-	private List _listeners = new ArrayList();
+	private List<MessageListener> _listeners = new ArrayList<MessageListener>();
 
 }

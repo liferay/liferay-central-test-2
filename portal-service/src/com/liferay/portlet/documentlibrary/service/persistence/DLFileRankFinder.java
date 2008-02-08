@@ -32,9 +32,10 @@ public interface DLFileRankFinder {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

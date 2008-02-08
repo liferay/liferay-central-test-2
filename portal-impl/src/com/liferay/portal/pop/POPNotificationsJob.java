@@ -134,7 +134,8 @@ public class POPNotificationsJob implements IntervalJob {
 		}
 	}
 
-	protected void nostifyListeners(List listeners, Message message)
+	protected void nostifyListeners(
+			List<MessageListener> listeners, Message message)
 		throws Exception {
 
 		String from = getEmailAddress(message.getFrom());
@@ -146,10 +147,10 @@ public class POPNotificationsJob implements IntervalJob {
 			_log.debug("Recipient " + recipient);
 		}
 
-		Iterator itr = listeners.iterator();
+		Iterator<MessageListener> itr = listeners.iterator();
 
 		while (itr.hasNext()) {
-			MessageListener messageListener = (MessageListener)itr.next();
+			MessageListener messageListener = itr.next();
 
 			try {
 				if (messageListener.accept(from, recipient)) {
@@ -167,7 +168,7 @@ public class POPNotificationsJob implements IntervalJob {
 			_log.debug("Messages " + messages.length);
 		}
 
-		List listeners = POPServerUtil.getListeners();
+		List<MessageListener> listeners = POPServerUtil.getListeners();
 
 		for (int i = 0; i < messages.length; i++) {
 			Message message = messages[i];

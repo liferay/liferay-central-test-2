@@ -35,16 +35,17 @@ import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.Time;
 
 import java.text.MessageFormat;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletConfig;
@@ -438,14 +439,14 @@ public class LanguageImpl implements Language {
 	}
 
 	private static LanguageImpl _getInstance() {
-		Long companyIdObj = new Long(CompanyThreadLocal.getCompanyId());
+		long companyId = CompanyThreadLocal.getCompanyId();
 
-		LanguageImpl instance = (LanguageImpl)_instances.get(companyIdObj);
+		LanguageImpl instance = _instances.get(companyId);
 
 		if (instance == null) {
 			instance = new LanguageImpl();
 
-			_instances.put(companyIdObj, instance);
+			_instances.put(companyId, instance);
 		}
 
 		return instance;
@@ -455,8 +456,8 @@ public class LanguageImpl implements Language {
 		String[] localesArray = PropsValues.LOCALES;
 
 		_locales = new Locale[localesArray.length];
-		_localesByLanguageCode = CollectionFactory.getHashMap();
-		_charEncodings = CollectionFactory.getHashMap();
+		_localesByLanguageCode = new HashMap<String, Locale>();
+		_charEncodings = new HashMap<String, String>();
 
 		for (int i = 0; i < localesArray.length; i++) {
 			String languageId = localesArray[i];
@@ -479,15 +480,16 @@ public class LanguageImpl implements Language {
 	}
 
 	private Locale _getLocale(String languageCode) {
-		return (Locale)_localesByLanguageCode.get(languageCode);
+		return _localesByLanguageCode.get(languageCode);
 	}
 
 	private static Log _log = LogFactory.getLog(LanguageImpl.class);
 
-	private static Map _instances = CollectionFactory.getSyncHashMap();
+	private static Map<Long, LanguageImpl> _instances =
+		new ConcurrentHashMap<Long, LanguageImpl>();
 
 	private Locale[] _locales;
-	private Map _localesByLanguageCode;
-	private Map _charEncodings;
+	private Map<String, Locale> _localesByLanguageCode;
+	private Map<String, String> _charEncodings;
 
 }

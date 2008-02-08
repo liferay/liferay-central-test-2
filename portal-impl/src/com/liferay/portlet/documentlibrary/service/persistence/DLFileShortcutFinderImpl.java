@@ -66,7 +66,7 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<DLFileShortcut> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -80,7 +80,7 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 				throw new NoSuchFileShortcutException(sm.toString());
 			}
 			else {
-				return (DLFileShortcut)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchFileShortcutException nsfse) {

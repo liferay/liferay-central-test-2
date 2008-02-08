@@ -43,19 +43,19 @@ public class LogFactoryWrapper implements LogFactory {
 	public void setLogFactory(LogFactory logFactory) {
 		_logFactory = logFactory;
 
-		Iterator<Map.Entry<String, List<LogWrapper>>> itr1 =
+		Iterator<Map.Entry<String, List<Log>>> itr1 =
 			_logs.entrySet().iterator();
 
 		while (itr1.hasNext()) {
-			Map.Entry<String, List<LogWrapper>> entry = itr1.next();
+			Map.Entry<String, List<Log>> entry = itr1.next();
 
 			String name = entry.getKey();
-			List<LogWrapper> list = entry.getValue();
+			List<Log> list = entry.getValue();
 
-			Iterator<LogWrapper> itr2 = list.iterator();
+			Iterator<Log> itr2 = list.iterator();
 
 			while (itr2.hasNext()) {
-				LogWrapper logWrapper = itr2.next();
+				LogWrapper logWrapper = (LogWrapper)itr2.next();
 
 				logWrapper.setLog(_logFactory.getLog(name));
 			}
@@ -67,15 +67,15 @@ public class LogFactoryWrapper implements LogFactory {
 	}
 
 	public Log getLog(String name) {
-		List<LogWrapper> list = _logs.get(name);
+		List<Log> list = _logs.get(name);
 
 		if (list == null) {
-			list = new Vector<LogWrapper>();
+			list = new Vector<Log>();
 
 			_logs.put(name, list);
 		}
 
-		LogWrapper log = new LogWrapper(_logFactory.getLog(name));
+		Log log = new LogWrapper(_logFactory.getLog(name));
 
 		list.add(log);
 
@@ -83,7 +83,6 @@ public class LogFactoryWrapper implements LogFactory {
 	}
 
 	private LogFactory _logFactory;
-	private Map<String, List<LogWrapper>> _logs =
-		new Hashtable<String, List<LogWrapper>>();
+	private Map<String, List<Log>> _logs = new Hashtable<String, List<Log>>();
 
 }

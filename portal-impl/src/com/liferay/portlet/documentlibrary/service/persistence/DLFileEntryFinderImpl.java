@@ -70,7 +70,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	public static String FIND_BY_G_U =
 		DLFileEntryFinder.class.getName() + ".findByG_U";
 
-	public int countByFolderIds(List folderIds) throws SystemException {
+	public int countByFolderIds(List<Long> folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -88,15 +88,15 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -129,10 +129,10 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -166,10 +166,10 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -186,13 +186,13 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<DLFileEntry> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(
+	public List<DLFileEntry> findByGroupId(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -213,7 +213,8 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 
 			qPos.add(groupId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<DLFileEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -223,7 +224,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<DLFileEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -245,13 +246,14 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<DLFileEntry> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return findByG_U(groupId, userId, begin, end, null);
 	}
 
-	public List findByG_U(
+	public List<DLFileEntry> findByG_U(
 			long groupId, long userId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -274,7 +276,8 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<DLFileEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -303,7 +306,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<DLFileEntry> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -317,7 +320,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 				throw new NoSuchFileEntryException(sm.toString());
 			}
 			else {
-				return (DLFileEntry)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -331,7 +334,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		}
 	}
 
-	protected String getFolderIds(List folderIds) {
+	protected String getFolderIds(List<Long> folderIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {
