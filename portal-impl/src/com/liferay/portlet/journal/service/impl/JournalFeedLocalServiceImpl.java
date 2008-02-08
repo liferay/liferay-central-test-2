@@ -54,7 +54,7 @@ import org.dom4j.XPath;
 /**
  * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class JournalFeedLocalServiceImpl
@@ -167,6 +167,7 @@ public class JournalFeedLocalServiceImpl
 		// Feed
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		feedId = feedId.trim().toUpperCase();
 		Date now = new Date();
 
 		validate(
@@ -174,6 +175,10 @@ public class JournalFeedLocalServiceImpl
 			targetLayoutFriendlyUrl, contentField);
 
 		long id = counterLocalService.increment();
+
+		if (autoFeedId) {
+			feedId = String.valueOf(counterLocalService.increment());
+		}
 
 		JournalFeed feed = journalFeedPersistence.create(id);
 

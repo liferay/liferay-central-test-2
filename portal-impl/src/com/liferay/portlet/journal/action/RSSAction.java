@@ -114,10 +114,8 @@ public class RSSAction extends PortletAction {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String feedURL =
-			themeDisplay.getURLPortal() +
-				PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
-					"/journal/rss/" + feed.getId();
+		String feedURL = PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
+			"/journal/rss/" + feed.getGroupId() + "/" + feed.getFeedId();
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
@@ -204,15 +202,18 @@ public class RSSAction extends PortletAction {
 				layout.getGroupId(), layout.isPrivateLayout(),
 				hitLayoutId.longValue());
 
-			return themeDisplay.getURLPortal() +
-				PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			return PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
 		}
 		else if (Validator.isNotNull(feed.getTargetLayoutFriendlyUrl())) {
-			sm.append(themeDisplay.getURLPortal());
-			sm.append(feed.getTargetLayoutFriendlyUrl());
+			long plid = PortalUtil.getPlidIdFromFriendlyURL(
+				feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
+
+			Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
+
+			sm.append(
+				PortalUtil.getLayoutFriendlyURL(targetLayout, themeDisplay));
 		}
 		else {
-			sm.append(themeDisplay.getURLPortal());
 			sm.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
 		}
 
