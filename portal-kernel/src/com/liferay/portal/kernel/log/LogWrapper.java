@@ -39,51 +39,111 @@ public class LogWrapper implements Log {
 	}
 
 	public void debug(Object msg) {
-		_log.debug(msg);
+		try {
+			_log.debug(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void debug(Throwable t) {
-		_log.debug(t);
+		try {
+			_log.debug(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void debug(Object msg, Throwable t) {
-		_log.debug(msg, t);
+		try {
+			_log.debug(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void error(Object msg) {
-		_log.error(msg);
+		try {
+			_log.error(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void error(Throwable t) {
-		_log.error(t);
+		try {
+			_log.error(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void error(Object msg, Throwable t) {
-		_log.error(msg, t);
+		try {
+			_log.error(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void fatal(Object msg) {
-		_log.fatal(msg);
+		try {
+			_log.fatal(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void fatal(Throwable t) {
-		_log.fatal(t);
+		try {
+			_log.fatal(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void fatal(Object msg, Throwable t) {
-		_log.fatal(msg, t);
+		try {
+			_log.fatal(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void info(Object msg) {
-		_log.info(msg);
+		try {
+			_log.info(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void info(Throwable t) {
-		_log.info(t);
+		try {
+			_log.info(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void info(Object msg, Throwable t) {
-		_log.info(msg, t);
+		try {
+			_log.info(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public boolean isDebugEnabled() {
@@ -111,27 +171,61 @@ public class LogWrapper implements Log {
 	}
 
 	public void trace(Object msg) {
-		_log.trace(msg);
+		try {
+			_log.trace(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void trace(Throwable t) {
-		_log.trace(t);
+		try {
+			_log.trace(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void trace(Object msg, Throwable t) {
-		_log.trace(msg, t);
+		try {
+			_log.trace(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void warn(Object msg) {
-		_log.warn(msg);
+		try {
+			_log.warn(msg);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
 	}
 
 	public void warn(Throwable t) {
-		_log.warn(t);
+		try {
+			_log.warn(t);
+		}
+		catch (Exception e) {
+			printMsg(t.getMessage());
+		}
 	}
 
 	public void warn(Object msg, Throwable t) {
-		_log.warn(msg, t);
+		try {
+			_log.warn(msg, t);
+		}
+		catch (Exception e) {
+			printMsg(msg);
+		}
+	}
+
+	protected void printMsg(Object msg) {
+		printMsg(msg);
 	}
 
 	private Log _log;
