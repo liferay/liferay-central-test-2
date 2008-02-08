@@ -297,7 +297,7 @@ public class DBLoader {
 			_loadHypersonic(con, "../sql/indexes.sql");
 		}
 		else {
-			_loadDerby(con, _fileName);
+			_loadHypersonic(con, _fileName);
 		}
 
 		// Shutdown Hypersonic
