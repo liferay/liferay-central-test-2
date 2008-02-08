@@ -138,10 +138,16 @@
 .js .interactive-mode .my-places li.current a {
 }
 
-.ie6.js .lfr-dock.interactive-mode {
+.ie.js .lfr-dock .my-places h3 {
 }
 
-.ie.js .lfr-dock .my-places h3 {
+.ie.js .interactive-mode .lfr-flyout.has-children {
+}
+
+.ie.js .lfr-dock.expanded .lfr-dock-list-container, .ie.js .lfr-dock.expanded .lfr-dock-list {
+}
+
+.ie6.js .lfr-dock.interactive-mode {
 }
 
 .ie6.js .lfr-dock.interactive-mode li {
@@ -151,6 +157,12 @@
 }
 
 .ie6.js .lfr-flyout.has-children ul {
+}
+
+.ie6.js .interactive-mode li {
+}
+
+.ie6.js .interactive-mode .lfr-flyout.has-children {
 }
 
 /* ---------- Add/sort/remove page ---------- */

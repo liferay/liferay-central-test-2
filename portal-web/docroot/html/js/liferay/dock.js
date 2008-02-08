@@ -15,7 +15,16 @@ Liferay.Dock = {
 		if (dockList.length > 0){
 			var myPlaces = jQuery('.my-places', dock);
 
-			Liferay.Util.createFlyouts({container: dockList[0]});
+			Liferay.Util.createFlyouts(
+				{
+					container: dockList[0],
+					mouseOver: function(event) {
+						if (this.className.indexOf('my-places') > -1) {
+							jQuery('.current-community > ul', this).show();
+						}
+					}
+				}
+			);
 
 			dockList.find('li:first-child, a:first-child').addClass('first');
 			dockList.find('li:last-child, a:last-child').addClass('last');

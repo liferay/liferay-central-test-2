@@ -186,6 +186,7 @@
 
 .js .interactive-mode li {
 	border-top: 1px solid #ccc;
+	clear: both;
 	display: block;
 	float: none;
 	margin-bottom: 0;
@@ -225,7 +226,7 @@
 }
 
 .js .interactive-mode .my-places li h3 {
-	background: url(../images/dock/my_place.png) no-repeat 3px 50%;
+	background: url(../images/dock/my_place.png) no-repeat 0 50%;
 	font-size: 1em;
 	margin: 0;
 	margin-left: 4px;
@@ -238,6 +239,7 @@
 	border: 1px solid #999;
 	display: none;
 	margin-left: 0.5em;
+	top: -1px;
 }
 
 .js .interactive-mode .my-places li.public a {
@@ -254,17 +256,27 @@
 	padding-left: 3.5em;
 }
 
+.ie.js .lfr-dock .my-places h3 {
+	font-size: 1.1em;
+}
+
+.ie.js .interactive-mode .lfr-flyout.has-children {
+	float: left;
+	min-width: 175px;
+}
+
+.ie.js .lfr-dock.expanded .lfr-dock-list-container, .ie.js .lfr-dock.expanded .lfr-dock-list {
+	height: 1%;
+}
+
 .ie6.js .lfr-dock.interactive-mode {
 	white-space: nowrap;
 	width: 150px;
 }
 
-.ie.js .lfr-dock .my-places h3 {
-	font-size: 1.1em;
-}
-
 .ie6.js .lfr-dock.interactive-mode li {
 	height: 1%;
+	width: 100%;
 }
 
 .ie6.js .lfr-dock.interactive-mode li a {
@@ -272,6 +284,15 @@
 }
 
 .ie6.js .lfr-flyout.has-children ul {
+	height: 1%;
+	width: 150px;
+}
+
+.ie6.js .interactive-mode li {
+	width: 162px;
+}
+
+.ie6.js .interactive-mode .lfr-flyout.has-children {
 	width: 150px;
 }
 
@@ -342,7 +363,7 @@
 }
 
 .nav-menu li a.selected {
-	1text-decoration: none;
+	text-decoration: none;
 	color: black;
 	font-weight: bold;
 }
