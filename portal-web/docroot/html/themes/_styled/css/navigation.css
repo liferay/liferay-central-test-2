@@ -190,7 +190,7 @@
 	display: block;
 	float: none;
 	margin-bottom: 0;
-	margin-left: 0.2em;
+	margin-left: 0;
 }
 
 .js .interactive-mode li a {
@@ -221,6 +221,10 @@
 	background-repeat: no-repeat;
 }
 
+.js .lfr-dock.interactive-mode .my-places.lfr-flyout.has-children > ul {
+	margin-right: -1px;
+}
+
 .js .interactive-mode .my-places li.current-community {
 	background-color: #E5FDEC;
 }
@@ -238,7 +242,7 @@
 	background: #fff none no-repeat 3px 50%;
 	border: 1px solid #999;
 	display: none;
-	margin-left: 0.5em;
+	margin-left: 0;
 	top: -1px;
 }
 
@@ -252,7 +256,7 @@
 
 .js .interactive-mode .my-places li.current a {
 	background: #E5F7FD url(../images/dock/my_place_current.png) no-repeat 1em 50%;
-	margin: 0.1em 0 0 0.2em;
+	margin: 0;
 	padding-left: 3.5em;
 }
 
@@ -284,8 +288,8 @@
 }
 
 .ie6.js .lfr-flyout.has-children ul {
-	height: 1%;
 	width: 150px;
+	height: 1%;
 }
 
 .ie6.js .interactive-mode li {

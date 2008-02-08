@@ -120,6 +120,9 @@
 .js .interactive-mode .my-places li {
 }
 
+.js .lfr-dock.interactive-mode .my-places.lfr-flyout.has-children > ul {
+}
+
 .js .interactive-mode .my-places li.current-community {
 }
 
