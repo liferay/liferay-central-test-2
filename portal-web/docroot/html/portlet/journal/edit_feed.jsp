@@ -95,45 +95,45 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
 <script type="text/javascript">
 	function <portlet:namespace />saveFeed() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
 
 		<c:if test="<%= feed == null %>">
-			document.<portlet:namespace />fm1.<portlet:namespace />feedId.value = document.<portlet:namespace />fm1.<portlet:namespace />newFeedId.value;
+			document.<portlet:namespace />fm.<portlet:namespace />feedId.value = document.<portlet:namespace />fm.<portlet:namespace />newFeedId.value;
 		</c:if>
 
-		submitForm(document.<portlet:namespace />fm1);
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-		document.<portlet:namespace />fm1.<portlet:namespace />rendererTemplateId.value = "";
-		document.<portlet:namespace />fm1.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>";
-		submitForm(document.<portlet:namespace />fm1);
+		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>";
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectRendererTemplate(rendererTemplateId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />rendererTemplateId.value = rendererTemplateId;
+		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = rendererTemplateId;
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
-			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-			document.<portlet:namespace />fm1.<portlet:namespace />rendererTemplateId.value = "";
-			document.<portlet:namespace />fm1.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>";
+		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>";
 			<portlet:namespace />saveFeed();
 		}
 	}
 
 	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
+		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
 		<portlet:namespace />saveFeed();
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveFeed(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFeed(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= feed == null ? Constants.ADD : Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
@@ -142,7 +142,6 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
 <liferay-ui:tabs
 	names="feed"
-	formName="fm1"
 	backURL="<%= redirect %>"
 />
 
@@ -271,12 +270,13 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
+
 				<%
-				long targetLayoutPlid = PortalUtil.getPlidIdFromFriendlyURL(
-					feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
+				long targetLayoutPlid = PortalUtil.getPlidIdFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
 				Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetLayoutPlid);
 				%>
+
 				<liferay-ui:input-resource
 					url='<%= PortalUtil.getLayoutFriendlyURL(targetLayout, themeDisplay) + "/journal/rss/" + groupId + "/" + feedId %>'
 				/>
@@ -554,10 +554,10 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	<script type="text/javascript">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_FEED_FORCE_AUTOGENERATE_ID %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />name);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (feed == null) ? "newFeedId" : "name" %>);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (feed == null) ? "newFeedId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
 	</script>

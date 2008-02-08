@@ -114,8 +114,9 @@ public class RSSAction extends PortletAction {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String feedURL = PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
-			"/journal/rss/" + feed.getGroupId() + "/" + feed.getFeedId();
+		String feedURL =
+			PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
+				"/journal/rss/" + feed.getGroupId() + "/" + feed.getFeedId();
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 

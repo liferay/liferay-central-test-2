@@ -174,11 +174,11 @@ public class JournalFeedLocalServiceImpl
 			groupId, feedId, autoFeedId, name, description, structureId,
 			targetLayoutFriendlyUrl, contentField);
 
-		long id = counterLocalService.increment();
-
 		if (autoFeedId) {
 			feedId = String.valueOf(counterLocalService.increment());
 		}
+
+		long id = counterLocalService.increment();
 
 		JournalFeed feed = journalFeedPersistence.create(id);
 
