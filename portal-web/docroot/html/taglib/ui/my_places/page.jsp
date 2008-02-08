@@ -155,13 +155,17 @@ List myPlaces = user.getMyPlaces();
 		%>
 
 			<c:if test="<%= showPublicPlace || showPrivatePlace %>">
-			<%
+
+				<%
 				boolean selectedCommunity = false;
 
   				if (layout != null) {
-	  				selectedCommunity = layout.getGroupId() == myPlace.getGroupId();
+	  				if (layout.getGroupId() == myPlace.getGroupId()) {
+						selectedCommunity = true;
+					}
 	  			}
-			 %>
+				%>
+
 				<li class="<%= selectedCommunity ? "current-community" : "" %>">
 					<h3>
 						<c:choose>
