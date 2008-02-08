@@ -132,13 +132,6 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		long nodeId, java.lang.String title, double version,
-		java.lang.String content, java.lang.String format, boolean head,
-		java.lang.String[] tagsEntries)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
 	public com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
@@ -249,12 +242,6 @@ public interface WikiPageLocalService {
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

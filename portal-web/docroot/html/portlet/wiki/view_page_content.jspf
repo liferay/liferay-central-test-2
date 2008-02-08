@@ -60,7 +60,7 @@ if (Validator.isNull(pageContent)) {
 	if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
 		editURL.setParameter("title", wikiPage.getTitle());
 
-		pageContent = "<div class=\"portlet-msg-info\"><a href=\"" + editURL +  "\">" + LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text") + "</a></div>";
+		pageContent = "<div class=\"portlet-msg-info\"><a href=\"" + editURL + "\">" + LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text") + "</a></div>";
 	}
 }
 %>

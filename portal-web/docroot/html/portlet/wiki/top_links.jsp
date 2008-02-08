@@ -44,7 +44,7 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			portletURL.setParameter("struts_action", "/wiki/view_nodes");
 	%>
 
-		<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="administer-nodes"/></nobr></a>
+		<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="administer-nodes" /></nobr></a>
 		&nbsp;&nbsp;&nbsp;
 
 	<%
@@ -58,18 +58,18 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	<%
 	portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
 	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="recent-changes"/></nobr></a>
+	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="recent-changes" /></nobr></a>
 
 	|
 	<%
 	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
 	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="all-pages"/></nobr></a>
+	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="all-pages" /></nobr></a>
 
 	|
 	<%
 	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="orphan-pages"/></nobr></a>
+	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="orphan-pages" /></nobr></a>
 
 </div>

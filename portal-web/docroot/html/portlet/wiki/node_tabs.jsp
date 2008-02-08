@@ -62,7 +62,7 @@ String tabs1Values = ListUtil.toString(allowedNodes, "nodeId");
 	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 	<span class="wiki-search">
-		<input name="<portlet:namespace />keywords" size="30" type="text"  value="<%= Html.escape(keywords) %>"/>
+		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 
 		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</span>

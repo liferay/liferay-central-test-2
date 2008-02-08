@@ -52,7 +52,7 @@ viewPageHistoryURL.setParameter("title", wikiPage.getTitle());
 
 <liferay-ui:tabs names="<%= tabsNames %>"
 	url0="<%= viewPageHistoryURL.toString() %>"
-	url1="<%= viewPageLinksURL.toString() %>"/>
+	url1="<%= viewPageLinksURL.toString() %>" />
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="page_history" />

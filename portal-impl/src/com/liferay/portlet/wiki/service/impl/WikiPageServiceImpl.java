@@ -105,7 +105,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.updatePage(
-			getUserId(), nodeId, title, content, format, tagsEntries);
+			getUserId(), nodeId, title, content, format, null, tagsEntries);
 	}
 
 }

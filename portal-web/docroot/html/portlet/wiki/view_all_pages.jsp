@@ -46,7 +46,7 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
-<h1 class="wiki-page-title"><liferay-ui:message key="all-pages"/></h1>
+<h1 class="wiki-page-title"><liferay-ui:message key="all-pages" /></h1>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="all_pages" />
@@ -57,4 +57,3 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 <c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>">
 	<liferay-ui:icon image="add_article" message="add-page" label="<%= true %>" url='<%= "javascript: " + renderResponse.getNamespace() + "addPage();" %>' />
 </c:if>
-

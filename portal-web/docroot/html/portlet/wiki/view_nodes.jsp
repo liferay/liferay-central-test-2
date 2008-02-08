@@ -47,7 +47,7 @@ List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), sea
 searchContainer.setResults(results);
 %>
 
-<h1><liferay-ui:message key="administer-nodes"/></h1>
+<h1><liferay-ui:message key="administer-nodes" /></h1>
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 

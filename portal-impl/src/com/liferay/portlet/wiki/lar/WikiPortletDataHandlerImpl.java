@@ -38,12 +38,12 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -102,24 +102,25 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Nodes
 
-			List nodes = WikiNodeUtil.findByGroupId(context.getGroupId());
+			List<WikiNode> nodes = WikiNodeUtil.findByGroupId(
+				context.getGroupId());
 
-			List pages = new ArrayList();
+			List<WikiPage> pages = new ArrayList<WikiPage>();
 
-			Iterator itr = nodes.iterator();
+			Iterator<WikiNode> nodesItr = nodes.iterator();
 
-			while (itr.hasNext()) {
-				WikiNode node = (WikiNode)itr.next();
+			while (nodesItr.hasNext()) {
+				WikiNode node = nodesItr.next();
 
 				if (context.addPrimaryKey(
 						WikiNode.class, node.getPrimaryKeyObj())) {
 
-					itr.remove();
+					nodesItr.remove();
 				}
 				else {
 					node.setUserUuid(node.getUserUuid());
 
-					List nodePages = WikiPageUtil.findByNodeId(
+					List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
 						node.getNodeId());
 
 					pages.addAll(nodePages);
@@ -136,15 +137,15 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Pages
 
-			itr = pages.iterator();
+			Iterator<WikiPage> pagesItr = pages.iterator();
 
-			while (itr.hasNext()) {
-				WikiPage page = (WikiPage)itr.next();
+			while (pagesItr.hasNext()) {
+				WikiPage page = pagesItr.next();
 
 				if (context.addPrimaryKey(
 						WikiPage.class, page.getPrimaryKeyObj())) {
 
-					itr.remove();
+					pagesItr.remove();
 				}
 				else {
 					page.setUserUuid(page.getUserUuid());
@@ -214,14 +215,15 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map nodePKs = CollectionFactory.getHashMap();
+			Map<Long, Long> nodePKs = new HashMap<Long, Long>();
 
-			List nodes = (List)xStream.fromXML(tempDoc.asXML());
+			List<WikiNode> nodes = (List<WikiNode>)xStream.fromXML(
+				tempDoc.asXML());
 
-			Iterator itr = nodes.iterator();
+			Iterator<WikiNode> nodesItr = nodes.iterator();
 
-			while (itr.hasNext()) {
-				WikiNode node = (WikiNode)itr.next();
+			while (nodesItr.hasNext()) {
+				WikiNode node = nodesItr.next();
 
 				importNode(context, nodePKs, node);
 			}
@@ -234,12 +236,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List pages = (List)xStream.fromXML(tempDoc.asXML());
+			List<WikiPage> pages = (List<WikiPage>)xStream.fromXML(
+				tempDoc.asXML());
 
-			itr = pages.iterator();
+			Iterator<WikiPage> pagesItr = pages.iterator();
 
-			while (itr.hasNext()) {
-				WikiPage page = (WikiPage)itr.next();
+			while (pagesItr.hasNext()) {
+				WikiPage page = pagesItr.next();
 
 				importPage(context, nodePKs, page);
 			}
@@ -252,7 +255,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importNode(
-			PortletDataContext context, Map nodePKs, WikiNode node)
+			PortletDataContext context, Map<Long, Long> nodePKs, WikiNode node)
 		throws Exception {
 
 		long userId = context.getUserId(node.getUserUuid());
@@ -287,11 +290,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 				addCommunityPermissions, addGuestPermissions);
 		}
 
-		nodePKs.put(node.getPrimaryKeyObj(), existingNode.getPrimaryKeyObj());
+		nodePKs.put(node.getNodeId(), existingNode.getNodeId());
 	}
 
 	protected void importPage(
-			PortletDataContext context, Map nodePKs, WikiPage page)
+			PortletDataContext context, Map<Long, Long> nodePKs, WikiPage page)
 		throws Exception {
 
 		long userId = context.getUserId(page.getUserUuid());

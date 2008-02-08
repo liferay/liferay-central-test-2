@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -64,10 +62,7 @@ public class ViewPageAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
-
-			checkNode(req);
-
+			getNode(req);
 			ActionUtil.getPage(req);
 		}
 		catch (Exception e) {
@@ -87,49 +82,51 @@ public class ViewPageAction extends PortletAction {
 		return mapping.findForward(getForward(req, "portlet.wiki.view_page"));
 	}
 
-	private void checkNode(RenderRequest req)
-		throws PortalException, SystemException {
+	protected void getNode(RenderRequest req) throws Exception {
+		ActionUtil.getNode(req);
 
 		WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+
+		if (node != null) {
+			return;
+		}
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		if (node == null) {
-			List nodes = WikiNodeLocalServiceUtil.getNodes(
-				themeDisplay.getLayout().getGroupId());
+		List nodes = WikiNodeLocalServiceUtil.getNodes(
+			themeDisplay.getLayout().getGroupId());
 
-			if (nodes.size() == 0) {
-				String nodeName = PropsUtil.get(
-					PropsUtil.WIKI_INITIAL_NODE_NAME);
+		if (nodes.size() == 0) {
+			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
 
-				node = WikiNodeLocalServiceUtil.addNode(
-					themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
-					StringPool.BLANK, true, true);
-			}
-			else {
-				PermissionChecker permissionChecker =
-					themeDisplay.getPermissionChecker(); 
-
-				for (int i = 0; i < nodes.size(); i++) {
-					WikiNode node2 = (WikiNode)nodes.get(i);
-
-					if (WikiNodePermission.contains(
-							permissionChecker, node2.getNodeId(),
-							ActionKeys.VIEW)) {
-
-						node = node2;
-						break;
-					}
-				}
-
-				if (node == null) {
-					throw new PrincipalException();
-				}
-			}
-
-			req.setAttribute(WebKeys.WIKI_NODE, node);
+			node = WikiNodeLocalServiceUtil.addNode(
+				themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
+				StringPool.BLANK, true, true);
 		}
+		else {
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			for (int i = 0; i < nodes.size(); i++) {
+				WikiNode curNode = (WikiNode)nodes.get(i);
+
+				if (WikiNodePermission.contains(
+						permissionChecker, curNode.getNodeId(),
+						ActionKeys.VIEW)) {
+
+					node = curNode;
+
+					break;
+				}
+			}
+
+			if (node == null) {
+				throw new PrincipalException();
+			}
+		}
+
+		req.setAttribute(WebKeys.WIKI_NODE, node);
 	}
 
 }

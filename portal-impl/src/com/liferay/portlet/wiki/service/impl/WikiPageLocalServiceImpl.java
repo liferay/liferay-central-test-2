@@ -81,23 +81,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return addPage(
 			null, userId, nodeId, title, version, content, format, head,
-			tagsEntries);
-	}
-
-	public WikiPage addPage(
-			long userId, long nodeId, String title, double version,
-			String content, String format, boolean head, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		return addPage(
-			null, userId, nodeId, title, version, content, format, head,
-			tagsEntries);
+			null, tagsEntries);
 	}
 
 	public WikiPage addPage(
 			String uuid, long userId, long nodeId, String title, double version,
 			String content, String format, boolean head, String[] tagsEntries)
 		throws PortalException, SystemException {
+
 		return addPage(
 			null, userId, nodeId, title, version, content, format, head, null,
 			tagsEntries);
@@ -513,18 +504,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Create stub page at the old location
 
+		String uuid = null;
 		double version = WikiPageImpl.DEFAULT_VERSION;
 		String content = WikiPageImpl.MOVED;
 		String format = page.getFormat();
 		boolean head = true;
+		String redirectTo = page.getTitle();
 		String[] tagsEntries = null;
 
-		WikiPage stubPage = addPage(
-			userId, nodeId, title, version, content, format, head, tagsEntries);
-
-		stubPage.setRedirectTo(page.getTitle());
-
-		wikiPagePersistence.update(stubPage);
+		addPage(
+			uuid, userId, nodeId, title, version, content, format, head,
+			redirectTo, tagsEntries);
 
 		// Move redirects to point to the page with the new title
 
@@ -554,7 +544,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Indexing " + newTitle, ioe);
 		}
-
 	}
 
 	public WikiPage revertPage(
@@ -565,15 +554,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return updatePage(
 			userId, nodeId, title, oldPage.getContent(), oldPage.getFormat(),
-			null);
-	}
-
-	public WikiPage updatePage(
-			long userId, long nodeId, String title, String content,
-			String format, String[] tagsEntries)
-		throws PortalException, SystemException {
-		return updatePage(
-			userId, nodeId, title, content, format, null, tagsEntries);
+			null, null);
 	}
 
 	public WikiPage updatePage(
@@ -622,10 +603,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setFormat(format);
 		page.setHead(true);
 
-		if (redirectTo != null) {
+		if (Validator.isNotNull(redirectTo)) {
 			page.setRedirectTo(redirectTo);
 		}
-		
+
 		wikiPagePersistence.update(page);
 
 		// Node
