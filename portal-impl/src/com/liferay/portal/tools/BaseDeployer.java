@@ -1112,8 +1112,7 @@ public class BaseDeployer {
 
 		String content = FileUtil.read(webXml);
 
-		int pos = content.indexOf("<web-app");
-		pos = content.indexOf(">", pos) + 1;
+		int pos = content.indexOf("</web-app>");
 
 		double webXmlVersion = 2.3;
 
