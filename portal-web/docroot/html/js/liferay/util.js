@@ -216,13 +216,14 @@ Liferay.Util = {
 
 		containers.addClass('lfr-flyout');
 		containers.addClass('has-children');
-		
+
 		if (!options.container) {
 			containers = containers.add(flyout);
 		}
 
 		var over = function(event) {
 			jQuery('> ul', this).show();
+
 			if (options.mouseOver) {
 				options.mouseOver.apply(this, [event]);
 			}
@@ -230,11 +231,12 @@ Liferay.Util = {
 
 		var out = function(event) {
 			jQuery('> ul', this).hide();
+
 			if (options.mouseOut) {
 				options.mouseOut.apply(this, [event]);
 			}
 		};
-		
+
 		containers.hover(over,out);
 	},
 
