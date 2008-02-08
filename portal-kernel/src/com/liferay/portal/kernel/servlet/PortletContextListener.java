@@ -57,7 +57,8 @@ public class PortletContextListener
 
 			Context ctx = new InitialContext();
 
-			ctx.bind(_JNDI_JDBC, new InitialContext());
+			ctx.createSubcontext(_JNDI_JDBC);
+
 			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, PortalJNDIUtil.getDataSource());
 		}
 		catch (Exception e) {
@@ -89,7 +90,9 @@ public class PortletContextListener
 
 			Context ctx = new InitialContext();
 
-			ctx.unbind(_JNDI_JDBC);
+			ctx.unbind(_JNDI_JDBC_LIFERAY_POOL);
+
+			ctx.destroySubcontext(_JNDI_JDBC);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
