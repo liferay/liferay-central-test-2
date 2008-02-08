@@ -78,10 +78,32 @@ import org.dom4j.Element;
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
+ * <p>
+ * Provides the Journal portlet export and import functionality, which is to
+ * clone all articles, structures, and templates associated with the layout's
+ * group. Upon import, new instances of the corresponding articles, structures,
+ * and templates are created or updated according to the DATA_MIRROW strategy
+ * The author of the newly created objects are determined by the 
+ * JournalCreationStrategy class defined in <i>portal.properties</i>. That
+ * strategy also allows the text of the journal article to be modified prior
+ * to import.
+ * </p>
+ *
+ * <p>
+ * This <code>PortletDataHandler</code> differs from
+ * <code>JournalContentPortletDataHandlerImpl</code> in that it exports all
+ * articles owned by the group whether or not they are actually displayed in a
+ * portlet in the layout set.
+ * </p>
+ *
  * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ *
+ * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
+ * @see com.liferay.portal.kernel.lar.PortletDataHandler
+ * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  *
  */
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
@@ -564,8 +586,31 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				JournalArticle.class, new Long(article.getResourcePrimKey()));
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+        JournalCreationStrategy creationStrategy =
+            JournalCreationStrategyFactory.getInstance();
+        
+        long authorId = creationStrategy.getAuthorUserId(
+                context.getCompanyId(), context.getGroupId(), article);
+
+        if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+            userId = authorId;
+        }
+
+        String newContent = creationStrategy.getTransformedContent(
+                context.getCompanyId(), context.getGroupId(), article);
+
+        if (newContent != JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED) {
+            article.setContent(newContent);
+        }
+        
+		boolean addCommunityPermissions = creationStrategy.addCommunityPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                article);
+        
+		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                article);
+        
 		boolean incrementVersion = false;
 
 		JournalArticle existingArticle = null;
@@ -626,10 +671,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				prefs, tagsEntries, addCommunityPermissions,
 				addGuestPermissions);
 		}
-
-		if (article.isApproved() && !existingArticle.isApproved()) {
-			long approvedByUserId = context.getUserId(
-				article.getApprovedByUserUuid());
+        
+        long strategyApprovalUserId = creationStrategy.getApprovalUserId(
+                context.getCompanyId(), context.getGroupId(), article);
+        
+		if ( strategyApprovalUserId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY ||
+             (article.isApproved() && !existingArticle.isApproved()) ) {
+			long approvedByUserId = strategyApprovalUserId;
+            if (approvedByUserId == 0) {
+                approvedByUserId = context.getUserId(
+                        article.getApprovedByUserUuid());
+            }
 
 			JournalArticleLocalServiceUtil.approveArticle(
 				approvedByUserId, context.getGroupId(),
@@ -680,8 +732,24 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			autoStructureId = true;
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+        JournalCreationStrategy creationStrategy =
+            JournalCreationStrategyFactory.getInstance();
+
+        long authorId = creationStrategy.getAuthorUserId(
+                context.getCompanyId(), context.getGroupId(), structure);
+
+        if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+            userId = authorId;
+        }
+        
+		boolean addCommunityPermissions = creationStrategy.addCommunityPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                structure);
+        
+		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                structure);
+
 
 		JournalStructure existingStructure = null;
 
@@ -752,8 +820,23 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean formatXsl = false;
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+        JournalCreationStrategy creationStrategy =
+            JournalCreationStrategyFactory.getInstance();
+
+        long authorId = creationStrategy.getAuthorUserId(
+                context.getCompanyId(), context.getGroupId(), template);
+
+        if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+            userId = authorId;
+        }
+        
+        boolean addCommunityPermissions = creationStrategy.addCommunityPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                template);
+        
+        boolean addGuestPermissions = creationStrategy.addGuestPermissions(
+                context.getCompanyId(), context.getGroupId(),
+                template);
 
 		File smallFile = null;
 

@@ -1,0 +1,145 @@
+/**
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.journal.lar;
+
+import com.liferay.portlet.journal.model.JournalArticle;
+
+/**
+ * <a href="JournalCreationStrategy.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * An interface defining how newly created content should be added to the
+ * Journal when imported from a LAR file. A class implementing this interface
+ * should be specified in <i>portal.properties</i> under the
+ * <b>journal.lar.creation.strategy</b> property.
+ * </p>
+ *
+ * @author Joel Kozikowski
+ *
+ */
+public interface JournalCreationStrategy {
+
+    /**
+     * Constant returned by getAuhtorUserId() and/or getApprovalUserId()
+     * that indicates that the default portlet data import user Id strategy
+     * should be used to determine the user id.
+     * 
+     * @see com.liferay.portal.kernel.lar.UserIdStrategy
+     * @see #getAuthorUserId(long, long, Object)
+     * @see #getApprovalUserId(long, long, Object)
+     */
+    public static final long USE_DEFAULT_USER_ID_STRATEGY = 0;
+    
+    
+    /**
+     * Constant returned by getTransformedContent() to indicate that the
+     * article text should remained unchanged.
+     * 
+     * @see #getTransformedContent(long, long, JournalArticle)
+     */
+    public static final String ARTICLE_CONTENT_UNCHANGED = null;
+    
+    
+	/**
+	 * Returns the author's user id to assign to newly created content. If zero
+	 * is returned, the default user id import strategy will determine the author Id.
+	 *
+	 * @param		companyId the company id of the layout
+	 * @param		groupId the group id of the layout
+	 * @param		journalObj the new object must be an instance of
+	 *				JournalArticle, JournalStructure or JournalTemplate
+	 * @return		the author's user id, or USE_DEFAULT_USER_ID_STRATEGY to use the default user Id strategy
+     * 
+     * @see #USE_DEFAULT_USER_ID_STRATEGY
+	 */
+	public long getAuthorUserId(long companyId, long groupId, Object journalObj)
+		throws Exception;
+
+    
+	/**
+	 * Returns the approver's user id to assign to newly created content. If
+	 * zero is returned, the default user id import strategy will determine the author Id
+	 *
+	 * @param		companyId the company id of the layout
+	 * @param		groupId the group id of the layout
+	 * @param		journalObj the new object must be an instance of
+	 *				JournalArticle, JournalStructure or JournalTemplate
+	 * @return		the approver's user id, or USE_DEFAULT_USER_ID_STRATEGY to use the default user Id strategy
+     *
+     * @see #USE_DEFAULT_USER_ID_STRATEGY
+	 */
+	public long getApprovalUserId(
+			long companyId, long groupId, Object journalObj)
+		throws Exception;
+
+
+	/**
+	 * Gives the content creation strategy an opportunity to transform the
+	 * content before the new article is saved to the database. Possible use
+	 * cases include using Velocity to merge in community specific values into
+	 * the text. Returns the new content to assign to the article. If null is
+	 * returned, the article content will be added unchanged.
+	 *
+	 * @param		companyId the company id of the layout
+	 * @param		groupId the group id of the layout
+	 * @param		newArticle the new article being created
+	 * @return		the transformed content to save in the database or ARTICLE_CONTENT_UNCHANGED if
+	 *				the content should be added unchanged
+     *
+     * @see #ARTICLE_CONTENT_UNCHANGED
+	 */
+	public String getTransformedContent(
+			long companyId, long groupId, JournalArticle newArticle)
+		throws Exception;
+
+	/**
+	 * Returns true if the default community permissions should be added when
+	 * the specified journalObj is created.
+	 *
+	 * @param		companyId the company id of the layout
+	 * @param		groupId the group id of the layout
+	 * @param		journalObj the new object must be an instance of
+	 *				JournalArticle, JournalStructure or JournalTemplate
+	 * @return		true if default community permissions should be added to the
+	 *				specified journalObj
+	 */
+	public boolean addCommunityPermissions(
+			long companyId, long groupId, Object journalObj)
+		throws Exception;
+
+	/**
+	 * Returns true if the default guest permissions should be added when the
+	 * specified journalObj is created.
+	 *
+	 * @param		companyId the company id of the layout
+	 * @param		groupId the group id of the layout
+	 * @param		journalObj the new object must be an instance of
+	 *				JournalArticle, JournalStructure or JournalTemplate
+	 * @return		true if default guest permissions should be added to the
+	 *				specified journalObj
+	 */
+	public boolean addGuestPermissions(
+			long companyId, long groupId, Object journalObj)
+		throws Exception;
+
+}
