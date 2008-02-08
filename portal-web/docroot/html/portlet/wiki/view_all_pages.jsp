@@ -24,36 +24,12 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<%
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-
-PortletURL addPageURL = renderResponse.createRenderURL();
-
-addPageURL.setParameter("struts_action", "/wiki/edit_page");
-addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-%>
-
-<script type="text/javascript">
-	function <portlet:namespace />addPage() {
-		var pageName = prompt('<liferay-ui:message key="page-name" />', '');
-
-		if ((pageName != null) && (pageName.length > 0)) {
-			window.location = Liferay.Util.addParams('<%= renderResponse.getNamespace() %>title=' + pageName, '<%= addPageURL.toString() %>');
-		}
-	}
-
-</script>
-
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
 <h1 class="wiki-page-title"><liferay-ui:message key="all-pages" /></h1>
 
+<br />
+
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="all_pages" />
 </liferay-util:include>
-
-<br/>
-
-<c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>">
-	<liferay-ui:icon image="add_article" message="add-page" label="<%= true %>" url='<%= "javascript: " + renderResponse.getNamespace() + "addPage();" %>' />
-</c:if>

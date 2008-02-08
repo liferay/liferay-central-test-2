@@ -24,8 +24,6 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
-
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -43,6 +41,8 @@ if (node != null) {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
@@ -50,6 +50,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
 <h1 class="wiki-page-title"><liferay-ui:message key="search-results" /></h1>
+
+<br />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

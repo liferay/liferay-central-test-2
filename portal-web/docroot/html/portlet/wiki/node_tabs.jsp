@@ -27,30 +27,30 @@
 <%
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
-boolean print = ParamUtil.get(request, Constants.PRINT, false);
-String keywords = ParamUtil.getString(request, "keywords", StringPool.BLANK);
+String keywords = ParamUtil.getString(request, "keywords");
 
-PortletURL tabs1URL = renderResponse.createRenderURL();
-
-tabs1URL.setParameter("struts_action", "/wiki/view");
-tabs1URL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-tabs1URL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
 List allowedNodes = new ArrayList();
 
 for (int i = 0; i < nodes.size(); i++) {
-	WikiNode node2 = (WikiNode)nodes.get(i);
+	WikiNode curNode = (WikiNode)nodes.get(i);
 
-	if (WikiNodePermission.contains(permissionChecker, node2.getNodeId(), ActionKeys.VIEW)) {
-
-		allowedNodes.add(node2);
+	if (WikiNodePermission.contains(permissionChecker, curNode.getNodeId(), ActionKeys.VIEW)) {
+		allowedNodes.add(curNode);
 	}
 }
 
 String tabs1Names = ListUtil.toString(allowedNodes, "name");
 String tabs1Values = ListUtil.toString(allowedNodes, "nodeId");
+
+PortletURL tabs1URL = renderResponse.createRenderURL();
+
+tabs1URL.setParameter("struts_action", "/wiki/view");
+tabs1URL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+tabs1URL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 %>
 
 <c:if test="<%= !print %>">

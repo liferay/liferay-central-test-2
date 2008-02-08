@@ -27,7 +27,7 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/wiki/view");
+portletURL.setParameter("struts_action", "/wiki/view_nodes");
 
 List headerNames = new ArrayList();
 
@@ -47,7 +47,11 @@ List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), sea
 searchContainer.setResults(results);
 %>
 
-<h1><liferay-ui:message key="administer-nodes" /></h1>
+<liferay-ui:tabs
+	names="nodes"
+	url="<%= portletURL.toString() %>"
+	backURL="<%= renderResponse.createRenderURL().toString() %>"
+/>
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
@@ -65,7 +69,7 @@ for (int i = 0; i < results.size(); i++) {
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setParameter("struts_action", "/wiki/view");
-	rowURL.setParameter("redirect", currentURL);
+	//rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
@@ -98,28 +102,21 @@ for (int i = 0; i < results.size(); i++) {
 }
 
 boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE);
-
-PortletURL backURL = renderResponse.createRenderURL();
-
-backURL.setParameter("struts_action", "/wiki/view");
 %>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<br/>
 
 <c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
 	<div>
 		<c:if test="<%= showAddNodeButton %>">
 			<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
-		<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<%= backURL %>';" />
 	</div>
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />
 	</c:if>
 </c:if>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>
 

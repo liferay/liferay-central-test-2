@@ -41,5 +41,7 @@ String curTags = ListUtil.toString(entries, "name", ", ");
 %>
 
 <c:if test="<%= entries.size() > 0 %>">
-	<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
+	<div class="taglib-tags-summary">
+		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
+	</div>
 </c:if>

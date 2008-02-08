@@ -30,23 +30,14 @@
 
 .portlet-wiki h1.wiki-page-title {
 	border-bottom: 1px solid #AAAAAA;
-	font-size: 2em;
-	padding-bottom: 3px;
+	margin: 0px;
+	padding-bottom: 5px;
 }
 
 .portlet-wiki .preview {
 	background: #ffc;
 	border: 1px dotted gray;
 	padding: 3px;
-}
-
-.portlet-wiki .tabs {
-	margin-bottom: 0.5em;
-}
-
-.portlet-wiki .tags {
-	margin: -1em 0em 1em 0em;
-	color: #7d7d7d;
 }
 
 .portlet-wiki .wiki-body .wiki-code {
@@ -77,9 +68,6 @@
 
 .portlet-wiki .wiki-page-actions {
 	float: right;
-	font-size: 0.5em;
-	font-weight: normal;
-	margin-left: 5px;
 }
 
 .portlet-wiki .wiki-page-actions a {
@@ -115,10 +103,9 @@
 
 .portlet-wiki .wiki-syntax-help {
 	border: 1px dotted gray;
-	padding-left: 30px;
+	padding-left: 10px;
 }
 
 .portlet-wiki .wiki-top-links {
-	text-align: right;
-	margin-bottom: 7px;
+	padding-bottom: 10px;
 }

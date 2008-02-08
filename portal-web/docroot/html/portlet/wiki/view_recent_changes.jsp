@@ -28,6 +28,8 @@
 
 <h1 class="wiki-page-title"><liferay-ui:message key="recent-changes" /></h1>
 
+<br />
+
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="recent_changes" />
 </liferay-util:include>

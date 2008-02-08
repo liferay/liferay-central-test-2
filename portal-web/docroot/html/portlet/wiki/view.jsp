@@ -37,46 +37,42 @@ if (wikiPage.getRedirectToPage() != null) {
 
 String title = wikiPage.getTitle();
 
-boolean print = ParamUtil.get(request, Constants.PRINT, false);
+boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
-PortletURL pageURL= renderResponse.createRenderURL();
+PortletURL viewPageURL = renderResponse.createRenderURL();
 
-pageURL.setParameter("struts_action", "/wiki/view");
-pageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-pageURL.setParameter("title", title);
+viewPageURL.setParameter("struts_action", "/wiki/view");
+viewPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageURL.setParameter("title", title);
 
-PortletURL printPageURL = renderResponse.createRenderURL();
+PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("redirect", currentURL);
+
+PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
-printPageURL.setParameter("struts_action", "/wiki/view");
-printPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-printPageURL.setParameter("title", title);
 printPageURL.setParameter("print", "true");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/wiki/edit_page");
-portletURL.setParameter("redirect", currentURL);
-portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-portletURL.setParameter("title", wikiPage.getTitle());
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />printPage() {
-		window.open('<%= printPageURL %>', '', "toolbar=0,location=1,directories=0,status=0,menubar=1,scrollbars=yes,resizable=1,width=640,height=480,left=80,top=180");
-	}
-</script>
+<c:choose>
+	<c:when test="<%= print %>">
+		<script type="text/javascript">
+			print();
+		</script>
 
-<c:if test="<%= print %>">
-	<script type="text/javascript">
-		print();
-	</script>
-
-	<div class="lfr-actions">
 		<liferay-ui:icon image="print" message="print" url="javascript: print();" label="<%= true %>" />
-	</div>
-</c:if>
+	</c:when>
+	<c:otherwise>
+		<script type="text/javascript">
+			function <portlet:namespace />printPage() {
+				window.open('<%= printPageURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
+			}
+		</script>
+	</c:otherwise>
+</c:choose>
 
 <c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
 	<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
@@ -86,22 +82,20 @@ portletURL.setParameter("title", wikiPage.getTitle());
 	<c:if test="<%= !print %>">
 		<div class="wiki-page-actions">
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-
-				<%
-				portletURL.setParameter("struts_action", "/wiki/edit_page");
-				%>
-
-				<liferay-ui:icon image="edit" url="<%= portletURL.toString() %>" />
+				<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
 			</c:if>
 
 			<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
 
 			<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
+
 				<%
-				portletURL.setParameter("struts_action", "/wiki/view_page_history");
+				PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+				viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
 				%>
 
-				<liferay-ui:icon image="history" message="page-info" url="<%= portletURL.toString() %>" />
+				<liferay-ui:icon image="history" message="history-and-links" url="<%= viewPageHistoryURL.toString() %>" />
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.PERMISSIONS) %>">
 					<liferay-security:permissionsURL
@@ -115,31 +109,30 @@ portletURL.setParameter("title", wikiPage.getTitle());
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
+
 					<%
-					portletURL.setParameter("struts_action", "/wiki/move_page");
+					PortletURL movePageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+					movePageURL.setParameter("struts_action", "/wiki/move_page");
+					movePageURL.setParameter("redirect", viewPageURL.toString());
 					%>
 
-					<liferay-ui:icon image="forward" message="move" url="<%= portletURL.toString() %>" />
+					<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
 
 					<%
-					PortletURL frontPageURL = renderResponse.createRenderURL();
+					PortletURL frontPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-					frontPageURL.setParameter("struts_action", "/wiki/view");
-					frontPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+					frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
-					PortletURL deleteURL = renderResponse.createActionURL();
+					PortletURL deletePageURL = PortletURLUtil.clone(editPageURL, true, renderResponse);
 
-					deleteURL.setParameter("struts_action", "/wiki/edit_page");
-					deleteURL.setParameter(Constants.CMD, Constants.DELETE);
-					deleteURL.setParameter("redirect", frontPageURL.toString());
-					deleteURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-					deleteURL.setParameter("title", wikiPage.getTitle());
+					deletePageURL.setParameter(Constants.CMD, Constants.DELETE);
 					%>
 
-					<liferay-ui:icon-delete url="<%= deleteURL.toString() %>" />
+					<liferay-ui:icon-delete url="<%= deletePageURL.toString() %>" />
 				</c:if>
 			</c:if>
 		</div>
@@ -148,31 +141,33 @@ portletURL.setParameter("title", wikiPage.getTitle());
 	<%= title %>
 </h1>
 
+<br />
+
 <c:if test="<%= originalPage != null %>">
 	<div class="wiki-page-redirect">
 		(<%= LanguageUtil.format(pageContext, "redirected-from-x", originalPage.getTitle()) %>)
 	</div>
 </c:if>
 
-<c:if test="<%= (!wikiPage.isHead()) %>">
+<c:if test="<%= !wikiPage.isHead() %>">
 	<div class="wiki-page-old-version">
-		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <a href="<%= pageURL %>"><liferay-ui:message key="go-to-latest-version" /></a>)
+		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <a href="<%= viewPageURL %>"><liferay-ui:message key="go-to-the-latest-version" /></a>)
 	</div>
 </c:if>
 
-<div class="tags">
-	<liferay-ui:tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-	/>
-</div>
+<liferay-ui:tags-summary
+	className="<%= WikiPage.class.getName() %>"
+	classPK="<%= wikiPage.getResourcePrimKey() %>"
+/>
 
 <div>
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<br />
+	<c:if test="<%= Validator.isNotNull(pageContent) %>">
+		<br />
+	</c:if>
 
 	<liferay-ui:tabs names="comments" />
 
@@ -193,6 +188,6 @@ portletURL.setParameter("title", wikiPage.getTitle());
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fmSearch.<portlet:namespace />keywords);
 	</script>
 </c:if>

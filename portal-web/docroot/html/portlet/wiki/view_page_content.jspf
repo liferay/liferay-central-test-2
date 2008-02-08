@@ -23,59 +23,56 @@
 %>
 
 <%
-String error = null;
-
 String pageContent = null;
 
-PortletURL viewPageURL = renderResponse.createRenderURL();
-
-viewPageURL.setPortletMode(PortletMode.VIEW);
-
-viewPageURL.setParameter("struts_action", "/wiki/view");
-
-PortletURL editURL = renderResponse.createRenderURL();
-
-editURL.setPortletMode(PortletMode.VIEW);
-
-editURL.setParameter("struts_action", "/wiki/edit_page");
-editURL.setParameter("redirect", currentURL);
-
 try {
-	pageContent = WikiUtil.convert(wikiPage, viewPageURL, editURL);
+	PortletURL curViewPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+	PortletURL curEditPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
+
+	pageContent = WikiUtil.convert(wikiPage, curViewPageURL, curEditPageURL);
+%>
+
+	<div class="wiki-body">
+		<c:choose>
+			<c:when test="<%= Validator.isNull(pageContent) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+				<div class="portlet-msg-info">
+					<a href="<%= editPageURL %>"><liferay-ui:message key="this-page-is-empty-edit-it-to-add-some-text" /></a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<%= pageContent %>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+<%
 }
 catch (WikiFormatException wfe) {
-	error = "the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted";
+%>
 
-	pageContent = "<pre>" + wikiPage.getContent() + "</pre>";
+	<span class="portlet-msg-error">
+		<liferay-ui:message key="the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted" />
+	</span>
+
+	<div class="wiki-body">
+		<pre>
+<%= wikiPage.getContent() %>
+		</pre>
+	</div>
+
+<%
 }
 catch (Exception e) {
 	_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
-
-	error = "error-formating-the-wiki-page";
-
-	pageContent = StringPool.DASH;
-}
-
-if (Validator.isNull(pageContent)) {
-	if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
-		editURL.setParameter("title", wikiPage.getTitle());
-
-		pageContent = "<div class=\"portlet-msg-info\"><a href=\"" + editURL + "\">" + LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text") + "</a></div>";
-	}
-}
 %>
 
-<c:if test="<%= Validator.isNotNull(error) %>">
-	<div class="wiki-body">
-		<span class="portlet-msg-error">
-			<liferay-ui:message key="<%= error %>" />
-		</span>
-	</div>
-</c:if>
+	<span class="portlet-msg-error">
+		<liferay-ui:message key="an-error-occurred-while-attempting-to-format-the-wiki-page" />
+	</span>
 
-<div class="wiki-body">
-	<%= pageContent %>
-</div>
+<%
+}
+%>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.wiki.view_page_content.jsp");

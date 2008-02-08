@@ -30,10 +30,8 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
 
-String strutsAction = "";
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 if (wikiPage != null) {

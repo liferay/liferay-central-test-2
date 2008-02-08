@@ -24,8 +24,6 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
-
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -49,21 +47,11 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImp
 
 boolean preview = ParamUtil.getBoolean(request, "preview");
 
-if (Validator.isNull(redirect)) {
-	PortletURL portletURL = renderResponse.createRenderURL();
+boolean newPage = false;
 
-	portletURL.setParameter("struts_config", "/wiki/view");
-	portletURL.setParameter("nodeId", String.valueOf(nodeId));
-	portletURL.setParameter("title", title);
-
-	redirect = portletURL.toString();
+if (wikiPage == null) {
+	newPage = true;
 }
-
- boolean newPage = false;
-
- if (wikiPage == null) {
-	 newPage = true;
- }
 
 boolean editable = false;
 
@@ -79,7 +67,24 @@ else if (Validator.isNotNull(title)) {
 	catch (PortalException pe) {
 	}
 }
+
+PortletURL viewPageURL = renderResponse.createRenderURL();
+
+viewPageURL.setParameter("struts_action", "/wiki/view");
+viewPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageURL.setParameter("title", title);
+
+PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("redirect", currentURL);
+
+if (Validator.isNull(redirect)) {
+	redirect = viewPageURL.toString();
+}
 %>
+
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
@@ -150,18 +155,21 @@ else if (Validator.isNotNull(title)) {
 
 <liferay-ui:tags-error />
 
-<c:if test="<%= newPage && editable %>">
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
-	</div>
-</c:if>
+<c:if test="<%= newPage %>">
+	<c:choose>
+		<c:when test="<%= editable %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="this-page-does-not-exist-yet-use-the-form-below-to-create-it" />
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="portlet-msg-error">
+				<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
+			</div>
 
-<c:if test="<%= newPage && !editable %>">
-	<div class="portlet-msg-error">
-		<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
-	</div>
-
-	<input type="button" onclick="history.go(-1)" value="<%= LanguageUtil.get(pageContext, "back") %>" />
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= redirect %>'" />
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <c:if test="<%= editable %>">

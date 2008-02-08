@@ -54,10 +54,10 @@ import javax.portlet.PortletURL;
 public class WikiUtil {
 
 	public static String convert(
-			WikiPage page, PortletURL pageURL, PortletURL editURL)
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL)
 		throws PageContentException, WikiFormatException {
 
-		return _instance._convert(page, pageURL, editURL);
+		return _instance._convert(page, viewPageURL, editPageURL);
 	}
 
 	public static String getEditPage(String format) {
@@ -92,20 +92,22 @@ public class WikiUtil {
 	}
 
 	private String _convert(
-			WikiPage page, PortletURL pageURL, PortletURL editURL)
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL)
 		throws PageContentException, WikiFormatException {
 
 		WikiEngine engine = _getEngine(page.getFormat());
 
-		String content = engine.convert(page, editURL);
+		String content = engine.convert(page, editPageURL);
 
-		if ((editURL != null) && (editURL instanceof LiferayPortletURL)) {
-			LiferayPortletURL liferayPageURL = (LiferayPortletURL)pageURL;
+		if ((editPageURL != null) &&
+			(editPageURL instanceof LiferayPortletURL)) {
+
+			LiferayPortletURL liferayPageURL = (LiferayPortletURL)viewPageURL;
 
 			liferayPageURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
 
-			LiferayPortletURL liferayEditURL = (LiferayPortletURL)editURL;
+			LiferayPortletURL liferayEditURL = (LiferayPortletURL)editPageURL;
 
 			liferayEditURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
@@ -219,26 +221,22 @@ public class WikiUtil {
 	}
 
 	private String _replaceLinks(
-		String title, String content, LiferayPortletURL pageURL,
-		LiferayPortletURL editURL) {
+		String title, String content, LiferayPortletURL viewPageURL,
+		LiferayPortletURL editPageURL) {
 
-		pageURL.setParameter("title", title, false);
-
-		String pageURLToString = pageURL.toString();
+		viewPageURL.setParameter("title", title, false);
 
 		content = StringUtil.replace(
 			content,
 			"[$BEGIN_PAGE_TITLE$]" + title + "[$END_PAGE_TITLE$]",
-			pageURLToString);
+			viewPageURL.toString());
 
-		editURL.setParameter("title", title, false);
-
-		String editURLToString = editURL.toString();
+		editPageURL.setParameter("title", title, false);
 
 		content = StringUtil.replace(
 			content,
 			"[$BEGIN_PAGE_TITLE_EDIT$]" + title + "[$END_PAGE_TITLE_EDIT$]",
-			editURLToString);
+			editPageURL.toString());
 
 		return content;
 	}

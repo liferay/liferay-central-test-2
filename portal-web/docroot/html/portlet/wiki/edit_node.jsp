@@ -39,22 +39,15 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	}
 </script>
 
-<h1><liferay-ui:message key="administer-nodes" /></h1>
-
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_node" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveNode(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<c:choose>
-	<c:when test="<%= node != null %>">
-		<h2><liferay-ui:message key="editing-node" />: <%= node.getName() %></h2>
-
-	</c:when>
-	<c:otherwise>
-		<h2><liferay-ui:message key="new-node" /></h2>
-	</c:otherwise>
-</c:choose>
+<liferay-ui:tabs
+	names="node"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 

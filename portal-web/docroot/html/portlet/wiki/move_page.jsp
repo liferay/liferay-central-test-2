@@ -25,17 +25,13 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String title = wikiPage.getTitle();
 String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
-
-PortletURL pageURL = renderResponse.createRenderURL();
-
-pageURL.setParameter("struts_action", "/wiki/view");
-pageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-pageURL.setParameter("title", title);
 %>
 
 <liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
@@ -50,7 +46,7 @@ pageURL.setParameter("title", title);
 </div>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input type="hidden" name="<portlet:namespace />redirect" value="<%= pageURL.toString() %>" />
+<input type="hidden" name="<portlet:namespace />redirect" value="<%= redirect %>" />
 <input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
 <input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
 
@@ -77,6 +73,6 @@ pageURL.setParameter("title", title);
 
 <input type="submit" value="<liferay-ui:message key="move-page" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="history.go(-1);" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

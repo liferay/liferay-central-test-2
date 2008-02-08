@@ -34,4 +34,6 @@
 			</c:otherwise>
 		</c:choose>
 	</h1>
+
+	<br />
 </c:if>

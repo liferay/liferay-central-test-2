@@ -21,55 +21,92 @@
  * SOFTWARE.
  */
 %>
+
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-
-PortletURL pageURL = renderResponse.createRenderURL();
-
-pageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-pageURL.setParameter("struts_action", "/wiki/view");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 %>
 
-<div class="wiki-top-links">
-	<%
-	if (themeDisplay.isSignedIn()) {
-		if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE)) {
+<c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>">
 
-			portletURL.setParameter("struts_action", "/wiki/view_nodes");
+	<%
+	PortletURL addPageURL = renderResponse.createRenderURL();
+
+	addPageURL.setParameter("struts_action", "/wiki/edit_page");
+	addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	%>
 
-		<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="administer-nodes" /></nobr></a>
-		&nbsp;&nbsp;&nbsp;
+	<script type="text/javascript">
+		function <portlet:namespace />addPage() {
+			var pageName = prompt('<liferay-ui:message key="page-name" />', '');
 
-	<%
+			if ((pageName != null) && (pageName.length > 0)) {
+				window.location = Liferay.Util.addParams('<portlet:namespace />title=' + pageName, '<%= addPageURL.toString() %>');
+			}
 		}
-	}
-	%>
+	</script>
+</c:if>
 
-	<a href="<%= pageURL.toString() %>"><%= WikiPageImpl.FRONT_PAGE %></a>
+<div class="wiki-top-links">
+	<table class="lfr-table">
+	<tr>
+		<td>
 
-	|
-	<%
-	portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
-	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="recent-changes" /></nobr></a>
+			<%
+			PortletURL frontPageURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-	|
-	<%
-	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
-	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="all-pages" /></nobr></a>
+			frontPageURL.setParameter("struts_action", "/wiki/view");
+			frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+			%>
 
-	|
-	<%
-	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
-	%>
-	<a href="<%= portletURL.toString() %>"><nobr><liferay-ui:message key="orphan-pages" /></nobr></a>
+			<liferay-ui:icon image="all_pages" message="<%= WikiPageImpl.FRONT_PAGE %>" url="<%= frontPageURL.toString() %>" label="<%= true %>" />
+		</td>
+		<td>
 
+			<%
+			portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
+			%>
+
+			<liferay-ui:icon image="recent_changes" message="recent-changes" url="<%= portletURL.toString() %>" label="<%= true %>" />
+		</td>
+		<td>
+
+			<%
+			portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+			%>
+
+			<liferay-ui:icon image="all_pages" message="all-pages" url="<%= portletURL.toString() %>" label="<%= true %>" />
+		</td>
+		<td>
+
+			<%
+			portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
+			%>
+
+			<liferay-ui:icon image="orphan_pages" message="orphan-pages" url="<%= portletURL.toString() %>" label="<%= true %>" />
+		</td>
+
+		<c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_PAGE) %>">
+			<td>
+				<liferay-ui:icon image="add_article" message="add-page" url='<%= "javascript: " + renderResponse.getNamespace() + "addPage();" %>' label="<%= true %>" />
+			</td>
+		</c:if>
+
+		<c:if test="<%= themeDisplay.isSignedIn() && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE) %>">
+
+			<%
+			portletURL.setParameter("struts_action", "/wiki/view_nodes");
+			%>
+
+			<td>
+				<liferay-ui:icon image="all_pages" message="manage-nodes" url="<%= portletURL.toString() %>" label="<%= true %>" />
+			</td>
+		</c:if>
+	</tr>
+	</table>
 </div>
