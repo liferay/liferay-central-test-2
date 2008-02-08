@@ -911,6 +911,7 @@ default=ディフォルト
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 define-permissions=許可を定義しなさい
 define-the-behavior-of-this-search=この調査の行動を定義しなさい。
+defining-permissions-for-this-resource-is-not-available-for-this-type-of-role=この資源のための許可を定義することはこのタイプの役割のために利用できない。
 definition-id=定義ID
 definition-name=定義名前
 definition-of-terms=言葉の定義

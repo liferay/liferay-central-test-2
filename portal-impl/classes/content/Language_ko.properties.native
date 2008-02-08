@@ -911,6 +911,7 @@ default=과태
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 define-permissions=허가를 정의하십시요
 define-the-behavior-of-this-search=이 수색의 행동을 정의하십시요.
+defining-permissions-for-this-resource-is-not-available-for-this-type-of-role=이 자원을 위해 허가를 정의함것은 역할의 이 유형을 위해 유효하지 않다.
 definition-id=정의 식별
 definition-name=정의 이름
 definition-of-terms=연한의 정의

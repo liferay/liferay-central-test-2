@@ -911,6 +911,7 @@ default=Προεπιλογή
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 define-permissions=Καθορίστε τις άδειες
 define-the-behavior-of-this-search=Καθορίστε τη συμπεριφορά αυτής της αναζήτησης.
+defining-permissions-for-this-resource-is-not-available-for-this-type-of-role=Ο καθορισμός των αδειών για αυτόν τον πόρο δεν είναι διαθέσιμος για αυτόν τον τύπο ρόλου.
 definition-id=Ταυτότητα καθορισμού
 definition-name=Όνομα καθορισμού
 definition-of-terms=Καθορισμός των όρων

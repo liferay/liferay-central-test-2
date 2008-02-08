@@ -459,7 +459,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 							<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:message key="not-available-for-this-type-of-role" />
+							<liferay-ui:message key="defining-permissions-for-this-resource-is-not-available-for-this-type-of-role" />
 
 							<br />
 						</c:otherwise>

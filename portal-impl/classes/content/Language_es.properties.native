@@ -911,6 +911,7 @@ default=Por defecto
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 define-permissions=Definir permisos
 define-the-behavior-of-this-search=Defina el comportamiento de esta búsqueda.
+defining-permissions-for-this-resource-is-not-available-for-this-type-of-role=Definir los permisos para este recurso no está disponible para este tipo de papel.
 definition-id=Identificador de la definición
 definition-name=Nombre de la definición
 definition-of-terms=Definición de términos

@@ -911,6 +911,7 @@ default=预设
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 define-permissions=定义允许
 define-the-behavior-of-this-search=定义这次查寻行为。
+defining-permissions-for-this-resource-is-not-available-for-this-type-of-role=定义允许为这种资源不是可利用的为这类型角色。
 definition-id=定义身份证
 definition-name=定义名字
 definition-of-terms=期限的定义
